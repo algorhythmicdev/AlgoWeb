@@ -14,19 +14,46 @@
     "contact": "Contact",
     "about": "About"
   },
-  "home": {
-    "hero_title": "Where Logic Dances with Creativity",
-    "hero_subtitle": "AI innovation lab building the future of travel and productivity",
-    "cta_primary": "Explore Products",
-    "cta_secondary": "Get in Touch",
-    "products_title": "Our Products",
-    "products_subtitle": "AI-powered platforms transforming how people travel and work",
-    "founders_title": "Meet the Founders",
-    "timeline_title": "Our Journey",
-    "partners_title": "Trusted By",
-    "cta_section_title": "Ready to Build the Future?",
-    "cta_section_text": "Join us in creating innovative AI solutions",
-    "cta_section_button": "Start Your Journey"
+  "hero": {
+    "status": "In Development • Shaping the Future of AI",
+    "title": "Where Logic Dances with Creativity",
+    "tagline": "AlgoRhythmics - AI Innovation Lab",
+    "subtitle": "Building NodeVoyage travel platform and Ideonautix productivity suite with cutting-edge AI technology",
+    "cta_products": "Explore Products",
+    "cta_consulting": "AI Consulting"
+  },
+  "story": {
+    "title": "Our Story",
+    "reality_title": "The Reality We're Building",
+    "reality_text": "We're creating AI-powered platforms that transform how people travel and work. NodeVoyage reimagines travel planning with intelligent assistance, while Ideonautix empowers startups with modular productivity tools.",
+    "mission_title": "Our Mission",
+    "mission_text": "To democratize AI technology by building accessible, intelligent platforms that solve real problems for travelers and entrepreneurs worldwide.",
+    "vision_title": "Our Vision",
+    "vision_text": "A future where AI seamlessly enhances human creativity and productivity, making complex tasks effortless and opening new possibilities for innovation."
+  },
+  "founders": {
+    "title": "Meet the Founders",
+    "subtitle": "Building the future of AI together"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "AI-powered platforms transforming how people travel and work",
+    "nodevoyage": {
+      "description": "AI-powered travel planning with your intelligent companion Nodi. Create personalized itineraries, discover hidden gems, and travel with confidence using AR tools and offline capabilities.",
+      "status": "In Development",
+      "mvp": "MVP: September 2026",
+      "cta": "Learn More"
+    },
+    "ideonautix": {
+      "description": "Modular productivity super-suite for startups. Get AI-powered insights for pitches, revenue tracking, team dynamics, and more with intelligent microservices designed for founders.",
+      "status": "Planning Phase",
+      "mvp": "MVP: February 2026",
+      "cta": "Learn More"
+    }
+  },
+  "timeline": {
+    "title": "Our Journey",
+    "subtitle": "Building the future, one milestone at a time"
   },
   "nodevoyage": {
     "name": "NodeVoyage",

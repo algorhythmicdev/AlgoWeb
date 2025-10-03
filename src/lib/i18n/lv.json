@@ -1,127 +1,238 @@
 {
-  "nav": {
-    "home": "Sākums",
-    "products": "Produkti",
-    "nodevoyage": "NodeVoyage",
-    "nodevoyage_desc": "AI ceļošanas platforma",
-    "ideonautix": "Ideonautix",
-    "ideonautix_desc": "Produktivitātes rīki jaunuzņēmumiem",
-    "community": "Kopiena",
-    "consulting": "Konsultācijas",
-    "pilot_badge": "3 bezmaksas vietas",
-    "contact": "Kontakti"
-  },
-  
-  "hero": {
-    "status": "Pirms uzņēmuma izveides • Ideju Kauss 2025. gada oktobris",
+  "site": {
     "title": "AlgoRhythmics",
-    "tagline": "Kur loģika dejo ar radošumu",
-    "subtitle": "AI inovāciju laboratorija, kas rada revolucionārus produktus, vienlaikus gatavojoties būvēt Latvijas jaunuzņēmumu ekosistēmu. Pašlaik konkursa fāzē, strādājot Reclame Fabriek.",
-    "cta_products": "Izpētīt produktus",
-    "cta_consulting": "Bezmaksas pilotprogramma"
+    "tagline": "Where Logic Dances with Creativity",
+    "description": "AI innovation lab building NodeVoyage travel platform and Ideonautix productivity suite"
   },
-  
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "community": "Community",
+    "consulting": "Consulting",
+    "contact": "Contact",
+    "about": "About"
+  },
+  "hero": {
+    "status": "In Development • Shaping the Future of AI",
+    "title": "Where Logic Dances with Creativity",
+    "tagline": "AlgoRhythmics - AI Innovation Lab",
+    "subtitle": "Building NodeVoyage travel platform and Ideonautix productivity suite with cutting-edge AI technology",
+    "cta_products": "Explore Products",
+    "cta_consulting": "AI Consulting"
+  },
   "story": {
-    "title": "Mūsu ceļš",
-    "reality_title": "Pašreizējā fāze",
-    "reality_text": "Mēs atrodamies aizraujošā pirmsuzņēmuma fāzē, piedaloties Latvijas Ideju Kausa konkursā ar NodeVoyage koncepciju. Turpinot R&D darbu Reclame Fabriek, AlgoRhythmics ir mūsu galvenā aizraušanās un nākotnes vīzija.",
-    "mission_title": "Mūsu misija",
-    "mission_text": "Atbrīvot radošo potenciālu katrā organizācijā ar AI rīkiem, kas apvieno loģiku un iztēli.",
-    "vision_title": "Mūsu vīzija",
-    "vision_text": "Kļūt par globāli atzītu visvairāk aicināšanu AI vārtiem, kur biznesa problēmas tiek risinātas ar prieku."
+    "title": "Our Story",
+    "reality_title": "The Reality We're Building",
+    "reality_text": "We're creating AI-powered platforms that transform how people travel and work. NodeVoyage reimagines travel planning with intelligent assistance, while Ideonautix empowers startups with modular productivity tools.",
+    "mission_title": "Our Mission",
+    "mission_text": "To democratize AI technology by building accessible, intelligent platforms that solve real problems for travelers and entrepreneurs worldwide.",
+    "vision_title": "Our Vision",
+    "vision_text": "A future where AI seamlessly enhances human creativity and productivity, making complex tasks effortless and opening new possibilities for innovation."
   },
-  
   "founders": {
-    "title": "Iepazīstieties ar dibinātājiem",
-    "subtitle": "Reāla pieredze, būvējot pasaules vadošajiem zīmoliem",
-    "slaff": {
-      "brand_intro": "Vadīja tehnisko inovāciju reklāmas risinājumiem, apkalpojot pasaules klases zīmolus:",
-      "brand_context": "Vadīja R&D un produktu izstrādi 99% eksportorientētai ražošanai, kas apkalpo Fortune 500 uzņēmumus. Vairāku miljonu EUR ražošanas jauda ar 6000+ m² objektu."
-    }
+    "title": "Meet the Founders",
+    "subtitle": "Building the future of AI together"
   },
-  
   "products": {
-    "title": "Mūsu produkti",
-    "subtitle": "Revolucionāras AI platformas izstrādē",
+    "title": "Our Products",
+    "subtitle": "AI-powered platforms transforming how people travel and work",
     "nodevoyage": {
-      "description": "AI ceļojumu plānošanas platforma ar inteliģentu maršruta veidotāju, mobilās tveršanas komplektu un kopienas koplietošanu.",
-      "cta": "Izpētīt NodeVoyage"
+      "description": "AI-powered travel planning with your intelligent companion Nodi. Create personalized itineraries, discover hidden gems, and travel with confidence using AR tools and offline capabilities.",
+      "status": "In Development",
+      "mvp": "MVP: September 2026",
+      "cta": "Learn More"
     },
     "ideonautix": {
-      "description": "Produktivitātes super-komplekts jaunuzņēmumiem, apvienojot AI mikroservisu sistēmas dibinātājiem un komandām.",
-      "cta": "Izpētīt Ideonautix"
+      "description": "Modular productivity super-suite for startups. Get AI-powered insights for pitches, revenue tracking, team dynamics, and more with intelligent microservices designed for founders.",
+      "status": "Planning Phase",
+      "mvp": "MVP: February 2026",
+      "cta": "Learn More"
     }
   },
-  
-  "footer": {
-    "tagline": "Kur loģika dejo ar radošumu",
-    "copyright": "© 2025 AlgoRhythmics. Visas tiesības aizsargātas.",
-    "location": "Daugavpils, Latvija",
-    "status": "Pirms uzņēmuma izveides • Ideju Kauss 2025"
-  },
-  
-  "common": {
-    "loading": "Ielādē...",
-    "error": "Kaut kas nogāja greizi",
-    "success": "Veiksmīgi!",
-    "submit": "Iesniegt",
-    "cancel": "Atcelt",
-    "close": "Aizvērt",
-    "learn_more": "Uzzināt vairāk",
-    "coming_soon": "Drīzumā"
+  "timeline": {
+    "title": "Our Journey",
+    "subtitle": "Building the future, one milestone at a time"
   },
   "nodevoyage": {
-    "status": "Izstrādē • MVP Sept 2026",
-    "hero_description": "AI darbināta ceļojumu plānošana, kas padara braucienu izveidi vienkāršu, jautru un personalizētu. Iepazīstieties ar Nodi, jūsu inteliģento ceļojumu kompanjonu.",
-    "cta_primary": "Pievienoties gaidītāju sarakstam",
-    "cta_secondary": "Izpētīt funkcijas",
+    "name": "NodeVoyage",
+    "status": "In Development • MVP Sept 2026",
+    "tagline": "Your AI Travel Companion",
+    "hero_description": "AI-powered travel planning that makes trip creation effortless, fun, and personalized. Meet Nodi, your intelligent travel companion.",
+    "cta_primary": "Join Waitlist",
+    "cta_secondary": "Explore Features",
     "stat1_value": "Sept 2026",
-    "stat1_label": "MVP starts",
-    "stat2_value": "AI darbināts",
-    "stat2_label": "Viedā plānošana",
-    "stat3_value": "Mobilais pirmais",
-    "stat3_label": "AR + Bezsaiste",
-    "features_title": "Revolucionāras funkcijas",
-    "features_subtitle": "Viss, kas nepieciešams ideālam ceļojumam",
-    "how_title": "Kā darbojas NodeVoyage",
-    "step1_title": "Pastāstiet Nodi savu sapni",
-    "step2_title": "Saņemiet viedus ieteikumus",
-    "step3_title": "Pielāgojiet savu ceļojumu",
-    "step4_title": "Ceļojiet ar pārliecību"
+    "stat1_label": "MVP Launch",
+    "stat2_value": "AI-Powered",
+    "stat2_label": "Smart Planning",
+    "stat3_value": "Mobile First",
+    "stat3_label": "AR + Offline",
+    "features_title": "Revolutionary Features",
+    "features_subtitle": "Everything you need for the perfect journey",
+    "features": {
+      "nodi-ai": "Your friendly AI travel assistant that learns your preferences and creates personalized itineraries in seconds",
+      "smart-builder": "Visual trip builder with drag-and-drop nodes, vibe presets, and real-time optimization",
+      "mobile-suite": "AR translation, live interpretation, photo recognition, and full offline capabilities",
+      "community": "Share your adventures, discover routes from travelers worldwide, and plan trips together"
+    },
+    "how_title": "How NodeVoyage Works",
+    "step1_title": "Tell Nodi Your Dream",
+    "step1_desc": "Chat with Nodi AI about your travel preferences, budget, and interests",
+    "step2_title": "Get Smart Suggestions",
+    "step2_desc": "Receive personalized itineraries with optimized routes and local insights",
+    "step3_title": "Customize Your Journey",
+    "step3_desc": "Fine-tune your trip with our visual node-based builder",
+    "step4_title": "Travel with Confidence",
+    "step4_desc": "Use mobile AR tools, offline maps, and real-time assistance on the go",
+    "tech_title": "Built with Cutting-Edge Technology",
+    "tech_subtitle": "Google Cloud, AI, and modern web standards",
+    "cta_title": "Ready to Transform How You Travel?",
+    "cta_description": "Join our waitlist and be among the first to experience NodeVoyage when we launch in September 2026",
+    "cta_button": "Join Waitlist",
+    "cta_note": "No credit card required • Early access benefits"
   },
-  
   "ideonautix": {
-    "status": "Plānošanas fāze • MVP Feb 2026",
-    "hero_description": "Modulārs produktivitātes super-komplekts, kas izstrādāts startapu dibinātājiem un augošām komandām.",
-    "microservices_title": "Jaudīgi mikroservisi",
-    "pitch_title": "Pitch Asistents",
-    "revenue_title": "Ieņēmumu paneļi",
-    "team_title": "Komandas dinamika"
+    "name": "Ideonautix",
+    "status": "Planning Phase • MVP Feb 2026",
+    "tagline": "Intelligence for Startups",
+    "hero_description": "Modular productivity super-suite designed for startup founders and growing teams. AI-powered microservices that actually understand your business.",
+    "cta_primary": "Get Early Access",
+    "cta_secondary": "View Microservices",
+    "stat1_value": "Feb 2026",
+    "stat1_label": "MVP Launch",
+    "stat2_value": "8+ Tools",
+    "stat2_label": "Microservices",
+    "stat3_value": "AI-First",
+    "stat3_label": "Intelligence",
+    "microservices_title": "Powerful Microservices",
+    "microservices_subtitle": "Pick what you need, when you need it",
+    "pitch_title": "Pitch Assistant",
+    "pitch_desc": "Get AI-powered feedback on your pitch deck with scoring, suggestions, and investor perspective analysis",
+    "revenue_title": "Revenue Boards",
+    "revenue_desc": "Real-time analytics dashboards with KPI tracking, forecasting, and actionable business insights",
+    "team_title": "Team Dynamics",
+    "team_desc": "Understand team health, communication patterns, and collaboration effectiveness with AI analysis",
+    "market_desc": "Track competitors, market trends, and opportunities with AI-powered intelligence",
+    "finance_desc": "Automated financial tracking, forecasting, and reporting for startups",
+    "growth_desc": "Growth hacking tools and analytics to scale your startup faster",
+    "investor_desc": "Manage investor relations, reporting, and communications in one place",
+    "analytics_desc": "Comprehensive analytics hub combining all your business metrics",
+    "how_title": "How Ideonautix Works",
+    "integrations_title": "Seamless Integrations",
+    "cta_title": "Scale Your Startup Faster",
+    "cta_description": "Early access launching February 2026. Be part of shaping the future of startup productivity"
   },
-  
   "community": {
-    "hero_title": "Kopiena",
-    "hero_subtitle": "Balsojiet par funkcijām, dalieties ar idejām un veidojiet nākotni kopā",
-    "voting_title": "Balsot par funkcijām",
-    "vote_button": "Balsot",
-    "voted_button": "Nobalsots"
+    "hero_title": "Community",
+    "hero_subtitle": "Vote on features, share ideas, and shape the future together",
+    "voting_title": "Vote on Features",
+    "voting_subtitle": "Help us prioritize what matters most to you",
+    "ideas_title": "Share Your Ideas",
+    "ideas_placeholder": "What feature would you love to see?",
+    "ideas_submit": "Submit Idea",
+    "leaderboard_title": "Top Requested Features",
+    "vote_button": "Vote",
+    "voted_button": "Voted",
+    "votes": "votes",
+    "thank_you": "Thank you! Your idea has been submitted."
   },
-  
   "consulting": {
-    "hero_title": "AI Konsultācijas",
-    "hero_subtitle": "Bezmaksas pilot programma 3 izvēlētiem uzņēmumiem",
-    "spots_remaining": "vietas atlikušas",
-    "form_title": "Pieteikties pilot programmai",
-    "form_success": "Pieteikums iesniegts! Mēs sazināsimies 48 stundu laikā.",
-    "form_error": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
+    "hero_title": "AI Consulting",
+    "hero_subtitle": "Free pilot program for 3 selected companies",
+    "spots_remaining": "spots remaining",
+    "what_title": "What We Offer",
+    "what_1": "AI Strategy & Implementation",
+    "what_2": "Technical Advisory",
+    "what_3": "Custom Solution Design",
+    "form_title": "Apply for Pilot Program",
+    "form_company": "Company Name",
+    "form_name": "Your Name",
+    "form_email": "Email Address",
+    "form_phone": "Phone Number",
+    "form_industry": "Industry",
+    "form_description": "Describe your AI needs",
+    "form_submit": "Submit Application",
+    "form_success": "Application submitted! We'll contact you within 48 hours.",
+    "form_error": "Something went wrong. Please try again.",
+    "benefits_title": "What You Get",
+    "benefit_1": "Free AI strategy consultation",
+    "benefit_2": "Technical implementation plan",
+    "benefit_3": "3 months of advisory support",
+    "benefit_4": "Priority access to our products",
+    "timeline_title": "Process Timeline",
+    "week_1": "Week 1: Initial consultation",
+    "week_2": "Week 2: Strategy development",
+    "week_3_12": "Week 3-12: Implementation support",
+    "requirements_title": "Requirements",
+    "req_1": "Based in Europe or willing to work CET hours",
+    "req_2": "Committed to AI transformation",
+    "req_3": "Open to collaboration and feedback"
   },
-  
   "contact": {
-    "hero_title": "Sazinies",
-    "hero_subtitle": "Veidosim kopā kaut ko pārsteidzošu",
-    "form_title": "Sūti mums ziņu",
-    "calendar_title": "Rezervēt tikšanos",
-    "form_success": "Ziņa nosūtīta! Atbildēsim drīzumā.",
-    "form_error": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
+    "hero_title": "Get in Touch",
+    "hero_subtitle": "Let's build something amazing together",
+    "form_title": "Send Us a Message",
+    "form_name": "Your Name",
+    "form_email": "Email Address",
+    "form_subject": "Subject",
+    "form_message": "Your Message",
+    "form_submit": "Send Message",
+    "form_success": "Message sent! We'll respond soon.",
+    "form_error": "Something went wrong. Please try again.",
+    "calendar_title": "Book a Meeting",
+    "calendar_subtitle": "Schedule a call with our team",
+    "calendar_button": "View Calendar",
+    "info_title": "Contact Information",
+    "info_email": "Email",
+    "info_location": "Location",
+    "social_title": "Follow Us",
+    "location_value": "Daugavpils, Latvia"
+  },
+  "form": {
+    "error_required": "This field is required",
+    "error_email": "Invalid email address",
+    "error_phone": "Invalid phone number",
+    "error_validation": "Please fix the errors in the form"
+  },
+  "common": {
+    "submitting": "Submitting...",
+    "loading": "Loading...",
+    "planning": "In Planning",
+    "in_development": "In Development",
+    "coming_soon": "Coming Soon",
+    "early_access": "Early Access",
+    "learn_more": "Learn More",
+    "get_started": "Get Started",
+    "read_more": "Read More",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view_all": "View All",
+    "show_more": "Show More",
+    "show_less": "Show Less"
+  },
+  "footer": {
+    "tagline": "Where Logic Dances with Creativity",
+    "products": "Products",
+    "company": "Company",
+    "about": "About",
+    "careers": "Careers",
+    "blog": "Blog",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "rights": "All rights reserved",
+    "made_in": "Made with ❤️ in Latvia"
   }
 }
