@@ -7,11 +7,9 @@
   <div class="container">
     <div class="status-badge">{$_('hero.status')}</div>
     
-    <h1 class="hero-title" use:typewriter={{ speed: 100 }}>
-      {$_('hero.title')}
-    </h1>
+    <h1 class="hero-title" use:typewriter={{ speed: 80 }}>AlgoRhythmics</h1>
     
-    <p class="hero-tagline">{$_('hero.tagline')}</p>
+    <p class="hero-tagline">Where Logic Dances with Creativity</p>
     
     <p class="hero-subtitle">{$_('hero.subtitle')}</p>
     
