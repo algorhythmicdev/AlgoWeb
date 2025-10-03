@@ -5,8 +5,6 @@
   import { revealOnScroll } from '$utils/animations';
   import productsData from '$data/products.json';
   import timelineData from '$data/timeline.json';
-  
-  export let data;
 </script>
 
 <HeroSection />

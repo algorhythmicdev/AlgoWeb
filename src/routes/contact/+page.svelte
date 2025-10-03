@@ -412,10 +412,6 @@
     font-weight: var(--weight-medium);
   }
   
-  .info-value a {
-    color: var(--aurora-purple);
-  }
-  
   .social-links {
     display: flex;
     flex-direction: column;

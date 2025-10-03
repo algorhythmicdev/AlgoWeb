@@ -21,10 +21,15 @@
 </script>
 
 {#if visible}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div 
     class="toast toast-{type}" 
     transition:fly={{ y: -50, duration: 300 }}
+    role="alert"
+    tabindex="0"
     on:click={() => { visible = false; setTimeout(onClose, 300); }}
+    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { visible = false; setTimeout(onClose, 300); } }}
   >
     <div class="toast-icon">{icons[type]}</div>
     <div class="toast-message">{message}</div>
