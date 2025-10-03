@@ -1,0 +1,76 @@
+{
+  "milestones": [
+    {
+      "id": "ideju-kauss",
+      "date": "2025-10",
+      "phase": "Current",
+      "title": "Ideju Kauss Competition",
+      "description": "Participating in Latvia's premier startup competition with NodeVoyage concept",
+      "status": "active",
+      "category": "Competition",
+      "icon": "trophy"
+    },
+    {
+      "id": "company-formation",
+      "date": "2025-11",
+      "phase": "Planned",
+      "title": "Company Formation",
+      "description": "Official company registration, legal structure, initial team setup",
+      "status": "planned",
+      "category": "Legal",
+      "icon": "building"
+    },
+    {
+      "id": "liaa-application",
+      "date": "2025-12",
+      "phase": "Planned",
+      "title": "LIAA Partnership Application",
+      "description": "Submit application for partnership with Latvia's Investment Agency for educational programs",
+      "status": "planned",
+      "category": "Partnership",
+      "icon": "handshake",
+      "note": "Aspirational - not yet confirmed"
+    },
+    {
+      "id": "mvp-ideonautix",
+      "date": "2026-02",
+      "phase": "Development",
+      "title": "Ideonautix MVP Launch",
+      "description": "First release of Ideonautix productivity platform with core microservices",
+      "status": "development",
+      "category": "Product",
+      "icon": "rocket"
+    },
+    {
+      "id": "pilot-consulting",
+      "date": "2026-03",
+      "phase": "Planned",
+      "title": "AI Consulting Pilot Program",
+      "description": "Launch free pilot program with 3 selected companies for AI integration consulting",
+      "status": "planned",
+      "category": "Service",
+      "icon": "users"
+    },
+    {
+      "id": "mvp-nodevoyage",
+      "date": "2026-09",
+      "phase": "Development",
+      "title": "NodeVoyage MVP Launch",
+      "description": "Public beta of NodeVoyage travel platform with core features and AI companion Nodi",
+      "status": "development",
+      "category": "Product",
+      "icon": "compass"
+    },
+    {
+      "id": "education-program",
+      "date": "2026-12",
+      "phase": "Vision",
+      "title": "Educational Program Launch",
+      "description": "Begin rollout of AI education programs targeting Latvia's secondary schools",
+      "status": "vision",
+      "category": "Education",
+      "icon": "book",
+      "note": "Target: 75+ institutes (research-based projection)"
+    }
+  ]
+}

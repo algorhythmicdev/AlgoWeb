@@ -1,0 +1,86 @@
+{
+  "reclameFabriek": {
+    "name": "Reclame Fabriek",
+    "type": "current",
+    "relationship": "R&D Foundation & Current Workplace",
+    "logo": "/images/partners/reclame-fabriek-logo.webp",
+    "website": "https://reclamefabriek.eu",
+    "description": "Leading signage manufacturer with 99% export focus, serving Fortune 500 companies across EU markets.",
+    "founded": 1993,
+    "location": "Daugavpils, Latvia",
+    "scale": {
+      "facility": "6,000+ m²",
+      "employees": "50+",
+      "production": "Multi-million EUR capacity",
+      "exportFocus": "99%"
+    },
+    "innovation": [
+      "LED Neon New Generation (300+ colors)",
+      "Custom LED controllers",
+      "Waterproof signage systems (IP68)",
+      "UV-resistant materials"
+    ]
+  },
+  "liaa": {
+    "name": "LIAA - Latvia's Investment and Development Agency",
+    "type": "aspirational",
+    "relationship": "Future Partnership Goal",
+    "logo": "/images/partners/liaa-logo.webp",
+    "website": "https://liaa.gov.lv",
+    "description": "We are preparing to apply for partnership with LIAA to develop comprehensive AI education programs across Latvia. This represents our vision for scaling educational impact.",
+    "note": "Aspirational - application planned for December 2025",
+    "targetPrograms": [
+      "AI literacy for secondary schools",
+      "Teacher training initiatives",
+      "Student innovation workshops"
+    ],
+    "projectedReach": {
+      "institutes": "75+ (25% of Latvia's secondary schools)",
+      "students": "5,000-15,000 annually",
+      "educators": "100-200",
+      "note": "Based on Latvia education system research"
+    }
+  },
+  "majorClients": [
+    {
+      "name": "KFC",
+      "category": "Quick Service Restaurant",
+      "region": "EU-wide"
+    },
+    {
+      "name": "McDonald's",
+      "category": "Quick Service Restaurant",
+      "region": "EU-wide"
+    },
+    {
+      "name": "H&M",
+      "category": "Retail Fashion",
+      "region": "EU-wide"
+    },
+    {
+      "name": "Deutsche Bank",
+      "category": "Financial Services",
+      "region": "Central Europe"
+    },
+    {
+      "name": "LONGCHAMP",
+      "category": "Luxury Goods",
+      "region": "EU-wide"
+    },
+    {
+      "name": "PUMA",
+      "category": "Sports & Lifestyle",
+      "region": "EU-wide"
+    },
+    {
+      "name": "Star Wars Outlaws",
+      "category": "Entertainment / Gaming",
+      "region": "EU-wide"
+    },
+    {
+      "name": "KLM Royal Dutch Airlines",
+      "category": "Airlines",
+      "region": "Netherlands & EU"
+    }
+  ]
+}

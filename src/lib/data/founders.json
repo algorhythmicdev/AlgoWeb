@@ -1,0 +1,116 @@
+{
+  "nikita": {
+    "name": "Nikita Jurtaevs",
+    "role": "Co-Founder & CEO",
+    "avatar": "/images/founders/founder-nikita.webp",
+    "bio": "Creative visionary leading AlgoRhythmics brand strategy and product innovation. Passionate about making AI accessible and delightful.",
+    "expertise": [
+      "Creative Vision & Brand Strategy",
+      "AI Product Design",
+      "User Experience Innovation",
+      "Strategic Partnerships"
+    ],
+    "email": "nikita@algorhythmics.com",
+    "linkedin": "https://linkedin.com/in/nikita-jurtaevs"
+  },
+  "slaff": {
+    "name": "Vjaceslavs \"Slaff\" Trosins",
+    "role": "Co-Founder & CTO",
+    "avatar": "/images/founders/founder-slaff.webp",
+    "currentPosition": {
+      "company": "Reclame Fabriek",
+      "title": "Founder of R&D Department & Head of Product Development",
+      "location": "Daugavpils, Latvia",
+      "achievements": [
+        "Founded and established R&D Department from ground up",
+        "Developed innovative LED Neon New Generation technology (300+ colors)",
+        "Led product development for Fortune 500 global brands",
+        "Represented company at Stockholm Sign Fair 2023, Helsinki 2024, and multiple EU expos"
+      ]
+    },
+    "brandExperience": {
+      "clients": [
+        {
+          "name": "KFC",
+          "logo": "/images/partners/brand-kfc.webp",
+          "category": "QSR"
+        },
+        {
+          "name": "McDonald's",
+          "logo": "/images/partners/brand-mcdonalds.webp",
+          "category": "QSR"
+        },
+        {
+          "name": "H&M",
+          "logo": "/images/partners/brand-hm.webp",
+          "category": "Retail"
+        },
+        {
+          "name": "Deutsche Bank",
+          "logo": "/images/partners/brand-deutsche-bank.webp",
+          "category": "Finance"
+        },
+        {
+          "name": "LONGCHAMP",
+          "logo": "/images/partners/brand-longchamp.webp",
+          "category": "Luxury"
+        },
+        {
+          "name": "PUMA",
+          "logo": "/images/partners/brand-puma.webp",
+          "category": "Sports"
+        },
+        {
+          "name": "Star Wars",
+          "logo": "/images/partners/brand-star-wars.webp",
+          "category": "Entertainment"
+        },
+        {
+          "name": "KLM",
+          "logo": "/images/partners/brand-klm.webp",
+          "category": "Airlines"
+        }
+      ],
+      "scale": {
+        "exportFocus": "99%",
+        "facilitySize": "6,000+ m²",
+        "production": "Multi-million EUR capacity"
+      }
+    },
+    "internationalExposure": [
+      {
+        "name": "Stockholm Sign Fair",
+        "year": 2023,
+        "country": "Sweden",
+        "flag": "🇸🇪",
+        "role": "Technical demonstrations and product presentations"
+      },
+      {
+        "name": "Helsinki Sign, Print & Promotion",
+        "year": 2024,
+        "country": "Finland",
+        "flag": "🇫🇮",
+        "role": "Innovation showcase with highest visitor interest"
+      },
+      {
+        "name": "Multiple EU Tech Expos",
+        "year": "2023-2024",
+        "country": "European Union",
+        "flag": "🇪🇺",
+        "role": "Representing Reclame Fabriek across European markets"
+      }
+    ],
+    "expertise": [
+      "R&D Strategy & Leadership",
+      "Product Development Management",
+      "Technical Architecture & AI Systems",
+      "International Business Presentations",
+      "EU Market Navigation",
+      "Cross-functional Team Leadership"
+    ],
+    "philosophy": "Technology serves humanity best when it combines strategic vision, deep technical expertise, and the ability to communicate innovation across borders. Working with global brands taught me that excellence comes from obsessive attention to detail and relentless innovation.",
+    "algorhythmicsVision": "Bringing enterprise-grade innovation experience and international business acumen from working with world's leading brands to create AI solutions that are both technically sophisticated and genuinely accessible to everyone.",
+    "email": "slaff@algorhythmics.com",
+    "linkedin": "https://linkedin.com/in/slaff-trosins"
+  }
+}

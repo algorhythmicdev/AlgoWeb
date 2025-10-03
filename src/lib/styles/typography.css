@@ -1,0 +1,86 @@
+/**
+ * Typography System
+ * Montserrat for display, Inter for body
+ */
+
+/* ==================== TYPOGRAPHY UTILITIES ==================== */
+.text-mega {
+  font-size: var(--text-mega);
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+.text-hero {
+  font-size: var(--text-hero);
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
+}
+
+.text-display {
+  font-size: var(--text-display);
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.01em;
+}
+
+.text-headline {
+  font-size: var(--text-headline);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+.text-title {
+  font-size: var(--text-title);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-normal);
+}
+
+.text-body {
+  font-size: var(--text-body);
+  font-family: var(--font-body);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-relaxed);
+}
+
+.text-small {
+  font-size: var(--text-small);
+  font-family: var(--font-body);
+  line-height: var(--leading-normal);
+}
+
+.text-caption {
+  font-size: var(--text-caption);
+  font-family: var(--font-body);
+  line-height: var(--leading-normal);
+}
+
+/* ==================== WEIGHT UTILITIES ==================== */
+.font-light { font-weight: var(--weight-light); }
+.font-normal { font-weight: var(--weight-normal); }
+.font-medium { font-weight: var(--weight-medium); }
+.font-semibold { font-weight: var(--weight-semibold); }
+.font-bold { font-weight: var(--weight-bold); }
+.font-black { font-weight: var(--weight-black); }
+
+/* ==================== TEXT COLORS ==================== */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-voyage { color: var(--voyage-blue); }
+.text-aurora { color: var(--aurora-purple); }
+.text-signal { color: var(--signal-yellow); }
+.text-cherry { color: var(--cherry-red); }
+
+/* ==================== GRADIENT TEXT ==================== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

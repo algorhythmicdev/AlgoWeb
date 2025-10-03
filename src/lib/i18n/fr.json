@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "products": "Produits",
+    "nodevoyage": "NodeVoyage",
+    "nodevoyage_desc": "Plateforme de voyage IA",
+    "ideonautix": "Ideonautix",
+    "ideonautix_desc": "Suite de productivité pour startups",
+    "community": "Communauté",
+    "consulting": "Consulting",
+    "pilot_badge": "3 places gratuites",
+    "contact": "Contact"
+  },
+  
+  "hero": {
+    "status": "Pré-entreprise • Ideju Kauss octobre 2025",
+    "title": "AlgoRhythmics",
+    "tagline": "Où la logique danse avec la créativité",
+    "subtitle": "Laboratoire d'innovation IA créant des produits révolutionnaires tout en préparant la construction de l'écosystème startup letton. Actuellement en phase de compétition, travaillant chez Reclame Fabriek.",
+    "cta_products": "Explorer les produits",
+    "cta_consulting": "Programme pilote gratuit"
+  },
+  
+  "story": {
+    "title": "Notre parcours",
+    "reality_title": "Phase actuelle",
+    "reality_text": "Nous sommes dans la phase passionnante de pré-entreprise, participant au concours letton Ideju Kauss avec notre concept NodeVoyage. Tout en continuant notre travail R&D chez Reclame Fabriek, AlgoRhythmics représente notre passion première et notre vision d'avenir.",
+    "mission_title": "Notre mission",
+    "mission_text": "Libérer le potentiel créatif dans chaque organisation grâce à des outils IA qui allient logique et imagination.",
+    "vision_title": "Notre vision",
+    "vision_text": "Être reconnu mondialement comme la porte d'entrée la plus accueillante vers l'IA, où les problèmes commerciaux sont résolus avec plaisir."
+  },
+  
+  "founders": {
+    "title": "Rencontrez les fondateurs",
+    "subtitle": "Expérience réelle avec les plus grandes marques mondiales",
+    "slaff": {
+      "brand_intro": "A dirigé l'innovation technique pour des solutions publicitaires au service de marques de classe mondiale:",
+      "brand_context": "A dirigé la R&D et le développement de produits pour une production orientée à 99% vers l'export, au service des entreprises Fortune 500. Capacité de production de plusieurs millions d'EUR avec une installation de 6000+ m²."
+    }
+  },
+  
+  "products": {
+    "title": "Nos produits",
+    "subtitle": "Plateformes IA révolutionnaires en développement",
+    "nodevoyage": {
+      "description": "Plateforme de planification de voyages IA avec constructeur d'itinéraire intelligent, suite de capture mobile et partage communautaire.",
+      "cta": "Explorer NodeVoyage"
+    },
+    "ideonautix": {
+      "description": "Super-suite de productivité pour startups combinant des microservices IA pour fondateurs et équipes.",
+      "cta": "Explorer Ideonautix"
+    }
+  },
+  
+  "footer": {
+    "tagline": "Où la logique danse avec la créativité",
+    "copyright": "© 2025 AlgoRhythmics. Tous droits réservés.",
+    "location": "Daugavpils, Lettonie",
+    "status": "Phase pré-entreprise • Ideju Kauss 2025"
+  },
+  
+  "common": {
+    "loading": "Chargement...",
+    "error": "Quelque chose s'est mal passé",
+    "success": "Succès!",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "learn_more": "En savoir plus",
+    "coming_soon": "Bientôt disponible"
+  }
+}

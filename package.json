@@ -1,0 +1,38 @@
+{
+  "name": "algorhythmics-website",
+  "version": "1.0.0",
+  "description": "Official website for AlgoRhythmics - Where Logic Dances with Creativity",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-vercel": "^5.4.4",
+    "@sveltejs/kit": "^2.5.28",
+    "@sveltejs/vite-plugin-svelte": "^3.1.2",
+    "@eslint/js": "^9.11.1",
+    "autoprefixer": "^10.4.20",
+    "globals": "^15.9.0",
+    "eslint": "^9.11.1",
+    "eslint-plugin-svelte": "^2.44.0",
+    "postcss": "^8.4.47",
+    "prettier": "^3.3.3",
+    "prettier-plugin-svelte": "^3.2.6",
+    "svelte": "^4.2.19",
+    "svelte-check": "^4.0.2",
+    "vite": "^5.4.7"
+  },
+  "dependencies": {
+    "svelte-i18n": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
