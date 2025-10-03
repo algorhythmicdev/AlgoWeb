@@ -103,8 +103,10 @@
   
   .founders-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
     gap: var(--space-8);
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   .founder-card {
@@ -158,7 +160,8 @@
     text-align: center;
     color: var(--text-secondary);
     margin-bottom: var(--space-6);
-    line-height: var(--leading-relaxed);
+    line-height: 1.6;
+    font-size: var(--text-body);
   }
   
   .expertise {
@@ -169,10 +172,10 @@
   }
   
   .expertise li {
-    padding: var(--space-2);
+    padding: var(--space-2) var(--space-3);
     background: var(--bg-elevated);
     border-radius: var(--radius-md);
-    font-size: var(--text-small);
+    font-size: var(--text-body);
   }
   
   .current-position,
@@ -294,10 +297,34 @@
   @media (max-width: 768px) {
     .founders-grid {
       grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    
+    .founder-card {
+      padding: var(--space-6);
+    }
+    
+    .avatar {
+      width: 100px;
+      height: 100px;
+      margin-bottom: var(--space-3);
+    }
+    
+    .founder-card h3 {
+      font-size: var(--text-title);
     }
     
     .brand-logos {
       grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+    }
+    
+    .current-position h4,
+    .brand-experience h4,
+    .international h4,
+    .algorhythmics-vision h4 {
+      font-size: var(--text-body);
+      margin-bottom: var(--space-2);
     }
   }
 </style>
