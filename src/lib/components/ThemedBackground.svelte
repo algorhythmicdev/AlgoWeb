@@ -2,59 +2,69 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { getThemeForPath } from '$config/backgroundThemes';
-  
-  let shapes = [];
-  let mouseX = 0;
-  let mouseY = 0;
-  
+
+  // Respect reduced motion
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Particle field using CSS transforms only, minimal DOM nodes
+  let particles = [];
+
   $: theme = getThemeForPath($page.url.pathname);
-  $: if (theme) generateShapes(theme);
-  
-  function generateShapes(themeConfig) {
-    shapes = [];
-    themeConfig.shapes.forEach(shapeConfig => {
-      for (let i = 0; i < shapeConfig.count; i++) {
-        shapes.push({
+  $: if (theme) initParticles(theme);
+
+  function colorVar(name) {
+    if (name === 'voyage-blue') return 'var(--voyage-blue)';
+    if (name === 'aurora-purple') return 'var(--aurora-purple)';
+    if (name === 'signal-yellow') return 'var(--signal-yellow)';
+    return 'var(--voyage-blue)';
+  }
+
+  function initParticles(themeConfig) {
+    const total = themeConfig.shapes.reduce((sum, s) => sum + s.count, 0);
+    const limit = Math.min(total, prefersReducedMotion ? 18 : 48);
+    const list = [];
+    themeConfig.shapes.forEach((shapeConfig) => {
+      const count = Math.min(shapeConfig.count, Math.ceil(limit / themeConfig.shapes.length));
+      for (let i = 0; i < count; i++) {
+        const size = shapeConfig.size === 'small' ? 6 : shapeConfig.size === 'medium' ? 10 : 14;
+        list.push({
           id: `${shapeConfig.type}-${i}`,
-          type: shapeConfig.type,
-          color: shapeConfig.color,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: shapeConfig.size === 'small' ? 20 : shapeConfig.size === 'medium' ? 40 : 60,
-          speed: Math.random() * 0.5 + 0.2,
-          rotation: Math.random() * 360
+          dx: (Math.random() - 0.5) * 0.15,
+          dy: (Math.random() - 0.5) * 0.12,
+          size,
+          color: colorVar(shapeConfig.color)
         });
       }
     });
+    particles = list;
   }
-  
+
+  let raf;
+  function animate() {
+    if (prefersReducedMotion) return;
+    particles = particles.map((p) => {
+      let nx = p.x + p.dx;
+      let ny = p.y + p.dy;
+      if (nx < -2 || nx > 102) p.dx = -p.dx, nx = Math.max(-2, Math.min(102, nx));
+      if (ny < -2 || ny > 102) p.dy = -p.dy, ny = Math.max(-2, Math.min(102, ny));
+      return { ...p, x: nx, y: ny };
+    });
+    raf = requestAnimationFrame(animate);
+  }
+
   onMount(() => {
-    const handleMouseMove = (e) => {
-      mouseX = e.clientX / window.innerWidth;
-      mouseY = e.clientY / window.innerHeight;
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
+    if (!prefersReducedMotion) {
+      raf = requestAnimationFrame(animate);
+    }
+    return () => cancelAnimationFrame(raf);
   });
 </script>
 
 <div class="background" aria-hidden="true">
-  {#each shapes as shape (shape.id)}
-    <div
-      class="shape shape-{shape.type}"
-      style="
-        left: {shape.x}%;
-        top: {shape.y}%;
-        width: {shape.size}px;
-        height: {shape.size}px;
-        animation-duration: {20 + shape.speed * 10}s;
-        transform: rotate({shape.rotation}deg);
-      "
-    />
+  {#each particles as p (p.id)}
+    <span class="dot" style="left:{p.x}%; top:{p.y}%; width:{p.size}px; height:{p.size}px; background:{p.color}"></span>
   {/each}
 </div>
 
@@ -66,34 +76,17 @@
     pointer-events: none;
     overflow: hidden;
   }
-  
-  .shape {
+
+  .dot {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.06;
-    animation: float 20s ease-in-out infinite;
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
+    opacity: 0.12;
+    transform: translateZ(0);
+    will-change: transform;
+    box-shadow: 0 0 10px rgba(var(--voyage-blue-rgb), 0.06);
   }
-  
-  .shape-brain {
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    background: var(--aurora-purple);
-  }
-  
-  .shape-sparkle {
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    background: var(--signal-yellow);
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    33% {
-      transform: translate(30px, -30px) rotate(120deg);
-    }
-    66% {
-      transform: translate(-20px, 20px) rotate(240deg);
-    }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot { opacity: 0.08; }
   }
 </style>

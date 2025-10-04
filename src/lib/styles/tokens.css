@@ -32,7 +32,8 @@
   --dark-text-secondary: #B4B7BA;
   
   /* ==================== SEMANTIC COLORS (LIGHT) ==================== */
-  --bg-primary: var(--cloud);
+  /* Per spec: pure white background throughout */
+  --bg-primary: var(--pure-white);
   --bg-surface: var(--pure-white);
   --bg-elevated: var(--mist);
   --border-color: rgba(0, 0, 0, 0.08);
