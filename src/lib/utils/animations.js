@@ -11,12 +11,12 @@ export function reveal(node, { delay = 0, duration = 500, y = 32, once = true } 
   }
   
   node.style.opacity = '0';
-  node.style.transform = `translateY(${y}px)`;
+  node.style.transform = 'translateY(' + y + 'px)';
   node.style.willChange = 'opacity, transform';
   
   const observer = new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
-      node.style.transition = `opacity ${duration}ms cubic-bezier(.6,0,.4,1), transform ${duration}ms cubic-bezier(.6,0,.4,1)`;
+      node.style.transition = 'opacity ' + duration + 'ms cubic-bezier(.6,0,.4,1), transform ' + duration + 'ms cubic-bezier(.6,0,.4,1)';
       setTimeout(() => {
         node.style.opacity = '1';
         node.style.transform = 'translateY(0)';
@@ -62,7 +62,7 @@ export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
       const y = (e.clientY - rect.top) / rect.height;
       const tiltX = (max / 2 - x * max);
       const tiltY = (y * max - max / 2);
-      node.style.transform = `perspective(600px) scale(${scale}) rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
+      node.style.transform = 'perspective(600px) scale(' + scale + ') rotateX(' + tiltY + 'deg) rotateY(' + tiltX + 'deg)';
     });
   };
   const reset = () => {
@@ -106,11 +106,11 @@ export function magnetic(node, { strength = 0.28, threshold = 110 } = {}) {
 // Parallax effect (moves at different speed on scroll)
 export function parallax(node, { intensity = 30 } = {}) {
   function onScroll() {
-    const rect = node.getBoundingClientRect(),
-          winHeight = window.innerHeight;
+    const rect = node.getBoundingClientRect();
+    const winHeight = window.innerHeight;
     if (rect.top < winHeight && rect.bottom > 0) {
       const progress = (rect.top + rect.height/2 - winHeight/2) / winHeight;
-      node.style.transform = `translateY(${progress * intensity}px)`;
+      node.style.transform = 'translateY(' + (progress * intensity) + 'px)';
     }
   }
   window.addEventListener('scroll', onScroll);
@@ -142,10 +142,15 @@ export function morphBlob(node, { duration = 6500, scale = 1.2 } = {}) {
   let frame;
   function animate(now) {
     const r1 = 80, r2 = 100, phi = now/750;
-    const path = `M${100+r1*Math.cos(phi)},${100+r1*Math.sin(phi)} 
-      C${100+r2*Math.cos(phi+1)},${100+r2*Math.sin(phi+1)}, 
-      ${100+r2*Math.cos(phi+2)},${100+r2*Math.sin(phi+2)}, 
-      ${100+r1*Math.cos(phi+3.14)},${100+r1*Math.sin(phi+3.14)} Z`;
+    const p1x = 100 + r1 * Math.cos(phi);
+    const p1y = 100 + r1 * Math.sin(phi);
+    const c1x = 100 + r2 * Math.cos(phi + 1);
+    const c1y = 100 + r2 * Math.sin(phi + 1);
+    const c2x = 100 + r2 * Math.cos(phi + 2);
+    const c2y = 100 + r2 * Math.sin(phi + 2);
+    const p2x = 100 + r1 * Math.cos(phi + 3.14);
+    const p2y = 100 + r1 * Math.sin(phi + 3.14);
+    const path = 'M' + p1x + ',' + p1y + ' C' + c1x + ',' + c1y + ', ' + c2x + ',' + c2y + ', ' + p2x + ',' + p2y + ' Z';
     node.setAttribute('d', path);
     frame = requestAnimationFrame(animate);
   }
@@ -161,8 +166,8 @@ export function ripple(node) {
     const circle = document.createElement('span');
     const diameter = Math.max(node.clientWidth, node.clientHeight);
     circle.style.width = circle.style.height = diameter + 'px';
-    circle.style.left = (e.offsetX - diameter/2) + 'px';
-    circle.style.top = (e.offsetY - diameter/2) + 'px';
+    circle.style.left = (e.offsetX - diameter / 2) + 'px';
+    circle.style.top = (e.offsetY - diameter / 2) + 'px';
     circle.style.position = 'absolute';
     circle.style.borderRadius = '50%';
     circle.style.background = 'rgba(255, 255, 255, 0.4)';
@@ -184,17 +189,18 @@ export function sparkleTrail(node) {
       const s = document.createElement('span');
       s.style.position = 'absolute';
       s.style.pointerEvents = 'none';
-      s.style.left = (e.offsetX + Math.random()*32-16) + 'px';
-      s.style.top = (e.offsetY + Math.random()*16-8) + 'px';
+      s.style.left = (e.offsetX + Math.random() * 32 - 16) + 'px';
+      s.style.top = (e.offsetY + Math.random() * 16 - 8) + 'px';
       s.style.width = s.style.height = (Math.random() * 6 + 4) + 'px';
-      s.style.background = `linear-gradient(45deg,#fff,${Math.random()<0.6?'#ff61d7':'#1351FF'})`;
+      const randColor = Math.random() < 0.6 ? '#ff61d7' : '#1351FF';
+      s.style.background = 'linear-gradient(45deg,#fff,' + randColor + ')';
       s.style.opacity = '1';
       s.style.borderRadius = '100%';
       s.style.zIndex = 10;
       s.style.transition = 'all .65s cubic-bezier(.54,-0.12,.56,1.32)';
       node.appendChild(s);
       setTimeout(() => {
-        s.style.top = (parseFloat(s.style.top)+16*(Math.random()<0.5?1:-1))+'px';
+        s.style.top = (parseFloat(s.style.top) + 16 * (Math.random() < 0.5 ? 1 : -1)) + 'px';
         s.style.opacity = '0';
       }, 32);
       setTimeout(() => node.removeChild(s), 700);
@@ -213,8 +219,8 @@ export function particleExplode(node) {
   function createParticle(x, y) {
     const particle = document.createElement('div');
     particle.style.position = 'fixed';
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
     particle.style.width = '4px';
     particle.style.height = '4px';
     particle.style.borderRadius = '50%';
@@ -239,12 +245,12 @@ export function particleExplode(node) {
         return;
       }
       
-      const distance = velocity * elapsed / 16;
-      const x = parseFloat(particle.style.left) + Math.cos(angle) * velocity;
-      const y = parseFloat(particle.style.top) + Math.sin(angle) * velocity + (progress * 2);
+      const distance = velocity * elapsed / 16; // retained for adjustment
+      const nx = parseFloat(particle.style.left) + Math.cos(angle) * velocity;
+      const ny = parseFloat(particle.style.top) + Math.sin(angle) * velocity + (progress * 2);
       
-      particle.style.left = `${x}px`;
-      particle.style.top = `${y}px`;
+      particle.style.left = nx + 'px';
+      particle.style.top = ny + 'px';
       particle.style.opacity = 1 - progress;
       
       requestAnimationFrame(animate);
@@ -278,7 +284,7 @@ export function morphGradient(node, { colors = ['#1351FF', '#6A38FF', '#FFD339']
   
   const animate = () => {
     const nextIndex = (currentIndex + 1) % colors.length;
-    const gradient = `linear-gradient(135deg, ${colors[currentIndex]}, ${colors[nextIndex]})`;
+    const gradient = 'linear-gradient(135deg, ' + colors[currentIndex] + ', ' + colors[nextIndex] + ')';
     node.style.background = gradient;
     currentIndex = nextIndex;
   };
