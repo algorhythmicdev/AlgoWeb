@@ -236,9 +236,11 @@
   .cta-card {
     text-align: center;
     padding: var(--space-12);
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-2xl);
-    color: white;
+    color: var(--text-primary);
   }
   
   .cta-card h2 {
@@ -259,10 +261,7 @@
     flex-wrap: wrap;
   }
   
-  .cta-buttons .btn-primary {
-    background: white;
-    color: var(--voyage-blue);
-  }
+  .cta-buttons .btn-primary { background: var(--voyage-blue); color: #fff; }
   
   .cta-buttons .btn-primary:hover {
     background: var(--bg-elevated);

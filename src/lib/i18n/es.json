@@ -12,7 +12,8 @@
     "community": "Comunidad",
     "consulting": "Consultoría",
     "contact": "Contacto",
-    "about": "Sobre nosotros"
+    "about": "Sobre nosotros",
+    "pilot_badge": "Piloto"
   },
   "hero": {
     "status": "En desarrollo • Dando forma al futuro de la IA",
@@ -250,6 +251,14 @@
     "products_title": "Productos",
     "company": "Empresa",
     "resources": "Recursos",
+    "founders": "Fundadores",
+    "vision": "Visión",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Hoja de ruta",
+    "community": "Comunidad",
+    "consulting": "Consultoría",
+    "contact": "Contacto",
     "about": "Sobre nosotros",
     "careers": "Empleo",
     "blog": "Blog",

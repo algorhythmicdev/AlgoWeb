@@ -10,7 +10,7 @@
     
     <h1 class="hero-title" use:typewriter={{ text: 'AlgoRhythmics', speed: 32, loop: false }} aria-label="AlgoRhythmics - AI Innovation Lab">AlgoRhythmics</h1>
     
-    <h2 class="hero-subheading">Where Logic Dances with Creativity</h2>
+    <h2 class="hero-subheading">{$_('hero.tagline')}</h2>
     
     <p class="hero-subtitle">{$_('hero.subtitle')}</p>
     
@@ -59,7 +59,7 @@
   }
   
   .hero-title {
-    font-size: clamp(2rem, 5vw, var(--text-mega));
+    font-size: var(--text-hero);
     background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -72,7 +72,7 @@
   }
   
   .hero-subheading {
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-size: var(--text-headline);
     font-weight: 400;
     color: var(--text-primary);
     margin-top: 0.75em;

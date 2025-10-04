@@ -12,7 +12,8 @@
     "community": "Communauté",
     "consulting": "Conseil",
     "contact": "Contact",
-    "about": "À propos"
+    "about": "À propos",
+    "pilot_badge": "Pilote"
   },
   "hero": {
     "status": "En développement • Façonnons l’avenir de l’IA",
@@ -250,6 +251,14 @@
     "products_title": "Produits",
     "company": "Entreprise",
     "resources": "Ressources",
+    "founders": "Fondateurs",
+    "vision": "Vision",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Feuille de route",
+    "community": "Communauté",
+    "consulting": "Conseil",
+    "contact": "Contact",
     "about": "À propos",
     "careers": "Carrières",
     "blog": "Blog",

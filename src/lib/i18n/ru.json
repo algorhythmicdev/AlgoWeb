@@ -12,7 +12,8 @@
     "community": "Сообщество",
     "consulting": "Консалтинг",
     "contact": "Контакты",
-    "about": "О нас"
+    "about": "О нас",
+    "pilot_badge": "Пилот"
   },
   "hero": {
     "status": "В разработке • Формируем будущее ИИ",
@@ -250,6 +251,14 @@
     "products_title": "Продукты",
     "company": "Компания",
     "resources": "Ресурсы",
+    "founders": "Основатели",
+    "vision": "Видение",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Дорожная карта",
+    "community": "Сообщество",
+    "consulting": "Консалтинг",
+    "contact": "Контакты",
     "about": "О нас",
     "careers": "Карьера",
     "blog": "Блог",

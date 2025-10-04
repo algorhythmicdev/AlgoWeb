@@ -12,7 +12,8 @@
     "community": "Kopiena",
     "consulting": "Konsultācijas",
     "contact": "Kontakti",
-    "about": "Par mums"
+    "about": "Par mums",
+    "pilot_badge": "Pilots"
   },
   "hero": {
     "status": "Izstrādē • Veidojam AI nākotni",
@@ -250,6 +251,14 @@
     "products_title": "Produkti",
     "company": "Uzņēmums",
     "resources": "Resursi",
+    "founders": "Dibinātāji",
+    "vision": "Vīzija",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Ceļvedis",
+    "community": "Kopiena",
+    "consulting": "Konsultācijas",
+    "contact": "Kontakti",
     "about": "Par mums",
     "careers": "Karjera",
     "blog": "Blogs",

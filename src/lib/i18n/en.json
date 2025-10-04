@@ -12,7 +12,8 @@
     "community": "Community",
     "consulting": "Consulting",
     "contact": "Contact",
-    "about": "About"
+    "about": "About",
+    "pilot_badge": "Pilot"
   },
   "hero": {
     "status": "In Development • Shaping the Future of AI",
@@ -250,6 +251,14 @@
     "products_title": "Products",
     "company": "Company",
     "resources": "Resources",
+    "founders": "Founders",
+    "vision": "Vision",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Roadmap",
+    "community": "Community",
+    "consulting": "Consulting",
+    "contact": "Contact",
     "about": "About",
     "careers": "Careers",
     "blog": "Blog",

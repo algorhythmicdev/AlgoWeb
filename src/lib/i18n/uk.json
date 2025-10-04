@@ -12,7 +12,8 @@
     "community": "Спільнота",
     "consulting": "Консалтинг",
     "contact": "Контакти",
-    "about": "Про нас"
+    "about": "Про нас",
+    "pilot_badge": "Пілот"
   },
   "hero": {
     "status": "У розробці • Формуємо майбутнє ІІ",
@@ -250,6 +251,14 @@
     "products_title": "Продукти",
     "company": "Компанія",
     "resources": "Ресурси",
+    "founders": "Засновники",
+    "vision": "Візія",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Дорожня карта",
+    "community": "Спільнота",
+    "consulting": "Консалтинг",
+    "contact": "Контакти",
     "about": "Про нас",
     "careers": "Кар’єра",
     "blog": "Блог",
