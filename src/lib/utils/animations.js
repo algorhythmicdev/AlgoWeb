@@ -50,7 +50,7 @@ export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
     return { destroy() {} };
   }
   
-  node.style.transition = `transform ${speed}ms cubic-bezier(.23,1.23,.56,1)`;
+  node.style.transition = 'transform ' + speed + 'ms cubic-bezier(.23,1.23,.56,1)';
   node.style.willChange = 'transform';
   
   let rafId;
@@ -67,7 +67,7 @@ export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
   };
   const reset = () => {
     cancelAnimationFrame(rafId);
-    node.style.transform = `perspective(600px) scale(1)`;
+    node.style.transform = 'perspective(600px) scale(1)';
     node.style.willChange = 'auto';
   };
   node.addEventListener('pointermove', pointermove);
@@ -89,7 +89,7 @@ export function magnetic(node, { strength = 0.28, threshold = 110 } = {}) {
     const dy = e.clientY - (rect.top + rect.height / 2);
     const d = Math.sqrt(dx*dx + dy*dy);
     if (d < threshold) {
-      node.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+      node.style.transform = 'translate(' + (dx * strength) + 'px, ' + (dy * strength) + 'px)';
     }
   };
   const onMouseLeave = () => node.style.transform = '';
