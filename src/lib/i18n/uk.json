@@ -169,7 +169,7 @@
     "what_3": "Індивідуальні рішення",
     "form_title": "Подати заявку",
     "form_company": "Назва компанії",
-    "form_name": "Ваше ім’я",
+    "form_name": "Ваше ім\u2019я",
     "form_email": "Email",
     "form_phone": "Телефон",
     "form_industry": "Галузь",
@@ -195,7 +195,7 @@
     "hero_title": "Зв’яжіться з нами",
     "hero_subtitle": "Створімо щось видатне разом",
     "form_title": "Напишіть нам",
-    "form_name": "Ваше ім’я",
+    "form_name": "Ваше ім\u2019я",
     "form_email": "Email",
     "form_subject": "Тема",
     "form_message": "Ваше повідомлення",
@@ -212,7 +212,7 @@
     "location_value": "Даугавпілс, Латвія"
   },
   "form": {
-    "error_required": "Обов’язкове поле",
+    "error_required": "Обов\u2019язкове поле",
     "error_email": "Невірний email",
     "error_phone": "Невірний номер телефону",
     "error_validation": "Виправте помилки у формі"
@@ -251,14 +251,14 @@
     "company": "Компанія",
     "resources": "Ресурси",
     "about": "Про нас",
-    "careers": "Кар’єра",
+    "careers": "Кар\u2019єра",
     "blog": "Блог",
     "legal": "Юридична інформація",
     "privacy": "Політика приватності",
     "terms": "Умови користування",
     "cookies": "Політика cookies",
     "rights": "Всі права захищені",
-    "made_in": "Зроблено з ❤️ в Латвії",
+    "made_in": "Зроблено з \u2764\uFE0F в Латвії",
     "copyright": "© 2025 AlgoRhythmics"
   }
 }
