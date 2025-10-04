@@ -36,23 +36,25 @@
     "subtitle": "Building the future of AI together",
     "nikita": {
       "role": "Co-Founder & CEO",
+      "current_title": "Current Position",
+      "position": "Head of Brand Strategy & Product Innovation at Reclame Fabriek",
       "bio": "Visionary entrepreneur passionate about transforming travel and productivity through AI innovation"
     },
     "slaff": {
       "role": "Co-Founder & CTO",
       "current_title": "Current Position",
-      "position": "Technical Director at Reclame Fabriek",
+      "position": "Founder of R&D & Head of Product Development at Reclame Fabriek",
       "achievement1": "15+ years of engineering leadership",
       "achievement2": "Expert in production systems and R&D",
       "achievement3": "Led teams of 10+ engineers",
       "achievement4": "Delivered 100+ successful projects",
       "brand_title": "Brand Experience",
       "brand_intro": "Worked with global brands on premium advertising display systems:",
-      "brand_context": "Projects delivered through Reclame Fabriek, Netherlands' leading advertising display manufacturer",
+      "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV), shared by both founders",
       "international_title": "International Exposure",
       "philosophy": "Technology should amplify human potential, not replace it. My goal is to build systems that empower people to achieve more.",
       "algorhythmics_title": "Vision for AlgoRhythmics",
-      "algorhythmics_vision": "Combining 15 years of production engineering excellence with cutting-edge AI to create platforms that solve real-world problems for millions of users."
+      "algorhythmics_vision": "Bringing enterprise-grade innovation experience and international brand work to build accessible, powerful AI products."
     }
   },
   "products": {
@@ -243,8 +245,11 @@
   },
   "footer": {
     "tagline": "Where Logic Dances with Creativity",
-    "products": "Products",
+    "status": "Pre-company • Ideju Kauss October 2025",
+    "location": "Daugavpils, Latvia",
+    "products_title": "Products",
     "company": "Company",
+    "resources": "Resources",
     "about": "About",
     "careers": "Careers",
     "blog": "Blog",
@@ -253,6 +258,7 @@
     "terms": "Terms of Service",
     "cookies": "Cookie Policy",
     "rights": "All rights reserved",
-    "made_in": "Made with ❤️ in Latvia"
+    "made_in": "Made with ❤️ in Latvia",
+    "copyright": "© 2025 AlgoRhythmics"
   }
 }

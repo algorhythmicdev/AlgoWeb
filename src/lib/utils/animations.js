@@ -2,14 +2,25 @@
 
 // Intersection fade/slide-up reveal (on scroll)
 export function reveal(node, { delay = 0, duration = 500, y = 32, once = true } = {}) {
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    node.style.opacity = '1';
+    node.style.transform = 'translateY(0)';
+    return { destroy() {} };
+  }
+  
   node.style.opacity = '0';
   node.style.transform = `translateY(${y}px)`;
+  node.style.willChange = 'opacity, transform';
+  
   const observer = new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
       node.style.transition = `opacity ${duration}ms cubic-bezier(.6,0,.4,1), transform ${duration}ms cubic-bezier(.6,0,.4,1)`;
       setTimeout(() => {
         node.style.opacity = '1';
         node.style.transform = 'translateY(0)';
+        node.style.willChange = 'auto';
       }, delay);
       if (once) observer.disconnect();
     }
@@ -31,20 +42,39 @@ export function staggerReveal(node, opts = {}) {
 
 // 3D hover tilt (tilts on mouse movement)
 export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
+  // Check for reduced motion preference and mobile
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth <= 768;
+  
+  if (prefersReducedMotion || isMobile) {
+    return { destroy() {} };
+  }
+  
   node.style.transition = `transform ${speed}ms cubic-bezier(.23,1.23,.56,1)`;
+  node.style.willChange = 'transform';
+  
+  let rafId;
   const pointermove = (e) => {
-    const rect = node.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    const tiltX = (max / 2 - x * max);
-    const tiltY = (y * max - max / 2);
-    node.style.transform = `perspective(600px) scale(${scale}) rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      const rect = node.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const tiltX = (max / 2 - x * max);
+      const tiltY = (y * max - max / 2);
+      node.style.transform = `perspective(600px) scale(${scale}) rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
+    });
   };
-  const reset = () => node.style.transform = `perspective(600px) scale(1)`;
+  const reset = () => {
+    cancelAnimationFrame(rafId);
+    node.style.transform = `perspective(600px) scale(1)`;
+    node.style.willChange = 'auto';
+  };
   node.addEventListener('pointermove', pointermove);
   node.addEventListener('pointerleave', reset);
   return {
     destroy() {
+      cancelAnimationFrame(rafId);
       node.removeEventListener('pointermove', pointermove);
       node.removeEventListener('pointerleave', reset);
     }

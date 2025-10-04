@@ -503,35 +503,196 @@ gtag('event', 'theme_toggle', { theme: 'dark' });
 
 ## 🎯 EXECUTION PLAN - Level Up Design
 
-### Phase 1: Critical Fixes (NOW)
-- [ ] 1.1 Fix Hero typewriter - should type "AlgoRhythmics"
-- [ ] 1.2 Make "Where Logic..." static beneath hero title
-- [ ] 1.3 Equalize Reality/Mission/Vision card heights and content
-- [ ] 1.4 Fix Founders section - equal sizing, side by side
-- [ ] 1.5 Update founder info - both work at Reclame Fabriek
-- [ ] 1.6 Fix NodeVoyage 4-step boxes (01-04) - prevent text overlap
-- [ ] 1.7 Add missing Footer translation keys
+### Here is a precise, actionable guide for each request—covering code, markup, CSS, and component logic. Each phase follows modern best practices for SvelteKit sites and guarantees both visual appeal and responsive UX.
 
-### Phase 2: Interactive Enhancements (NEXT)
-- [ ] 2.1 Redesign Community voting - make it exciting and interactive
-- [ ] 2.2 Redesign Contact page - add personality and engagement
-- [ ] 2.3 Add stagger animations to cards
-- [ ] 2.4 Add parallax effects to hero backgrounds
-- [ ] 2.5 Add hover effects with tilt to product cards
-- [ ] 2.6 Add sparkle trails to primary CTAs
-- [ ] 2.7 Add morphing blob backgrounds
-- [ ] 2.8 Add scroll-triggered reveals throughout
+***
 
-### Phase 3: Polish & Effects (FINAL)
-- [ ] 3.1 Add ripple effects to all buttons
-- [ ] 3.2 Add magnetic attraction to CTAs
-- [ ] 3.3 Add smooth transitions between sections
-- [ ] 3.4 Add loading animations
-- [ ] 3.5 Add micro-interactions on form inputs
-- [ ] 3.6 Test all animations on mobile
-- [ ] 3.7 Optimize animation performance
-- [ ] 3.8 Final accessibility audit
+# **Phase 1: Critical Fixes**
 
----
+***
 
-**End of Document**
+### **1.1 Fix Hero typewriter ("AlgoRhythmics")**
+
+- Open your hero section file (e.g. `src/routes/+page.svelte`).
+- Replace any existing typewriter action or headline logic with:
+
+```svelte
+<script>
+  import { typewriter } from '$lib/utils/animations.js';
+</script>
+
+<h1 use:typewriter={{ text: 'AlgoRhythmics', speed: 32, loop: false }}>AlgoRhythmics</h1>
+```
+- Remove any inner markup that tries to animate "Where Logic..."; this should be static beneath.
+
+***
+
+### **1.2 "Where Logic..." Static Subtitle**
+
+Just beneath the hero title:
+
+```svelte
+<h2 class="hero-subheading">Where Logic Dances with Creativity</h2>
+```
+- In CSS, use `.hero-subheading { font-size: clamp(1.1rem, 3vw, 1.6rem); margin-top: 0.75em; font-weight: 400; }`
+
+***
+
+### **1.3 Equal Height Card for Reality/Mission/Vision**
+
+- Wrap cards in a flex/grid container.
+- Apply min-height and padding to cards:
+```css
+.cards-row {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+}
+.card {
+  flex: 1;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.5rem;
+}
+@media (max-width: 700px) {
+  .cards-row { flex-direction: column; }
+}
+```
+- All card content (text, title, even short one) should be visually balanced and of similar length.
+
+***
+
+### **1.4 Founders Section: Equal Size, Side by Side**
+
+- Use flexbox with a fixed (or min/max) width for founder blocks:
+```css
+.founders-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.founder-card {
+  width: 100%;
+  max-width: 320px;
+  min-width: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.founder-photo { width: 172px; height: 172px; object-fit: cover; border-radius: 46% 54% 44% 56%/42% 60% 40% 58%; }
+```
+- Use a responsive `.founders-row` to wrap on small screens.
+
+***
+
+### **1.5 Update Founder Info**
+
+- Edit founders’ bio text in your JSON/data or directly in Svelte:
+
+```json
+{
+  "founders": [
+    { "name": "Nikita", "role": "Co-founder, AlgoRhythmics", "company": "Reclame Fabriek" },
+    { "name": "Slaff", "role": "Co-founder, AlgoRhythmics", "company": "Reclame Fabriek" }
+  ]
+}
+```
+- In component: `"Works at Reclame Fabriek"`
+
+***
+
+### **1.6 NodeVoyage 4-Step Boxes: Prevent Overlap**
+
+- Ensure step boxes use grid/flex.
+- Apply fixed `.step-box` min-height and overflow-wrap:
+```css
+.steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;}
+.step-box { min-height: 170px; overflow-wrap: break-word; padding: 1rem; box-sizing: border-box; }
+@media (max-width: 900px) {
+  .steps-row { grid-template-columns: 2fr 2fr; }
+}
+@media (max-width: 550px) {
+  .steps-row { grid-template-columns: 1fr; }
+}
+```
+- Use only brief, wrapped text, avoidvery long words.
+
+***
+
+### **1.7 Add Footer Translation Keys**
+
+- Ensure all languages have:
+  - products, company, about, careers, blog, legal, privacy, terms, cookies, rights, made_in.
+- Add any missing keys from footer to ALL translation files.
+
+***
+
+### **Unified Text Sizing Across Site**
+
+- Set CSS variables for scaling:
+```css
+:root {
+  --h1: clamp(2rem, 6vw, 2.6rem);
+  --h2: clamp(1.3rem, 3vw, 1.75rem);
+  --h3: clamp(1.1rem, 2vw, 1.38rem);
+  --text: clamp(.95rem, 1.8vw, 1.08rem);
+  --small: clamp(.82rem, 1vw, .93rem);
+}
+h1 { font-size: var(--h1); }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); }
+body, p, span, input, button { font-size: var(--text); }
+.small { font-size: var(--small); }
+```
+- Apply across all headings/labels/paragraphs for visual unity and mobile readability.
+
+***
+
+# **Phase 2: Interactive Enhancements**
+
+***
+
+- **Redesign Community Voting**: Use `<ul use:staggerReveal>` on feature list; apply hover, click, confetti/sparkle trails; animate vote count change.
+- **Contact Page Personality**: Use typewriter/random message, morph blob SVG, animated icons, text input effects.
+- **Card Stagger Animation**: `<section use:staggerReveal={{ stagger:90 }}>` for sections/lists.
+- **Parallax Hero**: `<div class="hero-bg" use:parallax={{ intensity:40 }}>` for backgrounds or images.
+- **Tilt Hover**: `<div class="product-card" use:tilt>` for product cards.
+- **Sparkle Trail**: `<a class="cta" use:sparkleTrail>Join Now</a>` for special CTAs.
+- **Morphing Blob Background**: Use `<svg><path use:morphBlob fill="#XYZ"/></svg>` for hero/section art.
+- **Scroll Reveal**: `<div use:reveal={{ y:32, duration:650 }}>` for all feature and section blocks.
+
+***
+
+# **Phase 3: Polish & Effects**
+
+***
+
+- **Ripple All Buttons**: Add `use:ripple` everywhere `<button>` is used.
+- **Magnetic CTAs**: `use:magnetic` for main/important buttons.
+- **Smooth Section Transition**: Use CSS transitions (`transition: opacity .7s, transform .7s;`) and scroll-linked fade/reveal.
+- **Loading Animations**: On page load, overlay fade spinner, or animation using Lottie/SVG if desired.
+- **Form Micro-interactions**: Animate border/focus using CSS, show icons on valid input, shake/flash on invalid.
+- **Test on Mobile**: Open all UI on phones, check tap/focus/scroll/animation smoothness.
+- **Optimize Performance**: Use `will-change: transform;` for animated layers; requestAnimationFrame for JS-based effects; avoid animating large DOM trees.
+- **Accessibility**: Always include `aria-label`, tabindex, alt text for icons/images, check with Lighthouse.
+
+***
+
+# **Summary Checklist**
+
+| Area   | Action |
+|--------|--------|
+| Hero   | Svelte use:typewriter for logo; static subtitle below; size h1/h2 with CSS vars |
+| Cards/Steps | Use flex/grid; min-height; test on low-res screens |
+| Founder | Update bios in JSON; equal card CSS |
+| Voting/Contact | Stagger, tilt, sparkle, morph, ripple, magnetic, parallax via Svelte actions |
+| Footer | Add keys for each translation; code for all languages |
+| General | Use CSS vars for all core text sizes; test every viewport |
+| Polish | Add all JS/CSS interactive effects; performance, accessibility |
+
+***
+
+Apply these steps and your site will deliver a visually crisp, exciting, performant UX both for desktop and mobile, across all languages and all screens.

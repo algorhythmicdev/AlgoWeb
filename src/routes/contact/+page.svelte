@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
-  import { staggerReveal, tilt, particleExplode } from '$utils/animations';
+  import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
   import Toast from '$components/Toast.svelte';
   
   let formData = {
@@ -117,9 +117,9 @@
 
 <!-- Hero Section -->
 <section class="contact-hero">
-  <div class="hero-background"></div>
+  <div class="hero-background" use:morphGradient={{ colors: ['#1351FF', '#6A38FF', '#FFD339'], speed: 4000 }}></div>
   <div class="container">
-    <h1 class="hero-title">{$_('contact.hero_title')}</h1>
+    <h1 class="hero-title" use:typewriter={{ text: $_('contact.hero_title'), speed: 100, loop: false }}>{$_('contact.hero_title')}</h1>
     <p class="hero-subtitle">{$_('contact.hero_subtitle')}</p>
   </div>
 </section>
@@ -129,8 +129,8 @@
   <div class="container">
     <div class="contact-grid">
       <!-- Contact Form -->
-      <div class="form-container glass-card" use:tilt={{ max: 2 }}>
-        <h2>{$_('contact.form_title')}</h2>
+      <div class="form-container glass-card" use:tilt={{ max: 3, scale: 1.01 }}>
+        <h2 use:sparkleTrail>{$_('contact.form_title')}</h2>
         
         <form on:submit={handleSubmit}>
           <div class="form-group" class:error={errors.name}>
@@ -194,6 +194,9 @@
             class="btn btn-primary btn-lg btn-block"
             disabled={isSubmitting}
             use:particleExplode
+            use:ripple
+            use:magnetic
+            use:sparkleTrail
           >
             {#if isSubmitting}
               <span class="spinner"></span>
@@ -208,14 +211,17 @@
       <!-- Contact Info & Calendar -->
       <div class="info-container">
         <!-- Calendar Widget -->
-        <div class="calendar-card glass-card" use:tilt={{ max: 2 }}>
-          <h3>{$_('contact.calendar_title')}</h3>
+        <div class="calendar-card glass-card" use:tilt={{ max: 3, scale: 1.01 }}>
+          <h3 use:sparkleTrail>{$_('contact.calendar_title')}</h3>
           <p>{$_('contact.calendar_subtitle')}</p>
           <button 
             class="btn btn-secondary btn-lg btn-block"
             on:click={openCalendly}
             disabled={!calendlyLoaded}
             use:particleExplode
+            use:ripple
+            use:magnetic
+            use:sparkleTrail
           >
             📅 {$_('contact.calendar_button')}
           </button>
@@ -245,18 +251,18 @@
         </div>
         
         <!-- Social Links -->
-        <div class="social-card glass-card">
-          <h3>{$_('contact.social_title')}</h3>
+        <div class="social-card glass-card" use:tilt={{ max: 2 }}>
+          <h3 use:sparkleTrail>{$_('contact.social_title')}</h3>
           <div class="social-links">
-            <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener">
+            <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
               <span class="social-icon">💼</span>
               LinkedIn
             </a>
-            <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener">
+            <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
               <span class="social-icon">💻</span>
               GitHub
             </a>
-            <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener">
+            <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
               <span class="social-icon">🐦</span>
               Twitter
             </a>
@@ -279,10 +285,16 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at 50% 0%, rgba(106, 56, 255, 0.1) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
   }
   
   .hero-title {
-    font-size: var(--text-mega);
+    font-size: var(--text-hero);
     background: linear-gradient(135deg, var(--aurora-purple), var(--voyage-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -347,6 +359,26 @@
     outline: none;
     border-color: var(--aurora-purple);
     box-shadow: 0 0 0 4px rgba(106, 56, 255, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .form-group input:valid,
+  .form-group textarea:valid {
+    border-color: var(--voyage-blue);
+    background: linear-gradient(135deg, rgba(19, 81, 255, 0.05), rgba(106, 56, 255, 0.05));
+  }
+  
+  .form-group input:invalid:not(:placeholder-shown),
+  .form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--cherry-red);
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
   }
   
   .form-group input.error,
@@ -427,13 +459,31 @@
     border-radius: var(--radius-lg);
     color: var(--text-primary);
     font-weight: var(--weight-medium);
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+  
+  .social-link:hover::before {
+    left: 100%;
   }
   
   .social-link:hover {
-    transform: translateX(8px);
-    background: var(--aurora-purple);
+    transform: translateX(8px) scale(1.02);
+    background: linear-gradient(135deg, var(--aurora-purple), var(--voyage-blue));
     color: white;
+    box-shadow: 0 8px 25px rgba(106, 56, 255, 0.3);
   }
   
   .social-icon {

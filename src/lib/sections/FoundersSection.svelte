@@ -1,17 +1,17 @@
 <script>
   import { _ } from 'svelte-i18n';
   import foundersData from '$data/founders.json';
-  import { revealOnScroll } from '$utils/animations';
+  import { revealOnScroll, staggerReveal } from '$utils/animations';
 </script>
 
-<section class="founders section" id="founders">
+<section class="founders section" id="founders" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title text-center">{$_('founders.title')}</h2>
     <p class="section-subtitle text-center">{$_('founders.subtitle')}</p>
     
-    <div class="founders-grid">
+    <div class="founders-grid" use:staggerReveal={{ delay: 100, stagger: 200 }}>
       <!-- Nikita Card -->
-      <div class="founder-card" use:revealOnScroll>
+      <div class="founder-card">
         <div class="avatar">
           <img src={foundersData.nikita.avatar} alt={foundersData.nikita.name} />
         </div>
@@ -19,6 +19,35 @@
         <p class="role">{$_('founders.nikita.role')}</p>
         <p class="bio">{$_('founders.nikita.bio')}</p>
         
+        {#if foundersData.nikita.currentPosition}
+          <div class="current-position">
+            <h4>{$_('founders.slaff.current_title')}</h4>
+            <p class="position-title">{foundersData.nikita.currentPosition.title} @ {foundersData.nikita.currentPosition.company}</p>
+            {#if foundersData.nikita.currentPosition.achievements}
+              <ul class="achievements">
+                {#each foundersData.nikita.currentPosition.achievements as ach}
+                  <li>{ach}</li>
+                {/each}
+              </ul>
+            {/if}
+          </div>
+        {/if}
+
+        {#if foundersData.nikita.brandExperience}
+          <div class="brand-experience">
+            <h4>{$_('founders.slaff.brand_title')}</h4>
+            <p class="brand-intro">{$_('founders.slaff.brand_intro')}</p>
+            <div class="brand-logos">
+              {#each foundersData.nikita.brandExperience.clients as client}
+                <div class="brand-logo" title={client.name}>
+                  <img src={client.logo} alt={client.name} />
+                </div>
+              {/each}
+            </div>
+            <p class="brand-context">{$_('founders.slaff.brand_context')}</p>
+          </div>
+        {/if}
+
         <ul class="expertise">
           {#each foundersData.nikita.expertise as skill}
             <li>{skill}</li>
@@ -27,7 +56,7 @@
       </div>
       
       <!-- Slaff Card - Featured -->
-      <div class="founder-card featured" use:revealOnScroll={{ delay: 200 }}>
+      <div class="founder-card featured">
         <div class="avatar">
           <img src={foundersData.slaff.avatar} alt={foundersData.slaff.name} />
         </div>
@@ -103,7 +132,7 @@
   
   .founders-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-8);
     max-width: 1200px;
     margin: 0 auto;
@@ -115,6 +144,8 @@
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     transition: all var(--duration-normal) var(--ease-out);
+    display: flex;
+    flex-direction: column;
   }
   
   .founder-card:hover {
@@ -123,7 +154,6 @@
   }
   
   .founder-card.featured {
-    grid-column: 1 / -1;
     background: linear-gradient(135deg, rgba(19, 81, 255, 0.03), rgba(106, 56, 255, 0.03));
     border: 2px solid var(--voyage-blue);
   }

@@ -3,6 +3,7 @@
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import ThemedBackground from '$components/ThemedBackground.svelte';
+  import LoadingSpinner from '$components/LoadingSpinner.svelte';
   import '$lib/i18n';
   import { waitLocale } from 'svelte-i18n';
   import { onMount } from 'svelte';
@@ -39,6 +40,8 @@
   <meta name="twitter:description" content={data?.meta?.description || 'Where Logic Dances with Creativity'} />
   <meta name="twitter:image" content="/og-image.png" />
 </svelte:head>
+
+<LoadingSpinner />
 
 {#await waitLocale()}
   <div class="loading">

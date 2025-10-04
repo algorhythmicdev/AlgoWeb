@@ -27,6 +27,7 @@ body {
   background: var(--bg-primary);
   overflow-x: hidden;
   min-height: 100vh;
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 /* ==================== TYPOGRAPHY ==================== */
@@ -139,6 +140,7 @@ select:focus-visible {
 /* ==================== SECTION SPACING ==================== */
 .section {
   padding: var(--space-16) 0;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section-sm {
@@ -147,6 +149,7 @@ select:focus-visible {
 
 .section-lg {
   padding: var(--space-24) 0;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 768px) {
@@ -160,6 +163,43 @@ select:focus-visible {
   
   .section-lg {
     padding: var(--space-16) 0;
+  }
+}
+
+/* ==================== MOBILE ANIMATION OPTIMIZATIONS ==================== */
+@media (max-width: 768px) {
+  /* Reduce motion for better performance on mobile */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Disable complex animations on mobile */
+  .hero-background,
+  .morphing-blob {
+    animation: none !important;
+  }
+  
+  /* Reduce tilt effects on mobile */
+  [use:tilt] {
+    transform: none !important;
+  }
+  
+  /* Optimize parallax for mobile */
+  [use:parallax] {
+    transform: none !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -233,6 +273,7 @@ select:focus-visible {
   text-align: center;
 }
 
+/* Screen reader only content */
 .sr-only {
   position: absolute;
   width: 1px;

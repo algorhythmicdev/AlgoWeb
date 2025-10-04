@@ -4,6 +4,29 @@
     "role": "Co-Founder & CEO",
     "avatar": "/images/founders/founder-nikita.webp",
     "bio": "Creative visionary leading AlgoRhythmics brand strategy and product innovation. Passionate about making AI accessible and delightful.",
+    "currentPosition": {
+      "company": "Reclame Fabriek",
+      "title": "Head of Brand Strategy & Product Innovation",
+      "location": "Daugavpils, Latvia",
+      "achievements": [
+        "Co-led innovation initiatives together with R&D",
+        "Drove brand and product storytelling for global clients",
+        "Shaped go-to-market for LED Neon New Generation",
+        "Presented at EU expos alongside R&D leadership"
+      ]
+    },
+    "brandExperience": {
+      "clients": [
+        { "name": "KFC", "logo": "/images/partners/brand-kfc.webp", "category": "QSR" },
+        { "name": "McDonald's", "logo": "/images/partners/brand-mcdonalds.webp", "category": "QSR" },
+        { "name": "H&M", "logo": "/images/partners/brand-hm.webp", "category": "Retail" },
+        { "name": "Deutsche Bank", "logo": "/images/partners/brand-deutsche-bank.webp", "category": "Finance" },
+        { "name": "LONGCHAMP", "logo": "/images/partners/brand-longchamp.webp", "category": "Luxury" },
+        { "name": "PUMA", "logo": "/images/partners/brand-puma.webp", "category": "Sports" },
+        { "name": "Star Wars", "logo": "/images/partners/brand-star-wars.webp", "category": "Entertainment" },
+        { "name": "KLM", "logo": "/images/partners/brand-klm.webp", "category": "Airlines" }
+      ]
+    },
     "expertise": [
       "Creative Vision & Brand Strategy",
       "AI Product Design",

@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { staggerReveal, tilt, particleExplode } from '$utils/animations';
+  import { staggerReveal, tilt, particleExplode, morphBlob } from '$utils/animations';
   import Toast from '$components/Toast.svelte';
   
   let formData = {
@@ -129,7 +129,18 @@
 
 <!-- Hero Section -->
 <section class="consulting-hero">
-  <div class="hero-background"></div>
+  <div class="hero-background">
+    <svg width="100%" height="100%" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+      <path use:morphBlob={{ duration: 8000, scale: 1.3 }} fill="url(#gradient1)" opacity="0.3"/>
+      <defs>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1351FF;stop-opacity:0.2" />
+          <stop offset="50%" style="stop-color:#6A38FF;stop-opacity:0.15" />
+          <stop offset="100%" style="stop-color:#FFD339;stop-opacity:0.1" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
   <div class="container">
     <div class="hero-content">
       <h1 class="hero-title">{$_('consulting.hero_title')}</h1>
@@ -330,7 +341,7 @@
   }
   
   .hero-title {
-    font-size: var(--text-mega);
+    font-size: var(--text-hero);
     background: linear-gradient(135deg, var(--signal-yellow), var(--voyage-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -448,6 +459,28 @@
     outline: none;
     border-color: var(--voyage-blue);
     box-shadow: 0 0 0 4px rgba(19, 81, 255, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .form-group input:valid,
+  .form-group textarea:valid,
+  .form-group select:valid {
+    border-color: var(--voyage-blue);
+    background: linear-gradient(135deg, rgba(19, 81, 255, 0.05), rgba(255, 211, 57, 0.05));
+  }
+  
+  .form-group input:invalid:not(:placeholder-shown),
+  .form-group textarea:invalid:not(:placeholder-shown),
+  .form-group select:invalid:not(:placeholder-shown) {
+    border-color: var(--cherry-red);
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
   }
   
   .form-group input.error,

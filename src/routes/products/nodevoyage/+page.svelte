@@ -189,7 +189,7 @@
   }
   
   .hero-title {
-    font-size: var(--text-mega);
+    font-size: var(--text-hero);
     background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -318,7 +318,7 @@
   /* How It Works */
   .steps-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--space-4);
     margin-top: var(--space-12);
   }
@@ -326,6 +326,7 @@
   .step {
     text-align: center;
     padding: var(--space-6);
+    min-height: 220px;
   }
   
   .step-number {

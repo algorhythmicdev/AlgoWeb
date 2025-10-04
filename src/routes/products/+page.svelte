@@ -99,7 +99,7 @@
   }
   
   .hero-title {
-    font-size: var(--text-mega);
+    font-size: var(--text-hero);
     background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

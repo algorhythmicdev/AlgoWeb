@@ -2,7 +2,7 @@
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { voting } from '$stores/voting';
-  import { staggerReveal, tilt, particleExplode } from '$utils/animations';
+  import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/Toast.svelte';
   
   let features = [
@@ -78,12 +78,12 @@
     <h2 class="section-title">{$_('community.voting_title')}</h2>
     <p class="section-subtitle">{$_('community.voting_subtitle')}</p>
     
-    <div class="features-grid" use:staggerReveal={{ delay: 100 }}>
+    <div class="features-grid" use:staggerReveal={{ delay: 100 }} role="list" aria-label="Feature voting list">
       {#each sortedFeatures as feature (feature.id)}
-        <div class="feature-card glass-card" use:tilt={{ max: 3 }}>
+        <div class="feature-card glass-card" use:tilt={{ max: 5, scale: 1.02 }} role="listitem">
           <div class="feature-header">
-            <span class="category-badge">{feature.category}</span>
-            <div class="vote-count">{feature.votes}</div>
+            <span class="category-badge" aria-label="Category: {feature.category}">{feature.category}</span>
+            <div class="vote-count" use:sparkleTrail aria-label="{feature.votes} votes">{feature.votes}</div>
           </div>
           
           <h3 class="feature-name">{feature.name}</h3>
@@ -94,6 +94,11 @@
             class:voted={$voting[feature.id]}
             on:click={() => handleVote(feature.id)}
             use:particleExplode
+            use:ripple
+            use:magnetic
+            use:sparkleTrail
+            aria-pressed={$voting[feature.id]}
+            aria-label="Vote for {feature.name}"
           >
             {$voting[feature.id] ? '✓ ' + $_('community.voted_button') : $_('community.vote_button')}
           </button>
@@ -113,11 +118,17 @@
           bind:value={newIdeaText}
           placeholder={$_('community.ideas_placeholder')}
           rows="4"
+          aria-label="Submit your idea"
+          aria-describedby="idea-help"
         ></textarea>
+        <div id="idea-help" class="sr-only">Enter your feature idea or suggestion for our products</div>
         <button 
           class="btn btn-primary btn-lg"
           on:click={submitIdea}
           use:particleExplode
+          use:ripple
+          use:magnetic
+          use:sparkleTrail
         >
           {$_('community.ideas_submit')}
         </button>
@@ -133,7 +144,7 @@
   }
   
   .hero-title {
-    font-size: var(--text-mega);
+    font-size: var(--text-hero);
     background: linear-gradient(135deg, var(--voyage-blue), var(--signal-yellow));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -153,6 +164,24 @@
   .feature-card {
     padding: var(--space-6);
     border-radius: var(--radius-xl);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s;
+  }
+  
+  .feature-card:hover::before {
+    left: 100%;
   }
   
   .feature-header {
@@ -175,6 +204,13 @@
     font-size: var(--text-headline);
     font-weight: var(--weight-black);
     color: var(--signal-yellow);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 211, 57, 0.3);
+  }
+  
+  .vote-count:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(255, 211, 57, 0.6);
   }
   
   .feature-name {
@@ -191,23 +227,31 @@
   .vote-button {
     width: 100%;
     padding: var(--space-3) var(--space-4);
-    background: var(--voyage-blue);
+    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
     color: white;
     border: none;
     border-radius: var(--radius-lg);
     font-weight: var(--weight-semibold);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(19, 81, 255, 0.3);
   }
   
   .vote-button:hover {
-    background: var(--aurora-purple);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(19, 81, 255, 0.4);
   }
   
   .vote-button.voted {
-    background: var(--signal-yellow);
+    background: linear-gradient(135deg, var(--signal-yellow), #ffed4e);
     color: var(--ink);
+    box-shadow: 0 4px 15px rgba(255, 211, 57, 0.4);
+  }
+  
+  .vote-button.voted:hover {
+    box-shadow: 0 8px 25px rgba(255, 211, 57, 0.6);
   }
   
   .idea-section {

@@ -1,29 +1,30 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { typewriter, magnetic } from '$utils/animations';
+  import { typewriter, magnetic, parallax, morphGradient, sparkleTrail, ripple } from '$utils/animations';
 </script>
 
 <section class="hero section-lg">
+  <div class="hero-background" use:parallax={{ intensity: 40 }} use:morphGradient={{ colors: ['#1351FF', '#6A38FF', '#FFD339'], speed: 5000 }}></div>
   <div class="container">
     <div class="status-badge">{$_('hero.status')}</div>
     
-    <h1 class="hero-title" use:typewriter={{ speed: 80 }}>AlgoRhythmics</h1>
+    <h1 class="hero-title" use:typewriter={{ text: 'AlgoRhythmics', speed: 80, loop: false }} aria-label="AlgoRhythmics - AI Innovation Lab">AlgoRhythmics</h1>
     
-    <p class="hero-tagline">Where Logic Dances with Creativity</p>
+    <h2 class="hero-subheading">Where Logic Dances with Creativity</h2>
     
     <p class="hero-subtitle">{$_('hero.subtitle')}</p>
     
-    <div class="hero-actions">
-      <a href="/products" class="btn btn-primary" use:magnetic>
+    <div class="hero-actions" role="group" aria-label="Main actions">
+      <a href="/products" class="btn btn-primary" use:magnetic use:sparkleTrail use:ripple aria-describedby="products-description">
         {$_('hero.cta_products')}
       </a>
-      <a href="/consulting" class="btn btn-secondary" use:magnetic>
+      <a href="/consulting" class="btn btn-secondary" use:magnetic use:sparkleTrail use:ripple aria-describedby="consulting-description">
         {$_('hero.cta_consulting')}
       </a>
     </div>
     
-    <div class="scroll-indicator">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <div class="scroll-indicator" role="img" aria-label="Scroll down to see more content">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M12 5V19M12 19L6 13M12 19L18 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
@@ -37,6 +38,16 @@
     align-items: center;
     text-align: center;
     position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(19, 81, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(106, 56, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 211, 57, 0.05) 0%, transparent 70%);
+    z-index: -1;
   }
   
   .status-badge {
@@ -67,10 +78,11 @@
     line-height: 1.2;
   }
   
-  .hero-tagline {
-    font-size: clamp(var(--text-title), 3vw, var(--text-hero));
+  .hero-subheading {
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
     font-weight: var(--weight-semibold);
     color: var(--text-primary);
+    margin-top: 0.75em;
     margin-bottom: var(--space-6);
     max-width: 30ch;
     margin-left: auto;
@@ -124,7 +136,7 @@
       margin-bottom: var(--space-3);
     }
     
-    .hero-tagline {
+    .hero-subheading {
       font-size: var(--text-title);
       margin-bottom: var(--space-4);
     }

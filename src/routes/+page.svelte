@@ -2,7 +2,7 @@
   import HeroSection from '$sections/HeroSection.svelte';
   import FoundersSection from '$sections/FoundersSection.svelte';
   import { _ } from 'svelte-i18n';
-  import { revealOnScroll } from '$utils/animations';
+  import { revealOnScroll, staggerReveal, tilt, sparkleTrail, ripple } from '$utils/animations';
   import productsData from '$data/products.json';
   import timelineData from '$data/timeline.json';
 </script>
@@ -10,22 +10,22 @@
 <HeroSection />
 
 <!-- Story Section -->
-<section class="story section" id="story">
+<section class="story section" id="story" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title text-center">{$_('story.title')}</h2>
     
-    <div class="story-grid">
-      <div class="story-card" use:revealOnScroll>
+    <div class="story-grid" use:staggerReveal={{ delay: 100, stagger: 150 }}>
+      <div class="story-card" use:tilt={{ max: 5, scale: 1.01 }}>
         <h3>{$_('story.reality_title')}</h3>
         <p>{$_('story.reality_text')}</p>
       </div>
       
-      <div class="story-card" use:revealOnScroll={{ delay: 200 }}>
+      <div class="story-card" use:tilt={{ max: 5, scale: 1.01 }}>
         <h3>{$_('story.mission_title')}</h3>
         <p>{$_('story.mission_text')}</p>
       </div>
       
-      <div class="story-card" use:revealOnScroll={{ delay: 400 }}>
+      <div class="story-card" use:tilt={{ max: 5, scale: 1.01 }}>
         <h3>{$_('story.vision_title')}</h3>
         <p>{$_('story.vision_text')}</p>
       </div>
@@ -36,13 +36,13 @@
 <FoundersSection />
 
 <!-- Products Section -->
-<section class="products section" id="products">
+<section class="products section" id="products" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title text-center">{$_('products.title')}</h2>
     <p class="section-subtitle text-center">{$_('products.subtitle')}</p>
     
-    <div class="products-grid">
-      <div class="product-card" use:revealOnScroll>
+    <div class="products-grid" use:staggerReveal={{ delay: 100, stagger: 200 }}>
+      <div class="product-card" use:tilt={{ max: 8, scale: 1.02 }}>
         <img src={productsData.nodevoyage.hero} alt="NodeVoyage" />
         <div class="product-content">
           <h3>{productsData.nodevoyage.name}</h3>
@@ -52,11 +52,11 @@
             <span class="status">{$_('products.nodevoyage.status')}</span>
             <span class="mvp">{$_('products.nodevoyage.mvp')}</span>
           </div>
-          <a href="/products/nodevoyage" class="btn btn-primary">{$_('products.nodevoyage.cta')}</a>
+          <a href="/products/nodevoyage" class="btn btn-primary" use:sparkleTrail use:ripple>{$_('products.nodevoyage.cta')}</a>
         </div>
       </div>
       
-      <div class="product-card" use:revealOnScroll={{ delay: 200 }}>
+      <div class="product-card" use:tilt={{ max: 8, scale: 1.02 }}>
         <img src={productsData.ideonautix.hero} alt="Ideonautix" />
         <div class="product-content">
           <h3>{productsData.ideonautix.name}</h3>
@@ -66,7 +66,7 @@
             <span class="status">{$_('products.ideonautix.status')}</span>
             <span class="mvp">{$_('products.ideonautix.mvp')}</span>
           </div>
-          <a href="/products/ideonautix" class="btn btn-primary">{$_('products.ideonautix.cta')}</a>
+          <a href="/products/ideonautix" class="btn btn-primary" use:sparkleTrail use:ripple>{$_('products.ideonautix.cta')}</a>
         </div>
       </div>
     </div>
@@ -74,14 +74,14 @@
 </section>
 
 <!-- Timeline Section -->
-<section class="timeline section" id="timeline">
+<section class="timeline section" id="timeline" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title text-center">{$_('timeline.title')}</h2>
     <p class="section-subtitle text-center">{$_('timeline.subtitle')}</p>
     
-    <div class="timeline-list">
+    <div class="timeline-list" use:staggerReveal={{ delay: 100, stagger: 120 }}>
       {#each timelineData.milestones as milestone, index}
-        <div class="timeline-item" use:revealOnScroll={{ delay: index * 100 }}>
+        <div class="timeline-item">
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <span class="date">{milestone.date}</span>
@@ -114,6 +114,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-6);
+    align-items: stretch;
   }
   
   .story-card {
@@ -123,6 +124,11 @@
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     transition: all var(--duration-normal) var(--ease-out);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 280px;
+    justify-content: space-between;
   }
   
   .story-card:hover {
