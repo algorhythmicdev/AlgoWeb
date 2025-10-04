@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { staggerReveal, tilt, particleExplode, morphGradient } from '$utils/animations';
+  import { staggerReveal, tilt, particleExplode, morphGradient, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
   
   const product = productsData.ideonautix;
@@ -32,7 +32,7 @@
       <p class="hero-description">{$_('ideonautix.hero_description')}</p>
       
       <div class="hero-actions">
-        <button class="btn btn-primary btn-lg" use:particleExplode>
+        <button class="btn btn-primary btn-lg" use:particleExplode use:ripple use:magnetic>
           {$_('ideonautix.cta_primary')}
         </button>
         <a href="#microservices" class="btn btn-secondary btn-lg">
@@ -159,7 +159,7 @@
     <div class="cta-card glass-card">
       <h2>{$_('ideonautix.cta_title')}</h2>
       <p>{$_('ideonautix.cta_description')}</p>
-      <button class="btn btn-primary btn-lg" use:particleExplode>
+      <button class="btn btn-primary btn-lg" use:particleExplode use:ripple use:magnetic>
         Get Early Access
       </button>
       <p class="cta-note">MVP launching February 2026 • Be first in line</p>

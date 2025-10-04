@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { staggerReveal, tilt, particleExplode, morphBlob } from '$utils/animations';
+  import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/Toast.svelte';
   
   let formData = {
@@ -274,6 +274,8 @@
           class="btn btn-primary btn-lg btn-block"
           disabled={isSubmitting}
           use:particleExplode
+          use:ripple
+          use:magnetic
         >
           {#if isSubmitting}
             <span class="spinner"></span>

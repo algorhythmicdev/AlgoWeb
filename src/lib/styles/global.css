@@ -21,7 +21,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: var(--text);
   line-height: var(--leading-relaxed);
   color: var(--text-primary);
   background: var(--bg-primary);
@@ -39,18 +39,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--text-mega);
+  font-size: var(--h1);
   font-weight: var(--weight-black);
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: var(--text-hero);
+  font-size: var(--h2);
   letter-spacing: -0.015em;
 }
 
 h3 {
-  font-size: var(--text-display);
+  font-size: var(--h3);
   letter-spacing: -0.01em;
 }
 
@@ -62,6 +62,15 @@ h4 {
 p {
   margin: 0;
   line-height: var(--leading-relaxed);
+}
+
+/* Unified text sizing utilities */
+span, input, button {
+  font-size: var(--text);
+}
+
+.small {
+  font-size: var(--small);
 }
 
 a {
