@@ -292,3 +292,12 @@ export function morphGradient(node, { colors = ['#1351FF', '#6A38FF', '#FFD339']
     }
   };
 }
+
+// Smoothly scroll the page to a target element or selector
+export function smoothScroll(target, { offset = 0, behavior = 'smooth' } = {}) {
+  if (typeof window === 'undefined') return;
+  const element = typeof target === 'string' ? document.querySelector(target) : target;
+  if (!element) return;
+  const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top, behavior });
+}
