@@ -117,7 +117,7 @@
 
 <!-- Hero Section -->
 <section class="contact-hero">
-  <div class="hero-background" use:morphGradient={{ colors: ['#1351FF', '#6A38FF', '#FFD339'], speed: 4000 }}></div>
+  <div class="hero-background"></div>
   <div class="container">
     <h1 class="hero-title" use:typewriter={{ text: $_('contact.hero_title'), speed: 100, loop: false }}>{$_('contact.hero_title')}</h1>
     <p class="hero-subtitle">{$_('contact.hero_subtitle')}</p>
@@ -284,13 +284,7 @@
   .hero-background {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(106, 56, 255, 0.1) 0%, transparent 70%);
-    animation: pulse 4s ease-in-out infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
+    background: transparent;
   }
   
   .hero-title {

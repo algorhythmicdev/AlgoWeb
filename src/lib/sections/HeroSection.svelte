@@ -4,7 +4,7 @@
 </script>
 
 <section class="hero section-lg">
-  <div class="hero-background" use:parallax={{ intensity: 40 }} use:morphGradient={{ colors: ['#1351FF', '#6A38FF', '#FFD339'], speed: 5000 }}></div>
+  <div class="hero-background" use:parallax={{ intensity: 40 }}></div>
   <div class="container">
     <div class="status-badge">{$_('hero.status')}</div>
     
@@ -44,9 +44,7 @@
   .hero-background {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(19, 81, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(106, 56, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(255, 211, 57, 0.05) 0%, transparent 70%);
+    background: transparent;
     z-index: -1;
   }
   
