@@ -281,12 +281,7 @@
     overflow: hidden;
   }
   
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(106, 56, 255, 0.1) 0%, transparent 70%);
-    animation: pulse 4s ease-in-out infinite;
-  }
+  .hero-background { display: none; }
   
   @keyframes pulse {
     0%, 100% { opacity: 0.8; }

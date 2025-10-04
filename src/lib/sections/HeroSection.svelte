@@ -41,14 +41,7 @@
     overflow: hidden;
   }
   
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(19, 81, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(106, 56, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(255, 211, 57, 0.05) 0%, transparent 70%);
-    z-index: -1;
-  }
+  .hero-background { display: none; }
   
   .status-badge {
     display: inline-block;

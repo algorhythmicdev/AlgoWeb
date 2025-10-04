@@ -177,11 +177,7 @@
     padding: var(--space-16) 0;
   }
   
-  .hero-gradient {
-    position: absolute;
-    inset: 0;
-    opacity: 0.15;
-  }
+  .hero-gradient { display: none; }
   
   .hero-content {
     flex: 1;

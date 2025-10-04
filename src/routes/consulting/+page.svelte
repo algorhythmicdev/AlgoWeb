@@ -330,11 +330,7 @@
     overflow: hidden;
   }
   
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 211, 57, 0.1) 0%, transparent 70%);
-  }
+  .hero-background { display: none; }
   
   .hero-content {
     text-align: center;

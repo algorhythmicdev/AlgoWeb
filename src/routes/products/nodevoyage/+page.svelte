@@ -152,13 +152,7 @@
     padding: var(--space-16) 0;
   }
   
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(19, 81, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(106, 56, 255, 0.1) 0%, transparent 50%);
-    animation: pulseGlow 8s ease-in-out infinite;
-  }
+  .hero-background { display: none; }
   
   @keyframes pulseGlow {
     0%, 100% { opacity: 1; }
