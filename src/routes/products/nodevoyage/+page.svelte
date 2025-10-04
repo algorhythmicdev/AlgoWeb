@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { staggerReveal, tilt, particleExplode } from '$utils/animations';
+  import { staggerReveal, tilt, particleExplode, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
   
   const product = productsData.nodevoyage;
@@ -23,7 +23,7 @@
       <p class="hero-description">{$_('nodevoyage.hero_description')}</p>
       
       <div class="hero-actions">
-        <button class="btn btn-primary btn-lg" use:particleExplode>
+        <button class="btn btn-primary btn-lg" use:particleExplode use:ripple use:magnetic>
           {$_('nodevoyage.cta_primary')}
         </button>
         <a href="#features" class="btn btn-secondary btn-lg">
@@ -83,32 +83,26 @@
   <div class="container">
     <h2 class="section-title text-center">{$_('nodevoyage.how_title')}</h2>
     
-    <div class="steps-container" use:staggerReveal={{ delay: 200 }}>
-      <div class="step">
+    <div class="steps-row" use:staggerReveal={{ delay: 200 }}>
+      <div class="step-box">
         <div class="step-number">01</div>
         <h3>{$_('nodevoyage.step1_title')}</h3>
         <p>{$_('nodevoyage.step1_desc')}</p>
       </div>
       
-      <div class="step-connector"></div>
-      
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">02</div>
         <h3>{$_('nodevoyage.step2_title')}</h3>
         <p>{$_('nodevoyage.step2_desc')}</p>
       </div>
       
-      <div class="step-connector"></div>
-      
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">03</div>
         <h3>{$_('nodevoyage.step3_title')}</h3>
         <p>{$_('nodevoyage.step3_desc')}</p>
       </div>
       
-      <div class="step-connector"></div>
-      
-      <div class="step">
+      <div class="step-box">
         <div class="step-number">04</div>
         <h3>{$_('nodevoyage.step4_title')}</h3>
         <p>{$_('nodevoyage.step4_desc')}</p>
@@ -139,7 +133,7 @@
     <div class="cta-card glass-card">
       <h2>{$_('nodevoyage.cta_title')}</h2>
       <p>{$_('nodevoyage.cta_description')}</p>
-      <button class="btn btn-primary btn-lg" use:particleExplode>
+      <button class="btn btn-primary btn-lg" use:particleExplode use:ripple use:magnetic>
         {$_('nodevoyage.cta_button')}
       </button>
       <p class="cta-note">{$_('nodevoyage.cta_note')}</p>
@@ -316,17 +310,18 @@
   }
   
   /* How It Works */
-  .steps-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--space-4);
+  .steps-row { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 1rem;
     margin-top: var(--space-12);
   }
-  
-  .step {
-    text-align: center;
-    padding: var(--space-6);
-    min-height: 220px;
+  .step-box { 
+    text-align: center; 
+    padding: var(--space-6); 
+    min-height: 170px; 
+    overflow-wrap: break-word; 
+    box-sizing: border-box; 
   }
   
   .step-number {
@@ -338,8 +333,12 @@
     margin-bottom: var(--space-4);
   }
   
-  .step-connector {
-    display: none;
+  .step-connector { display: none; }
+  @media (max-width: 900px) {
+    .steps-row { grid-template-columns: 2fr 2fr; }
+  }
+  @media (max-width: 550px) {
+    .steps-row { grid-template-columns: 1fr; }
   }
   
   /* Tech Stack */

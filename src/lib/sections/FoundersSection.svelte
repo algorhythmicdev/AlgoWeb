@@ -131,9 +131,10 @@
   }
   
   .founders-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
     gap: var(--space-8);
+    justify-content: center;
+    flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -146,6 +147,10 @@
     transition: all var(--duration-normal) var(--ease-out);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    min-width: 210px;
   }
   
   .founder-card:hover {
@@ -159,18 +164,17 @@
   }
   
   .avatar {
-    width: 120px;
-    height: 120px;
+    width: 172px;
+    height: 172px;
     margin: 0 auto var(--space-4);
-    border-radius: 50%;
     overflow: hidden;
-    border: 4px solid var(--voyage-blue);
   }
   
   .avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 46% 54% 44% 56%/42% 60% 40% 58%;
   }
   
   .founder-card h3 {
@@ -326,17 +330,17 @@
   
   @media (max-width: 768px) {
     .founders-grid {
-      grid-template-columns: 1fr;
       gap: var(--space-6);
     }
     
     .founder-card {
       padding: var(--space-6);
+      max-width: 100%;
     }
     
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 140px;
+      height: 140px;
       margin-bottom: var(--space-3);
     }
     

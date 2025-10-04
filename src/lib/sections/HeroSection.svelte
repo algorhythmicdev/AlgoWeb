@@ -8,7 +8,7 @@
   <div class="container">
     <div class="status-badge">{$_('hero.status')}</div>
     
-    <h1 class="hero-title" use:typewriter={{ text: 'AlgoRhythmics', speed: 80, loop: false }} aria-label="AlgoRhythmics - AI Innovation Lab">AlgoRhythmics</h1>
+    <h1 class="hero-title" use:typewriter={{ text: 'AlgoRhythmics', speed: 32, loop: false }} aria-label="AlgoRhythmics - AI Innovation Lab">AlgoRhythmics</h1>
     
     <h2 class="hero-subheading">Where Logic Dances with Creativity</h2>
     
@@ -80,7 +80,7 @@
   
   .hero-subheading {
     font-size: clamp(1.1rem, 3vw, 1.6rem);
-    font-weight: var(--weight-semibold);
+    font-weight: 400;
     color: var(--text-primary);
     margin-top: 0.75em;
     margin-bottom: var(--space-6);
