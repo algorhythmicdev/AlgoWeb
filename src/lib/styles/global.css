@@ -177,6 +177,19 @@ select:focus-visible {
   }
 }
 
+/* ==================== SECTION TITLES ==================== */
+.section-title {
+  font-size: var(--text-display);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.section-subtitle {
+  font-size: var(--text-title);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+}
+
 /* ==================== MOBILE ANIMATION OPTIMIZATIONS ==================== */
 @media (max-width: 768px) {
   /* Reduce motion for better performance on mobile */

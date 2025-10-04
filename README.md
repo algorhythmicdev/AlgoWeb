@@ -86,6 +86,19 @@ npm run check
 Lint code
 npm run lint
 
+If you see "svelte-kit: not found" when running check, install dependencies first:
+
+```
+npm install
+```
+
+Then rerun:
+
+```
+npm run check
+npm run lint
+```
+
 Format code
 npx prettier --write .
 

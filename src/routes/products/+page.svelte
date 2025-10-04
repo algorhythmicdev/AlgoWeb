@@ -100,10 +100,7 @@
   
   .hero-title {
     font-size: var(--text-hero);
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     margin-bottom: var(--space-4);
   }
   
