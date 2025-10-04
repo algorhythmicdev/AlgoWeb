@@ -8,77 +8,41 @@
   <div class="container">
     <h2 class="section-title text-center">{$_('founders.title')}</h2>
     <p class="section-subtitle text-center">{$_('founders.subtitle')}</p>
-    
-    <div class="founders-grid" use:staggerReveal={{ delay: 100, stagger: 200 }}>
-      <!-- Nikita Card -->
-      <div class="founder-card">
-        <div class="avatar">
-          <img src={foundersData.nikita.avatar} alt={foundersData.nikita.name} />
-        </div>
-        <h3>{foundersData.nikita.name}</h3>
-        <p class="role">{$_('founders.nikita.role')}</p>
-        <p class="bio">{$_('founders.nikita.bio')}</p>
-        
-        {#if foundersData.nikita.currentPosition}
-          <div class="current-position">
-            <h4>{$_('founders.slaff.current_title')}</h4>
-            <p class="position-title">{foundersData.nikita.currentPosition.title} @ {foundersData.nikita.currentPosition.company}</p>
-            {#if foundersData.nikita.currentPosition.achievements}
-              <ul class="achievements">
-                {#each foundersData.nikita.currentPosition.achievements as ach}
-                  <li>{ach}</li>
-                {/each}
-              </ul>
-            {/if}
-          </div>
-        {/if}
 
-        {#if foundersData.nikita.brandExperience}
-          <div class="brand-experience">
-            <h4>{$_('founders.slaff.brand_title')}</h4>
-            <p class="brand-intro">{$_('founders.slaff.brand_intro')}</p>
-            <div class="brand-logos">
-              {#each foundersData.nikita.brandExperience.clients as client}
-                <div class="brand-logo" title={client.name}>
-                  <img src={client.logo} alt={client.name} />
-                </div>
-              {/each}
-            </div>
-            <p class="brand-context">{$_('founders.slaff.brand_context')}</p>
-          </div>
-        {/if}
-
-        <ul class="expertise">
-          {#each foundersData.nikita.expertise as skill}
-            <li>{skill}</li>
-          {/each}
-        </ul>
-      </div>
-      
-      <!-- Slaff Card - Featured -->
-      <div class="founder-card featured">
+    <!-- Airy two-column layout with emphasis on story over dense blocks -->
+    <div class="founders-grid" use:staggerReveal={{ delay: 80, stagger: 140 }}>
+      <!-- Slaff Card - Featured on left for balance -->
+      <article class="founder-card featured" aria-labelledby="slaff-name">
         <div class="avatar">
           <img src={foundersData.slaff.avatar} alt={foundersData.slaff.name} />
         </div>
-        <h3>{foundersData.slaff.name}</h3>
+        <h3 id="slaff-name">{foundersData.slaff.name}</h3>
         <p class="role">{$_('founders.slaff.role')}</p>
         
         <div class="current-position">
           <h4>{$_('founders.slaff.current_title')}</h4>
           <p class="position-title">{$_('founders.slaff.position')}</p>
-          
-          <ul class="achievements">
-            <li>{$_('founders.slaff.achievement1')}</li>
-            <li>{$_('founders.slaff.achievement2')}</li>
-            <li>{$_('founders.slaff.achievement3')}</li>
-            <li>{$_('founders.slaff.achievement4')}</li>
-          </ul>
         </div>
-        
+
+        <ul class="achievements" aria-label="{$_('founders.slaff.current_title')}">
+          <li>{$_('founders.slaff.achievement1')}</li>
+          <li>{$_('founders.slaff.achievement2')}</li>
+          <li>{$_('founders.slaff.achievement3')}</li>
+          <li>{$_('founders.slaff.achievement4')}</li>
+        </ul>
+
+        <blockquote class="philosophy">
+          <p>{$_('founders.slaff.philosophy')}</p>
+        </blockquote>
+
+        <div class="algorhythmics-vision">
+          <h4>{$_('founders.slaff.algorhythmics_title')}</h4>
+          <p>{$_('founders.slaff.algorhythmics_vision')}</p>
+        </div>
+
         <div class="brand-experience">
           <h4>{$_('founders.slaff.brand_title')}</h4>
           <p class="brand-intro">{$_('founders.slaff.brand_intro')}</p>
-          
           <div class="brand-logos">
             {#each foundersData.slaff.brandExperience.clients as client}
               <div class="brand-logo" title={client.name}>
@@ -86,34 +50,40 @@
               </div>
             {/each}
           </div>
-          
           <p class="brand-context">{$_('founders.slaff.brand_context')}</p>
         </div>
-        
-        <div class="international">
-          <h4>{$_('founders.slaff.international_title')}</h4>
-          <div class="expo-list">
-            {#each foundersData.slaff.internationalExposure as expo}
-              <div class="expo-item">
-                <span class="flag">{expo.flag}</span>
-                <div>
-                  <strong>{expo.name} {expo.year}</strong>
-                  <p>{expo.role}</p>
-                </div>
-              </div>
+      </article>
+
+      <!-- Nikita Card - Light, simplified and airy -->
+      <article class="founder-card" aria-labelledby="nikita-name">
+        <div class="avatar">
+          <img src={foundersData.nikita.avatar} alt={foundersData.nikita.name} />
+        </div>
+        <h3 id="nikita-name">{foundersData.nikita.name}</h3>
+        <p class="role">{$_('founders.nikita.role')}</p>
+        <p class="bio">{$_('founders.nikita.bio')}</p>
+
+        {#if foundersData.nikita.currentPosition}
+          <div class="current-position">
+            <h4>{$_('founders.nikita.current_title')}</h4>
+            <p class="position-title">{foundersData.nikita.currentPosition.title} @ {foundersData.nikita.currentPosition.company}</p>
+          </div>
+        {/if}
+
+        {#if foundersData.nikita.brandExperience}
+          <div class="brand-logos minimal" aria-label="Brand experience">
+            {#each foundersData.nikita.brandExperience.clients.slice(0,6) as client}
+              <img class="brand-icon" src={client.logo} alt={client.name} />
             {/each}
           </div>
-        </div>
-        
-        <blockquote class="philosophy">
-          <p>{$_('founders.slaff.philosophy')}</p>
-        </blockquote>
-        
-        <div class="algorhythmics-vision">
-          <h4>{$_('founders.slaff.algorhythmics_title')}</h4>
-          <p>{$_('founders.slaff.algorhythmics_vision')}</p>
-        </div>
-      </div>
+        {/if}
+
+        <ul class="expertise compact" aria-label="Expertise">
+          {#each foundersData.nikita.expertise as skill}
+            <li>{skill}</li>
+          {/each}
+        </ul>
+      </article>
     </div>
   </div>
 </section>
@@ -131,10 +101,10 @@
   }
   
   .founders-grid {
-    display: flex;
-    gap: var(--space-8);
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: var(--space-12);
+    align-items: start;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -149,8 +119,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 320px;
-    min-width: 210px;
   }
   
   .founder-card:hover {
@@ -258,6 +226,17 @@
     gap: var(--space-3);
     margin: var(--space-4) 0;
   }
+
+  .brand-logos.minimal {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    opacity: 0.8;
+  }
+
+  .brand-icon {
+    filter: grayscale(1);
+    opacity: 0.65;
+  }
   
   .brand-logo {
     padding: var(--space-3);
@@ -328,37 +307,23 @@
     color: var(--text-secondary);
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 960px) {
     .founders-grid {
-      gap: var(--space-6);
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
     }
-    
+  }
+
+  @media (max-width: 768px) {
     .founder-card {
       padding: var(--space-6);
-      max-width: 100%;
     }
-    
-    .avatar {
-      width: 140px;
-      height: 140px;
-      margin-bottom: var(--space-3);
-    }
-    
-    .founder-card h3 {
-      font-size: var(--text-title);
-    }
-    
-    .brand-logos {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-2);
-    }
-    
+    .avatar { width: 140px; height: 140px; margin-bottom: var(--space-3); }
+    .founder-card h3 { font-size: var(--text-title); }
+    .brand-logos { grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
     .current-position h4,
     .brand-experience h4,
     .international h4,
-    .algorhythmics-vision h4 {
-      font-size: var(--text-body);
-      margin-bottom: var(--space-2);
-    }
+    .algorhythmics-vision h4 { font-size: var(--text-body); margin-bottom: var(--space-2); }
   }
 </style>
