@@ -27,7 +27,31 @@
     "subtitle": "Мы создаём путешественническую платформу NodeVoyage и продуктивный комплект Ideonautix на основе передовых AI-технологий",
     "cta_products": "Смотреть продукты",
     "cta_consulting": "AI-консалтинг",
-    "next_milestone": "Следующий этап"
+    "next_milestone": "Следующий этап",
+    "signals": {
+      "studio_phase": "Этап студии",
+      "studio_phase_value": "Пилотная студия • с 2023",
+      "focus_tracks": "Направления фокуса",
+      "focus_tracks_value": "NodeVoyage и Ideonautix",
+      "research": "Исследовательские корни",
+      "research_value": "R&D вывесок + облачный AI"
+    },
+    "moments": {
+      "nodevoyage": {
+        "kicker": "Продуктовое направление",
+        "status": "NodeVoyage",
+        "copy": "Путешественнический компаньон, соединяющий дисциплину вывесок с объяснимыми AI-маршрутами.",
+        "meta": "Формируем бета-пилоты",
+        "cta": "Исследовать NodeVoyage"
+      },
+      "ideonautix": {
+        "kicker": "Продуктовое направление",
+        "status": "Ideonautix",
+        "copy": "Операционная система для фаундеров, удерживающая команды в фокусе благодаря прозрачной автоматизации.",
+        "meta": "Идёт исследовательский спринт",
+        "cta": "Посмотреть Ideonautix"
+      }
+    }
   },
   "story": {
     "title": "Наша история",

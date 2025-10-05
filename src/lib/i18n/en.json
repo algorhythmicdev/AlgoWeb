@@ -35,6 +35,30 @@
       "Human-centered consulting sprints shaped by Latvian craft and Benelux brand work",
       "Explainable AI flows that scale from physical experiences to digital platforms"
     ],
+    "signals": {
+      "studio_phase": "Studio phase",
+      "studio_phase_value": "Pilot studio • Since 2023",
+      "focus_tracks": "Focus tracks",
+      "focus_tracks_value": "NodeVoyage & Ideonautix",
+      "research": "Research roots",
+      "research_value": "Signage R&D + Cloud AI"
+    },
+    "moments": {
+      "nodevoyage": {
+        "kicker": "Product track",
+        "status": "NodeVoyage",
+        "copy": "Travel companion weaving tactile signage discipline into explainable AI journeys.",
+        "meta": "Beta pilots forming",
+        "cta": "Explore NodeVoyage"
+      },
+      "ideonautix": {
+        "kicker": "Product track",
+        "status": "Ideonautix",
+        "copy": "Founder operating system keeping teams focused with transparent automation.",
+        "meta": "Research sprint in progress",
+        "cta": "See Ideonautix"
+      }
+    },
     "milestone_cta": "View the roadmap"
   },
   "story": {

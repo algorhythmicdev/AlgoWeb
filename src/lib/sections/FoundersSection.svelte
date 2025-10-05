@@ -5,6 +5,10 @@
 
   const founderKeys = /** @type {const} */ (['nikita', 'slaff']);
 
+  /**
+   * @param {string} path
+   * @returns {string[]}
+   */
   const getList = (path) => {
     const value = $json?.(path);
     return Array.isArray(value) ? value : [];
