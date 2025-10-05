@@ -17,18 +17,18 @@ html {
   text-rendering: optimizeLegibility;
   background: var(--bg-primary);
   position: relative;
+  color-scheme: light;
+  transition: background-color 320ms var(--ease-in-out), color 320ms var(--ease-in-out);
 }
 
 html::before {
   content: '';
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(120% 140% at 0% 0%, rgba(19, 81, 255, 0.18) 0%, transparent 70%),
-    radial-gradient(110% 120% at 100% 4%, rgba(106, 56, 255, 0.16) 0%, transparent 72%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(244, 247, 255, 0.94) 100%);
+  background: var(--backdrop-canvas);
   pointer-events: none;
   z-index: -3;
+  transition: background 420ms var(--ease-in-out), opacity 420ms var(--ease-in-out);
 }
 
 body {
@@ -40,17 +40,17 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  transition: color 320ms var(--ease-in-out);
 }
 
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(140% 140% at 15% 18%, rgba(255, 255, 255, 0.8) 0%, transparent 68%),
-    radial-gradient(120% 120% at 82% 12%, rgba(255, 211, 57, 0.16) 0%, transparent 72%);
+  background: var(--body-wash);
   pointer-events: none;
   z-index: -2;
+  transition: background 420ms var(--ease-in-out), opacity 420ms var(--ease-in-out);
 }
 
 body::after {
@@ -59,35 +59,14 @@ body::after {
   inset: 0;
   pointer-events: none;
   background-image: var(--grain-texture);
-  mix-blend-mode: soft-light;
-  opacity: 0.22;
+  mix-blend-mode: var(--grain-blend-mode);
+  opacity: var(--grain-opacity);
   z-index: -1;
+  transition: opacity 320ms var(--ease-in-out), mix-blend-mode 320ms var(--ease-in-out);
 }
 
-:global([data-theme='dark']) html::before {
-  background:
-    radial-gradient(120% 140% at 0% 0%, rgba(47, 92, 220, 0.24) 0%, transparent 70%),
-    radial-gradient(110% 120% at 100% 4%, rgba(106, 56, 255, 0.24) 0%, transparent 72%),
-    linear-gradient(180deg, rgba(2, 5, 17, 0.98) 0%, rgba(4, 9, 26, 0.98) 100%);
-}
-
-:global([data-theme='dark']) html::after {
-  background-image:
-    radial-gradient(circle at 20% 18%, rgba(47, 92, 220, 0.35) 0%, transparent 46%),
-    radial-gradient(circle at 76% 14%, rgba(106, 56, 255, 0.28) 0%, transparent 54%),
-    radial-gradient(circle at 52% 78%, rgba(255, 211, 57, 0.18) 0%, transparent 60%);
-  opacity: 0.42;
-}
-
-:global([data-theme='dark']) body::before {
-  background:
-    radial-gradient(140% 140% at 20% 18%, rgba(47, 92, 220, 0.32) 0%, transparent 68%),
-    radial-gradient(120% 120% at 78% 16%, rgba(106, 56, 255, 0.28) 0%, transparent 72%);
-}
-
-:global([data-theme='dark']) body::after {
-  opacity: 0.28;
-  mix-blend-mode: screen;
+:global([data-theme='dark']) html {
+  color-scheme: dark;
 }
 
 /* ==================== RESPONSIVE TYPOGRAPHY SYSTEM ==================== */

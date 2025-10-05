@@ -125,13 +125,13 @@
     left: 0;
     right: 0;
     z-index: var(--z-sticky);
-    background: color-mix(in srgb, var(--pure-white) 78%, rgba(255, 255, 255, 0) 22%);
+    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(255, 255, 255, 0) 18%);
     background-image:
-      linear-gradient(120deg, rgba(19, 81, 255, 0.1) 0%, rgba(106, 56, 255, 0.08) 100%),
+      linear-gradient(120deg, rgba(var(--voyage-blue-rgb), 0.12) 0%, rgba(var(--aurora-purple-rgb), 0.1) 100%),
       var(--grain-texture);
     background-blend-mode: screen, soft-light;
-    backdrop-filter: blur(26px);
-    border-bottom: 1px solid color-mix(in srgb, var(--border-glass) 60%, rgba(17, 24, 39, 0.08) 40%);
+    backdrop-filter: blur(28px) saturate(130%);
+    border-bottom: 1px solid color-mix(in srgb, var(--border-glass) 68%, rgba(17, 24, 39, 0.08) 32%);
     transition: transform var(--duration-normal) var(--ease-out),
       box-shadow var(--duration-normal) var(--ease-out),
       border-color var(--duration-normal) var(--ease-out),
@@ -143,12 +143,30 @@
 
   .nav-condensed {
     box-shadow: 0 24px 52px rgba(15, 20, 35, 0.12);
-    border-bottom-color: rgba(15, 20, 35, 0.14);
-    background: color-mix(in srgb, var(--pure-white) 82%, rgba(19, 81, 255, 0.08) 18%);
+    border-bottom-color: color-mix(in srgb, var(--border-strong) 55%, rgba(12, 18, 34, 0.2) 45%);
+    background: color-mix(in srgb, var(--bg-elevated) 78%, rgba(var(--voyage-blue-rgb), 0.16) 22%);
     background-image:
-      linear-gradient(135deg, rgba(19, 81, 255, 0.12) 0%, rgba(106, 56, 255, 0.08) 40%, transparent 100%),
+      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.16) 0%, rgba(var(--aurora-purple-rgb), 0.12) 40%, transparent 100%),
       var(--grain-texture);
     background-blend-mode: screen, soft-light;
+  }
+
+  :global([data-theme='dark']) .nav {
+    background: color-mix(in srgb, rgba(3, 7, 18, 0.86) 76%, rgba(var(--voyage-blue-rgb), 0.2) 24%);
+    background-image:
+      linear-gradient(122deg, rgba(var(--voyage-blue-rgb), 0.18) 0%, rgba(var(--aurora-purple-rgb), 0.18) 100%),
+      var(--grain-texture);
+    border-bottom: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 58%, rgba(255, 255, 255, 0.08) 42%);
+    box-shadow: 0 22px 54px rgba(1, 3, 10, 0.52);
+  }
+
+  :global([data-theme='dark']) .nav.nav-condensed {
+    background: color-mix(in srgb, rgba(4, 8, 20, 0.9) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
+    background-image:
+      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.22) 0%, rgba(var(--aurora-purple-rgb), 0.2) 44%, transparent 100%),
+      var(--grain-texture);
+    box-shadow: 0 28px 68px rgba(1, 3, 10, 0.58);
+    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 56%, rgba(255, 255, 255, 0.1) 44%);
   }
 
   .nav-container {

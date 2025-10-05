@@ -23,16 +23,16 @@ const createThemeStore = () => {
         
         if (browser) {
           localStorage.setItem('theme', newTheme);
-          document.body.setAttribute('data-theme', newTheme);
+          applyThemeAttributes(newTheme);
         }
-        
+
         return newTheme;
       });
     },
     set: (theme) => {
       if (browser) {
         localStorage.setItem('theme', theme);
-        document.body.setAttribute('data-theme', theme);
+        applyThemeAttributes(theme);
       }
       set(theme);
     }
@@ -40,3 +40,9 @@ const createThemeStore = () => {
 };
 
 export const theme = createThemeStore();
+
+function applyThemeAttributes(value) {
+  if (!browser) return;
+  document.body.setAttribute('data-theme', value);
+  document.documentElement.setAttribute('data-theme', value);
+}

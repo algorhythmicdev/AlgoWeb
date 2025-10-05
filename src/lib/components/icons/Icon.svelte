@@ -251,7 +251,10 @@
     focusable="false"
   >
     <rect x="3" y="3" width="18" height="18" rx="4" class="stroke" />
-    <text x="12" y="13.5" text-anchor="middle" class="badge-text">in</text>
+    <path
+      d="M8.2 9.4h2.1v7.2H8.2zm1-2.8c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2-1.2.5-1.2 1.2.5 1.2 1.2 1.2zm3.2 2.8h2v1c.4-.7 1.2-1.3 2.4-1.3 2.1 0 2.5 1.4 2.5 3.2v4.3h-2.1v-3.7c0-.9-.1-2.1-1.4-2.1-1.4 0-1.6 1-1.6 2.1v3.7h-2.1z"
+      class="fill"
+    />
   </svg>
 {:else if name === 'github'}
   <svg
@@ -315,16 +318,5 @@
     stroke: none;
   }
 
-  .icon-badge .badge-text {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 9px;
-    font-weight: 600;
-    text-transform: uppercase;
-    fill: currentColor;
-    dominant-baseline: middle;
-  }
-
-  .icon-badge text {
-    dominant-baseline: middle;
-  }
+  /* badge icons inherit fill styles */
 </style>

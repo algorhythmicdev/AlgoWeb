@@ -4,6 +4,9 @@
     "tagline": "Де логіка танцює з креативом",
     "description": "Лабораторія AI-інновацій, що створює тревел-платформу NodeVoyage та продуктивну екосистему Ideonautix"
   },
+  "app": {
+    "loading": "Завантаження..."
+  },
   "nav": {
     "home": "Головна",
     "products": "Продукти",
@@ -24,10 +27,17 @@
     "status": "У розробці • Формуємо майбутнє AI",
     "title": "Де логіка танцює з креативом",
     "tagline": "AlgoRhythmics — лабораторія AI-інновацій",
-    "subtitle": "Створюємо тревел-платформу NodeVoyage та продуктивну екосистему Ideonautix на базі найсучасніших AI-технологій",
+    "subtitle": "Пілоти NodeVoyage та ритуали Ideonautix тримають фаундерів у фокусі й зберігають людяність.",
+    "description": "Спираємося на R&D вивісок та хмарну інженерію, поєднуючи тактильну дисципліну з пояснюваним софтом, щоб команди людей залишалися в центрі управління.",
     "cta_products": "Переглянути продукти",
     "cta_consulting": "AI-консалтинг",
     "next_milestone": "Наступний етап",
+    "pillars_title": "Що веде нашу студію",
+    "pillars": [
+      "Два напрями: тревел-компаньйон NodeVoyage та операційна система Ideonautix",
+      "Людиноцентричні консалтингові спринти з латвійською майстерністю та брендами Бенілюксу",
+      "Пояснювані AI-потоки, що поєднують апарат signage та хмарні платформи"
+    ],
     "signals": {
       "studio_phase": "Етап студії",
       "studio_phase_value": "Пілотна студія • з 2023",
@@ -51,7 +61,19 @@
         "meta": "Триває дослідницький спринт",
         "cta": "Переглянути Ideonautix"
       }
-    }
+    },
+    "focus": {
+      "kicker": "Фокус студії",
+      "title": "Запускаємо пояснюваний AI",
+      "description": "Наша основна команда балансує пілоти NodeVoyage та ритуали Ideonautix, щоб кожен реліз був відповідальним і людяним.",
+      "points": [
+        "Дизайн-керовані пілоти з лабораторіями вивісок і тревел-тестерами",
+        "Консалтингові спринти з участю фаундерів для регульованих команд",
+        "Прозорі шаблони автоматизації, що утримують відповідальність за дані"
+      ],
+      "cta": "Познайомтеся з спільнотою"
+    },
+    "milestone_cta": "Переглянути дорожню карту"
   },
   "story": {
     "title": "Наша історія",
@@ -65,6 +87,8 @@
   "founders": {
     "title": "Знайомтесь із засновниками",
     "subtitle": "Разом будуємо майбутнє AI",
+    "email_cta": "E-mail",
+    "linkedin_cta": "LinkedIn",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Співзасновник та CEO",
@@ -81,6 +105,7 @@
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Співзасновник та CTO",
+      "bio": "Vjaceslavs “Slaff” Trosins спільно веде технологічне бачення: архітектуру хмари, потоки даних та AI-інтеграції для NodeVoyage і Ideonautix.",
       "current_title": "Поточна роль",
       "position": "CTO і спів-CEO, відповідальний за платформу на web/mobile, API та AI, паралельно проектуючи контролери рівня outdoor signage у дослідницькому відділі Reclame Fabriek.",
       "philosophy": "Системне мислення між R&D рекламних вивісок і consumer-софтом робить стек приземленим: вдень ми прототипуємо контролери, вночі переносимо цю стійкість у AI-продукти.",
@@ -97,8 +122,14 @@
     }
   },
   "products": {
+    "meta_title": "Продукти AlgoRhythmics",
+    "meta_description": "Дізнайтесь про NodeVoyage — нашого AI-компаньйона для мандрів — та Ideonautix, операційну систему продуктивності для фаундерів.",
     "title": "Наші продукти",
     "subtitle": "AI-платформи, що змінюють подорожі та роботу",
+    "cta_title": "Готові трансформувати процеси?",
+    "cta_text": "Приєднуйтесь до спільноти й першими спробуйте наші AI-платформи.",
+    "cta_join": "Приєднатися до спільноти",
+    "cta_contact": "Зв'язатися з нами",
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Fun. Travel. Memories. Community.",
@@ -158,6 +189,7 @@
     }
   },
   "nodevoyage": {
+    "meta_title": "NodeVoyage – AlgoRhythmics",
     "name": "NodeVoyage",
     "status": "У розробці • MVP вересень 2026",
     "tagline": "Ваш AI-навігатор",
@@ -209,6 +241,7 @@
     "cta_note": "Без банківської картки • Переваги раннього доступу"
   },
   "ideonautix": {
+    "meta_title": "Ideonautix – AlgoRhythmics",
     "name": "Ideonautix",
     "status": "Планування • MVP лютий 2026",
     "tagline": "Інтелект для стартапів",
@@ -242,6 +275,7 @@
     "cta_description": "Ранній доступ стартує у лютому 2026. Долучіться до творення нової продуктивності стартапів"
   },
   "community": {
+    "meta_title": "Спільнота AlgoRhythmics",
     "hero_title": "Спільнота",
     "hero_subtitle": "Голосуйте за функції, діліться ідеями й творіть майбутнє разом",
     "voting_title": "Голосування за функції",
@@ -301,6 +335,7 @@
     }
   },
   "consulting": {
+    "meta_title": "Консалтинг AlgoRhythmics",
     "hero_title": "AI-консалтинг",
     "hero_subtitle": "Безкоштовна пілотна програма для 3 компаній",
     "spots_remaining": "вільних місць",
@@ -349,6 +384,7 @@
     "req_3": "Відкритість до співпраці та фідбеку"
   },
   "contact": {
+    "meta_title": "Контакти AlgoRhythmics",
     "hero_title": "Зв'яжіться з нами",
     "hero_subtitle": "Створімо щось видатне разом",
     "form_title": "Напишіть повідомлення",
@@ -361,6 +397,7 @@
     "form_message": "Повідомлення",
     "form_message_placeholder": "Ваш текст...",
     "form_submit": "Надіслати",
+    "form_sending": "Надсилання...",
     "form_success": "Повідомлення надіслано! Відповімо незабаром.",
     "form_error": "Сталася помилка. Спробуйте ще раз.",
     "calendar_title": "Забронювати зустріч",
@@ -369,14 +406,20 @@
     "info_title": "Контакти",
     "info_email": "E-mail",
     "info_location": "Локація",
+    "info_email_value": "AlgoRhythmics.dev@gmail.com",
+    "info_location_value": "Даугавпілс, Латвія",
     "social_title": "Слідкуйте за нами",
+    "social_linkedin": "LinkedIn",
+    "social_github": "GitHub",
+    "social_twitter": "Twitter",
     "location_value": "Даугавпілс, Латвія"
   },
   "form": {
     "error_required": "Обов'язкове поле",
     "error_email": "Невірний e-mail",
     "error_phone": "Невірний номер телефону",
-    "error_validation": "Будь ласка, виправте помилки у формі"
+    "error_validation": "Будь ласка, виправте помилки у формі",
+    "required_note": "* Обов'язкові поля"
   },
   "common": {
     "submitting": "Надсилання...",

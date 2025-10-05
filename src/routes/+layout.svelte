@@ -6,7 +6,7 @@
   import AICompanion from '$components/AICompanion.svelte';
   import LoadingOverlay from '$components/LoadingOverlay.svelte';
   import '$lib/i18n';
-  import { waitLocale } from 'svelte-i18n';
+  import { _, waitLocale } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { theme } from '$stores/theme';
   
@@ -17,6 +17,7 @@
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.body.setAttribute('data-theme', savedTheme);
+      document.documentElement.setAttribute('data-theme', savedTheme);
     }
   });
 </script>
@@ -47,7 +48,7 @@
 {#await waitLocale()}
   <div class="loading">
     <div class="spinner"></div>
-    <p>Loading...</p>
+    <p>{$_('app.loading')}</p>
   </div>
 {:then}
   <ThemedBackground />

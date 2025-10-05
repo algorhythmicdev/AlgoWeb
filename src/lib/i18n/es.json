@@ -4,6 +4,9 @@
     "tagline": "Donde la lógica baila con la creatividad",
     "description": "Laboratorio de innovación en IA que da vida a la plataforma de viajes NodeVoyage y a la suite de productividad Ideonautix"
   },
+  "app": {
+    "loading": "Cargando..."
+  },
   "nav": {
     "home": "Inicio",
     "products": "Productos",
@@ -24,10 +27,17 @@
     "status": "En desarrollo • Moldeamos el futuro de la IA",
     "title": "Donde la lógica baila con la creatividad",
     "tagline": "AlgoRhythmics — Laboratorio de innovación en IA",
-    "subtitle": "Construimos la plataforma de viajes NodeVoyage y la suite de productividad Ideonautix con tecnología de IA de vanguardia",
+    "subtitle": "Los pilotos de NodeVoyage y los rituales de Ideonautix mantienen a los fundadores enfocados sin perder el toque humano.",
+    "description": "Con raíces en investigación de señalética y en ingeniería cloud, combinamos disciplina tangible con software explicable para que los equipos humanos mantengan el control.",
     "cta_products": "Explorar productos",
     "cta_consulting": "Consultoría de IA",
     "next_milestone": "Próximo hito",
+    "pillars_title": "Lo que guía nuestro estudio",
+    "pillars": [
+      "Dos líneas: NodeVoyage como compañero de viaje e Ideonautix como sistema operativo",
+      "Sprints de consultoría centrados en las personas, moldeados por la artesanía letona y marcas Benelux",
+      "Flujos de IA explicables que conectan hardware de señalética y plataformas cloud"
+    ],
     "signals": {
       "studio_phase": "Fase del estudio",
       "studio_phase_value": "Estudio piloto • Desde 2023",
@@ -51,7 +61,19 @@
         "meta": "Sprint de investigación en curso",
         "cta": "Ver Ideonautix"
       }
-    }
+    },
+    "focus": {
+      "kicker": "Enfoque del estudio",
+      "title": "Lanzamientos de IA explicable",
+      "description": "Nuestro dúo equilibra los pilotos de NodeVoyage con los rituales de Ideonautix para que cada entrega siga siendo responsable y humana.",
+      "points": [
+        "Pilotos guiados por el diseño junto a laboratorios de señalética y testers de viaje",
+        "Consultoría con fundadores involucrados para equipos regulados",
+        "Patrones de automatización transparentes que mantienen los datos responsables"
+      ],
+      "cta": "Conoce la comunidad"
+    },
+    "milestone_cta": "Ver la hoja de ruta"
   },
   "story": {
     "title": "Nuestra historia",
@@ -65,6 +87,8 @@
   "founders": {
     "title": "Conoce a los fundadores",
     "subtitle": "Construimos juntos el futuro de la IA",
+    "email_cta": "Correo",
+    "linkedin_cta": "LinkedIn",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Cofundador y CEO",
@@ -81,6 +105,7 @@
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Cofundador y CTO",
+      "bio": "Vjaceslavs “Slaff” Trosins co-lidera como CTO, arquitectando la infraestructura cloud, los flujos de datos y las integraciones de IA detrás de NodeVoyage e Ideonautix.",
       "current_title": "Posición actual",
       "position": "CTO y co-CEO responsable de la entrega de plataformas en web/móvil, APIs y IA mientras diseña sistemas de control grado señalética dentro del Departamento de Investigación en Señalética de Reclame Fabriek.",
       "philosophy": "El pensamiento sistémico que cruza I+D en señalética y software de consumo mantiene nuestra pila con los pies en la tierra: prototipamos controladores de día y trasladamos esa resiliencia a productos guiados por IA de noche.",
@@ -97,8 +122,14 @@
     }
   },
   "products": {
+    "meta_title": "Productos de AlgoRhythmics",
+    "meta_description": "Explora NodeVoyage, nuestro compañero de viajes con IA, e Ideonautix, la suite de productividad para fundadores.",
     "title": "Nuestros productos",
     "subtitle": "Plataformas impulsadas por IA que transforman cómo viajamos y trabajamos",
+    "cta_title": "¿Listo para transformar tu flujo de trabajo?",
+    "cta_text": "Únete a la comunidad y sé el primero en probar nuestras plataformas potenciadas por IA.",
+    "cta_join": "Unirse a la comunidad",
+    "cta_contact": "Ponte en contacto",
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Diversión. Viajes. Recuerdos. Comunidad.",
@@ -158,6 +189,7 @@
     }
   },
   "nodevoyage": {
+    "meta_title": "NodeVoyage – AlgoRhythmics",
     "name": "NodeVoyage",
     "status": "En desarrollo • MVP septiembre 2026",
     "tagline": "Tu compañero de viajes con IA",
@@ -209,6 +241,7 @@
     "cta_note": "Sin tarjeta de crédito • Beneficios de acceso anticipado"
   },
   "ideonautix": {
+    "meta_title": "Ideonautix – AlgoRhythmics",
     "name": "Ideonautix",
     "status": "Fase de planificación • MVP febrero 2026",
     "tagline": "Inteligencia para startups",
@@ -242,6 +275,7 @@
     "cta_description": "Acceso anticipado en febrero de 2026. Sé parte de la nueva productividad para startups"
   },
   "community": {
+    "meta_title": "Comunidad AlgoRhythmics",
     "hero_title": "Comunidad",
     "hero_subtitle": "Vota funciones, comparte ideas y diseña el futuro con nosotros",
     "voting_title": "Vota las funciones",
@@ -301,6 +335,7 @@
     }
   },
   "consulting": {
+    "meta_title": "Piloto de consultoría AlgoRhythmics",
     "hero_title": "Consultoría de IA",
     "hero_subtitle": "Programa piloto gratuito para 3 empresas seleccionadas",
     "spots_remaining": "plazas disponibles",
@@ -349,6 +384,7 @@
     "req_3": "Apertura a la colaboración y retroalimentación"
   },
   "contact": {
+    "meta_title": "Contacto AlgoRhythmics",
     "hero_title": "Ponte en contacto",
     "hero_subtitle": "Construyamos algo increíble juntos",
     "form_title": "Envíanos un mensaje",
@@ -361,6 +397,7 @@
     "form_message": "Tu mensaje",
     "form_message_placeholder": "Escribe tu mensaje...",
     "form_submit": "Enviar mensaje",
+    "form_sending": "Enviando...",
     "form_success": "¡Mensaje enviado! Responderemos pronto.",
     "form_error": "Algo salió mal. Inténtalo nuevamente.",
     "calendar_title": "Agenda una reunión",
@@ -369,14 +406,20 @@
     "info_title": "Información de contacto",
     "info_email": "Correo",
     "info_location": "Ubicación",
+    "info_email_value": "AlgoRhythmics.dev@gmail.com",
+    "info_location_value": "Daugavpils, Letonia",
     "social_title": "Síguenos",
+    "social_linkedin": "LinkedIn",
+    "social_github": "GitHub",
+    "social_twitter": "Twitter",
     "location_value": "Daugavpils, Letonia"
   },
   "form": {
     "error_required": "Este campo es obligatorio",
     "error_email": "Correo electrónico no válido",
     "error_phone": "Número de teléfono no válido",
-    "error_validation": "Revisa los errores en el formulario"
+    "error_validation": "Revisa los errores en el formulario",
+    "required_note": "* Campos obligatorios"
   },
   "common": {
     "submitting": "Enviando...",

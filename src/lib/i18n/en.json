@@ -4,6 +4,9 @@
     "tagline": "Where Logic Dances with Creativity",
     "description": "AI innovation lab building NodeVoyage travel platform and Ideonautix productivity suite"
   },
+  "app": {
+    "loading": "Loading..."
+  },
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -24,16 +27,16 @@
     "status": "In development • Latvian-founded AI studio",
     "title": "Calm, credible AI for travel and startup teams",
     "tagline": "AlgoRhythmics — Riga-to-Rotterdam innovation lab",
-    "subtitle": "We build NodeVoyage for effortless journeys and Ideonautix for focused founders.",
+    "subtitle": "NodeVoyage pilots and Ideonautix rituals keep founders focused while staying human-centred.",
     "description": "Rooted in signage R&D and cloud engineering, we blend tactile hardware discipline with explainable software so human teams stay in control.",
     "cta_products": "Explore our work",
     "cta_consulting": "Book a discovery call",
     "next_milestone": "Next milestone",
     "pillars_title": "What guides our studio",
     "pillars": [
-      "Dual product tracks: NodeVoyage travel companion & Ideonautix founder OS",
-      "Human-centered consulting sprints shaped by Latvian craft and Benelux brand work",
-      "Explainable AI flows that scale from physical experiences to digital platforms"
+      "Dual tracks: NodeVoyage travel companion & Ideonautix founder OS",
+      "Consulting sprints shaped by Latvian craft and Benelux brands",
+      "Explainable AI flows bridging signage hardware and cloud software"
     ],
     "signals": {
       "studio_phase": "Studio phase",
@@ -58,6 +61,17 @@
         "meta": "Research sprint in progress",
         "cta": "See Ideonautix"
       }
+    },
+    "focus": {
+      "kicker": "Studio focus",
+      "title": "Shipping explainable AI launches",
+      "description": "Our core duo balances NodeVoyage pilots with Ideonautix rituals so every release stays accountable and human controlled.",
+      "points": [
+        "Design-led pilots with signage labs and travel testers",
+        "Founders-in-the-loop consulting for regulated teams",
+        "Transparent automation patterns that keep data accountable"
+      ],
+      "cta": "Meet the community"
     },
     "milestone_cta": "View the roadmap"
   },
@@ -107,8 +121,14 @@
     }
   },
   "products": {
+    "meta_title": "AlgoRhythmics Products",
+    "meta_description": "Explore NodeVoyage, our AI travel companion, and Ideonautix, the productivity OS for founders.",
     "title": "Our Products",
     "subtitle": "Two calm AI builds shipping soon",
+    "cta_title": "Ready to transform your workflow?",
+    "cta_text": "Join our community and be the first to experience our AI-powered platforms.",
+    "cta_join": "Join Community",
+    "cta_contact": "Get in Touch",
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Travel planning that feels like a local friend",
@@ -168,6 +188,7 @@
     }
   },
   "nodevoyage": {
+    "meta_title": "NodeVoyage – AlgoRhythmics",
     "name": "NodeVoyage",
     "status": "In Development • MVP Sept 2026",
     "tagline": "Your AI Travel Companion",
@@ -219,6 +240,7 @@
     "cta_note": "No credit card required • Early access benefits"
   },
   "ideonautix": {
+    "meta_title": "Ideonautix – AlgoRhythmics",
     "name": "Ideonautix",
     "status": "Planning Phase • MVP Feb 2026",
     "tagline": "Intelligence for Startups",
@@ -252,6 +274,7 @@
     "cta_description": "Early access launching February 2026. Be part of shaping the future of startup productivity"
   },
   "community": {
+    "meta_title": "AlgoRhythmics Community",
     "hero_title": "Community",
     "hero_subtitle": "Vote on features, share ideas, and shape the future together",
     "voting_title": "Vote on Features",
@@ -311,6 +334,7 @@
     }
   },
   "consulting": {
+    "meta_title": "AlgoRhythmics Consulting Pilot",
     "hero_title": "AI Consulting",
     "hero_subtitle": "Free pilot program for 3 selected companies",
     "spots_remaining": "spots remaining",
@@ -359,6 +383,7 @@
     "req_3": "Open to collaboration and feedback"
   },
   "contact": {
+    "meta_title": "Contact AlgoRhythmics",
     "hero_title": "Get in Touch",
     "hero_subtitle": "Let's build something amazing together",
     "form_title": "Send Us a Message",
@@ -371,6 +396,7 @@
     "form_message": "Your Message",
     "form_message_placeholder": "Your message...",
     "form_submit": "Send Message",
+    "form_sending": "Sending...",
     "form_success": "Message sent! We'll respond soon.",
     "form_error": "Something went wrong. Please try again.",
     "calendar_title": "Book a Meeting",
@@ -379,14 +405,20 @@
     "info_title": "Contact Information",
     "info_email": "Email",
     "info_location": "Location",
+    "info_email_value": "AlgoRhythmics.dev@gmail.com",
+    "info_location_value": "Daugavpils, Latvia",
     "social_title": "Follow Us",
+    "social_linkedin": "LinkedIn",
+    "social_github": "GitHub",
+    "social_twitter": "Twitter",
     "location_value": "Daugavpils, Latvia"
   },
   "form": {
     "error_required": "This field is required",
     "error_email": "Invalid email address",
     "error_phone": "Invalid phone number",
-    "error_validation": "Please fix the errors in the form"
+    "error_validation": "Please fix the errors in the form",
+    "required_note": "* Required fields"
   },
   "common": {
     "submitting": "Submitting...",

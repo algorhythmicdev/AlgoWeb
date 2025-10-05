@@ -4,6 +4,9 @@
     "tagline": "Là où la logique danse avec la créativité",
     "description": "Laboratoire d'innovation en IA qui donne vie à la plateforme de voyage NodeVoyage et à la suite de productivité Ideonautix"
   },
+  "app": {
+    "loading": "Chargement..."
+  },
   "nav": {
     "home": "Accueil",
     "products": "Produits",
@@ -24,10 +27,17 @@
     "status": "En développement • Nous façonnons l'avenir de l'IA",
     "title": "Là où la logique danse avec la créativité",
     "tagline": "AlgoRhythmics — Laboratoire d'innovation en IA",
-    "subtitle": "Nous construisons la plateforme de voyage NodeVoyage et la suite de productivité Ideonautix avec une IA de pointe",
+    "subtitle": "Les pilotes NodeVoyage et les rituels Ideonautix maintiennent les fondateurs concentrés sans perdre l'humain.",
+    "description": "Ancrés dans la R&D signalétique et l'ingénierie cloud, nous mêlons rigueur matérielle et logiciels explicables pour que les équipes humaines gardent la main.",
     "cta_products": "Explorer les produits",
     "cta_consulting": "Conseil en IA",
     "next_milestone": "Prochain jalon",
+    "pillars_title": "Ce qui guide notre studio",
+    "pillars": [
+      "Deux pistes : compagnon de voyage NodeVoyage et OS fondateur Ideonautix",
+      "Sprints de conseil centrés sur l'humain, nourris par l'artisanat letton et des marques du Benelux",
+      "Parcours d'IA explicables reliant hardware signalétique et plateformes cloud"
+    ],
     "signals": {
       "studio_phase": "Phase du studio",
       "studio_phase_value": "Studio pilote • Depuis 2023",
@@ -51,7 +61,19 @@
         "meta": "Sprint de recherche en cours",
         "cta": "Voir Ideonautix"
       }
-    }
+    },
+    "focus": {
+      "kicker": "Focus du studio",
+      "title": "Lancer une IA explicable",
+      "description": "Notre duo équilibre les pilotes NodeVoyage et les rituels Ideonautix pour garder chaque livraison responsable et humaine.",
+      "points": [
+        "Pilotes design avec laboratoires signalétiques et testeurs voyage",
+        "Consulting avec fondateurs impliqués pour équipes régulées",
+        "Patrons d'automatisation transparents qui rendent les données responsables"
+      ],
+      "cta": "Découvrir la communauté"
+    },
+    "milestone_cta": "Voir la feuille de route"
   },
   "story": {
     "title": "Notre histoire",
@@ -83,6 +105,7 @@
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Cofondateur et CTO",
+      "bio": "Vjaceslavs “Slaff” Trosins co-pilote la vision technique : architecture cloud, flux de données et intégrations IA pour NodeVoyage et Ideonautix.",
       "current_title": "Poste actuel",
       "position": "CTO et co-CEO chargé de la livraison plateforme web/mobile, API et IA tout en architecturant des systèmes de contrôleurs de niveau signalétique au sein du département de recherche signalétique de Reclame Fabriek.",
       "philosophy": "La pensée systémique entre R&D signalétique et logiciel grand public garde notre stack pragmatique : nous prototypons des contrôleurs le jour et transformons cette résilience en produits pilotés par l'IA la nuit.",
@@ -99,8 +122,14 @@
     }
   },
   "products": {
+    "meta_title": "Produits AlgoRhythmics",
+    "meta_description": "Découvrez NodeVoyage, notre compagnon de voyage IA, et Ideonautix, la suite de productivité pour fondateurs.",
     "title": "Nos produits",
     "subtitle": "Des plateformes IA qui transforment le voyage et le travail",
+    "cta_title": "Prêt à transformer votre organisation ?",
+    "cta_text": "Rejoignez la communauté et soyez les premiers à tester nos plateformes propulsées par l'IA.",
+    "cta_join": "Rejoindre la communauté",
+    "cta_contact": "Nous contacter",
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Fun. Voyages. Souvenirs. Communauté.",
@@ -160,6 +189,7 @@
     }
   },
   "nodevoyage": {
+    "meta_title": "NodeVoyage – AlgoRhythmics",
     "name": "NodeVoyage",
     "status": "En développement • MVP sept. 2026",
     "tagline": "Votre compagnon de voyage IA",
@@ -211,6 +241,7 @@
     "cta_note": "Pas de carte requise • Avantages early access"
   },
   "ideonautix": {
+    "meta_title": "Ideonautix – AlgoRhythmics",
     "name": "Ideonautix",
     "status": "Phase de planification • MVP fév. 2026",
     "tagline": "L'intelligence pour les startups",
@@ -244,6 +275,7 @@
     "cta_description": "Accès anticipé en février 2026. Participez à la prochaine génération de productivité startup"
   },
   "community": {
+    "meta_title": "Communauté AlgoRhythmics",
     "hero_title": "Communauté",
     "hero_subtitle": "Votez les fonctionnalités, partagez vos idées et co-créez l'avenir",
     "voting_title": "Voter pour les fonctionnalités",
@@ -303,6 +335,7 @@
     }
   },
   "consulting": {
+    "meta_title": "Programme de conseil AlgoRhythmics",
     "hero_title": "Conseil en IA",
     "hero_subtitle": "Programme pilote gratuit pour 3 entreprises sélectionnées",
     "spots_remaining": "places restantes",
@@ -351,6 +384,7 @@
     "req_3": "Ouverture à la co-création et aux retours"
   },
   "contact": {
+    "meta_title": "Contact AlgoRhythmics",
     "hero_title": "Entrons en contact",
     "hero_subtitle": "Construisons quelque chose d'exceptionnel ensemble",
     "form_title": "Envoyez-nous un message",
@@ -363,6 +397,7 @@
     "form_message": "Votre message",
     "form_message_placeholder": "Votre message...",
     "form_submit": "Envoyer",
+    "form_sending": "Envoi...",
     "form_success": "Message envoyé ! Nous revenons vers vous rapidement.",
     "form_error": "Une erreur est survenue. Merci de réessayer.",
     "calendar_title": "Prendre rendez-vous",
@@ -371,14 +406,20 @@
     "info_title": "Contact",
     "info_email": "E-mail",
     "info_location": "Localisation",
+    "info_email_value": "AlgoRhythmics.dev@gmail.com",
+    "info_location_value": "Daugavpils, Lettonie",
     "social_title": "Nous suivre",
+    "social_linkedin": "LinkedIn",
+    "social_github": "GitHub",
+    "social_twitter": "Twitter",
     "location_value": "Daugavpils, Lettonie"
   },
   "form": {
     "error_required": "Ce champ est obligatoire",
     "error_email": "Adresse e-mail invalide",
     "error_phone": "Numéro de téléphone invalide",
-    "error_validation": "Merci de corriger les erreurs du formulaire"
+    "error_validation": "Merci de corriger les erreurs du formulaire",
+    "required_note": "* Champs obligatoires"
   },
   "common": {
     "submitting": "Envoi...",
