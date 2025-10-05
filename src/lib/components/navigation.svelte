@@ -2,8 +2,8 @@
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
   import { navigation } from '$stores/navigation';
-  import LanguageSwitcher from './LanguageSwitcher.svelte';
-  import ThemeToggle from './ThemeToggle.svelte';
+  import LanguageSwitcher from './language-switcher.svelte';
+  import ThemeToggle from './theme-toggle.svelte';
   import { mainNavigation } from '$config/navigation';
 
   let isScrolled = false;

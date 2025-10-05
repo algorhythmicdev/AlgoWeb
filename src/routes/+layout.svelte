@@ -1,9 +1,9 @@
 <script>
   import '../app.css';
   import Navigation from '$components/navigation.svelte';
-  import Footer from '$components/Footer.svelte';
-  import ThemedBackground from '$components/ThemedBackground.svelte';
-  import LoadingSpinner from '$components/LoadingSpinner.svelte';
+  import Footer from '$components/footer.svelte';
+  import ThemedBackground from '$components/themed-background.svelte';
+  import LoadingSpinner from '$components/loading-spinner.svelte';
   import '$lib/i18n';
   import { waitLocale } from 'svelte-i18n';
   import { onMount } from 'svelte';
