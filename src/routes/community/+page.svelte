@@ -68,6 +68,12 @@
 
 <!-- Hero -->
 <section class="community-hero">
+  <div class="community-hero__mesh" aria-hidden="true">
+    <span class="mesh-ring mesh-ring--one"></span>
+    <span class="mesh-ring mesh-ring--two"></span>
+    <span class="mesh-orb mesh-orb--one"></span>
+    <span class="mesh-orb mesh-orb--two"></span>
+  </div>
   <div class="container">
     <span class="eyebrow">{$_('community.hero_title')}</span>
     <h1>{$_('community.hero_subtitle')}</h1>
@@ -163,6 +169,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
 
   .community-hero::before {
@@ -174,6 +181,90 @@
     filter: blur(140px);
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .community-hero__mesh {
+    position: absolute;
+    inset: -10% -20% auto;
+    height: clamp(22rem, 36vw, 28rem);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .mesh-ring {
+    position: absolute;
+    inset: 10% 20%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(19, 81, 255, 0.25);
+    filter: blur(0.4px);
+    animation: meshOrbit 28s linear infinite;
+  }
+
+  .mesh-ring::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px dashed rgba(106, 56, 255, 0.26);
+    mix-blend-mode: screen;
+  }
+
+  .mesh-ring--one {
+    animation-duration: 32s;
+    animation-direction: alternate;
+  }
+
+  .mesh-ring--two {
+    inset: 0 12%;
+    animation-duration: 26s;
+    animation-direction: alternate-reverse;
+  }
+
+  .mesh-orb {
+    position: absolute;
+    width: clamp(160px, 26vw, 220px);
+    height: clamp(160px, 26vw, 220px);
+    border-radius: 50%;
+    background: var(--gradient-spectrum-2);
+    filter: blur(60px);
+    opacity: 0.45;
+    animation: meshPulse 20s ease-in-out infinite;
+  }
+
+  .mesh-orb--one {
+    top: -30%;
+    left: 12%;
+  }
+
+  .mesh-orb--two {
+    bottom: -38%;
+    right: 18%;
+    background: var(--gradient-spectrum-3);
+    animation-delay: -8s;
+  }
+
+  @keyframes meshOrbit {
+    0% {
+      transform: rotate(0deg) scale(0.96);
+      opacity: 0.5;
+    }
+    50% {
+      transform: rotate(180deg) scale(1.02);
+      opacity: 0.75;
+    }
+    100% {
+      transform: rotate(360deg) scale(0.96);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes meshPulse {
+    0%, 100% {
+      transform: translate3d(-6%, -4%, 0) scale(0.9);
+    }
+    50% {
+      transform: translate3d(4%, 6%, 0) scale(1.05);
+    }
   }
 
   .community-hero h1 {
@@ -349,5 +440,20 @@
   @media (max-width: 768px) {
     .community-hero { padding: var(--space-12) 0 var(--space-6); }
     .features-grid { grid-template-columns: 1fr; }
+  }
+
+  :global([data-theme='dark']) .community-hero__mesh .mesh-ring {
+    border-color: rgba(90, 135, 255, 0.35);
+  }
+
+  :global([data-theme='dark']) .community-hero__mesh .mesh-orb {
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mesh-ring,
+    .mesh-orb {
+      animation: none;
+    }
   }
 </style>
