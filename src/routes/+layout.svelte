@@ -3,6 +3,7 @@
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import ThemedBackground from '$components/ThemedBackground.svelte';
+  import AICompanion from '$components/AICompanion.svelte';
   import LoadingSpinner from '$components/LoadingSpinner.svelte';
   import '$lib/i18n';
   import { waitLocale } from 'svelte-i18n';
@@ -60,6 +61,7 @@
     
     <Footer />
   </div>
+  <AICompanion />
 {/await}
 
 <style>
