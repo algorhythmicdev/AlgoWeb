@@ -3,7 +3,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { spring } from 'svelte/motion';
   import { page } from '$app/stores';
-  import { getThemeForPath } from '$config/backgroundThemes';
+  import { getThemeForPath } from '$config/background-themes';
 
   const prefersReducedMotion =
     typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
