@@ -10,6 +10,14 @@
 
   $: currentPath = $page.url.pathname;
 
+  const navGradients = [
+    'var(--gradient-spectrum-1)',
+    'var(--gradient-spectrum-2)',
+    'var(--gradient-spectrum-3)',
+    'var(--gradient-spectrum-4)',
+    'var(--gradient-spectrum-5)'
+  ];
+
   function handleScroll() {
     const scrollY = window.scrollY;
     isScrolled = scrollY > 32;
@@ -31,12 +39,13 @@
 
     <div class="nav-content">
       <div class="nav-links" class:open={$navigation.isMenuOpen}>
-        {#each mainNavigation as item}
+        {#each mainNavigation as item, index}
           <a
             href={item.href}
             class="nav-link"
             class:active={currentPath === item.href}
             on:click={() => navigation.closeMenu()}
+            style={`--nav-gradient:${navGradients[index % navGradients.length]}; --nav-index:${index};`}
           >
             <span>{$_(item.label)}</span>
             {#if item.badge}
@@ -176,7 +185,7 @@
     background: color-mix(in srgb, var(--pure-white) 78%, rgba(19, 81, 255, 0.1) 22%);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
-    color: var(--text-primary);
+    color: var(--pure-white);
     transition: all var(--duration-fast) var(--ease-out);
     backdrop-filter: blur(22px);
     box-shadow: 0 16px 32px rgba(19, 81, 255, 0.12);
@@ -242,5 +251,51 @@
     .nav-cta { display: none; }
 
     .menu-toggle { display: inline-flex; }
+  }
+
+  :global([data-theme='dark']) .nav {
+    background: color-mix(in srgb, rgba(8, 16, 34, 0.95) 85%, transparent);
+    background-image:
+      linear-gradient(130deg, rgba(47, 92, 220, 0.18) 0%, rgba(106, 56, 255, 0.16) 100%),
+      var(--grain-texture);
+    border-bottom-color: rgba(70, 120, 255, 0.3);
+    box-shadow: 0 24px 58px rgba(2, 6, 18, 0.6);
+  }
+
+  :global([data-theme='dark']) .nav-condensed {
+    background: color-mix(in srgb, rgba(8, 16, 34, 0.96) 90%, rgba(47, 92, 220, 0.16) 10%);
+    border-bottom-color: rgba(90, 140, 255, 0.38);
+  }
+
+  :global([data-theme='dark']) .nav-link span {
+    opacity: 0.82;
+  }
+
+  :global([data-theme='dark']) .nav-cta {
+    box-shadow: 0 24px 52px rgba(2, 6, 18, 0.56);
+  }
+
+  :global([data-theme='dark']) .nav-links {
+    background: color-mix(in srgb, rgba(8, 18, 40, 0.88) 88%, transparent);
+    border-color: rgba(70, 120, 255, 0.32);
+  }
+
+  @keyframes navGradientDrift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link span {
+      animation: none;
+      background-size: 100% 100%;
+    }
   }
 </style>
