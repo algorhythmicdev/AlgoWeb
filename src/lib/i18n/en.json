@@ -21,13 +21,21 @@
     "toggle_menu": "Toggle menu"
   },
   "hero": {
-    "status": "In Development • Shaping the Future of AI",
-    "title": "Where Logic Dances with Creativity",
-    "tagline": "AlgoRhythmics - AI Innovation Lab",
-    "subtitle": "Building NodeVoyage travel platform and Ideonautix productivity suite with cutting-edge AI technology",
-    "cta_products": "Explore Products",
-    "cta_consulting": "AI Consulting",
-    "next_milestone": "Next milestone"
+    "status": "In development • Latvian-founded AI studio",
+    "title": "Calm, credible AI for travel and startup teams",
+    "tagline": "AlgoRhythmics — Riga-to-Rotterdam innovation lab",
+    "subtitle": "We build NodeVoyage for effortless journeys and Ideonautix for focused founders.",
+    "description": "Rooted in signage R&D and cloud engineering, we blend tactile hardware discipline with explainable software so human teams stay in control.",
+    "cta_products": "Explore our work",
+    "cta_consulting": "Book a discovery call",
+    "next_milestone": "Next milestone",
+    "pillars_title": "What guides our studio",
+    "pillars": [
+      "Dual product tracks: NodeVoyage travel companion & Ideonautix founder OS",
+      "Human-centered consulting sprints shaped by Latvian craft and Benelux brand work",
+      "Explainable AI flows that scale from physical experiences to digital platforms"
+    ],
+    "milestone_cta": "View the roadmap"
   },
   "story": {
     "title": "Our Story",
@@ -40,53 +48,55 @@
   },
   "founders": {
     "title": "Meet the Founders",
-    "subtitle": "Building the future of AI together",
+    "subtitle": "Two makers connecting signage R&D with human-first AI",
+    "email_cta": "Email",
+    "linkedin_cta": "LinkedIn",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Co-Founder & CEO",
-      "bio": "Nikita Jurtaevs serves as CEO in a documented 50/50 co-leadership model, steering company strategy, partnerships, and brand direction while orchestrating product management and UX/QA for NodeVoyage and Ideonautix during the early build phase.",
-      "current_title": "Current Position",
-      "current_position": "Embedded in Reclame Fabriek’s Signage Research Department leading next-gen LED neon, in-house LED controller, custom coating, and 3D-printing initiatives that feed directly into AlgoRhythmics delivery.",
+      "bio": "Nikita Jurtaevs co-leads AlgoRhythmics as CEO, shaping brand storylines and guiding product direction for NodeVoyage and Ideonautix. He pairs studio building with Reclame Fabriek’s signage lab, translating tactile experimentation into launch-ready digital experiences.",
+      "current_title": "Current Focus",
+      "current_position": "Reclame Fabriek — steering LED neon, controller, coating, and 3D fabrication programs that inform our product standards.",
       "expertise": [
-        "Creative Vision & Brand Strategy",
-        "AI Product Design",
-        "User Experience Innovation",
-        "Strategic Partnerships"
+        "Narrative-led product strategy",
+        "Experience design & QA leadership",
+        "Partnerships and education outreach"
       ]
     },
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Co-Founder & CTO",
-      "current_title": "Current Position",
-      "position": "CTO and co-CEO partner responsible for platform delivery across web/mobile, APIs, and AI while architecting signage-grade controller systems within Reclame Fabriek’s Signage Research Department.",
-      "philosophy": "Systems thinking across signage R&D and consumer software keeps our stack practical: we prototype controllers by day and translate that resilience into AI-led products by night.",
+      "current_title": "Current Focus",
+      "bio": "Vjaceslavs “Slaff” Trosins co-leads as CTO, architecting the cloud stack, data flows, and AI integrations behind NodeVoyage and Ideonautix. His signage-controller engineering inside Reclame Fabriek’s innovation unit keeps our delivery resilient and explainable.",
+      "position": "Reclame Fabriek — evolving controller hardware, LED systems, and production tooling that feed real-world requirements into our software.",
+      "philosophy": "Systems thinking across hardware and software keeps our decisions pragmatic; we validate ideas on the shop floor and translate the best of them into human-first digital products.",
       "achievements": [
-        "Runs Google Cloud–first delivery (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) with modern app layers (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
-        "Aligns signage-grade controller engineering and next-gen LED neon pipelines with explainable, real-time AI UX patterns",
-        "Drives three funding sprints—Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard—to scale NodeVoyage and Ideonautix"
+        "Runs a Google Cloud–first platform stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
+        "Aligns signage-grade controllers and LED pipelines with accessible, explainable AI user journeys.",
+        "Leads funding sprints that underwrite NodeVoyage and Ideonautix while recruiting multi-disciplinary talent."
       ],
       "brand_title": "Brand Experience",
       "brand_intro": "Worked with global brands on premium advertising display systems:",
       "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV), shared by both founders",
       "algorhythmics_title": "Vision for AlgoRhythmics",
-      "algorhythmics_vision": "Fuse signage research discipline with cloud-native delivery so AlgoRhythmics ships explainable, resilient AI experiences ready for real-world installations."
+      "algorhythmics_vision": "Fuse signage discipline with cloud delivery so AlgoRhythmics ships trustworthy, installation-ready AI experiences."
     }
   },
   "products": {
     "title": "Our Products",
-    "subtitle": "AI-powered platforms transforming how people travel and work",
+    "subtitle": "Two calm AI builds shipping soon",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "Fun. Travel. Memories. Community.",
-      "description": "AI-powered travel planning with your intelligent companion Nodi. Create personalized itineraries, discover hidden gems, and travel with confidence using AR tools and offline capabilities.",
+      "tagline": "Travel planning that feels like a local friend",
+      "description": "AI travel companion for curated itineraries, AR translation, and offline-ready adventures.",
       "status": "In Development",
       "mvp": "MVP: September 2026",
       "cta": "Learn More"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Explore. Invent. Launch.",
-      "description": "Modular productivity super-suite for startups. Get AI-powered insights for pitches, revenue tracking, team dynamics, and more with intelligent microservices designed for founders.",
+      "tagline": "An operating system for founder focus",
+      "description": "Modular AI toolkit for decks, revenue insight, and team rituals built for early-stage squads.",
       "status": "Planning Phase",
       "mvp": "MVP: February 2026",
       "cta": "Learn More"
