@@ -315,14 +315,6 @@
     border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.22) 60%, rgba(255, 255, 255, 0.36) 40%);
   }
 
-  .profile-card.achievements li {
-    padding: 0.7rem 1rem;
-    border-radius: var(--radius-full);
-    border: 1px solid rgba(19, 81, 255, 0.15);
-    color: var(--text-secondary);
-    background: color-mix(in srgb, var(--bg-muted) 55%, transparent);
-  }
-
   .profile-intro p {
     font-size: clamp(1.05rem, 2vw, 1.18rem);
     line-height: var(--leading-relaxed);
@@ -336,17 +328,22 @@
   .profile-grid {
     display: grid;
     gap: clamp(1.4rem, 3vw, 2.2rem);
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-auto-rows: 1fr;
+    align-items: stretch;
+    align-content: start;
   }
 
   .profile-card {
-    display: grid;
-    gap: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
     padding: clamp(1.4rem, 3vw, 2.1rem);
     border-radius: var(--radius-xl);
     background: color-mix(in srgb, var(--bg-surface) 88%, rgba(19, 81, 255, 0.08) 12%);
     border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.2) 60%, rgba(255, 255, 255, 0.34) 40%);
     box-shadow: var(--shadow-sm);
+    min-height: 100%;
   }
 
   .profile-card .label {
@@ -388,6 +385,35 @@
     position: absolute;
     left: 0;
     color: color-mix(in srgb, var(--voyage-blue) 70%, var(--text-secondary) 30%);
+  }
+
+  .profile-card.achievements ul {
+    counter-reset: highlight;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(0.7rem, 2.4vw, 1rem);
+  }
+
+  .profile-card.achievements li {
+    counter-increment: highlight;
+    padding: clamp(0.75rem, 2.2vw, 1.05rem) clamp(1.2rem, 2.6vw, 1.6rem);
+    border-radius: var(--radius-lg);
+    border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.26) 60%, rgba(255, 255, 255, 0.45) 40%);
+    background: color-mix(in srgb, var(--bg-muted) 60%, rgba(19, 81, 255, 0.06) 40%);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-left: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .profile-card.achievements li::before {
+    content: counter(highlight, decimal-leading-zero);
+    position: absolute;
+    left: clamp(0.6rem, 1.8vw, 0.9rem);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
   }
 
   .logo-grid {
