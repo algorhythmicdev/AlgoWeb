@@ -1,97 +1,86 @@
-<script>
+<script lang="ts">
+  import { browser } from '$app/environment';
   import { afterUpdate, onDestroy, onMount, tick } from 'svelte';
   import { locale } from 'svelte-i18n';
   import {
     DEFAULT_LOCALE,
     getProfile,
     isSupportedLocale,
-    matchKnowledgeBase
+    matchKnowledgeBase,
+    type CompanionMessage,
+    type CompanionProfile,
+    type SupportedLocale
   } from '$lib/memory/companionProfiles';
-
-  /** @typedef {import('$lib/memory/companionProfiles').CompanionProfile} CompanionProfile */
-  /** @typedef {import('$lib/memory/companionProfiles').CompanionMessage} Message */
-  /** @typedef {import('$lib/memory/companionProfiles').SupportedLocale} SupportedLocale */
 
   const STORAGE_KEY = 'algoweb:lumen:memory';
   const FOCUSABLE_SELECTOR =
     'button, [href], textarea, input, select, [tabindex]:not([tabindex="-1"])';
+  const MAX_PERSISTED_MESSAGES = 24;
+  const MAX_CONTEXT_MESSAGES = 10;
 
   let isOpen = false;
   let input = '';
   let loading = false;
   let hasUserInteracted = false;
-  /** @type {SupportedLocale} */
-  let currentLocale = DEFAULT_LOCALE;
-  /** @type {CompanionProfile} */
-  let profile = getProfile(DEFAULT_LOCALE);
+  let currentLocale: SupportedLocale = DEFAULT_LOCALE;
+  let profile: CompanionProfile = getProfile(DEFAULT_LOCALE);
   let suggestions = profile.suggestions;
-  /** @type {Message[]} */
-  let messages = [
-    {
-      sender: 'companion',
-      text: profile.greeting
-    }
-  ];
+  let messages: CompanionMessage[] = [{ sender: 'companion', text: profile.greeting }];
 
-  /** @type {HTMLTextAreaElement | null} */
-  let inputEl = null;
-  /** @type {HTMLUListElement | null} */
-  let messagesEl = null;
-  /** @type {HTMLButtonElement | null} */
-  let launcherEl = null;
-  /** @type {HTMLElement | null} */
-  let panelEl = null;
-  /** @type {HTMLElement[]} */
-  let focusableEls = [];
-  /** @type {Element | null} */
-  let previouslyFocused = null;
+  let inputEl: HTMLTextAreaElement | null = null;
+  let messagesEl: HTMLUListElement | null = null;
+  let launcherEl: HTMLButtonElement | null = null;
+  let panelEl: HTMLElement | null = null;
+  let focusableEls: HTMLElement[] = [];
+  let previouslyFocused: Element | null = null;
 
-  let canPersist = false;
   let skipLocaleGreeting = false;
+  let canPersist = false;
   let isHoveringOrb = false;
   let orbShiftX = 0;
   let orbShiftY = 0;
   let scrollDrift = 0;
   let requestToken = 0;
 
-  const unsubscribe = locale.subscribe((value) => {
-    const nextLocale = /** @type {SupportedLocale} */ (
-      isSupportedLocale(value) ? value : DEFAULT_LOCALE
-    );
-    const localeChanged = nextLocale !== currentLocale;
+  let reduceMotion = false;
+  let motionQuery: MediaQueryList | null = null;
+
+  const detachFns: Array<() => void> = [];
+
+  const unsubscribeLocale = locale.subscribe((value) => {
+    const nextLocale = isSupportedLocale(value) ? value : DEFAULT_LOCALE;
+    const changed = nextLocale !== currentLocale;
 
     currentLocale = nextLocale;
     profile = getProfile(nextLocale);
     suggestions = profile.suggestions;
 
-    if (localeChanged) {
-      if (skipLocaleGreeting) {
-        skipLocaleGreeting = false;
-      } else if (!hasUserInteracted) {
-        messages = [
-          {
-            sender: 'companion',
-            text: profile.greeting
-          }
-        ];
-      } else {
-        messages = [
-          ...messages,
-          {
-            sender: 'companion',
-            text: profile.languageSwitch
-          }
-        ];
-      }
+    if (!changed) return;
+
+    if (!hasUserInteracted && !skipLocaleGreeting) {
+      messages = [{ sender: 'companion', text: profile.greeting }];
+      return;
     }
+
+    skipLocaleGreeting = false;
+    messages = [
+      ...messages,
+      { sender: 'companion', text: profile.languageSwitch }
+    ];
   });
 
-  onDestroy(() => {
-    unsubscribe();
-  });
+  const stopMotionListener = () => {
+    if (!motionQuery) return;
+    motionQuery.removeEventListener('change', handleMotionPreference);
+    motionQuery = null;
+  };
+
+  const handleMotionPreference = (event: MediaQueryList | MediaQueryListEvent) => {
+    reduceMotion = event.matches;
+  };
 
   const restoreFromStorage = () => {
-    if (typeof window === 'undefined') return;
+    if (!browser) return;
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -101,8 +90,7 @@
       const storedLocale = persisted?.locale;
       const rawMessages = Array.isArray(persisted?.messages) ? persisted.messages : [];
 
-      /** @type {Message[]} */
-      const cleanedMessages = [];
+      const cleaned: CompanionMessage[] = [];
       for (const entry of rawMessages) {
         if (
           entry &&
@@ -110,10 +98,7 @@
           (entry.sender === 'user' || entry.sender === 'companion') &&
           typeof entry.text === 'string'
         ) {
-          cleanedMessages.push({
-            sender: entry.sender === 'user' ? 'user' : 'companion',
-            text: entry.text
-          });
+          cleaned.push({ sender: entry.sender, text: entry.text });
         }
       }
 
@@ -128,46 +113,50 @@
         }
       }
 
-      if (cleanedMessages.length) {
-        messages = cleanedMessages;
+      if (cleaned.length) {
+        messages = cleaned;
         hasUserInteracted =
           typeof persisted?.hasUserInteracted === 'boolean'
             ? persisted.hasUserInteracted
-            : cleanedMessages.some((message) => message.sender === 'user');
+            : cleaned.some((entry) => entry.sender === 'user');
       }
     } catch (error) {
-      // ignore persistence errors
+      // ignore
     }
 
     if (!messages.length) {
-      messages = [
-        {
-          sender: 'companion',
-          text: profile.greeting
-        }
-      ];
+      messages = [{ sender: 'companion', text: profile.greeting }];
     }
   };
 
-  onMount(() => {
-    restoreFromStorage();
+  const persist = () => {
+    if (!canPersist || !browser) return;
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', handleGlobalKeydown);
-      window.addEventListener('pointermove', handlePointerMove, { passive: true });
-      window.addEventListener('scroll', handleScroll, { passive: true });
+    try {
+      const snapshot = {
+        locale: currentLocale,
+        hasUserInteracted,
+        messages: messages.slice(-MAX_PERSISTED_MESSAGES)
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+    } catch (error) {
+      // ignore
     }
+  };
 
-    canPersist = true;
+  const focusFirstElement = async () => {
+    await tick();
+    if (!panelEl) return;
 
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('keydown', handleGlobalKeydown);
-        window.removeEventListener('pointermove', handlePointerMove);
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
-  });
+    updateFocusableElements();
+    const target = focusableEls[0] ?? panelEl;
+    target?.focus();
+  };
+
+  const focusInput = async () => {
+    await tick();
+    inputEl?.focus();
+  };
 
   const updateFocusableElements = () => {
     if (!panelEl) {
@@ -175,102 +164,15 @@
       return;
     }
 
-    focusableEls = /** @type {HTMLElement[]} */ (
-      Array.from(panelEl.querySelectorAll(FOCUSABLE_SELECTOR)).filter((element) =>
-        element instanceof HTMLElement &&
-        !element.hasAttribute('disabled') &&
-        element.getAttribute('aria-hidden') !== 'true'
-      )
-    );
+    focusableEls = Array.from(
+      panelEl.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+    ).filter((element) => !element.hasAttribute('disabled'));
   };
 
-  const focusFirstElement = async () => {
-    await tick();
-    updateFocusableElements();
-    const first = focusableEls[0] ?? panelEl;
-    if (first instanceof HTMLElement) {
-      first.focus();
-    }
-  };
-
-  const focusInput = async () => {
-    await tick();
-    if (inputEl) {
-      inputEl.focus();
-    }
-  };
-
-  afterUpdate(() => {
-    if (!isOpen) return;
-
-    if (messagesEl) {
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
-    updateFocusableElements();
-  });
-
-  $: if (canPersist && typeof window !== 'undefined') {
-    try {
-      const snapshot = {
-        locale: currentLocale,
-        messages: messages.slice(-24).map((message) => ({
-          sender: message.sender,
-          text: message.text
-        })),
-        hasUserInteracted
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
-    } catch (error) {
-      // ignore persistence errors
-    }
-  }
-
-  const openPanel = () => {
-    if (isOpen) return;
-
-    previouslyFocused = document.activeElement;
-    isOpen = true;
-    orbShiftX = 0;
-    orbShiftY = 0;
-    scrollDrift = 0;
-    focusFirstElement();
-  };
-
-  const closePanel = (focusLauncher = false) => {
-    if (!isOpen) return;
-
-    isOpen = false;
-
-    const target =
-      focusLauncher && launcherEl
-        ? launcherEl
-        : previouslyFocused instanceof HTMLElement
-        ? previouslyFocused
-        : null;
-
-    if (target) {
-      target.focus();
-    }
-
-    previouslyFocused = null;
-  };
-
-  const toggle = () => {
-    if (isOpen) {
-      closePanel(true);
-    } else {
-      openPanel();
-    }
-  };
-
-  /**
-   * @param {KeyboardEvent} event
-   */
-  const handlePanelKeydown = (event) => {
+  const handlePanelKeydown = (event: KeyboardEvent) => {
     if (event.key !== 'Tab') return;
-
     updateFocusableElements();
+
     if (!focusableEls.length) return;
 
     const first = focusableEls[0];
@@ -290,42 +192,26 @@
     }
   };
 
-  /**
-   * @param {KeyboardEvent} event
-   */
-  const handleGlobalKeydown = (event) => {
+  const trapFocusAction = (node: HTMLElement) => {
+    const listener = (event: KeyboardEvent) => handlePanelKeydown(event);
+    node.addEventListener('keydown', listener);
+
+    return {
+      destroy() {
+        node.removeEventListener('keydown', listener);
+      }
+    };
+  };
+
+  const handleGlobalKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape' && isOpen) {
       event.preventDefault();
       closePanel(true);
     }
   };
 
-  /**
-   * @param {Message['sender']} sender
-   * @param {string} text
-   */
-  const addMessage = (sender, text) => {
-    messages = [...messages, { sender, text }];
-  };
-
-  const resetConversation = () => {
-    requestToken += 1;
-    loading = false;
-    messages = [
-      {
-        sender: 'companion',
-        text: profile.greeting
-      }
-    ];
-    hasUserInteracted = false;
-    focusInput();
-  };
-
-  /**
-   * @param {PointerEvent} event
-   */
-  const handlePointerMove = (event) => {
-    if (isOpen || isHoveringOrb || typeof window === 'undefined') return;
+  const handlePointerMove = (event: PointerEvent) => {
+    if (isOpen || isHoveringOrb || !browser || reduceMotion) return;
 
     const { innerWidth, innerHeight } = window;
     if (!innerWidth || !innerHeight) return;
@@ -338,7 +224,7 @@
   };
 
   const handleScroll = () => {
-    if (isOpen || typeof window === 'undefined') return;
+    if (isOpen || !browser || reduceMotion) return;
 
     const { innerHeight, scrollY } = window;
     if (!innerHeight) return;
@@ -347,9 +233,53 @@
     scrollDrift = ratio * 12;
   };
 
+  const addMessage = (sender: CompanionMessage['sender'], text: string) => {
+    messages = [...messages, { sender, text }];
+  };
+
+  const openPanel = () => {
+    if (isOpen) return;
+    previouslyFocused = document.activeElement;
+    isOpen = true;
+    orbShiftX = 0;
+    orbShiftY = 0;
+    scrollDrift = 0;
+    focusFirstElement();
+  };
+
+  const closePanel = (focusLauncher = false) => {
+    if (!isOpen) return;
+    isOpen = false;
+
+    const target =
+      focusLauncher && launcherEl
+        ? launcherEl
+        : previouslyFocused instanceof HTMLElement
+        ? previouslyFocused
+        : null;
+
+    target?.focus();
+    previouslyFocused = null;
+  };
+
+  const toggle = () => {
+    if (isOpen) {
+      closePanel(true);
+    } else {
+      openPanel();
+    }
+  };
+
+  const resetConversation = () => {
+    requestToken += 1;
+    loading = false;
+    messages = [{ sender: 'companion', text: profile.greeting }];
+    hasUserInteracted = false;
+    focusInput();
+  };
+
   const sendMessage = async () => {
     const trimmed = input.trim();
-
     if (!trimmed || loading) return;
 
     addMessage('user', trimmed);
@@ -357,20 +287,19 @@
     loading = true;
     hasUserInteracted = true;
 
-    const conversation = messages.slice(-10).map((message) => ({
-      sender: message.sender,
-      text: message.text
+    const conversation = messages.slice(-MAX_CONTEXT_MESSAGES).map((entry) => ({
+      sender: entry.sender,
+      text: entry.text
     }));
     const token = ++requestToken;
+
     let reply = matchKnowledgeBase(currentLocale, trimmed);
     const startedAt = Date.now();
 
     try {
       const response = await fetch('/api/companion', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           locale: currentLocale,
           messages: conversation
@@ -384,7 +313,7 @@
         }
       }
     } catch (error) {
-      // use knowledge base fallback
+      // fall back to knowledge base
     }
 
     const elapsed = Date.now() - startedAt;
@@ -402,20 +331,14 @@
     focusInput();
   };
 
-  /**
-   * @param {KeyboardEvent} event
-   */
-  const handleKeydown = (event) => {
+  const handleInputKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       sendMessage();
     }
   };
 
-  /**
-   * @param {string} prompt
-   */
-  const chooseSuggestion = (prompt) => {
+  const chooseSuggestion = (prompt: string) => {
     input = prompt;
     focusInput();
   };
@@ -428,95 +351,148 @@
     isHoveringOrb = false;
   };
 
+  onMount(() => {
+    restoreFromStorage();
+
+    if (browser) {
+      window.addEventListener('keydown', handleGlobalKeydown);
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      detachFns.push(() => window.removeEventListener('keydown', handleGlobalKeydown));
+      detachFns.push(() => window.removeEventListener('pointermove', handlePointerMove));
+      detachFns.push(() => window.removeEventListener('scroll', handleScroll));
+
+      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      reduceMotion = motionQuery.matches;
+      motionQuery.addEventListener('change', handleMotionPreference);
+    }
+
+    canPersist = true;
+
+    return () => {
+      detachFns.splice(0).forEach((cleanup) => cleanup());
+      stopMotionListener();
+    };
+  });
+
+  onDestroy(() => {
+    unsubscribeLocale();
+    detachFns.splice(0).forEach((cleanup) => cleanup());
+    stopMotionListener();
+  });
+
+  afterUpdate(() => {
+    if (!isOpen) return;
+
+    if (messagesEl) {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    updateFocusableElements();
+  });
+
+  $: persist();
   $: orbStyle = `--orb-shift-x: ${orbShiftX.toFixed(2)}px; --orb-shift-y: ${orbShiftY.toFixed(
     2
   )}px; --orb-scroll: ${scrollDrift.toFixed(2)}px;`;
 </script>
 
-
 <div
   class="companion"
   aria-live="polite"
-  class:companion--floating={!isOpen && !isHoveringOrb}
+  class:companion--floating={!isOpen && !isHoveringOrb && !reduceMotion}
   class:companion--engaged={hasUserInteracted}
+  style={orbStyle}
 >
   <button
-    class="orb"
-    style={orbStyle}
     bind:this={launcherEl}
+    class="orb"
+    type="button"
+    aria-pressed={isOpen}
     on:click={toggle}
     on:mouseenter={handleOrbEnter}
     on:mouseleave={handleOrbLeave}
-    aria-haspopup="dialog"
     aria-label={isOpen ? profile.actions.hide : profile.actions.open}
-    aria-expanded={isOpen}
   >
-    <span class="orb__halo"></span>
-    <span class="orb__glow"></span>
-    <span class="orb__core"></span>
+    <span class="orb__halo" aria-hidden="true"></span>
+    <span class="orb__glow" aria-hidden="true"></span>
+    <span class="orb__core" aria-hidden="true"></span>
   </button>
 
   {#if isOpen}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <section
+      bind:this={panelEl}
       class="panel"
       role="dialog"
       aria-modal="true"
       aria-label={profile.dialogLabel}
-      bind:this={panelEl}
       tabindex="-1"
-      on:keydown={handlePanelKeydown}
+      use:trapFocusAction
     >
       <header class="panel__header">
         <div class="panel__identity">
-          <div class="panel__avatar"></div>
+          <div class="panel__avatar" aria-hidden="true">
+            <span class="panel__avatar-glow"></span>
+          </div>
           <div>
-            <h2>{profile.name}</h2>
-            <p>{profile.role}</p>
+            <p class="panel__name">{profile.name}</p>
+            <p class="panel__role">{profile.role}</p>
           </div>
         </div>
-        <button class="close" on:click={() => closePanel(true)} aria-label={profile.actions.closePanel}>
-          ✕
-        </button>
+        <div class="panel__actions">
+          <button type="button" class="panel__reset" on:click={resetConversation}>
+            {profile.actions.reset}
+          </button>
+          <button type="button" class="panel__close" on:click={() => closePanel(true)}>
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">{profile.actions.closePanel}</span>
+          </button>
+        </div>
       </header>
 
       <div class="panel__body">
+        <h2 class="sr-only">{profile.actions.formLabel}</h2>
         <ul class="messages" bind:this={messagesEl}>
           {#each messages as message, index (index)}
-            <li class:from-user={message.sender === 'user'}>
-              <span>{message.text}</span>
+            <li class={`message message--${message.sender}`}>
+              <p>{message.text}</p>
             </li>
           {/each}
           {#if loading}
-            <li class="typing">
-              <span></span>
-              <span></span>
-              <span></span>
+            <li class="message message--companion">
+              <span class="typing" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </span>
+              <span class="sr-only">{profile.name} is responding…</span>
             </li>
           {/if}
         </ul>
 
-        <div class="panel__body-actions">
+        {#if suggestions.length}
           <div class="suggestions" aria-label={profile.actions.suggestionLabel}>
-            {#each suggestions as suggestion}
-              <button type="button" on:click={() => chooseSuggestion(suggestion.prompt)}>
-                <span>{suggestion.title}</span>
+            {#each suggestions as suggestion (suggestion.prompt)}
+              <button
+                type="button"
+                class="suggestion"
+                on:click={() => chooseSuggestion(suggestion.prompt)}
+              >
+                <span class="suggestion__title">{suggestion.title}</span>
+                <span class="suggestion__prompt">{suggestion.prompt}</span>
               </button>
             {/each}
           </div>
-          <button type="button" class="reset" on:click={resetConversation}>
-            {profile.actions.reset}
-          </button>
-        </div>
+        {/if}
       </div>
 
-      <form class="panel__input" on:submit|preventDefault={sendMessage} aria-label={profile.actions.formLabel}>
+      <form class="panel__form" on:submit|preventDefault={sendMessage}>
+        <label class="sr-only" for="companion-input">{profile.actions.formLabel}</label>
         <textarea
+          id="companion-input"
           bind:this={inputEl}
           bind:value={input}
           placeholder={profile.placeholder}
           rows="2"
-          on:keydown={handleKeydown}
+          on:keydown={handleInputKeydown}
         />
         <button type="submit" class="send" disabled={loading || !input.trim()}>
           {profile.actions.send}
@@ -538,7 +514,6 @@
     gap: 1rem;
     pointer-events: none;
     transform: translate3d(0, 0, 0);
-    will-change: transform;
   }
 
   .companion--floating {
@@ -601,7 +576,8 @@
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, rgba(var(--signal-yellow-rgb), 0.24), rgba(var(--aurora-purple-rgb), 0.68));
     box-shadow: 0 0 24px rgba(var(--voyage-blue-rgb), 0.45), 0 0 64px rgba(106, 56, 255, 0.32);
-    transition: transform var(--duration-normal) var(--ease-spring), box-shadow var(--duration-normal) var(--ease-out),
+    transition: transform var(--duration-normal) var(--ease-spring),
+      box-shadow var(--duration-normal) var(--ease-out),
       opacity var(--duration-normal) var(--ease-out);
     opacity: 0.86;
   }
@@ -638,286 +614,296 @@
   .panel__identity {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-  }
-
-  .panel__identity h2 {
-    margin: 0;
-    font-size: 1.05rem;
-    font-family: var(--font-display);
-    font-weight: var(--weight-semibold);
-  }
-
-  .panel__identity p {
-    margin: 0;
-    font-size: 0.85rem;
-    opacity: 0.85;
+    gap: 0.85rem;
   }
 
   .panel__avatar {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: var(--gradient-secondary);
-    box-shadow: 0 0 16px rgba(var(--signal-yellow-rgb), 0.45);
+    position: relative;
+    background: radial-gradient(circle at 30% 30%, rgba(var(--signal-yellow-rgb), 0.4), rgba(var(--voyage-blue-rgb), 0.75));
+    box-shadow: 0 0 14px rgba(var(--pure-white-rgb), 0.3);
+    overflow: hidden;
   }
 
-  .close {
+  .panel__avatar-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, rgba(var(--aurora-purple-rgb), 0.5), transparent 70%);
+    opacity: 0.7;
+  }
+
+  .panel__name {
+    font: var(--font-body-bold);
+    margin: 0;
+  }
+
+  .panel__role {
+    font: var(--font-small);
+    margin: 0;
+    opacity: 0.72;
+  }
+
+  .panel__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .panel__reset {
+    color: var(--pure-white);
     background: transparent;
     border: none;
-    color: var(--pure-white);
-    font-size: 1.1rem;
+    font: var(--font-small);
     cursor: pointer;
-    border-radius: var(--radius-full);
-    width: 32px;
-    height: 32px;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    text-underline-offset: 0.25em;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .panel__reset:hover,
+  .panel__reset:focus-visible {
+    opacity: 0.8;
+  }
+
+  .panel__close {
+    width: 36px;
+    height: 36px;
     display: grid;
     place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--pure-white);
+    cursor: pointer;
     transition: background var(--duration-fast) var(--ease-out);
   }
 
-  .close:hover,
-  .close:focus-visible {
-    background: rgba(255, 255, 255, 0.14);
+  .panel__close:hover,
+  .panel__close:focus-visible {
+    background: rgba(0, 0, 0, 0.35);
   }
 
   .panel__body {
-    padding: 1.15rem 1.2rem;
     display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 0 1.2rem 1.2rem;
     gap: 1rem;
-    max-height: 340px;
-    grid-template-rows: minmax(0, 1fr) auto;
   }
 
   .messages {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    gap: 0.75rem;
-    align-content: start;
     overflow-y: auto;
-    padding-right: 0.35rem;
-    min-height: 0;
+    max-height: min(320px, 45vh);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
   }
 
-  .messages li {
-    max-width: 85%;
-    font-size: 0.95rem;
-    line-height: 1.45;
-    color: rgba(244, 247, 255, 0.94);
-    background: rgba(255, 255, 255, 0.06);
-    padding: 0.65rem 0.85rem;
-    border-radius: 1.1rem 1.1rem 1.1rem 0.35rem;
-    box-shadow: var(--shadow-xs);
+  .message {
+    display: inline-flex;
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 0.9rem;
+    max-width: 100%;
+    line-height: 1.4;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--pure-white);
   }
 
-  .messages li.from-user {
-    justify-self: end;
-    background: rgba(var(--voyage-blue-rgb), 0.9);
-    border-radius: 1.1rem 0.35rem 1.1rem 1.1rem;
+  .message--user {
+    margin-left: auto;
+    background: rgba(var(--voyage-blue-rgb), 0.38);
   }
 
   .typing {
     display: inline-flex;
-    gap: 0.3rem;
-    padding: 0.65rem 0.85rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 1.1rem;
+    gap: 0.35rem;
   }
 
   .typing span {
-    display: block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.7);
-    animation: blink 1.2s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.65);
+    animation: blink 1.2s infinite ease-in-out;
   }
 
   .typing span:nth-child(2) {
-    animation-delay: 0.2s;
+    animation-delay: 0.15s;
   }
 
   .typing span:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-
-  .panel__body-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    align-items: flex-start;
-  }
-
-  .panel__body-actions .suggestions {
-    width: 100%;
+    animation-delay: 0.3s;
   }
 
   .suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
+    display: grid;
+    gap: 0.6rem;
   }
 
-  .reset {
-    align-self: flex-end;
-    background: transparent;
-    border: none;
-    color: rgba(244, 247, 255, 0.7);
-    font-size: 0.78rem;
-    padding: 0;
+  .suggestion {
+    width: 100%;
+    text-align: left;
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
     cursor: pointer;
-    text-decoration: none;
-    transition: color var(--duration-fast) var(--ease-out);
+    display: grid;
+    gap: 0.3rem;
+    transition: transform var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
   }
 
-  .reset:hover,
-  .reset:focus-visible {
-    color: rgba(244, 247, 255, 0.95);
-    text-decoration: underline;
+  .suggestion:hover,
+  .suggestion:focus-visible {
+    transform: translateY(-1px);
+    border-color: rgba(var(--voyage-blue-rgb), 0.45);
   }
 
-  .suggestions button {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(244, 247, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-lg);
-    padding: 0.5rem 0.8rem;
-    font-size: 0.82rem;
-    cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-out);
+  .suggestion__title {
+    font: var(--font-body-bold);
+    margin: 0;
   }
 
-  .suggestions button:hover,
-  .suggestions button:focus-visible {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.16);
+  .suggestion__prompt {
+    font: var(--font-small);
+    margin: 0;
+    opacity: 0.76;
   }
 
-  .panel__input {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.65rem;
+  .panel__form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
     padding: 1rem 1.2rem 1.2rem;
-    background: rgba(10, 12, 24, 0.92);
+    background: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .panel__input textarea {
-    flex: 1;
-    min-height: 56px;
-    max-height: 124px;
+  textarea {
+    resize: none;
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(244, 247, 255, 0.94);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    padding: 0.65rem 0.8rem;
-    resize: vertical;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(0, 0, 0, 0.25);
+    color: var(--pure-white);
+    font: var(--font-body);
+    min-height: 68px;
   }
 
-  .panel__input textarea::placeholder {
-    color: rgba(244, 247, 255, 0.55);
+  textarea::placeholder {
+    color: rgba(255, 255, 255, 0.58);
   }
 
-  .panel__input textarea:focus-visible {
-    outline: 2px solid rgba(var(--aurora-purple-rgb), 0.5);
+  textarea:focus-visible {
+    outline: 2px solid rgba(var(--voyage-blue-rgb), 0.55);
     outline-offset: 2px;
   }
 
   .send {
-    background: var(--gradient-primary);
-    border: none;
-    color: var(--pure-white);
-    padding: 0.65rem 1.05rem;
+    align-self: end;
+    padding: 0.65rem 1.1rem;
     border-radius: var(--radius-lg);
-    font-weight: var(--weight-semibold);
+    border: none;
+    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.85), rgba(var(--aurora-purple-rgb), 0.85));
+    color: var(--pure-white);
+    font: var(--font-body-bold);
     cursor: pointer;
-    transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) var(--ease-out);
+    transition: transform var(--duration-fast) var(--ease-out),
+      opacity var(--duration-fast) var(--ease-out);
   }
 
   .send:disabled {
-    opacity: 0.6;
+    opacity: 0.45;
     cursor: not-allowed;
   }
 
   .send:not(:disabled):hover,
   .send:not(:disabled):focus-visible {
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(var(--voyage-blue-rgb), 0.45);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
   }
 
   @keyframes float {
     0% {
       transform: translate3d(0, 0, 0);
     }
-
-    25% {
-      transform: translate3d(-10px, -8px, 0);
-    }
-
     50% {
-      transform: translate3d(6px, -14px, 0);
+      transform: translate3d(-3px, -6px, 0);
     }
-
-    75% {
-      transform: translate3d(-6px, -4px, 0);
-    }
-
     100% {
-      transform: translate3d(4px, 8px, 0);
+      transform: translate3d(5px, 4px, 0);
     }
   }
 
   @keyframes pulse {
     0%,
     100% {
-      transform: scale(1);
+      transform: scale(0.96);
       opacity: 0.75;
     }
-
     50% {
-      transform: scale(1.08);
+      transform: scale(1.04);
       opacity: 1;
     }
   }
 
   @keyframes blink {
     0%,
+    80%,
     100% {
-      opacity: 0.35;
+      transform: translateY(0);
+      opacity: 0.6;
     }
-
-    50% {
+    40% {
+      transform: translateY(-3px);
       opacity: 1;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .companion--floating {
-      animation: none;
+  @media (max-width: 480px) {
+    .panel {
+      width: min(340px, calc(100vw - 1.5rem));
     }
 
-    .orb {
-      transform: translate3d(0, 0, 0);
-      transition-duration: var(--duration-fast);
+    .panel__actions {
+      gap: 0.5rem;
     }
 
-    .orb__glow {
-      animation: none;
-    }
-
-    .typing span {
-      animation: none;
+    .panel__reset {
+      display: none;
     }
   }
 
-  @media (max-width: 540px) {
-    .panel {
-      width: min(92vw, 360px);
-      right: 0;
-      left: auto;
+  @media (prefers-reduced-motion: reduce) {
+    .companion {
+      animation: none !important;
+    }
+
+    .orb,
+    .send,
+    .suggestion {
+      transition: none !important;
+    }
+
+    .orb__glow,
+    .typing span {
+      animation: none !important;
     }
   }
 </style>
