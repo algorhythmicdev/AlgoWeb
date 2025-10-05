@@ -23,19 +23,19 @@
   ];
 
   function handleScroll() {
-    const scrollY = window.scrollY;
-    isScrolled = scrollY > 32;
-    navigation.updateScroll(scrollY);
-    ticking = false;
-  }
-
-  function handleScroll() {
     lastKnownScrollY = window.scrollY || 0;
 
     if (!ticking) {
       ticking = true;
       requestAnimationFrame(updateScrollState);
     }
+  }
+
+  function updateScrollState() {
+    const scrollY = window.scrollY;
+    isScrolled = scrollY > 32;
+    navigation.updateScroll(scrollY);
+    ticking = false;
   }
 
   function handleResize() {
