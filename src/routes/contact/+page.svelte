@@ -3,7 +3,7 @@
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
-  import Toast from '$components/Toast.svelte';
+  import Toast from '$components/toast.svelte';
   
   let formData = {
     name: '',

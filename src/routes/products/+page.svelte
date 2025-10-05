@@ -28,12 +28,21 @@
         {#if products[key]}
           <article class="catalog-card">
             <div class="catalog-header">
-              <span class="kicker">{products[key].name}</span>
+              <span class="kicker">{$_(`products.${key}.name`)}</span>
               <span class="badge-pill">{$_(`products.${key}.status`)}</span>
             </div>
 
-            <h2>{products[key].tagline}</h2>
+            <h2>{$_(`products.${key}.tagline`)}</h2>
             <p>{$_(`products.${key}.description`)}</p>
+
+            <ul class="feature-pills">
+              {#each (products[key].features ?? []).slice(0, 3) as feature}
+                <li>
+                  <span class="feature-icon">{feature.icon}</span>
+                  <span>{$_(`${key}.features.${feature.id}.title`)}</span>
+                </li>
+              {/each}
+            </ul>
 
             <div class="catalog-footer">
               <span class="launch">{$_(`products.${key}.mvp`)}</span>
@@ -94,6 +103,7 @@
   .catalog-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
+    border-color: color-mix(in srgb, var(--voyage-blue) 40%, rgba(255, 255, 255, 0.4) 60%);
   }
 
   .catalog-header {
@@ -113,6 +123,30 @@
   }
 
   .catalog-card p { color: var(--text-secondary); }
+
+  .feature-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .feature-pills li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--bg-muted) 72%, transparent);
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+    backdrop-filter: blur(18px);
+  }
+
+  .feature-icon {
+    font-size: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(17, 24, 39, 0.12));
+  }
 
   .catalog-footer {
     display: flex;
@@ -152,5 +186,20 @@
 
   @media (max-width: 640px) {
     .cta-actions { flex-direction: column; }
+  }
+
+  :global([data-theme='dark']) .catalog-card {
+    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(47, 92, 220, 0.22) 22%);
+    border-color: color-mix(in srgb, rgba(74, 120, 255, 0.55) 60%, rgba(6, 12, 26, 0.65) 40%);
+  }
+
+  :global([data-theme='dark']) .catalog-card:hover {
+    border-color: color-mix(in srgb, rgba(90, 135, 255, 0.66) 70%, rgba(6, 12, 26, 0.6) 30%);
+  }
+
+  :global([data-theme='dark']) .feature-pills li {
+    background: color-mix(in srgb, rgba(17, 28, 58, 0.8) 70%, transparent);
+    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.45) 65%, transparent);
+    color: var(--text-secondary);
   }
 </style>

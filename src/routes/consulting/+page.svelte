@@ -2,7 +2,7 @@
   // @ts-nocheck
   import { _ } from 'svelte-i18n';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
-  import Toast from '$components/Toast.svelte';
+  import Toast from '$components/toast.svelte';
   
   let formData = {
     company: '',

@@ -2,7 +2,7 @@
 import { writable } from 'svelte/store';
 
 const createNavigationStore = () => {
-  const { subscribe, set, update } = writable({
+  const { subscribe, update } = writable({
     isMenuOpen: false,
     isScrolled: false,
     scrollDirection: 'up',

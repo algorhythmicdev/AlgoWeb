@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
-  import Toast from '$components/Toast.svelte';
+  import Toast from '$components/toast.svelte';
   
   let features = [
     { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },

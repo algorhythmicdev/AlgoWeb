@@ -143,12 +143,17 @@ export function typewriter(node, { text, speed = 40, loop = false } = {}) {
 export function morphBlob(node, { duration = 6500, scale = 1.2 } = {}) {
   let frame;
   function animate(now) {
-    const r1 = 80, r2 = 100, phi = now/750;
-    const path = `M${100+r1*Math.cos(phi)},${100+r1*Math.sin(phi)} 
-      C${100+r2*Math.cos(phi+1)},${100+r2*Math.sin(phi+1)}, 
-      ${100+r2*Math.cos(phi+2)},${100+r2*Math.sin(phi+2)}, 
-      ${100+r1*Math.cos(phi+3.14)},${100+r1*Math.sin(phi+3.14)} Z`;
+    const cycle = (now % duration) / duration;
+    const phi = cycle * Math.PI * 2;
+    const center = 100;
+    const r1 = 80 * scale;
+    const r2 = 100 * scale;
+    const path = `M${center + r1 * Math.cos(phi)},${center + r1 * Math.sin(phi)}
+      C${center + r2 * Math.cos(phi + 1)},${center + r2 * Math.sin(phi + 1)},
+      ${center + r2 * Math.cos(phi + 2)},${center + r2 * Math.sin(phi + 2)},
+      ${center + r1 * Math.cos(phi + Math.PI)},${center + r1 * Math.sin(phi + Math.PI)} Z`;
     node.setAttribute('d', path);
+    node.style.transform = `scale(${scale})`;
     frame = requestAnimationFrame(animate);
   }
   frame = requestAnimationFrame(animate);
@@ -241,7 +246,6 @@ export function particleExplode(node) {
         return;
       }
       
-      const distance = velocity * elapsed / 16;
       const x = parseFloat(particle.style.left) + Math.cos(angle) * velocity;
       const y = parseFloat(particle.style.top) + Math.sin(angle) * velocity + (progress * 2);
       
@@ -256,7 +260,6 @@ export function particleExplode(node) {
   }
   
   function handleClick(e) {
-    const rect = node.getBoundingClientRect();
     const x = e.clientX;
     const y = e.clientY;
     

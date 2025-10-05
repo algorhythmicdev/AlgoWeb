@@ -1,73 +1,179 @@
 <script>
+  import { onDestroy } from 'svelte';
+  import { spring } from 'svelte/motion';
   import { _ } from 'svelte-i18n';
-  import productsData from '$data/products.json';
   import timelineData from '$data/timeline.json';
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { revealOnScroll, staggerReveal, magnetic, typewriter } from '$utils/animations';
 
   const upcomingMilestone = timelineData.milestones?.[0];
   const milestoneDate = upcomingMilestone
     ? new Date(`${upcomingMilestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })
     : '';
+
+  /**
+   * @typedef {{ id: string; labelKey: string; valueKey?: string; value?: string }} HeroSignal
+   */
+
+  const heroMoments = [
+    {
+      id: 'nodevoyage',
+      accent: 'var(--voyage-blue)',
+      kickerKey: 'products.nodevoyage.name',
+      statusKey: 'products.nodevoyage.status',
+      copyKey: 'nodevoyage.hero_description',
+      metaKey: 'products.nodevoyage.mvp',
+      ctaKey: 'products.nodevoyage.cta',
+      href: '/products/nodevoyage'
+    },
+    {
+      id: 'ideonautix',
+      accent: 'var(--aurora-purple)',
+      kickerKey: 'products.ideonautix.name',
+      statusKey: 'products.ideonautix.status',
+      copyKey: 'ideonautix.hero_description',
+      metaKey: 'products.ideonautix.mvp',
+      ctaKey: 'products.ideonautix.cta',
+      href: '/products/ideonautix'
+    }
+  ];
+
+  /** @type {HeroSignal[]} */
+  const baseSignals = [
+    { id: 'nodevoyage', labelKey: 'products.nodevoyage.name', valueKey: 'products.nodevoyage.status' },
+    { id: 'ideonautix', labelKey: 'products.ideonautix.name', valueKey: 'products.ideonautix.status' }
+  ];
+
+  $: signals = /** @type {HeroSignal[]} */ (
+    upcomingMilestone
+      ? [...baseSignals, { id: 'milestone', labelKey: 'hero.next_milestone', value: milestoneDate }]
+      : baseSignals
+  );
+
+  const prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /** @type {HTMLElement | null} */
+  let heroSection = null;
+
+  const pointerSpring = spring({ x: 0.5, y: 0.45 }, { stiffness: 0.18, damping: 0.4, precision: 0.0008 });
+  const depthSpring = spring(0, { stiffness: 0.12, damping: 0.42, precision: 0.0001 });
+
+  let pointerCoords = { x: 0.5, y: 0.45 };
+  let depth = 0;
+
+  const unsubscribePointer = pointerSpring.subscribe((value) => (pointerCoords = value));
+  const unsubscribeDepth = depthSpring.subscribe((value) => (depth = value));
+
+  $: heroVars = `--hero-pointer-x:${pointerCoords.x}; --hero-pointer-y:${pointerCoords.y}; --hero-depth:${depth};`;
+
+  /** @param {PointerEvent} event */
+  function handlePointer(event) {
+    if (prefersReducedMotion || !heroSection) return;
+    const rect = heroSection.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+    pointerSpring.set({ x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) });
+  }
+
+  function resetPointer() {
+    pointerSpring.set({ x: 0.5, y: 0.45 });
+  }
+
+  function handleScroll() {
+    if (!heroSection || typeof window === 'undefined') return;
+    const rect = heroSection.getBoundingClientRect();
+    const viewport = Math.max(window.innerHeight, 1);
+    const progress = 1 - Math.min(1, Math.max(0, (rect.top + rect.height * 0.25) / viewport));
+    depthSpring.set(progress);
+  }
+
+  $: if (heroSection) handleScroll();
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    handleScroll();
+  }
+
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    }
+    unsubscribePointer();
+    unsubscribeDepth();
+  });
 </script>
 
-<section class="hero section-lg">
-  <div class="container hero-grid">
+<section
+  class="hero section-xl"
+  bind:this={heroSection}
+  style={heroVars}
+  on:pointermove={handlePointer}
+  on:pointerleave={resetPointer}
+  on:pointercancel={resetPointer}
+>
+  <div class="container hero-shell">
     <div class="hero-copy" use:revealOnScroll>
-      <span class="eyebrow">{$_('hero.status')}</span>
-      <h1 class="gradient-text">AlgoRhythmics</h1>
+      <span class="status-chip">{$_('hero.status')}</span>
+      <h1>{$_('hero.title')}</h1>
+      <p class="hero-tagline" use:typewriter={{ speed: 26 }}>{$_('hero.tagline')}</p>
       <p class="hero-lead">{$_('hero.subtitle')}</p>
 
-      <div class="hero-actions" role="group" aria-label="Primary actions">
-        <a href="/products" class="btn btn-gradient">{$_('hero.cta_products')}</a>
-        <a href="/consulting" class="btn btn-secondary hover-lift">{$_('hero.cta_consulting')}</a>
+      <div class="hero-actions" role="group" aria-label="Primary actions" use:staggerReveal={{ delay: 140, stagger: 100 }}>
+        <a href="/products" class="btn btn-gradient" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
+        <a href="/consulting" class="btn btn-secondary hover-lift" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
       </div>
 
-      <div class="hero-meta" use:staggerReveal={{ stagger: 160 }}>
-        <article class="meta-card">
-          <header>
-            <span class="kicker">{$_('products.nodevoyage.name')}</span>
-            <span class="badge-pill">{$_('products.nodevoyage.status')}</span>
-          </header>
-          <p>{$_('nodevoyage.hero_description')}</p>
-          <footer>{$_('products.nodevoyage.mvp')}</footer>
-        </article>
-
-        <article class="meta-card">
-          <header>
-            <span class="kicker">{$_('products.ideonautix.name')}</span>
-            <span class="badge-pill">{$_('products.ideonautix.status')}</span>
-          </header>
-          <p>{$_('ideonautix.hero_description')}</p>
-          <footer>{$_('products.ideonautix.mvp')}</footer>
-        </article>
+      <div class="hero-signals" aria-hidden="true" use:staggerReveal={{ delay: 260, stagger: 90 }}>
+        {#each signals as signal, index}
+          <span class="signal" style={`--index:${index}`}> 
+            <span class="signal-label">{$_(signal.labelKey)}</span>
+            <span class="signal-value">
+              {#if signal.valueKey}
+                {$_(signal.valueKey)}
+              {:else}
+                {signal.value}
+              {/if}
+            </span>
+          </span>
+        {/each}
       </div>
     </div>
 
-    <div class="hero-showcase" use:staggerReveal={{ delay: 140, stagger: 120 }}>
-      <article class="showcase-card focus">
-        <span class="kicker">{$_('story.reality_title')}</span>
-        <h2>{$_('hero.title')}</h2>
-        <p>{$_('story.reality_text')}</p>
-      </article>
+    <div class="hero-showcase" use:staggerReveal={{ delay: 200, stagger: 150 }}>
+      <div class="hero-orbit" aria-hidden="true"></div>
+      <div class="hero-glimmer" aria-hidden="true"></div>
 
-      <div class="showcase-stack">
-        <article class="showcase-card">
-          <span class="kicker">{$_('story.mission_title')}</span>
-          <p>{$_('story.mission_text')}</p>
+      {#each heroMoments as card, index}
+        <article class={`moment-card moment-${card.id}`} style={`--index:${index}; --accent:${card.accent};`}>
+          <header>
+            <span class="moment-kicker">{$_(card.kickerKey)}</span>
+            <span class="moment-status">{$_(card.statusKey)}</span>
+          </header>
+          <p>{$_(card.copyKey)}</p>
+          <footer>
+            <span>{$_(card.metaKey)}</span>
+            <a href={card.href} class="inline-link">{$_(card.ctaKey)}</a>
+          </footer>
         </article>
+      {/each}
 
-        {#if upcomingMilestone}
-          <article class="showcase-card milestone">
-            <span class="kicker">{$_('hero.next_milestone')}</span>
-            <h3>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h3>
-            <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
-            {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
-              <p class="timeline-note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
-            {/if}
-            <span class="milestone-date">{milestoneDate}</span>
-          </article>
-        {/if}
-      </div>
+      {#if upcomingMilestone}
+        <article class="moment-card milestone" style="--index:2; --accent:var(--signal-yellow);">
+          <header>
+            <span class="moment-kicker">{$_('hero.next_milestone')}</span>
+            <span class="moment-status">{milestoneDate}</span>
+          </header>
+          <h3>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h3>
+          <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
+          {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
+            <p class="moment-note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
+          {/if}
+        </article>
+      {/if}
+
+      <div class="hero-spark" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -89,7 +195,18 @@
     z-index: -1;
   }
 
-  .hero-grid {
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: clamp(-6rem, -12vw, -4rem) -30% auto;
+    height: clamp(24rem, 42vw, 32rem);
+    background: radial-gradient(70% 70% at 50% 30%, rgba(19, 81, 255, 0.16) 0%, transparent 70%);
+    filter: blur(120px);
+    opacity: 0.6;
+    z-index: -1;
+  }
+
+  .hero-shell {
     display: grid;
     gap: clamp(3rem, 6vw, 5rem);
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -106,17 +223,40 @@
   .hero-lead {
     font-size: clamp(1.2rem, 2.4vw, 1.7rem);
     color: var(--text-secondary);
-    max-width: 34rem;
+    max-width: 36ch;
+  }
+
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: color-mix(in srgb, var(--bg-muted) 78%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 65%, transparent);
+    backdrop-filter: blur(18px);
   }
 
   .hero-actions {
     display: flex;
+    gap: 1rem;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 0.5rem;
   }
 
-  .hero-meta {
+  .hero-signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .signal {
     display: grid;
     gap: 1.2rem;
     margin-top: 1.4rem;
@@ -146,17 +286,19 @@
     gap: 1rem;
   }
 
-  .meta-card p {
-    color: var(--text-secondary);
-    font-size: var(--text-small);
+  .hero-glimmer {
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
+    opacity: calc(0.25 + var(--hero-depth) * 0.25);
   }
 
-  .meta-card footer {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
+  .hero-spark {
+    background: radial-gradient(45% 45% at 70% 80%, rgba(255, 211, 57, 0.2), transparent 70%);
+    opacity: calc(0.12 + var(--hero-depth) * 0.3);
+    filter: blur(24px);
   }
 
-  .hero-showcase {
+  .moment-card {
+    position: relative;
     display: grid;
     gap: clamp(1.6rem, 4vw, 2.2rem);
   }
@@ -199,18 +341,17 @@
     box-shadow: var(--shadow-md);
   }
 
-  .showcase-card h2 {
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+  .moment-status {
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--bg-muted) 68%, transparent);
   }
 
-  .showcase-card p {
+  .moment-card p {
     color: var(--text-secondary);
-    font-size: var(--text-body);
   }
 
   .showcase-stack {
@@ -218,28 +359,36 @@
     gap: clamp(1.4rem, 3vw, 1.8rem);
   }
 
-  .milestone {
-    position: relative;
-    border-style: dashed;
+  .moment-card footer span {
+    font-size: var(--text-small);
   }
 
   .milestone h3 {
     font-size: clamp(1.4rem, 2.6vw, 1.9rem);
   }
 
-  .milestone p {
-    color: var(--text-secondary);
-    font-size: var(--text-small);
+  .moment-card:hover::after {
+    opacity: 0.68;
   }
 
-  .milestone-date {
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-    color: var(--voyage-blue);
+  .moment-card.milestone {
+    margin-inline-start: clamp(2.4rem, 6vw, 4rem);
+    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(255, 211, 57, 0.12) 12%);
+    border-color: color-mix(in srgb, rgba(255, 211, 57, 0.32) 60%, rgba(255, 255, 255, 0.28) 40%);
   }
 
-  @media (max-width: 1100px) {
-    .hero-grid {
+  .moment-card.milestone h3 {
+    font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+    line-height: var(--leading-snug);
+  }
+
+  .moment-note {
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 960px) {
+    .hero-shell {
       grid-template-columns: 1fr;
       align-items: stretch;
     }
@@ -248,7 +397,11 @@
       padding-top: clamp(6rem, 18vw, 8rem);
     }
 
-    .hero-showcase { order: -1; }
+    .moment-card,
+    .moment-card.milestone {
+      margin-inline-start: 0;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @media (max-width: 640px) {

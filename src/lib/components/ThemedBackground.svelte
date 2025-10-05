@@ -1,35 +1,60 @@
 <script>
   // @ts-nocheck
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import { spring } from 'svelte/motion';
   import { page } from '$app/stores';
   import { getThemeForPath } from '$config/backgroundThemes';
 
-  // Respect reduced motion
-  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Particle field using CSS transforms only, minimal DOM nodes
   let particles = [];
+  const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
+
+  const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.12, damping: 0.35, precision: 0.001 });
+  const scrollSpring = spring(0, { stiffness: 0.08, damping: 0.4, precision: 0.0001 });
+
+  let pointerCoords = { x: 0.5, y: 0.35 };
+  let scrollDepth = 0;
+
+  const unsubscribePointer = pointerSpring.subscribe((value) => (pointerCoords = value));
+  const unsubscribeScroll = scrollSpring.subscribe((value) => (scrollDepth = value));
+
+  $: paletteNames = theme?.palette ?? basePalette;
+  const paletteFallback = ['var(--voyage-blue)', 'var(--aurora-purple)', 'var(--signal-yellow)'];
+  $: paletteColors = paletteNames.map((name, index) => colorVar(name, index));
+  $: [primaryColor, secondaryColor, accentColor] = [
+    paletteColors[0] ?? paletteFallback[0],
+    paletteColors[1] ?? paletteFallback[1],
+    paletteColors[2] ?? paletteFallback[2]
+  ];
+
+  $: backgroundVars =
+    `--pointer-x:${pointerCoords.x}; --pointer-y:${pointerCoords.y}; --scroll-depth:${scrollDepth}; --theme-primary:${primaryColor}; --theme-secondary:${secondaryColor}; --theme-accent:${accentColor};`;
 
   $: theme = getThemeForPath($page.url.pathname);
   $: if (theme) initParticles(theme);
 
-  function colorVar(name) {
+  function colorVar(name, index = 0) {
     if (name === 'voyage-blue') return 'var(--voyage-blue)';
     if (name === 'aurora-purple') return 'var(--aurora-purple)';
     if (name === 'signal-yellow') return 'var(--signal-yellow)';
-    return 'var(--voyage-blue)';
+    if (name === 'cherry-red') return 'var(--cherry-red)';
+    // provide subtle variation when palette item missing
+    const fallback = ['var(--voyage-blue)', 'var(--aurora-purple)', 'var(--signal-yellow)'];
+    return fallback[index % fallback.length];
   }
 
   function initParticles(themeConfig) {
     const total = themeConfig.shapes.reduce((sum, s) => sum + s.count, 0);
-    const limit = Math.min(total, prefersReducedMotion ? 18 : 48);
+    const limit = Math.min(total, prefersReducedMotion ? 18 : 54);
     const list = [];
-    themeConfig.shapes.forEach((shapeConfig) => {
+    themeConfig.shapes.forEach((shapeConfig, index) => {
       const count = Math.min(shapeConfig.count, Math.ceil(limit / themeConfig.shapes.length));
       for (let i = 0; i < count; i++) {
-        const size = shapeConfig.size === 'small' ? 6 : shapeConfig.size === 'medium' ? 10 : 14;
+        const size = shapeConfig.size === 'small' ? 5 : shapeConfig.size === 'medium' ? 9 : 14;
         list.push({
-          id: `${shapeConfig.type}-${i}`,
+          id: `${shapeConfig.type}-${index}-${i}`,
           x: Math.random() * 100,
           y: Math.random() * 100,
           dx: (Math.random() - 0.5) * 0.12,
@@ -52,18 +77,52 @@
     particles = particles.map((p) => {
       let nx = p.x + p.dx;
       let ny = p.y + p.dy;
-      if (nx < -2 || nx > 102) p.dx = -p.dx, nx = Math.max(-2, Math.min(102, nx));
-      if (ny < -2 || ny > 102) p.dy = -p.dy, ny = Math.max(-2, Math.min(102, ny));
+      if (nx < -4 || nx > 104) p.dx = -p.dx, nx = Math.max(-4, Math.min(104, nx));
+      if (ny < -4 || ny > 104) p.dy = -p.dy, ny = Math.max(-4, Math.min(104, ny));
       return { ...p, x: nx, y: ny };
     });
     raf = requestAnimationFrame(animate);
   }
 
+  function handlePointer(event) {
+    if (prefersReducedMotion || typeof window === 'undefined') return;
+    const x = event.clientX / window.innerWidth;
+    const y = event.clientY / window.innerHeight;
+    pointerSpring.set({ x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) });
+  }
+
+  function handleLeave() {
+    pointerSpring.set({ x: 0.5, y: 0.35 });
+  }
+
+  function handleScroll() {
+    if (typeof window === 'undefined') return;
+    const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    scrollSpring.set(Math.max(0, Math.min(1, window.scrollY / max)));
+  }
+
   onMount(() => {
     if (!prefersReducedMotion) {
+      window.addEventListener('pointermove', handlePointer);
+      window.addEventListener('pointerleave', handleLeave);
       raf = requestAnimationFrame(animate);
     }
-    return () => cancelAnimationFrame(raf);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      if (!prefersReducedMotion) {
+        window.removeEventListener('pointermove', handlePointer);
+        window.removeEventListener('pointerleave', handleLeave);
+        cancelAnimationFrame(raf);
+      }
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
+
+  onDestroy(() => {
+    unsubscribePointer();
+    unsubscribeScroll();
   });
 </script>
 
