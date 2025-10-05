@@ -132,7 +132,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('contact.hero_title')} - AlgoRhythmics</title>
+  <title>{$_('contact.meta_title')}</title>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </svelte:head>
 
@@ -165,7 +165,7 @@
         
         <form on:submit={handleSubmit}>
           <div class="form-group" class:error={errors.name}>
-            <label for="name">{$_('contact.form_name')} *</label>
+            <label for="name" class="required">{$_('contact.form_name')}</label>
             <input
               type="text"
               id="name"
@@ -179,7 +179,7 @@
           </div>
           
           <div class="form-group" class:error={errors.email}>
-            <label for="email">{$_('contact.form_email')} *</label>
+            <label for="email" class="required">{$_('contact.form_email')}</label>
             <input
               type="email"
               id="email"
@@ -193,7 +193,7 @@
           </div>
           
           <div class="form-group" class:error={errors.subject}>
-            <label for="subject">{$_('contact.form_subject')} *</label>
+            <label for="subject" class="required">{$_('contact.form_subject')}</label>
             <input
               type="text"
               id="subject"
@@ -207,7 +207,7 @@
           </div>
           
           <div class="form-group" class:error={errors.message}>
-            <label for="message">{$_('contact.form_message')} *</label>
+            <label for="message" class="required">{$_('contact.form_message')}</label>
             <textarea
               id="message"
               bind:value={formData.message}
@@ -231,7 +231,7 @@
           >
             {#if isSubmitting}
               <span class="spinner"></span>
-              Sending...
+              {$_('contact.form_sending')}
             {:else}
               {$_('contact.form_submit')}
             {/if}
@@ -269,8 +269,8 @@
             </div>
             <div>
               <div class="info-label">{$_('contact.info_email')}</div>
-              <a href="mailto:AlgoRhythmics.dev@gmail.com" class="info-value">
-                AlgoRhythmics.dev@gmail.com
+              <a href={`mailto:${$_('contact.info_email_value')}`} class="info-value">
+                {$_('contact.info_email_value')}
               </a>
             </div>
           </div>
@@ -281,7 +281,7 @@
             </div>
             <div>
               <div class="info-label">{$_('contact.info_location')}</div>
-              <div class="info-value">Daugavpils, Latvia</div>
+              <div class="info-value">{$_('contact.info_location_value')}</div>
             </div>
           </div>
         </div>
@@ -294,19 +294,19 @@
               <span class="social-icon">
                 <Icon name="linkedin" size={18} />
               </span>
-              LinkedIn
+              {$_('contact.social_linkedin')}
             </a>
             <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
               <span class="social-icon">
                 <Icon name="github" size={18} />
               </span>
-              GitHub
+              {$_('contact.social_github')}
             </a>
             <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
               <span class="social-icon">
                 <Icon name="twitter" size={18} />
               </span>
-              Twitter
+              {$_('contact.social_twitter')}
             </a>
           </div>
         </div>
@@ -454,7 +454,20 @@ form {
     gap: 0.5rem;
   }
 
-  .form-group label { font-weight: var(--weight-semibold); }
+  .form-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+  }
+
+  .form-group label.required::after {
+    content: ' *';
+    color: var(--cherry-red);
+    font-weight: var(--weight-semibold);
+  }
 
 .form-group input,
 .form-group textarea {

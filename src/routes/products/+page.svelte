@@ -10,8 +10,8 @@
 </script>
 
 <svelte:head>
-  <title>Products - AlgoRhythmics</title>
-  <meta name="description" content="Explore our AI-powered products: NodeVoyage travel platform and Ideonautix productivity suite" />
+  <title>{$_('products.meta_title')}</title>
+  <meta name="description" content={$_('products.meta_description')} />
 </svelte:head>
 
 <section class="hero section" use:revealOnScroll>
@@ -66,12 +66,12 @@
 <section class="cta section" use:revealOnScroll>
   <div class="container cta-card">
     <div class="cta-copy">
-      <h2>Ready to transform your workflow?</h2>
-      <p>Join our community and be the first to experience our AI-powered platforms.</p>
+      <h2>{$_('products.cta_title')}</h2>
+      <p>{$_('products.cta_text')}</p>
     </div>
     <div class="cta-actions">
-      <a href="/community" class="btn btn-gradient">Join Community</a>
-      <a href="/contact" class="btn btn-secondary hover-lift">Get in Touch</a>
+      <a href="/community" class="btn btn-gradient">{$_('products.cta_join')}</a>
+      <a href="/contact" class="btn btn-secondary hover-lift">{$_('products.cta_contact')}</a>
     </div>
   </div>
 </section>

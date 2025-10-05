@@ -120,7 +120,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('consulting.hero_title')} - AlgoRhythmics</title>
+  <title>{$_('consulting.meta_title')}</title>
 </svelte:head>
 
 {#if showToast}
@@ -186,7 +186,7 @@
       <form on:submit={handleSubmit}>
         <div class="form-grid">
           <div class="form-group" class:error={errors.company}>
-            <label for="company">{$_('consulting.form_company')} *</label>
+            <label for="company" class="required">{$_('consulting.form_company')}</label>
             <input
               type="text"
               id="company"
@@ -200,7 +200,7 @@
           </div>
           
           <div class="form-group" class:error={errors.name}>
-            <label for="name">{$_('consulting.form_name')} *</label>
+            <label for="name" class="required">{$_('consulting.form_name')}</label>
             <input
               type="text"
               id="name"
@@ -214,7 +214,7 @@
           </div>
           
           <div class="form-group" class:error={errors.email}>
-            <label for="email">{$_('consulting.form_email')} *</label>
+            <label for="email" class="required">{$_('consulting.form_email')}</label>
             <input
               type="email"
               id="email"
@@ -228,7 +228,7 @@
           </div>
           
           <div class="form-group" class:error={errors.phone}>
-            <label for="phone">{$_('consulting.form_phone')} *</label>
+            <label for="phone" class="required">{$_('consulting.form_phone')}</label>
             <input
               type="tel"
               id="phone"
@@ -242,7 +242,7 @@
           </div>
           
           <div class="form-group full-width" class:error={errors.industry}>
-            <label for="industry">{$_('consulting.form_industry')} *</label>
+            <label for="industry" class="required">{$_('consulting.form_industry')}</label>
             <select
               id="industry"
               bind:value={formData.industry}
@@ -259,7 +259,7 @@
           </div>
           
           <div class="form-group full-width" class:error={errors.description}>
-            <label for="description">{$_('consulting.form_description')} *</label>
+            <label for="description" class="required">{$_('consulting.form_description')}</label>
             <textarea
               id="description"
               bind:value={formData.description}
@@ -289,7 +289,7 @@
           {/if}
         </button>
         
-        <p class="form-note">* Required fields</p>
+        <p class="form-note">{$_('form.required_note')}</p>
       </form>
     </div>
     
@@ -298,37 +298,37 @@
       <div class="benefit-card glass-card">
         <h3>
           <Icon name="package" size={22} class="heading-icon" />
-          <span>What You Get</span>
+          <span>{$_('consulting.benefits_title')}</span>
         </h3>
         <ul>
-          <li>Free AI strategy consultation</li>
-          <li>Technical implementation plan</li>
-          <li>3 months of advisory support</li>
-          <li>Priority access to our products</li>
+          <li>{$_('consulting.benefit_1')}</li>
+          <li>{$_('consulting.benefit_2')}</li>
+          <li>{$_('consulting.benefit_3')}</li>
+          <li>{$_('consulting.benefit_4')}</li>
         </ul>
       </div>
 
       <div class="benefit-card glass-card">
         <h3>
           <Icon name="bolt" size={22} class="heading-icon" />
-          <span>Process Timeline</span>
+          <span>{$_('consulting.timeline_title')}</span>
         </h3>
         <ul>
-          <li><strong>Week 1:</strong> Initial consultation</li>
-          <li><strong>Week 2:</strong> Strategy development</li>
-          <li><strong>Week 3-12:</strong> Implementation support</li>
+          <li>{$_('consulting.week_1')}</li>
+          <li>{$_('consulting.week_2')}</li>
+          <li>{$_('consulting.week_3_12')}</li>
         </ul>
       </div>
 
       <div class="benefit-card glass-card">
         <h3>
           <Icon name="check" size={22} class="heading-icon" />
-          <span>Requirements</span>
+          <span>{$_('consulting.requirements_title')}</span>
         </h3>
         <ul>
-          <li>Based in Europe or willing to work CET hours</li>
-          <li>Committed to AI transformation</li>
-          <li>Open to collaboration and feedback</li>
+          <li>{$_('consulting.req_1')}</li>
+          <li>{$_('consulting.req_2')}</li>
+          <li>{$_('consulting.req_3')}</li>
         </ul>
       </div>
     </div>
@@ -557,6 +557,18 @@
   }
 
   .form-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-small);
+    margin-bottom: 0.1rem;
+    color: var(--text-secondary);
+  }
+
+  .form-group label.required::after {
+    content: ' *';
+    color: var(--cherry-red);
     font-weight: var(--weight-semibold);
   }
 

@@ -6,10 +6,11 @@
 
   const product = productsData.nodevoyage;
   const features = product.features;
+  const stepKeys = ['step1', 'step2', 'step3', 'step4'];
 </script>
 
 <svelte:head>
-  <title>{$_('nodevoyage.name')} - AlgoRhythmics</title>
+  <title>{$_('nodevoyage.meta_title')}</title>
   <meta name="description" content={$_('nodevoyage.seo_description')} />
 </svelte:head>
 
@@ -84,26 +85,13 @@
     </div>
 
     <div class="steps-grid" use:staggerReveal={{ stagger: 120 }}>
-      <article class="step-card">
-        <span class="step-index">01</span>
-        <h3>{$_('nodevoyage.step1_title')}</h3>
-        <p>{$_('nodevoyage.step1_desc')}</p>
-      </article>
-      <article class="step-card">
-        <span class="step-index">02</span>
-        <h3>{$_('nodevoyage.step2_title')}</h3>
-        <p>{$_('nodevoyage.step2_desc')}</p>
-      </article>
-      <article class="step-card">
-        <span class="step-index">03</span>
-        <h3>{$_('nodevoyage.step3_title')}</h3>
-        <p>{$_('nodevoyage.step3_desc')}</p>
-      </article>
-      <article class="step-card">
-        <span class="step-index">04</span>
-        <h3>{$_('nodevoyage.step4_title')}</h3>
-        <p>{$_('nodevoyage.step4_desc')}</p>
-      </article>
+      {#each stepKeys as stepKey, index}
+        <article class="step-card">
+          <span class="step-index">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{$_(`nodevoyage.${stepKey}_title`)}</h3>
+          <p>{$_(`nodevoyage.${stepKey}_desc`)}</p>
+        </article>
+      {/each}
     </div>
   </div>
 </section>

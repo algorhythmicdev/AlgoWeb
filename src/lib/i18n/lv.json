@@ -4,6 +4,9 @@
     "tagline": "Kur loģika dejo ar radošumu",
     "description": "MI inovāciju laboratorija, kas veido ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix"
   },
+  "app": {
+    "loading": "Ielādējas..."
+  },
   "nav": {
     "home": "Sākums",
     "products": "Produkti",
@@ -24,10 +27,17 @@
     "status": "Izstrāde • Veidojam MI nākotni",
     "title": "Kur loģika dejo ar radošumu",
     "tagline": "AlgoRhythmics — MI inovāciju laboratorija",
-    "subtitle": "Veidojam ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix ar jaunākajām MI tehnoloģijām",
+    "subtitle": "NodeVoyage piloti un Ideonautix rituāli uztur dibinātājus fokusā, nezaudējot cilvēku klātbūtni.",
+    "description": "Balstāmies signāltehnikas pētniecībā un mākoņu inženierijā, apvienojot taustāmu disciplīnu ar skaidrojamu programmatūru, lai komandas saglabātu kontroli.",
     "cta_products": "Apskatīt produktus",
     "cta_consulting": "MI konsultācijas",
     "next_milestone": "Nākamais posms",
+    "pillars_title": "Kas vada mūsu studiju",
+    "pillars": [
+      "Divi virzieni: NodeVoyage ceļojumu pavadonis un Ideonautix dibinātāju OS",
+      "Cilvēkcentrēti konsultāciju sprinti ar Latvijas meistarību un Beniluksa zīmoliem",
+      "Skaidrojamas MI plūsmas, kas sasaista izkārtņu aparatūru ar mākoņa platformām"
+    ],
     "signals": {
       "studio_phase": "Studijas posms",
       "studio_phase_value": "Pilots studija • Kopš 2023",
@@ -51,7 +61,19 @@
         "meta": "Notiek pētniecības sprints",
         "cta": "Skatīt Ideonautix"
       }
-    }
+    },
+    "focus": {
+      "kicker": "Studijas fokuss",
+      "title": "Piegādājam skaidrojamu MI",
+      "description": "Mūsu kodola pāris balansē NodeVoyage pilotus un Ideonautix rituālus, lai katrs laidiens būtu atbildīgs un cilvēkiem draudzīgs.",
+      "points": [
+        "Dizaina vadīti piloti kopā ar izkārtņu laboratorijām un ceļojumu testētājiem",
+        "Konsultāciju sprinti ar dibinātājiem iesaistītiem regulētām komandām",
+        "Caurspīdīgi automatizācijas raksti, kas uztur datu atbildību"
+      ],
+      "cta": "Iepazīsti kopienu"
+    },
+    "milestone_cta": "Skatīt ceļa karti"
   },
   "story": {
     "title": "Mūsu stāsts",
@@ -65,6 +87,8 @@
   "founders": {
     "title": "Satieciet dibinātājus",
     "subtitle": "Kopā veidojam MI nākotni",
+    "email_cta": "E-pasts",
+    "linkedin_cta": "LinkedIn",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Līdzdibinātājs un CEO",
@@ -81,6 +105,7 @@
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Līdzdibinātājs un CTO",
+      "bio": "Vjaceslavs “Slaff” Trosins kopīgi vada tehnoloģisko redzējumu: mākoņu arhitektūra, datu plūsmas un MI integrācijas NodeVoyage un Ideonautix platformām.",
       "current_title": "Pašreizējais amats",
       "position": "CTO un līdz-CEO, kurš atbild par platformas piegādi web/mobilajās vidēs, API un MI, vienlaikus izstrādājot zīmju kvalitātes kontrolieru sistēmas Reclame Fabriek pētījumu nodaļā.",
       "philosophy": "Domāšana sistēmās starp signāltehnikas pētniecību un patērētāju programmatūru notur mūsu steku praktisku: dienā prototipējam kontrolierus, naktī šo noturību pārvēršam MI produktos.",
@@ -97,8 +122,14 @@
     }
   },
   "products": {
+    "meta_title": "AlgoRhythmics produkti",
+    "meta_description": "Iepazīsti NodeVoyage — mūsu MI ceļojumu draugu — un Ideonautix, dibinātāju produktivitātes komplektu.",
     "title": "Mūsu produkti",
     "subtitle": "MI darbinātas platformas, kas maina ceļošanu un darbu",
+    "cta_title": "Gatavs pārveidot savu darbu?",
+    "cta_text": "Pievienojies kopienai un esi pirmais, kas izmēģina mūsu MI platformas.",
+    "cta_join": "Pievienoties kopienai",
+    "cta_contact": "Sazināties ar mums",
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Izklaide. Ceļojumi. Atmiņas. Kopiena.",
@@ -158,6 +189,7 @@
     }
   },
   "nodevoyage": {
+    "meta_title": "NodeVoyage – AlgoRhythmics",
     "name": "NodeVoyage",
     "status": "Izstrāde • MVP 2026. gada septembris",
     "tagline": "Tavs MI ceļojumu draugs",
@@ -209,6 +241,7 @@
     "cta_note": "Nav vajadzīga karte • Agrīnās piekļuves priekšrocības"
   },
   "ideonautix": {
+    "meta_title": "Ideonautix – AlgoRhythmics",
     "name": "Ideonautix",
     "status": "Plānošana • MVP 2026. gada februāris",
     "tagline": "Inteliģence startapiem",
@@ -242,6 +275,7 @@
     "cta_description": "Agrīna piekļuve startēs 2026. gada februārī — kļūsti par jaunās produktivitātes līdzradītāju"
   },
   "community": {
+    "meta_title": "AlgoRhythmics kopiena",
     "hero_title": "Kopiena",
     "hero_subtitle": "Balso par funkcijām, dalies idejās un veido nākotni kopā ar mums",
     "voting_title": "Balso par funkcijām",
@@ -301,6 +335,7 @@
     }
   },
   "consulting": {
+    "meta_title": "AlgoRhythmics konsultāciju pilots",
     "hero_title": "MI konsultācijas",
     "hero_subtitle": "Bezmaksas pilotprogramma 3 atlasītiem uzņēmumiem",
     "spots_remaining": "brīvas vietas",
@@ -349,6 +384,7 @@
     "req_3": "Atvērtība sadarbībai un atgriezeniskajai saitei"
   },
   "contact": {
+    "meta_title": "Sazinies ar AlgoRhythmics",
     "hero_title": "Sazināsimies",
     "hero_subtitle": "Radīsim ko izcilu kopā",
     "form_title": "Raksti mums ziņu",
@@ -361,6 +397,7 @@
     "form_message": "Ziņa",
     "form_message_placeholder": "Tava ziņa...",
     "form_submit": "Nosūtīt",
+    "form_sending": "Nosūta...",
     "form_success": "Ziņa nosūtīta! Drīz sazināsimies.",
     "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
     "calendar_title": "Pieraksties sarunai",
@@ -369,14 +406,20 @@
     "info_title": "Kontakti",
     "info_email": "E-pasts",
     "info_location": "Atrašanās vieta",
+    "info_email_value": "AlgoRhythmics.dev@gmail.com",
+    "info_location_value": "Daugavpils, Latvija",
     "social_title": "Sekojiet mums",
+    "social_linkedin": "LinkedIn",
+    "social_github": "GitHub",
+    "social_twitter": "Twitter",
     "location_value": "Daugavpils, Latvija"
   },
   "form": {
     "error_required": "Šis lauks ir obligāts",
     "error_email": "Nederīga e-pasta adrese",
     "error_phone": "Nederīgs telefona numurs",
-    "error_validation": "Lūdzu, izlabo kļūdas formā"
+    "error_validation": "Lūdzu, izlabo kļūdas formā",
+    "required_note": "* Obligātie lauki"
   },
   "common": {
     "submitting": "Nosūta...",

@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('ideonautix.name')} - AlgoRhythmics</title>
+  <title>{$_('ideonautix.meta_title')}</title>
   <meta name="description" content={$_('ideonautix.seo_description')} />
 </svelte:head>
 

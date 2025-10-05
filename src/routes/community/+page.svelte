@@ -60,7 +60,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('community.hero_title')} - AlgoRhythmics</title>
+  <title>{$_('community.meta_title')}</title>
 </svelte:head>
 
 {#if showToast}
