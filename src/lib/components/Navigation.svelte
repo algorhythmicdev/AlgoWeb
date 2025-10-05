@@ -38,13 +38,6 @@
     }
   }
 
-  function updateScrollState() {
-    const scrollY = window.scrollY;
-    isScrolled = scrollY > 32;
-    navigation.updateScroll(scrollY);
-    ticking = false;
-  }
-
   function handleResize() {
     if (window.innerWidth > 960 && $navigation.isMenuOpen) {
       navigation.closeMenu();
@@ -83,7 +76,7 @@
     </a>
 
     <div class="nav-content">
-      <div class="nav-links" class:open={$navigation.isMenuOpen}>
+      <div id="primary-navigation" class="nav-links" class:open={$navigation.isMenuOpen}>
         {#each mainNavigation as item, index}
           <a
             href={item.href}

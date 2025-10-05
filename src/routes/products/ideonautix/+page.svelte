@@ -1,13 +1,14 @@
 <script>
   import { _ } from 'svelte-i18n';
+  import { Icon } from '$lib/components';
   import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
 
   const product = productsData.ideonautix;
   const microservices = [
-    { icon: '🎯', titleKey: 'pitch_title', descKey: 'pitch_desc' },
-    { icon: '📊', titleKey: 'revenue_title', descKey: 'revenue_desc' },
-    { icon: '👥', titleKey: 'team_title', descKey: 'team_desc' }
+    { icon: 'target', titleKey: 'pitch_title', descKey: 'pitch_desc' },
+    { icon: 'chart', titleKey: 'revenue_title', descKey: 'revenue_desc' },
+    { icon: 'people', titleKey: 'team_title', descKey: 'team_desc' }
   ];
 </script>
 
@@ -69,7 +70,9 @@
     <div class="services-grid" use:staggerReveal={{ stagger: 140 }}>
       {#each microservices as service}
         <article class="service-card">
-          <span class="service-icon">{service.icon}</span>
+          <span class="service-icon">
+            <Icon name={service.icon} size={32} />
+          </span>
           <h3>{$_(`ideonautix.${service.titleKey}`)}</h3>
           <p>{$_(`ideonautix.${service.descKey}`)}</p>
         </article>
@@ -292,7 +295,16 @@
     backdrop-filter: blur(22px);
   }
 
-  .service-icon { font-size: 2rem; }
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--aurora-purple) 16%, transparent 84%);
+    color: var(--aurora-purple);
+  }
   .service-card p { color: var(--text-secondary); }
 
   .pillars-grid {

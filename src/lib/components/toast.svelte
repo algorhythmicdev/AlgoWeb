@@ -1,6 +1,7 @@
 <script>
   import { onDestroy } from 'svelte';
   import { fly } from 'svelte/transition';
+  import Icon from './icons/Icon.svelte';
 
   export let message = '';
   /** @type {'success' | 'error' | 'info'} */
@@ -32,9 +33,9 @@
   });
 
   const icons = /** @type {Record<'success' | 'error' | 'info', string>} */ ({
-    success: '✓',
-    error: '✕',
-    info: 'ℹ'
+    success: 'check',
+    error: 'close',
+    info: 'info'
   });
 </script>
 
@@ -46,7 +47,9 @@
       transition:fly={{ y: -50, duration: 300 }}
       on:click={closeToast}
     >
-      <div class="toast-icon">{icons[type]}</div>
+      <div class="toast-icon">
+        <Icon name={icons[type]} size={18} />
+      </div>
       <div class="toast-message">{message}</div>
     </button>
   </div>
