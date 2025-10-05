@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // @ts-nocheck
   import { onMount, onDestroy } from 'svelte';
   import { spring } from 'svelte/motion';

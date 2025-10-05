@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { afterUpdate, onDestroy, onMount } from 'svelte';
   import { locale } from 'svelte-i18n';
 
