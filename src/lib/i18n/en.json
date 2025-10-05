@@ -44,9 +44,9 @@
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Co-Founder & CEO",
-      "bio": "Visionary entrepreneur passionate about transforming travel and productivity through AI innovation",
+      "bio": "Nikita Jurtaevs serves as CEO in a documented 50/50 co-leadership model, steering company strategy, partnerships, and brand direction while orchestrating product management and UX/QA for NodeVoyage and Ideonautix during the early build phase.",
       "current_title": "Current Position",
-      "current_position": "Head of Brand Strategy & Product Innovation at Reclame Fabriek",
+      "current_position": "Embedded in Reclame Fabriek’s Signage Research Department leading next-gen LED neon, in-house LED controller, custom coating, and 3D-printing initiatives that feed directly into AlgoRhythmics delivery.",
       "expertise": [
         "Creative Vision & Brand Strategy",
         "AI Product Design",
@@ -58,19 +58,18 @@
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Co-Founder & CTO",
       "current_title": "Current Position",
-      "position": "Founder of R&D & Head of Product Development at Reclame Fabriek",
-      "philosophy": "Technology should amplify human potential, not replace it. My goal is to build systems that empower people to achieve more.",
+      "position": "CTO and co-CEO partner responsible for platform delivery across web/mobile, APIs, and AI while architecting signage-grade controller systems within Reclame Fabriek’s Signage Research Department.",
+      "philosophy": "Systems thinking across signage R&D and consumer software keeps our stack practical: we prototype controllers by day and translate that resilience into AI-led products by night.",
       "achievements": [
-        "15+ years of engineering leadership",
-        "Expert in production systems and R&D",
-        "Led teams of 10+ engineers",
-        "Delivered 100+ successful projects"
+        "Runs Google Cloud–first delivery (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) with modern app layers (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
+        "Aligns signage-grade controller engineering and next-gen LED neon pipelines with explainable, real-time AI UX patterns",
+        "Drives three funding sprints—Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard—to scale NodeVoyage and Ideonautix"
       ],
       "brand_title": "Brand Experience",
       "brand_intro": "Worked with global brands on premium advertising display systems:",
       "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV), shared by both founders",
       "algorhythmics_title": "Vision for AlgoRhythmics",
-      "algorhythmics_vision": "Bringing enterprise-grade innovation experience and international brand work to build accessible, powerful AI products."
+      "algorhythmics_vision": "Fuse signage research discipline with cloud-native delivery so AlgoRhythmics ships explainable, resilient AI experiences ready for real-world installations."
     }
   },
   "products": {
