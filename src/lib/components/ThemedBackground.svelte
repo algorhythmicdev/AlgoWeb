@@ -32,10 +32,14 @@
           id: `${shapeConfig.type}-${i}`,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          dx: (Math.random() - 0.5) * 0.15,
-          dy: (Math.random() - 0.5) * 0.12,
+          dx: (Math.random() - 0.5) * 0.12,
+          dy: (Math.random() - 0.5) * 0.1,
           size,
-          color: colorVar(shapeConfig.color)
+          color: colorVar(shapeConfig.color),
+          duration: 12 + Math.random() * 10,
+          delay: -Math.random() * 8,
+          blur: 0.5 + Math.random() * 1.5,
+          opacity: 0.045 + Math.random() * 0.035
         });
       }
     });
@@ -64,8 +68,12 @@
 </script>
 
 <div class="background" aria-hidden="true">
+  <div class="wash"></div>
   {#each particles as p (p.id)}
-    <span class="dot" style="left:{p.x}%; top:{p.y}%; width:{p.size}px; height:{p.size}px; background:{p.color}"></span>
+    <span
+      class="dot"
+      style="left:{p.x}%; top:{p.y}%; width:{p.size}px; height:{p.size}px; background:{p.color}; --duration:{p.duration}s; --delay:{p.delay}s; filter:blur({p.blur}px); opacity:{p.opacity}"
+    ></span>
   {/each}
 </div>
 
@@ -76,23 +84,35 @@
     pointer-events: none;
     z-index: var(--z-background);
     overflow: hidden;
+    display: grid;
+  }
+
+  .wash {
+    grid-area: 1 / 1;
     background:
-      radial-gradient(circle at 12% 18%, rgba(19, 81, 255, 0.06), transparent 46%),
-      radial-gradient(circle at 88% 12%, rgba(255, 211, 57, 0.06), transparent 40%),
-      radial-gradient(circle at 72% 76%, rgba(106, 56, 255, 0.05), transparent 54%);
+      radial-gradient(50% 60% at 20% 15%, rgba(255, 255, 255, 0.55), transparent 70%),
+      radial-gradient(45% 50% at 80% 12%, rgba(19, 81, 255, 0.22), transparent 65%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 55%);
+    opacity: 0.6;
   }
 
   .dot {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.06;
     transform: translateZ(0);
     will-change: transform;
-    filter: blur(0.2px);
-    mix-blend-mode: multiply;
+    mix-blend-mode: screen;
+    animation: floaty var(--duration) ease-in-out infinite alternate;
+    animation-delay: var(--delay);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .dot { opacity: 0.04; }
+    .dot { animation: none; }
+  }
+
+  @keyframes floaty {
+    0% { transform: translate3d(-4px, -6px, 0) scale(0.95); }
+    50% { transform: translate3d(6px, 8px, 0) scale(1.05); }
+    100% { transform: translate3d(-6px, 4px, 0) scale(0.98); }
   }
 </style>

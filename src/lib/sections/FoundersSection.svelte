@@ -102,30 +102,37 @@
 <style>
   .section-heading {
     display: grid;
-    gap: 0.65rem;
+    gap: 0.8rem;
     max-width: 720px;
-    margin-bottom: var(--space-10);
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
   .founders-grid {
     display: grid;
-    gap: var(--space-6);
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   }
 
   .founder-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: var(--space-4);
+    background: var(--surface-glass);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
+    padding: clamp(2rem, 4vw, 2.8rem);
     display: grid;
-    gap: var(--space-4);
-    box-shadow: var(--shadow-xs);
+    gap: clamp(1.5rem, 4vw, 2.4rem);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(26px);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .founder-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
   }
 
   .founder-card.focus {
-    box-shadow: var(--shadow-md);
-    background: var(--bg-muted);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(19, 81, 255, 0.32);
   }
 
   header {
@@ -166,12 +173,12 @@
   }
 
   .achievement-item {
-    padding: 0.6rem 0.9rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-subtle);
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(19, 81, 255, 0.15);
     font-size: var(--text-small);
     color: var(--text-secondary);
-    background: var(--bg-surface);
+    background: rgba(19, 81, 255, 0.06);
   }
 
   .vision {
@@ -189,20 +196,21 @@
   .brand-logos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
-    gap: 0.75rem;
+    gap: 0.9rem;
   }
 
   .brand-logo {
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
-    background: var(--bg-surface);
-    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-lg);
+    background: var(--surface-glass);
+    padding: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(16px);
   }
 
-  .brand-logo img { max-width: 72px; filter: grayscale(1); opacity: 0.7; }
+  .brand-logo img { max-width: 72px; filter: grayscale(1); opacity: 0.68; }
 
   .brand-note {
     font-size: var(--text-small);
@@ -223,10 +231,10 @@
   }
 
   .expertise span {
-    padding: 0.45rem 0.8rem;
+    padding: 0.55rem 1rem;
     border-radius: var(--radius-full);
-    background: var(--bg-muted);
-    border: 1px solid rgba(15, 20, 25, 0.08);
+    background: rgba(19, 81, 255, 0.08);
+    border: 1px solid rgba(19, 81, 255, 0.18);
     font-size: var(--text-small);
   }
 
@@ -234,7 +242,7 @@
     margin-top: var(--space-2);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
-    gap: 0.75rem;
+    gap: 0.85rem;
     align-items: center;
   }
 
@@ -245,7 +253,7 @@
   }
 
   @media (max-width: 640px) {
-    .founder-card { padding: var(--space-3); }
+    .founder-card { padding: 1.8rem; }
     header { flex-direction: column; align-items: flex-start; }
     .avatar { width: 80px; height: 80px; }
   }
