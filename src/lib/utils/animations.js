@@ -2,31 +2,78 @@
 
 // @ts-nocheck
 
-// Intersection fade/slide-up reveal (on scroll)
-export function reveal(node, { delay = 0, duration = 500, y = 32, once = true } = {}) {
+// Enhanced intersection reveal with exciting animations
+export function reveal(node, { 
+  delay = 0, 
+  duration = 800, 
+  y = 50, 
+  x = 0, 
+  scale = 0.95, 
+  rotation = 0,
+  once = true,
+  animationType = 'slideUp',
+  threshold = 0.1
+} = {}) {
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
     node.style.opacity = '1';
-    node.style.transform = 'translateY(0)';
+    node.style.transform = 'translateY(0) translateX(0) scale(1) rotate(0deg)';
     return { destroy() {} };
   }
   
-  node.style.opacity = '0';
-  node.style.transform = `translateY(${y}px)`;
+  // Set initial state based on animation type
+  const initialStates = {
+    slideUp: { opacity: '0', transform: `translateY(${y}px) scale(${scale})` },
+    slideDown: { opacity: '0', transform: `translateY(-${y}px) scale(${scale})` },
+    slideLeft: { opacity: '0', transform: `translateX(${x}px) scale(${scale})` },
+    slideRight: { opacity: '0', transform: `translateX(-${x}px) scale(${scale})` },
+    scaleIn: { opacity: '0', transform: `scale(${scale})` },
+    flipIn: { opacity: '0', transform: `perspective(400px) rotateY(-90deg) scale(${scale})` },
+    elasticIn: { opacity: '0', transform: `scale(0.3) translateY(${y}px)` },
+    diagonal: { opacity: '0', transform: `translate(-${x}px, ${y}px) rotate(-10deg) scale(${scale})` },
+    reverseDiagonal: { opacity: '0', transform: `translate(${x}px, ${y}px) rotate(10deg) scale(${scale})` }
+  };
+  
+  const initialState = initialStates[animationType] || initialStates.slideUp;
+  
+  node.style.opacity = initialState.opacity;
+  node.style.transform = initialState.transform;
   node.style.willChange = 'opacity, transform';
   
   const observer = new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
-      node.style.transition = `opacity ${duration}ms cubic-bezier(.6,0,.4,1), transform ${duration}ms cubic-bezier(.6,0,.4,1)`;
+      node.style.transition = `opacity ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+      
       setTimeout(() => {
         node.style.opacity = '1';
-        node.style.transform = 'translateY(0)';
+        
+        // Set final state based on animation type
+        const finalStates = {
+          slideUp: 'translateY(0) scale(1)',
+          slideDown: 'translateY(0) scale(1)',
+          slideLeft: 'translateX(0) scale(1)',
+          slideRight: 'translateX(0) scale(1)',
+          scaleIn: 'scale(1)',
+          flipIn: 'perspective(400px) rotateY(0deg) scale(1)',
+          elasticIn: 'scale(1) translateY(0)',
+          diagonal: 'translate(0, 0) rotate(0deg) scale(1)',
+          reverseDiagonal: 'translate(0, 0) rotate(0deg) scale(1)'
+        };
+        
+        node.style.transform = finalStates[animationType] || finalStates.slideUp;
         node.style.willChange = 'auto';
+        
+        // Add glassy effect after animation
+        if (node.classList.contains('glass-card') || node.classList.contains('surface')) {
+          node.style.boxShadow = '0 20px 40px rgba(19, 81, 255, 0.15)';
+        }
       }, delay);
+      
       if (once) observer.disconnect();
     }
-  }, { threshold: 0.12 });
+  }, { threshold });
+  
   observer.observe(node);
   return {
     destroy() { observer.disconnect(); }
@@ -36,14 +83,34 @@ export function reveal(node, { delay = 0, duration = 500, y = 32, once = true } 
 // Alias for backward compatibility
 export const revealOnScroll = reveal;
 
-// Group stagger reveal (children only)
+// Enhanced group stagger reveal with varied animations
 export function staggerReveal(node, opts = {}) {
   const children = Array.from(node.children);
-  children.forEach((el, i) => reveal(el, { ...opts, delay: (opts.delay || 0) + (opts.stagger || 60) * i }));
+  const animationTypes = ['slideUp', 'slideLeft', 'slideRight', 'scaleIn', 'elasticIn', 'diagonal', 'reverseDiagonal'];
+  
+  children.forEach((el, i) => {
+    const animationType = opts.animationType || animationTypes[i % animationTypes.length];
+    const staggerDelay = (opts.delay || 0) + (opts.stagger || 100) * i;
+    
+    // Add glassy effect classes
+    if (el.classList.contains('card') || el.classList.contains('feature') || el.classList.contains('item')) {
+      el.classList.add('glass-card');
+    }
+    
+    reveal(el, { 
+      ...opts, 
+      delay: staggerDelay,
+      animationType,
+      duration: opts.duration || 800,
+      y: opts.y || 50,
+      x: opts.x || 30,
+      scale: opts.scale || 0.9
+    });
+  });
 }
 
-// 3D hover tilt (tilts on mouse movement)
-export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
+// Enhanced 3D hover tilt with glassy effects
+export function tilt(node, { max = 15, scale = 1.04, speed = 300, glow = true } = {}) {
   // Check for reduced motion preference and mobile
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = window.innerWidth <= 768;
@@ -52,8 +119,13 @@ export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
     return { destroy() {} };
   }
   
-  node.style.transition = `transform ${speed}ms cubic-bezier(.23,1.23,.56,1)`;
-  node.style.willChange = 'transform';
+  node.style.transition = `transform ${speed}ms cubic-bezier(.23,1.23,.56,1), box-shadow ${speed}ms cubic-bezier(.23,1.23,.56,1)`;
+  node.style.willChange = 'transform, box-shadow';
+  
+  // Add glassy effect classes
+  if (!node.classList.contains('glass-card')) {
+    node.classList.add('glass-card');
+  }
   
   let rafId;
   const pointermove = (e) => {
@@ -64,16 +136,26 @@ export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
       const y = (e.clientY - rect.top) / rect.height;
       const tiltX = (max / 2 - x * max);
       const tiltY = (y * max - max / 2);
+      
       node.style.transform = `perspective(600px) scale(${scale}) rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
+      
+      if (glow) {
+        const glowIntensity = Math.abs(tiltX) + Math.abs(tiltY);
+        node.style.boxShadow = `0 20px 40px rgba(19, 81, 255, ${0.1 + glowIntensity * 0.02}), 0 0 20px rgba(106, 56, 255, ${0.05 + glowIntensity * 0.01})`;
+      }
     });
   };
+  
   const reset = () => {
     cancelAnimationFrame(rafId);
     node.style.transform = `perspective(600px) scale(1)`;
+    node.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.15)';
     node.style.willChange = 'auto';
   };
+  
   node.addEventListener('pointermove', pointermove);
   node.addEventListener('pointerleave', reset);
+  
   return {
     destroy() {
       cancelAnimationFrame(rafId);
@@ -83,20 +165,39 @@ export function tilt(node, { max = 15, scale = 1.04, speed = 300 } = {}) {
   };
 }
 
-// Magnetic/attract (subtle following on mouse move, e.g. for buttons)
-export function magnetic(node, { strength = 0.28, threshold = 110 } = {}) {
+// Enhanced magnetic effect with glassy appeal
+export function magnetic(node, { strength = 0.28, threshold = 110, glow = true, scale = 1.05 } = {}) {
   const onMouseMove = e => {
     const rect = node.getBoundingClientRect();
     const dx = e.clientX - (rect.left + rect.width / 2);
     const dy = e.clientY - (rect.top + rect.height / 2);
     const d = Math.sqrt(dx*dx + dy*dy);
+    
     if (d < threshold) {
-      node.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+      const moveX = dx * strength;
+      const moveY = dy * strength;
+      const currentScale = 1 + (1 - d / threshold) * (scale - 1);
+      
+      node.style.transform = `translate(${moveX}px, ${moveY}px) scale(${currentScale})`;
+      
+      if (glow) {
+        const glowIntensity = (1 - d / threshold) * 0.3;
+        node.style.boxShadow = `0 15px 30px rgba(19, 81, 255, ${glowIntensity}), 0 0 20px rgba(106, 56, 255, ${glowIntensity * 0.5})`;
+      }
     }
   };
-  const onMouseLeave = () => node.style.transform = '';
+  
+  const onMouseLeave = () => {
+    node.style.transform = '';
+    node.style.boxShadow = '';
+  };
+  
+  // Add transition for smooth effects
+  node.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  
   window.addEventListener('mousemove', onMouseMove);
   node.addEventListener('mouseleave', onMouseLeave);
+  
   return {
     destroy() {
       window.removeEventListener('mousemove', onMouseMove);
