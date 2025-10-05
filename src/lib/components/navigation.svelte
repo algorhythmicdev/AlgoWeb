@@ -147,12 +147,14 @@
     justify-content: center;
     padding: 0.55rem 1.2rem;
     border-radius: var(--radius-full);
-    border: 1px solid transparent;
-    background: var(--bg-muted);
+    border: 1px solid rgba(19, 81, 255, 0.18);
+    background: var(--bg-surface);
+    background: color-mix(in srgb, var(--voyage-blue) 8%, transparent);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
     color: var(--text-primary);
     transition: all var(--duration-fast) var(--ease-out);
+    backdrop-filter: blur(18px);
   }
 
   .nav-cta:hover {

@@ -61,16 +61,39 @@
 <style>
   .footer {
     margin-top: var(--space-24);
-    padding: var(--space-12) 0 var(--space-6);
-    background: var(--bg-muted);
-    border-top: 1px solid var(--border-subtle);
+    padding: clamp(4rem, 10vw, 6rem) 0 clamp(2rem, 6vw, 3rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    inset: auto -15% -40%;
+    height: clamp(16rem, 30vw, 22rem);
+    background: radial-gradient(circle at 60% 20%, rgba(106, 56, 255, 0.16), transparent 70%);
+    filter: blur(120px);
+    opacity: 0.6;
+    pointer-events: none;
   }
 
   .footer-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
-    gap: var(--space-8);
-    margin-bottom: var(--space-8);
+    gap: clamp(2rem, 5vw, 3.4rem);
+    margin-bottom: clamp(2rem, 6vw, 3.5rem);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-grid > * {
+    background: var(--bg-surface);
+    background: var(--surface-glass);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: var(--radius-2xl);
+    padding: clamp(1.6rem, 3vw, 2.1rem);
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(22px);
   }
 
   .footer-brand {
@@ -119,10 +142,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--border-subtle);
+    gap: clamp(1.2rem, 3vw, 2rem);
+    padding: clamp(1.6rem, 3vw, 2.2rem);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: var(--bg-surface);
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(22px);
     font-size: var(--text-small);
     color: var(--text-tertiary);
+    position: relative;
+    z-index: 1;
   }
 
   .copyright { color: var(--text-secondary); }
@@ -138,13 +169,12 @@
 
   @media (max-width: 900px) {
     .footer-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-6);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 640px) {
     .footer-grid { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; gap: var(--space-2); text-align: center; }
+    .footer-bottom { flex-direction: column; text-align: center; }
   }
 </style>

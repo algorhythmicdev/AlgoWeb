@@ -127,17 +127,29 @@
 
 <style>
   .product-hero {
-    background: var(--bg-muted);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-hero::before {
+    content: '';
+    position: absolute;
+    inset: clamp(-6rem, -8vw, -3rem) -10% auto;
+    height: clamp(18rem, 32vw, 24rem);
+    background: radial-gradient(circle at 30% 40%, rgba(19, 81, 255, 0.18), transparent 70%);
+    filter: blur(120px);
+    opacity: 0.7;
+    pointer-events: none;
   }
 
   .hero-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: var(--space-6);
+    gap: clamp(2.5rem, 5vw, 4rem);
     align-items: center;
   }
 
-  .hero-copy { display: grid; gap: var(--space-3); }
+  .hero-copy { display: grid; gap: clamp(1.6rem, 3vw, 2.2rem); }
 
   .hero-tagline {
     font-size: var(--text-headline);
@@ -151,18 +163,21 @@
 
   .hero-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--space-3);
-    margin-top: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: clamp(1.2rem, 3vw, 1.8rem);
+    margin-top: 1.6rem;
   }
 
   .stat {
-    padding: 1rem 1.2rem;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.45rem;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
     background: var(--bg-surface);
+    background: var(--surface-glass);
     display: grid;
-    gap: 0.3rem;
+    gap: 0.45rem;
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(22px);
   }
 
   .label { color: var(--text-tertiary); font-size: var(--text-small); text-transform: uppercase; letter-spacing: 0.12em; }
@@ -174,62 +189,62 @@
   }
 
   .device-frame {
-    border: 1px solid var(--border-subtle);
-    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 32px;
     overflow: hidden;
     background: var(--bg-surface);
+    background: var(--surface-glass);
     box-shadow: var(--shadow-md);
-    padding: 1.2rem;
+    padding: 1.4rem;
+    backdrop-filter: blur(24px);
   }
 
   .device-frame img { width: clamp(240px, 60vw, 360px); border-radius: 20px; }
 
   .section-heading {
     display: grid;
-    gap: 0.6rem;
+    gap: 0.8rem;
     max-width: 720px;
-    margin-bottom: var(--space-8);
-  }
-
-  .features {
-    background: var(--bg-surface);
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
   .features-grid {
     display: grid;
-    gap: var(--space-4);
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(1.6rem, 3vw, 2.2rem);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
   .feature-card {
-    padding: var(--space-4);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    background: var(--bg-muted);
+    padding: clamp(1.8rem, 3vw, 2.2rem);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
+    background: var(--bg-surface);
+    background: var(--surface-glass);
     display: grid;
-    gap: var(--space-2);
+    gap: clamp(0.9rem, 2vw, 1.2rem);
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(22px);
   }
 
   .feature-icon { font-size: 2rem; }
   .feature-card p { color: var(--text-secondary); }
 
-  .steps {
-    background: var(--bg-surface);
-  }
-
   .steps-grid {
     display: grid;
-    gap: var(--space-4);
+    gap: clamp(1.6rem, 3vw, 2.2rem);
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .step-card {
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--space-4);
+    border: 1px dashed rgba(19, 81, 255, 0.24);
+    border-radius: var(--radius-2xl);
+    padding: clamp(1.8rem, 3vw, 2.2rem);
     display: grid;
-    gap: 0.75rem;
-    background: var(--bg-muted);
+    gap: 0.85rem;
+    background: var(--bg-surface);
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(20px);
   }
 
   .step-index {
@@ -241,34 +256,32 @@
 
   .step-card p { color: var(--text-secondary); }
 
-  .tech {
-    background: var(--bg-muted);
-  }
-
   .tech-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.8rem;
   }
 
   .tech-chip {
-    padding: 0.5rem 0.9rem;
+    padding: 0.6rem 1rem;
     border-radius: var(--radius-full);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
+    border: 1px solid rgba(19, 81, 255, 0.18);
+    background: rgba(19, 81, 255, 0.08);
     font-size: var(--text-small);
   }
 
   .cta-card {
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
     background: var(--bg-surface);
-    padding: var(--space-6);
+    background: var(--surface-glass);
+    padding: clamp(2.5rem, 5vw, 3.4rem);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: clamp(1.6rem, 3vw, 2.2rem);
     align-items: flex-start;
     box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(24px);
   }
 
   .cta-copy { display: grid; gap: 0.65rem; max-width: 540px; }

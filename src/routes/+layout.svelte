@@ -1,6 +1,6 @@
 <script>
   import '../app.css';
-  import Navigation from '$components/Navigation.svelte';
+  import Navigation from '$components/navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import ThemedBackground from '$components/ThemedBackground.svelte';
   import LoadingSpinner from '$components/LoadingSpinner.svelte';

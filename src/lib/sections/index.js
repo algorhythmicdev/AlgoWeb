@@ -3,5 +3,5 @@
  * Central export point for all page sections
  */
 
-export { default as HeroSection } from './HeroSection.svelte';
-export { default as FoundersSection } from './FoundersSection.svelte';
+export { default as HeroSection } from './hero-section.svelte';
+export { default as FoundersSection } from './founders-section.svelte';
