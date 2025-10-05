@@ -2,7 +2,7 @@
   "site": {
     "title": "AlgoRhythmics",
     "tagline": "Donde la lógica baila con la creatividad",
-    "description": "Laboratorio de innovación en IA que desarrolla la plataforma de viajes NodeVoyage y la suite de productividad Ideonautix"
+    "description": "Laboratorio de innovación en IA que da vida a la plataforma de viajes NodeVoyage y a la suite de productividad Ideonautix"
   },
   "nav": {
     "home": "Inicio",
@@ -18,226 +18,225 @@
     "pilot_badge": "Piloto",
     "brand_aria": "Inicio de AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Alternar menú"
+    "toggle_menu": "Abrir o cerrar menú"
   },
   "hero": {
-    "status": "En desarrollo • Moldeando el futuro de la IA",
+    "status": "En desarrollo • Moldeamos el futuro de la IA",
     "title": "Donde la lógica baila con la creatividad",
     "tagline": "AlgoRhythmics — Laboratorio de innovación en IA",
-    "subtitle": "Desarrollamos la plataforma de viajes NodeVoyage y la suite de productividad Ideonautix con tecnología de IA de vanguardia",
+    "subtitle": "Construimos la plataforma de viajes NodeVoyage y la suite de productividad Ideonautix con tecnología de IA de vanguardia",
     "cta_products": "Explorar productos",
-    "cta_consulting": "Consultoría IA",
+    "cta_consulting": "Consultoría de IA",
     "next_milestone": "Próximo hito"
   },
   "story": {
     "title": "Nuestra historia",
-    "reality_title": "La realidad que estamos construyendo",
-    "reality_text": "Creamos plataformas impulsadas por IA que transforman la forma en que las personas viajan y trabajan. NodeVoyage reinventa la planificación de viajes con asistencia inteligente, mientras que Ideonautix empodera a las startups con herramientas de productividad modulares.",
+    "reality_title": "La realidad que estamos creando",
+    "reality_text": "Creamos plataformas potenciadas por IA que transforman la forma en que las personas viajan y trabajan. NodeVoyage reinventa la planificación de viajes con asistencia inteligente, mientras Ideonautix empodera a las startups con herramientas modulares de productividad.",
     "mission_title": "Nuestra misión",
-    "mission_text": "Democratizar la tecnología de IA construyendo plataformas accesibles e inteligentes que resuelvan problemas reales para viajeros y emprendedores en todo el mundo.",
+    "mission_text": "Democratizar la tecnología de IA construyendo plataformas accesibles e inteligentes que resuelvan problemas reales para viajeros y emprendedores de todo el mundo.",
     "vision_title": "Nuestra visión",
-    "vision_text": "Un futuro donde la IA mejore armoniosamente la creatividad y productividad humana, haciendo que las tareas complejas sean sencillas y abriendo nuevas posibilidades de innovación."
+    "vision_text": "Un futuro donde la IA potencie sin fricciones la creatividad y productividad humanas, haciendo que las tareas complejas sean sencillas y abriendo nuevas posibilidades para innovar."
   },
   "founders": {
     "title": "Conoce a los fundadores",
-    "subtitle": "Construyendo juntos el futuro de la IA",
+    "subtitle": "Construimos juntos el futuro de la IA",
     "nikita": {
       "name": "Nikita Jurtaevs",
-      "role": "Co-fundador y CEO",
-      "bio": "Emprendedor visionario apasionado por transformar los viajes y la productividad a través de la innovación en IA",
+      "role": "Cofundador y CEO",
+      "bio": "Nikita Jurtaevs ejerce como CEO en un modelo documentado de co-liderazgo 50/50, dirige la estrategia de la compañía, las alianzas y la narrativa de marca, mientras orquesta la gestión de producto y la UX/QA de NodeVoyage e Ideonautix durante la fase inicial de construcción.",
       "current_title": "Posición actual",
-      "current_position": "Director de estrategia de marca e innovación de productos en Reclame Fabriek",
+      "current_position": "Integrado en el Departamento de Investigación en Señalética de Reclame Fabriek, lidera iniciativas de neón LED de nueva generación, controladores LED internos, recubrimientos personalizados e impresión 3D que alimentan directamente las entregas de AlgoRhythmics.",
       "expertise": [
         "Visión creativa y estrategia de marca",
         "Diseño de productos con IA",
         "Innovación en experiencia de usuario",
-        "Asociaciones estratégicas"
+        "Alianzas estratégicas"
       ]
     },
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
-      "role": "Co-fundador y CTO",
+      "role": "Cofundador y CTO",
       "current_title": "Posición actual",
-      "position": "Fundador de I+D y director de desarrollo de productos en Reclame Fabriek",
-      "philosophy": "La tecnología debe amplificar el potencial humano, no reemplazarlo. Mi objetivo es construir sistemas que empoderen a las personas para lograr más.",
+      "position": "CTO y co-CEO responsable de la entrega de plataformas en web/móvil, APIs y IA mientras diseña sistemas de control grado señalética dentro del Departamento de Investigación en Señalética de Reclame Fabriek.",
+      "philosophy": "El pensamiento sistémico que cruza I+D en señalética y software de consumo mantiene nuestra pila con los pies en la tierra: prototipamos controladores de día y trasladamos esa resiliencia a productos guiados por IA de noche.",
       "achievements": [
-        "15+ años de liderazgo técnico",
-        "Experto en sistemas de producción e I+D",
-        "Dirigió equipos de 10+ ingenieros",
-        "Entregó 100+ proyectos exitosos"
+        "Orquesta entrega con Google Cloud como base (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) y capas modernas (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
+        "Alinea ingeniería de controladores grado señalética y nuevas líneas de neón LED con experiencias de IA explicables en tiempo real",
+        "Impulsa tres sprints de financiación —Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard— para escalar NodeVoyage e Ideonautix"
       ],
-      "brand_title": "Experiencia de marca",
-      "brand_intro": "Ha trabajado con marcas globales en sistemas de visualización publicitaria premium:",
+      "brand_title": "Experiencia con marcas",
+      "brand_intro": "Ha colaborado con marcas globales en sistemas de exhibición publicitaria premium:",
       "brand_context": "Proyectos entregados a través de Reclame Fabriek (Daugavpils, LV), compartidos por ambos fundadores",
       "algorhythmics_title": "Visión para AlgoRhythmics",
-      "algorhythmics_vision": "Trayendo experiencia de innovación de nivel empresarial y trabajo de marca internacional para construir productos de IA accesibles y poderosos."
+      "algorhythmics_vision": "Fusionar la disciplina de investigación en señalética con la entrega cloud-native para que AlgoRhythmics ofrezca experiencias de IA explicables y resilientes listas para instalaciones reales."
     }
   },
   "products": {
     "title": "Nuestros productos",
-    "subtitle": "Plataformas impulsadas por IA que transforman cómo las personas viajan y trabajan",
+    "subtitle": "Plataformas impulsadas por IA que transforman cómo viajamos y trabajamos",
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Diversión. Viajes. Recuerdos. Comunidad.",
-      "description": "Planificación de viajes impulsada por IA con tu compañero inteligente Nodi. Crea itinerarios personalizados, descubre joyas ocultas y viaja con confianza usando herramientas AR y capacidades offline.",
+      "description": "Planificación de viajes con IA y tu compañero inteligente Nodi. Crea itinerarios personalizados, descubre joyas ocultas y viaja con confianza gracias a las herramientas de RA y las capacidades offline.",
       "status": "En desarrollo",
       "mvp": "MVP: Septiembre 2026",
-      "cta": "Saber más"
+      "cta": "Descubrir más"
     },
     "ideonautix": {
       "name": "Ideonautix",
       "tagline": "Explorar. Inventar. Lanzar.",
-      "description": "Suite de productividad modular para startups. Obtén insights impulsados por IA para presentaciones, seguimiento de ingresos, dinámicas de equipo y más con microservicios inteligentes diseñados para fundadores.",
+      "description": "Súper suite de productividad modular para startups. Obtén insights impulsados por IA para pitches, seguimiento de ingresos, dinámica de equipo y más mediante microservicios inteligentes diseñados para fundadores.",
       "status": "Fase de planificación",
       "mvp": "MVP: Febrero 2026",
-      "cta": "Saber más"
+      "cta": "Descubrir más"
     }
   },
   "timeline": {
-    "title": "Nuestro viaje",
-    "subtitle": "Construyendo el futuro, un hito a la vez",
+    "title": "Nuestro camino",
+    "subtitle": "Construimos el futuro, un hito a la vez",
     "milestones": {
       "ideju-kauss": {
-        "title": "Concurso Ideju Kauss",
-        "description": "Participando en el concurso de startups más importante de Letonia con el concepto NodeVoyage",
+        "title": "Competencia Ideju Kauss",
+        "description": "Participación en la competencia de startups más reconocida de Letonia con el concepto NodeVoyage",
         "note": ""
       },
       "company-formation": {
-        "title": "Formación de la empresa",
-        "description": "Registro oficial de la empresa, estructura legal y configuración del equipo inicial",
+        "title": "Constitución de la empresa",
+        "description": "Registro oficial, estructura legal y puesta en marcha del equipo inicial",
         "note": ""
       },
       "liaa-application": {
-        "title": "Solicitud de asociación LIAA",
-        "description": "Presentar solicitud de asociación con la Agencia de Inversión de Letonia para programas educativos",
-        "note": "Aspiracional — aún no confirmado"
+        "title": "Solicitud de alianza con LIAA",
+        "description": "Presentar solicitud de alianza con la Agencia de Inversión de Letonia para programas educativos",
+        "note": "Aspiracional — pendiente de confirmación"
       },
       "mvp-ideonautix": {
-        "title": "Lanzamiento MVP Ideonautix",
-        "description": "Primera versión de la plataforma de productividad Ideonautix con microservicios principales",
+        "title": "Lanzamiento del MVP de Ideonautix",
+        "description": "Primera versión de la plataforma de productividad Ideonautix con microservicios clave",
         "note": ""
       },
       "pilot-consulting": {
         "title": "Programa piloto de consultoría IA",
-        "description": "Lanzar programa piloto gratuito con 3 empresas seleccionadas para consultoría de integración IA",
+        "description": "Lanzamiento de un piloto gratuito con 3 empresas seleccionadas para consultoría de integración de IA",
         "note": ""
       },
       "mvp-nodevoyage": {
-        "title": "Lanzamiento MVP NodeVoyage",
-        "description": "Beta pública de la plataforma de viajes NodeVoyage con características principales y compañero IA Nodi",
+        "title": "Lanzamiento del MVP de NodeVoyage",
+        "description": "Beta pública de la plataforma de viajes NodeVoyage con funciones esenciales y el compañero IA Nodi",
         "note": ""
       },
       "education-program": {
-        "title": "Lanzamiento del programa educativo",
-        "description": "Comenzar despliegue de programas educativos de IA dirigidos a escuelas secundarias de Letonia",
-        "note": "Objetivo: 75+ institutos (proyección basada en investigación)"
+        "title": "Despliegue del programa educativo",
+        "description": "Inicio de programas educativos de IA orientados a escuelas secundarias letonas",
+        "note": "Meta: 75+ institutos (proyección basada en investigación)"
       }
     }
   },
   "nodevoyage": {
     "name": "NodeVoyage",
-    "status": "En desarrollo • MVP Sept 2026",
+    "status": "En desarrollo • MVP septiembre 2026",
     "tagline": "Tu compañero de viajes con IA",
-    "hero_description": "Planificación de viajes impulsada por IA que hace que la creación de viajes sea sin esfuerzo, divertida y personalizada. Conoce a Nodi, tu compañero de viajes inteligente.",
-    "seo_description": "Plataforma de planificación de viajes impulsada por IA con itinerarios inteligentes, herramientas AR y compartir comunitario dirigido por Nodi, tu compañero de viajes amigable.",
-    "hero_alt": "Vista previa de la interfaz NodeVoyage",
-    "cta_primary": "Unirse a la lista de espera",
-    "cta_secondary": "Explorar características",
+    "hero_description": "Planificación de viajes impulsada por IA que hace que diseñar aventuras sea sencillo, divertido y personalizado. Conoce a Nodi, tu compañero de viaje inteligente.",
+    "seo_description": "Plataforma de planificación de viajes con IA con itinerarios inteligentes, herramientas de RA y comunidad liderada por Nodi, tu compañero de viaje.",
+    "hero_alt": "Vista previa de la interfaz de NodeVoyage",
+    "cta_primary": "Unirme a la lista de espera",
+    "cta_secondary": "Explorar funciones",
     "stat1_value": "Sept 2026",
-    "stat1_label": "Lanzamiento MVP",
+    "stat1_label": "Lanzamiento del MVP",
     "stat2_value": "Impulsado por IA",
     "stat2_label": "Planificación inteligente",
     "stat3_value": "Mobile First",
-    "stat3_label": "AR + Offline",
-    "features_title": "Características revolucionarias",
+    "stat3_label": "RA + Offline",
+    "features_title": "Funciones que inspiran",
     "features_subtitle": "Todo lo que necesitas para el viaje perfecto",
     "features": {
       "nodi-ai": {
         "title": "Compañero IA Nodi",
-        "description": "Tu asistente de viajes IA amigable que aprende tus preferencias y crea itinerarios personalizados en segundos"
+        "description": "Tu asistente de viajes amable que aprende tus preferencias y crea itinerarios personalizados en segundos"
       },
       "smart-builder": {
         "title": "Constructor de viajes inteligente",
-        "description": "Constructor de viajes visual con nodos de arrastrar y soltar, presets de ambiente y optimización en tiempo real"
+        "description": "Planificador visual con nodos de arrastrar y soltar, presets de ambiente y optimización en tiempo real"
       },
       "mobile-suite": {
-        "title": "Suite de captura móvil",
-        "description": "Traducción AR, interpretación en vivo, reconocimiento de fotos y capacidades completas offline"
+        "title": "Suite móvil para capturar momentos",
+        "description": "Traducción con RA, interpretación en vivo, reconocimiento de fotos y capacidades offline completas"
       },
       "community": {
-        "title": "Compartir comunitario",
-        "description": "Comparte tus aventuras, descubre rutas de viajeros de todo el mundo y planifica viajes juntos"
+        "title": "Comunidad viajera",
+        "description": "Comparte tus aventuras, descubre rutas de otras personas y planifica viajes en conjunto"
       }
     },
     "how_title": "Cómo funciona NodeVoyage",
     "step1_title": "Cuéntale a Nodi tu sueño",
-    "step1_desc": "Chatea con la IA Nodi sobre tus preferencias de viaje, presupuesto e intereses",
+    "step1_desc": "Charla con la IA Nodi sobre tus preferencias, presupuesto e intereses",
     "step2_title": "Recibe sugerencias inteligentes",
-    "step2_desc": "Recibe itinerarios personalizados con rutas optimizadas e insights locales",
+    "step2_desc": "Obtén itinerarios personalizados con rutas optimizadas e insights locales",
     "step3_title": "Personaliza tu viaje",
-    "step3_desc": "Ajusta tu viaje con nuestro constructor visual basado en nodos",
+    "step3_desc": "Ajusta tu aventura con nuestro constructor visual basado en nodos",
     "step4_title": "Viaja con confianza",
-    "step4_desc": "Usa herramientas AR móviles, mapas offline y asistencia en tiempo real sobre la marcha",
-    "tech_title": "Construido con tecnología de vanguardia",
+    "step4_desc": "Usa herramientas de RA móvil, mapas offline y asistencia en tiempo real sobre la marcha",
+    "tech_title": "Tecnología de vanguardia",
     "tech_subtitle": "Google Cloud, IA y estándares web modernos",
-    "cta_title": "¿Listo para transformar cómo viajas?",
-    "cta_description": "Únete a nuestra lista de espera y sé de los primeros en experimentar NodeVoyage cuando lancemos en septiembre de 2026",
-    "cta_button": "Unirse a la lista de espera",
-    "cta_note": "No se requiere tarjeta de crédito • Beneficios de acceso temprano"
+    "cta_title": "¿Listo para transformar tu forma de viajar?",
+    "cta_description": "Únete a la lista de espera y sé de los primeros en probar NodeVoyage cuando lancemos en septiembre de 2026",
+    "cta_button": "Unirme a la lista de espera",
+    "cta_note": "Sin tarjeta de crédito • Beneficios de acceso anticipado"
   },
   "ideonautix": {
     "name": "Ideonautix",
-    "status": "Fase de planificación • MVP Feb 2026",
+    "status": "Fase de planificación • MVP febrero 2026",
     "tagline": "Inteligencia para startups",
-    "hero_description": "Suite de productividad modular diseñada para fundadores de startups y equipos en crecimiento. Microservicios impulsados por IA que realmente entienden tu negocio.",
-    "seo_description": "Suite de productividad IA modular para startups con microservicios de presentación, ingresos e inteligencia de equipo.",
-    "hero_alt": "Vista previa del dashboard Ideonautix",
-    "cta_primary": "Obtener acceso temprano",
+    "hero_description": "Suite de productividad modular diseñada para fundadores y equipos en crecimiento. Microservicios impulsados por IA que realmente entienden tu negocio.",
+    "seo_description": "Suite modular de productividad con IA para startups con microservicios de pitch, ingresos e inteligencia de equipo.",
+    "hero_alt": "Vista previa del panel de Ideonautix",
+    "cta_primary": "Obtener acceso anticipado",
     "cta_secondary": "Ver microservicios",
     "stat1_value": "Feb 2026",
-    "stat1_label": "Lanzamiento MVP",
-    "stat2_value": "8+ Herramientas",
+    "stat1_label": "Lanzamiento del MVP",
+    "stat2_value": "8+ herramientas",
     "stat2_label": "Microservicios",
-    "stat3_value": "IA-First",
+    "stat3_value": "AI-First",
     "stat3_label": "Inteligencia",
-    "microservices_title": "Microservicios poderosos",
-    "microservices_subtitle": "Elige lo que necesitas, cuando lo necesitas",
-    "pitch_title": "Asistente de presentación",
-    "pitch_desc": "Obtén retroalimentación impulsada por IA en tu pitch deck con puntuación, sugerencias y análisis de perspectiva de inversionista",
+    "microservices_title": "Microservicios potentes",
+    "microservices_subtitle": "Activa lo que necesites, justo cuando lo necesites",
+    "pitch_title": "Asistente de pitch",
+    "pitch_desc": "Obtén feedback impulsado por IA para tu pitch deck con puntuaciones, sugerencias y análisis desde la óptica del inversor",
     "revenue_title": "Tableros de ingresos",
-    "revenue_desc": "Dashboards de analytics en tiempo real con seguimiento de KPI, pronósticos e insights de negocio accionables",
+    "revenue_desc": "Paneles analíticos en tiempo real con KPIs, previsiones y recomendaciones accionables",
     "team_title": "Dinámicas de equipo",
-    "team_desc": "Entiende la salud del equipo, patrones de comunicación y efectividad de colaboración con análisis de IA",
-    "market_desc": "Rastrea competidores, tendencias del mercado y oportunidades con inteligencia impulsada por IA",
-    "finance_desc": "Seguimiento financiero automatizado, pronósticos y reportes para startups",
-    "growth_desc": "Herramientas de growth hacking y analytics para escalar tu startup más rápido",
-    "investor_desc": "Gestiona relaciones con inversionistas, reportes y comunicaciones en un solo lugar",
-    "analytics_desc": "Hub de analytics completo combinando todas tus métricas de negocio",
+    "team_desc": "Comprende la salud del equipo, los patrones de comunicación y la colaboración con análisis de IA",
+    "market_desc": "Sigue competidores, tendencias y oportunidades de mercado con inteligencia impulsada por IA",
+    "finance_desc": "Seguimiento financiero automatizado con previsiones y reportes para startups",
+    "growth_desc": "Herramientas y analítica de growth hacking para escalar más rápido",
+    "investor_desc": "Gestiona relaciones, reportes y comunicaciones con inversores en un solo lugar",
+    "analytics_desc": "Hub analítico integral que reúne todas tus métricas de negocio",
     "how_title": "Cómo funciona Ideonautix",
-    "integrations_title": "Integraciones perfectas",
-    "cta_title": "Escala tu startup más rápido",
-    "cta_description": "Acceso temprano lanzándose en febrero de 2026. Sé parte de moldear el futuro de la productividad de startups"
+    "integrations_title": "Integraciones fluidas",
+    "cta_title": "Acelera el crecimiento de tu startup",
+    "cta_description": "Acceso anticipado en febrero de 2026. Sé parte de la nueva productividad para startups"
   },
   "community": {
     "hero_title": "Comunidad",
-    "hero_subtitle": "Vota en características, comparte ideas y moldea el futuro juntos",
-    "voting_title": "Vota en características",
-    "voting_subtitle": "Ayúdanos a priorizar lo que más te importa",
-    "voting_list_aria": "Lista de votación de características",
+    "hero_subtitle": "Vota funciones, comparte ideas y diseña el futuro con nosotros",
+    "voting_title": "Vota las funciones",
+    "voting_subtitle": "Ayúdanos a priorizar lo que más valoras",
+    "voting_list_aria": "Lista de funciones para votar",
     "category_aria": "Categoría: {category}",
     "vote_count": "{count} votos",
     "vote_button": "Votar",
     "voted_button": "Votado",
     "vote_for": "Votar por {feature}",
     "ideas_title": "Comparte tus ideas",
-    "ideas_placeholder": "¿Qué característica te gustaría ver?",
+    "ideas_placeholder": "¿Qué función te gustaría ver?",
     "ideas_submit": "Enviar idea",
     "ideas_aria_label": "Enviar tu idea",
-    "ideas_helper": "Ingresa tu idea de característica o sugerencia para nuestros productos",
+    "ideas_helper": "Cuéntanos tu propuesta o sugerencia para nuestros productos",
     "ideas_error_empty": "Por favor ingresa tu idea",
-    "ideas_success": "¡Gracias! Tu idea ha sido enviada.",
-    "toast_voted": "¡Votado por \"{feature}\"!",
-    "toast_removed": "Voto removido de \"{feature}\"",
+    "ideas_success": "¡Gracias! Hemos recibido tu idea.",
+    "toast_voted": "¡Votaste por \"{feature}\"!",
+    "toast_removed": "Se retiró tu voto de \"{feature}\"",
     "categories": {
       "nodevoyage": "NodeVoyage",
       "ideonautix": "Ideonautix"
@@ -245,123 +244,123 @@
     "features": {
       "ai-trip-optimizer": {
         "name": "Optimizador de viajes IA",
-        "description": "Optimiza automáticamente rutas basadas en tiempo, presupuesto y preferencias"
+        "description": "Optimiza rutas según tiempo, presupuesto y preferencias"
       },
       "team-collaboration-board": {
-        "name": "Tablero de colaboración de equipo",
-        "description": "Planificación colaborativa en tiempo real para viajes grupales"
+        "name": "Tablero colaborativo de equipo",
+        "description": "Planificación en tiempo real para viajes grupales"
       },
       "revenue-forecasting-ai": {
-        "name": "IA de pronóstico de ingresos",
-        "description": "Analytics predictivas para proyecciones de ingresos de startups"
+        "name": "IA de previsión de ingresos",
+        "description": "Analítica predictiva para proyecciones de ingresos en startups"
       },
       "ar-navigation-mode": {
         "name": "Modo de navegación AR",
-        "description": "Navegación de realidad aumentada para exploración urbana"
+        "description": "Exploración urbana con realidad aumentada"
       },
       "pitch-deck-analyzer": {
         "name": "Analizador de pitch deck",
-        "description": "Retroalimentación impulsada por IA en presentaciones de pitch"
+        "description": "Feedback impulsado por IA para tus presentaciones"
       },
       "offline-maps-pro": {
         "name": "Mapas offline Pro",
         "description": "Capacidades offline mejoradas con mapas 3D"
       },
       "social-travel-feed": {
-        "name": "Feed de viajes social",
-        "description": "Comparte momentos de viaje con un feed comunitario inmersivo"
+        "name": "Feed social de viajes",
+        "description": "Comparte momentos de viaje en un feed inmersivo"
       },
       "budget-tracker": {
-        "name": "Rastreador de presupuesto",
-        "description": "Seguimiento de gastos en tiempo real durante viajes"
+        "name": "Gestor de presupuesto",
+        "description": "Control de gastos en tiempo real durante tus viajes"
       }
     }
   },
   "consulting": {
-    "hero_title": "Consultoría IA",
+    "hero_title": "Consultoría de IA",
     "hero_subtitle": "Programa piloto gratuito para 3 empresas seleccionadas",
-    "spots_remaining": "lugares restantes",
-    "what_title": "Lo que ofrecemos",
-    "what_1": "Estrategia e implementación IA",
+    "spots_remaining": "plazas disponibles",
+    "what_title": "Qué ofrecemos",
+    "what_1": "Estrategia e implementación de IA",
     "what_2": "Asesoría técnica",
-    "what_3": "Diseño de solución personalizada",
-    "form_title": "Aplicar al programa piloto",
+    "what_3": "Diseño de soluciones a medida",
+    "form_title": "Postúlate al programa piloto",
     "form_company": "Nombre de la empresa",
     "form_company_placeholder": "Acme Corp",
     "form_name": "Tu nombre",
-    "form_name_placeholder": "Alex Fundador",
-    "form_email": "Dirección de email",
-    "form_email_placeholder": "fundador@acme.com",
+    "form_name_placeholder": "Alex Founder",
+    "form_email": "Correo electrónico",
+    "form_email_placeholder": "founder@acme.com",
     "form_phone": "Número de teléfono",
     "form_phone_placeholder": "+371 12345678",
     "form_industry": "Industria",
-    "form_industry_placeholder": "Viajes, Hospitalidad, SaaS...",
+    "form_industry_placeholder": "Viajes, hospitalidad, SaaS...",
     "form_description": "Describe tus necesidades de IA",
-    "form_description_placeholder": "Cuéntanos sobre tus necesidades de IA, desafíos actuales y lo que esperas lograr...",
-    "form_submit": "Enviar aplicación",
-    "form_success": "¡Aplicación enviada! Te contactaremos en 48 horas.",
-    "form_error": "Algo salió mal. Por favor intenta de nuevo.",
-    "select_industry": "Seleccionar industria...",
+    "form_description_placeholder": "Cuéntanos tus retos actuales, lo que has probado y lo que quieres lograr...",
+    "form_submit": "Enviar solicitud",
+    "form_success": "¡Solicitud enviada! Te contactaremos en 48 horas.",
+    "form_error": "Algo salió mal. Inténtalo nuevamente.",
+    "select_industry": "Selecciona industria...",
     "industries": {
       "technology": "Tecnología",
       "fintech": "FinTech",
-      "ecommerce": "E-commerce",
+      "ecommerce": "Comercio electrónico",
       "healthcare": "Salud",
       "education": "Educación",
       "manufacturing": "Manufactura",
-      "other": "Otro"
+      "other": "Otra"
     },
     "benefits_title": "Lo que obtienes",
-    "benefit_1": "Consulta gratuita de estrategia IA",
-    "benefit_2": "Plan de implementación técnica",
-    "benefit_3": "3 meses de soporte de asesoría",
+    "benefit_1": "Consultoría estratégica en IA sin costo",
+    "benefit_2": "Plan técnico de implementación",
+    "benefit_3": "3 meses de acompañamiento",
     "benefit_4": "Acceso prioritario a nuestros productos",
-    "timeline_title": "Cronología del proceso",
+    "timeline_title": "Cronograma del proceso",
     "week_1": "Semana 1: Consulta inicial",
     "week_2": "Semana 2: Desarrollo de estrategia",
-    "week_3_12": "Semana 3-12: Soporte de implementación",
+    "week_3_12": "Semana 3-12: Acompañamiento en la ejecución",
     "requirements_title": "Requisitos",
-    "req_1": "Ubicado en Europa o dispuesto a trabajar en horario CET",
-    "req_2": "Comprometido con la transformación IA",
-    "req_3": "Abierto a colaboración y retroalimentación"
+    "req_1": "Operar en Europa o trabajar en horario CET",
+    "req_2": "Compromiso real con la transformación de IA",
+    "req_3": "Apertura a la colaboración y retroalimentación"
   },
   "contact": {
     "hero_title": "Ponte en contacto",
     "hero_subtitle": "Construyamos algo increíble juntos",
     "form_title": "Envíanos un mensaje",
     "form_name": "Tu nombre",
-    "form_name_placeholder": "Alex Fundador",
-    "form_email": "Dirección de email",
-    "form_email_placeholder": "tu@empresa.com",
+    "form_name_placeholder": "Alex Founder",
+    "form_email": "Correo electrónico",
+    "form_email_placeholder": "you@company.com",
     "form_subject": "Asunto",
-    "form_subject_placeholder": "Oportunidad de asociación",
+    "form_subject_placeholder": "Oportunidad de alianza",
     "form_message": "Tu mensaje",
-    "form_message_placeholder": "Tu mensaje...",
+    "form_message_placeholder": "Escribe tu mensaje...",
     "form_submit": "Enviar mensaje",
     "form_success": "¡Mensaje enviado! Responderemos pronto.",
-    "form_error": "Algo salió mal. Por favor intenta de nuevo.",
-    "calendar_title": "Reservar una reunión",
+    "form_error": "Algo salió mal. Inténtalo nuevamente.",
+    "calendar_title": "Agenda una reunión",
     "calendar_subtitle": "Programa una llamada con nuestro equipo",
     "calendar_button": "Ver calendario",
     "info_title": "Información de contacto",
-    "info_email": "Email",
+    "info_email": "Correo",
     "info_location": "Ubicación",
     "social_title": "Síguenos",
     "location_value": "Daugavpils, Letonia"
   },
   "form": {
-    "error_required": "Este campo es requerido",
-    "error_email": "Dirección de email inválida",
-    "error_phone": "Número de teléfono inválido",
-    "error_validation": "Por favor corrige los errores en el formulario"
+    "error_required": "Este campo es obligatorio",
+    "error_email": "Correo electrónico no válido",
+    "error_phone": "Número de teléfono no válido",
+    "error_validation": "Revisa los errores en el formulario"
   },
   "common": {
     "submitting": "Enviando...",
     "loading": "Cargando...",
     "planning": "En planificación",
     "in_development": "En desarrollo",
-    "coming_soon": "Próximamente",
-    "early_access": "Acceso temprano",
+    "coming_soon": "Muy pronto",
+    "early_access": "Acceso anticipado",
     "learn_more": "Saber más",
     "get_started": "Comenzar",
     "read_more": "Leer más",
@@ -378,15 +377,15 @@
     "filter": "Filtrar",
     "sort": "Ordenar",
     "view_all": "Ver todo",
-    "show_more": "Mostrar más",
-    "show_less": "Mostrar menos"
+    "show_more": "Ver más",
+    "show_less": "Ver menos"
   },
   "footer": {
     "tagline": "Donde la lógica baila con la creatividad",
-    "status": "Pre-empresa • Ideju Kauss Octubre 2025",
+    "status": "Pre-company • Ideju Kauss octubre 2025",
     "location": "Daugavpils, Letonia",
     "products_title": "Productos",
-    "company": "Empresa",
+    "company": "Compañía",
     "resources": "Recursos",
     "founders": "Fundadores",
     "vision": "Visión",
@@ -397,19 +396,19 @@
     "consulting": "Consultoría",
     "contact": "Contacto",
     "about": "Acerca de",
-    "careers": "Carreras",
+    "careers": "Empleo",
     "blog": "Blog",
     "legal": "Legal",
     "privacy": "Política de privacidad",
-    "terms": "Términos de servicio",
+    "terms": "Términos del servicio",
     "cookies": "Política de cookies",
     "rights": "Todos los derechos reservados",
-    "made_in": "Hecho con dedicación en Letonia",
+    "made_in": "Hecho con cariño en Letonia",
     "copyright": "© 2025 AlgoRhythmics",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",
-      "email": "Email"
+      "email": "Correo"
     }
   }
 }
