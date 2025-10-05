@@ -22,8 +22,8 @@
     'var(--gradient-spectrum-5)'
   ];
 
-  function updateScrollState() {
-    const scrollY = Math.max(0, lastKnownScrollY);
+  function handleScroll() {
+    const scrollY = window.scrollY;
     isScrolled = scrollY > 32;
     navigation.updateScroll(scrollY);
     ticking = false;
@@ -76,7 +76,7 @@
     </a>
 
     <div class="nav-content">
-      <div class="nav-links" class:open={$navigation.isMenuOpen} id="primary-navigation">
+      <div class="nav-links" class:open={$navigation.isMenuOpen}>
         {#each mainNavigation as item, index}
           <a
             href={item.href}
@@ -140,9 +140,6 @@
       border-color var(--duration-normal) var(--ease-out),
       background var(--duration-normal) var(--ease-out);
     box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
-    border-bottom-left-radius: var(--radius-xl);
-    border-bottom-right-radius: var(--radius-xl);
-    overflow: hidden;
   }
 
   .nav.hidden { transform: translateY(-100%); }
@@ -161,7 +158,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: clamp(1rem, 2vw, 1.35rem) 0;
+    padding: 1.35rem 0;
   }
 
   .brand img {
@@ -192,16 +189,13 @@
   }
 
   .nav-link span {
-    background: var(--nav-gradient, var(--gradient-text));
-    background-size: 220% 220%;
+    background: var(--gradient-text);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    opacity: 0.75;
+    opacity: 0.72;
     transition: opacity var(--duration-fast) var(--ease-out);
-    animation: navGradientDrift 14s ease-in-out infinite;
-    animation-delay: calc(var(--nav-index, 0) * -1.6s);
   }
 
   .nav-link:hover span,
@@ -244,21 +238,21 @@
     justify-content: center;
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius-full);
-    border: 1px solid transparent;
-    background: var(--gradient-spectrum-4);
+    border: 1px solid rgba(19, 81, 255, 0.22);
+    background: color-mix(in srgb, var(--pure-white) 78%, rgba(19, 81, 255, 0.1) 22%);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
     color: var(--pure-white);
     transition: all var(--duration-fast) var(--ease-out);
     backdrop-filter: blur(22px);
-    box-shadow: 0 16px 32px rgba(19, 81, 255, 0.18);
+    box-shadow: 0 16px 32px rgba(19, 81, 255, 0.12);
   }
 
   .nav-cta:hover {
-    background: var(--gradient-spectrum-5);
+    background: var(--gradient-primary);
     color: var(--pure-white);
     border-color: transparent;
-    box-shadow: 0 22px 46px rgba(19, 81, 255, 0.28);
+    box-shadow: 0 22px 46px rgba(19, 81, 255, 0.24);
   }
 
   .menu-toggle {
@@ -303,16 +297,12 @@
       align-items: stretch;
       padding: var(--space-4);
       border-radius: var(--radius-lg);
-      background: color-mix(in srgb, var(--surface-glass) 85%, transparent);
-      background-image:
-        linear-gradient(140deg, rgba(19, 81, 255, 0.14), rgba(106, 56, 255, 0.1)),
-        var(--grain-texture);
-      background-blend-mode: screen, soft-light;
+      background: color-mix(in srgb, var(--pure-white) 78%, rgba(19, 81, 255, 0.08) 22%);
+      background-image: var(--grain-texture);
+      background-blend-mode: soft-light;
       border: 1px solid color-mix(in srgb, var(--border-glass) 60%, rgba(17, 24, 39, 0.08) 40%);
       box-shadow: var(--shadow-lg);
       backdrop-filter: blur(22px);
-      max-height: calc(100vh - clamp(68px, 12vw, 80px) - 2rem);
-      overflow-y: auto;
       transform: translateY(-20px);
       opacity: 0;
       pointer-events: none;
@@ -337,31 +327,6 @@
     .nav-cta { display: none; }
 
     .menu-toggle { display: inline-flex; }
-  }
-
-  @media (max-width: 600px) {
-    .nav-container {
-      padding: clamp(0.75rem, 6vw, 1rem) 0;
-    }
-
-    .nav-links {
-      left: clamp(0.75rem, 5vw, 1rem);
-      right: clamp(0.75rem, 5vw, 1rem);
-      border-radius: var(--radius-xl);
-      padding: clamp(1.6rem, 6vw, 2rem);
-      gap: 1.2rem;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .nav-links {
-      left: clamp(0.6rem, 4vw, 0.85rem);
-      right: clamp(0.6rem, 4vw, 0.85rem);
-    }
-
-    .nav-link {
-      font-size: 1rem;
-    }
   }
 
   :global([data-theme='dark']) .nav {
@@ -409,5 +374,4 @@
       background-size: 100% 100%;
     }
   }
-
 </style>

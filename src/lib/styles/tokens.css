@@ -26,68 +26,11 @@
   --cherry-red-dark: #c42a25;
 
   /* ==================== GRADIENT COLORS ==================== */
-  --gradient-primary: linear-gradient(
-    135deg,
-    rgba(var(--voyage-blue-rgb), 0.92) 0%,
-    rgba(var(--aurora-purple-rgb), 0.88) 46%,
-    rgba(var(--signal-yellow-rgb), 0.9) 100%
-  );
-  --gradient-secondary: linear-gradient(
-    150deg,
-    rgba(var(--aurora-purple-rgb), 0.92) 0%,
-    rgba(var(--signal-yellow-rgb), 0.84) 52%,
-    rgba(var(--cherry-red-rgb), 0.88) 100%
-  );
-  --gradient-accent: linear-gradient(
-    135deg,
-    rgba(var(--signal-yellow-rgb), 0.9) 0%,
-    rgba(var(--cherry-red-rgb), 0.9) 50%,
-    rgba(var(--voyage-blue-rgb), 0.85) 100%
-  );
-  --gradient-text: linear-gradient(
-    120deg,
-    rgba(var(--voyage-blue-rgb), 0.95) 0%,
-    rgba(var(--aurora-purple-rgb), 0.92) 42%,
-    rgba(var(--signal-yellow-rgb), 0.9) 78%,
-    rgba(255, 255, 255, 0.92) 100%
-  );
-  --gradient-hero: linear-gradient(
-    135deg,
-    rgba(var(--voyage-blue-rgb), 0.94) 0%,
-    rgba(var(--aurora-purple-rgb), 0.9) 40%,
-    rgba(var(--signal-yellow-rgb), 0.88) 72%,
-    rgba(var(--cherry-red-rgb), 0.82) 100%
-  );
-  --gradient-spectrum-1: linear-gradient(
-    130deg,
-    rgba(var(--voyage-blue-rgb), 0.92) 0%,
-    rgba(var(--aurora-purple-rgb), 0.85) 52%,
-    rgba(var(--signal-yellow-rgb), 0.88) 100%
-  );
-  --gradient-spectrum-2: linear-gradient(
-    135deg,
-    rgba(var(--aurora-purple-rgb), 0.92) 0%,
-    rgba(var(--cherry-red-rgb), 0.85) 54%,
-    rgba(var(--voyage-blue-rgb), 0.9) 100%
-  );
-  --gradient-spectrum-3: linear-gradient(
-    140deg,
-    rgba(var(--signal-yellow-rgb), 0.9) 0%,
-    rgba(var(--voyage-blue-rgb), 0.85) 50%,
-    rgba(var(--aurora-purple-rgb), 0.88) 100%
-  );
-  --gradient-spectrum-4: linear-gradient(
-    145deg,
-    rgba(var(--voyage-blue-rgb), 0.92) 0%,
-    rgba(var(--signal-yellow-rgb), 0.86) 48%,
-    rgba(var(--cherry-red-rgb), 0.84) 100%
-  );
-  --gradient-spectrum-5: linear-gradient(
-    132deg,
-    rgba(var(--aurora-purple-rgb), 0.9) 0%,
-    rgba(var(--voyage-blue-rgb), 0.86) 45%,
-    rgba(var(--signal-yellow-rgb), 0.78) 88%
-  );
+  --gradient-primary: linear-gradient(135deg, rgba(19, 81, 255, 0.92) 0%, rgba(106, 56, 255, 0.88) 45%, rgba(255, 211, 57, 0.9) 100%);
+  --gradient-secondary: linear-gradient(150deg, rgba(106, 56, 255, 0.92) 0%, rgba(255, 211, 57, 0.84) 52%, rgba(224, 50, 44, 0.88) 100%);
+  --gradient-accent: linear-gradient(135deg, rgba(255, 211, 57, 0.9) 0%, rgba(224, 50, 44, 0.9) 50%, rgba(19, 81, 255, 0.85) 100%);
+  --gradient-text: linear-gradient(120deg, rgba(19, 81, 255, 0.95) 0%, rgba(106, 56, 255, 0.92) 42%, rgba(255, 211, 57, 0.9) 78%, rgba(255, 255, 255, 0.9) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(19, 81, 255, 0.94) 0%, rgba(106, 56, 255, 0.9) 40%, rgba(255, 211, 57, 0.88) 72%, rgba(224, 50, 44, 0.82) 100%);
 
   /* ==================== NEUTRALS ==================== */
   --pure-white: #ffffff;
@@ -102,8 +45,8 @@
   --bg-surface: var(--pure-white);
   --bg-muted: rgba(255, 255, 255, 0.72);
   --bg-elevated: color-mix(in srgb, var(--pure-white) 85%, var(--paper) 15%);
-  --surface-glass: rgba(255, 255, 255, 0.74);
-  --surface-tint: rgba(19, 81, 255, 0.08);
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --surface-tint: rgba(19, 81, 255, 0.06);
   --border-subtle: rgba(17, 24, 39, 0.07);
   --border-strong: rgba(17, 24, 39, 0.14);
   --border-glass: rgba(255, 255, 255, 0.6);
@@ -204,60 +147,10 @@
 }
 
 [data-theme="dark"] {
-  --gradient-primary: linear-gradient(
-    140deg,
-    rgba(47, 92, 220, 0.9) 0%,
-    rgba(106, 56, 255, 0.88) 50%,
-    rgba(255, 211, 57, 0.75) 100%
-  );
-  --gradient-secondary: linear-gradient(
-    145deg,
-    rgba(106, 56, 255, 0.9) 0%,
-    rgba(90, 135, 255, 0.74) 50%,
-    rgba(224, 50, 44, 0.78) 100%
-  );
-  --gradient-text: linear-gradient(
-    130deg,
-    rgba(90, 135, 255, 0.95) 0%,
-    rgba(144, 99, 255, 0.9) 45%,
-    rgba(255, 211, 57, 0.82) 85%
-  );
-  --gradient-hero: linear-gradient(
-    140deg,
-    rgba(47, 92, 220, 0.9) 0%,
-    rgba(106, 56, 255, 0.84) 48%,
-    rgba(255, 211, 57, 0.72) 88%
-  );
-  --gradient-spectrum-1: linear-gradient(
-    138deg,
-    rgba(47, 92, 220, 0.92) 0%,
-    rgba(106, 56, 255, 0.82) 50%,
-    rgba(255, 211, 57, 0.68) 100%
-  );
-  --gradient-spectrum-2: linear-gradient(
-    142deg,
-    rgba(106, 56, 255, 0.9) 0%,
-    rgba(224, 50, 44, 0.72) 54%,
-    rgba(47, 92, 220, 0.78) 100%
-  );
-  --gradient-spectrum-3: linear-gradient(
-    145deg,
-    rgba(255, 211, 57, 0.78) 0%,
-    rgba(47, 92, 220, 0.8) 50%,
-    rgba(106, 56, 255, 0.82) 100%
-  );
-  --gradient-spectrum-4: linear-gradient(
-    148deg,
-    rgba(47, 92, 220, 0.88) 0%,
-    rgba(255, 211, 57, 0.72) 48%,
-    rgba(224, 50, 44, 0.66) 100%
-  );
-  --gradient-spectrum-5: linear-gradient(
-    132deg,
-    rgba(106, 56, 255, 0.86) 0%,
-    rgba(47, 92, 220, 0.8) 45%,
-    rgba(255, 211, 57, 0.65) 88%
-  );
+  --gradient-primary: linear-gradient(140deg, rgba(47, 92, 220, 0.92) 0%, rgba(106, 56, 255, 0.88) 52%, rgba(255, 211, 57, 0.72) 100%);
+  --gradient-secondary: linear-gradient(145deg, rgba(106, 56, 255, 0.92) 0%, rgba(90, 135, 255, 0.74) 50%, rgba(224, 50, 44, 0.78) 100%);
+  --gradient-text: linear-gradient(130deg, rgba(90, 135, 255, 0.95) 0%, rgba(144, 99, 255, 0.92) 45%, rgba(255, 211, 57, 0.8) 85%);
+  --gradient-hero: linear-gradient(140deg, rgba(47, 92, 220, 0.9) 0%, rgba(106, 56, 255, 0.86) 48%, rgba(255, 211, 57, 0.72) 88%);
   --bg-primary: #020511;
   --bg-surface: #080e1f;
   --bg-muted: rgba(12, 20, 42, 0.82);
