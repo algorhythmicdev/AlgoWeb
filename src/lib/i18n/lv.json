@@ -21,21 +21,13 @@
     "toggle_menu": "Atvērt vai aizvērt izvēlni"
   },
   "hero": {
-    "status": "Izstrāde • Latvijā dibināta MI studija",
-    "title": "Mierīga, uzticama MI ceļojumu un startapu komandām",
-    "tagline": "AlgoRhythmics — inovāciju laboratorija no Rīgas līdz Roterdamai",
-    "subtitle": "Veidojam NodeVoyage bezrūpīgiem ceļojumiem un Ideonautix fokusa dibinātājiem.",
-    "description": "Ar saknēm signāltehnikas pētniecībā un mākoņinženierijā apvienojam taustāmu disciplīnu ar izskaidrojamu programmatūru, lai komandas vienmēr saglabātu kontroli.",
-    "cta_products": "Iepazīsti mūsu darbus",
-    "cta_consulting": "Piesaki iepazīšanās zvanu",
-    "next_milestone": "Nākamais posms",
-    "pillars_title": "Mūs vada",
-    "pillars": [
-      "Divas produktu līnijas: NodeVoyage ceļabiedrs un Ideonautix dibinātāju OS",
-      "Cilvēkcentriski konsultāciju sprinti, ko veido Latvijas meistarība un Beniluksa zīmolu pieredze",
-      "Izskaidrojami MI plūsmas, kas mērogojas no fiziskām pieredzēm līdz digitālām platformām"
-    ],
-    "milestone_cta": "Skatīt ceļa karti"
+    "status": "Izstrāde • Veidojam MI nākotni",
+    "title": "Kur loģika dejo ar radošumu",
+    "tagline": "AlgoRhythmics — MI inovāciju laboratorija",
+    "subtitle": "Veidojam ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix ar jaunākajām MI tehnoloģijām",
+    "cta_products": "Apskatīt produktus",
+    "cta_consulting": "MI konsultācijas",
+    "next_milestone": "Nākamais posms"
   },
   "story": {
     "title": "Mūsu stāsts",
@@ -48,55 +40,53 @@
   },
   "founders": {
     "title": "Satieciet dibinātājus",
-    "subtitle": "Divi praktiķi savieno signāltehnikas R&D ar cilvēkcentrētu MI",
-    "email_cta": "E-pasts",
-    "linkedin_cta": "LinkedIn",
+    "subtitle": "Kopā veidojam MI nākotni",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Līdzdibinātājs un CEO",
-      "bio": "Nikita Jurtaevs līdzvada AlgoRhythmics kā CEO, veido zīmola stāstus un vada NodeVoyage un Ideonautix produktu virzienu. Studijas darbu viņš savieno ar Reclame Fabriek signāltehnikas laboratoriju, pārvēršot taustāmu eksperimentēšanu digitālās pieredzēs, kas gatavas startam.",
-      "current_title": "Pašreizējais fokuss",
-      "current_position": "Reclame Fabriek — vada LED neona, kontrolieru, pārklājumu un 3D ražošanas programmas, kas paaugstina mūsu produktu latiņu.",
+      "bio": "Nikita Jurtaevs strādā kā CEO dokumentētā 50/50 līdzvadības modelī: viņš vada stratēģiju, partnerības un zīmola virzienu, vienlaikus sākumposmā koordinējot NodeVoyage un Ideonautix produkta vadību un UX/QA.",
+      "current_title": "Pašreizējais amats",
+      "current_position": "Reclame Fabriek zīmju pētījumu nodaļā vada nākamās paaudzes LED neona, iekšējo LED kontrolieru, speciālo pārklājumu un 3D drukas iniciatīvas, kas tieši stiprina AlgoRhythmics piegādes.",
       "expertise": [
-        "Stāstos balstīta produktu stratēģija",
-        "Pieredzes un kvalitātes līderība",
-        "Partnerības un izglītības iniciatīvas"
+        "Radošā vīzija un zīmola stratēģija",
+        "MI produktu dizains",
+        "Lietotāju pieredzes inovācijas",
+        "Stratēģiskās partnerības"
       ]
     },
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Līdzdibinātājs un CTO",
-      "current_title": "Pašreizējais fokuss",
-      "bio": "Vjaceslavs “Slaff” Trosins līdzvada kā CTO, arhitektējot mākoņa steku, datu plūsmas un MI integrācijas, kas darbina NodeVoyage un Ideonautix. Viņa kontrolieru inženierija Reclame Fabriek inovāciju vienībā nodrošina uzticamu, izskaidrojamu piegādi.",
-      "position": "Reclame Fabriek — attīsta kontrolieru aparatūru, LED sistēmas un ražošanas rīkus, kas mūsu programmatūrā ienes reālas prasības.",
-      "philosophy": "Domāšana sistēmās starp aparatūru un programmatūru ļauj pieņemt pragmatiskus lēmumus; idejas pārbaudām darbnīcā un labākās pārtulkojam cilvēkiem draudzīgos digitālos produktos.",
+      "current_title": "Pašreizējais amats",
+      "position": "CTO un līdz-CEO, kurš atbild par platformas piegādi web/mobilajās vidēs, API un MI, vienlaikus izstrādājot zīmju kvalitātes kontrolieru sistēmas Reclame Fabriek pētījumu nodaļā.",
+      "philosophy": "Domāšana sistēmās starp signāltehnikas pētniecību un patērētāju programmatūru notur mūsu steku praktisku: dienā prototipējam kontrolierus, naktī šo noturību pārvēršam MI produktos.",
       "achievements": [
-        "Vada Google Cloud balstītu platformas steku ar SvelteKit, Flutter, Fastify, Prisma/PostgreSQL un reāllaika ziņapmaiņu.",
-        "Saskaņo signāltehnikas kontrolierus un LED līnijas ar pieejamiem, izskaidrojamiem MI lietotāju ceļiem.",
-        "Vada finansējuma sprintus, kas balsta NodeVoyage un Ideonautix un piesaista daudzdisciplīnu talantus."
+        "Vada piegādi ar Google Cloud kā pamatu (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) un mūsdienīgām slāņiem (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
+        "Saskaņo signāltehnikas kontrolieru inženieriju un nākamās paaudzes LED neona līnijas ar skaidrojamām reāllaika MI pieredzēm",
+        "Vada trīs finansējuma sprintus — Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard — lai mērogotu NodeVoyage un Ideonautix"
       ],
       "brand_title": "Zīmolu pieredze",
       "brand_intro": "Strādājis ar pasaules zīmoliem pie premium reklāmas displeju sistēmām:",
       "brand_context": "Projekti īstenoti kopā ar Reclame Fabriek (Daugavpils, LV), abiem dibinātājiem daloties pieredzē",
       "algorhythmics_title": "Vīzija AlgoRhythmics",
-      "algorhythmics_vision": "Apvienot signāltehnikas disciplīnu ar mākoņa piegādi, lai AlgoRhythmics radītu uzticamas MI pieredzes, kas gatavas instalācijām."
+      "algorhythmics_vision": "Apvienot signāltehnikas pētniecības disciplīnu ar mākonī dzimušu piegādi, lai AlgoRhythmics radītu skaidrojamas un izturīgas MI pieredzes, gatavas reālām instalācijām."
     }
   },
   "products": {
     "title": "Mūsu produkti",
-    "subtitle": "Divi mierīgas MI projekti drīz pieejami",
+    "subtitle": "MI darbinātas platformas, kas maina ceļošanu un darbu",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "Ceļojuma plānošana kā saruna ar vietējo draugu",
-      "description": "MI ceļojumu draugs izmeklētiem maršrutiem, AR tulkošanai un piedzīvojumiem bezsaistē.",
+      "tagline": "Izklaide. Ceļojumi. Atmiņas. Kopiena.",
+      "description": "Ceļojumu plānošana ar MI un tavu draugu Nodi. Veido personalizētus maršrutus, atklāj slēptos dārgumus un ceļo droši ar AR rīkiem un darbu bezsaistē.",
       "status": "Izstrāde",
       "mvp": "MVP: 2026. gada septembris",
       "cta": "Uzzināt vairāk"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Operētājsistēma fokusa dibinātājiem",
-      "description": "Modulārs MI komplekts pičiem, ieņēmumu atziņām un komandas rituāliem agrīnajām komandām.",
+      "tagline": "Izpētīt. Izgudrot. Palaist.",
+      "description": "Modulārs produktivitātes supersets startapiem. MI ieskati piču sagatavošanai, ieņēmumu uzraudzībai, komandas dinamikai un citiem uzdevumiem ar gudriem mikropakalpojumiem dibinātājiem.",
       "status": "Plānošanas fāze",
       "mvp": "MVP: 2026. gada februāris",
       "cta": "Uzzināt vairāk"

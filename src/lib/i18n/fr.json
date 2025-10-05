@@ -21,21 +21,13 @@
     "toggle_menu": "Ouvrir ou fermer le menu"
   },
   "hero": {
-    "status": "En développement • Studio d'IA fondé en Lettonie",
-    "title": "Une IA sereine et crédible pour les équipes voyage et startup",
-    "tagline": "AlgoRhythmics — Laboratoire d'innovation de Riga à Rotterdam",
-    "subtitle": "Nous façonnons NodeVoyage pour des voyages fluides et Ideonautix pour des fondateurs concentrés.",
-    "description": "Ancrés dans la R&D signalétique et l'ingénierie cloud, nous mêlons discipline tangible et logiciel explicable afin que les équipes humaines gardent la main.",
-    "cta_products": "Découvrir nos travaux",
-    "cta_consulting": "Réserver un appel exploratoire",
-    "next_milestone": "Prochain jalon",
-    "pillars_title": "Ce qui guide notre studio",
-    "pillars": [
-      "Double trajectoire produit : compagnon de voyage NodeVoyage et OS fondateur Ideonautix",
-      "Sprints de conseil centrés sur l'humain, nourris par l'artisanat letton et l'expérience marques Benelux",
-      "Parcours IA explicables qui s'étendent des expériences physiques aux plateformes digitales"
-    ],
-    "milestone_cta": "Voir la feuille de route"
+    "status": "En développement • Nous façonnons l'avenir de l'IA",
+    "title": "Là où la logique danse avec la créativité",
+    "tagline": "AlgoRhythmics — Laboratoire d'innovation en IA",
+    "subtitle": "Nous construisons la plateforme de voyage NodeVoyage et la suite de productivité Ideonautix avec une IA de pointe",
+    "cta_products": "Explorer les produits",
+    "cta_consulting": "Conseil en IA",
+    "next_milestone": "Prochain jalon"
   },
   "story": {
     "title": "Notre histoire",
@@ -54,49 +46,49 @@
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Cofondateur et CEO",
-      "bio": "Nikita Jurtaevs co-dirige AlgoRhythmics comme CEO, façonne la narration de marque et pilote la vision produit de NodeVoyage et d'Ideonautix. Il marie construction du studio et laboratoire signalétique de Reclame Fabriek pour transformer l'expérimentation physique en expériences digitales prêtes au lancement.",
-      "current_title": "Focal actuel",
-      "current_position": "Reclame Fabriek — pilote programmes néon LED, contrôleurs, revêtements et fabrication 3D qui élèvent nos standards produit.",
+      "bio": "Nikita Jurtaevs exerce les fonctions de CEO dans un modèle documenté de co-direction 50/50 : il pilote la stratégie, les partenariats et le storytelling de la marque tout en orchestrant le produit et l'UX/QA de NodeVoyage et d'Ideonautix durant les premières phases de construction.",
+      "current_title": "Poste actuel",
+      "current_position": "Intégré au département de recherche signalétique de Reclame Fabriek, il dirige les initiatives néon LED nouvelle génération, contrôleurs LED maison, revêtements sur mesure et impression 3D qui alimentent directement les livrables AlgoRhythmics.",
       "expertise": [
-        "Stratégie produit guidée par le récit",
-        "Leadership expérience & qualité",
-        "Partenariats et diffusion éducative"
+        "Vision créative et stratégie de marque",
+        "Conception de produits IA",
+        "Innovation en expérience utilisateur",
+        "Partenariats stratégiques"
       ]
     },
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Cofondateur et CTO",
-      "current_title": "Focal actuel",
-      "bio": "Vjaceslavs “Slaff” Trosins co-dirige en tant que CTO, architecture la stack cloud, les flux de données et les intégrations IA derrière NodeVoyage et Ideonautix. Son ingénierie de contrôleurs au sein de l'unité d'innovation de Reclame Fabriek garantit une livraison résiliente et explicable.",
-      "position": "Reclame Fabriek — fait évoluer hardware de contrôle, systèmes LED et outils de production qui injectent des exigences terrain dans notre logiciel.",
-      "philosophy": "Une pensée système entre hardware et software garde nos choix pragmatiques ; nous validons sur le terrain et traduisons le meilleur en produits digitaux humains.",
+      "current_title": "Poste actuel",
+      "position": "CTO et co-CEO chargé de la livraison plateforme web/mobile, API et IA tout en architecturant des systèmes de contrôleurs de niveau signalétique au sein du département de recherche signalétique de Reclame Fabriek.",
+      "philosophy": "La pensée systémique entre R&D signalétique et logiciel grand public garde notre stack pragmatique : nous prototypons des contrôleurs le jour et transformons cette résilience en produits pilotés par l'IA la nuit.",
       "achievements": [
-        "Opère une stack plateforme Google Cloud avec SvelteKit, Flutter, Fastify, Prisma/PostgreSQL et messagerie temps réel.",
-        "Aligne contrôleurs de qualité signalétique et lignes LED avec des parcours IA accessibles et explicables.",
-        "Mène des sprints de financement qui soutiennent NodeVoyage et Ideonautix tout en recrutant des talents pluridisciplinaires."
+        "Pilote une livraison prioritairement Google Cloud (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) avec des couches modernes (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
+        "Aligne l'ingénierie de contrôleurs de qualité signalétique et les lignes de néon LED nouvelle génération avec des expériences IA explicables en temps réel",
+        "Conduit trois sprints de financement —Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard— pour accélérer NodeVoyage et Ideonautix"
       ],
       "brand_title": "Expériences de marque",
       "brand_intro": "A collaboré avec des marques internationales sur des dispositifs d'affichage premium :",
       "brand_context": "Projets livrés via Reclame Fabriek (Daugavpils, Lettonie), partagés par les deux fondateurs",
       "algorhythmics_title": "Vision pour AlgoRhythmics",
-      "algorhythmics_vision": "Allier discipline signalétique et livraison cloud pour offrir des expériences IA fiables, prêtes pour l'installation."
+      "algorhythmics_vision": "Fusionner la rigueur de la recherche signalétique avec une livraison cloud-native pour proposer des expériences IA explicables et résilientes prêtes pour des installations réelles."
     }
   },
   "products": {
     "title": "Nos produits",
-    "subtitle": "Deux expériences d'IA sereine bientôt disponibles",
+    "subtitle": "Des plateformes IA qui transforment le voyage et le travail",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "Une planification de voyage comme avec un ami local",
-      "description": "Compagnon de voyage IA pour itinéraires ciselés, traduction AR et aventures prêtes hors ligne.",
+      "tagline": "Fun. Voyages. Souvenirs. Communauté.",
+      "description": "Planification de voyage pilotée par l'IA avec Nodi, votre compagnon intelligent. Créez des itinéraires sur-mesure, dénichez des pépites locales et voyagez sereinement grâce aux outils AR et aux capacités hors ligne.",
       "status": "En développement",
       "mvp": "MVP : septembre 2026",
       "cta": "En savoir plus"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Un système d'exploitation pour la concentration des fondateurs",
-      "description": "Kit IA modulaire pour pitchs, visibilité revenus et rituels d'équipe taillé pour les équipes early-stage.",
+      "tagline": "Explorer. Inventer. Lancer.",
+      "description": "Super suite de productivité modulaire pour startups. Accédez à des insights IA pour les pitchs, le suivi des revenus, la dynamique d'équipe et plus encore via des microservices pensés pour les fondateurs.",
       "status": "Phase de planification",
       "mvp": "MVP : février 2026",
       "cta": "En savoir plus"

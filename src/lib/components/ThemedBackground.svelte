@@ -52,19 +52,19 @@
     themeConfig.shapes.forEach((shapeConfig, index) => {
       const count = Math.min(shapeConfig.count, Math.ceil(limit / themeConfig.shapes.length));
       for (let i = 0; i < count; i++) {
-        const size = shapeConfig.size === 'small' ? 5 : shapeConfig.size === 'medium' ? 9 : 14;
+        const size = shapeConfig.size === 'small' ? 7 : shapeConfig.size === 'medium' ? 12 : 18;
         list.push({
           id: `${shapeConfig.type}-${index}-${i}`,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          dx: (Math.random() - 0.5) * 0.12,
-          dy: (Math.random() - 0.5) * 0.1,
+          dx: (Math.random() - 0.5) * 0.18,
+          dy: (Math.random() - 0.5) * 0.14,
           size,
           color: colorVar(shapeConfig.color),
           duration: 12 + Math.random() * 10,
           delay: -Math.random() * 8,
           blur: 0.5 + Math.random() * 1.5,
-          opacity: 0.045 + Math.random() * 0.035
+          opacity: 0.085 + Math.random() * 0.055
         });
       }
     });
@@ -128,6 +128,7 @@
 
 <div class="background" aria-hidden="true">
   <div class="wash"></div>
+  <div class="flare"></div>
   {#each particles as p (p.id)}
     <span
       class="dot"
@@ -146,13 +147,30 @@
     display: grid;
   }
 
-  .wash {
+  .wash,
+  .flare {
     grid-area: 1 / 1;
+  }
+
+  .wash {
     background:
-      radial-gradient(50% 60% at 20% 15%, rgba(255, 255, 255, 0.55), transparent 70%),
-      radial-gradient(45% 50% at 80% 12%, rgba(19, 81, 255, 0.22), transparent 65%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 55%);
-    opacity: 0.6;
+      radial-gradient(
+        40% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
+        color-mix(in srgb, var(--theme-primary) 40%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(56% 52% at 16% 12%, color-mix(in srgb, var(--theme-secondary) 24%, transparent) 0%, transparent 72%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.05) 60%);
+    opacity: 0.82;
+    filter: saturate(1.1);
+  }
+
+  .flare {
+    background:
+      radial-gradient(38% 38% at 78% 20%, color-mix(in srgb, var(--theme-secondary) 28%, transparent) 0%, transparent 70%),
+      radial-gradient(46% 46% at 24% 86%, color-mix(in srgb, var(--theme-accent) 20%, transparent) 0%, transparent 74%);
+    opacity: calc(0.25 + var(--scroll-depth) * 0.45);
+    mix-blend-mode: screen;
   }
 
   .dot {
@@ -167,10 +185,19 @@
 
   :global([data-theme='dark']) .wash {
     background:
-      radial-gradient(50% 60% at 22% 18%, rgba(47, 92, 220, 0.32), transparent 70%),
-      radial-gradient(48% 52% at 74% 14%, rgba(106, 56, 255, 0.28), transparent 62%),
-      linear-gradient(180deg, rgba(4, 9, 26, 0.92) 0%, rgba(2, 5, 17, 0.9) 60%, rgba(2, 5, 17, 0.86) 100%);
-    opacity: 0.52;
+      radial-gradient(
+        44% 44% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
+        color-mix(in srgb, var(--theme-primary) 55%, transparent),
+        transparent 74%
+      ),
+      radial-gradient(54% 50% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 38%, transparent) 0%, transparent 72%),
+      linear-gradient(180deg, rgba(5, 9, 24, 0.94) 0%, rgba(3, 7, 20, 0.88) 50%, rgba(2, 4, 15, 0.86) 100%);
+    opacity: 0.76;
+  }
+
+  :global([data-theme='dark']) .flare {
+    opacity: calc(0.32 + var(--scroll-depth) * 0.48);
+    mix-blend-mode: lighten;
   }
 
   :global([data-theme='dark']) .dot {

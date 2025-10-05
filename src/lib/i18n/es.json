@@ -21,21 +21,13 @@
     "toggle_menu": "Abrir o cerrar menú"
   },
   "hero": {
-    "status": "En desarrollo • Estudio de IA fundado en Letonia",
-    "title": "IA serena y confiable para viajes y equipos emprendedores",
-    "tagline": "AlgoRhythmics — Laboratorio de innovación de Riga a Róterdam",
-    "subtitle": "Creamos NodeVoyage para viajes sin fricción e Ideonautix para fundadores enfocados.",
-    "description": "Con raíces en la I+D de señalética y la ingeniería en la nube, combinamos disciplina tangible con software explicable para que los equipos humanos mantengan el control.",
-    "cta_products": "Conoce nuestro trabajo",
-    "cta_consulting": "Agenda una llamada exploratoria",
-    "next_milestone": "Próximo hito",
-    "pillars_title": "Lo que guía nuestro estudio",
-    "pillars": [
-      "Doble vía de producto: NodeVoyage como compañero de viaje e Ideonautix como OS para fundadores",
-      "Sprints de consultoría centrados en las personas, moldeados por el oficio letón y la experiencia de marcas en el Benelux",
-      "Flujos de IA explicable que escalan de experiencias físicas a plataformas digitales"
-    ],
-    "milestone_cta": "Ver la hoja de ruta"
+    "status": "En desarrollo • Moldeamos el futuro de la IA",
+    "title": "Donde la lógica baila con la creatividad",
+    "tagline": "AlgoRhythmics — Laboratorio de innovación en IA",
+    "subtitle": "Construimos la plataforma de viajes NodeVoyage y la suite de productividad Ideonautix con tecnología de IA de vanguardia",
+    "cta_products": "Explorar productos",
+    "cta_consulting": "Consultoría de IA",
+    "next_milestone": "Próximo hito"
   },
   "story": {
     "title": "Nuestra historia",
@@ -48,55 +40,53 @@
   },
   "founders": {
     "title": "Conoce a los fundadores",
-    "subtitle": "Dos creadores que conectan la I+D en señalética con una IA centrada en las personas",
-    "email_cta": "Correo",
-    "linkedin_cta": "LinkedIn",
+    "subtitle": "Construimos juntos el futuro de la IA",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Cofundador y CEO",
-      "bio": "Nikita Jurtaevs co-lidera AlgoRhythmics como CEO, da forma a la narrativa de marca y dirige la visión de producto de NodeVoyage e Ideonautix. Combina la construcción del estudio con el laboratorio de señalética de Reclame Fabriek, trasladando la experimentación tangible a experiencias digitales listas para lanzar.",
-      "current_title": "Enfoque actual",
-      "current_position": "Reclame Fabriek — lidera programas de neón LED, controladores, recubrimientos y fabricación 3D que elevan nuestros estándares de producto.",
+      "bio": "Nikita Jurtaevs ejerce como CEO en un modelo documentado de co-liderazgo 50/50, dirige la estrategia de la compañía, las alianzas y la narrativa de marca, mientras orquesta la gestión de producto y la UX/QA de NodeVoyage e Ideonautix durante la fase inicial de construcción.",
+      "current_title": "Posición actual",
+      "current_position": "Integrado en el Departamento de Investigación en Señalética de Reclame Fabriek, lidera iniciativas de neón LED de nueva generación, controladores LED internos, recubrimientos personalizados e impresión 3D que alimentan directamente las entregas de AlgoRhythmics.",
       "expertise": [
-        "Estrategia de producto guiada por la narrativa",
-        "Liderazgo en experiencia y control de calidad",
-        "Alianzas y divulgación educativa"
+        "Visión creativa y estrategia de marca",
+        "Diseño de productos con IA",
+        "Innovación en experiencia de usuario",
+        "Alianzas estratégicas"
       ]
     },
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Cofundador y CTO",
-      "current_title": "Enfoque actual",
-      "bio": "Vjaceslavs “Slaff” Trosins co-lidera como CTO y diseña la pila en la nube, los flujos de datos y las integraciones de IA detrás de NodeVoyage e Ideonautix. Su ingeniería de controladores en la unidad de innovación de Reclame Fabriek mantiene nuestra entrega resiliente y explicable.",
-      "position": "Reclame Fabriek — evoluciona hardware de control, sistemas LED y herramientas de producción que aportan requisitos reales a nuestro software.",
-      "philosophy": "El pensamiento sistémico entre hardware y software mantiene decisiones pragmáticas; validamos ideas en el taller y traducimos lo mejor en productos digitales centrados en las personas.",
+      "current_title": "Posición actual",
+      "position": "CTO y co-CEO responsable de la entrega de plataformas en web/móvil, APIs y IA mientras diseña sistemas de control grado señalética dentro del Departamento de Investigación en Señalética de Reclame Fabriek.",
+      "philosophy": "El pensamiento sistémico que cruza I+D en señalética y software de consumo mantiene nuestra pila con los pies en la tierra: prototipamos controladores de día y trasladamos esa resiliencia a productos guiados por IA de noche.",
       "achievements": [
-        "Opera una pila de plataforma basada en Google Cloud con SvelteKit, Flutter, Fastify, Prisma/PostgreSQL y mensajería en tiempo real.",
-        "Alinea controladores grado señalética y líneas LED con recorridos de IA accesibles y explicables.",
-        "Lidera sprints de financiación que impulsan NodeVoyage e Ideonautix mientras incorpora talento multidisciplinario."
+        "Orquesta entrega con Google Cloud como base (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) y capas modernas (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
+        "Alinea ingeniería de controladores grado señalética y nuevas líneas de neón LED con experiencias de IA explicables en tiempo real",
+        "Impulsa tres sprints de financiación —Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard— para escalar NodeVoyage e Ideonautix"
       ],
       "brand_title": "Experiencia con marcas",
       "brand_intro": "Ha colaborado con marcas globales en sistemas de exhibición publicitaria premium:",
       "brand_context": "Proyectos entregados a través de Reclame Fabriek (Daugavpils, LV), compartidos por ambos fundadores",
       "algorhythmics_title": "Visión para AlgoRhythmics",
-      "algorhythmics_vision": "Fusionar la disciplina de señalética con la entrega en la nube para que AlgoRhythmics ofrezca experiencias de IA confiables y listas para instalaciones."
+      "algorhythmics_vision": "Fusionar la disciplina de investigación en señalética con la entrega cloud-native para que AlgoRhythmics ofrezca experiencias de IA explicables y resilientes listas para instalaciones reales."
     }
   },
   "products": {
     "title": "Nuestros productos",
-    "subtitle": "Dos desarrollos de IA serena que llegan pronto",
+    "subtitle": "Plataformas impulsadas por IA que transforman cómo viajamos y trabajamos",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "Planificación de viajes que se siente como un amigo local",
-      "description": "Compañero de viajes con IA para itinerarios curados, traducción AR y aventuras listas sin conexión.",
+      "tagline": "Diversión. Viajes. Recuerdos. Comunidad.",
+      "description": "Planificación de viajes con IA y tu compañero inteligente Nodi. Crea itinerarios personalizados, descubre joyas ocultas y viaja con confianza gracias a las herramientas de RA y las capacidades offline.",
       "status": "En desarrollo",
       "mvp": "MVP: Septiembre 2026",
       "cta": "Descubrir más"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Un sistema operativo para el enfoque de los fundadores",
-      "description": "Kit modular de IA para presentaciones, insights de ingresos y rituales de equipo pensado para equipos en etapa temprana.",
+      "tagline": "Explorar. Inventar. Lanzar.",
+      "description": "Súper suite de productividad modular para startups. Obtén insights impulsados por IA para pitches, seguimiento de ingresos, dinámica de equipo y más mediante microservicios inteligentes diseñados para fundadores.",
       "status": "Fase de planificación",
       "mvp": "MVP: Febrero 2026",
       "cta": "Descubrir más"
