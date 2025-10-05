@@ -1,265 +1,519 @@
-<script lang="ts">
-  import { browser } from '$app/environment';
-  import { afterUpdate, onDestroy, onMount, tick } from 'svelte';
+<script>
+  import { afterUpdate, onDestroy, onMount } from 'svelte';
   import { locale } from 'svelte-i18n';
-  import {
-    DEFAULT_LOCALE,
-    getProfile,
-    isSupportedLocale,
-    matchKnowledgeBase,
-    type CompanionMessage,
-    type CompanionProfile,
-    type SupportedLocale
-  } from '$lib/memory/companionProfiles';
 
-  const STORAGE_KEY = 'algoweb:lumen:memory';
-  const FOCUSABLE_SELECTOR =
-    'button, [href], textarea, input, select, [tabindex]:not([tabindex="-1"])';
-  const MAX_PERSISTED_MESSAGES = 24;
-  const MAX_CONTEXT_MESSAGES = 10;
+  const companionContent = /** @type {const} */ ({
+    en: {
+      name: 'Lumen',
+      role: 'Your AlgoRhythmics guide',
+      dialogLabel: 'AlgoRhythmics AI companion',
+      greeting:
+        'Hey there! I am Lumen, your AlgoRhythmics companion. Ask about our lab, products, or how we can partner on AI adventures.',
+      languageSwitch: "We're back in English. Let me know how I can support your next idea.",
+      placeholder: 'Ask us about the lab, a product, or how we partner with teams...',
+      actions: {
+        open: 'Open AI companion',
+        hide: 'Hide AI companion',
+        closePanel: 'Close companion',
+        send: 'Send',
+        suggestionLabel: 'Suggestions',
+        formLabel: 'Send a message'
+      },
+      latency: 520,
+      suggestions: [
+        {
+          title: 'Explore our AI lab',
+          prompt: 'What makes AlgoRhythmics different from other AI agencies?'
+        },
+        {
+          title: 'NodeVoyage platform',
+          prompt: 'Tell me about the NodeVoyage travel platform.'
+        },
+        {
+          title: 'Ideonautix suite',
+          prompt: 'How can the Ideonautix productivity suite help teams?'
+        },
+        {
+          title: 'Improve my AI strategy',
+          prompt: 'How could we improve our AI initiative with AlgoRhythmics?'
+        }
+      ],
+      knowledgeBase: [
+        {
+          keywords: ['different', 'unique', 'lab', 'agency', 'algorhythmics', 'culture'],
+          answer:
+            'AlgoRhythmics blends rigorous engineering with motion-inspired creativity. We operate as an innovation lab, shipping flagship products while mentoring partners so they inherit the same R&D mindset.'
+        },
+        {
+          keywords: ['nodevoyage', 'travel', 'platform', 'journey', 'trip'],
+          answer:
+            'NodeVoyage is our intelligent travel experience platform. It uses graph-powered itineraries, dynamic storytelling, and adaptive agents to craft journeys that feel both personal and delightfully unexpected.'
+        },
+        {
+          keywords: ['ideonautix', 'productivity', 'suite', 'team', 'collaboration'],
+          answer:
+            'Ideonautix is a constellation of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking.'
+        },
+        {
+          keywords: ['contact', 'consulting', 'engage', 'work with', 'partnership'],
+          answer:
+            'You can reach our consulting team through the contact page or by emailing hello@algorhythmics.com. We love scoping proofs of concept and long-term partnerships alike.'
+        },
+        {
+          keywords: ['improve', 'improvement', 'optimize', 'growth', 'strategy'],
+          answer:
+            'A good first step is a discovery sprint: we map your goals, audit existing data flows, and prototype a focused AI assist. From there we co-design experimentation loops so your team keeps improving after launch.'
+        }
+      ],
+      fallback:
+        "I'm still learning, but I can connect you with the team or share highlights about our products, lab culture, and services."
+    },
+    lv: {
+      name: 'Lumen',
+      role: 'Jūsu AlgoRhythmics gids',
+      dialogLabel: 'AlgoRhythmics AI pavadonis',
+      greeting:
+        'Sveicināti! Esmu Lumen — jūsu AlgoRhythmics pavadonis. Jautājiet par mūsu laboratoriju, produktiem vai sadarbības iespējām Baltijā un pasaulē.',
+      languageSwitch: 'Pārslēdzos uz latviešu valodu. Pastāstiet, kā varu palīdzēt jūsu nākamajam projektam.',
+      placeholder: 'Jautājiet mums par laboratoriju, produktu vai sadarbību...',
+      actions: {
+        open: 'Atvērt AI pavadoni',
+        hide: 'Paslēpt AI pavadoni',
+        closePanel: 'Aizvērt pavadoni',
+        send: 'Sūtīt',
+        suggestionLabel: 'Ieteikumi',
+        formLabel: 'Nosūtīt ziņu'
+      },
+      latency: 560,
+      suggestions: [
+        {
+          title: 'Izpētīt AI laboratoriju',
+          prompt: 'Ar ko AlgoRhythmics atšķiras no citām AI aģentūrām?'
+        },
+        {
+          title: 'NodeVoyage platforma',
+          prompt: 'Pastāsti par NodeVoyage ceļojumu platformu.'
+        },
+        {
+          title: 'Ideonautix komplekts',
+          prompt: 'Kā Ideonautix palīdz komandām Latvijā un Eiropā?'
+        },
+        {
+          title: 'Uzlabot manu AI stratēģiju',
+          prompt: 'Kā AlgoRhythmics var palīdzēt uzlabot mūsu AI iniciatīvu?'
+        }
+      ],
+      knowledgeBase: [
+        {
+          keywords: ['atšķir', 'unik', 'laboratorija', 'aģentūra', 'algorhythmics'],
+          answer:
+            'AlgoRhythmics apvieno inženieriju ar kustību iedvesmotu radošumu. Strādājam kā inovāciju laboratorija, palīdzot partneriem ieviest eksperimentēšanas kultūru Baltijas tirgū.'
+        },
+        {
+          keywords: ['nodevoyage', 'ceļojums', 'platforma', 'maršruts', 'turisms'],
+          answer:
+            'NodeVoyage ir gudrs ceļojumu palīgs, kas analizē kopienu pieredzi un stāsta stāstus par Latvijas un Eiropas galamērķiem, pielāgojot maršrutus jūsu ritmam.'
+        },
+        {
+          keywords: ['ideonautix', 'produktivitāte', 'komanda', 'sadarbība'],
+          answer:
+            'Ideonautix piedāvā AI līdzbraucējus komandām, kas veic attālinātu darbu. Tas palīdz strukturēt sapulces, lēmumus un zīmolu izstrādi latviešu un starptautiskos projektos.'
+        },
+        {
+          keywords: ['sadarbība', 'kontakts', 'konsultācija', 'projekts'],
+          answer:
+            'Droši rakstiet hello@algorhythmics.com vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību.'
+        },
+        {
+          keywords: ['uzlabot', 'pilnveidot', 'stratēģija', 'idejas'],
+          answer:
+            'Iesakām kopīgu darbnīcu: kartējam jūsu biznesa mērķus, izvērtējam datu kvalitāti un izveidojam izmēģinājuma risinājumu, ko var testēt ar vietējo auditoriju.'
+        }
+      ],
+      fallback:
+        'Vēl mācos, bet varu jūs savienot ar komandu vai dalīties ar informāciju par mūsu produktiem un pakalpojumiem.'
+    },
+    ru: {
+      name: 'Люмен',
+      role: 'Ваш проводник AlgoRhythmics',
+      dialogLabel: 'AI-помощник AlgoRhythmics',
+      greeting:
+        'Здравствуйте! Я Люмен, ваш виртуальный помощник AlgoRhythmics. Расскажите, что интересно про лабораторию, продукты или международное сотрудничество.',
+      languageSwitch: 'Перехожу на русский язык. Чем могу помочь дальше?',
+      placeholder: 'Спросите о лаборатории, продукте или совместной работе...',
+      actions: {
+        open: 'Открыть AI-помощника',
+        hide: 'Скрыть AI-помощника',
+        closePanel: 'Закрыть помощника',
+        send: 'Отправить',
+        suggestionLabel: 'Подсказки',
+        formLabel: 'Отправить сообщение'
+      },
+      latency: 560,
+      suggestions: [
+        {
+          title: 'Что делает нас особенными',
+          prompt: 'Чем AlgoRhythmics отличается от других AI-команд?'
+        },
+        {
+          title: 'Платформа NodeVoyage',
+          prompt: 'Расскажи о возможностях платформы NodeVoyage.'
+        },
+        {
+          title: 'Комплект Ideonautix',
+          prompt: 'Как Ideonautix помогает распределённым командам?'
+        },
+        {
+          title: 'Как улучшить AI-проекты',
+          prompt: 'Какие шаги помогут улучшить наш AI-проект вместе с AlgoRhythmics?'
+        }
+      ],
+      knowledgeBase: [
+        {
+          keywords: ['отличается', 'особенный', 'лаборатория', 'команда', 'algorhythmics'],
+          answer:
+            'AlgoRhythmics соединяет строгую инженерию и творческое мышление. Мы строим экспериментальные продукты и делимся методологиями, чтобы партнёры могли расти на рынках Балтии и СНГ.'
+        },
+        {
+          keywords: ['nodevoyage', 'путешествие', 'маршрут', 'туризм'],
+          answer:
+            'NodeVoyage — это интеллектуальная платформа для путешествий. Она анализирует культурные сценарии, рекомендации сообществ и помогает строить маршруты под ваш темп исследования.'
+        },
+        {
+          keywords: ['ideonautix', 'продуктивность', 'команда', 'сотрудничество'],
+          answer:
+            'Ideonautix предоставляет набор цифровых помощников для продуктовых и исследовательских команд. Они помогают готовить питчи, управлять знаниями и поддерживать кросс-культурные команды.'
+        },
+        {
+          keywords: ['контакт', 'сотрудничество', 'консалтинг', 'связаться'],
+          answer:
+            'Пишите на hello@algorhythmics.com или оставьте заявку через форму. Мы предлагаем пилотные проекты, воркшопы и долгосрочные партнёрства.'
+        },
+        {
+          keywords: ['улучшить', 'оптимизировать', 'стратегия', 'рост'],
+          answer:
+            'Для улучшения мы начинаем с аналитической сессии: оцениваем процессы, данные и культурные особенности аудитории, затем создаём дорожную карту быстрых экспериментов.'
+        }
+      ],
+      fallback:
+        'Я ещё учусь, но могу соединить вас с командой или поделиться основными материалами о наших продуктах и услугах.'
+    },
+    uk: {
+      name: 'Люмен',
+      role: 'Ваш провідник AlgoRhythmics',
+      dialogLabel: 'AI-помічник AlgoRhythmics',
+      greeting:
+        'Вітаю! Я Люмен — супутник AlgoRhythmics. Розкажу про нашу лабораторію, продукти та можливості партнерства з урахуванням українського ринку.',
+      languageSwitch: 'Переходжу на українську. З чого продовжимо?',
+      placeholder: 'Запитайте про лабораторію, продукт чи співпрацю...',
+      actions: {
+        open: 'Відкрити AI-супутника',
+        hide: 'Сховати AI-супутника',
+        closePanel: 'Закрити супутника',
+        send: 'Надіслати',
+        suggestionLabel: 'Підказки',
+        formLabel: 'Надіслати повідомлення'
+      },
+      latency: 540,
+      suggestions: [
+        {
+          title: 'Дізнатися про лабораторію',
+          prompt: 'Чим AlgoRhythmics відрізняється від інших AI-агенцій?'
+        },
+        {
+          title: 'Платформа NodeVoyage',
+          prompt: 'Розкажи про платформу NodeVoyage для мандрівок.'
+        },
+        {
+          title: 'Сервіс Ideonautix',
+          prompt: 'Як Ideonautix допомагає творчим командам?'
+        },
+        {
+          title: 'Покращити AI-ініціативу',
+          prompt: 'Які кроки допоможуть покращити наш AI-проєкт разом з AlgoRhythmics?'
+        }
+      ],
+      knowledgeBase: [
+        {
+          keywords: ['відрізняється', 'унікальність', 'лабораторія', 'агенція', 'algorhythmics'],
+          answer:
+            'AlgoRhythmics поєднує інженерну дисципліну та креативність. Ми допомагаємо партнерам будувати сміливі AI-рішення й розвивати культуру інновацій на ринках Східної Європи.'
+        },
+        {
+          keywords: ['nodevoyage', 'подорож', 'маршрут', 'туризм'],
+          answer:
+            'NodeVoyage — це інтелектуальний супутник мандрівника. Він будує історії маршрутів, враховуючи локальні рекомендації, сезонність та ваш стиль відкриттів.'
+        },
+        {
+          keywords: ['ideonautix', 'продуктивність', 'команда', 'співпраця'],
+          answer:
+            'Ideonautix — набір AI-коу-пілотів для команд, що працюють зі складними ідеями. Він структурує брейншторми, аналізує рішення та допомагає координувати міжнародні групи.'
+        },
+        {
+          keywords: ['контакт', 'співпраця', 'консалтинг', 'звʼязок'],
+          answer:
+            'Напишіть на hello@algorhythmics.com або залиште заявку на сайті. Організуємо воркшоп чи discovery-спринт для старту спільної роботи.'
+        },
+        {
+          keywords: ['покращити', 'оптимізувати', 'стратегія', 'розвиток'],
+          answer:
+            'Для покращення ми проводимо діагностичну сесію: перевіряємо готовність команди, доступні дані та очікування користувачів, після чого формуємо дорожню карту експериментів.'
+        }
+      ],
+      fallback:
+        'Я ще вчуся, але можу зʼєднати вас з нашою командою або надіслати матеріали про продукти й послуги.'
+    },
+    fr: {
+      name: 'Lumen',
+      role: "Votre guide AlgoRhythmics",
+      dialogLabel: 'Compagnon IA AlgoRhythmics',
+      greeting:
+        "Bonjour ! Je suis Lumen, compagnon AlgoRhythmics. Parlons de notre laboratoire, de nos produits ou d'un partenariat adapté aux marchés européens.",
+      languageSwitch: 'Je poursuis en français. Comment puis-je vous aider ?',
+      placeholder: 'Posez une question sur le labo, un produit ou une collaboration...',
+      actions: {
+        open: "Ouvrir l'assistant IA",
+        hide: "Masquer l'assistant IA",
+        closePanel: "Fermer l'assistant",
+        send: 'Envoyer',
+        suggestionLabel: 'Suggestions',
+        formLabel: 'Envoyer un message'
+      },
+      latency: 520,
+      suggestions: [
+        {
+          title: 'Découvrir notre laboratoire',
+          prompt: 'En quoi AlgoRhythmics se distingue des autres agences IA ?'
+        },
+        {
+          title: 'Plateforme NodeVoyage',
+          prompt: 'Peux-tu me présenter la plateforme de voyage NodeVoyage ?'
+        },
+        {
+          title: 'Suite Ideonautix',
+          prompt: 'Comment Ideonautix soutient-elle les équipes créatives ?'
+        },
+        {
+          title: 'Améliorer ma stratégie IA',
+          prompt: 'Comment améliorer notre initiative IA avec AlgoRhythmics ?'
+        }
+      ],
+      knowledgeBase: [
+        {
+          keywords: ['différenc', 'unique', 'laboratoire', 'agence', 'algorhythmics'],
+          answer:
+            "AlgoRhythmics marie rigueur d'ingénierie et imagination chorégraphique. Nous partageons cette méthode avec nos partenaires pour créer des expériences IA utiles en Europe et au-delà."
+        },
+        {
+          keywords: ['nodevoyage', 'voyage', 'itinéraire', 'tourisme'],
+          answer:
+            'NodeVoyage est notre plateforme de voyage intelligente. Elle combine graphes de destinations, récits culturels et agents adaptatifs pour offrir des parcours sur mesure.'
+        },
+        {
+          keywords: ['ideonautix', 'productivité', 'équipe', 'collaboration'],
+          answer:
+            'Ideonautix est une constellation de copilotes IA. Elle facilite les ateliers de co-création, la prise de décision et le suivi des performances pour les startups.'
+        },
+        {
+          keywords: ['contact', 'partenariat', 'consulting', 'collaborer'],
+          answer:
+            "Contactez hello@algorhythmics.com ou utilisez notre formulaire. Nous proposons des ateliers discovery, des pilotes rapides et des programmes d'accompagnement."
+        },
+        {
+          keywords: ['améliorer', 'optimiser', 'stratégie', 'croissance'],
+          answer:
+            "Pour progresser, nous organisons un diagnostic express : analyse de vos flux de données, culture d'équipe et attentes clients, puis feuille de route d'expérimentations." 
+        }
+      ],
+      fallback:
+        "Je m'améliore encore, mais je peux vous mettre en relation avec notre équipe ou partager des informations clés sur nos services."
+    },
+    es: {
+      name: 'Lumen',
+      role: 'Tu guía de AlgoRhythmics',
+      dialogLabel: 'Compañero IA de AlgoRhythmics',
+      greeting:
+        '¡Hola! Soy Lumen, el compañero de AlgoRhythmics. Pregunta sobre nuestro laboratorio, productos o cómo colaborar para proyectos en España y Latinoamérica.',
+      languageSwitch: 'Continuamos en español. ¿En qué puedo ayudarte ahora?',
+      placeholder: 'Pregunta por el laboratorio, un producto o la colaboración...',
+      actions: {
+        open: 'Abrir asistente IA',
+        hide: 'Ocultar asistente IA',
+        closePanel: 'Cerrar asistente',
+        send: 'Enviar',
+        suggestionLabel: 'Sugerencias',
+        formLabel: 'Enviar mensaje'
+      },
+      latency: 520,
+      suggestions: [
+        {
+          title: 'Conocer nuestro laboratorio',
+          prompt: '¿Qué hace diferente a AlgoRhythmics frente a otras agencias de IA?'
+        },
+        {
+          title: 'Plataforma NodeVoyage',
+          prompt: 'Háblame de la plataforma de viajes NodeVoyage.'
+        },
+        {
+          title: 'Suite Ideonautix',
+          prompt: '¿Cómo ayuda Ideonautix a los equipos distribuidos?'
+        },
+        {
+          title: 'Mejorar mi estrategia IA',
+          prompt: '¿Cómo podemos mejorar nuestra iniciativa de IA con AlgoRhythmics?'
+        }
+      ],
+      knowledgeBase: [
+        {
+          keywords: ['diferente', 'únic', 'laboratorio', 'agencia', 'algorhythmics'],
+          answer:
+            'AlgoRhythmics combina ingeniería rigurosa con una estética inspirada en el movimiento. Compartimos metodologías de laboratorio para que tus equipos aprendan a iterar con confianza.'
+        },
+        {
+          keywords: ['nodevoyage', 'viaje', 'itinerario', 'turismo'],
+          answer:
+            'NodeVoyage es nuestra plataforma inteligente de viajes. Construye itinerarios narrativos y recomendaciones culturales adaptadas a cada viajero.'
+        },
+        {
+          keywords: ['ideonautix', 'productividad', 'equipo', 'colaboración'],
+          answer:
+            'Ideonautix ofrece copilotos de IA para startups y estudios creativos. Facilita la planificación, los informes y el lanzamiento de servicios en mercados hispanohablantes.'
+        },
+        {
+          keywords: ['contacto', 'colaborar', 'consultoría', 'alianza'],
+          answer:
+            'Escríbenos a hello@algorhythmics.com o completa el formulario. Podemos organizar talleres remotos o sesiones presenciales según tu huso horario.'
+        },
+        {
+          keywords: ['mejorar', 'optimizar', 'estrategia', 'crecer'],
+          answer:
+            'Para mejorar, comenzamos con un sprint diagnóstico: revisamos objetivos, fuentes de datos y cultura de innovación, y construimos un plan de experimentos medibles.'
+        }
+      ],
+      fallback:
+        'Aún estoy aprendiendo, pero puedo ponerte en contacto con nuestro equipo o compartir más recursos sobre nuestros servicios.'
+    }
+  });
+
+  /** @typedef {keyof typeof companionContent} SupportedLocale */
+  /** @typedef {(typeof companionContent)[SupportedLocale]} CompanionProfile */
+  /** @typedef {CompanionProfile['knowledgeBase'][number]} KnowledgeEntry */
+  /** @typedef {{ sender: 'user' | 'companion'; text: string }} Message */
+
+  /** @type {SupportedLocale} */
+  const DEFAULT_LOCALE = 'en';
+
+  /**
+   * @param {SupportedLocale} lang
+   * @returns {CompanionProfile}
+   */
+  const getProfile = (lang) => companionContent[lang];
+
+  /**
+   * @param {string | undefined | null} lang
+   * @returns {lang is SupportedLocale}
+   */
+  const isSupportedLocale = (lang) => typeof lang === 'string' && lang in companionContent;
 
   let isOpen = false;
   let input = '';
   let loading = false;
   let hasUserInteracted = false;
-  let currentLocale: SupportedLocale = DEFAULT_LOCALE;
-  let profile: CompanionProfile = getProfile(DEFAULT_LOCALE);
+  /** @type {SupportedLocale} */
+  let currentLocale = DEFAULT_LOCALE;
+  /** @type {CompanionProfile} */
+  let profile = getProfile(DEFAULT_LOCALE);
+  /** @type {CompanionProfile['suggestions']} */
   let suggestions = profile.suggestions;
-  let messages: CompanionMessage[] = [{ sender: 'companion', text: profile.greeting }];
+  /** @type {ReadonlyArray<KnowledgeEntry>} */
+  let knowledgeBase = profile.knowledgeBase;
+  /** @type {Message[]} */
+  let messages = [
+    {
+      sender: 'companion',
+      text: profile.greeting
+    }
+  ];
 
-  let inputEl: HTMLTextAreaElement | null = null;
-  let messagesEl: HTMLUListElement | null = null;
-  let launcherEl: HTMLButtonElement | null = null;
-  let panelEl: HTMLElement | null = null;
-  let focusableEls: HTMLElement[] = [];
-  let previouslyFocused: Element | null = null;
+  /** @type {HTMLTextAreaElement | null} */
+  let inputEl = null;
+  /** @type {HTMLUListElement | null} */
+  let messagesEl = null;
+  /** @type {HTMLButtonElement | null} */
+  let launcherEl = null;
 
-  let skipLocaleGreeting = false;
-  let canPersist = false;
-  let isHoveringOrb = false;
-  let orbShiftX = 0;
-  let orbShiftY = 0;
-  let scrollDrift = 0;
-  let requestToken = 0;
-
-  let reduceMotion = false;
-  let motionQuery: MediaQueryList | null = null;
-
-  const detachFns: Array<() => void> = [];
-
-  const unsubscribeLocale = locale.subscribe((value) => {
-    const nextLocale = isSupportedLocale(value) ? value : DEFAULT_LOCALE;
-    const changed = nextLocale !== currentLocale;
+  const unsubscribe = locale.subscribe((value) => {
+    const nextLocale = /** @type {SupportedLocale} */ (
+      isSupportedLocale(value) ? value : DEFAULT_LOCALE
+    );
+    const localeChanged = nextLocale !== currentLocale;
 
     currentLocale = nextLocale;
     profile = getProfile(nextLocale);
     suggestions = profile.suggestions;
+    knowledgeBase = profile.knowledgeBase;
 
-    if (!changed) return;
-
-    if (!hasUserInteracted && !skipLocaleGreeting) {
-      messages = [{ sender: 'companion', text: profile.greeting }];
-      return;
+    if (localeChanged) {
+      if (!hasUserInteracted) {
+        messages = [
+          {
+            sender: 'companion',
+            text: profile.greeting
+          }
+        ];
+      } else {
+        messages = [
+          ...messages,
+          {
+            sender: 'companion',
+            text: profile.languageSwitch
+          }
+        ];
+      }
     }
-
-    skipLocaleGreeting = false;
-    messages = [
-      ...messages,
-      { sender: 'companion', text: profile.languageSwitch }
-    ];
   });
 
-  const stopMotionListener = () => {
-    if (!motionQuery) return;
-    motionQuery.removeEventListener('change', handleMotionPreference);
-    motionQuery = null;
-  };
+  onDestroy(() => {
+    unsubscribe();
+  });
 
-  const handleMotionPreference = (event: MediaQueryList | MediaQueryListEvent) => {
-    reduceMotion = event.matches;
-  };
-
-  const restoreFromStorage = () => {
-    if (!browser) return;
-
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-
-      const persisted = JSON.parse(raw);
-      const storedLocale = persisted?.locale;
-      const rawMessages = Array.isArray(persisted?.messages) ? persisted.messages : [];
-
-      const cleaned: CompanionMessage[] = [];
-      for (const entry of rawMessages) {
-        if (
-          entry &&
-          typeof entry === 'object' &&
-          (entry.sender === 'user' || entry.sender === 'companion') &&
-          typeof entry.text === 'string'
-        ) {
-          cleaned.push({ sender: entry.sender, text: entry.text });
-        }
-      }
-
-      if (isSupportedLocale(storedLocale)) {
-        skipLocaleGreeting = storedLocale !== currentLocale;
-        currentLocale = storedLocale;
-        profile = getProfile(storedLocale);
-        suggestions = profile.suggestions;
-
-        if (skipLocaleGreeting) {
-          locale.set(storedLocale);
-        }
-      }
-
-      if (cleaned.length) {
-        messages = cleaned;
-        hasUserInteracted =
-          typeof persisted?.hasUserInteracted === 'boolean'
-            ? persisted.hasUserInteracted
-            : cleaned.some((entry) => entry.sender === 'user');
-      }
-    } catch (error) {
-      // ignore
+  onMount(() => {
+    if (isOpen && inputEl) {
+      inputEl.focus();
     }
 
-    if (!messages.length) {
-      messages = [{ sender: 'companion', text: profile.greeting }];
-    }
-  };
-
-  const persist = () => {
-    if (!canPersist || !browser) return;
-
-    try {
-      const snapshot = {
-        locale: currentLocale,
-        hasUserInteracted,
-        messages: messages.slice(-MAX_PERSISTED_MESSAGES)
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
-    } catch (error) {
-      // ignore
-    }
-  };
-
-  const focusFirstElement = async () => {
-    await tick();
-    if (!panelEl) return;
-
-    updateFocusableElements();
-    const target = focusableEls[0] ?? panelEl;
-    target?.focus();
-  };
-
-  const focusInput = async () => {
-    await tick();
-    inputEl?.focus();
-  };
-
-  const updateFocusableElements = () => {
-    if (!panelEl) {
-      focusableEls = [];
-      return;
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', handleGlobalKeydown);
     }
 
-    focusableEls = Array.from(
-      panelEl.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-    ).filter((element) => !element.hasAttribute('disabled'));
-  };
-
-  const handlePanelKeydown = (event: KeyboardEvent) => {
-    if (event.key !== 'Tab') return;
-    updateFocusableElements();
-
-    if (!focusableEls.length) return;
-
-    const first = focusableEls[0];
-    const last = focusableEls[focusableEls.length - 1];
-
-    if (event.shiftKey) {
-      if (document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      }
-      return;
-    }
-
-    if (document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  };
-
-  const trapFocusAction = (node: HTMLElement) => {
-    const listener = (event: KeyboardEvent) => handlePanelKeydown(event);
-    node.addEventListener('keydown', listener);
-
-    return {
-      destroy() {
-        node.removeEventListener('keydown', listener);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('keydown', handleGlobalKeydown);
       }
     };
-  };
+  });
 
-  const handleGlobalKeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape' && isOpen) {
-      event.preventDefault();
-      closePanel(true);
-    }
-  };
+  afterUpdate(() => {
+    if (!isOpen || !messagesEl) return;
 
-  const handlePointerMove = (event: PointerEvent) => {
-    if (isOpen || isHoveringOrb || !browser || reduceMotion) return;
-
-    const { innerWidth, innerHeight } = window;
-    if (!innerWidth || !innerHeight) return;
-
-    const normalizedX = event.clientX / innerWidth - 0.5;
-    const normalizedY = event.clientY / innerHeight - 0.5;
-
-    orbShiftX = normalizedX * 18;
-    orbShiftY = normalizedY * 14;
-  };
-
-  const handleScroll = () => {
-    if (isOpen || !browser || reduceMotion) return;
-
-    const { innerHeight, scrollY } = window;
-    if (!innerHeight) return;
-
-    const ratio = Math.max(-1, Math.min(1, scrollY / innerHeight));
-    scrollDrift = ratio * 12;
-  };
-
-  const addMessage = (sender: CompanionMessage['sender'], text: string) => {
-    messages = [...messages, { sender, text }];
-  };
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
 
   const openPanel = () => {
     if (isOpen) return;
-    previouslyFocused = document.activeElement;
+
     isOpen = true;
-    orbShiftX = 0;
-    orbShiftY = 0;
-    scrollDrift = 0;
-    focusFirstElement();
+    tickFocus();
   };
 
   const closePanel = (focusLauncher = false) => {
     if (!isOpen) return;
+
     isOpen = false;
 
-    const target =
-      focusLauncher && launcherEl
-        ? launcherEl
-        : previouslyFocused instanceof HTMLElement
-        ? previouslyFocused
-        : null;
-
-    target?.focus();
-    previouslyFocused = null;
+    if (focusLauncher && launcherEl) {
+      launcherEl.focus();
+    }
   };
 
   const toggle = () => {
@@ -270,16 +524,50 @@
     }
   };
 
-  const resetConversation = () => {
-    requestToken += 1;
-    loading = false;
-    messages = [{ sender: 'companion', text: profile.greeting }];
-    hasUserInteracted = false;
-    focusInput();
+  const tickFocus = async () => {
+    await Promise.resolve();
+    if (inputEl) {
+      inputEl.focus();
+    }
+  };
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  const handleGlobalKeydown = (event) => {
+    if (event.key === 'Escape' && isOpen) {
+      event.preventDefault();
+      closePanel(true);
+    }
+  };
+
+  /**
+   * @param {Message['sender']} sender
+   * @param {string} text
+   */
+  const addMessage = (sender, text) => {
+    messages = [...messages, { sender, text }];
+  };
+
+  /**
+   * @param {string} question
+   * @returns {string}
+   */
+  const matchAnswer = (question) => {
+    const normalized = question.toLowerCase();
+
+    const entry = knowledgeBase.find((item) =>
+      item.keywords.some((keyword) => normalized.includes(keyword))
+    );
+
+    if (entry) return entry.answer;
+
+    return profile.fallback;
   };
 
   const sendMessage = async () => {
     const trimmed = input.trim();
+
     if (!trimmed || loading) return;
 
     addMessage('user', trimmed);
@@ -287,212 +575,94 @@
     loading = true;
     hasUserInteracted = true;
 
-    const conversation = messages.slice(-MAX_CONTEXT_MESSAGES).map((entry) => ({
-      sender: entry.sender,
-      text: entry.text
-    }));
-    const token = ++requestToken;
+    const response = matchAnswer(trimmed);
 
-    let reply = matchKnowledgeBase(currentLocale, trimmed);
-    const startedAt = Date.now();
+    await new Promise((resolve) => setTimeout(resolve, profile.latency));
 
-    try {
-      const response = await fetch('/api/companion', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          locale: currentLocale,
-          messages: conversation
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (typeof data.reply === 'string' && data.reply.trim()) {
-          reply = data.reply.trim();
-        }
-      }
-    } catch (error) {
-      // fall back to knowledge base
-    }
-
-    const elapsed = Date.now() - startedAt;
-    if (profile.latency > elapsed) {
-      await new Promise((resolve) => setTimeout(resolve, profile.latency - elapsed));
-    }
-
-    if (token !== requestToken) {
-      loading = false;
-      return;
-    }
-
-    addMessage('companion', reply);
+    addMessage('companion', response);
     loading = false;
-    focusInput();
+    tickFocus();
   };
 
-  const handleInputKeydown = (event: KeyboardEvent) => {
+  /**
+   * @param {KeyboardEvent} event
+   */
+  const handleKeydown = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       sendMessage();
     }
   };
 
-  const chooseSuggestion = (prompt: string) => {
+  /**
+   * @param {string} prompt
+   */
+  const chooseSuggestion = (prompt) => {
     input = prompt;
-    focusInput();
+    tickFocus();
   };
-
-  const handleOrbEnter = () => {
-    isHoveringOrb = true;
-  };
-
-  const handleOrbLeave = () => {
-    isHoveringOrb = false;
-  };
-
-  onMount(() => {
-    restoreFromStorage();
-
-    if (browser) {
-      window.addEventListener('keydown', handleGlobalKeydown);
-      window.addEventListener('pointermove', handlePointerMove, { passive: true });
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      detachFns.push(() => window.removeEventListener('keydown', handleGlobalKeydown));
-      detachFns.push(() => window.removeEventListener('pointermove', handlePointerMove));
-      detachFns.push(() => window.removeEventListener('scroll', handleScroll));
-
-      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      reduceMotion = motionQuery.matches;
-      motionQuery.addEventListener('change', handleMotionPreference);
-    }
-
-    canPersist = true;
-
-    return () => {
-      detachFns.splice(0).forEach((cleanup) => cleanup());
-      stopMotionListener();
-    };
-  });
-
-  onDestroy(() => {
-    unsubscribeLocale();
-    detachFns.splice(0).forEach((cleanup) => cleanup());
-    stopMotionListener();
-  });
-
-  afterUpdate(() => {
-    if (!isOpen) return;
-
-    if (messagesEl) {
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
-    updateFocusableElements();
-  });
-
-  $: persist();
-  $: orbStyle = `--orb-shift-x: ${orbShiftX.toFixed(2)}px; --orb-shift-y: ${orbShiftY.toFixed(
-    2
-  )}px; --orb-scroll: ${scrollDrift.toFixed(2)}px;`;
 </script>
 
-<div
-  class="companion"
-  aria-live="polite"
-  class:companion--floating={!isOpen && !isHoveringOrb && !reduceMotion}
-  class:companion--engaged={hasUserInteracted}
-  style={orbStyle}
->
+<div class="companion" aria-live="polite">
   <button
-    bind:this={launcherEl}
     class="orb"
-    type="button"
-    aria-pressed={isOpen}
+    bind:this={launcherEl}
     on:click={toggle}
-    on:mouseenter={handleOrbEnter}
-    on:mouseleave={handleOrbLeave}
     aria-label={isOpen ? profile.actions.hide : profile.actions.open}
+    aria-expanded={isOpen}
   >
-    <span class="orb__halo" aria-hidden="true"></span>
-    <span class="orb__glow" aria-hidden="true"></span>
-    <span class="orb__core" aria-hidden="true"></span>
+    <span class="orb__halo"></span>
+    <span class="orb__glow"></span>
+    <span class="orb__core"></span>
   </button>
 
   {#if isOpen}
-    <section
-      bind:this={panelEl}
-      class="panel"
-      role="dialog"
-      aria-modal="true"
-      aria-label={profile.dialogLabel}
-      tabindex="-1"
-      use:trapFocusAction
-    >
+    <section class="panel" role="dialog" aria-label={profile.dialogLabel}>
       <header class="panel__header">
         <div class="panel__identity">
-          <div class="panel__avatar" aria-hidden="true">
-            <span class="panel__avatar-glow"></span>
-          </div>
+          <div class="panel__avatar"></div>
           <div>
-            <p class="panel__name">{profile.name}</p>
-            <p class="panel__role">{profile.role}</p>
+            <h2>{profile.name}</h2>
+            <p>{profile.role}</p>
           </div>
         </div>
-        <div class="panel__actions">
-          <button type="button" class="panel__reset" on:click={resetConversation}>
-            {profile.actions.reset}
-          </button>
-          <button type="button" class="panel__close" on:click={() => closePanel(true)}>
-            <span aria-hidden="true">×</span>
-            <span class="sr-only">{profile.actions.closePanel}</span>
-          </button>
-        </div>
+        <button class="close" on:click={() => closePanel(true)} aria-label={profile.actions.closePanel}>
+          ✕
+        </button>
       </header>
 
       <div class="panel__body">
-        <h2 class="sr-only">{profile.actions.formLabel}</h2>
         <ul class="messages" bind:this={messagesEl}>
           {#each messages as message, index (index)}
-            <li class={`message message--${message.sender}`}>
-              <p>{message.text}</p>
+            <li class:from-user={message.sender === 'user'}>
+              <span>{message.text}</span>
             </li>
           {/each}
           {#if loading}
-            <li class="message message--companion">
-              <span class="typing" aria-hidden="true">
-                <span></span><span></span><span></span>
-              </span>
-              <span class="sr-only">{profile.name} is responding…</span>
+            <li class="typing">
+              <span></span>
+              <span></span>
+              <span></span>
             </li>
           {/if}
         </ul>
 
-        {#if suggestions.length}
-          <div class="suggestions" aria-label={profile.actions.suggestionLabel}>
-            {#each suggestions as suggestion (suggestion.prompt)}
-              <button
-                type="button"
-                class="suggestion"
-                on:click={() => chooseSuggestion(suggestion.prompt)}
-              >
-                <span class="suggestion__title">{suggestion.title}</span>
-                <span class="suggestion__prompt">{suggestion.prompt}</span>
-              </button>
-            {/each}
-          </div>
-        {/if}
+        <div class="suggestions" aria-label={profile.actions.suggestionLabel}>
+          {#each suggestions as suggestion}
+            <button type="button" on:click={() => chooseSuggestion(suggestion.prompt)}>
+              <span>{suggestion.title}</span>
+            </button>
+          {/each}
+        </div>
       </div>
 
-      <form class="panel__form" on:submit|preventDefault={sendMessage}>
-        <label class="sr-only" for="companion-input">{profile.actions.formLabel}</label>
+      <form class="panel__input" on:submit|preventDefault={sendMessage} aria-label={profile.actions.formLabel}>
         <textarea
-          id="companion-input"
           bind:this={inputEl}
           bind:value={input}
           placeholder={profile.placeholder}
           rows="2"
-          on:keydown={handleInputKeydown}
+          on:keydown={handleKeydown}
         />
         <button type="submit" class="send" disabled={loading || !input.trim()}>
           {profile.actions.send}
@@ -513,37 +683,18 @@
     align-items: flex-end;
     gap: 1rem;
     pointer-events: none;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .companion--floating {
-    animation: float 26s var(--ease-in-out) infinite alternate;
-  }
-
-  .companion--engaged {
-    gap: 1.25rem;
   }
 
   .orb {
     position: relative;
-    width: 92px;
-    height: 92px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
     border: none;
     background: transparent;
     cursor: pointer;
     pointer-events: auto;
     padding: 0;
-    transform: translate3d(
-      calc(var(--orb-shift-x, 0px)),
-      calc(var(--orb-shift-y, 0px) + var(--orb-scroll, 0px)),
-      0
-    );
-    transition: transform var(--duration-slow) var(--ease-out);
-  }
-
-  .companion--floating .orb {
-    transition-duration: var(--duration-slower);
   }
 
   .orb:focus-visible {
@@ -557,7 +708,7 @@
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
     filter: blur(10px);
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   .orb__glow {
@@ -566,7 +717,7 @@
     border-radius: 50%;
     background: radial-gradient(circle, rgba(var(--voyage-blue-rgb), 0.32), rgba(19, 81, 255, 0));
     filter: blur(18px);
-    opacity: 0.82;
+    opacity: 0.9;
     animation: pulse 4.5s var(--ease-in-out) infinite;
   }
 
@@ -576,10 +727,9 @@
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, rgba(var(--signal-yellow-rgb), 0.24), rgba(var(--aurora-purple-rgb), 0.68));
     box-shadow: 0 0 24px rgba(var(--voyage-blue-rgb), 0.45), 0 0 64px rgba(106, 56, 255, 0.32);
-    transition: transform var(--duration-normal) var(--ease-spring),
-      box-shadow var(--duration-normal) var(--ease-out),
+    transition: transform var(--duration-normal) var(--ease-spring), box-shadow var(--duration-normal) var(--ease-out),
       opacity var(--duration-normal) var(--ease-out);
-    opacity: 0.86;
+    opacity: 0.9;
   }
 
   .orb:hover .orb__core,
@@ -614,296 +764,226 @@
   .panel__identity {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
-  }
-
-  .panel__avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    position: relative;
-    background: radial-gradient(circle at 30% 30%, rgba(var(--signal-yellow-rgb), 0.4), rgba(var(--voyage-blue-rgb), 0.75));
-    box-shadow: 0 0 14px rgba(var(--pure-white-rgb), 0.3);
-    overflow: hidden;
-  }
-
-  .panel__avatar-glow {
-    position: absolute;
-    inset: -20%;
-    background: radial-gradient(circle, rgba(var(--aurora-purple-rgb), 0.5), transparent 70%);
-    opacity: 0.7;
-  }
-
-  .panel__name {
-    font: var(--font-body-bold);
-    margin: 0;
-  }
-
-  .panel__role {
-    font: var(--font-small);
-    margin: 0;
-    opacity: 0.72;
-  }
-
-  .panel__actions {
-    display: flex;
-    align-items: center;
     gap: 0.75rem;
   }
 
-  .panel__reset {
-    color: var(--pure-white);
+  .panel__identity h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+  }
+
+  .panel__identity p {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+
+  .panel__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-secondary);
+    box-shadow: 0 0 16px rgba(var(--signal-yellow-rgb), 0.45);
+  }
+
+  .close {
     background: transparent;
     border: none;
-    font: var(--font-small);
+    color: var(--pure-white);
+    font-size: 1.1rem;
     cursor: pointer;
-    text-decoration: underline;
-    text-decoration-color: rgba(255, 255, 255, 0.4);
-    text-underline-offset: 0.25em;
-    transition: opacity var(--duration-fast) var(--ease-out);
-  }
-
-  .panel__reset:hover,
-  .panel__reset:focus-visible {
-    opacity: 0.8;
-  }
-
-  .panel__close {
-    width: 36px;
-    height: 36px;
+    border-radius: var(--radius-full);
+    width: 32px;
+    height: 32px;
     display: grid;
     place-items: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    background: rgba(0, 0, 0, 0.2);
-    color: var(--pure-white);
-    cursor: pointer;
     transition: background var(--duration-fast) var(--ease-out);
   }
 
-  .panel__close:hover,
-  .panel__close:focus-visible {
-    background: rgba(0, 0, 0, 0.35);
+  .close:hover,
+  .close:focus-visible {
+    background: rgba(255, 255, 255, 0.14);
   }
 
   .panel__body {
+    padding: 1.15rem 1.2rem;
     display: grid;
-    grid-template-rows: 1fr auto;
-    padding: 0 1.2rem 1.2rem;
     gap: 1rem;
+    max-height: 340px;
+    grid-template-rows: minmax(0, 1fr) auto;
   }
 
   .messages {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
     overflow-y: auto;
-    max-height: min(320px, 45vh);
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
+    padding-right: 0.35rem;
+    min-height: 0;
   }
 
-  .message {
-    display: inline-flex;
-    border-radius: var(--radius-lg);
-    padding: 0.75rem 0.9rem;
-    max-width: 100%;
-    line-height: 1.4;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--pure-white);
+  .messages li {
+    max-width: 85%;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: rgba(244, 247, 255, 0.94);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.65rem 0.85rem;
+    border-radius: 1.1rem 1.1rem 1.1rem 0.35rem;
+    box-shadow: var(--shadow-xs);
   }
 
-  .message--user {
-    margin-left: auto;
-    background: rgba(var(--voyage-blue-rgb), 0.38);
+  .messages li.from-user {
+    justify-self: end;
+    background: rgba(var(--voyage-blue-rgb), 0.9);
+    border-radius: 1.1rem 0.35rem 1.1rem 1.1rem;
   }
 
   .typing {
     display: inline-flex;
-    gap: 0.35rem;
+    gap: 0.3rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1.1rem;
   }
 
   .typing span {
+    display: block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.65);
-    animation: blink 1.2s infinite ease-in-out;
+    background: rgba(255, 255, 255, 0.7);
+    animation: blink 1.2s ease-in-out infinite;
   }
 
   .typing span:nth-child(2) {
-    animation-delay: 0.15s;
+    animation-delay: 0.2s;
   }
 
   .typing span:nth-child(3) {
-    animation-delay: 0.3s;
+    animation-delay: 0.4s;
   }
 
   .suggestions {
-    display: grid;
-    gap: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
   }
 
-  .suggestion {
-    width: 100%;
-    text-align: left;
-    padding: 0.65rem 0.75rem;
-    border-radius: var(--radius-md);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.04);
-    cursor: pointer;
-    display: grid;
-    gap: 0.3rem;
-    transition: transform var(--duration-fast) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out);
-  }
-
-  .suggestion:hover,
-  .suggestion:focus-visible {
-    transform: translateY(-1px);
-    border-color: rgba(var(--voyage-blue-rgb), 0.45);
-  }
-
-  .suggestion__title {
-    font: var(--font-body-bold);
-    margin: 0;
-  }
-
-  .suggestion__prompt {
-    font: var(--font-small);
-    margin: 0;
-    opacity: 0.76;
-  }
-
-  .panel__form {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.75rem;
-    padding: 1rem 1.2rem 1.2rem;
-    background: rgba(0, 0, 0, 0.25);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  textarea {
-    resize: none;
+  .suggestions button {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(244, 247, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
-    padding: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(0, 0, 0, 0.25);
-    color: var(--pure-white);
-    font: var(--font-body);
-    min-height: 68px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
   }
 
-  textarea::placeholder {
-    color: rgba(255, 255, 255, 0.58);
+  .suggestions button:hover,
+  .suggestions button:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.16);
   }
 
-  textarea:focus-visible {
-    outline: 2px solid rgba(var(--voyage-blue-rgb), 0.55);
+  .panel__input {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.65rem;
+    padding: 1rem 1.2rem 1.2rem;
+    background: rgba(10, 12, 24, 0.92);
+  }
+
+  .panel__input textarea {
+    flex: 1;
+    min-height: 56px;
+    max-height: 124px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(244, 247, 255, 0.94);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.65rem 0.8rem;
+    resize: vertical;
+  }
+
+  .panel__input textarea::placeholder {
+    color: rgba(244, 247, 255, 0.55);
+  }
+
+  .panel__input textarea:focus-visible {
+    outline: 2px solid rgba(var(--aurora-purple-rgb), 0.5);
     outline-offset: 2px;
   }
 
   .send {
-    align-self: end;
-    padding: 0.65rem 1.1rem;
-    border-radius: var(--radius-lg);
+    background: var(--gradient-primary);
     border: none;
-    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.85), rgba(var(--aurora-purple-rgb), 0.85));
     color: var(--pure-white);
-    font: var(--font-body-bold);
+    padding: 0.65rem 1.05rem;
+    border-radius: var(--radius-lg);
+    font-weight: var(--weight-semibold);
     cursor: pointer;
-    transition: transform var(--duration-fast) var(--ease-out),
-      opacity var(--duration-fast) var(--ease-out);
+    transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) var(--ease-out);
   }
 
   .send:disabled {
-    opacity: 0.45;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
   .send:not(:disabled):hover,
   .send:not(:disabled):focus-visible {
     transform: translateY(-1px);
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-
-  @keyframes float {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    50% {
-      transform: translate3d(-3px, -6px, 0);
-    }
-    100% {
-      transform: translate3d(5px, 4px, 0);
-    }
+    box-shadow: 0 8px 20px rgba(var(--voyage-blue-rgb), 0.45);
   }
 
   @keyframes pulse {
     0%,
     100% {
-      transform: scale(0.96);
+      transform: scale(1);
       opacity: 0.75;
     }
+
     50% {
-      transform: scale(1.04);
+      transform: scale(1.08);
       opacity: 1;
     }
   }
 
   @keyframes blink {
     0%,
-    80%,
     100% {
-      transform: translateY(0);
-      opacity: 0.6;
+      opacity: 0.35;
     }
-    40% {
-      transform: translateY(-3px);
+
+    50% {
       opacity: 1;
     }
   }
 
-  @media (max-width: 480px) {
-    .panel {
-      width: min(340px, calc(100vw - 1.5rem));
+  @media (prefers-reduced-motion: reduce) {
+    .orb__glow {
+      animation: none;
     }
 
-    .panel__actions {
-      gap: 0.5rem;
-    }
-
-    .panel__reset {
-      display: none;
+    .typing span {
+      animation: none;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .companion {
-      animation: none !important;
-    }
-
-    .orb,
-    .send,
-    .suggestion {
-      transition: none !important;
-    }
-
-    .orb__glow,
-    .typing span {
-      animation: none !important;
+  @media (max-width: 540px) {
+    .panel {
+      width: min(92vw, 360px);
+      right: 0;
+      left: auto;
     }
   }
 </style>
