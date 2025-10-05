@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // @ts-nocheck
   import { browser } from '$app/environment';
   import { _ } from 'svelte-i18n';

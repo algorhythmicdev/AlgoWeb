@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // @ts-nocheck
   import HeroSection from '$sections/HeroSection.svelte';
   import FoundersSection from '$sections/FoundersSection.svelte';

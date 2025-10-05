@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // @ts-nocheck
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';

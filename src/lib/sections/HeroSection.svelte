@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onDestroy, onMount } from 'svelte';
   import { spring } from 'svelte/motion';
   import { _ } from 'svelte-i18n';

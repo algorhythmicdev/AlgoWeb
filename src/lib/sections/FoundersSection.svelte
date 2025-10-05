@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { _, json } from 'svelte-i18n';
   import foundersData from '$data/founders.json';
   import { revealOnScroll, staggerReveal, tilt } from '$utils/animations';
