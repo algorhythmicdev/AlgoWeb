@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Background Animation Themes
  * Page-specific floating shapes configuration

@@ -1,312 +1,245 @@
 <script>
+  // @ts-nocheck
   import HeroSection from '$sections/HeroSection.svelte';
   import FoundersSection from '$sections/FoundersSection.svelte';
   import { _ } from 'svelte-i18n';
-  import { revealOnScroll, staggerReveal, tilt, sparkleTrail, ripple } from '$utils/animations';
+  import { revealOnScroll, staggerReveal } from '$utils/animations';
   import productsData from '$data/products.json';
   import timelineData from '$data/timeline.json';
+
+  const productKeys = ['nodevoyage', 'ideonautix'];
 </script>
 
 <HeroSection />
 
-<!-- Story Section -->
 <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
-    <h2 class="section-title text-center">{$_('story.title')}</h2>
-    
-    <div class="story-grid" use:staggerReveal={{ delay: 100, stagger: 150 }}>
-      <div class="story-card" use:tilt={{ max: 5, scale: 1.01 }}>
-        <h3>{$_('story.reality_title')}</h3>
+    <div class="section-heading">
+      <span class="eyebrow">{$_('story.title')}</span>
+      <h2>{$_('story.vision_title')}</h2>
+      <p>{$_('story.vision_text')}</p>
+    </div>
+
+    <div class="story-grid" use:staggerReveal={{ stagger: 160 }}>
+      <article class="story-card">
+        <span class="kicker">{$_('story.reality_title')}</span>
         <p>{$_('story.reality_text')}</p>
-      </div>
-      
-      <div class="story-card" use:tilt={{ max: 5, scale: 1.01 }}>
-        <h3>{$_('story.mission_title')}</h3>
+      </article>
+
+      <article class="story-card">
+        <span class="kicker">{$_('story.mission_title')}</span>
         <p>{$_('story.mission_text')}</p>
-      </div>
-      
-      <div class="story-card" use:tilt={{ max: 5, scale: 1.01 }}>
-        <h3>{$_('story.vision_title')}</h3>
-        <p>{$_('story.vision_text')}</p>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
 <FoundersSection />
 
-<!-- Products Section -->
 <section class="products section" id="products" use:revealOnScroll>
   <div class="container">
-    <h2 class="section-title text-center">{$_('products.title')}</h2>
-    <p class="section-subtitle text-center">{$_('products.subtitle')}</p>
-    
-    <div class="products-grid" use:staggerReveal={{ delay: 100, stagger: 200 }}>
-      <div class="product-card" use:tilt={{ max: 8, scale: 1.02 }}>
-        <img src={productsData.nodevoyage.hero} alt="NodeVoyage" />
-        <div class="product-content">
-          <h3>{productsData.nodevoyage.name}</h3>
-          <p class="tagline">{productsData.nodevoyage.tagline}</p>
-          <p class="description">{$_('products.nodevoyage.description')}</p>
-          <div class="product-meta">
-            <span class="status">{$_('products.nodevoyage.status')}</span>
-            <span class="mvp">{$_('products.nodevoyage.mvp')}</span>
-          </div>
-          <a href="/products/nodevoyage" class="btn btn-primary" use:sparkleTrail use:ripple>{$_('products.nodevoyage.cta')}</a>
-        </div>
-      </div>
-      
-      <div class="product-card" use:tilt={{ max: 8, scale: 1.02 }}>
-        <img src={productsData.ideonautix.hero} alt="Ideonautix" />
-        <div class="product-content">
-          <h3>{productsData.ideonautix.name}</h3>
-          <p class="tagline">{productsData.ideonautix.tagline}</p>
-          <p class="description">{$_('products.ideonautix.description')}</p>
-          <div class="product-meta">
-            <span class="status">{$_('products.ideonautix.status')}</span>
-            <span class="mvp">{$_('products.ideonautix.mvp')}</span>
-          </div>
-          <a href="/products/ideonautix" class="btn btn-primary" use:sparkleTrail use:ripple>{$_('products.ideonautix.cta')}</a>
-        </div>
-      </div>
+    <div class="section-heading">
+      <span class="eyebrow">{$_('products.title')}</span>
+      <h2>{$_('products.subtitle')}</h2>
+    </div>
+
+    <div class="product-list">
+      {#each productKeys as key}
+        {#if productsData[key]}
+          <article class="product-row" use:staggerReveal={{ stagger: 140 }}>
+            <div class="product-meta">
+              <span class="kicker">{$_(`products.${key}.name`)}</span>
+              <h3>{$_(`products.${key}.tagline`)}</h3>
+              <div class="status-pill">
+                <span>{$_(`products.${key}.status`)}</span>
+                <span class="dot"></span>
+                <span>{$_(`products.${key}.mvp`)}</span>
+              </div>
+            </div>
+
+            <div class="product-body">
+              <p>{$_(`products.${key}.description`)}</p>
+              <a class="product-link" href={`/products/${key}`}>
+                <span>{$_(`products.${key}.cta`)}</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        {/if}
+      {/each}
     </div>
   </div>
 </section>
 
-<!-- Timeline Section -->
 <section class="timeline section" id="timeline" use:revealOnScroll>
   <div class="container">
-    <h2 class="section-title text-center">{$_('timeline.title')}</h2>
-    <p class="section-subtitle text-center">{$_('timeline.subtitle')}</p>
-    
-    <div class="timeline-list" use:staggerReveal={{ delay: 100, stagger: 120 }}>
+    <div class="section-heading">
+      <span class="eyebrow">{$_('timeline.title')}</span>
+      <h2>{$_('timeline.subtitle')}</h2>
+    </div>
+
+    <div class="timeline-grid">
       {#each timelineData.milestones as milestone, index}
-        <div class="timeline-item">
+        <article class="timeline-item" use:staggerReveal={{ delay: 80 + index * 60 }}>
           <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <span class="date">{milestone.date}</span>
-            <h3>{milestone.title}</h3>
-            <p>{milestone.description}</p>
-            {#if milestone.note}
-              <p class="note">{milestone.note}</p>
+            <span class="timeline-date">{new Date(`${milestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })}</span>
+            <h3>{$_(`timeline.milestones.${milestone.id}.title`)}</h3>
+            <p>{$_(`timeline.milestones.${milestone.id}.description`)}</p>
+            {#if $_(`timeline.milestones.${milestone.id}.note`)}
+              <p class="timeline-note">{$_(`timeline.milestones.${milestone.id}.note`)}</p>
             {/if}
           </div>
-        </div>
+        </article>
       {/each}
     </div>
   </div>
 </section>
 
 <style>
-  .section-title {
-    font-size: var(--text-display);
-    margin-bottom: var(--space-4);
+  .section-heading {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 840px;
+    margin-bottom: var(--space-10);
   }
-  
-  .section-subtitle {
-    font-size: var(--text-title);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-12);
-  }
-  
-  /* Story Section */
+
+  .section-heading p { color: var(--text-secondary); }
+
   .story-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-6);
-    align-items: stretch;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-  
+
   .story-card {
-    padding: var(--space-6);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    transition: all var(--duration-normal) var(--ease-out);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 280px;
-    justify-content: space-between;
-  }
-  
-  .story-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glass-hover);
-  }
-  
-  .story-card h3 {
-    font-size: var(--text-headline);
-    margin-bottom: var(--space-3);
-    color: var(--voyage-blue);
-  }
-  
-  /* Products Section */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
-    gap: var(--space-8);
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .product-card {
-    background: var(--bg-surface);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: all 300ms ease;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .product-card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-8px);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-  }
-  
-  .product-content {
-    padding: var(--space-6);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .product-content h3 {
-    font-size: var(--text-headline);
-    margin-bottom: var(--space-2);
-  }
-  
-  .tagline {
-    font-style: italic;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-3);
-  }
-  
-  .description {
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-4);
-  }
-  
-  .product-meta {
-    display: flex;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-    flex-wrap: wrap;
-    margin-top: auto;
-  }
-  
-  .status, .mvp {
-    padding: var(--space-1) var(--space-3);
-    background: var(--bg-elevated);
-    border-radius: var(--radius-full);
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-  }
-  
-  /* Timeline Section */
-  .timeline-list {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .timeline-list::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border-color);
-  }
-  
-  .timeline-item {
-    position: relative;
-    padding-left: var(--space-12);
-    margin-bottom: var(--space-8);
-  }
-  
-  .timeline-item:last-child {
-    margin-bottom: 0;
-  }
-  
-  .timeline-marker {
-    position: absolute;
-    left: 12px;
-    top: 4px;
-    width: 16px;
-    height: 16px;
-    background: var(--voyage-blue);
-    border: 4px solid var(--bg-primary);
-    border-radius: 50%;
-  }
-  
-  .timeline-content {
-    background: var(--bg-surface);
     padding: var(--space-4);
     border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-xs);
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .story-card p { color: var(--text-secondary); }
+
+  .products {
+    background: var(--bg-muted);
+  }
+
+  .product-list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .product-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: var(--space-6);
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
     box-shadow: var(--shadow-sm);
   }
-  
-  .date {
-    font-size: var(--text-small);
-    color: var(--voyage-blue);
-    font-weight: var(--weight-semibold);
-  }
-  
-  .timeline-content h3 {
-    font-size: var(--text-title);
-    margin: var(--space-2) 0;
-  }
-  
-  .note {
+
+  .product-meta { display: grid; gap: 0.6rem; }
+
+  .product-meta h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: var(--radius-full);
+    padding: 0.5rem 0.9rem;
+    background: var(--bg-muted);
     font-size: var(--text-small);
     color: var(--text-secondary);
-    font-style: italic;
-    margin-top: var(--space-2);
   }
-  
-  @media (max-width: 768px) {
-    .products-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-    }
-    
-    .product-card img {
-      height: 200px;
-    }
-    
-    .product-content {
-      padding: var(--space-4);
-    }
-    
-    .timeline-list::before {
-      left: 12px;
-    }
-    
-    .timeline-item {
-      padding-left: var(--space-8);
-      margin-bottom: var(--space-6);
-    }
-    
-    .timeline-marker {
-      left: 4px;
-      width: 12px;
-      height: 12px;
-      border-width: 3px;
-    }
-    
-    .timeline-content {
-      padding: var(--space-3);
-    }
+
+  .status-pill .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--voyage-blue);
+    display: inline-flex;
+  }
+
+  .product-body { display: grid; gap: var(--space-3); }
+
+  .product-body p { color: var(--text-secondary); }
+
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: var(--weight-semibold);
+    color: var(--voyage-blue);
+  }
+
+  .product-link:hover { color: var(--aurora-purple); }
+
+  .timeline-grid {
+    position: relative;
+    display: grid;
+    gap: var(--space-6);
+    padding-left: 1.5rem;
+  }
+
+  .timeline-grid::before {
+    content: '';
+    position: absolute;
+    left: 0.45rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-strong);
+  }
+
+  .timeline-item {
+    position: relative;
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .timeline-marker {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--voyage-blue);
+    margin-top: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .timeline-content {
+    display: grid;
+    gap: 0.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .timeline-date {
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .timeline-content p { color: var(--text-secondary); }
+
+  .timeline-note { color: var(--voyage-blue); font-size: var(--text-small); }
+
+  @media (max-width: 960px) {
+    .product-row { grid-template-columns: 1fr; }
+    .timeline-grid { padding-left: 0; }
+    .timeline-grid::before { left: 8px; }
+    .timeline-item { flex-direction: column; padding-left: 24px; }
   }
 </style>

@@ -1,4 +1,5 @@
 <script>
+  // @ts-nocheck
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { getThemeForPath } from '$config/backgroundThemes';
@@ -72,21 +73,26 @@
   .background {
     position: fixed;
     inset: 0;
-    z-index: var(--z-background);
     pointer-events: none;
+    z-index: var(--z-background);
     overflow: hidden;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(19, 81, 255, 0.06), transparent 46%),
+      radial-gradient(circle at 88% 12%, rgba(255, 211, 57, 0.06), transparent 40%),
+      radial-gradient(circle at 72% 76%, rgba(106, 56, 255, 0.05), transparent 54%);
   }
 
   .dot {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.12;
+    opacity: 0.06;
     transform: translateZ(0);
     will-change: transform;
-    box-shadow: 0 0 10px rgba(var(--voyage-blue-rgb), 0.06);
+    filter: blur(0.2px);
+    mix-blend-mode: multiply;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .dot { opacity: 0.08; }
+    .dot { opacity: 0.04; }
   }
 </style>

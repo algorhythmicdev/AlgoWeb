@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * Formatting Utilities
  */

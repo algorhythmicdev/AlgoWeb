@@ -1,47 +1,67 @@
 <script>
-  import { fade, fly } from 'svelte/transition';
-  
+  import { onDestroy } from 'svelte';
+  import { fly } from 'svelte/transition';
+
   export let message = '';
-  export let type = 'success'; // success, error, info
+  /** @type {'success' | 'error' | 'info'} */
+  export let type = 'success';
   export let duration = 4000;
+  /** @type {() => void} */
   export let onClose = () => {};
-  
+
   let visible = true;
-  
-  setTimeout(() => {
+  /** @type {ReturnType<typeof setTimeout> | undefined} */
+  let hideTimer;
+  /** @type {ReturnType<typeof setTimeout> | undefined} */
+  let cleanupTimer;
+
+  const closeToast = () => {
+    if (!visible) return;
     visible = false;
-    setTimeout(onClose, 300);
-  }, duration);
-  
-  const icons = {
+    clearTimeout(hideTimer);
+    cleanupTimer = setTimeout(onClose, 300);
+  };
+
+  hideTimer = setTimeout(closeToast, duration);
+
+  onDestroy(() => {
+    clearTimeout(hideTimer);
+    if (cleanupTimer) {
+      clearTimeout(cleanupTimer);
+    }
+  });
+
+  const icons = /** @type {Record<'success' | 'error' | 'info', string>} */ ({
     success: '✓',
     error: '✕',
     info: 'ℹ'
-  };
+  });
 </script>
 
 {#if visible}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div 
-    class="toast toast-{type}" 
-    transition:fly={{ y: -50, duration: 300 }}
-    role="alert"
-    tabindex="0"
-    on:click={() => { visible = false; setTimeout(onClose, 300); }}
-    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { visible = false; setTimeout(onClose, 300); } }}
-  >
-    <div class="toast-icon">{icons[type]}</div>
-    <div class="toast-message">{message}</div>
+  <div class="toast-wrapper" role="status" aria-live="polite">
+    <button
+      type="button"
+      class="toast toast-{type}"
+      transition:fly={{ y: -50, duration: 300 }}
+      on:click={closeToast}
+    >
+      <div class="toast-icon">{icons[type]}</div>
+      <div class="toast-message">{message}</div>
+    </button>
   </div>
 {/if}
 
 <style>
-  .toast {
+  .toast-wrapper {
     position: fixed;
     top: var(--space-6);
     right: var(--space-6);
     z-index: var(--z-toast);
+    animation: slideInRight 0.3s var(--ease-spring);
+  }
+
+  .toast {
     display: flex;
     align-items: center;
     gap: var(--space-3);
@@ -53,7 +73,9 @@
     box-shadow: var(--shadow-xl);
     cursor: pointer;
     max-width: 400px;
-    animation: slideInRight 0.3s var(--ease-spring);
+    font: inherit;
+    color: inherit;
+    text-align: left;
   }
   
   .toast-success {
@@ -99,6 +121,11 @@
     color: var(--text-primary);
     font-weight: var(--weight-medium);
   }
+
+  .toast:focus-visible {
+    outline: 3px solid rgba(var(--voyage-blue-rgb), 0.4);
+    outline-offset: 4px;
+  }
   
   @keyframes slideInRight {
     from {
@@ -112,11 +139,15 @@
   }
   
   @media (max-width: 768px) {
-    .toast {
+    .toast-wrapper {
       top: auto;
       bottom: var(--space-6);
       right: var(--space-4);
       left: var(--space-4);
+    }
+
+    .toast {
+      width: 100%;
       max-width: none;
     }
   }

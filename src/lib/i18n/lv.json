@@ -12,7 +12,13 @@
     "community": "Kopiena",
     "consulting": "Konsultācijas",
     "contact": "Kontakti",
-    "about": "Par mums"
+    "about": "Par mums",
+    "nodevoyage_desc": "Atklājiet mūsu AI ceļojuma pavadoni",
+    "ideonautix_desc": "Izpētiet starta produktivitātes komplektu",
+    "pilot_badge": "Pilots",
+    "brand_aria": "Algoritmikas mājas",
+    "brand_name": "Algoritmika",
+    "toggle_menu": "Pārslēgt izvēlni"
   },
   "hero": {
     "status": "Izstrādē • Veidojam AI nākotni",
@@ -20,7 +26,8 @@
     "tagline": "AlgoRhythmics - AI inovāciju laboratorija",
     "subtitle": "Veidojam NodeVoyage ceļojumu platformu un Ideonautix produktivitātes komplektu ar modernāko AI tehnoloģiju",
     "cta_products": "Apskatīt produktus",
-    "cta_consulting": "AI konsultācijas"
+    "cta_consulting": "AI konsultācijas",
+    "next_milestone": "Nākamais pagrieziena punkts"
   },
   "story": {
     "title": "Mūsu stāsts",
@@ -35,24 +42,33 @@
     "title": "Iepazīstiet dibinātājus",
     "subtitle": "Kopā veidojam AI nākotni",
     "nikita": {
+      "name": "Nikita Jurtaevs",
       "role": "Līdzdibinātājs un CEO",
+      "bio": "Vīzionārs uzņēmējs ar aizrautību pārveidot ceļošanu un produktivitāti ar AI inovāciju",
       "current_title": "Pašreizējais amats",
-      "position": "Zīmola stratēģijas un produktu inovāciju vadītājs uzņēmumā Reclame Fabriek",
-      "bio": "Vīzionārs uzņēmējs ar aizrautību pārveidot ceļošanu un produktivitāti ar AI inovāciju"
+      "current_position": "Zīmola stratēģijas vadītājs un produktu inovācijas Reclame Fabriek",
+      "expertise": [
+        "Radoša redze un zīmola stratēģija",
+        "AI produkta dizains",
+        "Lietotāju pieredze inovācija",
+        "Stratēģiskās partnerības"
+      ]
     },
     "slaff": {
+      "name": "Vjaceslavs \"Slaff\" trosīni",
       "role": "Līdzdibinātājs un CTO",
       "current_title": "Pašreizējais amats",
       "position": "P&A dibinātājs un produktu izstrādes vadītājs uzņēmumā Reclame Fabriek",
-      "achievement1": "15+ gadu inženierijas līderība",
-      "achievement2": "Eksperts ražošanas sistēmās un P&A",
-      "achievement3": "Vadījis 10+ inženieru komandas",
-      "achievement4": "Piegādāti 100+ veiksmīgi projekti",
+      "philosophy": "Tehnoloģijām jāpastiprina cilvēka potenciāls, nevis tas jāaizstāj. Mērķis – veidot sistēmas, kas dod cilvēkiem vairāk iespēju.",
+      "achievements": [
+        "15+ gadus ilga inženierzinātņu vadība",
+        "Ražošanas sistēmu un pētniecības un attīstības eksperts",
+        "Vadīja 10+ inženieru komandas",
+        "Nodrošināti vairāk nekā 100 veiksmīgi projekti"
+      ],
       "brand_title": "Zīmolu pieredze",
       "brand_intro": "Strādājis ar globāliem zīmoliem premium ekspozīciju sistēmās:",
       "brand_context": "Projekti īstenoti caur Reclame Fabriek (Daugavpils, LV), kopīgi abiem dibinātājiem",
-      "international_title": "Starptautiska pieredze",
-      "philosophy": "Tehnoloģijām jāpastiprina cilvēka potenciāls, nevis tas jāaizstāj. Mērķis – veidot sistēmas, kas dod cilvēkiem vairāk iespēju.",
       "algorhythmics_title": "Vīzija par AlgoRhythmics",
       "algorhythmics_vision": "Pārnest lieluzņēmumu inovāciju pieredzi un starptautisku zīmolu projektu kvalitāti pieejamos, jaudīgos AI produktos."
     }
@@ -61,12 +77,16 @@
     "title": "Mūsu produkti",
     "subtitle": "AI darbinātas platformas, kas pārveido ceļošanu un darbu",
     "nodevoyage": {
+      "name": "Nodevoyage",
+      "tagline": "Jautri. Ceļojums. Atmiņas. Kopiena.",
       "description": "AI darbināta ceļojumu plānošana ar tavu inteliģento kompanjonu Nodi. Veido personalizētus maršrutus, atklāj slēptos dārgakmeņus un ceļo ar pārliecību, izmantojot AR rīkus un bezsaistes iespējas.",
       "status": "Izstrādē",
       "mvp": "MVP: 2026. gada septembris",
       "cta": "Uzzināt vairāk"
     },
     "ideonautix": {
+      "name": "Ideonautiks",
+      "tagline": "Izpētīt. Izgudrot. Palaist.",
       "description": "Modulārs produktivitātes superkomplekts startapiem. Saņem AI ieskatus pitchiem, ieņēmumiem, komandas dinamikai un daudz kam citam ar dibinātājiem radītiem mikroservisiem.",
       "status": "Plānošanas posms",
       "mvp": "MVP: 2026. gada februāris",
@@ -75,13 +95,52 @@
   },
   "timeline": {
     "title": "Mūsu ceļojums",
-    "subtitle": "Veidojam nākotni, soli pa solim"
+    "subtitle": "Veidojam nākotni, soli pa solim",
+    "milestones": {
+      "ideju-kauss": {
+        "title": "Ideju Kauss sacensības",
+        "description": "Piedalīšanās Latvijas premjerministra starta konkursā ar nodevoyage koncepciju",
+        "note": ""
+      },
+      "company-formation": {
+        "title": "Uzņēmuma veidošana",
+        "description": "Oficiālā uzņēmuma reģistrācija, juridiskā struktūra un sākotnējā komandas iestatīšana",
+        "note": ""
+      },
+      "liaa-application": {
+        "title": "LIAA partnerības pieteikums",
+        "description": "Iesniedziet pieteikumu partnerībai ar Latvijas investīciju aģentūru izglītības programmām",
+        "note": "Aspirionalation - vēl nav apstiprināts"
+      },
+      "mvp-ideonautix": {
+        "title": "IDEONAUTIX MVP palaišana",
+        "description": "Pirmā IDEONAUTIX produktivitātes platformas izlaišana ar galvenajiem mikropakalpojumiem",
+        "note": ""
+      },
+      "pilot-consulting": {
+        "title": "AI konsultāciju izmēģinājuma programma",
+        "description": "Palaidiet bezmaksas izmēģinājuma programmu ar 3 atlasītiem uzņēmumiem AI integrācijas konsultācijām",
+        "note": ""
+      },
+      "mvp-nodevoyage": {
+        "title": "Nodevoyage MVP palaišana",
+        "description": "NODEVOYAGE ceļojumu platformas publiskā beta versija ar galvenajām funkcijām un AI pavadonis Nodi",
+        "note": ""
+      },
+      "education-program": {
+        "title": "Izglītības programmas palaišana",
+        "description": "Sāciet AI izglītības programmu ieviešanu, kuru mērķis ir Latvijas vidusskolas",
+        "note": "Mērķis: 75+ institūti (uz pētījumiem balstīta projekcija)"
+      }
+    }
   },
   "nodevoyage": {
     "name": "NodeVoyage",
     "status": "Izstrādē • MVP 2026. septembris",
     "tagline": "Tavs AI ceļojumu kompanjons",
     "hero_description": "AI darbināta ceļojumu plānošana, kas padara maršrutu veidošanu vienkāršu, aizraujošu un personalizētu. Iepazīsties ar Nodi – tavu inteliģento ceļabiedru.",
+    "seo_description": "AI darbināma ceļojumu plānošanas platforma ar inteliģentiem maršrutiem, AR rīkiem un sabiedrības koplietošanu, kuru vada jūsu draudzīgais ceļojuma pavadonis Nodi.",
+    "hero_alt": "Nodevoyage interfeisa priekšskatījums",
     "cta_primary": "Pievienoties gaidītāju sarakstam",
     "cta_secondary": "Apskatīt funkcijas",
     "stat1_value": "2026. sept",
@@ -93,10 +152,22 @@
     "features_title": "Revolucionāras funkcijas",
     "features_subtitle": "Viss ideālam ceļojumam",
     "features": {
-      "nodi-ai": "Draudzīgs AI asistents, kas apgūst tavas preferences un sekundēs izveido personalizētus maršrutus",
-      "smart-builder": "Vizuāls maršrutu veidotājs ar drag-and-drop mezgliem, noskaņu iestatījumiem un optimizāciju reāllaikā",
-      "mobile-suite": "AR tulkošana, tiešā interpretācija, foto atpazīšana un pilnas bezsaistes iespējas",
-      "community": "Dalies ar piedzīvojumiem, atklāj maršrutus no visas pasaules un plāno kopā"
+      "nodi-ai": {
+        "title": "Nodi ai pavadonis",
+        "description": "Jūsu draudzīgais AI ceļojuma palīgs, kas uzzina jūsu vēlmes un dažu sekunžu laikā rada personalizētus maršrutus"
+      },
+      "smart-builder": {
+        "title": "Viedā ceļojuma celtnieks",
+        "description": "Vizuālā brauciena veidotājs ar vilkšanas un nomešanas mezgliem, vibe priekšmetiem un reālā laika optimizāciju"
+      },
+      "mobile-suite": {
+        "title": "Mobilā uztveršanas komplekts",
+        "description": "AR tulkošana, tiešraides interpretācija, fotoattēlu atpazīšana un pilnas bezsaistes iespējas"
+      },
+      "community": {
+        "title": "Sabiedrības koplietošana",
+        "description": "Dalieties ar saviem piedzīvojumiem, atklājiet maršrutus no ceļotājiem visā pasaulē un plānojiet braucienus kopā"
+      }
     },
     "how_title": "Kā darbojas NodeVoyage",
     "step1_title": "Pastāsti Nodi savu sapni",
@@ -119,6 +190,8 @@
     "status": "Plānošanas posms • MVP 2026. februāris",
     "tagline": "Inteliģence startapiem",
     "hero_description": "Modulārs produktivitātes superkomplekts dibinātājiem un augošām komandām. AI mikroservisi, kas patiesi saprot tavu biznesu.",
+    "seo_description": "Modulārā AI produktivitātes komplekts jaunizveidotiem uzņēmumiem ar piķa, ieņēmumu un komandas izlūkošanas mikropakalpojumiem.",
+    "hero_alt": "IDEONAUTIX informācijas paneļa priekšskatījums",
     "cta_primary": "Saņemt agrīnu piekļuvi",
     "cta_secondary": "Skatīt mikroservisus",
     "stat1_value": "2026. febr",
@@ -150,14 +223,59 @@
     "hero_subtitle": "Balso par funkcijām, dalies ar idejām un veido nākotni kopā",
     "voting_title": "Balso par funkcijām",
     "voting_subtitle": "Palīdzi mums prioritizēt to, kas svarīgi tev",
+    "voting_list_aria": "Funkciju balsošanas saraksts",
+    "category_aria": "Kategorija: __var0__",
+    "vote_count": "__Var0__ balsis",
+    "vote_button": "Balsot",
+    "voted_button": "Nobalsots",
+    "vote_for": "Balsojiet par {feature}",
     "ideas_title": "Dalies ar idejām",
     "ideas_placeholder": "Kādu funkciju tu vēlētos redzēt?",
     "ideas_submit": "Iesniegt ideju",
-    "leaderboard_title": "Pieprasītāko funkciju TOP",
-    "vote_button": "Balsot",
-    "voted_button": "Nobalsots",
-    "votes": "balsis",
-    "thank_you": "Paldies! Tava ideja ir iesniegta."
+    "ideas_aria_label": "Iesniedziet savu ideju",
+    "ideas_helper": "Ievadiet savu funkcijas ideju vai ieteikumu mūsu produktiem",
+    "ideas_error_empty": "Lūdzu, ievadiet savu ideju",
+    "ideas_success": "Paldies! Jūsu ideja ir iesniegta.",
+    "toast_voted": "Balsoja par \"__var0__\"!",
+    "toast_removed": "Balsojums, kas noņemts no \"__var0__\"",
+    "categories": {
+      "nodevoyage": "Nodevoyage",
+      "ideonautix": "Ideonautiks"
+    },
+    "features": {
+      "ai-trip-optimizer": {
+        "name": "AI brauciena optimizētājs",
+        "description": "Automātiski optimizēt maršrutus, pamatojoties uz laiku, budžetu un vēlmēm"
+      },
+      "team-collaboration-board": {
+        "name": "Komandu sadarbības padome",
+        "description": "Reālā laika sadarbības plānošana grupas braucieniem"
+      },
+      "revenue-forecasting-ai": {
+        "name": "Ieņēmumu prognozēšana AI",
+        "description": "Paredzamā analītika starta ieņēmumu prognozēm"
+      },
+      "ar-navigation-mode": {
+        "name": "AR navigācijas režīms",
+        "description": "Papildinātā realitātes navigācija pilsētas izpētei"
+      },
+      "pitch-deck-analyzer": {
+        "name": "Piķa klāja analizators",
+        "description": "AI darbināma atgriezeniskā saite par piķa prezentācijām"
+      },
+      "offline-maps-pro": {
+        "name": "Bezsaistes Maps Pro",
+        "description": "Uzlabotas bezsaistes iespējas ar 3D kartēm"
+      },
+      "social-travel-feed": {
+        "name": "Sociālo ceļojumu plūsma",
+        "description": "Dalieties ceļojumu mirkļos ar ieskaujošu kopienas barību"
+      },
+      "budget-tracker": {
+        "name": "Budžeta izsekotājs",
+        "description": "Reālā laika izdevumu izsekošana braucienu laikā"
+      }
+    }
   },
   "consulting": {
     "hero_title": "AI konsultācijas",
@@ -169,14 +287,30 @@
     "what_3": "Pielāgotu risinājumu dizains",
     "form_title": "Pieteikties pilotprogrammai",
     "form_company": "Uzņēmuma nosaukums",
+    "form_company_placeholder": "Acme Corp",
     "form_name": "Tavs vārds",
+    "form_name_placeholder": "Aleksa dibinātājs",
     "form_email": "E-pasts",
+    "form_email_placeholder": "dibinātājs@acme.com",
     "form_phone": "Tālrunis",
+    "form_phone_placeholder": "+371 12345678",
     "form_industry": "Nozare",
+    "form_industry_placeholder": "Ceļojumi, viesmīlība, SaaS ...",
     "form_description": "Apraksti savas AI vajadzības",
+    "form_description_placeholder": "Pastāstiet mums par savām AI vajadzībām, pašreizējiem izaicinājumiem un to, ko jūs cerat sasniegt ...",
     "form_submit": "Iesniegt pieteikumu",
     "form_success": "Pieteikums saņemts! Sazināsimies 48 stundu laikā.",
     "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
+    "select_industry": "Atlasīt nozari ...",
+    "industries": {
+      "technology": "Tehnoloģija",
+      "fintech": "Fintech",
+      "ecommerce": "E-komercija",
+      "healthcare": "Veselības aprūpe",
+      "education": "Izglītība",
+      "manufacturing": "Ražošana",
+      "other": "Cits"
+    },
     "benefits_title": "Ko tu iegūsi",
     "benefit_1": "Bezmaksas AI stratēģijas konsultācija",
     "benefit_2": "Tehniskās ieviešanas plāns",
@@ -196,9 +330,13 @@
     "hero_subtitle": "Veidosim kopā ko lielisku",
     "form_title": "Sūti mums ziņu",
     "form_name": "Tavs vārds",
+    "form_name_placeholder": "Aleksa dibinātājs",
     "form_email": "E-pasta adrese",
+    "form_email_placeholder": "you@company.com",
     "form_subject": "Temats",
+    "form_subject_placeholder": "Partnerības iespēja",
     "form_message": "Tava ziņa",
+    "form_message_placeholder": "Jūsu ziņojums ...",
     "form_submit": "Sūtīt ziņu",
     "form_success": "Ziņa nosūtīta! Atbildēsim drīz.",
     "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
@@ -250,6 +388,14 @@
     "products_title": "Produkti",
     "company": "Uzņēmums",
     "resources": "Resursi",
+    "founders": "Dibinātāji",
+    "vision": "Redze",
+    "nodevoyage": "Nodevoyage",
+    "ideonautix": "Ideonautiks",
+    "roadmap": "Ceļvedis",
+    "community": "Kopiena",
+    "consulting": "Konsultēšanās",
+    "contact": "Saskare",
     "about": "Par mums",
     "careers": "Karjera",
     "blog": "Blogs",
@@ -259,6 +405,11 @@
     "cookies": "Sīkdatņu politika",
     "rights": "Visas tiesības aizsargātas",
     "made_in": "Radīts ar ❤️ Latvijā",
-    "copyright": "© 2025 AlgoRhythmics"
+    "copyright": "© 2025 AlgoRhythmics",
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "Github",
+      "email": "E -pasts"
+    }
   }
 }

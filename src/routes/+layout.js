@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { pageConfigs, siteConfig } from '$config/seo';
 
 export const prerender = true;

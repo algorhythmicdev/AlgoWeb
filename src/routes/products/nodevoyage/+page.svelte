@@ -1,418 +1,288 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { staggerReveal, tilt, particleExplode, ripple, magnetic } from '$utils/animations';
+  import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
-  
+
   const product = productsData.nodevoyage;
   const features = product.features;
 </script>
 
 <svelte:head>
-  <title>{product.name} - AlgoRhythmics</title>
-  <meta name="description" content={product.description} />
+  <title>{$_('nodevoyage.name')} - AlgoRhythmics</title>
+  <meta name="description" content={$_('nodevoyage.seo_description')} />
 </svelte:head>
 
-<!-- Hero Section -->
-<section class="product-hero">
-  <div class="hero-background"></div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="status-badge">{$_('nodevoyage.status')}</div>
-      <h1 class="hero-title">{product.name}</h1>
-      <p class="hero-tagline">{product.tagline}</p>
+<section class="product-hero section" use:reveal>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">{$_('nodevoyage.status')}</span>
+      <h1>{$_('nodevoyage.name')}</h1>
+      <p class="hero-tagline">{$_('nodevoyage.tagline')}</p>
       <p class="hero-description">{$_('nodevoyage.hero_description')}</p>
-      
+
       <div class="hero-actions">
-        <button class="btn btn-primary btn-lg" use:particleExplode use:ripple use:magnetic>
-          {$_('nodevoyage.cta_primary')}
-        </button>
-        <a href="#features" class="btn btn-secondary btn-lg">
-          {$_('nodevoyage.cta_secondary')}
-        </a>
+        <button class="btn btn-primary" use:ripple use:magnetic>{$_('nodevoyage.cta_primary')}</button>
+        <a href="#features" class="btn btn-secondary">{$_('nodevoyage.cta_secondary')}</a>
       </div>
-      
-      <div class="hero-stats" use:staggerReveal>
+
+      <div class="hero-stats" use:staggerReveal={{ stagger: 160 }}>
         <div class="stat">
-          <div class="stat-value">{$_('nodevoyage.stat1_value')}</div>
-          <div class="stat-label">{$_('nodevoyage.stat1_label')}</div>
+          <span class="label">{$_('nodevoyage.stat1_label')}</span>
+          <span class="value">{$_('nodevoyage.stat1_value')}</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{$_('nodevoyage.stat2_value')}</div>
-          <div class="stat-label">{$_('nodevoyage.stat2_label')}</div>
+          <span class="label">{$_('nodevoyage.stat2_label')}</span>
+          <span class="value">{$_('nodevoyage.stat2_value')}</span>
         </div>
         <div class="stat">
-          <div class="stat-value">{$_('nodevoyage.stat3_value')}</div>
-          <div class="stat-label">{$_('nodevoyage.stat3_label')}</div>
+          <span class="label">{$_('nodevoyage.stat3_label')}</span>
+          <span class="value">{$_('nodevoyage.stat3_value')}</span>
         </div>
       </div>
     </div>
-    
+
     <div class="hero-visual">
-      <div class="device-mockup" use:tilt>
-        <img src="/images/products/nodevoyage-hero.webp" alt="NodeVoyage Interface" />
+      <div class="device-frame">
+        <img src="/images/products/nodevoyage-hero.webp" alt={$_('nodevoyage.hero_alt')} />
       </div>
     </div>
   </div>
 </section>
 
-<!-- Features Section -->
-<section class="features-section" id="features">
+<section class="features section" id="features" use:reveal>
   <div class="container">
-    <h2 class="section-title text-center">{$_('nodevoyage.features_title')}</h2>
-    <p class="section-subtitle text-center">{$_('nodevoyage.features_subtitle')}</p>
-    
-    <div class="features-grid" use:staggerReveal={{ delay: 150 }}>
+    <div class="section-heading">
+      <span class="eyebrow">{$_('nodevoyage.features_title')}</span>
+      <h2>{$_('nodevoyage.features_subtitle')}</h2>
+    </div>
+
+    <div class="features-grid" use:staggerReveal={{ stagger: 120 }}>
       {#each features as feature}
-        <div class="feature-card glass-card" use:tilt={{ max: 5 }}>
-          <div class="feature-icon">
-            <div class="icon-wrapper">
-              <span class="icon">{feature.icon}</span>
-            </div>
-          </div>
-          <h3 class="feature-title">{feature.name}</h3>
-          <p class="feature-description">{$_(`nodevoyage.features.${feature.id}`)}</p>
-          <div class="feature-badge">{$_(`common.${feature.status}`)}</div>
-        </div>
+        <article class="feature-card">
+          <span class="feature-icon">{feature.icon}</span>
+          <h3>{$_(`nodevoyage.features.${feature.id}.title`)}</h3>
+          <p>{$_(`nodevoyage.features.${feature.id}.description`)}</p>
+        </article>
       {/each}
     </div>
   </div>
 </section>
 
-<!-- How It Works Section -->
-<section class="how-it-works section">
+<section class="steps section" use:reveal>
   <div class="container">
-    <h2 class="section-title text-center">{$_('nodevoyage.how_title')}</h2>
-    
-    <div class="steps-row" use:staggerReveal={{ delay: 200 }}>
-      <div class="step-box">
-        <div class="step-number">01</div>
+    <div class="section-heading">
+      <span class="eyebrow">{$_('nodevoyage.how_title')}</span>
+    </div>
+
+    <div class="steps-grid" use:staggerReveal={{ stagger: 120 }}>
+      <article class="step-card">
+        <span class="step-index">01</span>
         <h3>{$_('nodevoyage.step1_title')}</h3>
         <p>{$_('nodevoyage.step1_desc')}</p>
-      </div>
-      
-      <div class="step-box">
-        <div class="step-number">02</div>
+      </article>
+      <article class="step-card">
+        <span class="step-index">02</span>
         <h3>{$_('nodevoyage.step2_title')}</h3>
         <p>{$_('nodevoyage.step2_desc')}</p>
-      </div>
-      
-      <div class="step-box">
-        <div class="step-number">03</div>
+      </article>
+      <article class="step-card">
+        <span class="step-index">03</span>
         <h3>{$_('nodevoyage.step3_title')}</h3>
         <p>{$_('nodevoyage.step3_desc')}</p>
-      </div>
-      
-      <div class="step-box">
-        <div class="step-number">04</div>
+      </article>
+      <article class="step-card">
+        <span class="step-index">04</span>
         <h3>{$_('nodevoyage.step4_title')}</h3>
         <p>{$_('nodevoyage.step4_desc')}</p>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- Tech Stack Section -->
-<section class="tech-stack section bg-elevated">
+<section class="tech section-sm" use:reveal>
   <div class="container">
-    <h2 class="section-title text-center">{$_('nodevoyage.tech_title')}</h2>
-    <p class="section-subtitle text-center">{$_('nodevoyage.tech_subtitle')}</p>
-    
-    <div class="tech-grid" use:staggerReveal>
+    <div class="section-heading">
+      <span class="eyebrow">{$_('nodevoyage.tech_title')}</span>
+      <h3>{$_('nodevoyage.tech_subtitle')}</h3>
+    </div>
+
+    <div class="tech-grid" use:staggerReveal={{ stagger: 90 }}>
       {#each product.techStack as tech}
-        <div class="tech-badge glass-card">
-          <span>{tech}</span>
-        </div>
+        <span class="tech-chip">{tech}</span>
       {/each}
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-card glass-card">
+<section class="cta section" use:reveal>
+  <div class="container cta-card">
+    <div class="cta-copy">
       <h2>{$_('nodevoyage.cta_title')}</h2>
       <p>{$_('nodevoyage.cta_description')}</p>
-      <button class="btn btn-primary btn-lg" use:particleExplode use:ripple use:magnetic>
-        {$_('nodevoyage.cta_button')}
-      </button>
-      <p class="cta-note">{$_('nodevoyage.cta_note')}</p>
+      <p class="note">{$_('nodevoyage.cta_note')}</p>
     </div>
+    <button class="btn btn-primary" use:ripple use:magnetic>{$_('nodevoyage.cta_button')}</button>
   </div>
 </section>
 
 <style>
-  /* Hero Section */
   .product-hero {
-    position: relative;
-    min-height: 90vh;
-    display: flex;
+    background: var(--bg-muted);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--space-6);
     align-items: center;
-    overflow: hidden;
-    padding: var(--space-16) 0;
   }
-  
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(19, 81, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(106, 56, 255, 0.1) 0%, transparent 50%);
-    animation: pulseGlow 8s ease-in-out infinite;
-  }
-  
-  @keyframes pulseGlow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
-  
-  .hero-content {
-    flex: 1;
-    z-index: 1;
-  }
-  
-  .status-badge {
-    display: inline-block;
-    padding: var(--space-2) var(--space-4);
-    background: rgba(19, 81, 255, 0.1);
-    border: 1px solid rgba(19, 81, 255, 0.3);
-    border-radius: var(--radius-full);
-    color: var(--voyage-blue);
-    font-weight: var(--weight-semibold);
-    font-size: var(--text-small);
-    margin-bottom: var(--space-4);
-  }
-  
-  .hero-title {
-    font-size: var(--text-hero);
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-3);
-  }
-  
+
+  .hero-copy { display: grid; gap: var(--space-3); }
+
   .hero-tagline {
     font-size: var(--text-headline);
     color: var(--text-secondary);
     font-style: italic;
-    margin-bottom: var(--space-4);
   }
-  
-  .hero-description {
-    font-size: var(--text-title);
-    color: var(--text-secondary);
-    max-width: 600px;
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-6);
+
+  .hero-description { color: var(--text-secondary); }
+
+  .hero-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-3);
   }
-  
-  .hero-actions {
+
+  .stat {
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--bg-surface);
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .label { color: var(--text-tertiary); font-size: var(--text-small); text-transform: uppercase; letter-spacing: 0.12em; }
+  .value { font-size: var(--text-title); font-weight: var(--weight-semibold); }
+
+  .hero-visual {
     display: flex;
-    gap: var(--space-4);
+    justify-content: center;
+  }
+
+  .device-frame {
+    border: 1px solid var(--border-subtle);
+    border-radius: 28px;
+    overflow: hidden;
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-md);
+    padding: 1.2rem;
+  }
+
+  .device-frame img { width: clamp(240px, 60vw, 360px); border-radius: 20px; }
+
+  .section-heading {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 720px;
     margin-bottom: var(--space-8);
   }
-  
-  .hero-stats {
-    display: flex;
-    gap: var(--space-8);
+
+  .features {
+    background: var(--bg-surface);
   }
-  
-  .stat {
-    text-align: center;
-  }
-  
-  .stat-value {
-    font-size: var(--text-display);
-    font-weight: var(--weight-black);
-    color: var(--voyage-blue);
-    line-height: 1;
-  }
-  
-  .stat-label {
-    font-size: var(--text-small);
-    color: var(--text-secondary);
-    margin-top: var(--space-2);
-  }
-  
-  .hero-visual {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .device-mockup {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    transform-style: preserve-3d;
-  }
-  
-  .device-mockup img {
-    width: 100%;
-    border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-2xl);
-  }
-  
-  /* Features Grid */
+
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-12);
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
-  
+
   .feature-card {
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
-    transition: all var(--duration-normal) var(--ease-out);
-    position: relative;
-  }
-  
-  .feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-glass-hover);
-  }
-  
-  .feature-icon {
-    margin-bottom: var(--space-4);
-  }
-  
-  .icon-wrapper {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+    background: var(--bg-muted);
+    display: grid;
+    gap: var(--space-2);
   }
-  
-  .feature-title {
-    font-size: var(--text-title);
-    margin-bottom: var(--space-3);
+
+  .feature-icon { font-size: 2rem; }
+  .feature-card p { color: var(--text-secondary); }
+
+  .steps {
+    background: var(--bg-surface);
   }
-  
-  .feature-description {
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-4);
+
+  .steps-grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
-  
-  .feature-badge {
-    display: inline-block;
-    padding: var(--space-1) var(--space-3);
-    background: rgba(255, 211, 57, 0.1);
-    border-radius: var(--radius-full);
-    font-size: var(--text-caption);
-    color: var(--signal-yellow);
+
+  .step-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    display: grid;
+    gap: 0.75rem;
+    background: var(--bg-muted);
+  }
+
+  .step-index {
+    font-size: var(--text-small);
+    color: var(--voyage-blue);
     font-weight: var(--weight-semibold);
+    letter-spacing: 0.18em;
   }
-  
-  /* How It Works */
-  .steps-row { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 1rem;
-    margin-top: var(--space-12);
+
+  .step-card p { color: var(--text-secondary); }
+
+  .tech {
+    background: var(--bg-muted);
   }
-  .step-box { 
-    text-align: center; 
-    padding: var(--space-6); 
-    min-height: 170px; 
-    overflow-wrap: break-word; 
-    box-sizing: border-box; 
-  }
-  
-  .step-number {
-    font-size: var(--text-mega);
-    font-weight: var(--weight-black);
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-4);
-  }
-  
-  .step-connector { display: none; }
-  @media (max-width: 900px) {
-    .steps-row { grid-template-columns: 2fr 2fr; }
-  }
-  @media (max-width: 550px) {
-    .steps-row { grid-template-columns: 1fr; }
-  }
-  
-  /* Tech Stack */
+
   .tech-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
-    justify-content: center;
-    margin-top: var(--space-8);
+    gap: 0.75rem;
   }
-  
-  .tech-badge {
-    padding: var(--space-3) var(--space-6);
+
+  .tech-chip {
+    padding: 0.5rem 0.9rem;
     border-radius: var(--radius-full);
-    font-weight: var(--weight-semibold);
-    transition: all var(--duration-normal) var(--ease-out);
-  }
-  
-  .tech-badge:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  /* CTA Section */
-  .cta-section {
-    padding: var(--space-20) 0;
-  }
-  
-  .cta-card {
-    text-align: center;
-    padding: var(--space-12);
-    border-radius: var(--radius-2xl);
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .cta-card h2 {
-    font-size: var(--text-display);
-    margin-bottom: var(--space-4);
-  }
-  
-  .cta-card p {
-    font-size: var(--text-title);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-6);
-  }
-  
-  .cta-note {
-    margin-top: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
     font-size: var(--text-small);
-    color: var(--text-secondary);
-    font-style: italic;
   }
-  
-  /* Glass Card Effect */
-  .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-glass);
+
+  .cta-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    background: var(--bg-surface);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
   }
-  
-  @media (max-width: 768px) {
-    .product-hero .container {
-      flex-direction: column;
-    }
-    
-    .hero-stats {
-      flex-direction: column;
-      gap: var(--space-4);
-    }
-    
-    .hero-actions {
-      flex-direction: column;
-    }
+
+  .cta-copy { display: grid; gap: 0.65rem; max-width: 540px; }
+  .cta-copy p { color: var(--text-secondary); }
+  .note { font-size: var(--text-small); color: var(--text-tertiary); }
+
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-actions { flex-direction: column; }
+    .device-frame { padding: 1rem; }
+    .device-frame img { width: 100%; }
   }
 </style>

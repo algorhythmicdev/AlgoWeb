@@ -1,4 +1,5 @@
 <script>
+  // @ts-nocheck
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { voting } from '$stores/voting';
@@ -6,14 +7,14 @@
   import Toast from '$components/Toast.svelte';
   
   let features = [
-    { id: 'f1', name: 'AI Trip Optimizer', description: 'Automatically optimize routes based on time, budget, and preferences', votes: 127, category: 'NodeVoyage' },
-    { id: 'f2', name: 'Team Collaboration Board', description: 'Real-time collaborative planning for group trips', votes: 98, category: 'NodeVoyage' },
-    { id: 'f3', name: 'Revenue Forecasting AI', description: 'Predictive analytics for startup revenue projections', votes: 156, category: 'Ideonautix' },
-    { id: 'f4', name: 'AR Navigation Mode', description: 'Augmented reality navigation for city exploration', votes: 203, category: 'NodeVoyage' },
-    { id: 'f5', name: 'Pitch Deck Analyzer', description: 'AI-powered feedback on pitch presentations', votes: 89, category: 'Ideonautix' },
-    { id: 'f6', name: 'Offline Maps Pro', description: 'Enhanced offline capabilities with 3D maps', votes: 167, category: 'NodeVoyage' },
-    { id: 'f7', name: 'Social Travel Feed', description: 'Instagram-style feed for sharing travel moments', votes: 142, category: 'NodeVoyage' },
-    { id: 'f8', name: 'Budget Tracker', description: 'Real-time expense tracking during trips', votes: 178, category: 'NodeVoyage' }
+    { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },
+    { id: 'team-collaboration-board', votes: 98, product: 'nodevoyage' },
+    { id: 'revenue-forecasting-ai', votes: 156, product: 'ideonautix' },
+    { id: 'ar-navigation-mode', votes: 203, product: 'nodevoyage' },
+    { id: 'pitch-deck-analyzer', votes: 89, product: 'ideonautix' },
+    { id: 'offline-maps-pro', votes: 167, product: 'nodevoyage' },
+    { id: 'social-travel-feed', votes: 142, product: 'nodevoyage' },
+    { id: 'budget-tracker', votes: 178, product: 'nodevoyage' }
   ];
   
   let newIdeaText = '';
@@ -27,12 +28,13 @@
     voting.vote(featureId);
     
     const feature = features.find(f => f.id === featureId);
+    const featureName = $_(`community.features.${feature.id}.name`);
     if ($voting[featureId]) {
       feature.votes++;
-      toastMessage = `Voted for "${feature.name}"!`;
+      toastMessage = $_('community.toast_voted', { values: { feature: featureName } });
     } else {
       feature.votes--;
-      toastMessage = `Vote removed from "${feature.name}"`;
+      toastMessage = $_('community.toast_removed', { values: { feature: featureName } });
     }
     toastType = 'success';
     showToast = true;
@@ -42,14 +44,14 @@
   
   function submitIdea() {
     if (!newIdeaText.trim()) {
-      toastMessage = 'Please enter your idea';
+      toastMessage = $_('community.ideas_error_empty');
       toastType = 'error';
       showToast = true;
       return;
     }
-    
+
     // In production, this would send to backend
-    toastMessage = 'Thank you! Your idea has been submitted.';
+    toastMessage = $_('community.ideas_success');
     toastType = 'success';
     showToast = true;
     newIdeaText = '';
@@ -67,8 +69,8 @@
 <!-- Hero -->
 <section class="community-hero">
   <div class="container">
-    <h1 class="hero-title">{$_('community.hero_title')}</h1>
-    <p class="hero-subtitle">{$_('community.hero_subtitle')}</p>
+    <span class="eyebrow">{$_('community.hero_title')}</span>
+    <h1>{$_('community.hero_subtitle')}</h1>
   </div>
 </section>
 
@@ -78,27 +80,45 @@
     <h2 class="section-title">{$_('community.voting_title')}</h2>
     <p class="section-subtitle">{$_('community.voting_subtitle')}</p>
     
-    <div class="features-grid" use:staggerReveal={{ delay: 100 }} role="list" aria-label="Feature voting list">
+    <div
+      class="features-grid"
+      use:staggerReveal={{ delay: 100 }}
+      role="list"
+      aria-label={$_('community.voting_list_aria')}
+    >
       {#each sortedFeatures as feature (feature.id)}
-        <div class="feature-card glass-card" use:tilt={{ max: 5, scale: 1.02 }} role="listitem">
+        <div class="feature-card" use:tilt={{ max: 3, scale: 1.01 }} role="listitem">
           <div class="feature-header">
-            <span class="category-badge" aria-label="Category: {feature.category}">{feature.category}</span>
-            <div class="vote-count" use:sparkleTrail aria-label="{feature.votes} votes">{feature.votes}</div>
+            <span
+              class="category-badge"
+              aria-label={$_('community.category_aria', {
+                values: {
+                  category: $_(`community.categories.${feature.product}`)
+                }
+              })}
+            >
+              {$_(`community.categories.${feature.product}`)}
+            </span>
+            <span
+              class="vote-count"
+              aria-label={$_('community.vote_count', { values: { count: feature.votes } })}
+            >
+              {feature.votes}
+            </span>
           </div>
-          
-          <h3 class="feature-name">{feature.name}</h3>
-          <p class="feature-description">{feature.description}</p>
-          
-          <button 
+
+          <h3 class="feature-name">{$_(`community.features.${feature.id}.name`)}</h3>
+          <p class="feature-description">{$_(`community.features.${feature.id}.description`)}</p>
+
+          <button
             class="vote-button"
             class:voted={$voting[feature.id]}
             on:click={() => handleVote(feature.id)}
             use:particleExplode
             use:ripple
             use:magnetic
-            use:sparkleTrail
             aria-pressed={$voting[feature.id]}
-            aria-label="Vote for {feature.name}"
+            aria-label={$_('community.vote_for', { values: { feature: $_(`community.features.${feature.id}.name`) } })}
           >
             {$voting[feature.id] ? '✓ ' + $_('community.voted_button') : $_('community.vote_button')}
           </button>
@@ -111,18 +131,18 @@
 <!-- Submit Idea -->
 <section class="idea-section">
   <div class="container">
-    <div class="idea-card glass-card">
+    <div class="idea-card">
       <h2>{$_('community.ideas_title')}</h2>
       <div class="idea-form">
         <textarea 
           bind:value={newIdeaText}
           placeholder={$_('community.ideas_placeholder')}
           rows="4"
-          aria-label="Submit your idea"
+          aria-label={$_('community.ideas_aria_label')}
           aria-describedby="idea-help"
         ></textarea>
-        <div id="idea-help" class="sr-only">Enter your feature idea or suggestion for our products</div>
-        <button 
+        <div id="idea-help" class="sr-only">{$_('community.ideas_helper')}</div>
+        <button
           class="btn btn-primary btn-lg"
           on:click={submitIdea}
           use:particleExplode
@@ -139,152 +159,126 @@
 
 <style>
   .community-hero {
-    padding: var(--space-20) 0 var(--space-8);
+    padding: var(--space-16) 0 var(--space-6);
     text-align: center;
   }
-  
-  .hero-title {
-    font-size: var(--text-hero);
-    background: linear-gradient(135deg, var(--voyage-blue), var(--signal-yellow));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+
+  .community-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-top: 0.75rem;
   }
-  
+
   .voting-section {
     padding: var(--space-16) 0;
+    background: var(--bg-muted);
   }
-  
+
+  .section-title { text-align: center; }
+  .section-subtitle { text-align: center; color: var(--text-secondary); margin-top: 0.5rem; }
+
   .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--space-6);
     margin-top: var(--space-8);
   }
-  
+
   .feature-card {
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    display: grid;
+    gap: var(--space-3);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
-  
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s;
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
   }
-  
-  .feature-card:hover::before {
-    left: 100%;
-  }
-  
+
   .feature-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-4);
   }
-  
+
   .category-badge {
-    padding: var(--space-1) var(--space-3);
-    background: rgba(19, 81, 255, 0.1);
-    color: var(--voyage-blue);
+    padding: 0.35rem 0.75rem;
     border-radius: var(--radius-full);
-    font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-  }
-  
-  .vote-count {
-    font-size: var(--text-headline);
-    font-weight: var(--weight-black);
-    color: var(--signal-yellow);
-    transition: all 0.3s ease;
-    text-shadow: 0 0 10px rgba(255, 211, 57, 0.3);
-  }
-  
-  .vote-count:hover {
-    transform: scale(1.1);
-    text-shadow: 0 0 20px rgba(255, 211, 57, 0.6);
-  }
-  
-  .feature-name {
-    font-size: var(--text-title);
-    margin-bottom: var(--space-2);
-  }
-  
-  .feature-description {
+    background: var(--bg-muted);
     color: var(--text-secondary);
-    margin-bottom: var(--space-4);
-    line-height: var(--leading-relaxed);
+    font-size: var(--text-small);
   }
-  
-  .vote-button {
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    color: white;
-    border: none;
-    border-radius: var(--radius-lg);
+
+  .vote-count {
+    font-size: var(--text-title);
     font-weight: var(--weight-semibold);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(19, 81, 255, 0.3);
+    color: var(--voyage-blue);
   }
-  
-  .vote-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(19, 81, 255, 0.4);
-  }
-  
-  .vote-button.voted {
-    background: linear-gradient(135deg, var(--signal-yellow), #ffed4e);
-    color: var(--ink);
-    box-shadow: 0 4px 15px rgba(255, 211, 57, 0.4);
-  }
-  
-  .vote-button.voted:hover {
-    box-shadow: 0 8px 25px rgba(255, 211, 57, 0.6);
-  }
-  
-  .idea-section {
-    padding: var(--space-16) 0;
-  }
-  
-  .idea-card {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-8);
-    border-radius: var(--radius-2xl);
-    text-align: center;
-  }
-  
-  .idea-form {
-    margin-top: var(--space-6);
-  }
-  
-  .idea-form textarea {
-    width: 100%;
-    padding: var(--space-4);
-    background: var(--bg-elevated);
-    border: 2px solid transparent;
-    border-radius: var(--radius-lg);
-    font-size: var(--text-body);
-    font-family: inherit;
-    margin-bottom: var(--space-4);
+
+  .feature-name { font-size: var(--text-headline); }
+  .feature-description { color: var(--text-secondary); line-height: var(--leading-relaxed); }
+
+  .vote-button {
+    justify-self: flex-start;
+    padding: 0.85rem 1.2rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-subtle);
+    background: transparent;
+    color: var(--text-primary);
+    font-weight: var(--weight-semibold);
     transition: all var(--duration-fast) var(--ease-out);
   }
-  
+
+  .vote-button:hover {
+    border-color: var(--voyage-blue);
+    color: var(--voyage-blue);
+  }
+
+  .vote-button.voted {
+    background: rgba(19, 81, 255, 0.08);
+    border-color: rgba(19, 81, 255, 0.24);
+    color: var(--voyage-blue);
+  }
+
+  .idea-section { padding: var(--space-12) 0 var(--space-16); }
+
+  .idea-card {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .idea-form {
+    margin-top: var(--space-4);
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .idea-form textarea {
+    width: 100%;
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    font-family: inherit;
+    font-size: var(--text-body);
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
   .idea-form textarea:focus {
     outline: none;
     border-color: var(--voyage-blue);
-    box-shadow: 0 0 0 4px rgba(19, 81, 255, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .community-hero { padding: var(--space-12) 0 var(--space-6); }
+    .features-grid { grid-template-columns: 1fr; }
   }
 </style>

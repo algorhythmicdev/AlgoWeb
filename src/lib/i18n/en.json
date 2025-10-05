@@ -12,7 +12,13 @@
     "community": "Community",
     "consulting": "Consulting",
     "contact": "Contact",
-    "about": "About"
+    "about": "About",
+    "nodevoyage_desc": "Discover our AI travel companion",
+    "ideonautix_desc": "Explore the startup productivity suite",
+    "pilot_badge": "Pilot",
+    "brand_aria": "AlgoRhythmics home",
+    "brand_name": "AlgoRhythmics",
+    "toggle_menu": "Toggle menu"
   },
   "hero": {
     "status": "In Development • Shaping the Future of AI",
@@ -20,7 +26,8 @@
     "tagline": "AlgoRhythmics - AI Innovation Lab",
     "subtitle": "Building NodeVoyage travel platform and Ideonautix productivity suite with cutting-edge AI technology",
     "cta_products": "Explore Products",
-    "cta_consulting": "AI Consulting"
+    "cta_consulting": "AI Consulting",
+    "next_milestone": "Next milestone"
   },
   "story": {
     "title": "Our Story",
@@ -35,24 +42,33 @@
     "title": "Meet the Founders",
     "subtitle": "Building the future of AI together",
     "nikita": {
+      "name": "Nikita Jurtaevs",
       "role": "Co-Founder & CEO",
+      "bio": "Visionary entrepreneur passionate about transforming travel and productivity through AI innovation",
       "current_title": "Current Position",
-      "position": "Head of Brand Strategy & Product Innovation at Reclame Fabriek",
-      "bio": "Visionary entrepreneur passionate about transforming travel and productivity through AI innovation"
+      "current_position": "Head of Brand Strategy & Product Innovation at Reclame Fabriek",
+      "expertise": [
+        "Creative Vision & Brand Strategy",
+        "AI Product Design",
+        "User Experience Innovation",
+        "Strategic Partnerships"
+      ]
     },
     "slaff": {
+      "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Co-Founder & CTO",
       "current_title": "Current Position",
       "position": "Founder of R&D & Head of Product Development at Reclame Fabriek",
-      "achievement1": "15+ years of engineering leadership",
-      "achievement2": "Expert in production systems and R&D",
-      "achievement3": "Led teams of 10+ engineers",
-      "achievement4": "Delivered 100+ successful projects",
+      "philosophy": "Technology should amplify human potential, not replace it. My goal is to build systems that empower people to achieve more.",
+      "achievements": [
+        "15+ years of engineering leadership",
+        "Expert in production systems and R&D",
+        "Led teams of 10+ engineers",
+        "Delivered 100+ successful projects"
+      ],
       "brand_title": "Brand Experience",
       "brand_intro": "Worked with global brands on premium advertising display systems:",
       "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV), shared by both founders",
-      "international_title": "International Exposure",
-      "philosophy": "Technology should amplify human potential, not replace it. My goal is to build systems that empower people to achieve more.",
       "algorhythmics_title": "Vision for AlgoRhythmics",
       "algorhythmics_vision": "Bringing enterprise-grade innovation experience and international brand work to build accessible, powerful AI products."
     }
@@ -61,12 +77,16 @@
     "title": "Our Products",
     "subtitle": "AI-powered platforms transforming how people travel and work",
     "nodevoyage": {
+      "name": "NodeVoyage",
+      "tagline": "Fun. Travel. Memories. Community.",
       "description": "AI-powered travel planning with your intelligent companion Nodi. Create personalized itineraries, discover hidden gems, and travel with confidence using AR tools and offline capabilities.",
       "status": "In Development",
       "mvp": "MVP: September 2026",
       "cta": "Learn More"
     },
     "ideonautix": {
+      "name": "Ideonautix",
+      "tagline": "Explore. Invent. Launch.",
       "description": "Modular productivity super-suite for startups. Get AI-powered insights for pitches, revenue tracking, team dynamics, and more with intelligent microservices designed for founders.",
       "status": "Planning Phase",
       "mvp": "MVP: February 2026",
@@ -75,13 +95,52 @@
   },
   "timeline": {
     "title": "Our Journey",
-    "subtitle": "Building the future, one milestone at a time"
+    "subtitle": "Building the future, one milestone at a time",
+    "milestones": {
+      "ideju-kauss": {
+        "title": "Ideju Kauss Competition",
+        "description": "Participating in Latvia's premier startup competition with the NodeVoyage concept",
+        "note": ""
+      },
+      "company-formation": {
+        "title": "Company Formation",
+        "description": "Official company registration, legal structure, and initial team setup",
+        "note": ""
+      },
+      "liaa-application": {
+        "title": "LIAA Partnership Application",
+        "description": "Submit application for partnership with Latvia's Investment Agency for educational programs",
+        "note": "Aspirational — not yet confirmed"
+      },
+      "mvp-ideonautix": {
+        "title": "Ideonautix MVP Launch",
+        "description": "First release of Ideonautix productivity platform with core microservices",
+        "note": ""
+      },
+      "pilot-consulting": {
+        "title": "AI Consulting Pilot Program",
+        "description": "Launch free pilot program with 3 selected companies for AI integration consulting",
+        "note": ""
+      },
+      "mvp-nodevoyage": {
+        "title": "NodeVoyage MVP Launch",
+        "description": "Public beta of NodeVoyage travel platform with core features and AI companion Nodi",
+        "note": ""
+      },
+      "education-program": {
+        "title": "Educational Program Launch",
+        "description": "Begin rollout of AI education programs targeting Latvia's secondary schools",
+        "note": "Target: 75+ institutes (research-based projection)"
+      }
+    }
   },
   "nodevoyage": {
     "name": "NodeVoyage",
     "status": "In Development • MVP Sept 2026",
     "tagline": "Your AI Travel Companion",
     "hero_description": "AI-powered travel planning that makes trip creation effortless, fun, and personalized. Meet Nodi, your intelligent travel companion.",
+    "seo_description": "AI-powered travel planning platform with intelligent itineraries, AR tools, and community sharing led by Nodi, your friendly travel companion.",
+    "hero_alt": "NodeVoyage interface preview",
     "cta_primary": "Join Waitlist",
     "cta_secondary": "Explore Features",
     "stat1_value": "Sept 2026",
@@ -93,10 +152,22 @@
     "features_title": "Revolutionary Features",
     "features_subtitle": "Everything you need for the perfect journey",
     "features": {
-      "nodi-ai": "Your friendly AI travel assistant that learns your preferences and creates personalized itineraries in seconds",
-      "smart-builder": "Visual trip builder with drag-and-drop nodes, vibe presets, and real-time optimization",
-      "mobile-suite": "AR translation, live interpretation, photo recognition, and full offline capabilities",
-      "community": "Share your adventures, discover routes from travelers worldwide, and plan trips together"
+      "nodi-ai": {
+        "title": "Nodi AI Companion",
+        "description": "Your friendly AI travel assistant that learns your preferences and creates personalized itineraries in seconds"
+      },
+      "smart-builder": {
+        "title": "Smart Trip Builder",
+        "description": "Visual trip builder with drag-and-drop nodes, vibe presets, and real-time optimization"
+      },
+      "mobile-suite": {
+        "title": "Mobile Capture Suite",
+        "description": "AR translation, live interpretation, photo recognition, and full offline capabilities"
+      },
+      "community": {
+        "title": "Community Sharing",
+        "description": "Share your adventures, discover routes from travelers worldwide, and plan trips together"
+      }
     },
     "how_title": "How NodeVoyage Works",
     "step1_title": "Tell Nodi Your Dream",
@@ -119,6 +190,8 @@
     "status": "Planning Phase • MVP Feb 2026",
     "tagline": "Intelligence for Startups",
     "hero_description": "Modular productivity super-suite designed for startup founders and growing teams. AI-powered microservices that actually understand your business.",
+    "seo_description": "Modular AI productivity suite for startups with pitch, revenue, and team intelligence microservices.",
+    "hero_alt": "Ideonautix dashboard preview",
     "cta_primary": "Get Early Access",
     "cta_secondary": "View Microservices",
     "stat1_value": "Feb 2026",
@@ -150,14 +223,59 @@
     "hero_subtitle": "Vote on features, share ideas, and shape the future together",
     "voting_title": "Vote on Features",
     "voting_subtitle": "Help us prioritize what matters most to you",
+    "voting_list_aria": "Feature voting list",
+    "category_aria": "Category: {category}",
+    "vote_count": "{count} votes",
+    "vote_button": "Vote",
+    "voted_button": "Voted",
+    "vote_for": "Vote for {feature}",
     "ideas_title": "Share Your Ideas",
     "ideas_placeholder": "What feature would you love to see?",
     "ideas_submit": "Submit Idea",
-    "leaderboard_title": "Top Requested Features",
-    "vote_button": "Vote",
-    "voted_button": "Voted",
-    "votes": "votes",
-    "thank_you": "Thank you! Your idea has been submitted."
+    "ideas_aria_label": "Submit your idea",
+    "ideas_helper": "Enter your feature idea or suggestion for our products",
+    "ideas_error_empty": "Please enter your idea",
+    "ideas_success": "Thank you! Your idea has been submitted.",
+    "toast_voted": "Voted for \"{feature}\"!",
+    "toast_removed": "Vote removed from \"{feature}\"",
+    "categories": {
+      "nodevoyage": "NodeVoyage",
+      "ideonautix": "Ideonautix"
+    },
+    "features": {
+      "ai-trip-optimizer": {
+        "name": "AI Trip Optimizer",
+        "description": "Automatically optimize routes based on time, budget, and preferences"
+      },
+      "team-collaboration-board": {
+        "name": "Team Collaboration Board",
+        "description": "Real-time collaborative planning for group trips"
+      },
+      "revenue-forecasting-ai": {
+        "name": "Revenue Forecasting AI",
+        "description": "Predictive analytics for startup revenue projections"
+      },
+      "ar-navigation-mode": {
+        "name": "AR Navigation Mode",
+        "description": "Augmented reality navigation for city exploration"
+      },
+      "pitch-deck-analyzer": {
+        "name": "Pitch Deck Analyzer",
+        "description": "AI-powered feedback on pitch presentations"
+      },
+      "offline-maps-pro": {
+        "name": "Offline Maps Pro",
+        "description": "Enhanced offline capabilities with 3D maps"
+      },
+      "social-travel-feed": {
+        "name": "Social Travel Feed",
+        "description": "Share travel moments with an immersive community feed"
+      },
+      "budget-tracker": {
+        "name": "Budget Tracker",
+        "description": "Real-time expense tracking during trips"
+      }
+    }
   },
   "consulting": {
     "hero_title": "AI Consulting",
@@ -169,14 +287,30 @@
     "what_3": "Custom Solution Design",
     "form_title": "Apply for Pilot Program",
     "form_company": "Company Name",
+    "form_company_placeholder": "Acme Corp",
     "form_name": "Your Name",
+    "form_name_placeholder": "Alex Founder",
     "form_email": "Email Address",
+    "form_email_placeholder": "founder@acme.com",
     "form_phone": "Phone Number",
+    "form_phone_placeholder": "+371 12345678",
     "form_industry": "Industry",
+    "form_industry_placeholder": "Travel, Hospitality, SaaS...",
     "form_description": "Describe your AI needs",
+    "form_description_placeholder": "Tell us about your AI needs, current challenges, and what you hope to achieve...",
     "form_submit": "Submit Application",
     "form_success": "Application submitted! We'll contact you within 48 hours.",
     "form_error": "Something went wrong. Please try again.",
+    "select_industry": "Select industry...",
+    "industries": {
+      "technology": "Technology",
+      "fintech": "FinTech",
+      "ecommerce": "E-commerce",
+      "healthcare": "Healthcare",
+      "education": "Education",
+      "manufacturing": "Manufacturing",
+      "other": "Other"
+    },
     "benefits_title": "What You Get",
     "benefit_1": "Free AI strategy consultation",
     "benefit_2": "Technical implementation plan",
@@ -196,9 +330,13 @@
     "hero_subtitle": "Let's build something amazing together",
     "form_title": "Send Us a Message",
     "form_name": "Your Name",
+    "form_name_placeholder": "Alex Founder",
     "form_email": "Email Address",
+    "form_email_placeholder": "you@company.com",
     "form_subject": "Subject",
+    "form_subject_placeholder": "Partnership opportunity",
     "form_message": "Your Message",
+    "form_message_placeholder": "Your message...",
     "form_submit": "Send Message",
     "form_success": "Message sent! We'll respond soon.",
     "form_error": "Something went wrong. Please try again.",
@@ -250,6 +388,14 @@
     "products_title": "Products",
     "company": "Company",
     "resources": "Resources",
+    "founders": "Founders",
+    "vision": "Vision",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "roadmap": "Roadmap",
+    "community": "Community",
+    "consulting": "Consulting",
+    "contact": "Contact",
     "about": "About",
     "careers": "Careers",
     "blog": "Blog",
@@ -259,6 +405,11 @@
     "cookies": "Cookie Policy",
     "rights": "All rights reserved",
     "made_in": "Made with ❤️ in Latvia",
-    "copyright": "© 2025 AlgoRhythmics"
+    "copyright": "© 2025 AlgoRhythmics",
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "email": "Email"
+    }
   }
 }

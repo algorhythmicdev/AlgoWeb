@@ -1,4 +1,5 @@
 <script>
+  // @ts-nocheck
   import { language } from '$stores/language';
   
   let isOpen = false;

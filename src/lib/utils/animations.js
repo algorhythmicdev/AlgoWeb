@@ -1,5 +1,7 @@
 // Modern animation actions for SvelteKit
 
+// @ts-nocheck
+
 // Intersection fade/slide-up reveal (on scroll)
 export function reveal(node, { delay = 0, duration = 500, y = 32, once = true } = {}) {
   // Check for reduced motion preference

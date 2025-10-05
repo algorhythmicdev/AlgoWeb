@@ -8,41 +8,44 @@ export {
   revealOnScroll,
   staggerReveal,
   tilt,
-  particleExplode,
-  morphGradient,
-  typewriter,
   magnetic,
   parallax,
-  smoothScroll
+  typewriter,
+  morphBlob,
+  ripple,
+  sparkleTrail,
+  particleExplode,
+  morphGradient
 } from './animations.js';
 
 // Validation utilities
 export {
   validateEmail,
   validatePhone,
-  validateUrl,
+  validateURL,
   validateRequired,
   validateMinLength,
   validateMaxLength,
-  validatePattern
+  validatePattern,
+  validateForm
 } from './validators.js';
 
 // Formatting utilities
 export {
   formatDate,
-  formatCurrency,
+  formatDateShort,
   formatNumber,
-  formatPercentage,
-  truncateText,
+  formatCurrency,
+  truncate,
   slugify,
-  capitalizeFirst
+  capitalize,
+  formatRelativeTime
 } from './formatters.js';
 
 // SEO utilities
 export {
   generateMetaTags,
   generateStructuredData,
-  generateCanonicalUrl,
-  generateOpenGraph,
-  generateTwitterCard
+  generateBreadcrumbs,
+  sanitizeForMeta
 } from './seo.js';

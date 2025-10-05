@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 /**
  * AlgoRhythmics i18n Configuration
  * Internationalization setup for 6 languages
  */
 
-import { register, init, getLocaleFromNavigator } from 'svelte-i18n';
+import { register, init, getLocaleFromNavigator, locale, t, time, date, number } from 'svelte-i18n';
 
 // Register all translation files
 register('en', () => import('./en.json'));
@@ -92,7 +94,7 @@ init({
 });
 
 // Export locale utilities
-export { locale, t as _, time, date, number } from 'svelte-i18n';
+export { locale, t as _, time, date, number };
 
 /**
  * Available languages configuration

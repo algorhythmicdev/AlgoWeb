@@ -60,8 +60,8 @@ export const footerLinks = {
     { label: 'footer.contact', href: '/contact' }
   ],
   social: [
-    { label: 'LinkedIn', href: 'https://linkedin.com/company/algorhythmics', icon: 'linkedin' },
-    { label: 'GitHub', href: 'https://github.com/algorhythmics', icon: 'github' },
-    { label: 'Email', href: 'mailto:AlgoRhythmics.dev@gmail.com', icon: 'email' }
+    { label: 'footer.social.linkedin', href: 'https://linkedin.com/company/algorhythmics', icon: 'linkedin' },
+    { label: 'footer.social.github', href: 'https://github.com/algorhythmics', icon: 'github' },
+    { label: 'footer.social.email', href: 'mailto:AlgoRhythmics.dev@gmail.com', icon: 'email' }
   ]
 };
