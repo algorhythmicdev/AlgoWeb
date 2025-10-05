@@ -152,21 +152,21 @@
   }
 
   :global([data-theme='dark']) .nav {
-    background: color-mix(in srgb, rgba(3, 7, 18, 0.86) 76%, rgba(var(--voyage-blue-rgb), 0.2) 24%);
+    background: color-mix(in srgb, rgba(6, 12, 26, 0.78) 70%, rgba(var(--voyage-blue-rgb), 0.24) 30%);
     background-image:
-      linear-gradient(122deg, rgba(var(--voyage-blue-rgb), 0.18) 0%, rgba(var(--aurora-purple-rgb), 0.18) 100%),
+      linear-gradient(122deg, rgba(var(--voyage-blue-rgb), 0.22) 0%, rgba(var(--aurora-purple-rgb), 0.2) 100%),
       var(--grain-texture);
-    border-bottom: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 58%, rgba(255, 255, 255, 0.08) 42%);
-    box-shadow: 0 22px 54px rgba(1, 3, 10, 0.52);
+    border-bottom: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 62%, rgba(255, 255, 255, 0.08) 38%);
+    box-shadow: 0 22px 54px rgba(4, 7, 18, 0.45);
   }
 
   :global([data-theme='dark']) .nav.nav-condensed {
-    background: color-mix(in srgb, rgba(4, 8, 20, 0.9) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
+    background: color-mix(in srgb, rgba(8, 14, 30, 0.86) 62%, rgba(var(--voyage-blue-rgb), 0.28) 38%);
     background-image:
-      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.22) 0%, rgba(var(--aurora-purple-rgb), 0.2) 44%, transparent 100%),
+      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.28) 0%, rgba(var(--aurora-purple-rgb), 0.22) 44%, transparent 100%),
       var(--grain-texture);
-    box-shadow: 0 28px 68px rgba(1, 3, 10, 0.58);
-    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 56%, rgba(255, 255, 255, 0.1) 44%);
+    box-shadow: 0 28px 68px rgba(3, 6, 18, 0.52);
+    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 58%, rgba(255, 255, 255, 0.1) 42%);
   }
 
   .nav-container {
