@@ -65,8 +65,30 @@ body::after {
   transition: opacity 320ms var(--ease-in-out), mix-blend-mode 320ms var(--ease-in-out);
 }
 
-:global([data-theme='dark']) html {
-  color-scheme: dark;
+:global([data-theme='dark']) html::before {
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(var(--voyage-blue-rgb), 0.3) 0%, transparent 70%),
+    radial-gradient(110% 120% at 100% 4%, rgba(var(--aurora-purple-rgb), 0.28) 0%, transparent 74%),
+    linear-gradient(180deg, color-mix(in srgb, #020714 92%, rgba(var(--voyage-blue-rgb), 0.22) 8%) 0%, color-mix(in srgb, #050c1e 90%, rgba(var(--aurora-purple-rgb), 0.18) 10%) 100%);
+}
+
+:global([data-theme='dark']) html::after {
+  background-image:
+    radial-gradient(circle at 20% 18%, rgba(var(--voyage-blue-rgb), 0.36) 0%, transparent 46%),
+    radial-gradient(circle at 76% 14%, rgba(var(--aurora-purple-rgb), 0.32) 0%, transparent 56%),
+    radial-gradient(circle at 52% 78%, rgba(var(--signal-yellow-rgb), 0.22) 0%, transparent 62%);
+  opacity: 0.42;
+}
+
+:global([data-theme='dark']) body::before {
+  background:
+    radial-gradient(140% 140% at 20% 18%, rgba(var(--voyage-blue-rgb), 0.34) 0%, transparent 68%),
+    radial-gradient(120% 120% at 78% 16%, rgba(var(--aurora-purple-rgb), 0.3) 0%, transparent 74%);
+}
+
+:global([data-theme='dark']) body::after {
+  opacity: 0.3;
+  mix-blend-mode: screen;
 }
 
 /* ==================== RESPONSIVE TYPOGRAPHY SYSTEM ==================== */
