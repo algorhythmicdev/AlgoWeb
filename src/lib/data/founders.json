@@ -3,16 +3,15 @@
     "name": "Nikita Jurtaevs",
     "role": "Co-Founder & CEO",
     "avatar": "/images/founders/founder-nikita.webp",
-    "bio": "Creative visionary leading AlgoRhythmics brand strategy and product innovation. Passionate about making AI accessible and delightful.",
+    "bio": "Nikita Jurtaevs serves as CEO in a 50/50 co-leadership model, guiding company strategy, partnerships, and brand direction while coordinating product management and UX/QA across NodeVoyage and Ideonautix in the early build phase. In parallel with AlgoRhythmics, he advances next-gen LED neon, in-house LED controllers, custom coatings, and 3D-printed components inside Reclame Fabriek’s Signage Research Department, with showcase work presented across Nordic expos.",
     "currentPosition": {
       "company": "Reclame Fabriek",
-      "title": "Head of Brand Strategy & Product Innovation",
+      "title": "Co-CEO & Brand/R&D Strategist, Signage Research Department",
       "location": "Daugavpils, Latvia",
       "achievements": [
-        "Co-led innovation initiatives together with R&D",
-        "Drove brand and product storytelling for global clients",
-        "Shaped go-to-market for LED Neon New Generation",
-        "Presented at EU expos alongside R&D leadership"
+        "Leads brand and product direction with accessibility-first, multilingual delivery and education outreach plans aligned to LIAA, covering early pilots, MVPs, and a lean GTM timeline for 2025–2026 apps.",
+        "Contributed to signage R&D initiatives involving next-gen LED neon tubes, in-house CUBE LED DIGI controllers, custom coatings, and 3D printing for advanced client projects within Reclame Fabriek’s innovation arm.",
+        "Maintains honest early-stage positioning: AlgoRhythmics is in development while the founders actively work in Reclame Fabriek R&D, emphasizing real execution over vanity metrics."
       ]
     },
     "brandExperience": {
@@ -28,10 +27,10 @@
       ]
     },
     "expertise": [
-      "Creative Vision & Brand Strategy",
-      "AI Product Design",
-      "User Experience Innovation",
-      "Strategic Partnerships"
+      "Co-Leadership & Brand Strategy",
+      "Product Management & UX/QA Orchestration",
+      "Signage R&D Collaboration",
+      "Partnership Development & Education Outreach"
     ],
     "email": "nikita@algorhythmics.com",
     "linkedin": "https://linkedin.com/in/nikita-jurtaevs"
@@ -42,13 +41,12 @@
     "avatar": "/images/founders/founder-slaff.webp",
     "currentPosition": {
       "company": "Reclame Fabriek",
-      "title": "Founder of R&D Department & Head of Product Development",
+      "title": "Co-CTO & Systems Architect, Signage Research Department",
       "location": "Daugavpils, Latvia",
       "achievements": [
-        "Founded and established R&D Department from ground up",
-        "Developed innovative LED Neon New Generation technology (300+ colors)",
-        "Led product development for Fortune 500 global brands",
-        "Represented company at Stockholm Sign Fair 2023, Helsinki 2024, and multiple EU expos"
+        "Responsible for stack and delivery using a Google Cloud–first architecture (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) and modern app layers (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE) with security, GDPR, and WCAG 2.2 disciplines as baselines.",
+        "Brings hands-on R&D experience from Reclame Fabriek’s innovation hub, aligning signage-grade controller engineering and LED neon systems with explainable AI features and real-time UX patterns in consumer software.",
+        "Near-term delivery focuses on three funding sprints—Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard—to underwrite NodeVoyage and Ideonautix scale-up while recruiting for design and full-stack roles."
       ]
     },
     "brandExperience": {
@@ -124,15 +122,15 @@
       }
     ],
     "expertise": [
-      "R&D Strategy & Leadership",
-      "Product Development Management",
-      "Technical Architecture & AI Systems",
-      "International Business Presentations",
-      "EU Market Navigation",
-      "Cross-functional Team Leadership"
+      "Cloud-Native Platform Engineering",
+      "AI Systems & Controller Design",
+      "Signage R&D Leadership",
+      "International Product Delivery",
+      "Real-time UX & Systems Integration",
+      "Cross-functional Team Building"
     ],
-    "philosophy": "Technology serves humanity best when it combines strategic vision, deep technical expertise, and the ability to communicate innovation across borders. Working with global brands taught me that excellence comes from obsessive attention to detail and relentless innovation.",
-    "algorhythmicsVision": "Bringing enterprise-grade innovation experience and international business acumen from working with world's leading brands to create AI solutions that are both technically sophisticated and genuinely accessible to everyone.",
+    "philosophy": "Vjaceslavs “Slaff” Trosins serves as CTO in the same 50/50 co-leadership model, owning technical vision and platform delivery across web, mobile, APIs, and AI integration for NodeVoyage and Ideonautix while architecting Reclame Fabriek’s signage-grade controller systems.",
+    "algorhythmicsVision": "Pair rigorous signage R&D with cloud-first engineering so consumer AI products ship with the reliability, explainability, and real-time responsiveness demanded by modern installations.",
     "email": "slaff@algorhythmics.com",
     "linkedin": "https://linkedin.com/in/slaff-trosins"
   }

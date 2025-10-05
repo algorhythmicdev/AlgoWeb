@@ -179,6 +179,63 @@
     margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
+  .founder-tabs {
+    display: flex;
+    gap: clamp(1.2rem, 3.6vw, 2.6rem);
+    flex-wrap: wrap;
+    margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
+  }
+
+  .founder-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: clamp(0.85rem, 2.5vw, 1.1rem) clamp(1.3rem, 3vw, 1.7rem);
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, var(--border-strong) 20%, rgba(255, 255, 255, 0.4) 80%);
+    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(19, 81, 255, 0.06) 12%);
+    color: var(--text-secondary);
+    transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+  }
+
+  .founder-tab img {
+    width: clamp(52px, 8vw, 64px);
+    height: clamp(52px, 8vw, 64px);
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    box-shadow: 0 12px 26px rgba(19, 81, 255, 0.18);
+  }
+
+  .founder-tab span {
+    display: grid;
+    gap: 0.25rem;
+    text-align: left;
+  }
+
+  .founder-tab strong {
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+  }
+
+  .founder-tab small {
+    color: var(--text-tertiary);
+    font-size: var(--text-small);
+  }
+
+  .founder-tab:hover,
+  .founder-tab:focus-visible {
+    transform: translateY(-2px);
+    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(19, 81, 255, 0.12) 18%);
+    border-color: color-mix(in srgb, var(--voyage-blue) 35%, rgba(255, 255, 255, 0.45) 65%);
+    color: var(--text-primary);
+  }
+
+  .founder-tab.active {
+    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(19, 81, 255, 0.18) 22%);
+    border-color: color-mix(in srgb, var(--voyage-blue) 45%, rgba(255, 255, 255, 0.45) 55%);
+    color: var(--text-primary);
+  }
+
   .founder-stage {
     position: relative;
   }

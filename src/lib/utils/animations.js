@@ -3,13 +3,12 @@
 // @ts-nocheck
 
 // Enhanced intersection reveal with exciting animations
-export function reveal(node, { 
-  delay = 0, 
-  duration = 800, 
-  y = 50, 
-  x = 0, 
-  scale = 0.95, 
-  rotation = 0,
+export function reveal(node, {
+  delay = 0,
+  duration = 800,
+  y = 50,
+  x = 0,
+  scale = 0.95,
   once = true,
   animationType = 'slideUp',
   threshold = 0.1
