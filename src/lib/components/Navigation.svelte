@@ -22,7 +22,7 @@
     'var(--gradient-spectrum-5)'
   ];
 
-  function handleScroll() {
+  function updateScrollState() {
     const scrollY = window.scrollY;
     isScrolled = scrollY > 32;
     navigation.updateScroll(scrollY);
