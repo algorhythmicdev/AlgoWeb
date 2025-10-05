@@ -400,63 +400,64 @@ ul[class],
 ol[class] { list-style: none; }
 
 /* ==================== RESPONSIVE CONTAINER SYSTEM ==================== */
+
 .container {
   width: min(100%, var(--container-2xl));
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
 
 .container-sm {
   width: min(100%, var(--container-sm));
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
 }
 
 .container-lg {
   width: min(100%, var(--container-xl));
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 clamp(2rem, 5vw, 4rem);
 }
 
 .container-fluid {
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 var(--space-md);
+    padding: 0 clamp(1rem, 5vw, 2rem);
   }
-  
+
   .container-sm {
-    padding: 0 var(--space-sm);
+    padding: 0 clamp(0.75rem, 4vw, 1.5rem);
   }
-  
+
   .container-lg {
-    padding: 0 var(--space-md);
+    padding: 0 clamp(1.25rem, 5vw, 2.5rem);
   }
-  
+
   .container-fluid {
-    padding: 0 var(--space-sm);
+    padding: 0 clamp(0.75rem, 4vw, 1.5rem);
   }
 }
 
 /* ==================== RESPONSIVE SECTION SYSTEM ==================== */
 .section {
-  padding: var(--section-padding-desktop) 0;
+  padding: clamp(4rem, 10vw, 7.5rem) 0;
 }
 
 .section-sm {
-  padding: var(--section-padding-tablet) 0;
+  padding: clamp(3rem, 8vw, 5.5rem) 0;
 }
 
 .section-lg {
-  padding: var(--section-padding-xl) 0;
+  padding: clamp(5rem, 12vw, 9rem) 0;
 }
 
 .section-xl {
-  padding: var(--section-padding-xl) 0;
+  padding: clamp(6rem, 14vw, 10.5rem) 0;
 }
 
 .section-hero {
