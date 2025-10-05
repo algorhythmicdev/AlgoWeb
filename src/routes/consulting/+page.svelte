@@ -132,6 +132,11 @@
 
 <!-- Hero Section -->
 <section class="consulting-hero">
+  <div class="consulting-hero__halo" aria-hidden="true">
+    <span class="consulting-blob consulting-blob--one"></span>
+    <span class="consulting-blob consulting-blob--two"></span>
+    <span class="consulting-constellation consulting-constellation--one"></span>
+  </div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">{$_('consulting.hero_title')}</span>
@@ -319,6 +324,7 @@
   padding: clamp(6rem, 14vw, 8.5rem) 0;
   position: relative;
   overflow: hidden;
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 }
 
 .consulting-hero::before {
@@ -330,6 +336,82 @@
   filter: blur(140px);
   opacity: 0.7;
   pointer-events: none;
+}
+
+.consulting-hero__halo {
+  position: absolute;
+  inset: -15% -10% auto;
+  height: clamp(24rem, 40vw, 30rem);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.consulting-blob {
+  position: absolute;
+  width: clamp(200px, 32vw, 320px);
+  height: clamp(200px, 32vw, 320px);
+  background: var(--gradient-spectrum-1);
+  opacity: 0.35;
+  filter: blur(60px);
+  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+  animation: consultingMorph 26s ease-in-out infinite;
+}
+
+.consulting-blob--one {
+  top: -18%;
+  left: -12%;
+}
+
+.consulting-blob--two {
+  right: -10%;
+  bottom: -24%;
+  background: var(--gradient-spectrum-4);
+  animation-delay: -12s;
+}
+
+.consulting-constellation {
+  position: absolute;
+  inset: 12% 18%;
+  border-radius: var(--radius-2xl);
+  background:
+    radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 42%),
+    radial-gradient(circle at 82% 32%, rgba(255, 211, 57, 0.3) 0%, transparent 48%),
+    linear-gradient(120deg, rgba(19, 81, 255, 0.1), rgba(106, 56, 255, 0));
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9), transparent 70%);
+  animation: consultingSweep 18s ease-in-out infinite;
+}
+
+.consulting-constellation--one {
+  animation-delay: -6s;
+}
+
+@keyframes consultingMorph {
+  0% {
+    transform: translate3d(-4%, 2%, 0) scale(0.92) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(6%, -4%, 0) scale(1.05) rotate(6deg);
+  }
+  100% {
+    transform: translate3d(-2%, 4%, 0) scale(0.94) rotate(-3deg);
+  }
+}
+
+@keyframes consultingSweep {
+  0%, 100% {
+    opacity: 0.62;
+    transform: scale(0.96) translate3d(-4%, -2%, 0);
+  }
+  40% {
+    opacity: 0.88;
+    transform: scale(1.06) translate3d(3%, 4%, 0);
+  }
+  70% {
+    opacity: 0.74;
+    transform: scale(1) translate3d(-2%, 2%, 0);
+  }
 }
 
 .hero-grid {
@@ -528,6 +610,21 @@
     padding-left: 1.2rem;
     color: var(--text-secondary);
   }
+
+:global([data-theme='dark']) .consulting-hero__halo .consulting-blob {
+  opacity: 0.45;
+}
+
+:global([data-theme='dark']) .consulting-hero__halo .consulting-constellation {
+  opacity: 0.82;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consulting-blob,
+  .consulting-constellation {
+    animation: none;
+  }
+}
 
   @media (max-width: 960px) {
     .hero-grid {

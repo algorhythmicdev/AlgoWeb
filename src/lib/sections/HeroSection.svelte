@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { spring } from 'svelte/motion';
   import { _ } from 'svelte-i18n';
   import timelineData from '$data/timeline.json';
@@ -79,7 +79,7 @@
     pointerSpring.set({ x: 0.5, y: 0.45 });
   }
 
-  function handleScroll() {
+  function updateDepthFromScroll() {
     if (!heroSection || typeof window === 'undefined') return;
     const rect = heroSection.getBoundingClientRect();
     const viewport = Math.max(window.innerHeight, 1);
@@ -87,19 +87,26 @@
     depthSpring.set(progress);
   }
 
-  $: if (heroSection) handleScroll();
+  $: if (heroSection) updateDepthFromScroll();
 
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
-  }
+  let teardownWindowListeners = () => {};
+
+  onMount(() => {
+    if (typeof window === 'undefined') return;
+    const opts = { passive: true };
+    window.addEventListener('scroll', updateDepthFromScroll, opts);
+    window.addEventListener('resize', updateDepthFromScroll);
+    updateDepthFromScroll();
+
+    teardownWindowListeners = () => {
+      window.removeEventListener('scroll', updateDepthFromScroll);
+      window.removeEventListener('resize', updateDepthFromScroll);
+    };
+    return teardownWindowListeners;
+  });
 
   onDestroy(() => {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    }
+    teardownWindowListeners();
     unsubscribePointer();
     unsubscribeDepth();
   });

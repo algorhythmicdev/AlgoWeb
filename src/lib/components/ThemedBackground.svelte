@@ -95,7 +95,7 @@
     pointerSpring.set({ x: 0.5, y: 0.35 });
   }
 
-  function handleScroll() {
+  function syncScrollDepth() {
     if (typeof window === 'undefined') return;
     const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
     scrollSpring.set(Math.max(0, Math.min(1, window.scrollY / max)));
@@ -107,8 +107,8 @@
       window.addEventListener('pointerleave', handleLeave);
       raf = requestAnimationFrame(animate);
     }
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('scroll', syncScrollDepth, { passive: true });
+    syncScrollDepth();
 
     return () => {
       if (!prefersReducedMotion) {
@@ -116,7 +116,7 @@
         window.removeEventListener('pointerleave', handleLeave);
         cancelAnimationFrame(raf);
       }
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', syncScrollDepth);
     };
   });
 
@@ -163,6 +163,19 @@
     mix-blend-mode: screen;
     animation: floaty var(--duration) ease-in-out infinite alternate;
     animation-delay: var(--delay);
+  }
+
+  :global([data-theme='dark']) .wash {
+    background:
+      radial-gradient(50% 60% at 22% 18%, rgba(47, 92, 220, 0.32), transparent 70%),
+      radial-gradient(48% 52% at 74% 14%, rgba(106, 56, 255, 0.28), transparent 62%),
+      linear-gradient(180deg, rgba(4, 9, 26, 0.92) 0%, rgba(2, 5, 17, 0.9) 60%, rgba(2, 5, 17, 0.86) 100%);
+    opacity: 0.52;
+  }
+
+  :global([data-theme='dark']) .dot {
+    mix-blend-mode: screen;
+    opacity: 0.55;
   }
 
   @media (prefers-reduced-motion: reduce) {
