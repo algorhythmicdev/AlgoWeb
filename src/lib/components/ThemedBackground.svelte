@@ -95,7 +95,7 @@
     pointerSpring.set({ x: 0.5, y: 0.35 });
   }
 
-  function handleScroll() {
+  function syncScrollDepth() {
     if (typeof window === 'undefined') return;
     const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
     scrollSpring.set(Math.max(0, Math.min(1, window.scrollY / max)));
@@ -107,8 +107,8 @@
       window.addEventListener('pointerleave', handleLeave);
       raf = requestAnimationFrame(animate);
     }
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('scroll', syncScrollDepth, { passive: true });
+    syncScrollDepth();
 
     return () => {
       if (!prefersReducedMotion) {
@@ -116,7 +116,7 @@
         window.removeEventListener('pointerleave', handleLeave);
         cancelAnimationFrame(raf);
       }
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', syncScrollDepth);
     };
   });
 
