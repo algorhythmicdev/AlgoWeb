@@ -315,37 +315,51 @@
 </section>
 
 <style>
-  .consulting-hero {
-    padding: var(--space-16) 0;
-    background: var(--bg-muted);
-  }
+.consulting-hero {
+  padding: clamp(6rem, 14vw, 8.5rem) 0;
+  position: relative;
+  overflow: hidden;
+}
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: var(--space-6);
-    align-items: center;
-  }
+.consulting-hero::before {
+  content: '';
+  position: absolute;
+  inset: clamp(-5rem, -8vw, -2rem) -15% auto;
+  height: clamp(20rem, 36vw, 26rem);
+  background: radial-gradient(circle at 40% 40%, rgba(19, 81, 255, 0.2), transparent 70%);
+  filter: blur(140px);
+  opacity: 0.7;
+  pointer-events: none;
+}
 
-  .hero-copy {
-    display: grid;
-    gap: var(--space-3);
-  }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(2.6rem, 5vw, 3.8rem);
+  align-items: center;
+}
+
+.hero-copy {
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.2rem);
+}
 
   .hero-copy h1 {
     font-size: clamp(2.2rem, 5vw, 3rem);
   }
 
-  .spots-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: 0.75rem 1.2rem;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-    width: fit-content;
-  }
+.spots-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(19, 81, 255, 0.22);
+  background: var(--bg-surface);
+  background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
+  backdrop-filter: blur(18px);
+  width: fit-content;
+}
 
   .spots-number {
     font-size: clamp(2rem, 4vw, 2.8rem);
@@ -354,22 +368,24 @@
     line-height: 1;
   }
 
-  .hero-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-4);
-  }
+.hero-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.4rem, 3vw, 2rem);
+  margin-top: clamp(1.8rem, 4vw, 2.4rem);
+}
 
-  .feature {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 0.85rem 1.1rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-  }
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.95rem 1.35rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--bg-surface);
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px);
+}
 
   .feature-icon {
     font-size: 1.6rem;
@@ -380,41 +396,50 @@
     color: var(--text-secondary);
   }
 
-  .hero-cta {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: var(--space-5);
-    display: grid;
-    gap: var(--space-3);
-    justify-items: start;
-  }
+.hero-cta {
+  background: var(--bg-surface);
+  background: var(--surface-glass);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius-2xl);
+  padding: clamp(2.4rem, 5vw, 3.1rem);
+  display: grid;
+  gap: clamp(1.4rem, 3vw, 2rem);
+  justify-items: start;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(24px);
+}
 
   .hero-cta p {
     color: var(--text-secondary);
   }
 
-  .form-section {
-    padding: var(--space-16) 0;
-  }
+.form-section {
+  padding: clamp(6rem, 14vw, 8rem) 0;
+}
 
-  .form-wrapper {
-    max-width: 760px;
-    margin: 0 auto var(--space-10);
-    padding: var(--space-6);
-  }
+.form-wrapper {
+  max-width: 760px;
+  margin: 0 auto clamp(4rem, 8vw, 5rem);
+  padding: clamp(2.6rem, 5vw, 3.4rem);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: var(--bg-surface);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(24px);
+}
 
-  .form-title {
-    text-align: center;
-    margin-bottom: var(--space-6);
-  }
+.form-title {
+  text-align: center;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
-  }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
 
   .form-group {
     display: flex;
@@ -430,15 +455,15 @@
     font-weight: var(--weight-semibold);
   }
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: var(--space-3);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-    transition: border-color var(--duration-fast) var(--ease-out);
-  }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: clamp(1rem, 2.4vw, 1.35rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(19, 81, 255, 0.16);
+  background: var(--bg-surface);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
 
   .form-group input:focus,
   .form-group select:focus,
@@ -479,20 +504,23 @@
     to { transform: rotate(360deg); }
   }
 
-  .benefits-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--space-4);
-  }
+.benefits-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1.8rem, 4vw, 2.4rem);
+}
 
-  .benefit-card {
-    padding: var(--space-4);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-    display: grid;
-    gap: var(--space-3);
-  }
+.benefit-card {
+  padding: clamp(1.9rem, 3vw, 2.3rem);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: var(--bg-surface);
+  background: var(--surface-glass);
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 1.6rem);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(22px);
+}
 
   .benefit-card ul {
     display: grid;

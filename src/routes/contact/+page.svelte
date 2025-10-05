@@ -276,9 +276,21 @@
 
 <style>
   .contact-hero {
-    padding: var(--space-16) 0;
+    padding: clamp(6rem, 14vw, 8rem) 0;
     text-align: center;
-    background: var(--bg-muted);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-hero::before {
+    content: '';
+    position: absolute;
+    inset: clamp(-5rem, -8vw, -2rem) -12% auto;
+    height: clamp(18rem, 32vw, 24rem);
+    background: radial-gradient(circle at 50% 40%, rgba(19, 81, 255, 0.2), transparent 70%);
+    filter: blur(140px);
+    opacity: 0.7;
+    pointer-events: none;
   }
 
   .contact-hero h1 {
@@ -287,20 +299,27 @@
   }
 
   .contact-section {
-    padding: var(--space-16) 0;
+    padding: clamp(6rem, 14vw, 8rem) 0;
   }
 
   .contact-grid {
     display: grid;
-    gap: var(--space-6);
+    gap: clamp(2.4rem, 5vw, 3.5rem);
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: start;
   }
 
-  form {
-    display: grid;
-    gap: var(--space-3);
-  }
+form {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 1.8rem);
+  padding: clamp(2.4rem, 5vw, 3.2rem);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: var(--bg-surface);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(24px);
+}
 
   .form-group {
     display: grid;
@@ -309,14 +328,14 @@
 
   .form-group label { font-weight: var(--weight-semibold); }
 
-  .form-group input,
-  .form-group textarea {
-    padding: var(--space-3);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-    transition: border-color var(--duration-fast) var(--ease-out);
-  }
+.form-group input,
+.form-group textarea {
+  padding: clamp(1.1rem, 2.4vw, 1.4rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(19, 81, 255, 0.16);
+  background: var(--bg-surface);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
 
   .form-group input:focus,
   .form-group textarea:focus {
@@ -330,12 +349,19 @@
 
   .btn-block { width: 100%; display: inline-flex; justify-content: center; }
 
-  .calendar-card,
-  .info-card,
-  .social-card {
-    display: grid;
-    gap: var(--space-3);
-  }
+.calendar-card,
+.info-card,
+.social-card {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 1.8rem);
+  padding: clamp(2rem, 4vw, 2.6rem);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: var(--bg-surface);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(24px);
+}
 
   .info-item,
   .social-link {
@@ -350,24 +376,28 @@
   .info-value,
   .social-link { color: var(--text-secondary); }
 
-  .calendar-button,
-  .social-link {
-    transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
-  }
+.calendar-button,
+.social-link {
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
 
-  .calendar-button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: 0.8rem 1.2rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-  }
+.calendar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(19, 81, 255, 0.22);
+  background: var(--bg-surface);
+  background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
+  color: var(--text-primary);
+  backdrop-filter: blur(18px);
+}
 
   .calendar-button:hover,
   .social-link:hover {
     color: var(--voyage-blue);
+    border-color: rgba(19, 81, 255, 0.38);
   }
 
   @media (max-width: 960px) {

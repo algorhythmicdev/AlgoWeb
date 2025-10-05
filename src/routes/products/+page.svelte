@@ -28,7 +28,7 @@
         {#if products[key]}
           <article class="catalog-card">
             <div class="catalog-header">
-              <span class="kicker">{products[key].name}</span>
+              <span class="kicker">{$_(`products.${key}.name`)}</span>
               <span class="badge-pill">{$_(`products.${key}.status`)}</span>
             </div>
 
@@ -63,30 +63,28 @@
   .hero-container {
     max-width: 720px;
     display: grid;
-    gap: 0.75rem;
+    gap: 1rem;
     text-align: center;
     margin: 0 auto;
   }
 
   .hero-container p { color: var(--text-secondary); }
 
-  .catalog {
-    background: var(--bg-muted);
-  }
-
   .catalog-grid {
     display: grid;
-    gap: var(--space-4);
+    gap: clamp(1.8rem, 4vw, 2.8rem);
   }
 
   .catalog-card {
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: var(--space-4);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
+    padding: clamp(2rem, 4vw, 3rem);
     background: var(--bg-surface);
+    background: var(--surface-glass);
     box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(24px);
     display: grid;
-    gap: var(--space-3);
+    gap: clamp(1.5rem, 3vw, 2rem);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
@@ -94,7 +92,7 @@
   }
 
   .catalog-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
   }
 
@@ -102,11 +100,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-2);
+    gap: 1rem;
   }
 
   .catalog-card h2 {
-    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -120,7 +118,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-3);
+    gap: clamp(1.2rem, 3vw, 2rem);
     flex-wrap: wrap;
   }
 
@@ -131,22 +129,24 @@
 
   .cta-card {
     background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6);
+    background: var(--surface-glass);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
+    padding: clamp(2.5rem, 5vw, 3.5rem);
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: clamp(1.8rem, 4vw, 2.5rem);
     align-items: stretch;
     box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(24px);
   }
 
-  .cta-copy { display: grid; gap: 0.8rem; }
+  .cta-copy { display: grid; gap: 1rem; }
   .cta-copy p { color: var(--text-secondary); }
 
   .cta-actions {
     display: flex;
-    gap: var(--space-2);
+    gap: 1rem;
     flex-wrap: wrap;
   }
 
