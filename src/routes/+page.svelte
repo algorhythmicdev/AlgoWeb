@@ -1,7 +1,7 @@
 <script>
   // @ts-nocheck
-  import HeroSection from '$sections/hero-section.svelte';
-  import FoundersSection from '$sections/founders-section.svelte';
+  import HeroSection from '$sections/HeroSection.svelte';
+  import FoundersSection from '$sections/FoundersSection.svelte';
   import { _ } from 'svelte-i18n';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
   import productsData from '$data/products.json';
