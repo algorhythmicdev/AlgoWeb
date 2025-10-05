@@ -122,19 +122,19 @@
 >
   <div class="container hero-shell">
     <div class="hero-copy" use:revealOnScroll>
-      <span class="status-chip">{$_('hero.status')}</span>
-      <h1>{$_('hero.title')}</h1>
-      <p class="hero-tagline" use:typewriter={{ speed: 26 }}>{$_('hero.tagline')}</p>
-      <p class="hero-lead">{$_('hero.subtitle')}</p>
+      <span class="status-chip animate-fade-in-up animate-stagger-1">{$_('hero.status')}</span>
+      <h1 class="animate-slide-in-left animate-stagger-2">{$_('hero.title')}</h1>
+      <p class="hero-tagline animate-typewriter animate-stagger-3" use:typewriter={{ speed: 26 }}>{$_('hero.tagline')}</p>
+      <p class="hero-lead animate-fade-in-up animate-stagger-4">{$_('hero.subtitle')}</p>
 
       <div class="hero-actions" role="group" aria-label="Primary actions" use:staggerReveal={{ delay: 140, stagger: 100 }}>
-        <a href="/products" class="btn btn-gradient" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
-        <a href="/consulting" class="btn btn-secondary hover-lift" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
+        <a href="/products" class="btn btn-gradient animate-bounce-in animate-stagger-5" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
+        <a href="/consulting" class="btn btn-secondary hover-lift animate-zoom-in animate-stagger-6" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
       </div>
 
       <div class="hero-signals" aria-hidden="true" use:staggerReveal={{ delay: 260, stagger: 90 }}>
         {#each signals as signal, index}
-          <span class="signal" style={`--index:${index}`}> 
+          <span class="signal animate-fade-in-left" style={`--index:${index}; animation-delay: ${0.8 + index * 0.2}s;`}> 
             <span class="signal-label">{$_(signal.labelKey)}</span>
             <span class="signal-value">
               {#if signal.valueKey}
@@ -149,38 +149,38 @@
     </div>
 
     <div class="hero-showcase" use:staggerReveal={{ delay: 200, stagger: 150 }}>
-      <div class="hero-orbit" aria-hidden="true"></div>
-      <div class="hero-glimmer" aria-hidden="true"></div>
+      <div class="hero-orbit animate-float" aria-hidden="true"></div>
+      <div class="hero-glimmer animate-pulse" aria-hidden="true"></div>
 
       {#each heroMoments as card, index}
-        <article class={`moment-card moment-${card.id}`} style={`--index:${index}; --accent:${card.accent};`}>
+        <article class={`moment-card moment-${card.id} animate-slide-in-up`} style={`--index:${index}; --accent:${card.accent}; animation-delay: ${1.2 + index * 0.3}s;`}>
           <header>
-            <span class="moment-kicker">{$_(card.kickerKey)}</span>
-            <span class="moment-status">{$_(card.statusKey)}</span>
+            <span class="moment-kicker animate-fade-in-left" style={`animation-delay: ${1.4 + index * 0.3}s;`}>{$_(card.kickerKey)}</span>
+            <span class="moment-status animate-fade-in-right" style={`animation-delay: ${1.5 + index * 0.3}s;`}>{$_(card.statusKey)}</span>
           </header>
-          <p>{$_(card.copyKey)}</p>
+          <p class="animate-fade-in-up" style={`animation-delay: ${1.6 + index * 0.3}s;`}>{$_(card.copyKey)}</p>
           <footer>
-            <span>{$_(card.metaKey)}</span>
-            <a href={card.href} class="inline-link">{$_(card.ctaKey)}</a>
+            <span class="animate-fade-in-left" style={`animation-delay: ${1.7 + index * 0.3}s;`}>{$_(card.metaKey)}</span>
+            <a href={card.href} class="inline-link animate-fade-in-right" style={`animation-delay: ${1.8 + index * 0.3}s;`}>{$_(card.ctaKey)}</a>
           </footer>
         </article>
       {/each}
 
       {#if upcomingMilestone}
-        <article class="moment-card milestone" style="--index:2; --accent:var(--signal-yellow);">
+        <article class="moment-card milestone animate-zoom-in" style="--index:2; --accent:var(--signal-yellow); animation-delay: 2.1s;">
           <header>
-            <span class="moment-kicker">{$_('hero.next_milestone')}</span>
-            <span class="moment-status">{milestoneDate}</span>
+            <span class="moment-kicker animate-fade-in-left" style="animation-delay: 2.3s;">{$_('hero.next_milestone')}</span>
+            <span class="moment-status animate-fade-in-right" style="animation-delay: 2.4s;">{milestoneDate}</span>
           </header>
-          <h3>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h3>
-          <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
+          <h3 class="animate-slide-in-up" style="animation-delay: 2.5s;">{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h3>
+          <p class="animate-fade-in-up" style="animation-delay: 2.6s;">{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
           {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
-            <p class="moment-note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
+            <p class="moment-note animate-fade-in-up" style="animation-delay: 2.7s;">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
           {/if}
         </article>
       {/if}
 
-      <div class="hero-spark" aria-hidden="true"></div>
+      <div class="hero-spark animate-pulse" aria-hidden="true"></div>
     </div>
   </div>
 </section>
