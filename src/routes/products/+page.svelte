@@ -1,5 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
+  import { Icon } from '$lib/components';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
   import productsData from '$data/products.json';
 
@@ -43,7 +44,9 @@
             <ul class="feature-pills">
               {#each (products[key].features ?? []).slice(0, 3) as feature}
                 <li>
-                  <span class="feature-icon">{feature.icon}</span>
+                  <span class="feature-icon">
+                    <Icon name={feature.icon} size={28} />
+                  </span>
                   <span>{$_(`${key}.features.${feature.id}.title`)}</span>
                 </li>
               {/each}
@@ -226,7 +229,14 @@
   }
 
   .feature-icon {
-    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--voyage-blue) 12%, transparent 88%);
+    color: var(--voyage-blue);
     filter: drop-shadow(0 4px 8px rgba(17, 24, 39, 0.12));
   }
 

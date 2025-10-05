@@ -1,6 +1,7 @@
 <script>
   // @ts-nocheck
   import { _ } from 'svelte-i18n';
+  import { Icon } from '$lib/components';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
   
@@ -149,15 +150,21 @@
 
       <div class="hero-features" use:staggerReveal>
         <div class="feature">
-          <div class="feature-icon">🎯</div>
+          <div class="feature-icon">
+            <Icon name="target" size={26} />
+          </div>
           <p>{$_('consulting.what_1')}</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">💡</div>
+          <div class="feature-icon">
+            <Icon name="idea" size={26} />
+          </div>
           <p>{$_('consulting.what_2')}</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">⚡</div>
+          <div class="feature-icon">
+            <Icon name="bolt" size={26} />
+          </div>
           <p>{$_('consulting.what_3')}</p>
         </div>
       </div>
@@ -289,7 +296,10 @@
     <!-- Benefits Section -->
     <div class="benefits-section" use:staggerReveal>
       <div class="benefit-card glass-card">
-        <h3>🎁 What You Get</h3>
+        <h3>
+          <Icon name="package" size={22} class="heading-icon" />
+          <span>What You Get</span>
+        </h3>
         <ul>
           <li>Free AI strategy consultation</li>
           <li>Technical implementation plan</li>
@@ -297,18 +307,24 @@
           <li>Priority access to our products</li>
         </ul>
       </div>
-      
+
       <div class="benefit-card glass-card">
-        <h3>⚡ Process Timeline</h3>
+        <h3>
+          <Icon name="bolt" size={22} class="heading-icon" />
+          <span>Process Timeline</span>
+        </h3>
         <ul>
           <li><strong>Week 1:</strong> Initial consultation</li>
           <li><strong>Week 2:</strong> Strategy development</li>
           <li><strong>Week 3-12:</strong> Implementation support</li>
         </ul>
       </div>
-      
+
       <div class="benefit-card glass-card">
-        <h3>✅ Requirements</h3>
+        <h3>
+          <Icon name="check" size={22} class="heading-icon" />
+          <span>Requirements</span>
+        </h3>
         <ul>
           <li>Based in Europe or willing to work CET hours</li>
           <li>Committed to AI transformation</li>
@@ -469,9 +485,16 @@
   backdrop-filter: blur(20px);
 }
 
-  .feature-icon {
-    font-size: 1.6rem;
-  }
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--voyage-blue) 16%, transparent 84%);
+  color: var(--voyage-blue);
+}
 
   .feature p {
     margin: 0;
@@ -602,6 +625,25 @@
   gap: clamp(1.2rem, 3vw, 1.6rem);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(22px);
+}
+
+  .benefit-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+    color: var(--text-primary);
+  }
+
+:global(.heading-icon) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--aurora-purple) 18%, transparent 82%);
+  color: var(--aurora-purple);
 }
 
   .benefit-card ul {

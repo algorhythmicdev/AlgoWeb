@@ -2,6 +2,7 @@
   // @ts-nocheck
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
+  import { Icon } from '$lib/components';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -126,7 +127,14 @@
             aria-pressed={$voting[feature.id]}
             aria-label={$_('community.vote_for', { values: { feature: $_(`community.features.${feature.id}.name`) } })}
           >
-            {$voting[feature.id] ? '✓ ' + $_('community.voted_button') : $_('community.vote_button')}
+            {#if $voting[feature.id]}
+              <span class="vote-icon" aria-hidden="true">
+                <Icon name="check" size={16} />
+              </span>
+              <span>{$_('community.voted_button')}</span>
+            {:else}
+              <span>{$_('community.vote_button')}</span>
+            {/if}
           </button>
         </div>
       {/each}
@@ -359,6 +367,9 @@
   .feature-description { color: var(--text-secondary); line-height: var(--leading-relaxed); }
 
   .vote-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     justify-self: flex-start;
     padding: 0.9rem 1.4rem;
     border-radius: var(--radius-full);
@@ -399,6 +410,10 @@
     background: var(--gradient-primary);
     border-color: transparent;
     color: var(--pure-white);
+  }
+
+  .vote-icon {
+    display: inline-flex;
   }
 
   .idea-section { padding: clamp(5rem, 12vw, 7rem) 0 clamp(6rem, 14vw, 8rem); }

@@ -1,6 +1,7 @@
 <script>
   import { afterUpdate, onDestroy, onMount } from 'svelte';
   import { locale } from 'svelte-i18n';
+  import { Icon } from '$lib/components';
 
   const companionContent = /** @type {const} */ ({
     en: {
@@ -627,7 +628,7 @@
           </div>
         </div>
         <button class="close" on:click={() => closePanel(true)} aria-label={profile.actions.closePanel}>
-          ✕
+          <Icon name="close" size={18} />
         </button>
       </header>
 
