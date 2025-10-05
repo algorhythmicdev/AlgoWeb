@@ -159,8 +159,21 @@
 
 <style>
   .community-hero {
-    padding: var(--space-16) 0 var(--space-6);
+    padding: clamp(6rem, 14vw, 8rem) 0 clamp(3.5rem, 8vw, 5rem);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .community-hero::before {
+    content: '';
+    position: absolute;
+    inset: -40% -15% auto;
+    height: clamp(18rem, 32vw, 24rem);
+    background: radial-gradient(circle at center, rgba(19, 81, 255, 0.22), transparent 70%);
+    filter: blur(140px);
+    opacity: 0.7;
+    pointer-events: none;
   }
 
   .community-hero h1 {
@@ -169,8 +182,20 @@
   }
 
   .voting-section {
-    padding: var(--space-16) 0;
-    background: var(--bg-muted);
+    padding: clamp(6rem, 14vw, 8rem) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .voting-section::before {
+    content: '';
+    position: absolute;
+    inset: -35% -25% auto;
+    height: clamp(18rem, 32vw, 26rem);
+    background: radial-gradient(circle at 70% 40%, rgba(106, 56, 255, 0.18), transparent 70%);
+    filter: blur(140px);
+    opacity: 0.6;
+    pointer-events: none;
   }
 
   .section-title { text-align: center; }
@@ -179,23 +204,26 @@
   .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-8);
+    gap: clamp(2rem, 5vw, 3.2rem);
+    margin-top: clamp(3rem, 6vw, 4.5rem);
   }
 
   .feature-card {
-    padding: var(--space-5);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
+    padding: clamp(2.2rem, 4vw, 2.8rem);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     background: var(--bg-surface);
+    background: var(--surface-glass);
     display: grid;
-    gap: var(--space-3);
+    gap: clamp(1.2rem, 3vw, 1.6rem);
     transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(24px);
   }
 
   .feature-card::before {
@@ -213,10 +241,7 @@
     left: 100%;
   }
 
-  .feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-  }
+  .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
 
   .feature-header {
     display: flex;
@@ -225,10 +250,11 @@
   }
 
   .category-badge {
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem 0.9rem;
     border-radius: var(--radius-full);
-    background: var(--bg-muted);
-    color: var(--text-secondary);
+    background: rgba(19, 81, 255, 0.08);
+    border: 1px solid rgba(19, 81, 255, 0.18);
+    color: var(--voyage-blue);
     font-size: var(--text-small);
   }
 
@@ -243,15 +269,17 @@
 
   .vote-button {
     justify-self: flex-start;
-    padding: 0.85rem 1.2rem;
+    padding: 0.9rem 1.4rem;
     border-radius: var(--radius-full);
-    border: 1px solid var(--border-subtle);
-    background: transparent;
+    border: 1px solid rgba(19, 81, 255, 0.22);
+    background: var(--bg-surface);
+    background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
     color: var(--text-primary);
     font-weight: var(--weight-semibold);
     transition: all var(--duration-fast) var(--ease-out);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(18px);
   }
 
   .vote-button::before {
@@ -282,29 +310,31 @@
     color: var(--pure-white);
   }
 
-  .idea-section { padding: var(--space-12) 0 var(--space-16); }
+  .idea-section { padding: clamp(5rem, 12vw, 7rem) 0 clamp(6rem, 14vw, 8rem); }
 
   .idea-card {
     max-width: 640px;
     margin: 0 auto;
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--border-subtle);
+    padding: clamp(2.4rem, 5vw, 3.2rem);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     background: var(--bg-surface);
+    background: var(--surface-glass);
     box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(24px);
   }
 
   .idea-form {
     margin-top: var(--space-4);
     display: grid;
-    gap: var(--space-3);
+    gap: clamp(1.2rem, 3vw, 1.8rem);
   }
 
   .idea-form textarea {
     width: 100%;
-    padding: var(--space-3);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
+    padding: clamp(1.2rem, 3vw, 1.6rem);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(19, 81, 255, 0.16);
     background: var(--bg-surface);
     font-family: inherit;
     font-size: var(--text-body);

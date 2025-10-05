@@ -101,9 +101,9 @@
 <style>
   .section-heading {
     display: grid;
-    gap: 0.6rem;
-    max-width: 840px;
-    margin-bottom: var(--space-10);
+    gap: 0.75rem;
+    max-width: min(840px, 90%);
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
   .section-heading h2 {
@@ -118,18 +118,19 @@
 
   .story-grid {
     display: grid;
-    gap: var(--space-4);
+    gap: clamp(1.5rem, 4vw, 2.4rem);
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
   .story-card {
-    padding: var(--space-4);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
+    padding: clamp(1.8rem, 3vw, 2.4rem);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: var(--surface-glass);
     box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(24px);
     display: grid;
-    gap: 0.85rem;
+    gap: 0.95rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
@@ -137,30 +138,27 @@
   }
 
   .story-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-md);
   }
 
   .story-card p { color: var(--text-secondary); }
 
-  .products {
-    background: var(--bg-muted);
-  }
-
   .product-list {
     display: grid;
-    gap: var(--space-3);
+    gap: clamp(1.8rem, 4vw, 2.8rem);
   }
 
   .product-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    gap: var(--space-6);
-    padding: var(--space-4);
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    padding: clamp(2rem, 4vw, 3rem);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: var(--surface-glass);
     box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(28px);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
@@ -168,14 +166,14 @@
   }
 
   .product-row:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
   }
 
-  .product-meta { display: grid; gap: 0.6rem; }
+  .product-meta { display: grid; gap: 0.9rem; }
 
-  .product-meta h3 { 
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
+  .product-meta h3 {
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -188,28 +186,30 @@
     align-items: center;
     gap: 0.75rem;
     border-radius: var(--radius-full);
-    padding: 0.5rem 0.9rem;
-    background: var(--bg-muted);
+    padding: 0.55rem 1.1rem;
+    background: rgba(19, 81, 255, 0.08);
+    background: color-mix(in srgb, var(--voyage-blue) 12%, transparent);
+    border: 1px solid rgba(19, 81, 255, 0.18);
     font-size: var(--text-small);
-    color: var(--text-secondary);
+    color: var(--voyage-blue);
   }
 
   .status-pill .dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--voyage-blue);
+    background: currentColor;
     display: inline-flex;
   }
 
-  .product-body { display: grid; gap: var(--space-3); }
+  .product-body { display: grid; gap: 1.2rem; }
 
   .product-body p { color: var(--text-secondary); }
 
   .product-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.65rem;
     font-weight: var(--weight-semibold);
     color: var(--voyage-blue);
   }
@@ -219,8 +219,8 @@
   .timeline-grid {
     position: relative;
     display: grid;
-    gap: var(--space-6);
-    padding-left: 1.5rem;
+    gap: clamp(2.2rem, 5vw, 3.2rem);
+    padding-left: clamp(1rem, 3vw, 1.5rem);
   }
 
   .timeline-grid::before {
@@ -230,32 +230,34 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: var(--border-strong);
+    background: linear-gradient(180deg, rgba(19, 81, 255, 0.32), transparent 80%);
   }
 
   .timeline-item {
     position: relative;
     display: flex;
-    gap: var(--space-4);
+    gap: clamp(1.6rem, 4vw, 2.5rem);
   }
 
   .timeline-marker {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--voyage-blue);
+    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
     margin-top: 0.4rem;
     flex-shrink: 0;
+    box-shadow: 0 0 0 6px rgba(19, 81, 255, 0.08);
   }
 
   .timeline-content {
     display: grid;
-    gap: 0.5rem;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--space-3);
+    gap: 0.75rem;
+    background: var(--surface-glass);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-2xl);
+    padding: clamp(1.6rem, 3vw, 2.1rem);
     box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(22px);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
@@ -275,7 +277,8 @@
   @media (max-width: 960px) {
     .product-row { grid-template-columns: 1fr; }
     .timeline-grid { padding-left: 0; }
-    .timeline-grid::before { left: 8px; }
-    .timeline-item { flex-direction: column; padding-left: 24px; }
+    .timeline-grid::before { display: none; }
+    .timeline-item { flex-direction: column; padding-left: 0; }
+    .timeline-marker { margin-left: 6px; }
   }
 </style>
