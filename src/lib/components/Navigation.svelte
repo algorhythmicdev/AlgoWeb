@@ -38,13 +38,6 @@
     }
   }
 
-  function updateScrollState() {
-    const scrollY = window.scrollY;
-    isScrolled = scrollY > 32;
-    navigation.updateScroll(scrollY);
-    ticking = false;
-  }
-
   function handleResize() {
     if (window.innerWidth > 960 && $navigation.isMenuOpen) {
       navigation.closeMenu();
