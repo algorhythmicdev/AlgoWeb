@@ -1,124 +1,99 @@
 <script>
   import { onDestroy, onMount } from 'svelte';
   import { spring } from 'svelte/motion';
-  import { _ } from 'svelte-i18n';
+  import { _, json } from 'svelte-i18n';
   import timelineData from '$data/timeline.json';
-  import { revealOnScroll, staggerReveal, magnetic, typewriter } from '$utils/animations';
+  import { revealOnScroll, staggerReveal } from '$utils/animations';
 
   const upcomingMilestone = timelineData.milestones?.[0];
   const milestoneDate = upcomingMilestone
     ? new Date(`${upcomingMilestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })
     : '';
 
-  /**
-   * @typedef {{ id: string; labelKey: string; valueKey?: string; value?: string }} HeroSignal
-   */
-
-  const heroMoments = [
-    {
-      id: 'nodevoyage',
-      accent: 'var(--voyage-blue)',
-      kickerKey: 'products.nodevoyage.name',
-      statusKey: 'products.nodevoyage.status',
-      copyKey: 'nodevoyage.hero_description',
-      metaKey: 'products.nodevoyage.mvp',
-      ctaKey: 'products.nodevoyage.cta',
-      href: '/products/nodevoyage'
-    },
-    {
-      id: 'ideonautix',
-      accent: 'var(--aurora-purple)',
-      kickerKey: 'products.ideonautix.name',
-      statusKey: 'products.ideonautix.status',
-      copyKey: 'ideonautix.hero_description',
-      metaKey: 'products.ideonautix.mvp',
-      ctaKey: 'products.ideonautix.cta',
-      href: '/products/ideonautix'
-    }
+  const heroProducts = [
+    { id: 'nodevoyage', href: '/products/nodevoyage' },
+    { id: 'ideonautix', href: '/products/ideonautix' }
   ];
 
-  /** @type {HeroSignal[]} */
-  const baseSignals = [
-    { id: 'nodevoyage', labelKey: 'products.nodevoyage.name', valueKey: 'products.nodevoyage.status' },
-    { id: 'ideonautix', labelKey: 'products.ideonautix.name', valueKey: 'products.ideonautix.status' }
-  ];
+  $: heroPillars = (() => {
+    const value = $json?.('hero.pillars');
+    return Array.isArray(value) ? value : [];
+  })();
 
-  $: signals = /** @type {HeroSignal[]} */ (
-    upcomingMilestone
-      ? [...baseSignals, { id: 'milestone', labelKey: 'hero.next_milestone', value: milestoneDate }]
-      : baseSignals
-  );
+  const defaultPointer = { x: 0.56, y: 0.42 };
+  const pointerSpring = spring(defaultPointer, {
+    stiffness: 0.18,
+    damping: 0.42,
+    precision: 0.0005
+  });
 
-  const prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /** @type {{ x: number; y: number }} */
+  let pointerCoords = defaultPointer;
+  let heroSection;
+  let motionEnabled = false;
 
-  /** @type {HTMLElement | null} */
-  let heroSection = null;
+  const unsubscribePointer = pointerSpring.subscribe((value) => {
+    pointerCoords = value;
+  });
 
-  const pointerSpring = spring({ x: 0.5, y: 0.45 }, { stiffness: 0.18, damping: 0.4, precision: 0.0008 });
-  const depthSpring = spring(0, { stiffness: 0.12, damping: 0.42, precision: 0.0001 });
+  $: heroVars = `--hero-pointer-x:${pointerCoords.x}; --hero-pointer-y:${pointerCoords.y};`;
 
-  let pointerCoords = { x: 0.5, y: 0.45 };
-  let depth = 0;
+  function normalize(value) {
+    return Math.max(0, Math.min(1, value));
+  }
 
-  const unsubscribePointer = pointerSpring.subscribe((value) => (pointerCoords = value));
-  const unsubscribeDepth = depthSpring.subscribe((value) => (depth = value));
-
-  $: heroVars = `--hero-pointer-x:${pointerCoords.x}; --hero-pointer-y:${pointerCoords.y}; --hero-depth:${depth};`;
-
-  /** @param {PointerEvent} event */
   function handlePointer(event) {
-    if (prefersReducedMotion || !heroSection) return;
+    if (!motionEnabled || !heroSection || event.pointerType === 'touch') return;
     const rect = heroSection.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    pointerSpring.set({ x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) });
+    const x = normalize((event.clientX - rect.left) / rect.width);
+    const y = normalize((event.clientY - rect.top) / rect.height);
+    pointerSpring.set({ x, y });
   }
 
-  function resetPointer() {
-    pointerSpring.set({ x: 0.5, y: 0.45 });
+  function relaxPointer() {
+    pointerSpring.set(defaultPointer);
   }
-
-  function updateDepthFromScroll() {
-    if (!heroSection || typeof window === 'undefined') return;
-    const rect = heroSection.getBoundingClientRect();
-    const viewport = Math.max(window.innerHeight, 1);
-    const progress = 1 - Math.min(1, Math.max(0, (rect.top + rect.height * 0.25) / viewport));
-    depthSpring.set(progress);
-  }
-
-  $: if (heroSection) updateDepthFromScroll();
-
-  let teardownWindowListeners = () => {};
 
   onMount(() => {
-    if (typeof window === 'undefined') return;
-    const opts = { passive: true };
-    window.addEventListener('scroll', updateDepthFromScroll, opts);
-    window.addEventListener('resize', updateDepthFromScroll);
-    updateDepthFromScroll();
-
-    teardownWindowListeners = () => {
-      window.removeEventListener('scroll', updateDepthFromScroll);
-      window.removeEventListener('resize', updateDepthFromScroll);
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updatePreference = (event) => {
+      motionEnabled = !event.matches;
+      if (!motionEnabled) {
+        relaxPointer();
+      }
     };
-    return teardownWindowListeners;
+
+    motionEnabled = !mediaQuery.matches;
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', updatePreference);
+    } else {
+      mediaQuery.addListener(updatePreference);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', updatePreference);
+      } else {
+        mediaQuery.removeListener(updatePreference);
+      }
+    };
   });
 
   onDestroy(() => {
-    teardownWindowListeners();
     unsubscribePointer();
-    unsubscribeDepth();
   });
 </script>
 
 <section
-  class="hero section-xl"
+  class="hero section"
+  id="hero"
+  use:revealOnScroll
   bind:this={heroSection}
   style={heroVars}
   on:pointermove={handlePointer}
-  on:pointerleave={resetPointer}
-  on:pointercancel={resetPointer}
+  on:pointerleave={relaxPointer}
+  on:pointercancel={relaxPointer}
+  on:touchend={relaxPointer}
 >
   <div class="container hero-grid">
     <div class="hero-copy" use:revealOnScroll>
@@ -148,6 +123,17 @@
           </div>
         {/each}
       </div>
+
+      {#if heroPillars.length}
+        <div class="hero-pillars" use:staggerReveal={{ stagger: 90 }}>
+          <span class="pillars-title">{$_('hero.pillars_title')}</span>
+          <ul>
+            {#each heroPillars as pillar}
+              <li>{pillar}</li>
+            {/each}
+          </ul>
+        </div>
+      {/if}
     </div>
 
     <div class="hero-visual" use:staggerReveal={{ delay: 200, stagger: 150 }}>
@@ -247,9 +233,18 @@
     gap: 0.6rem;
     padding: 0.55rem 1.3rem;
     border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--voyage-blue) 12%, rgba(255, 255, 255, 0.7) 88%);
+    color: rgba(26, 33, 55, 0.78);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .hero-tagline {
+    color: var(--voyage-blue);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--voyage-blue);
     background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
@@ -259,7 +254,6 @@
 
   .hero-actions {
     display: flex;
-    gap: 1rem;
     flex-wrap: wrap;
     margin-top: 0.5rem;
   }

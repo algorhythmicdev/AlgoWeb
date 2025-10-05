@@ -40,7 +40,9 @@
   },
   "founders": {
     "title": "Rencontrez les fondateurs",
-    "subtitle": "Construire ensemble l'avenir de l'IA",
+    "subtitle": "Deux créateurs reliant la R&D signalétique à une IA centrée sur l'humain",
+    "email_cta": "E-mail",
+    "linkedin_cta": "LinkedIn",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Cofondateur et CEO",
