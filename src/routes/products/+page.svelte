@@ -53,8 +53,8 @@
       <p>Join our community and be the first to experience our AI-powered platforms.</p>
     </div>
     <div class="cta-actions">
-      <a href="/community" class="btn btn-primary">Join Community</a>
-      <a href="/contact" class="btn btn-secondary">Get in Touch</a>
+      <a href="/community" class="btn btn-gradient">Join Community</a>
+      <a href="/contact" class="btn btn-secondary hover-lift">Get in Touch</a>
     </div>
   </div>
 </section>
@@ -87,6 +87,15 @@
     box-shadow: var(--shadow-sm);
     display: grid;
     gap: var(--space-3);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .catalog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
   }
 
   .catalog-header {
@@ -98,6 +107,11 @@
 
   .catalog-card h2 {
     font-size: clamp(1.9rem, 3vw, 2.5rem);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   .catalog-card p { color: var(--text-secondary); }

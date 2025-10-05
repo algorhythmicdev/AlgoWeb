@@ -7,15 +7,30 @@
   /* ==================== BRAND COLORS ==================== */
   --voyage-blue: #1351ff;
   --voyage-blue-rgb: 19, 81, 255;
+  --voyage-blue-light: #4d7cff;
+  --voyage-blue-dark: #0d42cc;
 
   --aurora-purple: #6a38ff;
   --aurora-purple-rgb: 106, 56, 255;
+  --aurora-purple-light: #8b5fff;
+  --aurora-purple-dark: #4d2acc;
 
   --signal-yellow: #ffd339;
   --signal-yellow-rgb: 255, 211, 57;
+  --signal-yellow-light: #ffdd5c;
+  --signal-yellow-dark: #e6b800;
 
   --cherry-red: #e0322c;
   --cherry-red-rgb: 224, 50, 44;
+  --cherry-red-light: #e65a55;
+  --cherry-red-dark: #c42a25;
+
+  /* ==================== GRADIENT COLORS ==================== */
+  --gradient-primary: linear-gradient(135deg, var(--voyage-blue) 0%, var(--aurora-purple) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--aurora-purple) 0%, var(--signal-yellow) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--signal-yellow) 0%, var(--cherry-red) 100%);
+  --gradient-text: linear-gradient(135deg, var(--voyage-blue) 0%, var(--aurora-purple) 50%, var(--signal-yellow) 100%);
+  --gradient-hero: linear-gradient(135deg, var(--voyage-blue) 0%, var(--aurora-purple) 50%, var(--signal-yellow) 100%);
 
   /* ==================== NEUTRALS ==================== */
   --pure-white: #ffffff;

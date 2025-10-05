@@ -191,11 +191,31 @@
     display: grid;
     gap: var(--space-3);
     transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(19, 81, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .feature-card:hover::before {
+    left: 100%;
   }
 
   .feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
   }
 
   .feature-header {
@@ -230,17 +250,36 @@
     color: var(--text-primary);
     font-weight: var(--weight-semibold);
     transition: all var(--duration-fast) var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vote-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+
+  .vote-button:hover::before {
+    left: 0;
   }
 
   .vote-button:hover {
-    border-color: var(--voyage-blue);
-    color: var(--voyage-blue);
+    border-color: transparent;
+    color: var(--pure-white);
+    transform: scale(1.05);
   }
 
   .vote-button.voted {
-    background: rgba(19, 81, 255, 0.08);
-    border-color: rgba(19, 81, 255, 0.24);
-    color: var(--voyage-blue);
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: var(--pure-white);
   }
 
   .idea-section { padding: var(--space-12) 0 var(--space-16); }
