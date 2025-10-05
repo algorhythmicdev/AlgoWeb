@@ -1,25 +1,30 @@
 <script>
   import { _, json } from 'svelte-i18n';
   import foundersData from '$data/founders.json';
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { revealOnScroll, staggerReveal, tilt } from '$utils/animations';
 
   const founderKeys = /** @type {const} */ (['nikita', 'slaff']);
   let activeFounder = 'nikita';
 
+  /**
+   * @template T
+   * @param {T[] | null | undefined} list
+   * @param {number} [count=4]
+   * @returns {T[]}
+   */
+  const limit = (list, count = 4) => (Array.isArray(list) ? list.slice(0, count) : []);
+
+  $: nikitaExpertise = limit(foundersData.nikita.expertise);
+  $: slaffExpertise = limit(foundersData.slaff.expertise);
+  $: nikitaHighlights = limit(foundersData.nikita.currentPosition?.achievements);
+  $: slaffHighlights = limit(foundersData.slaff.currentPosition?.achievements);
+  $: nikitaBrands = limit(foundersData.nikita.brandExperience?.clients, 6);
+  $: slaffJourneys = limit(foundersData.slaff.internationalExposure, 4);
+
   $: slaffAchievements = (() => {
     const value = $json?.('founders.slaff.achievements');
-    return Array.isArray(value) ? value : [];
+    return Array.isArray(value) ? limit(value) : slaffHighlights;
   })();
-
-  $: nikitaExpertise = (() => {
-    const value = $json?.('founders.nikita.expertise');
-    return Array.isArray(value) ? value : [];
-  })();
-
-  const slaffExpertise = foundersData.slaff.expertise ?? [];
-  const nikitaHighlights = foundersData.nikita.currentPosition?.achievements ?? [];
-  const brandClients = foundersData.nikita.brandExperience?.clients ?? foundersData.slaff.brandExperience?.clients ?? [];
-  const slaffInternational = foundersData.slaff.internationalExposure ?? [];
 
   /** @param {'nikita' | 'slaff'} key */
   function activateFounder(key) {
@@ -32,47 +37,69 @@
     <div class="section-heading">
       <span class="eyebrow">{$_('founders.subtitle')}</span>
       <h2>{$_('founders.title')}</h2>
+      <p class="section-lead">{$_('story.vision_text')}</p>
     </div>
 
-    <div class="founders-grid" use:staggerReveal={{ delay: 80, stagger: 160 }}>
+    <div class="founder-tabs" role="tablist" aria-label="Founders">
       {#each founderKeys as key}
-        <article
-          class="founder-card"
+        <button
+          role="tab"
+          class="founder-tab"
           class:active={activeFounder === key}
+          aria-selected={activeFounder === key}
+          aria-controls={`panel-${key}`}
+          id={`tab-${key}`}
+          on:click={() => activateFounder(key)}
           on:mouseenter={() => activateFounder(key)}
-          on:focusin={() => activateFounder(key)}
-          aria-labelledby={`founder-${key}-name`}
         >
-          <header>
-            <div class="avatar">
+          <img src={foundersData[key].avatar} alt={$_(`founders.${key}.name`)} loading="lazy" />
+          <span>
+            <strong>{$_(`founders.${key}.name`)}</strong>
+            <small>{$_(`founders.${key}.role`)}</small>
+          </span>
+        </button>
+      {/each}
+    </div>
+
+    <div class="founder-stage">
+      {#each founderKeys as key}
+        <div
+          id={`panel-${key}`}
+          role="tabpanel"
+          class="founder-profile"
+          class:active={activeFounder === key}
+          aria-labelledby={`tab-${key}`}
+          tabindex="0"
+        >
+          <header class="profile-header">
+            <div class="profile-identity">
               <img src={foundersData[key].avatar} alt={$_(`founders.${key}.name`)} loading="lazy" />
-            </div>
-            <div class="identity">
-              <h3 id={`founder-${key}-name`}>{$_(`founders.${key}.name`)}</h3>
-              <p class="role">{$_(`founders.${key}.role`)}</p>
-              <div class="identity-meta">
-                {#if foundersData[key].currentPosition?.company}
-                  <span class="badge-pill">{foundersData[key].currentPosition.company}</span>
-                {/if}
-                {#if foundersData[key].currentPosition?.location}
-                  <span class="location">{foundersData[key].currentPosition.location}</span>
-                {/if}
+              <div>
+                <h3>{$_(`founders.${key}.name`)}</h3>
+                <p class="role">{$_(`founders.${key}.role`)}</p>
+                <div class="meta">
+                  {#if foundersData[key].currentPosition?.company}
+                    <span class="badge">{foundersData[key].currentPosition.company}</span>
+                  {/if}
+                  {#if foundersData[key].currentPosition?.location}
+                    <span class="badge subtle">{foundersData[key].currentPosition.location}</span>
+                  {/if}
+                </div>
               </div>
             </div>
-          </header>
-
-          <p class="bio">
-            {key === 'nikita' ? $_('founders.nikita.bio') : $_('founders.slaff.philosophy')}
-          </p>
-
-          <div class="profile-grid">
-            <div class="profile-card focus-card">
+            <div class="current-role">
               <span class="label">{$_(`founders.${key}.current_title`)}</span>
               <p>{key === 'nikita' ? $_('founders.nikita.current_position') : $_('founders.slaff.position')}</p>
             </div>
+          </header>
 
-            <div class="profile-card strengths">
-              <span class="label">Core expertise</span>
+          <div class="profile-intro">
+            <p>{key === 'nikita' ? $_('founders.nikita.bio') : $_('founders.slaff.philosophy')}</p>
+          </div>
+
+          <div class="profile-grid" use:staggerReveal={{ delay: 120, stagger: 130 }}>
+            <div class="profile-card focus" use:tilt={{ max: 7, scale: 1.02 }}>
+              <span class="label">Core Expertise</span>
               <div class="chip-list">
                 {#each key === 'nikita' ? nikitaExpertise : slaffExpertise as skill}
                   <span>{skill}</span>
@@ -80,45 +107,50 @@
               </div>
             </div>
 
-            <div class="profile-card highlights">
-              <span class="label">Recent highlights</span>
+            <div class="profile-card achievements" use:tilt={{ max: 7, scale: 1.02 }}>
+              <span class="label">Recent Highlights</span>
               <ul>
-                {#each key === 'nikita' ? nikitaHighlights : slaffAchievements as item}
+                {#each (key === 'nikita' ? nikitaHighlights : slaffAchievements) as item}
                   <li>{item}</li>
                 {/each}
               </ul>
             </div>
 
-            <div class="profile-card network">
-              <span class="label">{$_('founders.slaff.brand_title')}</span>
-              <div class="network-grid">
-                {#if key === 'nikita'}
-                  {#each foundersData.nikita.brandExperience.clients.slice(0, 4) as client}
-                    <span>{client.name}</span>
+            <div class="profile-card signature" use:tilt={{ max: 7, scale: 1.02 }}>
+              <span class="label">Signature Work</span>
+              {#if key === 'nikita'}
+                <div class="logo-grid">
+                  {#each nikitaBrands as brand}
+                    <span>
+                      <img src={brand.logo} alt={brand.name} loading="lazy" />
+                      <small>{brand.name}</small>
+                    </span>
                   {/each}
-                {:else}
-                  {#each slaffInternational as event}
-                    <span>{event.flag} {event.name} · {event.year}</span>
+                </div>
+              {:else}
+                <ul class="journey-list">
+                  {#each slaffJourneys as trip}
+                    <li>{trip.flag} {trip.name} • {trip.year}</li>
                   {/each}
-                {/if}
-              </div>
+                </ul>
+              {/if}
             </div>
 
-            <div class="profile-card vision">
-              <span class="label">{$_('story.vision_title')}</span>
-              <p>{key === 'slaff' ? $_('founders.slaff.algorhythmics_vision') : $_('story.vision_text')}</p>
+            <div class="profile-card vision" use:tilt={{ max: 7, scale: 1.02 }}>
+              <span class="label">Vision for AlgoRhythmics</span>
+              <p>{key === 'nikita' ? $_('story.vision_text') : $_('founders.slaff.algorhythmics_vision')}</p>
             </div>
           </div>
 
-          <div class="founder-links">
+          <footer class="profile-links">
             {#if foundersData[key].email}
               <a class="link-pill" href={`mailto:${foundersData[key].email}`}>Email</a>
             {/if}
             {#if foundersData[key].linkedin}
               <a class="link-pill" href={foundersData[key].linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
             {/if}
-          </div>
-        </article>
+          </footer>
+        </div>
       {/each}
     </div>
 
@@ -126,7 +158,7 @@
       <span class="label">{$_('founders.slaff.brand_title')}</span>
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          {#each brandClients.concat(brandClients) as client, index}
+          {#each (foundersData.nikita.brandExperience?.clients ?? []).concat(foundersData.nikita.brandExperience?.clients ?? []) as client, index}
             <span class="brand-chip" style={`--i:${index}`}>
               <img src={client.logo} alt={client.name} loading="lazy" />
               <span>{client.name}</span>
@@ -142,85 +174,100 @@
 <style>
   .section-heading {
     display: grid;
-    gap: 0.8rem;
-    max-width: 720px;
+    gap: 0.9rem;
+    max-width: 760px;
     margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
-  .founders-grid {
+  .section-lead {
+    color: var(--text-secondary);
+  }
+
+  .founder-tabs {
     display: grid;
-    gap: clamp(2rem, 5vw, 3.5rem);
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: clamp(2.4rem, 5vw, 3.5rem);
   }
 
-  .founder-card {
-    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(19, 81, 255, 0.08));
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 18%, transparent);
-    border-radius: var(--radius-2xl);
-    padding: clamp(2rem, 4vw, 2.8rem);
-    display: grid;
-    gap: clamp(1.4rem, 3vw, 2rem);
-    box-shadow: 0 24px 60px rgba(12, 24, 52, 0.12);
-    backdrop-filter: blur(24px);
-    position: relative;
-    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
-    outline: none;
-  }
-
-  .founder-card::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    background: radial-gradient(circle at calc(var(--hero-pointer-x, 0.5) * 100%) calc(var(--hero-pointer-y, 0.45) * 100%), rgba(19, 81, 255, 0.22), transparent 70%);
-    opacity: 0;
-    transition: opacity var(--duration-fast) var(--ease-out);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .founder-card:focus-visible {
-    border-color: color-mix(in srgb, var(--voyage-blue) 32%, transparent);
-    box-shadow: 0 28px 64px rgba(19, 81, 255, 0.22);
-  }
-
-  .founder-card.active,
-  .founder-card:hover {
-    transform: translateY(-6px);
-    border-color: color-mix(in srgb, var(--voyage-blue) 28%, transparent);
-    box-shadow: 0 32px 70px rgba(19, 81, 255, 0.18);
-  }
-
-  .founder-card.active::before,
-  .founder-card:hover::before {
-    opacity: 1;
-  }
-
-  .founder-card > * { position: relative; z-index: 1; }
-
-  header {
+  .founder-tab {
     display: flex;
     align-items: center;
-    gap: clamp(1.2rem, 3vw, 1.8rem);
+    gap: 1rem;
+    padding: 1rem 1.4rem;
+    border-radius: var(--radius-2xl);
+    border: 1px solid color-mix(in srgb, var(--voyage-blue) 18%, rgba(255, 255, 255, 0.32) 82%);
+    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(19, 81, 255, 0.06) 18%);
+    box-shadow: var(--shadow-xs);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
   }
 
-  .avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 32% 46% 38% 54% / 46% 42% 58% 54%;
-    overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 20%, transparent);
-    box-shadow: 0 16px 32px rgba(12, 24, 52, 0.22);
-  }
-
-  .avatar img {
-    width: 100%;
-    height: 100%;
+  .founder-tab img {
+    width: 54px;
+    height: 54px;
+    border-radius: var(--radius-full);
     object-fit: cover;
   }
 
-  .identity h3 {
-    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  .founder-tab span {
+    display: grid;
+    gap: 0.2rem;
+    text-align: left;
+  }
+
+  .founder-tab small {
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+  }
+
+  .founder-tab.active,
+  .founder-tab:hover,
+  .founder-tab:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--voyage-blue) 40%, rgba(255, 255, 255, 0.4) 60%);
+  }
+
+  .founder-stage {
+    position: relative;
+  }
+
+  .founder-profile {
+    display: none;
+    flex-direction: column;
+    gap: clamp(1.8rem, 4vw, 2.6rem);
+    background: color-mix(in srgb, var(--bg-surface) 86%, rgba(19, 81, 255, 0.08) 14%);
+    border: 1px solid color-mix(in srgb, var(--voyage-blue) 22%, rgba(255, 255, 255, 0.4) 78%);
+    border-radius: clamp(2.2rem, 6vw, 3rem);
+    padding: clamp(2.2rem, 5vw, 3.4rem);
+    box-shadow: 0 42px 90px rgba(15, 23, 42, 0.16);
+  }
+
+  .founder-profile.active {
+    display: flex;
+  }
+
+  .profile-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.4rem, 3vw, 2.2rem);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profile-identity {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  .profile-identity img {
+    width: clamp(82px, 12vw, 110px);
+    height: clamp(82px, 12vw, 110px);
+    border-radius: var(--radius-2xl);
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(19, 81, 255, 0.18);
   }
 
   .role {
@@ -228,222 +275,279 @@
     font-weight: var(--weight-medium);
   }
 
-  .identity-meta {
+  .meta {
     display: flex;
+    gap: 0.6rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.6rem;
-    align-items: center;
+    margin-top: 0.8rem;
   }
 
-  .identity-meta .location {
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-small);
+    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  }
+
+  .badge.subtle {
+    background: color-mix(in srgb, var(--bg-muted) 60%, transparent);
+    color: var(--text-tertiary);
+  }
+
+  .current-role {
+    max-width: 28rem;
+    display: grid;
+    gap: 0.6rem;
+    padding: 1.4rem;
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(19, 81, 255, 0.08) 12%);
+    border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.22) 60%, rgba(255, 255, 255, 0.36) 40%);
+  }
+
+  .current-role .label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: var(--weight-semibold);
     font-size: var(--text-small);
     color: var(--text-tertiary);
   }
 
-  .bio {
-    color: var(--text-secondary);
+  .profile-intro p {
+    font-size: clamp(1.05rem, 2vw, 1.18rem);
     line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
   }
 
   .profile-grid {
     display: grid;
-    gap: clamp(1.1rem, 3vw, 1.6rem);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.4rem, 3vw, 2.2rem);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
   .profile-card {
-    background: color-mix(in srgb, var(--bg-muted) 80%, transparent);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 16%, transparent);
-    border-radius: var(--radius-xl);
-    padding: 1.4rem 1.6rem;
     display: grid;
-    gap: 0.8rem;
+    gap: 0.9rem;
+    padding: clamp(1.4rem, 3vw, 2.1rem);
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(19, 81, 255, 0.08) 12%);
+    border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.2) 60%, rgba(255, 255, 255, 0.34) 40%);
+    box-shadow: var(--shadow-sm);
   }
 
   .profile-card .label {
-    font-size: var(--text-small);
-    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--voyage-blue) 65%, var(--text-tertiary) 35%);
+    letter-spacing: 0.14em;
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
     font-weight: var(--weight-semibold);
-  }
-
-  .focus-card,
-  .vision,
-  .network {
-    grid-column: 1 / -1;
   }
 
   .chip-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.55rem;
+    gap: 0.6rem;
   }
 
   .chip-list span {
-    padding: 0.55rem 1rem;
+    padding: 0.45rem 0.9rem;
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--voyage-blue) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 18%, transparent);
+    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
     font-size: var(--text-small);
   }
 
   .profile-card ul {
     display: grid;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-  }
-
-  .profile-card ul li::before {
-    content: '•';
-    color: color-mix(in srgb, var(--voyage-blue) 80%, var(--text-secondary) 20%);
-    margin-right: 0.5rem;
-  }
-
-  .network-grid {
-    display: flex;
-    flex-wrap: wrap;
     gap: 0.6rem;
-  }
-
-  .network-grid span {
-    padding: 0.55rem 0.9rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--aurora-purple) 12%, transparent);
-    border: 1px solid color-mix(in srgb, var(--aurora-purple) 18%, transparent);
-    font-size: var(--text-small);
-  }
-
-  .vision p {
+    list-style: none;
     color: var(--text-secondary);
-    font-size: var(--text-small);
   }
 
-  .founder-links {
+  .profile-card li {
+    position: relative;
+    padding-left: 1.2rem;
+  }
+
+  .profile-card li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--text-secondary) 30%);
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .logo-grid span {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--bg-muted) 75%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  }
+
+  .logo-grid img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  .journey-list li {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  }
+
+  .journey-list li::before {
+    display: none;
+  }
+
+  .profile-links {
     display: flex;
+    gap: 1rem;
     flex-wrap: wrap;
-    gap: 0.8rem;
   }
 
   .link-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.3rem;
+    justify-content: center;
+    padding: 0.65rem 1.4rem;
     border-radius: var(--radius-full);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 22%, transparent);
-    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(19, 81, 255, 0.08));
-    font-size: var(--text-small);
     font-weight: var(--weight-semibold);
+    background: color-mix(in srgb, var(--bg-muted) 76%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
     transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
 
-  .link-pill:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(19, 81, 255, 0.18);
+  .link-pill:hover,
+  .link-pill:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
   }
 
   .brand-stage {
-    margin-top: clamp(3.5rem, 8vw, 5rem);
-    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(106, 56, 255, 0.08));
-    border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, var(--aurora-purple) 22%, transparent);
-    padding: clamp(1.8rem, 4vw, 2.4rem);
+    margin-top: clamp(3rem, 6vw, 4rem);
     display: grid;
-    gap: 1.2rem;
-    box-shadow: 0 24px 60px rgba(30, 22, 56, 0.16);
-    backdrop-filter: blur(22px);
+    gap: 1rem;
+    background: color-mix(in srgb, var(--bg-surface) 80%, rgba(106, 56, 255, 0.08) 20%);
+    border: 1px solid color-mix(in srgb, rgba(106, 56, 255, 0.28) 60%, rgba(255, 255, 255, 0.35) 40%);
+    border-radius: clamp(2rem, 5vw, 2.8rem);
+    padding: clamp(1.8rem, 4vw, 2.6rem);
+    box-shadow: 0 32px 72px rgba(15, 23, 42, 0.14);
   }
 
   .brand-stage .label {
-    font-size: var(--text-small);
-    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text-tertiary) 32%);
+    letter-spacing: 0.14em;
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
     font-weight: var(--weight-semibold);
   }
 
   .marquee {
-    position: relative;
     overflow: hidden;
   }
 
   .marquee-track {
     display: flex;
-    gap: clamp(1.4rem, 3vw, 2rem);
-    animation: marquee 32s linear infinite;
+    gap: 1.4rem;
+    animation: marquee 26s linear infinite;
   }
 
   .brand-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.65rem 1.1rem;
+    gap: 0.8rem;
+    padding: 0.75rem 1.2rem;
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--bg-muted) 78%, transparent);
-    border: 1px solid color-mix(in srgb, var(--aurora-purple) 16%, transparent);
-    font-size: var(--text-small);
-    color: var(--text-secondary);
-    min-width: 140px;
+    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+    min-width: 160px;
   }
 
   .brand-chip img {
     width: 36px;
     height: 36px;
     object-fit: contain;
-    filter: grayscale(1);
-    opacity: 0.75;
   }
 
   .brand-note {
-    font-size: var(--text-small);
     color: var(--text-tertiary);
+    font-size: var(--text-small);
   }
 
   @keyframes marquee {
-    0% {
+    from {
       transform: translateX(0);
     }
-    100% {
+    to {
       transform: translateX(-50%);
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-      animation: none;
+  @media (max-width: 960px) {
+    .founder-tab {
+      justify-content: flex-start;
     }
-  }
 
-  @media (max-width: 980px) {
-    .profile-grid {
-      grid-template-columns: 1fr;
+    .profile-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .current-role {
+      width: 100%;
     }
   }
 
   @media (max-width: 640px) {
-    .founder-card {
-      padding: 1.8rem;
+    .founder-tab {
+      padding: 0.9rem 1.1rem;
     }
 
-    header {
-      flex-direction: column;
-      align-items: flex-start;
+    .profile-grid {
+      grid-template-columns: 1fr;
     }
 
-    .avatar {
-      width: 80px;
-      height: 80px;
+    .brand-chip {
+      min-width: 140px;
     }
+  }
 
-    .identity-meta {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  :global([data-theme='dark']) .founder-tab,
+  :global([data-theme='dark']) .founder-profile,
+  :global([data-theme='dark']) .profile-card,
+  :global([data-theme='dark']) .current-role,
+  :global([data-theme='dark']) .brand-stage {
+    background: color-mix(in srgb, var(--bg-surface) 80%, rgba(26, 48, 98, 0.55) 20%);
+    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.35) 60%, rgba(6, 12, 26, 0.6) 40%);
+  }
+
+  :global([data-theme='dark']) .brand-chip,
+  :global([data-theme='dark']) .journey-list li,
+  :global([data-theme='dark']) .badge,
+  :global([data-theme='dark']) .chip-list span,
+  :global([data-theme='dark']) .link-pill {
+    background: color-mix(in srgb, rgba(17, 28, 58, 0.8) 80%, transparent);
+    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.35) 65%, transparent);
+    color: var(--text-secondary);
+  }
+
+  :global([data-theme='dark']) .section-lead,
+  :global([data-theme='dark']) .profile-intro p,
+  :global([data-theme='dark']) .profile-card ul,
+  :global([data-theme='dark']) .journey-list li {
+    color: var(--text-secondary);
   }
 </style>

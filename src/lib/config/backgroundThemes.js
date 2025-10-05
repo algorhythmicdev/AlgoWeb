@@ -7,6 +7,7 @@
 export const backgroundThemes = {
   home: {
     name: 'home',
+    palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
     shapes: [
       { type: 'node', count: 20, color: 'voyage-blue', size: 'medium' },
       { type: 'brain', count: 8, color: 'aurora-purple', size: 'large' },
@@ -20,6 +21,7 @@ export const backgroundThemes = {
   
   nodevoyage: {
     name: 'nodevoyage',
+    palette: ['voyage-blue', 'signal-yellow', 'aurora-purple'],
     shapes: [
       { type: 'map-node', count: 25, color: 'voyage-blue', size: 'medium' },
       { type: 'location-pin', count: 15, color: 'signal-yellow', size: 'small' },
@@ -34,6 +36,7 @@ export const backgroundThemes = {
   
   ideonautix: {
     name: 'ideonautix',
+    palette: ['aurora-purple', 'voyage-blue', 'signal-yellow'],
     shapes: [
       { type: 'chart-bar', count: 15, color: 'aurora-purple', size: 'medium' },
       { type: 'lightning', count: 10, color: 'signal-yellow', size: 'small' },
@@ -48,6 +51,7 @@ export const backgroundThemes = {
   
   community: {
     name: 'community',
+    palette: ['voyage-blue', 'signal-yellow', 'aurora-purple'],
     shapes: [
       { type: 'speech-bubble', count: 18, color: 'voyage-blue', size: 'medium' },
       { type: 'heart', count: 12, color: 'signal-yellow', size: 'small' },
@@ -61,6 +65,7 @@ export const backgroundThemes = {
   
   consulting: {
     name: 'consulting',
+    palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
     shapes: [
       { type: 'briefcase', count: 12, color: 'voyage-blue', size: 'medium' },
       { type: 'lightbulb', count: 15, color: 'signal-yellow', size: 'medium' },
@@ -74,6 +79,7 @@ export const backgroundThemes = {
   
   contact: {
     name: 'contact',
+    palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
     shapes: [
       { type: 'email', count: 15, color: 'voyage-blue', size: 'medium' },
       { type: 'phone', count: 10, color: 'aurora-purple', size: 'small' },

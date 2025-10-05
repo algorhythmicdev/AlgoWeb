@@ -9,6 +9,7 @@
     typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let particles = [];
+  const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
 
   const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.12, damping: 0.35, precision: 0.001 });
   const scrollSpring = spring(0, { stiffness: 0.08, damping: 0.4, precision: 0.0001 });
@@ -19,16 +20,29 @@
   const unsubscribePointer = pointerSpring.subscribe((value) => (pointerCoords = value));
   const unsubscribeScroll = scrollSpring.subscribe((value) => (scrollDepth = value));
 
-  $: backgroundVars = `--pointer-x:${pointerCoords.x}; --pointer-y:${pointerCoords.y}; --scroll-depth:${scrollDepth};`;
+  $: paletteNames = theme?.palette ?? basePalette;
+  const paletteFallback = ['var(--voyage-blue)', 'var(--aurora-purple)', 'var(--signal-yellow)'];
+  $: paletteColors = paletteNames.map((name, index) => colorVar(name, index));
+  $: [primaryColor, secondaryColor, accentColor] = [
+    paletteColors[0] ?? paletteFallback[0],
+    paletteColors[1] ?? paletteFallback[1],
+    paletteColors[2] ?? paletteFallback[2]
+  ];
+
+  $: backgroundVars =
+    `--pointer-x:${pointerCoords.x}; --pointer-y:${pointerCoords.y}; --scroll-depth:${scrollDepth}; --theme-primary:${primaryColor}; --theme-secondary:${secondaryColor}; --theme-accent:${accentColor};`;
 
   $: theme = getThemeForPath($page.url.pathname);
   $: if (theme) initParticles(theme);
 
-  function colorVar(name) {
+  function colorVar(name, index = 0) {
     if (name === 'voyage-blue') return 'var(--voyage-blue)';
     if (name === 'aurora-purple') return 'var(--aurora-purple)';
     if (name === 'signal-yellow') return 'var(--signal-yellow)';
-    return 'var(--voyage-blue)';
+    if (name === 'cherry-red') return 'var(--cherry-red)';
+    // provide subtle variation when palette item missing
+    const fallback = ['var(--voyage-blue)', 'var(--aurora-purple)', 'var(--signal-yellow)'];
+    return fallback[index % fallback.length];
   }
 
   function initParticles(themeConfig) {
@@ -117,6 +131,12 @@
   <div class="wash"></div>
   <div class="halo"></div>
   <div class="mesh"></div>
+  <div class="ribbons" aria-hidden="true">
+    <span class="ribbon ribbon-a"></span>
+    <span class="ribbon ribbon-b"></span>
+    <span class="ribbon ribbon-c"></span>
+  </div>
+  <div class="grain"></div>
   {#each particles as p (p.id)}
     <span
       class="dot"
@@ -142,7 +162,9 @@
 
   .wash,
   .halo,
-  .mesh {
+  .mesh,
+  .ribbons,
+  .grain {
     grid-area: 1 / 1;
     transition: opacity var(--duration-slower) var(--ease-out);
   }
@@ -187,6 +209,50 @@
     transform: translate3d(calc(var(--pointer-offset-x) * 0.6), calc(var(--pointer-offset-y) * 0.5), 0);
   }
 
+  .ribbons {
+    position: relative;
+    display: grid;
+    mix-blend-mode: screen;
+    opacity: clamp(0.12, 0.08 + var(--scroll-depth) * 0.28, 0.38);
+  }
+
+  .ribbon {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 90% at 50% 50%, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.08) 52%, transparent
+        76%),
+      linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 35%, transparent) 0%, transparent 65%);
+    filter: blur(0.6px);
+    animation: ribbonShift 18s ease-in-out infinite;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .ribbon-b {
+    background: radial-gradient(110% 100% at 45% 55%, transparent 0%, transparent 28%, rgba(255, 255, 255, 0.1) 48%, transparent
+        70%),
+      linear-gradient(165deg, color-mix(in srgb, var(--theme-secondary) 38%, transparent) 0%, transparent 60%);
+    animation-duration: 22s;
+    animation-delay: -6s;
+    transform: translate3d(calc(var(--pointer-offset-x) * 0.5), calc(var(--pointer-offset-y) * -0.35), 0);
+  }
+
+  .ribbon-c {
+    background: radial-gradient(160% 120% at 60% 40%, transparent 0%, transparent 35%, rgba(255, 255, 255, 0.08) 52%, transparent
+        75%),
+      linear-gradient(200deg, color-mix(in srgb, var(--theme-accent) 45%, transparent) 0%, transparent 70%);
+    animation-duration: 26s;
+    animation-delay: -12s;
+    transform: translate3d(calc(var(--pointer-offset-x) * -0.45), calc(var(--pointer-offset-y) * 0.4), 0);
+  }
+
+  .grain {
+    opacity: 0.16;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 0);
+    background-size: 3px 3px;
+    mix-blend-mode: soft-light;
+    transform: translate3d(calc(var(--pointer-offset-x) * 0.25), calc(var(--pointer-offset-y) * -0.18), 0);
+  }
+
   .dot {
     position: absolute;
     border-radius: 50%;
@@ -204,7 +270,9 @@
   @media (prefers-reduced-motion: reduce) {
     .wash,
     .halo,
-    .mesh {
+    .mesh,
+    .ribbons,
+    .grain {
       transform: none;
       transition: none;
     }
@@ -212,6 +280,25 @@
     .dot {
       animation: none;
       transform: none;
+    }
+
+    .ribbon {
+      animation: none;
+    }
+  }
+
+  @keyframes ribbonShift {
+    0% {
+      transform: translate3d(calc(var(--pointer-offset-x) * -0.2), calc(var(--pointer-offset-y) * -0.15), 0) rotate(0deg)
+        scale(1);
+    }
+    50% {
+      transform: translate3d(calc(var(--pointer-offset-x) * 0.4), calc(var(--pointer-offset-y) * 0.25), 0) rotate(6deg)
+        scale(1.06);
+    }
+    100% {
+      transform: translate3d(calc(var(--pointer-offset-x) * -0.25), calc(var(--pointer-offset-y) * 0.18), 0) rotate(-4deg)
+        scale(1.02);
     }
   }
 
