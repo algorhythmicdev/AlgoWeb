@@ -101,9 +101,9 @@
 <style>
   .section-heading {
     display: grid;
-    gap: clamp(1rem, 2vw, 1.5rem);
+    gap: var(--space-lg);
     max-width: min(900px, 90%);
-    margin-bottom: clamp(4rem, 8vw, 6rem);
+    margin-bottom: var(--space-4xl);
   }
 
   .section-heading h2 {
@@ -118,13 +118,13 @@
 
   .story-grid {
     display: grid;
-    gap: clamp(2rem, 5vw, 3rem);
+    gap: var(--grid-gap-xl);
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-top: var(--space-2xl);
   }
 
   .story-card {
-    padding: clamp(2.2rem, 4vw, 3rem);
+    padding: var(--card-padding-lg);
     border-radius: var(--radius-2xl);
     border: 1px solid rgba(255, 255, 255, 0.55);
     background: var(--surface-glass);
@@ -132,13 +132,14 @@
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     display: grid;
-    gap: clamp(1.2rem, 2vw, 1.5rem);
+    gap: var(--space-lg);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     transition: all var(--duration-normal) var(--ease-out);
     position: relative;
     overflow: hidden;
+    margin-bottom: var(--card-margin-bottom);
   }
 
   .story-card:hover {
@@ -169,15 +170,15 @@
 
   .product-list {
     display: grid;
-    gap: clamp(2.5rem, 5vw, 3.5rem);
-    margin-top: clamp(2rem, 4vw, 3rem);
+    gap: var(--grid-gap-2xl);
+    margin-top: var(--space-2xl);
   }
 
   .product-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    gap: clamp(2.5rem, 6vw, 4rem);
-    padding: clamp(2.5rem, 5vw, 3.5rem);
+    gap: var(--space-3xl);
+    padding: var(--card-padding-xl);
     border-radius: var(--radius-2xl);
     border: 1px solid rgba(255, 255, 255, 0.6);
     background: var(--surface-glass);
@@ -190,6 +191,7 @@
     transition: all var(--duration-normal) var(--ease-out);
     position: relative;
     overflow: hidden;
+    margin-bottom: var(--card-margin-bottom);
   }
 
   .product-row:hover {
@@ -265,9 +267,9 @@
   .timeline-grid {
     position: relative;
     display: grid;
-    gap: clamp(3rem, 6vw, 4rem);
-    padding-left: clamp(1.5rem, 4vw, 2rem);
-    margin-top: clamp(2rem, 4vw, 3rem);
+    gap: var(--space-4xl);
+    padding-left: var(--space-xl);
+    margin-top: var(--space-2xl);
   }
 
   .timeline-grid::before {
@@ -298,11 +300,11 @@
 
   .timeline-content {
     display: grid;
-    gap: clamp(1rem, 2vw, 1.2rem);
+    gap: var(--space-md);
     background: var(--surface-glass);
     border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: var(--radius-2xl);
-    padding: clamp(2rem, 4vw, 2.5rem);
+    padding: var(--card-padding-lg);
     box-shadow: var(--shadow-xs);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
@@ -312,6 +314,7 @@
     transition: all var(--duration-normal) var(--ease-out);
     position: relative;
     overflow: hidden;
+    margin-bottom: var(--card-margin-bottom);
   }
 
   .timeline-content:hover {
@@ -350,10 +353,47 @@
   .timeline-note { color: var(--voyage-blue); font-size: var(--text-small); }
 
   @media (max-width: 960px) {
-    .product-row { grid-template-columns: 1fr; }
-    .timeline-grid { padding-left: 0; }
+    .product-row { 
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .timeline-grid { 
+      padding-left: 0;
+      gap: var(--space-2xl);
+    }
     .timeline-grid::before { display: none; }
-    .timeline-item { flex-direction: column; padding-left: 0; }
+    .timeline-item { 
+      flex-direction: column; 
+      padding-left: 0;
+      gap: var(--space-md);
+    }
     .timeline-marker { margin-left: 6px; }
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .section-heading {
+      gap: var(--space-md);
+      margin-bottom: var(--space-2xl);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product-row {
+      padding: var(--card-padding-md);
+      gap: var(--space-md);
+    }
+    .story-card {
+      padding: var(--card-padding-md);
+      gap: var(--space-md);
+    }
+    .timeline-content {
+      padding: var(--card-padding-md);
+      gap: var(--space-sm);
+    }
+    .section-heading {
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
   }
 </style>
