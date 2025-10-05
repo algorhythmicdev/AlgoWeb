@@ -1,12 +1,16 @@
 <script>
+  import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
+  import { onDestroy } from 'svelte';
   import { navigation } from '$stores/navigation';
   import LanguageSwitcher from './language-switcher.svelte';
   import ThemeToggle from './theme-toggle.svelte';
   import { mainNavigation } from '$config/navigation';
 
   let isScrolled = false;
+  let lastKnownScrollY = 0;
+  let ticking = false;
 
   $: currentPath = $page.url.pathname;
 
@@ -22,15 +26,49 @@
     const scrollY = window.scrollY;
     isScrolled = scrollY > 32;
     navigation.updateScroll(scrollY);
+    ticking = false;
   }
+
+  function handleScroll() {
+    lastKnownScrollY = window.scrollY || 0;
+
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateScrollState);
+    }
+  }
+
+  function handleResize() {
+    if (window.innerWidth > 960 && $navigation.isMenuOpen) {
+      navigation.closeMenu();
+    }
+  }
+
+  /** @param {KeyboardEvent} event */
+  function handleKeydown(event) {
+    if (event.key === 'Escape' && $navigation.isMenuOpen) {
+      navigation.closeMenu();
+    }
+  }
+
+  $: if (browser) {
+    document.documentElement.classList.toggle('nav-menu-open', $navigation.isMenuOpen);
+  }
+
+  onDestroy(() => {
+    if (browser) {
+      document.documentElement.classList.remove('nav-menu-open');
+    }
+  });
 </script>
 
-<svelte:window on:scroll={handleScroll} />
+<svelte:window on:scroll={handleScroll} on:resize={handleResize} on:keydown={handleKeydown} />
 
 <nav
   class="nav"
   class:nav-condensed={isScrolled}
   class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
+  class:menu-open={$navigation.isMenuOpen}
 >
   <div class="container nav-container">
     <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
@@ -59,7 +97,13 @@
         <LanguageSwitcher />
         <ThemeToggle />
         <a href="/contact" class="nav-cta">{$_('nav.contact')}</a>
-        <button class="menu-toggle" on:click={() => navigation.toggleMenu()} aria-label={$_('nav.toggle_menu')}>
+        <button
+          class="menu-toggle"
+          on:click={() => navigation.toggleMenu()}
+          aria-label={$_('nav.toggle_menu')}
+          aria-expanded={$navigation.isMenuOpen}
+          aria-controls="primary-navigation"
+        >
           <span></span>
           <span></span>
         </button>
@@ -67,6 +111,15 @@
     </div>
   </div>
 </nav>
+
+<button
+  type="button"
+  class="nav-overlay"
+  class:visible={$navigation.isMenuOpen}
+  aria-hidden="true"
+  tabindex="-1"
+  on:click={() => navigation.closeMenu()}
+></button>
 
 <style>
   .nav {
@@ -108,7 +161,11 @@
     padding: 1.35rem 0;
   }
 
-  .brand img { display: block; width: 148px; height: auto; }
+  .brand img {
+    display: block;
+    width: clamp(128px, 22vw, 148px);
+    height: auto;
+  }
 
   .nav-content {
     display: flex;
@@ -214,13 +271,28 @@
     transition: transform var(--duration-fast) var(--ease-out);
   }
 
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 9, 26, 0.38);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    z-index: calc(var(--z-sticky) - 2);
+  }
+
+  .nav-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
   @media (max-width: 960px) {
     .nav-content { gap: var(--space-3); }
     .nav-links {
       position: fixed;
-      top: 70px;
-      left: 1.5rem;
-      right: 1.5rem;
+      top: clamp(68px, 12vw, 80px);
+      left: clamp(1rem, 5vw, 1.5rem);
+      right: clamp(1rem, 5vw, 1.5rem);
       flex-direction: column;
       align-items: stretch;
       padding: var(--space-4);
@@ -244,7 +316,11 @@
       pointer-events: all;
     }
 
-    .nav-link { font-size: 1.05rem; padding: 0.5rem 0; }
+    .nav-link {
+      font-size: 1.05rem;
+      padding: 0.65rem 0;
+      justify-content: space-between;
+    }
 
     .nav-actions { gap: var(--space-2); }
 

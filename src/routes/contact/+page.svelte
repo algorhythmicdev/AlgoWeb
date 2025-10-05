@@ -1,5 +1,6 @@
 <script>
   // @ts-nocheck
+  import { browser } from '$app/environment';
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
@@ -21,12 +22,26 @@
   let calendlyLoaded = false;
   
   onMount(() => {
-    // Load Calendly widget script
+    if (!browser) return;
+
+    const existing = document.querySelector('script[data-calendly-widget]');
+    if (existing) {
+      calendlyLoaded = true;
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
-    script.onload = () => { calendlyLoaded = true; };
+    script.dataset.calendlyWidget = 'true';
+    script.onload = () => {
+      calendlyLoaded = true;
+    };
     document.head.appendChild(script);
+
+    return () => {
+      script.onload = null;
+    };
   });
   
   function validateEmail(email) {
@@ -100,10 +115,17 @@
   }
   
   function openCalendly() {
-    if (window.Calendly) {
+    if (!browser) {
+      window.open('https://calendly.com/algorhythmics-dev', '_blank');
+      return;
+    }
+
+    if (window.Calendly && calendlyLoaded) {
       window.Calendly.initPopupWidget({
         url: 'https://calendly.com/algorhythmics-dev'
       });
+    } else {
+      window.open('https://calendly.com/algorhythmics-dev', '_blank');
     }
   }
 </script>
@@ -496,5 +518,51 @@ form {
 
   @media (max-width: 960px) {
     .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .contact-hero {
+      padding: clamp(5rem, 18vw, 6.5rem) 0 clamp(3.5rem, 14vw, 5rem);
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    }
+
+    .contact-hero__backdrop {
+      inset: -32% -24%;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(2rem, 8vw, 2.6rem);
+    }
+
+    form,
+    .calendar-card,
+    .info-card,
+    .social-card {
+      padding: clamp(1.6rem, 8vw, 2rem);
+      border-radius: var(--radius-xl);
+    }
+
+    .contact-grid {
+      gap: clamp(2rem, 8vw, 2.6rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-orb {
+      width: clamp(180px, 60vw, 240px);
+      height: clamp(180px, 60vw, 240px);
+    }
+
+    .contact-node {
+      width: clamp(32px, 10vw, 42px);
+      height: clamp(32px, 10vw, 42px);
+    }
+
+    form,
+    .calendar-card,
+    .info-card,
+    .social-card {
+      padding: clamp(1.4rem, 10vw, 1.8rem);
+    }
   }
 </style>

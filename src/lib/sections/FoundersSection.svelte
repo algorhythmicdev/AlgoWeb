@@ -179,34 +179,6 @@
     margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
-  .founders-grid {
-    display: grid;
-    gap: clamp(2rem, 5vw, 3.5rem);
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  }
-
-  .founder-card {
-    background: var(--surface-glass);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: var(--radius-2xl);
-    padding: clamp(2rem, 4vw, 2.8rem);
-    display: grid;
-    gap: clamp(1.5rem, 4vw, 2.4rem);
-    box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(26px);
-    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  }
-
-  .founder-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .founder-card.focus {
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(19, 81, 255, 0.32);
-  }
-
   .founder-stage {
     position: relative;
   }
@@ -286,12 +258,12 @@
     border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.22) 60%, rgba(255, 255, 255, 0.36) 40%);
   }
 
-  .achievement-item {
+  .profile-card.achievements li {
     padding: 0.7rem 1rem;
     border-radius: var(--radius-full);
     border: 1px solid rgba(19, 81, 255, 0.15);
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
+    background: color-mix(in srgb, var(--bg-muted) 55%, transparent);
   }
 
   .profile-intro p {
@@ -299,6 +271,9 @@
     line-height: var(--leading-relaxed);
     color: var(--text-secondary);
     background: rgba(19, 81, 255, 0.06);
+    padding: clamp(1.4rem, 3vw, 2rem);
+    border-radius: var(--radius-xl);
+    border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.18) 50%, rgba(255, 255, 255, 0.4) 50%);
   }
 
   .profile-grid {
@@ -364,14 +339,15 @@
     gap: 0.9rem;
   }
 
-  .brand-logo {
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: var(--radius-lg);
-    background: var(--surface-glass);
+  .logo-grid span {
+    display: grid;
+    gap: 0.35rem;
+    place-items: center;
     padding: 0.85rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-xs);
   }
 
   .link-pill {
@@ -381,7 +357,11 @@
     backdrop-filter: blur(16px);
   }
 
-  .brand-logo img { max-width: 72px; filter: grayscale(1); opacity: 0.68; }
+  .logo-grid span img {
+    max-width: 72px;
+    filter: grayscale(1);
+    opacity: 0.72;
+  }
 
   .brand-stage {
     margin-top: clamp(3rem, 6vw, 4rem);
@@ -412,21 +392,6 @@
     animation: marquee 26s linear infinite;
   }
 
-  .expertise span {
-    padding: 0.55rem 1rem;
-    border-radius: var(--radius-full);
-    background: rgba(19, 81, 255, 0.08);
-    border: 1px solid rgba(19, 81, 255, 0.18);
-    font-size: var(--text-small);
-  }
-
-  .brand-minimal {
-    margin-top: var(--space-2);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
-    gap: 0.85rem;
-    align-items: center;
-  }
 
   @media (max-width: 960px) {
     .founder-tab {
@@ -444,8 +409,20 @@
   }
 
   @media (max-width: 640px) {
-    .founder-card { padding: 1.8rem; }
-    header { flex-direction: column; align-items: flex-start; }
-    .avatar { width: 80px; height: 80px; }
+    .profile-identity {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .profile-identity img {
+      width: 72px;
+      height: 72px;
+    }
+
+    .profile-card {
+      padding: clamp(1.1rem, 6vw, 1.6rem);
+    }
   }
+
 </style>
