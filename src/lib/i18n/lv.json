@@ -27,7 +27,31 @@
     "subtitle": "Veidojam ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix ar jaunākajām MI tehnoloģijām",
     "cta_products": "Apskatīt produktus",
     "cta_consulting": "MI konsultācijas",
-    "next_milestone": "Nākamais posms"
+    "next_milestone": "Nākamais posms",
+    "signals": {
+      "studio_phase": "Studijas posms",
+      "studio_phase_value": "Pilots studija • Kopš 2023",
+      "focus_tracks": "Fokusa virzieni",
+      "focus_tracks_value": "NodeVoyage un Ideonautix",
+      "research": "Pētījumu saknes",
+      "research_value": "Signāltehnikas R&D + mākoņa MI"
+    },
+    "moments": {
+      "nodevoyage": {
+        "kicker": "Produkta virziens",
+        "status": "NodeVoyage",
+        "copy": "Ceļojumu pavadonis, kas apvieno taktilās izkārtnes disciplīnu ar skaidrojamiem MI ceļojumiem.",
+        "meta": "Veidojas beta piloti",
+        "cta": "Izpētīt NodeVoyage"
+      },
+      "ideonautix": {
+        "kicker": "Produkta virziens",
+        "status": "Ideonautix",
+        "copy": "Dibinātāju operētājsistēma, kas uztur komandas fokusu ar caurspīdīgām automatizācijām.",
+        "meta": "Notiek pētniecības sprints",
+        "cta": "Skatīt Ideonautix"
+      }
+    }
   },
   "story": {
     "title": "Mūsu stāsts",

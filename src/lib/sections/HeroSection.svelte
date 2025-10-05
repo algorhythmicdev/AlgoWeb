@@ -3,7 +3,7 @@
   import { spring } from 'svelte/motion';
   import { _, json } from 'svelte-i18n';
   import timelineData from '$data/timeline.json';
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { revealOnScroll, staggerReveal, typewriter, magnetic } from '$utils/animations';
 
   const upcomingMilestone = timelineData.milestones?.[0];
   const milestoneDate = upcomingMilestone
@@ -13,6 +13,46 @@
   const heroProducts = [
     { id: 'nodevoyage', href: '/products/nodevoyage' },
     { id: 'ideonautix', href: '/products/ideonautix' }
+  ];
+
+  /** @type {{ id: string; kickerKey: string; statusKey: string; copyKey: string; metaKey: string; ctaKey: string; href: string; accent: string; }[]} */
+  const heroMoments = [
+    {
+      id: 'nodevoyage',
+      kickerKey: 'hero.moments.nodevoyage.kicker',
+      statusKey: 'hero.moments.nodevoyage.status',
+      copyKey: 'hero.moments.nodevoyage.copy',
+      metaKey: 'hero.moments.nodevoyage.meta',
+      ctaKey: 'hero.moments.nodevoyage.cta',
+      href: heroProducts[0].href,
+      accent: 'var(--voyage-blue)'
+    },
+    {
+      id: 'ideonautix',
+      kickerKey: 'hero.moments.ideonautix.kicker',
+      statusKey: 'hero.moments.ideonautix.status',
+      copyKey: 'hero.moments.ideonautix.copy',
+      metaKey: 'hero.moments.ideonautix.meta',
+      ctaKey: 'hero.moments.ideonautix.cta',
+      href: heroProducts[1].href,
+      accent: 'var(--aurora-purple)'
+    }
+  ];
+
+  /** @type {{ labelKey: string; valueKey?: string; value?: string }[]} */
+  const signals = [
+    {
+      labelKey: 'hero.signals.studio_phase',
+      valueKey: 'hero.signals.studio_phase_value'
+    },
+    {
+      labelKey: 'hero.signals.focus_tracks',
+      valueKey: 'hero.signals.focus_tracks_value'
+    },
+    {
+      labelKey: 'hero.signals.research',
+      valueKey: 'hero.signals.research_value'
+    }
   ];
 
   $: heroPillars = (() => {
@@ -29,7 +69,8 @@
 
   /** @type {{ x: number; y: number }} */
   let pointerCoords = defaultPointer;
-  let heroSection;
+  /** @type {HTMLElement | null} */
+  let heroSection = null;
   let motionEnabled = false;
 
   const unsubscribePointer = pointerSpring.subscribe((value) => {
@@ -38,10 +79,12 @@
 
   $: heroVars = `--hero-pointer-x:${pointerCoords.x}; --hero-pointer-y:${pointerCoords.y};`;
 
+  /** @param {number} value */
   function normalize(value) {
     return Math.max(0, Math.min(1, value));
   }
 
+  /** @param {PointerEvent} event */
   function handlePointer(event) {
     if (!motionEnabled || !heroSection || event.pointerType === 'touch') return;
     const rect = heroSection.getBoundingClientRect();
@@ -56,6 +99,7 @@
 
   onMount(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    /** @param {MediaQueryListEvent} event */
     const updatePreference = (event) => {
       motionEnabled = !event.matches;
       if (!motionEnabled) {

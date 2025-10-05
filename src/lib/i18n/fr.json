@@ -27,7 +27,31 @@
     "subtitle": "Nous construisons la plateforme de voyage NodeVoyage et la suite de productivité Ideonautix avec une IA de pointe",
     "cta_products": "Explorer les produits",
     "cta_consulting": "Conseil en IA",
-    "next_milestone": "Prochain jalon"
+    "next_milestone": "Prochain jalon",
+    "signals": {
+      "studio_phase": "Phase du studio",
+      "studio_phase_value": "Studio pilote • Depuis 2023",
+      "focus_tracks": "Axes de focus",
+      "focus_tracks_value": "NodeVoyage & Ideonautix",
+      "research": "Origines de recherche",
+      "research_value": "R&D signalétique + IA cloud"
+    },
+    "moments": {
+      "nodevoyage": {
+        "kicker": "Piste produit",
+        "status": "NodeVoyage",
+        "copy": "Compagnon de voyage mêlant la rigueur signalétique à des parcours IA explicables.",
+        "meta": "Pilotes bêta en préparation",
+        "cta": "Explorer NodeVoyage"
+      },
+      "ideonautix": {
+        "kicker": "Piste produit",
+        "status": "Ideonautix",
+        "copy": "Système d'exploitation fondateur qui garde les équipes focalisées grâce à une automatisation transparente.",
+        "meta": "Sprint de recherche en cours",
+        "cta": "Voir Ideonautix"
+      }
+    }
   },
   "story": {
     "title": "Notre histoire",
