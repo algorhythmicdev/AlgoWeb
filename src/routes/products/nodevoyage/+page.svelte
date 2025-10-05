@@ -13,6 +13,12 @@
 </svelte:head>
 
 <section class="product-hero section" use:reveal>
+  <div class="product-hero__halo" aria-hidden="true">
+    <span class="halo-ring halo-ring--outer"></span>
+    <span class="halo-ring halo-ring--inner"></span>
+    <span class="halo-orb halo-orb--one"></span>
+    <span class="halo-orb halo-orb--two"></span>
+  </div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">{$_('nodevoyage.status')}</span>
@@ -129,6 +135,7 @@
   .product-hero {
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
 
   .product-hero::before {
@@ -140,6 +147,87 @@
     filter: blur(120px);
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .product-hero__halo {
+    position: absolute;
+    inset: -16% -18% auto;
+    height: clamp(26rem, 44vw, 32rem);
+    pointer-events: none;
+  }
+
+  .halo-ring {
+    position: absolute;
+    inset: 16% 24%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(19, 81, 255, 0.25);
+    mix-blend-mode: screen;
+    animation: heroRingOrbit 32s linear infinite;
+  }
+
+  .halo-ring::after {
+    content: '';
+    position: absolute;
+    inset: 12% 18%;
+    border-radius: 50%;
+    border: 1px dashed rgba(106, 56, 255, 0.22);
+  }
+
+  .halo-ring--outer {
+    animation-duration: 36s;
+  }
+
+  .halo-ring--inner {
+    inset: 0 28%;
+    animation-direction: reverse;
+    animation-duration: 24s;
+  }
+
+  .halo-orb {
+    position: absolute;
+    width: clamp(120px, 22vw, 180px);
+    height: clamp(120px, 22vw, 180px);
+    border-radius: 50%;
+    background: var(--gradient-spectrum-1);
+    filter: blur(50px);
+    opacity: 0.4;
+    animation: heroOrbPulse 18s ease-in-out infinite;
+  }
+
+  .halo-orb--one {
+    top: -20%;
+    left: 8%;
+  }
+
+  .halo-orb--two {
+    right: 10%;
+    bottom: -32%;
+    background: var(--gradient-spectrum-3);
+    animation-delay: -8s;
+  }
+
+  @keyframes heroRingOrbit {
+    0% {
+      transform: rotate(0deg) scale(0.94);
+      opacity: 0.55;
+    }
+    50% {
+      transform: rotate(180deg) scale(1.04);
+      opacity: 0.8;
+    }
+    100% {
+      transform: rotate(360deg) scale(0.94);
+      opacity: 0.55;
+    }
+  }
+
+  @keyframes heroOrbPulse {
+    0%, 100% {
+      transform: translate3d(-6%, -4%, 0) scale(0.9);
+    }
+    50% {
+      transform: translate3d(6%, 4%, 0) scale(1.05);
+    }
   }
 
   .hero-grid {
@@ -287,6 +375,21 @@
   .cta-copy { display: grid; gap: 0.65rem; max-width: 540px; }
   .cta-copy p { color: var(--text-secondary); }
   .note { font-size: var(--text-small); color: var(--text-tertiary); }
+
+  :global([data-theme='dark']) .product-hero__halo .halo-ring {
+    border-color: rgba(90, 135, 255, 0.32);
+  }
+
+  :global([data-theme='dark']) .product-hero__halo .halo-orb {
+    opacity: 0.48;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .halo-ring,
+    .halo-orb {
+      animation: none;
+    }
+  }
 
   @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; }

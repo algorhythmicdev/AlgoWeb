@@ -14,6 +14,11 @@
 </svelte:head>
 
 <section class="hero section" use:revealOnScroll>
+  <div class="products-hero__backdrop" aria-hidden="true">
+    <span class="products-stripe products-stripe--one"></span>
+    <span class="products-stripe products-stripe--two"></span>
+    <span class="products-orb products-orb--one"></span>
+  </div>
   <div class="container hero-container">
     <span class="eyebrow">{$_('products.title')}</span>
     <h1>{$_('products.subtitle')}</h1>
@@ -69,6 +74,83 @@
 </section>
 
 <style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  }
+
+  .products-hero__backdrop {
+    position: absolute;
+    inset: -20% -30% auto;
+    height: clamp(20rem, 34vw, 26rem);
+    pointer-events: none;
+  }
+
+  .products-stripe {
+    position: absolute;
+    inset: auto;
+    top: 10%;
+    width: 140%;
+    height: clamp(280px, 40vw, 340px);
+    background: linear-gradient(120deg, rgba(19, 81, 255, 0.18), rgba(106, 56, 255, 0.08));
+    filter: blur(80px);
+    transform: rotate(12deg);
+    transform-origin: center;
+    animation: productsSweep 22s ease-in-out infinite;
+  }
+
+  .products-stripe--one {
+    left: -20%;
+    animation-duration: 24s;
+  }
+
+  .products-stripe--two {
+    right: -12%;
+    top: -6%;
+    transform: rotate(-14deg);
+    background: linear-gradient(120deg, rgba(255, 211, 57, 0.16), rgba(224, 50, 44, 0.12));
+    animation-duration: 28s;
+    animation-delay: -6s;
+  }
+
+  .products-orb {
+    position: absolute;
+    width: clamp(160px, 28vw, 220px);
+    height: clamp(160px, 28vw, 220px);
+    background: var(--gradient-spectrum-2);
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.42;
+    bottom: -40%;
+    left: 10%;
+    animation: productsOrbDrift 26s ease-in-out infinite;
+  }
+
+  @keyframes productsSweep {
+    0% {
+      transform: translate3d(-6%, 0, 0) rotate(12deg) scale(0.95);
+      opacity: 0.45;
+    }
+    50% {
+      transform: translate3d(6%, -4%, 0) rotate(18deg) scale(1.05);
+      opacity: 0.72;
+    }
+    100% {
+      transform: translate3d(-6%, 0, 0) rotate(12deg) scale(0.95);
+      opacity: 0.45;
+    }
+  }
+
+  @keyframes productsOrbDrift {
+    0%, 100% {
+      transform: translate3d(-6%, 6%, 0) scale(0.9);
+    }
+    40% {
+      transform: translate3d(6%, -6%, 0) scale(1.05);
+    }
+  }
+
   .hero-container {
     max-width: 720px;
     display: grid;
@@ -186,6 +268,21 @@
 
   @media (max-width: 640px) {
     .cta-actions { flex-direction: column; }
+  }
+
+  :global([data-theme='dark']) .products-hero__backdrop .products-stripe {
+    background: linear-gradient(120deg, rgba(47, 92, 220, 0.2), rgba(106, 56, 255, 0.12));
+  }
+
+  :global([data-theme='dark']) .products-hero__backdrop .products-orb {
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .products-stripe,
+    .products-orb {
+      animation: none;
+    }
   }
 
   :global([data-theme='dark']) .catalog-card {

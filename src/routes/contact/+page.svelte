@@ -1,5 +1,6 @@
 <script>
   // @ts-nocheck
+  import { browser } from '$app/environment';
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
@@ -21,12 +22,26 @@
   let calendlyLoaded = false;
   
   onMount(() => {
-    // Load Calendly widget script
+    if (!browser) return;
+
+    const existing = document.querySelector('script[data-calendly-widget]');
+    if (existing) {
+      calendlyLoaded = true;
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
-    script.onload = () => { calendlyLoaded = true; };
+    script.dataset.calendlyWidget = 'true';
+    script.onload = () => {
+      calendlyLoaded = true;
+    };
     document.head.appendChild(script);
+
+    return () => {
+      script.onload = null;
+    };
   });
   
   function validateEmail(email) {
@@ -100,10 +115,17 @@
   }
   
   function openCalendly() {
-    if (window.Calendly) {
+    if (!browser) {
+      window.open('https://calendly.com/algorhythmics-dev', '_blank');
+      return;
+    }
+
+    if (window.Calendly && calendlyLoaded) {
       window.Calendly.initPopupWidget({
         url: 'https://calendly.com/algorhythmics-dev'
       });
+    } else {
+      window.open('https://calendly.com/algorhythmics-dev', '_blank');
     }
   }
 </script>
@@ -119,6 +141,13 @@
 
 <!-- Hero Section -->
 <section class="contact-hero">
+  <div class="contact-hero__backdrop" aria-hidden="true">
+    <span class="contact-orb contact-orb--primary"></span>
+    <span class="contact-orb contact-orb--secondary"></span>
+    <span class="contact-node contact-node--one"></span>
+    <span class="contact-node contact-node--two"></span>
+    <span class="contact-node contact-node--three"></span>
+  </div>
   <div class="container">
     <span class="eyebrow">{$_('contact.hero_title')}</span>
     <h1>{$_('contact.hero_subtitle')}</h1>
@@ -280,6 +309,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
 
   .contact-hero::before {
@@ -291,6 +321,76 @@
     filter: blur(140px);
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .contact-hero__backdrop {
+    position: absolute;
+    inset: -20% -10%;
+    pointer-events: none;
+    filter: blur(0);
+  }
+
+  .contact-orb {
+    position: absolute;
+    width: clamp(240px, 36vw, 320px);
+    height: clamp(240px, 36vw, 320px);
+    border-radius: 50%;
+    opacity: 0.45;
+    filter: blur(60px);
+    transform: translate3d(0, 0, 0);
+    animation: contactOrbDrift 24s ease-in-out infinite;
+  }
+
+  .contact-orb--primary {
+    top: -10%;
+    left: -12%;
+    background: var(--gradient-spectrum-1);
+    animation-duration: 28s;
+  }
+
+  .contact-orb--secondary {
+    bottom: -18%;
+    right: -6%;
+    background: var(--gradient-spectrum-3);
+    animation-duration: 32s;
+    animation-delay: -6s;
+  }
+
+  .contact-node {
+    position: absolute;
+    width: clamp(38px, 6vw, 52px);
+    height: clamp(38px, 6vw, 52px);
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 18px 42px rgba(19, 81, 255, 0.16);
+    mix-blend-mode: screen;
+    opacity: 0.6;
+    animation: contactNodeFloat 16s ease-in-out infinite;
+  }
+
+  .contact-node--one { top: 28%; left: 12%; background: rgba(19, 81, 255, 0.4); }
+  .contact-node--two { top: 52%; right: 20%; background: rgba(255, 211, 57, 0.45); animation-delay: -4s; }
+  .contact-node--three { bottom: 18%; left: 32%; background: rgba(106, 56, 255, 0.42); animation-delay: -2s; }
+
+  @keyframes contactOrbDrift {
+    0% {
+      transform: translate3d(-4%, -2%, 0) scale(0.96);
+    }
+    50% {
+      transform: translate3d(6%, 4%, 0) scale(1.04);
+    }
+    100% {
+      transform: translate3d(-2%, 2%, 0) scale(0.98);
+    }
+  }
+
+  @keyframes contactNodeFloat {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(8px, -16px, 0) scale(1.08);
+    }
   }
 
   .contact-hero h1 {
@@ -307,6 +407,22 @@
     gap: clamp(2.4rem, 5vw, 3.5rem);
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: start;
+  }
+
+  :global([data-theme='dark']) .contact-hero__backdrop .contact-node {
+    background: rgba(70, 120, 255, 0.32);
+    box-shadow: 0 18px 44px rgba(2, 6, 18, 0.4);
+  }
+
+  :global([data-theme='dark']) .contact-hero__backdrop .contact-orb {
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-orb,
+    .contact-node {
+      animation: none;
+    }
   }
 
 form {
@@ -402,5 +518,51 @@ form {
 
   @media (max-width: 960px) {
     .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .contact-hero {
+      padding: clamp(5rem, 18vw, 6.5rem) 0 clamp(3.5rem, 14vw, 5rem);
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    }
+
+    .contact-hero__backdrop {
+      inset: -32% -24%;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(2rem, 8vw, 2.6rem);
+    }
+
+    form,
+    .calendar-card,
+    .info-card,
+    .social-card {
+      padding: clamp(1.6rem, 8vw, 2rem);
+      border-radius: var(--radius-xl);
+    }
+
+    .contact-grid {
+      gap: clamp(2rem, 8vw, 2.6rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-orb {
+      width: clamp(180px, 60vw, 240px);
+      height: clamp(180px, 60vw, 240px);
+    }
+
+    .contact-node {
+      width: clamp(32px, 10vw, 42px);
+      height: clamp(32px, 10vw, 42px);
+    }
+
+    form,
+    .calendar-card,
+    .info-card,
+    .social-card {
+      padding: clamp(1.4rem, 10vw, 1.8rem);
+    }
   }
 </style>

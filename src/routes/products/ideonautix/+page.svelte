@@ -17,6 +17,12 @@
 </svelte:head>
 
 <section class="product-hero section" use:reveal>
+  <div class="product-hero__halo" aria-hidden="true">
+    <span class="ribbon ribbon--one"></span>
+    <span class="ribbon ribbon--two"></span>
+    <span class="spark spark--one"></span>
+    <span class="spark spark--two"></span>
+  </div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">{$_('ideonautix.status')}</span>
@@ -123,6 +129,7 @@
   .product-hero {
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
 
   .product-hero::before {
@@ -134,6 +141,86 @@
     filter: blur(120px);
     opacity: 0.75;
     pointer-events: none;
+  }
+
+  .product-hero__halo {
+    position: absolute;
+    inset: -14% -16% auto;
+    height: clamp(28rem, 44vw, 34rem);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .ribbon {
+    position: absolute;
+    inset: 0;
+    width: 160%;
+    height: clamp(200px, 32vw, 260px);
+    background: linear-gradient(120deg, rgba(106, 56, 255, 0.18), rgba(19, 81, 255, 0.08));
+    filter: blur(70px);
+    transform: rotate(18deg);
+    transform-origin: center;
+    animation: ideonautixRibbon 24s ease-in-out infinite;
+  }
+
+  .ribbon--one {
+    top: -16%;
+    left: -30%;
+  }
+
+  .ribbon--two {
+    bottom: -22%;
+    right: -26%;
+    transform: rotate(-16deg);
+    background: linear-gradient(120deg, rgba(255, 211, 57, 0.16), rgba(224, 50, 44, 0.12));
+    animation-delay: -10s;
+  }
+
+  .spark {
+    position: absolute;
+    width: clamp(90px, 18vw, 140px);
+    height: clamp(90px, 18vw, 140px);
+    border-radius: 40% 60% 50% 50%;
+    background: var(--gradient-spectrum-2);
+    filter: blur(40px);
+    opacity: 0.42;
+    animation: ideonautixSpark 18s ease-in-out infinite;
+  }
+
+  .spark--one {
+    top: -14%;
+    right: 12%;
+  }
+
+  .spark--two {
+    bottom: -28%;
+    left: 18%;
+    background: var(--gradient-spectrum-5);
+    animation-delay: -6s;
+  }
+
+  @keyframes ideonautixRibbon {
+    0% {
+      transform: translate3d(-6%, -2%, 0) rotate(18deg) scale(0.92);
+      opacity: 0.48;
+    }
+    50% {
+      transform: translate3d(6%, 4%, 0) rotate(22deg) scale(1.04);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate3d(-6%, -2%, 0) rotate(18deg) scale(0.92);
+      opacity: 0.48;
+    }
+  }
+
+  @keyframes ideonautixSpark {
+    0%, 100% {
+      transform: translate3d(-6%, 4%, 0) scale(0.88) rotate(-6deg);
+    }
+    50% {
+      transform: translate3d(6%, -4%, 0) scale(1.05) rotate(6deg);
+    }
   }
 
   .hero-grid {
@@ -254,6 +341,21 @@
 
   .cta-copy { display: grid; gap: 0.65rem; max-width: 540px; }
   .cta-copy p { color: var(--text-secondary); }
+
+  :global([data-theme='dark']) .product-hero__halo .ribbon {
+    background: linear-gradient(120deg, rgba(106, 56, 255, 0.22), rgba(47, 92, 220, 0.14));
+  }
+
+  :global([data-theme='dark']) .product-hero__halo .spark {
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ribbon,
+    .spark {
+      animation: none;
+    }
+  }
 
   @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; }
