@@ -181,11 +181,18 @@
 <style>
   .hero {
     position: relative;
-    padding-top: clamp(7.5rem, 12vw, 10.5rem);
-    overflow: hidden;
-    --hero-pointer-x: 0.5;
-    --hero-pointer-y: 0.45;
-    --hero-depth: 0;
+    padding-top: clamp(8rem, 12vw, 10rem);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: clamp(-4rem, -8vw, -2rem) 0 auto;
+    height: clamp(18rem, 35vw, 26rem);
+    background: linear-gradient(135deg, rgba(19, 81, 255, 0.18), rgba(106, 56, 255, 0.08));
+    filter: blur(120px);
+    opacity: 0.7;
+    z-index: -1;
   }
 
   .hero::before {
@@ -201,34 +208,20 @@
 
   .hero-shell {
     display: grid;
-    gap: clamp(3rem, 8vw, 6rem);
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(3rem, 6vw, 5rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
   }
 
   .hero-copy {
-    display: grid;
-    gap: clamp(1.4rem, 3vw, 2.2rem);
-    max-width: 40rem;
-  }
-
-  .hero-copy h1 {
-    font-size: var(--text-hero);
-    letter-spacing: -0.03em;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .hero-tagline {
-    font-size: var(--text-title);
-    font-weight: var(--weight-medium);
-    color: color-mix(in srgb, var(--text-primary) 82%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    max-width: 38rem;
   }
 
   .hero-lead {
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
     color: var(--text-secondary);
     max-width: 36ch;
   }
@@ -253,6 +246,8 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
   }
 
   .hero-signals {
@@ -263,60 +258,32 @@
 
   .signal {
     display: grid;
-    gap: 0.15rem;
-    padding: 0.65rem 1.1rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--bg-muted) 72%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
-    backdrop-filter: blur(16px);
-    font-size: var(--text-small);
-    color: var(--text-secondary);
-    transform: translateY(calc(var(--index) * -4px));
+    gap: 1.2rem;
+    margin-top: 1.4rem;
   }
 
-  .signal-label {
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .signal-value {
-    font-weight: var(--weight-medium);
-    color: var(--text-primary);
-  }
-
-  .hero-showcase {
-    position: relative;
-    display: grid;
-    gap: clamp(1.4rem, 4vw, 2rem);
-    padding: clamp(1.8rem, 4vw, 3rem);
+  .meta-card {
+    padding: clamp(1.4rem, 2.4vw, 1.8rem);
+    border: 1px solid rgba(255, 255, 255, 0.58);
     border-radius: var(--radius-2xl);
-    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(19, 81, 255, 0.1) 22%);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 20%, rgba(255, 255, 255, 0.35) 80%);
-    box-shadow: 0 38px 80px rgba(15, 23, 42, 0.16);
-    overflow: hidden;
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-xs);
+    backdrop-filter: blur(24px);
+    display: grid;
+    gap: 0.65rem;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
 
-  .hero-orbit,
-  .hero-glimmer,
-  .hero-spark {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    mix-blend-mode: screen;
+  .meta-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
   }
 
-  .hero-orbit {
-    background:
-      radial-gradient(90% 75% at calc(var(--hero-pointer-x) * 100%) calc(var(--hero-pointer-y) * 100%), rgba(19, 81, 255, 0.18) 0%,
-        transparent 68%),
-      radial-gradient(70% 70% at 30% 10%, rgba(106, 56, 255, 0.16) 0%, transparent 75%);
-    transform: translate3d(
-        calc((var(--hero-pointer-x) - 0.5) * 16%),
-        calc((var(--hero-pointer-y) - 0.5) * 20%),
-        0
-      );
-    transition: transform var(--duration-slow) var(--ease-out);
+  .meta-card header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .hero-glimmer {
@@ -333,48 +300,45 @@
   .moment-card {
     position: relative;
     display: grid;
-    gap: 1.1rem;
-    padding: clamp(1.6rem, 3.6vw, 2.4rem);
-    border-radius: var(--radius-2xl);
-    background: color-mix(in srgb, var(--bg-surface) 84%, rgba(19, 81, 255, 0.12) 16%);
-    border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.18) 60%, rgba(255, 255, 255, 0.3) 40%);
-    box-shadow: 0 28px 48px rgba(15, 23, 42, 0.18);
-    margin-inline-start: calc(var(--index) * clamp(0.8rem, 2.8vw, 2.4rem));
-    transform: translate3d(
-        calc((var(--hero-pointer-x) - 0.5) * 18px * (var(--index) + 1)),
-        calc((var(--hero-pointer-y) - 0.52) * 22px * (var(--index) + 0.7) - var(--hero-depth) * 12px * (var(--index) + 0.5)),
-        0
-      );
-    transition: transform var(--duration-normal) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out),
-      box-shadow var(--duration-fast) var(--ease-out);
-    z-index: calc(6 - var(--index));
+    gap: clamp(1.6rem, 4vw, 2.2rem);
   }
 
-  .moment-card::after {
+  .showcase-card {
+    padding: clamp(1.8rem, 3vw, 2.4rem);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(24px);
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.2rem);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .showcase-card::after {
     content: '';
     position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 28%, transparent) 0%, transparent 70%);
-    opacity: 0.45;
-    pointer-events: none;
-    mix-blend-mode: screen;
+    inset: -40% 30% auto -30%;
+    height: 140%;
+    background: radial-gradient(ellipse at center, rgba(19, 81, 255, 0.2), transparent 65%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
   }
 
-  .moment-card header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+  .showcase-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
   }
 
-  .moment-kicker {
-    font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: color-mix(in srgb, var(--accent) 65%, var(--text-secondary) 35%);
+  .showcase-card:hover::after {
+    opacity: 0.6;
+  }
+
+  .showcase-card.focus {
+    border: 1px solid rgba(19, 81, 255, 0.24);
+    box-shadow: var(--shadow-md);
   }
 
   .moment-status {
@@ -390,22 +354,17 @@
     color: var(--text-secondary);
   }
 
-  .moment-card footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    color: var(--text-tertiary);
+  .showcase-stack {
+    display: grid;
+    gap: clamp(1.4rem, 3vw, 1.8rem);
   }
 
   .moment-card footer span {
     font-size: var(--text-small);
   }
 
-  .moment-card:hover {
-    border-color: color-mix(in srgb, var(--accent) 45%, rgba(255, 255, 255, 0.5) 55%);
-    box-shadow: 0 36px 68px rgba(19, 81, 255, 0.18);
+  .milestone h3 {
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
   }
 
   .moment-card:hover::after {
@@ -431,10 +390,11 @@
   @media (max-width: 960px) {
     .hero-shell {
       grid-template-columns: 1fr;
+      align-items: stretch;
     }
 
-    .hero-showcase {
-      margin-inline: auto;
+    .hero {
+      padding-top: clamp(6rem, 18vw, 8rem);
     }
 
     .moment-card,
@@ -445,50 +405,8 @@
   }
 
   @media (max-width: 640px) {
-    .hero-actions {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .hero-showcase {
-      padding: clamp(1.2rem, 8vw, 2rem);
-    }
-  }
-
-  :global([data-theme='dark']) .hero-showcase {
-    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(26, 48, 98, 0.55) 22%);
-    border-color: color-mix(in srgb, rgba(74, 120, 255, 0.42) 65%, rgba(5, 10, 22, 0.7) 35%);
-    box-shadow: 0 42px 88px rgba(2, 6, 18, 0.68);
-  }
-
-  :global([data-theme='dark']) .moment-card {
-    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(40, 70, 140, 0.35) 18%);
-    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.32) 60%, rgba(6, 12, 26, 0.6) 40%);
-    box-shadow: 0 32px 72px rgba(2, 6, 18, 0.65);
-  }
-
-  :global([data-theme='dark']) .moment-card.milestone {
-    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(255, 211, 57, 0.18) 12%);
-    border-color: color-mix(in srgb, rgba(255, 211, 57, 0.4) 65%, rgba(6, 12, 26, 0.55) 35%);
-  }
-
-  :global([data-theme='dark']) .status-chip,
-  :global([data-theme='dark']) .signal {
-    background: color-mix(in srgb, rgba(17, 28, 58, 0.78) 80%, transparent);
-    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.35) 60%, transparent);
-    color: var(--text-secondary);
-  }
-
-  :global([data-theme='dark']) .signal-value {
-    color: var(--text-primary);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-showcase,
-    .moment-card,
-    .hero-orbit {
-      transition: none;
-      transform: none;
-    }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .meta-card { padding: 1.2rem; }
+    .showcase-card { padding: 1.6rem; }
   }
 </style>

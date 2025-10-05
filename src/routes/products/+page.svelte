@@ -85,12 +85,13 @@
   }
 
   .catalog-card {
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 18%, rgba(255, 255, 255, 0.32) 82%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: var(--radius-2xl);
     padding: clamp(2rem, 4vw, 3rem);
-    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(19, 81, 255, 0.08) 18%);
+    background: var(--bg-surface);
+    background: var(--surface-glass);
     box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(32px);
+    backdrop-filter: blur(24px);
     display: grid;
     gap: clamp(1.5rem, 3vw, 2rem);
     word-wrap: break-word;

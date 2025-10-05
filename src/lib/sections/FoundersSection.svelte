@@ -174,59 +174,37 @@
 <style>
   .section-heading {
     display: grid;
-    gap: 0.9rem;
-    max-width: 760px;
+    gap: 0.8rem;
+    max-width: 720px;
     margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
-  .section-lead {
-    color: var(--text-secondary);
-  }
-
-  .founder-tabs {
+  .founders-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-    margin-bottom: clamp(2.4rem, 5vw, 3.5rem);
+    gap: clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   }
 
-  .founder-tab {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.4rem;
+  .founder-card {
+    background: var(--surface-glass);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 18%, rgba(255, 255, 255, 0.32) 82%);
-    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(19, 81, 255, 0.06) 18%);
-    box-shadow: var(--shadow-xs);
-    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out);
-  }
-
-  .founder-tab img {
-    width: 54px;
-    height: 54px;
-    border-radius: var(--radius-full);
-    object-fit: cover;
-  }
-
-  .founder-tab span {
+    padding: clamp(2rem, 4vw, 2.8rem);
     display: grid;
-    gap: 0.2rem;
-    text-align: left;
+    gap: clamp(1.5rem, 4vw, 2.4rem);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(26px);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
 
-  .founder-tab small {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
+  .founder-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
   }
 
-  .founder-tab.active,
-  .founder-tab:hover,
-  .founder-tab:focus-visible {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: color-mix(in srgb, var(--voyage-blue) 40%, rgba(255, 255, 255, 0.4) 60%);
+  .founder-card.focus {
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(19, 81, 255, 0.32);
   }
 
   .founder-stage {
@@ -308,10 +286,10 @@
     border: 1px solid color-mix(in srgb, rgba(19, 81, 255, 0.22) 60%, rgba(255, 255, 255, 0.36) 40%);
   }
 
-  .current-role .label {
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: var(--weight-semibold);
+  .achievement-item {
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(19, 81, 255, 0.15);
     font-size: var(--text-small);
     color: var(--text-tertiary);
   }
@@ -320,6 +298,7 @@
     font-size: clamp(1.05rem, 2vw, 1.18rem);
     line-height: var(--leading-relaxed);
     color: var(--text-secondary);
+    background: rgba(19, 81, 255, 0.06);
   }
 
   .profile-grid {
@@ -381,38 +360,15 @@
 
   .logo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+    gap: 0.9rem;
   }
 
-  .logo-grid span {
-    display: grid;
-    justify-items: center;
-    gap: 0.5rem;
-    padding: 0.9rem;
+  .brand-logo {
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--bg-muted) 75%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
-  }
-
-  .logo-grid img {
-    width: 56px;
-    height: 56px;
-    object-fit: contain;
-  }
-
-  .journey-list li {
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
-  }
-
-  .journey-list li::before {
-    display: none;
-  }
-
-  .profile-links {
+    background: var(--surface-glass);
+    padding: 0.85rem;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -422,19 +378,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.65rem 1.4rem;
-    border-radius: var(--radius-full);
-    font-weight: var(--weight-semibold);
-    background: color-mix(in srgb, var(--bg-muted) 76%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
-    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    backdrop-filter: blur(16px);
   }
 
-  .link-pill:hover,
-  .link-pill:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-sm);
-  }
+  .brand-logo img { max-width: 72px; filter: grayscale(1); opacity: 0.68; }
 
   .brand-stage {
     margin-top: clamp(3rem, 6vw, 4rem);
@@ -465,35 +412,20 @@
     animation: marquee 26s linear infinite;
   }
 
-  .brand-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 0.75rem 1.2rem;
+  .expertise span {
+    padding: 0.55rem 1rem;
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
-    min-width: 160px;
-  }
-
-  .brand-chip img {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-  }
-
-  .brand-note {
-    color: var(--text-tertiary);
+    background: rgba(19, 81, 255, 0.08);
+    border: 1px solid rgba(19, 81, 255, 0.18);
     font-size: var(--text-small);
   }
 
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
+  .brand-minimal {
+    margin-top: var(--space-2);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    gap: 0.85rem;
+    align-items: center;
   }
 
   @media (max-width: 960px) {
@@ -512,42 +444,8 @@
   }
 
   @media (max-width: 640px) {
-    .founder-tab {
-      padding: 0.9rem 1.1rem;
-    }
-
-    .profile-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .brand-chip {
-      min-width: 140px;
-    }
-  }
-
-  :global([data-theme='dark']) .founder-tab,
-  :global([data-theme='dark']) .founder-profile,
-  :global([data-theme='dark']) .profile-card,
-  :global([data-theme='dark']) .current-role,
-  :global([data-theme='dark']) .brand-stage {
-    background: color-mix(in srgb, var(--bg-surface) 80%, rgba(26, 48, 98, 0.55) 20%);
-    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.35) 60%, rgba(6, 12, 26, 0.6) 40%);
-  }
-
-  :global([data-theme='dark']) .brand-chip,
-  :global([data-theme='dark']) .journey-list li,
-  :global([data-theme='dark']) .badge,
-  :global([data-theme='dark']) .chip-list span,
-  :global([data-theme='dark']) .link-pill {
-    background: color-mix(in srgb, rgba(17, 28, 58, 0.8) 80%, transparent);
-    border-color: color-mix(in srgb, rgba(70, 120, 255, 0.35) 65%, transparent);
-    color: var(--text-secondary);
-  }
-
-  :global([data-theme='dark']) .section-lead,
-  :global([data-theme='dark']) .profile-intro p,
-  :global([data-theme='dark']) .profile-card ul,
-  :global([data-theme='dark']) .journey-list li {
-    color: var(--text-secondary);
+    .founder-card { padding: 1.8rem; }
+    header { flex-direction: column; align-items: flex-start; }
+    .avatar { width: 80px; height: 80px; }
   }
 </style>

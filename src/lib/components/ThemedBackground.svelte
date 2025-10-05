@@ -57,15 +57,14 @@
           id: `${shapeConfig.type}-${index}-${i}`,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          dx: (Math.random() - 0.5) * 0.1,
-          dy: (Math.random() - 0.5) * 0.08,
+          dx: (Math.random() - 0.5) * 0.12,
+          dy: (Math.random() - 0.5) * 0.1,
           size,
           color: colorVar(shapeConfig.color),
-          duration: 12 + Math.random() * 12,
-          delay: -Math.random() * 12,
+          duration: 12 + Math.random() * 10,
+          delay: -Math.random() * 8,
           blur: 0.5 + Math.random() * 1.5,
-          opacity: 0.04 + Math.random() * 0.04,
-          layer: Math.floor(Math.random() * 3) + 1
+          opacity: 0.045 + Math.random() * 0.035
         });
       }
     });
@@ -127,20 +126,12 @@
   });
 </script>
 
-<div class="background" aria-hidden="true" style={backgroundVars}>
+<div class="background" aria-hidden="true">
   <div class="wash"></div>
-  <div class="halo"></div>
-  <div class="mesh"></div>
-  <div class="ribbons" aria-hidden="true">
-    <span class="ribbon ribbon-a"></span>
-    <span class="ribbon ribbon-b"></span>
-    <span class="ribbon ribbon-c"></span>
-  </div>
-  <div class="grain"></div>
   {#each particles as p (p.id)}
     <span
       class="dot"
-      style="left:{p.x}%; top:{p.y}%; width:{p.size}px; height:{p.size}px; background:{p.color}; --duration:{p.duration}s; --delay:{p.delay}s; filter:blur({p.blur}px); opacity:{p.opacity}; --layer:{p.layer}"
+      style="left:{p.x}%; top:{p.y}%; width:{p.size}px; height:{p.size}px; background:{p.color}; --duration:{p.duration}s; --delay:{p.delay}s; filter:blur({p.blur}px); opacity:{p.opacity}"
     ></span>
   {/each}
 </div>
@@ -153,114 +144,21 @@
     z-index: var(--z-background);
     overflow: hidden;
     display: grid;
-    --pointer-x: 0.5;
-    --pointer-y: 0.35;
-    --scroll-depth: 0;
-    --pointer-offset-x: calc((var(--pointer-x) - 0.5) * 24%);
-    --pointer-offset-y: calc((var(--pointer-y) - 0.4) * 28%);
-  }
-
-  .wash,
-  .halo,
-  .mesh,
-  .ribbons,
-  .grain {
-    grid-area: 1 / 1;
-    transition: opacity var(--duration-slower) var(--ease-out);
   }
 
   .wash {
+    grid-area: 1 / 1;
     background:
-      radial-gradient(
-        42% 50% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 95%),
-        color-mix(in srgb, var(--voyage-blue) 22%, transparent) 0%,
-        transparent 70%
-      ),
-      radial-gradient(36% 48% at calc((1 - var(--pointer-x)) * 100%) calc((var(--pointer-y) + var(--scroll-depth) * 0.35) * 80%),
-        color-mix(in srgb, var(--aurora-purple) 18%, transparent) 0%,
-        transparent 75%
-      ),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 55%);
-    opacity: calc(0.45 + var(--scroll-depth) * 0.35);
-    transform: translate3d(calc(var(--pointer-offset-x) * 0.3), calc(var(--pointer-offset-y) * 0.25), 0);
-  }
-
-  .halo {
-    background:
-      radial-gradient(80% 80% at 50% 10%, rgba(255, 255, 255, 0.22), transparent 70%),
-      radial-gradient(80% 65% at 50% 90%, rgba(19, 81, 255, 0.2), transparent 65%);
-    opacity: calc(0.35 + var(--scroll-depth) * 0.25);
-    transform: translate3d(calc(var(--pointer-offset-x) * -0.25), calc(var(--pointer-offset-y) * -0.2), 0);
-  }
-
-  .mesh {
-    background-image:
-      radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 65%),
-      linear-gradient(120deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%),
-      repeating-linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0.05) 0px,
-        rgba(255, 255, 255, 0.05) 1px,
-        transparent 1px,
-        transparent 14px
-      );
-    mix-blend-mode: screen;
-    opacity: calc(0.18 + var(--scroll-depth) * 0.22);
-    transform: translate3d(calc(var(--pointer-offset-x) * 0.6), calc(var(--pointer-offset-y) * 0.5), 0);
-  }
-
-  .ribbons {
-    position: relative;
-    display: grid;
-    mix-blend-mode: screen;
-    opacity: clamp(0.12, 0.08 + var(--scroll-depth) * 0.28, 0.38);
-  }
-
-  .ribbon {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(120% 90% at 50% 50%, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.08) 52%, transparent
-        76%),
-      linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 35%, transparent) 0%, transparent 65%);
-    filter: blur(0.6px);
-    animation: ribbonShift 18s ease-in-out infinite;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .ribbon-b {
-    background: radial-gradient(110% 100% at 45% 55%, transparent 0%, transparent 28%, rgba(255, 255, 255, 0.1) 48%, transparent
-        70%),
-      linear-gradient(165deg, color-mix(in srgb, var(--theme-secondary) 38%, transparent) 0%, transparent 60%);
-    animation-duration: 22s;
-    animation-delay: -6s;
-    transform: translate3d(calc(var(--pointer-offset-x) * 0.5), calc(var(--pointer-offset-y) * -0.35), 0);
-  }
-
-  .ribbon-c {
-    background: radial-gradient(160% 120% at 60% 40%, transparent 0%, transparent 35%, rgba(255, 255, 255, 0.08) 52%, transparent
-        75%),
-      linear-gradient(200deg, color-mix(in srgb, var(--theme-accent) 45%, transparent) 0%, transparent 70%);
-    animation-duration: 26s;
-    animation-delay: -12s;
-    transform: translate3d(calc(var(--pointer-offset-x) * -0.45), calc(var(--pointer-offset-y) * 0.4), 0);
-  }
-
-  .grain {
-    opacity: 0.16;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 0);
-    background-size: 3px 3px;
-    mix-blend-mode: soft-light;
-    transform: translate3d(calc(var(--pointer-offset-x) * 0.25), calc(var(--pointer-offset-y) * -0.18), 0);
+      radial-gradient(50% 60% at 20% 15%, rgba(255, 255, 255, 0.55), transparent 70%),
+      radial-gradient(45% 50% at 80% 12%, rgba(19, 81, 255, 0.22), transparent 65%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 55%);
+    opacity: 0.6;
   }
 
   .dot {
     position: absolute;
     border-radius: 50%;
-    transform: translate3d(
-        calc(var(--pointer-offset-x) * (var(--layer) * 0.35 + 0.2)),
-        calc(var(--pointer-offset-y) * (var(--layer) * 0.3 + 0.18)),
-        0
-      );
+    transform: translateZ(0);
     will-change: transform;
     mix-blend-mode: screen;
     animation: floaty var(--duration) ease-in-out infinite alternate;
@@ -268,49 +166,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .wash,
-    .halo,
-    .mesh,
-    .ribbons,
-    .grain {
-      transform: none;
-      transition: none;
-    }
-
-    .dot {
-      animation: none;
-      transform: none;
-    }
-
-    .ribbon {
-      animation: none;
-    }
-  }
-
-  @keyframes ribbonShift {
-    0% {
-      transform: translate3d(calc(var(--pointer-offset-x) * -0.2), calc(var(--pointer-offset-y) * -0.15), 0) rotate(0deg)
-        scale(1);
-    }
-    50% {
-      transform: translate3d(calc(var(--pointer-offset-x) * 0.4), calc(var(--pointer-offset-y) * 0.25), 0) rotate(6deg)
-        scale(1.06);
-    }
-    100% {
-      transform: translate3d(calc(var(--pointer-offset-x) * -0.25), calc(var(--pointer-offset-y) * 0.18), 0) rotate(-4deg)
-        scale(1.02);
-    }
+    .dot { animation: none; }
   }
 
   @keyframes floaty {
-    0% {
-      transform: translate3d(-4px, -6px, 0) scale(0.92);
-    }
-    50% {
-      transform: translate3d(6px, 8px, 0) scale(1.06);
-    }
-    100% {
-      transform: translate3d(-6px, 4px, 0) scale(0.98);
-    }
+    0% { transform: translate3d(-4px, -6px, 0) scale(0.95); }
+    50% { transform: translate3d(6px, 8px, 0) scale(1.05); }
+    100% { transform: translate3d(-6px, 4px, 0) scale(0.98); }
   }
 </style>
