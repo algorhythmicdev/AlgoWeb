@@ -2,7 +2,7 @@
   "site": {
     "title": "AlgoRhythmics",
     "tagline": "Kur loģika dejo ar radošumu",
-    "description": "AI inovāciju laboratorija, kas izstrādā ceļojumu platformu NodeVoyage un produktivitātes rīku komplektu Ideonautix"
+    "description": "MI inovāciju laboratorija, kas veido ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix"
   },
   "nav": {
     "home": "Sākums",
@@ -13,43 +13,43 @@
     "consulting": "Konsultācijas",
     "contact": "Kontakti",
     "about": "Par mums",
-    "nodevoyage_desc": "Iepazīstieties ar mūsu AI ceļojuma biedru",
-    "ideonautix_desc": "Izpētiet startup produktivitātes rīku komplektu",
+    "nodevoyage_desc": "Iepazīsti mūsu MI ceļojumu draugu",
+    "ideonautix_desc": "Izpēti startapu produktivitātes komplektu",
     "pilot_badge": "Pilots",
     "brand_aria": "AlgoRhythmics sākumlapa",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Pārslēgt izvēlni"
+    "toggle_menu": "Atvērt vai aizvērt izvēlni"
   },
   "hero": {
-    "status": "Izstrādē • Veidojam AI nākotni",
+    "status": "Izstrāde • Veidojam MI nākotni",
     "title": "Kur loģika dejo ar radošumu",
-    "tagline": "AlgoRhythmics — AI inovāciju laboratorija",
-    "subtitle": "Izstrādājam ceļojumu platformu NodeVoyage un produktivitātes rīku komplektu Ideonautix ar jaunākajām AI tehnoloģijām",
-    "cta_products": "Izpētīt produktus",
-    "cta_consulting": "AI konsultācijas",
-    "next_milestone": "Nākamais pagrieziena punkts"
+    "tagline": "AlgoRhythmics — MI inovāciju laboratorija",
+    "subtitle": "Veidojam ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix ar jaunākajām MI tehnoloģijām",
+    "cta_products": "Apskatīt produktus",
+    "cta_consulting": "MI konsultācijas",
+    "next_milestone": "Nākamais posms"
   },
   "story": {
     "title": "Mūsu stāsts",
-    "reality_title": "Realitāte, ko mēs veidojam",
-    "reality_text": "Mēs veidojam AI darbinātas platformas, kas pārveido to, kā cilvēki ceļo un strādā. NodeVoyage no jauna definē ceļojumu plānošanu ar inteliģentu asistentu, savukārt Ideonautix sniedz startupiem modulārus produktivitātes rīkus.",
+    "reality_title": "Realitāte, ko būvējam",
+    "reality_text": "Radām ar MI darbinātas platformas, kas maina ceļošanas un darba paradumus. NodeVoyage pārveido ceļojumu plānošanu ar gudru palīgu, bet Ideonautix dod startapiem modulārus produktivitātes rīkus.",
     "mission_title": "Mūsu misija",
-    "mission_text": "Demokratizēt AI tehnoloģiju, veidojot pieejamas, gudras platformas, kas risina reālas ceļotāju un uzņēmēju problēmas visā pasaulē.",
+    "mission_text": "Demokratizēt MI tehnoloģijas, veidojot pieejamas un gudras platformas, kas risina reālas problēmas ceļotājiem un uzņēmējiem visā pasaulē.",
     "vision_title": "Mūsu vīzija",
-    "vision_text": "Nākotne, kur AI nemanāmi pastiprina cilvēka radošumu un produktivitāti, padarot sarežģītus uzdevumus vienkāršus un atverot jaunas inovāciju iespējas."
+    "vision_text": "Nākotne, kur MI organiski papildina cilvēku radošumu un produktivitāti, sarežģītus uzdevumus padarot vienkāršus un atverot jaunas inovāciju iespējas."
   },
   "founders": {
-    "title": "Iepazīstiet dibinātājus",
-    "subtitle": "Kopā veidojam AI nākotni",
+    "title": "Satieciet dibinātājus",
+    "subtitle": "Kopā veidojam MI nākotni",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Līdzdibinātājs un CEO",
-      "bio": "Vīzionārs uzņēmējs ar aizrautību pārveidot ceļošanu un produktivitāti ar AI inovāciju",
+      "bio": "Nikita Jurtaevs strādā kā CEO dokumentētā 50/50 līdzvadības modelī: viņš vada stratēģiju, partnerības un zīmola virzienu, vienlaikus sākumposmā koordinējot NodeVoyage un Ideonautix produkta vadību un UX/QA.",
       "current_title": "Pašreizējais amats",
-      "current_position": "Zīmola stratēģijas vadītājs un produktu inovāciju vadītājs Reclame Fabriek",
+      "current_position": "Reclame Fabriek zīmju pētījumu nodaļā vada nākamās paaudzes LED neona, iekšējo LED kontrolieru, speciālo pārklājumu un 3D drukas iniciatīvas, kas tieši stiprina AlgoRhythmics piegādes.",
       "expertise": [
-        "Radoša vīzija un zīmola stratēģija",
-        "AI produktu dizains",
+        "Radošā vīzija un zīmola stratēģija",
+        "MI produktu dizains",
         "Lietotāju pieredzes inovācijas",
         "Stratēģiskās partnerības"
       ]
@@ -58,44 +58,43 @@
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Līdzdibinātājs un CTO",
       "current_title": "Pašreizējais amats",
-      "position": "R&D dibinātājs un produktu izstrādes vadītājs Reclame Fabriek",
-      "philosophy": "Tehnoloģijai jāpastiprina cilvēka potenciāls, nevis jāaizstāj tas. Mans mērķis ir veidot sistēmas, kas palīdz cilvēkiem sasniegt vairāk.",
+      "position": "CTO un līdz-CEO, kurš atbild par platformas piegādi web/mobilajās vidēs, API un MI, vienlaikus izstrādājot zīmju kvalitātes kontrolieru sistēmas Reclame Fabriek pētījumu nodaļā.",
+      "philosophy": "Domāšana sistēmās starp signāltehnikas pētniecību un patērētāju programmatūru notur mūsu steku praktisku: dienā prototipējam kontrolierus, naktī šo noturību pārvēršam MI produktos.",
       "achievements": [
-        "15+ gadu tehniskā vadība",
-        "Eksperts ražošanas sistēmās un R&D",
-        "Vadījis komandas ar 10+ inženieriem",
-        "Realizējis 100+ veiksmīgus projektus"
+        "Vada piegādi ar Google Cloud kā pamatu (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) un mūsdienīgām slāņiem (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
+        "Saskaņo signāltehnikas kontrolieru inženieriju un nākamās paaudzes LED neona līnijas ar skaidrojamām reāllaika MI pieredzēm",
+        "Vada trīs finansējuma sprintus — Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard — lai mērogotu NodeVoyage un Ideonautix"
       ],
-      "brand_title": "Zīmola pieredze",
-      "brand_intro": "Strādājis ar globāliem zīmoliem pie premium reklāmas displeju sistēmām:",
-      "brand_context": "Projekti realizēti caur Reclame Fabriek (Daugavpils, LV), kopīgi abiem dibinātājiem",
+      "brand_title": "Zīmolu pieredze",
+      "brand_intro": "Strādājis ar pasaules zīmoliem pie premium reklāmas displeju sistēmām:",
+      "brand_context": "Projekti īstenoti kopā ar Reclame Fabriek (Daugavpils, LV), abiem dibinātājiem daloties pieredzē",
       "algorhythmics_title": "Vīzija AlgoRhythmics",
-      "algorhythmics_vision": "Ienesot korporatīvo inovāciju pieredzi un starptautisko zīmola darbu, lai veidotu pieejamus un jaudīgus AI produktus."
+      "algorhythmics_vision": "Apvienot signāltehnikas pētniecības disciplīnu ar mākonī dzimušu piegādi, lai AlgoRhythmics radītu skaidrojamas un izturīgas MI pieredzes, gatavas reālām instalācijām."
     }
   },
   "products": {
     "title": "Mūsu produkti",
-    "subtitle": "AI darbinātas platformas, kas pārveido to, kā cilvēki ceļo un strādā",
+    "subtitle": "MI darbinātas platformas, kas maina ceļošanu un darbu",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "Jautrība. Ceļojumi. Atmiņas. Kopiena.",
-      "description": "AI darbināta ceļojumu plānošana ar jūsu inteliģento biedru Nodi. Izveidojiet personalizētus maršrutus, atklājiet slēptas dārgakmeņus un ceļojiet ar pašpārliecību, izmantojot AR rīkus un bezsaistes iespējas.",
-      "status": "Izstrādē",
-      "mvp": "MVP: Septembris 2026",
+      "tagline": "Izklaide. Ceļojumi. Atmiņas. Kopiena.",
+      "description": "Ceļojumu plānošana ar MI un tavu draugu Nodi. Veido personalizētus maršrutus, atklāj slēptos dārgumus un ceļo droši ar AR rīkiem un darbu bezsaistē.",
+      "status": "Izstrāde",
+      "mvp": "MVP: 2026. gada septembris",
       "cta": "Uzzināt vairāk"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Izpētīt. Izdot. Uzsākt.",
-      "description": "Modulārs produktivitātes rīku komplekts startupiem. Iegūstiet AI darbinātus ieskatus prezentācijām, ieņēmumu izsekošanai, komandas dinamikai un daudz ko citu ar inteliģentiem mikrosakņiem, kas izveidoti dibinātājiem.",
+      "tagline": "Izpētīt. Izgudrot. Palaist.",
+      "description": "Modulārs produktivitātes supersets startapiem. MI ieskati piču sagatavošanai, ieņēmumu uzraudzībai, komandas dinamikai un citiem uzdevumiem ar gudriem mikropakalpojumiem dibinātājiem.",
       "status": "Plānošanas fāze",
-      "mvp": "MVP: Februāris 2026",
+      "mvp": "MVP: 2026. gada februāris",
       "cta": "Uzzināt vairāk"
     }
   },
   "timeline": {
     "title": "Mūsu ceļš",
-    "subtitle": "Veidojam nākotni, vienu pagrieziena punktu laikā",
+    "subtitle": "Veidojam nākotni soli pa solim",
     "milestones": {
       "ideju-kauss": {
         "title": "Ideju Kauss konkurss",
@@ -103,247 +102,247 @@
         "note": ""
       },
       "company-formation": {
-        "title": "Uzņēmuma dibināšana",
-        "description": "Oficiāla uzņēmuma reģistrācija, juridiskā struktūra un sākotnējās komandas veidošana",
+        "title": "Uzņēmuma izveide",
+        "description": "Oficiāla reģistrācija, juridiskā struktūra un sākuma komandas veidošana",
         "note": ""
       },
       "liaa-application": {
         "title": "LIAA partnerības pieteikums",
-        "description": "Pieteikuma iesniegšana partnerībai ar Latvijas Investīciju aģentūru izglītības programmām",
-        "note": "Tieksme — vēl nav apstiprināts"
+        "description": "Pieteikums sadarbībai ar Latvijas Investīciju un attīstības aģentūru izglītības programmām",
+        "note": "Mērķis — vēl nav apstiprināts"
       },
       "mvp-ideonautix": {
         "title": "Ideonautix MVP palaišana",
-        "description": "Pirmā produktivitātes platformas Ideonautix versija ar galvenajiem mikrosakņiem",
+        "description": "Pirmā Ideonautix produktivitātes platformas versija ar galvenajiem mikropakalpojumiem",
         "note": ""
       },
       "pilot-consulting": {
-        "title": "AI konsultāciju pilotprogramma",
-        "description": "Bezmaksas pilotprogrammas palaišana ar 3 atlasītajiem uzņēmumiem AI integrācijas konsultācijām",
+        "title": "MI konsultāciju pilots",
+        "description": "Bezmaksas pilots ar 3 atlasītiem uzņēmumiem MI integrācijas konsultācijām",
         "note": ""
       },
       "mvp-nodevoyage": {
         "title": "NodeVoyage MVP palaišana",
-        "description": "Publiska ceļojumu platformas NodeVoyage beta versija ar galvenajām funkcijām un AI biedru Nodi",
+        "description": "Publiska beta ar pamatfunkcijām un MI draugu Nodi",
         "note": ""
       },
       "education-program": {
-        "title": "Izglītības programmas palaišana",
-        "description": "AI izglītības programmu izvietošanas sākums, kas vērstas uz Latvijas vidusskolām",
-        "note": "Mērķis: 75+ institūti (prognoze, balstīta uz pētījumiem)"
+        "title": "Izglītības programmas uzsākšana",
+        "description": "MI izglītības programmu ieviešana Latvijas vidusskolās",
+        "note": "Mērķis: 75+ skolas (pētījumu prognoze)"
       }
     }
   },
   "nodevoyage": {
     "name": "NodeVoyage",
-    "status": "Izstrādē • MVP Sept 2026",
-    "tagline": "Jūsu AI ceļojuma biedrs",
-    "hero_description": "AI darbināta ceļojumu plānošana, kas padara ceļojumu izveidošanu bezpūļu, aizraujošu un personalizētu. Iepazīstieties ar Nodi, jūsu inteliģento ceļojuma biedru.",
-    "seo_description": "AI darbināta ceļojumu plānošanas platforma ar inteliģentiem maršrutiem, AR rīkiem un kopienas dalīšanos, ko vada Nodi, jūsu draudzīgais ceļojuma biedrs.",
-    "hero_alt": "NodeVoyage saskarnes priekšskatījums",
-    "cta_primary": "Pievienoties gaidīšanas sarakstam",
-    "cta_secondary": "Izpētīt funkcijas",
-    "stat1_value": "Sept 2026",
+    "status": "Izstrāde • MVP 2026. gada septembris",
+    "tagline": "Tavs MI ceļojumu draugs",
+    "hero_description": "MI plānošana, kas padara piedzīvojumu radīšanu vieglu, jautru un personīgu. Iepazīsti Nodi — gudro ceļabiedru.",
+    "seo_description": "MI ceļojumu platforma ar gudriem maršrutiem, AR rīkiem un kopienu, ko vada Nodi — tavs ceļojumu draugs.",
+    "hero_alt": "NodeVoyage interfeisa priekšskatījums",
+    "cta_primary": "Pievienoties gaidītāju sarakstam",
+    "cta_secondary": "Apskatīt funkcijas",
+    "stat1_value": "2026. sept.",
     "stat1_label": "MVP palaišana",
-    "stat2_value": "AI darbināts",
+    "stat2_value": "MI spēks",
     "stat2_label": "Gudra plānošana",
     "stat3_value": "Mobile First",
-    "stat3_label": "AR + Bezsaiste",
-    "features_title": "Revolucionāras funkcijas",
-    "features_subtitle": "Viss nepieciešamais ideālajam ceļojumam",
+    "stat3_label": "AR + bezsaistē",
+    "features_title": "Iedvesmojošas iespējas",
+    "features_subtitle": "Viss nepieciešamais ideālam ceļojumam",
     "features": {
       "nodi-ai": {
-        "title": "AI biedrs Nodi",
-        "description": "Jūsu draudzīgais AI ceļojuma asistents, kas apgūst jūsu vēlmes un izveido personalizētus maršrutus sekunžu laikā"
+        "title": "MI draugs Nodi",
+        "description": "Draudzīgs asistents, kas apgūst tavas vēlmes un sekundēs rada personalizētus maršrutus"
       },
       "smart-builder": {
-        "title": "Gudrs ceļojumu būvētājs",
-        "description": "Vizuāls ceļojumu būvētājs ar vilkšanas mezgliem, noskaņas iestatījumiem un reāllaika optimizāciju"
+        "title": "Gudrais maršruta veidotājs",
+        "description": "Vizuals plānotājs ar velc-un-nomet mezgliem, noskaņu priekšiestatījumiem un reāllaika optimizāciju"
       },
       "mobile-suite": {
-        "title": "Mobilā uztveršanas komplekts",
-        "description": "AR tulkojums, tiešraides interpretācija, foto atpazīšana un pilnas bezsaistes iespējas"
+        "title": "Mobilā pieredzes suite",
+        "description": "AR tulkošana, tiešraides tulks, foto atpazīšana un pilna bezsaistes funkcionalitāte"
       },
       "community": {
-        "title": "Kopienas dalīšanās",
-        "description": "Dalieties ar saviem piedzīvojumiem, atklājiet maršrutus no ceļotājiem visā pasaulē un plānojiet ceļojumus kopā"
+        "title": "Ceļotāju kopiena",
+        "description": "Dalies piedzīvojumos, atklāj citu ceļotāju maršrutus un plāno kopā"
       }
     },
     "how_title": "Kā darbojas NodeVoyage",
-    "step1_title": "Pastāstiet Nodi par savu sapni",
-    "step1_desc": "Sarunājieties ar AI Nodi par jūsu ceļojumu vēlmēm, budžetu un interesēm",
-    "step2_title": "Saņemiet gudrus ierosinājumus",
-    "step2_desc": "Saņemiet personalizētus maršrutus ar optimizētiem ceļiem un vietējiem ieskatiem",
-    "step3_title": "Personalizējiet savu ceļojumu",
-    "step3_desc": "Pielāgojiet savu ceļojumu ar mūsu vizuālo būvētāju, kas balstīts uz mezgliem",
-    "step4_title": "Ceļojiet ar pašpārliecību",
-    "step4_desc": "Izmantojiet mobilās AR rīkus, bezsaistes kartes un reāllaika palīdzību ceļā",
-    "tech_title": "Izveidots ar jaunākajām tehnoloģijām",
-    "tech_subtitle": "Google Cloud, AI un mūsdienu tīmekļa standarti",
-    "cta_title": "Gatavi pārveidot to, kā jūs ceļojat?",
-    "cta_description": "Pievienojieties mūsu gaidīšanas sarakstam un esiet starp pirmajiem, kas izbaudīs NodeVoyage, kad mēs to palaidīsim 2026. gada septembrī",
-    "cta_button": "Pievienoties gaidīšanas sarakstam",
-    "cta_note": "Kredītkarte nav nepieciešama • Agrīnā piekļuves priekšrocības"
+    "step1_title": "Pastāsti Nodi par sapni",
+    "step1_desc": "Parunā ar MI Nodi par savām vēlmēm, budžetu un interesēm",
+    "step2_title": "Saņem gudrus ieteikumus",
+    "step2_desc": "Saņem personalizētus maršrutus ar optimizētiem ceļiem un vietējām atziņām",
+    "step3_title": "Pielāgo savu braucienu",
+    "step3_desc": "Pielāgo ar mūsu vizuālo mezglu plānotāju",
+    "step4_title": "Ceļo droši",
+    "step4_desc": "Izmanto mobilos AR rīkus, bezsaistes kartes un reāllaika atbalstu",
+    "tech_title": "Tehnoloģijas priekšgalā",
+    "tech_subtitle": "Google Cloud, MI un moderni tīmekļa standarti",
+    "cta_title": "Gatavs mainīt ceļošanas paradumus?",
+    "cta_description": "Pievienojies gaidītāju sarakstam un būsi starp pirmajiem, kas izmēģina NodeVoyage 2026. gada septembrī",
+    "cta_button": "Pievienoties sarakstam",
+    "cta_note": "Nav vajadzīga karte • Agrīnās piekļuves priekšrocības"
   },
   "ideonautix": {
     "name": "Ideonautix",
-    "status": "Plānošanas fāze • MVP Feb 2026",
-    "tagline": "Inteligencija startupiem",
-    "hero_description": "Modulārs produktivitātes rīku komplekts, kas izveidots startup dibinātājiem un augošām komandām. AI darbināti mikrosakņi, kas patiešām saprot jūsu biznesu.",
-    "seo_description": "Modulārs AI produktivitātes rīku komplekts startupiem ar prezentāciju, ieņēmumu un komandas inteligences mikrosakņiem.",
+    "status": "Plānošana • MVP 2026. gada februāris",
+    "tagline": "Inteliģence startapiem",
+    "hero_description": "Modulāra produktivitātes suite dibinātājiem un augošām komandām. MI mikropakalpojumi, kas patiesi izprot tavu biznesu.",
+    "seo_description": "MI produktivitātes suite startapiem ar piču, ieņēmumu un komandas inteliģences mikropakalpojumiem.",
     "hero_alt": "Ideonautix paneļa priekšskatījums",
-    "cta_primary": "Iegūt agrīno piekļuvi",
-    "cta_secondary": "Skatīt mikrosakņus",
-    "stat1_value": "Feb 2026",
+    "cta_primary": "Saņemt agrīnu piekļuvi",
+    "cta_secondary": "Skatīt mikropakalpojumus",
+    "stat1_value": "2026. febr.",
     "stat1_label": "MVP palaišana",
-    "stat2_value": "8+ Rīki",
-    "stat2_label": "Mikrosakņi",
+    "stat2_value": "8+ rīki",
+    "stat2_label": "Mikropakalpojumi",
     "stat3_value": "AI-First",
-    "stat3_label": "Inteligencija",
-    "microservices_title": "Jaudīgi mikrosakņi",
-    "microservices_subtitle": "Izvēlieties to, kas jums nepieciešams, kad jums tas nepieciešams",
-    "pitch_title": "Prezentāciju asistents",
-    "pitch_desc": "Iegūstiet AI darbinātu atsauksmi par jūsu prezentāciju ar vērtējumu, ierosinājumiem un investora perspektīvas analīzi",
+    "stat3_label": "Inteliģence",
+    "microservices_title": "Jaudīgi mikropakalpojumi",
+    "microservices_subtitle": "Aktivizē tikai to, kas vajadzīgs tieši tagad",
+    "pitch_title": "Pitch asistents",
+    "pitch_desc": "Saņem MI vērtējumu, punktus un investoru skatījumu savam pitch deck",
     "revenue_title": "Ieņēmumu paneļi",
-    "revenue_desc": "Reāllaika analītikas paneļi ar KPI izsekošanu, prognozēšanu un rīcībai spējīgiem biznesa ieskatiem",
+    "revenue_desc": "Reāllaika analītikas dēļi ar KPI uzraudzību, prognozēm un ieteikumiem",
     "team_title": "Komandas dinamika",
-    "team_desc": "Saprotiet komandas veselību, komunikācijas modeļus un sadarbības efektivitāti ar AI analīzi",
-    "market_desc": "Izsekojiet konkurentus, tirgus tendences un iespējas ar AI darbinātu inteligenci",
-    "finance_desc": "Automatizēta finanšu izsekošana, prognozēšana un atskaitīšana startupiem",
-    "growth_desc": "Augšanas hakinga rīki un analītika, lai ātrāk mērogotu jūsu startup",
-    "investor_desc": "Pārvaldiet investoru attiecības, atskaitīšanu un komunikāciju vienā vietā",
-    "analytics_desc": "Pilnīgs analītikas centrs, kas apvieno visas jūsu biznesa metrikas",
-    "how_title": "Kā darbojas Ideonautix",
-    "integrations_title": "Nevainojamas integrācijas",
-    "cta_title": "Mērogot savu startup ātrāk",
-    "cta_description": "Agrīnā piekļuve tiek palaista 2026. gada februārī. Esi daļa no startup produktivitātes nākotnes veidošanas"
+    "team_desc": "Iepazīsti komandas veselību, saziņas un sadarbības paradumus ar MI analīzi",
+    "market_desc": "Seko konkurentiem, tirgus tendencēm un iespējām ar MI inteliģenci",
+    "finance_desc": "Automatizēta finanšu uzskaite, prognozes un atskaites startapiem",
+    "growth_desc": "Growth hacking rīki un analītika straujākam izrāvienam",
+    "investor_desc": "Vienuviet pārvaldi investoru attiecības, atskaites un komunikāciju",
+    "analytics_desc": "Visaptverošs analītikas centrs ar visiem tava biznesa rādītājiem",
+    "how_title": "Kā strādā Ideonautix",
+    "integrations_title": "Vienmērīgas integrācijas",
+    "cta_title": "Paātrini sava startapa izaugsmi",
+    "cta_description": "Agrīna piekļuve startēs 2026. gada februārī — kļūsti par jaunās produktivitātes līdzradītāju"
   },
   "community": {
     "hero_title": "Kopiena",
-    "hero_subtitle": "Balsot par funkcijām, dalīties ar idejām un kopā veidot nākotni",
-    "voting_title": "Balsot par funkcijām",
-    "voting_subtitle": "Palīdziet mums noteikt prioritātes tam, kas jums vissvarīgākais",
+    "hero_subtitle": "Balso par funkcijām, dalies idejās un veido nākotni kopā ar mums",
+    "voting_title": "Balso par funkcijām",
+    "voting_subtitle": "Palīdzi mums prioritizēt svarīgāko",
     "voting_list_aria": "Funkciju balsošanas saraksts",
     "category_aria": "Kategorija: {category}",
     "vote_count": "{count} balsis",
     "vote_button": "Balsot",
-    "voted_button": "Iebalsots",
+    "voted_button": "Nobalsots",
     "vote_for": "Balsot par {feature}",
-    "ideas_title": "Dalieties ar savām idejām",
-    "ideas_placeholder": "Kādu funkciju jūs vēlētos redzēt?",
+    "ideas_title": "Dalies idejās",
+    "ideas_placeholder": "Kādu funkciju tu gribētu redzēt?",
     "ideas_submit": "Iesniegt ideju",
-    "ideas_aria_label": "Iesniegt savu ideju",
-    "ideas_helper": "Ievadiet savu funkcijas ideju vai ierosinājumu mūsu produktiem",
-    "ideas_error_empty": "Lūdzu, ievadiet savu ideju",
-    "ideas_success": "Paldies! Jūsu ideja ir iesniegta.",
-    "toast_voted": "Iebalsots par \"{feature}\"!",
-    "toast_removed": "Balsis noņemts no \"{feature}\"",
+    "ideas_aria_label": "Iesniedz savu ideju",
+    "ideas_helper": "Pastāsti par ierosinājumu vai vajadzību mūsu produktiem",
+    "ideas_error_empty": "Lūdzu, ieraksti ideju",
+    "ideas_success": "Paldies! Tava ideja saņemta.",
+    "toast_voted": "Nobalsots par \"{feature}\"!",
+    "toast_removed": "Balsojums no \"{feature}\" noņemts",
     "categories": {
       "nodevoyage": "NodeVoyage",
       "ideonautix": "Ideonautix"
     },
     "features": {
       "ai-trip-optimizer": {
-        "name": "AI ceļojumu optimizators",
-        "description": "Automātiski optimizē maršrutus, balstoties uz laiku, budžetu un vēlmēm"
+        "name": "MI ceļojumu optimizētājs",
+        "description": "Automātiski optimizē maršrutus pēc laika, budžeta un vēlmēm"
       },
       "team-collaboration-board": {
         "name": "Komandas sadarbības dēlis",
-        "description": "Reāllaika kopīga plānošana grupu ceļojumiem"
+        "description": "Reāllaika plānošana grupu ceļojumiem"
       },
       "revenue-forecasting-ai": {
-        "name": "AI ieņēmumu prognozēšana",
-        "description": "Prognozējoša analītika startup ieņēmumu prognozēm"
+        "name": "Ieņēmumu prognožu MI",
+        "description": "Prognozējoša analītika startapu ieņēmumu modelēšanai"
       },
       "ar-navigation-mode": {
         "name": "AR navigācijas režīms",
-        "description": "Papildinātās realitātes navigācija pilsētu izpētei"
+        "description": "Pilsētu izpēte ar paplašināto realitāti"
       },
       "pitch-deck-analyzer": {
-        "name": "Prezentāciju analizators",
-        "description": "AI darbināta atsauksme par prezentācijām"
+        "name": "Pitch deck analizators",
+        "description": "MI atsauksmes par prezentācijām"
       },
       "offline-maps-pro": {
-        "name": "Bezsaistes kartes Pro",
+        "name": "Offline Maps Pro",
         "description": "Uzlabotas bezsaistes iespējas ar 3D kartēm"
       },
       "social-travel-feed": {
-        "name": "Sociālā ceļojumu plūsma",
-        "description": "Dalieties ar ceļojumu brīžiem ar iegremdējošu kopienas plūsmu"
+        "name": "Ceļojumu sociālais feeds",
+        "description": "Dalies ar piedzīvojumiem imersīvā lentē"
       },
       "budget-tracker": {
-        "name": "Budžeta izsekošanas rīks",
-        "description": "Reāllaika izdevumu izsekošana ceļojumu laikā"
+        "name": "Budžeta uzraugs",
+        "description": "Reāllaika izdevumu kontrole ceļojuma laikā"
       }
     }
   },
   "consulting": {
-    "hero_title": "AI konsultācijas",
+    "hero_title": "MI konsultācijas",
     "hero_subtitle": "Bezmaksas pilotprogramma 3 atlasītiem uzņēmumiem",
-    "spots_remaining": "vietas atlikušas",
-    "what_title": "Ko mēs piedāvājam",
-    "what_1": "AI stratēģija un ieviešana",
-    "what_2": "Tehniska konsultācija",
-    "what_3": "Personalizēta risinājuma dizains",
-    "form_title": "Pieteikties pilotprogrammai",
+    "spots_remaining": "brīvas vietas",
+    "what_title": "Ko piedāvājam",
+    "what_1": "MI stratēģija un ieviešana",
+    "what_2": "Tehniskā konsultēšana",
+    "what_3": "Pielāgotu risinājumu dizains",
+    "form_title": "Piesakies pilotam",
     "form_company": "Uzņēmuma nosaukums",
     "form_company_placeholder": "Acme Corp",
-    "form_name": "Jūsu vārds",
-    "form_name_placeholder": "Aleks Dibinātājs",
+    "form_name": "Tavs vārds",
+    "form_name_placeholder": "Alex Founder",
     "form_email": "E-pasta adrese",
     "form_email_placeholder": "founder@acme.com",
-    "form_phone": "Tālruņa numurs",
+    "form_phone": "Telefona numurs",
     "form_phone_placeholder": "+371 12345678",
     "form_industry": "Nozare",
-    "form_industry_placeholder": "Ceļojumi, Viesmīlība, SaaS...",
-    "form_description": "Aprakstiet jūsu AI vajadzības",
-    "form_description_placeholder": "Pastāstiet mums par jūsu AI vajadzībām, pašreizējiem izaicinājumiem un to, ko cerat sasniegt...",
+    "form_industry_placeholder": "Ceļojumi, viesmīlība, SaaS...",
+    "form_description": "Apraksti savas MI vajadzības",
+    "form_description_placeholder": "Pastāsti par izaicinājumiem, risinājumiem un mērķiem...",
     "form_submit": "Iesniegt pieteikumu",
-    "form_success": "Pieteikums iesniegts! Mēs sazināsimies ar jums 48 stundu laikā.",
-    "form_error": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.",
-    "select_industry": "Izvēlieties nozari...",
+    "form_success": "Pieteikums saņemts! Sazināsimies 48 stundu laikā.",
+    "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
+    "select_industry": "Izvēlies nozari...",
     "industries": {
       "technology": "Tehnoloģijas",
       "fintech": "FinTech",
       "ecommerce": "E-komercija",
-      "healthcare": "Veselības aprūpe",
+      "healthcare": "Veselība",
       "education": "Izglītība",
       "manufacturing": "Ražošana",
-      "other": "Cits"
+      "other": "Cita"
     },
-    "benefits_title": "Ko jūs iegūstat",
-    "benefit_1": "Bezmaksas AI stratēģijas konsultācija",
-    "benefit_2": "Tehniska ieviešanas plāns",
-    "benefit_3": "3 mēnešu konsultāciju atbalsts",
+    "benefits_title": "Ko iegūsi",
+    "benefit_1": "Bezmaksas MI stratēģijas konsultācija",
+    "benefit_2": "Tehniskais ieviešanas plāns",
+    "benefit_3": "3 mēnešu atbalsts",
     "benefit_4": "Prioritāra piekļuve mūsu produktiem",
-    "timeline_title": "Procesa laika skala",
-    "week_1": "1. nedēļa: Sākotnējā konsultācija",
+    "timeline_title": "Procesa grafiks",
+    "week_1": "1. nedēļa: Iepazīšanās konsultācija",
     "week_2": "2. nedēļa: Stratēģijas izstrāde",
-    "week_3_12": "3-12. nedēļa: Ieviešanas atbalsts",
+    "week_3_12": "3.–12. nedēļa: Ieviešanas atbalsts",
     "requirements_title": "Prasības",
-    "req_1": "Atrodaties Eiropā vai esat gatavi strādāt CET laikā",
-    "req_2": "Apņemties AI transformācijai",
-    "req_3": "Atvērti sadarbībai un atsauksmēm"
+    "req_1": "Darbība Eiropā vai gatavība strādāt pēc CET",
+    "req_2": "Apņēmība transformēt uzņēmumu ar MI",
+    "req_3": "Atvērtība sadarbībai un atgriezeniskajai saitei"
   },
   "contact": {
-    "hero_title": "Sazināties ar mums",
-    "hero_subtitle": "Veidosim kaut ko brīnišķīgu kopā",
-    "form_title": "Nosūtiet mums ziņojumu",
-    "form_name": "Jūsu vārds",
-    "form_name_placeholder": "Aleks Dibinātājs",
-    "form_email": "E-pasta adrese",
+    "hero_title": "Sazināsimies",
+    "hero_subtitle": "Radīsim ko izcilu kopā",
+    "form_title": "Raksti mums ziņu",
+    "form_name": "Tavs vārds",
+    "form_name_placeholder": "Alex Founder",
+    "form_email": "E-pasts",
     "form_email_placeholder": "you@company.com",
     "form_subject": "Temats",
     "form_subject_placeholder": "Partnerības iespēja",
-    "form_message": "Jūsu ziņojums",
-    "form_message_placeholder": "Jūsu ziņojums...",
-    "form_submit": "Nosūtīt ziņojumu",
-    "form_success": "Ziņojums nosūtīts! Mēs atbildēsim drīz.",
-    "form_error": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.",
-    "calendar_title": "Rezervēt tikšanos",
-    "calendar_subtitle": "Ieplānojiet zvanu ar mūsu komandu",
+    "form_message": "Ziņa",
+    "form_message_placeholder": "Tava ziņa...",
+    "form_submit": "Nosūtīt",
+    "form_success": "Ziņa nosūtīta! Drīz sazināsimies.",
+    "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
+    "calendar_title": "Pieraksties sarunai",
+    "calendar_subtitle": "Ieplāno zvanu ar mūsu komandu",
     "calendar_button": "Skatīt kalendāru",
-    "info_title": "Kontaktinformācija",
+    "info_title": "Kontakti",
     "info_email": "E-pasts",
     "info_location": "Atrašanās vieta",
     "social_title": "Sekojiet mums",
@@ -352,16 +351,16 @@
   "form": {
     "error_required": "Šis lauks ir obligāts",
     "error_email": "Nederīga e-pasta adrese",
-    "error_phone": "Nederīgs tālruņa numurs",
-    "error_validation": "Lūdzu, izlabojiet kļūdas formā"
+    "error_phone": "Nederīgs telefona numurs",
+    "error_validation": "Lūdzu, izlabo kļūdas formā"
   },
   "common": {
-    "submitting": "Iesniegšana...",
+    "submitting": "Nosūta...",
     "loading": "Ielādē...",
     "planning": "Plānošanā",
-    "in_development": "Izstrādē",
+    "in_development": "Izstrāde",
     "coming_soon": "Drīzumā",
-    "early_access": "Agrīnā piekļuve",
+    "early_access": "Agrīna piekļuve",
     "learn_more": "Uzzināt vairāk",
     "get_started": "Sākt",
     "read_more": "Lasīt vairāk",
@@ -377,13 +376,13 @@
     "search": "Meklēt",
     "filter": "Filtrēt",
     "sort": "Kārtot",
-    "view_all": "Skatīt visu",
+    "view_all": "Skatīt visus",
     "show_more": "Rādīt vairāk",
     "show_less": "Rādīt mazāk"
   },
   "footer": {
     "tagline": "Kur loģika dejo ar radošumu",
-    "status": "Pirms uzņēmuma dibināšanas • Ideju Kauss Oktobris 2025",
+    "status": "Pirmsuzņēmums • Ideju Kauss 2025. gada oktobris",
     "location": "Daugavpils, Latvija",
     "products_title": "Produkti",
     "company": "Uzņēmums",
@@ -392,7 +391,7 @@
     "vision": "Vīzija",
     "nodevoyage": "NodeVoyage",
     "ideonautix": "Ideonautix",
-    "roadmap": "Ceļa karte",
+    "roadmap": "Ceļvedis",
     "community": "Kopiena",
     "consulting": "Konsultācijas",
     "contact": "Kontakti",
@@ -402,7 +401,7 @@
     "legal": "Juridiskā informācija",
     "privacy": "Privātuma politika",
     "terms": "Lietošanas noteikumi",
-    "cookies": "Sīkfailu politika",
+    "cookies": "Sīkdatņu politika",
     "rights": "Visas tiesības aizsargātas",
     "made_in": "Radīts ar rūpēm Latvijā",
     "copyright": "© 2025 AlgoRhythmics",

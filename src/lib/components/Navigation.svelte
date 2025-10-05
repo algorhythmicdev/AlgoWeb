@@ -9,7 +9,6 @@
   import { mainNavigation } from '$config/navigation';
 
   let isScrolled = false;
-  let lastKnownScrollY = 0;
   let ticking = false;
 
   $: currentPath = $page.url.pathname;
@@ -30,8 +29,6 @@
   }
 
   function handleScroll() {
-    lastKnownScrollY = window.scrollY || 0;
-
     if (!ticking) {
       ticking = true;
       requestAnimationFrame(updateScrollState);
