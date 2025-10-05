@@ -4,7 +4,7 @@
   import Footer from '$components/Footer.svelte';
   import ThemedBackground from '$components/ThemedBackground.svelte';
   import AICompanion from '$components/AICompanion.svelte';
-  import LoadingSpinner from '$components/LoadingSpinner.svelte';
+  import LoadingOverlay from '$components/LoadingOverlay.svelte';
   import '$lib/i18n';
   import { waitLocale } from 'svelte-i18n';
   import { onMount } from 'svelte';
@@ -42,7 +42,7 @@
   <meta name="twitter:image" content="/og-image.png" />
 </svelte:head>
 
-<LoadingSpinner />
+<LoadingOverlay />
 
 {#await waitLocale()}
   <div class="loading">
