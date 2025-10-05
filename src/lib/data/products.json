@@ -6,10 +6,10 @@
     "hero": "/images/products/nodevoyage-hero.webp",
     "color": "#1351FF",
     "features": [
-      { "id": "nodi-ai", "icon": "🤖" },
-      { "id": "smart-builder", "icon": "🗺️" },
-      { "id": "mobile-suite", "icon": "📱" },
-      { "id": "community", "icon": "👥" }
+      { "id": "nodi-ai", "icon": "ai" },
+      { "id": "smart-builder", "icon": "map" },
+      { "id": "mobile-suite", "icon": "device" },
+      { "id": "community", "icon": "people" }
     ],
     "techStack": [
       "SvelteKit",
@@ -27,10 +27,10 @@
     "hero": "/images/products/ideonautix-hero.webp",
     "color": "#6A38FF",
     "features": [
-      { "id": "pitch", "icon": "🎯" },
-      { "id": "revenue", "icon": "📊" },
-      { "id": "team", "icon": "👥" },
-      { "id": "market", "icon": "🎪" }
+      { "id": "pitch", "icon": "target" },
+      { "id": "revenue", "icon": "chart" },
+      { "id": "team", "icon": "people" },
+      { "id": "market", "icon": "market" }
     ],
     "techStack": [
       "SvelteKit",

@@ -73,7 +73,7 @@
     </a>
 
     <div class="nav-content">
-      <div class="nav-links" class:open={$navigation.isMenuOpen}>
+      <div id="primary-navigation" class="nav-links" class:open={$navigation.isMenuOpen}>
         {#each mainNavigation as item, index}
           <a
             href={item.href}

@@ -1,9 +1,10 @@
 <script>
   // @ts-nocheck
   import { language } from '$stores/language';
-  
+
   let isOpen = false;
-  
+  let trigger;
+
   const languages = [
     { code: 'en', label: 'EN', name: 'English' },
     { code: 'lv', label: 'LV', name: 'Latviešu' },
@@ -12,33 +13,56 @@
     { code: 'fr', label: 'FR', name: 'Français' },
     { code: 'es', label: 'ES', name: 'Español' }
   ];
-  
-  $: currentLanguage = languages.find(lang => lang.code === $language) || languages[0];
-  
+
+  $: currentLanguage = languages.find((lang) => lang.code === $language) || languages[0];
+
   function selectLanguage(code) {
     language.set(code);
     isOpen = false;
+    trigger?.focus();
+  }
+
+  function handleKeydown(event) {
+    if (event.key === 'Escape' && isOpen) {
+      isOpen = false;
+      trigger?.focus();
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  }
+
+  function handleFocusOut(event) {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      isOpen = false;
+    }
   }
 </script>
 
-<div class="language-switcher">
-  <button 
-    class="current-lang" 
-    on:click={() => isOpen = !isOpen}
+<div class="language-switcher" role="group" on:focusout={handleFocusOut}>
+  <button
+    bind:this={trigger}
+    class="current-lang"
+    on:click={() => (isOpen = !isOpen)}
+    on:keydown={handleKeydown}
     aria-label="Select language"
+    aria-haspopup="listbox"
+    aria-expanded={isOpen}
+    aria-controls="language-menu"
   >
     {currentLanguage.label}
     <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </svg>
   </button>
-  
+
   {#if isOpen}
-    <div class="dropdown">
+    <div class="dropdown" id="language-menu" role="listbox" tabindex="-1" on:keydown={handleKeydown}>
       {#each languages as lang}
         <button
           class="lang-option"
           class:active={lang.code === $language}
+          role="option"
+          aria-selected={lang.code === $language}
           on:click={() => selectLanguage(lang.code)}
         >
           <span class="label">{lang.label}</span>
@@ -53,7 +77,7 @@
   .language-switcher {
     position: relative;
   }
-  
+
   .current-lang {
     display: flex;
     align-items: center;
@@ -67,12 +91,13 @@
     cursor: pointer;
     transition: all var(--duration-fast) var(--ease-out);
   }
-  
-  .current-lang:hover {
+
+  .current-lang:hover,
+  .current-lang:focus-visible {
     border-color: var(--voyage-blue);
     color: var(--voyage-blue);
   }
-  
+
   .dropdown {
     position: absolute;
     top: calc(100% + var(--space-2));
@@ -85,7 +110,7 @@
     padding: var(--space-2);
     z-index: var(--z-overlay);
   }
-  
+
   .lang-option {
     display: flex;
     align-items: center;
@@ -99,21 +124,22 @@
     cursor: pointer;
     transition: background var(--duration-fast) var(--ease-out);
   }
-  
-  .lang-option:hover {
+
+  .lang-option:hover,
+  .lang-option:focus-visible {
     background: var(--bg-elevated);
   }
-  
+
   .lang-option.active {
     background: rgba(var(--voyage-blue-rgb), 0.1);
     color: var(--voyage-blue);
   }
-  
+
   .label {
     font-weight: var(--weight-semibold);
     font-size: var(--text-small);
   }
-  
+
   .name {
     font-size: var(--text-caption);
     color: var(--text-secondary);

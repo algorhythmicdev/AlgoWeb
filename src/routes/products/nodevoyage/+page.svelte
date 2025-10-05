@@ -1,5 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
+  import { Icon } from '$lib/components';
   import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
 
@@ -65,7 +66,9 @@
     <div class="features-grid" use:staggerReveal={{ stagger: 120 }}>
       {#each features as feature}
         <article class="feature-card">
-          <span class="feature-icon">{feature.icon}</span>
+          <span class="feature-icon">
+            <Icon name={feature.icon} size={32} />
+          </span>
           <h3>{$_(`nodevoyage.features.${feature.id}.title`)}</h3>
           <p>{$_(`nodevoyage.features.${feature.id}.description`)}</p>
         </article>
@@ -314,7 +317,16 @@
     backdrop-filter: blur(22px);
   }
 
-  .feature-icon { font-size: 2rem; }
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--voyage-blue) 14%, transparent 86%);
+    color: var(--voyage-blue);
+  }
   .feature-card p { color: var(--text-secondary); }
 
   .steps-grid {

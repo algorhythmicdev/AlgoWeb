@@ -2,6 +2,7 @@
   // @ts-nocheck
   import { browser } from '$app/environment';
   import { _ } from 'svelte-i18n';
+  import { Icon } from '$lib/components';
   import { onMount } from 'svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -253,7 +254,8 @@
             use:magnetic
             use:sparkleTrail
           >
-            📅 {$_('contact.calendar_button')}
+            <Icon name="calendar" size={20} class="button-icon" />
+            <span>{$_('contact.calendar_button')}</span>
           </button>
         </div>
         
@@ -262,7 +264,9 @@
           <h3>{$_('contact.info_title')}</h3>
           
           <div class="info-item">
-            <div class="info-icon">📧</div>
+            <div class="info-icon">
+              <Icon name="mail" size={22} />
+            </div>
             <div>
               <div class="info-label">{$_('contact.info_email')}</div>
               <a href="mailto:AlgoRhythmics.dev@gmail.com" class="info-value">
@@ -270,9 +274,11 @@
               </a>
             </div>
           </div>
-          
+
           <div class="info-item">
-            <div class="info-icon">📍</div>
+            <div class="info-icon">
+              <Icon name="location" size={22} />
+            </div>
             <div>
               <div class="info-label">{$_('contact.info_location')}</div>
               <div class="info-value">Daugavpils, Latvia</div>
@@ -285,15 +291,21 @@
           <h3 use:sparkleTrail>{$_('contact.social_title')}</h3>
           <div class="social-links">
             <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
-              <span class="social-icon">💼</span>
+              <span class="social-icon">
+                <Icon name="linkedin" size={18} />
+              </span>
               LinkedIn
             </a>
             <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
-              <span class="social-icon">💻</span>
+              <span class="social-icon">
+                <Icon name="github" size={18} />
+              </span>
               GitHub
             </a>
             <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
-              <span class="social-icon">🐦</span>
+              <span class="social-icon">
+                <Icon name="twitter" size={18} />
+              </span>
               Twitter
             </a>
           </div>
@@ -487,7 +499,25 @@ form {
   }
 
   .info-icon,
-  .social-icon { font-size: 1.2rem; }
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--voyage-blue) 14%, transparent 86%);
+    color: var(--voyage-blue);
+  }
+
+  .social-icon {
+    background: color-mix(in srgb, var(--aurora-purple) 18%, transparent 82%);
+    color: var(--aurora-purple);
+  }
+
+  :global(.button-icon) {
+    display: inline-flex;
+  }
 
   .info-value,
   .social-link { color: var(--text-secondary); }
