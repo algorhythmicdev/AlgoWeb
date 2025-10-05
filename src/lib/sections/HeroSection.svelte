@@ -14,12 +14,12 @@
   <div class="container hero-grid">
     <div class="hero-copy" use:revealOnScroll>
       <span class="eyebrow">{$_('hero.status')}</span>
-      <h1>AlgoRhythmics</h1>
+      <h1 class="gradient-text">AlgoRhythmics</h1>
       <p class="hero-lead">{$_('hero.subtitle')}</p>
 
       <div class="hero-actions" role="group" aria-label="Primary actions">
-        <a href="/products" class="btn btn-primary">{$_('hero.cta_products')}</a>
-        <a href="/consulting" class="btn btn-secondary">{$_('hero.cta_consulting')}</a>
+        <a href="/products" class="btn btn-gradient">{$_('hero.cta_products')}</a>
+        <a href="/consulting" class="btn btn-secondary hover-lift">{$_('hero.cta_consulting')}</a>
       </div>
 
       <div class="hero-meta" use:staggerReveal={{ stagger: 160 }}>
@@ -118,6 +118,12 @@
     box-shadow: var(--shadow-xs);
     display: grid;
     gap: 0.6rem;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .meta-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
   }
 
   .meta-card header {
@@ -150,6 +156,12 @@
     box-shadow: var(--shadow-sm);
     display: grid;
     gap: var(--space-2);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .showcase-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
   }
 
   .showcase-card.focus {
@@ -159,6 +171,11 @@
 
   .showcase-card h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   .showcase-card p {
