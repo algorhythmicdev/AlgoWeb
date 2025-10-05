@@ -203,36 +203,56 @@
 }
 
 [data-theme="dark"] {
-  /* Enhanced dark theme with better contrast and visibility */
-  --gradient-primary: linear-gradient(140deg, rgba(67, 112, 255, 0.95) 0%, rgba(106, 56, 255, 0.92) 52%, rgba(255, 211, 57, 0.85) 100%);
-  --gradient-secondary: linear-gradient(145deg, rgba(106, 56, 255, 0.95) 0%, rgba(120, 150, 255, 0.88) 50%, rgba(255, 211, 57, 0.82) 100%);
-  --gradient-text: linear-gradient(130deg, rgba(120, 150, 255, 0.98) 0%, rgba(150, 120, 255, 0.95) 45%, rgba(255, 211, 57, 0.9) 85%);
-  --gradient-hero: linear-gradient(140deg, rgba(67, 112, 255, 0.92) 0%, rgba(106, 56, 255, 0.88) 48%, rgba(255, 211, 57, 0.8) 88%);
-  
-  /* Improved dark backgrounds with better contrast */
-  --bg-primary: #0a0f1a;
-  --bg-surface: #111827;
-  --bg-muted: rgba(20, 30, 50, 0.85);
-  --bg-elevated: #1a2332;
-  --surface-glass: rgba(25, 35, 55, 0.8);
-  --surface-tint: rgba(67, 112, 255, 0.15);
-  
-  /* Enhanced borders for better visibility and WCAG compliance */
-  --border-subtle: rgba(120, 150, 255, 0.35);
-  --border-strong: rgba(140, 170, 255, 0.55);
-  --border-glass: rgba(120, 150, 255, 0.45);
-  
-  /* High contrast text colors for WCAG AAA compliance */
-  --text-primary: rgba(255, 255, 255, 1);
-  --text-secondary: rgba(240, 244, 248, 0.95);
-  --text-tertiary: rgba(220, 228, 240, 0.85);
+  /* Brand-led gradients with luminous contrast */
+  --gradient-primary: linear-gradient(
+    138deg,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.92) 78%, rgba(5, 10, 22, 0.92) 22%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.94) 74%, rgba(8, 14, 30, 0.94) 26%) 52%,
+    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.88) 70%, rgba(12, 18, 36, 0.88) 30%) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    145deg,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.95) 72%, rgba(6, 12, 26, 0.95) 28%) 0%,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.9) 70%, rgba(9, 16, 32, 0.9) 30%) 48%,
+    color-mix(in srgb, rgba(var(--cherry-red-rgb), 0.82) 65%, rgba(14, 18, 30, 0.82) 35%) 100%
+  );
+  --gradient-text: linear-gradient(
+    132deg,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.98) 78%, rgba(10, 16, 30, 0.98) 22%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.95) 74%, rgba(12, 18, 34, 0.95) 26%) 45%,
+    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.9) 70%, rgba(18, 20, 28, 0.9) 30%) 85%
+  );
+  --gradient-hero: linear-gradient(
+    140deg,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.92) 75%, rgba(4, 9, 20, 0.92) 25%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.9) 72%, rgba(9, 14, 26, 0.9) 28%) 48%,
+    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.82) 66%, rgba(18, 24, 36, 0.82) 34%) 88%
+  );
 
-  /* Enhanced shadows for depth */
-  --shadow-xs: 0 8px 16px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 20px 40px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 32px 64px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 48px 96px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 64px 128px rgba(0, 0, 0, 0.7);
+  /* Brand-tinted backgrounds with WCAG-compliant contrast */
+  --bg-primary: color-mix(in srgb, #02060f 90%, rgba(var(--voyage-blue-rgb), 0.2) 10%);
+  --bg-surface: color-mix(in srgb, #040a16 86%, rgba(var(--aurora-purple-rgb), 0.24) 14%);
+  --bg-muted: color-mix(in srgb, rgba(3, 7, 18, 0.94) 72%, rgba(var(--aurora-purple-rgb), 0.24) 28%);
+  --bg-elevated: color-mix(in srgb, rgba(6, 12, 24, 0.96) 70%, rgba(var(--voyage-blue-rgb), 0.26) 30%);
+  --surface-glass: color-mix(in srgb, rgba(3, 7, 18, 0.82) 68%, rgba(var(--voyage-blue-rgb), 0.28) 32%);
+  --surface-tint: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 58%, rgba(var(--aurora-purple-rgb), 0.18) 42%);
+
+  /* Glassy borders and dividers */
+  --border-subtle: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 52%, rgba(255, 255, 255, 0.06) 48%);
+  --border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 58%, rgba(var(--aurora-purple-rgb), 0.38) 42%);
+  --border-glass: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 56%, rgba(255, 255, 255, 0.1) 44%);
+
+  /* High contrast text tokens */
+  --text-primary: rgba(249, 252, 255, 0.98);
+  --text-secondary: rgba(225, 232, 244, 0.92);
+  --text-tertiary: rgba(198, 210, 228, 0.82);
+
+  /* Softer, depth-aware shadows for luminous glass */
+  --shadow-xs: 0 12px 26px rgba(2, 4, 12, 0.54);
+  --shadow-sm: 0 24px 48px rgba(2, 4, 12, 0.5);
+  --shadow-md: 0 36px 72px rgba(1, 3, 10, 0.52);
+  --shadow-lg: 0 52px 112px rgba(0, 2, 8, 0.55);
+  --shadow-xl: 0 68px 148px rgba(0, 2, 8, 0.58);
 }
 
 @media (prefers-reduced-motion: reduce) {
