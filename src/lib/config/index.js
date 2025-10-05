@@ -3,6 +3,6 @@
  * Central export point for all configuration files
  */
 
-export { backgroundThemes } from './backgroundThemes.js';
-export { seoConfig } from './seo.js';
-export { navigationConfig } from './navigation.js';
+export { backgroundThemes, getThemeForPath } from './backgroundThemes.js';
+export { siteConfig, pageConfigs } from './seo.js';
+export { mainNavigation, footerLinks } from './navigation.js';

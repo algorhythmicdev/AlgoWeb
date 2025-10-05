@@ -5,54 +5,56 @@
   import LanguageSwitcher from './LanguageSwitcher.svelte';
   import ThemeToggle from './ThemeToggle.svelte';
   import { mainNavigation } from '$config/navigation';
-  
+
   let isScrolled = false;
-  
+
   $: currentPath = $page.url.pathname;
-  
+
   function handleScroll() {
     const scrollY = window.scrollY;
-    isScrolled = scrollY > 50;
+    isScrolled = scrollY > 32;
     navigation.updateScroll(scrollY);
   }
 </script>
 
 <svelte:window on:scroll={handleScroll} />
 
-<nav class="nav" class:scrolled={isScrolled} class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}>
+<nav
+  class="nav"
+  class:nav-condensed={isScrolled}
+  class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
+>
   <div class="container nav-container">
-    <a href="/" class="logo">
-      <img src="/images/brand/logo-main.webp" alt="AlgoRhythmics" width="150" height="40" />
+    <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
+      <img src="/images/brand/logo-main.webp" alt={$_('nav.brand_name')} width="148" height="40" />
     </a>
-    
-    <div class="nav-links" class:open={$navigation.isMenuOpen}>
-      {#each mainNavigation as item}
-        <a 
-          href={item.href} 
-          class="nav-link" 
-          class:active={currentPath === item.href}
-          on:click={() => navigation.closeMenu()}
-        >
-          {$_(item.label)}
-          {#if item.badge}
-            <span class="badge">{$_(item.badge)}</span>
-          {/if}
-        </a>
-      {/each}
-    </div>
-    
-    <div class="nav-actions">
-      <LanguageSwitcher />
-      <ThemeToggle />
-      <button 
-        class="menu-toggle" 
-        on:click={() => navigation.toggleMenu()}
-        aria-label="Toggle menu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
+    <div class="nav-content">
+      <div class="nav-links" class:open={$navigation.isMenuOpen}>
+        {#each mainNavigation as item}
+          <a
+            href={item.href}
+            class="nav-link"
+            class:active={currentPath === item.href}
+            on:click={() => navigation.closeMenu()}
+          >
+            <span>{$_(item.label)}</span>
+            {#if item.badge}
+              <span class="nav-badge">{$_(item.badge)}</span>
+            {/if}
+          </a>
+        {/each}
+      </div>
+
+      <div class="nav-actions">
+        <LanguageSwitcher />
+        <ThemeToggle />
+        <a href="/contact" class="nav-cta">{$_('nav.contact')}</a>
+        <button class="menu-toggle" on:click={() => navigation.toggleMenu()} aria-label={$_('nav.toggle_menu')}>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
@@ -64,114 +66,150 @@
     left: 0;
     right: 0;
     z-index: var(--z-sticky);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border-bottom: 1px solid var(--glass-border);
-    transition: all var(--duration-normal) var(--ease-out);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out),
+      border-color var(--duration-normal) var(--ease-out);
   }
-  
-  .nav.hidden {
-    transform: translateY(-100%);
+
+  .nav.hidden { transform: translateY(-100%); }
+
+  .nav-condensed {
+    box-shadow: 0 12px 24px rgba(15, 20, 25, 0.06);
+    border-bottom-color: rgba(15, 20, 25, 0.08);
   }
-  
+
   .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: var(--space-3);
-    padding-bottom: var(--space-3);
+    padding: 1.1rem 0;
   }
-  
-  .logo img {
-    display: block;
-    height: 40px;
-    width: auto;
+
+  .brand img { display: block; width: 148px; height: auto; }
+
+  .nav-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
   }
-  
+
   .nav-links {
     display: flex;
-    gap: var(--space-6);
     align-items: center;
+    gap: var(--space-4);
   }
-  
+
   .nav-link {
     position: relative;
-    display: flex;
+    display: inline-flex;
+    gap: 0.35rem;
     align-items: center;
-    gap: var(--space-1);
     font-weight: var(--weight-medium);
-    color: var(--text-primary);
+    color: var(--text-secondary);
+    padding: 0.25rem 0;
     transition: color var(--duration-fast) var(--ease-out);
-    white-space: nowrap;
   }
-  
-  .nav-link:hover {
-    color: var(--voyage-blue);
-  }
-  
+
+  .nav-link:hover,
+  .nav-link.active { color: var(--text-primary); }
+
   .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: -0.55rem;
     left: 0;
-    right: 0;
+    width: 100%;
     height: 2px;
     background: var(--voyage-blue);
   }
-  
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
+
+  .nav-badge {
     font-size: var(--text-caption);
-    background: var(--signal-yellow);
-    color: var(--ink);
+    color: var(--voyage-blue);
+    background: rgba(19, 81, 255, 0.1);
     border-radius: var(--radius-full);
+    padding: 0.1rem 0.45rem;
     font-weight: var(--weight-semibold);
   }
-  
+
   .nav-actions {
     display: flex;
-    gap: var(--space-2);
     align-items: center;
+    gap: var(--space-2);
   }
-  
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.2rem;
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+    background: var(--bg-muted);
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-cta:hover {
+    background: var(--voyage-blue);
+    color: var(--pure-white);
+    border-color: var(--voyage-blue);
+  }
+
   .menu-toggle {
     display: none;
     flex-direction: column;
     gap: 4px;
-    padding: var(--space-2);
+    padding: 0.4rem 0.35rem;
+    border-radius: var(--radius-sm);
     background: transparent;
   }
-  
+
   .menu-toggle span {
-    display: block;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: var(--text-primary);
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: transform var(--duration-fast) var(--ease-out);
   }
-  
-  @media (max-width: 768px) {
+
+  @media (max-width: 960px) {
+    .nav-content { gap: var(--space-3); }
     .nav-links {
       position: fixed;
       top: 70px;
-      left: 0;
-      right: 0;
+      left: 1.5rem;
+      right: 1.5rem;
       flex-direction: column;
-      background: var(--bg-surface);
+      align-items: stretch;
       padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-lg);
-      transform: translateX(-100%);
-      transition: transform var(--duration-normal) var(--ease-out);
+      transform: translateY(-20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-normal) var(--ease-out),
+        transform var(--duration-normal) var(--ease-out);
     }
-    
+
     .nav-links.open {
-      transform: translateX(0);
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
     }
-    
-    .menu-toggle {
-      display: flex;
-    }
+
+    .nav-link { font-size: 1.05rem; padding: 0.5rem 0; }
+
+    .nav-actions { gap: var(--space-2); }
+
+    .nav-cta { display: none; }
+
+    .menu-toggle { display: inline-flex; }
   }
 </style>

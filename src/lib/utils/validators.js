@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * Form Validation Utilities
  */

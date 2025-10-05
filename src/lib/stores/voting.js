@@ -1,6 +1,10 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
+/**
+ * @typedef {Record<string, boolean>} Votes
+ */
+
 const createVotingStore = () => {
   // Load votes from localStorage
   const getInitialVotes = () => {
@@ -12,7 +16,7 @@ const createVotingStore = () => {
   
   const { subscribe, set, update } = writable(getInitialVotes());
   
-  const saveToLocalStorage = (votes) => {
+  const saveToLocalStorage = (/** @type {Votes} */ votes) => {
     if (browser) {
       localStorage.setItem('featureVotes', JSON.stringify(votes));
     }
@@ -20,8 +24,8 @@ const createVotingStore = () => {
   
   return {
     subscribe,
-    vote: (featureId) => {
-      update(votes => {
+    vote: (/** @type {string} */ featureId) => {
+      update((/** @type {Votes} */ votes) => {
         const newVotes = { ...votes };
         
         // Toggle vote
@@ -35,7 +39,7 @@ const createVotingStore = () => {
         return newVotes;
       });
     },
-    hasVoted: (featureId, votes) => {
+    hasVoted: (/** @type {string} */ featureId, /** @type {Votes} */ votes) => {
       return !!votes[featureId];
     },
     clear: () => {

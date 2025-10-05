@@ -1,4 +1,5 @@
 <script>
+  // @ts-nocheck
   import { _ } from 'svelte-i18n';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/Toast.svelte';
@@ -12,12 +13,14 @@
     description: ''
   };
   
+  /** @type {Record<string, string>} */
   let errors = {};
   let isSubmitting = false;
   let showToast = false;
   let toastMessage = '';
   let toastType = 'success';
   let spotsRemaining = 3;
+  const industryOptions = ['technology', 'fintech', 'ecommerce', 'healthcare', 'education', 'manufacturing', 'other'];
   
   function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -129,48 +132,41 @@
 
 <!-- Hero Section -->
 <section class="consulting-hero">
-  <div class="hero-background">
-    <svg width="100%" height="100%" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
-      <path use:morphBlob={{ duration: 8000, scale: 1.3 }} fill="url(#gradient1)" opacity="0.3"/>
-      <defs>
-        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#1351FF;stop-opacity:0.2" />
-          <stop offset="50%" style="stop-color:#6A38FF;stop-opacity:0.15" />
-          <stop offset="100%" style="stop-color:#FFD339;stop-opacity:0.1" />
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-  <div class="container">
-    <div class="hero-content">
-      <h1 class="hero-title">{$_('consulting.hero_title')}</h1>
-      <p class="hero-subtitle">{$_('consulting.hero_subtitle')}</p>
-      
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">{$_('consulting.hero_title')}</span>
+      <h1>{$_('consulting.hero_subtitle')}</h1>
+
       <div class="spots-indicator">
         <div class="spots-number">{spotsRemaining}</div>
-        <div class="spots-text">{$_('consulting.spots_remaining')}</div>
+        <span>{$_('consulting.spots_remaining')}</span>
       </div>
-      
+
       <div class="hero-features" use:staggerReveal>
         <div class="feature">
           <div class="feature-icon">🎯</div>
-          <h3>{$_('consulting.what_1')}</h3>
+          <p>{$_('consulting.what_1')}</p>
         </div>
         <div class="feature">
           <div class="feature-icon">💡</div>
-          <h3>{$_('consulting.what_2')}</h3>
+          <p>{$_('consulting.what_2')}</p>
         </div>
         <div class="feature">
           <div class="feature-icon">⚡</div>
-          <h3>{$_('consulting.what_3')}</h3>
+          <p>{$_('consulting.what_3')}</p>
         </div>
       </div>
+    </div>
+
+    <div class="hero-cta">
+      <p>{$_('consulting.what_title')}</p>
+      <a href="#form" class="btn btn-primary">{$_('consulting.form_title')}</a>
     </div>
   </div>
 </section>
 
 <!-- Application Form -->
-<section class="form-section">
+<section class="form-section" id="form">
   <div class="container">
     <div class="form-wrapper glass-card" use:tilt={{ max: 2 }}>
       <h2 class="form-title">{$_('consulting.form_title')}</h2>
@@ -179,11 +175,11 @@
         <div class="form-grid">
           <div class="form-group" class:error={errors.company}>
             <label for="company">{$_('consulting.form_company')} *</label>
-            <input 
-              type="text" 
-              id="company" 
+            <input
+              type="text"
+              id="company"
               bind:value={formData.company}
-              placeholder="Acme Corp"
+              placeholder={$_('consulting.form_company_placeholder')}
               class:error={errors.company}
             />
             {#if errors.company}
@@ -193,11 +189,11 @@
           
           <div class="form-group" class:error={errors.name}>
             <label for="name">{$_('consulting.form_name')} *</label>
-            <input 
-              type="text" 
-              id="name" 
+            <input
+              type="text"
+              id="name"
               bind:value={formData.name}
-              placeholder="John Doe"
+              placeholder={$_('consulting.form_name_placeholder')}
               class:error={errors.name}
             />
             {#if errors.name}
@@ -207,11 +203,11 @@
           
           <div class="form-group" class:error={errors.email}>
             <label for="email">{$_('consulting.form_email')} *</label>
-            <input 
-              type="email" 
-              id="email" 
+            <input
+              type="email"
+              id="email"
               bind:value={formData.email}
-              placeholder="john@acme.com"
+              placeholder={$_('consulting.form_email_placeholder')}
               class:error={errors.email}
             />
             {#if errors.email}
@@ -221,11 +217,11 @@
           
           <div class="form-group" class:error={errors.phone}>
             <label for="phone">{$_('consulting.form_phone')} *</label>
-            <input 
-              type="tel" 
-              id="phone" 
+            <input
+              type="tel"
+              id="phone"
               bind:value={formData.phone}
-              placeholder="+371 12345678"
+              placeholder={$_('consulting.form_phone_placeholder')}
               class:error={errors.phone}
             />
             {#if errors.phone}
@@ -235,19 +231,15 @@
           
           <div class="form-group full-width" class:error={errors.industry}>
             <label for="industry">{$_('consulting.form_industry')} *</label>
-            <select 
-              id="industry" 
+            <select
+              id="industry"
               bind:value={formData.industry}
               class:error={errors.industry}
             >
-              <option value="">Select industry...</option>
-              <option value="technology">Technology</option>
-              <option value="fintech">FinTech</option>
-              <option value="ecommerce">E-commerce</option>
-              <option value="healthcare">Healthcare</option>
-              <option value="education">Education</option>
-              <option value="manufacturing">Manufacturing</option>
-              <option value="other">Other</option>
+              <option value="">{$_('consulting.select_industry')}</option>
+              {#each industryOptions as option}
+                <option value={option}>{$_(`consulting.industries.${option}`)}</option>
+              {/each}
             </select>
             {#if errors.industry}
               <span class="error-message">{errors.industry}</span>
@@ -256,11 +248,11 @@
           
           <div class="form-group full-width" class:error={errors.description}>
             <label for="description">{$_('consulting.form_description')} *</label>
-            <textarea 
-              id="description" 
+            <textarea
+              id="description"
               bind:value={formData.description}
               rows="6"
-              placeholder="Tell us about your AI needs, current challenges, and what you hope to achieve..."
+              placeholder={$_('consulting.form_description_placeholder')}
               class:error={errors.description}
             ></textarea>
             {#if errors.description}
@@ -323,244 +315,202 @@
 </section>
 
 <style>
-  /* Hero Section */
   .consulting-hero {
-    position: relative;
-    padding: var(--space-20) 0 var(--space-16);
-    overflow: hidden;
+    padding: var(--space-16) 0;
+    background: var(--bg-muted);
   }
-  
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 211, 57, 0.1) 0%, transparent 70%);
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: center;
   }
-  
-  .hero-content {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
+
+  .hero-copy {
+    display: grid;
+    gap: var(--space-3);
   }
-  
-  .hero-title {
-    font-size: var(--text-hero);
-    background: linear-gradient(135deg, var(--signal-yellow), var(--voyage-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-4);
+
+  .hero-copy h1 {
+    font-size: clamp(2.2rem, 5vw, 3rem);
   }
-  
-  .hero-subtitle {
-    font-size: var(--text-headline);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-8);
-  }
-  
+
   .spots-indicator {
     display: inline-flex;
-    flex-direction: column;
     align-items: center;
-    padding: var(--space-6);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 2px solid var(--signal-yellow);
-    border-radius: var(--radius-xl);
-    margin-bottom: var(--space-12);
+    gap: var(--space-2);
+    padding: 0.75rem 1.2rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    width: fit-content;
   }
-  
+
   .spots-number {
-    font-size: 4rem;
-    font-weight: var(--weight-black);
-    color: var(--signal-yellow);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: var(--weight-semibold);
+    color: var(--voyage-blue);
     line-height: 1;
   }
-  
-  .spots-text {
-    font-size: var(--text-small);
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  
+
   .hero-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-12);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
   }
-  
+
   .feature {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
   }
-  
+
   .feature-icon {
-    font-size: 3rem;
-    margin-bottom: var(--space-3);
+    font-size: 1.6rem;
   }
-  
-  .feature h3 {
-    font-size: var(--text-title);
-    color: var(--text-primary);
+
+  .feature p {
+    margin: 0;
+    color: var(--text-secondary);
   }
-  
-  /* Form Section */
+
+  .hero-cta {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    display: grid;
+    gap: var(--space-3);
+    justify-items: start;
+  }
+
+  .hero-cta p {
+    color: var(--text-secondary);
+  }
+
   .form-section {
     padding: var(--space-16) 0;
   }
-  
+
   .form-wrapper {
-    max-width: 800px;
-    margin: 0 auto var(--space-12);
-    padding: var(--space-8);
-    border-radius: var(--radius-2xl);
+    max-width: 760px;
+    margin: 0 auto var(--space-10);
+    padding: var(--space-6);
   }
-  
+
   .form-title {
-    font-size: var(--text-display);
     text-align: center;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
   }
-  
+
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
-    margin-bottom: var(--space-8);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
   }
-  
+
   .form-group {
     display: flex;
     flex-direction: column;
+    gap: 0.4rem;
   }
-  
+
   .form-group.full-width {
     grid-column: 1 / -1;
   }
-  
+
   .form-group label {
     font-weight: var(--weight-semibold);
-    margin-bottom: var(--space-2);
-    color: var(--text-primary);
   }
-  
+
   .form-group input,
   .form-group select,
   .form-group textarea {
-    padding: var(--space-3) var(--space-4);
-    background: var(--bg-elevated);
-    border: 2px solid transparent;
+    padding: var(--space-3);
     border-radius: var(--radius-lg);
-    font-size: var(--text-body);
-    color: var(--text-primary);
-    transition: all var(--duration-fast) var(--ease-out);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    transition: border-color var(--duration-fast) var(--ease-out);
   }
-  
+
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus {
     outline: none;
     border-color: var(--voyage-blue);
-    box-shadow: 0 0 0 4px rgba(19, 81, 255, 0.1);
-    transform: translateY(-2px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
-  .form-group input:valid,
-  .form-group textarea:valid,
-  .form-group select:valid {
-    border-color: var(--voyage-blue);
-    background: linear-gradient(135deg, rgba(19, 81, 255, 0.05), rgba(255, 211, 57, 0.05));
-  }
-  
-  .form-group input:invalid:not(:placeholder-shown),
-  .form-group textarea:invalid:not(:placeholder-shown),
-  .form-group select:invalid:not(:placeholder-shown) {
-    border-color: var(--cherry-red);
-    animation: shake 0.5s ease-in-out;
-  }
-  
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-  
+
   .form-group input.error,
   .form-group select.error,
   .form-group textarea.error {
     border-color: var(--cherry-red);
   }
-  
+
   .error-message {
     color: var(--cherry-red);
     font-size: var(--text-small);
-    margin-top: var(--space-1);
   }
-  
-  .form-note {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-    margin-top: var(--space-4);
-  }
-  
+
   .btn-block {
     width: 100%;
+    display: inline-flex;
+    justify-content: center;
   }
-  
+
   .spinner {
     display: inline-block;
     width: 16px;
     height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-top-color: white;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
-    margin-right: var(--space-2);
+    margin-right: 0.5rem;
   }
-  
+
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
-  
-  /* Benefits Section */
+
   .benefits-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
   }
-  
+
   .benefit-card {
-    padding: var(--space-6);
-    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    display: grid;
+    gap: var(--space-3);
   }
-  
-  .benefit-card h3 {
-    font-size: var(--text-title);
-    margin-bottom: var(--space-4);
-  }
-  
+
   .benefit-card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-  
-  .benefit-card li {
-    padding-left: var(--space-6);
-    position: relative;
+    display: grid;
+    gap: 0.35rem;
+    padding-left: 1.2rem;
     color: var(--text-secondary);
   }
-  
-  .benefit-card li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--signal-yellow);
-    font-weight: var(--weight-bold);
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-cta {
+      justify-items: stretch;
+    }
   }
-  
+
   @media (max-width: 768px) {
     .form-grid {
       grid-template-columns: 1fr;

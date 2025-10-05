@@ -50,7 +50,7 @@
       <div class="social-links">
         {#each footerLinks.social as social}
           <a href={social.href} target="_blank" rel="noopener noreferrer">
-            {social.label}
+            {$_(social.label)}
           </a>
         {/each}
       </div>
@@ -60,114 +60,91 @@
 
 <style>
   .footer {
-    background: var(--bg-surface);
-    border-top: 1px solid var(--border-color);
-    padding: var(--space-12) 0 var(--space-6);
     margin-top: var(--space-24);
+    padding: var(--space-12) 0 var(--space-6);
+    background: var(--bg-muted);
+    border-top: 1px solid var(--border-subtle);
   }
-  
+
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr repeat(3, 1fr);
+    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
     gap: var(--space-8);
     margin-bottom: var(--space-8);
   }
-  
+
   .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+    display: grid;
+    gap: 0.75rem;
   }
-  
-  .footer-brand img {
-    max-width: 180px;
-  }
-  
+
+  .footer-brand img { max-width: 180px; }
+
   .tagline {
     color: var(--text-secondary);
-    font-style: italic;
     font-size: var(--text-small);
   }
-  
+
   .status {
     font-size: var(--text-small);
     color: var(--voyage-blue);
-    font-weight: var(--weight-medium);
+    font-weight: var(--weight-semibold);
   }
-  
+
   .contact-info {
-    margin-top: var(--space-3);
+    display: grid;
+    gap: 0.35rem;
     color: var(--text-secondary);
     font-size: var(--text-small);
   }
-  
-  .contact-info a {
-    color: var(--voyage-blue);
-    display: block;
-    margin-top: var(--space-1);
-  }
-  
+
+  .contact-info a { color: var(--text-primary); }
+
   .footer-links-section h4 {
     font-size: var(--text-title);
-    margin-bottom: var(--space-3);
-    color: var(--text-primary);
+    margin-bottom: 0.75rem;
   }
-  
+
   .footer-links-section ul {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    list-style: none;
-  }
-  
-  .footer-links-section a {
-    color: var(--text-secondary);
-    transition: color var(--duration-fast) var(--ease-out);
+    display: grid;
+    gap: 0.45rem;
     font-size: var(--text-small);
   }
-  
-  .footer-links-section a:hover {
-    color: var(--voyage-blue);
-  }
-  
+
+  .footer-links-section a { color: var(--text-secondary); }
+
+  .footer-links-section a:hover { color: var(--voyage-blue); }
+
   .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--border-color);
-  }
-  
-  .copyright {
-    color: var(--text-secondary);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-subtle);
     font-size: var(--text-small);
+    color: var(--text-tertiary);
   }
-  
+
+  .copyright { color: var(--text-secondary); }
+
   .social-links {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-3);
   }
-  
-  .social-links a {
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-  
-  .social-links a:hover {
-    color: var(--voyage-blue);
-  }
-  
-  @media (max-width: 768px) {
+
+  .social-links a { color: var(--text-secondary); }
+
+  .social-links a:hover { color: var(--voyage-blue); }
+
+  @media (max-width: 900px) {
     .footer-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: var(--space-6);
     }
-    
-    .footer-bottom {
-      flex-direction: column;
-      gap: var(--space-3);
-      text-align: center;
-    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: var(--space-2); text-align: center; }
   }
 </style>

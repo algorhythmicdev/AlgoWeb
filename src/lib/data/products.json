@@ -1,41 +1,15 @@
 {
   "nodevoyage": {
-    "name": "NodeVoyage",
-    "tagline": "Fun. Travel. Memories. Community.",
-    "status": "In Development",
-    "mvpDate": "2026-09",
+    "id": "nodevoyage",
+    "slug": "nodevoyage",
     "icon": "/images/products/nodevoyage-icon.webp",
     "hero": "/images/products/nodevoyage-hero.webp",
-    "description": "AI-powered travel planning and experience platform combining intelligent trip planning with immersive travel experiences and community sharing.",
+    "color": "#1351FF",
     "features": [
-      {
-        "id": "nodi-ai",
-        "name": "Nodi AI Companion",
-        "description": "Friendly AI assistant that helps plan trips, answers questions, and provides real-time travel support",
-        "icon": "robot",
-        "status": "core"
-      },
-      {
-        "id": "smart-builder",
-        "name": "Smart Trip Builder",
-        "description": "Node-based itinerary system with drag-and-drop interface, vibe presets, and real-time optimization",
-        "icon": "puzzle",
-        "status": "core"
-      },
-      {
-        "id": "mobile-suite",
-        "name": "Mobile Capture Suite",
-        "description": "AR translation, live translation, photo recognition, and offline capabilities for on-the-go travelers",
-        "icon": "camera",
-        "status": "core"
-      },
-      {
-        "id": "community",
-        "name": "Community Sharing",
-        "description": "Share trips, discover routes from others, collaborative planning, and traveler reviews",
-        "icon": "users",
-        "status": "extended"
-      }
+      { "id": "nodi-ai", "icon": "🤖" },
+      { "id": "smart-builder", "icon": "🗺️" },
+      { "id": "mobile-suite", "icon": "📱" },
+      { "id": "community", "icon": "👥" }
     ],
     "techStack": [
       "SvelteKit",
@@ -44,79 +18,19 @@
       "Firestore",
       "Cloud Vision API",
       "Cloud Translation API"
-    ],
-    "targetAudience": [
-      "Explorers and adventure seekers",
-      "Families planning vacations",
-      "Sustainable and eco-conscious travelers",
-      "On-the-go content creators"
     ]
   },
   "ideonautix": {
-    "name": "Ideonautix",
-    "tagline": "Explore, Invent, Launch.",
-    "status": "Planning Phase",
-    "mvpDate": "2026-02",
+    "id": "ideonautix",
+    "slug": "ideonautix",
     "icon": "/images/products/ideonautix-icon.webp",
     "hero": "/images/products/ideonautix-hero.webp",
-    "description": "Productivity super-suite for startups and growing companies, combining AI-powered microservices for founders and teams.",
-    "microservices": [
-      {
-        "id": "pitch-assistant",
-        "name": "Pitch Assistant",
-        "description": "AI-powered feedback on pitch decks with scoring, suggestions, and investor perspective analysis",
-        "icon": "presentation",
-        "status": "mvp"
-      },
-      {
-        "id": "revenue-boards",
-        "name": "Revenue Boards",
-        "description": "Real-time analytics dashboards with KPI tracking, forecasting, and actionable insights",
-        "icon": "chart",
-        "status": "mvp"
-      },
-      {
-        "id": "team-dynamics",
-        "name": "Team Dynamics Analyzer",
-        "description": "Understand team health, communication patterns, and collaboration effectiveness",
-        "icon": "network",
-        "status": "mvp"
-      },
-      {
-        "id": "legal-assistant",
-        "name": "Legal Document Assistant",
-        "description": "AI-powered contract review, compliance checking, and document generation",
-        "icon": "document",
-        "status": "future"
-      },
-      {
-        "id": "market-intelligence",
-        "name": "Market Intelligence",
-        "description": "Competitive analysis, trend tracking, and market opportunity identification",
-        "icon": "radar",
-        "status": "future"
-      },
-      {
-        "id": "financial-forecast",
-        "name": "Financial Forecasting",
-        "description": "Scenario modeling, burn rate optimization, and funding runway analysis",
-        "icon": "calculator",
-        "status": "future"
-      },
-      {
-        "id": "customer-insights",
-        "name": "Customer Insights Engine",
-        "description": "Analyze feedback, identify patterns, and predict customer behavior",
-        "icon": "lightbulb",
-        "status": "future"
-      },
-      {
-        "id": "workflow-automation",
-        "name": "Workflow Automation",
-        "description": "Connect tools, automate repetitive tasks, and streamline operations",
-        "icon": "automation",
-        "status": "future"
-      }
+    "color": "#6A38FF",
+    "features": [
+      { "id": "pitch", "icon": "🎯" },
+      { "id": "revenue", "icon": "📊" },
+      { "id": "team", "icon": "👥" },
+      { "id": "market", "icon": "🎪" }
     ],
     "techStack": [
       "SvelteKit",
@@ -125,105 +39,6 @@
       "Pub/Sub",
       "BigQuery",
       "Cloud Functions"
-    ],
-    "targetAudience": [
-      "Early-stage founders",
-      "Startup teams (5-50 people)",
-      "Innovation departments in enterprises",
-      "Accelerators and incubators"
-    ]
-  },  "nodevoyage": {
-    "id": "nodevoyage",
-    "name": "NodeVoyage",
-    "tagline": "Your AI Travel Companion",
-    "description": "AI-powered travel planning platform with intelligent itinerary builder, mobile AR tools, and community sharing",
-    "status": "In Development",
-    "mvpDate": "September 2026",
-    "hero": "/images/products/nodevoyage-hero.webp",
-    "icon": "/images/products/nodevoyage-icon.webp",
-    "color": "#1351FF",
-    "features": [
-      {
-        "id": "nodi-ai",
-        "name": "Nodi AI Assistant",
-        "icon": "🤖",
-        "status": "development"
-      },
-      {
-        "id": "smart-builder",
-        "name": "Smart Trip Builder",
-        "icon": "🗺️",
-        "status": "development"
-      },
-      {
-        "id": "mobile-suite",
-        "name": "Mobile AR Suite",
-        "icon": "📱",
-        "status": "planning"
-      },
-      {
-        "id": "community",
-        "name": "Community Hub",
-        "icon": "👥",
-        "status": "planning"
-      }
-    ],
-    "techStack": [
-      "SvelteKit",
-      "Google Cloud Platform",
-      "Vertex AI",
-      "Firebase",
-      "Cloud Run",
-      "BigQuery",
-      "Maps API",
-      "Flutter"
-    ]
-  },
-  "ideonautix": {
-    "id": "ideonautix",
-    "name": "Ideonautix",
-    "tagline": "Intelligence for Startups",
-    "description": "Modular productivity super-suite combining AI-powered microservices for startup founders and teams",
-    "status": "Planning Phase",
-    "mvpDate": "February 2026",
-    "hero": "/images/products/ideonautix-hero.webp",
-    "icon": "/images/products/ideonautix-icon.webp",
-    "color": "#6A38FF",
-    "features": [
-      {
-        "id": "pitch",
-        "name": "Pitch Assistant",
-        "icon": "🎯",
-        "status": "planning"
-      },
-      {
-        "id": "revenue",
-        "name": "Revenue Boards",
-        "icon": "📊",
-        "status": "planning"
-      },
-      {
-        "id": "team",
-        "name": "Team Dynamics",
-        "icon": "👥",
-        "status": "planning"
-      },
-      {
-        "id": "market",
-        "name": "Market Intelligence",
-        "icon": "🎪",
-        "status": "planning"
-      }
-    ],
-    "techStack": [
-      "SvelteKit",
-      "Python FastAPI",
-      "TensorFlow",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "Kubernetes",
-      "OpenAI API"
     ]
   }
 }

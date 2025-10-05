@@ -1,4 +1,5 @@
 <script>
+  // @ts-nocheck
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
@@ -11,6 +12,7 @@
     message: ''
   };
   
+  /** @type {Record<string, string>} */
   let errors = {};
   let isSubmitting = false;
   let showToast = false;
@@ -34,14 +36,14 @@
   function validateForm() {
     const newErrors = {};
     
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = $_('form.error_required');
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = $_('form.error_required');
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Invalid email address';
+      newErrors.email = $_('form.error_email');
     }
-    if (!formData.subject.trim()) newErrors.subject = 'Subject is required';
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (!formData.subject.trim()) newErrors.subject = $_('form.error_required');
+    if (!formData.message.trim()) newErrors.message = $_('form.error_required');
     
     errors = newErrors;
     return Object.keys(newErrors).length === 0;
@@ -51,7 +53,7 @@
     e.preventDefault();
     
     if (!validateForm()) {
-      toastMessage = 'Please fix the errors in the form';
+      toastMessage = $_('form.error_validation');
       toastType = 'error';
       showToast = true;
       return;
@@ -117,10 +119,9 @@
 
 <!-- Hero Section -->
 <section class="contact-hero">
-  <div class="hero-background" use:morphGradient={{ colors: ['#1351FF', '#6A38FF', '#FFD339'], speed: 4000 }}></div>
   <div class="container">
-    <h1 class="hero-title" use:typewriter={{ text: $_('contact.hero_title'), speed: 100, loop: false }}>{$_('contact.hero_title')}</h1>
-    <p class="hero-subtitle">{$_('contact.hero_subtitle')}</p>
+    <span class="eyebrow">{$_('contact.hero_title')}</span>
+    <h1>{$_('contact.hero_subtitle')}</h1>
   </div>
 </section>
 
@@ -135,11 +136,11 @@
         <form on:submit={handleSubmit}>
           <div class="form-group" class:error={errors.name}>
             <label for="name">{$_('contact.form_name')} *</label>
-            <input 
-              type="text" 
-              id="name" 
+            <input
+              type="text"
+              id="name"
               bind:value={formData.name}
-              placeholder="John Doe"
+              placeholder={$_('contact.form_name_placeholder')}
               class:error={errors.name}
             />
             {#if errors.name}
@@ -149,11 +150,11 @@
           
           <div class="form-group" class:error={errors.email}>
             <label for="email">{$_('contact.form_email')} *</label>
-            <input 
-              type="email" 
-              id="email" 
+            <input
+              type="email"
+              id="email"
               bind:value={formData.email}
-              placeholder="john@example.com"
+              placeholder={$_('contact.form_email_placeholder')}
               class:error={errors.email}
             />
             {#if errors.email}
@@ -163,11 +164,11 @@
           
           <div class="form-group" class:error={errors.subject}>
             <label for="subject">{$_('contact.form_subject')} *</label>
-            <input 
-              type="text" 
-              id="subject" 
+            <input
+              type="text"
+              id="subject"
               bind:value={formData.subject}
-              placeholder="Partnership opportunity"
+              placeholder={$_('contact.form_subject_placeholder')}
               class:error={errors.subject}
             />
             {#if errors.subject}
@@ -177,11 +178,11 @@
           
           <div class="form-group" class:error={errors.message}>
             <label for="message">{$_('contact.form_message')} *</label>
-            <textarea 
-              id="message" 
+            <textarea
+              id="message"
               bind:value={formData.message}
               rows="6"
-              placeholder="Your message..."
+              placeholder={$_('contact.form_message_placeholder')}
               class:error={errors.message}
             ></textarea>
             {#if errors.message}
@@ -214,8 +215,8 @@
         <div class="calendar-card glass-card" use:tilt={{ max: 3, scale: 1.01 }}>
           <h3 use:sparkleTrail>{$_('contact.calendar_title')}</h3>
           <p>{$_('contact.calendar_subtitle')}</p>
-          <button 
-            class="btn btn-secondary btn-lg btn-block"
+          <button
+            class="calendar-button btn btn-secondary btn-lg btn-block"
             on:click={openCalendly}
             disabled={!calendlyLoaded}
             use:particleExplode
@@ -275,224 +276,101 @@
 
 <style>
   .contact-hero {
-    position: relative;
-    padding: var(--space-20) 0 var(--space-8);
+    padding: var(--space-16) 0;
     text-align: center;
-    overflow: hidden;
+    background: var(--bg-muted);
   }
-  
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(106, 56, 255, 0.1) 0%, transparent 70%);
-    animation: pulse 4s ease-in-out infinite;
+
+  .contact-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    margin-top: 0.75rem;
   }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-  }
-  
-  .hero-title {
-    font-size: var(--text-hero);
-    background: linear-gradient(135deg, var(--aurora-purple), var(--voyage-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-4);
-  }
-  
-  .hero-subtitle {
-    font-size: var(--text-headline);
-    color: var(--text-secondary);
-  }
-  
+
   .contact-section {
     padding: var(--space-16) 0;
   }
-  
+
   .contact-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: var(--space-8);
+    gap: var(--space-6);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: start;
   }
-  
-  .form-container,
-  .calendar-card,
-  .info-card,
-  .social-card {
-    padding: var(--space-8);
-    border-radius: var(--radius-2xl);
+
+  form {
+    display: grid;
+    gap: var(--space-3);
   }
-  
-  .form-container h2,
-  .calendar-card h3,
-  .info-card h3,
-  .social-card h3 {
-    margin-bottom: var(--space-6);
-  }
-  
+
   .form-group {
-    margin-bottom: var(--space-6);
+    display: grid;
+    gap: 0.5rem;
   }
-  
-  .form-group label {
-    display: block;
-    font-weight: var(--weight-semibold);
-    margin-bottom: var(--space-2);
-  }
-  
+
+  .form-group label { font-weight: var(--weight-semibold); }
+
   .form-group input,
   .form-group textarea {
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
-    background: var(--bg-elevated);
-    border: 2px solid transparent;
+    padding: var(--space-3);
     border-radius: var(--radius-lg);
-    font-size: var(--text-body);
-    color: var(--text-primary);
-    font-family: inherit;
-    transition: all var(--duration-fast) var(--ease-out);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    transition: border-color var(--duration-fast) var(--ease-out);
   }
-  
+
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: var(--aurora-purple);
-    box-shadow: 0 0 0 4px rgba(106, 56, 255, 0.1);
-    transform: translateY(-2px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .form-group input:valid,
-  .form-group textarea:valid {
     border-color: var(--voyage-blue);
-    background: linear-gradient(135deg, rgba(19, 81, 255, 0.05), rgba(106, 56, 255, 0.05));
   }
-  
-  .form-group input:invalid:not(:placeholder-shown),
-  .form-group textarea:invalid:not(:placeholder-shown) {
-    border-color: var(--cherry-red);
-    animation: shake 0.5s ease-in-out;
-  }
-  
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-  
+
   .form-group input.error,
-  .form-group textarea.error {
-    border-color: var(--cherry-red);
-  }
-  
-  .error-message {
-    display: block;
-    color: var(--cherry-red);
-    font-size: var(--text-small);
-    margin-top: var(--space-1);
-  }
-  
-  .btn-block {
-    width: 100%;
-  }
-  
-  .spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin-right: var(--space-2);
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
-  .info-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  }
-  
-  .calendar-card p {
-    color: var(--text-secondary);
-    margin-bottom: var(--space-4);
-  }
-  
-  .info-item {
-    display: flex;
-    gap: var(--space-4);
-    margin-bottom: var(--space-4);
-  }
-  
-  .info-icon {
-    font-size: 2rem;
-  }
-  
-  .info-label {
-    font-size: var(--text-small);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-1);
-  }
-  
-  .info-value {
-    color: var(--text-primary);
-    font-weight: var(--weight-medium);
-  }
-  
-  .social-links {
-    display: flex;
-    flex-direction: column;
+  .form-group textarea.error { border-color: var(--cherry-red); }
+  .error-message { color: var(--cherry-red); font-size: var(--text-small); }
+
+  .btn-block { width: 100%; display: inline-flex; justify-content: center; }
+
+  .calendar-card,
+  .info-card,
+  .social-card {
+    display: grid;
     gap: var(--space-3);
   }
-  
+
+  .info-item,
   .social-link {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    background: var(--bg-elevated);
+    gap: var(--space-2);
+  }
+
+  .info-icon,
+  .social-icon { font-size: 1.2rem; }
+
+  .info-value,
+  .social-link { color: var(--text-secondary); }
+
+  .calendar-button,
+  .social-link {
+    transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .calendar-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.8rem 1.2rem;
     border-radius: var(--radius-lg);
-    color: var(--text-primary);
-    font-weight: var(--weight-medium);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
   }
-  
-  .social-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s;
-  }
-  
-  .social-link:hover::before {
-    left: 100%;
-  }
-  
+
+  .calendar-button:hover,
   .social-link:hover {
-    transform: translateX(8px) scale(1.02);
-    background: linear-gradient(135deg, var(--aurora-purple), var(--voyage-blue));
-    color: white;
-    box-shadow: 0 8px 25px rgba(106, 56, 255, 0.3);
+    color: var(--voyage-blue);
   }
-  
-  .social-icon {
-    font-size: 1.5rem;
-  }
-  
-  @media (max-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 1fr;
-    }
+
+  @media (max-width: 960px) {
+    .contact-grid { grid-template-columns: 1fr; }
   }
 </style>
