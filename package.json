@@ -31,8 +31,16 @@
   "dependencies": {
     "svelte-i18n": "^4.0.0"
   },
+  "resolutions": {
+    "cookie": ">=0.7.0",
+    "esbuild": ">=0.24.3"
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
+  },
+  "overrides": {
+    "cookie": ">=0.7.0",
+    "esbuild": ">=0.24.3"
   }
 }
