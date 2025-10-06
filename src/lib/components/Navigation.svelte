@@ -4,6 +4,7 @@
   import { _ } from 'svelte-i18n';
   import { onDestroy } from 'svelte';
   import { navigation } from '$stores/navigation';
+  import { theme } from '$stores/theme';
   import LanguageSwitcher from './language-switcher.svelte';
   import ThemeToggle from './theme-toggle.svelte';
   import { mainNavigation } from '$config/navigation';
@@ -69,7 +70,12 @@
 >
   <div class="container nav-container">
     <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
-      <img src="/images/brand/logo-main.webp" alt={$_('nav.brand_name')} width="148" height="40" />
+      <img
+        src={$theme === 'dark' ? '/images/brand/logo-white.webp' : '/images/brand/logo-main.webp'}
+        alt={$_('nav.brand_name')}
+        width="148"
+        height="40"
+      />
     </a>
 
     <div class="nav-content">
@@ -180,6 +186,7 @@
     display: block;
     width: clamp(128px, 22vw, 148px);
     height: auto;
+    transition: opacity var(--duration-fast) var(--ease-out);
   }
 
   .nav-content {
@@ -239,6 +246,11 @@
     border-radius: var(--radius-full);
     padding: 0.1rem 0.45rem;
     font-weight: var(--weight-semibold);
+  }
+
+  :global([data-theme='dark']) .nav-badge {
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 65%, rgba(6, 12, 26, 0.78) 35%);
+    color: rgba(228, 236, 255, 0.94);
   }
 
   .nav-actions {
@@ -363,6 +375,9 @@
   }
 
   :global([data-theme='dark']) .nav-cta {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: var(--pure-white);
     box-shadow: 0 24px 52px rgba(2, 6, 18, 0.56);
   }
 

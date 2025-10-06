@@ -21,21 +21,37 @@
 
 <style>
   .theme-toggle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid var(--border-color);
+    width: 42px;
+    height: 42px;
+    background: var(--control-surface);
+    border: 1px solid var(--control-border);
     border-radius: var(--radius-md);
     color: var(--text-primary);
+    box-shadow: 0 16px 34px rgba(var(--voyage-blue-rgb), 0.12);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-out);
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
   }
-  
+
   .theme-toggle:hover {
-    border-color: var(--voyage-blue);
+    background: var(--control-surface-hover);
+    border-color: var(--control-border-strong);
     color: var(--voyage-blue);
+    transform: translateY(-1px);
   }
+
+  .theme-toggle:focus-visible {
+    outline: none;
+    border-color: var(--control-border-strong);
+    box-shadow: 0 0 0 4px var(--control-ring);
+  }
+
+  svg { pointer-events: none; }
 </style>
