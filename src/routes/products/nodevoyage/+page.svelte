@@ -1,7 +1,7 @@
 <script>
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
-  import TypewriterText from '$components/TypewriterText.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
@@ -43,8 +43,8 @@
     <div class="hero-copy">
       <span class="eyebrow">{$_('nodevoyage.status')}</span>
       <h1>{$_('nodevoyage.name')}</h1>
-      <span class="hero-typewriter">
-        <TypewriterText phrases={heroPhrases} holdDuration={2400} />
+      <span class="hero-headline">
+        <AnimatedHeadline variant="slide" phrases={heroPhrases} holdDuration={2600} />
       </span>
       <p class="hero-description">{$_('nodevoyage.hero_description')}</p>
 
@@ -250,15 +250,31 @@
 
   .hero-copy { display: grid; gap: clamp(1.6rem, 3vw, 2.2rem); }
 
-  .hero-typewriter {
+  .hero-headline {
     display: inline-flex;
     margin-bottom: clamp(0.6rem, 2vw, 1rem);
+    padding: clamp(0.55rem, 1.8vw, 0.9rem) clamp(1.25rem, 3vw, 1.85rem);
+    border-radius: clamp(2.2rem, 4.6vw, 3.1rem);
+    background: linear-gradient(126deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
   }
 
-  .hero-typewriter :global(.typewriter-text) {
-    font-size: var(--text-headline);
-    color: var(--text-secondary);
-    font-style: italic;
+  .hero-headline :global(.animated-headline) {
+    width: 100%;
+  }
+
+  :global([data-base-theme='dark']) .hero-headline {
+    background: linear-gradient(126deg, rgba(22, 30, 52, 0.78), rgba(22, 30, 52, 0.54));
+    border: 1px solid rgba(120, 146, 220, 0.38);
+    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.26);
+  }
+
+  :global([data-theme='contrast']) .hero-headline {
+    background: linear-gradient(126deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.72));
+    border: 2px solid rgba(255, 255, 255, 0.85);
   }
 
   .hero-description { color: var(--text-secondary); }

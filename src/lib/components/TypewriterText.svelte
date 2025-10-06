@@ -8,7 +8,6 @@
   export let className = '';
 
   const isBrowser = typeof window !== 'undefined';
-  const prefersReducedMotion = isBrowser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /**
    * @param {unknown} value
@@ -27,11 +26,15 @@
   };
 
   let sanitizedPhrases = sanitize(phrases);
+  let phrasesSignature = sanitizedPhrases.join('||');
   let displayText = sanitizedPhrases[0] ?? '';
   let liveAnnouncement = sanitizedPhrases[0] ?? '';
   /** @type {ReturnType<typeof setTimeout> | undefined} */
   let timeoutId;
   let isTypingCycleActive = false;
+  let prefersReducedMotion = false;
+  /** @type {MediaQueryList | undefined} */
+  let motionQuery;
 
   function clearTimer() {
     if (timeoutId) {
@@ -40,10 +43,6 @@
     }
   }
 
-  /**
-   * @param {() => void} fn
-   * @param {number} delay
-   */
   /**
    * @param {() => void} fn
    * @param {number} delay
@@ -66,9 +65,14 @@
     let phraseIndex = 0;
     let charIndex = 0;
     let currentPhrase = sanitizedPhrases[phraseIndex];
-    let stage = 'typing'; // typing | holding | erasing
+    let stage = 'typing';
 
     const tick = () => {
+      if (!isTypingCycleActive) {
+        clearTimer();
+        return;
+      }
+
       if (stage === 'typing') {
         displayText = currentPhrase.slice(0, charIndex);
         charIndex += 1;
@@ -103,7 +107,6 @@
       }
     };
 
-    // initialise typing
     displayText = '';
     charIndex = 0;
     stage = 'typing';
@@ -115,28 +118,42 @@
     clearTimer();
   }
 
-  onMount(() => {
-    startTypewriter();
-    return stopTypewriter;
-  });
-
-  $: sanitizedPhrases = sanitize(phrases);
-
-  $: {
-    const nextPhrase = sanitizedPhrases[0] ?? '';
-    displayText = nextPhrase;
-    liveAnnouncement = nextPhrase;
+  function resetCycle() {
+    stopTypewriter();
+    displayText = sanitizedPhrases[0] ?? '';
+    liveAnnouncement = sanitizedPhrases[0] ?? '';
     if (!prefersReducedMotion) {
-      stopTypewriter();
       startTypewriter();
     }
   }
 
-  $: if (prefersReducedMotion) {
-    stopTypewriter();
-    const nextPhrase = sanitizedPhrases[0] ?? '';
-    displayText = nextPhrase;
-    liveAnnouncement = nextPhrase;
+  onMount(() => {
+    if (!isBrowser) return;
+
+    motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotion = motionQuery.matches;
+
+    const handleMotionChange = /** @type {(event: MediaQueryListEvent) => void} */ ((event) => {
+      prefersReducedMotion = event.matches;
+      resetCycle();
+    });
+
+    motionQuery.addEventListener?.('change', handleMotionChange);
+    resetCycle();
+
+    return () => {
+      stopTypewriter();
+      motionQuery?.removeEventListener?.('change', handleMotionChange);
+    };
+  });
+
+  $: {
+    sanitizedPhrases = sanitize(phrases);
+    const nextSignature = sanitizedPhrases.join('||');
+    if (phrasesSignature !== nextSignature) {
+      phrasesSignature = nextSignature;
+      resetCycle();
+    }
   }
 
   onDestroy(stopTypewriter);
@@ -155,7 +172,11 @@
     align-items: center;
     gap: 0.4ch;
     font-weight: var(--weight-semibold);
-    color: var(--text-primary);
+    font-size: var(--typewriter-font-size, clamp(1.8rem, 5.5vw, 2.8rem));
+    background: var(--typewriter-gradient, var(--gradient-heading));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .typewriter-text__visible {
@@ -166,20 +187,29 @@
   .typewriter-text__cursor {
     width: 0.6ch;
     height: 1.1em;
-    background: currentColor;
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.85) 70%, rgba(255, 255, 255, 0.92) 30%);
     border-radius: 2px;
     display: inline-block;
-    opacity: 0.65;
+    opacity: 0.7;
     animation: cursorBlink 1s steps(2, start) infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .typewriter-text__cursor { animation: none; opacity: 0.35; }
+    .typewriter-text__cursor {
+      animation: none;
+      opacity: 0.45;
+    }
   }
 
   @keyframes cursorBlink {
-    0%, 49% { opacity: 0.65; }
-    50%, 100% { opacity: 0; }
+    0%,
+    49% {
+      opacity: 0.7;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
   }
 
   .sr-only {
@@ -192,5 +222,9 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  :global([data-theme='contrast']) .typewriter-text {
+    --typewriter-gradient: linear-gradient(120deg, #ffffff 0%, #ffe082 50%, #ff9100 100%);
   }
 </style>
