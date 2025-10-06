@@ -3,6 +3,7 @@
   import { browser } from '$app/environment';
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
+  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import { onDestroy, onMount } from 'svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -260,20 +261,27 @@
 {/if}
 
 <!-- Hero Section -->
-<section
-  class="contact-hero"
-  use:staggerReveal={{ delay: 80, stagger: 140 }}
-  bind:this={heroSectionEl}
+<HeroWrapper
+  class="hero hero--contact"
+  bind:element={heroSectionEl}
+  showAside={false}
+  introReveal={{ delay: 80, stagger: 140 }}
 >
-  <div class="contact-hero__backdrop" aria-hidden="true">
-    <span class="contact-orb contact-orb--primary"></span>
-    <span class="contact-orb contact-orb--secondary"></span>
-    <span class="contact-node contact-node--one"></span>
-    <span class="contact-node contact-node--two"></span>
-    <span class="contact-node contact-node--three"></span>
-  </div>
-  <div class="container">
+  <svelte:fragment slot="backdrop">
+    <div class="contact-hero__backdrop" aria-hidden="true">
+      <span class="contact-orb contact-orb--primary"></span>
+      <span class="contact-orb contact-orb--secondary"></span>
+      <span class="contact-node contact-node--one"></span>
+      <span class="contact-node contact-node--two"></span>
+      <span class="contact-node contact-node--three"></span>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="status">
     <span class="eyebrow">{$_('contact.hero_title')}</span>
+  </svelte:fragment>
+
+  <svelte:fragment slot="title">
     <h1 class="contact-hero__headline" aria-live="polite" aria-atomic="true">
       <span class="sr-only">{heroPhrases[heroPhraseIndex] ?? $_('contact.hero_subtitle')}</span>
       {#each heroPhrases as phrase, index}
@@ -286,8 +294,8 @@
         </span>
       {/each}
     </h1>
-  </div>
-</section>
+  </svelte:fragment>
+</HeroWrapper>
 
 <!-- Contact Content -->
 <section class="contact-section">
@@ -450,10 +458,19 @@
 </section>
 
 <style>
-  .contact-hero {
-    padding: clamp(6rem, 14vw, 8rem) 0;
+  :global(.hero--contact) {
+    --hero-padding-block-start: clamp(6rem, 14vw, 8rem);
+    --hero-padding-block-end: clamp(3.5rem, 10vw, 5.5rem);
+    --hero-shell-columns: minmax(0, 1fr);
+    --hero-shell-gap: clamp(2rem, 4vw, 2.6rem);
+    --hero-intro-gap: clamp(1.4rem, 3vw, 2.1rem);
+    --hero-backdrop-inset: clamp(-5rem, -8vw, -2rem) -12% auto;
+    --hero-backdrop-height: clamp(18rem, 32vw, 24rem);
+    --hero-backdrop-gradient: radial-gradient(circle at 50% 40%, rgba(19, 81, 255, 0.24), transparent 72%);
+    --hero-backdrop-opacity: 0.34;
+    --hero-backdrop-opacity-light: 0.4;
+    --hero-backdrop-opacity-dark: 0.25;
     text-align: center;
-    position: relative;
     overflow: hidden;
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
@@ -520,6 +537,7 @@
     inset: -20% -10%;
     pointer-events: none;
     filter: blur(0);
+    z-index: -1;
   }
 
   .contact-orb {
@@ -585,7 +603,7 @@
     }
   }
 
-  .contact-hero h1 {
+  :global(.hero--contact h1) {
     font-size: clamp(2.2rem, 5vw, 3rem);
     margin-top: 0.75rem;
   }
@@ -735,8 +753,9 @@ form {
   }
 
   @media (max-width: 640px) {
-    .contact-hero {
-      padding: clamp(5rem, 18vw, 6.5rem) 0 clamp(3.5rem, 14vw, 5rem);
+    :global(.hero--contact) {
+      --hero-padding-block-start: clamp(5rem, 18vw, 6.5rem);
+      --hero-padding-block-end: clamp(3.5rem, 14vw, 5rem);
       border-radius: 0 0 var(--radius-xl) var(--radius-xl);
     }
 
@@ -744,7 +763,7 @@ form {
       inset: -32% -24%;
     }
 
-    .contact-hero h1 {
+    :global(.hero--contact) h1 {
       font-size: clamp(2rem, 8vw, 2.6rem);
     }
 

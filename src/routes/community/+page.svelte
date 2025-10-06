@@ -3,6 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { onDestroy, onMount } from 'svelte';
   import { Icon } from '$lib/components';
+  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -188,19 +189,26 @@
 {/if}
 
 <!-- Hero -->
-<section
-  class="community-hero"
-  use:staggerReveal={{ delay: 60, stagger: 120 }}
-  bind:this={heroSectionEl}
+<HeroWrapper
+  class="hero hero--community"
+  bind:element={heroSectionEl}
+  showAside={false}
+  introReveal={{ delay: 60, stagger: 120 }}
 >
-  <div class="community-hero__mesh" aria-hidden="true">
-    <span class="mesh-ring mesh-ring--one"></span>
-    <span class="mesh-ring mesh-ring--two"></span>
-    <span class="mesh-orb mesh-orb--one"></span>
-    <span class="mesh-orb mesh-orb--two"></span>
-  </div>
-  <div class="container">
+  <svelte:fragment slot="backdrop">
+    <div class="community-hero__mesh" aria-hidden="true">
+      <span class="mesh-ring mesh-ring--one"></span>
+      <span class="mesh-ring mesh-ring--two"></span>
+      <span class="mesh-orb mesh-orb--one"></span>
+      <span class="mesh-orb mesh-orb--two"></span>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="status">
     <span class="eyebrow">{$_('community.hero_title')}</span>
+  </svelte:fragment>
+
+  <svelte:fragment slot="title">
     <h1 class="community-hero__headline" aria-live="polite" aria-atomic="true">
       <span class="sr-only">{heroPhrases[heroPhraseIndex] ?? $_('community.hero_subtitle')}</span>
       {#each heroPhrases as phrase, index}
@@ -213,8 +221,8 @@
         </span>
       {/each}
     </h1>
-  </div>
-</section>
+  </svelte:fragment>
+</HeroWrapper>
 
 <!-- Voting Section -->
 <section class="voting-section">
@@ -307,10 +315,19 @@
 </section>
 
 <style>
-  .community-hero {
-    padding: clamp(6rem, 14vw, 8rem) 0 clamp(3.5rem, 8vw, 5rem);
+  :global(.hero--community) {
+    --hero-padding-block-start: clamp(6rem, 14vw, 8rem);
+    --hero-padding-block-end: clamp(3.5rem, 10vw, 5.2rem);
+    --hero-shell-columns: minmax(0, 1fr);
+    --hero-shell-gap: clamp(2rem, 4vw, 2.6rem);
+    --hero-intro-gap: clamp(1.2rem, 3vw, 1.8rem);
+    --hero-backdrop-inset: -40% -15% auto;
+    --hero-backdrop-height: clamp(18rem, 32vw, 24rem);
+    --hero-backdrop-gradient: radial-gradient(circle at center, rgba(19, 81, 255, 0.22), transparent 70%);
+    --hero-backdrop-opacity: 0.35;
+    --hero-backdrop-opacity-light: 0.42;
+    --hero-backdrop-opacity-dark: 0.28;
     text-align: center;
-    position: relative;
     overflow: hidden;
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
@@ -379,6 +396,7 @@
     height: clamp(22rem, 36vw, 28rem);
     pointer-events: none;
     overflow: hidden;
+    z-index: -1;
   }
 
   .mesh-ring {
@@ -457,7 +475,7 @@
     }
   }
 
-  .community-hero h1 {
+  :global(.hero--community h1) {
     font-size: clamp(2rem, 5vw, 3rem);
     margin-top: 0.75rem;
   }
@@ -635,7 +653,10 @@
   }
 
   @media (max-width: 768px) {
-    .community-hero { padding: var(--space-12) 0 var(--space-6); }
+    :global(.hero--community) {
+      --hero-padding-block-start: var(--space-12);
+      --hero-padding-block-end: var(--space-6);
+    }
     .features-grid { grid-template-columns: 1fr; }
   }
 

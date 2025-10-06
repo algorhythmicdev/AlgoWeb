@@ -182,40 +182,49 @@
   <meta name="description" content={$_('products.meta_description')} />
 </svelte:head>
 
-<section class="hero section" use:revealOnScroll>
-  <div class="products-hero__backdrop" aria-hidden="true">
-    <span class="products-stripe products-stripe--one"></span>
-    <span class="products-stripe products-stripe--two"></span>
-    <span class="products-orb products-orb--one"></span>
-  </div>
-  <div class="container hero-container">
-    <div class="hero-intro">
-      <span class="eyebrow text-gradient">{heroLabel}</span>
-      <h1 class="products-hero__headline" aria-label={heroTitle}>
-        <span class="sr-only">{heroTitle}</span>
-        <span class="products-hero__headline-visual" aria-hidden="true">
-          {#each heroTitleChars as char, index (index)}
-            <span class="products-hero__char" style={`--char-index:${index}`}>
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          {/each}
-        </span>
-      </h1>
-      <p class="products-hero__subtitle" aria-live="polite">
-        {#each heroSubtitleWords as word, index (index)}
-          <span class="products-hero__word" style={`--word-index:${index}`}>{word}</span>{index < heroSubtitleWords.length - 1
-            ? '\u00A0'
-            : ''}
-        {/each}
-      </p>
-      <p class="products-hero__description">{$_('story.mission_text')}</p>
-      <div class="hero-actions">
-        <a href="#demos" class="btn btn-gradient">{$_('products.demos.title')}</a>
-        <a href="/contact" class="btn btn-secondary hover-lift">{$_('products.cta_contact')}</a>
-      </div>
+<HeroWrapper
+  class="hero hero--products section"
+  showAside={false}
+  introReveal={{ stagger: 120 }}
+>
+  <svelte:fragment slot="backdrop">
+    <div class="products-hero__backdrop" aria-hidden="true">
+      <span class="products-stripe products-stripe--one"></span>
+      <span class="products-stripe products-stripe--two"></span>
+      <span class="products-orb products-orb--one"></span>
     </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="status">
+    <span class="eyebrow text-gradient">{heroLabel}</span>
+  </svelte:fragment>
+
+  <svelte:fragment slot="title">
+    <h1 class="products-hero__headline" aria-label={heroTitle}>
+      <span class="sr-only">{heroTitle}</span>
+      <span class="products-hero__headline-visual" aria-hidden="true">
+        {#each heroTitleChars as char, index (index)}
+          <span class="products-hero__char" style={`--char-index:${index}`}>
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        {/each}
+      </span>
+    </h1>
+  </svelte:fragment>
+
+  <p class="products-hero__subtitle" aria-live="polite">
+    {#each heroSubtitleWords as word, index (index)}
+      <span class="products-hero__word" style={`--word-index:${index}`}>{word}</span>{index < heroSubtitleWords.length - 1
+        ? '\u00A0'
+        : ''}
+    {/each}
+  </p>
+  <p class="products-hero__description">{$_('story.mission_text')}</p>
+  <div class="hero-actions">
+    <a href="#demos" class="btn btn-gradient">{$_('products.demos.title')}</a>
+    <a href="/contact" class="btn btn-secondary hover-lift">{$_('products.cta_contact')}</a>
   </div>
-</section>
+</HeroWrapper>
 
 <section class="demo-previews section-sm" id="demos" use:revealOnScroll>
   <div class="container">
@@ -295,19 +304,39 @@
 </section>
 
 <style>
-  .hero {
-    position: relative;
+  :global(.hero--products) {
+    --hero-padding-block-start: clamp(5rem, 10vw, 8rem);
+    --hero-padding-block-end: clamp(4rem, 9vw, 6.5rem);
+    --hero-shell-columns: minmax(0, 1fr);
+    --hero-shell-gap: clamp(2.2rem, 5vw, 3rem);
+    --hero-intro-gap: clamp(1.4rem, 3vw, 2.2rem);
+    --hero-actions-gap: 1rem;
+    --hero-backdrop-inset: -20% -30% auto;
+    --hero-backdrop-height: clamp(18rem, 32vw, 26rem);
+    --hero-backdrop-gradient: linear-gradient(120deg, rgba(19, 81, 255, 0.18), rgba(106, 56, 255, 0.08));
+    --hero-backdrop-opacity: 0.35;
+    --hero-backdrop-opacity-light: 0.42;
+    --hero-backdrop-opacity-dark: 0.28;
     overflow: hidden;
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
-    padding-top: clamp(5rem, 10vw, 8rem);
-    padding-bottom: clamp(4rem, 9vw, 6.5rem);
   }
+
+  :global(.hero--products .hero-wrapper__intro) {
+    max-width: min(100%, 960px);
+    margin: 0 auto;
+    justify-items: flex-start;
+    text-align: left;
+    position: relative;
+  }
+
+  :global(.hero--products .hero-wrapper__intro .eyebrow) { justify-self: flex-start; }
 
   .products-hero__backdrop {
     position: absolute;
     inset: -20% -30% auto;
     height: clamp(18rem, 32vw, 26rem);
     pointer-events: none;
+    z-index: -1;
   }
 
   .products-stripe {
@@ -377,24 +406,6 @@
     }
   }
 
-  .hero-container {
-    max-width: 960px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .hero-intro {
-    display: grid;
-    gap: clamp(1rem, 2.6vw, 1.8rem);
-    text-align: left;
-    position: relative;
-  }
-
-  .hero-intro .eyebrow {
-    justify-self: flex-start;
-  }
-
   .products-hero__headline {
     margin: 0;
     font-size: var(--text-hero);
@@ -432,12 +443,6 @@
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.2vw, 1.45rem);
     max-width: 64ch;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
   }
 
   .demo-previews {
@@ -615,22 +620,20 @@
   }
 
   @media (max-width: 768px) {
-    .hero-container {
-      justify-content: center;
+    :global(.hero--products) {
+      --hero-shell-gap: clamp(2rem, 6vw, 2.6rem);
+    }
+
+    :global(.hero--products .hero-wrapper__intro) {
+      justify-items: center;
       text-align: center;
     }
 
-    .hero-intro {
-      text-align: center;
-      align-items: center;
+    :global(.hero--products .hero-wrapper__intro .eyebrow) {
+      justify-self: center;
     }
 
-    .hero-intro .eyebrow,
-    .hero-actions {
-      justify-content: center;
-    }
-
-    .hero-actions {
+    :global(.hero--products .hero-wrapper__intro .hero-actions) {
       width: 100%;
       justify-content: center;
     }
@@ -645,7 +648,7 @@
   }
 
   @media (max-width: 640px) {
-    .hero-actions {
+    :global(.hero--products .hero-wrapper__intro .hero-actions) {
       flex-direction: column;
     }
   }
