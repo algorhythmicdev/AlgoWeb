@@ -118,6 +118,37 @@ h6 {
   transition: color 280ms var(--ease-in-out), text-shadow 280ms var(--ease-in-out);
 }
 
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    background-image: var(--gradient-heading);
+    background-size: 220% auto;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: headingGradientShift 12s var(--ease-in-out) infinite alternate;
+  }
+}
+
+@keyframes headingGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 h1 {
   font-size: var(--h1);
   line-height: 1.1;
@@ -708,10 +739,9 @@ ol[class] { list-style: none; }
 .story-card,
 .product-row,
 .timeline-content {
-  background-image: var(--grain-texture);
-  background-blend-mode: soft-light;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .surface::before,
@@ -719,17 +749,66 @@ ol[class] { list-style: none; }
 .glass-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 52%, rgba(255, 255, 255, 0.06) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
+.surface::after,
+.surface-muted::after,
+.glass-card::after,
+.feature-card::after,
+.catalog-card::after,
+.cta-card::after,
+.idea-card::after,
+.calendar-card::after,
+.info-card::after,
+.social-card::after,
+.form-container::after,
+.form-wrapper::after,
+.benefit-card::after,
+.story-card::after,
+.product-row::after,
+.timeline-content::after,
+.footer-grid > *::after,
+.footer-bottom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain-texture);
+  mix-blend-mode: var(--grain-blend-mode);
+  opacity: var(--grain-opacity);
+  z-index: 0;
+}
+
+.surface > *,
+.surface-muted > *,
+.glass-card > *,
+.feature-card > *,
+.catalog-card > *,
+.cta-card > *,
+.idea-card > *,
+.calendar-card > *,
+.info-card > *,
+.social-card > *,
+.form-container > *,
+.form-wrapper > *,
+.benefit-card > *,
+.story-card > *,
+.product-row > *,
+.timeline-content > *,
+.footer-grid > * > *,
+.footer-bottom > * {
+  position: relative;
+  z-index: 2;
+}
+
 .surface {
-  background: var(--surface-glass);
+  background:
+    linear-gradient(140deg, rgba(var(--voyage-blue-rgb), 0.12) 0%, rgba(var(--aurora-purple-rgb), 0.08) 48%, rgba(255, 255, 255, 0.06) 100%),
+    var(--surface-glass);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
@@ -745,7 +824,9 @@ ol[class] { list-style: none; }
 }
 
 .surface-muted {
-  background: color-mix(in srgb, var(--pure-white) 68%, transparent);
+  background:
+    linear-gradient(150deg, rgba(var(--voyage-blue-rgb), 0.08) 0%, rgba(var(--aurora-purple-rgb), 0.06) 40%, rgba(255, 255, 255, 0.04) 100%),
+    color-mix(in srgb, var(--pure-white) 68%, transparent);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
   backdrop-filter: blur(18px);
@@ -753,7 +834,9 @@ ol[class] { list-style: none; }
 }
 
 .glass-card {
-  background: color-mix(in srgb, var(--surface-glass) 88%, transparent);
+  background:
+    linear-gradient(155deg, rgba(var(--voyage-blue-rgb), 0.16) 0%, rgba(var(--aurora-purple-rgb), 0.14) 44%, rgba(var(--cherry-red-rgb), 0.12) 88%),
+    color-mix(in srgb, var(--surface-glass) 88%, transparent);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-md);
@@ -859,7 +942,9 @@ ol[class] { list-style: none; }
 }
 
 :global([data-theme='dark']) .surface {
-  background: var(--surface-glass);
+  background:
+    linear-gradient(150deg, rgba(var(--voyage-blue-rgb), 0.24) 0%, rgba(var(--aurora-purple-rgb), 0.2) 52%, rgba(4, 9, 20, 0.72) 100%),
+    var(--surface-glass);
   border-color: var(--border-glass);
   box-shadow: var(--shadow-sm);
 }
@@ -870,7 +955,9 @@ ol[class] { list-style: none; }
 }
 
 :global([data-theme='dark']) .glass-card {
-  background: var(--surface-glass);
+  background:
+    linear-gradient(160deg, rgba(var(--voyage-blue-rgb), 0.3) 0%, rgba(var(--aurora-purple-rgb), 0.26) 48%, rgba(var(--cherry-red-rgb), 0.24) 86%),
+    var(--surface-glass);
   border-color: var(--border-glass);
   box-shadow: var(--shadow-md);
 }
@@ -1028,6 +1115,14 @@ ol[class] { list-style: none; }
   .animated-gradient { animation: none; }
   .float { animation: none; }
   .pulse-glow { animation: none; }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    animation: none !important;
+  }
   html::before,
   html::after,
   body::before {

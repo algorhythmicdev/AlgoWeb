@@ -25,7 +25,11 @@
   },
   "hero": {
     "status": "Izstrāde • Veidojam MI nākotni",
-    "title": "Kur loģika dejo ar radošumu",
+    "title": {
+      "lead": "Kur loģika dejo ar",
+      "brand": "AlgoRhythmics",
+      "trail": "radošumu"
+    },
     "tagline": "AlgoRhythmics — MI inovāciju laboratorija",
     "subtitle": "NodeVoyage piloti un Ideonautix rituāli uztur dibinātājus fokusā, nezaudējot cilvēku klātbūtni.",
     "description": "Balstāmies signāltehnikas pētniecībā un mākoņu inženierijā, apvienojot taustāmu disciplīnu ar skaidrojamu programmatūru, lai komandas saglabātu kontroli.",
@@ -73,7 +77,8 @@
       ],
       "cta": "Iepazīsti kopienu"
     },
-    "milestone_cta": "Skatīt ceļa karti"
+    "milestone_cta": "Skatīt ceļa karti",
+    "brand_aria": "AlgoRhythmics zīmola akcents hero virsrakstā"
   },
   "story": {
     "title": "Mūsu stāsts",
@@ -124,6 +129,7 @@
   "products": {
     "meta_title": "AlgoRhythmics produkti",
     "meta_description": "Iepazīsti NodeVoyage — mūsu MI ceļojumu draugu — un Ideonautix, dibinātāju produktivitātes komplektu.",
+    "hero_label": "Produktu studija",
     "title": "Mūsu produkti",
     "subtitle": "MI darbinātas platformas, kas maina ceļošanu un darbu",
     "cta_title": "Gatavs pārveidot savu darbu?",
@@ -145,6 +151,20 @@
       "status": "Plānošanas fāze",
       "mvp": "MVP: 2026. gada februāris",
       "cta": "Uzzināt vairāk"
+    },
+    "demos": {
+      "title": "Izmēģini mūsu tiešsaistes demonstrācijas",
+      "description": "Atver Ideonautix un NodeVoyage priekšskatījumus vietnē algorhythmics.dev.",
+      "nodevoyage": "Palaist NodeVoyage demo",
+      "ideonautix": "Atvērt Ideonautix vidi",
+      "nodevoyage_host": "nodevoyage.algorhythmics.dev",
+      "ideonautix_host": "ideonautix.algorhythmics.dev",
+      "nodevoyage_description": "Veido iespaidīgus maršrutus ar MI maršrutēšanu, bezsaistes kartēm un kopīgu plānošanu.",
+      "ideonautix_description": "Prototipē jaunuzņēmumu dizaina plūsmas un piču stāstus stiklotā, taustāmā darbvietā."
+    },
+    "showcase": {
+      "title": "Tiešsaistes demonstrācijas vietnē algorhythmics.dev",
+      "subtitle": "Ielūkojies Ideonautix un NodeVoyage pirms to publiskās pieejamības."
     }
   },
   "timeline": {
@@ -278,6 +298,11 @@
     "meta_title": "AlgoRhythmics kopiena",
     "hero_title": "Kopiena",
     "hero_subtitle": "Balso par funkcijām, dalies idejās un veido nākotni kopā ar mums",
+    "hero_rotating": [
+      "Balso par funkcijām ar reāliem rezultātiem",
+      "Piedāvā savas produktu idejas dažu sekunžu laikā",
+      "Veido NodeVoyage un Ideonautix kopā ar mums"
+    ],
     "voting_title": "Balso par funkcijām",
     "voting_subtitle": "Palīdzi mums prioritizēt svarīgāko",
     "voting_list_aria": "Funkciju balsošanas saraksts",
@@ -338,6 +363,11 @@
     "meta_title": "AlgoRhythmics konsultāciju pilots",
     "hero_title": "MI konsultācijas",
     "hero_subtitle": "Bezmaksas pilotprogramma 3 atlasītiem uzņēmumiem",
+    "hero_rotating": [
+      "Bezmaksas pilotprogramma 3 atlasītiem uzņēmumiem",
+      "MI stratēģijas sprinti regulētām komandām",
+      "No prototipa līdz produkcijai kopā ar dibinātājiem"
+    ],
     "spots_remaining": "brīvas vietas",
     "what_title": "Ko piedāvājam",
     "what_1": "MI stratēģija un ieviešana",
@@ -387,6 +417,11 @@
     "meta_title": "Sazinies ar AlgoRhythmics",
     "hero_title": "Sazināsimies",
     "hero_subtitle": "Radīsim ko izcilu kopā",
+    "hero_rotating": [
+      "Radīsim ko izcilu kopā",
+      "Ieplāno sarunu ar dibinātājiem",
+      "Pārvērt savu produktu vīziju par kustību"
+    ],
     "form_title": "Raksti mums ziņu",
     "form_name": "Tavs vārds",
     "form_name_placeholder": "Alex Founder",
@@ -477,5 +512,90 @@
       "github": "GitHub",
       "email": "E-pasts"
     }
+  },
+  "ai_companion": {
+    "name": "Lumen",
+    "role": "Jūsu AlgoRhythmics gids",
+    "dialogLabel": "AlgoRhythmics AI pavadonis",
+    "greeting": "Sveicināti! Esmu Lumen — jūsu AlgoRhythmics pavadonis. Jautājiet par mūsu laboratoriju, produktiem vai sadarbības iespējām Baltijā un pasaulē.",
+    "languageSwitch": "Pārslēdzos uz latviešu valodu. Pastāstiet, kā varu palīdzēt jūsu nākamajam projektam.",
+    "placeholder": "Jautājiet mums par laboratoriju, produktu vai sadarbību...",
+    "actions": {
+      "open": "Atvērt AI pavadoni",
+      "hide": "Paslēpt AI pavadoni",
+      "closePanel": "Aizvērt pavadoni",
+      "send": "Sūtīt",
+      "suggestionLabel": "Ieteikumi",
+      "formLabel": "Nosūtīt ziņu"
+    },
+    "latency": 560,
+    "suggestions": [
+      {
+        "title": "Izpētīt AI laboratoriju",
+        "prompt": "Ar ko AlgoRhythmics atšķiras no citām AI aģentūrām?"
+      },
+      {
+        "title": "NodeVoyage platforma",
+        "prompt": "Pastāsti par NodeVoyage ceļojumu platformu."
+      },
+      {
+        "title": "Ideonautix komplekts",
+        "prompt": "Kā Ideonautix palīdz komandām Latvijā un Eiropā?"
+      },
+      {
+        "title": "Uzlabot manu AI stratēģiju",
+        "prompt": "Kā AlgoRhythmics var palīdzēt uzlabot mūsu AI iniciatīvu?"
+      }
+    ],
+    "knowledgeBase": [
+      {
+        "keywords": [
+          "atšķir",
+          "unik",
+          "laboratorija",
+          "aģentūra",
+          "algorhythmics"
+        ],
+        "answer": "AlgoRhythmics apvieno inženieriju ar kustību iedvesmotu radošumu. Strādājam kā inovāciju laboratorija, palīdzot partneriem ieviest eksperimentēšanas kultūru Baltijas tirgū."
+      },
+      {
+        "keywords": [
+          "nodevoyage",
+          "ceļojums",
+          "platforma",
+          "maršruts",
+          "turisms"
+        ],
+        "answer": "NodeVoyage ir gudrs ceļojumu palīgs, kas analizē kopienu pieredzi un stāsta stāstus par Latvijas un Eiropas galamērķiem, pielāgojot maršrutus jūsu ritmam."
+      },
+      {
+        "keywords": [
+          "ideonautix",
+          "produktivitāte",
+          "komanda",
+          "sadarbība"
+        ],
+        "answer": "Ideonautix piedāvā AI līdzbraucējus komandām, kas veic attālinātu darbu. Tas palīdz strukturēt sapulces, lēmumus un zīmolu izstrādi latviešu un starptautiskos projektos."
+      },
+      {
+        "keywords": [
+          "sadarbība",
+          "kontakts",
+          "konsultācija",
+          "projekts"
+        ],
+        "answer": "Droši rakstiet hello@algorhythmics.com vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību."
+      },
+      {
+        "keywords": [
+          "uzlabot",
+          "pilnveidot",
+          "stratēģija",
+          "idejas"
+        ],
+        "answer": "Iesakām kopīgu darbnīcu: kartējam jūsu biznesa mērķus, izvērtējam datu kvalitāti un izveidojam izmēģinājuma risinājumu, ko var testēt ar vietējo auditoriju."
+      }
+    ],
+    "fallback": "Vēl mācos, bet varu jūs savienot ar komandu vai dalīties ar informāciju par mūsu produktiem un pakalpojumiem."
   }
 }

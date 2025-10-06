@@ -79,8 +79,12 @@
 
 /* ==================== GRADIENT TEXT ==================== */
 .text-gradient {
-  background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
+  background: var(--gradient-heading);
+  background-size: 220% auto;
+  background-position: 0% 50%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
+  animation: headingGradientShift 12s var(--ease-in-out) infinite alternate;
 }

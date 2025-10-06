@@ -2,6 +2,7 @@
   import { _, json } from 'svelte-i18n';
   import timelineData from '$data/timeline.json';
   import { revealOnScroll, staggerReveal, magnetic } from '$utils/animations';
+  import en from '$lib/i18n/en.json';
 
   const upcomingMilestone = timelineData.milestones?.[0];
   const milestoneDate = upcomingMilestone
@@ -14,14 +15,39 @@
     { label: 'hero.signals.research', value: 'hero.signals.research_value' }
   ];
 
+  const fallbackTitle = /** @type {{ lead: string; brand: string; trail: string }} */ (en.hero.title);
+  const fallbackPillars = Array.isArray(en.hero.pillars) ? en.hero.pillars : [];
+  const fallbackFocusPoints = Array.isArray(en.hero.focus?.points) ? en.hero.focus.points : [];
+
+  let heroTitle = fallbackTitle;
+
+  /**
+   * @template T
+   * @param {unknown} value
+   * @param {ReadonlyArray<T>} fallback
+   * @returns {ReadonlyArray<T>}
+   */
+  const ensureArray = (value, fallback) => (Array.isArray(value) ? value : fallback);
+
+  /**
+   * @param {unknown} value
+   * @returns {value is { lead: string; brand: string; trail: string }}
+   */
+  const isHeroTitle = (value) =>
+    !!value && typeof value === 'object' && 'lead' in value && 'brand' in value && 'trail' in value;
+
+  $: heroTitle = (() => {
+    const value = $json?.('hero.title');
+    return isHeroTitle(value) ? value : fallbackTitle;
+  })();
+
   $: heroHighlights = (() => {
-    const value = $json?.('hero.pillars');
-    return Array.isArray(value) ? value.slice(0, 3) : [];
+    const value = ensureArray($json?.('hero.pillars'), fallbackPillars);
+    return value.slice(0, 3);
   })();
 
   $: focusPoints = (() => {
-    const value = $json?.('hero.focus.points');
-    return Array.isArray(value) ? value : [];
+    return ensureArray($json?.('hero.focus.points'), fallbackFocusPoints);
   })();
 </script>
 
@@ -29,8 +55,16 @@
   <div class="container hero-shell">
     <div class="hero-intro" use:staggerReveal={{ stagger: 110 }}>
       <span class="status-chip">{$_('hero.status')}</span>
-      <h1>{$_('hero.title')}</h1>
-      <p class="hero-lead">{$_('hero.tagline')}</p>
+      <h1 class="hero-title">
+        <span class="hero-title__line text-gradient">{heroTitle.lead}</span>
+        <span class="hero-title__brand" aria-label={$_('hero.brand_aria')}>
+          <span class="hero-title__brand-glow" aria-hidden="true"></span>
+          <span class="hero-title__brand-text" aria-hidden="true">{heroTitle.brand}</span>
+          <span class="sr-only">{heroTitle.brand}</span>
+        </span>
+        <span class="hero-title__line hero-title__line--trail text-gradient">{heroTitle.trail}</span>
+      </h1>
+      <p class="hero-lead text-gradient">{$_('hero.tagline')}</p>
       <p class="hero-description">{$_('hero.subtitle')}</p>
 
       <div class="hero-actions">
@@ -102,22 +136,21 @@
     content: '';
     position: absolute;
     inset: clamp(-7rem, -12vw, -3rem) 0 auto;
-    height: clamp(14rem, 38vw, 26rem);
-    background: radial-gradient(64% 72% at 50% 18%, var(--hero-glow-color) 0%, transparent 68%);
-    opacity: 0.7;
-    filter: blur(120px);
+    height: clamp(14rem, 38vw, 28rem);
+    background: var(--gradient-hero);
+    opacity: 0.62;
+    filter: blur(140px);
     pointer-events: none;
     z-index: -1;
-    transition: background 400ms var(--ease-in-out), opacity 400ms var(--ease-in-out);
+    transition: opacity 400ms var(--ease-in-out);
   }
 
   :global([data-theme='light']) .hero::before {
-    --hero-glow-color: color-mix(in srgb, var(--voyage-blue) 34%, rgba(255, 255, 255, 0.18));
+    opacity: 0.72;
   }
 
   :global([data-theme='dark']) .hero::before {
-    --hero-glow-color: color-mix(in srgb, var(--aurora-purple) 42%, rgba(2, 6, 16, 0.92));
-    opacity: 0.55;
+    opacity: 0.48;
   }
 
   .hero-shell {
@@ -131,6 +164,127 @@
     display: grid;
     gap: clamp(1.4rem, 3vw, 2.2rem);
     align-content: start;
+  }
+
+  .hero-title {
+    display: inline-grid;
+    gap: clamp(0.35rem, 1.4vw, 0.55rem);
+    align-items: start;
+    justify-items: start;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .hero-title {
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      color: var(--heading-color);
+      animation: none;
+    }
+  }
+
+  .hero-title__line {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(0.35rem, 1vw, 0.55rem);
+  }
+
+  .hero-title__brand {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.15em, 0.5vw, 0.25em) clamp(0.45em, 1vw, 0.7em);
+    border-radius: var(--radius-full);
+    isolation: isolate;
+  }
+
+  .hero-title__brand::before {
+    content: '';
+    position: absolute;
+    inset: -18%;
+    border-radius: inherit;
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(var(--cherry-red-rgb), 0.28) 40%);
+    filter: blur(32px);
+    opacity: 0.45;
+    z-index: 0;
+    animation: heroBrandAura 14s var(--ease-in-out) infinite alternate;
+  }
+
+  .hero-title__brand::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.65) 60%, rgba(var(--voyage-blue-rgb), 0.24) 40%);
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.18) 55%, rgba(var(--voyage-blue-rgb), 0.18) 45%);
+    opacity: 0.35;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    z-index: 0;
+  }
+
+  .hero-title__brand-text {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: var(--weight-black);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    background: var(--gradient-heading-strong);
+    background-size: 280% auto;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    animation: heroBrandPulse 8s var(--ease-spring) infinite alternate;
+  }
+
+  @keyframes heroBrandPulse {
+    0% {
+      background-position: 0% 50%;
+      transform: scale(0.96);
+    }
+
+    50% {
+      background-position: 100% 50%;
+      transform: scale(1.02);
+    }
+
+    100% {
+      background-position: 0% 50%;
+      transform: scale(0.97);
+    }
+  }
+
+  @keyframes heroBrandAura {
+    0% {
+      opacity: 0.32;
+      transform: scale(0.96);
+    }
+
+    50% {
+      opacity: 0.58;
+      transform: scale(1.04);
+    }
+
+    100% {
+      opacity: 0.36;
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title__brand-text {
+      animation: none;
+      transform: none;
+    }
+
+    .hero-title__brand::before {
+      animation: none;
+    }
   }
 
   .status-chip {

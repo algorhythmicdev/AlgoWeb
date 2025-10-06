@@ -1,11 +1,130 @@
 <script>
   // @ts-nocheck
   import { browser } from '$app/environment';
-  import { _ } from 'svelte-i18n';
+  import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
-  import { onMount } from 'svelte';
-  import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient, typewriter } from '$utils/animations';
+  import { onDestroy, onMount } from 'svelte';
+  import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient } from '$utils/animations';
   import Toast from '$components/toast.svelte';
+  import en from '$lib/i18n/en.json';
+
+  const fallbackHeroPhrases = Array.isArray(en.contact?.hero_rotating)
+    ? en.contact.hero_rotating
+    : [en.contact.hero_subtitle];
+
+  /**
+   * @param {unknown} value
+   * @returns {ReadonlyArray<string>}
+   */
+  const ensureStringArray = (value) =>
+    Array.isArray(value) && value.every((item) => typeof item === 'string' && item.length)
+      ? /** @type {string[]} */ (value)
+      : fallbackHeroPhrases;
+
+  let heroPhrases = fallbackHeroPhrases;
+  let heroPhraseIndex = 0;
+  /** @type {ReturnType<typeof setInterval> | null} */
+  let heroPhraseTimer = null;
+  /** @type {HTMLElement | null} */
+  let heroSectionEl = null;
+  let hasMounted = false;
+  let isHeroVisible = false;
+  let prefersReducedMotion = false;
+  /** @type {IntersectionObserver | null} */
+  let heroObserver = null;
+  /** @type {MediaQueryList | null} */
+  let motionQuery = null;
+
+  function handleMotionChange(event) {
+    prefersReducedMotion = event.matches;
+    syncHeroRotation();
+  }
+
+  function startHeroRotation() {
+    if (!hasMounted || heroPhraseTimer || heroPhrases.length <= 1 || prefersReducedMotion || !isHeroVisible) {
+      return;
+    }
+
+    heroPhraseTimer = setInterval(() => {
+      heroPhraseIndex = (heroPhraseIndex + 1) % heroPhrases.length;
+    }, 4200);
+  }
+
+  function stopHeroRotation() {
+    if (heroPhraseTimer) {
+      clearInterval(heroPhraseTimer);
+      heroPhraseTimer = null;
+    }
+  }
+
+  function syncHeroRotation() {
+    if (!hasMounted) return;
+    if (heroPhrases.length <= 1 || prefersReducedMotion || !isHeroVisible) {
+      stopHeroRotation();
+    } else {
+      startHeroRotation();
+    }
+  }
+
+  $: heroPhrases = ensureStringArray($json?.('contact.hero_rotating'));
+  $: if (heroPhraseIndex >= heroPhrases.length) {
+    heroPhraseIndex = 0;
+  }
+  $: syncHeroRotation();
+
+  onMount(() => {
+    hasMounted = true;
+
+    if (typeof window !== 'undefined') {
+      if ('IntersectionObserver' in window) {
+        heroObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.target === heroSectionEl) {
+                isHeroVisible = entry.isIntersecting;
+                syncHeroRotation();
+              }
+            }
+          },
+          { threshold: 0.35 }
+        );
+
+        if (heroSectionEl) {
+          heroObserver.observe(heroSectionEl);
+        }
+      } else {
+        isHeroVisible = true;
+      }
+
+      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      prefersReducedMotion = motionQuery.matches;
+
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', handleMotionChange);
+      } else if (motionQuery.addListener) {
+        motionQuery.addListener(handleMotionChange);
+      }
+
+      syncHeroRotation();
+    }
+  });
+
+  onDestroy(() => {
+    stopHeroRotation();
+
+    if (heroObserver && heroSectionEl) {
+      heroObserver.unobserve(heroSectionEl);
+      heroObserver.disconnect();
+    }
+
+    if (motionQuery) {
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener('change', handleMotionChange);
+      } else if (motionQuery.removeListener) {
+        motionQuery.removeListener(handleMotionChange);
+      }
+    }
+  });
   
   let formData = {
     name: '',
@@ -141,7 +260,11 @@
 {/if}
 
 <!-- Hero Section -->
-<section class="contact-hero">
+<section
+  class="contact-hero"
+  use:staggerReveal={{ delay: 80, stagger: 140 }}
+  bind:this={heroSectionEl}
+>
   <div class="contact-hero__backdrop" aria-hidden="true">
     <span class="contact-orb contact-orb--primary"></span>
     <span class="contact-orb contact-orb--secondary"></span>
@@ -151,7 +274,18 @@
   </div>
   <div class="container">
     <span class="eyebrow">{$_('contact.hero_title')}</span>
-    <h1>{$_('contact.hero_subtitle')}</h1>
+    <h1 class="contact-hero__headline" aria-live="polite" aria-atomic="true">
+      <span class="sr-only">{heroPhrases[heroPhraseIndex] ?? $_('contact.hero_subtitle')}</span>
+      {#each heroPhrases as phrase, index}
+        <span
+          class="contact-hero__phrase"
+          class:contact-hero__phrase--active={index === heroPhraseIndex}
+          aria-hidden={index !== heroPhraseIndex}
+        >
+          {phrase}
+        </span>
+      {/each}
+    </h1>
   </div>
 </section>
 
@@ -333,6 +467,52 @@
     filter: blur(140px);
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .contact-hero__headline {
+    position: relative;
+    display: grid;
+    place-items: center;
+    margin: clamp(1.1rem, 2.8vw, 1.8rem) auto 0;
+    min-height: clamp(3.4rem, 6vw, 4.6rem);
+    max-width: min(100%, 48ch);
+  }
+
+  .contact-hero__phrase {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    filter: blur(12px);
+    transition: opacity 380ms var(--ease-out), transform 380ms var(--ease-out), filter 380ms var(--ease-out);
+    padding-inline: clamp(0.3rem, 1vw, 0.65rem);
+    border-radius: var(--radius-full);
+  }
+
+  .contact-hero__phrase--active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+    animation: contactPhraseIn 820ms var(--ease-spring);
+    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--signal-yellow-rgb), 0.12));
+    box-shadow: 0 16px 42px rgba(19, 81, 255, 0.18);
+  }
+
+  @keyframes contactPhraseIn {
+    0% {
+      opacity: 0;
+      transform: translateY(32px) scale(0.94);
+      filter: blur(16px);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.01);
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
   }
 
   .contact-hero__backdrop {

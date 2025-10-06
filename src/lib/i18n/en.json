@@ -25,7 +25,11 @@
   },
   "hero": {
     "status": "In development • Latvian-founded AI studio",
-    "title": "Calm, credible AI for travel and startup teams",
+    "title": {
+      "lead": "Calm, credible AI from",
+      "brand": "AlgoRhythmics",
+      "trail": "for travel and startup teams"
+    },
     "tagline": "AlgoRhythmics — Riga-to-Rotterdam innovation lab",
     "subtitle": "NodeVoyage pilots and Ideonautix rituals keep founders focused while staying human-centred.",
     "description": "Rooted in signage R&D and cloud engineering, we blend tactile hardware discipline with explainable software so human teams stay in control.",
@@ -73,7 +77,8 @@
       ],
       "cta": "Meet the community"
     },
-    "milestone_cta": "View the roadmap"
+    "milestone_cta": "View the roadmap",
+    "brand_aria": "AlgoRhythmics brand highlight in the hero heading"
   },
   "story": {
     "title": "Our Story",
@@ -123,6 +128,7 @@
   "products": {
     "meta_title": "AlgoRhythmics Products",
     "meta_description": "Explore NodeVoyage, our AI travel companion, and Ideonautix, the productivity OS for founders.",
+    "hero_label": "Product studio",
     "title": "Our Products",
     "subtitle": "Two calm AI builds shipping soon",
     "cta_title": "Ready to transform your workflow?",
@@ -144,6 +150,20 @@
       "status": "Planning Phase",
       "mvp": "MVP: February 2026",
       "cta": "Learn More"
+    },
+    "demos": {
+      "title": "Experience our live demos",
+      "description": "Jump into the Ideonautix and NodeVoyage previews hosted on algorhythmics.dev.",
+      "nodevoyage": "Launch NodeVoyage demo",
+      "ideonautix": "Open Ideonautix studio",
+      "nodevoyage_host": "nodevoyage.algorhythmics.dev",
+      "ideonautix_host": "ideonautix.algorhythmics.dev",
+      "nodevoyage_description": "Trace immersive itineraries with AI-assisted routing, offline maps, and collaborative planning.",
+      "ideonautix_description": "Prototype venture design flows and pitch narratives inside a glassy, tactile workspace."
+    },
+    "showcase": {
+      "title": "Live demos across algorhythmics.dev",
+      "subtitle": "Peek into Ideonautix and NodeVoyage before their general availability."
     }
   },
   "timeline": {
@@ -277,6 +297,11 @@
     "meta_title": "AlgoRhythmics Community",
     "hero_title": "Community",
     "hero_subtitle": "Vote on features, share ideas, and shape the future together",
+    "hero_rotating": [
+      "Vote on features with live results",
+      "Drop your product ideas in seconds",
+      "Shape NodeVoyage & Ideonautix together"
+    ],
     "voting_title": "Vote on Features",
     "voting_subtitle": "Help us prioritize what matters most to you",
     "voting_list_aria": "Feature voting list",
@@ -337,6 +362,11 @@
     "meta_title": "AlgoRhythmics Consulting Pilot",
     "hero_title": "AI Consulting",
     "hero_subtitle": "Free pilot program for 3 selected companies",
+    "hero_rotating": [
+      "Free pilot program for 3 selected companies",
+      "AI strategy sprints for regulated teams",
+      "From prototype to production with our founders"
+    ],
     "spots_remaining": "spots remaining",
     "what_title": "What We Offer",
     "what_1": "AI Strategy & Implementation",
@@ -386,6 +416,11 @@
     "meta_title": "Contact AlgoRhythmics",
     "hero_title": "Get in Touch",
     "hero_subtitle": "Let's build something amazing together",
+    "hero_rotating": [
+      "Let's build something amazing together",
+      "Schedule a founder-to-founder conversation",
+      "Turn your product vision into momentum"
+    ],
     "form_title": "Send Us a Message",
     "form_name": "Your Name",
     "form_name_placeholder": "Alex Founder",
@@ -476,5 +511,94 @@
       "github": "GitHub",
       "email": "Email"
     }
+  },
+  "ai_companion": {
+    "name": "Lumen",
+    "role": "Your AlgoRhythmics guide",
+    "dialogLabel": "AlgoRhythmics AI companion",
+    "greeting": "Hey there! I am Lumen, your AlgoRhythmics companion. Ask about our lab, products, or how we can partner on AI adventures.",
+    "languageSwitch": "We're back in English. Let me know how I can support your next idea.",
+    "placeholder": "Ask us about the lab, a product, or how we partner with teams...",
+    "actions": {
+      "open": "Open AI companion",
+      "hide": "Hide AI companion",
+      "closePanel": "Close companion",
+      "send": "Send",
+      "suggestionLabel": "Suggestions",
+      "formLabel": "Send a message"
+    },
+    "latency": 520,
+    "suggestions": [
+      {
+        "title": "Explore our AI lab",
+        "prompt": "What makes AlgoRhythmics different from other AI agencies?"
+      },
+      {
+        "title": "NodeVoyage platform",
+        "prompt": "Tell me about the NodeVoyage travel platform."
+      },
+      {
+        "title": "Ideonautix suite",
+        "prompt": "How can the Ideonautix productivity suite help teams?"
+      },
+      {
+        "title": "Improve my AI strategy",
+        "prompt": "How could we improve our AI initiative with AlgoRhythmics?"
+      }
+    ],
+    "knowledgeBase": [
+      {
+        "keywords": [
+          "different",
+          "unique",
+          "lab",
+          "agency",
+          "algorhythmics",
+          "culture"
+        ],
+        "answer": "AlgoRhythmics blends rigorous engineering with motion-inspired creativity. We operate as an innovation lab, shipping flagship products while mentoring partners so they inherit the same R&D mindset."
+      },
+      {
+        "keywords": [
+          "nodevoyage",
+          "travel",
+          "platform",
+          "journey",
+          "trip"
+        ],
+        "answer": "NodeVoyage is our intelligent travel experience platform. It uses graph-powered itineraries, dynamic storytelling, and adaptive agents to craft journeys that feel both personal and delightfully unexpected."
+      },
+      {
+        "keywords": [
+          "ideonautix",
+          "productivity",
+          "suite",
+          "team",
+          "collaboration"
+        ],
+        "answer": "Ideonautix is a constellation of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking."
+      },
+      {
+        "keywords": [
+          "contact",
+          "consulting",
+          "engage",
+          "work with",
+          "partnership"
+        ],
+        "answer": "You can reach our consulting team through the contact page or by emailing hello@algorhythmics.com. We love scoping proofs of concept and long-term partnerships alike."
+      },
+      {
+        "keywords": [
+          "improve",
+          "improvement",
+          "optimize",
+          "growth",
+          "strategy"
+        ],
+        "answer": "A good first step is a discovery sprint: we map your goals, audit existing data flows, and prototype a focused AI assist. From there we co-design experimentation loops so your team keeps improving after launch."
+      }
+    ],
+    "fallback": "I'm still learning, but I can connect you with the team or share highlights about our products, lab culture, and services."
   }
 }
