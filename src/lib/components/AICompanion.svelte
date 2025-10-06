@@ -267,7 +267,7 @@
   </button>
 
   {#if isOpen}
-    <section class="panel" role="dialog" aria-label={profile.dialogLabel}>
+    <div class="panel" role="dialog" aria-label={profile.dialogLabel}>
       <header class="panel__header">
         <div class="panel__identity">
           <div class="panel__avatar"></div>
@@ -313,12 +313,12 @@
           placeholder={profile.placeholder}
           rows="2"
           on:keydown={handleKeydown}
-        />
+        ></textarea>
         <button type="submit" class="send" disabled={loading || !input.trim()}>
           {profile.actions.send}
         </button>
       </form>
-    </section>
+    </div>
   {/if}
 </div>
 

@@ -3,7 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import TypewriterText from '$components/TypewriterText.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
@@ -170,11 +170,17 @@
 
   <svelte:fragment slot="title">
     <h1 class="consulting-hero__headline">
-      <span class="consulting-hero__typewriter">
-        <TypewriterText phrases={heroRotating} holdDuration={2400} />
-      </span>
+      <AnimatedHeadline variant="glow" text={heroRotating[0] ?? ''} />
     </h1>
   </svelte:fragment>
+
+  {#if heroRotating.length > 1}
+    <ul class="consulting-hero__phrases">
+      {#each heroRotating.slice(1) as phrase, index}
+        <li class="consulting-hero__phrase" aria-label={`Focus area ${index + 1}`}>{phrase}</li>
+      {/each}
+    </ul>
+  {/if}
 
   <div class="spots-indicator">
     <div class="spots-number">{spotsRemaining}</div>
@@ -402,19 +408,46 @@
 .consulting-hero__headline {
   display: flex;
   justify-content: center;
-  margin: clamp(1.1rem, 2.8vw, 1.7rem) 0 clamp(1.6rem, 3.2vw, 2.2rem);
+  margin: clamp(1.1rem, 2.8vw, 1.7rem) 0 clamp(1.3rem, 3vw, 1.9rem);
   text-align: center;
 }
 
-.consulting-hero__typewriter {
-  display: inline-flex;
-  justify-content: center;
+.consulting-hero__headline :global(.animated-headline) {
+  max-width: min(48ch, 90vw);
 }
 
-.consulting-hero__typewriter :global(.typewriter-text) {
-  font-size: clamp(2.2rem, 5.4vw, 3.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.consulting-hero__phrases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1.6vw, 1rem);
+  justify-content: center;
+  margin: 0 0 clamp(1.2rem, 2.8vw, 1.8rem);
+  padding: 0;
+  list-style: none;
+}
+
+.consulting-hero__phrase {
+  padding: 0.45rem 1.05rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 60%, rgba(255, 255, 255, 0.24) 40%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+:global([data-base-theme='dark']) .consulting-hero__phrase {
+  background: linear-gradient(132deg, rgba(32, 44, 78, 0.78), rgba(25, 32, 58, 0.62));
+  box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38);
+  color: rgba(236, 242, 255, 0.94);
+}
+
+:global([data-theme='contrast']) .consulting-hero__phrase {
+  background: rgba(0, 0, 0, 0.92);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  color: #ffffff;
 }
 
 .consulting-hero__halo {

@@ -3,7 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import TypewriterText from '$components/TypewriterText.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -106,8 +106,8 @@
 
   <svelte:fragment slot="title">
     <h1 class="community-hero__headline">
-      <span class="community-hero__typewriter">
-        <TypewriterText phrases={heroPhrases} holdDuration={2200} />
+      <span class="community-hero__headline-text">
+        <AnimatedHeadline variant="slide" phrases={heroPhrases} holdDuration={2600} />
       </span>
     </h1>
   </svelte:fragment>
@@ -232,25 +232,24 @@
     pointer-events: none;
   }
 
-  .community-hero__headline {
+  .community-hero__headline-text {
     position: relative;
     display: flex;
     justify-content: center;
     margin: clamp(1.2rem, 2.8vw, 1.8rem) auto 0;
-    max-width: min(100%, 48ch);
+    padding: clamp(0.6rem, 2vw, 0.95rem) clamp(1.25rem, 3vw, 1.85rem);
+    border-radius: clamp(2.4rem, 5vw, 3.6rem);
+    max-width: min(100%, 50ch);
     text-align: center;
+    background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
-  .community-hero__typewriter {
-    display: inline-flex;
-    justify-content: center;
-  }
-
-  .community-hero__typewriter :global(.typewriter-text) {
-    font-size: clamp(2.2rem, 6vw, 3.2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
+  .community-hero__headline-text :global(.animated-headline) {
+    width: 100%;
   }
 
   .community-hero__mesh {

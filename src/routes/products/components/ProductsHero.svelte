@@ -1,6 +1,6 @@
 <script>
   import { revealOnScroll, staggerReveal } from '$utils/animations';
-  import TypewriterText from '$components/TypewriterText.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
 
   export let label = '';
   export let title = '';
@@ -33,8 +33,8 @@
 
       <div class="hero-text">
         <h1>{title}</h1>
-        <span class="hero-typewriter">
-          <TypewriterText phrases={heroPhrases} holdDuration={2400} />
+        <span class="hero-headline">
+          <AnimatedHeadline variant={products.length > 1 ? 'slide' : 'typewriter'} phrases={heroPhrases} holdDuration={2600} />
         </span>
       </div>
 
@@ -142,13 +142,30 @@
     line-height: 1.05;
   }
 
-  .hero-typewriter {
+  .hero-headline {
     display: inline-flex;
+    padding: clamp(0.55rem, 1.6vw, 0.9rem) clamp(1.15rem, 2.6vw, 1.6rem);
+    border-radius: clamp(2.2rem, 4.6vw, 3.1rem);
+    background: linear-gradient(126deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
   }
 
-  .hero-typewriter :global(.typewriter-text) {
-    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-    color: var(--text-secondary);
+  .hero-headline :global(.animated-headline) {
+    width: 100%;
+  }
+
+  :global([data-base-theme='dark']) .hero-headline {
+    background: linear-gradient(126deg, rgba(20, 28, 48, 0.78), rgba(20, 28, 48, 0.54));
+    border: 1px solid rgba(120, 146, 220, 0.38);
+    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.26);
+  }
+
+  :global([data-theme='contrast']) .hero-headline {
+    background: linear-gradient(126deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+    border: 2px solid rgba(255, 255, 255, 0.85);
   }
 
   .hero-mission {

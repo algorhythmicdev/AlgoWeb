@@ -4,7 +4,7 @@
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import TypewriterText from '$components/TypewriterText.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient } from '$utils/animations';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
@@ -180,8 +180,8 @@
 
   <svelte:fragment slot="title">
     <h1 class="contact-hero__headline">
-      <span class="contact-hero__typewriter">
-        <TypewriterText phrases={heroPhrases} holdDuration={2400} />
+      <span class="contact-hero__headline">
+        <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
       </span>
     </h1>
   </svelte:fragment>
@@ -380,19 +380,29 @@
     display: flex;
     justify-content: center;
     margin: clamp(1.2rem, 3vw, 1.9rem) auto 0;
-    max-width: min(100%, 48ch);
+    max-width: min(100%, 50ch);
     text-align: center;
+    padding: clamp(0.6rem, 2vw, 1rem) clamp(1.3rem, 3vw, 1.9rem);
+    border-radius: clamp(2.4rem, 5vw, 3.6rem);
+    background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
-  .contact-hero__typewriter {
-    display: inline-flex;
-    justify-content: center;
+  .contact-hero__headline :global(.animated-headline) {
+    width: 100%;
   }
 
-  .contact-hero__typewriter :global(.typewriter-text) {
-    font-size: clamp(2.1rem, 5.6vw, 3.1rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+  :global([data-base-theme='dark']) .contact-hero__headline {
+    background: linear-gradient(128deg, rgba(18, 24, 44, 0.78), rgba(18, 24, 44, 0.56));
+    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
+  }
+
+  :global([data-theme='contrast']) .contact-hero__headline {
+    background: linear-gradient(128deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
   }
 
   .contact-hero__backdrop {

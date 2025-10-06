@@ -3,7 +3,7 @@
   import timelineData from '$data/timeline.json';
   import { magnetic } from '$utils/animations';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import TypewriterText from '$components/TypewriterText.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import en from '$lib/i18n/en.json';
 
   const upcomingMilestone = timelineData.milestones?.[0];
@@ -88,8 +88,13 @@
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
-    <div class="hero-typewriter">
-      <TypewriterText phrases={heroLeadPhrases} holdDuration={2600} />
+    <div class="hero-headline">
+      <AnimatedHeadline
+        variant="typewriter"
+        phrases={heroLeadPhrases}
+        holdDuration={2600}
+        typingSpeed={42}
+      />
     </div>
   </svelte:fragment>
 
@@ -306,21 +311,53 @@
     text-transform: uppercase;
   }
 
-  .hero-typewriter {
+  .hero-headline {
     display: inline-flex;
+    align-items: center;
+    min-height: clamp(3.2rem, 6vw, 4.1rem);
+    padding: clamp(0.65rem, 2vw, 0.95rem) clamp(1.1rem, 2.8vw, 1.6rem);
+    border-radius: clamp(2.6rem, 5vw, 3.6rem);
+    background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55), 0 22px 45px rgba(13, 23, 46, 0.18);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    position: relative;
+    overflow: hidden;
   }
 
-  .hero-typewriter :global(.typewriter-text) {
-    font-size: clamp(1.15rem, 2.6vw, 1.65rem);
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-    justify-content: flex-start;
-    color: var(--text-primary);
+  .hero-headline::before {
+    content: '';
+    position: absolute;
+    inset: -140% -60% auto;
+    height: 260%;
+    background: radial-gradient(circle at 18% 28%, rgba(var(--voyage-blue-rgb), 0.2), transparent 62%),
+      radial-gradient(circle at 82% 24%, rgba(var(--signal-yellow-rgb), 0.16), transparent 66%);
+    opacity: 0.85;
+    pointer-events: none;
   }
 
-  :global([data-base-theme='dark']) .hero-typewriter :global(.typewriter-text) {
-    color: rgba(236, 242, 255, 0.96);
+  .hero-headline::after {
+    content: '';
+    position: absolute;
+    inset: 12% 14%;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  .hero-headline :global(.animated-headline) {
+    width: 100%;
+  }
+
+  :global([data-base-theme='dark']) .hero-headline {
+    background: linear-gradient(128deg, rgba(19, 26, 45, 0.78), rgba(19, 26, 45, 0.56));
+    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 22px 45px rgba(4, 12, 26, 0.42);
+  }
+
+  :global([data-theme='contrast']) .hero-headline {
+    background: linear-gradient(128deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.68));
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.72);
   }
 
   .hero-description {
