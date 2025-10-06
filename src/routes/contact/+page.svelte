@@ -1,6 +1,7 @@
 <script>
   // @ts-nocheck
   import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';

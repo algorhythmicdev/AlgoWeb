@@ -10,10 +10,25 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { theme } from '$stores/theme';
+  import { get } from 'svelte/store';
   
   export let data;
 
   $: routeKey = $page.url.pathname;
+
+  const localePromise = waitLocale();
+  let loadingMessage = 'Loading...';
+
+  localePromise
+    .then(() => {
+      const translate = get(_);
+      if (typeof translate === 'function') {
+        loadingMessage = translate('app.loading');
+      }
+    })
+    .catch(() => {
+      loadingMessage = 'Loading...';
+    });
 
   onMount(() => {
     // Initialize theme on mount
@@ -48,10 +63,10 @@
 
 <LoadingOverlay />
 
-{#await waitLocale()}
+{#await localePromise}
   <div class="loading">
     <div class="spinner"></div>
-    <p>Loading…</p>
+    <p>{loadingMessage}</p>
   </div>
 {:then}
   <ThemedBackground />
