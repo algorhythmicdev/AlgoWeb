@@ -1,28 +1,20 @@
 <script>
   import { _, json } from 'svelte-i18n';
-  import timelineData from '$data/timeline.json';
-  import { magnetic } from '$utils/animations';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import en from '$lib/i18n/en.json';
-
-  const upcomingMilestone = timelineData.milestones?.[0];
-  const milestoneDate = upcomingMilestone
-    ? new Date(`${upcomingMilestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })
-    : '';
-
-  const heroSignals = [
-    { label: 'hero.signals.studio_phase', value: 'hero.signals.studio_phase_value' },
-    { label: 'hero.signals.focus_tracks', value: 'hero.signals.focus_tracks_value' },
-    { label: 'hero.signals.research', value: 'hero.signals.research_value' }
-  ];
 
   const fallbackTitle = /** @type {{ lead: string; brand: string; trail: string }} */ (en.hero.title);
   const fallbackPillars = Array.isArray(en.hero.pillars) ? en.hero.pillars : [];
-  const fallbackLeadPhrases = [en.hero.tagline, ...fallbackPillars].filter(Boolean);
-  const fallbackFocusPoints = Array.isArray(en.hero.focus?.points) ? en.hero.focus.points : [];
+  const fallbackHighlight = (() => {
+    const second = fallbackPillars[1];
+    const first = fallbackPillars[0];
+    if (typeof second === 'string' && second.trim()) return second.trim();
+    if (typeof first === 'string' && first.trim()) return first.trim();
+    return '';
+  })();
 
   let heroTitle = fallbackTitle;
+  let heroHighlight = fallbackHighlight;
 
   /**
    * @template T
@@ -39,42 +31,28 @@
   const isHeroTitle = (value) =>
     !!value && typeof value === 'object' && 'lead' in value && 'brand' in value && 'trail' in value;
 
+  /**
+   * @param {unknown} value
+   * @returns {string}
+   */
+  const normaliseHighlight = (value) => {
+    return typeof value === 'string' && value.trim() ? value.trim() : '';
+  };
+
   $: heroTitle = (() => {
     const value = $json?.('hero.title');
     return isHeroTitle(value) ? value : fallbackTitle;
   })();
 
-  $: heroHighlights = (() => {
-    const value = ensureArray($json?.('hero.pillars'), fallbackPillars);
-    return value.slice(0, 3);
-  })();
-
-  $: heroLeadPhrases = (() => {
-    const tagline = $json?.('hero.tagline');
-    const phrases = ensureArray($json?.('hero.pillars'), fallbackPillars);
-    const list = [];
-    if (typeof tagline === 'string' && tagline.trim()) {
-      list.push(tagline);
-    }
-    list.push(...phrases);
-    return list.length ? list : fallbackLeadPhrases;
-  })();
-
-  $: focusPoints = (() => {
-    return ensureArray($json?.('hero.focus.points'), fallbackFocusPoints);
+  $: heroHighlight = (() => {
+    const pillars = ensureArray($json?.('hero.pillars'), fallbackPillars);
+    const preferred = normaliseHighlight(pillars[1]);
+    const fallbackCandidate = preferred || normaliseHighlight(pillars[0]);
+    return fallbackCandidate || fallbackHighlight;
   })();
 </script>
 
-<HeroWrapper
-  id="hero"
-  class="hero hero--landing"
-  introReveal={{ stagger: 110 }}
-  asideReveal={{ delay: 140, stagger: 130 }}
->
-  <svelte:fragment slot="status">
-    <span class="status-chip">{$_('hero.status')}</span>
-  </svelte:fragment>
-
+<HeroWrapper id="hero" class="hero hero--landing" showAside={false}>
   <svelte:fragment slot="title">
     <h1 class="hero-title">
       <span class="hero-title__line text-gradient">{heroTitle.lead}</span>
@@ -88,91 +66,18 @@
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
-    <div class="hero-headline">
-      <AnimatedHeadline
-        variant="typewriter"
-        phrases={heroLeadPhrases}
-        holdDuration={2600}
-        typingSpeed={42}
-      />
-    </div>
-  </svelte:fragment>
-
-  <svelte:fragment slot="description">
-    <p class="hero-description">{$_('hero.subtitle')}</p>
-  </svelte:fragment>
-
-  <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      <a href="/products" class="btn btn-gradient" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
-      <a href="/consulting" class="btn btn-secondary" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
-    </div>
-  </svelte:fragment>
-
-  <svelte:fragment slot="highlights">
-    {#if heroHighlights.length}
-      <ul class="hero-highlights">
-        {#each heroHighlights as highlight}
-          <li>{highlight}</li>
-        {/each}
-      </ul>
+    {#if heroHighlight}
+      <p class="hero-highlight">{heroHighlight}</p>
     {/if}
-  </svelte:fragment>
-
-  <svelte:fragment slot="metrics">
-    <dl class="hero-metrics">
-      {#each heroSignals as signal}
-        <div class="metric">
-          <dt>{$_(signal.label)}</dt>
-          <dd>{$_(signal.value)}</dd>
-        </div>
-      {/each}
-    </dl>
-  </svelte:fragment>
-
-  <svelte:fragment slot="aside">
-    {#if upcomingMilestone}
-      <article class="glass-card milestone">
-        <header>
-          <span class="kicker">{$_('hero.next_milestone')}</span>
-          <span class="timestamp">{milestoneDate}</span>
-        </header>
-        <h2>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h2>
-        <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
-        {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
-          <p class="note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
-        {/if}
-        <a href="#journey" class="inline-link">{$_('hero.milestone_cta')}</a>
-      </article>
-    {/if}
-
-    <article class="glass-card focus">
-      <header>
-        <span class="kicker">{$_('hero.focus.kicker')}</span>
-        <h2>{$_('hero.focus.title')}</h2>
-      </header>
-      <p>{$_('hero.focus.description')}</p>
-      {#if focusPoints.length}
-        <ul>
-          {#each focusPoints as point}
-            <li>{point}</li>
-          {/each}
-        </ul>
-      {/if}
-      <a href="/community" class="inline-link">{$_('hero.focus.cta')}</a>
-    </article>
   </svelte:fragment>
 </HeroWrapper>
 
 <style>
   :global(.hero--landing) {
-    --hero-actions-gap: 0.85rem;
-    --hero-metrics-gap: clamp(1rem, 2.6vw, 1.6rem);
-    --hero-aside-gap: clamp(1.6rem, 3.4vw, 2.4rem);
-  }
-
-  :global(.hero--landing .hero-metrics) {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    --hero-shell-columns: minmax(0, 1fr);
+    --hero-shell-gap: 0;
+    --hero-intro-gap: clamp(1.15rem, 2.6vw, 1.85rem);
+    --hero-padding-block-end: clamp(3rem, 10vw, 5rem);
   }
 
   .hero-title {
@@ -196,6 +101,13 @@
     display: inline-flex;
     align-items: center;
     gap: clamp(0.35rem, 1vw, 0.55rem);
+  }
+
+  .hero-highlight {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+    color: var(--text-secondary);
+    max-width: 32ch;
   }
 
   .hero-title__brand {
@@ -293,263 +205,6 @@
 
     .hero-title__brand::before {
       animation: none;
-    }
-  }
-
-  .status-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.55rem 1.35rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--surface-glass) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent 28%);
-    color: var(--text-primary);
-    font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .hero-headline {
-    display: inline-flex;
-    align-items: center;
-    min-height: clamp(3.2rem, 6vw, 4.1rem);
-    padding: clamp(0.65rem, 2vw, 0.95rem) clamp(1.1rem, 2.8vw, 1.6rem);
-    border-radius: clamp(2.6rem, 5vw, 3.6rem);
-    background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55), 0 22px 45px rgba(13, 23, 46, 0.18);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-headline::before {
-    content: '';
-    position: absolute;
-    inset: -140% -60% auto;
-    height: 260%;
-    background: radial-gradient(circle at 18% 28%, rgba(var(--voyage-blue-rgb), 0.2), transparent 62%),
-      radial-gradient(circle at 82% 24%, rgba(var(--signal-yellow-rgb), 0.16), transparent 66%);
-    opacity: 0.85;
-    pointer-events: none;
-  }
-
-  .hero-headline::after {
-    content: '';
-    position: absolute;
-    inset: 12% 14%;
-    border-radius: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.32);
-    opacity: 0.75;
-    pointer-events: none;
-  }
-
-  .hero-headline :global(.animated-headline) {
-    width: 100%;
-  }
-
-  :global([data-base-theme='dark']) .hero-headline {
-    background: linear-gradient(128deg, rgba(19, 26, 45, 0.78), rgba(19, 26, 45, 0.56));
-    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 22px 45px rgba(4, 12, 26, 0.42);
-  }
-
-  :global([data-theme='contrast']) .hero-headline {
-    background: linear-gradient(128deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.68));
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.72);
-  }
-
-  .hero-description {
-    font-size: clamp(1.05rem, 2.2vw, 1.5rem);
-    color: var(--text-secondary);
-    max-width: 60ch;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-  }
-
-  .btn {
-    min-width: clamp(10rem, 18vw, 12rem);
-  }
-
-  .hero-highlights {
-    display: grid;
-    gap: 0.75rem;
-    padding: clamp(1.2rem, 2.4vw, 1.8rem);
-    border-radius: clamp(1.4rem, 3.4vw, 2.2rem);
-    background: color-mix(in srgb, var(--surface-glass) 90%, rgba(var(--voyage-blue-rgb), 0.1) 10%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent 28%);
-    box-shadow: var(--shadow-xs);
-    list-style: none;
-  }
-
-  .hero-highlights li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-  }
-
-  .hero-highlights li::before {
-    content: '';
-    width: 0.65rem;
-    height: 0.65rem;
-    border-radius: 50%;
-    background: var(--voyage-blue);
-    box-shadow: 0 0 12px rgba(var(--voyage-blue-rgb), 0.4);
-  }
-
-  :global([data-base-theme='dark']) .hero-highlights {
-    background: color-mix(in srgb, rgba(6, 12, 24, 0.86) 68%, rgba(var(--voyage-blue-rgb), 0.16) 32%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.08) 40%);
-  }
-
-  :global([data-base-theme='dark']) .hero-highlights li::before {
-    background: color-mix(in srgb, var(--voyage-blue) 60%, var(--aurora-purple) 40%);
-    box-shadow: 0 0 14px rgba(var(--aurora-purple-rgb), 0.45);
-  }
-
-  .hero-metrics {
-    display: grid;
-    gap: clamp(1rem, 2.6vw, 1.6rem);
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  }
-
-  .metric {
-    display: grid;
-    gap: 0.35rem;
-    padding: 1.1rem 1.2rem;
-    border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--voyage-blue-rgb), 0.08) 14%);
-    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 62%, rgba(255, 255, 255, 0.4) 38%);
-    box-shadow: var(--shadow-xs);
-  }
-
-  .metric dt {
-    font-size: clamp(0.7rem, 1vw, 0.82rem);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: color-mix(in srgb, var(--voyage-blue) 66%, var(--aurora-purple) 34%);
-  }
-
-  .metric dd {
-    margin: 0;
-    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
-    font-weight: var(--weight-semibold);
-    color: var(--text-primary);
-  }
-
-  :global([data-base-theme='dark']) .metric {
-    background: color-mix(in srgb, rgba(6, 12, 24, 0.88) 68%, rgba(var(--voyage-blue-rgb), 0.2) 32%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
-  }
-
-  .glass-card {
-    display: grid;
-    gap: 1rem;
-    padding: clamp(1.6rem, 3.2vw, 2.3rem);
-    border-radius: clamp(1.8rem, 4vw, 2.6rem);
-    background: color-mix(in srgb, var(--surface-glass) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent 28%);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .glass-card header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .glass-card h2 {
-    margin: 0;
-    font-size: clamp(1.45rem, 2.6vw, 1.9rem);
-    line-height: var(--leading-snug);
-  }
-
-  .glass-card p {
-    margin: 0;
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  .glass-card ul {
-    margin: 0;
-    padding-left: 1.1rem;
-    color: var(--text-secondary);
-    display: grid;
-    gap: 0.55rem;
-    font-size: var(--text-small);
-  }
-
-  .glass-card ul li::marker {
-    color: var(--voyage-blue);
-  }
-
-  .kicker {
-    font-size: clamp(0.7rem, 1vw, 0.82rem);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-weight: var(--weight-semibold);
-    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
-  }
-
-  .timestamp {
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-    padding: 0.4rem 0.85rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--surface-glass) 80%, rgba(var(--voyage-blue-rgb), 0.14) 20%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 68%, transparent 32%);
-  }
-
-  .note {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
-  }
-
-  :global([data-base-theme='dark']) .glass-card {
-    background: color-mix(in srgb, rgba(4, 10, 22, 0.9) 68%, rgba(var(--voyage-blue-rgb), 0.2) 32%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
-    box-shadow: var(--shadow-md);
-  }
-
-  :global([data-base-theme='dark']) .timestamp {
-    background: color-mix(in srgb, rgba(6, 12, 24, 0.84) 70%, rgba(var(--voyage-blue-rgb), 0.24) 30%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 60%, rgba(255, 255, 255, 0.1) 40%);
-  }
-
-  @media (max-width: 1024px) {
-    :global(.hero--landing .hero-wrapper__shell) {
-      grid-template-columns: 1fr;
-    }
-
-    :global(.hero--landing .hero-wrapper__aside) {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  @media (max-width: 720px) {
-    :global(.hero--landing) {
-      --hero-padding-block-start: clamp(5rem, 18vw, 6.5rem);
-    }
-
-    :global(.hero--landing .hero-actions) {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .metric {
-      padding: clamp(0.9rem, 4vw, 1.2rem);
-    }
-
-    .glass-card {
-      padding: clamp(1.3rem, 4.4vw, 1.8rem);
     }
   }
 </style>
