@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
   
   let visible = true;
   
@@ -21,7 +22,7 @@
       <div class="spinner-ring"></div>
       <div class="spinner-ring"></div>
     </div>
-    <div class="loading-text">AlgoRhythmics</div>
+    <div class="loading-text">{$_('nav.brand_name')}</div>
   </div>
 {/if}
 

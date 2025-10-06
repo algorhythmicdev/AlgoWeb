@@ -1,9 +1,129 @@
 <script>
   // @ts-nocheck
-  import { _ } from 'svelte-i18n';
+  import { _, json } from 'svelte-i18n';
+  import { onDestroy, onMount } from 'svelte';
   import { Icon } from '$lib/components';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
+  import en from '$lib/i18n/en.json';
+
+  const fallbackHeroRotating = Array.isArray(en.consulting?.hero_rotating)
+    ? en.consulting.hero_rotating
+    : [en.consulting.hero_subtitle];
+
+  /**
+   * @param {unknown} value
+   * @returns {ReadonlyArray<string>}
+   */
+  const ensureStringArray = (value) =>
+    Array.isArray(value) && value.every((item) => typeof item === 'string' && item.length)
+      ? /** @type {string[]} */ (value)
+      : fallbackHeroRotating;
+
+  let heroRotating = fallbackHeroRotating;
+  let heroRotatingIndex = 0;
+  /** @type {ReturnType<typeof setInterval> | null} */
+  let heroRotatingTimer = null;
+  /** @type {HTMLElement | null} */
+  let heroSectionEl = null;
+  let hasMounted = false;
+  let isHeroVisible = false;
+  let prefersReducedMotion = false;
+  /** @type {IntersectionObserver | null} */
+  let heroObserver = null;
+  /** @type {MediaQueryList | null} */
+  let motionQuery = null;
+
+  function handleMotionChange(event) {
+    prefersReducedMotion = event.matches;
+    syncHeroRotation();
+  }
+
+  function startHeroRotation() {
+    if (!hasMounted || heroRotatingTimer || heroRotating.length <= 1 || prefersReducedMotion || !isHeroVisible) {
+      return;
+    }
+
+    heroRotatingTimer = setInterval(() => {
+      heroRotatingIndex = (heroRotatingIndex + 1) % heroRotating.length;
+    }, 4400);
+  }
+
+  function stopHeroRotation() {
+    if (heroRotatingTimer) {
+      clearInterval(heroRotatingTimer);
+      heroRotatingTimer = null;
+    }
+  }
+
+  function syncHeroRotation() {
+    if (!hasMounted) return;
+    if (heroRotating.length <= 1 || prefersReducedMotion || !isHeroVisible) {
+      stopHeroRotation();
+    } else {
+      startHeroRotation();
+    }
+  }
+
+  $: heroRotating = ensureStringArray($json?.('consulting.hero_rotating'));
+  $: if (heroRotatingIndex >= heroRotating.length) {
+    heroRotatingIndex = 0;
+  }
+  $: syncHeroRotation();
+
+  onMount(() => {
+    hasMounted = true;
+
+    if (typeof window !== 'undefined') {
+      if ('IntersectionObserver' in window) {
+        heroObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.target === heroSectionEl) {
+                isHeroVisible = entry.isIntersecting;
+                syncHeroRotation();
+              }
+            }
+          },
+          { threshold: 0.35 }
+        );
+
+        if (heroSectionEl) {
+          heroObserver.observe(heroSectionEl);
+        }
+      } else {
+        isHeroVisible = true;
+      }
+
+      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      prefersReducedMotion = motionQuery.matches;
+
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', handleMotionChange);
+      } else if (motionQuery.addListener) {
+        motionQuery.addListener(handleMotionChange);
+      }
+
+      syncHeroRotation();
+    }
+  });
+
+  onDestroy(() => {
+    stopHeroRotation();
+
+    if (heroObserver && heroSectionEl) {
+      heroObserver.unobserve(heroSectionEl);
+      heroObserver.disconnect();
+    }
+
+    if (motionQuery) {
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener('change', handleMotionChange);
+      } else if (motionQuery.removeListener) {
+        motionQuery.removeListener(handleMotionChange);
+      }
+    }
+  });
   
   let formData = {
     company: '',
@@ -132,7 +252,7 @@
 {/if}
 
 <!-- Hero Section -->
-<section class="consulting-hero">
+<section class="consulting-hero" bind:this={heroSectionEl}>
   <div class="consulting-hero__halo" aria-hidden="true">
     <span class="consulting-blob consulting-blob--one"></span>
     <span class="consulting-blob consulting-blob--two"></span>
@@ -141,7 +261,18 @@
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">{$_('consulting.hero_title')}</span>
-      <h1>{$_('consulting.hero_subtitle')}</h1>
+      <h1 class="consulting-hero__headline" aria-live="polite" aria-atomic="true">
+        <span class="sr-only">{heroRotating[heroRotatingIndex] ?? $_('consulting.hero_subtitle')}</span>
+        {#each heroRotating as phrase, index}
+          <span
+            class="consulting-hero__phrase"
+            class:consulting-hero__phrase--active={index === heroRotatingIndex}
+            aria-hidden={index !== heroRotatingIndex}
+          >
+            {phrase}
+          </span>
+        {/each}
+      </h1>
 
       <div class="spots-indicator">
         <div class="spots-number">{spotsRemaining}</div>
@@ -352,6 +483,51 @@
   filter: blur(140px);
   opacity: 0.7;
   pointer-events: none;
+}
+
+.consulting-hero__headline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  min-height: clamp(3.6rem, 6vw, 4.8rem);
+  max-width: min(100%, 46ch);
+}
+
+.consulting-hero__phrase {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(26px) scale(0.96);
+  filter: blur(14px);
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out), filter 420ms var(--ease-out);
+  padding-inline: clamp(0.35rem, 1vw, 0.75rem);
+  border-radius: var(--radius-full);
+}
+
+.consulting-hero__phrase--active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
+  animation: consultingHeadlineIn 900ms var(--ease-spring);
+  background: linear-gradient(135deg, rgba(var(--aurora-purple-rgb), 0.12), rgba(var(--cherry-red-rgb), 0.12));
+  box-shadow: 0 20px 50px rgba(12, 18, 34, 0.24);
+}
+
+@keyframes consultingHeadlineIn {
+  0% {
+    opacity: 0;
+    transform: translateY(36px) scale(0.94);
+    filter: blur(18px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
 }
 
 .consulting-hero__halo {

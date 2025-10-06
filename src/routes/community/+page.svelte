@@ -1,11 +1,131 @@
 <script>
   // @ts-nocheck
-  import { _ } from 'svelte-i18n';
-  import { onMount } from 'svelte';
+  import { _, json } from 'svelte-i18n';
+  import { onDestroy, onMount } from 'svelte';
   import { Icon } from '$lib/components';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
+  import en from '$lib/i18n/en.json';
+
+  const fallbackHeroPhrases = Array.isArray(en.community?.hero_rotating)
+    ? en.community.hero_rotating
+    : [en.community.hero_subtitle];
+
+  /**
+   * @param {unknown} value
+   * @returns {ReadonlyArray<string>}
+   */
+  const ensureStringArray = (value) =>
+    Array.isArray(value) && value.every((item) => typeof item === 'string' && item.length)
+      ? /** @type {string[]} */ (value)
+      : fallbackHeroPhrases;
+
+  let heroPhrases = fallbackHeroPhrases;
+  let heroPhraseIndex = 0;
+  /** @type {ReturnType<typeof setInterval> | null} */
+  let heroRotationTimer = null;
+  /** @type {HTMLElement | null} */
+  let heroSectionEl = null;
+  let hasMounted = false;
+  let isHeroVisible = false;
+  let prefersReducedMotion = false;
+  /** @type {IntersectionObserver | null} */
+  let heroObserver = null;
+  /** @type {MediaQueryList | null} */
+  let motionQuery = null;
+
+  function handleMotionChange(event) {
+    prefersReducedMotion = event.matches;
+    syncHeroRotation();
+  }
+
+  function startHeroRotation() {
+    if (!hasMounted || heroRotationTimer || heroPhrases.length <= 1 || prefersReducedMotion || !isHeroVisible) {
+      return;
+    }
+
+    heroRotationTimer = setInterval(() => {
+      heroPhraseIndex = (heroPhraseIndex + 1) % heroPhrases.length;
+    }, 4200);
+  }
+
+  function stopHeroRotation() {
+    if (heroRotationTimer) {
+      clearInterval(heroRotationTimer);
+      heroRotationTimer = null;
+    }
+  }
+
+  function syncHeroRotation() {
+    if (!hasMounted) return;
+    if (heroPhrases.length <= 1 || prefersReducedMotion || !isHeroVisible) {
+      stopHeroRotation();
+    } else {
+      startHeroRotation();
+    }
+  }
+
+  $: heroPhrases = ensureStringArray($json?.('community.hero_rotating'));
+  $: if (heroPhraseIndex >= heroPhrases.length) {
+    heroPhraseIndex = 0;
+  }
+  $: syncHeroRotation();
+
+  onMount(() => {
+    hasMounted = true;
+
+    if (typeof window !== 'undefined') {
+      if ('IntersectionObserver' in window) {
+        heroObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.target === heroSectionEl) {
+                isHeroVisible = entry.isIntersecting;
+                syncHeroRotation();
+              }
+            }
+          },
+          { threshold: 0.35 }
+        );
+
+        if (heroSectionEl) {
+          heroObserver.observe(heroSectionEl);
+        }
+      } else {
+        isHeroVisible = true;
+      }
+
+      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      prefersReducedMotion = motionQuery.matches;
+
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', handleMotionChange);
+      } else if (motionQuery.addListener) {
+        motionQuery.addListener(handleMotionChange);
+      }
+      syncHeroRotation();
+    }
+
+    return undefined;
+  });
+
+  onDestroy(() => {
+    stopHeroRotation();
+
+    if (heroObserver && heroSectionEl) {
+      heroObserver.unobserve(heroSectionEl);
+      heroObserver.disconnect();
+    }
+
+    if (motionQuery) {
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener('change', handleMotionChange);
+      } else if (motionQuery.removeListener) {
+        motionQuery.removeListener(handleMotionChange);
+      }
+    }
+  });
   
   let features = [
     { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },
@@ -68,7 +188,11 @@
 {/if}
 
 <!-- Hero -->
-<section class="community-hero">
+<section
+  class="community-hero"
+  use:staggerReveal={{ delay: 60, stagger: 120 }}
+  bind:this={heroSectionEl}
+>
   <div class="community-hero__mesh" aria-hidden="true">
     <span class="mesh-ring mesh-ring--one"></span>
     <span class="mesh-ring mesh-ring--two"></span>
@@ -77,7 +201,18 @@
   </div>
   <div class="container">
     <span class="eyebrow">{$_('community.hero_title')}</span>
-    <h1>{$_('community.hero_subtitle')}</h1>
+    <h1 class="community-hero__headline" aria-live="polite" aria-atomic="true">
+      <span class="sr-only">{heroPhrases[heroPhraseIndex] ?? $_('community.hero_subtitle')}</span>
+      {#each heroPhrases as phrase, index}
+        <span
+          class="community-hero__phrase"
+          class:community-hero__phrase--active={index === heroPhraseIndex}
+          aria-hidden={index !== heroPhraseIndex}
+        >
+          {phrase}
+        </span>
+      {/each}
+    </h1>
   </div>
 </section>
 
@@ -189,6 +324,53 @@
     filter: blur(140px);
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .community-hero__headline {
+    position: relative;
+    display: grid;
+    place-items: center;
+    gap: 0;
+    margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
+    min-height: clamp(3.4rem, 6vw, 4.6rem);
+    max-width: min(100%, 48ch);
+  }
+
+  .community-hero__phrase {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+    filter: blur(12px);
+    transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out), filter 420ms var(--ease-out);
+    padding-inline: clamp(0.25rem, 1vw, 0.6rem);
+    border-radius: var(--radius-full);
+  }
+
+  .community-hero__phrase--active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+    animation: heroPhraseIn 880ms var(--ease-spring);
+    background: linear-gradient(120deg, rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--aurora-purple-rgb), 0.1));
+    box-shadow: 0 20px 50px rgba(19, 81, 255, 0.12);
+  }
+
+  @keyframes heroPhraseIn {
+    0% {
+      transform: translateY(34px) scale(0.96);
+      filter: blur(16px);
+      opacity: 0;
+    }
+    55% {
+      transform: translateY(-6px) scale(1.01);
+      filter: blur(0px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+      opacity: 1;
+    }
   }
 
   .community-hero__mesh {

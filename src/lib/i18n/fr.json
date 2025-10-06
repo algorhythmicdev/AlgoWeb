@@ -25,7 +25,11 @@
   },
   "hero": {
     "status": "En développement • Nous façonnons l'avenir de l'IA",
-    "title": "Là où la logique danse avec la créativité",
+    "title": {
+      "lead": "Là où la logique danse avec",
+      "brand": "AlgoRhythmics",
+      "trail": "et la créativité"
+    },
     "tagline": "AlgoRhythmics — Laboratoire d'innovation en IA",
     "subtitle": "Les pilotes NodeVoyage et les rituels Ideonautix maintiennent les fondateurs concentrés sans perdre l'humain.",
     "description": "Ancrés dans la R&D signalétique et l'ingénierie cloud, nous mêlons rigueur matérielle et logiciels explicables pour que les équipes humaines gardent la main.",
@@ -73,7 +77,8 @@
       ],
       "cta": "Découvrir la communauté"
     },
-    "milestone_cta": "Voir la feuille de route"
+    "milestone_cta": "Voir la feuille de route",
+    "brand_aria": "Mise en avant de la marque AlgoRhythmics dans le titre"
   },
   "story": {
     "title": "Notre histoire",
@@ -124,6 +129,7 @@
   "products": {
     "meta_title": "Produits AlgoRhythmics",
     "meta_description": "Découvrez NodeVoyage, notre compagnon de voyage IA, et Ideonautix, la suite de productivité pour fondateurs.",
+    "hero_label": "Studio produit",
     "title": "Nos produits",
     "subtitle": "Des plateformes IA qui transforment le voyage et le travail",
     "cta_title": "Prêt à transformer votre organisation ?",
@@ -145,6 +151,20 @@
       "status": "Phase de planification",
       "mvp": "MVP : février 2026",
       "cta": "En savoir plus"
+    },
+    "demos": {
+      "title": "Découvrez nos démos en direct",
+      "description": "Accédez aux aperçus Ideonautix et NodeVoyage hébergés sur algorhythmics.dev.",
+      "nodevoyage": "Lancer la démo NodeVoyage",
+      "ideonautix": "Ouvrir l'atelier Ideonautix",
+      "nodevoyage_host": "nodevoyage.algorhythmics.dev",
+      "ideonautix_host": "ideonautix.algorhythmics.dev",
+      "nodevoyage_description": "Tracez des itinéraires immersifs avec un routage assisté par l’IA, des cartes hors ligne et une planification collaborative.",
+      "ideonautix_description": "Prototypiez des parcours de conception de venture et des récits de pitch dans un espace de travail vitré et tactile."
+    },
+    "showcase": {
+      "title": "Démos en direct sur algorhythmics.dev",
+      "subtitle": "Découvrez Ideonautix et NodeVoyage avant leur disponibilité générale."
     }
   },
   "timeline": {
@@ -278,6 +298,11 @@
     "meta_title": "Communauté AlgoRhythmics",
     "hero_title": "Communauté",
     "hero_subtitle": "Votez les fonctionnalités, partagez vos idées et co-créez l'avenir",
+    "hero_rotating": [
+      "Votez pour les fonctionnalités et voyez les résultats en direct",
+      "Partagez vos idées produit en quelques secondes",
+      "Co-créez NodeVoyage et Ideonautix avec nous"
+    ],
     "voting_title": "Voter pour les fonctionnalités",
     "voting_subtitle": "Aidez-nous à prioriser ce qui compte pour vous",
     "voting_list_aria": "Liste de vote des fonctionnalités",
@@ -338,6 +363,11 @@
     "meta_title": "Programme de conseil AlgoRhythmics",
     "hero_title": "Conseil en IA",
     "hero_subtitle": "Programme pilote gratuit pour 3 entreprises sélectionnées",
+    "hero_rotating": [
+      "Programme pilote gratuit pour 3 entreprises sélectionnées",
+      "Sprints de stratégie IA pour les équipes réglementées",
+      "Du prototype à la production avec nos fondateurs"
+    ],
     "spots_remaining": "places restantes",
     "what_title": "Ce que nous offrons",
     "what_1": "Stratégie et mise en œuvre IA",
@@ -387,6 +417,11 @@
     "meta_title": "Contact AlgoRhythmics",
     "hero_title": "Entrons en contact",
     "hero_subtitle": "Construisons quelque chose d'exceptionnel ensemble",
+    "hero_rotating": [
+      "Construisons quelque chose d'incroyable ensemble",
+      "Planifiez une conversation fondateur à fondateur",
+      "Transformez votre vision produit en élan"
+    ],
     "form_title": "Envoyez-nous un message",
     "form_name": "Votre nom",
     "form_name_placeholder": "Alex Founder",
@@ -477,5 +512,89 @@
       "github": "GitHub",
       "email": "E-mail"
     }
+  },
+  "ai_companion": {
+    "name": "Lumen",
+    "role": "Votre guide AlgoRhythmics",
+    "dialogLabel": "Compagnon IA AlgoRhythmics",
+    "greeting": "Bonjour ! Je suis Lumen, compagnon AlgoRhythmics. Parlons de notre laboratoire, de nos produits ou d'un partenariat adapté aux marchés européens.",
+    "languageSwitch": "Je poursuis en français. Comment puis-je vous aider ?",
+    "placeholder": "Posez une question sur le labo, un produit ou une collaboration...",
+    "actions": {
+      "open": "Ouvrir l'assistant IA",
+      "hide": "Masquer l'assistant IA",
+      "closePanel": "Fermer l'assistant",
+      "send": "Envoyer",
+      "suggestionLabel": "Suggestions",
+      "formLabel": "Envoyer un message"
+    },
+    "latency": 520,
+    "suggestions": [
+      {
+        "title": "Découvrir notre laboratoire",
+        "prompt": "En quoi AlgoRhythmics se distingue des autres agences IA ?"
+      },
+      {
+        "title": "Plateforme NodeVoyage",
+        "prompt": "Peux-tu me présenter la plateforme de voyage NodeVoyage ?"
+      },
+      {
+        "title": "Suite Ideonautix",
+        "prompt": "Comment Ideonautix soutient-elle les équipes créatives ?"
+      },
+      {
+        "title": "Améliorer ma stratégie IA",
+        "prompt": "Comment améliorer notre initiative IA avec AlgoRhythmics ?"
+      }
+    ],
+    "knowledgeBase": [
+      {
+        "keywords": [
+          "différenc",
+          "unique",
+          "laboratoire",
+          "agence",
+          "algorhythmics"
+        ],
+        "answer": "AlgoRhythmics marie rigueur d'ingénierie et imagination chorégraphique. Nous partageons cette méthode avec nos partenaires pour créer des expériences IA utiles en Europe et au-delà."
+      },
+      {
+        "keywords": [
+          "nodevoyage",
+          "voyage",
+          "itinéraire",
+          "tourisme"
+        ],
+        "answer": "NodeVoyage est notre plateforme de voyage intelligente. Elle combine graphes de destinations, récits culturels et agents adaptatifs pour offrir des parcours sur mesure."
+      },
+      {
+        "keywords": [
+          "ideonautix",
+          "productivité",
+          "équipe",
+          "collaboration"
+        ],
+        "answer": "Ideonautix est une constellation de copilotes IA. Elle facilite les ateliers de co-création, la prise de décision et le suivi des performances pour les startups."
+      },
+      {
+        "keywords": [
+          "contact",
+          "partenariat",
+          "consulting",
+          "collaborer"
+        ],
+        "answer": "Contactez hello@algorhythmics.com ou utilisez notre formulaire. Nous proposons des ateliers discovery, des pilotes rapides et des programmes d'accompagnement."
+      },
+      {
+        "keywords": [
+          "améliorer",
+          "optimiser",
+          "stratégie",
+          "croissance"
+        ],
+        "answer": "Pour progresser, nous organisons un diagnostic express : analyse de vos flux de données, culture d'équipe et attentes clients, puis feuille de route d'expérimentations."
+      }
+    ],
+    "fallback": "Je m'améliore encore, mais je peux vous mettre en relation avec notre équipe ou partager des informations clés sur nos services."
   }
 }
