@@ -86,7 +86,7 @@ body::after {
     radial-gradient(circle at 20% 18%, rgba(var(--voyage-blue-rgb), 0.36) 0%, transparent 46%),
     radial-gradient(circle at 76% 14%, rgba(var(--aurora-purple-rgb), 0.32) 0%, transparent 56%),
     radial-gradient(circle at 52% 78%, rgba(var(--signal-yellow-rgb), 0.22) 0%, transparent 62%);
-  opacity: 0.42;
+  opacity: 0.32;
 }
 
 :global(body[data-theme='dark'])::before {
@@ -96,8 +96,8 @@ body::after {
 }
 
 :global(body[data-theme='dark'])::after {
-  opacity: 0.3;
-  mix-blend-mode: screen;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend-mode);
 }
 
 /* ==================== RESPONSIVE TYPOGRAPHY SYSTEM ==================== */

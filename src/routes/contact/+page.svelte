@@ -463,7 +463,7 @@
     position: absolute;
     inset: clamp(-5rem, -8vw, -2rem) -12% auto;
     height: clamp(18rem, 32vw, 24rem);
-    background: radial-gradient(circle at 50% 40%, rgba(19, 81, 255, 0.2), transparent 70%);
+    background: radial-gradient(circle at 50% 40%, var(--hero-glow-primary), transparent 70%);
     filter: blur(140px);
     opacity: 0.7;
     pointer-events: none;
@@ -493,8 +493,8 @@
     transform: translateY(0) scale(1);
     filter: blur(0px);
     animation: contactPhraseIn 820ms var(--ease-spring);
-    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--signal-yellow-rgb), 0.12));
-    box-shadow: 0 16px 42px rgba(19, 81, 255, 0.18);
+    background: linear-gradient(135deg, var(--hero-phrase-bg-strong), color-mix(in srgb, var(--hero-phrase-bg-soft) 60%, var(--hero-glow-accent) 40%));
+    box-shadow: var(--hero-phrase-shadow);
   }
 
   @keyframes contactPhraseIn {
@@ -527,7 +527,7 @@
     width: clamp(240px, 36vw, 320px);
     height: clamp(240px, 36vw, 320px);
     border-radius: 50%;
-    opacity: 0.45;
+    opacity: var(--hero-orb-opacity);
     filter: blur(60px);
     transform: translate3d(0, 0, 0);
     animation: contactOrbDrift 24s ease-in-out infinite;
@@ -553,16 +553,16 @@
     width: clamp(38px, 6vw, 52px);
     height: clamp(38px, 6vw, 52px);
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.65);
-    box-shadow: 0 18px 42px rgba(19, 81, 255, 0.16);
-    mix-blend-mode: screen;
-    opacity: 0.6;
+    background: var(--hero-overlay-highlight);
+    box-shadow: 0 18px 42px color-mix(in srgb, var(--hero-glow-primary) 50%, rgba(2, 6, 18, 0.4) 50%);
+    mix-blend-mode: var(--hero-overlay-blend);
+    opacity: calc(var(--hero-overlay-opacity) * 0.9);
     animation: contactNodeFloat 16s ease-in-out infinite;
   }
 
-  .contact-node--one { top: 28%; left: 12%; background: rgba(19, 81, 255, 0.4); }
-  .contact-node--two { top: 52%; right: 20%; background: rgba(255, 211, 57, 0.45); animation-delay: -4s; }
-  .contact-node--three { bottom: 18%; left: 32%; background: rgba(106, 56, 255, 0.42); animation-delay: -2s; }
+  .contact-node--one { top: 28%; left: 12%; background: color-mix(in srgb, var(--hero-glow-primary) 80%, var(--hero-overlay-subtle) 20%); }
+  .contact-node--two { top: 52%; right: 20%; background: color-mix(in srgb, var(--hero-glow-accent) 70%, var(--hero-overlay-highlight) 30%); animation-delay: -4s; }
+  .contact-node--three { bottom: 18%; left: 32%; background: color-mix(in srgb, var(--hero-glow-secondary) 75%, var(--hero-overlay-subtle) 25%); animation-delay: -2s; }
 
   @keyframes contactOrbDrift {
     0% {
@@ -599,15 +599,6 @@
     gap: clamp(2.4rem, 5vw, 3.5rem);
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: start;
-  }
-
-  :global([data-theme='dark']) .contact-hero__backdrop .contact-node {
-    background: rgba(70, 120, 255, 0.32);
-    box-shadow: 0 18px 44px rgba(2, 6, 18, 0.4);
-  }
-
-  :global([data-theme='dark']) .contact-hero__backdrop .contact-orb {
-    opacity: 0.5;
   }
 
   @media (prefers-reduced-motion: reduce) {

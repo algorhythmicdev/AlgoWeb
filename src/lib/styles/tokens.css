@@ -97,6 +97,19 @@
   --text-primary: #1a1a1a;
   --text-secondary: rgba(26, 33, 55, 0.85);
   --text-tertiary: rgba(26, 33, 55, 0.65);
+  --hero-glow-primary: rgba(var(--voyage-blue-rgb), 0.2);
+  --hero-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
+  --hero-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
+  --hero-overlay-highlight: rgba(255, 255, 255, 0.65);
+  --hero-overlay-subtle: rgba(255, 255, 255, 0.32);
+  --hero-overlay-blend: screen;
+  --hero-overlay-opacity: 0.75;
+  --hero-phrase-bg-strong: rgba(var(--aurora-purple-rgb), 0.12);
+  --hero-phrase-bg-soft: rgba(var(--cherry-red-rgb), 0.12);
+  --hero-phrase-shadow: 0 20px 50px rgba(12, 18, 34, 0.24);
+  --hero-ring-border: rgba(var(--voyage-blue-rgb), 0.22);
+  --hero-ring-dash: rgba(var(--aurora-purple-rgb), 0.2);
+  --hero-orb-opacity: 0.45;
 
   /* ==================== INTERACTIVE SURFACES ==================== */
   --control-surface: color-mix(in srgb, var(--bg-surface) 88%, rgba(var(--voyage-blue-rgb), 0.06) 12%);
@@ -238,7 +251,7 @@
   --body-wash: radial-gradient(140% 140% at 15% 18%, rgba(255, 255, 255, 0.8) 0%, transparent 68%),
     radial-gradient(120% 120% at 82% 12%, rgba(255, 211, 57, 0.16) 0%, transparent 72%);
   --grain-blend-mode: soft-light;
-  --grain-opacity: 0.26;
+  --grain-opacity: 0.24;
 
   /* ==================== MOTION ==================== */
   --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
@@ -305,11 +318,11 @@
 
   /* Brand-tinted backgrounds with WCAG-compliant contrast */
   --bg-primary: linear-gradient(178deg, #060912 0%, #0e111f 45%, #191228 100%);
-  --bg-surface: color-mix(in srgb, rgba(12, 16, 28, 0.96) 70%, rgba(var(--aurora-purple-rgb), 0.32) 30%);
-  --bg-muted: color-mix(in srgb, rgba(14, 18, 30, 0.88) 66%, rgba(var(--voyage-blue-rgb), 0.36) 34%);
-  --bg-elevated: color-mix(in srgb, rgba(16, 20, 36, 0.9) 60%, rgba(var(--aurora-purple-rgb), 0.38) 40%);
-  --surface-glass: color-mix(in srgb, rgba(10, 16, 28, 0.78) 62%, rgba(var(--voyage-blue-rgb), 0.4) 38%);
-  --surface-tint: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(var(--aurora-purple-rgb), 0.28) 40%);
+  --bg-surface: color-mix(in srgb, rgba(10, 14, 26, 0.96) 74%, rgba(var(--aurora-purple-rgb), 0.28) 26%);
+  --bg-muted: color-mix(in srgb, rgba(12, 16, 28, 0.9) 68%, rgba(var(--voyage-blue-rgb), 0.34) 32%);
+  --bg-elevated: color-mix(in srgb, rgba(14, 18, 32, 0.92) 64%, rgba(var(--aurora-purple-rgb), 0.36) 36%);
+  --surface-glass: color-mix(in srgb, rgba(8, 12, 24, 0.82) 64%, rgba(var(--voyage-blue-rgb), 0.36) 36%);
+  --surface-tint: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 58%, rgba(var(--aurora-purple-rgb), 0.26) 42%);
 
   /* Glassy borders and dividers */
   --border-subtle: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 55%, rgba(255, 255, 255, 0.08) 45%);
@@ -322,6 +335,19 @@
   --text-primary: rgba(249, 252, 255, 0.98);
   --text-secondary: rgba(225, 232, 244, 0.92);
   --text-tertiary: rgba(198, 210, 228, 0.82);
+  --hero-glow-primary: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 70%, rgba(6, 10, 24, 0.9) 30%);
+  --hero-glow-secondary: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.34) 70%, rgba(8, 12, 24, 0.88) 30%);
+  --hero-glow-accent: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.26) 60%, rgba(12, 14, 26, 0.88) 40%);
+  --hero-overlay-highlight: rgba(108, 138, 255, 0.3);
+  --hero-overlay-subtle: rgba(48, 86, 196, 0.24);
+  --hero-overlay-blend: lighten;
+  --hero-overlay-opacity: 0.68;
+  --hero-phrase-bg-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.32) 60%, rgba(6, 10, 24, 0.82) 40%);
+  --hero-phrase-bg-soft: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 55%, rgba(12, 16, 30, 0.82) 45%);
+  --hero-phrase-shadow: 0 22px 52px rgba(3, 6, 18, 0.55);
+  --hero-ring-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 70%, rgba(4, 6, 16, 0.9) 30%);
+  --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.38) 65%, rgba(6, 8, 18, 0.85) 35%);
+  --hero-orb-opacity: 0.38;
 
   /* Softer, depth-aware shadows for luminous glass */
   --shadow-xs: 0 12px 22px rgba(5, 8, 20, 0.4);
@@ -336,8 +362,8 @@
   --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 62%, rgba(255, 255, 255, 0.12) 38%);
   --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 66%, rgba(255, 255, 255, 0.18) 34%);
   --control-ring: rgba(var(--voyage-blue-rgb), 0.4);
-  --grain-blend-mode: screen;
-  --grain-opacity: 0.32;
+  --grain-blend-mode: soft-light;
+  --grain-opacity: 0.2;
 }
 
 @media (prefers-reduced-motion: reduce) {

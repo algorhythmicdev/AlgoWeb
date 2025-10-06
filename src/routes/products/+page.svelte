@@ -200,7 +200,7 @@
     top: 10%;
     width: 140%;
     height: clamp(280px, 40vw, 340px);
-    background: linear-gradient(120deg, rgba(19, 81, 255, 0.18), rgba(106, 56, 255, 0.08));
+    background: linear-gradient(120deg, var(--hero-glow-primary), color-mix(in srgb, var(--hero-glow-secondary) 60%, transparent 40%));
     filter: blur(80px);
     transform: rotate(12deg);
     transform-origin: center;
@@ -216,7 +216,7 @@
     right: -12%;
     top: -6%;
     transform: rotate(-14deg);
-    background: linear-gradient(120deg, rgba(255, 211, 57, 0.16), rgba(224, 50, 44, 0.12));
+    background: linear-gradient(120deg, var(--hero-glow-accent), color-mix(in srgb, var(--hero-glow-secondary) 55%, transparent 45%));
     animation-duration: 28s;
     animation-delay: -6s;
   }
@@ -228,7 +228,7 @@
     background: var(--gradient-spectrum-2);
     border-radius: 50%;
     filter: blur(70px);
-    opacity: 0.42;
+    opacity: var(--hero-orb-opacity);
     bottom: -40%;
     left: 10%;
     animation: productsOrbDrift 26s ease-in-out infinite;
@@ -334,7 +334,7 @@
     position: absolute;
     inset: 5% 10% auto;
     height: clamp(12rem, 26vw, 18rem);
-    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.16), rgba(var(--aurora-purple-rgb), 0.1));
+    background: linear-gradient(135deg, var(--hero-glow-primary), color-mix(in srgb, var(--hero-glow-secondary) 60%, transparent 40%));
     filter: blur(120px);
     opacity: 0.6;
     pointer-events: none;
