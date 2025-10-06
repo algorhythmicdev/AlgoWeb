@@ -320,7 +320,7 @@
     position: absolute;
     inset: -40% -15% auto;
     height: clamp(18rem, 32vw, 24rem);
-    background: radial-gradient(circle at center, rgba(19, 81, 255, 0.22), transparent 70%);
+    background: radial-gradient(circle at center, var(--hero-glow-primary), transparent 70%);
     filter: blur(140px);
     opacity: 0.7;
     pointer-events: none;
@@ -351,8 +351,8 @@
     transform: translateY(0) scale(1);
     filter: blur(0px);
     animation: heroPhraseIn 880ms var(--ease-spring);
-    background: linear-gradient(120deg, rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--aurora-purple-rgb), 0.1));
-    box-shadow: 0 20px 50px rgba(19, 81, 255, 0.12);
+    background: linear-gradient(120deg, var(--hero-phrase-bg-strong), var(--hero-phrase-bg-soft));
+    box-shadow: var(--hero-phrase-shadow);
   }
 
   @keyframes heroPhraseIn {
@@ -385,7 +385,7 @@
     position: absolute;
     inset: 10% 20%;
     border-radius: 50%;
-    border: 1.5px solid rgba(19, 81, 255, 0.25);
+    border: 1.5px solid var(--hero-ring-border);
     filter: blur(0.4px);
     animation: meshOrbit 28s linear infinite;
   }
@@ -395,8 +395,8 @@
     position: absolute;
     inset: -2px;
     border-radius: 50%;
-    border: 1px dashed rgba(106, 56, 255, 0.26);
-    mix-blend-mode: screen;
+    border: 1px dashed var(--hero-ring-dash);
+    mix-blend-mode: var(--hero-overlay-blend);
   }
 
   .mesh-ring--one {
@@ -417,7 +417,7 @@
     border-radius: 50%;
     background: var(--gradient-spectrum-2);
     filter: blur(60px);
-    opacity: 0.45;
+    opacity: var(--hero-orb-opacity);
     animation: meshPulse 20s ease-in-out infinite;
   }
 
@@ -473,7 +473,7 @@
     position: absolute;
     inset: -35% -25% auto;
     height: clamp(18rem, 32vw, 26rem);
-    background: radial-gradient(circle at 70% 40%, rgba(106, 56, 255, 0.18), transparent 70%);
+    background: radial-gradient(circle at 70% 40%, var(--hero-glow-secondary), transparent 70%);
     filter: blur(140px);
     opacity: 0.6;
     pointer-events: none;
@@ -637,14 +637,6 @@
   @media (max-width: 768px) {
     .community-hero { padding: var(--space-12) 0 var(--space-6); }
     .features-grid { grid-template-columns: 1fr; }
-  }
-
-  :global([data-theme='dark']) .community-hero__mesh .mesh-ring {
-    border-color: rgba(90, 135, 255, 0.35);
-  }
-
-  :global([data-theme='dark']) .community-hero__mesh .mesh-orb {
-    opacity: 0.5;
   }
 
   @media (prefers-reduced-motion: reduce) {

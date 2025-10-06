@@ -479,7 +479,7 @@
   position: absolute;
   inset: clamp(-5rem, -8vw, -2rem) -15% auto;
   height: clamp(20rem, 36vw, 26rem);
-  background: radial-gradient(circle at 40% 40%, rgba(19, 81, 255, 0.2), transparent 70%);
+  background: radial-gradient(circle at 40% 40%, var(--hero-glow-primary), transparent 70%);
   filter: blur(140px);
   opacity: 0.7;
   pointer-events: none;
@@ -508,8 +508,8 @@
   transform: translateY(0) scale(1);
   filter: blur(0px);
   animation: consultingHeadlineIn 900ms var(--ease-spring);
-  background: linear-gradient(135deg, rgba(var(--aurora-purple-rgb), 0.12), rgba(var(--cherry-red-rgb), 0.12));
-  box-shadow: 0 20px 50px rgba(12, 18, 34, 0.24);
+  background: linear-gradient(135deg, var(--hero-phrase-bg-strong), var(--hero-phrase-bg-soft));
+  box-shadow: var(--hero-phrase-shadow);
 }
 
 @keyframes consultingHeadlineIn {
@@ -543,7 +543,7 @@
   width: clamp(200px, 32vw, 320px);
   height: clamp(200px, 32vw, 320px);
   background: var(--gradient-spectrum-1);
-  opacity: 0.35;
+  opacity: var(--hero-orb-opacity);
   filter: blur(60px);
   border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
   animation: consultingMorph 26s ease-in-out infinite;
@@ -566,11 +566,11 @@
   inset: 12% 18%;
   border-radius: var(--radius-2xl);
   background:
-    radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 42%),
-    radial-gradient(circle at 82% 32%, rgba(255, 211, 57, 0.3) 0%, transparent 48%),
-    linear-gradient(120deg, rgba(19, 81, 255, 0.1), rgba(106, 56, 255, 0));
-  opacity: 0.75;
-  mix-blend-mode: screen;
+    radial-gradient(circle at 12% 20%, var(--hero-overlay-highlight) 0%, transparent 42%),
+    radial-gradient(circle at 82% 32%, color-mix(in srgb, var(--hero-glow-accent) 70%, transparent 30%) 0%, transparent 48%),
+    linear-gradient(120deg, color-mix(in srgb, var(--hero-glow-primary) 60%, transparent 40%), transparent);
+  opacity: var(--hero-overlay-opacity);
+  mix-blend-mode: var(--hero-overlay-blend);
   mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9), transparent 70%);
   animation: consultingSweep 18s ease-in-out infinite;
 }
@@ -840,14 +840,6 @@
     padding-left: 1.2rem;
     color: var(--text-secondary);
   }
-
-:global([data-theme='dark']) .consulting-hero__halo .consulting-blob {
-  opacity: 0.45;
-}
-
-:global([data-theme='dark']) .consulting-hero__halo .consulting-constellation {
-  opacity: 0.82;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .consulting-blob,
