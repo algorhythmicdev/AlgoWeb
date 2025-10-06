@@ -2,13 +2,19 @@
   import { _ } from 'svelte-i18n';
   import { footerLinks } from '$config/navigation';
   import { siteConfig } from '$config/seo';
+  import { theme } from '$stores/theme';
 </script>
 
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="/images/brand/logo-main.webp" alt="AlgoRhythmics" width="180" height="48" />
+        <img
+          src={$theme === 'dark' ? '/images/brand/logo-white.webp' : '/images/brand/logo-main.webp'}
+          alt="AlgoRhythmics"
+          width="180"
+          height="48"
+        />
         <p class="tagline">{$_('footer.tagline')}</p>
         <p class="status">{$_('footer.status')}</p>
         <div class="contact-info">
@@ -77,6 +83,11 @@
     pointer-events: none;
   }
 
+  :global([data-theme='dark']) .footer::before {
+    background: radial-gradient(circle at 60% 20%, rgba(var(--aurora-purple-rgb), 0.32), transparent 70%);
+    opacity: 0.8;
+  }
+
   .footer-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
@@ -87,13 +98,13 @@
   }
 
   .footer-grid > * {
-    background: var(--bg-surface);
     background: var(--surface-glass);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    border: 1px solid var(--border-glass);
     border-radius: var(--radius-2xl);
     padding: clamp(1.6rem, 3vw, 2.1rem);
     box-shadow: var(--shadow-xs);
-    backdrop-filter: blur(22px);
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
   }
 
   .footer-brand {
@@ -101,7 +112,10 @@
     gap: 0.75rem;
   }
 
-  .footer-brand img { max-width: 180px; }
+  .footer-brand img {
+    max-width: 180px;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
 
   .tagline {
     color: var(--text-secondary);
@@ -145,11 +159,11 @@
     gap: clamp(1.2rem, 3vw, 2rem);
     padding: clamp(1.6rem, 3vw, 2.2rem);
     border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
     background: var(--surface-glass);
     box-shadow: var(--shadow-xs);
-    backdrop-filter: blur(22px);
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
     font-size: var(--text-small);
     color: var(--text-tertiary);
     position: relative;

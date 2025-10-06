@@ -83,19 +83,27 @@
     align-items: center;
     gap: var(--space-1);
     padding: var(--space-2) var(--space-3);
-    background: transparent;
-    border: 1px solid var(--border-color);
+    background: var(--control-surface);
+    border: 1px solid var(--control-border);
     border-radius: var(--radius-md);
     font-weight: var(--weight-medium);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-out);
+    box-shadow: 0 14px 30px rgba(var(--voyage-blue-rgb), 0.12);
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
   }
 
   .current-lang:hover,
   .current-lang:focus-visible {
-    border-color: var(--voyage-blue);
+    outline: none;
+    background: var(--control-surface-hover);
+    border-color: var(--control-border-strong);
     color: var(--voyage-blue);
+    box-shadow: 0 0 0 4px var(--control-ring);
   }
 
   .dropdown {
@@ -103,10 +111,10 @@
     top: calc(100% + var(--space-2));
     right: 0;
     min-width: 180px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
+    background: var(--bg-elevated);
+    border: 1px solid var(--control-border);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 32px 60px rgba(15, 23, 42, 0.18);
     padding: var(--space-2);
     z-index: var(--z-overlay);
   }
@@ -122,16 +130,18 @@
     border-radius: var(--radius-md);
     text-align: left;
     cursor: pointer;
-    transition: background var(--duration-fast) var(--ease-out);
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
   }
 
   .lang-option:hover,
   .lang-option:focus-visible {
-    background: var(--bg-elevated);
+    background: var(--control-surface-hover);
   }
 
   .lang-option.active {
-    background: rgba(var(--voyage-blue-rgb), 0.1);
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 70%, var(--control-surface) 30%);
     color: var(--voyage-blue);
   }
 
@@ -144,4 +154,6 @@
     font-size: var(--text-caption);
     color: var(--text-secondary);
   }
+
+  svg { pointer-events: none; }
 </style>

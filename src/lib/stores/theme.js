@@ -13,7 +13,13 @@ const createThemeStore = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   };
   
-  const { subscribe, set, update } = writable(getInitialTheme());
+  const initialTheme = getInitialTheme();
+
+  if (browser) {
+    applyThemeAttributes(initialTheme);
+  }
+
+  const { subscribe, set, update } = writable(initialTheme);
   
   return {
     subscribe,
@@ -45,4 +51,5 @@ function applyThemeAttributes(value) {
   if (!browser) return;
   document.body.setAttribute('data-theme', value);
   document.documentElement.setAttribute('data-theme', value);
+  document.documentElement.style.colorScheme = value;
 }
