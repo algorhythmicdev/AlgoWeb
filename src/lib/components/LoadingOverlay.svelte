@@ -1,7 +1,11 @@
 <script>
+  import '$lib/i18n';
+  import { _, waitLocale } from 'svelte-i18n';
+  import { get } from 'svelte/store';
   import { onMount } from 'svelte';
   
   let visible = true;
+  let loadingText = 'AlgoRhythmics';
   
   onMount(() => {
     // Hide loading spinner after page loads
@@ -9,6 +13,17 @@
       visible = false;
     }, 1000);
     
+    waitLocale()
+      .then(() => {
+        const translate = get(_);
+        if (typeof translate === 'function') {
+          loadingText = translate('site.title');
+        }
+      })
+      .catch(() => {
+        loadingText = 'AlgoRhythmics';
+      });
+
     return () => clearTimeout(timer);
   });
 </script>
@@ -21,7 +36,7 @@
       <div class="spinner-ring"></div>
       <div class="spinner-ring"></div>
     </div>
-    <div class="loading-text">AlgoRhythmics</div>
+    <div class="loading-text">{loadingText}</div>
   </div>
 {/if}
 

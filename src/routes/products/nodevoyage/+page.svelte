@@ -51,7 +51,7 @@
 
     <div class="hero-visual">
       <div class="device-frame">
-        <img src="/images/products/nodevoyage-hero.webp" alt={$_('nodevoyage.hero_alt')} />
+        <img src="/images/products/nodevoyage-hero.png" alt={$_('nodevoyage.hero_alt')} />
       </div>
     </div>
   </div>

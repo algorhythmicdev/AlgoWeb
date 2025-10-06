@@ -2,8 +2,8 @@
   "nodevoyage": {
     "id": "nodevoyage",
     "slug": "nodevoyage",
-    "icon": "/images/products/nodevoyage-icon.webp",
-    "hero": "/images/products/nodevoyage-hero.webp",
+    "icon": "/images/products/nodevoyage-icon.png",
+    "hero": "/images/products/nodevoyage-hero.png",
     "color": "#1351FF",
     "features": [
       { "id": "nodi-ai", "icon": "ai" },
@@ -23,8 +23,8 @@
   "ideonautix": {
     "id": "ideonautix",
     "slug": "ideonautix",
-    "icon": "/images/products/ideonautix-icon.webp",
-    "hero": "/images/products/ideonautix-hero.webp",
+    "icon": "/images/products/ideonautix-icon.png",
+    "hero": "/images/products/ideonautix-hero.png",
     "color": "#6A38FF",
     "features": [
       { "id": "pitch", "icon": "target" },

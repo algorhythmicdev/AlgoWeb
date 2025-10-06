@@ -54,7 +54,7 @@
 
     <div class="hero-visual">
       <div class="device-frame">
-        <img src="/images/products/ideonautix-hero.webp" alt={$_('ideonautix.hero_alt')} />
+        <img src="/images/products/ideonautix-hero.png" alt={$_('ideonautix.hero_alt')} />
       </div>
     </div>
   </div>

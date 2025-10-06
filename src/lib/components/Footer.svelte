@@ -10,7 +10,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img
-          src={$theme === 'dark' ? '/images/brand/logo-white.webp' : '/images/brand/logo-main.webp'}
+          src={$theme === 'dark' ? '/images/brand/logo-white.png' : '/images/brand/logo-main.png'}
           alt="AlgoRhythmics"
           width="180"
           height="48"

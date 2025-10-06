@@ -71,7 +71,7 @@
   <div class="container nav-container">
     <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
       <img
-        src={$theme === 'dark' ? '/images/brand/logo-white.webp' : '/images/brand/logo-main.webp'}
+        src={$theme === 'dark' ? '/images/brand/logo-white.png' : '/images/brand/logo-main.png'}
         alt={$_('nav.brand_name')}
         width="148"
         height="40"

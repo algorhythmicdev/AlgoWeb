@@ -2,7 +2,7 @@
   "nikita": {
     "name": "Nikita Jurtaevs",
     "role": "Co-Founder & CEO",
-    "avatar": "/images/founders/founder-nikita.webp",
+    "avatar": "/images/founders/founder-nikita.png",
     "bio": "Nikita Jurtaevs serves as CEO in a 50/50 co-leadership model, guiding company strategy, partnerships, and brand direction while coordinating product management and UX/QA across NodeVoyage and Ideonautix in the early build phase. In parallel with AlgoRhythmics, he advances next-gen LED neon, in-house LED controllers, custom coatings, and 3D-printed components inside Reclame Fabriek’s Signage Research Department, with showcase work presented across Nordic expos.",
     "currentPosition": {
       "company": "Reclame Fabriek",
@@ -16,14 +16,14 @@
     },
     "brandExperience": {
       "clients": [
-        { "name": "KFC", "logo": "/images/partners/brand-kfc.webp", "category": "QSR" },
-        { "name": "McDonald's", "logo": "/images/partners/brand-mcdonalds.webp", "category": "QSR" },
-        { "name": "H&M", "logo": "/images/partners/brand-hm.webp", "category": "Retail" },
-        { "name": "Deutsche Bank", "logo": "/images/partners/brand-deutsche-bank.webp", "category": "Finance" },
-        { "name": "LONGCHAMP", "logo": "/images/partners/brand-longchamp.webp", "category": "Luxury" },
-        { "name": "PUMA", "logo": "/images/partners/brand-puma.webp", "category": "Sports" },
-        { "name": "Star Wars", "logo": "/images/partners/brand-star-wars.webp", "category": "Entertainment" },
-        { "name": "KLM", "logo": "/images/partners/brand-klm.webp", "category": "Airlines" }
+        { "name": "KFC", "logo": "/images/partners/brand-kfc.png", "category": "QSR" },
+        { "name": "McDonald's", "logo": "/images/partners/brand-mcdonalds.png", "category": "QSR" },
+        { "name": "H&M", "logo": "/images/partners/brand-hm.png", "category": "Retail" },
+        { "name": "Deutsche Bank", "logo": "/images/partners/brand-deutsche-bank.png", "category": "Finance" },
+        { "name": "LONGCHAMP", "logo": "/images/partners/brand-longchamp.png", "category": "Luxury" },
+        { "name": "PUMA", "logo": "/images/partners/brand-puma.png", "category": "Sports" },
+        { "name": "Star Wars", "logo": "/images/partners/brand-star-wars.png", "category": "Entertainment" },
+        { "name": "KLM", "logo": "/images/partners/brand-klm.png", "category": "Airlines" }
       ]
     },
     "expertise": [
@@ -38,7 +38,7 @@
   "slaff": {
     "name": "Vjaceslavs \"Slaff\" Trosins",
     "role": "Co-Founder & CTO",
-    "avatar": "/images/founders/founder-slaff.webp",
+    "avatar": "/images/founders/founder-slaff.png",
     "currentPosition": {
       "company": "Reclame Fabriek",
       "title": "Co-CTO & Systems Architect, Signage Research Department",
@@ -53,42 +53,42 @@
       "clients": [
         {
           "name": "KFC",
-          "logo": "/images/partners/brand-kfc.webp",
+          "logo": "/images/partners/brand-kfc.png",
           "category": "QSR"
         },
         {
           "name": "McDonald's",
-          "logo": "/images/partners/brand-mcdonalds.webp",
+          "logo": "/images/partners/brand-mcdonalds.png",
           "category": "QSR"
         },
         {
           "name": "H&M",
-          "logo": "/images/partners/brand-hm.webp",
+          "logo": "/images/partners/brand-hm.png",
           "category": "Retail"
         },
         {
           "name": "Deutsche Bank",
-          "logo": "/images/partners/brand-deutsche-bank.webp",
+          "logo": "/images/partners/brand-deutsche-bank.png",
           "category": "Finance"
         },
         {
           "name": "LONGCHAMP",
-          "logo": "/images/partners/brand-longchamp.webp",
+          "logo": "/images/partners/brand-longchamp.png",
           "category": "Luxury"
         },
         {
           "name": "PUMA",
-          "logo": "/images/partners/brand-puma.webp",
+          "logo": "/images/partners/brand-puma.png",
           "category": "Sports"
         },
         {
           "name": "Star Wars",
-          "logo": "/images/partners/brand-star-wars.webp",
+          "logo": "/images/partners/brand-star-wars.png",
           "category": "Entertainment"
         },
         {
           "name": "KLM",
-          "logo": "/images/partners/brand-klm.webp",
+          "logo": "/images/partners/brand-klm.png",
           "category": "Airlines"
         }
       ],

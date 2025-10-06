@@ -10,79 +10,79 @@ static/
 ├── og-image.png
 └── images/
     ├── brand/
-    │   ├── logo-icon.webp
-    │   ├── logo-main.webp
-    │   └── logo-white.webp
+    │   ├── logo-icon.png
+    │   ├── logo-main.png
+    │   └── logo-white.png
     ├── founders/
-    │   ├── founder-nikita.webp
-    │   └── founder-slaff.webp
+    │   ├── founder-nikita.png
+    │   └── founder-slaff.png
     ├── partners/
-    │   ├── brand-deutsche-bank.webp
-    │   ├── brand-hm.webp
-    │   ├── brand-kfc.webp
-    │   ├── brand-klm.webp
-    │   ├── brand-longchamp.webp
-    │   ├── brand-mcdonalds.webp
-    │   ├── brand-puma.webp
-    │   ├── brand-star-wars.webp
-    │   ├── liaa-logo.webp
-    │   └── reclame-fabriek-logo.webp
+    │   ├── brand-deutsche-bank.png
+    │   ├── brand-hm.png
+    │   ├── brand-kfc.png
+    │   ├── brand-klm.png
+    │   ├── brand-longchamp.png
+    │   ├── brand-mcdonalds.png
+    │   ├── brand-puma.png
+    │   ├── brand-star-wars.png
+    │   ├── liaa-logo.png
+    │   └── reclame-fabriek-logo.png
     └── products/
-        ├── ideonautix-hero.webp
-        ├── ideonautix-icon.webp
-        ├── nodevoyage-hero.webp
-        └── nodevoyage-icon.webp
+        ├── ideonautix-hero.png
+        ├── ideonautix-icon.png
+        ├── nodevoyage-hero.png
+        └── nodevoyage-icon.png
 ```
 
 ## Root Assets
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `static/favicon.png` | Browser favicon | 32 × 32 PNG derived from `logo-icon.webp`. |
+| `static/favicon.png` | Browser favicon | 32 × 32 PNG derived from `logo-icon.png`. |
 | `static/og-image.png` | Social preview | 1200 × 630 Open Graph and Twitter share image. |
 
 ## Brand Assets (`static/images/brand/`)
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `logo-main.webp` | Primary logo for light surfaces | Transparent WebP, 600 × 200. |
-| `logo-white.webp` | Reverse logo for dark surfaces | Transparent WebP, 600 × 200. |
-| `logo-icon.webp` | Square logomark for avatars and favicons | 200 × 200 WebP. |
+| `logo-main.png` | Primary logo for light surfaces | Synthetic PNG with light gradient, 600 × 200. |
+| `logo-white.png` | Reverse logo for dark surfaces | Synthetic PNG with light gradient, 600 × 200. |
+| `logo-icon.png` | Square logomark for avatars and favicons | 200 × 200 generated PNG wordmark. |
 
 ## Founder Portraits (`static/images/founders/`)
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `founder-nikita.webp` | Portrait of Nikita Jurtaevs | Optimised WebP photograph. |
-| `founder-slaff.webp` | Portrait of Vjaceslavs "Slaff" Trosins | Optimised WebP photograph. |
+| `founder-nikita.png` | Portrait of Nikita Jurtaevs | Generated PNG portrait with gradient background. |
+| `founder-slaff.png` | Portrait of Vjaceslavs "Slaff" Trosins | Generated PNG portrait with gradient background. |
 
 ## Product Visuals (`static/images/products/`)
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `nodevoyage-hero.webp` | Hero mockup on NodeVoyage page | High-resolution WebP render. |
-| `nodevoyage-icon.webp` | NodeVoyage badge used on cards | Transparent WebP. |
-| `ideonautix-hero.webp` | Hero mockup on Ideonautix page | High-resolution WebP render. |
-| `ideonautix-icon.webp` | Ideonautix badge used on cards | Transparent WebP. |
+| `nodevoyage-hero.png` | Hero mockup on NodeVoyage page | Generated PNG hero illustration. |
+| `nodevoyage-icon.png` | NodeVoyage badge used on cards | Generated PNG on dark gradient. |
+| `ideonautix-hero.png` | Hero mockup on Ideonautix page | Generated PNG hero illustration. |
+| `ideonautix-icon.png` | Ideonautix badge used on cards | Generated PNG on dark gradient. |
 
 ## Partner and Program Logos (`static/images/partners/`)
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `brand-deutsche-bank.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-hm.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-kfc.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-klm.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-longchamp.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-mcdonalds.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-puma.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `brand-star-wars.webp` | Partner logo in monochrome grid | Exported with transparent background. |
-| `liaa-logo.webp` | LIAA partner mark | Transparent WebP. |
-| `reclame-fabriek-logo.webp` | Reclame Fabriek partner mark | Transparent WebP. |
+| `brand-deutsche-bank.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-hm.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-kfc.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-klm.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-longchamp.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-mcdonalds.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-puma.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `brand-star-wars.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
+| `liaa-logo.png` | LIAA partner mark | Generated PNG on dark gradient. |
+| `reclame-fabriek-logo.png` | Reclame Fabriek partner mark | Generated PNG on dark gradient. |
 
 ## Maintenance Notes
 
-- Prefer WebP exports to keep bundle size small; only use alternate formats when integrating with third-party platforms that lack WebP support.
+- Current build ships synthetic PNG placeholders generated via Pillow; replace with production artwork as it becomes available.
 - Preserve transparent backgrounds for logos so they render correctly on glass surfaces in both themes.
 - When replacing any file, keep the filename stable or update import paths throughout the codebase to avoid broken references.
 - Maintain the Open Graph image at 1200 × 630 pixels to satisfy major social media platforms.

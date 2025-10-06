@@ -2,10 +2,10 @@
   import { _, json } from 'svelte-i18n';
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
-  import ProductsHero from './components/ProductsHero.svelte';
-  import ProductsShowcase from './components/ProductsShowcase.svelte';
-  import ProductCatalog from './components/ProductCatalog.svelte';
-  import ProductsCTA from './components/ProductsCTA.svelte';
+  import HeroWrapper from '$components/hero/HeroWrapper.svelte';
+  import ProductDemoPreview from '$components/ProductDemoPreview.svelte';
+  import Icon from '$components/icons/Icon.svelte';
+  import { revealOnScroll, staggerReveal } from '$utils/animations';
 
   /** @type {Array<'nodevoyage' | 'ideonautix'>} */
   const productKeys = ['nodevoyage', 'ideonautix'];
@@ -97,6 +97,9 @@
   $: ctaText = ensureString($json?.('products.cta_text'), fallbackCtaText);
   $: ctaPrimaryLabel = ensureString($json?.('products.cta_join'), fallbackCtaJoin);
   $: ctaSecondaryLabel = ensureString($json?.('products.cta_contact'), fallbackCtaContact);
+
+  $: heroTitleChars = Array.from(heroTitle ?? '');
+  $: heroSubtitleWords = heroSubtitle ? heroSubtitle.split(/\s+/).filter(Boolean) : [];
 
   $: heroProducts = productKeys.reduce((acc, key) => {
     const fallback = fallbackProductCopy[key];
@@ -234,22 +237,16 @@
       <p>{showcaseSubtitle}</p>
     </div>
     <div class="demo-previews__grid" use:staggerReveal={{ stagger: 140 }}>
-      <ProductDemoPreview
-        title={$_('products.demos.nodevoyage')}
-        description={nodevoyageDescription}
-        host={$_('products.demos.nodevoyage_host')}
-        href="https://nodevoyage.algorhythmics.dev/"
-        cta={$_('products.demos.nodevoyage')}
-        accent="voyage"
-      />
-      <ProductDemoPreview
-        title={$_('products.demos.ideonautix')}
-        description={ideonautixDescription}
-        host={$_('products.demos.ideonautix_host')}
-        href="https://ideonautix.algorhythmics.dev/"
-        cta={$_('products.demos.ideonautix')}
-        accent="aurora"
-      />
+      {#each demos as demo (demo.id)}
+        <ProductDemoPreview
+          title={demo.title}
+          description={demo.description}
+          host={demo.host}
+          href={demo.href}
+          cta={demo.cta}
+          accent={demo.accent}
+        />
+      {/each}
     </div>
   </div>
 </section>

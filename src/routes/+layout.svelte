@@ -11,7 +11,10 @@
   import { theme } from '$stores/theme';
   
   export let data;
-  
+  export let params;
+
+  $: routeKey = JSON.stringify(params ?? {});
+
   onMount(() => {
     // Initialize theme on mount
     if (typeof window !== 'undefined') {
@@ -57,7 +60,9 @@
     <Navigation />
     
     <main>
-      <slot />
+      {#key routeKey}
+        <slot />
+      {/key}
     </main>
     
     <Footer />
