@@ -21,7 +21,7 @@ html {
   transition: background-color 320ms var(--ease-in-out), color 320ms var(--ease-in-out);
 }
 
-:global(html[data-theme='dark']) {
+:global([data-theme='dark']) html {
   color-scheme: dark;
   background: var(--bg-primary);
 }
@@ -48,7 +48,7 @@ body {
   transition: color 320ms var(--ease-in-out);
 }
 
-:global(body[data-theme='dark']) {
+:global([data-theme='dark']) body {
   color: var(--text-primary);
 }
 
