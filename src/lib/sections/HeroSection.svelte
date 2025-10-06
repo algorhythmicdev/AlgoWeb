@@ -1,28 +1,22 @@
 <script>
   import { _, json } from 'svelte-i18n';
-  import timelineData from '$data/timeline.json';
-  import { magnetic } from '$utils/animations';
-  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
+  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import en from '$lib/i18n/en.json';
-
-  const upcomingMilestone = timelineData.milestones?.[0];
-  const milestoneDate = upcomingMilestone
-    ? new Date(`${upcomingMilestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })
-    : '';
-
-  const heroSignals = [
-    { label: 'hero.signals.studio_phase', value: 'hero.signals.studio_phase_value' },
-    { label: 'hero.signals.focus_tracks', value: 'hero.signals.focus_tracks_value' },
-    { label: 'hero.signals.research', value: 'hero.signals.research_value' }
-  ];
 
   const fallbackTitle = /** @type {{ lead: string; brand: string; trail: string }} */ (en.hero.title);
   const fallbackPillars = Array.isArray(en.hero.pillars) ? en.hero.pillars : [];
-  const fallbackLeadPhrases = [en.hero.tagline, ...fallbackPillars].filter(Boolean);
-  const fallbackFocusPoints = Array.isArray(en.hero.focus?.points) ? en.hero.focus.points : [];
+  const fallbackHighlight = (() => {
+    const second = fallbackPillars[1];
+    const first = fallbackPillars[0];
+    if (typeof second === 'string' && second.trim()) return second.trim();
+    if (typeof first === 'string' && first.trim()) return first.trim();
+    return '';
+  })();
 
   let heroTitle = fallbackTitle;
+  let heroHighlight = fallbackHighlight;
+  let heroPillars = fallbackPillars.slice(0, 3);
 
   /**
    * @template T
@@ -39,517 +33,324 @@
   const isHeroTitle = (value) =>
     !!value && typeof value === 'object' && 'lead' in value && 'brand' in value && 'trail' in value;
 
+  /**
+   * @param {unknown} value
+   * @returns {string}
+   */
+  const normaliseHighlight = (value) => {
+    return typeof value === 'string' && value.trim() ? value.trim() : '';
+  };
+
   $: heroTitle = (() => {
     const value = $json?.('hero.title');
     return isHeroTitle(value) ? value : fallbackTitle;
   })();
 
-  $: heroHighlights = (() => {
-    const value = ensureArray($json?.('hero.pillars'), fallbackPillars);
-    return value.slice(0, 3);
-  })();
+  $: heroPillars = ensureArray($json?.('hero.pillars'), fallbackPillars).slice(0, 3);
 
-  $: heroLeadPhrases = (() => {
-    const tagline = $json?.('hero.tagline');
-    const phrases = ensureArray($json?.('hero.pillars'), fallbackPillars);
-    const list = [];
-    if (typeof tagline === 'string' && tagline.trim()) {
-      list.push(tagline);
-    }
-    list.push(...phrases);
-    return list.length ? list : fallbackLeadPhrases;
-  })();
-
-  $: focusPoints = (() => {
-    return ensureArray($json?.('hero.focus.points'), fallbackFocusPoints);
+  $: heroHighlight = (() => {
+    const preferred = normaliseHighlight(heroPillars[1]);
+    const fallbackCandidate = preferred || normaliseHighlight(heroPillars[0]);
+    return fallbackCandidate || fallbackHighlight;
   })();
 </script>
 
 <HeroWrapper
   id="hero"
-  class="hero hero--landing"
-  introReveal={{ stagger: 110 }}
-  asideReveal={{ delay: 140, stagger: 130 }}
+  class="hero hero--landing hero--centered hero--landing-center"
+  showAside={false}
+  introReveal={{ delay: 60, stagger: 120 }}
 >
+  <svelte:fragment slot="backdrop">
+    <div class="hero-backdrop" aria-hidden="true">
+      <span class="hero-backdrop__halo hero-backdrop__halo--primary"></span>
+      <span class="hero-backdrop__halo hero-backdrop__halo--secondary"></span>
+      <span class="hero-backdrop__grid"></span>
+    </div>
+  </svelte:fragment>
+
   <svelte:fragment slot="status">
-    <span class="status-chip">{$_('hero.status')}</span>
+    <span class="hero-badge">{$_('hero.status')}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="title">
-    <h1 class="hero-title">
-      <span class="hero-title__line text-gradient">{heroTitle.lead}</span>
-      <span class="hero-title__brand" aria-label={$_('hero.brand_aria')}>
-        <span class="hero-title__brand-glow" aria-hidden="true"></span>
-        <span class="hero-title__brand-text" aria-hidden="true">{heroTitle.brand}</span>
-        <span class="sr-only">{heroTitle.brand}</span>
+    <div class="hero-heading" aria-live="polite">
+      <span class="hero-heading__line hero-heading__line--lead">{heroTitle.lead}</span>
+      <span class="hero-heading__brand">
+        <AnimatedHeadline
+          variant="glow"
+          text={heroTitle.brand}
+          ariaLabel={$_('hero.brand_aria')}
+        />
       </span>
-      <span class="hero-title__line hero-title__line--trail text-gradient">{heroTitle.trail}</span>
-    </h1>
+      <span class="hero-heading__line hero-heading__line--trail">{heroTitle.trail}</span>
+    </div>
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
-    <div class="hero-headline">
-      <AnimatedHeadline
-        variant="typewriter"
-        phrases={heroLeadPhrases}
-        holdDuration={2600}
-        typingSpeed={42}
-      />
-    </div>
+    <p class="hero-motto">{$_('hero.tagline')}</p>
   </svelte:fragment>
 
   <svelte:fragment slot="description">
     <p class="hero-description">{$_('hero.subtitle')}</p>
-  </svelte:fragment>
-
-  <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      <a href="/products" class="btn btn-gradient" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
-      <a href="/consulting" class="btn btn-secondary" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
-    </div>
+    <p class="hero-description hero-description--secondary">{$_('hero.description')}</p>
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
-    {#if heroHighlights.length}
-      <ul class="hero-highlights">
-        {#each heroHighlights as highlight}
-          <li>{highlight}</li>
-        {/each}
-      </ul>
-    {/if}
-  </svelte:fragment>
-
-  <svelte:fragment slot="metrics">
-    <dl class="hero-metrics">
-      {#each heroSignals as signal}
-        <div class="metric">
-          <dt>{$_(signal.label)}</dt>
-          <dd>{$_(signal.value)}</dd>
-        </div>
-      {/each}
-    </dl>
-  </svelte:fragment>
-
-  <svelte:fragment slot="aside">
-    {#if upcomingMilestone}
-      <article class="glass-card milestone">
-        <header>
-          <span class="kicker">{$_('hero.next_milestone')}</span>
-          <span class="timestamp">{milestoneDate}</span>
-        </header>
-        <h2>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h2>
-        <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
-        {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
-          <p class="note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
+    {#if heroHighlight || heroPillars.length}
+      <div class="hero-insight" aria-label={$_('hero.pillars_title')}>
+        {#if heroHighlight}
+          <p class="hero-insight__headline">{heroHighlight}</p>
         {/if}
-        <a href="#journey" class="inline-link">{$_('hero.milestone_cta')}</a>
-      </article>
+        {#if heroPillars.length}
+          <ul class="hero-insight__list">
+            {#each heroPillars as pillar}
+              <li>{pillar}</li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
     {/if}
-
-    <article class="glass-card focus">
-      <header>
-        <span class="kicker">{$_('hero.focus.kicker')}</span>
-        <h2>{$_('hero.focus.title')}</h2>
-      </header>
-      <p>{$_('hero.focus.description')}</p>
-      {#if focusPoints.length}
-        <ul>
-          {#each focusPoints as point}
-            <li>{point}</li>
-          {/each}
-        </ul>
-      {/if}
-      <a href="/community" class="inline-link">{$_('hero.focus.cta')}</a>
-    </article>
   </svelte:fragment>
 </HeroWrapper>
 
 <style>
-  :global(.hero--landing) {
-    --hero-actions-gap: 0.85rem;
-    --hero-metrics-gap: clamp(1rem, 2.6vw, 1.6rem);
-    --hero-aside-gap: clamp(1.6rem, 3.4vw, 2.4rem);
+  :global(.hero--landing-center) {
+    --hero-backdrop-inset: clamp(-6rem, -12vw, -3rem) 0 auto;
+    --hero-backdrop-height: clamp(16rem, 42vw, 30rem);
+    --hero-intro-gap: clamp(1.3rem, 3.2vw, 2.2rem);
   }
 
-  :global(.hero--landing .hero-metrics) {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  }
-
-  .hero-title {
-    display: inline-grid;
-    gap: clamp(0.35rem, 1.4vw, 0.55rem);
-    align-items: start;
-    justify-items: start;
-  }
-
-  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-    .hero-title {
-      background: none;
-      -webkit-background-clip: border-box;
-      background-clip: border-box;
-      color: var(--heading-color);
-      animation: none;
-    }
-  }
-
-  .hero-title__line {
-    display: inline-flex;
-    align-items: center;
-    gap: clamp(0.35rem, 1vw, 0.55rem);
-  }
-
-  .hero-title__brand {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(0.15em, 0.5vw, 0.25em) clamp(0.45em, 1vw, 0.7em);
-    border-radius: var(--radius-full);
-    isolation: isolate;
-  }
-
-  .hero-title__brand::before {
-    content: '';
-    position: absolute;
-    inset: -18%;
-    border-radius: inherit;
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(var(--cherry-red-rgb), 0.28) 40%);
-    filter: blur(32px);
-    opacity: 0.45;
-    z-index: 0;
-    animation: heroBrandAura 14s var(--ease-in-out) infinite alternate;
-  }
-
-  .hero-title__brand::after {
-    content: '';
+  .hero-backdrop {
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.65) 60%, rgba(var(--voyage-blue-rgb), 0.24) 40%);
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.18) 55%, rgba(var(--voyage-blue-rgb), 0.18) 45%);
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-backdrop__halo {
+    position: absolute;
+    width: clamp(18rem, 46vw, 32rem);
+    height: clamp(18rem, 46vw, 32rem);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.55;
+    transform: scale(0.85);
+    animation: heroHaloFloat 18s ease-in-out infinite;
+  }
+
+  .hero-backdrop__halo--primary {
+    background: radial-gradient(circle at 45% 35%, rgba(var(--voyage-blue-rgb), 0.48), transparent 65%);
+    animation-delay: -4s;
+  }
+
+  .hero-backdrop__halo--secondary {
+    background: radial-gradient(circle at 55% 65%, rgba(var(--aurora-purple-rgb), 0.4), transparent 70%);
+    animation-delay: -10s;
+  }
+
+  .hero-backdrop__grid {
+    position: absolute;
+    inset: auto;
+    width: min(82vw, 640px);
+    height: min(82vw, 640px);
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.45) 60%, transparent 40%);
+    mask: radial-gradient(circle, rgba(0, 0, 0, 0.95), transparent 70%);
+    animation: heroGridSpin 26s linear infinite;
     opacity: 0.35;
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    z-index: 0;
   }
 
-  .hero-title__brand-text {
-    position: relative;
-    z-index: 1;
-    font-size: clamp(2.8rem, 7vw, 5rem);
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6ch;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.2) 65%, transparent);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.46) 50%, transparent);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .hero-heading {
+    display: grid;
+    gap: clamp(0.45rem, 1.6vw, 0.85rem);
+  }
+
+  .hero-heading__brand {
+    display: block;
+  }
+
+  .hero-heading__line {
+    font-size: clamp(1.3rem, 3.8vw, 2rem);
+    letter-spacing: -0.02em;
+    color: var(--text-secondary);
+  }
+
+  .hero-heading__brand :global(.animated-headline__glow) {
+    font-size: clamp(3rem, 8vw, 5.2rem);
     font-weight: var(--weight-black);
-    line-height: 1.05;
     letter-spacing: -0.04em;
-    background: var(--gradient-heading-strong);
-    background-size: 280% auto;
-    background-position: 0% 50%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    text-shadow: none;
-    animation: heroBrandPulse 8s var(--ease-spring) infinite alternate;
+    text-transform: uppercase;
   }
 
-  @keyframes heroBrandPulse {
-    0% {
-      background-position: 0% 50%;
-      transform: scale(0.96);
+  .hero-heading__line--trail {
+    color: var(--text-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .hero-motto {
+    margin: 0;
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    color: var(--text-primary);
+    font-weight: var(--weight-medium);
+  }
+
+  .hero-description {
+    margin: 0;
+    max-width: 58ch;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+  }
+
+  .hero-description + .hero-description {
+    margin-top: 0.4rem;
+  }
+
+  .hero-insight {
+    display: grid;
+    gap: 1.2rem;
+    padding: clamp(1.2rem, 3.2vw, 1.8rem) clamp(1.4rem, 3.6vw, 2.2rem);
+    border-radius: clamp(1.6rem, 3.8vw, 2.6rem);
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.26) 60%, transparent);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.48) 55%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 28px 48px rgba(15, 18, 38, 0.12);
+  }
+
+  .hero-insight__headline {
+    margin: 0;
+    font-size: clamp(1.1rem, 2.6vw, 1.35rem);
+    color: var(--text-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .hero-insight__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+
+  .hero-insight__list li {
+    position: relative;
+    padding-inline-start: 1.5rem;
+  }
+
+  .hero-insight__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--gradient-hero);
+    opacity: 0.75;
+    animation: heroPulseDot 3.6s ease-in-out infinite;
+  }
+
+  @keyframes heroHaloFloat {
+    0%,
+    100% {
+      transform: scale(0.9) translate3d(0, -4%, 0);
+      opacity: 0.45;
     }
 
     50% {
-      background-position: 100% 50%;
-      transform: scale(1.02);
-    }
-
-    100% {
-      background-position: 0% 50%;
-      transform: scale(0.97);
+      transform: scale(1) translate3d(0, 6%, 0);
+      opacity: 0.6;
     }
   }
 
-  @keyframes heroBrandAura {
-    0% {
-      opacity: 0.32;
-      transform: scale(0.96);
+  @keyframes heroGridSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes heroPulseDot {
+    0%,
+    100% {
+      transform: scale(0.85);
+      opacity: 0.5;
     }
 
     50% {
-      opacity: 0.58;
-      transform: scale(1.04);
-    }
-
-    100% {
-      opacity: 0.36;
-      transform: scale(1);
+      transform: scale(1.1);
+      opacity: 0.9;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-title__brand-text {
-      animation: none;
-      transform: none;
-    }
-
-    .hero-title__brand::before {
+    .hero-backdrop__halo,
+    .hero-backdrop__grid,
+    .hero-insight__list li::before {
       animation: none;
     }
   }
 
-  .status-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.55rem 1.35rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--surface-glass) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent 28%);
-    color: var(--text-primary);
-    font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  :global([data-base-theme='dark']) .hero-badge {
+    background: rgba(16, 22, 38, 0.65);
+    border-color: rgba(120, 146, 220, 0.38);
+    color: rgba(210, 220, 255, 0.86);
   }
 
-  .hero-headline {
-    display: inline-flex;
-    align-items: center;
-    min-height: clamp(3.2rem, 6vw, 4.1rem);
-    padding: clamp(0.65rem, 2vw, 0.95rem) clamp(1.1rem, 2.8vw, 1.6rem);
-    border-radius: clamp(2.6rem, 5vw, 3.6rem);
-    background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55), 0 22px 45px rgba(13, 23, 46, 0.18);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    position: relative;
-    overflow: hidden;
+  :global([data-base-theme='dark']) .hero-insight {
+    background: rgba(16, 22, 38, 0.72);
+    border-color: rgba(120, 146, 220, 0.35);
+    box-shadow: 0 36px 60px rgba(2, 8, 18, 0.6);
   }
 
-  .hero-headline::before {
-    content: '';
-    position: absolute;
-    inset: -140% -60% auto;
-    height: 260%;
-    background: radial-gradient(circle at 18% 28%, rgba(var(--voyage-blue-rgb), 0.2), transparent 62%),
-      radial-gradient(circle at 82% 24%, rgba(var(--signal-yellow-rgb), 0.16), transparent 66%);
-    opacity: 0.85;
-    pointer-events: none;
+  :global([data-base-theme='dark']) .hero-backdrop__halo--primary {
+    background: radial-gradient(circle at 45% 35%, rgba(var(--voyage-blue-rgb), 0.55), transparent 72%);
   }
 
-  .hero-headline::after {
-    content: '';
-    position: absolute;
-    inset: 12% 14%;
-    border-radius: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.32);
-    opacity: 0.75;
-    pointer-events: none;
+  :global([data-base-theme='dark']) .hero-backdrop__halo--secondary {
+    background: radial-gradient(circle at 55% 65%, rgba(var(--aurora-purple-rgb), 0.48), transparent 76%);
   }
 
-  .hero-headline :global(.animated-headline) {
-    width: 100%;
+  :global([data-theme='contrast']) .hero-badge {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    color: #fff;
   }
 
-  :global([data-base-theme='dark']) .hero-headline {
-    background: linear-gradient(128deg, rgba(19, 26, 45, 0.78), rgba(19, 26, 45, 0.56));
-    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 22px 45px rgba(4, 12, 26, 0.42);
+  :global([data-theme='contrast']) .hero-insight {
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: none;
   }
 
-  :global([data-theme='contrast']) .hero-headline {
-    background: linear-gradient(128deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.68));
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.72);
+  :global([data-theme='contrast']) .hero-insight__list li::before {
+    background: #fff;
   }
 
-  .hero-description {
-    font-size: clamp(1.05rem, 2.2vw, 1.5rem);
-    color: var(--text-secondary);
-    max-width: 60ch;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-  }
-
-  .btn {
-    min-width: clamp(10rem, 18vw, 12rem);
-  }
-
-  .hero-highlights {
-    display: grid;
-    gap: 0.75rem;
-    padding: clamp(1.2rem, 2.4vw, 1.8rem);
-    border-radius: clamp(1.4rem, 3.4vw, 2.2rem);
-    background: color-mix(in srgb, var(--surface-glass) 90%, rgba(var(--voyage-blue-rgb), 0.1) 10%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent 28%);
-    box-shadow: var(--shadow-xs);
-    list-style: none;
-  }
-
-  .hero-highlights li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-  }
-
-  .hero-highlights li::before {
-    content: '';
-    width: 0.65rem;
-    height: 0.65rem;
-    border-radius: 50%;
-    background: var(--voyage-blue);
-    box-shadow: 0 0 12px rgba(var(--voyage-blue-rgb), 0.4);
-  }
-
-  :global([data-base-theme='dark']) .hero-highlights {
-    background: color-mix(in srgb, rgba(6, 12, 24, 0.86) 68%, rgba(var(--voyage-blue-rgb), 0.16) 32%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.08) 40%);
-  }
-
-  :global([data-base-theme='dark']) .hero-highlights li::before {
-    background: color-mix(in srgb, var(--voyage-blue) 60%, var(--aurora-purple) 40%);
-    box-shadow: 0 0 14px rgba(var(--aurora-purple-rgb), 0.45);
-  }
-
-  .hero-metrics {
-    display: grid;
-    gap: clamp(1rem, 2.6vw, 1.6rem);
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  }
-
-  .metric {
-    display: grid;
-    gap: 0.35rem;
-    padding: 1.1rem 1.2rem;
-    border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--voyage-blue-rgb), 0.08) 14%);
-    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 62%, rgba(255, 255, 255, 0.4) 38%);
-    box-shadow: var(--shadow-xs);
-  }
-
-  .metric dt {
-    font-size: clamp(0.7rem, 1vw, 0.82rem);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: color-mix(in srgb, var(--voyage-blue) 66%, var(--aurora-purple) 34%);
-  }
-
-  .metric dd {
-    margin: 0;
-    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
-    font-weight: var(--weight-semibold);
-    color: var(--text-primary);
-  }
-
-  :global([data-base-theme='dark']) .metric {
-    background: color-mix(in srgb, rgba(6, 12, 24, 0.88) 68%, rgba(var(--voyage-blue-rgb), 0.2) 32%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
-  }
-
-  .glass-card {
-    display: grid;
-    gap: 1rem;
-    padding: clamp(1.6rem, 3.2vw, 2.3rem);
-    border-radius: clamp(1.8rem, 4vw, 2.6rem);
-    background: color-mix(in srgb, var(--surface-glass) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent 28%);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .glass-card header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .glass-card h2 {
-    margin: 0;
-    font-size: clamp(1.45rem, 2.6vw, 1.9rem);
-    line-height: var(--leading-snug);
-  }
-
-  .glass-card p {
-    margin: 0;
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  .glass-card ul {
-    margin: 0;
-    padding-left: 1.1rem;
-    color: var(--text-secondary);
-    display: grid;
-    gap: 0.55rem;
-    font-size: var(--text-small);
-  }
-
-  .glass-card ul li::marker {
-    color: var(--voyage-blue);
-  }
-
-  .kicker {
-    font-size: clamp(0.7rem, 1vw, 0.82rem);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-weight: var(--weight-semibold);
-    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
-  }
-
-  .timestamp {
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-    padding: 0.4rem 0.85rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--surface-glass) 80%, rgba(var(--voyage-blue-rgb), 0.14) 20%);
-    border: 1px solid color-mix(in srgb, var(--border-subtle) 68%, transparent 32%);
-  }
-
-  .note {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
-  }
-
-  :global([data-base-theme='dark']) .glass-card {
-    background: color-mix(in srgb, rgba(4, 10, 22, 0.9) 68%, rgba(var(--voyage-blue-rgb), 0.2) 32%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
-    box-shadow: var(--shadow-md);
-  }
-
-  :global([data-base-theme='dark']) .timestamp {
-    background: color-mix(in srgb, rgba(6, 12, 24, 0.84) 70%, rgba(var(--voyage-blue-rgb), 0.24) 30%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 60%, rgba(255, 255, 255, 0.1) 40%);
-  }
-
-  @media (max-width: 1024px) {
-    :global(.hero--landing .hero-wrapper__shell) {
-      grid-template-columns: 1fr;
-    }
-
-    :global(.hero--landing .hero-wrapper__aside) {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  @media (max-width: 720px) {
-    :global(.hero--landing) {
-      --hero-padding-block-start: clamp(5rem, 18vw, 6.5rem);
-    }
-
-    :global(.hero--landing .hero-actions) {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .metric {
-      padding: clamp(0.9rem, 4vw, 1.2rem);
-    }
-
-    .glass-card {
-      padding: clamp(1.3rem, 4.4vw, 1.8rem);
+  @media (max-width: 640px) {
+    .hero-insight {
+      padding-inline: clamp(1rem, 6vw, 1.6rem);
     }
   }
 </style>

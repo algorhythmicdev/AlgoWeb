@@ -186,7 +186,7 @@
 </svelte:head>
 
 <HeroWrapper
-  class="hero hero--products section"
+  class="hero hero--products hero--centered section"
   showAside={false}
   introReveal={{ stagger: 120 }}
 >
@@ -199,7 +199,7 @@
   </svelte:fragment>
 
   <svelte:fragment slot="status">
-    <span class="eyebrow text-gradient">{heroLabel}</span>
+    <span class="hero-badge products-hero__badge">{heroLabel}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="title">
@@ -321,12 +321,14 @@
   :global(.hero--products .hero-wrapper__intro) {
     max-width: min(100%, 960px);
     margin: 0 auto;
-    justify-items: flex-start;
-    text-align: left;
+    justify-items: center;
+    text-align: center;
     position: relative;
   }
 
-  :global(.hero--products .hero-wrapper__intro .eyebrow) { justify-self: flex-start; }
+  :global(.hero--products .hero-wrapper__intro .hero-badge) {
+    justify-self: center;
+  }
 
   .products-hero__backdrop {
     position: absolute;
@@ -440,6 +442,24 @@
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.2vw, 1.45rem);
     max-width: 64ch;
+  }
+
+  .products-hero__badge {
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
+    border-color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.12em;
+  }
+
+  :global([data-base-theme='dark']) .products-hero__badge {
+    background: rgba(24, 32, 56, 0.68);
+    border-color: rgba(120, 146, 220, 0.4);
+    color: rgba(220, 232, 255, 0.88);
+  }
+
+  :global([data-theme='contrast']) .products-hero__badge {
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    color: #fff;
   }
 
   .demo-previews {

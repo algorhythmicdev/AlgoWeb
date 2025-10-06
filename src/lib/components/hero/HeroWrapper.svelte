@@ -134,6 +134,29 @@
     opacity: 0.82;
   }
 
+  :global(.hero--centered) {
+    --hero-shell-columns: minmax(0, 1fr);
+    --hero-shell-gap: clamp(2rem, 5vw, 3.2rem);
+    --hero-shell-align: center;
+    --hero-intro-gap: clamp(1.15rem, 3vw, 1.85rem);
+    --hero-intro-align: center;
+    --hero-padding-block-start: clamp(5.5rem, 14vw, 8.2rem);
+    --hero-padding-block-end: clamp(4rem, 10vw, 6.4rem);
+  }
+
+  :global(.hero--centered) .hero-wrapper__intro {
+    justify-items: center;
+    text-align: center;
+  }
+
+  :global(.hero--centered) .hero-wrapper__intro :global(.hero-actions) {
+    justify-content: center;
+  }
+
+  :global(.hero--centered) .hero-wrapper__intro :global(.hero-highlights) {
+    justify-items: center;
+  }
+
   @media (max-width: 1024px) {
     .hero-wrapper__shell {
       grid-template-columns: minmax(0, 1fr);

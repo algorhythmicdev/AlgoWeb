@@ -61,200 +61,186 @@
 
 <section class="founders section" id="founders" use:revealOnScroll>
   <div class="container">
-    <div class="founders-shell">
-      <header class="founders-header">
-        <div>
-          <span class="eyebrow">{$_('founders.subtitle')}</span>
-          <h2>{$_('founders.title')}</h2>
-        </div>
-        <p class="section-lead">{$_('story.vision_text')}</p>
-      </header>
+    <header class="founders-header">
+      <div class="founders-header__intro">
+        <span class="eyebrow">{$_('founders.subtitle')}</span>
+        <h2>{$_('founders.title')}</h2>
+      </div>
+      <p class="founders-header__lead">{$_('story.vision_text')}</p>
+    </header>
 
-      <div class="founders-layout">
-        <div class="founders-stack" use:staggerReveal={{ stagger: 140 }}>
-          {#each founderProfiles as founder (founder.key)}
-            <article class="founder-panel">
-              <header class="founder-panel__header">
-                <div class="founder-avatar">
-                  <img src={founder.avatar} alt={founder.name} loading="lazy" />
-                  <span class="founder-avatar__halo" aria-hidden="true"></span>
-                </div>
-                <div class="founder-panel__identity">
-                  <span class="founder-panel__role">{founder.role}</span>
-                  <h3>{founder.name}</h3>
-                </div>
-                <div class="founder-panel__contacts" aria-label={contactLabel}>
-                  {#if founder.email}
-                    <a class="contact-chip" href={`mailto:${founder.email}`}>{$_('founders.email_cta')}</a>
-                  {/if}
-                  {#if founder.linkedin}
-                    <a class="contact-chip" href={founder.linkedin} target="_blank" rel="noreferrer">{$_('founders.linkedin_cta')}</a>
-                  {/if}
-                </div>
-              </header>
+    <div class="founders-grid" use:staggerReveal={{ stagger: 140 }}>
+      {#each founderProfiles as founder (founder.key)}
+        <article class="founder-card">
+          <div class="founder-card__top">
+            <div class="founder-card__avatar">
+              <img src={founder.avatar} alt={founder.name} loading="lazy" />
+              <span class="founder-card__glow" aria-hidden="true"></span>
+            </div>
+            <div class="founder-card__identity">
+              <span class="founder-card__role">{founder.role}</span>
+              <h3>{founder.name}</h3>
+            </div>
+            <div class="founder-card__contacts" aria-label={contactLabel}>
+              {#if founder.email}
+                <a class="contact-chip" href={`mailto:${founder.email}`}>{$_('founders.email_cta')}</a>
+              {/if}
+              {#if founder.linkedin}
+                <a class="contact-chip" href={founder.linkedin} target="_blank" rel="noreferrer">{$_('founders.linkedin_cta')}</a>
+              {/if}
+            </div>
+          </div>
 
-              <p class="founder-panel__bio">{founder.bio}</p>
+          <p class="founder-card__bio">{founder.bio}</p>
 
-              <div class="founder-panel__focus">
-                <span class="founder-panel__focus-label">{founder.focusLabel}</span>
-                <p>{founder.focus}</p>
+          <div class="founder-card__focus">
+            <span class="founder-card__focus-label">{founder.focusLabel}</span>
+            <p>{founder.focus}</p>
+          </div>
+
+          <div class="founder-card__details">
+            {#if founder.expertise.length}
+              <div class="founder-card__column" aria-label={expertiseLabel}>
+                <span class="founder-card__eyebrow">{expertiseLabel}</span>
+                <ul class="founder-card__chips">
+                  {#each founder.expertise as item}
+                    <li>{item}</li>
+                  {/each}
+                </ul>
               </div>
+            {/if}
 
-              <div class="founder-panel__grid">
-                {#if founder.expertise.length}
-                  <div class="founder-panel__column" aria-label={expertiseLabel}>
-                    <span class="founder-panel__eyebrow">{expertiseLabel}</span>
-                    <ul class="founder-panel__chips">
-                      {#each founder.expertise as item}
-                        <li>{item}</li>
-                      {/each}
-                    </ul>
-                  </div>
-                {/if}
-
-                {#if founder.achievements.length}
-                  <div class="founder-panel__column" aria-label={achievementsLabel}>
-                    <span class="founder-panel__eyebrow">{achievementsLabel}</span>
-                    <ul class="founder-panel__highlights">
-                      {#each founder.achievements as item}
-                        <li>{item}</li>
-                      {/each}
-                    </ul>
-                  </div>
-                {/if}
+            {#if founder.achievements.length}
+              <div class="founder-card__column" aria-label={achievementsLabel}>
+                <span class="founder-card__eyebrow">{achievementsLabel}</span>
+                <ul class="founder-card__highlights">
+                  {#each founder.achievements as item}
+                    <li>{item}</li>
+                  {/each}
+                </ul>
               </div>
-            </article>
+            {/if}
+          </div>
+        </article>
+      {/each}
+    </div>
+
+    <aside class="founders-spotlight" use:staggerReveal={{ delay: 160, stagger: 80 }}>
+      <div class="founders-spotlight__inner">
+        <span class="founders-spotlight__label">{$_('founders.slaff.brand_title')}</span>
+        <p class="founders-spotlight__lead">{$_('founders.slaff.brand_intro')}</p>
+        <div class="founders-spotlight__brands">
+          {#each brandClients as client}
+            <span class="brand-chip">
+              <img src={client.logo} alt={client.name} loading="lazy" />
+              <span>{client.name}</span>
+            </span>
           {/each}
         </div>
-
-        <aside class="founders-aside" use:staggerReveal={{ delay: 160, stagger: 80 }}>
-          <div class="brand-stage">
-            <span class="label">{$_('founders.slaff.brand_title')}</span>
-            <div class="brand-grid">
-              {#each brandClients as client}
-                <span class="brand-chip">
-                  <img src={client.logo} alt={client.name} loading="lazy" />
-                  <span>{client.name}</span>
-                </span>
-              {/each}
-            </div>
-            <p class="brand-note">{$_('founders.slaff.brand_context')}</p>
-          </div>
-        </aside>
+        <p class="founders-spotlight__note">{$_('founders.slaff.brand_context')}</p>
       </div>
-    </div>
+    </aside>
   </div>
 </section>
 
 <style>
-  .founders-shell {
-    display: grid;
-    gap: clamp(2rem, 5vw, 3.6rem);
-  }
-
   .founders-header {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: clamp(1.5rem, 4vw, 2.8rem);
+    gap: clamp(1.6rem, 4vw, 2.8rem);
+    margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
   }
 
-  .founders-header h2 {
+  .founders-header__intro h2 {
     margin: 0;
   }
 
-  .founders-header .section-lead {
+  .founders-header__lead {
     margin: 0;
-    max-width: clamp(34ch, 44vw, 50ch);
+    max-width: clamp(36ch, 44vw, 54ch);
     color: var(--text-secondary);
   }
 
-  .founders-layout {
+  .founders-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    gap: clamp(2.4rem, 5vw, 3.5rem);
-    align-items: start;
+    gap: clamp(2rem, 4vw, 3.2rem);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 
-  .founders-stack {
-    display: grid;
-    gap: clamp(2rem, 4vw, 3rem);
-  }
-
-  .founder-panel {
+  .founder-card {
     position: relative;
     display: grid;
-    gap: clamp(1.5rem, 3.2vw, 2.2rem);
+    gap: clamp(1.4rem, 3vw, 2.1rem);
     padding: clamp(1.8rem, 4vw, 2.6rem);
-    border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    background: linear-gradient(136deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.68));
-    box-shadow: 0 28px 55px rgba(15, 23, 42, 0.12);
+    border-radius: clamp(1.8rem, 4vw, 2.6rem);
+    border: 1px solid color-mix(in srgb, var(--border-strong) 45%, transparent);
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.85) 70%, transparent);
+    box-shadow: 0 28px 48px rgba(15, 23, 42, 0.12);
     overflow: hidden;
   }
 
-  .founder-panel::before {
+  .founder-card::before {
     content: '';
     position: absolute;
-    inset: -40% -10% auto;
+    inset: -35% -20% auto;
     height: 70%;
     background: radial-gradient(circle at 20% 40%, rgba(var(--voyage-blue-rgb), 0.18), transparent 70%),
-      radial-gradient(circle at 80% 30%, rgba(var(--signal-yellow-rgb), 0.16), transparent 68%);
-    opacity: 0.9;
+      radial-gradient(circle at 76% 26%, rgba(var(--aurora-purple-rgb), 0.16), transparent 68%);
+    opacity: 0.85;
     pointer-events: none;
   }
 
-  .founder-panel__header {
+  .founder-card__top {
     position: relative;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: clamp(1rem, 2.4vw, 1.6rem);
+    gap: clamp(1rem, 2.6vw, 1.6rem);
     align-items: center;
     z-index: 1;
   }
 
-  .founder-avatar {
+  .founder-card__avatar {
     position: relative;
-    width: clamp(76px, 12vw, 96px);
-    height: clamp(76px, 12vw, 96px);
+    width: clamp(74px, 10vw, 92px);
+    height: clamp(74px, 10vw, 92px);
   }
 
-  .founder-avatar img {
+  .founder-card__avatar img {
     width: 100%;
     height: 100%;
     border-radius: 28px;
     object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.75);
+    border: 3px solid rgba(255, 255, 255, 0.8);
     position: relative;
     z-index: 1;
   }
 
-  .founder-avatar__halo {
+  .founder-card__glow {
     content: '';
     position: absolute;
-    inset: -15%;
+    inset: -18%;
     border-radius: 32px;
-    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.32), rgba(var(--aurora-purple-rgb), 0.24));
+    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.32), rgba(var(--aurora-purple-rgb), 0.26));
     filter: blur(18px);
-    opacity: 0.9;
   }
 
-  .founder-panel__identity h3 {
+  .founder-card__identity h3 {
     margin: 0;
-    font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
   }
 
-  .founder-panel__role {
-    display: inline-block;
+  .founder-card__role {
+    display: inline-flex;
     font-size: var(--text-small);
-    text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(26, 33, 55, 0.62);
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--text-secondary) 65%, transparent);
     margin-bottom: 0.35rem;
   }
 
-  .founder-panel__contacts {
+  .founder-card__contacts {
     display: flex;
     flex-direction: column;
     gap: 0.55rem;
@@ -266,8 +252,8 @@
     justify-content: center;
     padding: 0.45rem 1.1rem;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(26, 33, 55, 0.12);
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.92) 80%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-strong) 35%, transparent);
     text-decoration: none;
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
@@ -278,17 +264,17 @@
   .contact-chip:hover,
   .contact-chip:focus-visible {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.16);
   }
 
-  .founder-panel__bio {
+  .founder-card__bio {
     margin: 0;
     color: var(--text-secondary);
     line-height: var(--leading-relaxed);
     z-index: 1;
   }
 
-  .founder-panel__focus {
+  .founder-card__focus {
     position: relative;
     padding: clamp(1rem, 2.6vw, 1.4rem);
     border-radius: clamp(1.4rem, 3vw, 2rem);
@@ -299,7 +285,7 @@
     z-index: 1;
   }
 
-  .founder-panel__focus-label {
+  .founder-card__focus-label {
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
     letter-spacing: 0.08em;
@@ -307,26 +293,26 @@
     color: rgba(var(--voyage-blue-rgb), 0.78);
   }
 
-  .founder-panel__grid {
+  .founder-card__details {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: clamp(1.2rem, 3vw, 1.8rem);
     z-index: 1;
   }
 
-  .founder-panel__column {
+  .founder-card__column {
     display: grid;
     gap: 0.75rem;
   }
 
-  .founder-panel__eyebrow {
+  .founder-card__eyebrow {
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(26, 33, 55, 0.55);
+    color: color-mix(in srgb, var(--text-secondary) 60%, transparent);
   }
 
-  .founder-panel__chips {
+  .founder-card__chips {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -335,7 +321,7 @@
     gap: 0.6rem;
   }
 
-  .founder-panel__chips li {
+  .founder-card__chips li {
     padding: 0.4rem 1rem;
     border-radius: var(--radius-full);
     background: rgba(var(--aurora-purple-rgb), 0.12);
@@ -344,7 +330,7 @@
     font-weight: var(--weight-medium);
   }
 
-  .founder-panel__highlights {
+  .founder-card__highlights {
     margin: 0;
     padding-left: 1.2rem;
     display: grid;
@@ -354,47 +340,52 @@
     line-height: var(--leading-relaxed);
   }
 
-  .founder-panel__highlights li::marker {
+  .founder-card__highlights li::marker {
     color: rgba(var(--voyage-blue-rgb), 0.7);
   }
 
-  .founders-aside {
-    display: grid;
-    gap: clamp(1.8rem, 3.5vw, 2.4rem);
+  .founders-spotlight {
+    margin-top: clamp(2.4rem, 6vw, 3.6rem);
   }
 
-  .brand-stage {
+  .founders-spotlight__inner {
     position: relative;
     display: grid;
-    gap: clamp(1.2rem, 2.6vw, 1.8rem);
-    padding: clamp(1.8rem, 3.6vw, 2.4rem);
-    border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    background: linear-gradient(140deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.65));
-    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
+    gap: clamp(1.4rem, 3vw, 2rem);
+    padding: clamp(1.8rem, 3.6vw, 2.6rem);
+    border-radius: clamp(1.8rem, 3.6vw, 2.4rem);
+    border: 1px solid color-mix(in srgb, var(--border-strong) 45%, transparent);
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.86) 70%, transparent);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
     overflow: hidden;
   }
 
-  .brand-stage::before {
+  .founders-spotlight__inner::before {
     content: '';
     position: absolute;
-    inset: -35% -20% auto;
-    height: 65%;
-    background: radial-gradient(circle at 30% 40%, rgba(var(--voyage-blue-rgb), 0.16), transparent 70%),
-      radial-gradient(circle at 70% 30%, rgba(var(--aurora-purple-rgb), 0.14), transparent 72%);
+    inset: -32% -18% auto;
+    height: 68%;
+    background: radial-gradient(circle at 32% 42%, rgba(var(--voyage-blue-rgb), 0.16), transparent 70%),
+      radial-gradient(circle at 72% 28%, rgba(var(--aurora-purple-rgb), 0.16), transparent 72%);
     opacity: 0.85;
     pointer-events: none;
   }
 
-  .brand-stage .label {
+  .founders-spotlight__label {
     position: relative;
     font-size: var(--text-small);
-    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(26, 33, 55, 0.58);
+    letter-spacing: 0.12em;
+    color: color-mix(in srgb, var(--text-secondary) 60%, transparent);
   }
 
-  .brand-grid {
+  .founders-spotlight__lead {
+    position: relative;
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .founders-spotlight__brands {
     position: relative;
     display: grid;
     gap: 0.85rem;
@@ -425,7 +416,7 @@
     color: rgba(26, 33, 55, 0.7);
   }
 
-  .brand-note {
+  .founders-spotlight__note {
     position: relative;
     margin: 0;
     color: rgba(26, 33, 55, 0.65);
@@ -433,26 +424,22 @@
     line-height: var(--leading-relaxed);
   }
 
-  :global([data-base-theme='dark']) .founder-panel {
+  :global([data-base-theme='dark']) .founder-card {
     background: linear-gradient(136deg, rgba(20, 28, 48, 0.82), rgba(18, 24, 42, 0.72));
     border: 1px solid rgba(120, 146, 220, 0.35);
     box-shadow: 0 28px 55px rgba(2, 8, 18, 0.6);
   }
 
-  :global([data-base-theme='dark']) .founder-panel__role {
+  :global([data-base-theme='dark']) .founder-card__role {
     color: rgba(196, 210, 255, 0.7);
   }
 
-  :global([data-base-theme='dark']) .founder-panel__focus {
+  :global([data-base-theme='dark']) .founder-card__focus {
     background: rgba(var(--voyage-blue-rgb), 0.12);
     border-color: rgba(var(--voyage-blue-rgb), 0.22);
   }
 
-  :global([data-base-theme='dark']) .founder-panel__eyebrow {
-    color: rgba(210, 220, 255, 0.6);
-  }
-
-  :global([data-base-theme='dark']) .founder-panel__chips li {
+  :global([data-base-theme='dark']) .founder-card__chips li {
     background: rgba(124, 135, 242, 0.18);
     color: rgba(230, 236, 255, 0.88);
   }
@@ -463,7 +450,7 @@
     color: rgba(224, 232, 255, 0.92);
   }
 
-  :global([data-base-theme='dark']) .brand-stage {
+  :global([data-base-theme='dark']) .founders-spotlight__inner {
     background: linear-gradient(140deg, rgba(20, 28, 48, 0.82), rgba(20, 28, 48, 0.68));
     border: 1px solid rgba(120, 146, 220, 0.32);
     box-shadow: 0 24px 50px rgba(2, 8, 18, 0.55);
@@ -475,8 +462,8 @@
     color: rgba(220, 232, 255, 0.88);
   }
 
-  :global([data-theme='contrast']) .founder-panel,
-  :global([data-theme='contrast']) .brand-stage {
+  :global([data-theme='contrast']) .founder-card,
+  :global([data-theme='contrast']) .founders-spotlight__inner {
     background: rgba(0, 0, 0, 0.92);
     border: 2px solid rgba(255, 255, 255, 0.85);
     box-shadow: none;
@@ -488,11 +475,7 @@
     color: #fff;
   }
 
-  :global([data-theme='contrast']) .founder-panel__eyebrow {
-    color: rgba(255, 255, 255, 0.72);
-  }
-
-  :global([data-theme='contrast']) .founder-panel__chips li {
+  :global([data-theme='contrast']) .founder-card__chips li {
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
   }
@@ -503,23 +486,14 @@
     color: #fff;
   }
 
-  @media (max-width: 1080px) {
-    .founders-layout {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .founders-aside {
-      order: -1;
-    }
-  }
-
   @media (max-width: 640px) {
-    .founder-panel__header {
+    .founder-card__top {
       grid-template-columns: auto 1fr;
       grid-template-rows: auto auto;
+      gap: 1rem;
     }
 
-    .founder-panel__contacts {
+    .founder-card__contacts {
       grid-column: 1 / -1;
       flex-direction: row;
       flex-wrap: wrap;
