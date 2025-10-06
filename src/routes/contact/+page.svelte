@@ -1,6 +1,7 @@
 <script>
   // @ts-nocheck
   import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
@@ -180,9 +181,12 @@
 
   <svelte:fragment slot="title">
     <h1 class="contact-hero__headline">
-      <span class="contact-hero__headline">
-        <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
-      </span>
+      <AnimatedHeadline
+        className="contact-hero__headline-text"
+        variant="pulse"
+        phrases={heroPhrases}
+        holdDuration={2800}
+      />
     </h1>
   </svelte:fragment>
 </HeroWrapper>
@@ -319,22 +323,22 @@
         </div>
         
         <!-- Social Links -->
-        <div class="social-card glass-card" use:tilt={{ max: 2 }}>
-          <h3 use:sparkleTrail>{$_('contact.social_title')}</h3>
+        <div class="social-card glass-card">
+          <h3 class="social-card__title">{$_('contact.social_title')}</h3>
           <div class="social-links">
-            <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
+            <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener">
               <span class="social-icon">
                 <Icon name="linkedin" size={18} />
               </span>
               {$_('contact.social_linkedin')}
             </a>
-            <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
+            <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener">
               <span class="social-icon">
                 <Icon name="github" size={18} />
               </span>
               {$_('contact.social_github')}
             </a>
-            <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
+            <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener">
               <span class="social-icon">
                 <Icon name="twitter" size={18} />
               </span>
@@ -379,30 +383,30 @@
   .contact-hero__headline {
     display: flex;
     justify-content: center;
-    margin: clamp(1.2rem, 3vw, 1.9rem) auto 0;
-    max-width: min(100%, 50ch);
-    text-align: center;
-    padding: clamp(0.6rem, 2vw, 1rem) clamp(1.3rem, 3vw, 1.9rem);
-    border-radius: clamp(2.4rem, 5vw, 3.6rem);
-    background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    width: 100%;
+    margin: clamp(1.2rem, 3vw, 1.9rem) 0 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .contact-hero__headline :global(.animated-headline) {
     width: 100%;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    background: var(--gradient-spectrum-2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  :global([data-base-theme='dark']) .contact-hero__headline {
-    background: linear-gradient(128deg, rgba(18, 24, 44, 0.78), rgba(18, 24, 44, 0.56));
-    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
-  }
-
-  :global([data-theme='contrast']) .contact-hero__headline {
-    background: linear-gradient(128deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  .contact-hero__headline :global(.animated-headline__pulse) {
+    background: inherit;
+    -webkit-background-clip: inherit;
+    background-clip: inherit;
   }
 
   .contact-hero__backdrop {
@@ -566,8 +570,24 @@ form {
   backdrop-filter: blur(24px);
 }
 
-  .info-item,
-  .social-link {
+  .social-card {
+    gap: clamp(1.1rem, 2.6vw, 1.6rem);
+  }
+
+  .social-card__title {
+    font-size: clamp(1.3rem, 2.8vw, 1.6rem);
+    font-weight: var(--weight-semibold);
+    color: var(--voyage-blue);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .social-links {
+    display: grid;
+    gap: clamp(0.8rem, 2.2vw, 1rem);
+  }
+
+  .info-item {
     display: flex;
     align-items: center;
     gap: var(--space-2);
@@ -581,25 +601,41 @@ form {
     width: 2.4rem;
     height: 2.4rem;
     border-radius: var(--radius-full);
+  }
+
+  .info-icon {
     background: color-mix(in srgb, var(--voyage-blue) 14%, transparent 86%);
     color: var(--voyage-blue);
   }
 
   .social-icon {
-    background: color-mix(in srgb, var(--aurora-purple) 18%, transparent 82%);
-    color: var(--aurora-purple);
+    background: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
+    color: var(--surface-contrast);
   }
 
   :global(.button-icon) {
     display: inline-flex;
   }
 
-  .info-value,
-  .social-link { color: var(--text-secondary); }
+  .info-value { color: var(--text-secondary); }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, var(--voyage-blue) 28%, transparent);
+    background: color-mix(in srgb, var(--voyage-blue) 8%, transparent 92%);
+    color: var(--text-primary);
+    transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
+  }
 
 .calendar-button,
 .social-link {
-  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
 }
 
 .calendar-button {
@@ -619,6 +655,13 @@ form {
   .social-link:hover {
     color: var(--voyage-blue);
     border-color: rgba(19, 81, 255, 0.38);
+    background: color-mix(in srgb, var(--voyage-blue) 14%, transparent 86%);
+  }
+
+  @media (max-width: 1024px) {
+    .contact-hero__headline :global(.animated-headline) {
+      white-space: normal;
+    }
   }
 
   @media (max-width: 960px) {
