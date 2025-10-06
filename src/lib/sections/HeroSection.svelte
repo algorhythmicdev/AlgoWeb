@@ -1,6 +1,7 @@
 <script>
   import { _, json } from 'svelte-i18n';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import en from '$lib/i18n/en.json';
 
   const fallbackTitle = /** @type {{ lead: string; brand: string; trail: string }} */ (en.hero.title);
@@ -53,17 +54,25 @@
 </script>
 
 <HeroWrapper id="hero" class="hero hero--landing" showAside={false}>
+  <svelte:fragment slot="backdrop">
+    <div class="hero-backdrop" aria-hidden="true">
+      <span class="hero-backdrop__halo hero-backdrop__halo--primary"></span>
+      <span class="hero-backdrop__halo hero-backdrop__halo--secondary"></span>
+      <span class="hero-backdrop__grid" aria-hidden="true"></span>
+    </div>
+  </svelte:fragment>
+
   <svelte:fragment slot="title">
-    <div class="hero-heading" aria-live="polite">
-      <span class="hero-heading__line hero-heading__line--lead">{heroTitle.lead}</span>
-      <span class="hero-heading__brand">
+    <div class="hero-title" aria-live="polite">
+      <span class="hero-title__line hero-title__line--lead">{heroTitle.lead}</span>
+      <span class="hero-title__brand">
         <AnimatedHeadline
           variant="glow"
           text={heroTitle.brand}
           ariaLabel={$_('hero.brand_aria')}
         />
       </span>
-      <span class="hero-heading__line hero-heading__line--trail">{heroTitle.trail}</span>
+      <span class="hero-title__line hero-title__line--trail">{heroTitle.trail}</span>
     </div>
   </svelte:fragment>
 
