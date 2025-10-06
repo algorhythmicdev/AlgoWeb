@@ -54,6 +54,13 @@
   --text-secondary: rgba(26, 33, 55, 0.85);
   --text-tertiary: rgba(26, 33, 55, 0.65);
 
+  /* ==================== INTERACTIVE SURFACES ==================== */
+  --control-surface: color-mix(in srgb, var(--bg-surface) 88%, rgba(var(--voyage-blue-rgb), 0.06) 12%);
+  --control-surface-hover: color-mix(in srgb, var(--bg-elevated) 82%, rgba(var(--voyage-blue-rgb), 0.12) 18%);
+  --control-border: color-mix(in srgb, rgba(17, 24, 39, 0.16) 70%, rgba(var(--voyage-blue-rgb), 0.18) 30%);
+  --control-border-strong: color-mix(in srgb, rgba(17, 24, 39, 0.24) 60%, rgba(var(--voyage-blue-rgb), 0.22) 40%);
+  --control-ring: rgba(var(--voyage-blue-rgb), 0.24);
+
   /* ==================== TYPOGRAPHY ==================== */
   --font-display: 'Montserrat', -apple-system, system-ui, sans-serif;
   --font-body: 'Inter', -apple-system, system-ui, sans-serif;
@@ -260,6 +267,13 @@
   --shadow-md: 0 34px 68px rgba(3, 6, 18, 0.48);
   --shadow-lg: 0 48px 108px rgba(2, 5, 16, 0.52);
   --shadow-xl: 0 64px 132px rgba(1, 4, 14, 0.56);
+
+  /* Interactive surfaces tuned for luminous glass UI */
+  --control-surface: color-mix(in srgb, rgba(10, 16, 30, 0.85) 72%, rgba(var(--voyage-blue-rgb), 0.34) 28%);
+  --control-surface-hover: color-mix(in srgb, rgba(12, 18, 34, 0.9) 68%, rgba(var(--aurora-purple-rgb), 0.35) 32%);
+  --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 62%, rgba(255, 255, 255, 0.12) 38%);
+  --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 66%, rgba(255, 255, 255, 0.18) 34%);
+  --control-ring: rgba(var(--voyage-blue-rgb), 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {
