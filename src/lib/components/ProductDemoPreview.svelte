@@ -350,13 +350,13 @@
     }
   }
 
-  :global([data-theme='dark']) .demo-preview__frame {
+  :global([data-base-theme='dark']) .demo-preview__frame {
     background: color-mix(in srgb, rgba(12, 18, 32, 0.82) 60%, rgba(var(--aurora-purple-rgb), 0.24) 40%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 60%, rgba(255, 255, 255, 0.16) 40%);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 36px 72px rgba(0, 6, 18, 0.55);
   }
 
-  :global([data-theme='dark']) .demo-preview__placeholder {
+  :global([data-base-theme='dark']) .demo-preview__placeholder {
     color: rgba(236, 242, 255, 0.9);
     background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.35), rgba(var(--aurora-purple-rgb), 0.32));
   }

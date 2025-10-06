@@ -1,5 +1,6 @@
 <script>
   import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import TypewriterText from '$components/TypewriterText.svelte';
 
   export let label = '';
   export let title = '';
@@ -10,6 +11,12 @@
   export let products = /** @type {Array<{ id: string; name: string; status: string; mvp: string; cta: string; href: string }>} */ (
     []
   );
+
+  $: heroPhrases = products.length
+    ? products.map((product) => [product.name, product.status].filter(Boolean).join(' • '))
+    : subtitle
+      ? [subtitle]
+      : [title];
 </script>
 
 <section class="products-hero section" use:revealOnScroll>
@@ -26,9 +33,9 @@
 
       <div class="hero-text">
         <h1>{title}</h1>
-        {#if subtitle}
-          <p class="hero-subtitle">{subtitle}</p>
-        {/if}
+        <span class="hero-typewriter">
+          <TypewriterText phrases={heroPhrases} holdDuration={2400} />
+        </span>
       </div>
 
       {#if mission}
@@ -135,9 +142,12 @@
     line-height: 1.05;
   }
 
-  .hero-subtitle {
-    margin: 0;
-    font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+  .hero-typewriter {
+    display: inline-flex;
+  }
+
+  .hero-typewriter :global(.typewriter-text) {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
     color: var(--text-secondary);
   }
 
@@ -211,7 +221,7 @@
     }
   }
 
-  :global([data-theme='dark']) .hero-overview {
+  :global([data-base-theme='dark']) .hero-overview {
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 60%, rgba(255, 255, 255, 0.12) 40%);
     box-shadow: var(--shadow-md);
   }

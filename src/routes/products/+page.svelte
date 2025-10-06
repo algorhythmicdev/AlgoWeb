@@ -665,23 +665,23 @@
     }
   }
 
-  :global([data-theme='dark']) .demo-previews::before {
+  :global([data-base-theme='dark']) .demo-previews::before {
     background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.22), rgba(var(--aurora-purple-rgb), 0.18));
     opacity: 0.5;
   }
 
-  :global([data-theme='dark']) .catalog-card {
+  :global([data-base-theme='dark']) .catalog-card {
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.12) 40%);
     box-shadow: var(--shadow-sm);
   }
 
-  :global([data-theme='dark']) .feature-pills li {
+  :global([data-base-theme='dark']) .feature-pills li {
     background: color-mix(in srgb, rgba(12, 18, 30, 0.82) 70%, rgba(var(--voyage-blue-rgb), 0.2) 30%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(255, 255, 255, 0.08) 40%);
     color: rgba(220, 228, 244, 0.9);
   }
 
-  :global([data-theme='dark']) .cta-card {
+  :global([data-base-theme='dark']) .cta-card {
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.12) 40%);
     box-shadow: var(--shadow-md);
   }

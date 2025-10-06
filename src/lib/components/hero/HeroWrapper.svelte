@@ -83,7 +83,7 @@
     opacity: var(--hero-backdrop-opacity-light);
   }
 
-  :global([data-theme='dark']) .hero-wrapper::before {
+  :global([data-base-theme='dark']) .hero-wrapper::before {
     opacity: var(--hero-backdrop-opacity-dark);
   }
 
@@ -98,6 +98,7 @@
     display: grid;
     gap: var(--hero-intro-gap);
     align-content: var(--hero-intro-align);
+    color: var(--text-primary);
   }
 
   .hero-wrapper__intro :global(.hero-actions) {
@@ -125,6 +126,12 @@
     display: grid;
     gap: var(--hero-aside-gap);
     align-content: start;
+    color: var(--text-secondary);
+  }
+
+  :global([data-theme='contrast']) .hero-wrapper::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.88) 100%);
+    opacity: 0.82;
   }
 
   @media (max-width: 1024px) {

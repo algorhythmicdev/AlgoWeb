@@ -7,6 +7,15 @@
   "app": {
     "loading": "Cargando..."
   },
+  "settings": {
+    "theme": {
+      "group": "Tema de color",
+      "light": "Modo claro",
+      "dark": "Modo oscuro",
+      "contrast": "Modo de alto contraste",
+      "selected": "Tema establecido en {theme}"
+    }
+  },
   "nav": {
     "home": "Inicio",
     "products": "Productos",
@@ -213,6 +222,11 @@
     "name": "NodeVoyage",
     "status": "En desarrollo • MVP septiembre 2026",
     "tagline": "Tu compañero de viajes con IA",
+    "hero_rotating": [
+      "Nodi crea itinerarios adaptables en segundos",
+      "Herramientas sin conexión para viajar con confianza",
+      "Un copiloto humano con inteligencia artificial"
+    ],
     "hero_description": "Planificación de viajes impulsada por IA que hace que diseñar aventuras sea sencillo, divertido y personalizado. Conoce a Nodi, tu compañero de viaje inteligente.",
     "seo_description": "Plataforma de planificación de viajes con IA con itinerarios inteligentes, herramientas de RA y comunidad liderada por Nodi, tu compañero de viaje.",
     "hero_alt": "Vista previa de la interfaz de NodeVoyage",
@@ -265,6 +279,11 @@
     "name": "Ideonautix",
     "status": "Fase de planificación • MVP febrero 2026",
     "tagline": "Inteligencia para startups",
+    "hero_rotating": [
+      "Microservicios que entienden tu startup",
+      "Ideonautix analiza mientras tu equipo se enfoca",
+      "Automatización supervisada en cada presentación"
+    ],
     "hero_description": "Suite de productividad modular diseñada para fundadores y equipos en crecimiento. Microservicios impulsados por IA que realmente entienden tu negocio.",
     "seo_description": "Suite modular de productividad con IA para startups con microservicios de pitch, ingresos e inteligencia de equipo.",
     "hero_alt": "Vista previa del panel de Ideonautix",

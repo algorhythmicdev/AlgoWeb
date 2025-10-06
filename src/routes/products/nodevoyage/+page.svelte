@@ -1,12 +1,30 @@
 <script>
-  import { _ } from 'svelte-i18n';
+  import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
+  import TypewriterText from '$components/TypewriterText.svelte';
   import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
+  import en from '$lib/i18n/en.json';
+
+  const fallbackHeroPhrases = Array.isArray(en.nodevoyage?.hero_rotating)
+    ? [...en.nodevoyage.hero_rotating]
+    : [en.nodevoyage.tagline];
+
+  /**
+   * @param {unknown} value
+   * @returns {string[]}
+   */
+  const ensureStringArray = (value) =>
+    Array.isArray(value) && value.every((item) => typeof item === 'string' && item.length)
+      ? Array.from(value)
+      : [...fallbackHeroPhrases];
 
   const product = productsData.nodevoyage;
   const features = product.features;
   const stepKeys = ['step1', 'step2', 'step3', 'step4'];
+
+  let heroPhrases = [...fallbackHeroPhrases];
+  $: heroPhrases = ensureStringArray($json?.('nodevoyage.hero_rotating'));
 </script>
 
 <svelte:head>
@@ -25,7 +43,9 @@
     <div class="hero-copy">
       <span class="eyebrow">{$_('nodevoyage.status')}</span>
       <h1>{$_('nodevoyage.name')}</h1>
-      <p class="hero-tagline">{$_('nodevoyage.tagline')}</p>
+      <span class="hero-typewriter">
+        <TypewriterText phrases={heroPhrases} holdDuration={2400} />
+      </span>
       <p class="hero-description">{$_('nodevoyage.hero_description')}</p>
 
       <div class="hero-actions">
@@ -230,7 +250,12 @@
 
   .hero-copy { display: grid; gap: clamp(1.6rem, 3vw, 2.2rem); }
 
-  .hero-tagline {
+  .hero-typewriter {
+    display: inline-flex;
+    margin-bottom: clamp(0.6rem, 2vw, 1rem);
+  }
+
+  .hero-typewriter :global(.typewriter-text) {
     font-size: var(--text-headline);
     color: var(--text-secondary);
     font-style: italic;
@@ -376,11 +401,11 @@
   .cta-copy p { color: var(--text-secondary); }
   .note { font-size: var(--text-small); color: var(--text-tertiary); }
 
-  :global([data-theme='dark']) .product-hero__halo .halo-ring {
+  :global([data-base-theme='dark']) .product-hero__halo .halo-ring {
     border-color: rgba(90, 135, 255, 0.32);
   }
 
-  :global([data-theme='dark']) .product-hero__halo .halo-orb {
+  :global([data-base-theme='dark']) .product-hero__halo .halo-orb {
     opacity: 0.48;
   }
 

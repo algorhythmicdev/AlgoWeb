@@ -187,10 +187,10 @@
   --space-40: var(--space-6xl);
   
   /* ==================== SECTION SPACING ==================== */
-  --section-padding-mobile: clamp(3rem, 8vw, 4rem);
-  --section-padding-tablet: clamp(4rem, 10vw, 6rem);
-  --section-padding-desktop: clamp(6rem, 12vw, 8rem);
-  --section-padding-xl: clamp(8rem, 16vw, 12rem);
+  --section-padding-mobile: clamp(3.5rem, 9vw, 4.5rem);
+  --section-padding-tablet: clamp(4.5rem, 11vw, 6.5rem);
+  --section-padding-desktop: clamp(6.5rem, 13vw, 8.5rem);
+  --section-padding-xl: clamp(8.5rem, 17vw, 12.5rem);
   
   /* ==================== COMPONENT SPACING ==================== */
   --component-padding-sm: clamp(1rem, 2vw, 1.5rem);
@@ -273,7 +273,7 @@
   --z-toast: 1200;
 }
 
-[data-theme="dark"] {
+[data-base-theme="dark"] {
   /* Brand-led gradients with luminous contrast */
   --gradient-primary: linear-gradient(
     138deg,
@@ -323,6 +323,14 @@
   --bg-elevated: color-mix(in srgb, rgba(14, 18, 32, 0.92) 64%, rgba(var(--aurora-purple-rgb), 0.36) 36%);
   --surface-glass: color-mix(in srgb, rgba(8, 12, 24, 0.82) 64%, rgba(var(--voyage-blue-rgb), 0.36) 36%);
   --surface-tint: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 58%, rgba(var(--aurora-purple-rgb), 0.26) 42%);
+  --backdrop-canvas:
+    radial-gradient(122% 142% at 0% 0%, rgba(var(--voyage-blue-rgb), 0.28) 0%, transparent 64%),
+    radial-gradient(118% 128% at 100% 6%, rgba(var(--aurora-purple-rgb), 0.24) 0%, transparent 72%),
+    linear-gradient(180deg, rgba(6, 9, 20, 0.96) 0%, rgba(3, 6, 18, 0.94) 48%, rgba(2, 4, 14, 0.92) 100%);
+  --body-wash:
+    radial-gradient(140% 140% at 20% 20%, rgba(var(--voyage-blue-rgb), 0.32) 0%, transparent 72%),
+    radial-gradient(128% 128% at 78% 14%, rgba(var(--aurora-purple-rgb), 0.26) 0%, transparent 76%),
+    linear-gradient(180deg, rgba(5, 8, 20, 0.8) 0%, rgba(5, 8, 20, 0.6) 100%);
 
   /* Glassy borders and dividers */
   --border-subtle: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 55%, rgba(255, 255, 255, 0.08) 45%);
@@ -364,6 +372,66 @@
   --control-ring: rgba(var(--voyage-blue-rgb), 0.4);
   --grain-blend-mode: soft-light;
   --grain-opacity: 0.2;
+}
+
+[data-theme="contrast"] {
+  --gradient-primary: linear-gradient(138deg, #ffffff 0%, #4d7cff 46%, #141414 100%);
+  --gradient-secondary: linear-gradient(140deg, #ffffff 0%, #ffd339 48%, #1a1a1a 100%);
+  --gradient-text: linear-gradient(120deg, #ffffff 0%, #ffd339 55%, #ff6b6b 100%);
+  --gradient-heading: var(--gradient-text);
+  --gradient-heading-strong: linear-gradient(122deg, #ffffff 0%, #ffb347 42%, #ff5f6d 82%, #ffffff 100%);
+  --gradient-spectrum-1: linear-gradient(140deg, #ffffff 0%, #4d7cff 100%);
+  --gradient-spectrum-2: linear-gradient(140deg, #ffffff 0%, #6a38ff 65%, #111111 100%);
+  --gradient-spectrum-3: linear-gradient(140deg, #ffed85 0%, #ff6b6b 60%, #000000 100%);
+  --gradient-spectrum-4: linear-gradient(145deg, #ffffff 0%, #6a38ff 50%, #000000 100%);
+  --gradient-spectrum-5: linear-gradient(145deg, #ffffff 0%, #ffd339 45%, #ff6b6b 75%, #080808 100%);
+  --gradient-hero: linear-gradient(150deg, #111111 0%, #222222 45%, #050505 100%);
+
+  --bg-primary: #050505;
+  --bg-surface: #101010;
+  --bg-muted: #1a1a1a;
+  --bg-elevated: #121212;
+  --surface-glass: rgba(255, 255, 255, 0.08);
+  --surface-tint: rgba(255, 255, 255, 0.18);
+  --backdrop-canvas: linear-gradient(180deg, #050505 0%, #020202 100%);
+  --body-wash: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.8) 100%);
+
+  --border-subtle: rgba(255, 255, 255, 0.45);
+  --border-strong: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(255, 255, 255, 0.5);
+  --heading-color: #ffffff;
+  --heading-shadow: 0 0 0 transparent;
+
+  --text-primary: #ffffff;
+  --text-secondary: #f0f0f0;
+  --text-tertiary: #cccccc;
+  --hero-glow-primary: rgba(255, 255, 255, 0.3);
+  --hero-glow-secondary: rgba(255, 255, 255, 0.28);
+  --hero-glow-accent: rgba(255, 255, 255, 0.25);
+  --hero-overlay-highlight: rgba(255, 255, 255, 0.6);
+  --hero-overlay-subtle: rgba(255, 255, 255, 0.34);
+  --hero-overlay-blend: normal;
+  --hero-overlay-opacity: 0.78;
+  --hero-phrase-bg-strong: rgba(255, 255, 255, 0.22);
+  --hero-phrase-bg-soft: rgba(255, 255, 255, 0.18);
+  --hero-phrase-shadow: 0 0 0 transparent;
+  --hero-ring-border: rgba(255, 255, 255, 0.45);
+  --hero-ring-dash: rgba(255, 255, 255, 0.38);
+  --hero-orb-opacity: 0.5;
+
+  --shadow-xs: 0 8px 18px rgba(0, 0, 0, 0.65);
+  --shadow-sm: 0 12px 28px rgba(0, 0, 0, 0.72);
+  --shadow-md: 0 18px 42px rgba(0, 0, 0, 0.75);
+  --shadow-lg: 0 26px 56px rgba(0, 0, 0, 0.78);
+  --shadow-xl: 0 32px 72px rgba(0, 0, 0, 0.8);
+
+  --control-surface: #151515;
+  --control-surface-hover: #1f1f1f;
+  --control-border: rgba(255, 255, 255, 0.6);
+  --control-border-strong: rgba(255, 255, 255, 0.85);
+  --control-ring: rgba(255, 255, 255, 0.6);
+  --grain-opacity: 0;
+  --grain-blend-mode: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {

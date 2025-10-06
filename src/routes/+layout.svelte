@@ -8,12 +8,12 @@
   import '$lib/i18n';
   import { _, waitLocale } from 'svelte-i18n';
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   import { theme } from '$stores/theme';
   
   export let data;
-  export let params;
 
-  $: routeKey = JSON.stringify(params ?? {});
+  $: routeKey = $page.url.pathname;
 
   onMount(() => {
     // Initialize theme on mount

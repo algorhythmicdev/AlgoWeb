@@ -258,12 +258,12 @@
     }
   }
 
-  :global([data-theme='dark']) .products-showcase::before {
+  :global([data-base-theme='dark']) .products-showcase::before {
     background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.25), rgba(var(--aurora-purple-rgb), 0.2));
     opacity: 0.5;
   }
 
-  :global([data-theme='dark']) .showcase-meta li {
+  :global([data-base-theme='dark']) .showcase-meta li {
     background: color-mix(in srgb, rgba(12, 18, 30, 0.85) 70%, rgba(var(--voyage-blue-rgb), 0.25) 30%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 60%, rgba(255, 255, 255, 0.12) 40%);
   }

@@ -2,54 +2,74 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
+const STORAGE_KEY = 'theme';
+const THEMES = /** @type {const} */ (['light', 'dark', 'contrast']);
+const DEFAULT_THEME = 'light';
+
 const createThemeStore = () => {
-  // Get initial theme from localStorage or system preference
   const getInitialTheme = () => {
-    if (!browser) return 'light';
-    
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored;
-    
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (!browser) return DEFAULT_THEME;
+
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored && THEMES.includes(stored)) {
+      return stored;
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches) {
+      return 'contrast';
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+
+    return DEFAULT_THEME;
   };
-  
-  const initialTheme = getInitialTheme();
 
-  if (browser) {
-    applyThemeAttributes(initialTheme);
-  }
+  const apply = (value) => {
+    const normalized = THEMES.includes(value) ? value : DEFAULT_THEME;
+    if (browser) {
+      localStorage.setItem(STORAGE_KEY, normalized);
+      applyThemeAttributes(normalized);
+    }
+    return normalized;
+  };
 
-  const { subscribe, set, update } = writable(initialTheme);
-  
+  const initialTheme = apply(getInitialTheme());
+  const { subscribe, set: internalSet, update } = writable(initialTheme);
+
   return {
     subscribe,
-    toggle: () => {
-      update(theme => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        
-        if (browser) {
-          localStorage.setItem('theme', newTheme);
-          applyThemeAttributes(newTheme);
-        }
-
-        return newTheme;
+    set: (value) => {
+      internalSet(apply(value));
+    },
+    cycle: () => {
+      update((current) => {
+        const index = THEMES.indexOf(current);
+        const next = THEMES[(index + 1) % THEMES.length];
+        return apply(next);
       });
     },
-    set: (theme) => {
-      if (browser) {
-        localStorage.setItem('theme', theme);
-        applyThemeAttributes(theme);
-      }
-      set(theme);
+    toggle: () => {
+      update((current) => {
+        const index = THEMES.indexOf(current);
+        const fallbackIndex = index === -1 ? 0 : index;
+        const next = THEMES[(fallbackIndex + 1) % THEMES.length];
+        return apply(next);
+      });
     }
   };
 };
 
 export const theme = createThemeStore();
+export const availableThemes = THEMES;
 
 function applyThemeAttributes(value) {
   if (!browser) return;
+  const baseTheme = value === 'light' ? 'light' : 'dark';
   document.body.setAttribute('data-theme', value);
+  document.body.setAttribute('data-base-theme', baseTheme);
   document.documentElement.setAttribute('data-theme', value);
-  document.documentElement.style.colorScheme = value;
+  document.documentElement.setAttribute('data-base-theme', baseTheme);
+  document.documentElement.style.colorScheme = baseTheme;
 }

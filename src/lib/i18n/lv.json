@@ -7,6 +7,15 @@
   "app": {
     "loading": "Ielādējas..."
   },
+  "settings": {
+    "theme": {
+      "group": "Krāsu režīms",
+      "light": "Gaišais režīms",
+      "dark": "Tumšais režīms",
+      "contrast": "Augsta kontrasta režīms",
+      "selected": "Tēma iestatīta uz {theme}"
+    }
+  },
   "nav": {
     "home": "Sākums",
     "products": "Produkti",
@@ -213,6 +222,11 @@
     "name": "NodeVoyage",
     "status": "Izstrāde • MVP 2026. gada septembris",
     "tagline": "Tavs MI ceļojumu draugs",
+    "hero_rotating": [
+      "Nodi izveido pielāgotus maršrutus sekundēs",
+      "Bezsaistes rīki drošiem ceļojumiem",
+      "Cilvēcīgs kopilots ar MI atbalstu"
+    ],
     "hero_description": "MI plānošana, kas padara piedzīvojumu radīšanu vieglu, jautru un personīgu. Iepazīsti Nodi — gudro ceļabiedru.",
     "seo_description": "MI ceļojumu platforma ar gudriem maršrutiem, AR rīkiem un kopienu, ko vada Nodi — tavs ceļojumu draugs.",
     "hero_alt": "NodeVoyage interfeisa priekšskatījums",
@@ -265,6 +279,11 @@
     "name": "Ideonautix",
     "status": "Plānošana • MVP 2026. gada februāris",
     "tagline": "Inteliģence startapiem",
+    "hero_rotating": [
+      "Mikropakalpojumi, kas saprot jūsu startup",
+      "Ideonautix analizē, kamēr komanda saglabā fokusu",
+      "Automatizācija cilvēka uzraudzībā katram pitch"
+    ],
     "hero_description": "Modulāra produktivitātes suite dibinātājiem un augošām komandām. MI mikropakalpojumi, kas patiesi izprot tavu biznesu.",
     "seo_description": "MI produktivitātes suite startapiem ar piču, ieņēmumu un komandas inteliģences mikropakalpojumiem.",
     "hero_alt": "Ideonautix paneļa priekšskatījums",

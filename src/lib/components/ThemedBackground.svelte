@@ -183,7 +183,7 @@
     animation-delay: var(--delay);
   }
 
-  :global([data-theme='dark']) .wash {
+  :global([data-base-theme='dark']) .wash {
     background:
       radial-gradient(
         44% 44% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
@@ -195,14 +195,40 @@
     opacity: 0.76;
   }
 
-  :global([data-theme='dark']) .flare {
+  :global([data-base-theme='dark']) .flare {
     opacity: calc(0.32 + var(--scroll-depth) * 0.48);
     mix-blend-mode: lighten;
   }
 
-  :global([data-theme='dark']) .dot {
+  :global([data-base-theme='dark']) .dot {
     mix-blend-mode: screen;
     opacity: 0.55;
+  }
+
+  :global([data-theme='contrast']) .wash {
+    background:
+      radial-gradient(
+        40% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
+        rgba(255, 255, 255, 0.28),
+        transparent 72%
+      ),
+      linear-gradient(180deg, rgba(8, 8, 8, 0.95) 0%, rgba(2, 2, 2, 0.92) 100%);
+    opacity: 0.74;
+    filter: saturate(1.05);
+  }
+
+  :global([data-theme='contrast']) .flare {
+    background:
+      radial-gradient(42% 42% at 78% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+      radial-gradient(50% 50% at 24% 80%, rgba(255, 255, 255, 0.28) 0%, transparent 74%);
+    opacity: calc(0.45 + var(--scroll-depth) * 0.4);
+    mix-blend-mode: normal;
+  }
+
+  :global([data-theme='contrast']) .dot {
+    background: rgba(255, 255, 255, 0.6) !important;
+    mix-blend-mode: normal;
+    opacity: 0.6 !important;
   }
 
   @media (prefers-reduced-motion: reduce) {

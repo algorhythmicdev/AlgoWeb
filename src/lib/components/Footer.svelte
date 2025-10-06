@@ -10,7 +10,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img
-          src={$theme === 'dark' ? '/images/brand/logo-white.png' : '/images/brand/logo-main.png'}
+          src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
           alt="AlgoRhythmics"
           width="180"
           height="48"
@@ -83,7 +83,7 @@
     pointer-events: none;
   }
 
-  :global([data-theme='dark']) .footer::before {
+  :global([data-base-theme='dark']) .footer::before {
     background: radial-gradient(circle at 60% 20%, rgba(var(--aurora-purple-rgb), 0.32), transparent 70%);
     opacity: 0.8;
   }

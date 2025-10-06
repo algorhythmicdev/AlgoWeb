@@ -71,7 +71,7 @@
   <div class="container nav-container">
     <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
       <img
-        src={$theme === 'dark' ? '/images/brand/logo-white.png' : '/images/brand/logo-main.png'}
+        src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
         alt={$_('nav.brand_name')}
         width="148"
         height="40"
@@ -157,7 +157,7 @@
     background-blend-mode: screen, soft-light;
   }
 
-  :global([data-theme='dark']) .nav {
+  :global([data-base-theme='dark']) .nav {
     background: color-mix(in srgb, rgba(6, 12, 26, 0.78) 70%, rgba(var(--voyage-blue-rgb), 0.24) 30%);
     background-image:
       linear-gradient(122deg, rgba(var(--voyage-blue-rgb), 0.22) 0%, rgba(var(--aurora-purple-rgb), 0.2) 100%),
@@ -166,13 +166,26 @@
     box-shadow: 0 22px 54px rgba(4, 7, 18, 0.45);
   }
 
-  :global([data-theme='dark']) .nav.nav-condensed {
+  :global([data-base-theme='dark']) .nav.nav-condensed {
     background: color-mix(in srgb, rgba(8, 14, 30, 0.86) 62%, rgba(var(--voyage-blue-rgb), 0.28) 38%);
     background-image:
       linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.28) 0%, rgba(var(--aurora-purple-rgb), 0.22) 44%, transparent 100%),
       var(--grain-texture);
     box-shadow: 0 28px 68px rgba(3, 6, 18, 0.52);
     border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 58%, rgba(255, 255, 255, 0.1) 42%);
+  }
+
+  :global([data-theme='contrast']) .nav {
+    background: #050505;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.8);
+    background-image: none;
+  }
+
+  :global([data-theme='contrast']) .nav.nav-condensed {
+    background: #070707;
+    border-bottom-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.82);
   }
 
   .nav-container {
@@ -220,13 +233,22 @@
     color: var(--text-primary);
   }
 
-  :global(html[data-theme='dark']) .nav-link span {
+  :global(html[data-base-theme='dark']) .nav-link span {
     color: color-mix(in srgb, var(--text-tertiary) 84%, rgba(var(--voyage-blue-rgb), 0.24) 16%);
   }
 
-  :global(html[data-theme='dark']) .nav-link:hover span,
-  :global(html[data-theme='dark']) .nav-link.active span {
+  :global(html[data-base-theme='dark']) .nav-link:hover span,
+  :global(html[data-base-theme='dark']) .nav-link.active span {
     color: var(--text-primary);
+  }
+
+  :global(html[data-theme='contrast']) .nav-link span {
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  :global(html[data-theme='contrast']) .nav-link:hover span,
+  :global(html[data-theme='contrast']) .nav-link.active span {
+    color: #ffffff;
   }
 
   .nav-link::after {
@@ -245,6 +267,10 @@
   .nav-link:hover::after,
   .nav-link.active::after { transform: scaleX(1); }
 
+  :global([data-theme='contrast']) .nav-link::after {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+  }
+
   .nav-badge {
     font-size: var(--text-caption);
     color: var(--voyage-blue);
@@ -254,9 +280,14 @@
     font-weight: var(--weight-semibold);
   }
 
-  :global([data-theme='dark']) .nav-badge {
+  :global([data-base-theme='dark']) .nav-badge {
     background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 65%, rgba(6, 12, 26, 0.78) 35%);
     color: rgba(228, 236, 255, 0.94);
+  }
+
+  :global([data-theme='contrast']) .nav-badge {
+    background: #ffffff;
+    color: #000000;
   }
 
   .nav-actions {
@@ -288,6 +319,27 @@
     box-shadow: 0 22px 46px rgba(19, 81, 255, 0.24);
   }
 
+  :global([data-base-theme='dark']) .nav-cta {
+    background: linear-gradient(145deg, rgba(var(--voyage-blue-rgb), 0.32) 0%, rgba(var(--aurora-purple-rgb), 0.28) 70%);
+    border-color: rgba(102, 140, 255, 0.42);
+    box-shadow: 0 18px 42px rgba(4, 7, 18, 0.55);
+    color: rgba(236, 242, 255, 0.95);
+  }
+
+  :global([data-theme='contrast']) .nav-cta {
+    background: #ffffff;
+    color: #000000;
+    border-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.68);
+  }
+
+  :global([data-theme='contrast']) .nav-cta:hover {
+    background: #ffd339;
+    color: #000000;
+    border-color: #ffd339;
+    box-shadow: 0 18px 42px rgba(255, 211, 57, 0.45);
+  }
+
   .menu-toggle {
     display: none;
     flex-direction: column;
@@ -304,6 +356,10 @@
     transition: transform var(--duration-fast) var(--ease-out);
   }
 
+  :global([data-theme='contrast']) .menu-toggle span {
+    background: #ffffff;
+  }
+
   .nav-overlay {
     position: fixed;
     inset: 0;
@@ -312,6 +368,10 @@
     pointer-events: none;
     transition: opacity var(--duration-normal) var(--ease-out);
     z-index: calc(var(--z-sticky) - 2);
+  }
+
+  :global([data-theme='contrast']) .nav-overlay {
+    background: rgba(255, 255, 255, 0.18);
   }
 
   .nav-overlay.visible {
@@ -343,6 +403,18 @@
         transform var(--duration-normal) var(--ease-out);
     }
 
+    :global([data-base-theme='dark']) .nav-links {
+      background: color-mix(in srgb, rgba(12, 18, 40, 0.9) 75%, rgba(var(--voyage-blue-rgb), 0.3) 25%);
+      border-color: rgba(94, 130, 240, 0.42);
+      box-shadow: 0 26px 56px rgba(2, 6, 18, 0.64);
+    }
+
+    :global([data-theme='contrast']) .nav-links {
+      background: #050505;
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.82);
+    }
+
     .nav-links.open {
       opacity: 1;
       transform: translateY(0);
@@ -360,18 +432,6 @@
     .nav-cta { display: none; }
 
     .menu-toggle { display: inline-flex; }
-  }
-
-  :global([data-theme='dark']) .nav-cta {
-    background: var(--gradient-primary);
-    border-color: transparent;
-    color: var(--pure-white);
-    box-shadow: 0 24px 52px rgba(2, 6, 18, 0.56);
-  }
-
-  :global([data-theme='dark']) .nav-links {
-    background: color-mix(in srgb, rgba(8, 18, 40, 0.88) 88%, transparent);
-    border-color: rgba(70, 120, 255, 0.32);
   }
 
   @keyframes navGradientDrift {

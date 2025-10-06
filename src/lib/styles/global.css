@@ -21,7 +21,7 @@ html {
   transition: background-color 320ms var(--ease-in-out), color 320ms var(--ease-in-out);
 }
 
-:global([data-theme='dark']) html {
+:global([data-base-theme='dark']) html {
   color-scheme: dark;
   background: var(--bg-primary);
 }
@@ -48,7 +48,7 @@ body {
   transition: color 320ms var(--ease-in-out);
 }
 
-:global([data-theme='dark']) body {
+:global([data-base-theme='dark']) body {
   color: var(--text-primary);
 }
 
@@ -74,14 +74,14 @@ body::after {
   transition: opacity 320ms var(--ease-in-out), mix-blend-mode 320ms var(--ease-in-out);
 }
 
-:global(html[data-theme='dark'])::before {
+:global(html[data-base-theme='dark'])::before {
   background:
     radial-gradient(120% 140% at 0% 0%, rgba(var(--voyage-blue-rgb), 0.3) 0%, transparent 70%),
     radial-gradient(110% 120% at 100% 4%, rgba(var(--aurora-purple-rgb), 0.28) 0%, transparent 74%),
     linear-gradient(180deg, color-mix(in srgb, #020714 92%, rgba(var(--voyage-blue-rgb), 0.22) 8%) 0%, color-mix(in srgb, #050c1e 90%, rgba(var(--aurora-purple-rgb), 0.18) 10%) 100%);
 }
 
-:global(html[data-theme='dark'])::after {
+:global(html[data-base-theme='dark'])::after {
   background-image:
     radial-gradient(circle at 20% 18%, rgba(var(--voyage-blue-rgb), 0.36) 0%, transparent 46%),
     radial-gradient(circle at 76% 14%, rgba(var(--aurora-purple-rgb), 0.32) 0%, transparent 56%),
@@ -89,13 +89,13 @@ body::after {
   opacity: 0.32;
 }
 
-:global(body[data-theme='dark'])::before {
+:global(body[data-base-theme='dark'])::before {
   background:
     radial-gradient(140% 140% at 20% 18%, rgba(var(--voyage-blue-rgb), 0.34) 0%, transparent 68%),
     radial-gradient(120% 120% at 78% 16%, rgba(var(--aurora-purple-rgb), 0.3) 0%, transparent 74%);
 }
 
-:global(body[data-theme='dark'])::after {
+:global(body[data-base-theme='dark'])::after {
   opacity: var(--grain-opacity);
   mix-blend-mode: var(--grain-blend-mode);
 }
@@ -373,7 +373,7 @@ img:not([alt]) {
     --border-strong: #000000;
   }
   
-  [data-theme="dark"] {
+  [data-base-theme="dark"] {
     --text-primary: #ffffff;
     --text-secondary: #cccccc;
     --text-tertiary: #999999;
@@ -625,24 +625,50 @@ ol[class] { list-style: none; }
   border-radius: var(--radius-full);
 }
 
-:global([data-theme='dark']) .btn-primary {
+:global([data-base-theme='dark']) .btn-primary {
   box-shadow: 0 24px 48px rgba(2, 6, 18, 0.5);
 }
 
-:global([data-theme='dark']) .btn-secondary {
+:global([data-base-theme='dark']) .btn-secondary {
   background: color-mix(in srgb, rgba(12, 24, 52, 0.85) 80%, transparent);
   border-color: rgba(70, 120, 255, 0.28);
   color: rgba(228, 236, 255, 0.92);
 }
 
-:global([data-theme='dark']) .btn-secondary:hover {
+:global([data-base-theme='dark']) .btn-secondary:hover {
   border-color: rgba(120, 160, 255, 0.45);
   color: rgba(255, 255, 255, 0.98);
 }
 
-:global([data-theme='dark']) .btn-tertiary {
+:global([data-base-theme='dark']) .btn-tertiary {
   background: rgba(18, 32, 64, 0.72);
   color: rgba(224, 232, 255, 0.86);
+}
+
+:global([data-theme='contrast']) .btn-primary {
+  background: linear-gradient(130deg, #ffffff 0%, #ffd339 60%, #ffffff 100%);
+  color: #000000;
+  box-shadow: 0 18px 42px rgba(255, 211, 57, 0.35);
+}
+
+:global([data-theme='contrast']) .btn-secondary {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #000000;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+:global([data-theme='contrast']) .btn-secondary:hover {
+  border-color: #ffd339;
+  background: #ffd339;
+  color: #000000;
+  box-shadow: 0 14px 34px rgba(255, 211, 57, 0.4);
+}
+
+:global([data-theme='contrast']) .btn-tertiary {
+  background: #121212;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 /* ==================== RESPONSIVE TEXT ALIGNMENT ==================== */
@@ -929,11 +955,11 @@ ol[class] { list-style: none; }
   animation: gradientShift 8s ease infinite;
 }
 
-:global([data-theme='dark']) .animated-gradient {
+:global([data-base-theme='dark']) .animated-gradient {
   background: var(--gradient-primary);
 }
 
-:global([data-theme='dark']) .gradient-text {
+:global([data-base-theme='dark']) .gradient-text {
   background: var(--gradient-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -941,7 +967,20 @@ ol[class] { list-style: none; }
   color: transparent;
 }
 
-:global([data-theme='dark']) .surface {
+:global([data-theme='contrast']) .animated-gradient {
+  background: linear-gradient(135deg, #ffffff, #ffd339, #ffffff);
+  animation: none;
+}
+
+:global([data-theme='contrast']) .gradient-text {
+  background: linear-gradient(120deg, #ffffff 0%, #ffd339 60%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+:global([data-base-theme='dark']) .surface {
   background:
     linear-gradient(150deg, rgba(var(--voyage-blue-rgb), 0.24) 0%, rgba(var(--aurora-purple-rgb), 0.2) 52%, rgba(4, 9, 20, 0.72) 100%),
     var(--surface-glass);
@@ -949,12 +988,23 @@ ol[class] { list-style: none; }
   box-shadow: var(--shadow-sm);
 }
 
-:global([data-theme='dark']) .surface:hover {
+:global([data-base-theme='dark']) .surface:hover {
   border-color: color-mix(in srgb, var(--border-glass) 60%, rgba(var(--voyage-blue-rgb), 0.45) 40%);
   box-shadow: var(--shadow-md);
 }
 
-:global([data-theme='dark']) .glass-card {
+:global([data-theme='contrast']) .surface {
+  background: #151515;
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow-md);
+}
+
+:global([data-theme='contrast']) .surface:hover {
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-lg);
+}
+
+:global([data-base-theme='dark']) .glass-card {
   background:
     linear-gradient(160deg, rgba(var(--voyage-blue-rgb), 0.3) 0%, rgba(var(--aurora-purple-rgb), 0.26) 48%, rgba(var(--cherry-red-rgb), 0.24) 86%),
     var(--surface-glass);
@@ -962,8 +1012,19 @@ ol[class] { list-style: none; }
   box-shadow: var(--shadow-md);
 }
 
-:global([data-theme='dark']) .glass-card:hover {
+:global([data-base-theme='dark']) .glass-card:hover {
   border-color: color-mix(in srgb, var(--border-glass) 58%, rgba(var(--voyage-blue-rgb), 0.5) 42%);
+  box-shadow: var(--shadow-lg);
+}
+
+:global([data-theme='contrast']) .glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow-md);
+}
+
+:global([data-theme='contrast']) .glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow-lg);
 }
 

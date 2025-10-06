@@ -3,6 +3,7 @@
   import timelineData from '$data/timeline.json';
   import { magnetic } from '$utils/animations';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import TypewriterText from '$components/TypewriterText.svelte';
   import en from '$lib/i18n/en.json';
 
   const upcomingMilestone = timelineData.milestones?.[0];
@@ -18,6 +19,7 @@
 
   const fallbackTitle = /** @type {{ lead: string; brand: string; trail: string }} */ (en.hero.title);
   const fallbackPillars = Array.isArray(en.hero.pillars) ? en.hero.pillars : [];
+  const fallbackLeadPhrases = [en.hero.tagline, ...fallbackPillars].filter(Boolean);
   const fallbackFocusPoints = Array.isArray(en.hero.focus?.points) ? en.hero.focus.points : [];
 
   let heroTitle = fallbackTitle;
@@ -45,6 +47,17 @@
   $: heroHighlights = (() => {
     const value = ensureArray($json?.('hero.pillars'), fallbackPillars);
     return value.slice(0, 3);
+  })();
+
+  $: heroLeadPhrases = (() => {
+    const tagline = $json?.('hero.tagline');
+    const phrases = ensureArray($json?.('hero.pillars'), fallbackPillars);
+    const list = [];
+    if (typeof tagline === 'string' && tagline.trim()) {
+      list.push(tagline);
+    }
+    list.push(...phrases);
+    return list.length ? list : fallbackLeadPhrases;
   })();
 
   $: focusPoints = (() => {
@@ -75,7 +88,9 @@
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
-    <p class="hero-lead text-gradient">{$_('hero.tagline')}</p>
+    <div class="hero-typewriter">
+      <TypewriterText phrases={heroLeadPhrases} holdDuration={2600} />
+    </div>
   </svelte:fragment>
 
   <svelte:fragment slot="description">
@@ -291,17 +306,21 @@
     text-transform: uppercase;
   }
 
-  .hero-lead {
-    margin: 0;
-    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: var(--voyage-blue);
+  .hero-typewriter {
+    display: inline-flex;
   }
 
-  :global([data-theme='dark']) .hero-lead {
-    color: color-mix(in srgb, var(--voyage-blue) 56%, var(--aurora-purple) 44%);
+  .hero-typewriter :global(.typewriter-text) {
+    font-size: clamp(1.15rem, 2.6vw, 1.65rem);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    justify-content: flex-start;
+    color: var(--text-primary);
+  }
+
+  :global([data-base-theme='dark']) .hero-typewriter :global(.typewriter-text) {
+    color: rgba(236, 242, 255, 0.96);
   }
 
   .hero-description {
@@ -348,12 +367,12 @@
     box-shadow: 0 0 12px rgba(var(--voyage-blue-rgb), 0.4);
   }
 
-  :global([data-theme='dark']) .hero-highlights {
+  :global([data-base-theme='dark']) .hero-highlights {
     background: color-mix(in srgb, rgba(6, 12, 24, 0.86) 68%, rgba(var(--voyage-blue-rgb), 0.16) 32%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.08) 40%);
   }
 
-  :global([data-theme='dark']) .hero-highlights li::before {
+  :global([data-base-theme='dark']) .hero-highlights li::before {
     background: color-mix(in srgb, var(--voyage-blue) 60%, var(--aurora-purple) 40%);
     box-shadow: 0 0 14px rgba(var(--aurora-purple-rgb), 0.45);
   }
@@ -388,7 +407,7 @@
     color: var(--text-primary);
   }
 
-  :global([data-theme='dark']) .metric {
+  :global([data-base-theme='dark']) .metric {
     background: color-mix(in srgb, rgba(6, 12, 24, 0.88) 68%, rgba(var(--voyage-blue-rgb), 0.2) 32%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
   }
@@ -457,13 +476,13 @@
     color: var(--text-tertiary);
   }
 
-  :global([data-theme='dark']) .glass-card {
+  :global([data-base-theme='dark']) .glass-card {
     background: color-mix(in srgb, rgba(4, 10, 22, 0.9) 68%, rgba(var(--voyage-blue-rgb), 0.2) 32%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
     box-shadow: var(--shadow-md);
   }
 
-  :global([data-theme='dark']) .timestamp {
+  :global([data-base-theme='dark']) .timestamp {
     background: color-mix(in srgb, rgba(6, 12, 24, 0.84) 70%, rgba(var(--voyage-blue-rgb), 0.24) 30%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 60%, rgba(255, 255, 255, 0.1) 40%);
   }

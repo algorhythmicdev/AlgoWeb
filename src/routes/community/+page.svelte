@@ -1,9 +1,9 @@
 <script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
-  import { onDestroy, onMount } from 'svelte';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import TypewriterText from '$components/TypewriterText.svelte';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -23,110 +23,7 @@
       : fallbackHeroPhrases;
 
   let heroPhrases = fallbackHeroPhrases;
-  let heroPhraseIndex = 0;
-  /** @type {ReturnType<typeof setInterval> | null} */
-  let heroRotationTimer = null;
-  /** @type {HTMLElement | null} */
-  let heroSectionEl = null;
-  let hasMounted = false;
-  let isHeroVisible = false;
-  let prefersReducedMotion = false;
-  /** @type {IntersectionObserver | null} */
-  let heroObserver = null;
-  /** @type {MediaQueryList | null} */
-  let motionQuery = null;
-
-  function handleMotionChange(event) {
-    prefersReducedMotion = event.matches;
-    syncHeroRotation();
-  }
-
-  function startHeroRotation() {
-    if (!hasMounted || heroRotationTimer || heroPhrases.length <= 1 || prefersReducedMotion || !isHeroVisible) {
-      return;
-    }
-
-    heroRotationTimer = setInterval(() => {
-      heroPhraseIndex = (heroPhraseIndex + 1) % heroPhrases.length;
-    }, 4200);
-  }
-
-  function stopHeroRotation() {
-    if (heroRotationTimer) {
-      clearInterval(heroRotationTimer);
-      heroRotationTimer = null;
-    }
-  }
-
-  function syncHeroRotation() {
-    if (!hasMounted) return;
-    if (heroPhrases.length <= 1 || prefersReducedMotion || !isHeroVisible) {
-      stopHeroRotation();
-    } else {
-      startHeroRotation();
-    }
-  }
-
   $: heroPhrases = ensureStringArray($json?.('community.hero_rotating'));
-  $: if (heroPhraseIndex >= heroPhrases.length) {
-    heroPhraseIndex = 0;
-  }
-  $: syncHeroRotation();
-
-  onMount(() => {
-    hasMounted = true;
-
-    if (typeof window !== 'undefined') {
-      if ('IntersectionObserver' in window) {
-        heroObserver = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (entry.target === heroSectionEl) {
-                isHeroVisible = entry.isIntersecting;
-                syncHeroRotation();
-              }
-            }
-          },
-          { threshold: 0.35 }
-        );
-
-        if (heroSectionEl) {
-          heroObserver.observe(heroSectionEl);
-        }
-      } else {
-        isHeroVisible = true;
-      }
-
-      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      prefersReducedMotion = motionQuery.matches;
-
-      if (motionQuery.addEventListener) {
-        motionQuery.addEventListener('change', handleMotionChange);
-      } else if (motionQuery.addListener) {
-        motionQuery.addListener(handleMotionChange);
-      }
-      syncHeroRotation();
-    }
-
-    return undefined;
-  });
-
-  onDestroy(() => {
-    stopHeroRotation();
-
-    if (heroObserver && heroSectionEl) {
-      heroObserver.unobserve(heroSectionEl);
-      heroObserver.disconnect();
-    }
-
-    if (motionQuery) {
-      if (motionQuery.removeEventListener) {
-        motionQuery.removeEventListener('change', handleMotionChange);
-      } else if (motionQuery.removeListener) {
-        motionQuery.removeListener(handleMotionChange);
-      }
-    }
-  });
   
   let features = [
     { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },
@@ -190,8 +87,7 @@
 
 <!-- Hero -->
 <HeroWrapper
-  class="hero hero--community"
-  bind:element={heroSectionEl}
+  class="hero hero--community community-hero"
   showAside={false}
   introReveal={{ delay: 60, stagger: 120 }}
 >
@@ -209,17 +105,10 @@
   </svelte:fragment>
 
   <svelte:fragment slot="title">
-    <h1 class="community-hero__headline" aria-live="polite" aria-atomic="true">
-      <span class="sr-only">{heroPhrases[heroPhraseIndex] ?? $_('community.hero_subtitle')}</span>
-      {#each heroPhrases as phrase, index}
-        <span
-          class="community-hero__phrase"
-          class:community-hero__phrase--active={index === heroPhraseIndex}
-          aria-hidden={index !== heroPhraseIndex}
-        >
-          {phrase}
-        </span>
-      {/each}
+    <h1 class="community-hero__headline">
+      <span class="community-hero__typewriter">
+        <TypewriterText phrases={heroPhrases} holdDuration={2200} />
+      </span>
     </h1>
   </svelte:fragment>
 </HeroWrapper>
@@ -332,7 +221,7 @@
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
 
-  .community-hero::before {
+  :global(.community-hero)::before {
     content: '';
     position: absolute;
     inset: -40% -15% auto;
@@ -345,49 +234,23 @@
 
   .community-hero__headline {
     position: relative;
-    display: grid;
-    place-items: center;
-    gap: 0;
-    margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
-    min-height: clamp(3.4rem, 6vw, 4.6rem);
+    display: flex;
+    justify-content: center;
+    margin: clamp(1.2rem, 2.8vw, 1.8rem) auto 0;
     max-width: min(100%, 48ch);
+    text-align: center;
   }
 
-  .community-hero__phrase {
-    grid-area: 1 / 1;
-    opacity: 0;
-    transform: translateY(22px) scale(0.98);
-    filter: blur(12px);
-    transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out), filter 420ms var(--ease-out);
-    padding-inline: clamp(0.25rem, 1vw, 0.6rem);
-    border-radius: var(--radius-full);
+  .community-hero__typewriter {
+    display: inline-flex;
+    justify-content: center;
   }
 
-  .community-hero__phrase--active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
-    animation: heroPhraseIn 880ms var(--ease-spring);
-    background: linear-gradient(120deg, var(--hero-phrase-bg-strong), var(--hero-phrase-bg-soft));
-    box-shadow: var(--hero-phrase-shadow);
-  }
-
-  @keyframes heroPhraseIn {
-    0% {
-      transform: translateY(34px) scale(0.96);
-      filter: blur(16px);
-      opacity: 0;
-    }
-    55% {
-      transform: translateY(-6px) scale(1.01);
-      filter: blur(0px);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(0) scale(1);
-      filter: blur(0px);
-      opacity: 1;
-    }
+  .community-hero__typewriter :global(.typewriter-text) {
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
   }
 
   .community-hero__mesh {

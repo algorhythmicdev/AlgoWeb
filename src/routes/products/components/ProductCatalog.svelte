@@ -185,13 +185,13 @@
     }
   }
 
-  :global([data-theme='dark']) .catalog-card {
+  :global([data-base-theme='dark']) .catalog-card {
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 55%, rgba(255, 255, 255, 0.12) 45%);
     box-shadow: var(--shadow-md);
     background: color-mix(in srgb, rgba(8, 12, 20, 0.88) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
   }
 
-  :global([data-theme='dark']) .catalog-features li {
+  :global([data-base-theme='dark']) .catalog-features li {
     background: color-mix(in srgb, rgba(12, 18, 30, 0.82) 70%, rgba(var(--voyage-blue-rgb), 0.2) 30%);
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 60%, rgba(255, 255, 255, 0.12) 40%);
   }

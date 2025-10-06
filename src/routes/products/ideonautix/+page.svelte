@@ -1,8 +1,23 @@
 <script>
-  import { _ } from 'svelte-i18n';
+  import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
+  import TypewriterText from '$components/TypewriterText.svelte';
   import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
+  import en from '$lib/i18n/en.json';
+
+  const fallbackHeroPhrases = Array.isArray(en.ideonautix?.hero_rotating)
+    ? [...en.ideonautix.hero_rotating]
+    : [en.ideonautix.tagline];
+
+  /**
+   * @param {unknown} value
+   * @returns {string[]}
+   */
+  const ensureStringArray = (value) =>
+    Array.isArray(value) && value.every((item) => typeof item === 'string' && item.length)
+      ? Array.from(value)
+      : [...fallbackHeroPhrases];
 
   const product = productsData.ideonautix;
   const microservices = [
@@ -10,6 +25,9 @@
     { icon: 'chart', titleKey: 'revenue_title', descKey: 'revenue_desc' },
     { icon: 'people', titleKey: 'team_title', descKey: 'team_desc' }
   ];
+
+  let heroPhrases = [...fallbackHeroPhrases];
+  $: heroPhrases = ensureStringArray($json?.('ideonautix.hero_rotating'));
 </script>
 
 <svelte:head>
@@ -28,7 +46,9 @@
     <div class="hero-copy">
       <span class="eyebrow">{$_('ideonautix.status')}</span>
       <h1>{$_('ideonautix.name')}</h1>
-      <p class="hero-tagline">{$_('ideonautix.tagline')}</p>
+      <span class="hero-typewriter">
+        <TypewriterText phrases={heroPhrases} holdDuration={2400} />
+      </span>
       <p class="hero-description">{$_('ideonautix.hero_description')}</p>
 
       <div class="hero-actions">
@@ -234,7 +254,16 @@
   }
 
   .hero-copy { display: grid; gap: clamp(1.6rem, 3vw, 2.2rem); }
-  .hero-tagline { font-size: var(--text-headline); color: var(--text-secondary); font-style: italic; }
+  .hero-typewriter {
+    display: inline-flex;
+    margin-bottom: clamp(0.6rem, 2vw, 1rem);
+  }
+
+  .hero-typewriter :global(.typewriter-text) {
+    font-size: var(--text-headline);
+    color: var(--text-secondary);
+    font-style: italic;
+  }
   .hero-description { color: var(--text-secondary); }
   .hero-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 
@@ -354,11 +383,11 @@
   .cta-copy { display: grid; gap: 0.65rem; max-width: 540px; }
   .cta-copy p { color: var(--text-secondary); }
 
-  :global([data-theme='dark']) .product-hero__halo .ribbon {
+  :global([data-base-theme='dark']) .product-hero__halo .ribbon {
     background: linear-gradient(120deg, rgba(106, 56, 255, 0.22), rgba(47, 92, 220, 0.14));
   }
 
-  :global([data-theme='dark']) .product-hero__halo .spark {
+  :global([data-base-theme='dark']) .product-hero__halo .spark {
     opacity: 0.5;
   }
 

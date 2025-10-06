@@ -1,9 +1,9 @@
 <script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
-  import { onDestroy, onMount } from 'svelte';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import TypewriterText from '$components/TypewriterText.svelte';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
@@ -22,109 +22,7 @@
       : fallbackHeroRotating;
 
   let heroRotating = fallbackHeroRotating;
-  let heroRotatingIndex = 0;
-  /** @type {ReturnType<typeof setInterval> | null} */
-  let heroRotatingTimer = null;
-  /** @type {HTMLElement | null} */
-  let heroSectionEl = null;
-  let hasMounted = false;
-  let isHeroVisible = false;
-  let prefersReducedMotion = false;
-  /** @type {IntersectionObserver | null} */
-  let heroObserver = null;
-  /** @type {MediaQueryList | null} */
-  let motionQuery = null;
-
-  function handleMotionChange(event) {
-    prefersReducedMotion = event.matches;
-    syncHeroRotation();
-  }
-
-  function startHeroRotation() {
-    if (!hasMounted || heroRotatingTimer || heroRotating.length <= 1 || prefersReducedMotion || !isHeroVisible) {
-      return;
-    }
-
-    heroRotatingTimer = setInterval(() => {
-      heroRotatingIndex = (heroRotatingIndex + 1) % heroRotating.length;
-    }, 4400);
-  }
-
-  function stopHeroRotation() {
-    if (heroRotatingTimer) {
-      clearInterval(heroRotatingTimer);
-      heroRotatingTimer = null;
-    }
-  }
-
-  function syncHeroRotation() {
-    if (!hasMounted) return;
-    if (heroRotating.length <= 1 || prefersReducedMotion || !isHeroVisible) {
-      stopHeroRotation();
-    } else {
-      startHeroRotation();
-    }
-  }
-
   $: heroRotating = ensureStringArray($json?.('consulting.hero_rotating'));
-  $: if (heroRotatingIndex >= heroRotating.length) {
-    heroRotatingIndex = 0;
-  }
-  $: syncHeroRotation();
-
-  onMount(() => {
-    hasMounted = true;
-
-    if (typeof window !== 'undefined') {
-      if ('IntersectionObserver' in window) {
-        heroObserver = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (entry.target === heroSectionEl) {
-                isHeroVisible = entry.isIntersecting;
-                syncHeroRotation();
-              }
-            }
-          },
-          { threshold: 0.35 }
-        );
-
-        if (heroSectionEl) {
-          heroObserver.observe(heroSectionEl);
-        }
-      } else {
-        isHeroVisible = true;
-      }
-
-      motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      prefersReducedMotion = motionQuery.matches;
-
-      if (motionQuery.addEventListener) {
-        motionQuery.addEventListener('change', handleMotionChange);
-      } else if (motionQuery.addListener) {
-        motionQuery.addListener(handleMotionChange);
-      }
-
-      syncHeroRotation();
-    }
-  });
-
-  onDestroy(() => {
-    stopHeroRotation();
-
-    if (heroObserver && heroSectionEl) {
-      heroObserver.unobserve(heroSectionEl);
-      heroObserver.disconnect();
-    }
-
-    if (motionQuery) {
-      if (motionQuery.removeEventListener) {
-        motionQuery.removeEventListener('change', handleMotionChange);
-      } else if (motionQuery.removeListener) {
-        motionQuery.removeListener(handleMotionChange);
-      }
-    }
-  });
   
   let formData = {
     company: '',
@@ -254,8 +152,7 @@
 
 <!-- Hero Section -->
 <HeroWrapper
-  class="hero hero--consulting"
-  bind:element={heroSectionEl}
+  class="hero hero--consulting consulting-hero"
   introReveal={{ delay: 60, stagger: 130 }}
   asideReveal={{ delay: 220, stagger: 160 }}
 >
@@ -272,17 +169,10 @@
   </svelte:fragment>
 
   <svelte:fragment slot="title">
-    <h1 class="consulting-hero__headline" aria-live="polite" aria-atomic="true">
-      <span class="sr-only">{heroRotating[heroRotatingIndex] ?? $_('consulting.hero_subtitle')}</span>
-      {#each heroRotating as phrase, index}
-        <span
-          class="consulting-hero__phrase"
-          class:consulting-hero__phrase--active={index === heroRotatingIndex}
-          aria-hidden={index !== heroRotatingIndex}
-        >
-          {phrase}
-        </span>
-      {/each}
+    <h1 class="consulting-hero__headline">
+      <span class="consulting-hero__typewriter">
+        <TypewriterText phrases={heroRotating} holdDuration={2400} />
+      </span>
     </h1>
   </svelte:fragment>
 
@@ -498,7 +388,7 @@
   border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 }
 
-.consulting-hero::before {
+:global(.consulting-hero)::before {
   content: '';
   position: absolute;
   inset: clamp(-5rem, -8vw, -2rem) -15% auto;
@@ -510,48 +400,21 @@
 }
 
 .consulting-hero__headline {
-  position: relative;
-  display: grid;
-  gap: 0;
-  min-height: clamp(3.6rem, 6vw, 4.8rem);
-  max-width: min(100%, 46ch);
+  display: flex;
+  justify-content: center;
+  margin: clamp(1.1rem, 2.8vw, 1.7rem) 0 clamp(1.6rem, 3.2vw, 2.2rem);
+  text-align: center;
 }
 
-.consulting-hero__phrase {
-  grid-area: 1 / 1;
-  opacity: 0;
-  transform: translateY(26px) scale(0.96);
-  filter: blur(14px);
-  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out), filter 420ms var(--ease-out);
-  padding-inline: clamp(0.35rem, 1vw, 0.75rem);
-  border-radius: var(--radius-full);
+.consulting-hero__typewriter {
+  display: inline-flex;
+  justify-content: center;
 }
 
-.consulting-hero__phrase--active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0px);
-  animation: consultingHeadlineIn 900ms var(--ease-spring);
-  background: linear-gradient(135deg, var(--hero-phrase-bg-strong), var(--hero-phrase-bg-soft));
-  box-shadow: var(--hero-phrase-shadow);
-}
-
-@keyframes consultingHeadlineIn {
-  0% {
-    opacity: 0;
-    transform: translateY(36px) scale(0.94);
-    filter: blur(18px);
-  }
-  55% {
-    opacity: 1;
-    transform: translateY(-8px) scale(1.02);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
-  }
+.consulting-hero__typewriter :global(.typewriter-text) {
+  font-size: clamp(2.2rem, 5.4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .consulting-hero__halo {
