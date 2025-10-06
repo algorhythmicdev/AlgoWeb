@@ -1,7 +1,8 @@
 <script>
   import { _, json } from 'svelte-i18n';
   import timelineData from '$data/timeline.json';
-  import { revealOnScroll, staggerReveal, magnetic } from '$utils/animations';
+  import { magnetic } from '$utils/animations';
+  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import en from '$lib/i18n/en.json';
 
   const upcomingMilestone = timelineData.milestones?.[0];
@@ -51,119 +52,107 @@
   })();
 </script>
 
-<section class="hero" id="hero" use:revealOnScroll>
-  <div class="container hero-shell">
-    <div class="hero-intro" use:staggerReveal={{ stagger: 110 }}>
-      <span class="status-chip">{$_('hero.status')}</span>
-      <h1 class="hero-title">
-        <span class="hero-title__line text-gradient">{heroTitle.lead}</span>
-        <span class="hero-title__brand" aria-label={$_('hero.brand_aria')}>
-          <span class="hero-title__brand-glow" aria-hidden="true"></span>
-          <span class="hero-title__brand-text" aria-hidden="true">{heroTitle.brand}</span>
-          <span class="sr-only">{heroTitle.brand}</span>
-        </span>
-        <span class="hero-title__line hero-title__line--trail text-gradient">{heroTitle.trail}</span>
-      </h1>
-      <p class="hero-lead text-gradient">{$_('hero.tagline')}</p>
-      <p class="hero-description">{$_('hero.subtitle')}</p>
+<HeroWrapper
+  id="hero"
+  class="hero hero--landing"
+  introReveal={{ stagger: 110 }}
+  asideReveal={{ delay: 140, stagger: 130 }}
+>
+  <svelte:fragment slot="status">
+    <span class="status-chip">{$_('hero.status')}</span>
+  </svelte:fragment>
 
-      <div class="hero-actions">
-        <a href="/products" class="btn btn-gradient" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
-        <a href="/consulting" class="btn btn-secondary" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
-      </div>
+  <svelte:fragment slot="title">
+    <h1 class="hero-title">
+      <span class="hero-title__line text-gradient">{heroTitle.lead}</span>
+      <span class="hero-title__brand" aria-label={$_('hero.brand_aria')}>
+        <span class="hero-title__brand-glow" aria-hidden="true"></span>
+        <span class="hero-title__brand-text" aria-hidden="true">{heroTitle.brand}</span>
+        <span class="sr-only">{heroTitle.brand}</span>
+      </span>
+      <span class="hero-title__line hero-title__line--trail text-gradient">{heroTitle.trail}</span>
+    </h1>
+  </svelte:fragment>
 
-      {#if heroHighlights.length}
-        <ul class="hero-highlights">
-          {#each heroHighlights as highlight}
-            <li>{highlight}</li>
+  <svelte:fragment slot="lead">
+    <p class="hero-lead text-gradient">{$_('hero.tagline')}</p>
+  </svelte:fragment>
+
+  <svelte:fragment slot="description">
+    <p class="hero-description">{$_('hero.subtitle')}</p>
+  </svelte:fragment>
+
+  <svelte:fragment slot="actions">
+    <div class="hero-actions">
+      <a href="/products" class="btn btn-gradient" use:magnetic={{ strength: 0.18 }}>{$_('hero.cta_products')}</a>
+      <a href="/consulting" class="btn btn-secondary" use:magnetic={{ strength: 0.16 }}>{$_('hero.cta_consulting')}</a>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="highlights">
+    {#if heroHighlights.length}
+      <ul class="hero-highlights">
+        {#each heroHighlights as highlight}
+          <li>{highlight}</li>
+        {/each}
+      </ul>
+    {/if}
+  </svelte:fragment>
+
+  <svelte:fragment slot="metrics">
+    <dl class="hero-metrics">
+      {#each heroSignals as signal}
+        <div class="metric">
+          <dt>{$_(signal.label)}</dt>
+          <dd>{$_(signal.value)}</dd>
+        </div>
+      {/each}
+    </dl>
+  </svelte:fragment>
+
+  <svelte:fragment slot="aside">
+    {#if upcomingMilestone}
+      <article class="glass-card milestone">
+        <header>
+          <span class="kicker">{$_('hero.next_milestone')}</span>
+          <span class="timestamp">{milestoneDate}</span>
+        </header>
+        <h2>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h2>
+        <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
+        {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
+          <p class="note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
+        {/if}
+        <a href="#journey" class="inline-link">{$_('hero.milestone_cta')}</a>
+      </article>
+    {/if}
+
+    <article class="glass-card focus">
+      <header>
+        <span class="kicker">{$_('hero.focus.kicker')}</span>
+        <h2>{$_('hero.focus.title')}</h2>
+      </header>
+      <p>{$_('hero.focus.description')}</p>
+      {#if focusPoints.length}
+        <ul>
+          {#each focusPoints as point}
+            <li>{point}</li>
           {/each}
         </ul>
       {/if}
-
-      <dl class="hero-metrics">
-        {#each heroSignals as signal}
-          <div class="metric">
-            <dt>{$_(signal.label)}</dt>
-            <dd>{$_(signal.value)}</dd>
-          </div>
-        {/each}
-      </dl>
-    </div>
-
-    <aside class="hero-aside" aria-label={$_('hero.status')} use:staggerReveal={{ delay: 140, stagger: 130 }}>
-      {#if upcomingMilestone}
-        <article class="glass-card milestone">
-          <header>
-            <span class="kicker">{$_('hero.next_milestone')}</span>
-            <span class="timestamp">{milestoneDate}</span>
-          </header>
-          <h2>{$_(`timeline.milestones.${upcomingMilestone.id}.title`)}</h2>
-          <p>{$_(`timeline.milestones.${upcomingMilestone.id}.description`)}</p>
-          {#if $_(`timeline.milestones.${upcomingMilestone.id}.note`)}
-            <p class="note">{$_(`timeline.milestones.${upcomingMilestone.id}.note`)}</p>
-          {/if}
-          <a href="#journey" class="inline-link">{$_('hero.milestone_cta')}</a>
-        </article>
-      {/if}
-
-      <article class="glass-card focus">
-        <header>
-          <span class="kicker">{$_('hero.focus.kicker')}</span>
-          <h2>{$_('hero.focus.title')}</h2>
-        </header>
-        <p>{$_('hero.focus.description')}</p>
-        {#if focusPoints.length}
-          <ul>
-            {#each focusPoints as point}
-              <li>{point}</li>
-            {/each}
-          </ul>
-        {/if}
-        <a href="/community" class="inline-link">{$_('hero.focus.cta')}</a>
-      </article>
-    </aside>
-  </div>
-</section>
+      <a href="/community" class="inline-link">{$_('hero.focus.cta')}</a>
+    </article>
+  </svelte:fragment>
+</HeroWrapper>
 
 <style>
-  .hero {
-    position: relative;
-    padding: clamp(5.5rem, 11vw, 9rem) 0 clamp(4rem, 10vw, 7rem);
-    isolation: isolate;
+  :global(.hero--landing) {
+    --hero-actions-gap: 0.85rem;
+    --hero-metrics-gap: clamp(1rem, 2.6vw, 1.6rem);
+    --hero-aside-gap: clamp(1.6rem, 3.4vw, 2.4rem);
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: clamp(-7rem, -12vw, -3rem) 0 auto;
-    height: clamp(14rem, 38vw, 28rem);
-    background: var(--gradient-hero);
-    opacity: 0.62;
-    filter: blur(140px);
-    pointer-events: none;
-    z-index: -1;
-    transition: opacity 400ms var(--ease-in-out);
-  }
-
-  :global([data-theme='light']) .hero::before {
-    opacity: 0.72;
-  }
-
-  :global([data-theme='dark']) .hero::before {
-    opacity: 0.48;
-  }
-
-  .hero-shell {
-    display: grid;
-    gap: clamp(2.5rem, 5vw, 4rem);
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: start;
-  }
-
-  .hero-intro {
-    display: grid;
-    gap: clamp(1.4rem, 3vw, 2.2rem);
-    align-content: start;
+  :global(.hero--landing .hero-metrics) {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   }
 
   .hero-title {
@@ -404,11 +393,6 @@
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.08) 40%);
   }
 
-  .hero-aside {
-    display: grid;
-    gap: clamp(1.6rem, 3.4vw, 2.4rem);
-  }
-
   .glass-card {
     display: grid;
     gap: 1rem;
@@ -485,21 +469,21 @@
   }
 
   @media (max-width: 1024px) {
-    .hero-shell {
+    :global(.hero--landing .hero-wrapper__shell) {
       grid-template-columns: 1fr;
     }
 
-    .hero-aside {
+    :global(.hero--landing .hero-wrapper__aside) {
       grid-template-columns: minmax(0, 1fr);
     }
   }
 
   @media (max-width: 720px) {
-    .hero {
-      padding-top: clamp(5rem, 18vw, 6.5rem);
+    :global(.hero--landing) {
+      --hero-padding-block-start: clamp(5rem, 18vw, 6.5rem);
     }
 
-    .hero-actions {
+    :global(.hero--landing .hero-actions) {
       flex-direction: column;
       align-items: stretch;
     }

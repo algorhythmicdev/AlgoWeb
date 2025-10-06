@@ -3,6 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { onDestroy, onMount } from 'svelte';
   import { Icon } from '$lib/components';
+  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
@@ -252,61 +253,72 @@
 {/if}
 
 <!-- Hero Section -->
-<section class="consulting-hero" bind:this={heroSectionEl}>
-  <div class="consulting-hero__halo" aria-hidden="true">
-    <span class="consulting-blob consulting-blob--one"></span>
-    <span class="consulting-blob consulting-blob--two"></span>
-    <span class="consulting-constellation consulting-constellation--one"></span>
-  </div>
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">{$_('consulting.hero_title')}</span>
-      <h1 class="consulting-hero__headline" aria-live="polite" aria-atomic="true">
-        <span class="sr-only">{heroRotating[heroRotatingIndex] ?? $_('consulting.hero_subtitle')}</span>
-        {#each heroRotating as phrase, index}
-          <span
-            class="consulting-hero__phrase"
-            class:consulting-hero__phrase--active={index === heroRotatingIndex}
-            aria-hidden={index !== heroRotatingIndex}
-          >
-            {phrase}
-          </span>
-        {/each}
-      </h1>
-
-      <div class="spots-indicator">
-        <div class="spots-number">{spotsRemaining}</div>
-        <span>{$_('consulting.spots_remaining')}</span>
-      </div>
-
-      <div class="hero-features" use:staggerReveal>
-        <div class="feature">
-          <div class="feature-icon">
-            <Icon name="target" size={26} />
-          </div>
-          <p>{$_('consulting.what_1')}</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <Icon name="idea" size={26} />
-          </div>
-          <p>{$_('consulting.what_2')}</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <Icon name="bolt" size={26} />
-          </div>
-          <p>{$_('consulting.what_3')}</p>
-        </div>
-      </div>
+<HeroWrapper
+  class="hero hero--consulting"
+  bind:element={heroSectionEl}
+  introReveal={{ delay: 60, stagger: 130 }}
+  asideReveal={{ delay: 220, stagger: 160 }}
+>
+  <svelte:fragment slot="backdrop">
+    <div class="consulting-hero__halo" aria-hidden="true">
+      <span class="consulting-blob consulting-blob--one"></span>
+      <span class="consulting-blob consulting-blob--two"></span>
+      <span class="consulting-constellation consulting-constellation--one"></span>
     </div>
+  </svelte:fragment>
 
+  <svelte:fragment slot="status">
+    <span class="eyebrow">{$_('consulting.hero_title')}</span>
+  </svelte:fragment>
+
+  <svelte:fragment slot="title">
+    <h1 class="consulting-hero__headline" aria-live="polite" aria-atomic="true">
+      <span class="sr-only">{heroRotating[heroRotatingIndex] ?? $_('consulting.hero_subtitle')}</span>
+      {#each heroRotating as phrase, index}
+        <span
+          class="consulting-hero__phrase"
+          class:consulting-hero__phrase--active={index === heroRotatingIndex}
+          aria-hidden={index !== heroRotatingIndex}
+        >
+          {phrase}
+        </span>
+      {/each}
+    </h1>
+  </svelte:fragment>
+
+  <div class="spots-indicator">
+    <div class="spots-number">{spotsRemaining}</div>
+    <span>{$_('consulting.spots_remaining')}</span>
+  </div>
+
+  <div class="hero-features" use:staggerReveal>
+    <div class="feature">
+      <div class="feature-icon">
+        <Icon name="target" size={26} />
+      </div>
+      <p>{$_('consulting.what_1')}</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">
+        <Icon name="idea" size={26} />
+      </div>
+      <p>{$_('consulting.what_2')}</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">
+        <Icon name="bolt" size={26} />
+      </div>
+      <p>{$_('consulting.what_3')}</p>
+    </div>
+  </div>
+
+  <svelte:fragment slot="aside">
     <div class="hero-cta">
       <p>{$_('consulting.what_title')}</p>
       <a href="#form" class="btn btn-primary">{$_('consulting.form_title')}</a>
     </div>
-  </div>
-</section>
+  </svelte:fragment>
+</HeroWrapper>
 
 <!-- Application Form -->
 <section class="form-section" id="form">
@@ -467,22 +479,32 @@
 </section>
 
 <style>
-.consulting-hero {
-  padding: clamp(6rem, 14vw, 8.5rem) 0;
-  position: relative;
+:global(.hero--consulting) {
+  --hero-padding-block-start: clamp(6rem, 14vw, 8.5rem);
+  --hero-padding-block-end: clamp(4rem, 12vw, 6.5rem);
+  --hero-shell-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
+  --hero-shell-gap: clamp(2.6rem, 5vw, 3.8rem);
+  --hero-shell-align: center;
+  --hero-intro-gap: clamp(1.6rem, 3vw, 2.2rem);
+  --hero-aside-gap: clamp(1.8rem, 4vw, 2.6rem);
+  --hero-backdrop-inset: clamp(-5rem, -8vw, -2rem) -15% auto;
+  --hero-backdrop-height: clamp(20rem, 36vw, 26rem);
+  --hero-backdrop-gradient: radial-gradient(circle at 40% 40%, rgba(19, 81, 255, 0.26), transparent 72%);
+  --hero-backdrop-blur: 140px;
+  --hero-backdrop-opacity: 0.3;
+  --hero-backdrop-opacity-light: 0.36;
+  --hero-backdrop-opacity-dark: 0.22;
   overflow: hidden;
   border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 }
 
-.consulting-hero::before {
-  content: '';
-  position: absolute;
-  inset: clamp(-5rem, -8vw, -2rem) -15% auto;
-  height: clamp(20rem, 36vw, 26rem);
-  background: radial-gradient(circle at 40% 40%, rgba(19, 81, 255, 0.2), transparent 70%);
-  filter: blur(140px);
-  opacity: 0.7;
-  pointer-events: none;
+:global(.hero--consulting .hero-wrapper__intro) {
+  max-width: 48rem;
+}
+
+:global(.hero--consulting .hero-wrapper__aside) {
+  align-self: stretch;
+  justify-items: start;
 }
 
 .consulting-hero__headline {
@@ -536,6 +558,7 @@
   height: clamp(24rem, 40vw, 30rem);
   pointer-events: none;
   overflow: hidden;
+  z-index: -1;
 }
 
 .consulting-blob {
@@ -605,22 +628,6 @@
     transform: scale(1) translate3d(-2%, 2%, 0);
   }
 }
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(2.6rem, 5vw, 3.8rem);
-  align-items: center;
-}
-
-.hero-copy {
-  display: grid;
-  gap: clamp(1.6rem, 3vw, 2.2rem);
-}
-
-  .hero-copy h1 {
-    font-size: clamp(2.2rem, 5vw, 3rem);
-  }
 
 .spots-indicator {
   display: inline-flex;
@@ -857,12 +864,15 @@
 }
 
   @media (max-width: 960px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
+    :global(.hero--consulting) {
+      --hero-shell-columns: minmax(0, 1fr);
+      --hero-shell-gap: clamp(2rem, 6vw, 2.8rem);
+      --hero-aside-gap: clamp(1.6rem, 5vw, 2.2rem);
     }
 
     .hero-cta {
       justify-items: stretch;
+      width: 100%;
     }
   }
 
