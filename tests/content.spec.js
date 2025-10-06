@@ -1,7 +1,8 @@
 // @ts-nocheck
 import { beforeAll, describe, it, expect } from 'vitest';
 import fg from 'fast-glob';
-import { parse, walk } from 'svelte/compiler';
+import { parse } from 'svelte/compiler';
+import { walk } from 'estree-walker';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
