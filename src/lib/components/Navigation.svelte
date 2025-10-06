@@ -211,17 +211,23 @@
   }
 
   .nav-link span {
-    background: var(--gradient-text);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.72;
-    transition: opacity var(--duration-fast) var(--ease-out);
+    color: color-mix(in srgb, var(--text-secondary) 88%, rgba(var(--voyage-blue-rgb), 0.1) 12%);
+    transition: color var(--duration-fast) var(--ease-out);
   }
 
   .nav-link:hover span,
-  .nav-link.active span { opacity: 1; }
+  .nav-link.active span {
+    color: var(--text-primary);
+  }
+
+  :global(html[data-theme='dark']) .nav-link span {
+    color: color-mix(in srgb, var(--text-tertiary) 84%, rgba(var(--voyage-blue-rgb), 0.24) 16%);
+  }
+
+  :global(html[data-theme='dark']) .nav-link:hover span,
+  :global(html[data-theme='dark']) .nav-link.active span {
+    color: var(--text-primary);
+  }
 
   .nav-link::after {
     content: '';
@@ -356,24 +362,6 @@
     .menu-toggle { display: inline-flex; }
   }
 
-  :global([data-theme='dark']) .nav {
-    background: color-mix(in srgb, rgba(8, 16, 34, 0.95) 85%, transparent);
-    background-image:
-      linear-gradient(130deg, rgba(47, 92, 220, 0.18) 0%, rgba(106, 56, 255, 0.16) 100%),
-      var(--grain-texture);
-    border-bottom-color: rgba(70, 120, 255, 0.3);
-    box-shadow: 0 24px 58px rgba(2, 6, 18, 0.6);
-  }
-
-  :global([data-theme='dark']) .nav-condensed {
-    background: color-mix(in srgb, rgba(8, 16, 34, 0.96) 90%, rgba(47, 92, 220, 0.16) 10%);
-    border-bottom-color: rgba(90, 140, 255, 0.38);
-  }
-
-  :global([data-theme='dark']) .nav-link span {
-    opacity: 0.82;
-  }
-
   :global([data-theme='dark']) .nav-cta {
     background: var(--gradient-primary);
     border-color: transparent;
@@ -397,11 +385,14 @@
       background-position: 0% 50%;
     }
   }
-
+  /* motion-safe adjustments */
   @media (prefers-reduced-motion: reduce) {
+    .nav {
+      transition: none;
+    }
+
     .nav-link span {
-      animation: none;
-      background-size: 100% 100%;
+      transition: none;
     }
   }
 </style>
