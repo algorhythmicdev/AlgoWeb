@@ -51,7 +51,7 @@
 {#await waitLocale()}
   <div class="loading">
     <div class="spinner"></div>
-    <p>Loading…</p>
+    <p>{$_('app.loading')}</p>
   </div>
 {:then}
   <ThemedBackground />
