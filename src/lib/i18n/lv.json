@@ -33,13 +33,13 @@
     "toggle_menu": "Atvērt vai aizvērt izvēlni"
   },
   "hero": {
-    "status": "Izstrāde • Veidojam MI nākotni",
+    "status": "Rāmju AI studija • Radīta Latvijā",
     "title": {
       "lead": "Kur loģika dejo ar",
       "brand": "AlgoRhythmics",
       "trail": "radošumu"
     },
-    "tagline": "AlgoRhythmics — MI inovāciju laboratorija",
+    "tagline": "AlgoRhythmics — Baltijas cilvēkcentrētas inovācijas laboratorija",
     "subtitle": "NodeVoyage piloti un Ideonautix rituāli uztur dibinātājus fokusā, nezaudējot cilvēku klātbūtni.",
     "description": "Balstāmies signāltehnikas pētniecībā un mākoņu inženierijā, apvienojot taustāmu disciplīnu ar skaidrojamu programmatūru, lai komandas saglabātu kontroli.",
     "cta_products": "Apskatīt produktus",
@@ -381,7 +381,7 @@
   "consulting": {
     "meta_title": "AlgoRhythmics konsultāciju pilots",
     "hero_title": "MI konsultācijas",
-    "hero_subtitle": "Bezmaksas pilotprogramma 3 atlasītiem uzņēmumiem",
+    "hero_subtitle": "Bezmaksas pilots trim komandām, kas gatavas strauji rīkoties",
     "hero_rotating": [
       "Bezmaksas pilotprogramma 3 atlasītiem uzņēmumiem",
       "MI stratēģijas sprinti regulētām komandām",
@@ -435,7 +435,7 @@
   "contact": {
     "meta_title": "Sazinies ar AlgoRhythmics",
     "hero_title": "Sazināsimies",
-    "hero_subtitle": "Radīsim ko izcilu kopā",
+    "hero_subtitle": "Sarunāsimies, lai iedarbinātu nākamo posmu",
     "hero_rotating": [
       "Radīsim ko izcilu kopā",
       "Ieplāno sarunu ar dibinātājiem",

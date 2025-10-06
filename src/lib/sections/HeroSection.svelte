@@ -54,15 +54,17 @@
 
 <HeroWrapper id="hero" class="hero hero--landing" showAside={false}>
   <svelte:fragment slot="title">
-    <h1 class="hero-title">
-      <span class="hero-title__line text-gradient">{heroTitle.lead}</span>
-      <span class="hero-title__brand" aria-label={$_('hero.brand_aria')}>
-        <span class="hero-title__brand-glow" aria-hidden="true"></span>
-        <span class="hero-title__brand-text" aria-hidden="true">{heroTitle.brand}</span>
-        <span class="sr-only">{heroTitle.brand}</span>
+    <div class="hero-heading" aria-live="polite">
+      <span class="hero-heading__line hero-heading__line--lead">{heroTitle.lead}</span>
+      <span class="hero-heading__brand">
+        <AnimatedHeadline
+          variant="glow"
+          text={heroTitle.brand}
+          ariaLabel={$_('hero.brand_aria')}
+        />
       </span>
-      <span class="hero-title__line hero-title__line--trail text-gradient">{heroTitle.trail}</span>
-    </h1>
+      <span class="hero-heading__line hero-heading__line--trail">{heroTitle.trail}</span>
+    </div>
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
@@ -120,91 +122,45 @@
     isolation: isolate;
   }
 
-  .hero-title__brand::before {
-    content: '';
-    position: absolute;
-    inset: -18%;
-    border-radius: inherit;
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(var(--cherry-red-rgb), 0.28) 40%);
-    filter: blur(32px);
-    opacity: 0.45;
-    z-index: 0;
-    animation: heroBrandAura 14s var(--ease-in-out) infinite alternate;
-  }
-
-  .hero-title__brand::after {
-    content: '';
+  .hero-backdrop {
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.65) 60%, rgba(var(--voyage-blue-rgb), 0.24) 40%);
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.18) 55%, rgba(var(--voyage-blue-rgb), 0.18) 45%);
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-backdrop__halo {
+    position: absolute;
+    width: clamp(18rem, 46vw, 32rem);
+    height: clamp(18rem, 46vw, 32rem);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.55;
+    transform: scale(0.85);
+    animation: heroHaloFloat 18s ease-in-out infinite;
+  }
+
+  .hero-backdrop__halo--primary {
+    background: radial-gradient(circle at 45% 35%, rgba(var(--voyage-blue-rgb), 0.48), transparent 65%);
+    animation-delay: -4s;
+  }
+
+  .hero-backdrop__halo--secondary {
+    background: radial-gradient(circle at 55% 65%, rgba(var(--aurora-purple-rgb), 0.4), transparent 70%);
+    animation-delay: -10s;
+  }
+
+  .hero-backdrop__grid {
+    position: absolute;
+    inset: auto;
+    width: min(82vw, 640px);
+    height: min(82vw, 640px);
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.45) 60%, transparent 40%);
+    mask: radial-gradient(circle, rgba(0, 0, 0, 0.95), transparent 70%);
+    animation: heroGridSpin 26s linear infinite;
     opacity: 0.35;
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    z-index: 0;
-  }
-
-  .hero-title__brand-text {
-    position: relative;
-    z-index: 1;
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    font-weight: var(--weight-black);
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    background: var(--gradient-heading-strong);
-    background-size: 280% auto;
-    background-position: 0% 50%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    text-shadow: none;
-    animation: heroBrandPulse 8s var(--ease-spring) infinite alternate;
-  }
-
-  @keyframes heroBrandPulse {
-    0% {
-      background-position: 0% 50%;
-      transform: scale(0.96);
-    }
-
-    50% {
-      background-position: 100% 50%;
-      transform: scale(1.02);
-    }
-
-    100% {
-      background-position: 0% 50%;
-      transform: scale(0.97);
-    }
-  }
-
-  @keyframes heroBrandAura {
-    0% {
-      opacity: 0.32;
-      transform: scale(0.96);
-    }
-
-    50% {
-      opacity: 0.58;
-      transform: scale(1.04);
-    }
-
-    100% {
-      opacity: 0.36;
-      transform: scale(1);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-title__brand-text {
-      animation: none;
-      transform: none;
-    }
-
-    .hero-title__brand::before {
-      animation: none;
-    }
   }
 </style>

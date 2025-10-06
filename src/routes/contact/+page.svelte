@@ -161,7 +161,7 @@
 
 <!-- Hero Section -->
 <HeroWrapper
-  class="hero hero--contact contact-hero"
+  class="hero hero--contact hero--centered contact-hero"
   showAside={false}
   introReveal={{ delay: 80, stagger: 140 }}
 >
@@ -176,15 +176,19 @@
   </svelte:fragment>
 
   <svelte:fragment slot="status">
-    <span class="eyebrow">{$_('contact.hero_title')}</span>
+    <span class="hero-badge contact-hero__badge">{$_('contact.hero_title')}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="title">
-    <h1 class="contact-hero__headline">
+    <div class="contact-hero__heading">
       <span class="contact-hero__headline">
         <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
       </span>
-    </h1>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="lead">
+    <p class="contact-hero__motto">{$_('contact.hero_subtitle')}</p>
   </svelte:fragment>
 </HeroWrapper>
 
@@ -352,16 +356,12 @@
   :global(.hero--contact) {
     --hero-padding-block-start: clamp(6rem, 14vw, 8rem);
     --hero-padding-block-end: clamp(3.5rem, 10vw, 5.5rem);
-    --hero-shell-columns: minmax(0, 1fr);
-    --hero-shell-gap: clamp(2rem, 4vw, 2.6rem);
-    --hero-intro-gap: clamp(1.4rem, 3vw, 2.1rem);
     --hero-backdrop-inset: clamp(-5rem, -8vw, -2rem) -12% auto;
     --hero-backdrop-height: clamp(18rem, 32vw, 24rem);
     --hero-backdrop-gradient: radial-gradient(circle at 50% 40%, rgba(19, 81, 255, 0.24), transparent 72%);
     --hero-backdrop-opacity: 0.34;
     --hero-backdrop-opacity-light: 0.4;
     --hero-backdrop-opacity-dark: 0.25;
-    text-align: center;
     overflow: hidden;
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
@@ -377,12 +377,17 @@
     pointer-events: none;
   }
 
+  .contact-hero__heading {
+    display: grid;
+    gap: clamp(0.75rem, 2.6vw, 1.2rem);
+    justify-items: center;
+  }
+
   .contact-hero__headline {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     margin: clamp(1.2rem, 3vw, 1.9rem) auto 0;
-    max-width: min(100%, 50ch);
-    text-align: center;
+    max-width: min(100%, 52ch);
     padding: clamp(0.6rem, 2vw, 1rem) clamp(1.3rem, 3vw, 1.9rem);
     border-radius: clamp(2.4rem, 5vw, 3.6rem);
     background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
@@ -396,14 +401,38 @@
     width: 100%;
   }
 
+  .contact-hero__motto {
+    margin: 0;
+    max-width: 50ch;
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    color: var(--text-secondary);
+  }
+
+  .contact-hero__badge {
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.22) 65%, transparent);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
   :global([data-base-theme='dark']) .contact-hero__headline {
     background: linear-gradient(128deg, rgba(18, 24, 44, 0.78), rgba(18, 24, 44, 0.56));
     box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
   }
 
+  :global([data-base-theme='dark']) .contact-hero__badge {
+    background: rgba(18, 24, 44, 0.68);
+    border-color: rgba(120, 146, 220, 0.4);
+    color: rgba(210, 220, 255, 0.88);
+  }
+
   :global([data-theme='contrast']) .contact-hero__headline {
     background: linear-gradient(128deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  }
+
+  :global([data-theme='contrast']) .contact-hero__badge {
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    color: #fff;
   }
 
   .contact-hero__backdrop {
@@ -475,11 +504,6 @@
     50% {
       transform: translate3d(8px, -16px, 0) scale(1.08);
     }
-  }
-
-  :global(.hero--contact h1) {
-    font-size: clamp(2.2rem, 5vw, 3rem);
-    margin-top: 0.75rem;
   }
 
   .contact-section {
@@ -635,10 +659,6 @@ form {
 
     .contact-hero__backdrop {
       inset: -32% -24%;
-    }
-
-    :global(.hero--contact) h1 {
-      font-size: clamp(2rem, 8vw, 2.6rem);
     }
 
     form,

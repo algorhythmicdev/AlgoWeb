@@ -87,7 +87,7 @@
 
 <!-- Hero -->
 <HeroWrapper
-  class="hero hero--community community-hero"
+  class="hero hero--community hero--centered community-hero"
   showAside={false}
   introReveal={{ delay: 60, stagger: 120 }}
 >
@@ -101,15 +101,19 @@
   </svelte:fragment>
 
   <svelte:fragment slot="status">
-    <span class="eyebrow">{$_('community.hero_title')}</span>
+    <span class="hero-badge community-hero__badge">{$_('community.hero_title')}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="title">
-    <h1 class="community-hero__headline">
+    <div class="community-hero__heading">
       <span class="community-hero__headline-text">
         <AnimatedHeadline variant="slide" phrases={heroPhrases} holdDuration={2600} />
       </span>
-    </h1>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="lead">
+    <p class="community-hero__motto">{$_('community.hero_subtitle')}</p>
   </svelte:fragment>
 </HeroWrapper>
 
@@ -216,7 +220,6 @@
     --hero-backdrop-opacity: 0.35;
     --hero-backdrop-opacity-light: 0.42;
     --hero-backdrop-opacity-dark: 0.28;
-    text-align: center;
     overflow: hidden;
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
@@ -232,16 +235,22 @@
     pointer-events: none;
   }
 
+  .community-hero__heading {
+    display: grid;
+    gap: clamp(0.6rem, 2vw, 1rem);
+    justify-items: center;
+  }
+
   .community-hero__headline-text {
     position: relative;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     margin: clamp(1.2rem, 2.8vw, 1.8rem) auto 0;
     padding: clamp(0.6rem, 2vw, 0.95rem) clamp(1.25rem, 3vw, 1.85rem);
     border-radius: clamp(2.4rem, 5vw, 3.6rem);
-    max-width: min(100%, 50ch);
+    max-width: min(100%, 52ch);
     text-align: center;
-    background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
+    background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1));
     border: 1px solid rgba(255, 255, 255, 0.45);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
     backdrop-filter: blur(18px);
@@ -250,6 +259,40 @@
 
   .community-hero__headline-text :global(.animated-headline) {
     width: 100%;
+  }
+
+  .community-hero__badge {
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
+    border-color: rgba(255, 255, 255, 0.48);
+  }
+
+  .community-hero__motto {
+    margin: 0;
+    max-width: 56ch;
+    color: var(--text-secondary);
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  }
+
+  :global([data-base-theme='dark']) .community-hero__headline-text {
+    background: linear-gradient(126deg, rgba(24, 32, 56, 0.82), rgba(24, 32, 56, 0.56));
+    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
+  }
+
+  :global([data-base-theme='dark']) .community-hero__badge {
+    background: rgba(24, 32, 56, 0.68);
+    border-color: rgba(120, 146, 220, 0.4);
+    color: rgba(220, 232, 255, 0.88);
+  }
+
+  :global([data-theme='contrast']) .community-hero__headline-text {
+    background: linear-gradient(126deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.72));
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  }
+
+  :global([data-theme='contrast']) .community-hero__badge {
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    color: #fff;
   }
 
   .community-hero__mesh {

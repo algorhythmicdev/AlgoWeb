@@ -1,6 +1,7 @@
 <script>
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
+  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
@@ -32,50 +33,66 @@
   <meta name="description" content={$_('nodevoyage.seo_description')} />
 </svelte:head>
 
-<section class="product-hero section" use:reveal>
-  <div class="product-hero__halo" aria-hidden="true">
-    <span class="halo-ring halo-ring--outer"></span>
-    <span class="halo-ring halo-ring--inner"></span>
-    <span class="halo-orb halo-orb--one"></span>
-    <span class="halo-orb halo-orb--two"></span>
-  </div>
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">{$_('nodevoyage.status')}</span>
-      <h1>{$_('nodevoyage.name')}</h1>
-      <span class="hero-headline">
-        <AnimatedHeadline variant="slide" phrases={heroPhrases} holdDuration={2600} />
-      </span>
-      <p class="hero-description">{$_('nodevoyage.hero_description')}</p>
+<HeroWrapper class="hero hero--product hero--nodevoyage hero--centered" introReveal={{ delay: 60, stagger: 130 }}>
+  <svelte:fragment slot="backdrop">
+    <div class="product-hero__halo" aria-hidden="true">
+      <span class="halo-ring halo-ring--outer"></span>
+      <span class="halo-ring halo-ring--inner"></span>
+      <span class="halo-orb halo-orb--one"></span>
+      <span class="halo-orb halo-orb--two"></span>
+    </div>
+  </svelte:fragment>
 
-      <div class="hero-actions">
-        <button class="btn btn-primary" use:ripple use:magnetic>{$_('nodevoyage.cta_primary')}</button>
-        <a href="#features" class="btn btn-secondary">{$_('nodevoyage.cta_secondary')}</a>
+  <svelte:fragment slot="status">
+    <span class="hero-badge product-hero__badge">{$_('nodevoyage.status')}</span>
+  </svelte:fragment>
+
+  <svelte:fragment slot="title">
+    <h1 class="product-hero__title">{$_('nodevoyage.name')}</h1>
+  </svelte:fragment>
+
+  <svelte:fragment slot="lead">
+    <span class="product-hero__headline">
+      <AnimatedHeadline variant="slide" phrases={heroPhrases} holdDuration={2600} />
+    </span>
+  </svelte:fragment>
+
+  <svelte:fragment slot="description">
+    <p class="product-hero__description">{$_('nodevoyage.hero_description')}</p>
+  </svelte:fragment>
+
+  <svelte:fragment slot="actions">
+    <div class="product-hero__actions">
+      <button class="btn btn-primary" use:ripple use:magnetic>{$_('nodevoyage.cta_primary')}</button>
+      <a href="#features" class="btn btn-secondary">{$_('nodevoyage.cta_secondary')}</a>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="metrics">
+    <div class="product-hero__stats" use:staggerReveal={{ stagger: 160 }}>
+      <div class="stat">
+        <span class="label">{$_('nodevoyage.stat1_label')}</span>
+        <span class="value">{$_('nodevoyage.stat1_value')}</span>
       </div>
-
-      <div class="hero-stats" use:staggerReveal={{ stagger: 160 }}>
-        <div class="stat">
-          <span class="label">{$_('nodevoyage.stat1_label')}</span>
-          <span class="value">{$_('nodevoyage.stat1_value')}</span>
-        </div>
-        <div class="stat">
-          <span class="label">{$_('nodevoyage.stat2_label')}</span>
-          <span class="value">{$_('nodevoyage.stat2_value')}</span>
-        </div>
-        <div class="stat">
-          <span class="label">{$_('nodevoyage.stat3_label')}</span>
-          <span class="value">{$_('nodevoyage.stat3_value')}</span>
-        </div>
+      <div class="stat">
+        <span class="label">{$_('nodevoyage.stat2_label')}</span>
+        <span class="value">{$_('nodevoyage.stat2_value')}</span>
+      </div>
+      <div class="stat">
+        <span class="label">{$_('nodevoyage.stat3_label')}</span>
+        <span class="value">{$_('nodevoyage.stat3_value')}</span>
       </div>
     </div>
+  </svelte:fragment>
 
-    <div class="hero-visual">
+  <svelte:fragment slot="aside">
+    <div class="product-hero__visual">
       <div class="device-frame">
         <img src="/images/products/nodevoyage-hero.png" alt={$_('nodevoyage.hero_alt')} />
       </div>
     </div>
-  </div>
-</section>
+  </svelte:fragment>
+</HeroWrapper>
 
 <section class="features section" id="features" use:reveal>
   <div class="container">
@@ -143,21 +160,25 @@
 </section>
 
 <style>
-  .product-hero {
-    position: relative;
-    overflow: hidden;
+  :global(.hero--nodevoyage) {
+    --hero-padding-block-start: clamp(5.5rem, 12vw, 8rem);
+    --hero-padding-block-end: clamp(4rem, 10vw, 6.5rem);
+    --hero-shell-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    --hero-shell-gap: clamp(2.6rem, 5vw, 3.6rem);
+    --hero-intro-gap: clamp(1.4rem, 3vw, 2.1rem);
+    --hero-aside-gap: clamp(1.8rem, 4vw, 2.6rem);
+    --hero-backdrop-inset: clamp(-6rem, -8vw, -3rem) -10% auto;
+    --hero-backdrop-height: clamp(18rem, 32vw, 24rem);
+    --hero-backdrop-gradient: radial-gradient(circle at 30% 40%, rgba(19, 81, 255, 0.18), transparent 70%);
+    --hero-backdrop-opacity: 0.7;
+    --hero-backdrop-blur: 120px;
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+    overflow: hidden;
   }
 
-  .product-hero::before {
-    content: '';
-    position: absolute;
-    inset: clamp(-6rem, -8vw, -3rem) -10% auto;
-    height: clamp(18rem, 32vw, 24rem);
-    background: radial-gradient(circle at 30% 40%, rgba(19, 81, 255, 0.18), transparent 70%);
-    filter: blur(120px);
-    opacity: 0.7;
-    pointer-events: none;
+  :global(.hero--nodevoyage .hero-wrapper__intro) {
+    text-align: center;
+    justify-items: center;
   }
 
   .product-hero__halo {
@@ -241,16 +262,18 @@
     }
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(2.5rem, 5vw, 4rem);
-    align-items: center;
+  .product-hero__badge {
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
+    border-color: rgba(255, 255, 255, 0.45);
   }
 
-  .hero-copy { display: grid; gap: clamp(1.6rem, 3vw, 2.2rem); }
+  .product-hero__title {
+    margin: 0;
+    font-size: clamp(2.6rem, 6vw, 4.1rem);
+    letter-spacing: -0.035em;
+  }
 
-  .hero-headline {
+  .product-hero__headline {
     display: inline-flex;
     margin-bottom: clamp(0.6rem, 2vw, 1rem);
     padding: clamp(0.55rem, 1.8vw, 0.9rem) clamp(1.25rem, 3vw, 1.85rem);
@@ -262,26 +285,47 @@
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
   }
 
-  .hero-headline :global(.animated-headline) {
+  .product-hero__headline :global(.animated-headline) {
     width: 100%;
   }
 
-  :global([data-base-theme='dark']) .hero-headline {
+  :global([data-base-theme='dark']) .product-hero__headline {
     background: linear-gradient(126deg, rgba(22, 30, 52, 0.78), rgba(22, 30, 52, 0.54));
     border: 1px solid rgba(120, 146, 220, 0.38);
     box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.26);
   }
 
-  :global([data-theme='contrast']) .hero-headline {
+  :global([data-theme='contrast']) .product-hero__headline {
     background: linear-gradient(126deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.72));
     border: 2px solid rgba(255, 255, 255, 0.85);
   }
 
-  .hero-description { color: var(--text-secondary); }
+  :global([data-base-theme='dark']) .product-hero__badge {
+    background: rgba(22, 30, 52, 0.7);
+    border-color: rgba(120, 146, 220, 0.4);
+    color: rgba(220, 232, 255, 0.88);
+  }
 
-  .hero-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+  :global([data-theme='contrast']) .product-hero__badge {
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    color: #fff;
+  }
 
-  .hero-stats {
+  .product-hero__description {
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .product-hero__actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .product-hero__stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: clamp(1.2rem, 3vw, 1.8rem);
@@ -300,10 +344,19 @@
     backdrop-filter: blur(22px);
   }
 
-  .label { color: var(--text-tertiary); font-size: var(--text-small); text-transform: uppercase; letter-spacing: 0.12em; }
-  .value { font-size: var(--text-title); font-weight: var(--weight-semibold); }
+  .product-hero__stats .label {
+    color: var(--text-tertiary);
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
 
-  .hero-visual {
+  .product-hero__stats .value {
+    font-size: var(--text-title);
+    font-weight: var(--weight-semibold);
+  }
+
+  .product-hero__visual {
     display: flex;
     justify-content: center;
   }
@@ -433,12 +486,21 @@
   }
 
   @media (max-width: 1024px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-visual { order: -1; }
+    :global(.hero--nodevoyage) {
+      --hero-shell-columns: minmax(0, 1fr);
+    }
+
+    :global(.hero--nodevoyage .hero-wrapper__aside) {
+      order: -1;
+    }
+
+    .product-hero__actions {
+      justify-content: center;
+    }
   }
 
   @media (max-width: 640px) {
-    .hero-actions { flex-direction: column; }
+    .product-hero__actions { flex-direction: column; }
     .device-frame { padding: 1rem; }
     .device-frame img { width: 100%; }
   }

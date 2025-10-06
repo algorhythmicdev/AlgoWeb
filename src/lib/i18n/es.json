@@ -33,13 +33,13 @@
     "toggle_menu": "Abrir o cerrar menú"
   },
   "hero": {
-    "status": "En desarrollo • Moldeamos el futuro de la IA",
+    "status": "Estudio de IA en calma • Fundado en Letonia",
     "title": {
       "lead": "Donde la lógica baila con",
       "brand": "AlgoRhythmics",
       "trail": "y la creatividad"
     },
-    "tagline": "AlgoRhythmics — Laboratorio de innovación en IA",
+    "tagline": "AlgoRhythmics — laboratorio báltico de innovación humanista",
     "subtitle": "Los pilotos de NodeVoyage y los rituales de Ideonautix mantienen a los fundadores enfocados sin perder el toque humano.",
     "description": "Con raíces en investigación de señalética y en ingeniería cloud, combinamos disciplina tangible con software explicable para que los equipos humanos mantengan el control.",
     "cta_products": "Explorar productos",
@@ -316,7 +316,7 @@
   "community": {
     "meta_title": "Comunidad AlgoRhythmics",
     "hero_title": "Comunidad",
-    "hero_subtitle": "Vota funciones, comparte ideas y diseña el futuro con nosotros",
+    "hero_subtitle": "Vota funciones, comparte ideas y traza el futuro junto a nosotros",
     "hero_rotating": [
       "Vota por las funciones y mira los resultados al instante",
       "Comparte tus ideas de producto en segundos",
@@ -381,7 +381,7 @@
   "consulting": {
     "meta_title": "Piloto de consultoría AlgoRhythmics",
     "hero_title": "Consultoría de IA",
-    "hero_subtitle": "Programa piloto gratuito para 3 empresas seleccionadas",
+    "hero_subtitle": "Programa piloto sin coste para tres equipos comprometidos",
     "hero_rotating": [
       "Programa piloto gratuito para 3 empresas seleccionadas",
       "Sprints de estrategia de IA para equipos regulados",
@@ -435,7 +435,7 @@
   "contact": {
     "meta_title": "Contacto AlgoRhythmics",
     "hero_title": "Ponte en contacto",
-    "hero_subtitle": "Construyamos algo increíble juntos",
+    "hero_subtitle": "Conversemos para activar tu próxima fase",
     "hero_rotating": [
       "Construyamos algo increíble juntos",
       "Agenda una conversación de fundador a fundador",

@@ -33,13 +33,13 @@
     "toggle_menu": "Ouvrir ou fermer le menu"
   },
   "hero": {
-    "status": "En développement • Nous façonnons l'avenir de l'IA",
+    "status": "Studio d'IA serein • Fondé en Lettonie",
     "title": {
       "lead": "Là où la logique danse avec",
       "brand": "AlgoRhythmics",
       "trail": "et la créativité"
     },
-    "tagline": "AlgoRhythmics — Laboratoire d'innovation en IA",
+    "tagline": "AlgoRhythmics — laboratoire baltique d'innovation humaniste",
     "subtitle": "Les pilotes NodeVoyage et les rituels Ideonautix maintiennent les fondateurs concentrés sans perdre l'humain.",
     "description": "Ancrés dans la R&D signalétique et l'ingénierie cloud, nous mêlons rigueur matérielle et logiciels explicables pour que les équipes humaines gardent la main.",
     "cta_products": "Explorer les produits",
@@ -316,7 +316,7 @@
   "community": {
     "meta_title": "Communauté AlgoRhythmics",
     "hero_title": "Communauté",
-    "hero_subtitle": "Votez les fonctionnalités, partagez vos idées et co-créez l'avenir",
+    "hero_subtitle": "Votez les fonctionnalités, partagez vos idées et co-créez l'avenir avec nous",
     "hero_rotating": [
       "Votez pour les fonctionnalités et voyez les résultats en direct",
       "Partagez vos idées produit en quelques secondes",
@@ -381,7 +381,7 @@
   "consulting": {
     "meta_title": "Programme de conseil AlgoRhythmics",
     "hero_title": "Conseil en IA",
-    "hero_subtitle": "Programme pilote gratuit pour 3 entreprises sélectionnées",
+    "hero_subtitle": "Programme pilote offert à trois équipes réellement investies",
     "hero_rotating": [
       "Programme pilote gratuit pour 3 entreprises sélectionnées",
       "Sprints de stratégie IA pour les équipes réglementées",
@@ -435,7 +435,7 @@
   "contact": {
     "meta_title": "Contact AlgoRhythmics",
     "hero_title": "Entrons en contact",
-    "hero_subtitle": "Construisons quelque chose d'exceptionnel ensemble",
+    "hero_subtitle": "Échangeons pour enclencher votre prochaine étape",
     "hero_rotating": [
       "Construisons quelque chose d'incroyable ensemble",
       "Planifiez une conversation fondateur à fondateur",

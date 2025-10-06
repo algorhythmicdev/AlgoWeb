@@ -152,9 +152,9 @@
 
 <!-- Hero Section -->
 <HeroWrapper
-  class="hero hero--consulting consulting-hero"
+  class="hero hero--consulting hero--centered consulting-hero"
+  showAside={false}
   introReveal={{ delay: 60, stagger: 130 }}
-  asideReveal={{ delay: 220, stagger: 160 }}
 >
   <svelte:fragment slot="backdrop">
     <div class="consulting-hero__halo" aria-hidden="true">
@@ -165,29 +165,42 @@
   </svelte:fragment>
 
   <svelte:fragment slot="status">
-    <span class="eyebrow">{$_('consulting.hero_title')}</span>
+    <span class="hero-badge consulting-hero__badge">{$_('consulting.hero_title')}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="title">
-    <h1 class="consulting-hero__headline">
-      <AnimatedHeadline variant="glow" text={heroRotating[0] ?? ''} />
-    </h1>
+    <div class="consulting-hero__heading">
+      <span class="consulting-hero__headline">
+        <AnimatedHeadline variant="glow" text={heroRotating[0] ?? ''} />
+      </span>
+    </div>
   </svelte:fragment>
 
-  {#if heroRotating.length > 1}
-    <ul class="consulting-hero__phrases">
-      {#each heroRotating.slice(1) as phrase, index}
-        <li class="consulting-hero__phrase" aria-label={`Focus area ${index + 1}`}>{phrase}</li>
-      {/each}
-    </ul>
-  {/if}
+  <svelte:fragment slot="lead">
+    <p class="consulting-hero__motto">{$_('consulting.hero_subtitle')}</p>
+  </svelte:fragment>
 
-  <div class="spots-indicator">
-    <div class="spots-number">{spotsRemaining}</div>
-    <span>{$_('consulting.spots_remaining')}</span>
-  </div>
+  <svelte:fragment slot="description">
+    <div class="consulting-hero__meta">
+      <div class="spots-indicator">
+        <div class="spots-number">{spotsRemaining}</div>
+        <span>{$_('consulting.spots_remaining')}</span>
+      </div>
+      <a href="#form" class="btn btn-gradient">{$_('consulting.form_title')}</a>
+    </div>
+  </svelte:fragment>
 
-  <div class="hero-features" use:staggerReveal>
+    <svelte:fragment slot="highlights">
+      {#if heroRotating.length > 1}
+        <ul class="consulting-hero__phrases">
+          {#each heroRotating.slice(1) as phrase, index}
+            <li class="consulting-hero__phrase" aria-label={`Focus area ${index + 1}`}>{phrase}</li>
+          {/each}
+        </ul>
+      {/if}
+    </svelte:fragment>
+
+  <div class="consulting-hero__features" use:staggerReveal>
     <div class="feature">
       <div class="feature-icon">
         <Icon name="target" size={26} />
@@ -207,13 +220,6 @@
       <p>{$_('consulting.what_3')}</p>
     </div>
   </div>
-
-  <svelte:fragment slot="aside">
-    <div class="hero-cta">
-      <p>{$_('consulting.what_title')}</p>
-      <a href="#form" class="btn btn-primary">{$_('consulting.form_title')}</a>
-    </div>
-  </svelte:fragment>
 </HeroWrapper>
 
 <!-- Application Form -->
@@ -378,11 +384,9 @@
 :global(.hero--consulting) {
   --hero-padding-block-start: clamp(6rem, 14vw, 8.5rem);
   --hero-padding-block-end: clamp(4rem, 12vw, 6.5rem);
-  --hero-shell-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
-  --hero-shell-gap: clamp(2.6rem, 5vw, 3.8rem);
-  --hero-shell-align: center;
-  --hero-intro-gap: clamp(1.6rem, 3vw, 2.2rem);
-  --hero-aside-gap: clamp(1.8rem, 4vw, 2.6rem);
+  --hero-shell-columns: minmax(0, 1fr);
+  --hero-shell-gap: clamp(2.2rem, 4.5vw, 3.4rem);
+  --hero-intro-gap: clamp(1.5rem, 3vw, 2.2rem);
   --hero-backdrop-inset: clamp(-5rem, -8vw, -2rem) -15% auto;
   --hero-backdrop-height: clamp(20rem, 36vw, 26rem);
   --hero-backdrop-gradient: radial-gradient(circle at 40% 40%, rgba(19, 81, 255, 0.26), transparent 72%);
@@ -405,15 +409,47 @@
   pointer-events: none;
 }
 
+.consulting-hero__heading {
+  display: grid;
+  gap: clamp(0.7rem, 2.4vw, 1.1rem);
+  justify-items: center;
+}
+
 .consulting-hero__headline {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  margin: clamp(1.1rem, 2.8vw, 1.7rem) 0 clamp(1.3rem, 3vw, 1.9rem);
-  text-align: center;
+  padding: clamp(0.65rem, 2vw, 1rem) clamp(1.4rem, 3.2vw, 2rem);
+  border-radius: clamp(2.6rem, 5vw, 3.6rem);
+  background: linear-gradient(132deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.14));
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .consulting-hero__headline :global(.animated-headline) {
-  max-width: min(48ch, 90vw);
+  max-width: min(50ch, 90vw);
+}
+
+.consulting-hero__motto {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+}
+
+.consulting-hero__badge {
+  background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
+  border-color: rgba(255, 255, 255, 0.48);
+}
+
+.consulting-hero__meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.8vw, 1.6rem);
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(1.4rem, 3vw, 2rem);
 }
 
 .consulting-hero__phrases {
@@ -438,10 +474,32 @@
   color: var(--text-primary);
 }
 
+:global([data-base-theme='dark']) .consulting-hero__headline {
+  background: linear-gradient(132deg, rgba(24, 32, 56, 0.82), rgba(24, 32, 56, 0.58));
+  box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
+}
+
+:global([data-base-theme='dark']) .consulting-hero__badge {
+  background: rgba(24, 32, 56, 0.68);
+  border-color: rgba(120, 146, 220, 0.38);
+  color: rgba(220, 232, 255, 0.88);
+}
+
 :global([data-base-theme='dark']) .consulting-hero__phrase {
   background: linear-gradient(132deg, rgba(32, 44, 78, 0.78), rgba(25, 32, 58, 0.62));
   box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38);
   color: rgba(236, 242, 255, 0.94);
+}
+
+:global([data-theme='contrast']) .consulting-hero__headline {
+  background: linear-gradient(132deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.7));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+:global([data-theme='contrast']) .consulting-hero__badge {
+  background: rgba(0, 0, 0, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: #fff;
 }
 
 :global([data-theme='contrast']) .consulting-hero__phrase {
@@ -537,19 +595,26 @@
   background: var(--bg-surface);
   background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
   backdrop-filter: blur(18px);
-  width: fit-content;
 }
 
-  .spots-number {
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: var(--weight-semibold);
-    color: var(--voyage-blue);
-    line-height: 1;
-  }
+.spots-indicator span {
+  font-size: var(--text-small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
 
-.hero-features {
+.spots-number {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: var(--weight-semibold);
+  color: var(--voyage-blue);
+  line-height: 1;
+}
+
+.consulting-hero__features {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(1.4rem, 3vw, 2rem);
   margin-top: clamp(1.8rem, 4vw, 2.4rem);
 }
@@ -577,27 +642,10 @@
   color: var(--voyage-blue);
 }
 
-  .feature p {
-    margin: 0;
-    color: var(--text-secondary);
-  }
-
-.hero-cta {
-  background: var(--bg-surface);
-  background: var(--surface-glass);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: var(--radius-2xl);
-  padding: clamp(2.4rem, 5vw, 3.1rem);
-  display: grid;
-  gap: clamp(1.4rem, 3vw, 2rem);
-  justify-items: start;
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(24px);
+.feature p {
+  margin: 0;
+  color: var(--text-secondary);
 }
-
-  .hero-cta p {
-    color: var(--text-secondary);
-  }
 
 .form-section {
   padding: clamp(6rem, 14vw, 8rem) 0;
@@ -757,12 +805,6 @@
     :global(.hero--consulting) {
       --hero-shell-columns: minmax(0, 1fr);
       --hero-shell-gap: clamp(2rem, 6vw, 2.8rem);
-      --hero-aside-gap: clamp(1.6rem, 5vw, 2.2rem);
-    }
-
-    .hero-cta {
-      justify-items: stretch;
-      width: 100%;
     }
   }
 
