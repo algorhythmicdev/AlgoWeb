@@ -11,23 +11,113 @@
   import { page } from '$app/stores';
   import { theme } from '$stores/theme';
   import { get } from 'svelte/store';
+  import en from '$lib/i18n/en.json';
   
   export let data;
 
   $: routeKey = $page.url.pathname;
 
+  /** @type {Record<string, any>} */
+  let metaData = {};
+  $: metaData = /** @type {Record<string, any>} */ (data?.meta ?? {});
+
   const localePromise = waitLocale();
-  let loadingMessage = 'Loading...';
+  let localeReady = false;
+
+  const fallbackMeta = {
+    title: en.seo?.default_title ?? `${en.site.title} — ${en.site.tagline}`,
+    description: en.seo?.default_description ?? en.site.description,
+    ogTitle: en.seo?.default_og_title ?? en.site.title,
+    ogDescription: en.seo?.default_og_description ?? en.site.tagline,
+    url: en.seo?.default_url ?? 'https://algorhythmics.com'
+  };
+
+  const fallbackLoading = en.app.loading;
+  let loadingMessage = fallbackLoading;
+  /** @type {((key: string, options?: Record<string, any>) => string) | null} */
+  let translateFn = null;
+
+  let defaultMetaTitle = fallbackMeta.title;
+  let defaultMetaDescription = fallbackMeta.description;
+  let defaultOgTitle = fallbackMeta.ogTitle;
+  let defaultOgDescription = fallbackMeta.ogDescription;
+  let defaultMetaUrl = fallbackMeta.url;
+
+  let metaTitle = defaultMetaTitle;
+  let metaDescription = defaultMetaDescription;
+  let ogTitle = defaultOgTitle;
+  let ogDescription = defaultOgDescription;
+  let metaUrl = defaultMetaUrl;
+
+  /**
+   * @param {string} key
+   * @param {string} fallback
+   */
+  const safeTranslate = (key, fallback) => {
+    if (!localeReady) return fallback;
+    const t = translateFn;
+    if (typeof t !== 'function') return fallback;
+    try {
+      const result = t(key);
+      if (typeof result === 'string' && result.trim().length > 0) {
+        return result;
+      }
+    } catch (error) {
+      // Ignore and fall back to the provided string
+    }
+    return fallback;
+  };
+
+  $: translateFn = get(_);
+
+  $: {
+    if (localeReady && typeof translateFn === 'function') {
+      try {
+        defaultMetaTitle = translateFn('seo.default_title') || fallbackMeta.title;
+        defaultMetaDescription = translateFn('seo.default_description') || fallbackMeta.description;
+        defaultOgTitle = translateFn('seo.default_og_title') || fallbackMeta.ogTitle;
+        defaultOgDescription = translateFn('seo.default_og_description') || fallbackMeta.ogDescription;
+        defaultMetaUrl = translateFn('seo.default_url') || fallbackMeta.url;
+      } catch (error) {
+        defaultMetaTitle = fallbackMeta.title;
+        defaultMetaDescription = fallbackMeta.description;
+        defaultOgTitle = fallbackMeta.ogTitle;
+        defaultOgDescription = fallbackMeta.ogDescription;
+        defaultMetaUrl = fallbackMeta.url;
+      }
+    } else {
+      defaultMetaTitle = fallbackMeta.title;
+      defaultMetaDescription = fallbackMeta.description;
+      defaultOgTitle = fallbackMeta.ogTitle;
+      defaultOgDescription = fallbackMeta.ogDescription;
+      defaultMetaUrl = fallbackMeta.url;
+    }
+  }
+
+  $: metaTitle = metaData.title ?? (metaData.titleKey ? safeTranslate(metaData.titleKey, defaultMetaTitle) : defaultMetaTitle);
+
+  $: metaDescription =
+    metaData.description ??
+    (metaData.descriptionKey ? safeTranslate(metaData.descriptionKey, defaultMetaDescription) : defaultMetaDescription);
+
+  $: ogTitle =
+    metaData.ogTitle ??
+    (metaData.ogTitleKey ? safeTranslate(metaData.ogTitleKey, metaTitle ?? defaultOgTitle) : metaTitle ?? defaultOgTitle);
+
+  $: ogDescription =
+    metaData.ogDescription ??
+    (metaData.ogDescriptionKey ? safeTranslate(metaData.ogDescriptionKey, defaultOgDescription) : defaultOgDescription);
+
+  $: metaUrl = typeof metaData.url === 'string' && metaData.url.trim() ? metaData.url : defaultMetaUrl;
 
   localePromise
     .then(() => {
-      const translate = get(_);
-      if (typeof translate === 'function') {
-        loadingMessage = translate('app.loading');
-      }
+      localeReady = true;
+      loadingMessage = safeTranslate('app.loading', fallbackLoading);
     })
     .catch(() => {
-      loadingMessage = 'Loading...';
+      localeReady = false;
+      loadingMessage = fallbackLoading;
     });
 
   onMount(() => {
@@ -41,23 +131,23 @@
 </script>
 
 <svelte:head>
-  <title>{data?.meta?.title || 'AlgoRhythmics - Where Logic Dances with Creativity'}</title>
-  <meta name="description" content={data?.meta?.description || 'AI innovation lab creating NodeVoyage travel platform and Ideonautix productivity suite.'} />
+  <title>{metaTitle}</title>
+  <meta name="description" content={metaDescription} />
   {#if data?.meta?.keywords}
     <meta name="keywords" content={data.meta.keywords.join(', ')} />
   {/if}
   
   <!-- Open Graph -->
-  <meta property="og:title" content={data?.meta?.title || 'AlgoRhythmics'} />
-  <meta property="og:description" content={data?.meta?.description || 'Where Logic Dances with Creativity'} />
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={data?.meta?.url || 'https://algorhythmics.com'} />
+  <meta property="og:url" content={metaUrl} />
   <meta property="og:image" content="/og-image.png" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={data?.meta?.title || 'AlgoRhythmics'} />
-  <meta name="twitter:description" content={data?.meta?.description || 'Where Logic Dances with Creativity'} />
+  <meta name="twitter:title" content={metaTitle} />
+  <meta name="twitter:description" content={ogDescription} />
   <meta name="twitter:image" content="/og-image.png" />
 </svelte:head>
 

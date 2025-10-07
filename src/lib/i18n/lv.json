@@ -4,6 +4,19 @@
     "tagline": "Kur loģika dejo ar radošumu",
     "description": "MI inovāciju laboratorija, kas veido ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix"
   },
+  "seo": {
+    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
+    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
+    "default_og_title": "AlgoRhythmics",
+    "default_og_description": "Ideas tuned to human rhythm.",
+    "default_url": "https://algorhythmics.com",
+    "home": {
+      "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
+      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
+      "og_title": "AlgoRhythmics — Calm OS rituals",
+      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+    }
+  },
   "app": {
     "loading": "Ielādējas..."
   },
@@ -30,7 +43,10 @@
     "pilot_badge": "Pilots",
     "brand_aria": "AlgoRhythmics sākumlapa",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Atvērt vai aizvērt izvēlni"
+    "toggle_menu": "Atvērt vai aizvērt izvēlni",
+    "primary_label": "Galvenā navigācija",
+    "products_panel_label": "Produktu saites",
+    "talk_to_us": "Sazinies ar mums"
   },
   "hero": {
     "status": "OS-native AI studio • Riga ↔ Rotterdam",
@@ -505,7 +521,11 @@
         "cta": "Enter Discord",
         "action": "https://discord.gg/algorhythmics"
       }
-    ]
+    ],
+    "form_topic": "Tēma",
+    "form_topic_placeholder": "Par ko vēlaties runāt?",
+    "success_title": "Ziņa saņemta",
+    "success_subtitle": "Paldies par ziņu. Atbildēsim divu darba dienu laikā."
   },
   "form": {
     "error_required": "Šis lauks ir obligāts",
@@ -549,6 +569,7 @@
     "show_less": "Rādīt mazāk"
   },
   "footer": {
+    "brand_alt": "AlgoRhythmics wordmark",
     "tagline": "Kur loģika dejo ar radošumu",
     "status": "Pirmsuzņēmums • Ideju Kauss 2025. gada oktobris",
     "location": "Daugavpils, Latvija",
@@ -663,5 +684,36 @@
       }
     ],
     "fallback": "Vēl mācos, bet varu jūs savienot ar komandu vai dalīties ar informāciju par mūsu produktiem un pakalpojumiem."
+  },
+  "language_switcher": {
+    "group_label": "Valodu izvēle",
+    "trigger_label": "Izvēlies valodu",
+    "menu_label": "Pieejamās valodas",
+    "languages": {
+      "en": {
+        "short": "EN",
+        "name": "English"
+      },
+      "lv": {
+        "short": "LV",
+        "name": "Latviešu"
+      },
+      "ru": {
+        "short": "RU",
+        "name": "Русский"
+      },
+      "uk": {
+        "short": "UK",
+        "name": "Українська"
+      },
+      "fr": {
+        "short": "FR",
+        "name": "Français"
+      },
+      "es": {
+        "short": "ES",
+        "name": "Español"
+      }
+    }
   }
 }

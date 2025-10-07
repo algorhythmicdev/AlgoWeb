@@ -4,6 +4,19 @@
     "tagline": "Де логіка танцює з креативом",
     "description": "Лабораторія AI-інновацій, що створює тревел-платформу NodeVoyage та продуктивну екосистему Ideonautix"
   },
+  "seo": {
+    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
+    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
+    "default_og_title": "AlgoRhythmics",
+    "default_og_description": "Ideas tuned to human rhythm.",
+    "default_url": "https://algorhythmics.com",
+    "home": {
+      "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
+      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
+      "og_title": "AlgoRhythmics — Calm OS rituals",
+      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+    }
+  },
   "app": {
     "loading": "Завантаження..."
   },
@@ -30,7 +43,10 @@
     "pilot_badge": "Пілот",
     "brand_aria": "Головна AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Відкрити або закрити меню"
+    "toggle_menu": "Відкрити або закрити меню",
+    "primary_label": "Головна навігація",
+    "products_panel_label": "Швидкі посилання на продукти",
+    "talk_to_us": "Зв’яжіться з нами"
   },
   "hero": {
     "status": "OS-native AI studio • Riga ↔ Rotterdam",
@@ -505,7 +521,11 @@
         "cta": "Enter Discord",
         "action": "https://discord.gg/algorhythmics"
       }
-    ]
+    ],
+    "form_topic": "Тема",
+    "form_topic_placeholder": "Про що хочете поговорити?",
+    "success_title": "Повідомлення отримано",
+    "success_subtitle": "Дякуємо за звернення. Відповімо протягом двох робочих днів."
   },
   "form": {
     "error_required": "Обов'язкове поле",
@@ -549,6 +569,7 @@
     "show_less": "Показати менше"
   },
   "footer": {
+    "brand_alt": "AlgoRhythmics wordmark",
     "tagline": "Де логіка танцює з креативом",
     "status": "Пре-компанія • Ideju Kauss жовтень 2025",
     "location": "Даугавпілс, Латвія",
@@ -662,5 +683,36 @@
       }
     ],
     "fallback": "Я ще вчуся, але можу зʼєднати вас з нашою командою або надіслати матеріали про продукти й послуги."
+  },
+  "language_switcher": {
+    "group_label": "Вибір мови",
+    "trigger_label": "Обрати мову",
+    "menu_label": "Доступні мови",
+    "languages": {
+      "en": {
+        "short": "EN",
+        "name": "English"
+      },
+      "lv": {
+        "short": "LV",
+        "name": "Latviešu"
+      },
+      "ru": {
+        "short": "RU",
+        "name": "Русский"
+      },
+      "uk": {
+        "short": "UK",
+        "name": "Українська"
+      },
+      "fr": {
+        "short": "FR",
+        "name": "Français"
+      },
+      "es": {
+        "short": "ES",
+        "name": "Español"
+      }
+    }
   }
 }

@@ -4,6 +4,19 @@
     "tagline": "Là où la logique danse avec la créativité",
     "description": "Laboratoire d'innovation en IA qui donne vie à la plateforme de voyage NodeVoyage et à la suite de productivité Ideonautix"
   },
+  "seo": {
+    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
+    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
+    "default_og_title": "AlgoRhythmics",
+    "default_og_description": "Ideas tuned to human rhythm.",
+    "default_url": "https://algorhythmics.com",
+    "home": {
+      "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
+      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
+      "og_title": "AlgoRhythmics — Calm OS rituals",
+      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+    }
+  },
   "app": {
     "loading": "Chargement..."
   },
@@ -30,7 +43,10 @@
     "pilot_badge": "Pilote",
     "brand_aria": "Accueil AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Ouvrir ou fermer le menu"
+    "toggle_menu": "Ouvrir ou fermer le menu",
+    "primary_label": "Navigation principale",
+    "products_panel_label": "Raccourcis produits",
+    "talk_to_us": "Parlez-nous"
   },
   "hero": {
     "status": "OS-native AI studio • Riga ↔ Rotterdam",
@@ -505,7 +521,11 @@
         "cta": "Enter Discord",
         "action": "https://discord.gg/algorhythmics"
       }
-    ]
+    ],
+    "form_topic": "Sujet",
+    "form_topic_placeholder": "Quel sujet souhaitez-vous aborder ?",
+    "success_title": "Message reçu",
+    "success_subtitle": "Merci pour votre message. Nous répondons sous deux jours ouvrés."
   },
   "form": {
     "error_required": "Ce champ est obligatoire",
@@ -549,6 +569,7 @@
     "show_less": "Voir moins"
   },
   "footer": {
+    "brand_alt": "AlgoRhythmics wordmark",
     "tagline": "Là où la logique danse avec la créativité",
     "status": "Pré-entreprise • Ideju Kauss octobre 2025",
     "location": "Daugavpils, Lettonie",
@@ -662,5 +683,36 @@
       }
     ],
     "fallback": "Je m'améliore encore, mais je peux vous mettre en relation avec notre équipe ou partager des informations clés sur nos services."
+  },
+  "language_switcher": {
+    "group_label": "Sélecteur de langue",
+    "trigger_label": "Choisir la langue",
+    "menu_label": "Langues disponibles",
+    "languages": {
+      "en": {
+        "short": "EN",
+        "name": "English"
+      },
+      "lv": {
+        "short": "LV",
+        "name": "Latviešu"
+      },
+      "ru": {
+        "short": "RU",
+        "name": "Русский"
+      },
+      "uk": {
+        "short": "UK",
+        "name": "Українська"
+      },
+      "fr": {
+        "short": "FR",
+        "name": "Français"
+      },
+      "es": {
+        "short": "ES",
+        "name": "Español"
+      }
+    }
   }
 }

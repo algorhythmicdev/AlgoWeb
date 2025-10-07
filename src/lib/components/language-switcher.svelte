@@ -1,6 +1,7 @@
 <script>
   // @ts-nocheck
   import { tick } from 'svelte';
+  import { _ } from 'svelte-i18n';
   import { language } from '$stores/language';
 
   let isOpen = false;
@@ -9,12 +10,12 @@
   let focusedIndex = -1;
 
   const languages = [
-    { code: 'en', label: 'EN', name: 'English' },
-    { code: 'lv', label: 'LV', name: 'Latviešu' },
-    { code: 'ru', label: 'RU', name: 'Русский' },
-    { code: 'uk', label: 'UK', name: 'Українська' },
-    { code: 'fr', label: 'FR', name: 'Français' },
-    { code: 'es', label: 'ES', name: 'Español' }
+    { code: 'en', label: 'language_switcher.languages.en.short', name: 'language_switcher.languages.en.name' },
+    { code: 'lv', label: 'language_switcher.languages.lv.short', name: 'language_switcher.languages.lv.name' },
+    { code: 'ru', label: 'language_switcher.languages.ru.short', name: 'language_switcher.languages.ru.name' },
+    { code: 'uk', label: 'language_switcher.languages.uk.short', name: 'language_switcher.languages.uk.name' },
+    { code: 'fr', label: 'language_switcher.languages.fr.short', name: 'language_switcher.languages.fr.name' },
+    { code: 'es', label: 'language_switcher.languages.es.short', name: 'language_switcher.languages.es.name' }
   ];
 
   $: currentLanguage = languages.find((lang) => lang.code === $language) || languages[0];
@@ -152,25 +153,25 @@
   }
 </script>
 
-<div class="language-switcher" role="group" on:focusout={handleFocusOut}>
+<div class="language-switcher" role="group" aria-label={$_('language_switcher.group_label')} on:focusout={handleFocusOut}>
   <button
     bind:this={trigger}
     class="current-lang"
     on:click={toggleMenu}
     on:keydown={handleTriggerKeydown}
-    aria-label="Select language"
+    aria-label={$_('language_switcher.trigger_label')}
     aria-haspopup="listbox"
     aria-expanded={isOpen}
     aria-controls="language-menu"
   >
-    {currentLanguage.label}
+    {$_(currentLanguage.label)}
     <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
       <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </svg>
   </button>
 
   {#if isOpen}
-    <div class="dropdown" id="language-menu" role="listbox" tabindex="-1">
+    <div class="dropdown" id="language-menu" role="listbox" aria-label={$_('language_switcher.menu_label')} tabindex="-1">
       {#each languages as lang, index}
         <button
           type="button"
@@ -183,8 +184,8 @@
           on:click={() => selectLanguage(lang.code)}
           on:keydown={(event) => handleOptionKeydown(event, index)}
         >
-          <span class="label">{lang.label}</span>
-          <span class="name">{lang.name}</span>
+          <span class="label">{$_(lang.label)}</span>
+          <span class="name">{$_(lang.name)}</span>
         </button>
       {/each}
     </div>
