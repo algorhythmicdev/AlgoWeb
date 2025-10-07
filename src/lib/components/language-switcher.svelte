@@ -1,9 +1,12 @@
 <script>
   // @ts-nocheck
+  import { tick } from 'svelte';
   import { language } from '$stores/language';
 
   let isOpen = false;
   let trigger;
+  let optionRefs = [];
+  let focusedIndex = -1;
 
   const languages = [
     { code: 'en', label: 'EN', name: 'English' },
@@ -15,25 +18,136 @@
   ];
 
   $: currentLanguage = languages.find((lang) => lang.code === $language) || languages[0];
+  $: activeIndex = languages.findIndex((lang) => lang.code === $language);
 
-  function selectLanguage(code) {
-    language.set(code);
-    isOpen = false;
-    trigger?.focus();
+  function clampIndex(index) {
+    if (index < 0) return languages.length - 1;
+    if (index >= languages.length) return 0;
+    return index;
   }
 
-  function handleKeydown(event) {
-    if (event.key === 'Escape' && isOpen) {
-      isOpen = false;
+  function focusOption(index) {
+    focusedIndex = clampIndex(index);
+    optionRefs[focusedIndex]?.focus();
+  }
+
+  async function openMenu(startIndex = 0) {
+    optionRefs = [];
+    isOpen = true;
+    focusedIndex = clampIndex(startIndex);
+    await tick();
+    optionRefs[focusedIndex]?.focus();
+  }
+
+  function trackOption(node, index) {
+    optionRefs[index] = node;
+
+    return {
+      destroy() {
+        optionRefs[index] = undefined;
+      },
+      update(newIndex) {
+        if (newIndex !== index) {
+          optionRefs[index] = undefined;
+          index = newIndex;
+        }
+        optionRefs[index] = node;
+      }
+    };
+  }
+
+  async function closeMenu(restoreFocus = true) {
+    isOpen = false;
+    focusedIndex = -1;
+    if (restoreFocus) {
+      await tick();
       trigger?.focus();
-      event.stopPropagation();
+    }
+  }
+
+  async function selectLanguage(code) {
+    language.set(code);
+    await closeMenu();
+  }
+
+  async function handleTriggerKeydown(event) {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault();
+      const start = event.key === 'ArrowDown'
+        ? activeIndex !== -1 ? activeIndex : 0
+        : activeIndex !== -1 ? activeIndex : languages.length - 1;
+      await openMenu(start);
+      return;
+    }
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (isOpen) {
+        await closeMenu();
+      } else {
+        const start = activeIndex !== -1 ? activeIndex : 0;
+        await openMenu(start);
+      }
+      return;
+    }
+
+    if (event.key === 'Escape' && isOpen) {
+      event.preventDefault();
+      await closeMenu();
+    }
+  }
+
+  function handleOptionKeydown(event, index) {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      focusOption(index + 1);
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      focusOption(index - 1);
+      return;
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      focusOption(0);
+      return;
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      focusOption(languages.length - 1);
+      return;
+    }
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectLanguage(languages[index].code);
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeMenu();
+      return;
+    }
+  }
+
+  async function toggleMenu() {
+    if (isOpen) {
+      await closeMenu();
+    } else {
+      const start = activeIndex !== -1 ? activeIndex : 0;
+      await openMenu(start);
     }
   }
 
   function handleFocusOut(event) {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       isOpen = false;
+      focusedIndex = -1;
     }
   }
 </script>
@@ -42,8 +156,8 @@
   <button
     bind:this={trigger}
     class="current-lang"
-    on:click={() => (isOpen = !isOpen)}
-    on:keydown={handleKeydown}
+    on:click={toggleMenu}
+    on:keydown={handleTriggerKeydown}
     aria-label="Select language"
     aria-haspopup="listbox"
     aria-expanded={isOpen}
@@ -56,14 +170,18 @@
   </button>
 
   {#if isOpen}
-    <div class="dropdown" id="language-menu" role="listbox" tabindex="-1" on:keydown={handleKeydown}>
-      {#each languages as lang}
+    <div class="dropdown" id="language-menu" role="listbox" tabindex="-1">
+      {#each languages as lang, index}
         <button
+          type="button"
           class="lang-option"
           class:active={lang.code === $language}
           role="option"
           aria-selected={lang.code === $language}
+          use:trackOption={index}
+          tabindex={focusedIndex === index ? 0 : -1}
           on:click={() => selectLanguage(lang.code)}
+          on:keydown={(event) => handleOptionKeydown(event, index)}
         >
           <span class="label">{lang.label}</span>
           <span class="name">{lang.name}</span>

@@ -512,7 +512,15 @@
     "error_email": "Adresse e-mail invalide",
     "error_phone": "Numéro de téléphone invalide",
     "error_validation": "Merci de corriger les erreurs du formulaire",
-    "required_note": "* Champs obligatoires"
+    "required_note": "* Champs obligatoires",
+    "helper_company": "Indique le nom de l’entreprise ou du projet avec lequel nous allons collaborer.",
+    "helper_name": "Précise l’interlocuteur principal pour cet échange.",
+    "helper_email": "Nous confirmerons les prochaines étapes à cette adresse.",
+    "helper_phone": "Ajoute un numéro à contacter si l’échange asynchrone ralentit.",
+    "helper_industry": "Choisis le secteur le plus proche pour que nous préparions les bons repères.",
+    "helper_description": "Décris objectifs, contraintes et délais pour que nous nous ajustions.",
+    "helper_subject": "Donne-nous l’objet afin d’orienter rapidement ton message.",
+    "helper_message": "Ajoute du contexte, des liens et des détails à examiner."
   },
   "common": {
     "submitting": "Envoi...",

@@ -1,19 +1,19 @@
 {
   "site": {
     "title": "AlgoRhythmics",
-    "tagline": "Where Logic Dances with Creativity",
-    "description": "AI innovation lab building NodeVoyage travel platform and Ideonautix productivity suite"
+    "tagline": "Ideas in sync with human rhythm",
+    "description": "An AI craft studio shaping the NodeVoyage travel co-pilot and the Ideonautix founder cockpit."
   },
   "app": {
-    "loading": "Loading..."
+    "loading": "Booting the experience..."
   },
   "settings": {
     "theme": {
-      "group": "Color theme",
-      "light": "Light mode",
-      "dark": "Dark mode",
-      "contrast": "High contrast mode",
-      "selected": "Theme set to {theme}"
+      "group": "Theme palette",
+      "light": "Bathe in light",
+      "dark": "Switch to night",
+      "contrast": "High-contrast clarity",
+      "selected": "Theme switched to {theme}."
     }
   },
   "nav": {
@@ -25,31 +25,31 @@
     "consulting": "Consulting",
     "contact": "Contact",
     "about": "About",
-    "nodevoyage_desc": "Discover our AI travel companion",
-    "ideonautix_desc": "Explore the startup productivity suite",
+    "nodevoyage_desc": "Meet our adaptive travel guide.",
+    "ideonautix_desc": "Tour the productivity flight deck.",
     "pilot_badge": "Pilot",
-    "brand_aria": "AlgoRhythmics home",
+    "brand_aria": "Navigate to the AlgoRhythmics homepage",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Toggle menu"
+    "toggle_menu": "Open or close the menu"
   },
   "hero": {
     "status": "OS-native AI studio • Riga ↔ Rotterdam",
     "title": {
-      "lead": "Think faster.",
+      "lead": "Accelerate your thinking.",
       "brand": "AlgoRhythmics",
-      "trail": "helps teams ship smarter."
+      "trail": "keeps your crew shipping smarter."
     },
-    "tagline": "OS-native studio aligning NodeVoyage, Ideonautix, and consulting into one calm constellation.",
-    "subtitle": "We choreograph explainable AI rituals, from travel companions to founder workspaces, with AAA-accessible glass shells.",
-    "description": "Every surface honours reduced-motion settings, signage-born craft, and WCAG AAA contrast so your team stays in control whether you're exploring NodeVoyage, assembling Ideonautix, or partnering through our consulting sprints.",
-    "cta_products": "Explore the constellation",
-    "cta_consulting": "Plan a strategy session",
-    "next_milestone": "Next milestone",
-    "pillars_title": "How we deliver calm momentum",
+    "tagline": "One calm constellation linking NodeVoyage, Ideonautix, and hands-on consulting.",
+    "subtitle": "We choreograph understandable AI rituals—from travel copilots to founder dashboards—with glass-shell poise.",
+    "description": "Our layouts honour reduced-motion settings, signage discipline, and AAA contrast so every collaborator stays in control across NodeVoyage, Ideonautix, and studio engagements.",
+    "cta_products": "Browse the constellation",
+    "cta_consulting": "Schedule a strategy huddle",
+    "next_milestone": "Upcoming waypoint",
+    "pillars_title": "Ways we sustain calm momentum",
     "pillars": [
-      "Story-led OS windows frame NodeVoyage, Ideonautix, and consulting within shared Aurora Mist surfaces.",
-      "Think Faster. Ship Smarter. Motion, focus, and colour tokens default to reduced-motion and AAA ratios.",
-      "Explainable automation fuses signage hardware discipline with cloud delivery for trustworthy launches."
+      "Story-led OS windows keep NodeVoyage, Ideonautix, and consulting in one Aurora Mist ecosystem.",
+      "Motion, focus, and colour tokens default to gentle transitions and AAA ratios for clarity.",
+      "Explainable automation blends signage craftsmanship with cloud tooling for trusted launches."
     ],
     "signals": {
       "studio_phase": "Studio phase",
@@ -61,93 +61,93 @@
     },
     "moments": {
       "nodevoyage": {
-        "kicker": "Product track",
+        "kicker": "Product lane",
         "status": "NodeVoyage",
-        "copy": "Travel companion with OS-inspired itineraries, offline reliability, and explainable suggestions.",
+        "copy": "Travel companion with OS-inspired itineraries, offline muscle, and transparent suggestions.",
         "meta": "Beta pilots forming",
-        "cta": "Open NodeVoyage preview"
+        "cta": "Open the NodeVoyage preview"
       },
       "ideonautix": {
-        "kicker": "Product track",
+        "kicker": "Product lane",
         "status": "Ideonautix",
-        "copy": "Founder OS with modular rituals, venture metrics, and transparent automation.",
-        "meta": "Research sprint in progress",
+        "copy": "Founder OS with modular rituals, venture analytics, and honest automation.",
+        "meta": "Research sprint underway",
         "cta": "Preview Ideonautix"
       }
     },
     "focus": {
       "kicker": "Studio focus",
       "title": "Calm OS rituals across products",
-      "description": "We maintain one timing, colour, and accessibility system so travel teams, founders, and partners feel at home in every surface.",
+      "description": "We maintain a shared rhythm for timing, colour, and accessibility so teams feel at home on every surface.",
       "points": [
-        "OS-window shells stay legible in light, dark, and high-contrast modes.",
-        "Reduced-motion fallbacks keep essential context visible when animations pause.",
-        "Signage R&D meets cloud delivery so automation remains explainable and accountable."
+        "OS shells read clearly in light, dark, and high-contrast modes.",
+        "Reduced-motion fallbacks keep key context visible when animations pause.",
+        "Signage research meets cloud delivery so automation stays accountable."
       ],
       "cta": "Meet the community"
     },
     "milestone_cta": "View the roadmap",
-    "brand_aria": "AlgoRhythmics brand highlight in the hero heading"
+    "brand_aria": "AlgoRhythmics logomark highlighted in the hero heading"
   },
   "story": {
     "title": "Our Story",
     "reality_title": "The Reality We're Building",
-    "reality_text": "We orchestrate OS-native experiences that make travel planning and founder rituals calmer and more transparent.",
+    "reality_text": "We craft OS-native experiences that make travel planning and founder rituals feel calmer and more transparent.",
     "mission_title": "Our Mission",
-    "mission_text": "To deliver explainable, accessible AI platforms that keep humans in the loop across journeys, startups, and consulting engagements.",
+    "mission_text": "Deliver explainable, accessible AI platforms that keep humans in the loop across journeys, startups, and consulting partnerships.",
     "vision_title": "Our Vision",
-    "vision_text": "A 2026 design language where frosted glass, grain, and motion support focus while NodeVoyage and Ideonautix share a single trustworthy operating system."
+    "vision_text": "By 2026, a shared design language where frosted glass, grain, and motion support focus while NodeVoyage and Ideonautix run on one trusted operating system."
   },
   "founders": {
     "title": "Meet the Founders",
-    "subtitle": "Two makers connecting signage R&D with human-first AI",
+    "subtitle": "Two makers blending signage R&D with human-first AI",
     "email_cta": "Email",
     "linkedin_cta": "LinkedIn",
     "nikita": {
       "name": "Nikita Jurtaevs",
       "role": "Co-Founder & CEO",
-      "bio": "Nikita Jurtaevs co-leads AlgoRhythmics as CEO, shaping brand storylines and guiding product direction for NodeVoyage and Ideonautix. He pairs studio building with Reclame Fabriek’s signage lab, translating tactile experimentation into launch-ready digital experiences.",
-      "current_title": "Current Focus",
-      "current_position": "Reclame Fabriek — steering LED neon, controller, coating, and 3D fabrication programs that inform our product standards.",
+      "bio": "Nikita guides AlgoRhythmics as CEO, shaping narrative arcs and steering product direction for NodeVoyage and Ideonautix. He pairs studio building with Reclame Fabriek’s signage lab so tactile experiments graduate into launch-ready digital journeys.",
+      "current_title": "Current focus",
+      "current_position": "Reclame Fabriek — leading LED neon, controller, coating, and 3D fabrication programs that set our product standards.",
       "expertise": [
         "Narrative-led product strategy",
-        "Experience design & QA leadership",
+        "Experience design and QA leadership",
         "Partnerships and education outreach"
       ]
     },
     "slaff": {
       "name": "Vjaceslavs \"Slaff\" Trosins",
       "role": "Co-Founder & CTO",
-      "current_title": "Current Focus",
-      "bio": "Vjaceslavs “Slaff” Trosins co-leads as CTO, architecting the cloud stack, data flows, and AI integrations behind NodeVoyage and Ideonautix. His signage-controller engineering inside Reclame Fabriek’s innovation unit keeps our delivery resilient and explainable.",
-      "position": "Reclame Fabriek — evolving controller hardware, LED systems, and production tooling that feed real-world requirements into our software.",
-      "philosophy": "Systems thinking across hardware and software keeps our decisions pragmatic; we validate ideas on the shop floor and translate the best of them into human-first digital products.",
+      "current_title": "Current focus",
+      "bio": "Slaff architects the cloud stack, data flows, and AI integrations powering NodeVoyage and Ideonautix. His signage-controller engineering inside Reclame Fabriek’s innovation unit keeps delivery resilient and explainable.",
+      "position": "Reclame Fabriek — evolving controller hardware, LED systems, and production tooling that feed real-world needs into our software.",
+      "philosophy": "Systems thinking across hardware and software keeps decisions grounded; shop-floor validation informs every digital release.",
       "achievements": [
-        "Runs a Google Cloud–first platform stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
-        "Aligns signage-grade controllers and LED pipelines with accessible, explainable AI user journeys.",
-        "Leads funding sprints that underwrite NodeVoyage and Ideonautix while recruiting multi-disciplinary talent."
+        "Runs a Google Cloud–first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
+        "Aligns signage-grade controllers and LED pipelines with accessible, explainable AI journeys.",
+        "Leads funding sprints for NodeVoyage and Ideonautix while recruiting multi-disciplinary talent."
       ],
-      "brand_title": "Brand Experience",
-      "brand_intro": "Worked with global brands on premium advertising display systems:",
-      "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV), shared by both founders",
+      "brand_title": "Brand experience",
+      "brand_intro": "Partnered with global brands on premium advertising display systems:",
+      "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV) by both founders",
       "algorhythmics_title": "Vision for AlgoRhythmics",
-      "algorhythmics_vision": "Fuse signage discipline with cloud delivery so AlgoRhythmics ships trustworthy, installation-ready AI experiences."
+      "algorhythmics_vision": "Blend signage precision with cloud agility so AlgoRhythmics ships trustworthy, installation-ready AI experiences."
     }
   },
   "products": {
     "meta_title": "AlgoRhythmics Products",
-    "meta_description": "Explore NodeVoyage, our AI travel companion, and Ideonautix, the productivity OS for founders.",
+    "meta_description": "Explore NodeVoyage, our AI travel co-pilot, and Ideonautix, the productivity OS for founders.",
     "hero_label": "Product constellation",
-    "title": "Platform Constellation",
-    "subtitle": "NodeVoyage and Ideonautix orbit one calm OS-native studio.",
-    "cta_title": "Stay in orbit with us",
-    "cta_text": "Join the community for roadmap drops, pilot invites, and AAA accessibility updates.",
+    "title": "Platform constellation",
+    "subtitle": "NodeVoyage and Ideonautix orbit one calm studio.",
+    "cta_title": "Stay within our orbit",
+    "cta_text": "Join the community for roadmap drops, pilot invites, and AAA accessibility notes.",
     "cta_join": "Join the community",
     "cta_contact": "Plan a strategy session",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "OS-native travel companion for confident itineraries",
-      "description": "Fuses signage craftsmanship with explainable AI to plan, translate, and adapt offline.",
+      "tagline": "OS-native travel co-pilot for confident itineraries",
+      "description": "Fuses signage craft with explainable AI to plan, translate, and adapt offline.",
       "status": "Beta pilots",
       "mvp": "Preview: nodevoyage.algorhythmics.dev",
       "cta": "Explore NodeVoyage"
@@ -161,10 +161,10 @@
       "cta": "See Ideonautix"
     },
     "demos": {
-      "title": "Explore our OS-native previews",
-      "description": "Jump into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
-      "nodevoyage": "Launch NodeVoyage demo",
-      "ideonautix": "Open Ideonautix studio",
+      "title": "Dive into our OS-native previews",
+      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
+      "nodevoyage": "Launch the NodeVoyage demo",
+      "ideonautix": "Open the Ideonautix studio",
       "nodevoyage_host": "nodevoyage.algorhythmics.dev",
       "ideonautix_host": "ideonautix.algorhythmics.dev",
       "nodevoyage_description": "Trace immersive itineraries with AI-assisted routing, offline maps, and collaborative planning.",
@@ -172,46 +172,46 @@
     },
     "showcase": {
       "title": "Live demos across algorhythmics.dev",
-      "subtitle": "Peek into Ideonautix and NodeVoyage before their general availability."
+      "subtitle": "Peek into Ideonautix and NodeVoyage before general availability."
     }
   },
   "timeline": {
     "title": "Our Journey",
-    "subtitle": "Building the future, one milestone at a time",
+    "subtitle": "Building the future milestone by milestone",
     "milestones": {
       "ideju-kauss": {
         "title": "Ideju Kauss Competition",
-        "description": "Participating in Latvia's premier startup competition with the NodeVoyage concept",
+        "description": "Competing in Latvia's premier startup arena with the NodeVoyage concept.",
         "note": ""
       },
       "company-formation": {
-        "title": "Company Formation",
-        "description": "Official company registration, legal structure, and initial team setup",
+        "title": "Company formation",
+        "description": "Formal company registration, legal structure, and core team setup.",
         "note": ""
       },
       "liaa-application": {
-        "title": "LIAA Partnership Application",
-        "description": "Submit application for partnership with Latvia's Investment Agency for educational programs",
+        "title": "LIAA partnership application",
+        "description": "Submitting for collaboration with Latvia's Investment Agency on educational programs.",
         "note": "Aspirational — not yet confirmed"
       },
       "mvp-ideonautix": {
-        "title": "Ideonautix MVP Launch",
-        "description": "First release of Ideonautix productivity platform with core microservices",
+        "title": "Ideonautix MVP launch",
+        "description": "First release of the Ideonautix productivity platform with core microservices.",
         "note": ""
       },
       "pilot-consulting": {
-        "title": "AI Consulting Pilot Program",
-        "description": "Launch free pilot program with 3 selected companies for AI integration consulting",
+        "title": "AI consulting pilot program",
+        "description": "Launch a free pilot with three partner companies for AI integration consulting.",
         "note": ""
       },
       "mvp-nodevoyage": {
-        "title": "NodeVoyage MVP Launch",
-        "description": "Public beta of NodeVoyage travel platform with core features and AI companion Nodi",
+        "title": "NodeVoyage MVP launch",
+        "description": "Public beta of the NodeVoyage travel platform with core features and Nodi, the AI companion.",
         "note": ""
       },
       "education-program": {
-        "title": "Educational Program Launch",
-        "description": "Begin rollout of AI education programs targeting Latvia's secondary schools",
+        "title": "Educational program rollout",
+        "description": "Bring AI education programs to Latvia's secondary schools.",
         "note": "Target: 75+ institutes (research-based projection)"
       }
     }
@@ -219,164 +219,164 @@
   "nodevoyage": {
     "meta_title": "NodeVoyage – AlgoRhythmics",
     "name": "NodeVoyage",
-    "status": "In Development • MVP Sept 2026",
-    "tagline": "Your AI Travel Companion",
+    "status": "In development • MVP Sept 2026",
+    "tagline": "Your AI travel companion",
     "hero_rotating": [
-      "Nodi crafts adaptive itineraries in seconds",
-      "Offline-first tools keep you oriented everywhere",
-      "Give your adventures a human-guided AI co-pilot"
+      "Nodi crafts adaptive itineraries in seconds.",
+      "Offline-first tools keep you oriented anywhere.",
+      "Give your adventures a human-guided AI co-pilot."
     ],
-    "hero_description": "AI-powered travel planning that makes trip creation effortless, fun, and personalized. Meet Nodi, your intelligent travel companion.",
-    "seo_description": "AI-powered travel planning platform with intelligent itineraries, AR tools, and community sharing led by Nodi, your friendly travel companion.",
+    "hero_description": "AI-powered travel planning that makes every trip effortless, joyful, and tailored. Meet Nodi, your friendly guide.",
+    "seo_description": "AI travel planning with intelligent itineraries, AR tools, and community sharing led by Nodi, your travel companion.",
     "hero_alt": "NodeVoyage interface preview",
-    "cta_primary": "Join Waitlist",
-    "cta_secondary": "Explore Features",
+    "cta_primary": "Join the waitlist",
+    "cta_secondary": "Explore the features",
     "stat1_value": "Sept 2026",
-    "stat1_label": "MVP Launch",
-    "stat2_value": "AI-Powered",
-    "stat2_label": "Smart Planning",
-    "stat3_value": "Mobile First",
-    "stat3_label": "AR + Offline",
-    "features_title": "Revolutionary Features",
+    "stat1_label": "MVP launch",
+    "stat2_value": "AI-powered",
+    "stat2_label": "Smart planning",
+    "stat3_value": "Mobile first",
+    "stat3_label": "AR + offline",
+    "features_title": "Standout features",
     "features_subtitle": "Everything you need for the perfect journey",
     "features": {
       "nodi-ai": {
-        "title": "Nodi AI Companion",
-        "description": "Your friendly AI travel assistant that learns your preferences and creates personalized itineraries in seconds"
+        "title": "Nodi AI companion",
+        "description": "A friendly assistant that learns your preferences and sculpts tailored itineraries in moments."
       },
       "smart-builder": {
-        "title": "Smart Trip Builder",
-        "description": "Visual trip builder with drag-and-drop nodes, vibe presets, and real-time optimization"
+        "title": "Smart trip builder",
+        "description": "Visual nodes, vibe presets, and real-time optimisation keep planning playful."
       },
       "mobile-suite": {
-        "title": "Mobile Capture Suite",
-        "description": "AR translation, live interpretation, photo recognition, and full offline capabilities"
+        "title": "Mobile capture suite",
+        "description": "AR translation, live interpretation, photo recognition, and full offline resilience."
       },
       "community": {
-        "title": "Community Sharing",
-        "description": "Share your adventures, discover routes from travelers worldwide, and plan trips together"
+        "title": "Community sharing",
+        "description": "Swap routes with explorers worldwide and plan group adventures together."
       }
     },
-    "how_title": "How NodeVoyage Works",
-    "step1_title": "Tell Nodi Your Dream",
-    "step1_desc": "Chat with Nodi AI about your travel preferences, budget, and interests",
-    "step2_title": "Get Smart Suggestions",
-    "step2_desc": "Receive personalized itineraries with optimized routes and local insights",
-    "step3_title": "Customize Your Journey",
-    "step3_desc": "Fine-tune your trip with our visual node-based builder",
-    "step4_title": "Travel with Confidence",
-    "step4_desc": "Use mobile AR tools, offline maps, and real-time assistance on the go",
-    "tech_title": "Built with Cutting-Edge Technology",
+    "how_title": "How NodeVoyage works",
+    "step1_title": "Tell Nodi your dream",
+    "step1_desc": "Chat about your travel style, budget, and must-see moments.",
+    "step2_title": "Receive smart suggestions",
+    "step2_desc": "Get curated itineraries with optimised routes and local context.",
+    "step3_title": "Fine-tune your journey",
+    "step3_desc": "Drag, drop, and customise in the visual node builder.",
+    "step4_title": "Travel with confidence",
+    "step4_desc": "Carry AR tools, offline maps, and real-time assistance on every step.",
+    "tech_title": "Powered by thoughtful technology",
     "tech_subtitle": "Google Cloud, AI, and modern web standards",
-    "cta_title": "Ready to Transform How You Travel?",
-    "cta_description": "Join our waitlist and be among the first to experience NodeVoyage when we launch in September 2026",
-    "cta_button": "Join Waitlist",
-    "cta_note": "No credit card required • Early access benefits"
+    "cta_title": "Ready to reimagine travel?",
+    "cta_description": "Join the waitlist to be among the first to experience NodeVoyage in September 2026.",
+    "cta_button": "Join the waitlist",
+    "cta_note": "No credit card required • Early access perks"
   },
   "ideonautix": {
     "meta_title": "Ideonautix – AlgoRhythmics",
     "name": "Ideonautix",
-    "status": "Planning Phase • MVP Feb 2026",
-    "tagline": "Intelligence for Startups",
+    "status": "Planning phase • MVP Feb 2026",
+    "tagline": "Intelligence for startups",
     "hero_rotating": [
-      "Microservices that understand your startup",
-      "Founders stay focused while Ideonautix handles the analysis",
-      "Human-in-the-loop automation for every pitch"
+      "Microservices that speak your startup's language.",
+      "Founders stay focused while Ideonautix handles the analysis.",
+      "Human-in-the-loop automation for every pitch."
     ],
-    "hero_description": "Modular productivity super-suite designed for startup founders and growing teams. AI-powered microservices that actually understand your business.",
+    "hero_description": "A modular productivity super-suite tuned for founders and growing teams. AI microservices that actually understand your business.",
     "seo_description": "Modular AI productivity suite for startups with pitch, revenue, and team intelligence microservices.",
     "hero_alt": "Ideonautix dashboard preview",
-    "cta_primary": "Get Early Access",
-    "cta_secondary": "View Microservices",
+    "cta_primary": "Get early access",
+    "cta_secondary": "View the microservices",
     "stat1_value": "Feb 2026",
-    "stat1_label": "MVP Launch",
-    "stat2_value": "8+ Tools",
+    "stat1_label": "MVP launch",
+    "stat2_value": "8+ tools",
     "stat2_label": "Microservices",
-    "stat3_value": "AI-First",
+    "stat3_value": "AI-first",
     "stat3_label": "Intelligence",
-    "microservices_title": "Powerful Microservices",
-    "microservices_subtitle": "Pick what you need, when you need it",
-    "pitch_title": "Pitch Assistant",
-    "pitch_desc": "Get AI-powered feedback on your pitch deck with scoring, suggestions, and investor perspective analysis",
-    "revenue_title": "Revenue Boards",
-    "revenue_desc": "Real-time analytics dashboards with KPI tracking, forecasting, and actionable business insights",
-    "team_title": "Team Dynamics",
-    "team_desc": "Understand team health, communication patterns, and collaboration effectiveness with AI analysis",
-    "market_desc": "Track competitors, market trends, and opportunities with AI-powered intelligence",
-    "finance_desc": "Automated financial tracking, forecasting, and reporting for startups",
-    "growth_desc": "Growth hacking tools and analytics to scale your startup faster",
-    "investor_desc": "Manage investor relations, reporting, and communications in one place",
-    "analytics_desc": "Comprehensive analytics hub combining all your business metrics",
-    "how_title": "How Ideonautix Works",
-    "integrations_title": "Seamless Integrations",
-    "cta_title": "Scale Your Startup Faster",
-    "cta_description": "Early access launching February 2026. Be part of shaping the future of startup productivity"
+    "microservices_title": "Powerful microservices",
+    "microservices_subtitle": "Pick what you need when you need it",
+    "pitch_title": "Pitch assistant",
+    "pitch_desc": "AI-backed feedback on your pitch deck with scoring, suggestions, and investor perspective analysis.",
+    "revenue_title": "Revenue boards",
+    "revenue_desc": "Realtime analytics dashboards with KPI tracking, forecasting, and actionable insights.",
+    "team_title": "Team dynamics",
+    "team_desc": "Understand team health, communication patterns, and collaboration effectiveness with AI analysis.",
+    "market_desc": "Monitor competitors, market trends, and fresh opportunities with AI intelligence.",
+    "finance_desc": "Automated financial tracking, forecasting, and reporting built for startups.",
+    "growth_desc": "Growth experiments and analytics to scale faster.",
+    "investor_desc": "Manage investor relations, reporting, and updates in one place.",
+    "analytics_desc": "An analytics hub that unifies every critical metric.",
+    "how_title": "How Ideonautix works",
+    "integrations_title": "Seamless integrations",
+    "cta_title": "Scale your startup faster",
+    "cta_description": "Early access lands February 2026. Help shape the future of startup productivity."
   },
   "community": {
     "meta_title": "AlgoRhythmics Community",
-    "hero_title": "Community Manifest",
-    "hero_subtitle": "Signal the features you need, share ideas, and review public metrics in real time.",
+    "hero_title": "Community manifesto",
+    "hero_subtitle": "Call out the features you want, trade ideas, and watch public metrics update in real time.",
     "hero_rotating": [
-      "Vote on NodeVoyage & Ideonautix priorities",
-      "Review build metrics without leaving the hero",
-      "Co-create calm AI rituals with the studio"
+      "Vote on NodeVoyage and Ideonautix priorities.",
+      "Review build metrics without leaving the hero.",
+      "Co-create calm AI rituals with the studio."
     ],
     "voting_title": "Shape the roadmap",
-    "voting_subtitle": "Prioritise what lands next for NodeVoyage and Ideonautix.",
+    "voting_subtitle": "Choose what lands next for NodeVoyage and Ideonautix.",
     "voting_list_aria": "Feature voting list",
     "category_aria": "Category: {category}",
     "vote_count": "{count} votes",
     "vote_button": "Vote",
     "voted_button": "Voted",
     "vote_for": "Vote for {feature}",
-    "ideas_title": "Share Your Ideas",
-    "ideas_placeholder": "What feature would you love to see?",
-    "ideas_submit": "Submit Idea",
+    "ideas_title": "Share your ideas",
+    "ideas_placeholder": "What feature would brighten your day?",
+    "ideas_submit": "Submit idea",
     "ideas_aria_label": "Submit your idea",
-    "ideas_helper": "Enter your feature idea or suggestion for our products",
-    "ideas_error_empty": "Please enter your idea",
-    "ideas_success": "Thank you! Your idea has been submitted.",
-    "toast_voted": "Voted for \"{feature}\"!",
-    "toast_removed": "Vote removed from \"{feature}\"",
+    "ideas_helper": "Add the feature or improvement you'd love to see.",
+    "ideas_error_empty": "Please add your idea first.",
+    "ideas_success": "Thanks! Your idea is in the mix.",
+    "toast_voted": "You voted for \"{feature}\"!",
+    "toast_removed": "Removed your vote from \"{feature}\".",
     "categories": {
       "nodevoyage": "NodeVoyage",
       "ideonautix": "Ideonautix"
     },
     "features": {
       "ai-trip-optimizer": {
-        "name": "AI Trip Optimizer",
-        "description": "Automatically optimize routes based on time, budget, and preferences"
+        "name": "AI trip optimizer",
+        "description": "Automatically balances routes by time, budget, and personal flavour."
       },
       "team-collaboration-board": {
-        "name": "Team Collaboration Board",
-        "description": "Real-time collaborative planning for group trips"
+        "name": "Team collaboration board",
+        "description": "Plan group trips together in a live shared canvas."
       },
       "revenue-forecasting-ai": {
-        "name": "Revenue Forecasting AI",
-        "description": "Predictive analytics for startup revenue projections"
+        "name": "Revenue forecasting AI",
+        "description": "Predictive analytics that ground startup revenue projections."
       },
       "ar-navigation-mode": {
-        "name": "AR Navigation Mode",
-        "description": "Augmented reality navigation for city exploration"
+        "name": "AR navigation mode",
+        "description": "Augmented reality guidance for city discoveries."
       },
       "pitch-deck-analyzer": {
-        "name": "Pitch Deck Analyzer",
-        "description": "AI-powered feedback on pitch presentations"
+        "name": "Pitch deck analyzer",
+        "description": "AI-powered feedback for every slide of your pitch."
       },
       "offline-maps-pro": {
         "name": "Offline Maps Pro",
-        "description": "Enhanced offline capabilities with 3D maps"
+        "description": "Expanded offline coverage with rich 3D maps."
       },
       "social-travel-feed": {
-        "name": "Social Travel Feed",
-        "description": "Share travel moments with an immersive community feed"
+        "name": "Social travel feed",
+        "description": "Share moments with an immersive traveller community."
       },
       "budget-tracker": {
-        "name": "Budget Tracker",
-        "description": "Real-time expense tracking during trips"
+        "name": "Budget tracker",
+        "description": "Track trip expenses in real time."
       }
     },
-    "hero_manifest": "Manifest: transparent builds, explainable automation, humans in the loop.",
+    "hero_manifest": "Manifesto: transparent builds, explainable automation, humans always in the loop.",
     "metrics": [
       {
         "label": "Contributors",
@@ -394,33 +394,33 @@
   },
   "consulting": {
     "meta_title": "AlgoRhythmics Consulting Pilot",
-    "hero_title": "AI Consulting",
+    "hero_title": "AI consulting",
     "hero_subtitle": "Pilot program with OS-native playbooks for regulated teams.",
     "hero_rotating": [
-      "Frosted OS shells for enterprise pilots",
-      "Explainable automation that survives audits",
-      "Latvian craft meets Benelux delivery"
+      "Frosted OS shells built for enterprise pilots.",
+      "Explainable automation ready for audits.",
+      "Latvian craft meets Benelux delivery."
     ],
     "spots_remaining": "spots remaining",
-    "what_title": "What We Offer",
-    "what_1": "AI Strategy & Implementation",
-    "what_2": "Technical Advisory",
-    "what_3": "Custom Solution Design",
-    "form_title": "Apply for Pilot Program",
-    "form_company": "Company Name",
+    "what_title": "What we offer",
+    "what_1": "AI strategy and implementation",
+    "what_2": "Technical advisory",
+    "what_3": "Custom solution design",
+    "form_title": "Apply for the pilot program",
+    "form_company": "Company name",
     "form_company_placeholder": "Acme Corp",
-    "form_name": "Your Name",
+    "form_name": "Your name",
     "form_name_placeholder": "Alex Founder",
-    "form_email": "Email Address",
+    "form_email": "Email address",
     "form_email_placeholder": "founder@acme.com",
-    "form_phone": "Phone Number",
+    "form_phone": "Phone number",
     "form_phone_placeholder": "+371 12345678",
     "form_industry": "Industry",
-    "form_industry_placeholder": "Travel, Hospitality, SaaS...",
+    "form_industry_placeholder": "Travel, hospitality, SaaS...",
     "form_description": "Describe your AI needs",
-    "form_description_placeholder": "Tell us about your AI needs, current challenges, and what you hope to achieve...",
-    "form_submit": "Submit Application",
-    "form_success": "Application submitted! We'll contact you within 48 hours.",
+    "form_description_placeholder": "Share your AI goals, current hurdles, and the outcomes you’re chasing...",
+    "form_submit": "Submit application",
+    "form_success": "Application received! We'll reach out within 48 hours.",
     "form_error": "Something went wrong. Please try again.",
     "select_industry": "Select industry...",
     "industries": {
@@ -432,17 +432,17 @@
       "manufacturing": "Manufacturing",
       "other": "Other"
     },
-    "benefits_title": "What You Get",
-    "benefit_1": "Free AI strategy consultation",
-    "benefit_2": "Technical implementation plan",
-    "benefit_3": "3 months of advisory support",
+    "benefits_title": "What you get",
+    "benefit_1": "Complimentary AI strategy workshop",
+    "benefit_2": "Hands-on implementation plan",
+    "benefit_3": "Three months of advisory support",
     "benefit_4": "Priority access to our products",
-    "timeline_title": "Process Timeline",
-    "week_1": "Week 1: Initial consultation",
-    "week_2": "Week 2: Strategy development",
+    "timeline_title": "Process timeline",
+    "week_1": "Week 1: Discovery conversation",
+    "week_2": "Week 2: Strategy blueprint",
     "week_3_12": "Week 3-12: Implementation support",
     "requirements_title": "Requirements",
-    "req_1": "Based in Europe or willing to work CET hours",
+    "req_1": "Based in Europe or comfortable with CET hours",
     "req_2": "Committed to AI transformation",
     "req_3": "Open to collaboration and feedback",
     "hero_testimonial_label": "Client reflection",
@@ -452,35 +452,35 @@
   },
   "contact": {
     "meta_title": "Contact AlgoRhythmics",
-    "hero_title": "Get in Touch",
-    "hero_subtitle": "Choose the lane that fits: email, strategy call, or community handshake.",
+    "hero_title": "Get in touch",
+    "hero_subtitle": "Pick your lane: inbox, strategy call, or community handshake.",
     "hero_rotating": [
-      "Founder inbox, calendar, and community in one place",
-      "Pick the lane that fits your runway",
-      "Bring your roadmap—leave with calm momentum"
+      "Founder inbox, calendar, and community in one space.",
+      "Choose the pace that fits your runway.",
+      "Bring your roadmap—leave with calm momentum."
     ],
-    "form_title": "Send Us a Message",
-    "form_name": "Your Name",
+    "form_title": "Send us a message",
+    "form_name": "Your name",
     "form_name_placeholder": "Alex Founder",
-    "form_email": "Email Address",
+    "form_email": "Email address",
     "form_email_placeholder": "you@company.com",
     "form_subject": "Subject",
     "form_subject_placeholder": "Partnership opportunity",
-    "form_message": "Your Message",
-    "form_message_placeholder": "Your message...",
-    "form_submit": "Send Message",
+    "form_message": "Your message",
+    "form_message_placeholder": "Share what's on your mind...",
+    "form_submit": "Send message",
     "form_sending": "Sending...",
-    "form_success": "Message sent! We'll respond soon.",
+    "form_success": "Message sent! We'll be in touch soon.",
     "form_error": "Something went wrong. Please try again.",
-    "calendar_title": "Book a Meeting",
+    "calendar_title": "Book a meeting",
     "calendar_subtitle": "Schedule a call with our team",
-    "calendar_button": "View Calendar",
-    "info_title": "Contact Information",
+    "calendar_button": "View calendar",
+    "info_title": "Contact information",
     "info_email": "Email",
     "info_location": "Location",
     "info_email_value": "AlgoRhythmics.dev@gmail.com",
     "info_location_value": "Daugavpils, Latvia",
-    "social_title": "Follow Us",
+    "social_title": "Follow us",
     "social_linkedin": "LinkedIn",
     "social_github": "GitHub",
     "social_twitter": "Twitter",
@@ -488,13 +488,13 @@
     "hero_ctas": [
       {
         "label": "Email the studio",
-        "description": "Direct founder inbox for partnerships, pilots, and press.",
+        "description": "Reach the founder inbox for partnerships, pilots, and press.",
         "cta": "Write an email",
         "action": "mailto:AlgoRhythmics.dev@gmail.com"
       },
       {
         "label": "Book a strategy call",
-        "description": "Schedule a 30-minute OS-native workshop with our founders.",
+        "description": "Reserve a 30-minute OS-native workshop with our founders.",
         "cta": "Open calendar",
         "action": "calendly"
       },
@@ -508,21 +508,29 @@
   },
   "form": {
     "error_required": "This field is required",
-    "error_email": "Invalid email address",
-    "error_phone": "Invalid phone number",
-    "error_validation": "Please fix the errors in the form",
-    "required_note": "* Required fields"
+    "error_email": "Please enter a valid email",
+    "error_phone": "Please enter a valid phone number",
+    "error_validation": "Take a moment to fix the highlighted fields.",
+    "required_note": "* Required fields",
+    "helper_company": "Share the organization or project name we'll partner with.",
+    "helper_name": "Let us know the primary contact for this conversation.",
+    "helper_email": "We'll confirm next steps at this address.",
+    "helper_phone": "Add a number we can call if async updates stall.",
+    "helper_industry": "Choose the closest focus so we prep relevant references.",
+    "helper_description": "Outline goals, constraints, and timelines so we can calibrate.",
+    "helper_subject": "Give us the headline so we can route your message quickly.",
+    "helper_message": "Add context, links, and details you want us to review."
   },
   "common": {
     "submitting": "Submitting...",
     "loading": "Loading...",
-    "planning": "In Planning",
-    "in_development": "In Development",
-    "coming_soon": "Coming Soon",
-    "early_access": "Early Access",
-    "learn_more": "Learn More",
-    "get_started": "Get Started",
-    "read_more": "Read More",
+    "planning": "In planning",
+    "in_development": "In development",
+    "coming_soon": "Coming soon",
+    "early_access": "Early access",
+    "learn_more": "Learn more",
+    "get_started": "Get started",
+    "read_more": "Read more",
     "close": "Close",
     "back": "Back",
     "next": "Next",
@@ -535,12 +543,12 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
-    "view_all": "View All",
-    "show_more": "Show More",
-    "show_less": "Show Less"
+    "view_all": "View all",
+    "show_more": "Show more",
+    "show_less": "Show less"
   },
   "footer": {
-    "tagline": "Where Logic Dances with Creativity",
+    "tagline": "Ideas in sync with human rhythm",
     "status": "Pre-company • Ideju Kauss October 2025",
     "location": "Daugavpils, Latvia",
     "products_title": "Products",
@@ -558,9 +566,9 @@
     "careers": "Careers",
     "blog": "Blog",
     "legal": "Legal",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "cookies": "Cookie Policy",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "cookies": "Cookie policy",
     "rights": "All rights reserved",
     "made_in": "Made with care in Latvia",
     "copyright": "© 2025 AlgoRhythmics",
@@ -574,9 +582,9 @@
     "name": "Lumen",
     "role": "Your AlgoRhythmics guide",
     "dialogLabel": "AlgoRhythmics AI companion",
-    "greeting": "Hey there! I am Lumen, your AlgoRhythmics companion. Ask about our lab, products, or how we can partner on AI adventures.",
-    "languageSwitch": "We're back in English. Let me know how I can support your next idea.",
-    "placeholder": "Ask us about the lab, a product, or how we partner with teams...",
+    "greeting": "Hey! I'm Lumen, your AlgoRhythmics companion. Ask about the lab, our products, or how we can collaborate on AI adventures.",
+    "languageSwitch": "Back in English—let me know how I can help with your next idea.",
+    "placeholder": "Ask about the lab, a product, or how we partner with teams...",
     "actions": {
       "open": "Open AI companion",
       "hide": "Hide AI companion",
@@ -589,19 +597,19 @@
     "suggestions": [
       {
         "title": "Explore our AI lab",
-        "prompt": "What makes AlgoRhythmics different from other AI agencies?"
+        "prompt": "What sets AlgoRhythmics apart from other AI studios?"
       },
       {
         "title": "NodeVoyage platform",
-        "prompt": "Tell me about the NodeVoyage travel platform."
+        "prompt": "Give me the highlights of the NodeVoyage travel platform."
       },
       {
         "title": "Ideonautix suite",
-        "prompt": "How can the Ideonautix productivity suite help teams?"
+        "prompt": "How does the Ideonautix productivity suite support teams?"
       },
       {
         "title": "Improve my AI strategy",
-        "prompt": "How could we improve our AI initiative with AlgoRhythmics?"
+        "prompt": "How could AlgoRhythmics level up our AI initiative?"
       }
     ],
     "knowledgeBase": [
@@ -614,7 +622,7 @@
           "algorhythmics",
           "culture"
         ],
-        "answer": "AlgoRhythmics blends rigorous engineering with motion-inspired creativity. We operate as an innovation lab, shipping flagship products while mentoring partners so they inherit the same R&D mindset."
+        "answer": "AlgoRhythmics pairs workshop-grade engineering with playful motion design. We operate as an invention studio, shipping our own flagships while coaching partners to adopt the same R&D rituals."
       },
       {
         "keywords": [
@@ -624,7 +632,7 @@
           "journey",
           "trip"
         ],
-        "answer": "NodeVoyage is our intelligent travel experience platform. It uses graph-powered itineraries, dynamic storytelling, and adaptive agents to craft journeys that feel both personal and delightfully unexpected."
+        "answer": "NodeVoyage is our intelligent travel experience platform. Graph-powered itineraries, dynamic storytelling, and adaptive agents combine to build trips that feel personal and delightfully surprising."
       },
       {
         "keywords": [
@@ -634,7 +642,7 @@
           "team",
           "collaboration"
         ],
-        "answer": "Ideonautix is a constellation of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking."
+        "answer": "Ideonautix is a constellation of collaborative AI copilots for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking."
       },
       {
         "keywords": [
@@ -644,7 +652,7 @@
           "work with",
           "partnership"
         ],
-        "answer": "You can reach our consulting team through the contact page or by emailing hello@algorhythmics.com. We love scoping proofs of concept and long-term partnerships alike."
+        "answer": "Reach our consulting crew via the contact page or by emailing hello@algorhythmics.com. We love shaping proofs of concept and long-term partnerships alike."
       },
       {
         "keywords": [
@@ -654,9 +662,9 @@
           "growth",
           "strategy"
         ],
-        "answer": "A good first step is a discovery sprint: we map your goals, audit existing data flows, and prototype a focused AI assist. From there we co-design experimentation loops so your team keeps improving after launch."
+        "answer": "Begin with a discovery sprint: we map your goals, audit current data flows, and prototype a focused AI assist. Together we design experimentation loops so momentum continues well beyond launch."
       }
     ],
-    "fallback": "I'm still learning, but I can connect you with the team or share highlights about our products, lab culture, and services."
+    "fallback": "I'm still learning, yet I can link you to the team or share highlights about our products, lab culture, and services."
   }
 }

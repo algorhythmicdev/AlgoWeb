@@ -3,7 +3,7 @@
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import { _, json } from 'svelte-i18n';
-  import { Icon } from '$lib/components';
+  import { Icon, FieldSupport } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
@@ -78,6 +78,13 @@
     email: '',
     subject: '',
     message: ''
+  };
+
+  const supportIds = {
+    name: 'contact-name-support',
+    email: 'contact-email-support',
+    subject: 'contact-subject-support',
+    message: 'contact-message-support'
   };
   
   /** @type {Record<string, string>} */
@@ -289,61 +296,81 @@
         <h2 use:sparkleTrail>{$_('contact.form_title')}</h2>
         
         <form on:submit={handleSubmit}>
-          <div class="form-group" class:error={errors.name}>
-            <label for="name" class="required">{$_('contact.form_name')}</label>
-            <input
-              type="text"
-              id="name"
-              bind:value={formData.name}
-              placeholder={$_('contact.form_name_placeholder')}
-              class:error={errors.name}
-            />
-            {#if errors.name}
-              <span class="error-message">{errors.name}</span>
-            {/if}
-          </div>
+      <div class="form-group" class:error={errors.name}>
+        <label for="name" class="required">{$_('contact.form_name')}</label>
+        <input
+          type="text"
+          id="name"
+          bind:value={formData.name}
+          placeholder={$_('contact.form_name_placeholder')}
+          class:error={errors.name}
+          aria-describedby={supportIds.name}
+          aria-invalid={Boolean(errors.name)}
+        />
+        <FieldSupport
+          id={supportIds.name}
+          tone={errors.name ? 'error' : 'helper'}
+          message={errors.name ?? $_('form.helper_name')}
+          announce="assertive"
+        />
+      </div>
+
+      <div class="form-group" class:error={errors.email}>
+        <label for="email" class="required">{$_('contact.form_email')}</label>
+        <input
+          type="email"
+          id="email"
+          bind:value={formData.email}
+          placeholder={$_('contact.form_email_placeholder')}
+          class:error={errors.email}
+          aria-describedby={supportIds.email}
+          aria-invalid={Boolean(errors.email)}
+        />
+        <FieldSupport
+          id={supportIds.email}
+          tone={errors.email ? 'error' : 'helper'}
+          message={errors.email ?? $_('form.helper_email')}
+          announce="assertive"
+        />
+      </div>
           
-          <div class="form-group" class:error={errors.email}>
-            <label for="email" class="required">{$_('contact.form_email')}</label>
-            <input
-              type="email"
-              id="email"
-              bind:value={formData.email}
-              placeholder={$_('contact.form_email_placeholder')}
-              class:error={errors.email}
-            />
-            {#if errors.email}
-              <span class="error-message">{errors.email}</span>
-            {/if}
-          </div>
+      <div class="form-group" class:error={errors.subject}>
+        <label for="subject" class="required">{$_('contact.form_subject')}</label>
+        <input
+          type="text"
+          id="subject"
+          bind:value={formData.subject}
+          placeholder={$_('contact.form_subject_placeholder')}
+          class:error={errors.subject}
+          aria-describedby={supportIds.subject}
+          aria-invalid={Boolean(errors.subject)}
+        />
+        <FieldSupport
+          id={supportIds.subject}
+          tone={errors.subject ? 'error' : 'helper'}
+          message={errors.subject ?? $_('form.helper_subject')}
+          announce="assertive"
+        />
+      </div>
           
-          <div class="form-group" class:error={errors.subject}>
-            <label for="subject" class="required">{$_('contact.form_subject')}</label>
-            <input
-              type="text"
-              id="subject"
-              bind:value={formData.subject}
-              placeholder={$_('contact.form_subject_placeholder')}
-              class:error={errors.subject}
-            />
-            {#if errors.subject}
-              <span class="error-message">{errors.subject}</span>
-            {/if}
-          </div>
-          
-          <div class="form-group" class:error={errors.message}>
-            <label for="message" class="required">{$_('contact.form_message')}</label>
-            <textarea
-              id="message"
-              bind:value={formData.message}
-              rows="6"
-              placeholder={$_('contact.form_message_placeholder')}
-              class:error={errors.message}
-            ></textarea>
-            {#if errors.message}
-              <span class="error-message">{errors.message}</span>
-            {/if}
-          </div>
+      <div class="form-group" class:error={errors.message}>
+        <label for="message" class="required">{$_('contact.form_message')}</label>
+        <textarea
+          id="message"
+          bind:value={formData.message}
+          rows="6"
+          placeholder={$_('contact.form_message_placeholder')}
+          class:error={errors.message}
+          aria-describedby={supportIds.message}
+          aria-invalid={Boolean(errors.message)}
+        ></textarea>
+        <FieldSupport
+          id={supportIds.message}
+          tone={errors.message ? 'error' : 'helper'}
+          message={errors.message ?? $_('form.helper_message')}
+          announce="assertive"
+        />
+      </div>
           
           <button 
             type="submit" 
@@ -649,7 +676,6 @@ form {
 
   .form-group input.error,
   .form-group textarea.error { border-color: var(--cherry-pop); }
-  .error-message { color: var(--cherry-pop); font-size: var(--text-small); }
 
   .btn-block { width: 100%; display: inline-flex; justify-content: center; }
 

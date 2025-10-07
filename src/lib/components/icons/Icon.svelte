@@ -241,6 +241,19 @@
     <path d="M12 16v-4" class="stroke" />
     <circle cx="12" cy="8" r="0.8" class="fill" />
   </svg>
+{:else if name === 'alert'}
+  <svg
+    {...commonProps}
+    width={dimension}
+    height={dimension}
+    class={classes}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M12 4 3 19h18L12 4z" class="stroke" />
+    <path d="M12 10v4.5" class="stroke" />
+    <circle cx="12" cy="16.5" r="0.9" class="fill" />
+  </svg>
 {:else if name === 'linkedin'}
   <svg
     {...commonProps}
