@@ -191,7 +191,7 @@
 
   .demo-preview__orb--secondary {
     inset: -10% -24% auto auto;
-    background: linear-gradient(150deg, rgba(var(--cherry-red-rgb), 0.7), rgba(var(--signal-yellow-rgb), 0.65));
+    background: linear-gradient(150deg, rgba(var(--cherry-pop-rgb), 0.7), rgba(var(--signal-yellow-rgb), 0.65));
     animation: demoOrbDriftAlt 20s var(--ease-in-out) infinite alternate;
   }
 
@@ -250,7 +250,7 @@
     border: 0;
     transform: scale(1.02);
     transform-origin: center;
-    transition: transform 480ms var(--ease-in-out);
+    transition: transform var(--duration-hero) var(--ease-in-out);
   }
 
   .demo-preview:hover .demo-preview__frame iframe {
@@ -270,11 +270,11 @@
   }
 
   .demo-preview--aurora .demo-preview__host {
-    color: color-mix(in srgb, var(--aurora-purple) 60%, var(--cherry-red) 40%);
+    color: color-mix(in srgb, var(--aurora-purple) 60%, var(--cherry-pop) 40%);
   }
 
   .demo-preview--aurora .demo-preview__orb--primary {
-    background: linear-gradient(148deg, rgba(var(--aurora-purple-rgb), 0.88), rgba(var(--cherry-red-rgb), 0.78));
+    background: linear-gradient(148deg, rgba(var(--aurora-purple-rgb), 0.88), rgba(var(--cherry-pop-rgb), 0.78));
   }
 
   .demo-preview--aurora .demo-preview__orb--secondary {
@@ -282,21 +282,19 @@
   }
 
   @keyframes demoOrbDrift {
-    0% {
+    0%,
+    100% {
       transform: translate3d(0, 0, 0) scale(0.92);
     }
 
     50% {
       transform: translate3d(8%, -6%, 0) scale(1.05);
     }
-
-    100% {
-      transform: translate3d(-6%, 4%, 0) scale(0.94);
-    }
   }
 
   @keyframes demoOrbDriftAlt {
-    0% {
+    0%,
+    100% {
       transform: translate3d(0, 0, 0) scale(0.94);
       opacity: 0.5;
     }
@@ -305,15 +303,11 @@
       transform: translate3d(-6%, 6%, 0) scale(1.06);
       opacity: 0.65;
     }
-
-    100% {
-      transform: translate3d(4%, -6%, 0) scale(0.96);
-      opacity: 0.52;
-    }
   }
 
   @keyframes demoBeamPulse {
-    0% {
+    0%,
+    100% {
       opacity: 0.32;
       transform: skewX(-16deg) scale(0.96);
     }
@@ -322,14 +316,9 @@
       opacity: 0.55;
       transform: skewX(-12deg) scale(1.06);
     }
-
-    100% {
-      opacity: 0.35;
-      transform: skewX(-16deg) scale(0.98);
-    }
   }
 
-    @media (min-width: 900px) {
+  @media (min-width: 900px) {
     .demo-preview {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
       align-items: center;
@@ -345,7 +334,8 @@
       min-height: clamp(18rem, 30vw, 26rem);
     }
   }
-@media (prefers-reduced-motion: reduce) {
+
+  @media (prefers-reduced-motion: reduce) {
     .demo-preview__orb,
     .demo-preview__beam,
     .demo-preview__frame iframe {

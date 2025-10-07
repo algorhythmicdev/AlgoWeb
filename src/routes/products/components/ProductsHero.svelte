@@ -110,7 +110,7 @@
 
   .hero-gradient--secondary {
     inset: auto -12% -40% auto;
-    background: linear-gradient(145deg, rgba(var(--signal-yellow-rgb), 0.45), rgba(var(--cherry-red-rgb), 0.35));
+    background: linear-gradient(145deg, rgba(var(--signal-yellow-rgb), 0.45), rgba(var(--cherry-pop-rgb), 0.35));
   }
 
   .hero-shell {

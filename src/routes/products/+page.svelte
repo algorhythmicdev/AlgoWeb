@@ -190,6 +190,11 @@
   showAside={false}
   introReveal={{ stagger: 120 }}
 >
+  <svelte:fragment slot="status">
+    {#if heroLabel}
+      <span class="products-hero__label">{heroLabel}</span>
+    {/if}
+  </svelte:fragment>
   <svelte:fragment slot="backdrop">
     <div class="products-hero__backdrop" aria-hidden="true">
       <span class="products-stripe products-stripe--one"></span>
@@ -217,10 +222,14 @@
         : ''}
     {/each}
   </p>
-  <p class="products-hero__description">{$_('story.mission_text')}</p>
+  <p class="products-hero__description">{heroMission}</p>
   <div class="hero-actions">
-    <a href="#demos" class="btn btn-gradient">{$_('products.demos.title')}</a>
-    <a href="/contact" class="btn btn-secondary hover-lift">{$_('products.cta_contact')}</a>
+    {#if heroPrimaryActionLabel}
+      <a href="#demos" class="btn btn-gradient">{heroPrimaryActionLabel}</a>
+    {/if}
+    {#if heroSecondaryActionLabel}
+      <a href="/contact" class="btn btn-secondary hover-lift">{heroSecondaryActionLabel}</a>
+    {/if}
   </div>
 </HeroWrapper>
 
@@ -314,7 +323,7 @@
   }
 
   :global(.hero--products .hero-wrapper__intro) {
-    max-width: min(100%, 960px);
+    max-width: min(100%, var(--container-xl));
     margin: 0 auto;
     justify-items: center;
     text-align: center;
@@ -389,15 +398,46 @@
     }
   }
 
-  @keyframes productsOrbDrift {
-    0%,
-    100% {
-      transform: translate3d(-6%, 6%, 0) scale(0.9);
-    }
+@keyframes productsOrbDrift {
+  0%,
+  100% {
+    transform: translate3d(-6%, 6%, 0) scale(0.9);
+  }
 
-    40% {
-      transform: translate3d(6%, -6%, 0) scale(1.05);
-    }
+  40% {
+    transform: translate3d(6%, -6%, 0) scale(1.05);
+  }
+}
+
+  .products-hero__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: clamp(0.45rem, 1.2vw, 0.65rem) clamp(1rem, 2.6vw, 1.5rem);
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--bg-surface) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 55%, rgba(255, 255, 255, 0.55) 45%);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.15);
+    color: var(--heading-color);
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  :global([data-base-theme='dark']) .products-hero__label {
+    background: color-mix(in srgb, rgba(10, 16, 30, 0.88) 60%, rgba(var(--aurora-purple-rgb), 0.3) 40%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 62%, rgba(255, 255, 255, 0.16) 38%);
+    box-shadow: 0 22px 52px rgba(2, 6, 18, 0.48);
+    color: var(--text-primary);
+  }
+
+  :global([data-theme='contrast']) .products-hero__label {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: rgba(255, 255, 255, 0.72);
+    color: var(--text-primary);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.75);
   }
 
   .products-hero__headline {
@@ -436,7 +476,7 @@
     margin: 0;
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.2vw, 1.45rem);
-    max-width: 64ch;
+    max-width: var(--measure-xl);
   }
   :global([data-base-theme='dark'])
   :global([data-theme='contrast'])
@@ -458,7 +498,7 @@
   .demo-previews__header {
     display: grid;
     gap: clamp(0.5rem, 1.6vw, 1rem);
-    max-width: 620px;
+    width: min(100%, var(--container-md));
     margin-bottom: clamp(2rem, 5vw, 3rem);
   }
 

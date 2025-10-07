@@ -410,12 +410,6 @@
       justify-content: space-between;
       border-radius: var(--radius-lg);
     }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
   /* motion-safe adjustments */
   @media (prefers-reduced-motion: reduce) {

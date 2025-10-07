@@ -330,7 +330,7 @@
 }
 
 .animate-gradient-shift {
-  background: linear-gradient(-45deg, var(--voyage-blue), var(--aurora-purple), var(--signal-yellow), var(--cherry-red));
+  background: linear-gradient(-45deg, var(--voyage-blue), var(--aurora-purple), var(--signal-yellow), var(--cherry-pop));
   background-size: 400% 400%;
   animation: gradientShift 3s ease infinite;
 }
