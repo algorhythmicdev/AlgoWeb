@@ -1,7 +1,7 @@
 ﻿<script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
-  import { Icon } from '$lib/components';
+  import { Icon, FieldSupport } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
@@ -47,6 +47,15 @@
     phone: '',
     industry: '',
     description: ''
+  };
+
+  const supportIds = {
+    company: 'consulting-company-support',
+    name: 'consulting-name-support',
+    email: 'consulting-email-support',
+    phone: 'consulting-phone-support',
+    industry: 'consulting-industry-support',
+    description: 'consulting-description-support'
   };
   
   /** @type {Record<string, string>} */
@@ -215,7 +224,7 @@
           </span>
           <span class="consulting-hero__testimonial-label">{$_('consulting.hero_testimonial_label')}</span>
         </div>
-        <p class="consulting-hero__quote">“{testimonial.quote}”</p>
+        <p class="consulting-hero__quote">{testimonial.quote}</p>
         <p class="consulting-hero__attribution">
           <span>{testimonial.name}</span>
           <span>{testimonial.role}</span>
@@ -272,12 +281,17 @@
               bind:value={formData.company}
               placeholder={$_('consulting.form_company_placeholder')}
               class:error={errors.company}
+              aria-describedby={supportIds.company}
+              aria-invalid={Boolean(errors.company)}
             />
-            {#if errors.company}
-              <span class="error-message">{errors.company}</span>
-            {/if}
+            <FieldSupport
+              id={supportIds.company}
+              tone={errors.company ? 'error' : 'helper'}
+              message={errors.company ?? $_('form.helper_company')}
+              announce="assertive"
+            />
           </div>
-          
+
           <div class="form-group" class:error={errors.name}>
             <label for="name" class="required">{$_('consulting.form_name')}</label>
             <input
@@ -286,12 +300,17 @@
               bind:value={formData.name}
               placeholder={$_('consulting.form_name_placeholder')}
               class:error={errors.name}
+              aria-describedby={supportIds.name}
+              aria-invalid={Boolean(errors.name)}
             />
-            {#if errors.name}
-              <span class="error-message">{errors.name}</span>
-            {/if}
+            <FieldSupport
+              id={supportIds.name}
+              tone={errors.name ? 'error' : 'helper'}
+              message={errors.name ?? $_('form.helper_name')}
+              announce="assertive"
+            />
           </div>
-          
+
           <div class="form-group" class:error={errors.email}>
             <label for="email" class="required">{$_('consulting.form_email')}</label>
             <input
@@ -300,10 +319,15 @@
               bind:value={formData.email}
               placeholder={$_('consulting.form_email_placeholder')}
               class:error={errors.email}
+              aria-describedby={supportIds.email}
+              aria-invalid={Boolean(errors.email)}
             />
-            {#if errors.email}
-              <span class="error-message">{errors.email}</span>
-            {/if}
+            <FieldSupport
+              id={supportIds.email}
+              tone={errors.email ? 'error' : 'helper'}
+              message={errors.email ?? $_('form.helper_email')}
+              announce="assertive"
+            />
           </div>
           
           <div class="form-group" class:error={errors.phone}>
@@ -314,10 +338,15 @@
               bind:value={formData.phone}
               placeholder={$_('consulting.form_phone_placeholder')}
               class:error={errors.phone}
+              aria-describedby={supportIds.phone}
+              aria-invalid={Boolean(errors.phone)}
             />
-            {#if errors.phone}
-              <span class="error-message">{errors.phone}</span>
-            {/if}
+            <FieldSupport
+              id={supportIds.phone}
+              tone={errors.phone ? 'error' : 'helper'}
+              message={errors.phone ?? $_('form.helper_phone')}
+              announce="assertive"
+            />
           </div>
           
           <div class="form-group full-width" class:error={errors.industry}>
@@ -326,15 +355,20 @@
               id="industry"
               bind:value={formData.industry}
               class:error={errors.industry}
+              aria-describedby={supportIds.industry}
+              aria-invalid={Boolean(errors.industry)}
             >
               <option value="">{$_('consulting.select_industry')}</option>
               {#each industryOptions as option}
                 <option value={option}>{$_(`consulting.industries.${option}`)}</option>
               {/each}
             </select>
-            {#if errors.industry}
-              <span class="error-message">{errors.industry}</span>
-            {/if}
+            <FieldSupport
+              id={supportIds.industry}
+              tone={errors.industry ? 'error' : 'helper'}
+              message={errors.industry ?? $_('form.helper_industry')}
+              announce="assertive"
+            />
           </div>
           
           <div class="form-group full-width" class:error={errors.description}>
@@ -345,10 +379,15 @@
               rows="6"
               placeholder={$_('consulting.form_description_placeholder')}
               class:error={errors.description}
+              aria-describedby={supportIds.description}
+              aria-invalid={Boolean(errors.description)}
             ></textarea>
-            {#if errors.description}
-              <span class="error-message">{errors.description}</span>
-            {/if}
+            <FieldSupport
+              id={supportIds.description}
+              tone={errors.description ? 'error' : 'helper'}
+              message={errors.description ?? $_('form.helper_description')}
+              announce="assertive"
+            />
           </div>
         </div>
         
@@ -532,6 +571,23 @@
     font-size: clamp(1.1rem, 2.4vw, 1.45rem);
     color: var(--text-primary);
     line-height: var(--leading-snug);
+  }
+
+  .consulting-hero__quote::before,
+  .consulting-hero__quote::after {
+    color: var(--voyage-blue);
+    font-size: 1.35em;
+    vertical-align: top;
+  }
+
+  .consulting-hero__quote::before {
+    content: '“';
+    margin-right: 0.35rem;
+  }
+
+  .consulting-hero__quote::after {
+    content: '”';
+    margin-left: 0.35rem;
   }
 
   .consulting-hero__attribution {
@@ -748,11 +804,6 @@
   .form-group select.error,
   .form-group textarea.error {
     border-color: var(--cherry-pop);
-  }
-
-  .error-message {
-    color: var(--cherry-pop);
-    font-size: var(--text-small);
   }
 
   .btn-block {

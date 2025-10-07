@@ -512,7 +512,15 @@
     "error_email": "Nederīga e-pasta adrese",
     "error_phone": "Nederīgs telefona numurs",
     "error_validation": "Lūdzu, izlabo kļūdas formā",
-    "required_note": "* Obligātie lauki"
+    "required_note": "* Obligātie lauki",
+    "helper_company": "Pastāsti uzņēmuma vai projekta nosaukumu, ar ko sadarbojamies.",
+    "helper_name": "Norādi galveno kontaktpersonu šai sarunai.",
+    "helper_email": "Mēs apstiprināsim nākamos soļus uz šo e-pastu.",
+    "helper_phone": "Pievieno tālruni, uz kuru varam piezvanīt, ja asinhronā saziņa ieilgst.",
+    "helper_industry": "Izvēlies tuvāko nozari, lai varam sagatavot atbilstošas atsauces.",
+    "helper_description": "Apraksti mērķus, ierobežojumus un termiņus, lai varam pielāgoties.",
+    "helper_subject": "Ieraksti galveno tēmu, lai varam ātri novirzīt ziņu.",
+    "helper_message": "Pievieno kontekstu, saites un detaļas, kuras jāizskata."
   },
   "common": {
     "submitting": "Nosūta...",

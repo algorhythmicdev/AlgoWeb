@@ -512,7 +512,15 @@
     "error_email": "Correo electrónico no válido",
     "error_phone": "Número de teléfono no válido",
     "error_validation": "Revisa los errores en el formulario",
-    "required_note": "* Campos obligatorios"
+    "required_note": "* Campos obligatorios",
+    "helper_company": "Cuéntanos el nombre de la empresa o proyecto con el que colaboraremos.",
+    "helper_name": "Indica la persona de contacto principal para esta conversación.",
+    "helper_email": "Confirmaremos los siguientes pasos en esta dirección.",
+    "helper_phone": "Añade un número al que podamos llamar si el intercambio asíncrono se frena.",
+    "helper_industry": "Elige el sector más cercano para preparar referencias relevantes.",
+    "helper_description": "Describe objetivos, límites y plazos para que podamos calibrar.",
+    "helper_subject": "Escribe el asunto para que podamos dirigir tu mensaje con rapidez.",
+    "helper_message": "Incluye contexto, enlaces y detalles que debamos revisar."
   },
   "common": {
     "submitting": "Enviando...",
