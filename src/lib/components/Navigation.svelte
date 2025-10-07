@@ -1,4 +1,4 @@
-﻿<script>
+<script>
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
@@ -14,17 +14,9 @@
 
   $: currentPath = $page.url.pathname;
 
-  const navGradients = [
-    'var(--gradient-spectrum-1)',
-    'var(--gradient-spectrum-2)',
-    'var(--gradient-spectrum-3)',
-    'var(--gradient-spectrum-4)',
-    'var(--gradient-spectrum-5)'
-  ];
-
   function updateScrollState() {
     const scrollY = window.scrollY;
-    isScrolled = scrollY > 32;
+    isScrolled = scrollY > 28;
     navigation.updateScroll(scrollY);
     ticking = false;
   }
@@ -63,13 +55,14 @@
 <svelte:window on:scroll={handleScroll} on:resize={handleResize} on:keydown={handleKeydown} />
 
 <nav
-  class="nav"
+  class="nav-shell"
   class:nav-condensed={isScrolled}
   class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
   class:menu-open={$navigation.isMenuOpen}
+  aria-label={$_('nav.primary_label')}
 >
-  <div class="container nav-container">
-    <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
+  <div class="container nav-surface">
+    <a href="/" class="nav-brand" aria-label={$_('nav.brand_aria')}>
       <img
         src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
         alt={$_('nav.brand_name')}
@@ -78,30 +71,56 @@
       />
     </a>
 
-    <div class="nav-content">
-      <div id="primary-navigation" class="nav-links" class:open={$navigation.isMenuOpen}>
-        {#each mainNavigation as item, index}
-          <a
-            href={item.href}
-            class="nav-link"
-            class:active={currentPath === item.href}
-            on:click={() => navigation.closeMenu()}
-            style={`--nav-gradient:${navGradients[index % navGradients.length]}; --nav-index:${index};`}
-          >
-            <span>{$_(item.label)}</span>
-            {#if item.badge}
-              <span class="nav-badge">{$_(item.badge)}</span>
-            {/if}
-          </a>
-        {/each}
+    <div class="nav-groups">
+      <div
+        id="primary-navigation"
+        class="nav-links"
+        role="navigation"
+        aria-label={$_('nav.primary_label')}
+        data-open={$navigation.isMenuOpen}
+      >
+        <ul class="nav-list">
+          {#each mainNavigation as item}
+            <li class={`nav-item${item.children ? ' nav-item--group' : ''}`}>
+              <a
+                href={item.href}
+                class="nav-link"
+                class:active={currentPath === item.href}
+                on:click={() => navigation.closeMenu()}
+              >
+                <span class="nav-link__label">{$_(item.label)}</span>
+                {#if item.badge}
+                  <span class="nav-link__badge">{$_(item.badge)}</span>
+                {/if}
+              </a>
+
+              {#if item.children?.length}
+                <div class="nav-submenu" role="group" aria-label={$_('nav.products_panel_label')}>
+                  {#each item.children as child}
+                    <a
+                      href={child.href}
+                      class="nav-submenu__link"
+                      on:click={() => navigation.closeMenu()}
+                    >
+                      <span class="nav-submenu__title">{$_(child.label)}</span>
+                      {#if child.description}
+                        <span class="nav-submenu__description">{$_(child.description)}</span>
+                      {/if}
+                    </a>
+                  {/each}
+                </div>
+              {/if}
+            </li>
+          {/each}
+        </ul>
       </div>
 
       <div class="nav-actions">
         <LanguageSwitcher />
         <ThemeToggle />
-        <a href="/contact" class="nav-cta">{$_('nav.contact')}</a>
+        <a href="/contact" class="nav-button" data-variant="primary">{$_('nav.talk_to_us')}</a>
         <button
-          class="menu-toggle"
+          class="nav-trigger"
           on:click={() => navigation.toggleMenu()}
           aria-label={$_('nav.toggle_menu')}
           aria-expanded={$navigation.isMenuOpen}
@@ -109,6 +128,7 @@
         >
           <span></span>
           <span></span>
+          <span class="sr-only">{$_('nav.toggle_menu')}</span>
         </button>
       </div>
     </div>
@@ -118,25 +138,23 @@
 <button
   type="button"
   class="nav-overlay"
-  class:visible={$navigation.isMenuOpen}
+  data-visible={$navigation.isMenuOpen}
   aria-hidden="true"
   tabindex="-1"
   on:click={() => navigation.closeMenu()}
 ></button>
 
 <style>
-  .nav {
+  .nav-shell {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto 0;
     z-index: var(--z-sticky);
-    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(255, 255, 255, 0) 18%);
+    background: color-mix(in srgb, var(--bg-surface) 78%, rgba(255, 255, 255, 0) 22%);
     background-image:
       linear-gradient(120deg, rgba(var(--voyage-blue-rgb), 0.12) 0%, rgba(var(--aurora-purple-rgb), 0.1) 100%),
       var(--grain-texture);
     background-blend-mode: screen, soft-light;
-    backdrop-filter: blur(28px) saturate(130%);
+    backdrop-filter: blur(28px) saturate(135%);
     border-bottom: 1px solid color-mix(in srgb, var(--border-glass) 68%, rgba(17, 24, 39, 0.08) 32%);
     transition: transform var(--duration-normal) var(--ease-out),
       box-shadow var(--duration-normal) var(--ease-out),
@@ -145,28 +163,29 @@
     box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
   }
 
-  .nav.hidden { transform: translateY(-100%); }
+  .nav-shell.hidden {
+    transform: translateY(-100%);
+  }
 
-  .nav-condensed {
+  .nav-shell.nav-condensed {
     box-shadow: 0 24px 52px rgba(15, 20, 35, 0.12);
     border-bottom-color: color-mix(in srgb, var(--border-strong) 55%, rgba(12, 18, 34, 0.2) 45%);
     background: color-mix(in srgb, var(--bg-elevated) 78%, rgba(var(--voyage-blue-rgb), 0.16) 22%);
     background-image:
-      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.16) 0%, rgba(var(--aurora-purple-rgb), 0.12) 40%, transparent 100%),
+      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.18) 0%, rgba(var(--aurora-purple-rgb), 0.12) 42%, transparent 100%),
       var(--grain-texture);
-    background-blend-mode: screen, soft-light;
   }
 
-  :global([data-base-theme='dark']) .nav {
-    background: color-mix(in srgb, rgba(6, 12, 26, 0.78) 70%, rgba(var(--voyage-blue-rgb), 0.24) 30%);
+  :global([data-base-theme='dark']) .nav-shell {
+    background: color-mix(in srgb, rgba(6, 12, 26, 0.78) 68%, rgba(var(--voyage-blue-rgb), 0.26) 32%);
     background-image:
-      linear-gradient(122deg, rgba(var(--voyage-blue-rgb), 0.22) 0%, rgba(var(--aurora-purple-rgb), 0.2) 100%),
+      linear-gradient(122deg, rgba(var(--voyage-blue-rgb), 0.24) 0%, rgba(var(--aurora-purple-rgb), 0.2) 100%),
       var(--grain-texture);
-    border-bottom: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 62%, rgba(255, 255, 255, 0.08) 38%);
+    border-bottom: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 60%, rgba(255, 255, 255, 0.08) 40%);
     box-shadow: 0 22px 54px rgba(4, 7, 18, 0.45);
   }
 
-  :global([data-base-theme='dark']) .nav.nav-condensed {
+  :global([data-base-theme='dark']) .nav-shell.nav-condensed {
     background: color-mix(in srgb, rgba(8, 14, 30, 0.86) 62%, rgba(var(--voyage-blue-rgb), 0.28) 38%);
     background-image:
       linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.28) 0%, rgba(var(--aurora-purple-rgb), 0.22) 44%, transparent 100%),
@@ -175,257 +194,382 @@
     border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 58%, rgba(255, 255, 255, 0.1) 42%);
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-shell {
     background: #050505;
     border-bottom: 1px solid rgba(255, 255, 255, 0.45);
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.8);
     background-image: none;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav.nav-condensed {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-shell.nav-condensed {
     background: #070707;
     border-bottom-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 22px 54px rgba(0, 0, 0, 0.82);
   }
 
-  .nav-container {
+  .nav-surface {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.35rem 0;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    padding: clamp(1rem, 2.5vw, 1.5rem) 0;
   }
 
-  .brand img {
+  .nav-brand img {
     display: block;
-    width: clamp(128px, 22vw, 148px);
+    width: clamp(128px, 22vw, 152px);
     height: auto;
-    transition: opacity var(--duration-fast) var(--ease-out);
   }
 
-  .nav-content {
+  .nav-groups {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
+    gap: clamp(1.25rem, 2.6vw, 2.25rem);
+    flex: 1;
+    justify-content: flex-end;
   }
 
   .nav-links {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav-list {
     display: flex;
     align-items: center;
-    gap: clamp(1.6rem, 3vw, 2.2rem);
+    gap: clamp(1rem, 2vw, 1.75rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
   .nav-link {
-    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: clamp(0.35rem, 0.8vw, 0.55rem);
-    font-weight: var(--weight-semibold);
-    padding: clamp(0.35rem, 0.8vw, 0.55rem) clamp(0.75rem, 1.4vw, 1rem);
+    gap: 0.55rem;
+    padding: 0.65rem 1.05rem;
     border-radius: var(--radius-full);
+    font-size: 0.98rem;
+    font-weight: var(--weight-medium);
     color: var(--text-secondary);
-    transition: background var(--duration-fast) var(--ease-out),
+    transition:
       color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
       transform var(--duration-fast) var(--ease-out);
   }
 
-  .nav-link span {
-    color: inherit;
-    font-size: var(--text-small);
-    letter-spacing: 0.01em;
-    text-transform: none;
-    white-space: nowrap;
-  }
-
   .nav-link:hover,
-  .nav-link:focus-visible,
-  .nav-link.active {
-    background: color-mix(in srgb, var(--accent-primary) 14%, transparent 86%);
+  .nav-link:focus-visible {
     color: var(--text-primary);
+    background: color-mix(in srgb, var(--control-surface-hover) 78%, rgba(255, 255, 255, 0.1) 22%);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
     transform: translateY(-1px);
   }
 
-  :global(html[data-base-theme='dark']) .nav-link {
-    color: color-mix(in srgb, #cfd8f6 80%, rgba(var(--aurora-purple-rgb), 0.28) 20%);
-  }
-
-  :global(html[data-base-theme='dark']) .nav-link:hover,
-  :global(html[data-base-theme='dark']) .nav-link.active {
+  .nav-link.active {
     color: var(--text-primary);
-    background: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 60%, rgba(var(--voyage-blue-rgb), 0.2) 40%);
+    background: color-mix(in srgb, var(--control-surface-hover) 82%, rgba(var(--voyage-blue-rgb), 0.12) 18%);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.18);
   }
 
-  .nav-badge {
-    font-size: var(--text-caption);
-    color: var(--accent-primary);
-    background: color-mix(in srgb, var(--accent-primary) 12%, transparent 88%);
-    border-radius: var(--radius-full);
-    padding: 0.15rem 0.55rem;
-    border: 1px solid rgba(var(--accent-primary-rgb), 0.32);
-  }
-
-  :global([data-base-theme='dark']) .nav-badge {
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 65%, rgba(6, 12, 26, 0.78) 35%);
-    color: rgba(228, 236, 255, 0.94);
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-badge {
-    background: #ffffff;
-    color: #000000;
-  }
-
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-  }
-
-  .nav-cta {
+  .nav-link__badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-full);
-    border: 1px solid rgba(19, 81, 255, 0.22);
-    background: color-mix(in srgb, var(--pure-white) 78%, rgba(19, 81, 255, 0.1) 22%);
-    font-size: var(--text-small);
+    padding: 0.1rem 0.55rem;
+    font-size: 0.75rem;
     font-weight: var(--weight-semibold);
-    color: var(--pure-white);
-    transition: all var(--duration-fast) var(--ease-out);
-    backdrop-filter: blur(22px);
-    box-shadow: 0 16px 32px rgba(19, 81, 255, 0.12);
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.22) 65%, rgba(255, 255, 255, 0.16) 35%);
+    color: color-mix(in srgb, var(--text-strong) 82%, rgba(var(--voyage-blue-rgb), 0.28) 18%);
   }
 
-  .nav-cta:hover {
-    background: var(--gradient-primary);
-    color: var(--pure-white);
-    border-color: transparent;
-    box-shadow: 0 22px 46px rgba(19, 81, 255, 0.24);
+  .nav-item--group {
+    align-items: stretch;
   }
 
-  :global([data-base-theme='dark']) .nav-cta {
-    background: linear-gradient(145deg, rgba(var(--voyage-blue-rgb), 0.32) 0%, rgba(var(--aurora-purple-rgb), 0.28) 70%);
-    border-color: rgba(102, 140, 255, 0.42);
-    box-shadow: 0 18px 42px rgba(4, 7, 18, 0.55);
-    color: rgba(236, 242, 255, 0.95);
+  .nav-item--group .nav-link {
+    padding-right: 1.25rem;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-cta {
-    background: #ffffff;
-    color: #000000;
-    border-color: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.68);
+  .nav-item--group .nav-submenu {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translate(-50%, 10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    display: grid;
+    gap: var(--space-sm);
+    min-width: clamp(220px, 22vw, 320px);
+    padding: clamp(0.85rem, 2vw, 1.25rem);
+    border-radius: var(--radius-xl);
+    background: var(--bg-surface);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, rgba(var(--voyage-blue-rgb), 0.18) 28%);
+    box-shadow: 0 32px 68px rgba(15, 23, 42, 0.18);
+    transition:
+      opacity var(--duration-normal) var(--ease-out),
+      transform var(--duration-normal) var(--ease-out),
+      visibility var(--duration-normal) var(--ease-out);
+    z-index: var(--z-elevated);
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-cta:hover {
-    background: #ffd339;
-    color: #000000;
-    border-color: #ffd339;
-    box-shadow: 0 18px 42px rgba(255, 211, 57, 0.45);
+  .nav-item--group:hover .nav-submenu,
+  .nav-item--group:focus-within .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
   }
 
-  .menu-toggle {
+  .nav-submenu__link {
+    display: grid;
+    gap: 0.35rem;
+    padding: clamp(0.75rem, 1.6vw, 1rem);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--control-surface) 85%, rgba(255, 255, 255, 0.16) 15%);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 76%, rgba(var(--voyage-blue-rgb), 0.18) 24%);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-submenu__link:hover,
+  .nav-submenu__link:focus-visible {
+    border-color: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--aurora-purple-rgb), 0.26) 32%);
+    transform: translateY(-2px);
+  }
+
+  .nav-submenu__title {
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+  }
+
+  .nav-submenu__description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .nav-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 52%, rgba(var(--aurora-purple-rgb), 0.18) 48%);
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 58%, rgba(255, 255, 255, 0.18) 42%);
+    color: var(--text-primary);
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.18);
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-button:hover,
+  .nav-button:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 24px 54px rgba(15, 23, 42, 0.22);
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.24) 56%, rgba(var(--aurora-purple-rgb), 0.22) 44%);
+  }
+
+  .nav-trigger {
+    position: relative;
     display: none;
     flex-direction: column;
-    gap: 4px;
-    padding: 0.4rem 0.35rem;
-    border-radius: var(--radius-sm);
-    background: transparent;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--control-surface) 88%, rgba(255, 255, 255, 0.2) 12%);
+    border: 1px solid var(--control-border);
+    gap: 6px;
+    transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
   }
 
-  .menu-toggle span {
-    width: 22px;
+  .nav-trigger span {
+    display: block;
+    width: 18px;
     height: 2px;
-    background: var(--text-primary);
+    border-radius: 999px;
+    background: currentColor;
     transition: transform var(--duration-fast) var(--ease-out);
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .menu-toggle span {
-    background: #ffffff;
+  .nav-trigger:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .nav-shell.menu-open .nav-trigger span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .nav-shell.menu-open .nav-trigger span:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
   }
 
   .nav-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(4, 9, 26, 0.38);
+    background: rgba(0, 6, 18, 0.4);
+    backdrop-filter: blur(6px);
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--duration-normal) var(--ease-out);
-    z-index: calc(var(--z-sticky) - 2);
+    z-index: calc(var(--z-sticky) - 1);
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-overlay {
-    background: rgba(255, 255, 255, 0.18);
-  }
-
-  .nav-overlay.visible {
+  .nav-overlay[data-visible='true'] {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
-  @media (max-width: 960px) {
-    .nav-content { gap: var(--space-3); }
-    .nav-links {
-      position: fixed;
-      top: clamp(68px, 12vw, 80px);
-      left: clamp(1rem, 5vw, 1.5rem);
-      right: clamp(1rem, 5vw, 1.5rem);
-      flex-direction: column;
-      align-items: stretch;
-      padding: var(--space-4);
-      border-radius: var(--radius-lg);
-      background: color-mix(in srgb, var(--pure-white) 78%, rgba(19, 81, 255, 0.08) 22%);
-      background-image: var(--grain-texture);
-      background-blend-mode: soft-light;
-      border: 1px solid color-mix(in srgb, var(--border-glass) 60%, rgba(17, 24, 39, 0.08) 40%);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(22px);
-      transform: translateY(-20px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--duration-normal) var(--ease-out),
-        transform var(--duration-normal) var(--ease-out);
-    }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
-    :global([data-base-theme='dark']) .nav-links {
-      background: color-mix(in srgb, rgba(12, 18, 40, 0.9) 75%, rgba(var(--voyage-blue-rgb), 0.3) 25%);
-      border-color: rgba(94, 130, 240, 0.42);
-      box-shadow: 0 26px 56px rgba(2, 6, 18, 0.64);
-    }
-
-    :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-links {
-      background: #050505;
-      border-color: rgba(255, 255, 255, 0.6);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.82);
-    }
-
-    .nav-links.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
+  @media (max-width: 1200px) {
+    .nav-list {
+      gap: clamp(0.65rem, 1.8vw, 1.25rem);
     }
 
     .nav-link {
-      font-size: 1.05rem;
-      padding: 0.65rem clamp(0.75rem, 3vw, 1.15rem);
-      justify-content: space-between;
-      border-radius: var(--radius-lg);
+      padding: 0.6rem 0.95rem;
     }
   }
-  /* motion-safe adjustments */
-  @media (prefers-reduced-motion: reduce) {
-    .nav {
-      transition: none;
+
+  @media (max-width: 960px) {
+    .nav-groups {
+      gap: 0.75rem;
     }
 
-    .nav-link span {
-    color: inherit;
-    font-size: var(--text-small);
-    letter-spacing: 0.01em;
-    text-transform: none;
-    white-space: nowrap;
+    .nav-links {
+      position: fixed;
+      top: clamp(4.25rem, 12vw, 5.5rem);
+      right: clamp(1.25rem, 5vw, 2rem);
+      left: clamp(1.25rem, 5vw, 2rem);
+      padding: clamp(1rem, 4vw, 1.5rem);
+      border-radius: var(--radius-2xl);
+      border: 1px solid color-mix(in srgb, var(--border-subtle) 75%, rgba(var(--voyage-blue-rgb), 0.16) 25%);
+      background: color-mix(in srgb, var(--bg-surface) 88%, rgba(var(--voyage-blue-rgb), 0.14) 12%);
+      box-shadow: 0 32px 68px rgba(15, 23, 42, 0.22);
+      transform: translateY(-20px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity var(--duration-normal) var(--ease-out),
+        transform var(--duration-normal) var(--ease-out),
+        visibility var(--duration-normal) var(--ease-out);
+    }
+
+    .nav-links[data-open='true'] {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .nav-item {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .nav-link {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .nav-item--group .nav-submenu {
+      position: static;
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      gap: 0.75rem;
+      margin-top: 0.6rem;
+    }
+
+    .nav-submenu__link {
+      background: color-mix(in srgb, var(--control-surface) 88%, rgba(255, 255, 255, 0.1) 12%);
+      border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, rgba(var(--voyage-blue-rgb), 0.18) 30%);
+    }
+
+    .nav-actions {
+      gap: 0.85rem;
+    }
+
+    .nav-button {
+      display: none;
+    }
+
+    .nav-trigger {
+      display: inline-flex;
+    }
   }
+
+  @media (max-width: 600px) {
+    .nav-surface {
+      padding: clamp(0.85rem, 4vw, 1rem) 0;
+    }
+
+    .nav-brand img {
+      width: clamp(116px, 40vw, 140px);
+    }
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-links {
+    background: var(--bg-surface);
+    border: 2px solid #000;
+    box-shadow: none;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-button {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-submenu__link {
+    border: 2px solid #000;
+    background: var(--bg-surface);
   }
 </style>
-
-
-

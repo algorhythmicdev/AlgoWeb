@@ -37,9 +37,9 @@ export const mainNavigation = [
     badge: 'nav.pilot_badge'
   },
   {
-    label: 'nav.contact',
-    href: '/contact',
-    icon: 'contact'
+    label: 'nav.about',
+    href: '/#story',
+    icon: 'about'
   }
 ];
 

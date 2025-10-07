@@ -3,9 +3,11 @@
   import { _, waitLocale } from 'svelte-i18n';
   import { get } from 'svelte/store';
   import { onMount } from 'svelte';
-  
+  import en from '$lib/i18n/en.json';
+
   let visible = true;
-  let loadingText = 'AlgoRhythmics';
+  const fallbackLoadingText = en.site.title;
+  let loadingText = fallbackLoadingText;
   
   onMount(() => {
     // Hide loading spinner after page loads
@@ -18,10 +20,12 @@
         const translate = get(_);
         if (typeof translate === 'function') {
           loadingText = translate('site.title');
+        } else {
+          loadingText = fallbackLoadingText;
         }
       })
       .catch(() => {
-        loadingText = 'AlgoRhythmics';
+        loadingText = fallbackLoadingText;
       });
 
     return () => clearTimeout(timer);

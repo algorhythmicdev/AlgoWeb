@@ -4,6 +4,19 @@
     "tagline": "Donde la lógica baila con la creatividad",
     "description": "Laboratorio de innovación en IA que da vida a la plataforma de viajes NodeVoyage y a la suite de productividad Ideonautix"
   },
+  "seo": {
+    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
+    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
+    "default_og_title": "AlgoRhythmics",
+    "default_og_description": "Ideas tuned to human rhythm.",
+    "default_url": "https://algorhythmics.com",
+    "home": {
+      "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
+      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
+      "og_title": "AlgoRhythmics — Calm OS rituals",
+      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+    }
+  },
   "app": {
     "loading": "Cargando..."
   },
@@ -30,7 +43,10 @@
     "pilot_badge": "Piloto",
     "brand_aria": "Inicio de AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Abrir o cerrar menú"
+    "toggle_menu": "Abrir o cerrar menú",
+    "primary_label": "Navegación principal",
+    "products_panel_label": "Accesos directos de productos",
+    "talk_to_us": "Habla con nosotros"
   },
   "hero": {
     "status": "OS-native AI studio • Riga ↔ Rotterdam",
@@ -505,7 +521,11 @@
         "cta": "Enter Discord",
         "action": "https://discord.gg/algorhythmics"
       }
-    ]
+    ],
+    "form_topic": "Tema",
+    "form_topic_placeholder": "¿Sobre qué quieres hablar?",
+    "success_title": "Mensaje recibido",
+    "success_subtitle": "Gracias por escribirnos. Respondemos en dos días laborables."
   },
   "form": {
     "error_required": "Este campo es obligatorio",
@@ -549,6 +569,7 @@
     "show_less": "Ver menos"
   },
   "footer": {
+    "brand_alt": "AlgoRhythmics wordmark",
     "tagline": "Donde la lógica baila con la creatividad",
     "status": "Pre-company • Ideju Kauss octubre 2025",
     "location": "Daugavpils, Letonia",
@@ -662,5 +683,36 @@
       }
     ],
     "fallback": "Aún estoy aprendiendo, pero puedo ponerte en contacto con nuestro equipo o compartir más recursos sobre nuestros servicios."
+  },
+  "language_switcher": {
+    "group_label": "Selector de idioma",
+    "trigger_label": "Elegir idioma",
+    "menu_label": "Idiomas disponibles",
+    "languages": {
+      "en": {
+        "short": "EN",
+        "name": "English"
+      },
+      "lv": {
+        "short": "LV",
+        "name": "Latviešu"
+      },
+      "ru": {
+        "short": "RU",
+        "name": "Русский"
+      },
+      "uk": {
+        "short": "UK",
+        "name": "Українська"
+      },
+      "fr": {
+        "short": "FR",
+        "name": "Français"
+      },
+      "es": {
+        "short": "ES",
+        "name": "Español"
+      }
+    }
   }
 }

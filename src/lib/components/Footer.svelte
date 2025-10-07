@@ -11,7 +11,7 @@
       <div class="footer-brand">
         <img
           src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
-          alt="AlgoRhythmics"
+          alt={$_('footer.brand_alt')}
           width="180"
           height="48"
         />
