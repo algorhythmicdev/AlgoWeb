@@ -85,10 +85,19 @@
 
 <style>
   :global(.hero--landing) {
+    --hero-padding-block-start: clamp(9rem, 20vw, 14rem);
     --hero-shell-columns: minmax(0, 1fr);
     --hero-shell-gap: 0;
-    --hero-intro-gap: clamp(1.15rem, 2.6vw, 1.85rem);
-    --hero-padding-block-end: clamp(3rem, 10vw, 5rem);
+    --hero-intro-gap: clamp(1.35rem, 3vw, 2.2rem);
+    --hero-padding-block-end: clamp(6rem, 14vw, 8.5rem);
+  }
+
+  @media (max-width: 768px) {
+    :global(.hero--landing) {
+      --hero-padding-block-start: clamp(7rem, 28vw, 10rem);
+      --hero-intro-gap: clamp(1.4rem, 4vw, 2.1rem);
+      --hero-padding-block-end: clamp(5rem, 16vw, 7.5rem);
+    }
   }
 
   .hero-title {
@@ -115,7 +124,7 @@
   }
 
   .hero-highlight {
-    margin: 0;
+    margin: clamp(0.5rem, 1.6vw, 0.85rem) 0 0;
     font-size: clamp(1.05rem, 2.4vw, 1.55rem);
     color: var(--text-secondary);
     max-width: var(--measure-sm);
