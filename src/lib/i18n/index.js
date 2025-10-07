@@ -104,42 +104,36 @@ export const languages = [
     code: 'en',
     name: 'English',
     nativeName: 'English',
-    flag: '🇬🇧',
     isDefault: true
   },
   {
     code: 'lv',
     name: 'Latvian',
     nativeName: 'Latviešu',
-    flag: '🇱🇻',
     isDefault: false
   },
   {
     code: 'ru',
     name: 'Russian',
     nativeName: 'Русский',
-    flag: '🇷🇺',
     isDefault: false
   },
   {
     code: 'uk',
     name: 'Ukrainian',
     nativeName: 'Українська',
-    flag: '🇺🇦',
     isDefault: false
   },
   {
     code: 'fr',
     name: 'French',
     nativeName: 'Français',
-    flag: '🇫🇷',
     isDefault: false
   },
   {
     code: 'es',
     name: 'Spanish',
     nativeName: 'Español',
-    flag: '🇪🇸',
     isDefault: false
   }
 ];

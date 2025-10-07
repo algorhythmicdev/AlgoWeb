@@ -22,6 +22,7 @@
   $: metaData = /** @type {Record<string, any>} */ (data?.meta ?? {});
 
   const localePromise = waitLocale();
+  let localeReady = false;
 
   const fallbackMeta = {
     title: en.seo?.default_title ?? `${en.site.title} — ${en.site.tagline}`,
@@ -33,6 +34,7 @@
 
   const fallbackLoading = en.app.loading;
   let loadingMessage = fallbackLoading;
+  /** @type {((key: string, options?: Record<string, any>) => string) | null} */
   let translateFn = null;
 
   let defaultMetaTitle = fallbackMeta.title;
@@ -47,15 +49,42 @@
   let ogDescription = defaultOgDescription;
   let metaUrl = defaultMetaUrl;
 
-  $: translateFn = get(_);
-  $: {
+  /**
+   * @param {string} key
+   * @param {string} fallback
+   */
+  const safeTranslate = (key, fallback) => {
+    if (!localeReady) return fallback;
     const t = translateFn;
-    if (typeof t === 'function') {
-      defaultMetaTitle = t('seo.default_title');
-      defaultMetaDescription = t('seo.default_description');
-      defaultOgTitle = t('seo.default_og_title');
-      defaultOgDescription = t('seo.default_og_description');
-      defaultMetaUrl = t('seo.default_url');
+    if (typeof t !== 'function') return fallback;
+    try {
+      const result = t(key);
+      if (typeof result === 'string' && result.trim().length > 0) {
+        return result;
+      }
+    } catch (error) {
+      // Ignore and fall back to the provided string
+    }
+    return fallback;
+  };
+
+  $: translateFn = get(_);
+
+  $: {
+    if (localeReady && typeof translateFn === 'function') {
+      try {
+        defaultMetaTitle = translateFn('seo.default_title') || fallbackMeta.title;
+        defaultMetaDescription = translateFn('seo.default_description') || fallbackMeta.description;
+        defaultOgTitle = translateFn('seo.default_og_title') || fallbackMeta.ogTitle;
+        defaultOgDescription = translateFn('seo.default_og_description') || fallbackMeta.ogDescription;
+        defaultMetaUrl = translateFn('seo.default_url') || fallbackMeta.url;
+      } catch (error) {
+        defaultMetaTitle = fallbackMeta.title;
+        defaultMetaDescription = fallbackMeta.description;
+        defaultOgTitle = fallbackMeta.ogTitle;
+        defaultOgDescription = fallbackMeta.ogDescription;
+        defaultMetaUrl = fallbackMeta.url;
+      }
     } else {
       defaultMetaTitle = fallbackMeta.title;
       defaultMetaDescription = fallbackMeta.description;
@@ -65,42 +94,29 @@
     }
   }
 
-  $: metaTitle =
-    metaData.title ??
-    (metaData.titleKey && typeof translateFn === 'function'
-      ? translateFn(metaData.titleKey)
-      : defaultMetaTitle);
+  $: metaTitle = metaData.title ?? (metaData.titleKey ? safeTranslate(metaData.titleKey, defaultMetaTitle) : defaultMetaTitle);
 
   $: metaDescription =
     metaData.description ??
-    (metaData.descriptionKey && typeof translateFn === 'function'
-      ? translateFn(metaData.descriptionKey)
-      : defaultMetaDescription);
+    (metaData.descriptionKey ? safeTranslate(metaData.descriptionKey, defaultMetaDescription) : defaultMetaDescription);
 
   $: ogTitle =
     metaData.ogTitle ??
-    (metaData.ogTitleKey && typeof translateFn === 'function'
-      ? translateFn(metaData.ogTitleKey)
-      : metaTitle ?? defaultOgTitle);
+    (metaData.ogTitleKey ? safeTranslate(metaData.ogTitleKey, metaTitle ?? defaultOgTitle) : metaTitle ?? defaultOgTitle);
 
   $: ogDescription =
     metaData.ogDescription ??
-    (metaData.ogDescriptionKey && typeof translateFn === 'function'
-      ? translateFn(metaData.ogDescriptionKey)
-      : defaultOgDescription);
+    (metaData.ogDescriptionKey ? safeTranslate(metaData.ogDescriptionKey, defaultOgDescription) : defaultOgDescription);
 
   $: metaUrl = typeof metaData.url === 'string' && metaData.url.trim() ? metaData.url : defaultMetaUrl;
 
   localePromise
     .then(() => {
-      const translate = get(_);
-      if (typeof translate === 'function') {
-        loadingMessage = translate('app.loading');
-      } else {
-        loadingMessage = fallbackLoading;
-      }
+      localeReady = true;
+      loadingMessage = safeTranslate('app.loading', fallbackLoading);
     })
     .catch(() => {
+      localeReady = false;
       loadingMessage = fallbackLoading;
     });
 
