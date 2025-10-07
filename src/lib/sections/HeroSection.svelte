@@ -2,6 +2,7 @@
   import { _, json } from 'svelte-i18n';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
+  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
   import en from '$lib/i18n/en.json';
 
   const fallbackTitle = /** @type {{ lead: string; brand: string; trail: string }} */ (en.hero.title);
@@ -55,19 +56,17 @@
 
 <HeroWrapper id="hero" class="hero hero--landing" showAside={false}>
   <svelte:fragment slot="backdrop">
-    <div class="hero-backdrop" aria-hidden="true">
-      <span class="hero-backdrop__halo hero-backdrop__halo--primary"></span>
-      <span class="hero-backdrop__halo hero-backdrop__halo--secondary"></span>
-      <span class="hero-backdrop__grid" aria-hidden="true"></span>
-    </div>
+    <HeroBackdrop variant="aurora-flow" tone="primary" intensity="balanced" className="hero-backdrop--landing" />
+    <HeroBackdrop variant="line-sweep" tone="primary" intensity="soft" className="hero-backdrop--landing-sweep" />
   </svelte:fragment>
 
   <svelte:fragment slot="title">
     <div class="hero-title" aria-live="polite">
       <span class="hero-title__line hero-title__line--lead">{heroTitle.lead}</span>
       <span class="hero-title__brand">
+        <span aria-hidden="true" class="hero-title__brand-sweep"></span>
         <AnimatedHeadline
-          variant="glow"
+          variant="reveal"
           text={heroTitle.brand}
           ariaLabel={$_('hero.brand_aria')}
         />
@@ -129,7 +128,7 @@
     max-width: var(--measure-sm);
   }
 
-  :global([data-theme='contrast']) .hero-highlight {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-highlight {
     color: var(--text-primary);
   }
 
@@ -146,6 +145,23 @@
       0 18px 42px rgba(15, 23, 42, 0.18),
       inset 0 0 0 1px rgba(255, 255, 255, 0.16);
     isolation: isolate;
+    overflow: hidden;
+  }
+
+  .hero-title__brand-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.45) 0%, rgba(var(--aurora-purple-rgb), 0.32) 45%, rgba(var(--signal-yellow-rgb), 0.18) 100%);
+    mix-blend-mode: screen;
+    opacity: 0.55;
+    animation: heroBrandSweep 18s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .hero-title__brand :global(.animated-headline) {
+    position: relative;
+    z-index: 1;
   }
 
   :global([data-base-theme='dark']) .hero-title__brand {
@@ -156,51 +172,41 @@
       inset 0 0 0 1px rgba(120, 146, 220, 0.28);
   }
 
-  :global([data-theme='contrast']) .hero-title__brand {
+  :global([data-base-theme='dark']) .hero-title__brand-sweep {
+    mix-blend-mode: lighten;
+    opacity: 0.48;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-title__brand {
     background: rgba(0, 0, 0, 0.86);
     border-color: rgba(255, 255, 255, 0.72);
     box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65);
   }
 
-  .hero-backdrop {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-title__brand-sweep {
+    display: none;
+  }
+
+  :global(.hero-backdrop--landing) {
+    --hero-backdrop-opacity: 0.72;
+    --hero-backdrop-blur: clamp(160px, 24vw, 260px);
+  }
+
+  :global(.hero-backdrop--landing-sweep) {
+    --hero-backdrop-opacity: 0.38;
     pointer-events: none;
-    overflow: hidden;
+    mix-blend-mode: screen;
   }
 
-  .hero-backdrop__halo {
-    position: absolute;
-    width: clamp(18rem, 46vw, 32rem);
-    height: clamp(18rem, 46vw, 32rem);
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.55;
-    transform: scale(0.85);
-    animation: heroHaloFloat 18s ease-in-out infinite;
+  @keyframes heroBrandSweep {
+    0% { transform: translate3d(-14%, -10%, 0) rotate(-8deg); }
+    50% { transform: translate3d(12%, 6%, 0) rotate(6deg); }
+    100% { transform: translate3d(-10%, -4%, 0) rotate(-7deg); }
   }
 
-  .hero-backdrop__halo--primary {
-    background: radial-gradient(circle at 45% 35%, rgba(var(--voyage-blue-rgb), 0.48), transparent 65%);
-    animation-delay: -4s;
-  }
-
-  .hero-backdrop__halo--secondary {
-    background: radial-gradient(circle at 55% 65%, rgba(var(--aurora-purple-rgb), 0.4), transparent 70%);
-    animation-delay: -10s;
-  }
-
-  .hero-backdrop__grid {
-    position: absolute;
-    inset: auto;
-    width: min(82vw, 640px);
-    height: min(82vw, 640px);
-    border-radius: 50%;
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.45) 60%, transparent 40%);
-    mask: radial-gradient(circle, rgba(0, 0, 0, 0.95), transparent 70%);
-    animation: heroGridSpin 26s linear infinite;
-    opacity: 0.35;
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title__brand-sweep {
+      display: none;
+    }
   }
 </style>

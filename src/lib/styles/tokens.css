@@ -4,28 +4,45 @@
  */
 
 :root {
-  /* ==================== CORE COLOR PALETTE ==================== */
-  --aurora-purple: #6a38ff;
-  --aurora-purple-rgb: 106, 56, 255;
-  --aurora-purple-strong: #5628f2;
+  color-scheme: light;
 
-  --voyage-blue: #1351ff;
-  --voyage-blue-rgb: 19, 81, 255;
+  /* ==================== BRAND CORE ==================== */
+  --blue-vo: #1351ff;
+  --blue-vo-rgb: 19, 81, 255;
+  --purple-au: #6a38ff;
+  --purple-au-rgb: 106, 56, 255;
+  --yellow-si: #ffd339;
+  --yellow-si-rgb: 255, 211, 57;
+  --red-ch: #e0322c;
+  --red-ch-rgb: 224, 50, 44;
+
+  --voyage-blue: var(--blue-vo);
+  --voyage-blue-rgb: var(--blue-vo-rgb);
   --voyage-blue-strong: #0e3ed9;
-
-  --signal-yellow: #ffd339;
-  --signal-yellow-rgb: 255, 211, 57;
+  --aurora-purple: var(--purple-au);
+  --aurora-purple-rgb: var(--purple-au-rgb);
+  --aurora-purple-strong: #5628f2;
+  --signal-yellow: var(--yellow-si);
+  --signal-yellow-rgb: var(--yellow-si-rgb);
   --signal-yellow-strong: #dca910;
-
-  --cherry-pop: #e0322c;
-  --cherry-pop-rgb: 224, 50, 44;
+  --cherry-pop: var(--red-ch);
+  --cherry-pop-rgb: var(--red-ch-rgb);
   --cherry-pop-strong: #b9231f;
 
+  /* ==================== NEUTRALS & TEXT ==================== */
+  --cloud: #f5f7fb;
+  --cloud-rgb: 245, 247, 251;
+  --surface: #ffffff;
+  --surface-subtle: #eef2fa;
+  --surface-strong: #dfe6f3;
+  --mist: #e7ebf3;
+  --porcelain: var(--surface-subtle);
+  --snow: #f2f5f9;
+  --snow-rgb: 242, 245, 249;
+  --ash: #8b9299;
   --slate-base: #1b2230;
   --slate-base-rgb: 27, 34, 48;
   --slate-muted: #2a3140;
-
-  /* ==================== NEUTRALS ==================== */
   --ink: #0a0d14;
   --ink-rgb: 10, 13, 20;
   --night: #0b0e13;
@@ -33,18 +50,27 @@
   --graphite: #1a1d23;
   --graphite-rgb: 26, 29, 35;
   --graphite-soft: #232834;
+  --pure-white: #ffffff;
+
+  --bg: var(--cloud);
+  --card: var(--surface);
+  --card-subtle: var(--surface-subtle);
+  --card-strong: var(--surface-strong);
+  --text: var(--ink);
+  --text-strong: var(--slate-base);
+  --text-secondary-base: #25324b;
+  --text-tertiary-base: #3b4862;
+  --divider: rgba(var(--ink-rgb), 0.14);
+  --border: #d5ddef;
+  --border-strong: #bcc6de;
+
+  --focus-ring: 0 0 0 3px color-mix(in oklab, var(--voyage-blue) 55%, white 45%);
+  --focus-ring-contrast: 0 0 0 3px color-mix(in oklab, var(--slate-base) 70%, white 30%);
 
   /* Core surface anchors referenced across themes */
-  --surface-aurora-mist: #f5f7fb;
+  --surface-aurora-mist: var(--cloud);
   --surface-midnight-nebula: #0f1522;
   --surface-obsidian-matrix: #000000;
-
-  --cloud: #f5f7fb;
-  --cloud-rgb: 245, 247, 251;
-  --snow: #f2f5f9;
-  --snow-rgb: 242, 245, 249;
-  --mist: #e6ebf5;
-  --porcelain: #eef2fa;
 
   /* ==================== SHARED ACCENTS ==================== */
   --accent-primary: var(--aurora-purple);
@@ -107,28 +133,23 @@
   --gradient-spectrum-3: linear-gradient(150deg, rgba(var(--voyage-blue-rgb), 0.84) 0%, rgba(var(--signal-yellow-rgb), 0.8) 52%, rgba(var(--aurora-purple-rgb), 0.82) 100%);
 
   /* ==================== SURFACES & TEXT ==================== */
-  --bg-primary: linear-gradient(
-    180deg,
-    rgba(var(--cloud-rgb), 1) 0%,
-    rgba(var(--snow-rgb), 0.96) 60%,
-    rgba(232, 237, 245, 0.94) 100%
-  );
-  --bg-surface: var(--surface-aurora-mist);
-  --bg-muted: color-mix(in srgb, var(--surface-aurora-mist) 86%, rgba(var(--aurora-purple-rgb), 0.06) 14%);
-  --bg-elevated: color-mix(in srgb, var(--surface-aurora-mist) 82%, rgba(var(--voyage-blue-rgb), 0.08) 18%);
-  --surface-glass: color-mix(in srgb, rgba(255, 255, 255, 0.88) 76%, rgba(var(--aurora-purple-rgb), 0.12) 24%);
-  --surface-glass-strong: color-mix(in srgb, rgba(255, 255, 255, 0.92) 68%, rgba(var(--voyage-blue-rgb), 0.18) 32%);
+  --bg-primary: var(--bg);
+  --bg-surface: var(--card);
+  --bg-muted: var(--card-subtle);
+  --bg-elevated: var(--card-strong);
+  --surface-glass: color-mix(in srgb, var(--card) 90%, rgba(var(--voyage-blue-rgb), 0.08) 10%);
+  --surface-glass-strong: color-mix(in srgb, var(--card) 86%, rgba(var(--purple-au-rgb), 0.14) 14%);
   --surface-tint: rgba(var(--voyage-blue-rgb), 0.08);
 
-  --border-subtle: rgba(var(--ink-rgb), 0.12);
-  --border-strong: rgba(var(--ink-rgb), 0.24);
-  --border-glass: rgba(var(--aurora-purple-rgb), 0.26);
+  --border-subtle: var(--divider);
+  --border-strong: color-mix(in srgb, var(--border) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
+  --border-glass: rgba(var(--purple-au-rgb), 0.26);
 
-  --heading-color: var(--ink);
+  --heading-color: var(--text-strong);
   --heading-shadow: 0 16px 38px rgba(10, 13, 20, 0.12);
-  --text-primary: var(--ink);
-  --text-secondary: #1d2744;
-  --text-tertiary: #4a5671;
+  --text-primary: var(--text);
+  --text-secondary: var(--text-secondary-base);
+  --text-tertiary: var(--text-tertiary-base);
 
   --hero-glow-primary: rgba(var(--voyage-blue-rgb), 0.16);
   --hero-glow-secondary: rgba(var(--aurora-purple-rgb), 0.14);
@@ -285,27 +306,40 @@
 }
 
 [data-base-theme="dark"] {
-  --bg-primary: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--surface-midnight-nebula) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%) 0%,
-    color-mix(in srgb, #050910 92%, rgba(var(--aurora-purple-rgb), 0.14) 8%) 100%
-  );
-  --bg-surface: color-mix(in srgb, var(--surface-midnight-nebula) 94%, rgba(var(--voyage-blue-rgb), 0.22) 6%);
-  --bg-muted: color-mix(in srgb, #131a2c 90%, rgba(var(--aurora-purple-rgb), 0.32) 10%);
-  --bg-elevated: color-mix(in srgb, #162036 88%, rgba(var(--voyage-blue-rgb), 0.34) 12%);
-  --surface-glass: color-mix(in srgb, var(--surface-midnight-nebula) 72%, rgba(var(--voyage-blue-rgb), 0.38) 28%);
-  --surface-glass-strong: color-mix(in srgb, var(--surface-midnight-nebula) 70%, rgba(var(--aurora-purple-rgb), 0.42) 30%);
+  color-scheme: dark;
+
+  --bg: #0b0e13;
+  --card: #1a1d23;
+  --card-subtle: #141923;
+  --card-strong: #232834;
+  --text: #f2f5f9;
+  --text-strong: #ffffff;
+  --text-secondary-base: #8b9299;
+  --text-tertiary-base: #6c7480;
+  --divider: rgba(242, 245, 249, 0.12);
+  --border: #2a3140;
+  --border-strong: #3d465a;
+
+  --focus-ring: 0 0 0 3px color-mix(in oklab, var(--voyage-blue) 65%, white 20%, black 15%);
+  --focus-ring-contrast: 0 0 0 3px color-mix(in oklab, var(--snow) 70%, black 30%);
+
+  --bg-primary: var(--bg);
+  --bg-surface: var(--card);
+  --bg-muted: var(--card-subtle);
+  --bg-elevated: var(--card-strong);
+  --surface-glass: color-mix(in srgb, var(--card) 78%, rgba(var(--voyage-blue-rgb), 0.3) 22%);
+  --surface-glass-strong: color-mix(in srgb, var(--card) 72%, rgba(var(--purple-au-rgb), 0.35) 28%);
   --surface-tint: rgba(var(--voyage-blue-rgb), 0.26);
 
-  --border-subtle: rgba(210, 226, 255, 0.22);
-  --border-strong: rgba(210, 226, 255, 0.38);
-  --border-glass: rgba(210, 226, 255, 0.48);
+  --border-subtle: rgba(242, 245, 249, 0.2);
+  --border-strong: rgba(242, 245, 249, 0.38);
+  --border-glass: rgba(242, 245, 249, 0.48);
 
-  --heading-color: #f5f8ff;
+  --heading-color: var(--text-strong);
   --heading-shadow: 0 18px 48px rgba(0, 2, 12, 0.6);
-  --text-primary: #f5f8ff;
-  --text-secondary: #d3dcfb;
-  --text-tertiary: #93a3cc;
+  --text-primary: var(--text);
+  --text-secondary: var(--text-secondary-base);
+  --text-tertiary: var(--text-tertiary-base);
 
   --hero-glow-primary: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 68%, rgba(2, 6, 14, 0.88) 32%);
   --hero-glow-secondary: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.32) 66%, rgba(2, 6, 14, 0.88) 34%);
@@ -320,8 +354,8 @@
   --hero-ring-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 66%, rgba(2, 6, 12, 0.92) 34%);
   --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.38) 62%, rgba(2, 6, 12, 0.92) 38%);
   --hero-orb-opacity: 0.48;
-  --hero-surface: color-mix(in srgb, var(--surface-midnight-nebula) 68%, rgba(var(--voyage-blue-rgb), 0.36) 32%);
-  --hero-surface-strong: color-mix(in srgb, var(--surface-midnight-nebula) 66%, rgba(var(--aurora-purple-rgb), 0.4) 34%);
+  --hero-surface: color-mix(in srgb, var(--card) 68%, rgba(var(--voyage-blue-rgb), 0.36) 32%);
+  --hero-surface-strong: color-mix(in srgb, var(--card) 66%, rgba(var(--aurora-purple-rgb), 0.4) 34%);
   --hero-grid-line: rgba(132, 153, 220, 0.24);
   --hero-grid-line-strong: rgba(132, 153, 220, 0.34);
 
@@ -334,68 +368,88 @@
   --grain-blend-mode: soft-light;
   --grain-opacity: 0.22;
 
-  --control-surface: color-mix(in srgb, var(--surface-midnight-nebula) 74%, rgba(var(--voyage-blue-rgb), 0.34) 26%);
-  --control-surface-hover: color-mix(in srgb, var(--surface-midnight-nebula) 72%, rgba(var(--aurora-purple-rgb), 0.36) 28%);
-  --control-surface-active: color-mix(in srgb, var(--surface-midnight-nebula) 70%, rgba(var(--aurora-purple-rgb), 0.4) 30%);
-  --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(210, 226, 255, 0.24) 36%);
-  --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 66%, rgba(210, 226, 255, 0.32) 34%);
+  --control-surface: color-mix(in srgb, var(--card) 74%, rgba(var(--voyage-blue-rgb), 0.34) 26%);
+  --control-surface-hover: color-mix(in srgb, var(--card) 72%, rgba(var(--aurora-purple-rgb), 0.36) 28%);
+  --control-surface-active: color-mix(in srgb, var(--card) 70%, rgba(var(--aurora-purple-rgb), 0.4) 30%);
+  --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(242, 245, 249, 0.24) 36%);
+  --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 66%, rgba(242, 245, 249, 0.32) 34%);
   --control-ring: rgba(var(--voyage-blue-rgb), 0.54);
 }
 
-[data-theme="contrast"] {
-  --bg-primary: var(--surface-obsidian-matrix);
-  --bg-surface: var(--surface-obsidian-matrix);
-  --bg-muted: #141414;
-  --bg-elevated: color-mix(in srgb, var(--surface-obsidian-matrix) 92%, rgba(255, 255, 255, 0.08) 8%);
-  --surface-glass: rgba(255, 255, 255, 0.18);
-  --surface-glass-strong: rgba(255, 255, 255, 0.24);
-  --surface-tint: rgba(255, 255, 255, 0.32);
 
-  --border-subtle: rgba(255, 255, 255, 0.6);
-  --border-strong: rgba(255, 255, 255, 0.9);
-  --border-glass: rgba(255, 255, 255, 0.72);
+[data-theme='hc'],
+[data-theme='contrast'],
+[data-theme-legacy='contrast'] {
+  color-scheme: light;
 
-  --heading-color: #ffffff;
+  --bg: var(--cloud);
+  --card: var(--surface);
+  --card-subtle: color-mix(in srgb, var(--cloud) 70%, var(--surface) 30%);
+  --card-strong: color-mix(in srgb, var(--surface) 60%, #000000 40%);
+  --text: var(--ink);
+  --text-strong: var(--ink);
+  --text-secondary-base: #111111;
+  --text-tertiary-base: #222222;
+  --divider: #000000;
+  --border: #000000;
+  --border-strong: #000000;
+
+  --focus-ring: 0 0 0 3px #000000;
+  --focus-ring-contrast: 0 0 0 3px #000000;
+
+  --bg-primary: var(--bg);
+  --bg-surface: var(--card);
+  --bg-muted: var(--card-subtle);
+  --bg-elevated: var(--card-strong);
+  --surface-glass: rgba(0, 0, 0, 0.08);
+  --surface-glass-strong: rgba(0, 0, 0, 0.12);
+  --surface-tint: rgba(0, 0, 0, 0.18);
+
+  --border-subtle: #000000;
+  --border-strong: #000000;
+  --border-glass: #000000;
+
+  --heading-color: var(--text-strong);
   --heading-shadow: none;
-  --text-primary: #ffffff;
-  --text-secondary: #f4f4f4;
-  --text-tertiary: #dadada;
+  --text-primary: var(--text);
+  --text-secondary: var(--text-secondary-base);
+  --text-tertiary: var(--text-tertiary-base);
 
-  --hero-glow-primary: rgba(255, 255, 255, 0.42);
-  --hero-glow-secondary: rgba(255, 255, 255, 0.36);
-  --hero-glow-accent: rgba(255, 255, 255, 0.34);
-  --hero-overlay-highlight: rgba(255, 255, 255, 0.52);
-  --hero-overlay-subtle: rgba(255, 255, 255, 0.34);
-  --hero-overlay-blend: screen;
-  --hero-overlay-opacity: 0.82;
-  --hero-phrase-bg-strong: rgba(255, 255, 255, 0.2);
-  --hero-phrase-bg-soft: rgba(255, 255, 255, 0.16);
+  --hero-glow-primary: rgba(0, 0, 0, 0.16);
+  --hero-glow-secondary: rgba(0, 0, 0, 0.16);
+  --hero-glow-accent: rgba(0, 0, 0, 0.16);
+  --hero-overlay-highlight: rgba(255, 255, 255, 0.24);
+  --hero-overlay-subtle: rgba(255, 255, 255, 0.18);
+  --hero-overlay-blend: normal;
+  --hero-overlay-opacity: 1;
+  --hero-phrase-bg-strong: rgba(255, 255, 255, 0.1);
+  --hero-phrase-bg-soft: rgba(255, 255, 255, 0.06);
   --hero-phrase-shadow: none;
-  --hero-ring-border: rgba(255, 255, 255, 0.6);
-  --hero-ring-dash: rgba(255, 255, 255, 0.6);
-  --hero-orb-opacity: 0.5;
-  --hero-surface: rgba(0, 0, 0, 0.92);
-  --hero-surface-strong: rgba(0, 0, 0, 0.96);
-  --hero-grid-line: rgba(255, 255, 255, 0.4);
-  --hero-grid-line-strong: rgba(255, 255, 255, 0.56);
+  --hero-ring-border: #000000;
+  --hero-ring-dash: #000000;
+  --hero-orb-opacity: 0.32;
+  --hero-surface: rgba(255, 255, 255, 0.94);
+  --hero-surface-strong: rgba(255, 255, 255, 0.98);
+  --hero-grid-line: #000000;
+  --hero-grid-line-strong: #000000;
 
-  --gradient-primary: linear-gradient(135deg, #000000 0%, #1351ff 45%, #ffffff 100%);
-  --gradient-secondary: linear-gradient(140deg, #000000 0%, #ffd339 60%, #ffffff 100%);
-  --gradient-text: linear-gradient(120deg, #ffffff 0%, #ffd339 60%, #ff375f 100%);
-  --gradient-heading: var(--gradient-text);
-  --gradient-heading-strong: linear-gradient(128deg, #ffffff 0%, #ffd339 48%, #ff375f 80%, #ffffff 100%);
-  --gradient-hero: linear-gradient(150deg, #000000 0%, #111111 50%, #000000 100%);
+  --gradient-primary: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+  --gradient-secondary: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+  --gradient-text: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+  --gradient-heading: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+  --gradient-heading-strong: linear-gradient(0deg, currentColor 0%, currentColor 100%);
 
   --grain-blend-mode: normal;
-  --grain-opacity: 0.28;
+  --grain-opacity: 0;
 
-  --control-surface: rgba(255, 255, 255, 0.16);
-  --control-surface-hover: rgba(255, 255, 255, 0.22);
-  --control-surface-active: rgba(255, 255, 255, 0.28);
-  --control-border: rgba(255, 255, 255, 0.76);
-  --control-border-strong: rgba(255, 255, 255, 0.92);
-  --control-ring: rgba(255, 255, 255, 0.82);
+  --control-surface: var(--card);
+  --control-surface-hover: color-mix(in srgb, var(--card) 80%, #000000 20%);
+  --control-surface-active: color-mix(in srgb, var(--card) 70%, #000000 30%);
+  --control-border: #000000;
+  --control-border-strong: #000000;
+  --control-ring: rgba(0, 0, 0, 0.9);
 }
+
 
 .hero--nodevoyage {
   --accent-primary: var(--nodevoyage-accent);

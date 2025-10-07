@@ -175,14 +175,14 @@
     border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 58%, rgba(255, 255, 255, 0.1) 42%);
   }
 
-  :global([data-theme='contrast']) .nav {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav {
     background: #050505;
     border-bottom: 1px solid rgba(255, 255, 255, 0.45);
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.8);
     background-image: none;
   }
 
-  :global([data-theme='contrast']) .nav.nav-condensed {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav.nav-condensed {
     background: #070707;
     border-bottom-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 22px 54px rgba(0, 0, 0, 0.82);
@@ -268,7 +268,7 @@
     color: rgba(228, 236, 255, 0.94);
   }
 
-  :global([data-theme='contrast']) .nav-badge {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-badge {
     background: #ffffff;
     color: #000000;
   }
@@ -309,14 +309,14 @@
     color: rgba(236, 242, 255, 0.95);
   }
 
-  :global([data-theme='contrast']) .nav-cta {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-cta {
     background: #ffffff;
     color: #000000;
     border-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.68);
   }
 
-  :global([data-theme='contrast']) .nav-cta:hover {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-cta:hover {
     background: #ffd339;
     color: #000000;
     border-color: #ffd339;
@@ -339,7 +339,7 @@
     transition: transform var(--duration-fast) var(--ease-out);
   }
 
-  :global([data-theme='contrast']) .menu-toggle span {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .menu-toggle span {
     background: #ffffff;
   }
 
@@ -353,7 +353,7 @@
     z-index: calc(var(--z-sticky) - 2);
   }
 
-  :global([data-theme='contrast']) .nav-overlay {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-overlay {
     background: rgba(255, 255, 255, 0.18);
   }
 
@@ -392,7 +392,7 @@
       box-shadow: 0 26px 56px rgba(2, 6, 18, 0.64);
     }
 
-    :global([data-theme='contrast']) .nav-links {
+    :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-links {
       background: #050505;
       border-color: rgba(255, 255, 255, 0.6);
       box-shadow: 0 24px 48px rgba(0, 0, 0, 0.82);

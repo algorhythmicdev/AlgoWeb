@@ -4,7 +4,7 @@
 
   const isBrowser = typeof window !== 'undefined';
 
-  export let variant = /** @type {'typewriter' | 'slide' | 'glow' | 'pulse' | 'static'} */ ('typewriter');
+  export let variant = /** @type {'typewriter' | 'slide' | 'glow' | 'pulse' | 'reveal' | 'static'} */ ('typewriter');
   export let phrases = /** @type {string[]} */ ([]);
   export let text = '';
   export let holdDuration = 2400;
@@ -28,9 +28,22 @@
     return [];
   };
 
+  /**
+   * @param {string} value
+   */
+  const segmentify = (value) =>
+    value
+      ? value
+          .split(/(\s+)/)
+          .filter((segment) => segment.length > 0)
+          .map((segment) => ({ content: segment, isSpace: /^\s+$/.test(segment) }))
+      : [];
+
   $: normalizedPhrases = sanitize(phrases);
   $: baseText = text || normalizedPhrases[0] || '';
   $: labelText = ariaLabel || baseText;
+  $: revealSegments = segmentify(baseText);
+  $: revealDisabled = prefersReducedMotion || revealSegments.every((segment) => segment.isSpace);
 
   let prefersReducedMotion = false;
   let slideIndex = 0;
@@ -131,6 +144,22 @@
         {/if}
       </span>
     </span>
+  {:else if (variant === 'reveal')}
+    <span class="animated-headline__reveal" aria-label={labelText}>
+      {#if revealDisabled}
+        <span class="animated-headline__reveal-static">{baseText}</span>
+      {:else}
+        {#each revealSegments as segment, index}
+          {#if segment.isSpace}
+            <span class="animated-headline__reveal-space" aria-hidden="true">{segment.content}</span>
+          {:else}
+            <span class="animated-headline__reveal-segment" style={`--segment-index:${index};`}>
+              {segment.content}
+            </span>
+          {/if}
+        {/each}
+      {/if}
+    </span>
   {:else if (variant === 'glow')}
     <span class="animated-headline__glow" aria-label={labelText}>{baseText}</span>
   {:else if (variant === 'pulse')}
@@ -182,6 +211,42 @@
     background-clip: text;
     color: transparent;
     letter-spacing: -0.02em;
+  }
+
+  .animated-headline__reveal {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.45ch;
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -0.02em;
+  }
+
+  .animated-headline__reveal-segment,
+  .animated-headline__reveal-static {
+    display: inline-block;
+    background: var(--headline-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .animated-headline__reveal-segment {
+    opacity: 0;
+    transform: translateY(0.65ch);
+    filter: blur(8px);
+    animation: headlineReveal 420ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+    animation-delay: calc(var(--segment-index, 0) * 0.09s);
+  }
+
+  .animated-headline__reveal-space {
+    display: inline-block;
+    white-space: pre;
+  }
+
+  .animated-headline__reveal-static {
+    letter-spacing: inherit;
   }
 
   .animated-headline__slide {
@@ -257,6 +322,23 @@
     }
   }
 
+  @keyframes headlineReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(0.65ch);
+      filter: blur(8px);
+    }
+    60% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animated-headline,
     .animated-headline :global(.typewriter-text),
@@ -271,10 +353,17 @@
       opacity: 1;
       transform: none;
     }
+
+    .animated-headline__reveal-segment {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: none !important;
+    }
   }
 
   :global([data-base-theme='dark']) .animated-headline,
-  :global([data-theme='contrast']) .animated-headline {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .animated-headline {
     --headline-gradient: linear-gradient(
       128deg,
       rgba(187, 211, 255, 0.98) 0%,
@@ -284,12 +373,19 @@
     );
   }
 
-  :global([data-theme='contrast']) .animated-headline {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .animated-headline {
     --headline-gradient: linear-gradient(
       128deg,
       rgba(255, 255, 255, 1) 0%,
       rgba(255, 223, 129, 1) 45%,
       rgba(255, 153, 0, 1) 100%
     );
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .animated-headline__reveal-segment,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .animated-headline__reveal-static {
+    background: none;
+    color: currentColor;
+    -webkit-text-fill-color: currentColor;
   }
 </style>

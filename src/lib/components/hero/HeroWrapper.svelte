@@ -129,7 +129,7 @@
     color: var(--text-secondary);
   }
 
-  :global([data-theme='contrast']) .hero-wrapper::before {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-wrapper::before {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(0, 0, 0, 0.88) 100%);
     opacity: 0.82;
   }

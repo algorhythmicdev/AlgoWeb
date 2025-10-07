@@ -83,10 +83,19 @@
             </div>
             <div class="founder-card__contacts" aria-label={contactLabel}>
               {#if founder.email}
-                <a class="contact-chip" href={`mailto:${founder.email}`}>{$_('founders.email_cta')}</a>
+                <a class="contact-chip chip chip--interactive" href={`mailto:${founder.email}`}>
+                  {$_('founders.email_cta')}
+                </a>
               {/if}
               {#if founder.linkedin}
-                <a class="contact-chip" href={founder.linkedin} target="_blank" rel="noreferrer">{$_('founders.linkedin_cta')}</a>
+                <a
+                  class="contact-chip chip chip--interactive"
+                  href={founder.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {$_('founders.linkedin_cta')}
+                </a>
               {/if}
             </div>
           </div>
@@ -104,7 +113,7 @@
                 <span class="founder-card__eyebrow">{expertiseLabel}</span>
                 <ul class="founder-card__chips">
                   {#each founder.expertise as item}
-                    <li>{item}</li>
+                    <li class="chip">{item}</li>
                   {/each}
                 </ul>
               </div>
@@ -131,7 +140,7 @@
         <p class="founders-spotlight__lead">{$_('founders.slaff.brand_intro')}</p>
         <div class="founders-spotlight__brands">
           {#each brandClients as client}
-            <span class="brand-chip">
+            <span class="brand-chip chip">
               <img src={client.logo} alt={client.name} loading="lazy" />
               <span>{client.name}</span>
             </span>
@@ -234,27 +243,6 @@
     gap: 0.55rem;
   }
 
-  .contact-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.45rem 1.1rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.92) 80%, transparent);
-    border: 1px solid color-mix(in srgb, var(--border-strong) 35%, transparent);
-    text-decoration: none;
-    font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-    color: var(--text-primary);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .contact-chip:hover,
-  .contact-chip:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.16);
-  }
-
   .founder-card__bio {
     margin: 0;
     color: var(--text-secondary);
@@ -307,15 +295,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-  }
-
-  .founder-card__chips li {
-    padding: 0.4rem 1rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--hero-secondary) 16%, transparent 84%);
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
   }
 
   .founder-card__highlights {
@@ -371,15 +350,20 @@
     align-items: center;
   }
 
+  .contact-chip {
+    text-decoration: none;
+    justify-content: center;
+  }
+
+  .founder-card__chips li {
+    display: inline-flex;
+  }
+
   .brand-chip {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.7rem;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--hero-surface-layer) 70%, transparent 30%);
-    border: 1px solid color-mix(in srgb, var(--hero-secondary) 22%, transparent 78%);
-    box-shadow: 0 14px 28px rgba(16, 24, 40, 0.12);
+    gap: 0.6rem;
+    padding: 0.6rem 0.95rem;
   }
 
   .brand-chip img {
@@ -440,28 +424,18 @@
     color: rgba(220, 232, 255, 0.9);
   }
 
-  :global([data-theme='contrast']) .founder-card,
-  :global([data-theme='contrast']) .founders-spotlight__inner {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founders-spotlight__inner {
+    background: var(--card);
+    border: 2px solid #000000;
     box-shadow: none;
+    color: #000000;
   }
 
-  :global([data-theme='contrast']) .contact-chip {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid #fff;
-    color: #fff;
-  }
-
-  :global([data-theme='contrast']) .founder-card__chips li {
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-  }
-
-  :global([data-theme='contrast']) .brand-chip {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    color: #fff;
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-chip,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card__chips li,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .brand-chip {
+    color: #000000;
   }
 
   @media (max-width: 640px) {

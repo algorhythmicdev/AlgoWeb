@@ -3,7 +3,8 @@ import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
 const STORAGE_KEY = 'theme';
-const THEMES = /** @type {const} */ (['light', 'dark', 'contrast']);
+const THEMES = /** @type {const} */ (['light', 'dark', 'hc']);
+const LEGACY_ALIASES = /** @type {const} */ ({ contrast: 'hc' });
 const DEFAULT_THEME = 'light';
 
 const createThemeStore = () => {
@@ -11,12 +12,15 @@ const createThemeStore = () => {
     if (!browser) return DEFAULT_THEME;
 
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored && THEMES.includes(stored)) {
-      return stored;
+    if (stored) {
+      const normalized = LEGACY_ALIASES[stored] ?? stored;
+      if (THEMES.includes(normalized)) {
+        return normalized;
+      }
     }
 
     if (window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches) {
-      return 'contrast';
+      return 'hc';
     }
 
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -72,4 +76,12 @@ function applyThemeAttributes(value) {
   document.documentElement.setAttribute('data-theme', value);
   document.documentElement.setAttribute('data-base-theme', baseTheme);
   document.documentElement.style.colorScheme = baseTheme;
+
+  if (value === 'hc') {
+    document.body.setAttribute('data-theme-legacy', 'contrast');
+    document.documentElement.setAttribute('data-theme-legacy', 'contrast');
+  } else {
+    document.body.removeAttribute('data-theme-legacy');
+    document.documentElement.removeAttribute('data-theme-legacy');
+  }
 }
