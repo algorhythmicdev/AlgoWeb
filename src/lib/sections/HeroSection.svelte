@@ -85,18 +85,17 @@
 
 <style>
   :global(.hero--landing) {
-    --hero-padding-block-start: clamp(9rem, 20vw, 14rem);
+    --hero-padding-block-start: clamp(7rem, 16vw, 11rem);
     --hero-shell-columns: minmax(0, 1fr);
     --hero-shell-gap: 0;
-    --hero-intro-gap: clamp(1.35rem, 3vw, 2.2rem);
-    --hero-padding-block-end: clamp(6rem, 14vw, 8.5rem);
+    --hero-intro-gap: clamp(1.15rem, 2.6vw, 1.85rem);
+    --hero-padding-block-end: clamp(5rem, 12vw, 7rem);
   }
 
   @media (max-width: 768px) {
     :global(.hero--landing) {
-      --hero-padding-block-start: clamp(7rem, 28vw, 10rem);
-      --hero-intro-gap: clamp(1.4rem, 4vw, 2.1rem);
-      --hero-padding-block-end: clamp(5rem, 16vw, 7.5rem);
+      --hero-padding-block-start: clamp(6rem, 22vw, 8rem);
+      --hero-padding-block-end: clamp(4.5rem, 14vw, 6rem);
     }
   }
 
