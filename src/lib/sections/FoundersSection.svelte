@@ -159,8 +159,10 @@
 
   .founders-header__lead {
     margin: 0;
-    max-width: clamp(36ch, 44vw, 54ch);
+    max-width: var(--measure-lg);
     color: var(--text-secondary);
+    font-size: var(--text-subtitle);
+    line-height: var(--leading-relaxed);
   }
 
   .founders-grid {

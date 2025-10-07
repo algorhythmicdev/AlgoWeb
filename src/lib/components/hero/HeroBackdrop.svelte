@@ -534,7 +534,7 @@
   }
 
   .hero-backdrop--tone-crimson {
-    --hero-accent: var(--cherry-red);
+    --hero-accent: var(--cherry-pop);
   }
 
   .hero-backdrop--tone-atlantic {

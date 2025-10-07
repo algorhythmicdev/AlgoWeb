@@ -86,7 +86,7 @@
   }
   
   .toast-error {
-    border-left: 4px solid var(--cherry-red);
+    border-left: 4px solid var(--cherry-pop);
   }
   
   .toast-info {
@@ -111,7 +111,7 @@
   
   .toast-error .toast-icon {
     background: rgba(224, 50, 44, 0.1);
-    color: var(--cherry-red);
+    color: var(--cherry-pop);
   }
   
   .toast-info .toast-icon {

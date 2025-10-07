@@ -3,7 +3,7 @@
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
-  import { staggerReveal, reveal, ripple, magnetic } from '$utils/animations';
+  import { staggerReveal, revealOnScroll, ripple, magnetic } from '$utils/animations';
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
 
@@ -89,7 +89,7 @@
   </svelte:fragment>
 </HeroWrapper>
 
-<section class="features section" id="features" use:reveal>
+<section class="features section" id="features" use:revealOnScroll>
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">{$_('nodevoyage.features_title')}</span>
@@ -110,7 +110,7 @@
   </div>
 </section>
 
-<section class="steps section" use:reveal>
+<section class="steps section" use:revealOnScroll>
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">{$_('nodevoyage.how_title')}</span>
@@ -128,7 +128,7 @@
   </div>
 </section>
 
-<section class="tech section-sm" use:reveal>
+<section class="tech section-sm" use:revealOnScroll>
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">{$_('nodevoyage.tech_title')}</span>
@@ -143,7 +143,7 @@
   </div>
 </section>
 
-<section class="cta section" use:reveal>
+<section class="cta section" use:revealOnScroll>
   <div class="container cta-card">
     <div class="cta-copy">
       <h2>{$_('nodevoyage.cta_title')}</h2>
@@ -356,10 +356,10 @@
   .device-frame img { width: clamp(240px, 60vw, 360px); border-radius: 20px; }
 
   .section-heading {
-    display: grid;
-    gap: 0.8rem;
-    max-width: 720px;
-    margin-bottom: clamp(3rem, 6vw, 4.5rem);
+    --section-heading-gap: clamp(1.5rem, 3vw, 2.25rem);
+    --section-heading-max-width: min(100%, var(--measure-lg));
+    --section-heading-margin: clamp(3rem, 6vw, 4.5rem);
+    --section-heading-copy-width: var(--measure-md);
   }
 
   .features-grid {

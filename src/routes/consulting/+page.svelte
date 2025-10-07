@@ -12,6 +12,14 @@
     ? en.consulting.hero_rotating
     : [en.consulting.hero_subtitle];
 
+  const ensureString = (value, fallback = '') => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
+
+  const fallbackTestimonial = {
+    quote: ensureString(en.consulting?.hero_testimonial_quote, ''),
+    name: ensureString(en.consulting?.hero_testimonial_name, ''),
+    role: ensureString(en.consulting?.hero_testimonial_role, '')
+  };
+
   /**
    * @param {unknown} value
    * @returns {ReadonlyArray<string>}
@@ -23,6 +31,13 @@
 
   let heroRotating = fallbackHeroRotating;
   $: heroRotating = ensureStringArray($json?.('consulting.hero_rotating'));
+
+  let testimonial = fallbackTestimonial;
+  $: testimonial = {
+    quote: ensureString($json?.('consulting.hero_testimonial_quote'), fallbackTestimonial.quote),
+    name: ensureString($json?.('consulting.hero_testimonial_name'), fallbackTestimonial.name),
+    role: ensureString($json?.('consulting.hero_testimonial_role'), fallbackTestimonial.role)
+  };
   
   let formData = {
     company: '',
@@ -173,7 +188,7 @@
     </div>
   </svelte:fragment>
 
-    <svelte:fragment slot="description">
+  <svelte:fragment slot="description">
     <p class="consulting-hero__description">{$_('consulting.hero_subtitle')}</p>
 
 <div class="consulting-hero__meta">
@@ -183,6 +198,22 @@
       </div>
       <a href="#form" class="btn btn-gradient">{$_('consulting.form_title')}</a>
     </div>
+
+    {#if testimonial.quote}
+      <div class="consulting-hero__testimonial os-window" data-surface="window">
+        <div class="consulting-hero__testimonial-header">
+          <span class="consulting-hero__testimonial-icon" aria-hidden="true">
+            <Icon name="sparkles" size={18} />
+          </span>
+          <span class="consulting-hero__testimonial-label">{$_('consulting.hero_testimonial_label')}</span>
+        </div>
+        <p class="consulting-hero__quote">“{testimonial.quote}”</p>
+        <p class="consulting-hero__attribution">
+          <span>{testimonial.name}</span>
+          <span>{testimonial.role}</span>
+        </p>
+      </div>
+    {/if}
   </svelte:fragment>
 
     <svelte:fragment slot="highlights">
@@ -407,20 +438,20 @@
 .consulting-hero__title {
   margin: 0;
   text-align: center;
-  font-size: clamp(2.35rem, 6.2vw, 3.4rem);
+  font-size: clamp(2.85rem, 6.5vw, 4.1rem);
   letter-spacing: -0.02em;
   color: var(--heading-color);
 }
 
-.consulting-hero__headline {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
-  padding: clamp(0.55rem, 2vw, 0.85rem) clamp(1.25rem, 3vw, 1.8rem);
-  border-radius: clamp(2.6rem, 6vw, 3.6rem);
-  max-width: min(54ch, 100%);
-  text-align: center;
+  .consulting-hero__headline {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
+    padding: clamp(0.55rem, 2vw, 0.85rem) clamp(1.25rem, 3vw, 1.8rem);
+    border-radius: clamp(2.6rem, 6vw, 3.6rem);
+    max-width: min(100%, var(--measure-lg));
+    text-align: center;
   background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 22px 52px rgba(16, 28, 48, 0.26);
@@ -428,17 +459,17 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-.consulting-hero__headline :global(.animated-headline) {
-  max-width: min(50ch, 90vw);
-}
+  .consulting-hero__headline :global(.animated-headline) {
+    max-width: min(90vw, var(--measure-lg));
+  }
 
-.consulting-hero__description {
-  margin: 0;
-  max-width: 60ch;
-  color: var(--text-secondary);
-  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
-  text-align: center;
-}
+  .consulting-hero__description {
+    margin: 0;
+    max-width: var(--measure-lg);
+    color: var(--text-secondary);
+    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+    text-align: center;
+  }
 
 .consulting-hero__meta {
   display: flex;
@@ -447,6 +478,90 @@
   gap: clamp(1rem, 3vw, 1.5rem);
   margin-top: clamp(1.4rem, 3vw, 1.9rem);
 }
+
+  .consulting-hero__testimonial {
+    margin: clamp(1.4rem, 3vw, 2.1rem) auto 0;
+    max-width: min(100%, var(--measure-lg));
+    text-align: left;
+    gap: clamp(0.75rem, 2.4vw, 1.2rem);
+    background: color-mix(in srgb, var(--surface-glass-strong) 70%, rgba(var(--voyage-blue-rgb), 0.18) 30%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 58%, rgba(255, 255, 255, 0.58) 42%);
+    box-shadow: 0 26px 58px rgba(15, 23, 42, 0.24);
+  }
+
+  .consulting-hero__testimonial-header {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(0.55rem, 1.6vw, 0.85rem);
+    font-size: var(--text-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--voyage-blue) 54%, var(--aurora-purple) 46%);
+  }
+
+  .consulting-hero__testimonial-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(2rem, 4vw, 2.5rem);
+    height: clamp(2rem, 4vw, 2.5rem);
+    border-radius: var(--radius-full);
+    background: var(--gradient-spectrum-3);
+    color: #ffffff;
+    box-shadow: 0 18px 32px rgba(19, 81, 255, 0.18);
+  }
+
+  .consulting-hero__testimonial-icon :global(svg) {
+    width: clamp(1rem, 2.6vw, 1.25rem);
+    height: clamp(1rem, 2.6vw, 1.25rem);
+  }
+
+  .consulting-hero__testimonial-label {
+    letter-spacing: inherit;
+  }
+
+  .consulting-hero__quote {
+    margin: 0;
+    font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+    color: var(--text-primary);
+    line-height: var(--leading-snug);
+  }
+
+  .consulting-hero__attribution {
+    margin: 0;
+    display: grid;
+    gap: 0.25rem;
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  :global([data-theme='contrast']) .consulting-hero__attribution {
+    color: var(--text-primary);
+  }
+
+  :global([data-base-theme='dark']) .consulting-hero__testimonial {
+    background: color-mix(in srgb, rgba(12, 18, 32, 0.9) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 60%, rgba(255, 255, 255, 0.14) 40%);
+    box-shadow: 0 28px 64px rgba(2, 6, 18, 0.45);
+  }
+
+  :global([data-theme='contrast']) .consulting-hero__testimonial {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.72);
+  }
+
+  :global([data-theme='contrast']) .consulting-hero__testimonial-header {
+    color: var(--text-primary);
+  }
+
+  :global([data-theme='contrast']) .consulting-hero__testimonial-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    box-shadow: none;
+  }
 
 :global([data-base-theme='dark']) .consulting-hero__headline {
   background: linear-gradient(126deg, rgba(26, 32, 54, 0.82), rgba(26, 32, 54, 0.56));
@@ -602,7 +717,7 @@
 }
 
 .form-wrapper {
-  max-width: 760px;
+  width: min(100%, var(--container-md));
   margin: 0 auto clamp(4rem, 8vw, 5rem);
   padding: clamp(2.6rem, 5vw, 3.4rem);
   border-radius: var(--radius-2xl);
@@ -647,7 +762,7 @@
 
   .form-group label.required::after {
     content: ' *';
-    color: var(--cherry-red);
+    color: var(--cherry-pop);
     font-weight: var(--weight-semibold);
   }
 
@@ -671,11 +786,11 @@
   .form-group input.error,
   .form-group select.error,
   .form-group textarea.error {
-    border-color: var(--cherry-red);
+    border-color: var(--cherry-pop);
   }
 
   .error-message {
-    color: var(--cherry-red);
+    color: var(--cherry-pop);
     font-size: var(--text-small);
   }
 

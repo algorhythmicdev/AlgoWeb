@@ -33,58 +33,58 @@
     "toggle_menu": "Abrir o cerrar menú"
   },
   "hero": {
-    "status": "Estudio de IA en calma • Fundado en Letonia",
+    "status": "OS-native AI studio • Riga ↔ Rotterdam",
     "title": {
-      "lead": "Donde la lógica baila con",
+      "lead": "Think faster.",
       "brand": "AlgoRhythmics",
-      "trail": "y la creatividad"
+      "trail": "helps teams ship smarter."
     },
-    "tagline": "AlgoRhythmics — laboratorio báltico de innovación humanista",
-    "subtitle": "Los pilotos de NodeVoyage y los rituales de Ideonautix mantienen a los fundadores enfocados sin perder el toque humano.",
-    "description": "Con raíces en investigación de señalética y en ingeniería cloud, combinamos disciplina tangible con software explicable para que los equipos humanos mantengan el control.",
-    "cta_products": "Explorar productos",
-    "cta_consulting": "Consultoría de IA",
+    "tagline": "OS-native studio aligning NodeVoyage, Ideonautix, and consulting into one calm constellation.",
+    "subtitle": "We choreograph explainable AI rituals, from travel companions to founder workspaces, with AAA-accessible glass shells.",
+    "description": "Every surface honours reduced-motion settings, signage-born craft, and WCAG AAA contrast so your team stays in control whether you're exploring NodeVoyage, assembling Ideonautix, or partnering through our consulting sprints.",
+    "cta_products": "Explore the constellation",
+    "cta_consulting": "Plan a strategy session",
     "next_milestone": "Próximo hito",
-    "pillars_title": "Lo que guía nuestro estudio",
+    "pillars_title": "How we deliver calm momentum",
     "pillars": [
-      "Dos líneas: NodeVoyage como compañero de viaje e Ideonautix como sistema operativo",
-      "Sprints de consultoría centrados en las personas, moldeados por la artesanía letona y marcas Benelux",
-      "Flujos de IA explicables que conectan hardware de señalética y plataformas cloud"
+      "Story-led OS windows frame NodeVoyage, Ideonautix, and consulting within shared Aurora Mist surfaces.",
+      "Think Faster. Ship Smarter. Motion, focus, and colour tokens default to reduced-motion and AAA ratios.",
+      "Explainable automation fuses signage hardware discipline with cloud delivery for trustworthy launches."
     ],
     "signals": {
       "studio_phase": "Fase del estudio",
-      "studio_phase_value": "Estudio piloto • Desde 2023",
+      "studio_phase_value": "OS-native studio • Since 2023",
       "focus_tracks": "Líneas de enfoque",
-      "focus_tracks_value": "NodeVoyage e Ideonautix",
+      "focus_tracks_value": "NodeVoyage • Ideonautix • Consulting",
       "research": "Raíces de investigación",
-      "research_value": "I+D en señalización + IA en la nube"
+      "research_value": "Signage systems + cloud AI"
     },
     "moments": {
       "nodevoyage": {
         "kicker": "Línea de producto",
         "status": "NodeVoyage",
-        "copy": "Compañero de viaje que une la disciplina de señalización táctil con recorridos de IA explicables.",
-        "meta": "Pilotos beta en formación",
-        "cta": "Explorar NodeVoyage"
+        "copy": "Travel companion with OS-inspired itineraries, offline reliability, and explainable suggestions.",
+        "meta": "Beta pilots forming",
+        "cta": "Open NodeVoyage preview"
       },
       "ideonautix": {
         "kicker": "Línea de producto",
         "status": "Ideonautix",
-        "copy": "Sistema operativo para fundadores que mantiene al equipo enfocado con automatizaciones transparentes.",
-        "meta": "Sprint de investigación en curso",
-        "cta": "Ver Ideonautix"
+        "copy": "Founder OS with modular rituals, venture metrics, and transparent automation.",
+        "meta": "Research sprint in progress",
+        "cta": "Preview Ideonautix"
       }
     },
     "focus": {
       "kicker": "Enfoque del estudio",
-      "title": "Lanzamientos de IA explicable",
-      "description": "Nuestro dúo equilibra los pilotos de NodeVoyage con los rituales de Ideonautix para que cada entrega siga siendo responsable y humana.",
+      "title": "Calm OS rituals across products",
+      "description": "We maintain one timing, colour, and accessibility system so travel teams, founders, and partners feel at home in every surface.",
       "points": [
-        "Pilotos guiados por el diseño junto a laboratorios de señalética y testers de viaje",
-        "Consultoría con fundadores involucrados para equipos regulados",
-        "Patrones de automatización transparentes que mantienen los datos responsables"
+        "OS-window shells stay legible in light, dark, and high-contrast modes.",
+        "Reduced-motion fallbacks keep essential context visible when animations pause.",
+        "Signage R&D meets cloud delivery so automation remains explainable and accountable."
       ],
-      "cta": "Conoce la comunidad"
+      "cta": "Meet the community"
     },
     "milestone_cta": "Ver la hoja de ruta",
     "brand_aria": "Resaltado de la marca AlgoRhythmics en el título"
@@ -92,11 +92,11 @@
   "story": {
     "title": "Nuestra historia",
     "reality_title": "La realidad que estamos creando",
-    "reality_text": "Creamos plataformas potenciadas por IA que transforman la forma en que las personas viajan y trabajan. NodeVoyage reinventa la planificación de viajes con asistencia inteligente, mientras Ideonautix empodera a las startups con herramientas modulares de productividad.",
+    "reality_text": "We orchestrate OS-native experiences that make travel planning and founder rituals calmer and more transparent.",
     "mission_title": "Nuestra misión",
-    "mission_text": "Democratizar la tecnología de IA construyendo plataformas accesibles e inteligentes que resuelvan problemas reales para viajeros y emprendedores de todo el mundo.",
+    "mission_text": "To deliver explainable, accessible AI platforms that keep humans in the loop across journeys, startups, and consulting engagements.",
     "vision_title": "Nuestra visión",
-    "vision_text": "Un futuro donde la IA potencie sin fricciones la creatividad y productividad humanas, haciendo que las tareas complejas sean sencillas y abriendo nuevas posibilidades para innovar."
+    "vision_text": "A 2026 design language where frosted glass, grain, and motion support focus while NodeVoyage and Ideonautix share a single trustworthy operating system."
   },
   "founders": {
     "title": "Conoce a los fundadores",
@@ -138,32 +138,32 @@
   "products": {
     "meta_title": "Productos de AlgoRhythmics",
     "meta_description": "Explora NodeVoyage, nuestro compañero de viajes con IA, e Ideonautix, la suite de productividad para fundadores.",
-    "hero_label": "Estudio de producto",
-    "title": "Nuestros productos",
-    "subtitle": "Plataformas impulsadas por IA que transforman cómo viajamos y trabajamos",
-    "cta_title": "¿Listo para transformar tu flujo de trabajo?",
-    "cta_text": "Únete a la comunidad y sé el primero en probar nuestras plataformas potenciadas por IA.",
-    "cta_join": "Unirse a la comunidad",
-    "cta_contact": "Ponte en contacto",
+    "hero_label": "Product constellation",
+    "title": "Platform Constellation",
+    "subtitle": "NodeVoyage and Ideonautix orbit one calm OS-native studio.",
+    "cta_title": "Stay in orbit with us",
+    "cta_text": "Join the community for roadmap drops, pilot invites, and AAA accessibility updates.",
+    "cta_join": "Join the community",
+    "cta_contact": "Plan a strategy session",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "Diversión. Viajes. Recuerdos. Comunidad.",
-      "description": "Planificación de viajes con IA y tu compañero inteligente Nodi. Crea itinerarios personalizados, descubre joyas ocultas y viaja con confianza gracias a las herramientas de RA y las capacidades offline.",
-      "status": "En desarrollo",
-      "mvp": "MVP: Septiembre 2026",
-      "cta": "Descubrir más"
+      "tagline": "OS-native travel companion for confident itineraries",
+      "description": "Fuses signage craftsmanship with explainable AI to plan, translate, and adapt offline.",
+      "status": "Beta pilots",
+      "mvp": "Preview: nodevoyage.algorhythmics.dev",
+      "cta": "Explore NodeVoyage"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Explorar. Inventar. Lanzar.",
-      "description": "Súper suite de productividad modular para startups. Obtén insights impulsados por IA para pitches, seguimiento de ingresos, dinámica de equipo y más mediante microservicios inteligentes diseñados para fundadores.",
-      "status": "Fase de planificación",
-      "mvp": "MVP: Febrero 2026",
-      "cta": "Descubrir más"
+      "tagline": "Calm operating system for founder rituals",
+      "description": "Modular analytics, pitch workflows, and automation patterns that stay human-first.",
+      "status": "Research sprint",
+      "mvp": "Preview: ideonautix.algorhythmics.dev",
+      "cta": "See Ideonautix"
     },
     "demos": {
-      "title": "Prueba nuestras demos en vivo",
-      "description": "Explora los avances de Ideonautix y NodeVoyage en algorhythmics.dev.",
+      "title": "Explore our OS-native previews",
+      "description": "Jump into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
       "nodevoyage": "Abrir demo de NodeVoyage",
       "ideonautix": "Abrir estudio Ideonautix",
       "nodevoyage_host": "nodevoyage.algorhythmics.dev",
@@ -315,15 +315,15 @@
   },
   "community": {
     "meta_title": "Comunidad AlgoRhythmics",
-    "hero_title": "Comunidad",
-    "hero_subtitle": "Vota funciones, comparte ideas y traza el futuro junto a nosotros",
+    "hero_title": "Community Manifest",
+    "hero_subtitle": "Signal the features you need, share ideas, and review public metrics in real time.",
     "hero_rotating": [
-      "Vota por las funciones y mira los resultados al instante",
-      "Comparte tus ideas de producto en segundos",
-      "Diseñemos NodeVoyage e Ideonautix juntos"
+      "Vote on NodeVoyage & Ideonautix priorities",
+      "Review build metrics without leaving the hero",
+      "Co-create calm AI rituals with the studio"
     ],
-    "voting_title": "Vota las funciones",
-    "voting_subtitle": "Ayúdanos a priorizar lo que más valoras",
+    "voting_title": "Shape the roadmap",
+    "voting_subtitle": "Prioritise what lands next for NodeVoyage and Ideonautix.",
     "voting_list_aria": "Lista de funciones para votar",
     "category_aria": "Categoría: {category}",
     "vote_count": "{count} votos",
@@ -376,16 +376,31 @@
         "name": "Gestor de presupuesto",
         "description": "Control de gastos en tiempo real durante tus viajes"
       }
-    }
+    },
+    "hero_manifest": "Manifest: transparent builds, explainable automation, humans in the loop.",
+    "metrics": [
+      {
+        "label": "Contributors",
+        "value": "2.4k"
+      },
+      {
+        "label": "Feature votes",
+        "value": "58k"
+      },
+      {
+        "label": "Locales",
+        "value": "6 languages"
+      }
+    ]
   },
   "consulting": {
     "meta_title": "Piloto de consultoría AlgoRhythmics",
     "hero_title": "Consultoría de IA",
-    "hero_subtitle": "Programa piloto sin coste para tres equipos comprometidos",
+    "hero_subtitle": "Pilot program with OS-native playbooks for regulated teams.",
     "hero_rotating": [
-      "Programa piloto gratuito para 3 empresas seleccionadas",
-      "Sprints de estrategia de IA para equipos regulados",
-      "Del prototipo a producción con nuestros fundadores"
+      "Frosted OS shells for enterprise pilots",
+      "Explainable automation that survives audits",
+      "Latvian craft meets Benelux delivery"
     ],
     "spots_remaining": "plazas disponibles",
     "what_title": "Qué ofrecemos",
@@ -430,16 +445,20 @@
     "requirements_title": "Requisitos",
     "req_1": "Operar en Europa o trabajar en horario CET",
     "req_2": "Compromiso real con la transformación de IA",
-    "req_3": "Apertura a la colaboración y retroalimentación"
+    "req_3": "Apertura a la colaboración y retroalimentación",
+    "hero_testimonial_label": "Client reflection",
+    "hero_testimonial_quote": "AlgoRhythmics translated signage discipline into a calm AI workflow we could ship in weeks.",
+    "hero_testimonial_name": "Marta Ozoliņa",
+    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek"
   },
   "contact": {
     "meta_title": "Contacto AlgoRhythmics",
     "hero_title": "Ponte en contacto",
-    "hero_subtitle": "Conversemos para activar tu próxima fase",
+    "hero_subtitle": "Choose the lane that fits: email, strategy call, or community handshake.",
     "hero_rotating": [
-      "Construyamos algo increíble juntos",
-      "Agenda una conversación de fundador a fundador",
-      "Convierte tu visión de producto en impulso"
+      "Founder inbox, calendar, and community in one place",
+      "Pick the lane that fits your runway",
+      "Bring your roadmap—leave with calm momentum"
     ],
     "form_title": "Envíanos un mensaje",
     "form_name": "Tu nombre",
@@ -466,7 +485,27 @@
     "social_linkedin": "LinkedIn",
     "social_github": "GitHub",
     "social_twitter": "Twitter",
-    "location_value": "Daugavpils, Letonia"
+    "location_value": "Daugavpils, Letonia",
+    "hero_ctas": [
+      {
+        "label": "Email the studio",
+        "description": "Direct founder inbox for partnerships, pilots, and press.",
+        "cta": "Write an email",
+        "action": "mailto:AlgoRhythmics.dev@gmail.com"
+      },
+      {
+        "label": "Book a strategy call",
+        "description": "Schedule a 30-minute OS-native workshop with our founders.",
+        "cta": "Open calendar",
+        "action": "calendly"
+      },
+      {
+        "label": "Join the community",
+        "description": "Vote on features, review open metrics, and co-create releases.",
+        "cta": "Enter Discord",
+        "action": "https://discord.gg/algorhythmics"
+      }
+    ]
   },
   "form": {
     "error_required": "Este campo es obligatorio",

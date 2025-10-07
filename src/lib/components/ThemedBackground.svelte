@@ -39,7 +39,7 @@
     if (name === 'voyage-blue') return 'var(--voyage-blue)';
     if (name === 'aurora-purple') return 'var(--aurora-purple)';
     if (name === 'signal-yellow') return 'var(--signal-yellow)';
-    if (name === 'cherry-red') return 'var(--cherry-red)';
+    if (name === 'cherry-red' || name === 'cherry-pop') return 'var(--cherry-pop)';
     // provide subtle variation when palette item missing
     const fallback = ['var(--voyage-blue)', 'var(--aurora-purple)', 'var(--signal-yellow)'];
     return fallback[index % fallback.length];

@@ -5,11 +5,14 @@
 
 // Animation utilities
 export {
+  useReveal,
   revealOnScroll,
+  useStaggerReveal,
   staggerReveal,
+  useParallax,
+  parallax,
   tilt,
   magnetic,
-  parallax,
   typewriter,
   morphBlob,
   ripple,

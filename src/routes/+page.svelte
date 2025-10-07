@@ -100,10 +100,9 @@
 
 <style>
   .section-heading {
-    display: grid;
-    gap: var(--space-lg);
-    max-width: min(900px, 90%);
-    margin-bottom: var(--space-4xl);
+    --section-heading-gap: clamp(1.75rem, 4vw, 2.75rem);
+    --section-heading-max-width: min(100%, 72ch);
+    --section-heading-margin: var(--space-4xl);
   }
 
   .section-heading h2 {
@@ -373,11 +372,11 @@
       gap: var(--space-lg);
     }
     .section-heading {
-      gap: var(--space-md);
-      margin-bottom: var(--space-2xl);
+      --section-heading-gap: var(--space-lg);
+      --section-heading-margin: var(--space-2xl);
     }
   }
-  
+
   @media (max-width: 768px) {
     .product-row {
       padding: var(--card-padding-md);
@@ -392,8 +391,8 @@
       gap: var(--space-sm);
     }
     .section-heading {
-      gap: var(--space-sm);
-      margin-bottom: var(--space-xl);
+      --section-heading-gap: var(--space-md);
+      --section-heading-margin: var(--space-xl);
     }
   }
 </style>
