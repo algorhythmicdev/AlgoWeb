@@ -98,7 +98,7 @@
   }
   
   .spinner-ring:nth-child(4) {
-    border-top-color: var(--cherry-red);
+    border-top-color: var(--cherry-pop);
     width: 40%;
     height: 40%;
     top: 30%;

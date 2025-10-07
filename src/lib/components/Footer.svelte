@@ -36,7 +36,15 @@
         <h4>{$_('footer.products_title')}</h4>
         <ul>
           {#each footerLinks.products as link}
-            <li><a href={link.href}>{$_(link.label)}</a></li>
+            <li>
+              <a
+                href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+              >
+                {$_(link.label)}
+              </a>
+            </li>
           {/each}
         </ul>
       </div>

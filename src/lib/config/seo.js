@@ -4,18 +4,19 @@
 
 export const siteConfig = {
   name: 'AlgoRhythmics',
-  title: 'AlgoRhythmics - Where Logic Dances with Creativity',
-  description: 'AI innovation lab creating NodeVoyage travel platform and Ideonautix productivity suite. Pre-company phase, building Latvia\'s AI future from Daugavpils.',
+  title: 'AlgoRhythmics — OS-native AI studio',
+  description:
+    'AlgoRhythmics blends signage R&D with cloud-native AI to ship NodeVoyage, Ideonautix, and consulting pilots across AAA-accessible design systems.',
   url: 'https://algorhythmics.com',
   ogImage: '/og-image.png',
   keywords: [
-    'AI Latvia',
-    'Daugavpils startup',
-    'NodeVoyage',
-    'Ideonautix',
-    'AI travel planning',
-    'productivity tools',
-    'Ideju Kauss 2025',
+    'OS-native AI studio',
+    'AAA accessible design',
+    'NodeVoyage travel platform',
+    'Ideonautix founder OS',
+    'Latvia startup',
+    'Riga AI consulting',
+    'Aurora Purple palette',
     'AlgoRhythmics'
   ],
   founders: [
@@ -40,38 +41,33 @@ export const siteConfig = {
 
 export const pageConfigs = {
   home: {
-    title: 'AlgoRhythmics - Where Logic Dances with Creativity',
-    description: 'AI innovation lab in pre-company phase, creating revolutionary products while preparing to build Latvia\'s startup ecosystem.',
+    title: 'AlgoRhythmics — OS-native AI studio',
+    description:
+      'Discover how AlgoRhythmics unites NodeVoyage, Ideonautix, and advisory pilots under one AAA-accessible design system rooted in signage craft.',
     path: '/'
   },
   products: {
-    title: 'Our Products - NodeVoyage & Ideonautix | AlgoRhythmics',
-    description: 'Explore NodeVoyage AI travel platform and Ideonautix productivity suite - revolutionary products in development.',
+    title: 'Products — NodeVoyage & Ideonautix',
+    description:
+      'Explore the NodeVoyage travel companion and Ideonautix founder OS, compare their flagship capabilities, and launch the live demos on their subdomains.',
     path: '/products'
   },
-  nodevoyage: {
-    title: 'NodeVoyage - AI-Powered Travel Platform | AlgoRhythmics',
-    description: 'Smart trip planning, AI companion Nodi, mobile capture suite, and community sharing. MVP launching September 2026.',
-    path: '/products/nodevoyage'
-  },
-  ideonautix: {
-    title: 'Ideonautix - Productivity Suite for Startups | AlgoRhythmics',
-    description: 'Modular microservices for founders: Pitch Assistant, Revenue Boards, Team Dynamics. MVP February 2026.',
-    path: '/products/ideonautix'
-  },
   community: {
-    title: 'Community - Vote, Share, Build Together | AlgoRhythmics',
-    description: 'Vote on features, share ideas, and help shape the future of NodeVoyage and Ideonautix.',
+    title: 'Community — Build the roadmap together',
+    description:
+      'Vote on feature concepts, submit ideas, and watch public metrics as we refine NodeVoyage and Ideonautix with the community.',
     path: '/community'
   },
   consulting: {
-    title: 'AI Consulting - Free Pilot Program | AlgoRhythmics',
-    description: '3 free pilot spots available. AI integration, technical advisory, and strategic innovation consulting.',
+    title: 'AI consulting pilots — AlgoRhythmics',
+    description:
+      'Join the limited pilot for regulated teams and co-design explainable AI workflows that mirror the NodeVoyage and Ideonautix operating system.',
     path: '/consulting'
   },
   contact: {
-    title: 'Contact Us - Let\'s Build Together | AlgoRhythmics',
-    description: 'Get in touch with AlgoRhythmics team in Daugavpils, Latvia. Book a meeting or send us a message.',
+    title: 'Contact AlgoRhythmics',
+    description:
+      'Reach the founders, book a discovery call, or request press details for the AlgoRhythmics studio operating between Riga and Rotterdam.',
     path: '/contact'
   }
 };

@@ -11,19 +11,7 @@ export const mainNavigation = [
   {
     label: 'nav.products',
     href: '/products',
-    icon: 'products',
-    children: [
-      {
-        label: 'nav.nodevoyage',
-        href: '/products/nodevoyage',
-        description: 'nav.nodevoyage_desc'
-      },
-      {
-        label: 'nav.ideonautix',
-        href: '/products/ideonautix',
-        description: 'nav.ideonautix_desc'
-      }
-    ]
+    icon: 'products'
   },
   {
     label: 'nav.community',
@@ -50,8 +38,8 @@ export const footerLinks = {
     { label: 'footer.vision', href: '/#vision' }
   ],
   products: [
-    { label: 'footer.nodevoyage', href: '/products/nodevoyage' },
-    { label: 'footer.ideonautix', href: '/products/ideonautix' },
+    { label: 'footer.nodevoyage', href: 'https://nodevoyage.algorhythmics.dev', external: true },
+    { label: 'footer.ideonautix', href: 'https://ideonautix.algorhythmics.dev', external: true },
     { label: 'footer.roadmap', href: '/#timeline' }
   ],
   resources: [

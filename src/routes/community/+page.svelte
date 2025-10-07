@@ -12,6 +12,22 @@
   const fallbackHeroPhrases = Array.isArray(en.community?.hero_rotating)
     ? en.community.hero_rotating
     : [en.community.hero_subtitle];
+  const fallbackHeroManifest = typeof en.community?.hero_manifest === 'string' ? en.community.hero_manifest : '';
+  const fallbackHeroMetrics = Array.isArray(en.community?.metrics)
+    ? en.community.metrics.filter(
+        (entry) =>
+          entry &&
+          typeof entry === 'object' &&
+          typeof entry.label === 'string' &&
+          entry.label &&
+          typeof entry.value === 'string' &&
+          entry.value
+      )
+    : [
+        { label: 'Contributors', value: '2.4k' },
+        { label: 'Feature votes', value: '58k' },
+        { label: 'Locales', value: '6 languages' }
+      ];
 
   /**
    * @param {unknown} value
@@ -22,10 +38,36 @@
       ? /** @type {string[]} */ (value)
       : fallbackHeroPhrases;
 
+  const ensureString = (value, fallback = '') => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
+
+  /**
+   * @param {unknown} value
+   * @param {Array<{ label: string; value: string }>} fallback
+   */
+  const ensureMetrics = (value, fallback) => {
+    if (!Array.isArray(value)) return fallback;
+    const entries = value
+      .map((item) => {
+        if (!item || typeof item !== 'object') return null;
+        const label = ensureString(item.label);
+        const metricValue = ensureString(item.value);
+        if (!label || !metricValue) return null;
+        return { label, value: metricValue };
+      })
+      .filter(Boolean);
+    return entries.length ? /** @type {Array<{ label: string; value: string }>} */ (entries) : fallback;
+  };
+
   let heroPhrases = fallbackHeroPhrases;
   $: heroPhrases = ensureStringArray($json?.('community.hero_rotating'));
   $: heroHeadlinePhrases = [$_('community.hero_title'), ...heroPhrases]
     .filter((value, index, array) => typeof value === 'string' && value.trim().length && array.indexOf(value) === index);
+
+  let heroManifest = fallbackHeroManifest;
+  $: heroManifest = ensureString($json?.('community.hero_manifest'), fallbackHeroManifest);
+
+  let heroMetrics = fallbackHeroMetrics;
+  $: heroMetrics = ensureMetrics($json?.('community.metrics'), fallbackHeroMetrics);
 
   
   let features = [
@@ -114,6 +156,27 @@
 
   <svelte:fragment slot="description">
     <p class="community-hero__description">{$_('community.hero_subtitle')}</p>
+  </svelte:fragment>
+
+  <svelte:fragment slot="highlights">
+    {#if heroManifest}
+      <div class="hero-highlights">
+        <p class="community-hero__manifest" aria-live="polite">{heroManifest}</p>
+      </div>
+    {/if}
+  </svelte:fragment>
+
+  <svelte:fragment slot="metrics">
+    {#if heroMetrics.length}
+      <ul class="hero-metrics community-hero__metrics">
+        {#each heroMetrics as metric (metric.label)}
+          <li class="community-hero__metric os-window" data-surface="window">
+            <span class="community-hero__metric-value">{metric.value}</span>
+            <span class="community-hero__metric-label">{metric.label}</span>
+          </li>
+        {/each}
+      </ul>
+    {/if}
   </svelte:fragment>
 </HeroWrapper>
 
@@ -238,7 +301,7 @@
   .community-hero__title {
     margin: 0;
     text-align: center;
-    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    font-size: clamp(2.8rem, 6.5vw, 4rem);
     letter-spacing: -0.02em;
     color: var(--heading-color);
   }
@@ -250,7 +313,7 @@
     margin: clamp(1.2rem, 2.8vw, 1.8rem) auto 0;
     padding: clamp(0.6rem, 2vw, 0.95rem) clamp(1.25rem, 3vw, 1.85rem);
     border-radius: clamp(2.4rem, 5vw, 3.6rem);
-    max-width: min(100%, 52ch);
+    max-width: min(100%, var(--measure-md));
     text-align: center;
     background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1));
     border: 1px solid rgba(255, 255, 255, 0.45);
@@ -265,10 +328,55 @@
 
   .community-hero__description {
     margin: 0;
-    max-width: 56ch;
+    max-width: var(--measure-lg);
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.4vw, 1.35rem);
     text-align: center;
+  }
+
+  .community-hero__manifest {
+    margin: 0;
+    max-width: min(100%, var(--measure-xl));
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    color: var(--text-secondary);
+  }
+
+  .community-hero__metrics {
+    display: grid;
+    width: 100%;
+    gap: clamp(1rem, 2.4vw, 1.6rem);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    align-items: stretch;
+  }
+
+  .community-hero__metric {
+    display: grid;
+    gap: 0.5rem;
+    padding: clamp(1.1rem, 2.2vw, 1.6rem);
+    text-align: left;
+  }
+
+  @media (max-width: 720px) {
+    .community-hero__metrics {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .community-hero__metric-value {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: var(--weight-semibold);
+    color: var(--heading-color);
+  }
+
+  .community-hero__metric-label {
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  :global([data-theme='contrast']) .community-hero__metric-label {
+    color: var(--text-primary);
   }
 
   :global([data-base-theme='dark']) .community-hero__headline {
@@ -388,8 +496,20 @@
     pointer-events: none;
   }
 
-  .section-title { text-align: center; }
-  .section-subtitle { text-align: center; color: var(--text-secondary); margin-top: 0.5rem; }
+  .section-title {
+    text-align: center;
+    font-size: var(--h2);
+    margin: 0;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--text-subtitle);
+    line-height: var(--leading-relaxed);
+    margin: 0.75rem auto 0;
+    max-width: var(--measure-md);
+  }
 
   .features-grid {
     display: grid;
@@ -504,7 +624,7 @@
   .idea-section { padding: clamp(5rem, 12vw, 7rem) 0 clamp(6rem, 14vw, 8rem); }
 
   .idea-card {
-    max-width: 640px;
+    width: min(100%, var(--container-sm));
     margin: 0 auto;
     padding: clamp(2.4rem, 5vw, 3.2rem);
     border-radius: var(--radius-2xl);
