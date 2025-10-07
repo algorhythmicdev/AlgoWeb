@@ -115,6 +115,10 @@
 
   .section-heading p { color: var(--text-secondary); }
 
+  .story .section-heading .eyebrow {
+    margin-top: var(--space-xs);
+  }
+
   .story-grid {
     display: grid;
     gap: var(--grid-gap-xl);
