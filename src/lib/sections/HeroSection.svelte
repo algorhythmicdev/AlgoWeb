@@ -123,7 +123,7 @@
   }
 
   .hero-highlight {
-    margin: 0;
+    margin: clamp(0.5rem, 1.6vw, 0.85rem) 0 0;
     font-size: clamp(1.05rem, 2.4vw, 1.55rem);
     color: var(--text-secondary);
     max-width: var(--measure-sm);
