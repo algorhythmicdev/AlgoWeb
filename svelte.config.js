@@ -51,6 +51,8 @@ const config = {
       entries: [
         '/',
         '/products',
+        '/products/nodevoyage',
+        '/products/ideonautix',
         '/community',
         '/consulting',
         '/contact'
