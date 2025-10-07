@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
@@ -217,67 +217,50 @@
   .nav-link {
     position: relative;
     display: inline-flex;
-    gap: 0.35rem;
     align-items: center;
-    font-weight: var(--weight-medium);
-    padding: 0.25rem 0;
+    gap: clamp(0.35rem, 0.8vw, 0.55rem);
+    font-weight: var(--weight-semibold);
+    padding: clamp(0.35rem, 0.8vw, 0.55rem) clamp(0.75rem, 1.4vw, 1rem);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    transition: background var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
   }
 
   .nav-link span {
-    color: color-mix(in srgb, var(--text-secondary) 88%, rgba(var(--voyage-blue-rgb), 0.1) 12%);
-    transition: color var(--duration-fast) var(--ease-out);
+    color: inherit;
+    font-size: var(--text-small);
+    letter-spacing: 0.01em;
+    text-transform: none;
+    white-space: nowrap;
   }
 
-  .nav-link:hover span,
-  .nav-link.active span {
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .nav-link.active {
+    background: color-mix(in srgb, var(--accent-primary) 14%, transparent 86%);
     color: var(--text-primary);
+    transform: translateY(-1px);
   }
 
-  :global(html[data-base-theme='dark']) .nav-link span {
-    color: color-mix(in srgb, var(--text-tertiary) 84%, rgba(var(--voyage-blue-rgb), 0.24) 16%);
+  :global(html[data-base-theme='dark']) .nav-link {
+    color: color-mix(in srgb, #cfd8f6 80%, rgba(var(--aurora-purple-rgb), 0.28) 20%);
   }
 
-  :global(html[data-base-theme='dark']) .nav-link:hover span,
-  :global(html[data-base-theme='dark']) .nav-link.active span {
+  :global(html[data-base-theme='dark']) .nav-link:hover,
+  :global(html[data-base-theme='dark']) .nav-link.active {
     color: var(--text-primary);
-  }
-
-  :global(html[data-theme='contrast']) .nav-link span {
-    color: rgba(255, 255, 255, 0.86);
-  }
-
-  :global(html[data-theme='contrast']) .nav-link:hover span,
-  :global(html[data-theme='contrast']) .nav-link.active span {
-    color: #ffffff;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -0.55rem;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, rgba(19, 81, 255, 0), rgba(19, 81, 255, 0.65), rgba(106, 56, 255, 0));
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .nav-link:hover::after,
-  .nav-link.active::after { transform: scaleX(1); }
-
-  :global([data-theme='contrast']) .nav-link::after {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+    background: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 60%, rgba(var(--voyage-blue-rgb), 0.2) 40%);
   }
 
   .nav-badge {
     font-size: var(--text-caption);
-    color: var(--voyage-blue);
-    background: rgba(19, 81, 255, 0.1);
+    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--accent-primary) 12%, transparent 88%);
     border-radius: var(--radius-full);
-    padding: 0.1rem 0.45rem;
-    font-weight: var(--weight-semibold);
+    padding: 0.15rem 0.55rem;
+    border: 1px solid rgba(var(--accent-primary-rgb), 0.32);
   }
 
   :global([data-base-theme='dark']) .nav-badge {
@@ -423,20 +406,9 @@
 
     .nav-link {
       font-size: 1.05rem;
-      padding: 0.65rem 0;
+      padding: 0.65rem clamp(0.75rem, 3vw, 1.15rem);
       justify-content: space-between;
-    }
-
-    .nav-actions { gap: var(--space-2); }
-
-    .nav-cta { display: none; }
-
-    .menu-toggle { display: inline-flex; }
-  }
-
-  @keyframes navGradientDrift {
-    0% {
-      background-position: 0% 50%;
+      border-radius: var(--radius-lg);
     }
     50% {
       background-position: 100% 50%;
@@ -452,7 +424,14 @@
     }
 
     .nav-link span {
-      transition: none;
-    }
+    color: inherit;
+    font-size: var(--text-small);
+    letter-spacing: 0.01em;
+    text-transform: none;
+    white-space: nowrap;
+  }
   }
 </style>
+
+
+

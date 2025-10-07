@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   // @ts-nocheck
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
@@ -174,21 +174,18 @@
       <span class="contact-node contact-node--three"></span>
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="status">
-    <span class="hero-badge contact-hero__badge">{$_('contact.hero_title')}</span>
-  </svelte:fragment>
-
   <svelte:fragment slot="title">
-    <div class="contact-hero__heading">
-      <span class="contact-hero__headline">
-        <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
-      </span>
-    </div>
+    <h1 class="contact-hero__title">{$_('contact.hero_title')}</h1>
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
-    <p class="contact-hero__motto">{$_('contact.hero_subtitle')}</p>
+    <div class="contact-hero__headline">
+      <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="description">
+    <p class="contact-hero__description">{$_('contact.hero_subtitle')}</p>
   </svelte:fragment>
 </HeroWrapper>
 
@@ -197,7 +194,7 @@
   <div class="container">
     <div class="contact-grid">
       <!-- Contact Form -->
-      <div class="form-container glass-card" use:tilt={{ max: 3, scale: 1.01 }}>
+      <div class="form-container os-window" use:tilt={{ max: 3, scale: 1.01 }}>
         <h2 use:sparkleTrail>{$_('contact.form_title')}</h2>
         
         <form on:submit={handleSubmit}>
@@ -279,7 +276,7 @@
       <!-- Contact Info & Calendar -->
       <div class="info-container">
         <!-- Calendar Widget -->
-        <div class="calendar-card glass-card" use:tilt={{ max: 3, scale: 1.01 }}>
+        <div class="calendar-card os-window" use:tilt={{ max: 3, scale: 1.01 }}>
           <h3 use:sparkleTrail>{$_('contact.calendar_title')}</h3>
           <p>{$_('contact.calendar_subtitle')}</p>
           <button
@@ -297,7 +294,7 @@
         </div>
         
         <!-- Contact Information -->
-        <div class="info-card glass-card" use:staggerReveal>
+        <div class="info-card os-window" use:staggerReveal>
           <h3>{$_('contact.info_title')}</h3>
           
           <div class="info-item">
@@ -324,7 +321,7 @@
         </div>
         
         <!-- Social Links -->
-        <div class="social-card glass-card" use:tilt={{ max: 2 }}>
+        <div class="social-card os-window" use:tilt={{ max: 2 }}>
           <h3 use:sparkleTrail>{$_('contact.social_title')}</h3>
           <div class="social-links">
             <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
@@ -377,22 +374,26 @@
     pointer-events: none;
   }
 
-  .contact-hero__heading {
-    display: grid;
-    gap: clamp(0.75rem, 2.6vw, 1.2rem);
-    justify-items: center;
+  .contact-hero__title {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(2.3rem, 6vw, 3.3rem);
+    letter-spacing: -0.02em;
+    color: var(--heading-color);
   }
 
   .contact-hero__headline {
+    position: relative;
     display: inline-flex;
     justify-content: center;
-    margin: clamp(1.2rem, 3vw, 1.9rem) auto 0;
-    max-width: min(100%, 52ch);
-    padding: clamp(0.6rem, 2vw, 1rem) clamp(1.3rem, 3vw, 1.9rem);
-    border-radius: clamp(2.4rem, 5vw, 3.6rem);
-    background: linear-gradient(128deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
+    margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
+    padding: clamp(0.55rem, 2vw, 0.9rem) clamp(1.25rem, 3vw, 1.75rem);
+    border-radius: clamp(2.4rem, 6vw, 3.4rem);
+    max-width: min(54ch, 100%);
+    text-align: center;
+    background: linear-gradient(126deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 24px 55px rgba(22, 30, 56, 0.28);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
@@ -401,38 +402,22 @@
     width: 100%;
   }
 
-  .contact-hero__motto {
+  .contact-hero__description {
     margin: 0;
-    max-width: 50ch;
-    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    max-width: 58ch;
     color: var(--text-secondary);
-  }
-
-  .contact-hero__badge {
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.22) 65%, transparent);
-    border-color: rgba(255, 255, 255, 0.45);
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    text-align: center;
   }
 
   :global([data-base-theme='dark']) .contact-hero__headline {
-    background: linear-gradient(128deg, rgba(18, 24, 44, 0.78), rgba(18, 24, 44, 0.56));
-    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
-  }
-
-  :global([data-base-theme='dark']) .contact-hero__badge {
-    background: rgba(18, 24, 44, 0.68);
-    border-color: rgba(120, 146, 220, 0.4);
-    color: rgba(210, 220, 255, 0.88);
+    background: linear-gradient(126deg, rgba(28, 36, 64, 0.84), rgba(28, 36, 64, 0.58));
+    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.36), 0 24px 55px rgba(4, 12, 26, 0.45);
   }
 
   :global([data-theme='contrast']) .contact-hero__headline {
-    background: linear-gradient(128deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
-  }
-
-  :global([data-theme='contrast']) .contact-hero__badge {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    color: #fff;
+    background: linear-gradient(126deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.74));
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
   }
 
   .contact-hero__backdrop {
@@ -693,3 +678,5 @@ form {
     }
   }
 </style>
+
+

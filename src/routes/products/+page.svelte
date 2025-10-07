@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { _, json } from 'svelte-i18n';
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
@@ -197,11 +197,6 @@
       <span class="products-orb products-orb--one"></span>
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="status">
-    <span class="hero-badge products-hero__badge">{heroLabel}</span>
-  </svelte:fragment>
-
   <svelte:fragment slot="title">
     <h1 class="products-hero__headline" aria-label={heroTitle}>
       <span class="sr-only">{heroTitle}</span>
@@ -256,7 +251,7 @@
     <div class="catalog-grid" use:staggerReveal={{ stagger: 160 }}>
       {#each productKeys as key}
         {#if products[key]}
-          <article class="catalog-card">
+          <article class="catalog-card os-window">
             <div class="catalog-header">
               <span class="kicker">{$_(`products.${key}.name`)}</span>
               <span class="badge-pill">{$_(`products.${key}.status`)}</span>
@@ -443,25 +438,8 @@
     font-size: clamp(1.05rem, 2.2vw, 1.45rem);
     max-width: 64ch;
   }
-
-  .products-hero__badge {
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
-    border-color: rgba(255, 255, 255, 0.45);
-    letter-spacing: 0.12em;
-  }
-
-  :global([data-base-theme='dark']) .products-hero__badge {
-    background: rgba(24, 32, 56, 0.68);
-    border-color: rgba(120, 146, 220, 0.4);
-    color: rgba(220, 232, 255, 0.88);
-  }
-
-  :global([data-theme='contrast']) .products-hero__badge {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    color: #fff;
-  }
-
+  :global([data-base-theme='dark'])
+  :global([data-theme='contrast'])
   .demo-previews {
     position: relative;
   }
@@ -706,3 +684,6 @@
     box-shadow: var(--shadow-md);
   }
 </style>
+
+
+

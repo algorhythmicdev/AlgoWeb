@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { onDestroy, onMount } from 'svelte';
 
   export let title = '';
@@ -104,7 +104,7 @@
   });
 </script>
 
-<div class={`demo-preview glass-card ${accentClass}`} bind:this={container} data-mounted={hasMounted}>
+<div class={`demo-preview os-window ${accentClass}`} bind:this={container} data-mounted={hasMounted}>
   <div class="demo-preview__halo" aria-hidden="true">
     <span class="demo-preview__orb demo-preview__orb--primary"></span>
     <span class="demo-preview__orb demo-preview__orb--secondary"></span>
@@ -329,18 +329,23 @@
     }
   }
 
-  @media (min-width: 900px) {
+    @media (min-width: 900px) {
     .demo-preview {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
       align-items: center;
     }
 
     .demo-preview__meta {
-      padding-right: clamp(1rem, 2vw, 1.6rem);
+      padding-right: clamp(1rem, 2.4vw, 1.8rem);
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (min-width: 1200px) {
+    .demo-preview__frame {
+      min-height: clamp(18rem, 30vw, 26rem);
+    }
+  }
+@media (prefers-reduced-motion: reduce) {
     .demo-preview__orb,
     .demo-preview__beam,
     .demo-preview__frame iframe {
@@ -361,3 +366,13 @@
     background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.35), rgba(var(--aurora-purple-rgb), 0.32));
   }
 </style>
+
+
+
+
+
+
+
+
+
+

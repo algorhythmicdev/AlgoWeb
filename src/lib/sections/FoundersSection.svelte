@@ -172,25 +172,16 @@
   .founder-card {
     position: relative;
     display: grid;
-    gap: clamp(1.4rem, 3vw, 2.1rem);
+    gap: clamp(1.4rem, 3vw, 2rem);
     padding: clamp(1.8rem, 4vw, 2.6rem);
     border-radius: clamp(1.8rem, 4vw, 2.6rem);
-    border: 1px solid color-mix(in srgb, var(--border-strong) 45%, transparent);
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.85) 70%, transparent);
-    box-shadow: 0 28px 48px rgba(15, 23, 42, 0.12);
+    border: 1px solid color-mix(in srgb, var(--hero-secondary) 24%, transparent 76%);
+    background: color-mix(in srgb, var(--hero-surface-layer) 72%, transparent 28%);
+    box-shadow: 0 24px 48px rgba(16, 24, 40, 0.12);
     overflow: hidden;
   }
 
-  .founder-card::before {
-    content: '';
-    position: absolute;
-    inset: -35% -20% auto;
-    height: 70%;
-    background: radial-gradient(circle at 20% 40%, rgba(var(--voyage-blue-rgb), 0.18), transparent 70%),
-      radial-gradient(circle at 76% 26%, rgba(var(--aurora-purple-rgb), 0.16), transparent 68%);
-    opacity: 0.85;
-    pointer-events: none;
-  }
+
 
   .founder-card__top {
     position: relative;
@@ -218,12 +209,7 @@
   }
 
   .founder-card__glow {
-    content: '';
-    position: absolute;
-    inset: -18%;
-    border-radius: 32px;
-    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.32), rgba(var(--aurora-purple-rgb), 0.26));
-    filter: blur(18px);
+    display: none;
   }
 
   .founder-card__identity h3 {
@@ -290,7 +276,7 @@
     font-weight: var(--weight-semibold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(var(--voyage-blue-rgb), 0.78);
+    color: var(--text-tertiary);
   }
 
   .founder-card__details {
@@ -324,8 +310,8 @@
   .founder-card__chips li {
     padding: 0.4rem 1rem;
     border-radius: var(--radius-full);
-    background: rgba(var(--aurora-purple-rgb), 0.12);
-    color: rgba(32, 40, 72, 0.9);
+    background: color-mix(in srgb, var(--hero-secondary) 16%, transparent 84%);
+    color: var(--text-secondary);
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
   }
@@ -360,16 +346,6 @@
     overflow: hidden;
   }
 
-  .founders-spotlight__inner::before {
-    content: '';
-    position: absolute;
-    inset: -32% -18% auto;
-    height: 68%;
-    background: radial-gradient(circle at 32% 42%, rgba(var(--voyage-blue-rgb), 0.16), transparent 70%),
-      radial-gradient(circle at 72% 28%, rgba(var(--aurora-purple-rgb), 0.16), transparent 72%);
-    opacity: 0.85;
-    pointer-events: none;
-  }
 
   .founders-spotlight__label {
     position: relative;
@@ -399,9 +375,9 @@
     gap: 0.7rem;
     padding: 0.75rem 1rem;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(26, 33, 55, 0.12);
-    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    background: color-mix(in srgb, var(--hero-surface-layer) 70%, transparent 30%);
+    border: 1px solid color-mix(in srgb, var(--hero-secondary) 22%, transparent 78%);
+    box-shadow: 0 14px 28px rgba(16, 24, 40, 0.12);
   }
 
   .brand-chip img {
@@ -413,7 +389,7 @@
   .brand-chip span {
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
-    color: rgba(26, 33, 55, 0.7);
+    color: var(--text-secondary);
   }
 
   .founders-spotlight__note {
@@ -425,9 +401,9 @@
   }
 
   :global([data-base-theme='dark']) .founder-card {
-    background: linear-gradient(136deg, rgba(20, 28, 48, 0.82), rgba(18, 24, 42, 0.72));
-    border: 1px solid rgba(120, 146, 220, 0.35);
-    box-shadow: 0 28px 55px rgba(2, 8, 18, 0.6);
+    background: color-mix(in srgb, var(--hero-surface-layer-strong) 72%, transparent 28%);
+    border: 1px solid color-mix(in srgb, var(--hero-secondary) 32%, transparent 68%);
+    box-shadow: 0 28px 55px rgba(4, 12, 26, 0.52);
   }
 
   :global([data-base-theme='dark']) .founder-card__role {
@@ -435,31 +411,31 @@
   }
 
   :global([data-base-theme='dark']) .founder-card__focus {
-    background: rgba(var(--voyage-blue-rgb), 0.12);
-    border-color: rgba(var(--voyage-blue-rgb), 0.22);
+    background: color-mix(in srgb, var(--hero-surface-layer-strong) 68%, transparent 32%);
+    border-color: color-mix(in srgb, var(--hero-secondary) 32%, transparent 68%);
   }
 
   :global([data-base-theme='dark']) .founder-card__chips li {
-    background: rgba(124, 135, 242, 0.18);
-    color: rgba(230, 236, 255, 0.88);
+    background: color-mix(in srgb, var(--hero-surface-layer-strong) 65%, transparent 35%);
+    color: rgba(232, 238, 255, 0.88);
   }
 
   :global([data-base-theme='dark']) .contact-chip {
-    background: rgba(13, 18, 32, 0.92);
-    border-color: rgba(108, 128, 202, 0.4);
-    color: rgba(224, 232, 255, 0.92);
+    background: color-mix(in srgb, var(--hero-surface-layer-strong) 68%, transparent 32%);
+    border-color: color-mix(in srgb, var(--hero-secondary) 34%, transparent 66%);
+    color: rgba(224, 232, 255, 0.9);
   }
 
   :global([data-base-theme='dark']) .founders-spotlight__inner {
-    background: linear-gradient(140deg, rgba(20, 28, 48, 0.82), rgba(20, 28, 48, 0.68));
-    border: 1px solid rgba(120, 146, 220, 0.32);
-    box-shadow: 0 24px 50px rgba(2, 8, 18, 0.55);
+    background: color-mix(in srgb, var(--hero-surface-layer-strong) 70%, transparent 30%);
+    border: 1px solid color-mix(in srgb, var(--hero-secondary) 34%, transparent 66%);
+    box-shadow: 0 24px 50px rgba(4, 12, 26, 0.5);
   }
 
   :global([data-base-theme='dark']) .brand-chip {
-    background: rgba(12, 18, 34, 0.92);
-    border-color: rgba(120, 146, 220, 0.32);
-    color: rgba(220, 232, 255, 0.88);
+    background: color-mix(in srgb, var(--hero-surface-layer-strong) 68%, transparent 32%);
+    border-color: color-mix(in srgb, var(--hero-secondary) 30%, transparent 70%);
+    color: rgba(220, 232, 255, 0.9);
   }
 
   :global([data-theme='contrast']) .founder-card,
@@ -470,13 +446,13 @@
   }
 
   :global([data-theme='contrast']) .contact-chip {
-    background: #000;
+    background: rgba(0, 0, 0, 0.92);
     border: 2px solid #fff;
     color: #fff;
   }
 
   :global([data-theme='contrast']) .founder-card__chips li {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.85);
     color: #fff;
   }
 

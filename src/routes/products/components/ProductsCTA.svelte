@@ -25,7 +25,7 @@
           <a href={primaryHref} class="btn btn-gradient">{primaryLabel}</a>
         {/if}
         {#if secondaryLabel}
-          <a href={secondaryHref} class="btn btn-secondary hover-lift">{secondaryLabel}</a>
+          <a href={secondaryHref} class="btn btn-secondary">{secondaryLabel}</a>
         {/if}
       </div>
     </div>

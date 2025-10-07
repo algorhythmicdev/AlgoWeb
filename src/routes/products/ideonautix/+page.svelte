@@ -45,12 +45,7 @@
       <span class="spark spark--two"></span>
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="status">
-    <span class="hero-badge product-hero__badge">{$_('ideonautix.status')}</span>
-  </svelte:fragment>
-
-  <svelte:fragment slot="title">
+<svelte:fragment slot="title">
     <h1 class="product-hero__title">{$_('ideonautix.name')}</h1>
   </svelte:fragment>
 
@@ -267,22 +262,8 @@
     }
   }
 
-  .product-hero__badge {
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
-    border-color: rgba(255, 255, 255, 0.45);
-  }
 
-  :global([data-base-theme='dark']) .product-hero__badge {
-    background: rgba(22, 30, 52, 0.7);
-    border-color: rgba(120, 146, 220, 0.4);
-    color: rgba(220, 232, 255, 0.88);
-  }
 
-  :global([data-theme='contrast']) .product-hero__badge {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    color: #fff;
-  }
 
   .product-hero__title {
     margin: 0;
@@ -500,3 +481,4 @@
     .device-frame img { width: 100%; }
   }
 </style>
+

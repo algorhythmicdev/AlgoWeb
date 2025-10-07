@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
@@ -163,25 +163,20 @@
       <span class="consulting-constellation consulting-constellation--one"></span>
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="status">
-    <span class="hero-badge consulting-hero__badge">{$_('consulting.hero_title')}</span>
+  <svelte:fragment slot="title">
+    <h1 class="consulting-hero__title">{$_('consulting.hero_title')}</h1>
   </svelte:fragment>
 
-  <svelte:fragment slot="title">
-    <div class="consulting-hero__heading">
-      <span class="consulting-hero__headline">
-        <AnimatedHeadline variant="glow" text={heroRotating[0] ?? ''} />
-      </span>
+    <svelte:fragment slot="lead">
+    <div class="consulting-hero__headline">
+      <AnimatedHeadline variant="glow" phrases={heroRotating} holdDuration={2600} />
     </div>
   </svelte:fragment>
 
-  <svelte:fragment slot="lead">
-    <p class="consulting-hero__motto">{$_('consulting.hero_subtitle')}</p>
-  </svelte:fragment>
+    <svelte:fragment slot="description">
+    <p class="consulting-hero__description">{$_('consulting.hero_subtitle')}</p>
 
-  <svelte:fragment slot="description">
-    <div class="consulting-hero__meta">
+<div class="consulting-hero__meta">
       <div class="spots-indicator">
         <div class="spots-number">{spotsRemaining}</div>
         <span>{$_('consulting.spots_remaining')}</span>
@@ -225,7 +220,7 @@
 <!-- Application Form -->
 <section class="form-section" id="form">
   <div class="container">
-    <div class="form-wrapper glass-card" use:tilt={{ max: 2 }}>
+    <div class="form-wrapper os-window" use:tilt={{ max: 2 }}>
       <h2 class="form-title">{$_('consulting.form_title')}</h2>
       
       <form on:submit={handleSubmit}>
@@ -340,7 +335,7 @@
     
     <!-- Benefits Section -->
     <div class="benefits-section" use:staggerReveal>
-      <div class="benefit-card glass-card">
+      <div class="benefit-card os-window">
         <h3>
           <Icon name="package" size={22} class="heading-icon" />
           <span>{$_('consulting.benefits_title')}</span>
@@ -353,7 +348,7 @@
         </ul>
       </div>
 
-      <div class="benefit-card glass-card">
+      <div class="benefit-card os-window">
         <h3>
           <Icon name="bolt" size={22} class="heading-icon" />
           <span>{$_('consulting.timeline_title')}</span>
@@ -365,7 +360,7 @@
         </ul>
       </div>
 
-      <div class="benefit-card glass-card">
+      <div class="benefit-card os-window">
         <h3>
           <Icon name="check" size={22} class="heading-icon" />
           <span>{$_('consulting.requirements_title')}</span>
@@ -409,20 +404,26 @@
   pointer-events: none;
 }
 
-.consulting-hero__heading {
-  display: grid;
-  gap: clamp(0.7rem, 2.4vw, 1.1rem);
-  justify-items: center;
+.consulting-hero__title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2.35rem, 6.2vw, 3.4rem);
+  letter-spacing: -0.02em;
+  color: var(--heading-color);
 }
 
 .consulting-hero__headline {
+  position: relative;
   display: inline-flex;
   justify-content: center;
-  padding: clamp(0.65rem, 2vw, 1rem) clamp(1.4rem, 3.2vw, 2rem);
-  border-radius: clamp(2.6rem, 5vw, 3.6rem);
-  background: linear-gradient(132deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.14));
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
+  margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
+  padding: clamp(0.55rem, 2vw, 0.85rem) clamp(1.25rem, 3vw, 1.8rem);
+  border-radius: clamp(2.6rem, 6vw, 3.6rem);
+  max-width: min(54ch, 100%);
+  text-align: center;
+  background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 22px 52px rgba(16, 28, 48, 0.26);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
@@ -431,81 +432,30 @@
   max-width: min(50ch, 90vw);
 }
 
-.consulting-hero__motto {
+.consulting-hero__description {
   margin: 0;
   max-width: 60ch;
   color: var(--text-secondary);
-  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-}
-
-.consulting-hero__badge {
-  background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
-  border-color: rgba(255, 255, 255, 0.48);
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+  text-align: center;
 }
 
 .consulting-hero__meta {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: clamp(1rem, 2.8vw, 1.6rem);
-  align-items: center;
-  justify-content: center;
-  margin-top: clamp(1.4rem, 3vw, 2rem);
-}
-
-.consulting-hero__phrases {
   display: flex;
-  flex-wrap: wrap;
-  gap: clamp(0.5rem, 1.6vw, 1rem);
   justify-content: center;
-  margin: 0 0 clamp(1.2rem, 2.8vw, 1.8rem);
-  padding: 0;
-  list-style: none;
-}
-
-.consulting-hero__phrase {
-  padding: 0.45rem 1.05rem;
-  border-radius: var(--radius-full);
-  background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 60%, rgba(255, 255, 255, 0.24) 40%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  font-weight: var(--weight-medium);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--text-primary);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  margin-top: clamp(1.4rem, 3vw, 1.9rem);
 }
 
 :global([data-base-theme='dark']) .consulting-hero__headline {
-  background: linear-gradient(132deg, rgba(24, 32, 56, 0.82), rgba(24, 32, 56, 0.58));
-  box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
-}
-
-:global([data-base-theme='dark']) .consulting-hero__badge {
-  background: rgba(24, 32, 56, 0.68);
-  border-color: rgba(120, 146, 220, 0.38);
-  color: rgba(220, 232, 255, 0.88);
-}
-
-:global([data-base-theme='dark']) .consulting-hero__phrase {
-  background: linear-gradient(132deg, rgba(32, 44, 78, 0.78), rgba(25, 32, 58, 0.62));
-  box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38);
-  color: rgba(236, 242, 255, 0.94);
+  background: linear-gradient(126deg, rgba(26, 32, 54, 0.82), rgba(26, 32, 54, 0.56));
+  box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.32), 0 24px 55px rgba(4, 12, 26, 0.42);
 }
 
 :global([data-theme='contrast']) .consulting-hero__headline {
-  background: linear-gradient(132deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.7));
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
-}
-
-:global([data-theme='contrast']) .consulting-hero__badge {
-  background: rgba(0, 0, 0, 0.92);
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  color: #fff;
-}
-
-:global([data-theme='contrast']) .consulting-hero__phrase {
-  background: rgba(0, 0, 0, 0.92);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
-  color: #ffffff;
+  background: linear-gradient(126deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.72));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
 }
 
 .consulting-hero__halo {
@@ -814,3 +764,5 @@
     }
   }
 </style>
+
+

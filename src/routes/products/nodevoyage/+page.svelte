@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
@@ -42,12 +42,7 @@
       <span class="halo-orb halo-orb--two"></span>
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="status">
-    <span class="hero-badge product-hero__badge">{$_('nodevoyage.status')}</span>
-  </svelte:fragment>
-
-  <svelte:fragment slot="title">
+<svelte:fragment slot="title">
     <h1 class="product-hero__title">{$_('nodevoyage.name')}</h1>
   </svelte:fragment>
 
@@ -103,7 +98,7 @@
 
     <div class="features-grid" use:staggerReveal={{ stagger: 120 }}>
       {#each features as feature}
-        <article class="feature-card">
+        <article class="feature-card os-window">
           <span class="feature-icon">
             <Icon name={feature.icon} size={32} />
           </span>
@@ -123,7 +118,7 @@
 
     <div class="steps-grid" use:staggerReveal={{ stagger: 120 }}>
       {#each stepKeys as stepKey, index}
-        <article class="step-card">
+        <article class="step-card os-window">
           <span class="step-index">{String(index + 1).padStart(2, '0')}</span>
           <h3>{$_(`nodevoyage.${stepKey}_title`)}</h3>
           <p>{$_(`nodevoyage.${stepKey}_desc`)}</p>
@@ -262,10 +257,6 @@
     }
   }
 
-  .product-hero__badge {
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
-    border-color: rgba(255, 255, 255, 0.45);
-  }
 
   .product-hero__title {
     margin: 0;
@@ -300,17 +291,7 @@
     border: 2px solid rgba(255, 255, 255, 0.85);
   }
 
-  :global([data-base-theme='dark']) .product-hero__badge {
-    background: rgba(22, 30, 52, 0.7);
-    border-color: rgba(120, 146, 220, 0.4);
-    color: rgba(220, 232, 255, 0.88);
-  }
 
-  :global([data-theme='contrast']) .product-hero__badge {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    color: #fff;
-  }
 
   .product-hero__description {
     color: var(--text-secondary);
@@ -505,3 +486,9 @@
     .device-frame img { width: 100%; }
   }
 </style>
+
+
+
+
+
+

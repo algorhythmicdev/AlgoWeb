@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
@@ -24,6 +24,9 @@
 
   let heroPhrases = fallbackHeroPhrases;
   $: heroPhrases = ensureStringArray($json?.('community.hero_rotating'));
+  $: heroHeadlinePhrases = [$_('community.hero_title'), ...heroPhrases]
+    .filter((value, index, array) => typeof value === 'string' && value.trim().length && array.indexOf(value) === index);
+
   
   let features = [
     { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },
@@ -99,21 +102,18 @@
       <span class="mesh-orb mesh-orb--two"></span>
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="status">
-    <span class="hero-badge community-hero__badge">{$_('community.hero_title')}</span>
-  </svelte:fragment>
-
   <svelte:fragment slot="title">
-    <div class="community-hero__heading">
-      <span class="community-hero__headline-text">
-        <AnimatedHeadline variant="slide" phrases={heroPhrases} holdDuration={2600} />
-      </span>
-    </div>
+    <h1 class="community-hero__title">{$_('community.hero_title')}</h1>
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
-    <p class="community-hero__motto">{$_('community.hero_subtitle')}</p>
+    <div class="community-hero__headline">
+      <AnimatedHeadline variant="slide" phrases={heroHeadlinePhrases} holdDuration={2600} />
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="description">
+    <p class="community-hero__description">{$_('community.hero_subtitle')}</p>
   </svelte:fragment>
 </HeroWrapper>
 
@@ -130,7 +130,7 @@
       aria-label={$_('community.voting_list_aria')}
     >
       {#each sortedFeatures as feature (feature.id)}
-        <div class="feature-card" use:tilt={{ max: 3, scale: 1.01 }} role="listitem">
+        <div class="feature-card os-window" use:tilt={{ max: 3, scale: 1.01 }} role="listitem">
           <div class="feature-header">
             <span
               class="category-badge"
@@ -181,7 +181,7 @@
 <!-- Submit Idea -->
 <section class="idea-section">
   <div class="container">
-    <div class="idea-card">
+    <div class="idea-card os-window">
       <h2>{$_('community.ideas_title')}</h2>
       <div class="idea-form">
         <textarea 
@@ -235,13 +235,15 @@
     pointer-events: none;
   }
 
-  .community-hero__heading {
-    display: grid;
-    gap: clamp(0.6rem, 2vw, 1rem);
-    justify-items: center;
+  .community-hero__title {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    letter-spacing: -0.02em;
+    color: var(--heading-color);
   }
 
-  .community-hero__headline-text {
+  .community-hero__headline {
     position: relative;
     display: inline-flex;
     justify-content: center;
@@ -257,42 +259,26 @@
     -webkit-backdrop-filter: blur(18px);
   }
 
-  .community-hero__headline-text :global(.animated-headline) {
+  .community-hero__headline :global(.animated-headline) {
     width: 100%;
   }
 
-  .community-hero__badge {
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.24) 65%, transparent);
-    border-color: rgba(255, 255, 255, 0.48);
-  }
-
-  .community-hero__motto {
+  .community-hero__description {
     margin: 0;
     max-width: 56ch;
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    text-align: center;
   }
 
-  :global([data-base-theme='dark']) .community-hero__headline-text {
+  :global([data-base-theme='dark']) .community-hero__headline {
     background: linear-gradient(126deg, rgba(24, 32, 56, 0.82), rgba(24, 32, 56, 0.56));
     box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
   }
 
-  :global([data-base-theme='dark']) .community-hero__badge {
-    background: rgba(24, 32, 56, 0.68);
-    border-color: rgba(120, 146, 220, 0.4);
-    color: rgba(220, 232, 255, 0.88);
-  }
-
-  :global([data-theme='contrast']) .community-hero__headline-text {
+  :global([data-theme='contrast']) .community-hero__headline {
     background: linear-gradient(126deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.72));
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
-  }
-
-  :global([data-theme='contrast']) .community-hero__badge {
-    background: rgba(0, 0, 0, 0.92);
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    color: #fff;
   }
 
   .community-hero__mesh {
@@ -413,39 +399,33 @@
   }
 
   .feature-card {
-    padding: clamp(2.2rem, 4vw, 2.8rem);
-    border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    background: var(--bg-surface);
-    background: var(--surface-glass);
     display: grid;
-    gap: clamp(1.2rem, 3vw, 1.6rem);
-    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    gap: clamp(1rem, 2.6vw, 1.6rem);
+    padding: clamp(2rem, 4vw, 2.8rem);
     position: relative;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(24px);
+    border-radius: var(--radius-2xl);
+    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
   }
 
   .feature-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(19, 81, 255, 0.1), transparent);
-    transition: left 0.6s ease;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.12), rgba(var(--accent-secondary-rgb), 0.1));
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    pointer-events: none;
   }
 
   .feature-card:hover::before {
-    left: 100%;
+    opacity: 1;
   }
 
-  .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
 
   .feature-header {
     display: flex;
@@ -572,3 +552,22 @@
     }
   }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

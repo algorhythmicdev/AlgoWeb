@@ -27,11 +27,7 @@
 
   <div class="container hero-shell">
     <div class="hero-copy" use:staggerReveal={{ stagger: 110 }}>
-      {#if label}
-        <span class="status-chip">{label}</span>
-      {/if}
-
-      <div class="hero-text">
+<div class="hero-text">
         <h1>{title}</h1>
         <span class="hero-headline">
           <AnimatedHeadline variant={products.length > 1 ? 'slide' : 'typewriter'} phrases={heroPhrases} holdDuration={2600} />
@@ -243,3 +239,4 @@
     box-shadow: var(--shadow-md);
   }
 </style>
+
