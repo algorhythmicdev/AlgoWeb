@@ -3,7 +3,7 @@
 
   export let id = 'hero';
   export let showAside = true;
-  export let introReveal = { stagger: 110 };
+  export let introReveal = { delay: 0, stagger: 110 };
   export let asideReveal = { delay: 140, stagger: 130 };
   export let containerClass = '';
   export let introClass = '';

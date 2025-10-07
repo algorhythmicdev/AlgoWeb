@@ -143,6 +143,10 @@ export const revealOnScroll = useReveal;
  *  easing?: string;
  *  once?: boolean;
  *  selector?: string;
+ *  x?: number;
+ *  y?: number;
+ *  scale?: number;
+ *  finalState?: { opacity?: number | string; transform?: string };
  * }} [options]
  */
 export function useStaggerReveal(node, options = {}) {
@@ -156,23 +160,26 @@ export function useStaggerReveal(node, options = {}) {
   } = options;
 
   const targets = selector ? node.querySelectorAll(selector) : node.children;
+  /** @type {Array<() => void>} */
   const destroyers = [];
 
-  Array.from(targets).forEach((child, index) => {
-    if (!(child instanceof HTMLElement)) return;
-    normaliseSurface(child);
-    const action = useReveal(child, {
-      delay: delay + index * stagger,
-      duration,
-      easing,
-      once,
-      y: options.y ?? 40,
-      x: options.x ?? 0,
-      scale: options.scale ?? 0.96,
-      finalState: options.finalState
+  Array.from(targets)
+    .filter((child) => child instanceof HTMLElement)
+    .forEach((child, index) => {
+      const element = /** @type {HTMLElement} */ (child);
+      normaliseSurface(element);
+      const action = useReveal(element, {
+        delay: delay + index * stagger,
+        duration,
+        easing,
+        once,
+        y: options.y ?? 40,
+        x: options.x ?? 0,
+        scale: options.scale ?? 0.96,
+        finalState: options.finalState
+      });
+      destroyers.push(() => action?.destroy?.());
     });
-    destroyers.push(() => action?.destroy?.());
-  });
 
   return {
     destroy() {
@@ -238,6 +245,7 @@ export function tilt(node, { max = 12, scale = 1.03, easing = easings.snappy(), 
   node.style.willChange = 'transform, box-shadow';
 
   let raf = 0;
+  /** @param {PointerEvent} event */
   const handlePointerMove = (event) => {
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(() => {
@@ -283,6 +291,7 @@ export function magnetic(node, { strength = 0.28, threshold = 110, glow = true, 
 
   node.style.transition = `transform ${durations.ui()} ${easings.soft()}, box-shadow ${durations.ui()} ${easings.soft()}`;
 
+  /** @param {MouseEvent} event */
   const handleMove = (event) => {
     const rect = node.getBoundingClientRect();
     const dx = event.clientX - (rect.left + rect.width / 2);
@@ -325,6 +334,7 @@ export function ripple(node) {
   node.style.position = node.style.position || 'relative';
   node.style.overflow = 'hidden';
 
+  /** @param {PointerEvent} event */
   const handlePointerDown = (event) => {
     const diameter = Math.max(node.clientWidth, node.clientHeight);
     const radius = diameter / 2;
@@ -366,7 +376,11 @@ export function ripple(node) {
 export function sparkleTrail(node) {
   if (!isBrowser || shouldReduceMotion()) return { destroy: () => {} };
 
+  /**
+   * @param {PointerEvent | FocusEvent} event
+   */
   const spawn = (event) => {
+    if (!('offsetX' in event) || !('offsetY' in event)) return;
     const count = 10;
     for (let i = 0; i < count; i += 1) {
       const sparkle = document.createElement('span');
@@ -409,8 +423,14 @@ export function sparkleTrail(node) {
 export function particleExplode(node) {
   if (!isBrowser || shouldReduceMotion()) return { destroy: () => {} };
 
+  /** @param {MouseEvent} event */
   const spawn = (event) => {
     const baseColor = getCssToken('--voyage-blue', '#1351ff');
+    /**
+     * @param {number} angle
+     * @param {number} velocity
+     * @param {number} lifetime
+     */
     const createParticle = (angle, velocity, lifetime) => {
       const particle = document.createElement('span');
       particle.className = 'motion-particle';
@@ -425,6 +445,7 @@ export function particleExplode(node) {
       document.body.appendChild(particle);
 
       const start = performance.now();
+      /** @param {number} now */
       const animate = (now) => {
         const progress = (now - start) / lifetime;
         if (progress >= 1) {
@@ -468,6 +489,7 @@ export function morphBlob(node, { duration = 6500, scale = 1.2 } = {}) {
   if (!isBrowser || shouldReduceMotion()) return { destroy: () => {} };
   let frameId = 0;
 
+  /** @param {number} time */
   const animate = (time) => {
     const cycle = (time % duration) / duration;
     const angle = cycle * Math.PI * 2;

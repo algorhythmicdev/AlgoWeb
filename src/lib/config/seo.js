@@ -49,16 +49,6 @@ export const pageConfigs = {
     description: 'Explore NodeVoyage AI travel platform and Ideonautix productivity suite - revolutionary products in development.',
     path: '/products'
   },
-  nodevoyage: {
-    title: 'NodeVoyage - AI-Powered Travel Platform | AlgoRhythmics',
-    description: 'Smart trip planning, AI companion Nodi, mobile capture suite, and community sharing. MVP launching September 2026.',
-    path: '/products/nodevoyage'
-  },
-  ideonautix: {
-    title: 'Ideonautix - Productivity Suite for Startups | AlgoRhythmics',
-    description: 'Modular microservices for founders: Pitch Assistant, Revenue Boards, Team Dynamics. MVP February 2026.',
-    path: '/products/ideonautix'
-  },
   community: {
     title: 'Community - Vote, Share, Build Together | AlgoRhythmics',
     description: 'Vote on features, share ideas, and help shape the future of NodeVoyage and Ideonautix.',

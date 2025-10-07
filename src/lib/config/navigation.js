@@ -15,12 +15,12 @@ export const mainNavigation = [
     children: [
       {
         label: 'nav.nodevoyage',
-        href: '/products/nodevoyage',
+        href: '/products#nodevoyage',
         description: 'nav.nodevoyage_desc'
       },
       {
         label: 'nav.ideonautix',
-        href: '/products/ideonautix',
+        href: '/products#ideonautix',
         description: 'nav.ideonautix_desc'
       }
     ]
@@ -50,8 +50,8 @@ export const footerLinks = {
     { label: 'footer.vision', href: '/#vision' }
   ],
   products: [
-    { label: 'footer.nodevoyage', href: '/products/nodevoyage' },
-    { label: 'footer.ideonautix', href: '/products/ideonautix' },
+    { label: 'footer.nodevoyage', href: '/products#nodevoyage' },
+    { label: 'footer.ideonautix', href: '/products#ideonautix' },
     { label: 'footer.roadmap', href: '/#timeline' }
   ],
   resources: [
