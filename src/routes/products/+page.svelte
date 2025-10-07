@@ -51,16 +51,16 @@
     nodevoyage: {
       title: en.products?.demos?.nodevoyage ?? '',
       description: en.products?.demos?.nodevoyage_description ?? '',
-      host: en.products?.demos?.nodevoyage_host ?? '',
-      href: 'https://nodevoyage.algorhythmics.dev/',
+      host: products.nodevoyage?.demoHost ?? en.products?.demos?.nodevoyage_host ?? '',
+      href: products.nodevoyage?.demoUrl ?? 'https://nodevoyage.algorhythmics.dev/',
       cta: en.products?.demos?.nodevoyage ?? '',
       accent: 'voyage'
     },
     ideonautix: {
       title: en.products?.demos?.ideonautix ?? '',
       description: en.products?.demos?.ideonautix_description ?? '',
-      host: en.products?.demos?.ideonautix_host ?? '',
-      href: 'https://ideonautix.algorhythmics.dev/',
+      host: products.ideonautix?.demoHost ?? en.products?.demos?.ideonautix_host ?? '',
+      href: products.ideonautix?.demoUrl ?? 'https://ideonautix.algorhythmics.dev/',
       cta: en.products?.demos?.ideonautix ?? '',
       accent: 'aurora'
     }
@@ -101,27 +101,15 @@
   $: heroTitleChars = Array.from(heroTitle ?? '');
   $: heroSubtitleWords = heroSubtitle ? heroSubtitle.split(/\s+/).filter(Boolean) : [];
 
-  $: heroProducts = productKeys.reduce((acc, key) => {
-    const fallback = fallbackProductCopy[key];
-    const name = ensureString($json?.(`products.${key}.name`), fallback.name);
-    if (name.trim().length) {
-      acc.push({
-        id: key,
-        name,
-        status: ensureString($json?.(`products.${key}.status`), fallback.status),
-        mvp: ensureString($json?.(`products.${key}.mvp`), fallback.mvp),
-        cta: ensureString($json?.(`products.${key}.cta`), fallback.cta),
-        href: `/products/${key}`
-      });
-    }
-    return acc;
-  }, /** @type {Array<{ id: string; name: string; status: string; mvp: string; cta: string; href: string }>} */ ([]));
-
   $: catalogEntries = productKeys.reduce((acc, key) => {
     const fallback = fallbackProductCopy[key];
     const source = products[key];
     const name = ensureString($json?.(`products.${key}.name`), fallback.name);
     if (name.trim().length) {
+      const fallbackDemo = fallbackDemoContent[key];
+      const previewLabel = ensureString($json?.(`products.demos.${key}`), fallbackDemo.cta);
+      const ctaLabel = ensureString($json?.(`products.${key}.cta`), fallback.cta);
+      const buttonLabel = previewLabel || ctaLabel || `Visit ${name}`;
       acc.push({
         id: key,
         name,
@@ -129,8 +117,12 @@
         tagline: ensureString($json?.(`products.${key}.tagline`), fallback.tagline),
         description: ensureString($json?.(`products.${key}.description`), fallback.description),
         mvp: ensureString($json?.(`products.${key}.mvp`), fallback.mvp),
-        cta: ensureString($json?.(`products.${key}.cta`), fallback.cta),
-        href: `/products/${key}`,
+        cta: ctaLabel,
+        previewLabel,
+        buttonLabel,
+        buttonAriaLabel: `${buttonLabel} (opens in a new tab)`,
+        demoHref: ensureString(source?.demoUrl, fallbackDemo.href),
+        demoHost: ensureString(source?.demoHost, fallbackDemo.host),
         features: (source?.features ?? []).slice(0, 4).map(
           /** @param {{ id: string; icon: string }} feature */ (feature) => {
             const fallbackFeature = fallbackFeatureCopy[key]?.[feature.id] ?? {};
@@ -144,6 +136,9 @@
               )
             };
           }
+        ).filter(
+          /** @param {{ title: string }} feature */
+          (feature) => feature.title
         )
       });
     }
@@ -156,12 +151,17 @@
     description: string;
     mvp: string;
     cta: string;
-    href: string;
+    previewLabel: string;
+    buttonLabel: string;
+    buttonAriaLabel: string;
+    demoHref: string;
+    demoHost: string;
     features: Array<{ id: string; icon: string; title: string; description: string }>;
   }>} */ ([]));
 
   $: demos = productKeys.reduce((acc, key) => {
     const fallback = fallbackDemoContent[key];
+    const source = products[key];
     const titleValue = ensureString($json?.(`products.demos.${key}`), fallback.title);
     const descriptionValue = ensureString($json?.(`products.demos.${key}_description`), fallback.description);
     const hostValue = ensureString($json?.(`products.demos.${key}_host`), fallback.host);
@@ -171,7 +171,7 @@
         title: titleValue,
         description: descriptionValue,
         host: hostValue,
-        href: fallback.href,
+        href: ensureString(source?.demoUrl, fallback.href),
         cta: ensureString($json?.(`products.demos.${key}`), fallback.cta),
         accent: fallback.accent
       });
@@ -188,7 +188,7 @@
 <HeroWrapper
   class="hero hero--products hero--centered section"
   showAside={false}
-  introReveal={{ stagger: 120 }}
+  introReveal={{ delay: 40, stagger: 120 }}
 >
   <svelte:fragment slot="status">
     {#if heroLabel}
@@ -203,7 +203,7 @@
     </div>
   </svelte:fragment>
   <svelte:fragment slot="title">
-    <h1 class="products-hero__headline" aria-label={heroTitle}>
+    <h1 class="products-hero__headline heading-gradient" aria-label={heroTitle}>
       <span class="sr-only">{heroTitle}</span>
       <span class="products-hero__headline-visual" aria-hidden="true">
         {#each heroTitleChars as char, index (index)}
@@ -258,34 +258,57 @@
 <section class="catalog section-sm" use:revealOnScroll>
   <div class="container">
     <div class="catalog-grid" use:staggerReveal={{ stagger: 160 }}>
-      {#each productKeys as key}
-        {#if products[key]}
-          <article class="catalog-card os-window">
-            <div class="catalog-header">
-              <span class="kicker">{$_(`products.${key}.name`)}</span>
-              <span class="badge-pill">{$_(`products.${key}.status`)}</span>
-            </div>
+      {#each catalogEntries as entry (entry.id)}
+        <article class="catalog-card os-window" id={entry.id}>
+          <header class="catalog-header">
+            <span class="catalog-eyebrow">{entry.name}</span>
+            {#if entry.status}
+              <span class="badge-pill">{entry.status}</span>
+            {/if}
+          </header>
 
-            <h2>{$_(`products.${key}.tagline`)}</h2>
-            <p>{$_(`products.${key}.description`)}</p>
+          <h2 class="catalog-tagline heading-gradient">{entry.tagline}</h2>
+          <p>{entry.description}</p>
 
+          <div class="catalog-meta">
+            {#if entry.mvp}
+              <span class="catalog-mvp">{entry.mvp}</span>
+            {/if}
+            {#if entry.demoHost}
+              <span class="catalog-host">{entry.demoHost}</span>
+            {/if}
+          </div>
+
+          {#if entry.features.length}
             <ul class="feature-pills">
-              {#each (products[key].features ?? []).slice(0, 3) as feature}
+              {#each entry.features as feature (feature.id)}
                 <li>
                   <span class="feature-icon">
                     <Icon name={feature.icon} size={28} />
                   </span>
-                  <span>{$_(`${key}.features.${feature.id}.title`)}</span>
+                  <div class="feature-text">
+                    <span class="feature-title">{feature.title}</span>
+                    {#if feature.description}
+                      <span class="feature-description">{feature.description}</span>
+                    {/if}
+                  </div>
                 </li>
               {/each}
             </ul>
+          {/if}
 
-            <div class="catalog-footer">
-              <span class="launch">{$_(`products.${key}.mvp`)}</span>
-              <a href={`/products/${key}`} class="btn btn-primary">{$_(`products.${key}.cta`)}</a>
-            </div>
-          </article>
-        {/if}
+          <div class="catalog-actions">
+            <a
+              class="btn btn-gradient"
+              href={entry.demoHref}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={entry.buttonAriaLabel}
+            >
+              {entry.buttonLabel}
+            </a>
+          </div>
+        </article>
       {/each}
     </div>
   </div>
@@ -545,13 +568,23 @@
     gap: 1rem;
   }
 
-  .catalog-card h2 {
+  .catalog-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: var(--text-caption);
+    font-weight: var(--weight-semibold);
+    color: var(--heading-color);
+    background: color-mix(in srgb, var(--bg-muted) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 65%, transparent);
+  }
+
+  .catalog-tagline {
     font-size: clamp(1.9rem, 3vw, 2.6rem);
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
     margin: 0;
   }
 
@@ -560,22 +593,52 @@
     margin: 0;
   }
 
-  .feature-pills {
+  .catalog-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
+    align-items: center;
+    margin-top: clamp(0.3rem, 1vw, 0.6rem);
+    margin-bottom: clamp(0.4rem, 1.2vw, 0.8rem);
   }
 
-  .feature-pills li {
+  .catalog-mvp,
+  .catalog-host {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.45rem 0.9rem;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--bg-muted) 72%, transparent);
+    background: color-mix(in srgb, var(--bg-muted) 76%, transparent);
     color: var(--text-secondary);
     font-size: var(--text-small);
     border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .catalog-host {
+    font-family: 'Space Grotesk', var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .feature-pills {
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.3rem);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .feature-pills li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1rem, 2.4vw, 1.6rem);
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--bg-muted) 74%, transparent);
+    color: var(--text-secondary);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent);
     backdrop-filter: blur(18px);
   }
 
@@ -583,25 +646,36 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: clamp(2.4rem, 5vw, 2.9rem);
+    height: clamp(2.4rem, 5vw, 2.9rem);
     border-radius: 50%;
     background: color-mix(in srgb, var(--voyage-blue) 12%, transparent 88%);
     color: var(--voyage-blue);
     filter: drop-shadow(0 4px 8px rgba(17, 24, 39, 0.12));
   }
 
-  .catalog-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: clamp(1.2rem, 3vw, 2rem);
-    flex-wrap: wrap;
+  .feature-text {
+    display: grid;
+    gap: 0.3rem;
   }
 
-  .launch {
+  .feature-title {
+    font-weight: var(--weight-semibold);
+    color: var(--heading-color);
+  }
+
+  .feature-description {
+    color: var(--text-secondary);
     font-size: var(--text-small);
-    color: var(--text-tertiary);
+    line-height: var(--leading-normal);
+  }
+
+  .catalog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: clamp(0.6rem, 1.6vw, 1.2rem);
   }
 
   .cta-card {
@@ -713,15 +787,54 @@
     box-shadow: var(--shadow-sm);
   }
 
+  :global([data-base-theme='dark']) .catalog-eyebrow {
+    background: color-mix(in srgb, rgba(12, 18, 30, 0.88) 70%, rgba(var(--voyage-blue-rgb), 0.3) 30%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 62%, rgba(255, 255, 255, 0.14) 38%);
+    color: rgba(226, 236, 255, 0.95);
+  }
+
+  :global([data-base-theme='dark']) .catalog-mvp,
+  :global([data-base-theme='dark']) .catalog-host {
+    background: color-mix(in srgb, rgba(10, 16, 30, 0.86) 68%, rgba(var(--voyage-blue-rgb), 0.32) 32%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 60%, rgba(255, 255, 255, 0.12) 40%);
+    color: rgba(214, 226, 255, 0.92);
+  }
+
   :global([data-base-theme='dark']) .feature-pills li {
-    background: color-mix(in srgb, rgba(12, 18, 30, 0.82) 70%, rgba(var(--voyage-blue-rgb), 0.2) 30%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(255, 255, 255, 0.08) 40%);
-    color: rgba(220, 228, 244, 0.9);
+    background: color-mix(in srgb, rgba(12, 18, 30, 0.88) 70%, rgba(var(--voyage-blue-rgb), 0.26) 30%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.1) 40%);
+    color: rgba(214, 226, 255, 0.9);
+  }
+
+  :global([data-base-theme='dark']) .feature-description {
+    color: rgba(196, 208, 242, 0.82);
   }
 
   :global([data-base-theme='dark']) .cta-card {
     border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.12) 40%);
     box-shadow: var(--shadow-md);
+  }
+
+  :global([data-theme='contrast']) .catalog-card {
+    border-color: rgba(255, 255, 255, 0.85);
+    box-shadow: none;
+  }
+
+  :global([data-theme='contrast']) .catalog-eyebrow,
+  :global([data-theme='contrast']) .catalog-mvp,
+  :global([data-theme='contrast']) .catalog-host,
+  :global([data-theme='contrast']) .feature-pills li {
+    background: rgba(0, 0, 0, 0.88);
+    border-color: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
+  }
+
+  :global([data-theme='contrast']) .feature-title {
+    color: var(--text-primary);
+  }
+
+  :global([data-theme='contrast']) .feature-description {
+    color: var(--text-secondary);
   }
 </style>
 

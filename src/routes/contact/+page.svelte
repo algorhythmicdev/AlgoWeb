@@ -221,7 +221,7 @@
     </div>
   </svelte:fragment>
   <svelte:fragment slot="title">
-    <h1 class="contact-hero__title">{$_('contact.hero_title')}</h1>
+    <h1 class="contact-hero__title heading-gradient">{$_('contact.hero_title')}</h1>
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
@@ -464,7 +464,6 @@
     text-align: center;
     font-size: clamp(2.8rem, 6.5vw, 3.9rem);
     letter-spacing: -0.02em;
-    color: var(--heading-color);
   }
 
   .contact-hero__headline {

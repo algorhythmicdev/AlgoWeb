@@ -179,7 +179,7 @@
     </div>
   </svelte:fragment>
   <svelte:fragment slot="title">
-    <h1 class="consulting-hero__title">{$_('consulting.hero_title')}</h1>
+    <h1 class="consulting-hero__title heading-gradient">{$_('consulting.hero_title')}</h1>
   </svelte:fragment>
 
     <svelte:fragment slot="lead">
@@ -440,7 +440,6 @@
   text-align: center;
   font-size: clamp(2.85rem, 6.5vw, 4.1rem);
   letter-spacing: -0.02em;
-  color: var(--heading-color);
 }
 
   .consulting-hero__headline {

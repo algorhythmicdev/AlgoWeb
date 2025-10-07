@@ -118,6 +118,10 @@ h6 {
   transition: color 280ms var(--ease-in-out), text-shadow 280ms var(--ease-in-out);
 }
 
+.heading-gradient {
+  color: var(--heading-color);
+}
+
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .heading-gradient {
     background-image: var(--gradient-heading);
@@ -128,6 +132,19 @@ h6 {
     color: transparent;
     animation: headingGradientShift 12s var(--ease-in-out) infinite alternate;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heading-gradient {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
+:global([data-theme='contrast']) .heading-gradient {
+  background-image: none !important;
+  color: var(--heading-color) !important;
+  -webkit-text-fill-color: currentColor;
 }
 
 @keyframes headingGradientShift {

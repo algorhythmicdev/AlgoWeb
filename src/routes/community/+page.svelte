@@ -145,7 +145,7 @@
     </div>
   </svelte:fragment>
   <svelte:fragment slot="title">
-    <h1 class="community-hero__title">{$_('community.hero_title')}</h1>
+    <h1 class="community-hero__title heading-gradient">{$_('community.hero_title')}</h1>
   </svelte:fragment>
 
   <svelte:fragment slot="lead">
@@ -303,7 +303,6 @@
     text-align: center;
     font-size: clamp(2.8rem, 6.5vw, 4rem);
     letter-spacing: -0.02em;
-    color: var(--heading-color);
   }
 
   .community-hero__headline {
