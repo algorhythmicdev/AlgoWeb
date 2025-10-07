@@ -1,5 +1,5 @@
 <script>
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { heroStage, staggerReveal } from '$utils/animations';
 
   export let id = 'hero';
   export let showAside = true;
@@ -19,7 +19,7 @@
   $: sectionClass = ['hero-wrapper', className, externalClass].filter(Boolean).join(' ');
 </script>
 
-<section class={sectionClass} id={id} bind:this={element} use:revealOnScroll {...restProps}>
+<section class={sectionClass} id={id} bind:this={element} use:heroStage {...restProps}>
   <slot name="backdrop" />
   <div class={`container hero-wrapper__shell ${containerClass}`}>
     <div class={`hero-wrapper__intro ${introClass}`} use:staggerReveal={introReveal}>
@@ -64,6 +64,18 @@
     position: relative;
     padding: var(--hero-padding-block-start) 0 var(--hero-padding-block-end);
     isolation: isolate;
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) scale(0.98);
+    transition:
+      opacity var(--duration-hero) var(--ease-in-out),
+      transform var(--duration-hero) var(--ease-in-out),
+      filter var(--duration-hero) var(--ease-in-out);
+  }
+
+  .hero-wrapper.hero-ready,
+  .hero-wrapper[data-hero-ready='true'] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
   .hero-wrapper::before {
@@ -72,18 +84,25 @@
     inset: var(--hero-backdrop-inset);
     height: var(--hero-backdrop-height);
     background: var(--hero-backdrop-gradient);
-    opacity: var(--hero-backdrop-opacity);
+    opacity: 0;
     filter: blur(var(--hero-backdrop-blur));
     pointer-events: none;
     z-index: -1;
-    transition: opacity 400ms var(--ease-in-out);
+    transition: opacity var(--duration-hero) var(--ease-in-out);
   }
 
-  :global([data-theme='light']) .hero-wrapper::before {
+  .hero-wrapper.hero-ready::before,
+  .hero-wrapper[data-hero-ready='true']::before {
+    opacity: var(--hero-backdrop-opacity);
+  }
+
+  :global([data-theme='light']) .hero-wrapper.hero-ready::before,
+  :global([data-theme='light']) .hero-wrapper[data-hero-ready='true']::before {
     opacity: var(--hero-backdrop-opacity-light);
   }
 
-  :global([data-base-theme='dark']) .hero-wrapper::before {
+  :global([data-base-theme='dark']) .hero-wrapper.hero-ready::before,
+  :global([data-base-theme='dark']) .hero-wrapper[data-hero-ready='true']::before {
     opacity: var(--hero-backdrop-opacity-dark);
   }
 

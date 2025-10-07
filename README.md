@@ -14,6 +14,30 @@ The site presents company positioning, product roadmaps, founder biographies, an
 - Persistent theme and language preferences stored in local storage
 - SVG-based icon system shared across the application
 
+## Design System (2026 Refurb)
+
+- **Surfaces:** Aurora Mist (light), Midnight Nebula (dark), and Obsidian Matrix (high contrast) power the refreshed OS-window shells.
+- **Palette:** Voyage Blue, Aurora Purple, Signal Yellow, and Cherry Pop drive navigation, accents, metrics, and alerts while maintaining WCAG AAA contrast.
+- **Themes:** High-contrast mode now mirrors tokenised borders, focus rings, and frosted glass treatments for parity with light and dark experiences.
+
+## Motion Blueprint
+
+- **Timing tokens:** `--duration-micro` (120 ms), `--duration-ui` (240 ms), `--duration-hero` (520 ms), and `--duration-epic` (720 ms) guide micro to hero interactions.
+- **Easing tokens:** `--ease-out-soft`, `--ease-in-out`, `--ease-snappy`, and `--ease-spring` align Svelte actions and CSS transitions across the site.
+- **Svelte actions:** `useReveal`, `useStaggerReveal`, and `useParallax` now include reduced-motion fallbacks alongside hover `tilt`, `magnetic`, and CTA sparkle utilities.
+
+## QA & Accessibility Checklist
+
+- Verified light, dark, and high-contrast modes for the home, products, community, consulting, and contact routes on desktop breakpoints.
+- Exercised keyboard navigation, focus outlines, and reduced-motion settings to ensure essential content remains visible without animation.
+- Confirmed the marketing build pipeline is clean by running `npm run build` with zero warnings before release.
+
+## Motion QA Checklist
+
+- Profile hero reveals, staggered parallax, and CTA sparkles in Chrome DevTools to keep frame times under 4 ms on mid-tier hardware.
+- Toggle `prefers-reduced-motion` in the browser to verify reveals, blobs, and parallax actions respect static fallbacks.
+- Inspect animation layers to ensure only GPU-friendly opacity/transform properties animate, preventing layout thrash on scroll.
+
 ## Tech Stack
 
 - **Framework:** SvelteKit 2

@@ -48,15 +48,7 @@ const config = {
     adapter: adapter(adapterOptions),
 
     prerender: {
-      entries: [
-        '/',
-        '/products',
-        '/products/nodevoyage',
-        '/products/ideonautix',
-        '/community',
-        '/consulting',
-        '/contact'
-      ]
+      entries: ['/', '/products', '/community', '/consulting', '/contact']
     },
 
     alias: {

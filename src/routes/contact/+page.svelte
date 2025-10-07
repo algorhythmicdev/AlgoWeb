@@ -13,6 +13,29 @@
   const fallbackHeroPhrases = Array.isArray(en.contact?.hero_rotating)
     ? en.contact.hero_rotating
     : [en.contact.hero_subtitle];
+  const ensureString = (value, fallback = '') => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
+  const fallbackHeroCtas = Array.isArray(en.contact?.hero_ctas)
+    ? en.contact.hero_ctas.filter((item) => item && typeof item === 'object')
+    : [
+        {
+          label: 'Email the studio',
+          description: 'Direct founder inbox for partnerships, pilots, and press.',
+          cta: 'Write an email',
+          action: 'mailto:AlgoRhythmics.dev@gmail.com'
+        },
+        {
+          label: 'Book a strategy call',
+          description: 'Schedule a 30-minute OS-native workshop with our founders.',
+          cta: 'Open calendar',
+          action: 'calendly'
+        },
+        {
+          label: 'Join the community',
+          description: 'Vote on features, review open metrics, and co-create releases.',
+          cta: 'Enter Discord',
+          action: 'https://discord.gg/algorhythmics'
+        }
+      ];
 
   /**
    * @param {unknown} value
@@ -23,8 +46,31 @@
       ? /** @type {string[]} */ (value)
       : fallbackHeroPhrases;
 
+  /**
+   * @param {unknown} value
+   * @param {Array<{ label: string; description: string; cta: string; action: string }>} fallback
+   */
+  const ensureHeroCtas = (value, fallback) => {
+    if (!Array.isArray(value)) return fallback;
+    const entries = value
+      .map((item) => {
+        if (!item || typeof item !== 'object') return null;
+        const label = ensureString(item.label);
+        const description = ensureString(item.description);
+        const cta = ensureString(item.cta);
+        const action = ensureString(item.action);
+        if (!label || !cta || !action) return null;
+        return { label, description, cta, action };
+      })
+      .filter(Boolean);
+    return entries.length ? /** @type {Array<{ label: string; description: string; cta: string; action: string }>} */ (entries) : fallback;
+  };
+
   let heroPhrases = fallbackHeroPhrases;
   $: heroPhrases = ensureStringArray($json?.('contact.hero_rotating'));
+
+  let heroCtas = ensureHeroCtas(fallbackHeroCtas, fallbackHeroCtas);
+  $: heroCtas = ensureHeroCtas($json?.('contact.hero_ctas'), fallbackHeroCtas);
   
   let formData = {
     name: '',
@@ -186,6 +232,45 @@
 
   <svelte:fragment slot="description">
     <p class="contact-hero__description">{$_('contact.hero_subtitle')}</p>
+  </svelte:fragment>
+
+  <svelte:fragment slot="actions">
+    {#if heroCtas.length}
+      <div class="contact-hero__cta-grid" use:staggerReveal={{ delay: 100, stagger: 140 }}>
+        {#each heroCtas as item (item.label)}
+          {#if item.action === 'calendly'}
+            <button
+              type="button"
+              class="contact-hero__cta os-window"
+              data-surface="window"
+              on:click={openCalendly}
+              use:tilt={{ max: 2, scale: 1.01 }}
+            >
+              <span class="contact-hero__cta-label">{item.label}</span>
+              {#if item.description}
+                <span class="contact-hero__cta-description">{item.description}</span>
+              {/if}
+              <span class="contact-hero__cta-action">{item.cta}</span>
+            </button>
+          {:else}
+            <a
+              class="contact-hero__cta os-window"
+              data-surface="window"
+              href={item.action}
+              target={item.action.startsWith('http') ? '_blank' : undefined}
+              rel={item.action.startsWith('http') ? 'noopener noreferrer' : undefined}
+              use:tilt={{ max: 2, scale: 1.01 }}
+            >
+              <span class="contact-hero__cta-label">{item.label}</span>
+              {#if item.description}
+                <span class="contact-hero__cta-description">{item.description}</span>
+              {/if}
+              <span class="contact-hero__cta-action">{item.cta}</span>
+            </a>
+          {/if}
+        {/each}
+      </div>
+    {/if}
   </svelte:fragment>
 </HeroWrapper>
 
@@ -377,7 +462,7 @@
   .contact-hero__title {
     margin: 0;
     text-align: center;
-    font-size: clamp(2.3rem, 6vw, 3.3rem);
+    font-size: clamp(2.8rem, 6.5vw, 3.9rem);
     letter-spacing: -0.02em;
     color: var(--heading-color);
   }
@@ -389,7 +474,7 @@
     margin: clamp(1.1rem, 2.6vw, 1.6rem) auto 0;
     padding: clamp(0.55rem, 2vw, 0.9rem) clamp(1.25rem, 3vw, 1.75rem);
     border-radius: clamp(2.4rem, 6vw, 3.4rem);
-    max-width: min(54ch, 100%);
+    max-width: min(100%, var(--measure-lg));
     text-align: center;
     background: linear-gradient(126deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -404,10 +489,59 @@
 
   .contact-hero__description {
     margin: 0;
-    max-width: 58ch;
+    max-width: var(--measure-lg);
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.4vw, 1.4rem);
     text-align: center;
+  }
+
+  .contact-hero__cta-grid {
+    display: grid;
+    gap: clamp(1rem, 2.8vw, 1.8rem);
+    margin: clamp(1.6rem, 3vw, 2.4rem) auto 0;
+    width: min(100%, var(--container-lg));
+  }
+
+  .contact-hero__cta {
+    display: grid;
+    gap: 0.65rem;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    text-align: left;
+  }
+
+  .contact-hero__cta-label {
+    font-size: var(--text-small);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--text-tertiary) 70%, rgba(var(--voyage-blue-rgb), 0.32) 30%);
+  }
+
+  .contact-hero__cta-description {
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: var(--text-secondary);
+  }
+
+  .contact-hero__cta-action {
+    font-weight: var(--weight-semibold);
+    color: var(--accent-primary);
+  }
+
+  :global([data-theme='contrast']) .contact-hero__cta-action {
+    color: var(--text-primary);
+  }
+
+  :global([data-base-theme='dark']) .contact-hero__cta-label {
+    color: color-mix(in srgb, rgba(214, 224, 255, 0.82) 68%, rgba(var(--signal-yellow-rgb), 0.3) 32%);
+  }
+
+  :global([data-theme='contrast']) .contact-hero__cta-label {
+    color: var(--text-primary);
+  }
+
+  @media (min-width: 768px) {
+    .contact-hero__cta-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   :global([data-base-theme='dark']) .contact-hero__headline {
@@ -537,7 +671,7 @@ form {
 
   .form-group label.required::after {
     content: ' *';
-    color: var(--cherry-red);
+    color: var(--cherry-pop);
     font-weight: var(--weight-semibold);
   }
 
@@ -557,8 +691,8 @@ form {
   }
 
   .form-group input.error,
-  .form-group textarea.error { border-color: var(--cherry-red); }
-  .error-message { color: var(--cherry-red); font-size: var(--text-small); }
+  .form-group textarea.error { border-color: var(--cherry-pop); }
+  .error-message { color: var(--cherry-pop); font-size: var(--text-small); }
 
   .btn-block { width: 100%; display: inline-flex; justify-content: center; }
 

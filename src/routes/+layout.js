@@ -8,9 +8,7 @@ export function load({ url }) {
   
   // Determine which page config to use
   let pageKey = 'home';
-  if (pathname.includes('nodevoyage')) pageKey = 'nodevoyage';
-  else if (pathname.includes('ideonautix')) pageKey = 'ideonautix';
-  else if (pathname.includes('products')) pageKey = 'products';
+  if (pathname.includes('products')) pageKey = 'products';
   else if (pathname.includes('community')) pageKey = 'community';
   else if (pathname.includes('consulting')) pageKey = 'consulting';
   else if (pathname.includes('contact')) pageKey = 'contact';

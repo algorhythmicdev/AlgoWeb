@@ -5,6 +5,8 @@
     "icon": "/images/products/nodevoyage-icon.png",
     "hero": "/images/products/nodevoyage-hero.png",
     "color": "#1351FF",
+    "url": "https://nodevoyage.algorhythmics.dev",
+    "domain": "nodevoyage.algorhythmics.dev",
     "features": [
       { "id": "nodi-ai", "icon": "ai" },
       { "id": "smart-builder", "icon": "map" },
@@ -26,6 +28,8 @@
     "icon": "/images/products/ideonautix-icon.png",
     "hero": "/images/products/ideonautix-hero.png",
     "color": "#6A38FF",
+    "url": "https://ideonautix.algorhythmics.dev",
+    "domain": "ideonautix.algorhythmics.dev",
     "features": [
       { "id": "pitch", "icon": "target" },
       { "id": "revenue", "icon": "chart" },
