@@ -3,6 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { voting } from '$stores/voting';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
@@ -137,12 +138,18 @@
   introReveal={{ delay: 60, stagger: 120 }}
 >
   <svelte:fragment slot="backdrop">
-    <div class="community-hero__mesh" aria-hidden="true">
-      <span class="mesh-ring mesh-ring--one"></span>
-      <span class="mesh-ring mesh-ring--two"></span>
-      <span class="mesh-orb mesh-orb--one"></span>
-      <span class="mesh-orb mesh-orb--two"></span>
-    </div>
+    <HeroBackdrop
+      variant="grid-ripple"
+      tone="primary"
+      intensity="balanced"
+      className="community-hero__backdrop"
+    />
+    <HeroBackdrop
+      variant="spotlight"
+      tone="aurora"
+      intensity="soft"
+      className="community-hero__backdrop-spotlight"
+    />
   </svelte:fragment>
   <svelte:fragment slot="title">
     <h1 class="community-hero__title heading-gradient">{$_('community.hero_title')}</h1>
@@ -374,7 +381,7 @@
     color: var(--text-secondary);
   }
 
-  :global([data-theme='contrast']) .community-hero__metric-label {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .community-hero__metric-label {
     color: var(--text-primary);
   }
 
@@ -383,94 +390,40 @@
     box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
   }
 
-  :global([data-theme='contrast']) .community-hero__headline {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .community-hero__headline {
     background: linear-gradient(126deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.72));
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
   }
 
-  .community-hero__mesh {
+  :global(.community-hero__backdrop),
+  :global(.community-hero__backdrop-spotlight) {
     position: absolute;
-    inset: -10% -20% auto;
-    height: clamp(22rem, 36vw, 28rem);
+    inset: -12% -22% auto;
+    height: clamp(22rem, 38vw, 30rem);
     pointer-events: none;
-    overflow: hidden;
     z-index: -1;
   }
 
-  .mesh-ring {
-    position: absolute;
-    inset: 10% 20%;
-    border-radius: 50%;
-    border: 1.5px solid var(--hero-ring-border);
-    filter: blur(0.4px);
-    animation: meshOrbit 28s linear infinite;
+  :global(.community-hero__backdrop) {
+    --hero-backdrop-opacity: 0.6;
+    --hero-backdrop-blur: clamp(120px, 24vw, 230px);
   }
 
-  .mesh-ring::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 50%;
-    border: 1px dashed var(--hero-ring-dash);
-    mix-blend-mode: var(--hero-overlay-blend);
+  :global(.community-hero__backdrop-spotlight) {
+    --hero-backdrop-opacity: 0.4;
+    mix-blend-mode: screen;
   }
 
-  .mesh-ring--one {
-    animation-duration: 32s;
-    animation-direction: alternate;
+  :global([data-base-theme='dark'] .community-hero__backdrop) {
+    --hero-backdrop-opacity: 0.52;
   }
 
-  .mesh-ring--two {
-    inset: 0 12%;
-    animation-duration: 26s;
-    animation-direction: alternate-reverse;
+  :global([data-base-theme='dark'] .community-hero__backdrop-spotlight) {
+    --hero-backdrop-opacity: 0.32;
   }
 
-  .mesh-orb {
-    position: absolute;
-    width: clamp(160px, 26vw, 220px);
-    height: clamp(160px, 26vw, 220px);
-    border-radius: 50%;
-    background: var(--gradient-spectrum-2);
-    filter: blur(60px);
-    opacity: var(--hero-orb-opacity);
-    animation: meshPulse 20s ease-in-out infinite;
-  }
-
-  .mesh-orb--one {
-    top: -30%;
-    left: 12%;
-  }
-
-  .mesh-orb--two {
-    bottom: -38%;
-    right: 18%;
-    background: var(--gradient-spectrum-3);
-    animation-delay: -8s;
-  }
-
-  @keyframes meshOrbit {
-    0% {
-      transform: rotate(0deg) scale(0.96);
-      opacity: 0.5;
-    }
-    50% {
-      transform: rotate(180deg) scale(1.02);
-      opacity: 0.75;
-    }
-    100% {
-      transform: rotate(360deg) scale(0.96);
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes meshPulse {
-    0%, 100% {
-      transform: translate3d(-6%, -4%, 0) scale(0.9);
-    }
-    50% {
-      transform: translate3d(4%, 6%, 0) scale(1.05);
-    }
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .community-hero__backdrop-spotlight) {
+    display: none;
   }
 
   :global(.hero--community h1) {
@@ -665,8 +618,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mesh-ring,
-    .mesh-orb {
+    :global(.community-hero__backdrop),
+    :global(.community-hero__backdrop-spotlight) {
       animation: none;
     }
   }

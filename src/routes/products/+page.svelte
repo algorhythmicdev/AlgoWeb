@@ -3,6 +3,7 @@
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
   import HeroWrapper from '$components/hero/HeroWrapper.svelte';
+  import HeroBackdrop from '$components/hero/HeroBackdrop.svelte';
   import ProductDemoPreview from '$components/ProductDemoPreview.svelte';
   import Icon from '$components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
@@ -196,11 +197,18 @@
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="backdrop">
-    <div class="products-hero__backdrop" aria-hidden="true">
-      <span class="products-stripe products-stripe--one"></span>
-      <span class="products-stripe products-stripe--two"></span>
-      <span class="products-orb products-orb--one"></span>
-    </div>
+    <HeroBackdrop
+      variant="glass-parallax"
+      tone="atlantic"
+      intensity="bold"
+      className="products-hero__backdrop"
+    />
+    <HeroBackdrop
+      variant="line-sweep"
+      tone="aurora"
+      intensity="soft"
+      className="products-hero__backdrop-sweep"
+    />
   </svelte:fragment>
   <svelte:fragment slot="title">
     <h1 class="products-hero__headline heading-gradient" aria-label={heroTitle}>
@@ -357,80 +365,32 @@
     justify-self: center;
   }
 
-  .products-hero__backdrop {
+  :global(.products-hero__backdrop),
+  :global(.products-hero__backdrop-sweep) {
     position: absolute;
-    inset: -20% -30% auto;
-    height: clamp(18rem, 32vw, 26rem);
+    inset: -22% -32% auto;
+    height: clamp(18rem, 34vw, 26rem);
     pointer-events: none;
     z-index: -1;
   }
 
-  .products-stripe {
-    position: absolute;
-    top: 10%;
-    width: 140%;
-    height: clamp(280px, 40vw, 340px);
-    background: linear-gradient(120deg, var(--hero-glow-primary), color-mix(in srgb, var(--hero-glow-secondary) 60%, transparent 40%));
-    filter: blur(80px);
-    transform: rotate(12deg);
-    transform-origin: center;
-    animation: productsSweep 22s ease-in-out infinite;
+  :global(.products-hero__backdrop) {
+    --hero-backdrop-opacity: 0.56;
+    --hero-backdrop-blur: clamp(140px, 26vw, 220px);
   }
 
-  .products-stripe--one {
-    left: -20%;
-    animation-duration: 24s;
+  :global(.products-hero__backdrop-sweep) {
+    --hero-backdrop-opacity: 0.38;
+    mix-blend-mode: screen;
   }
 
-  .products-stripe--two {
-    right: -12%;
-    top: -6%;
-    transform: rotate(-14deg);
-    background: linear-gradient(120deg, var(--hero-glow-accent), color-mix(in srgb, var(--hero-glow-secondary) 55%, transparent 45%));
-    animation-duration: 28s;
-    animation-delay: -6s;
+  :global([data-base-theme='dark'] .products-hero__backdrop) {
+    --hero-backdrop-opacity: 0.48;
   }
 
-  .products-orb {
-    position: absolute;
-    width: clamp(160px, 28vw, 220px);
-    height: clamp(160px, 28vw, 220px);
-    background: var(--gradient-spectrum-2);
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: var(--hero-orb-opacity);
-    bottom: -40%;
-    left: 10%;
-    animation: productsOrbDrift 26s ease-in-out infinite;
+  :global([data-base-theme='dark'] .products-hero__backdrop-sweep) {
+    --hero-backdrop-opacity: 0.32;
   }
-
-  @keyframes productsSweep {
-    0% {
-      transform: translate3d(-6%, 0, 0) rotate(12deg) scale(0.95);
-      opacity: 0.45;
-    }
-
-    50% {
-      transform: translate3d(6%, -4%, 0) rotate(18deg) scale(1.05);
-      opacity: 0.72;
-    }
-
-    100% {
-      transform: translate3d(-6%, 0, 0) rotate(12deg) scale(0.95);
-      opacity: 0.45;
-    }
-  }
-
-@keyframes productsOrbDrift {
-  0%,
-  100% {
-    transform: translate3d(-6%, 6%, 0) scale(0.9);
-  }
-
-  40% {
-    transform: translate3d(6%, -6%, 0) scale(1.05);
-  }
-}
 
   .products-hero__label {
     display: inline-flex;
@@ -456,7 +416,7 @@
     color: var(--text-primary);
   }
 
-  :global([data-theme='contrast']) .products-hero__label {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .products-hero__label {
     background: rgba(0, 0, 0, 0.85);
     border-color: rgba(255, 255, 255, 0.72);
     color: var(--text-primary);
@@ -502,7 +462,7 @@
     max-width: var(--measure-xl);
   }
   :global([data-base-theme='dark'])
-  :global([data-theme='contrast'])
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']))
   .demo-previews {
     position: relative;
   }
@@ -815,25 +775,25 @@
     box-shadow: var(--shadow-md);
   }
 
-  :global([data-theme='contrast']) .catalog-card {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .catalog-card {
     border-color: rgba(255, 255, 255, 0.85);
     box-shadow: none;
   }
 
-  :global([data-theme='contrast']) .catalog-eyebrow,
-  :global([data-theme='contrast']) .catalog-mvp,
-  :global([data-theme='contrast']) .catalog-host,
-  :global([data-theme='contrast']) .feature-pills li {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .catalog-eyebrow,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .catalog-mvp,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .catalog-host,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .feature-pills li {
     background: rgba(0, 0, 0, 0.88);
     border-color: rgba(255, 255, 255, 0.85);
     color: var(--text-primary);
   }
 
-  :global([data-theme='contrast']) .feature-title {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .feature-title {
     color: var(--text-primary);
   }
 
-  :global([data-theme='contrast']) .feature-description {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .feature-description {
     color: var(--text-secondary);
   }
 </style>

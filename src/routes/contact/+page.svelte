@@ -5,6 +5,7 @@
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -212,13 +213,18 @@
   introReveal={{ delay: 80, stagger: 140 }}
 >
   <svelte:fragment slot="backdrop">
-    <div class="contact-hero__backdrop" aria-hidden="true">
-      <span class="contact-orb contact-orb--primary"></span>
-      <span class="contact-orb contact-orb--secondary"></span>
-      <span class="contact-node contact-node--one"></span>
-      <span class="contact-node contact-node--two"></span>
-      <span class="contact-node contact-node--three"></span>
-    </div>
+    <HeroBackdrop
+      variant="particle-drift"
+      tone="atlantic"
+      intensity="balanced"
+      className="contact-hero__backdrop"
+    />
+    <HeroBackdrop
+      variant="spotlight"
+      tone="aurora"
+      intensity="soft"
+      className="contact-hero__backdrop-spotlight"
+    />
   </svelte:fragment>
   <svelte:fragment slot="title">
     <h1 class="contact-hero__title heading-gradient">{$_('contact.hero_title')}</h1>
@@ -525,7 +531,7 @@
     color: var(--accent-primary);
   }
 
-  :global([data-theme='contrast']) .contact-hero__cta-action {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-hero__cta-action {
     color: var(--text-primary);
   }
 
@@ -533,7 +539,7 @@
     color: color-mix(in srgb, rgba(214, 224, 255, 0.82) 68%, rgba(var(--signal-yellow-rgb), 0.3) 32%);
   }
 
-  :global([data-theme='contrast']) .contact-hero__cta-label {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-hero__cta-label {
     color: var(--text-primary);
   }
 
@@ -548,80 +554,39 @@
     box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.36), 0 24px 55px rgba(4, 12, 26, 0.45);
   }
 
-  :global([data-theme='contrast']) .contact-hero__headline {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-hero__headline {
     background: linear-gradient(126deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.74));
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
   }
 
-  .contact-hero__backdrop {
+  :global(.contact-hero__backdrop),
+  :global(.contact-hero__backdrop-spotlight) {
     position: absolute;
-    inset: -20% -10%;
+    inset: -22% -12% auto;
     pointer-events: none;
-    filter: blur(0);
     z-index: -1;
   }
 
-  .contact-orb {
-    position: absolute;
-    width: clamp(240px, 36vw, 320px);
-    height: clamp(240px, 36vw, 320px);
-    border-radius: 50%;
-    opacity: var(--hero-orb-opacity);
-    filter: blur(60px);
-    transform: translate3d(0, 0, 0);
-    animation: contactOrbDrift 24s ease-in-out infinite;
+  :global(.contact-hero__backdrop) {
+    --hero-backdrop-opacity: 0.58;
+    --hero-backdrop-blur: clamp(150px, 28vw, 260px);
   }
 
-  .contact-orb--primary {
-    top: -10%;
-    left: -12%;
-    background: var(--gradient-spectrum-1);
-    animation-duration: 28s;
+  :global(.contact-hero__backdrop-spotlight) {
+    --hero-backdrop-opacity: 0.36;
+    mix-blend-mode: screen;
   }
 
-  .contact-orb--secondary {
-    bottom: -18%;
-    right: -6%;
-    background: var(--gradient-spectrum-3);
-    animation-duration: 32s;
-    animation-delay: -6s;
+  :global([data-base-theme='dark'] .contact-hero__backdrop) {
+    --hero-backdrop-opacity: 0.5;
   }
 
-  .contact-node {
-    position: absolute;
-    width: clamp(38px, 6vw, 52px);
-    height: clamp(38px, 6vw, 52px);
-    border-radius: var(--radius-full);
-    background: var(--hero-overlay-highlight);
-    box-shadow: 0 18px 42px color-mix(in srgb, var(--hero-glow-primary) 50%, rgba(2, 6, 18, 0.4) 50%);
-    mix-blend-mode: var(--hero-overlay-blend);
-    opacity: calc(var(--hero-overlay-opacity) * 0.9);
-    animation: contactNodeFloat 16s ease-in-out infinite;
+  :global([data-base-theme='dark'] .contact-hero__backdrop-spotlight) {
+    --hero-backdrop-opacity: 0.28;
   }
 
-  .contact-node--one { top: 28%; left: 12%; background: color-mix(in srgb, var(--hero-glow-primary) 80%, var(--hero-overlay-subtle) 20%); }
-  .contact-node--two { top: 52%; right: 20%; background: color-mix(in srgb, var(--hero-glow-accent) 70%, var(--hero-overlay-highlight) 30%); animation-delay: -4s; }
-  .contact-node--three { bottom: 18%; left: 32%; background: color-mix(in srgb, var(--hero-glow-secondary) 75%, var(--hero-overlay-subtle) 25%); animation-delay: -2s; }
-
-  @keyframes contactOrbDrift {
-    0% {
-      transform: translate3d(-4%, -2%, 0) scale(0.96);
-    }
-    50% {
-      transform: translate3d(6%, 4%, 0) scale(1.04);
-    }
-    100% {
-      transform: translate3d(-2%, 2%, 0) scale(0.98);
-    }
-  }
-
-  @keyframes contactNodeFloat {
-    0%, 100% {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-    50% {
-      transform: translate3d(8px, -16px, 0) scale(1.08);
-    }
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .contact-hero__backdrop-spotlight) {
+    display: none;
   }
 
   .contact-section {
@@ -633,13 +598,6 @@
     gap: clamp(2.4rem, 5vw, 3.5rem);
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: start;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .contact-orb,
-    .contact-node {
-      animation: none;
-    }
   }
 
 form {
@@ -775,8 +733,9 @@ form {
       border-radius: 0 0 var(--radius-xl) var(--radius-xl);
     }
 
-    .contact-hero__backdrop {
-      inset: -32% -24%;
+    :global(.contact-hero__backdrop),
+    :global(.contact-hero__backdrop-spotlight) {
+      inset: -32% -24% auto;
     }
 
     form,
@@ -793,14 +752,9 @@ form {
   }
 
   @media (max-width: 480px) {
-    .contact-orb {
-      width: clamp(180px, 60vw, 240px);
-      height: clamp(180px, 60vw, 240px);
-    }
-
-    .contact-node {
-      width: clamp(32px, 10vw, 42px);
-      height: clamp(32px, 10vw, 42px);
+    :global(.contact-hero__backdrop),
+    :global(.contact-hero__backdrop-spotlight) {
+      inset: -38% -30% auto;
     }
 
     form,

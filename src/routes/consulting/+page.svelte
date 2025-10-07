@@ -3,6 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
   import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
+  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
@@ -172,11 +173,18 @@
   introReveal={{ delay: 60, stagger: 130 }}
 >
   <svelte:fragment slot="backdrop">
-    <div class="consulting-hero__halo" aria-hidden="true">
-      <span class="consulting-blob consulting-blob--one"></span>
-      <span class="consulting-blob consulting-blob--two"></span>
-      <span class="consulting-constellation consulting-constellation--one"></span>
-    </div>
+    <HeroBackdrop
+      variant="glass-parallax"
+      tone="primary"
+      intensity="balanced"
+      className="consulting-hero__backdrop"
+    />
+    <HeroBackdrop
+      variant="particle-drift"
+      tone="aurora"
+      intensity="soft"
+      className="consulting-hero__backdrop-drift"
+    />
   </svelte:fragment>
   <svelte:fragment slot="title">
     <h1 class="consulting-hero__title heading-gradient">{$_('consulting.hero_title')}</h1>
@@ -536,7 +544,7 @@
     color: var(--text-secondary);
   }
 
-  :global([data-theme='contrast']) .consulting-hero__attribution {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__attribution {
     color: var(--text-primary);
   }
 
@@ -546,17 +554,17 @@
     box-shadow: 0 28px 64px rgba(2, 6, 18, 0.45);
   }
 
-  :global([data-theme='contrast']) .consulting-hero__testimonial {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial {
     background: rgba(0, 0, 0, 0.9);
     border-color: rgba(255, 255, 255, 0.75);
     box-shadow: 0 24px 52px rgba(0, 0, 0, 0.72);
   }
 
-  :global([data-theme='contrast']) .consulting-hero__testimonial-header {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial-header {
     color: var(--text-primary);
   }
 
-  :global([data-theme='contrast']) .consulting-hero__testimonial-icon {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial-icon {
     background: rgba(255, 255, 255, 0.2);
     color: var(--text-primary);
     box-shadow: none;
@@ -567,86 +575,40 @@
   box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.32), 0 24px 55px rgba(4, 12, 26, 0.42);
 }
 
-:global([data-theme='contrast']) .consulting-hero__headline {
+:global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__headline {
   background: linear-gradient(126deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.72));
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
 }
 
-.consulting-hero__halo {
+:global(.consulting-hero__backdrop),
+:global(.consulting-hero__backdrop-drift) {
   position: absolute;
-  inset: -15% -10% auto;
+  inset: -18% -12% auto;
   height: clamp(24rem, 40vw, 30rem);
   pointer-events: none;
-  overflow: hidden;
   z-index: -1;
 }
 
-.consulting-blob {
-  position: absolute;
-  width: clamp(200px, 32vw, 320px);
-  height: clamp(200px, 32vw, 320px);
-  background: var(--gradient-spectrum-1);
-  opacity: var(--hero-orb-opacity);
-  filter: blur(60px);
-  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
-  animation: consultingMorph 26s ease-in-out infinite;
+:global(.consulting-hero__backdrop) {
+  --hero-backdrop-opacity: 0.58;
+  --hero-backdrop-blur: clamp(140px, 26vw, 240px);
 }
 
-.consulting-blob--one {
-  top: -18%;
-  left: -12%;
+:global(.consulting-hero__backdrop-drift) {
+  --hero-backdrop-opacity: 0.34;
+  mix-blend-mode: screen;
 }
 
-.consulting-blob--two {
-  right: -10%;
-  bottom: -24%;
-  background: var(--gradient-spectrum-4);
-  animation-delay: -12s;
+:global([data-base-theme='dark'] .consulting-hero__backdrop) {
+  --hero-backdrop-opacity: 0.5;
 }
 
-.consulting-constellation {
-  position: absolute;
-  inset: 12% 18%;
-  border-radius: var(--radius-2xl);
-  background:
-    radial-gradient(circle at 12% 20%, var(--hero-overlay-highlight) 0%, transparent 42%),
-    radial-gradient(circle at 82% 32%, color-mix(in srgb, var(--hero-glow-accent) 70%, transparent 30%) 0%, transparent 48%),
-    linear-gradient(120deg, color-mix(in srgb, var(--hero-glow-primary) 60%, transparent 40%), transparent);
-  opacity: var(--hero-overlay-opacity);
-  mix-blend-mode: var(--hero-overlay-blend);
-  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9), transparent 70%);
-  animation: consultingSweep 18s ease-in-out infinite;
+:global([data-base-theme='dark'] .consulting-hero__backdrop-drift) {
+  --hero-backdrop-opacity: 0.28;
 }
 
-.consulting-constellation--one {
-  animation-delay: -6s;
-}
-
-@keyframes consultingMorph {
-  0% {
-    transform: translate3d(-4%, 2%, 0) scale(0.92) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(6%, -4%, 0) scale(1.05) rotate(6deg);
-  }
-  100% {
-    transform: translate3d(-2%, 4%, 0) scale(0.94) rotate(-3deg);
-  }
-}
-
-@keyframes consultingSweep {
-  0%, 100% {
-    opacity: 0.62;
-    transform: scale(0.96) translate3d(-4%, -2%, 0);
-  }
-  40% {
-    opacity: 0.88;
-    transform: scale(1.06) translate3d(3%, 4%, 0);
-  }
-  70% {
-    opacity: 0.74;
-    transform: scale(1) translate3d(-2%, 2%, 0);
-  }
+:global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .consulting-hero__backdrop-drift) {
+  display: none;
 }
 
 .spots-indicator {
@@ -859,8 +821,8 @@
   }
 
 @media (prefers-reduced-motion: reduce) {
-  .consulting-blob,
-  .consulting-constellation {
+  :global(.consulting-hero__backdrop),
+  :global(.consulting-hero__backdrop-drift) {
     animation: none;
   }
 }

@@ -1,7 +1,25 @@
 <script>
-  const SUPPORTED = new Set(['aurora', 'mesh', 'wave', 'prism', 'spotlight', 'constellation']);
+  import { parallax } from '$utils/animations';
 
-  export let variant = /** @type {'aurora' | 'mesh' | 'wave' | 'prism' | 'spotlight' | 'constellation'} */ ('aurora');
+  const VARIANT_MAP = new Map([
+    ['aurora-flow', 'aurora-flow'],
+    ['aurora', 'aurora-flow'],
+    ['grid-ripple', 'grid-ripple'],
+    ['mesh', 'grid-ripple'],
+    ['glass-parallax', 'glass-parallax'],
+    ['prism', 'glass-parallax'],
+    ['particle-drift', 'particle-drift'],
+    ['constellation', 'particle-drift'],
+    ['line-sweep', 'line-sweep'],
+    ['wave', 'line-sweep'],
+    ['spotlight', 'spotlight']
+  ]);
+
+  export let variant =
+    /**
+     * @type {'aurora-flow' | 'glass-parallax' | 'grid-ripple' | 'particle-drift' | 'line-sweep' | 'spotlight' | 'aurora' | 'mesh' | 'wave' | 'prism' | 'constellation'}
+     */
+    ('aurora-flow');
   export let tone = /** @type {'primary' | 'aurora' | 'citrus' | 'crimson' | 'atlantic' | 'evergreen'} */ ('primary');
   export let intensity = /** @type {'soft' | 'balanced' | 'bold'} */ ('balanced');
   export let className = '';
@@ -37,65 +55,65 @@
     { top: '46%', left: '70%', size: '7px' }
   ];
 
-  $: resolvedVariant = SUPPORTED.has(variant) ? variant : 'aurora';
+  $: resolvedVariant = VARIANT_MAP.get(variant) ?? 'aurora-flow';
   $: toneClass = tone ? `hero-backdrop--tone-${tone}` : '';
   $: intensityClass = intensity ? `hero-backdrop--intensity-${intensity}` : '';
   $: baseClasses = ['hero-backdrop', `hero-backdrop--${resolvedVariant}`, toneClass, intensityClass, className]
     .filter(Boolean)
     .join(' ');
-  $: particleCount = resolvedVariant === 'mesh' ? 22 : resolvedVariant === 'constellation' ? 26 : resolvedVariant === 'prism' ? 18 : 14;
-  $: scatter = resolvedVariant === 'mesh'
+  $: particleCount =
+    resolvedVariant === 'grid-ripple'
+      ? 22
+      : resolvedVariant === 'particle-drift'
+        ? 26
+        : resolvedVariant === 'glass-parallax'
+          ? 18
+          : 14;
+  $: scatter = resolvedVariant === 'grid-ripple'
     ? createScatter(particleCount, 0.42)
-    : resolvedVariant === 'prism'
+    : resolvedVariant === 'glass-parallax'
       ? createScatter(particleCount, 0.38, -0.05)
-      : resolvedVariant === 'constellation'
+      : resolvedVariant === 'particle-drift'
         ? createScatter(particleCount, 0.52)
         : [];
 </script>
 
 <div class={baseClasses} aria-hidden="true">
-  {#if resolvedVariant === 'aurora'}
+  {#if resolvedVariant === 'aurora-flow'}
     <span class="hero-backdrop__halo hero-backdrop__halo--aurora-primary"></span>
     <span class="hero-backdrop__halo hero-backdrop__halo--aurora-secondary"></span>
     <span class="hero-backdrop__beam hero-backdrop__beam--aurora"></span>
     <span class="hero-backdrop__spray hero-backdrop__spray--aurora"></span>
-  {:else if resolvedVariant === 'mesh'}
-    <span class="hero-backdrop__grid hero-backdrop__grid--mesh"></span>
-    <div class="hero-backdrop__rings hero-backdrop__rings--mesh">
+  {:else if resolvedVariant === 'grid-ripple'}
+    <span class="hero-backdrop__grid hero-backdrop__grid--ripple"></span>
+    <div class="hero-backdrop__rings hero-backdrop__rings--ripple">
       <span></span>
       <span></span>
     </div>
-    <div class="hero-backdrop__particles hero-backdrop__particles--mesh">
+    <div class="hero-backdrop__particles hero-backdrop__particles--ripple">
       {#each scatter as particle, index (index)}
         <span
-          class="hero-backdrop__particle"
+          class="hero-backdrop__particle hero-backdrop__particle--ripple"
           style={`top:${particle.top};left:${particle.left};animation-delay:${particle.delay}s;`}
         ></span>
       {/each}
     </div>
-  {:else if resolvedVariant === 'wave'}
-    <span class="hero-backdrop__wave hero-backdrop__wave--one"></span>
-    <span class="hero-backdrop__wave hero-backdrop__wave--two"></span>
-    <span class="hero-backdrop__wave hero-backdrop__wave--accent"></span>
-    <div class="hero-backdrop__spark-lines">
-      <span></span>
-      <span></span>
-    </div>
-  {:else if resolvedVariant === 'prism'}
-    <div class="hero-backdrop__prisms">
-      <span class="hero-backdrop__prism hero-backdrop__prism--one"></span>
-      <span class="hero-backdrop__prism hero-backdrop__prism--two"></span>
-      <span class="hero-backdrop__prism hero-backdrop__prism--three"></span>
-    </div>
-    <span class="hero-backdrop__halo hero-backdrop__halo--prism"></span>
-    <div class="hero-backdrop__particles hero-backdrop__particles--prism">
-      {#each scatter as particle, index (index)}
+  {:else if resolvedVariant === 'glass-parallax'}
+    <div class="hero-backdrop__glass hero-backdrop__glass--one" use:parallax={{ intensity: 18 }}></div>
+    <div class="hero-backdrop__glass hero-backdrop__glass--two" use:parallax={{ intensity: 26 }}></div>
+    <div class="hero-backdrop__glass hero-backdrop__glass--three" use:parallax={{ intensity: 14 }}></div>
+    <div class="hero-backdrop__glints">
+      {#each scatter as glint, index (index)}
         <span
-          class="hero-backdrop__particle hero-backdrop__particle--prism"
-          style={`top:${particle.top};left:${particle.left};animation-delay:${particle.delay}s;`}
+          class="hero-backdrop__glint"
+          style={`top:${glint.top};left:${glint.left};animation-delay:${glint.delay}s;`}
         ></span>
       {/each}
     </div>
+  {:else if resolvedVariant === 'line-sweep'}
+    <span class="hero-backdrop__sweep hero-backdrop__sweep--base"></span>
+    <span class="hero-backdrop__sweep hero-backdrop__sweep--accent"></span>
+    <span class="hero-backdrop__sweep hero-backdrop__sweep--glare"></span>
   {:else if resolvedVariant === 'spotlight'}
     <span class="hero-backdrop__halo hero-backdrop__halo--spotlight"></span>
     <span class="hero-backdrop__ring hero-backdrop__ring--pulse"></span>
@@ -104,8 +122,8 @@
       <span></span>
       <span></span>
     </div>
-  {:else if resolvedVariant === 'constellation'}
-    <span class="hero-backdrop__grid hero-backdrop__grid--constellation"></span>
+  {:else if resolvedVariant === 'particle-drift'}
+    <span class="hero-backdrop__grid hero-backdrop__grid--particle"></span>
     <div class="hero-backdrop__nodes">
       {#each constellationNodes as node, index (index)}
         <span
@@ -114,7 +132,7 @@
         ></span>
       {/each}
     </div>
-    <div class="hero-backdrop__particles hero-backdrop__particles--constellation">
+    <div class="hero-backdrop__particles hero-backdrop__particles--drift">
       {#each scatter as particle, index (index)}
         <span
           class="hero-backdrop__particle hero-backdrop__particle--star"
@@ -177,8 +195,8 @@
     transform: translate(-50%, -50%);
   }
 
-  /* Aurora variant */
-  .hero-backdrop--aurora .hero-backdrop__halo--aurora-primary {
+  /* Aurora flow variant */
+  .hero-backdrop--aurora-flow .hero-backdrop__halo--aurora-primary {
     width: clamp(28rem, 60vw, 42rem);
     height: clamp(28rem, 60vw, 42rem);
     background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--hero-accent) 72%, transparent 28%) 0%, transparent 68%);
@@ -187,7 +205,7 @@
     animation: auroraDrift 18s ease-in-out infinite alternate;
   }
 
-  .hero-backdrop--aurora .hero-backdrop__halo--aurora-secondary {
+  .hero-backdrop--aurora-flow .hero-backdrop__halo--aurora-secondary {
     width: clamp(24rem, 52vw, 36rem);
     height: clamp(24rem, 52vw, 36rem);
     background: radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--hero-tertiary) 65%, transparent 35%) 0%, transparent 70%);
@@ -196,7 +214,7 @@
     animation: auroraDrift 22s ease-in-out infinite alternate-reverse;
   }
 
-  .hero-backdrop--aurora .hero-backdrop__beam--aurora {
+  .hero-backdrop--aurora-flow .hero-backdrop__beam--aurora {
     width: 140%;
     height: clamp(12rem, 32vw, 20rem);
     background: conic-gradient(
@@ -212,7 +230,7 @@
     animation: auroraSweep 24s linear infinite;
   }
 
-  .hero-backdrop--aurora .hero-backdrop__spray--aurora {
+  .hero-backdrop--aurora-flow .hero-backdrop__spray--aurora {
     width: 120%;
     height: 120%;
     background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--hero-secondary) 35%, transparent 65%) 0%, transparent 65%);
@@ -220,9 +238,8 @@
     opacity: calc(var(--hero-backdrop-opacity) * 0.45);
     animation: auroraPulse 12s ease-in-out infinite;
   }
-
-  /* Mesh variant */
-  .hero-backdrop--mesh .hero-backdrop__grid--mesh {
+  /* Grid ripple variant */
+  .hero-backdrop--grid-ripple .hero-backdrop__grid--ripple {
     width: clamp(26rem, 62vw, 44rem);
     height: clamp(26rem, 62vw, 44rem);
     border-radius: 50%;
@@ -237,27 +254,27 @@
     animation: meshSpin 26s linear infinite;
   }
 
-  .hero-backdrop--mesh .hero-backdrop__rings--mesh {
+  .hero-backdrop--grid-ripple .hero-backdrop__rings--ripple {
     width: clamp(30rem, 70vw, 48rem);
     height: clamp(30rem, 70vw, 48rem);
     margin: auto;
   }
 
-  .hero-backdrop--mesh .hero-backdrop__rings--mesh span {
+  .hero-backdrop--grid-ripple .hero-backdrop__rings--ripple span {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     border: 1px dashed color-mix(in srgb, var(--hero-grid-line-strong-color) 60%, transparent 40%);
     opacity: 0.65;
-    animation: meshFloat 18s ease-in-out infinite;
+    animation: ripplePulse 18s ease-in-out infinite;
   }
 
-  .hero-backdrop--mesh .hero-backdrop__rings--mesh span:nth-child(2) {
+  .hero-backdrop--grid-ripple .hero-backdrop__rings--ripple span:nth-child(2) {
     transform: rotate(42deg) scale(0.8);
     animation-duration: 24s;
   }
 
-  .hero-backdrop--mesh .hero-backdrop__particles--mesh {
+  .hero-backdrop--grid-ripple .hero-backdrop__particles--ripple {
     width: 0;
     height: 0;
     left: 50%;
@@ -265,7 +282,7 @@
     transform: translate(-50%, -50%);
   }
 
-  .hero-backdrop--mesh .hero-backdrop__particle {
+  .hero-backdrop--grid-ripple .hero-backdrop__particle--ripple {
     position: absolute;
     width: 6px;
     height: 6px;
@@ -276,136 +293,106 @@
     animation: particleTwinkle 12s ease-in-out infinite;
   }
 
-  .hero-backdrop--mesh .hero-backdrop__particle:nth-child(odd) {
+  .hero-backdrop--grid-ripple .hero-backdrop__particle--ripple:nth-child(odd) {
     animation-duration: 14s;
   }
 
-  .hero-backdrop--mesh .hero-backdrop__particle:nth-child(3n) {
+  .hero-backdrop--grid-ripple .hero-backdrop__particle--ripple:nth-child(3n) {
     animation-delay: 1.6s;
   }
 
-  /* Wave variant */
-  .hero-backdrop--wave .hero-backdrop__wave {
-    width: 140%;
-    height: clamp(10rem, 26vw, 16rem);
-    border-radius: 45% 55% 55% 45% / 60% 40% 60% 40%;
-    opacity: calc(var(--hero-backdrop-opacity) * 0.65);
-    filter: blur(calc(var(--hero-backdrop-blur) * 0.25));
-    animation: waveDrift 24s ease-in-out infinite;
-  }
-
-  .hero-backdrop--wave .hero-backdrop__wave--one {
-    top: 18%;
-    background: linear-gradient(120deg, color-mix(in srgb, var(--hero-accent) 55%, transparent 45%) 0%, transparent 80%);
-  }
-
-  .hero-backdrop--wave .hero-backdrop__wave--two {
-    top: 54%;
-    animation-duration: 28s;
-    animation-direction: reverse;
-    background: linear-gradient(140deg, color-mix(in srgb, var(--hero-secondary) 55%, transparent 45%) 0%, transparent 85%);
-  }
-
-  .hero-backdrop--wave .hero-backdrop__wave--accent {
-    width: 120%;
-    top: 40%;
-    background: linear-gradient(120deg, color-mix(in srgb, var(--hero-tertiary) 42%, transparent 58%) 0%, transparent 75%);
-    filter: blur(calc(var(--hero-backdrop-blur) * 0.18));
-    animation-duration: 20s;
-    animation-direction: alternate;
-  }
-
-  .hero-backdrop--wave .hero-backdrop__spark-lines {
-    width: 100%;
-    height: 100%;
-  }
-
-  .hero-backdrop--wave .hero-backdrop__spark-lines span {
+  /* Glass parallax variant */
+  .hero-backdrop--glass-parallax .hero-backdrop__glass {
     position: absolute;
-    width: clamp(12rem, 34vw, 20rem);
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--hero-accent) 80%, transparent 20%) 40%, transparent 100%);
-    left: 20%;
-    top: 28%;
-    transform-origin: left center;
-    animation: waveSpark 14s linear infinite;
+    inset: auto;
+    border-radius: clamp(1.5rem, 4vw, 2.75rem);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--hero-overlay-highlight) 70%, transparent 30%) 0%, color-mix(in srgb, var(--hero-accent) 15%, transparent 85%) 100%);
+    border: 1px solid color-mix(in srgb, var(--hero-ring-border) 60%, rgba(255, 255, 255, 0.22) 40%);
+    backdrop-filter: blur(22px);
+    box-shadow:
+      0 28px 60px rgba(15, 23, 42, 0.24),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    opacity: calc(var(--hero-backdrop-opacity) * 0.8);
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
   }
 
-  .hero-backdrop--wave .hero-backdrop__spark-lines span:nth-child(2) {
-    top: 70%;
-    left: auto;
-    right: 18%;
-    transform-origin: right center;
-    animation-duration: 18s;
-    animation-direction: reverse;
+  .hero-backdrop--glass-parallax .hero-backdrop__glass--one {
+    width: clamp(18rem, 42vw, 28rem);
+    height: clamp(12rem, 32vw, 20rem);
+    top: 6%;
+    left: 6%;
   }
 
-  /* Prism variant */
-  .hero-backdrop--prism .hero-backdrop__prisms {
-    width: 100%;
-    height: 100%;
+  .hero-backdrop--glass-parallax .hero-backdrop__glass--two {
+    width: clamp(16rem, 38vw, 24rem);
+    height: clamp(11rem, 28vw, 18rem);
+    top: 36%;
+    right: 10%;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--hero-overlay-highlight) 58%, transparent 42%) 0%, color-mix(in srgb, var(--hero-secondary) 24%, transparent 76%) 100%);
   }
 
-  .hero-backdrop--prism .hero-backdrop__prism {
+  .hero-backdrop--glass-parallax .hero-backdrop__glass--three {
+    width: clamp(14rem, 34vw, 20rem);
+    height: clamp(10rem, 24vw, 16rem);
+    bottom: 4%;
+    left: 24%;
+    background: linear-gradient(140deg, color-mix(in srgb, var(--hero-overlay-highlight) 52%, transparent 48%) 0%, color-mix(in srgb, var(--hero-tertiary) 18%, transparent 82%) 100%);
+  }
+
+  .hero-backdrop--glass-parallax .hero-backdrop__glints {
     position: absolute;
-    width: clamp(7rem, 20vw, 12rem);
-    height: clamp(9rem, 24vw, 16rem);
-    background: linear-gradient(140deg, color-mix(in srgb, var(--hero-accent) 75%, transparent 25%) 0%, color-mix(in srgb, var(--hero-secondary) 60%, transparent 40%) 100%);
-    opacity: calc(var(--hero-backdrop-opacity) * 0.7);
-    clip-path: polygon(15% 0%, 85% 0%, 100% 65%, 50% 100%, 0% 65%);
-    filter: drop-shadow(0 24px 60px color-mix(in srgb, var(--hero-accent) 35%, transparent 65%));
-    animation: prismFloat 20s ease-in-out infinite;
+    inset: 0;
+    pointer-events: none;
   }
 
-  .hero-backdrop--prism .hero-backdrop__prism--one {
-    left: 18%;
-    top: 10%;
-  }
-
-  .hero-backdrop--prism .hero-backdrop__prism--two {
-    right: 14%;
-    top: 22%;
-    animation-duration: 24s;
-  }
-
-  .hero-backdrop--prism .hero-backdrop__prism--three {
-    left: 32%;
-    top: 46%;
-    width: clamp(8rem, 24vw, 14rem);
-    height: clamp(10rem, 28vw, 18rem);
-    animation-duration: 26s;
-  }
-
-  .hero-backdrop--prism .hero-backdrop__halo--prism {
-    width: clamp(28rem, 62vw, 42rem);
-    height: clamp(28rem, 62vw, 42rem);
-    background: radial-gradient(circle, color-mix(in srgb, var(--hero-accent) 58%, transparent 42%) 0%, transparent 70%);
-    filter: blur(calc(var(--hero-backdrop-blur) * 0.28));
-    opacity: calc(var(--hero-backdrop-opacity) * 0.6);
-    animation: prismGlow 18s ease-in-out infinite;
-  }
-
-  .hero-backdrop--prism .hero-backdrop__particles--prism {
-    width: 0;
-    height: 0;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .hero-backdrop--prism .hero-backdrop__particle--prism {
+  .hero-backdrop--glass-parallax .hero-backdrop__glint {
     position: absolute;
-    width: 4px;
-    height: 12px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--hero-secondary) 80%, transparent 20%);
+    width: 2px;
+    height: clamp(1.5rem, 4vw, 2.25rem);
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.85) 40%, transparent 100%);
     opacity: 0;
-    transform-origin: center;
-    animation: prismShard 16s linear infinite;
+    animation: glintBlink 6s ease-in-out infinite;
   }
 
-  .hero-backdrop--prism .hero-backdrop__particle--prism:nth-child(odd) {
-    animation-duration: 20s;
+  .hero-backdrop--glass-parallax .hero-backdrop__glint:nth-child(3n) {
+    animation-duration: 8s;
+  }
+
+  .hero-backdrop--glass-parallax .hero-backdrop__glint:nth-child(4n) {
+    animation-delay: 2s;
+  }
+
+  /* Line sweep variant */
+  .hero-backdrop--line-sweep .hero-backdrop__sweep {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: clamp(24rem, 64vw, 38rem);
+    height: clamp(12rem, 30vw, 18rem);
+    border-radius: clamp(2rem, 5vw, 3.25rem);
+    opacity: calc(var(--hero-backdrop-opacity) * 0.6);
+    filter: blur(calc(var(--hero-backdrop-blur) * 0.18));
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero-backdrop--line-sweep .hero-backdrop__sweep--base {
+    background: linear-gradient(130deg, color-mix(in srgb, var(--hero-accent) 65%, transparent 35%) 0%, transparent 80%);
+    animation: lineSweep 22s ease-in-out infinite;
+  }
+
+  .hero-backdrop--line-sweep .hero-backdrop__sweep--accent {
+    background: linear-gradient(140deg, color-mix(in srgb, var(--hero-secondary) 55%, transparent 45%) 0%, transparent 82%);
+    animation: lineSweep 24s ease-in-out infinite reverse;
+  }
+
+  .hero-backdrop--line-sweep .hero-backdrop__sweep--glare {
+    width: clamp(28rem, 70vw, 46rem);
+    height: clamp(14rem, 32vw, 20rem);
+    background: linear-gradient(150deg, transparent 10%, rgba(255, 255, 255, 0.35) 45%, transparent 90%);
+    mix-blend-mode: screen;
+    opacity: calc(var(--hero-backdrop-opacity) * 0.35);
+    animation: lineGlare 26s linear infinite;
   }
 
   /* Spotlight variant */
@@ -455,8 +442,8 @@
     opacity: 0.6;
   }
 
-  /* Constellation variant */
-  .hero-backdrop--constellation .hero-backdrop__grid--constellation {
+  /* Particle drift variant */
+  .hero-backdrop--particle-drift .hero-backdrop__grid--particle {
     width: 120%;
     height: 120%;
     background:
@@ -467,14 +454,14 @@
     animation: meshSpin 48s linear infinite;
   }
 
-  .hero-backdrop--constellation .hero-backdrop__nodes {
+  .hero-backdrop--particle-drift .hero-backdrop__nodes {
     width: 100%;
     height: 100%;
     position: absolute;
     inset: 0;
   }
 
-  .hero-backdrop--constellation .hero-backdrop__node {
+  .hero-backdrop--particle-drift .hero-backdrop__node {
     position: absolute;
     border-radius: 50%;
     background: color-mix(in srgb, var(--hero-accent) 85%, transparent 15%);
@@ -483,14 +470,14 @@
     animation: constellationTwinkle 12s ease-in-out infinite;
   }
 
-  .hero-backdrop--constellation .hero-backdrop__node--major {
+  .hero-backdrop--particle-drift .hero-backdrop__node--major {
     box-shadow:
       0 0 18px color-mix(in srgb, var(--hero-accent) 45%, transparent 55%),
       0 0 32px color-mix(in srgb, var(--hero-secondary) 25%, transparent 75%);
     animation-duration: 18s;
   }
 
-  .hero-backdrop--constellation .hero-backdrop__particles--constellation {
+  .hero-backdrop--particle-drift .hero-backdrop__particles--drift {
     width: 0;
     height: 0;
     left: 50%;
@@ -498,7 +485,7 @@
     transform: translate(-50%, -50%);
   }
 
-  .hero-backdrop--constellation .hero-backdrop__particle--star {
+  .hero-backdrop--particle-drift .hero-backdrop__particle--star {
     position: absolute;
     width: 4px;
     height: 4px;
@@ -508,11 +495,11 @@
     animation: constellationParticle 20s linear infinite;
   }
 
-  .hero-backdrop--constellation .hero-backdrop__particle--star:nth-child(odd) {
+  .hero-backdrop--particle-drift .hero-backdrop__particle--star:nth-child(odd) {
     animation-duration: 24s;
   }
 
-  .hero-backdrop--constellation .hero-backdrop__particles--constellation::after {
+  .hero-backdrop--particle-drift .hero-backdrop__particles--drift::after {
     content: '';
     position: absolute;
     width: clamp(28rem, 64vw, 46rem);
@@ -566,9 +553,15 @@
     100% { transform: rotate(360deg); }
   }
 
-  @keyframes meshFloat {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(0.92) rotate(12deg); }
+  @keyframes ripplePulse {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.65;
+    }
+    50% {
+      transform: scale(0.9) rotate(14deg);
+      opacity: 0.4;
+    }
   }
 
   @keyframes particleTwinkle {
@@ -579,35 +572,24 @@
     100% { opacity: 0; transform: translate(-4px, 4px) scale(0.8); }
   }
 
-  @keyframes waveDrift {
-    0% { transform: translate(-12%, 0) rotate(-4deg); }
-    50% { transform: translate(8%, -2%) rotate(3deg); }
-    100% { transform: translate(-10%, 1%) rotate(-2deg); }
+  @keyframes glintBlink {
+    0% { opacity: 0; transform: translateY(12px) scaleY(0.6); }
+    35% { opacity: 0.8; }
+    60% { opacity: 0; transform: translateY(-12px) scaleY(1.1); }
+    100% { opacity: 0; transform: translateY(18px) scaleY(0.4); }
   }
 
-  @keyframes waveSpark {
-    0% { transform: scaleX(0.3) translateY(0); opacity: 0; }
-    20% { opacity: 1; }
-    50% { transform: scaleX(1) translateY(-8px); }
-    100% { transform: scaleX(0.4) translateY(4px); opacity: 0; }
+  @keyframes lineSweep {
+    0% { transform: translate3d(-12%, -6%, 0) rotate(-6deg); }
+    50% { transform: translate3d(10%, 4%, 0) rotate(4deg); }
+    100% { transform: translate3d(-8%, -3%, 0) rotate(-5deg); }
   }
 
-  @keyframes prismFloat {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-12px) rotate(4deg); }
-    100% { transform: translateY(0) rotate(-3deg); }
-  }
-
-  @keyframes prismGlow {
-    0%, 100% { opacity: calc(var(--hero-backdrop-opacity) * 0.55); }
-    50% { opacity: calc(var(--hero-backdrop-opacity) * 0.75); }
-  }
-
-  @keyframes prismShard {
-    0% { opacity: 0; transform: translate(-10px, 10px) scale(0.6) rotate(0deg); }
-    20% { opacity: 1; }
-    50% { transform: translate(6px, -8px) scale(1.05) rotate(18deg); }
-    100% { opacity: 0; transform: translate(-12px, 12px) scale(0.7) rotate(-10deg); }
+  @keyframes lineGlare {
+    0% { transform: translateX(-60%) rotate(-12deg); opacity: 0; }
+    35% { opacity: calc(var(--hero-backdrop-opacity) * 0.4); }
+    70% { opacity: calc(var(--hero-backdrop-opacity) * 0.2); }
+    100% { transform: translateX(60%) rotate(12deg); opacity: 0; }
   }
 
   @keyframes spotlightPulse {
@@ -632,15 +614,26 @@
     100% { opacity: 0; transform: scale(0.6); }
   }
 
-  :global([data-theme='contrast']) .hero-backdrop {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop {
     mix-blend-mode: normal;
   }
 
-  :global([data-theme='contrast']) .hero-backdrop__halo,
-  :global([data-theme='contrast']) .hero-backdrop__beam,
-  :global([data-theme='contrast']) .hero-backdrop__grid,
-  :global([data-theme='contrast']) .hero-backdrop__particle {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__halo,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__beam,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__grid,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__glass,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__sweep,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__particle,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop__glint {
     opacity: 0.65;
+  }
+
+  :global([data-base-theme='dark']) .hero-backdrop--line-sweep {
+    mix-blend-mode: lighten;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop--line-sweep {
+    display: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -649,13 +642,13 @@
     .hero-backdrop__spray,
     .hero-backdrop__grid,
     .hero-backdrop__ring,
-    .hero-backdrop__wave,
-    .hero-backdrop__prism,
     .hero-backdrop__particle,
     .hero-backdrop__rays span,
-    .hero-backdrop__spark-lines span,
-    .hero-backdrop__prism {
+    .hero-backdrop__glass,
+    .hero-backdrop__sweep,
+    .hero-backdrop__glint {
       animation: none !important;
+      transform: none !important;
     }
   }
 </style>

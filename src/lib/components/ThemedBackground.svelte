@@ -205,7 +205,7 @@
     opacity: 0.55;
   }
 
-  :global([data-theme='contrast']) .wash {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .wash {
     background:
       radial-gradient(
         40% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
@@ -217,7 +217,7 @@
     filter: saturate(1.05);
   }
 
-  :global([data-theme='contrast']) .flare {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .flare {
     background:
       radial-gradient(42% 42% at 78% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
       radial-gradient(50% 50% at 24% 80%, rgba(255, 255, 255, 0.28) 0%, transparent 74%);
@@ -225,7 +225,7 @@
     mix-blend-mode: normal;
   }
 
-  :global([data-theme='contrast']) .dot {
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .dot {
     background: rgba(255, 255, 255, 0.6) !important;
     mix-blend-mode: normal;
     opacity: 0.6 !important;

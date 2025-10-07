@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { theme } from '$stores/theme';
 
-  /** @type {Array<{ value: 'light' | 'dark' | 'contrast'; label: string; icon: 'sun' | 'moon' | 'contrast' }>} */
+  /** @type {Array<{ value: 'light' | 'dark' | 'hc'; label: string; icon: 'sun' | 'moon' | 'contrast' }>} */
   const themeOptions = [
     {
       value: 'light',
@@ -16,7 +16,7 @@
       icon: 'moon'
     },
     {
-      value: 'contrast',
+      value: 'hc',
       label: 'settings.theme.contrast',
       icon: 'contrast'
     }
@@ -29,7 +29,7 @@
   });
 
   /**
-   * @param {'light' | 'dark' | 'contrast'} value
+   * @param {'light' | 'dark' | 'hc'} value
    */
   const selectTheme = (value) => {
     theme.set(value);
