@@ -85,10 +85,18 @@
 
 <style>
   :global(.hero--landing) {
+    --hero-padding-block-start: clamp(7rem, 16vw, 11rem);
     --hero-shell-columns: minmax(0, 1fr);
     --hero-shell-gap: 0;
     --hero-intro-gap: clamp(1.15rem, 2.6vw, 1.85rem);
-    --hero-padding-block-end: clamp(3rem, 10vw, 5rem);
+    --hero-padding-block-end: clamp(5rem, 12vw, 7rem);
+  }
+
+  @media (max-width: 768px) {
+    :global(.hero--landing) {
+      --hero-padding-block-start: clamp(6rem, 22vw, 8rem);
+      --hero-padding-block-end: clamp(4.5rem, 14vw, 6rem);
+    }
   }
 
   .hero-title {
