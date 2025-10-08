@@ -1,9 +1,11 @@
 // @ts-nocheck
 import { pageConfigs, siteConfig } from '$config/seo';
+import { waitLocale } from 'svelte-i18n';
 
 export const prerender = true;
 
-export function load({ url }) {
+export async function load({ url }) {
+  await waitLocale();
   const pathname = url.pathname;
   
   // Determine which page config to use

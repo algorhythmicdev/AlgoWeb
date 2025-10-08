@@ -136,6 +136,8 @@
   --gradient-spectrum-3: linear-gradient(150deg, rgba(var(--voyage-blue-rgb), 0.84) 0%, rgba(var(--signal-yellow-rgb), 0.8) 52%, rgba(var(--aurora-purple-rgb), 0.82) 100%);
 
   /* ==================== SURFACES & TEXT ==================== */
+  --grad-a: var(--voyage-blue);
+  --grad-b: var(--aurora-purple);
   --bg-primary: var(--bg);
   --bg-surface: var(--card);
   --bg-muted: var(--card-subtle);

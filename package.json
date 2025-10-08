@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
-    "@sveltejs/adapter-vercel": "^5.4.4",
     "@sveltejs/kit": "^2.5.28",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "autoprefixer": "^10.4.20",
@@ -35,6 +34,7 @@
   },
   "dependencies": {
     "@heroui/theme": "^2.4.23",
+    "@sveltejs/adapter-auto": "^6.1.1",
     "svelte-i18n": "^4.0.0",
     "tailwind-variants": "^3.1.1"
   },

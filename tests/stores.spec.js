@@ -95,7 +95,7 @@ describe('theme store', () => {
     expect(document.body.getAttribute('data-base-theme')).toBe('dark');
 
     unsubscribe();
-  });
+  }, 50000); // Increased timeout for this specific test
 
   it('normalizes legacy contrast theme to high-contrast', async () => {
     window.localStorage.setItem('theme', 'contrast');

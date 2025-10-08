@@ -1,16 +1,21 @@
-<script>
-  // @ts-nocheck
-  import HeroSection from '$sections/HeroSection.svelte';
+<script lang="ts">
+  import Hero from '$lib/components/Hero.svelte';
   import FoundersSection from '$sections/FoundersSection.svelte';
+  import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { _ } from 'svelte-i18n';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
   import productsData from '$data/products.json';
   import timelineData from '$data/timeline.json';
 
   const productKeys = ['nodevoyage', 'ideonautix'];
+  const products: any = productsData;
 </script>
 
-<HeroSection />
+<section class="hero-section">
+  <Hero variant="halo" title="Algo · Home" subtitle="Signature aurora gradient with neutral overlay.">
+    <!-- CTA / search / KPIs, etc. -->
+  </Hero>
+</section>
 
 <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
@@ -20,16 +25,16 @@
       <p>{$_('story.vision_text')}</p>
     </div>
 
-    <div class="story-grid" use:staggerReveal={{ stagger: 160 }}>
-      <article class="story-card">
+    <div class="story-grid">
+      <MagneticTiltCard staggerOptions={{ stagger: 160 }}>
         <span class="kicker">{$_('story.reality_title')}</span>
         <p>{$_('story.reality_text')}</p>
-      </article>
+      </MagneticTiltCard>
 
-      <article class="story-card">
+      <MagneticTiltCard data-variant="halo" staggerOptions={{ stagger: 160 }}>
         <span class="kicker">{$_('story.mission_title')}</span>
         <p>{$_('story.mission_text')}</p>
-      </article>
+      </MagneticTiltCard>
     </div>
   </div>
 </section>
@@ -45,8 +50,8 @@
 
     <div class="product-list">
       {#each productKeys as key}
-        {#if productsData[key]}
-          <article class="product-row" use:staggerReveal={{ stagger: 140 }}>
+        {#if products[key]}
+          <MagneticTiltCard class="particle-container" staggerOptions={{ stagger: 140 }}>
             <div class="product-meta">
               <span class="kicker">{$_(`products.${key}.name`)}</span>
               <h3>{$_(`products.${key}.tagline`)}</h3>
@@ -66,7 +71,7 @@
                 </svg>
               </a>
             </div>
-          </article>
+          </MagneticTiltCard>
         {/if}
       {/each}
     </div>
@@ -82,7 +87,7 @@
 
     <div class="timeline-grid">
       {#each timelineData.milestones as milestone, index}
-        <article class="timeline-item" use:staggerReveal={{ delay: 80 + index * 60 }}>
+        <MagneticTiltCard class="timeline-item" staggerOptions={{ delay: 80 + index * 60 }}>
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <span class="timeline-date">{new Date(`${milestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })}</span>
@@ -92,7 +97,7 @@
               <p class="timeline-note">{$_(`timeline.milestones.${milestone.id}.note`)}</p>
             {/if}
           </div>
-        </article>
+        </MagneticTiltCard>
       {/each}
     </div>
   </div>
@@ -126,50 +131,16 @@
     margin-top: var(--space-2xl);
   }
 
-  .story-card {
-    padding: var(--card-padding-lg);
-    border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    background: var(--surface-glass);
-    box-shadow: var(--shadow-xs);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
+  .story-grid :global(.glass-card) {
     display: grid;
     gap: var(--space-lg);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
-    transition: all var(--duration-normal) var(--ease-out);
-    position: relative;
-    overflow: hidden;
     margin-bottom: var(--card-margin-bottom);
   }
 
-  .story-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(255, 255, 255, 0.7);
-  }
-
-  .story-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-out);
-  }
-
-  .story-card:hover::before {
-    opacity: 1;
-  }
-
-  .story-card p { color: var(--text-secondary); }
+  .story-grid :global(.glass-card p) { color: var(--text-secondary); }
 
   .product-list {
     display: grid;
@@ -177,48 +148,15 @@
     margin-top: var(--space-2xl);
   }
 
-  .product-row {
+  .product-list :global(.glass-card) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
     gap: var(--space-3xl);
     padding: var(--card-padding-xl);
-    border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    background: var(--surface-glass);
-    box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(32px);
-    -webkit-backdrop-filter: blur(32px);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
-    transition: all var(--duration-normal) var(--ease-out);
-    position: relative;
-    overflow: hidden;
     margin-bottom: var(--card-margin-bottom);
-  }
-
-  .product-row:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .product-row::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-out);
-  }
-
-  .product-row:hover::before {
-    opacity: 1;
   }
 
   .product-meta { display: grid; gap: 0.9rem; }
@@ -301,9 +239,9 @@
     box-shadow: 0 0 0 6px rgba(19, 81, 255, 0.08);
   }
 
-  .timeline-content {
-    display: grid;
-    gap: var(--space-md);
+  .timeline-grid :global(.glass-card) {
+    display: flex;
+    gap: clamp(1.6rem, 4vw, 2.5rem);
     background: var(--surface-glass);
     border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: var(--radius-2xl);
@@ -314,34 +252,12 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
-    transition: all var(--duration-normal) var(--ease-out);
-    position: relative;
-    overflow: hidden;
     margin-bottom: var(--card-margin-bottom);
   }
 
-  .timeline-content:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(255, 255, 255, 0.7);
-  }
-
-  .timeline-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-out);
-  }
-
-  .timeline-content:hover::before {
-    opacity: 1;
+  .timeline-grid :global(.glass-card .timeline-content) {
+    display: grid;
+    gap: var(--space-md);
   }
 
   .timeline-date {
@@ -386,17 +302,13 @@
       padding: var(--card-padding-md);
       gap: var(--space-md);
     }
-    .story-card {
+    .story-grid :global(.glass-card) {
       padding: var(--card-padding-md);
       gap: var(--space-md);
     }
-    .timeline-content {
+    .timeline-grid :global(.glass-card) {
       padding: var(--card-padding-md);
       gap: var(--space-sm);
-    }
-    .section-heading {
-      --section-heading-gap: var(--space-md);
-      --section-heading-margin: var(--space-xl);
     }
   }
 </style>
