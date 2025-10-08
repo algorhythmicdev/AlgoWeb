@@ -1,6 +1,8 @@
 <script>
   // @ts-nocheck
+  import { onDestroy } from 'svelte';
   import { tick } from 'svelte';
+  import { get } from 'svelte/store';
   import { _ } from 'svelte-i18n';
   import { language } from '$stores/language';
 
@@ -8,6 +10,10 @@
   let trigger;
   let optionRefs = [];
   let focusedIndex = -1;
+  let typeaheadTerm = '';
+  let typeaheadTimeout;
+
+  const TYPEAHEAD_RESET_MS = 500;
 
   const languages = [
     { code: 'en', label: 'language_switcher.languages.en.short', name: 'language_switcher.languages.en.name' },
@@ -32,10 +38,58 @@
     optionRefs[focusedIndex]?.focus();
   }
 
+  function resetTypeahead() {
+    typeaheadTerm = '';
+    clearTimeout(typeaheadTimeout);
+    typeaheadTimeout = undefined;
+  }
+
+  function queueTypeaheadReset() {
+    clearTimeout(typeaheadTimeout);
+    typeaheadTimeout = setTimeout(resetTypeahead, TYPEAHEAD_RESET_MS);
+  }
+
+  function findTypeaheadMatch(term, startIndex = 0) {
+    if (!term) return -1;
+
+    const normalizedTerm = term.toLowerCase();
+    const total = languages.length;
+    const translate = get(_);
+
+    for (let offset = 0; offset < total; offset += 1) {
+      const index = (startIndex + offset) % total;
+      const lang = languages[index];
+      const label = translate(lang.name)?.toLowerCase?.();
+      const shortLabel = translate(lang.label)?.toLowerCase?.();
+      if (label?.startsWith(normalizedTerm) || shortLabel?.startsWith(normalizedTerm)) {
+        return index;
+      }
+    }
+
+    return -1;
+  }
+
+  function handleTypeahead(key, startIndex = 0) {
+    typeaheadTerm += key.toLowerCase();
+    queueTypeaheadReset();
+
+    const matchIndex = findTypeaheadMatch(typeaheadTerm, startIndex);
+    if (matchIndex !== -1) {
+      focusOption(matchIndex);
+    } else {
+      resetTypeahead();
+      const fallbackIndex = findTypeaheadMatch(key, startIndex);
+      if (fallbackIndex !== -1) {
+        focusOption(fallbackIndex);
+      }
+    }
+  }
+
   async function openMenu(startIndex = 0) {
     optionRefs = [];
     isOpen = true;
     focusedIndex = clampIndex(startIndex);
+    resetTypeahead();
     await tick();
     optionRefs[focusedIndex]?.focus();
   }
@@ -60,6 +114,7 @@
   async function closeMenu(restoreFocus = true) {
     isOpen = false;
     focusedIndex = -1;
+    resetTypeahead();
     if (restoreFocus) {
       await tick();
       trigger?.focus();
@@ -90,6 +145,19 @@
         await openMenu(start);
       }
       return;
+    }
+
+    if (
+      !event.altKey &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      event.key.length === 1 &&
+      event.key.match(/\S/)
+    ) {
+      event.preventDefault();
+      const start = activeIndex !== -1 ? activeIndex : 0;
+      await openMenu(start);
+      handleTypeahead(event.key, focusedIndex);
     }
 
     if (event.key === 'Escape' && isOpen) {
@@ -134,6 +202,17 @@
       closeMenu();
       return;
     }
+
+    if (
+      !event.altKey &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      event.key.length === 1 &&
+      event.key.match(/\S/)
+    ) {
+      event.preventDefault();
+      handleTypeahead(event.key, index + 1);
+    }
   }
 
   async function toggleMenu() {
@@ -149,8 +228,13 @@
     if (!event.currentTarget.contains(event.relatedTarget)) {
       isOpen = false;
       focusedIndex = -1;
+      resetTypeahead();
     }
   }
+
+  onDestroy(() => {
+    clearTimeout(typeaheadTimeout);
+  });
 </script>
 
 <div class="language-switcher" role="group" aria-label={$_('language_switcher.group_label')} on:focusout={handleFocusOut}>

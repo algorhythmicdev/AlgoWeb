@@ -2,7 +2,8 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
-  import { onDestroy } from 'svelte';
+  import { afterUpdate, onDestroy } from 'svelte';
+  import { tick } from 'svelte';
   import { navigation } from '$stores/navigation';
   import { theme } from '$stores/theme';
   import LanguageSwitcher from './language-switcher.svelte';
@@ -11,6 +12,44 @@
 
   let isScrolled = false;
   let ticking = false;
+  let menuGroup;
+  let menuTrigger;
+  /** @type {HTMLElement | null} */
+  let restoreFocusTarget = null;
+  let wasMenuOpen = false;
+
+  const focusableSelectors = [
+    'a[href]:not([tabindex="-1"])',
+    'button:not([disabled]):not([tabindex="-1"])',
+    'input:not([disabled]):not([type="hidden"]):not([tabindex="-1"])',
+    'select:not([disabled]):not([tabindex="-1"])',
+    'textarea:not([disabled]):not([tabindex="-1"])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  /**
+   * @param {Element | null} element
+   */
+  const isElementVisible = (element) => {
+    if (!(element instanceof HTMLElement)) return false;
+    if (element.hidden) return false;
+    const style = getComputedStyle(element);
+    if (style.display === 'none' || style.visibility === 'hidden') {
+      return false;
+    }
+    if (element.getAttribute('aria-hidden') === 'true') {
+      return false;
+    }
+    const rects = element.getClientRects();
+    return rects.length > 0;
+  };
+
+  const getFocusableMenuItems = () => {
+    if (!menuGroup) return [];
+    return Array.from(menuGroup.querySelectorAll(focusableSelectors)).filter((element) =>
+      isElementVisible(element)
+    );
+  };
 
   $: currentPath = $page.url.pathname;
 
@@ -35,6 +74,43 @@
   }
 
   /** @param {KeyboardEvent} event */
+  function handleMenuFocusTrap(event) {
+    if (!$navigation.isMenuOpen || event.key !== 'Tab') {
+      return;
+    }
+
+    const focusableItems = getFocusableMenuItems();
+    if (focusableItems.length === 0) return;
+
+    const activeElement = document.activeElement;
+    const first = focusableItems[0];
+    const last = focusableItems[focusableItems.length - 1];
+
+    if (event.shiftKey && activeElement === first) {
+      event.preventDefault();
+      last.focus();
+      return;
+    }
+
+    if (!event.shiftKey && activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  const focusTrap = (node) => {
+    /** @param {KeyboardEvent} event */
+    const onKeydown = (event) => handleMenuFocusTrap(event);
+    node.addEventListener('keydown', onKeydown);
+
+    return {
+      destroy() {
+        node.removeEventListener('keydown', onKeydown);
+      }
+    };
+  };
+
+  /** @param {KeyboardEvent} event */
   function handleKeydown(event) {
     if (event.key === 'Escape' && $navigation.isMenuOpen) {
       navigation.closeMenu();
@@ -48,6 +124,39 @@
   onDestroy(() => {
     if (browser) {
       document.documentElement.classList.remove('nav-menu-open');
+    }
+  });
+
+  afterUpdate(async () => {
+    if (!browser) return;
+
+    if ($navigation.isMenuOpen !== wasMenuOpen) {
+      if ($navigation.isMenuOpen) {
+        restoreFocusTarget = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        await tick();
+        const focusableItems = getFocusableMenuItems();
+        const primaryLink = focusableItems.find((element) =>
+          element instanceof HTMLElement && element.closest('.nav-links')
+        );
+
+        if (primaryLink instanceof HTMLElement) {
+          primaryLink.focus({ preventScroll: true });
+        } else if (focusableItems[0] instanceof HTMLElement) {
+          focusableItems[0].focus({ preventScroll: true });
+        } else if (menuTrigger) {
+          menuTrigger.focus({ preventScroll: true });
+        }
+      } else {
+        await tick();
+        if (restoreFocusTarget && document.contains(restoreFocusTarget)) {
+          restoreFocusTarget.focus({ preventScroll: true });
+        } else if (menuTrigger) {
+          menuTrigger.focus({ preventScroll: true });
+        }
+        restoreFocusTarget = null;
+      }
+
+      wasMenuOpen = $navigation.isMenuOpen;
     }
   });
 </script>
@@ -71,7 +180,7 @@
       />
     </a>
 
-    <div class="nav-groups">
+    <div class="nav-groups" bind:this={menuGroup} use:focusTrap>
       <div
         id="primary-navigation"
         class="nav-links"
@@ -120,11 +229,13 @@
         <ThemeToggle />
         <a href="/contact" class="nav-button" data-variant="primary">{$_('nav.talk_to_us')}</a>
         <button
+          type="button"
           class="nav-trigger"
           on:click={() => navigation.toggleMenu()}
           aria-label={$_('nav.toggle_menu')}
           aria-expanded={$navigation.isMenuOpen}
           aria-controls="primary-navigation"
+          bind:this={menuTrigger}
         >
           <span></span>
           <span></span>
