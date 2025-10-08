@@ -2,7 +2,6 @@
   // @ts-nocheck
   import { onDestroy } from 'svelte';
   import { tick } from 'svelte';
-  import { get } from 'svelte/store';
   import { _ } from 'svelte-i18n';
   import { language } from '$stores/language';
 

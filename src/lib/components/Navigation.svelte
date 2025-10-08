@@ -51,8 +51,6 @@
     );
   };
 
-  $: currentPath = $page.url.pathname;
-
   function updateScrollState() {
     const scrollY = window.scrollY;
     isScrolled = scrollY > 28;
@@ -180,7 +178,7 @@
       />
     </a>
 
-    <div class="nav-groups" bind:this={menuGroup} use:focusTrap>
+    <div class="nav-groups">
       <div
         id="primary-navigation"
         class="nav-links"
@@ -229,7 +227,6 @@
         <ThemeToggle />
         <a href="/contact" class="nav-button" data-variant="primary">{$_('nav.talk_to_us')}</a>
         <button
-          type="button"
           class="nav-trigger"
           on:click={() => navigation.toggleMenu()}
           aria-label={$_('nav.toggle_menu')}
