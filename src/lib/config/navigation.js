@@ -40,6 +40,11 @@ export const mainNavigation = [
     label: 'nav.about',
     href: '/#story',
     icon: 'about'
+  },
+  {
+    label: 'nav.contact',
+    href: '/contact',
+    icon: 'contact'
   }
 ];
 

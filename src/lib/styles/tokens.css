@@ -7,23 +7,23 @@
   color-scheme: light;
 
   /* ==================== BRAND CORE ==================== */
-  --blue-vo: #1351ff;
-  --blue-vo-rgb: 19, 81, 255;
-  --purple-au: #6a38ff;
-  --purple-au-rgb: 106, 56, 255;
-  --yellow-si: #ffd339;
-  --yellow-si-rgb: 255, 211, 57;
+  --primary: #6a38ff;
+  --primary-rgb: 106, 56, 255;
+  --accent-1: #0fd6c9;
+  --accent-1-rgb: 15, 214, 201;
+  --accent-2: #ffd339;
+  --accent-2-rgb: 255, 211, 57;
   --red-ch: #e0322c;
   --red-ch-rgb: 224, 50, 44;
 
-  --voyage-blue: var(--blue-vo);
-  --voyage-blue-rgb: var(--blue-vo-rgb);
-  --voyage-blue-strong: #0e3ed9;
-  --aurora-purple: var(--purple-au);
-  --aurora-purple-rgb: var(--purple-au-rgb);
+  --voyage-blue: var(--accent-1);
+  --voyage-blue-rgb: var(--accent-1-rgb);
+  --voyage-blue-strong: #0ab3a8;
+  --aurora-purple: var(--primary);
+  --aurora-purple-rgb: var(--primary-rgb);
   --aurora-purple-strong: #5628f2;
-  --signal-yellow: var(--yellow-si);
-  --signal-yellow-rgb: var(--yellow-si-rgb);
+  --signal-yellow: var(--accent-2);
+  --signal-yellow-rgb: var(--accent-2-rgb);
   --signal-yellow-strong: #dca910;
   --cherry-pop: var(--red-ch);
   --cherry-pop-rgb: var(--red-ch-rgb);
@@ -33,9 +33,9 @@
   --cloud: #f5f7fb;
   --cloud-rgb: 245, 247, 251;
   --surface: #ffffff;
-  --surface-subtle: #eef2fa;
-  --surface-strong: #dfe6f3;
-  --mist: #e7ebf3;
+  --surface-subtle: #eef1f7;
+  --surface-strong: #e1e6f0;
+  --mist: #e7ecf4;
   --porcelain: var(--surface-subtle);
   --snow: #f2f5f9;
   --snow-rgb: 242, 245, 249;
@@ -56,6 +56,8 @@
   --card: var(--surface);
   --card-subtle: var(--surface-subtle);
   --card-strong: var(--surface-strong);
+  --bg-elev-1: var(--card);
+  --bg-elev-2: var(--card-subtle);
   --text: var(--ink);
   --text-strong: var(--slate-base);
   --text-secondary-base: #25324b;
@@ -75,9 +77,10 @@
   /* ==================== SHARED ACCENTS ==================== */
   --accent-primary: var(--aurora-purple);
   --accent-primary-rgb: var(--aurora-purple-rgb);
-  --accent-secondary: var(--signal-yellow);
-  --accent-secondary-rgb: var(--signal-yellow-rgb);
-  --accent-tertiary: var(--voyage-blue);
+  --accent-secondary: var(--voyage-blue);
+  --accent-secondary-rgb: var(--voyage-blue-rgb);
+  --accent-tertiary: var(--signal-yellow);
+  --accent-tertiary-rgb: var(--signal-yellow-rgb);
   --accent-critical: var(--cherry-pop);
 
   --nodevoyage-accent: var(--voyage-blue);
@@ -274,8 +277,8 @@
   --shadow-xl: 0 52px 132px rgba(15, 23, 42, 0.22);
 
   --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.24'/%3E%3C/svg%3E");
-  --backdrop-canvas: linear-gradient(180deg, rgba(249, 251, 255, 0.96) 0%, rgba(236, 240, 250, 0.96) 100%);
-  --body-wash: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 244, 252, 0.78) 100%);
+  --backdrop-canvas: linear-gradient(180deg, rgba(245, 247, 251, 0.96) 0%, rgba(238, 241, 247, 0.96) 100%);
+  --body-wash: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(238, 241, 247, 0.78) 100%);
   --grain-blend-mode: soft-light;
   --grain-opacity: 0.18;
 
@@ -308,17 +311,25 @@
 [data-base-theme="dark"] {
   color-scheme: dark;
 
+  --primary: #8a6bff;
+  --primary-rgb: 138, 107, 255;
+  --accent-1: #10e3d6;
+  --accent-1-rgb: 16, 227, 214;
+  --accent-2: #ffd339;
+  --accent-2-rgb: 255, 211, 57;
   --bg: #0b0e13;
-  --card: #1a1d23;
-  --card-subtle: #141923;
-  --card-strong: #232834;
+  --card: #121722;
+  --card-subtle: #161c28;
+  --card-strong: #1c2433;
+  --bg-elev-1: var(--card);
+  --bg-elev-2: var(--card-subtle);
   --text: #f2f5f9;
   --text-strong: #ffffff;
   --text-secondary-base: #8b9299;
   --text-tertiary-base: #6c7480;
   --divider: rgba(242, 245, 249, 0.12);
-  --border: #2a3140;
-  --border-strong: #3d465a;
+  --border: #222a3a;
+  --border-strong: #2e374b;
 
   --focus-ring: 0 0 0 3px color-mix(in oklab, var(--voyage-blue) 65%, white 20%, black 15%);
   --focus-ring-contrast: 0 0 0 3px color-mix(in oklab, var(--snow) 70%, black 30%);
@@ -382,17 +393,32 @@
 [data-theme-legacy='contrast'] {
   color-scheme: light;
 
-  --bg: var(--cloud);
-  --card: var(--surface);
-  --card-subtle: color-mix(in srgb, var(--cloud) 70%, var(--surface) 30%);
-  --card-strong: color-mix(in srgb, var(--surface) 60%, #000000 40%);
-  --text: var(--ink);
-  --text-strong: var(--ink);
+  --primary: #4400ff;
+  --primary-rgb: 68, 0, 255;
+  --accent-1: #007a73;
+  --accent-1-rgb: 0, 122, 115;
+  --accent-2: #b78300;
+  --accent-2-rgb: 183, 131, 0;
+  --bg: #ffffff;
+  --card: #ffffff;
+  --card-subtle: #f0f3fa;
+  --card-strong: #cfd8f0;
+  --bg-elev-1: var(--card);
+  --bg-elev-2: var(--card-subtle);
+  --text: #000000;
+  --text-strong: #000000;
   --text-secondary-base: #111111;
   --text-tertiary-base: #222222;
   --divider: #000000;
   --border: #000000;
   --border-strong: #000000;
+
+  --accent-primary: var(--primary);
+  --accent-primary-rgb: var(--primary-rgb);
+  --accent-secondary: var(--accent-1);
+  --accent-secondary-rgb: var(--accent-1-rgb);
+  --accent-tertiary: var(--accent-2);
+  --accent-tertiary-rgb: var(--accent-2-rgb);
 
   --focus-ring: 0 0 0 3px #000000;
   --focus-ring-contrast: 0 0 0 3px #000000;

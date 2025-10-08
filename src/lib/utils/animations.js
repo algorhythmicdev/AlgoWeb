@@ -425,7 +425,7 @@ export function particleExplode(node) {
 
   /** @param {MouseEvent} event */
   const spawn = (event) => {
-    const baseColor = getCssToken('--voyage-blue', '#1351ff');
+    const baseColor = getCssToken('--voyage-blue', '#0fd6c9');
     /**
      * @param {number} angle
      * @param {number} velocity
@@ -559,9 +559,9 @@ export function typewriter(node, { text, speed = 40, loop = false } = {}) {
  * @param {HTMLElement} node
  * @param {{ colors?: string[]; speed?: number }} [options]
  */
-export function morphGradient(node, { colors = ['#1351ff', '#6a38ff', '#ffd339'], speed = 3200 } = {}) {
+export function morphGradient(node, { colors = ['#6a38ff', '#0fd6c9', '#ffd339'], speed = 3200 } = {}) {
   if (!isBrowser || shouldReduceMotion() || colors.length < 2) {
-    node.style.background = colors[0] ?? '#1351ff';
+    node.style.background = colors[0] ?? '#6a38ff';
     return { destroy: () => {} };
   }
 
