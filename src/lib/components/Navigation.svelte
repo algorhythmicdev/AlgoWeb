@@ -12,8 +12,11 @@
 
   let isScrolled = false;
   let ticking = false;
-  let menuGroup;
-  let menuTrigger;
+  /** @type {HTMLElement | null} */
+  let menuGroup = null;
+  /** @type {HTMLElement | null} */
+  let menuTrigger = null;
+  let currentPath = '';
   /** @type {HTMLElement | null} */
   let restoreFocusTarget = null;
   let wasMenuOpen = false;
@@ -44,10 +47,18 @@
     return rects.length > 0;
   };
 
+  /**
+   * @returns {HTMLElement[]}
+   */
   const getFocusableMenuItems = () => {
     if (!menuGroup) return [];
-    return Array.from(menuGroup.querySelectorAll(focusableSelectors)).filter((element) =>
-      isElementVisible(element)
+    const group = /** @type {HTMLElement} */ (menuGroup);
+
+    return /** @type {HTMLElement[]} */ (
+      Array.from(group.querySelectorAll(focusableSelectors)).filter((element) => {
+        if (!(element instanceof HTMLElement)) return false;
+        return isElementVisible(element);
+      })
     );
   };
 
@@ -96,6 +107,9 @@
     }
   }
 
+  /**
+   * @param {HTMLElement} node
+   */
   const focusTrap = (node) => {
     /** @param {KeyboardEvent} event */
     const onKeydown = (event) => handleMenuFocusTrap(event);
@@ -114,6 +128,8 @@
       navigation.closeMenu();
     }
   }
+
+  $: currentPath = $page.url?.pathname ?? '';
 
   $: if (browser) {
     document.documentElement.classList.toggle('nav-menu-open', $navigation.isMenuOpen);
