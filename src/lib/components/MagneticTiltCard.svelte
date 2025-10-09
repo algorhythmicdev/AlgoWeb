@@ -4,27 +4,33 @@
 
   export let magneticStrength = 0.3; // 0 to 1
   export let maxTilt = 7; // Max tilt in degrees
+  export let interactive = true;
   export let staggerOptions: { stagger?: number; delay?: number } = {};
 
   let cardEl: HTMLElement;
 
   onMount(() => {
-    const cleanupTilt = tilt(cardEl, { max: maxTilt });
-    const cleanupMag = magnetic(cardEl, { strength: magneticStrength });
+    const tiltAction = interactive ? tilt(cardEl, { max: maxTilt }) : null;
+    const magneticAction = interactive ? magnetic(cardEl, { strength: magneticStrength }) : null;
     let cleanupStagger: (() => void) | undefined;
     if (Object.keys(staggerOptions).length > 0) {
       cleanupStagger = staggerReveal(cardEl, staggerOptions).destroy;
     }
 
     return () => {
-      cleanupTilt.destroy();
-      cleanupMag.destroy();
+      tiltAction?.destroy?.();
+      magneticAction?.destroy?.();
       if (cleanupStagger) cleanupStagger();
     };
   });
 </script>
 
-<div bind:this={cardEl} class="glass-card magnetic-card {$$props.class || ''}" data-variant={$$props['data-variant'] || ''}>
+<div
+  bind:this={cardEl}
+  class="glass-card magnetic-card {$$props.class || ''}"
+  data-variant={$$props['data-variant'] || ''}
+  {...$$restProps}
+>
   <slot />
 </div>
 

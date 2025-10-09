@@ -2,10 +2,9 @@
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
   import { Icon, FieldSupport } from '$lib/components';
-  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
+  import Hero from '$lib/components/Hero.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
-  import { staggerReveal, tilt, particleExplode, morphBlob, ripple, magnetic } from '$utils/animations';
+  import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
 
@@ -39,6 +38,12 @@
     name: ensureString($json?.('consulting.hero_testimonial_name'), fallbackTestimonial.name),
     role: ensureString($json?.('consulting.hero_testimonial_role'), fallbackTestimonial.role)
   };
+
+  const heroFeatureIcons = [
+    { icon: 'target', copyKey: 'consulting.what_1', variant: 'halo' },
+    { icon: 'idea', copyKey: 'consulting.what_2', variant: 'grid' },
+    { icon: 'bolt', copyKey: 'consulting.what_3', variant: 'line' }
+  ];
   
   let formData = {
     company: '',
@@ -176,40 +181,15 @@
 {/if}
 
 <!-- Hero Section -->
-<HeroWrapper
-  class="hero hero--consulting hero--centered consulting-hero"
-  showAside={false}
-  introReveal={{ delay: 60, stagger: 130 }}
->
-  <svelte:fragment slot="backdrop">
-    <HeroBackdrop
-      variant="glass-parallax"
-      tone="primary"
-      intensity="balanced"
-      className="consulting-hero__backdrop"
-    />
-    <HeroBackdrop
-      variant="particle-drift"
-      tone="aurora"
-      intensity="soft"
-      className="consulting-hero__backdrop-drift"
-    />
-  </svelte:fragment>
-  <svelte:fragment slot="title">
-    <h1 class="consulting-hero__title heading-gradient">{$_('consulting.hero_title')}</h1>
-  </svelte:fragment>
+<Hero variant="nodes" title={$_('consulting.hero_title')} subtitle={$_('consulting.hero_subtitle')}>
+  <div class="consulting-hero">
+    <div class="consulting-hero__body">
+      <div class="consulting-hero__headline">
+        <AnimatedHeadline variant="glow" phrases={heroRotating} holdDuration={2600} />
+      </div>
 
-    <svelte:fragment slot="lead">
-    <div class="consulting-hero__headline">
-      <AnimatedHeadline variant="glow" phrases={heroRotating} holdDuration={2600} />
-    </div>
-  </svelte:fragment>
-
-  <svelte:fragment slot="description">
-    <p class="consulting-hero__description">{$_('consulting.hero_subtitle')}</p>
-
-<div class="consulting-hero__meta">
-      <div class="spots-indicator">
+    <div class="consulting-hero__meta">
+      <div class="spots-indicator" aria-live="polite">
         <div class="spots-number">{spotsRemaining}</div>
         <span>{$_('consulting.spots_remaining')}</span>
       </div>
@@ -217,7 +197,7 @@
     </div>
 
     {#if testimonial.quote}
-      <div class="consulting-hero__testimonial os-window" data-surface="window">
+      <div class="consulting-hero__testimonial glass-card">
         <div class="consulting-hero__testimonial-header">
           <span class="consulting-hero__testimonial-icon" aria-hidden="true">
             <Icon name="sparkles" size={18} />
@@ -231,9 +211,7 @@
         </p>
       </div>
     {/if}
-  </svelte:fragment>
 
-    <svelte:fragment slot="highlights">
       {#if heroRotating.length > 1}
         <ul class="consulting-hero__phrases">
           {#each heroRotating.slice(1) as phrase, index}
@@ -241,36 +219,32 @@
           {/each}
         </ul>
       {/if}
-    </svelte:fragment>
+    </div>
 
-  <div class="consulting-hero__features" use:staggerReveal>
-    <div class="feature">
-      <div class="feature-icon">
-        <Icon name="target" size={26} />
-      </div>
-      <p>{$_('consulting.what_1')}</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <Icon name="idea" size={26} />
-      </div>
-      <p>{$_('consulting.what_2')}</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <Icon name="bolt" size={26} />
-      </div>
-      <p>{$_('consulting.what_3')}</p>
+    <div class="consulting-hero__features">
+      {#each heroFeatureIcons as feature, index}
+        <MagneticTiltCard
+          class="hero-feature"
+          data-variant={feature.variant}
+          interactive={false}
+          staggerOptions={{ delay: 140 + index * 80 }}
+        >
+          <div class="hero-feature__icon">
+            <Icon name={feature.icon} size={26} />
+          </div>
+          <p>{$_(feature.copyKey)}</p>
+        </MagneticTiltCard>
+      {/each}
     </div>
   </div>
-</HeroWrapper>
+</Hero>
 
 <!-- Application Form -->
 <section class="form-section" id="form">
   <div class="container">
-    <div class="form-wrapper os-window" use:tilt={{ max: 2 }}>
+    <MagneticTiltCard class="form-card" interactive={false}>
       <h2 class="form-title">{$_('consulting.form_title')}</h2>
-      
+
       <form on:submit={handleSubmit}>
         <div class="form-grid">
           <div class="form-group" class:error={errors.company}>
@@ -391,13 +365,10 @@
           </div>
         </div>
         
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           class="btn btn-primary btn-lg btn-block"
           disabled={isSubmitting}
-          use:particleExplode
-          use:ripple
-          use:magnetic
         >
           {#if isSubmitting}
             <span class="spinner"></span>
@@ -406,14 +377,14 @@
             {$_('consulting.form_submit')}
           {/if}
         </button>
-        
+
         <p class="form-note">{$_('form.required_note')}</p>
       </form>
-    </div>
+    </MagneticTiltCard>
     
     <!-- Benefits Section -->
-    <div class="benefits-section" use:staggerReveal>
-      <div class="benefit-card os-window">
+    <div class="benefits-section">
+      <MagneticTiltCard class="benefit-card" interactive={false} staggerOptions={{ delay: 80 }}>
         <h3>
           <Icon name="package" size={22} class="heading-icon" />
           <span>{$_('consulting.benefits_title')}</span>
@@ -424,9 +395,9 @@
           <li>{$_('consulting.benefit_3')}</li>
           <li>{$_('consulting.benefit_4')}</li>
         </ul>
-      </div>
+      </MagneticTiltCard>
 
-      <div class="benefit-card os-window">
+      <MagneticTiltCard class="benefit-card" interactive={false} staggerOptions={{ delay: 140 }}>
         <h3>
           <Icon name="bolt" size={22} class="heading-icon" />
           <span>{$_('consulting.timeline_title')}</span>
@@ -436,9 +407,9 @@
           <li>{$_('consulting.week_2')}</li>
           <li>{$_('consulting.week_3_12')}</li>
         </ul>
-      </div>
+      </MagneticTiltCard>
 
-      <div class="benefit-card os-window">
+      <MagneticTiltCard class="benefit-card" interactive={false} staggerOptions={{ delay: 200 }}>
         <h3>
           <Icon name="check" size={22} class="heading-icon" />
           <span>{$_('consulting.requirements_title')}</span>
@@ -448,7 +419,7 @@
           <li>{$_('consulting.req_2')}</li>
           <li>{$_('consulting.req_3')}</li>
         </ul>
-      </div>
+      </MagneticTiltCard>
     </div>
   </div>
 </section>
@@ -482,7 +453,7 @@
   pointer-events: none;
 }
 
-.consulting-hero__title {
+.consulting-hero :global(h1) {
   margin: 0;
   text-align: center;
   font-size: clamp(2.85rem, 6.5vw, 4.1rem);
@@ -509,7 +480,7 @@
     max-width: min(90vw, var(--measure-lg));
   }
 
-  .consulting-hero__description {
+  .consulting-hero :global(p) {
     margin: 0;
     max-width: var(--measure-lg);
     color: var(--text-secondary);
@@ -636,36 +607,6 @@
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
 }
 
-:global(.consulting-hero__backdrop),
-:global(.consulting-hero__backdrop-drift) {
-  position: absolute;
-  inset: -18% -12% auto;
-  height: clamp(24rem, 40vw, 30rem);
-  pointer-events: none;
-  z-index: -1;
-}
-
-:global(.consulting-hero__backdrop) {
-  --hero-backdrop-opacity: 0.58;
-  --hero-backdrop-blur: clamp(140px, 26vw, 240px);
-}
-
-:global(.consulting-hero__backdrop-drift) {
-  --hero-backdrop-opacity: 0.34;
-  mix-blend-mode: screen;
-}
-
-:global([data-base-theme='dark'] .consulting-hero__backdrop) {
-  --hero-backdrop-opacity: 0.5;
-}
-
-:global([data-base-theme='dark'] .consulting-hero__backdrop-drift) {
-  --hero-backdrop-opacity: 0.28;
-}
-
-:global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .consulting-hero__backdrop-drift) {
-  display: none;
-}
 
 .spots-indicator {
   display: inline-flex;
@@ -701,48 +642,54 @@
   margin-top: clamp(1.8rem, 4vw, 2.4rem);
 }
 
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 0.95rem 1.35rem;
+:global(.hero-feature) {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1.2rem);
+  padding: clamp(1.1rem, 2.6vw, 1.8rem);
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: var(--bg-surface);
-  background: var(--surface-glass);
-  backdrop-filter: blur(20px);
+  background: color-mix(in srgb, var(--surface-glass) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
+  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 60%, rgba(255, 255, 255, 0.45) 40%);
+  box-shadow: 0 22px 50px rgba(12, 18, 32, 0.22);
+  text-align: left;
 }
 
-.feature-icon {
+:global(.hero-feature__icon) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: clamp(2.3rem, 4vw, 2.7rem);
+  height: clamp(2.3rem, 4vw, 2.7rem);
   border-radius: var(--radius-full);
-  background: color-mix(in srgb, var(--voyage-blue) 16%, transparent 84%);
-  color: var(--voyage-blue);
+  background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+  color: #ffffff;
+  box-shadow: 0 18px 32px rgba(19, 81, 255, 0.25);
 }
 
-.feature p {
+:global(.hero-feature__icon) :global(svg) {
+  width: clamp(1.05rem, 2.2vw, 1.3rem);
+  height: clamp(1.05rem, 2.2vw, 1.3rem);
+}
+
+:global(.hero-feature) p {
   margin: 0;
   color: var(--text-secondary);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: var(--leading-relaxed);
 }
 
 .form-section {
   padding: clamp(6rem, 14vw, 8rem) 0;
 }
 
-.form-wrapper {
+:global(.form-card) {
   width: min(100%, var(--container-md));
   margin: 0 auto clamp(4rem, 8vw, 5rem);
   padding: clamp(2.6rem, 5vw, 3.4rem);
   border-radius: var(--radius-2xl);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: var(--bg-surface);
-  background: var(--surface-glass);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(24px);
+  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 58%, rgba(255, 255, 255, 0.42) 42%);
+  background: color-mix(in srgb, var(--surface-glass) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
+  box-shadow: 0 32px 70px rgba(10, 18, 32, 0.24);
+  backdrop-filter: blur(28px);
 }
 
 .form-title {
@@ -833,19 +780,18 @@
   gap: clamp(1.8rem, 4vw, 2.4rem);
 }
 
-.benefit-card {
-  padding: clamp(1.9rem, 3vw, 2.3rem);
+:global(.benefit-card) {
+  padding: clamp(1.9rem, 3vw, 2.4rem);
   border-radius: var(--radius-2xl);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: var(--bg-surface);
-  background: var(--surface-glass);
+  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 58%, rgba(255, 255, 255, 0.45) 42%);
+  background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--aurora-purple-rgb), 0.14) 14%);
   display: grid;
-  gap: clamp(1.2rem, 3vw, 1.6rem);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(22px);
+  gap: clamp(1.2rem, 3vw, 1.7rem);
+  box-shadow: 0 26px 60px rgba(10, 18, 36, 0.2);
+  backdrop-filter: blur(24px);
 }
 
-  .benefit-card h3 {
+  :global(.benefit-card) h3 {
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -864,7 +810,7 @@
   color: var(--aurora-purple);
 }
 
-  .benefit-card ul {
+  :global(.benefit-card) ul {
     display: grid;
     gap: 0.35rem;
     padding-left: 1.2rem;

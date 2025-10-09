@@ -4,10 +4,9 @@
   import { onMount } from 'svelte';
   import { _, json } from 'svelte-i18n';
   import { Icon, FieldSupport } from '$lib/components';
-  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
+  import Hero from '$lib/components/Hero.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
-  import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic, morphGradient } from '$utils/animations';
+  import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
 
@@ -214,50 +213,20 @@
 {/if}
 
 <!-- Hero Section -->
-<HeroWrapper
-  class="hero hero--contact hero--centered contact-hero"
-  showAside={false}
-  introReveal={{ delay: 80, stagger: 140 }}
->
-  <svelte:fragment slot="backdrop">
-    <HeroBackdrop
-      variant="particle-drift"
-      tone="atlantic"
-      intensity="balanced"
-      className="contact-hero__backdrop"
-    />
-    <HeroBackdrop
-      variant="spotlight"
-      tone="aurora"
-      intensity="soft"
-      className="contact-hero__backdrop-spotlight"
-    />
-  </svelte:fragment>
-  <svelte:fragment slot="title">
-    <h1 class="contact-hero__title heading-gradient">{$_('contact.hero_title')}</h1>
-  </svelte:fragment>
-
-  <svelte:fragment slot="lead">
+<Hero variant="line" title={$_('contact.hero_title')} subtitle={$_('contact.hero_subtitle')}>
+  <div class="contact-hero">
     <div class="contact-hero__headline">
       <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
     </div>
-  </svelte:fragment>
 
-  <svelte:fragment slot="description">
-    <p class="contact-hero__description">{$_('contact.hero_subtitle')}</p>
-  </svelte:fragment>
-
-  <svelte:fragment slot="actions">
     {#if heroCtas.length}
-      <div class="contact-hero__cta-grid" use:staggerReveal={{ delay: 100, stagger: 140 }}>
+      <div class="contact-hero__cta-grid">
         {#each heroCtas as item (item.label)}
           {#if item.action === 'calendly'}
             <button
               type="button"
-              class="contact-hero__cta os-window"
-              data-surface="window"
+              class="contact-hero__cta glass-card"
               on:click={openCalendly}
-              use:tilt={{ max: 2, scale: 1.01 }}
             >
               <span class="contact-hero__cta-label">{item.label}</span>
               {#if item.description}
@@ -267,12 +236,10 @@
             </button>
           {:else}
             <a
-              class="contact-hero__cta os-window"
-              data-surface="window"
+              class="contact-hero__cta glass-card"
               href={item.action}
               target={item.action.startsWith('http') ? '_blank' : undefined}
               rel={item.action.startsWith('http') ? 'noopener noreferrer' : undefined}
-              use:tilt={{ max: 2, scale: 1.01 }}
             >
               <span class="contact-hero__cta-label">{item.label}</span>
               {#if item.description}
@@ -284,17 +251,17 @@
         {/each}
       </div>
     {/if}
-  </svelte:fragment>
-</HeroWrapper>
+  </div>
+</Hero>
 
 <!-- Contact Content -->
 <section class="contact-section">
   <div class="container">
     <div class="contact-grid">
       <!-- Contact Form -->
-      <div class="form-container os-window" use:tilt={{ max: 3, scale: 1.01 }}>
-        <h2 use:sparkleTrail>{$_('contact.form_title')}</h2>
-        
+      <MagneticTiltCard class="form-card" interactive={false}>
+        <h2>{$_('contact.form_title')}</h2>
+
         <form on:submit={handleSubmit}>
       <div class="form-group" class:error={errors.name}>
         <label for="name" class="required">{$_('contact.form_name')}</label>
@@ -372,14 +339,10 @@
         />
       </div>
           
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             class="btn btn-primary btn-lg btn-block"
             disabled={isSubmitting}
-            use:particleExplode
-            use:ripple
-            use:magnetic
-            use:sparkleTrail
           >
             {#if isSubmitting}
               <span class="spinner"></span>
@@ -389,32 +352,28 @@
             {/if}
           </button>
         </form>
-      </div>
-      
+      </MagneticTiltCard>
+
       <!-- Contact Info & Calendar -->
       <div class="info-container">
         <!-- Calendar Widget -->
-        <div class="calendar-card os-window" use:tilt={{ max: 3, scale: 1.01 }}>
-          <h3 use:sparkleTrail>{$_('contact.calendar_title')}</h3>
+        <MagneticTiltCard class="calendar-card" interactive={false}>
+          <h3>{$_('contact.calendar_title')}</h3>
           <p>{$_('contact.calendar_subtitle')}</p>
           <button
             class="calendar-button btn btn-secondary btn-lg btn-block"
             on:click={openCalendly}
             disabled={!calendlyLoaded}
-            use:particleExplode
-            use:ripple
-            use:magnetic
-            use:sparkleTrail
           >
             <Icon name="calendar" size={20} class="button-icon" />
             <span>{$_('contact.calendar_button')}</span>
           </button>
-        </div>
-        
+        </MagneticTiltCard>
+
         <!-- Contact Information -->
-        <div class="info-card os-window" use:staggerReveal>
+        <MagneticTiltCard class="info-card" interactive={false}>
           <h3>{$_('contact.info_title')}</h3>
-          
+
           <div class="info-item">
             <div class="info-icon">
               <Icon name="mail" size={22} />
@@ -436,32 +395,32 @@
               <div class="info-value">{$_('contact.info_location_value')}</div>
             </div>
           </div>
-        </div>
-        
+        </MagneticTiltCard>
+
         <!-- Social Links -->
-        <div class="social-card os-window" use:tilt={{ max: 2 }}>
-          <h3 use:sparkleTrail>{$_('contact.social_title')}</h3>
+        <MagneticTiltCard class="social-card" interactive={false}>
+          <h3>{$_('contact.social_title')}</h3>
           <div class="social-links">
-            <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
+            <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener">
               <span class="social-icon">
                 <Icon name="linkedin" size={18} />
               </span>
               {$_('contact.social_linkedin')}
             </a>
-            <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
+            <a href="https://github.com/algorhythmics" class="social-link" target="_blank" rel="noopener">
               <span class="social-icon">
                 <Icon name="github" size={18} />
               </span>
               {$_('contact.social_github')}
             </a>
-            <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener" use:particleExplode use:magnetic>
+            <a href="https://twitter.com/algorhythmics" class="social-link" target="_blank" rel="noopener">
               <span class="social-icon">
                 <Icon name="twitter" size={18} />
               </span>
               {$_('contact.social_twitter')}
             </a>
           </div>
-        </div>
+        </MagneticTiltCard>
       </div>
     </div>
   </div>
@@ -492,7 +451,7 @@
     pointer-events: none;
   }
 
-  .contact-hero__title {
+  .contact-hero :global(h1) {
     margin: 0;
     text-align: center;
     font-size: clamp(2.8rem, 6.5vw, 3.9rem);
@@ -519,7 +478,7 @@
     width: 100%;
   }
 
-  .contact-hero__description {
+  .contact-hero :global(p) {
     margin: 0;
     max-width: var(--measure-lg);
     color: var(--text-secondary);
@@ -537,8 +496,12 @@
   .contact-hero__cta {
     display: grid;
     gap: 0.65rem;
-    padding: clamp(1.35rem, 3vw, 2rem);
+    padding: clamp(1.25rem, 3vw, 1.85rem);
     text-align: left;
+    border-radius: var(--radius-2xl);
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.3) 58%, rgba(255, 255, 255, 0.45) 42%);
+    background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--aurora-purple-rgb), 0.14) 14%);
+    box-shadow: 0 20px 48px rgba(12, 22, 48, 0.18);
   }
 
   .contact-hero__cta-label {
@@ -586,35 +549,6 @@
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
   }
 
-  :global(.contact-hero__backdrop),
-  :global(.contact-hero__backdrop-spotlight) {
-    position: absolute;
-    inset: -22% -12% auto;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  :global(.contact-hero__backdrop) {
-    --hero-backdrop-opacity: 0.58;
-    --hero-backdrop-blur: clamp(150px, 28vw, 260px);
-  }
-
-  :global(.contact-hero__backdrop-spotlight) {
-    --hero-backdrop-opacity: 0.36;
-    mix-blend-mode: screen;
-  }
-
-  :global([data-base-theme='dark'] .contact-hero__backdrop) {
-    --hero-backdrop-opacity: 0.5;
-  }
-
-  :global([data-base-theme='dark'] .contact-hero__backdrop-spotlight) {
-    --hero-backdrop-opacity: 0.28;
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .contact-hero__backdrop-spotlight) {
-    display: none;
-  }
 
   .contact-section {
     padding: clamp(6rem, 14vw, 8rem) 0;
@@ -627,16 +561,9 @@
     align-items: start;
   }
 
-form {
+:global(.form-card) form {
   display: grid;
   gap: clamp(1.2rem, 3vw, 1.8rem);
-  padding: clamp(2.4rem, 5vw, 3.2rem);
-  border-radius: var(--radius-2xl);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: var(--bg-surface);
-  background: var(--surface-glass);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(24px);
 }
 
   .form-group {
@@ -679,17 +606,17 @@ form {
 
   .btn-block { width: 100%; display: inline-flex; justify-content: center; }
 
-.calendar-card,
-.info-card,
-.social-card {
+:global(.form-card),
+:global(.calendar-card),
+:global(.info-card),
+:global(.social-card) {
   display: grid;
   gap: clamp(1.2rem, 3vw, 1.8rem);
   padding: clamp(2rem, 4vw, 2.6rem);
   border-radius: var(--radius-2xl);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: var(--bg-surface);
-  background: var(--surface-glass);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 58%, rgba(255, 255, 255, 0.45) 42%);
+  background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--aurora-purple-rgb), 0.12) 14%);
+  box-shadow: 0 26px 60px rgba(10, 18, 36, 0.2);
   backdrop-filter: blur(24px);
 }
 
@@ -764,10 +691,10 @@ form {
       inset: -32% -24% auto;
     }
 
-    form,
-    .calendar-card,
-    .info-card,
-    .social-card {
+    :global(.form-card),
+    :global(.calendar-card),
+    :global(.info-card),
+    :global(.social-card) {
       padding: clamp(1.6rem, 8vw, 2rem);
       border-radius: var(--radius-xl);
     }
@@ -778,15 +705,10 @@ form {
   }
 
   @media (max-width: 480px) {
-    :global(.contact-hero__backdrop),
-    :global(.contact-hero__backdrop-spotlight) {
-      inset: -38% -30% auto;
-    }
-
-    form,
-    .calendar-card,
-    .info-card,
-    .social-card {
+    :global(.form-card),
+    :global(.calendar-card),
+    :global(.info-card),
+    :global(.social-card) {
       padding: clamp(1.4rem, 10vw, 1.8rem);
     }
   }
