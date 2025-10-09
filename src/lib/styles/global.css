@@ -1,54 +1,17 @@
-﻿/* Global animations, typography, and base styles */
+/* Base global styles */
 
-/* Gradient bar animation */
-@keyframes bar-pan {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
-}
-
-/* Hero variant animations */
-@keyframes halo-move { 
-  from { transform: translateY(-5%); } 
-  to { transform: translateY(5%); } 
-}
-
-@keyframes grid-ripple { 
-  from { transform: scale(1); } 
-  to { transform: scale(1.05); } 
-}
-
-@keyframes sweep { 
-  to { transform: rotate(1turn); } 
-}
-
-@keyframes drift { 
-  from { transform: translateY(-1%); } 
-  to { transform: translateY(1%); } 
-}
-
-/* Accessibility: reduce non-essential animations */
-@media (prefers-reduced-motion: reduce){
-  * { 
-    animation-duration:.001ms !important; 
-    animation-iteration-count:1 !important; 
-    transition:none !important; 
-  }
-}
-
-/* Glass effect */
 .glass {
   background: var(--bg-elev-1);
   backdrop-filter: blur(12px) saturate(1.2);
-  border: 1px solid rgba(255,255,255,.2); /* subtle inner border */
-  box-shadow: 0 1rem 2rem rgba(0,0,0,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
 }
 
-/* Grain overlay */
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
   background-image: var(--grain);
-  opacity: 0.04; /* extremely low contrast */
+  opacity: 0.04;
   pointer-events: none;
 }

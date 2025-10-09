@@ -427,15 +427,15 @@
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card,
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founders-spotlight__inner {
     background: var(--card);
-    border: 2px solid #000000;
+    border: 2px solid var(--border-strong);
     box-shadow: none;
-    color: #000000;
+    color: var(--text);
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-chip,
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card__chips li,
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .brand-chip {
-    color: #000000;
+    color: var(--text);
   }
 
   @media (max-width: 640px) {

@@ -553,7 +553,7 @@
     height: clamp(2rem, 4vw, 2.5rem);
     border-radius: var(--radius-full);
     background: var(--gradient-spectrum-3);
-    color: #ffffff;
+    color: var(--pure-white, #ffffff);
     box-shadow: 0 18px 32px rgba(19, 81, 255, 0.18);
   }
 

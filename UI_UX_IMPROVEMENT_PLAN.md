@@ -1,4 +1,11 @@
-Got it—you’re right. I rebuilt the themes so Light/Dark/High-Contrast all use **different page, card, and sub-panel backgrounds** (no more “all white”). I also aligned everything with your 2026 design notes (frosted glass, dynamic minimalism, grain, Aurora Purple as the shared color, OS-like shells) and kept AAA body text and ≥3:1 non-text contrast, per the design brief. See: design update requiring Aurora Purple as the shared color and AAA across light/dark/HC, with OS-like shells and restrained glass/grain. 
+## Implementation Progress — 2025-02-16
+
+- [x] Pruned legacy animation classes and keyframes so `animations.css` only ships the halo, particle, and magnetic utilities required by the refreshed components.
+- [x] Replaced remaining inline hex colours in Navigation, Hero, Founders, Consulting, and support UI with theme tokens to keep all palettes centralized in `theme.css`.
+- [x] Added status (success/info/critical) tokens and reused them for toast and form affordances so feedback colours stay in sync across modes.
+- [x] Updated `morphGradient` and sparkle helpers to consume the shared tokens instead of hard-coded values, ensuring theme swaps drive the motion accents automatically.
+
+Got it—you’re right. I rebuilt the themes so Light/Dark/High-Contrast all use **different page, card, and sub-panel backgrounds** (no more “all white”). I also aligned everything with your 2026 design notes (frosted glass, dynamic minimalism, grain, Aurora Purple as the shared color, OS-like shells) and kept AAA body text and ≥3:1 non-text contrast, per the design brief. See: design update requiring Aurora Purple as the shared color and AAA across light/dark/HC, with OS-like shells and restrained glass/grain.
 
 ### What you can use immediately
 

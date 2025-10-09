@@ -319,16 +319,16 @@
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-shell {
-    background: #050505;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.8);
+    background: color-mix(in srgb, var(--text) 8%, var(--bg) 92%);
+    border-bottom: 2px solid var(--border-strong);
+    box-shadow: 0 18px 42px color-mix(in srgb, var(--text) 82%, transparent 18%);
     background-image: none;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-shell.nav-condensed {
-    background: #070707;
-    border-bottom-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.82);
+    background: color-mix(in srgb, var(--text) 10%, var(--bg) 90%);
+    border-bottom-color: var(--border-strong);
+    box-shadow: 0 22px 54px color-mix(in srgb, var(--text) 86%, transparent 14%);
   }
 
   .nav-surface {
@@ -682,18 +682,18 @@
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-links {
     background: var(--bg-surface);
-    border: 2px solid #000;
+    border: 2px solid var(--border-strong);
     box-shadow: none;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-button {
-    background: #000;
-    color: #fff;
-    border-color: #000;
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--border-strong);
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-submenu__link {
-    border: 2px solid #000;
+    border: 2px solid var(--border-strong);
     background: var(--bg-surface);
   }
 </style>

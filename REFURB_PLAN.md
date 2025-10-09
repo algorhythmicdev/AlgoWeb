@@ -11,7 +11,7 @@ Deliver the refreshed AlgoRhythmics experience outlined in `designUpdate.pdf`: u
 - Typography: maintain Inter/Space Grotesk pairing with updated tracking and weight guidance per tokens file.
 
 ## Progress Snapshot (2025-02-15)
-- [x] Refresh global design tokens with new brand palettes, neutral ramps, and typography guidance (`src/lib/styles/tokens.css`).
+- [x] Refresh global design tokens with new brand palettes, neutral ramps, and typography guidance (`src/lib/styles/theme.css`).
 - [x] Apply frosted OS-window shell styling to shared layouts (`src/lib/styles/global.css`, hero/CTA components) and document usage.
 - [x] Remove redundant hero badges/micro-titles; expand headline/body copy so each hero communicates the full product promise.
 - [x] Enlarge product demo preview frames, add beam/orb treatment, and improve responsive behavior.

@@ -178,9 +178,9 @@
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-title__brand {
-    background: rgba(0, 0, 0, 0.86);
-    border-color: rgba(255, 255, 255, 0.72);
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65);
+    background: color-mix(in srgb, var(--text) 86%, var(--bg) 14%);
+    border-color: color-mix(in srgb, var(--text) 72%, var(--bg) 28%);
+    box-shadow: 0 18px 44px color-mix(in srgb, var(--text) 65%, transparent 35%);
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-title__brand-sweep {

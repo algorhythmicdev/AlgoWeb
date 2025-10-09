@@ -1,14 +1,16 @@
-<script lang="ts">
+<script>
   import Hero from '$lib/components/Hero.svelte';
   import FoundersSection from '$sections/FoundersSection.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { _ } from 'svelte-i18n';
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { revealOnScroll } from '$utils/animations';
   import productsData from '$data/products.json';
   import timelineData from '$data/timeline.json';
 
+  /** @type {string[]} */
   const productKeys = ['nodevoyage', 'ideonautix'];
-  const products: any = productsData;
+  /** @type {Record<string, any>} */
+  const products = productsData;
 </script>
 
 <section class="hero-section">
@@ -31,7 +33,7 @@
         <p>{$_('story.reality_text')}</p>
       </MagneticTiltCard>
 
-      <MagneticTiltCard data-variant="halo" staggerOptions={{ stagger: 160 }}>
+      <MagneticTiltCard variant="halo" staggerOptions={{ stagger: 160 }}>
         <span class="kicker">{$_('story.mission_title')}</span>
         <p>{$_('story.mission_text')}</p>
       </MagneticTiltCard>
@@ -131,7 +133,7 @@
     margin-top: var(--space-2xl);
   }
 
-  .story-grid :global(.glass-card) {
+  .story-grid :global(.os-window) {
     display: grid;
     gap: var(--space-lg);
     word-wrap: break-word;
@@ -140,7 +142,7 @@
     margin-bottom: var(--card-margin-bottom);
   }
 
-  .story-grid :global(.glass-card p) { color: var(--text-secondary); }
+  .story-grid :global(.os-window p) { color: var(--text-secondary); }
 
   .product-list {
     display: grid;
@@ -148,7 +150,7 @@
     margin-top: var(--space-2xl);
   }
 
-  .product-list :global(.glass-card) {
+  .product-list :global(.os-window) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
     gap: var(--space-3xl);
@@ -223,7 +225,7 @@
     background: linear-gradient(180deg, rgba(19, 81, 255, 0.32), transparent 80%);
   }
 
-  .timeline-item {
+  .timeline-grid :global(.timeline-item) {
     position: relative;
     display: flex;
     gap: clamp(1.6rem, 4vw, 2.5rem);
@@ -239,23 +241,17 @@
     box-shadow: 0 0 0 6px rgba(19, 81, 255, 0.08);
   }
 
-  .timeline-grid :global(.glass-card) {
+  .timeline-grid :global(.os-window) {
     display: flex;
     gap: clamp(1.6rem, 4vw, 2.5rem);
-    background: var(--surface-glass);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: var(--radius-2xl);
     padding: var(--card-padding-lg);
-    box-shadow: var(--shadow-xs);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     margin-bottom: var(--card-margin-bottom);
   }
 
-  .timeline-grid :global(.glass-card .timeline-content) {
+  .timeline-grid :global(.os-window .timeline-content) {
     display: grid;
     gap: var(--space-md);
   }
@@ -272,17 +268,13 @@
   .timeline-note { color: var(--voyage-blue); font-size: var(--text-small); }
 
   @media (max-width: 960px) {
-    .product-row { 
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
-    }
-    .timeline-grid { 
+    .timeline-grid {
       padding-left: 0;
       gap: var(--space-2xl);
     }
     .timeline-grid::before { display: none; }
-    .timeline-item { 
-      flex-direction: column; 
+    .timeline-grid :global(.timeline-item) {
+      flex-direction: column;
       padding-left: 0;
       gap: var(--space-md);
     }
@@ -298,15 +290,11 @@
   }
 
   @media (max-width: 768px) {
-    .product-row {
+    .story-grid :global(.os-window) {
       padding: var(--card-padding-md);
       gap: var(--space-md);
     }
-    .story-grid :global(.glass-card) {
-      padding: var(--card-padding-md);
-      gap: var(--space-md);
-    }
-    .timeline-grid :global(.glass-card) {
+    .timeline-grid :global(.os-window) {
       padding: var(--card-padding-md);
       gap: var(--space-sm);
     }

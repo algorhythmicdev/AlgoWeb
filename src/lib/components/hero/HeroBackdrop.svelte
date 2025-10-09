@@ -529,7 +529,7 @@
   }
 
   .hero-backdrop--tone-evergreen {
-    --hero-accent: color-mix(in srgb, #00a676 65%, var(--voyage-blue) 35%);
+    --hero-accent: color-mix(in srgb, var(--accent-secondary, var(--voyage-blue)) 65%, var(--accent-primary, var(--aurora-purple)) 35%);
   }
 
   @keyframes auroraDrift {

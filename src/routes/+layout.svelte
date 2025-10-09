@@ -1,7 +1,8 @@
-<script lang="ts">
-  import '../app.css';
-  import '../lib/styles/theme.css';
-  import '../lib/styles/global.css';
+<script>
+  import '$lib/styles/theme.css';
+  import '$lib/styles/typography.css';
+  import '$lib/styles/animations.css';
+  import '$lib/styles/global.css';
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import AICompanion from '$components/AICompanion.svelte';
@@ -17,35 +18,44 @@
   export let data;
 
   let theme = 'light';
-  const setTheme = (t: string) => {
+  /**
+   * @param {'light' | 'dark' | 'hc'} t
+   */
+  const setTheme = (t) => {
     theme = t;
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
   };
 
-  let cleanupMorphGradient: { destroy: () => void; };
+  /** @type {{ destroy: () => void } | null} */
+  let cleanupMorphGradient = null;
 
   onMount(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const storedTheme = localStorage.getItem('theme');
+    /** @type {'light' | 'dark' | 'hc'} */
+    const savedTheme = storedTheme === 'dark' || storedTheme === 'hc' ? storedTheme : 'light';
     setTheme(savedTheme);
 
-    cleanupMorphGradient = morphGradient(document.documentElement, {
-      colors: ['#6A38FF', '#1351FF', '#E0322C', '#FFD339'],
+    const instance = morphGradient(document.documentElement, {
       speed: 20000 // A longer duration for a subtle, calm shift
     });
+    if (instance && typeof instance.destroy === 'function') {
+      cleanupMorphGradient = instance;
+    }
   });
 
   onDestroy(() => {
     if (cleanupMorphGradient) {
       cleanupMorphGradient.destroy();
+      cleanupMorphGradient = null;
     }
   });
 
   $: routeKey = $page.url.pathname;
 
   /** @type {Record<string, any>} */
-  let metaData: { [key: string]: any } = {};
-  $: metaData = /** @type {Record<string, any>} */ (data?.meta ?? {});
+  let metaData = {};
+  $: metaData = data?.meta ?? {};
 
   const fallbackMeta = {
     title: en.seo?.default_title ?? `${en.site.title} — ${en.site.tagline}`,
@@ -140,27 +150,5 @@
     padding-top: 80px;
   }
   
-  .loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    gap: var(--space-4);
-  }
-  
-  .spinner {
-    width: 48px;
-    height: 48px;
-    border: 4px solid var(--bg-elevated);
-    border-top-color: var(--voyage-blue);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
 </style>
+

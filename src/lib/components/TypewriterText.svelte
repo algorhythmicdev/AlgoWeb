@@ -225,6 +225,15 @@
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .typewriter-text {
-    --typewriter-gradient: linear-gradient(120deg, #ffffff 0%, #ffe082 50%, #ff9100 100%);
+    --typewriter-gradient: linear-gradient(
+      120deg,
+      var(--text) 0%,
+      color-mix(in srgb, var(--accent-tertiary, var(--accent-2)) 70%, var(--bg) 30%) 50%,
+      var(--accent-tertiary, var(--accent-2)) 100%
+    );
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .typewriter-text__cursor {
+    background: var(--text);
   }
 </style>

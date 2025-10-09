@@ -1,35 +1,58 @@
-<script lang="ts">
+<script>
   import { onMount } from 'svelte';
   import { tilt, magnetic, staggerReveal } from '$lib/utils/animations';
 
   export let magneticStrength = 0.3; // 0 to 1
   export let maxTilt = 7; // Max tilt in degrees
-  export let staggerOptions: { stagger?: number; delay?: number } = {};
+  /** @type {{ stagger?: number; delay?: number }} */
+  export let staggerOptions = {};
+  export let surface = 'window';
+  export let variant = '';
 
-  let cardEl: HTMLElement;
+  /** @type {HTMLElement | null} */
+  let cardEl = null;
+  /** @type {Record<string, any>} */
+  let restProps = {};
+  /** @type {string} */
+  let incomingClass = '';
+  /** @type {(() => void) | null} */
+  let cleanupStagger = null;
+  $: {
+    const { class: restClass = '', ...rest } = $$restProps;
+    incomingClass = restClass;
+    restProps = rest;
+  }
+  $: classes = ['os-window', 'magnetic-card', incomingClass].filter(Boolean).join(' ');
 
   onMount(() => {
+    if (!cardEl) {
+      return () => {};
+    }
+
     const cleanupTilt = tilt(cardEl, { max: maxTilt });
     const cleanupMag = magnetic(cardEl, { strength: magneticStrength });
-    let cleanupStagger: (() => void) | undefined;
+    cleanupStagger = null;
     if (Object.keys(staggerOptions).length > 0) {
-      cleanupStagger = staggerReveal(cardEl, staggerOptions).destroy;
+      const staggerAction = staggerReveal(cardEl, staggerOptions);
+      if (staggerAction && typeof staggerAction.destroy === 'function') {
+        cleanupStagger = () => staggerAction.destroy();
+      }
     }
 
     return () => {
-      cleanupTilt.destroy();
-      cleanupMag.destroy();
+      cleanupTilt?.destroy?.();
+      cleanupMag?.destroy?.();
       if (cleanupStagger) cleanupStagger();
     };
   });
 </script>
 
-<div bind:this={cardEl} class="glass-card magnetic-card {$$props.class || ''}" data-variant={$$props['data-variant'] || ''}>
+<div
+  bind:this={cardEl}
+  class={classes}
+  data-surface={surface}
+  data-variant={variant}
+  {...restProps}
+>
   <slot />
 </div>
-
-<style>
-  .magnetic-card {
-    /* Add any specific styling for the magnetic card here, if needed */
-  }
-</style>

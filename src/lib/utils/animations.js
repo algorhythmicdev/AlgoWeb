@@ -1,6 +1,6 @@
 // Motion utilities and Svelte actions for the AlgoRhythmics refurb
 // These helpers lean on the refreshed timing tokens and surface patterns
-// declared in `tokens.css`, and they respect the new motion blueprint from
+// declared in `theme.css`, and they respect the new motion blueprint from
 // `REFURB_PLAN.md`.
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
@@ -392,8 +392,8 @@ export function sparkleTrail(node) {
       sparkle.style.top = `${event.offsetY + (Math.random() * 16 - 8)}px`;
       sparkle.style.borderRadius = '50%';
       sparkle.style.background = Math.random() > 0.5
-        ? 'linear-gradient(45deg, #ffffff, rgba(var(--voyage-blue-rgb), 0.8))'
-        : 'linear-gradient(45deg, #ffffff, rgba(var(--aurora-purple-rgb), 0.8))';
+        ? 'linear-gradient(45deg, var(--pure-white, #ffffff), rgba(var(--status-info-rgb, var(--voyage-blue-rgb)), 0.8))'
+        : 'linear-gradient(45deg, var(--pure-white, #ffffff), rgba(var(--status-critical-rgb, var(--aurora-purple-rgb)), 0.8))';
       sparkle.style.opacity = '1';
       sparkle.style.transition = `all ${durations.ui()} ${easings.spring()}`;
       node.appendChild(sparkle);
@@ -559,16 +559,28 @@ export function typewriter(node, { text, speed = 40, loop = false } = {}) {
  * @param {HTMLElement} node
  * @param {{ colors?: string[]; speed?: number }} [options]
  */
-export function morphGradient(node, { colors = ['#6a38ff', '#0fd6c9', '#ffd339'], speed = 3200 } = {}) {
-  if (!isBrowser || shouldReduceMotion() || colors.length < 2) {
-    node.style.background = colors[0] ?? '#6a38ff';
+export function morphGradient(
+  node,
+  { colors, speed = 3200 } = {}
+) {
+  const palette = (Array.isArray(colors) && colors.length > 1
+    ? colors
+    : [
+        getCssToken('--aurora-purple', '#6a38ff'),
+        getCssToken('--voyage-blue', '#1351ff'),
+        getCssToken('--cherry-pop', '#e0322c'),
+        getCssToken('--signal-yellow', '#ffd339')
+      ]);
+
+  if (!isBrowser || shouldReduceMotion() || palette.length < 2) {
+    node.style.background = palette[0] ?? getCssToken('--aurora-purple', '#6a38ff');
     return { destroy: () => {} };
   }
 
   let index = 0;
   const apply = () => {
-    const next = (index + 1) % colors.length;
-    node.style.background = `linear-gradient(135deg, ${colors[index]}, ${colors[next]})`;
+    const next = (index + 1) % palette.length;
+    node.style.background = `linear-gradient(135deg, ${palette[index]}, ${palette[next]})`;
     index = next;
   };
 

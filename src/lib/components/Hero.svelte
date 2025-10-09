@@ -1,12 +1,13 @@
-<script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
-  export let variant: 'halo' | 'grid' | 'line' | 'particles' = 'halo';
+<script>
+  import { onMount } from 'svelte';
+  /** @type {'halo' | 'grid' | 'line' | 'particles'} */
+  export let variant = 'halo';
   export let title = 'Algo Hero — Big, modern, animated';
   export let subtitle = 'Single gradient logic + page-to-page variants.';
 
-  let prefersReduced = false;
-  let theme: 'light' | 'dark' | 'hc' = 'light';
-  let heroEl: HTMLElement;
+  /** @type {'light' | 'dark' | 'hc'} */
+  let theme = 'light';
+  let heroEl;
 
   // Simple store-free theme sync via <html data-theme>
   function readTheme() {
@@ -16,7 +17,6 @@
   }
 
   onMount(() => {
-    prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const obs = new MutationObserver(() => {
       readTheme();
     });
@@ -93,12 +93,12 @@
     opacity: 0.55;
     animation: halo-move var(--med) ease-in-out infinite alternate;
   }
-  [data-theme='dark'] .hero.a-halo::before,
-  [data-theme='dark'] .hero.a-halo::after {
+  :global([data-theme='dark'] .hero.a-halo)::before,
+  :global([data-theme='dark'] .hero.a-halo)::after {
     mix-blend-mode: lighten;
   }
-  [data-theme='hc'] .hero.a-halo::before,
-  [data-theme='hc'] .hero.a-halo::after {
+  :global([data-theme='hc'] .hero.a-halo)::before,
+  :global([data-theme='hc'] .hero.a-halo)::after {
     display: none;
   }
 
@@ -126,7 +126,7 @@
     background-size: auto, 40px 40px, 40px 40px;
     animation: grid-ripple var(--med) ease-in-out infinite alternate;
   }
-  [data-theme='hc'] .hero.a-grid::before {
+  :global([data-theme='hc'] .hero.a-grid)::before {
     background-image: none;
   }
 
@@ -145,7 +145,7 @@
     z-index: 0;
     opacity: 0.6;
   }
-  [data-theme='hc'] .hero.a-line::before {
+  :global([data-theme='hc'] .hero.a-line)::before {
     display: none;
   }
 
@@ -178,7 +178,7 @@
     animation: drift var(--med) ease-in-out infinite alternate;
     opacity: 0.5;
   }
-  [data-theme='hc'] .hero.a-particles::before {
+  :global([data-theme='hc'] .hero.a-particles)::before {
     display: none;
   }
 </style>

@@ -26,7 +26,7 @@
     <Icon
       name={iconByTone[tone]}
       size={16}
-      style={`color: ${tone === 'error' ? 'var(--critical, #E0322C)' : 'var(--voyage-blue)'}; margin-top: 0.1rem;`}
+      style={`color: ${tone === 'error' ? 'var(--status-critical, var(--accent-critical))' : 'var(--status-info, var(--voyage-blue))'}; margin-top: 0.1rem;`}
     />
     <span>{message}</span>
   </p>
@@ -45,7 +45,7 @@
   }
 
   .field-support--error {
-    color: var(--critical-text, var(--error-strong, var(--critical, #E0322C)));
+    color: var(--critical-text, var(--error-strong, var(--status-critical, var(--accent-critical))));
   }
 
   @media (prefers-reduced-motion: no-preference) {
