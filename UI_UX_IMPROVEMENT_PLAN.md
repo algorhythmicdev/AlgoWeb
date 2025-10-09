@@ -1,67 +1,27 @@
-## Implementation Progress — 2025-02-16
+NodeVoyage
 
-- [x] Pruned legacy animation classes and keyframes so `animations.css` only ships the halo, particle, and magnetic utilities required by the refreshed components.
-- [x] Replaced remaining inline hex colours in Navigation, Hero, Founders, Consulting, and support UI with theme tokens to keep all palettes centralized in `theme.css`.
-- [x] Added status (success/info/critical) tokens and reused them for toast and form affordances so feedback colours stay in sync across modes.
-- [x] Updated `morphGradient` and sparkle helpers to consume the shared tokens instead of hard-coded values, ensuring theme swaps drive the motion accents automatically.
+Light: --bg #F4F8FF, --bg-elev-1 #FFFFFF, --bg-elev-2 #E9F0FF, --text #0A0D14, --primary #1351FF, --accent-1 #1BC7A9, --accent-2 #FFD339
 
-Got it—you’re right. I rebuilt the themes so Light/Dark/High-Contrast all use **different page, card, and sub-panel backgrounds** (no more “all white”). I also aligned everything with your 2026 design notes (frosted glass, dynamic minimalism, grain, Aurora Purple as the shared color, OS-like shells) and kept AAA body text and ≥3:1 non-text contrast, per the design brief. See: design update requiring Aurora Purple as the shared color and AAA across light/dark/HC, with OS-like shells and restrained glass/grain.
+Dark: --bg #081018, --bg-elev-1 #101828, --bg-elev-2 #162235, --text #F2F5F9, --primary #3A71FF, --accent-1 #27E2C1, --accent-2 #FFD339
 
-### What you can use immediately
+High-Contrast: --bg #000000, --bg-elev-1 #000000, --bg-elev-2 #0F0F0F, --text #FFFFFF, --primary #FFFFFF, --accent-1 #00C4AD, --accent-2 #FFD339
+love it — let’s make the **Algo website** feel alive, and keep it performant + accessible.
 
-* **Interactive preview (HTML):** [Open the Theme Preview](sandbox:/mnt/data/algorhythmics-theme-preview.html)
+Below is a drop-in **hero animation system** (brand only) with:
 
-  * Switch between **Brand / NodeVoyage / Ideonautix** and **Light / Dark / High-Contrast**.
-  * You’ll see **three distinct surfaces** in every theme: `--bg` (page), `--bg-elev-1` (cards), `--bg-elev-2` (sub-panels).
-  * Includes frosted app bar, subtle grain, OS-like calm, visible focus rings, and sample UI (hero, cards, forms, table, buttons).
+* **Single gradient logic** (shared across all variants)
+* **Animated transitions** between themes via CSS custom properties
+* **Page-to-page background variants**: *Aurora Flow*, *Dynamic Halo*, *Connected Nodes*, *Grid Ripple*, *Line Sweep*, *Particle Drift*
+* **prefers-reduced-motion** + **High-Contrast** safeguards baked in
+* Minimal JS; GPU-friendly; canvas only where it adds value
 
-### Color systems (concise tokens)
+---
 
-Below are the key tokens (no long sentences, just values). All use **Aurora Purple** as the shared thread.
+# 1) Tokens & motion (brand only)
 
-**Brand (AlgoRhythmics)**
+Create `src/lib/styles/theme.css` and import it once (e.g., in `+layout.svelte`).
 
-* Light: `--bg #F5F7FB`, `--bg-elev-1 #FFFFFF`, `--bg-elev-2 #EEF1F7`, `--text #0A0D14`, `--primary #6A38FF`, `--accent-1 #0FD6C9`, `--accent-2 #FFD339`
-* Dark: `--bg #0B0E13`, `--bg-elev-1 #121722`, `--bg-elev-2 #161C28`, `--text #F2F5F9`, `--primary #8A6BFF`, `--accent-1 #10E3D6`, `--accent-2 #FFD339`
-* High-Contrast: `--bg #FFFFFF`, `--bg-elev-1 #FFFFFF`, `--bg-elev-2 #F0F3FA`, `--text #000000`, `--primary #4400FF`, `--accent-1 #007A73`, `--accent-2 #B78300`
-
-**NodeVoyage**
-
-* Light: `--bg #F4F8FF`, `--bg-elev-1 #FFFFFF`, `--bg-elev-2 #E9F0FF`, `--text #0A0D14`, `--primary #1351FF`, `--accent-1 #1BC7A9`, `--accent-2 #FFD339`
-* Dark: `--bg #081018`, `--bg-elev-1 #101828`, `--bg-elev-2 #162235`, `--text #F2F5F9`, `--primary #3A71FF`, `--accent-1 #27E2C1`, `--accent-2 #FFD339`
-* High-Contrast: `--bg #000000`, `--bg-elev-1 #000000`, `--bg-elev-2 #0F0F0F`, `--text #FFFFFF`, `--primary #FFFFFF`, `--accent-1 #00C4AD`, `--accent-2 #FFD339`
-
-**Ideonautix**
-
-* Light: `--bg #F6FAFF`, `--bg-elev-1 #FFFFFF`, `--bg-elev-2 #ECF3FF`, `--text #0A0D14`, `--primary #00A3FF`, `--accent-1 #FF4D6D`, `--accent-2 #6A38FF`
-* Dark: `--bg #0A0F16`, `--bg-elev-1 #121926`, `--bg-elev-2 #172133`, `--text #F2F5F9`, `--primary #36BAFF`, `--accent-1 #FF6F86`, `--accent-2 #8A6BFF`
-* High-Contrast: `--bg #FFFFFF`, `--bg-elev-1 #FFFFFF`, `--bg-elev-2 #F3F7FF`, `--text #000000`, `--primary #000000`, `--accent-1 #7A0015`, `--accent-2 #4400FF`
-
-### Why this fixes the issue
-
-* **Distinct backgrounds:** Per theme you now have **three** clearly separated surfaces (page vs card vs sub-panel). No more flat white in Light or flat black in Dark.
-* **AAA text:** Body text colors sit on neutrals with ≥7:1 contrast; high-contrast modes flip to pure black/white where needed.
-* **Non-text contrast:** Focus rings/outlines meet ≥3:1 and don’t rely on color alone—shapes/labels change too, as the design note requires. 
-
-If you want, I can package this as a drop-in `theme.css` + a tiny TS util for SvelteKit and open a PR to your repo next.
-
-
-Below is a drop-in hero animation system (brand only) with:
-
-Single gradient logic (shared across all variants)
-
-Animated transitions between themes via CSS custom properties
-
-Page-to-page background variants: Aurora Flow, Dynamic Halo, Connected Nodes, Grid Ripple, Line Sweep, Particle Drift
-
-prefers-reduced-motion + High-Contrast safeguards baked in
-
-Minimal JS; GPU-friendly; canvas only where it adds value
-
-1) Tokens & motion (brand only)
-
-Create src/lib/styles/theme.css and import it once (e.g., in +layout.svelte).
-
+```css
 /* src/lib/styles/theme.css */
 /* Brand core palette + shared gradient logic */
 :root{
@@ -122,11 +82,15 @@ html[data-theme="hc"]{
 @media (prefers-reduced-motion: reduce){
   * { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition:none !important; }
 }
+```
 
-2) Reusable Hero component (Svelte)
+---
 
-Create src/lib/components/Hero.svelte.
+# 2) Reusable Hero component (Svelte)
 
+Create `src/lib/components/Hero.svelte`.
+
+```svelte
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   export let variant: 'aurora'|'halo'|'nodes'|'grid'|'line'|'particles' = 'aurora';
@@ -332,11 +296,15 @@ Create src/lib/components/Hero.svelte.
     <slot />
   </div>
 </div>
+```
 
-3) Using it per page
+---
 
-Map page → variant in your routes. Example:
+# 3) Using it per page
 
+Map **page → variant** in your routes. Example:
+
+```svelte
 <!-- src/routes/+layout.svelte -->
 <script>
   import '../lib/styles/theme.css';
@@ -358,7 +326,9 @@ Map page → variant in your routes. Example:
   <button on:click={()=>setTheme('dark')}>Dark</button>
   <button on:click={()=>setTheme('hc')}>HC</button>
 </div>
+```
 
+```svelte
 <!-- src/routes/+page.svelte (Home = Aurora Flow) -->
 <script>
   import Hero from '$lib/components/Hero.svelte';
@@ -367,36 +337,56 @@ Map page → variant in your routes. Example:
 <Hero variant="aurora" title="Algo · Home" subtitle="Signature aurora gradient with neutral overlay.">
   <!-- CTA / search / KPIs, etc. -->
 </Hero>
+```
 
+```svelte
 <!-- src/routes/products/+page.svelte (Dynamic Halo) -->
 <script> import Hero from '$lib/components/Hero.svelte'; </script>
 <Hero variant="halo" title="Products" subtitle="Ethereal radial halos, calm motion."></Hero>
+```
 
+```svelte
 <!-- src/routes/docs/+page.svelte (Grid Ripple) -->
 <script> import Hero from '$lib/components/Hero.svelte'; </script>
 <Hero variant="grid" title="Docs" subtitle="Grid ripple with gentle highlight."></Hero>
+```
 
+```svelte
 <!-- src/routes/labs/+page.svelte (Connected Nodes) -->
 <script> import Hero from '$lib/components/Hero.svelte'; </script>
 <Hero variant="nodes" title="Labs" subtitle="Moving graph of connected nodes."></Hero>
+```
 
+```svelte
 <!-- src/routes/about/+page.svelte (Line Sweep) -->
 <script> import Hero from '$lib/components/Hero.svelte'; </script>
 <Hero variant="line" title="About" subtitle="Conic sweep glint, premium and subtle."></Hero>
+```
 
+```svelte
 <!-- src/routes/blog/+page.svelte (Particle Drift) -->
 <script> import Hero from '$lib/components/Hero.svelte'; </script>
 <Hero variant="particles" title="Blog" subtitle="Sparse particles drifting slowly."></Hero>
+```
 
-4) Notes on accessibility & performance
+---
 
-HC mode: we keep the hero decorative layers off, rely on solid text and the gradient bar underlay only, ensuring AAA on body text and clear focus rings.
+# 4) Notes on accessibility & performance
 
-prefers-reduced-motion: all CSS animations clamp to still; canvas loops short-circuit.
+* **HC mode:** we keep the hero decorative layers off, rely on **solid text** and the **gradient bar underlay** only, ensuring AAA on body text and clear focus rings.
+* **prefers-reduced-motion:** all CSS animations clamp to still; canvas loops short-circuit.
+* **GPU-friendly:** CSS uses transforms/opacity; canvas work is modest and resolution-capped by devicePixelRatio.
+* **Theming transitions:** are applied to token *usage* (colors, borders, backgrounds) so switching **light ↔ dark ↔ HC** feels smooth without re-mounting components.
 
-GPU-friendly: CSS uses transforms/opacity; canvas work is modest and resolution-capped by devicePixelRatio.
+---
 
-Theming transitions: are applied to token usage (colors, borders, backgrounds) so switching light ↔ dark ↔ HC feels smooth without re-mounting components.
+# 5) Quick smoke test (no framework)
+
+If you want an instant browser demo, copy the **Hero.svelte logic** into a plain HTML and replace Svelte bits with standard DOM — or tell me and I’ll paste a standalone HTML in full here.
+
+---
+
+If you’d like, I can adapt this into a tiny **`@algo/hero`** internal package (Svelte component + CSS tokens) and wire it into your repo’s layout with a page-to-variant map.
 Here’s your upgrade guide summarizing the unified colour system, hero animations, accessibility guardrails and implementation steps tailored for the Algo site. It synthesizes our previous conversations and the detailed rules from the design kit (core palette, surface tokens, gradient rules, hero variant descriptions and interaction requirements). The guide is ready to drop into your repo or design documentation.
 
 {{file:file-KH69tzFwAZF9Y6exeDaQQU}}
@@ -774,3 +764,195 @@ Add subtle texture and frosted panels using CSS; keep text on a separate solid l
 ---
 
 These snippets should integrate easily into your existing SvelteKit project. You can wrap the hero variants in a single `<Hero>` component with props, toggle themes by updating `data-theme` on `<html>`, and rely on the global tokens defined in `base.css`. All animations honour high‑contrast mode and `prefers-reduced-motion`, so your site stays accessible while delivering the glassy, grainy, dynamic minimalism defined in the design kit.
+Below are practical ways to upgrade your **cards and sections** while preserving the brand’s glassy, grainy, dynamic minimalism. These suggestions draw directly from the existing codebase (notably `ThemedBackground.svelte` and `animations.css`) and the design kit’s accessibility rules. Where possible I’ve included actual code patterns from the repo, so you can copy them into your own components.
+
+---
+
+## 1. Glass cards with subtle grain and halo accents
+
+The repo already defines a `.glass-card` class that gives panels a frosted, blurred effect and adds an ultra‑low‑contrast grain layer. Extend it to support a **halo glow** behind specific cards.
+
+```css
+/* Extend the existing glass card */
+.glass-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 18px;
+  background: var(--bg-elev-1);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Grain overlay (already in animations.css) */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain); /* defined in your tokens */
+  opacity: 0.035;
+  mix-blend-mode: normal;
+  pointer-events: none;
+}
+
+/* Halo variant: radial glow on specific cards */
+.glass-card[data-variant="halo"]::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--grad-a) 50%, transparent) 0%, transparent 65%),
+    radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--grad-b) 45%, transparent) 0%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.4;
+  animation: halo-pulse 8s ease-in-out infinite alternate;
+}
+@keyframes halo-pulse {
+  from { transform: scale(0.98); }
+  to   { transform: scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
+  .glass-card[data-variant="halo"]::before {
+    animation: none;
+  }
+}
+```
+
+* `var(--grad-a)` and `var(--grad-b)` reference your global gradient colours (Voyage Blue and Aurora Purple).
+* Add `data-variant="halo"` to the cards you want to highlight; the radial glow makes them stand out.
+
+---
+
+## 2. Particle-backed cards and shimmer highlights
+
+In `animations.css` there is a `.particle-container` class that creates floating dots behind a panel. Use it to make content blocks feel dynamic without overwhelming the text.
+
+```html
+<div class="glass-card particle-container">
+  <h3 class="heading">Key Insight</h3>
+  <p>Clear copy goes here…</p>
+</div>
+```
+
+The CSS (already in the repo) looks like this:
+
+```css
+.particle-container {
+  position: relative;
+}
+.particle-container::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, color-mix(in oklab, var(--grad-a) 80%, transparent) 0%, transparent 100%),
+    radial-gradient(2px 2px at 35% 60%, color-mix(in oklab, var(--grad-b) 80%, transparent) 0%, transparent 100%),
+    radial-gradient(2px 2px at 70% 30%, color-mix(in oklab, var(--signal-yellow) 70%, transparent) 0%, transparent 100%),
+    radial-gradient(2px 2px at 85% 75%, color-mix(in oklab, var(--voyage-blue) 70%, transparent) 0%, transparent 100%);
+  animation: drift var(--med) ease-in-out infinite alternate;
+  opacity: 0.5;
+  z-index: 0;
+}
+```
+
+Because the dots are extremely small and semi‑transparent, they add subtle movement without distracting from the content. The animation automatically halts in high‑contrast or `prefers‑reduced‑motion` modes.
+
+---
+
+## 3. Magnetic & tilt interactions
+
+The repo includes `useTilt` and `useMagnetic` functions in `animations.js` to create interactive hover effects. Wrap your cards in a component that applies these hooks:
+
+```svelte
+<script lang="ts">
+  import { tilt, magnetic } from '$lib/animations';
+
+  export let magneticStrength = 0.3; // 0 to 1
+  let cardEl: HTMLElement;
+
+  onMount(() => {
+    const cleanupTilt = tilt(cardEl, { maxTilt: 7, speed: 0.4 });
+    const cleanupMag = magnetic(cardEl, { strength: magneticStrength });
+    return () => { cleanupTilt(); cleanupMag(); };
+  });
+</script>
+
+<div bind:this={cardEl} class="glass-card magnetic-card">
+  <slot />
+</div>
+```
+
+On hover, the card subtly tilts toward the pointer and follows the mouse magnetically, making the content feel alive. The hooks automatically respect `prefers‑reduced‑motion`, so they fall back to a simple hover style when necessary.
+
+---
+
+## 4. Section‑specific card layouts
+
+Use your existing page themes (Home, NodeVoyage, Ideonautix, etc.) to influence card styling. For example, on the **Home** section you can apply a higher density of background shapes and brighter halos to hero cards, while using neutral glass cards with subtle gradients for supporting content. On **Consulting** or **Community**, reduce density and rely on text‑heavy cards with just a thin gradient bar (as shown in the heading-bar snippet above) to avoid visual overload.
+
+To implement, add data attributes to cards:
+
+```html
+<section class="grid">
+  <div class="glass-card" data-variant="halo">
+    <h3>AI Solutions</h3>
+    <p>Custom ML models built to your needs.</p>
+  </div>
+
+  <div class="glass-card particle-container">
+    <h3>Consulting</h3>
+    <p>Expert guidance on data strategy.</p>
+  </div>
+
+  <div class="glass-card">
+    <h3>Community</h3>
+    <p>Join our forum to learn and share.</p>
+  </div>
+</section>
+```
+
+Use `grid-template-columns` and media queries to adjust layout across breakpoints; ensure enough spacing (≥1.25rem) and high contrast between cards and backgrounds as required by the design kit.
+
+---
+
+## 5. Interesting reveals & content emphasis
+
+The repo’s `animations.js` also provides `useReveal` and `useStaggerReveal` functions to animate cards as they scroll into view. Combine them with typed text and gradient morphing for hero cards:
+
+```svelte
+<script>
+  import { useReveal, useStaggerReveal, morphGradient } from '$lib/animations';
+
+  let cards: HTMLElement[];
+  onMount(() => {
+    const unsubs = [
+      ...cards.map((el) => useReveal(el, { threshold: 0.2, distance: '20px' })),
+      morphGradient(document.documentElement, {
+        colors: ['#6A38FF', '#1351FF', '#E0322C', '#FFD339'],
+        duration: 20
+      })
+    ];
+    return () => { unsubs.forEach((fn) => fn()); };
+  });
+</script>
+
+<div bind:this={el => cards = [el]} class="glass-card"> … </div>
+<div bind:this={el => cards = [el]} class="glass-card particle-container"> … </div>
+```
+
+Cards fade in and slide up as they enter the viewport, creating a polished feel. The background gradient on the page gradually shifts between brand colours, which keeps the environment dynamic but still calm thanks to long durations and easing.
+
+---
+
+## Summary
+
+By reusing the **glass‑card**, **particle-container**, and **magnetic** classes found in the repository and extending them with halo pseudo‑elements, you can make cards stand out while staying true to the design system. The animations remain subtle and accessible: they pause when `prefers‑reduced‑motion` is enabled and are disabled entirely in high‑contrast mode. These patterns encourage visual hierarchy—special cards draw the eye via halos and particle backgrounds, while standard cards maintain clarity through frosted glass and gentle gradients.
+
+If you’d like help wiring these components into specific pages (e.g., the Home hero or Product showcase) or creating a unified Svelte component library, I’d be happy to assist!
+Here’s a comprehensive guide that analyses the current codebase and provides step-by-step instructions to unify AlgoRhythmics’ website around a modern, glassy-grainy aesthetic, using the consulting page hero as the baseline.  It explains why styles diverged, lays out core principles (tokens, accessibility, grain/glass usage), and offers concrete implementation steps—consolidating theme variables, building universal hero and card components, standardising layouts and spacing, and auditing existing pages.  Following this plan should bring consistency and polish across all pages while honouring the dynamic minimalism and accessibility guardrails specified in the design kit.
+
+You can download the full guide here: {{file:file-R7Hoa81Y1K1rheF2CpxWS5}}.
+
+Let me know if you’d like help wiring these components into the code or reviewing specific pages!
