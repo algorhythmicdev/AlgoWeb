@@ -1,31 +1,37 @@
 :root {
+  /* Brand core palette + shared gradient logic */
+  --aurora: #6A38FF;
+  --voyage: #1351FF;
+  --signal: #FFD339;
+  --cherry: #E0322C;
+
+  --grad-angle: 120deg;
+  --grad-a: var(--voyage);
+  --grad-b: var(--aurora);
+  --grad: linear-gradient(var(--grad-angle), var(--grad-a) 0%, var(--grad-b) 100%);
+
   /* Brand (light) */
   --bg: #F5F7FB;
   --bg-elev-1: #FFFFFF;
   --bg-elev-2: #EEF1F7;
   --text: #0A0D14;
-  --primary: #6A38FF;
+  --primary: var(--aurora);
   --accent-1: #0FD6C9;
-  --accent-2: #FFD339;
+  --accent-2: var(--signal);
   --muted: #2B3446;
   --border: #D5DBE7;
   --link: #4F2CFF;
   --focus: #1351FF55;
 
-  /* Shared */
-  --aurora: #6A38FF;
-  --voyage: #1351FF;
-  --signal: #FFD339;
-  --cherry: #E0322C;
-  --grad-angle: 120deg;
-  --grad-a: var(--voyage);
-  --grad-b: var(--aurora);
-  --grad: linear-gradient(var(--grad-angle), var(--grad-a) 0%, var(--grad-b) 100%);
   --radius: 16px;
   --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  /* Motion timing */
   --slow: 22s;
   --med: 12s;
   --fast: 6s;
+
+  /* Transition for theme changes (custom props) */
   --theme-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --theme-dur: 0.55s;
 
@@ -40,7 +46,7 @@
 }
 
 /* Dark mode override */
-[data-theme='dark'] {
+html[data-theme='dark'] {
   --grad-a: #3A71FF;
   --grad-b: #8A6BFF;
   --bg: #0B0E13;
@@ -49,7 +55,7 @@
   --text: #F2F5F9;
   --primary: #8A6BFF;
   --accent-1: #10E3D6;
-  --accent-2: #FFD339;
+  --accent-2: var(--signal);
   --muted: #BBC5D6;
   --link: #A795FF;
   --border: #2B3446;
@@ -57,22 +63,22 @@
 }
 
 /* high‑contrast mode: no gradients */
-[data-theme='hc'] {
+html[data-theme='hc'] {
   --bg: #FFFFFF;
   --bg-elev-1: #FFFFFF;
   --bg-elev-2: #F0F3FA;
   --text: #000000;
-  --primary: #4400FF;
-  --accent-1: #007A73;
-  --accent-2: #B78300;
+  --primary: #FFFFFF;
+  --accent-1: #00C4AD;
+  --accent-2: var(--signal);
   --muted: #111;
   --link: #0000EE;
-  --border: #000;
-  --focus: #000;
+  --border: #000000;
+  --focus: #000000;
 }
 
 /* NodeVoyage Themes */
-[data-theme="nodevoyage-light"] {
+html[data-theme="nodevoyage-light"] {
   --bg: #F4F8FF;
   --bg-elev-1: #FFFFFF;
   --bg-elev-2: #E9F0FF;
@@ -82,7 +88,7 @@
   --accent-2: #FFD339;
 }
 
-[data-theme="nodevoyage-dark"] {
+html[data-theme="nodevoyage-dark"] {
   --bg: #081018;
   --bg-elev-1: #101828;
   --bg-elev-2: #162235;
@@ -92,7 +98,7 @@
   --accent-2: #FFD339;
 }
 
-[data-theme="nodevoyage-hc"] {
+html[data-theme="nodevoyage-hc"] {
   --bg: #000000;
   --bg-elev-1: #000000;
   --bg-elev-2: #0F0F0F;
@@ -103,7 +109,7 @@
 }
 
 /* Ideonautix Themes */
-[data-theme="ideonautix-light"] {
+html[data-theme="ideonautix-light"] {
   --bg: #F6FAFF;
   --bg-elev-1: #FFFFFF;
   --bg-elev-2: #ECF3FF;
@@ -113,7 +119,7 @@
   --accent-2: #6A38FF;
 }
 
-[data-theme="ideonautix-dark"] {
+html[data-theme="ideonautix-dark"] {
   --bg: #0A0F16;
   --bg-elev-1: #121926;
   --bg-elev-2: #172133;
@@ -123,7 +129,7 @@
   --accent-2: #8A6BFF;
 }
 
-[data-theme="ideonautix-hc"] {
+html[data-theme="ideonautix-hc"] {
   --bg: #FFFFFF;
   --bg-elev-1: #FFFFFF;
   --bg-elev-2: #F3F7FF;
@@ -159,6 +165,10 @@ body::after {
 }
 
 /* Accessibility: reduce non-essential animations */
-@media (prefers-reduced-motion: reduce){
-  * { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition:none !important; }
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
 }

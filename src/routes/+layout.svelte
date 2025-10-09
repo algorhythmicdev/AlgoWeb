@@ -140,24 +140,6 @@
     padding-top: 80px;
   }
   
-  .loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    gap: var(--space-4);
-  }
-  
-  .spinner {
-    width: 48px;
-    height: 48px;
-    border: 4px solid var(--bg-elevated);
-    border-top-color: var(--voyage-blue);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
   @keyframes spin {
     to {
       transform: rotate(360deg);

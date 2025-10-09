@@ -2,11 +2,10 @@
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
   import { Icon } from '$lib/components';
-  import HeroWrapper from '$lib/components/hero/HeroWrapper.svelte';
-  import HeroBackdrop from '$lib/components/hero/HeroBackdrop.svelte';
+  import Hero from '$lib/components/Hero.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
+  import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { voting } from '$stores/voting';
-  import { staggerReveal, tilt, particleExplode, sparkleTrail, ripple, magnetic } from '$utils/animations';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
 
@@ -70,6 +69,11 @@
   let heroMetrics = fallbackHeroMetrics;
   $: heroMetrics = ensureMetrics($json?.('community.metrics'), fallbackHeroMetrics);
 
+  const featureVariants = {
+    nodevoyage: 'halo',
+    ideonautix: 'grid'
+  };
+
   
   let features = [
     { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },
@@ -132,60 +136,30 @@
 {/if}
 
 <!-- Hero -->
-<HeroWrapper
-  class="hero hero--community hero--centered community-hero"
-  showAside={false}
-  introReveal={{ delay: 60, stagger: 120 }}
->
-  <svelte:fragment slot="backdrop">
-    <HeroBackdrop
-      variant="grid-ripple"
-      tone="primary"
-      intensity="balanced"
-      className="community-hero__backdrop"
-    />
-    <HeroBackdrop
-      variant="spotlight"
-      tone="aurora"
-      intensity="soft"
-      className="community-hero__backdrop-spotlight"
-    />
-  </svelte:fragment>
-  <svelte:fragment slot="title">
-    <h1 class="community-hero__title heading-gradient">{$_('community.hero_title')}</h1>
-  </svelte:fragment>
-
-  <svelte:fragment slot="lead">
+<Hero variant="particles" title={$_('community.hero_title')} subtitle={$_('community.hero_subtitle')}>
+  <div class="community-hero">
     <div class="community-hero__headline">
       <AnimatedHeadline variant="slide" phrases={heroHeadlinePhrases} holdDuration={2600} />
     </div>
-  </svelte:fragment>
 
-  <svelte:fragment slot="description">
-    <p class="community-hero__description">{$_('community.hero_subtitle')}</p>
-  </svelte:fragment>
-
-  <svelte:fragment slot="highlights">
     {#if heroManifest}
       <div class="hero-highlights">
         <p class="community-hero__manifest" aria-live="polite">{heroManifest}</p>
       </div>
     {/if}
-  </svelte:fragment>
 
-  <svelte:fragment slot="metrics">
     {#if heroMetrics.length}
       <ul class="hero-metrics community-hero__metrics">
         {#each heroMetrics as metric (metric.label)}
-          <li class="community-hero__metric os-window" data-surface="window">
+          <li class="community-hero__metric glass-card">
             <span class="community-hero__metric-value">{metric.value}</span>
             <span class="community-hero__metric-label">{metric.label}</span>
           </li>
         {/each}
       </ul>
     {/if}
-  </svelte:fragment>
-</HeroWrapper>
+  </div>
+</Hero>
 
 <!-- Voting Section -->
 <section class="voting-section">
@@ -195,12 +169,16 @@
     
     <div
       class="features-grid"
-      use:staggerReveal={{ delay: 100 }}
       role="list"
       aria-label={$_('community.voting_list_aria')}
     >
-      {#each sortedFeatures as feature (feature.id)}
-        <div class="feature-card os-window" use:tilt={{ max: 3, scale: 1.01 }} role="listitem">
+      {#each sortedFeatures as feature, index (feature.id)}
+        <MagneticTiltCard
+          class="feature-card"
+          data-variant={featureVariants[feature.product]}
+          role="listitem"
+          staggerOptions={{ delay: 120 + index * 60 }}
+        >
           <div class="feature-header">
             <span
               class="category-badge"
@@ -227,9 +205,6 @@
             class="vote-button"
             class:voted={$voting[feature.id]}
             on:click={() => handleVote(feature.id)}
-            use:particleExplode
-            use:ripple
-            use:magnetic
             aria-pressed={$voting[feature.id]}
             aria-label={$_('community.vote_for', { values: { feature: $_(`community.features.${feature.id}.name`) } })}
           >
@@ -242,7 +217,7 @@
               <span>{$_('community.vote_button')}</span>
             {/if}
           </button>
-        </div>
+        </MagneticTiltCard>
       {/each}
     </div>
   </div>
@@ -251,10 +226,10 @@
 <!-- Submit Idea -->
 <section class="idea-section">
   <div class="container">
-    <div class="idea-card os-window">
+    <MagneticTiltCard class="idea-card" interactive={false}>
       <h2>{$_('community.ideas_title')}</h2>
       <div class="idea-form">
-        <textarea 
+        <textarea
           bind:value={newIdeaText}
           placeholder={$_('community.ideas_placeholder')}
           rows="4"
@@ -265,35 +240,15 @@
         <button
           class="btn btn-primary btn-lg"
           on:click={submitIdea}
-          use:particleExplode
-          use:ripple
-          use:magnetic
-          use:sparkleTrail
         >
           {$_('community.ideas_submit')}
         </button>
       </div>
-    </div>
+    </MagneticTiltCard>
   </div>
 </section>
 
 <style>
-  :global(.hero--community) {
-    --hero-padding-block-start: clamp(6rem, 14vw, 8rem);
-    --hero-padding-block-end: clamp(3.5rem, 10vw, 5.2rem);
-    --hero-shell-columns: minmax(0, 1fr);
-    --hero-shell-gap: clamp(2rem, 4vw, 2.6rem);
-    --hero-intro-gap: clamp(1.2rem, 3vw, 1.8rem);
-    --hero-backdrop-inset: -40% -15% auto;
-    --hero-backdrop-height: clamp(18rem, 32vw, 24rem);
-    --hero-backdrop-gradient: radial-gradient(circle at center, rgba(19, 81, 255, 0.22), transparent 70%);
-    --hero-backdrop-opacity: 0.35;
-    --hero-backdrop-opacity-light: 0.42;
-    --hero-backdrop-opacity-dark: 0.28;
-    overflow: hidden;
-    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
-  }
-
   :global(.community-hero)::before {
     content: '';
     position: absolute;
@@ -301,13 +256,19 @@
     height: clamp(18rem, 32vw, 24rem);
     background: radial-gradient(circle at center, var(--hero-glow-primary), transparent 70%);
     filter: blur(140px);
-    opacity: 0.7;
+    opacity: 0.68;
     pointer-events: none;
   }
 
-  .community-hero__title {
-    margin: 0;
+  .community-hero {
+    display: grid;
+    justify-items: center;
+    gap: clamp(1.4rem, 4vw, 2.2rem);
     text-align: center;
+  }
+
+  .community-hero :global(h1) {
+    margin: 0;
     font-size: clamp(2.8rem, 6.5vw, 4rem);
     letter-spacing: -0.02em;
   }
@@ -316,33 +277,32 @@
     position: relative;
     display: inline-flex;
     justify-content: center;
-    margin: clamp(1.2rem, 2.8vw, 1.8rem) auto 0;
-    padding: clamp(0.6rem, 2vw, 0.95rem) clamp(1.25rem, 3vw, 1.85rem);
+    margin-top: clamp(1.1rem, 3vw, 1.8rem);
+    padding: clamp(0.65rem, 2vw, 0.95rem) clamp(1.2rem, 3vw, 1.85rem);
     border-radius: clamp(2.4rem, 5vw, 3.6rem);
-    max-width: min(100%, var(--measure-md));
-    text-align: center;
-    background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1));
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 24px 55px rgba(10, 22, 44, 0.22);
+    max-width: min(100%, 60ch);
+    background: linear-gradient(128deg,
+        color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--voyage-blue-rgb), 0.28) 18%),
+        color-mix(in srgb, var(--bg-elev-1) 78%, rgba(var(--aurora-purple-rgb), 0.22) 22%));
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.4) 40%);
+    box-shadow: 0 24px 55px rgba(10, 22, 44, 0.22);
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
   }
 
   .community-hero__headline :global(.animated-headline) {
     width: 100%;
   }
 
-  .community-hero__description {
+  .community-hero :global(p) {
     margin: 0;
-    max-width: var(--measure-lg);
+    max-width: min(100%, 68ch);
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-    text-align: center;
   }
 
   .community-hero__manifest {
     margin: 0;
-    max-width: min(100%, var(--measure-xl));
+    max-width: min(100%, 72ch);
     font-size: clamp(1rem, 2.2vw, 1.35rem);
     color: var(--text-secondary);
   }
@@ -352,26 +312,23 @@
     width: 100%;
     gap: clamp(1rem, 2.4vw, 1.6rem);
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    align-items: stretch;
+    margin-top: clamp(2rem, 5vw, 3rem);
   }
 
   .community-hero__metric {
     display: grid;
-    gap: 0.5rem;
-    padding: clamp(1.1rem, 2.2vw, 1.6rem);
+    gap: 0.55rem;
+    padding: clamp(1.1rem, 2.4vw, 1.7rem);
     text-align: left;
-  }
-
-  @media (max-width: 720px) {
-    .community-hero__metrics {
-      grid-template-columns: minmax(0, 1fr);
-    }
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 55%, rgba(255, 255, 255, 0.4) 45%);
+    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
+    box-shadow: 0 18px 42px rgba(10, 22, 44, 0.12);
   }
 
   .community-hero__metric-value {
     font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: var(--weight-semibold);
-    color: var(--heading-color);
+    color: color-mix(in srgb, var(--grad-a) 55%, var(--text) 45%);
   }
 
   .community-hero__metric-label {
@@ -381,60 +338,9 @@
     color: var(--text-secondary);
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .community-hero__metric-label {
-    color: var(--text-primary);
-  }
-
-  :global([data-base-theme='dark']) .community-hero__headline {
-    background: linear-gradient(126deg, rgba(24, 32, 56, 0.82), rgba(24, 32, 56, 0.56));
-    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.38), 0 24px 55px rgba(4, 12, 26, 0.42);
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .community-hero__headline {
-    background: linear-gradient(126deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.72));
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
-  }
-
-  :global(.community-hero__backdrop),
-  :global(.community-hero__backdrop-spotlight) {
-    position: absolute;
-    inset: -12% -22% auto;
-    height: clamp(22rem, 38vw, 30rem);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  :global(.community-hero__backdrop) {
-    --hero-backdrop-opacity: 0.6;
-    --hero-backdrop-blur: clamp(120px, 24vw, 230px);
-  }
-
-  :global(.community-hero__backdrop-spotlight) {
-    --hero-backdrop-opacity: 0.4;
-    mix-blend-mode: screen;
-  }
-
-  :global([data-base-theme='dark'] .community-hero__backdrop) {
-    --hero-backdrop-opacity: 0.52;
-  }
-
-  :global([data-base-theme='dark'] .community-hero__backdrop-spotlight) {
-    --hero-backdrop-opacity: 0.32;
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .community-hero__backdrop-spotlight) {
-    display: none;
-  }
-
-  :global(.hero--community h1) {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-top: 0.75rem;
-  }
-
   .voting-section {
     padding: clamp(6rem, 14vw, 8rem) 0;
     position: relative;
-    overflow: hidden;
   }
 
   .voting-section::before {
@@ -442,185 +348,183 @@
     position: absolute;
     inset: -35% -25% auto;
     height: clamp(18rem, 32vw, 26rem);
-    background: radial-gradient(circle at 70% 40%, var(--hero-glow-secondary), transparent 70%);
+    background: radial-gradient(circle at 70% 40%, var(--hero-glow-primary), transparent 70%);
     filter: blur(140px);
-    opacity: 0.6;
+    opacity: 0.55;
     pointer-events: none;
   }
 
   .section-title {
-    text-align: center;
-    font-size: var(--h2);
     margin: 0;
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 2.8rem);
   }
 
   .section-subtitle {
     text-align: center;
     color: var(--text-secondary);
-    font-size: var(--text-subtitle);
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
     line-height: var(--leading-relaxed);
     margin: 0.75rem auto 0;
-    max-width: var(--measure-md);
+    max-width: min(100%, 60ch);
   }
 
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: clamp(2rem, 5vw, 3.2rem);
-    margin-top: clamp(3rem, 6vw, 4.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(1.8rem, 4vw, 2.8rem);
+    margin-top: clamp(2.8rem, 6vw, 4.5rem);
   }
 
-  .feature-card {
+  .features-grid :global(.feature-card) {
     display: grid;
     gap: clamp(1rem, 2.6vw, 1.6rem);
-    padding: clamp(2rem, 4vw, 2.8rem);
-    position: relative;
+    padding: clamp(1.8rem, 4vw, 2.6rem);
     border-radius: var(--radius-2xl);
-    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+    position: relative;
+    overflow: hidden;
   }
 
-  .feature-card::before {
+  .features-grid :global(.feature-card)::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.12), rgba(var(--accent-secondary-rgb), 0.1));
+    background: linear-gradient(135deg,
+        color-mix(in srgb, var(--grad-a) 22%, transparent),
+        color-mix(in srgb, var(--grad-b) 18%, transparent));
     opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-out);
+    transition: opacity 220ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94));
     pointer-events: none;
   }
 
-  .feature-card:hover::before {
-    opacity: 1;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+  .features-grid :global(.feature-card:hover)::before,
+  .features-grid :global(.feature-card:focus-within)::before {
+    opacity: 0.5;
   }
 
   .feature-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
   }
 
   .category-badge {
-    padding: 0.4rem 0.9rem;
+    padding: 0.45rem 1rem;
     border-radius: var(--radius-full);
-    background: rgba(19, 81, 255, 0.08);
-    border: 1px solid rgba(19, 81, 255, 0.18);
-    color: var(--voyage-blue);
+    background: color-mix(in srgb, var(--voyage) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--voyage) 32%, transparent);
+    color: var(--voyage);
     font-size: var(--text-small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .vote-count {
-    font-size: var(--text-title);
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
     font-weight: var(--weight-semibold);
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--grad-b) 52%, var(--text) 48%);
   }
 
-  .feature-name { font-size: var(--text-headline); }
-  .feature-description { color: var(--text-secondary); line-height: var(--leading-relaxed); }
+  .feature-name {
+    font-size: clamp(1.4rem, 3vw, 1.85rem);
+  }
+
+  .feature-description {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
 
   .vote-button {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    justify-self: flex-start;
-    padding: 0.9rem 1.4rem;
+    gap: 0.45rem;
+    padding: 0.85rem 1.35rem;
     border-radius: var(--radius-full);
-    border: 1px solid rgba(19, 81, 255, 0.22);
-    background: var(--bg-surface);
-    background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
-    color: var(--text-primary);
+    border: 1px solid color-mix(in srgb, var(--voyage) 32%, transparent);
+    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
+    color: var(--text);
     font-weight: var(--weight-semibold);
-    transition: all var(--duration-fast) var(--ease-out);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(18px);
+    transition: transform 180ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94)),
+      box-shadow 180ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94)),
+      background-color 180ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94));
   }
 
-  .vote-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-primary);
-    transition: left 0.3s ease;
-    z-index: -1;
-  }
-
-  .vote-button:hover::before {
-    left: 0;
-  }
-
-  .vote-button:hover {
-    border-color: transparent;
-    color: var(--pure-white);
-    transform: scale(1.05);
+  .vote-button:hover,
+  .vote-button:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(19, 81, 255, 0.25);
+    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+    color: #fff;
   }
 
   .vote-button.voted {
-    background: var(--gradient-primary);
-    border-color: transparent;
-    color: var(--pure-white);
+    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+    color: #fff;
+    box-shadow: 0 18px 36px rgba(19, 81, 255, 0.3);
   }
 
   .vote-icon {
     display: inline-flex;
   }
 
-  .idea-section { padding: clamp(5rem, 12vw, 7rem) 0 clamp(6rem, 14vw, 8rem); }
+  .idea-section {
+    padding: clamp(5rem, 12vw, 7rem) 0 clamp(6rem, 14vw, 8rem);
+  }
 
-  .idea-card {
-    width: min(100%, var(--container-sm));
+  :global(.idea-card) {
+    width: min(100%, 560px);
     margin: 0 auto;
-    padding: clamp(2.4rem, 5vw, 3.2rem);
-    border-radius: var(--radius-2xl);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    background: var(--bg-surface);
-    background: var(--surface-glass);
-    box-shadow: var(--shadow-sm);
-    backdrop-filter: blur(24px);
+    padding: clamp(2.2rem, 5vw, 3rem);
   }
 
   .idea-form {
-    margin-top: var(--space-4);
+    margin-top: clamp(1.4rem, 3vw, 2rem);
     display: grid;
-    gap: clamp(1.2rem, 3vw, 1.8rem);
+    gap: clamp(1.1rem, 3vw, 1.6rem);
   }
 
   .idea-form textarea {
     width: 100%;
-    padding: clamp(1.2rem, 3vw, 1.6rem);
+    padding: clamp(1.1rem, 3vw, 1.5rem);
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(19, 81, 255, 0.16);
-    background: var(--bg-surface);
+    border: 1px solid color-mix(in srgb, var(--voyage) 22%, transparent);
+    background: color-mix(in srgb, var(--bg-surface) 92%, rgba(var(--aurora-purple-rgb), 0.08) 8%);
     font-family: inherit;
     font-size: var(--text-body);
-    transition: border-color var(--duration-fast) var(--ease-out);
+    color: var(--text);
+    transition: border-color 160ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94));
   }
 
-  .idea-form textarea:focus {
-    outline: none;
-    border-color: var(--voyage-blue);
+  .idea-form textarea:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--grad-a) 60%, var(--grad-b) 40%);
+    outline-offset: 2px;
+    border-color: transparent;
   }
 
-  @media (max-width: 768px) {
-    :global(.hero--community) {
-      --hero-padding-block-start: var(--space-12);
-      --hero-padding-block-end: var(--space-6);
+  @media (max-width: 720px) {
+    .community-hero__metrics {
+      grid-template-columns: minmax(0, 1fr);
     }
-    .features-grid { grid-template-columns: 1fr; }
+
+    .features-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    :global(.community-hero__backdrop),
-    :global(.community-hero__backdrop-spotlight) {
-      animation: none;
+    .community-hero__headline,
+    .community-hero__metrics,
+    .features-grid,
+    :global(.idea-card) {
+      transition: none;
+    }
+
+    .features-grid :global(.feature-card)::before,
+    .vote-button,
+    .idea-form textarea {
+      transition: none;
     }
   }
 </style>

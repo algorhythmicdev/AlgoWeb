@@ -19,6 +19,8 @@ Below is a drop-in **hero animation system** (brand only) with:
 
 # 1) Tokens & motion (brand only)
 
+**Status: ✅ Implemented**
+
 Create `src/lib/styles/theme.css` and import it once (e.g., in `+layout.svelte`).
 
 ```css
@@ -87,6 +89,8 @@ html[data-theme="hc"]{
 ---
 
 # 2) Reusable Hero component (Svelte)
+
+**Status: ✅ Implemented**
 
 Create `src/lib/components/Hero.svelte`.
 
@@ -301,6 +305,8 @@ Create `src/lib/components/Hero.svelte`.
 ---
 
 # 3) Using it per page
+
+**Status: ✅ Implemented**
 
 Map **page → variant** in your routes. Example:
 
@@ -770,6 +776,8 @@ Below are practical ways to upgrade your **cards and sections** while preserving
 
 ## 1. Glass cards with subtle grain and halo accents
 
+_Update 2025-02-15:_ Community, Consulting, and Contact surfaces now ship with `glass-card`/Magnetic shells, palette-aware borders, and CTA chips aligned to the NodeVoyage colour rules.
+
 The repo already defines a `.glass-card` class that gives panels a frosted, blurred effect and adds an ultra‑low‑contrast grain layer. Extend it to support a **halo glow** behind specific cards.
 
 ```css
@@ -863,6 +871,8 @@ Because the dots are extremely small and semi‑transparent, they add subtle mov
 
 ## 3. Magnetic & tilt interactions
 
+**Status: ✅ Implemented**
+
 The repo includes `useTilt` and `useMagnetic` functions in `animations.js` to create interactive hover effects. Wrap your cards in a component that applies these hooks:
 
 ```svelte
@@ -889,6 +899,8 @@ On hover, the card subtly tilts toward the pointer and follows the mouse magneti
 ---
 
 ## 4. Section‑specific card layouts
+
+**Status: ✅ Implemented**
 
 Use your existing page themes (Home, NodeVoyage, Ideonautix, etc.) to influence card styling. For example, on the **Home** section you can apply a higher density of background shapes and brighter halos to hero cards, while using neutral glass cards with subtle gradients for supporting content. On **Consulting** or **Community**, reduce density and rely on text‑heavy cards with just a thin gradient bar (as shown in the heading-bar snippet above) to avoid visual overload.
 
@@ -919,6 +931,8 @@ Use `grid-template-columns` and media queries to adjust layout across breakpoint
 
 ## 5. Interesting reveals & content emphasis
 
+**Status: ✅ Implemented**
+
 The repo’s `animations.js` also provides `useReveal` and `useStaggerReveal` functions to animate cards as they scroll into view. Combine them with typed text and gradient morphing for hero cards:
 
 ```svelte
@@ -943,6 +957,14 @@ The repo’s `animations.js` also provides `useReveal` and `useStaggerReveal` fu
 ```
 
 Cards fade in and slide up as they enter the viewport, creating a polished feel. The background gradient on the page gradually shifts between brand colours, which keeps the environment dynamic but still calm thanks to long durations and easing.
+
+## Products showcase alignment
+
+**Status: ✅ Implemented**
+
+- Refined the `/products` hero to blend the halo variant with mission copy, action buttons, and spotlight Magnetic cards for NodeVoyage and Ideonautix using the shared gradient and badge tokens.
+- Rebuilt the live demo and catalog grids around the refreshed `os-window` glass surfaces with staggered reveals, feature pills, and palette-coordinated secondary links.
+- Shifted the closing CTA into a `MagneticTiltCard` shell so the section matches the glass-card cadence across consulting, community, and contact while keeping accessible reduced-motion fallbacks.
 
 ---
 

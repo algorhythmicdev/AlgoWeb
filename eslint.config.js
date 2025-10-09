@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import pluginSvelte from 'eslint-plugin-svelte';
+import tsParser from '@typescript-eslint/parser';
 
 const jsConfig = {
   ...js.configs.recommended,
@@ -22,6 +23,14 @@ const svelteRecommended = pluginSvelte.configs['flat/recommended'].map((config) 
   files: ['**/*.svelte'],
   languageOptions: {
     ...config.languageOptions,
+    parserOptions: {
+      ...(config.languageOptions?.parserOptions ?? {}),
+      parser: {
+        ...(config.languageOptions?.parserOptions?.parser ?? {}),
+        ts: tsParser
+      },
+      extraFileExtensions: ['.svelte']
+    },
     globals: {
       ...globals.browser,
       ...globals.node,

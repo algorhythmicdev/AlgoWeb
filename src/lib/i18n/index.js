@@ -5,7 +5,8 @@
  * Internationalization setup for 6 languages
  */
 
-import { register, init, getLocaleFromNavigator, locale, t, time, date, number } from 'svelte-i18n';
+import { register, init, getLocaleFromNavigator, locale, t, time, date, number, addMessages } from 'svelte-i18n';
+import enMessages from './en.json';
 
 // Register all translation files
 register('en', () => import('./en.json'));
@@ -14,6 +15,8 @@ register('ru', () => import('./ru.json'));
 register('uk', () => import('./uk.json'));
 register('fr', () => import('./fr.json'));
 register('es', () => import('./es.json'));
+
+addMessages('en', enMessages);
 
 // Get stored language or default to browser language
 function getInitialLocale() {
@@ -50,10 +53,12 @@ function getInitialLocale() {
   return langMap[browserLang] || 'en';
 }
 
+const initialLocale = getInitialLocale();
+
 // Initialize i18n
 init({
   fallbackLocale: 'en',
-  initialLocale: getInitialLocale(),
+  initialLocale,
   loadingDelay: 200,
   formats: {
     number: {
@@ -92,6 +97,8 @@ init({
     }
   }
 });
+
+locale.set(initialLocale);
 
 // Export locale utilities
 export { locale, t as _, time, date, number };

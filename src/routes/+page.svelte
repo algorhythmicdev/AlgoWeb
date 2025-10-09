@@ -12,13 +12,14 @@
 </script>
 
 <section class="hero-section">
-  <Hero variant="halo" title="Algo · Home" subtitle="Signature aurora gradient with neutral overlay.">
+  <Hero variant="aurora" title="Algo · Home" subtitle="Signature aurora gradient with neutral overlay.">
     <!-- CTA / search / KPIs, etc. -->
   </Hero>
 </section>
 
 <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
+    <span id="vision" class="section-anchor" aria-hidden="true"></span>
     <div class="section-heading">
       <span class="eyebrow">{$_('story.title')}</span>
       <h2>{$_('story.vision_title')}</h2>
@@ -26,7 +27,7 @@
     </div>
 
     <div class="story-grid">
-      <MagneticTiltCard staggerOptions={{ stagger: 160 }}>
+      <MagneticTiltCard data-variant="grid" staggerOptions={{ stagger: 160 }}>
         <span class="kicker">{$_('story.reality_title')}</span>
         <p>{$_('story.reality_text')}</p>
       </MagneticTiltCard>
@@ -87,7 +88,7 @@
 
     <div class="timeline-grid">
       {#each timelineData.milestones as milestone, index}
-        <MagneticTiltCard class="timeline-item" staggerOptions={{ delay: 80 + index * 60 }}>
+        <MagneticTiltCard staggerOptions={{ delay: 80 + index * 60 }}>
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <span class="timeline-date">{new Date(`${milestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })}</span>
@@ -141,6 +142,12 @@
   }
 
   .story-grid :global(.glass-card p) { color: var(--text-secondary); }
+
+  .section-anchor {
+    display: block;
+    width: 0;
+    height: 0;
+  }
 
   .product-list {
     display: grid;
@@ -223,12 +230,6 @@
     background: linear-gradient(180deg, rgba(19, 81, 255, 0.32), transparent 80%);
   }
 
-  .timeline-item {
-    position: relative;
-    display: flex;
-    gap: clamp(1.6rem, 4vw, 2.5rem);
-  }
-
   .timeline-marker {
     width: 14px;
     height: 14px;
@@ -272,20 +273,11 @@
   .timeline-note { color: var(--voyage-blue); font-size: var(--text-small); }
 
   @media (max-width: 960px) {
-    .product-row { 
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
-    }
-    .timeline-grid { 
+    .timeline-grid {
       padding-left: 0;
       gap: var(--space-2xl);
     }
     .timeline-grid::before { display: none; }
-    .timeline-item { 
-      flex-direction: column; 
-      padding-left: 0;
-      gap: var(--space-md);
-    }
     .timeline-marker { margin-left: 6px; }
     .story-grid {
       grid-template-columns: 1fr;
@@ -298,10 +290,6 @@
   }
 
   @media (max-width: 768px) {
-    .product-row {
-      padding: var(--card-padding-md);
-      gap: var(--space-md);
-    }
     .story-grid :global(.glass-card) {
       padding: var(--card-padding-md);
       gap: var(--space-md);

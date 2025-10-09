@@ -46,8 +46,9 @@ const shouldReduceMotion = () => isBrowser && window.matchMedia(REDUCED_MOTION_Q
  * @param {HTMLElement} node
  */
 const normaliseSurface = (node) => {
-  if (node.classList.contains(SURFACE_CLASS)) return;
-  if (node.classList.contains('glass-card')) node.classList.remove('glass-card');
+  if (!node.classList.contains('glass-card')) {
+    node.classList.add('glass-card');
+  }
   if (node.dataset.surface === 'window' || SURFACE_HINTS.some((cls) => node.classList.contains(cls))) {
     node.classList.add(SURFACE_CLASS);
   }
