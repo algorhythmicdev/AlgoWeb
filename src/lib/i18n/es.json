@@ -105,6 +105,20 @@
     "milestone_cta": "Ver la hoja de ruta",
     "brand_aria": "Resaltado de la marca AlgoRhythmics en el título"
   },
+  "home": {
+    "cta": {
+      "eyebrow": "Sigue explorando",
+      "title": "Mantente en nuestra órbita",
+      "text": "Únete a la comunidad del sistema operativo sereno para recibir avances de la hoja de ruta, invitaciones a pilotos y rituales accesibles.",
+      "primary": "Unirse a la comunidad",
+      "secondary": "Planear una sesión estratégica",
+      "points": [
+        "Previews de NodeVoyage e Ideonautix actualizados cada mes.",
+        "Los programas piloto se anuncian primero a quienes se suscriben.",
+        "Auditorías de accesibilidad y movimiento enviadas como guías rápidas."
+      ]
+    }
+  },
   "story": {
     "title": "Nuestra historia",
     "reality_title": "La realidad que estamos creando",
@@ -149,6 +163,25 @@
       "brand_context": "Proyectos entregados a través de Reclame Fabriek (Daugavpils, LV), compartidos por ambos fundadores",
       "algorhythmics_title": "Visión para AlgoRhythmics",
       "algorhythmics_vision": "Fusionar la disciplina de investigación en señalética con la entrega cloud-native para que AlgoRhythmics ofrezca experiencias de IA explicables y resilientes listas para instalaciones reales."
+    }
+  },
+  "partners": {
+    "eyebrow": "Alianzas operativas",
+    "title": "Alianzas que impulsan el estudio",
+    "description": "Colaboramos hoy con líderes en señalética y preparamos aliados del sector público para escalar nuestros programas educativos.",
+    "location": "Ubicación",
+    "founded": "Fundado",
+    "website": "Sitio web",
+    "clients_label": "Clientes destacados",
+    "clients_title": "Marcas globales que hemos acompañado",
+    "clients_description": "Décadas de entrega en señalética para retail, finanzas y aviación aportan respaldo probado a nuestro trabajo en IA.",
+    "labels": {
+      "current": "Alianza activa",
+      "aspirational": "Próxima alianza",
+      "scale": "Escala resumida",
+      "reach": "Alcance proyectado",
+      "innovation": "Enfoque de innovación",
+      "programs": "Programas en marcha"
     }
   },
   "products": {

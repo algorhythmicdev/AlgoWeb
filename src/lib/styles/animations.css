@@ -621,6 +621,12 @@
   border: 1px solid rgba(255,255,255,0.15);
   box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.1);
   overflow: hidden;
+  isolation: isolate;
+}
+
+.glass-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* Grain overlay (already in animations.css) */
@@ -628,10 +634,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: var(--grain); /* defined in your tokens */
-  opacity: 0.035;
-  mix-blend-mode: normal;
+  background-image: var(--grain, var(--grain-texture));
+  opacity: var(--grain-opacity, 0.035);
+  mix-blend-mode: var(--grain-blend-mode, normal);
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Halo variant: radial glow on specific cards */
@@ -646,6 +653,40 @@
   opacity: 0.4;
   animation: halo-pulse 8s ease-in-out infinite alternate;
 }
+
+.glass-card[data-variant="grid"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at var(--grid-spot-x, 58%) var(--grid-spot-y, 42%), color-mix(in oklab, var(--grad-a) 32%, transparent) 0%, transparent 55%),
+    linear-gradient(to right, color-mix(in oklab, var(--grad-a) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--grad-b) 12%, transparent) 1px, transparent 1px);
+  background-size: auto, 34px 34px, 34px 34px;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  transform-origin: center;
+  animation: grid-ripple var(--med) ease-in-out infinite alternate;
+}
+
+.glass-card[data-variant="line"]::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--line-angle, 42deg),
+    transparent 0 30%,
+    color-mix(in oklab, var(--grad-a) 38%, transparent) 45%,
+    transparent 70%
+  );
+  opacity: 0.36;
+  mix-blend-mode: screen;
+  animation: sweep var(--slow) linear infinite;
+}
 @keyframes halo-pulse {
   from { transform: scale(0.98); }
   to   { transform: scale(1.02); }
@@ -655,6 +696,16 @@
   .glass-card[data-variant="halo"]::before {
     animation: none;
   }
+  .glass-card[data-variant="grid"]::before,
+  .glass-card[data-variant="line"]::before {
+    animation: none;
+  }
+}
+
+html[data-theme='hc'] .glass-card[data-variant="halo"]::before,
+html[data-theme='hc'] .glass-card[data-variant="grid"]::before,
+html[data-theme='hc'] .glass-card[data-variant="line"]::before {
+  display: none;
 }
 
 /* ==================== PARTICLE EFFECTS ==================== */

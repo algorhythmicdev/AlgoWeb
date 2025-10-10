@@ -105,6 +105,20 @@
     "milestone_cta": "Voir la feuille de route",
     "brand_aria": "Mise en avant de la marque AlgoRhythmics dans le titre"
   },
+  "home": {
+    "cta": {
+      "eyebrow": "Poursuivez l'exploration",
+      "title": "Restez dans notre orbite",
+      "text": "Rejoignez la communauté OS apaisée pour recevoir les étapes de feuille de route, les invitations pilotes et les rituels accessibles.",
+      "primary": "Rejoindre la communauté",
+      "secondary": "Planifier une session stratégique",
+      "points": [
+        "Aperçus de NodeVoyage et Ideonautix mis à jour chaque mois.",
+        "Les programmes pilotes sont annoncés en priorité aux abonnés.",
+        "Audits d’accessibilité et de motion envoyés sous forme de fiches."
+      ]
+    }
+  },
   "story": {
     "title": "Notre histoire",
     "reality_title": "La réalité que nous construisons",
@@ -149,6 +163,25 @@
       "brand_context": "Projets livrés via Reclame Fabriek (Daugavpils, Lettonie), partagés par les deux fondateurs",
       "algorhythmics_title": "Vision pour AlgoRhythmics",
       "algorhythmics_vision": "Fusionner la rigueur de la recherche signalétique avec une livraison cloud-native pour proposer des expériences IA explicables et résilientes prêtes pour des installations réelles."
+    }
+  },
+  "partners": {
+    "eyebrow": "Alliances opérationnelles",
+    "title": "Alliances qui alimentent le studio",
+    "description": "Nous collaborons aujourd’hui avec des leaders de la signalétique et préparons des partenaires publics pour déployer nos programmes éducatifs à grande échelle.",
+    "location": "Localisation",
+    "founded": "Fondation",
+    "website": "Site web",
+    "clients_label": "Clients sélectionnés",
+    "clients_title": "Marques mondiales accompagnées",
+    "clients_description": "Des décennies de projets signalétiques pour le retail, la finance et l’aviation renforcent la crédibilité de nos solutions IA.",
+    "labels": {
+      "current": "Partenariat actif",
+      "aspirational": "Partenariat visé",
+      "scale": "Échelle en résumé",
+      "reach": "Portée projetée",
+      "innovation": "Focus innovation",
+      "programs": "Programmes en cours"
     }
   },
   "products": {

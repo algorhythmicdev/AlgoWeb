@@ -1,6 +1,8 @@
 <script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import FoundersSection from '$sections/FoundersSection.svelte';
+  import PartnersSection from '$sections/PartnersSection.svelte';
+  import CallToActionSection from '$sections/CallToActionSection.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { _ } from 'svelte-i18n';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
@@ -59,7 +61,30 @@
   const fallbackHeroSecondaryCta = ensureString(en.hero?.cta_consulting, 'Book a strategy huddle');
   const fallbackHeroMilestoneHeading = ensureString(en.hero?.next_milestone, 'Next waypoint');
   const fallbackHeroMilestoneCta = ensureString(en.hero?.milestone_cta, 'See the roadmap');
-  const fallbackHeroActionsLabel = ensureString(en.hero?.pillars_title, 'How we sustain calm momentum');
+  const fallbackHeroPillarsTitle = ensureString(en.hero?.pillars_title, 'How we sustain calm momentum');
+  const fallbackHeroActionsLabel = 'Primary hero actions';
+
+  const heroSignalKeyMap = [
+    { id: 'studio_phase', valueKey: 'studio_phase_value' },
+    { id: 'focus_tracks', valueKey: 'focus_tracks_value' },
+    { id: 'research', valueKey: 'research_value' }
+  ] as const;
+
+  const fallbackHeroSignals = heroSignalKeyMap.reduce(
+    (acc, { id, valueKey }) => {
+      const signals = (en.hero?.signals ?? {}) as Record<string, unknown>;
+      acc[id] = {
+        label: ensureString(signals[id], ''),
+        value: ensureString(signals[valueKey], '')
+      };
+      return acc;
+    },
+    {} as Record<string, { label: string; value: string }>
+  );
+
+  const fallbackHeroPillars = Array.isArray(en.hero?.pillars)
+    ? en.hero.pillars.map((pillar) => ensureString(pillar, '')).filter(Boolean)
+    : [];
 
   const fallbackMilestones: Record<string, { title?: string; description?: string; note?: string }> =
     (en.timeline?.milestones as Record<string, { title?: string; description?: string; note?: string }>) ?? {};
@@ -74,6 +99,11 @@
   let heroMilestoneHeading = fallbackHeroMilestoneHeading;
   let heroMilestoneCta = fallbackHeroMilestoneCta;
   let heroActionsLabel = fallbackHeroActionsLabel;
+  let heroPillarsTitle = fallbackHeroPillarsTitle;
+  let heroPillars: string[] = fallbackHeroPillars;
+  let heroSignals: Array<{ id: string; label: string; value: string }> = heroSignalKeyMap
+    .map(({ id }) => ({ id, ...fallbackHeroSignals[id] }))
+    .filter((entry) => entry.label || entry.value);
   let upcomingMilestone: TimelineMilestone | null = sortedMilestones[0] ?? null;
   let upcomingMilestoneTitle = ensureString(
     upcomingMilestone ? fallbackMilestones?.[upcomingMilestone.id]?.title : ''
@@ -85,6 +115,21 @@
     upcomingMilestone ? fallbackMilestones?.[upcomingMilestone.id]?.note : ''
   );
   let upcomingMilestoneDateLabel = upcomingMilestone ? formatMilestoneDate(upcomingMilestone.date) : '';
+  let upcomingMilestonePhaseLabel = '';
+  let upcomingMilestoneStatusLabel = '';
+  let upcomingMilestoneCategoryLabel = '';
+
+  const toReadableLabel = (value: string): string =>
+    value
+      ? value
+          .replace(/[-_]+/g, ' ')
+          .replace(/\b\w/g, (match) => match.toUpperCase())
+          .trim()
+      : '';
+
+  const timelineHighlights = sortedMilestones
+    .filter((milestone) => ['active', 'development', 'planned'].includes(milestone.status))
+    .slice(0, 3);
 
   $: heroTitleParts = [
     ensureString($_('hero.title.lead'), fallbackHeroTitleParts[0]),
@@ -100,7 +145,20 @@
   $: heroSecondaryActionLabel = ensureString($_('hero.cta_consulting'), fallbackHeroSecondaryCta);
   $: heroMilestoneHeading = ensureString($_('hero.next_milestone'), fallbackHeroMilestoneHeading);
   $: heroMilestoneCta = ensureString($_('hero.milestone_cta'), fallbackHeroMilestoneCta);
-  $: heroActionsLabel = ensureString($_('hero.pillars_title'), fallbackHeroActionsLabel);
+  $: heroPillarsTitle = ensureString($_('hero.pillars_title'), fallbackHeroPillarsTitle);
+  $: heroPillars = fallbackHeroPillars
+    .map((fallbackValue, index) => ensureString($_(`hero.pillars.${index}`), fallbackValue))
+    .filter(Boolean);
+  $: heroSignals = heroSignalKeyMap
+    .map(({ id, valueKey }) => {
+      const fallback = fallbackHeroSignals[id] ?? { label: '', value: '' };
+      return {
+        id,
+        label: ensureString($_(`hero.signals.${id}`), fallback.label),
+        value: ensureString($_(`hero.signals.${valueKey}`), fallback.value)
+      };
+    })
+    .filter((entry) => entry.label || entry.value);
 
   $: upcomingMilestone =
     sortedMilestones.find((milestone) => milestone.status === 'active') ??
@@ -128,65 +186,100 @@
       )
     : '';
   $: upcomingMilestoneDateLabel = upcomingMilestone ? formatMilestoneDate(upcomingMilestone.date) : '';
+  $: upcomingMilestonePhaseLabel = upcomingMilestone ? toReadableLabel(upcomingMilestone.phase) : '';
+  $: upcomingMilestoneStatusLabel = upcomingMilestone ? toReadableLabel(upcomingMilestone.status) : '';
+  $: upcomingMilestoneCategoryLabel = upcomingMilestone ? toReadableLabel(upcomingMilestone.category) : '';
 </script>
 
 <section class="hero-section">
   <Hero variant="aurora" title={heroTitle} subtitle={heroSubtitle}>
     <div class="home-hero">
-      {#if heroStatus}
-        <p class="home-hero__status">{heroStatus}</p>
-      {/if}
+      <div class="home-hero__column home-hero__column--main">
+        {#if heroStatus}
+          <p class="home-hero__status">{heroStatus}</p>
+        {/if}
 
-      {#if heroDescription}
-        <p class="home-hero__description">{heroDescription}</p>
-      {/if}
+        {#if heroDescription}
+          <p class="home-hero__description">{heroDescription}</p>
+        {/if}
 
-      <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
-        <a class="home-hero__action home-hero__action--primary" href="#products">
-          <span>{heroPrimaryActionLabel}</span>
-        </a>
-        <a class="home-hero__action home-hero__action--secondary" href="/consulting">
-          <span>{heroSecondaryActionLabel}</span>
-        </a>
-      </div>
-
-      {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription || upcomingMilestoneNote)}
-        <div class="home-hero__milestone glass-card" data-variant="grid">
-          <div class="home-hero__milestone-header">
-            {#if heroMilestoneHeading}
-              <span class="home-hero__milestone-eyebrow">{heroMilestoneHeading}</span>
-            {/if}
-            {#if upcomingMilestoneDateLabel}
-              <span class="home-hero__milestone-date">{upcomingMilestoneDateLabel}</span>
-            {/if}
-          </div>
-
-          {#if upcomingMilestoneTitle}
-            <h3>{upcomingMilestoneTitle}</h3>
-          {/if}
-
-          {#if upcomingMilestoneDescription}
-            <p>{upcomingMilestoneDescription}</p>
-          {/if}
-
-          {#if upcomingMilestoneNote}
-            <p class="home-hero__milestone-note">{upcomingMilestoneNote}</p>
-          {/if}
-
-          <a class="home-hero__milestone-cta" href="#timeline">
-            <span>{heroMilestoneCta}</span>
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path
-                d="M4.75 10h10.5M10 4.75 15.25 10 10 15.25"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+        <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
+          <a class="home-hero__action home-hero__action--primary" href="#products">
+            <span>{heroPrimaryActionLabel}</span>
+          </a>
+          <a class="home-hero__action home-hero__action--secondary" href="/consulting">
+            <span>{heroSecondaryActionLabel}</span>
           </a>
         </div>
-      {/if}
+
+        {#if heroPillars.length}
+          <div class="home-hero__pillars" aria-labelledby="home-hero-pillars-heading">
+            <p id="home-hero-pillars-heading" class="home-hero__pillars-heading">{heroPillarsTitle}</p>
+            <ul class="home-hero__pillars-list">
+              {#each heroPillars as pillar}
+                <li class="home-hero__pillars-item">
+                  <span>{pillar}</span>
+                </li>
+              {/each}
+            </ul>
+          </div>
+        {/if}
+      </div>
+
+      <div class="home-hero__column home-hero__column--aside">
+        {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription || upcomingMilestoneNote)}
+          <article class="home-hero__milestone glass-card" data-variant="grid">
+            <div class="home-hero__milestone-header">
+              {#if heroMilestoneHeading}
+                <span class="home-hero__milestone-eyebrow">{heroMilestoneHeading}</span>
+              {/if}
+              {#if upcomingMilestoneDateLabel}
+                <span class="home-hero__milestone-date">{upcomingMilestoneDateLabel}</span>
+              {/if}
+            </div>
+
+            {#if upcomingMilestoneTitle}
+              <h3>{upcomingMilestoneTitle}</h3>
+            {/if}
+
+            {#if upcomingMilestoneDescription}
+              <p>{upcomingMilestoneDescription}</p>
+            {/if}
+
+            {#if upcomingMilestoneNote}
+              <p class="home-hero__milestone-note">{upcomingMilestoneNote}</p>
+            {/if}
+
+            <a class="home-hero__milestone-cta" href="#timeline">
+              <span>{heroMilestoneCta}</span>
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="M4.75 10h10.5M10 4.75 15.25 10 10 15.25"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </article>
+        {/if}
+
+        {#if heroSignals.length}
+          <dl class="home-hero__signals glass-card" data-variant="line">
+            {#each heroSignals as signal (signal.id)}
+              <div class="home-hero__signal">
+                {#if signal.label}
+                  <dt>{signal.label}</dt>
+                {/if}
+                {#if signal.value}
+                  <dd>{signal.value}</dd>
+                {/if}
+              </div>
+            {/each}
+          </dl>
+        {/if}
+      </div>
     </div>
   </Hero>
 </section>
@@ -194,89 +287,158 @@
 <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
     <span id="vision" class="section-anchor" aria-hidden="true"></span>
-    <div class="section-heading">
-      <span class="eyebrow">{$_('story.title')}</span>
-      <h2>{$_('story.vision_title')}</h2>
-      <p>{$_('story.vision_text')}</p>
-    </div>
+    <div class="story-shell glass-stack" role="group" aria-labelledby="story-heading">
+      <header class="story-shell__intro">
+        <span class="eyebrow">{$_('story.title')}</span>
+        <h2 id="story-heading">{$_('story.vision_title')}</h2>
+        <p>{$_('story.vision_text')}</p>
+      </header>
 
-    <div class="story-grid">
-      <MagneticTiltCard data-variant="grid" staggerOptions={{ stagger: 160 }}>
-        <span class="kicker">{$_('story.reality_title')}</span>
-        <p>{$_('story.reality_text')}</p>
-      </MagneticTiltCard>
+      <div class="story-shell__body">
+        <div class="story-shell__cards">
+          <MagneticTiltCard class="story-card" data-variant="grid" staggerOptions={{ stagger: 160 }}>
+            <span class="kicker">{$_('story.reality_title')}</span>
+            <p>{$_('story.reality_text')}</p>
+          </MagneticTiltCard>
 
-      <MagneticTiltCard data-variant="halo" staggerOptions={{ stagger: 160 }}>
-        <span class="kicker">{$_('story.mission_title')}</span>
-        <p>{$_('story.mission_text')}</p>
-      </MagneticTiltCard>
+          <MagneticTiltCard class="story-card" data-variant="halo" staggerOptions={{ stagger: 160 }}>
+            <span class="kicker">{$_('story.mission_title')}</span>
+            <p>{$_('story.mission_text')}</p>
+          </MagneticTiltCard>
+        </div>
+
+        {#if heroPillars.length}
+          <div class="story-shell__pillars" aria-labelledby="story-pillars-heading">
+            <p id="story-pillars-heading" class="story-shell__pillars-heading">{heroPillarsTitle}</p>
+            <ul class="story-shell__pillars-list">
+              {#each heroPillars as pillar}
+                <li class="story-shell__pillars-item">{pillar}</li>
+              {/each}
+            </ul>
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 </section>
 
 <FoundersSection />
 
+<PartnersSection />
+
 <section class="products section" id="products" use:revealOnScroll>
   <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">{$_('products.title')}</span>
-      <h2>{$_('products.subtitle')}</h2>
-    </div>
+    <div class="products-shell">
+      <header class="products-shell__intro">
+        <span class="eyebrow">{$_('products.title')}</span>
+        <h2>{$_('products.subtitle')}</h2>
+      </header>
 
-    <div class="product-list">
-      {#each productKeys as key}
-        {#if products[key]}
-          <MagneticTiltCard class="particle-container" staggerOptions={{ stagger: 140 }}>
-            <div class="product-meta">
-              <span class="kicker">{$_(`products.${key}.name`)}</span>
-              <h3>{$_(`products.${key}.tagline`)}</h3>
-              <div class="status-pill">
-                <span>{$_(`products.${key}.status`)}</span>
-                <span class="dot"></span>
-                <span>{$_(`products.${key}.mvp`)}</span>
+      <div class="products-shell__grid">
+        {#each productKeys as key}
+          {#if products[key]}
+            <MagneticTiltCard
+              class="product-card"
+              data-variant={key === 'nodevoyage' ? 'grid' : 'line'}
+              staggerOptions={{ stagger: 140 }}
+            >
+              <div class="product-card__meta">
+                <span class="kicker">{$_(`products.${key}.name`)}</span>
+                <h3>{$_(`products.${key}.tagline`)}</h3>
+                <div class="status-pill">
+                  <span>{$_(`products.${key}.status`)}</span>
+                  <span class="dot"></span>
+                  <span>{$_(`products.${key}.mvp`)}</span>
+                </div>
               </div>
-            </div>
 
-            <div class="product-body">
-              <p>{$_(`products.${key}.description`)}</p>
-              <a class="product-link" href={`/products#${key}`}>
-                <span>{$_(`products.${key}.cta`)}</span>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
-            </div>
-          </MagneticTiltCard>
-        {/if}
-      {/each}
+              <div class="product-card__body">
+                <p>{$_(`products.${key}.description`)}</p>
+                <a class="product-link" href={`/products#${key}`}>
+                  <span>{$_(`products.${key}.cta`)}</span>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </MagneticTiltCard>
+          {/if}
+        {/each}
+      </div>
     </div>
   </div>
 </section>
 
 <section class="timeline section" id="timeline" use:revealOnScroll>
   <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">{$_('timeline.title')}</span>
-      <h2>{$_('timeline.subtitle')}</h2>
-    </div>
+    <div class="timeline-shell">
+      <aside class="timeline-overview">
+        <span class="eyebrow">{$_('timeline.title')}</span>
+        <h2>{$_('timeline.subtitle')}</h2>
 
-    <div class="timeline-grid">
-      {#each timelineData.milestones as milestone, index}
-        <MagneticTiltCard staggerOptions={{ delay: 80 + index * 60 }}>
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">{new Date(`${milestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })}</span>
-            <h3>{$_(`timeline.milestones.${milestone.id}.title`)}</h3>
-            <p>{$_(`timeline.milestones.${milestone.id}.description`)}</p>
-            {#if $_(`timeline.milestones.${milestone.id}.note`)}
-              <p class="timeline-note">{$_(`timeline.milestones.${milestone.id}.note`)}</p>
+        {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription)}
+          <div class="timeline-overview__highlight glass-stack" aria-labelledby="timeline-next-heading">
+            <div class="timeline-overview__header">
+              <span class="timeline-overview__date">{upcomingMilestoneDateLabel}</span>
+              <span class="timeline-overview__badge">{upcomingMilestoneStatusLabel || 'Upcoming'}</span>
+            </div>
+            <h3 id="timeline-next-heading">{upcomingMilestoneTitle}</h3>
+            {#if upcomingMilestoneDescription}
+              <p>{upcomingMilestoneDescription}</p>
             {/if}
+            <div class="timeline-overview__meta">
+              {#if upcomingMilestonePhaseLabel}
+                <span>{upcomingMilestonePhaseLabel}</span>
+              {/if}
+              {#if upcomingMilestoneCategoryLabel}
+                <span>{upcomingMilestoneCategoryLabel}</span>
+              {/if}
+            </div>
+            {#if upcomingMilestoneNote}
+              <p class="timeline-overview__note">{upcomingMilestoneNote}</p>
+            {/if}
+            <a class="timeline-overview__cta" href="#timeline-track">{heroMilestoneCta}</a>
           </div>
-        </MagneticTiltCard>
-      {/each}
+        {/if}
+
+        {#if timelineHighlights.length > 1}
+          <ul class="timeline-overview__list" aria-label="Roadmap preview">
+            {#each timelineHighlights as highlight (highlight.id)}
+              <li>
+                <span class="timeline-overview__list-date">{formatMilestoneDate(highlight.date)}</span>
+                <span class="timeline-overview__list-title">{$_(`timeline.milestones.${highlight.id}.title`)}</span>
+                <span class="timeline-overview__list-status">{toReadableLabel(highlight.status)}</span>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </aside>
+
+      <div class="timeline-track" id="timeline-track">
+        {#each timelineData.milestones as milestone, index}
+          <MagneticTiltCard class="timeline-card" staggerOptions={{ delay: 80 + index * 60 }}>
+            <div class="timeline-card__marker" aria-hidden="true"></div>
+            <div class="timeline-card__content">
+              <div class="timeline-card__meta">
+                <span class="timeline-card__date">
+                  {new Date(`${milestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })}
+                </span>
+                <span class="timeline-card__status">{toReadableLabel(milestone.status)}</span>
+              </div>
+              <h3>{$_(`timeline.milestones.${milestone.id}.title`)}</h3>
+              <p>{$_(`timeline.milestones.${milestone.id}.description`)}</p>
+              {#if $_(`timeline.milestones.${milestone.id}.note`)}
+                <p class="timeline-card__note">{$_(`timeline.milestones.${milestone.id}.note`)}</p>
+              {/if}
+            </div>
+          </MagneticTiltCard>
+        {/each}
+      </div>
     </div>
   </div>
 </section>
+
+<CallToActionSection />
 
 <style>
   .hero-section {
@@ -284,26 +446,65 @@
   }
 
   .home-hero {
+    --hero-gap: clamp(1.75rem, 6vw, 2.75rem);
+    margin-top: clamp(1.2rem, 2.2vw, 1.6rem);
     display: grid;
-    gap: clamp(1rem, 3vw, 1.8rem);
-    margin-top: clamp(1.2rem, 2.6vw, 1.6rem);
-    max-width: min(640px, 100%);
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    gap: var(--hero-gap);
+    align-items: start;
+  }
+
+  .home-hero__column {
+    display: grid;
+  }
+
+  .home-hero__column--main {
+    gap: clamp(1.15rem, 3vw, 1.85rem);
+  }
+
+  .home-hero__column--aside {
+    gap: clamp(1.2rem, 3vw, 2rem);
   }
 
   .home-hero__status {
     margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.95rem;
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-tertiary);
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in oklab, var(--border) 65%, transparent);
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--bg-elev-1) 75%, transparent) 0%,
+        color-mix(in oklab, var(--bg-elev-2) 85%, transparent) 100%
+      );
+    box-shadow: 0 18px 38px rgba(10, 13, 20, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .home-hero__status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, var(--grad-a) 0%, transparent 70%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
   }
 
   .home-hero__description {
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-    line-height: 1.6;
+    font-size: clamp(1.08rem, 2.5vw, 1.32rem);
+    line-height: 1.65;
+    text-wrap: balance;
+    max-width: 58ch;
   }
 
   .home-hero__actions {
@@ -317,7 +518,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    padding: 0.85rem 1.6rem;
+    padding: 0.9rem 1.8rem;
     border-radius: var(--radius-full);
     font-weight: var(--weight-semibold);
     text-decoration: none;
@@ -329,26 +530,26 @@
   }
 
   .home-hero__action--primary {
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, color-mix(in oklab, var(--grad-a) 88%, transparent), var(--grad-b));
     color: #fff;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 22px 32px rgba(19, 81, 255, 0.26);
   }
 
   .home-hero__action--primary:hover,
   .home-hero__action--primary:focus-visible {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
 
   .home-hero__action--secondary {
-    background: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.16) 10%);
+    background: color-mix(in oklab, var(--bg-elev-1) 84%, transparent);
     color: var(--voyage-blue);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 35%, transparent);
+    box-shadow: inset 0 0 0 1px rgba(var(--voyage-blue-rgb), 0.16);
   }
 
   .home-hero__action--secondary:hover,
   .home-hero__action--secondary:focus-visible {
-    transform: translateY(-2px);
-    background: color-mix(in srgb, var(--bg-elev-1) 80%, rgba(var(--voyage-blue-rgb), 0.22) 20%);
+    transform: translateY(-3px);
+    box-shadow: inset 0 0 0 1px rgba(var(--voyage-blue-rgb), 0.32);
   }
 
   .home-hero__action:focus-visible {
@@ -362,40 +563,100 @@
     }
   }
 
-  .home-hero__milestone {
+  .home-hero__pillars {
+    position: relative;
+    margin-top: clamp(1.65rem, 4vw, 2.5rem);
+    padding: clamp(1.2rem, 3.6vw, 1.9rem);
+    border-radius: 26px;
+    border: 1px solid color-mix(in oklab, var(--border) 55%, transparent);
+    background:
+      linear-gradient(180deg, color-mix(in oklab, var(--bg-elev-1) 92%, transparent) 0%, transparent 120%);
+    box-shadow: 0 26px 48px rgba(10, 13, 20, 0.12);
+    backdrop-filter: blur(22px) saturate(1.12);
+    overflow: hidden;
+  }
+
+  .home-hero__pillars::before {
+    content: '';
+    position: absolute;
+    inset: -25% 35% 55% -18%;
+    background: radial-gradient(
+      520px 420px at 18% 28%,
+      color-mix(in oklab, var(--grad-b) 48%, transparent) 0%,
+      transparent 65%
+    );
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .home-hero__pillars-heading {
+    margin: 0 0 0.85rem;
+    font-size: clamp(0.78rem, 1.6vw, 0.92rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: var(--weight-semibold);
+    color: var(--text-tertiary);
+  }
+
+  .home-hero__pillars-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
-    gap: clamp(0.65rem, 2vw, 1.2rem);
-    padding: clamp(1.2rem, 2.6vw, 1.8rem);
-    border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
-    background: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    box-shadow: var(--shadow-sm);
+    gap: clamp(0.85rem, 2.6vw, 1.4rem);
+  }
+
+  .home-hero__pillars-item {
+    position: relative;
+    padding-left: 1.75rem;
+    font-size: clamp(0.96rem, 2.4vw, 1.08rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .home-hero__pillars-item::before {
+    content: '';
+    position: absolute;
+    top: 0.55em;
+    left: 0.3rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 35%, var(--grad-a) 0%, transparent 65%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  }
+
+  .home-hero__milestone,
+  .home-hero__signals {
+    padding: clamp(1.25rem, 3.4vw, 1.8rem);
+    display: grid;
+    gap: clamp(0.75rem, 2.6vw, 1.1rem);
   }
 
   .home-hero__milestone-header {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
     justify-content: space-between;
+    align-items: baseline;
     gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .home-hero__milestone-eyebrow {
     font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-tertiary);
+    color: rgba(var(--voyage-blue-rgb), 0.92);
   }
 
   .home-hero__milestone-date {
     font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
+    color: var(--text-tertiary);
   }
 
   .home-hero__milestone h3 {
     margin: 0;
-    font-size: clamp(1.35rem, 3vw, 1.9rem);
+    font-size: clamp(1.4rem, 3.4vw, 2rem);
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -420,7 +681,7 @@
     font-weight: var(--weight-semibold);
     color: var(--voyage-blue);
     text-decoration: none;
-    margin-top: 0.35rem;
+    margin-top: 0.2rem;
   }
 
   .home-hero__milestone-cta svg {
@@ -437,11 +698,40 @@
     outline-offset: 3px;
   }
 
-  @media (max-width: 640px) {
+  .home-hero__signals {
+    gap: clamp(0.9rem, 2.6vw, 1.2rem);
+  }
+
+  .home-hero__signal {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .home-hero__signal dt {
+    font-size: var(--text-small);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .home-hero__signal dd {
+    margin: 0;
+    font-size: clamp(1rem, 2.4vw, 1.18rem);
+    font-weight: var(--weight-medium);
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 960px) {
     .home-hero {
-      max-width: 100%;
+      grid-template-columns: minmax(0, 1fr);
     }
 
+    .home-hero__column--aside {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 640px) {
     .home-hero__actions {
       flex-direction: column;
       align-items: stretch;
@@ -457,9 +747,36 @@
     color: var(--bg);
   }
 
+  :global(html[data-theme='hc']) .home-hero__status {
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__status::before {
+    background: currentColor;
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__pillars {
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__pillars::before {
+    display: none;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__pillars-item::before {
+    background: currentColor;
+    box-shadow: none;
+  }
+
   :global(html[data-theme='hc']) .home-hero__milestone {
     background: var(--bg-elev-1);
     border-color: var(--border);
+    box-shadow: none;
   }
 
   :global(html[data-theme='hc']) .home-hero__milestone h3 {
@@ -471,43 +788,47 @@
     color: var(--text);
   }
 
-  .section-heading {
-    --section-heading-gap: clamp(1.75rem, 4vw, 2.75rem);
-    --section-heading-max-width: min(100%, 72ch);
-    --section-heading-margin: var(--space-4xl);
+  :global(html[data-theme='hc']) .home-hero__signals {
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    box-shadow: none;
   }
 
-  .section-heading h2 {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+  .glass-stack {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    padding: clamp(1.8rem, 3.6vw, 2.8rem);
+    background: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
+    border: 1px solid color-mix(in srgb, var(--border) 58%, rgba(var(--voyage-blue-rgb), 0.12) 42%);
+    box-shadow: 0 28px 60px rgba(16, 24, 40, 0.14);
+    backdrop-filter: blur(22px) saturate(1.08);
+    -webkit-backdrop-filter: blur(22px) saturate(1.08);
+    overflow: hidden;
   }
 
-  .section-heading p { color: var(--text-secondary); }
-
-  .story .section-heading .eyebrow {
-    margin-top: var(--space-xs);
+  .glass-stack::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    opacity: var(--grain-opacity, 0.18);
+    mix-blend-mode: var(--grain-blend-mode, soft-light);
+    pointer-events: none;
   }
 
-  .story-grid {
-    display: grid;
-    gap: var(--grid-gap-xl);
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    margin-top: var(--space-2xl);
+  :global(html[data-theme='dark']) .glass-stack {
+    background: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.18) 18%);
+    border-color: color-mix(in srgb, var(--border) 46%, rgba(var(--voyage-blue-rgb), 0.32) 54%);
+    box-shadow: 0 34px 68px rgba(8, 16, 30, 0.28);
   }
 
-  .story-grid :global(.glass-card) {
-    display: grid;
-    gap: var(--space-lg);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    margin-bottom: var(--card-margin-bottom);
+  :global(html[data-theme='hc']) .glass-stack {
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    box-shadow: none;
   }
 
-  .story-grid :global(.glass-card p) { color: var(--text-secondary); }
+  :global(html[data-theme='hc']) .glass-stack::after { display: none; }
 
   .section-anchor {
     display: block;
@@ -515,45 +836,206 @@
     height: 0;
   }
 
-  .product-list {
+  .story-shell {
     display: grid;
-    gap: var(--grid-gap-2xl);
-    margin-top: var(--space-2xl);
+    gap: clamp(1.8rem, 4vw, 2.6rem);
   }
 
-  .product-list :global(.glass-card) {
+  .story-shell__intro {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    gap: var(--space-3xl);
-    padding: var(--card-padding-xl);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    margin-bottom: var(--card-margin-bottom);
+    gap: var(--space-md);
+    max-width: min(54ch, 100%);
   }
 
-  .product-meta { display: grid; gap: 0.9rem; }
-
-  .product-meta h3 {
-    font-size: clamp(1.9rem, 3vw, 2.6rem);
-    background: var(--gradient-text);
+  .story-shell__intro h2 {
+    margin: 0;
+    background: var(--gradient-heading);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
   }
 
+  .story-shell__intro p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed, 1.65);
+  }
+
+  .story-shell__body {
+    display: grid;
+    gap: clamp(1.6rem, 4vw, 2.6rem);
+  }
+
+  .story-shell__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  :global(.story-card) {
+    display: grid;
+    gap: var(--space-md);
+    padding: clamp(1.6rem, 3.6vw, 2.2rem);
+  }
+
+  :global(.story-card) .kicker {
+    font-size: var(--text-small);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: var(--weight-semibold);
+    color: var(--text-tertiary);
+  }
+
+  :global(.story-card) p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .story-shell__pillars {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .story-shell__pillars-heading {
+    margin: 0;
+    font-size: var(--text-small);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .story-shell__pillars-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .story-shell__pillars-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--voyage-blue-rgb), 0.1) 22%);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    position: relative;
+  }
+
+  .story-shell__pillars-item::before {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--grad-a), color-mix(in oklab, var(--grad-b) 85%, transparent));
+    box-shadow: 0 0 0 3px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 40%, rgba(255, 255, 255, 0.42) 60%);
+  }
+
+  :global(html[data-theme='hc']) .story-shell__pillars-item {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+  }
+
+  :global(html[data-theme='hc']) .story-shell__pillars-item::before {
+    background: currentColor;
+    box-shadow: none;
+  }
+
+  .products-shell {
+    position: relative;
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .products-shell::before {
+    content: '';
+    position: absolute;
+    inset: -35% -20% 32% -20%;
+    background:
+      radial-gradient(520px 520px at 18% 28%, rgba(var(--voyage-blue-rgb), 0.18), transparent 70%),
+      radial-gradient(620px 620px at 82% 62%, rgba(var(--aurora-purple-rgb), 0.14), transparent 75%);
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  .products-shell__intro {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--space-md);
+    max-width: min(48ch, 100%);
+  }
+
+  .products-shell__intro h2 {
+    margin: 0;
+    background: var(--gradient-heading);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .products-shell__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  :global(.product-card) {
+    display: grid;
+    gap: clamp(1.6rem, 4vw, 2.6rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: start;
+    padding: clamp(1.8rem, 3.6vw, 2.6rem);
+    border-radius: var(--radius-2xl);
+    background: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--aurora-purple-rgb), 0.12) 8%);
+    border: 1px solid color-mix(in srgb, var(--border) 62%, rgba(var(--voyage-blue-rgb), 0.16) 38%);
+    box-shadow: 0 24px 56px rgba(16, 24, 40, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  :global(.product-card) .kicker {
+    font-size: var(--text-small);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .product-card__meta {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .product-card__meta h3 {
+    margin: 0;
+    font-size: var(--text-display);
+    background: var(--gradient-heading);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.1;
+  }
+
   .status-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    border-radius: var(--radius-full);
+    gap: 0.65rem;
     padding: 0.55rem 1.1rem;
-    background: rgba(19, 81, 255, 0.08);
-    background: color-mix(in srgb, var(--voyage-blue) 12%, transparent);
-    border: 1px solid rgba(19, 81, 255, 0.18);
+    border-radius: var(--radius-full);
     font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     color: var(--voyage-blue);
+    background: color-mix(in srgb, var(--voyage-blue) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--voyage-blue) 24%, transparent);
   }
 
   .status-pill .dot {
@@ -561,12 +1043,18 @@
     height: 6px;
     border-radius: 50%;
     background: currentColor;
-    display: inline-flex;
   }
 
-  .product-body { display: grid; gap: 1.2rem; }
+  .product-card__body {
+    display: grid;
+    gap: var(--space-md);
+  }
 
-  .product-body p { color: var(--text-secondary); }
+  .product-card__body p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
 
   .product-link {
     display: inline-flex;
@@ -574,95 +1062,287 @@
     gap: 0.65rem;
     font-weight: var(--weight-semibold);
     color: var(--voyage-blue);
+    text-decoration: none;
   }
 
-  .product-link:hover { color: var(--aurora-purple); }
+  .product-link:hover,
+  .product-link:focus-visible {
+    color: var(--aurora-purple);
+  }
 
-  .timeline-grid {
+  .product-link svg { transition: transform var(--duration-ui) var(--ease-out); }
+
+  .product-link:hover svg,
+  .product-link:focus-visible svg {
+    transform: translateX(4px);
+  }
+
+  :global(html[data-theme='hc'] .product-card) {
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .status-pill {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+  }
+
+  .timeline-shell {
+    display: grid;
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3.4rem);
+    align-items: start;
+  }
+
+  .timeline-overview {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.2rem);
+    position: sticky;
+    top: clamp(4rem, 9vw, 6rem);
+  }
+
+  .timeline-overview h2 {
+    margin: 0;
+    background: var(--gradient-heading);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .timeline-overview__highlight {
+    display: grid;
+    gap: var(--space-md);
+    padding: clamp(1.6rem, 3.2vw, 2.2rem);
+    border-radius: var(--radius-2xl);
+  }
+
+  .timeline-overview__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .timeline-overview__date {
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-tertiary);
+  }
+
+  .timeline-overview__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-small);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: var(--weight-semibold);
+    color: var(--aurora-purple);
+    background: color-mix(in srgb, var(--aurora-purple) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--aurora-purple) 22%, transparent);
+  }
+
+  .timeline-overview__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    color: var(--text-tertiary);
+    font-size: var(--text-small);
+  }
+
+  .timeline-overview__note {
+    margin: 0;
+    color: var(--voyage-blue);
+    font-size: var(--text-small);
+  }
+
+  .timeline-overview__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: var(--weight-semibold);
+    color: var(--voyage-blue);
+    text-decoration: none;
+  }
+
+  .timeline-overview__cta::after {
+    content: '→';
+    font-size: 0.9em;
+  }
+
+  .timeline-overview__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .timeline-overview__list li {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 52%, transparent);
+  }
+
+  .timeline-overview__list-date {
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-tertiary);
+  }
+
+  .timeline-overview__list-title { font-weight: var(--weight-semibold); }
+
+  .timeline-overview__list-status {
+    font-size: var(--text-small);
+    color: var(--voyage-blue);
+  }
+
+  .timeline-track {
     position: relative;
     display: grid;
-    gap: var(--space-4xl);
-    padding-left: var(--space-xl);
-    margin-top: var(--space-2xl);
+    gap: clamp(1.8rem, 3.6vw, 2.6rem);
+    padding-left: clamp(1.4rem, 2vw, 1.8rem);
   }
 
-  .timeline-grid::before {
+  .timeline-track::before {
     content: '';
     position: absolute;
-    left: 0.45rem;
+    left: clamp(0.2rem, 0.8vw, 0.5rem);
     top: 0;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(180deg, rgba(19, 81, 255, 0.32), transparent 80%);
+    background: linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.32), transparent 85%);
   }
 
-  .timeline-marker {
+  :global(.timeline-card) {
+    position: relative;
+    display: grid;
+    gap: var(--space-md);
+    padding: clamp(1.6rem, 3.2vw, 2.1rem);
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.1) 10%);
+    border: 1px solid color-mix(in srgb, var(--border) 54%, rgba(var(--voyage-blue-rgb), 0.16) 46%);
+    box-shadow: 0 24px 48px rgba(16, 24, 40, 0.1);
+  }
+
+  .timeline-card__marker {
+    position: absolute;
+    top: 1.25rem;
+    left: -2.05rem;
     width: 14px;
     height: 14px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    margin-top: 0.4rem;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 6px rgba(19, 81, 255, 0.08);
+    box-shadow: 0 0 0 6px rgba(var(--voyage-blue-rgb), 0.1);
   }
 
-  .timeline-grid :global(.glass-card) {
+  .timeline-card__meta {
     display: flex;
-    gap: clamp(1.6rem, 4vw, 2.5rem);
-    background: var(--surface-glass);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-radius: var(--radius-2xl);
-    padding: var(--card-padding-lg);
-    box-shadow: var(--shadow-xs);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    margin-bottom: var(--card-margin-bottom);
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.85rem;
   }
 
-  .timeline-grid :global(.glass-card .timeline-content) {
-    display: grid;
-    gap: var(--space-md);
-  }
-
-  .timeline-date {
+  .timeline-card__date {
     font-size: var(--text-small);
-    color: var(--text-tertiary);
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    color: var(--text-tertiary);
   }
 
-  .timeline-content p { color: var(--text-secondary); }
+  .timeline-card__status {
+    font-size: var(--text-small);
+    color: var(--voyage-blue);
+  }
 
-  .timeline-note { color: var(--voyage-blue); font-size: var(--text-small); }
+  :global(.timeline-card) h3 {
+    margin: 0;
+    font-size: var(--text-title);
+  }
+
+  :global(.timeline-card) p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .timeline-card__note {
+    color: var(--voyage-blue);
+    font-size: var(--text-small);
+  }
+
+  :global(html[data-theme='hc'] .timeline-card) {
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .timeline-track::before { background: currentColor; }
+
+  :global(html[data-theme='hc']) .timeline-card__marker {
+    background: currentColor;
+    box-shadow: none;
+  }
+
+  @media (max-width: 1080px) {
+    .home-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .home-hero__column--aside {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
 
   @media (max-width: 960px) {
-    .timeline-grid {
-      padding-left: 0;
-      gap: var(--space-2xl);
-    }
-    .timeline-grid::before { display: none; }
-    .timeline-marker { margin-left: 6px; }
-    .story-grid {
+    .products-shell::before { inset: -45% -35% 45% -35%; }
+    :global(.product-card) {
       grid-template-columns: 1fr;
-      gap: var(--space-lg);
     }
-    .section-heading {
-      --section-heading-gap: var(--space-lg);
-      --section-heading-margin: var(--space-2xl);
+    .timeline-shell {
+      grid-template-columns: 1fr;
     }
+    .timeline-overview {
+      position: static;
+    }
+    .timeline-track {
+      padding-left: 0;
+    }
+    .timeline-track::before {
+      left: -999px;
+    }
+      :global(.timeline-card) {
+        padding: clamp(1.4rem, 3vw, 1.9rem);
+      }
+      .timeline-card__marker {
+        position: static;
+        margin-bottom: 0.75rem;
+      }
   }
 
-  @media (max-width: 768px) {
-    .story-grid :global(.glass-card) {
-      padding: var(--card-padding-md);
-      gap: var(--space-md);
+  @media (max-width: 720px) {
+    .story-shell__cards {
+      grid-template-columns: 1fr;
     }
-    .timeline-grid :global(.glass-card) {
-      padding: var(--card-padding-md);
-      gap: var(--space-sm);
+    .glass-stack {
+      padding: clamp(1.6rem, 5vw, 2.2rem);
+      border-radius: var(--radius-xl);
+    }
+    :global(.product-card) {
+      padding: clamp(1.5rem, 5vw, 2rem);
+      border-radius: var(--radius-xl);
+    }
+    :global(.timeline-card) {
+      border-radius: var(--radius-lg);
     }
   }
 </style>
