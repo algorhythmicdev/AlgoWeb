@@ -105,6 +105,20 @@
     "milestone_cta": "Skatīt ceļa karti",
     "brand_aria": "AlgoRhythmics zīmola akcents hero virsrakstā"
   },
+  "home": {
+    "cta": {
+      "eyebrow": "Turpini izpētīt",
+      "title": "Paliec mūsu orbītā",
+      "text": "Pievienojies mierīgajai OS kopienai, lai pirmais saņemtu ceļa kartes jaunākos posmus, pilotprojektu ielūgumus un pieejamības ritmus.",
+      "primary": "Pievienoties kopienai",
+      "secondary": "Saskaņot stratēģijas sesiju",
+      "points": [
+        "NodeVoyage un Ideonautix priekšskatījumi ar ikmēneša atjauninājumiem.",
+        "Pilotprogrammas vispirms tiek izziņotas abonentiem.",
+        "Pieejamības un kustības auditi kā īsi ceļveži."
+      ]
+    }
+  },
   "story": {
     "title": "Mūsu stāsts",
     "reality_title": "Realitāte, ko būvējam",
@@ -149,6 +163,25 @@
       "brand_context": "Projekti īstenoti kopā ar Reclame Fabriek (Daugavpils, LV), abiem dibinātājiem daloties pieredzē",
       "algorhythmics_title": "Vīzija AlgoRhythmics",
       "algorhythmics_vision": "Apvienot signāltehnikas pētniecības disciplīnu ar mākonī dzimušu piegādi, lai AlgoRhythmics radītu skaidrojamas un izturīgas MI pieredzes, gatavas reālām instalācijām."
+    }
+  },
+  "partners": {
+    "eyebrow": "Operatīvās alianses",
+    "title": "Partneri, kas virza studiju",
+    "description": "Šodien strādājam ar izkārtnes industrijas līderiem un gatavojam valsts sektorālos sabiedrotos, lai paplašinātu mūsu izglītības programmas.",
+    "location": "Atrašanās vieta",
+    "founded": "Dibināts",
+    "website": "Vietne",
+    "clients_label": "Atlasītie klienti",
+    "clients_title": "Globālie zīmoli, kurus esam atbalstījuši",
+    "clients_description": "Gadu desmitu pieredze izkārtnes projektos mazumtirdzniecībā, finanšu un aviācijas nozarēs dod stingru pamatu mūsu AI risinājumiem.",
+    "labels": {
+      "current": "Aktīva partnerība",
+      "aspirational": "Nākamā partnerība",
+      "scale": "Mērogs īsumā",
+      "reach": "Prognozētā ietekme",
+      "innovation": "Inovāciju fokuss",
+      "programs": "Programmas kustībā"
     }
   },
   "products": {

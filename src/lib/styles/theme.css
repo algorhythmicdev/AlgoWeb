@@ -10,6 +10,9 @@
   --grad-b: var(--aurora);
   --grad: linear-gradient(var(--grad-angle), var(--grad-a) 0%, var(--grad-b) 100%);
 
+  /* Textures */
+  --grain: var(--grain-texture);
+
   /* Brand (light) */
   --bg: #F5F7FB;
   --bg-elev-1: #FFFFFF;
@@ -75,6 +78,7 @@ html[data-theme='hc'] {
   --link: #0000EE;
   --border: #000000;
   --focus: #000000;
+  --grain: none;
 }
 
 /* NodeVoyage Themes */

@@ -105,6 +105,20 @@
     "milestone_cta": "See the roadmap",
     "brand_aria": "AlgoRhythmics logomark highlighted in the hero heading"
   },
+  "home": {
+    "cta": {
+      "eyebrow": "Keep exploring",
+      "title": "Stay in our orbit",
+      "text": "Join the calm OS community for roadmap drops, pilot invites, and accessibility rituals.",
+      "primary": "Join the community",
+      "secondary": "Arrange a strategy session",
+      "points": [
+        "NodeVoyage and Ideonautix previews refreshed every month.",
+        "Pilot programmes announced to subscribers first.",
+        "Accessibility and motion audits delivered as cheatsheets."
+      ]
+    }
+  },
   "story": {
     "title": "Our story",
     "reality_title": "The reality we're shaping",
@@ -148,6 +162,25 @@
       "brand_context": "Projects delivered through Reclame Fabriek (Daugavpils, LV) by both founders",
       "algorhythmics_title": "Vision for AlgoRhythmics",
       "algorhythmics_vision": "Blend signage precision with cloud agility so AlgoRhythmics ships trustworthy, installation-ready AI experiences."
+    }
+  },
+  "partners": {
+    "eyebrow": "Operational alliances",
+    "title": "Alliances powering the studio",
+    "description": "We build with signage leaders today and prepare public-sector allies so our education programmes land with scale.",
+    "location": "Location",
+    "founded": "Founded",
+    "website": "Website",
+    "clients_label": "Selected clients",
+    "clients_title": "Global brands we've supported",
+    "clients_description": "Decades of signage delivery for retail, finance, and aviation gives our AI work a proven production backbone.",
+    "labels": {
+      "current": "Active partnership",
+      "aspirational": "Next partnership",
+      "scale": "Scale at a glance",
+      "reach": "Projected reach",
+      "innovation": "Innovation focus",
+      "programs": "Programmes in motion"
     }
   },
   "products": {

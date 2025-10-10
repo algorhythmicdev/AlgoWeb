@@ -6,8 +6,11 @@
   export let maxTilt = 7; // Max tilt in degrees
   export let interactive = true;
   export let staggerOptions: { stagger?: number; delay?: number } = {};
+  export let variant: 'halo' | 'grid' | 'line' | 'particles' | undefined = undefined;
 
   let cardEl: HTMLElement;
+  let restProps: Record<string, any> = {};
+  let forwardedVariant: string | undefined;
 
   onMount(() => {
     const tiltAction = interactive ? tilt(cardEl, { max: maxTilt }) : null;
@@ -23,13 +26,20 @@
       if (cleanupStagger) cleanupStagger();
     };
   });
+
+  $: {
+    const { 'data-variant': dataVariant, ...rest } = $$restProps;
+    restProps = rest;
+    const attrVariant = typeof dataVariant === 'string' ? dataVariant.trim() : undefined;
+    forwardedVariant = variant ?? (attrVariant && attrVariant.length ? attrVariant : undefined);
+  }
 </script>
 
 <div
   bind:this={cardEl}
   class="glass-card magnetic-card {$$props.class || ''}"
-  data-variant={$$props['data-variant'] || ''}
-  {...$$restProps}
+  data-variant={forwardedVariant}
+  {...restProps}
 >
   <slot />
 </div>
