@@ -60,6 +60,7 @@
     "description": "Our layouts respect reduced-motion settings, signage discipline, and AAA contrast so every collaborator stays in control across NodeVoyage, Ideonautix, and studio engagements.",
     "cta_products": "Explore the constellation",
     "cta_consulting": "Book a strategy huddle",
+    "actions_label": "Primary hero actions",
     "next_milestone": "Next waypoint",
     "pillars_title": "How we sustain calm momentum",
     "pillars": [
@@ -227,6 +228,12 @@
   "timeline": {
     "title": "Our path",
     "subtitle": "Shaping the future milestone by milestone",
+    "nav_previous": "Previous milestone",
+    "nav_next": "Next milestone",
+    "preview_label": "Roadmap preview",
+    "upcoming_badge": "Upcoming",
+    "milestone_live_label": "Now viewing {title}{progress}",
+    "progress_label": "Milestone {current} of {total}",
     "milestones": {
       "ideju-kauss": {
         "title": "Ideju Kauss competition",

@@ -184,12 +184,12 @@
 <Hero variant="nodes" title={$_('consulting.hero_title')} subtitle={$_('consulting.hero_subtitle')}>
   <div class="consulting-hero">
     <div class="consulting-hero__body">
-      <div class="consulting-hero__headline">
+      <div class="consulting-hero__headline surface-pill" data-tone="accent">
         <AnimatedHeadline variant="glow" phrases={heroRotating} holdDuration={2600} />
       </div>
 
     <div class="consulting-hero__meta">
-      <div class="spots-indicator" aria-live="polite">
+      <div class="spots-indicator surface-pill" aria-live="polite" data-tone="accent">
         <div class="spots-number">{spotsRemaining}</div>
         <span>{$_('consulting.spots_remaining')}</span>
       </div>
@@ -252,6 +252,7 @@
             <input
               type="text"
               id="company"
+              class="surface-field"
               bind:value={formData.company}
               placeholder={$_('consulting.form_company_placeholder')}
               class:error={errors.company}
@@ -271,6 +272,7 @@
             <input
               type="text"
               id="name"
+              class="surface-field"
               bind:value={formData.name}
               placeholder={$_('consulting.form_name_placeholder')}
               class:error={errors.name}
@@ -290,6 +292,7 @@
             <input
               type="email"
               id="email"
+              class="surface-field"
               bind:value={formData.email}
               placeholder={$_('consulting.form_email_placeholder')}
               class:error={errors.email}
@@ -309,6 +312,7 @@
             <input
               type="tel"
               id="phone"
+              class="surface-field"
               bind:value={formData.phone}
               placeholder={$_('consulting.form_phone_placeholder')}
               class:error={errors.phone}
@@ -327,6 +331,7 @@
             <label for="industry" class="required">{$_('consulting.form_industry')}</label>
             <select
               id="industry"
+              class="surface-field"
               bind:value={formData.industry}
               class:error={errors.industry}
               aria-describedby={supportIds.industry}
@@ -349,6 +354,7 @@
             <label for="description" class="required">{$_('consulting.form_description')}</label>
             <textarea
               id="description"
+              class="surface-field"
               bind:value={formData.description}
               rows="6"
               placeholder={$_('consulting.form_description_placeholder')}
@@ -433,7 +439,7 @@
   --hero-intro-gap: clamp(1.5rem, 3vw, 2.2rem);
   --hero-backdrop-inset: clamp(-5rem, -8vw, -2rem) -15% auto;
   --hero-backdrop-height: clamp(20rem, 36vw, 26rem);
-  --hero-backdrop-gradient: radial-gradient(circle at 40% 40%, rgba(19, 81, 255, 0.26), transparent 72%);
+  --hero-backdrop-gradient: radial-gradient(circle at 40% 40%, rgba(var(--voyage-blue-rgb), 0.26), transparent 72%);
   --hero-backdrop-blur: 140px;
   --hero-backdrop-opacity: 0.3;
   --hero-backdrop-opacity-light: 0.36;
@@ -469,12 +475,7 @@
     border-radius: clamp(2.6rem, 6vw, 3.6rem);
     max-width: min(100%, var(--measure-lg));
     text-align: center;
-  background: linear-gradient(126deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 22px 52px rgba(16, 28, 48, 0.26);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
+  }
 
   .consulting-hero__headline :global(.animated-headline) {
     max-width: min(90vw, var(--measure-lg));
@@ -501,9 +502,6 @@
     max-width: min(100%, var(--measure-lg));
     text-align: left;
     gap: clamp(0.75rem, 2.4vw, 1.2rem);
-    background: color-mix(in srgb, var(--surface-glass-strong) 70%, rgba(var(--voyage-blue-rgb), 0.18) 30%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 58%, rgba(255, 255, 255, 0.58) 42%);
-    box-shadow: 0 26px 58px rgba(15, 23, 42, 0.24);
   }
 
   .consulting-hero__testimonial-header {
@@ -525,7 +523,7 @@
     border-radius: var(--radius-full);
     background: var(--gradient-spectrum-3);
     color: #ffffff;
-    box-shadow: 0 18px 32px rgba(19, 81, 255, 0.18);
+    box-shadow: 0 18px 32px rgba(var(--voyage-blue-rgb), 0.18);
   }
 
   .consulting-hero__testimonial-icon :global(svg) {
@@ -575,37 +573,9 @@
     color: var(--text-primary);
   }
 
-  :global([data-base-theme='dark']) .consulting-hero__testimonial {
-    background: color-mix(in srgb, rgba(12, 18, 32, 0.9) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 60%, rgba(255, 255, 255, 0.14) 40%);
-    box-shadow: 0 28px 64px rgba(2, 6, 18, 0.45);
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial {
-    background: rgba(0, 0, 0, 0.9);
-    border-color: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.72);
-  }
-
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial-header {
     color: var(--text-primary);
   }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial-icon {
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--text-primary);
-    box-shadow: none;
-  }
-
-:global([data-base-theme='dark']) .consulting-hero__headline {
-  background: linear-gradient(126deg, rgba(26, 32, 54, 0.82), rgba(26, 32, 54, 0.56));
-  box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.32), 0 24px 55px rgba(4, 12, 26, 0.42);
-}
-
-:global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__headline {
-  background: linear-gradient(126deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.72));
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
-}
 
 
 .spots-indicator {
@@ -614,10 +584,6 @@
   gap: 0.75rem;
   padding: 0.9rem 1.4rem;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(19, 81, 255, 0.22);
-  background: var(--bg-surface);
-  background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
-  backdrop-filter: blur(18px);
 }
 
 .spots-indicator span {
@@ -647,9 +613,6 @@
   gap: clamp(0.75rem, 2vw, 1.2rem);
   padding: clamp(1.1rem, 2.6vw, 1.8rem);
   border-radius: var(--radius-xl);
-  background: color-mix(in srgb, var(--surface-glass) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
-  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 60%, rgba(255, 255, 255, 0.45) 40%);
-  box-shadow: 0 22px 50px rgba(12, 18, 32, 0.22);
   text-align: left;
 }
 
@@ -662,7 +625,7 @@
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
   color: #ffffff;
-  box-shadow: 0 18px 32px rgba(19, 81, 255, 0.25);
+  box-shadow: 0 18px 32px rgba(var(--voyage-blue-rgb), 0.25);
 }
 
 :global(.hero-feature__icon) :global(svg) {
@@ -686,10 +649,6 @@
   margin: 0 auto clamp(4rem, 8vw, 5rem);
   padding: clamp(2.6rem, 5vw, 3.4rem);
   border-radius: var(--radius-2xl);
-  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 58%, rgba(255, 255, 255, 0.42) 42%);
-  background: color-mix(in srgb, var(--surface-glass) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
-  box-shadow: 0 32px 70px rgba(10, 18, 32, 0.24);
-  backdrop-filter: blur(28px);
 }
 
 .form-title {
@@ -730,33 +689,9 @@
     font-weight: var(--weight-semibold);
   }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: clamp(1rem, 2.4vw, 1.35rem);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(19, 81, 255, 0.16);
-  background: var(--bg-surface);
-  transition: border-color var(--duration-fast) var(--ease-out);
-}
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--voyage-blue);
-  }
-
-  .form-group input.error,
-  .form-group select.error,
-  .form-group textarea.error {
-    border-color: var(--cherry-pop);
-  }
-
-  .btn-block {
-    width: 100%;
-    display: inline-flex;
-    justify-content: center;
+  .form-group textarea.surface-field {
+    min-height: clamp(8rem, 22vw, 11rem);
+    resize: vertical;
   }
 
   .spinner {
@@ -783,12 +718,8 @@
 :global(.benefit-card) {
   padding: clamp(1.9rem, 3vw, 2.4rem);
   border-radius: var(--radius-2xl);
-  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 58%, rgba(255, 255, 255, 0.45) 42%);
-  background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--aurora-purple-rgb), 0.14) 14%);
   display: grid;
   gap: clamp(1.2rem, 3vw, 1.7rem);
-  box-shadow: 0 26px 60px rgba(10, 18, 36, 0.2);
-  backdrop-filter: blur(24px);
 }
 
   :global(.benefit-card) h3 {

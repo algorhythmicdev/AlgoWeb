@@ -105,17 +105,17 @@
   }
   
   .toast-success .toast-icon {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10B981;
+    background: rgba(var(--accent-1-rgb, 15, 214, 201), 0.1);
+    color: var(--accent-1);
   }
-  
+
   .toast-error .toast-icon {
-    background: rgba(224, 50, 44, 0.1);
+    background: rgba(var(--cherry-pop-rgb), 0.1);
     color: var(--cherry-pop);
   }
   
   .toast-info .toast-icon {
-    background: rgba(19, 81, 255, 0.1);
+    background: rgba(var(--voyage-blue-rgb), 0.1);
     color: var(--voyage-blue);
   }
   

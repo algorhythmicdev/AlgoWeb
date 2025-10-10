@@ -43,9 +43,3 @@
 >
   <slot />
 </div>
-
-<style>
-  .magnetic-card {
-    /* Add any specific styling for the magnetic card here, if needed */
-  }
-</style>

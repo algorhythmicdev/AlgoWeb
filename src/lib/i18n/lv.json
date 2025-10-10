@@ -60,6 +60,7 @@
     "description": "Every surface honours reduced-motion settings, signage-born craft, and WCAG AAA contrast so your team stays in control whether you're exploring NodeVoyage, assembling Ideonautix, or partnering through our consulting sprints.",
     "cta_products": "Explore the constellation",
     "cta_consulting": "Plan a strategy session",
+    "actions_label": "Galvenās hero darbības",
     "next_milestone": "Nākamais posms",
     "pillars_title": "How we deliver calm momentum",
     "pillars": [
@@ -228,6 +229,12 @@
   "timeline": {
     "title": "Mūsu ceļš",
     "subtitle": "Veidojam nākotni soli pa solim",
+    "nav_previous": "Iepriekšējais posms",
+    "nav_next": "Nākamais posms",
+    "preview_label": "Ceļa kartes priekšskatījums",
+    "upcoming_badge": "Gaidāms",
+    "milestone_live_label": "Skatāt {title}{progress}",
+    "progress_label": "Posms {current} no {total}",
     "milestones": {
       "ideju-kauss": {
         "title": "Ideju Kauss konkurss",

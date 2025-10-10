@@ -215,7 +215,7 @@
 <!-- Hero Section -->
 <Hero variant="line" title={$_('contact.hero_title')} subtitle={$_('contact.hero_subtitle')}>
   <div class="contact-hero">
-    <div class="contact-hero__headline">
+    <div class="contact-hero__headline surface-pill" data-tone="accent">
       <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
     </div>
 
@@ -268,6 +268,7 @@
         <input
           type="text"
           id="name"
+          class="surface-field"
           bind:value={formData.name}
           placeholder={$_('contact.form_name_placeholder')}
           class:error={errors.name}
@@ -287,6 +288,7 @@
         <input
           type="email"
           id="email"
+          class="surface-field"
           bind:value={formData.email}
           placeholder={$_('contact.form_email_placeholder')}
           class:error={errors.email}
@@ -306,6 +308,7 @@
         <input
           type="text"
           id="subject"
+          class="surface-field"
           bind:value={formData.subject}
           placeholder={$_('contact.form_subject_placeholder')}
           class:error={errors.subject}
@@ -324,6 +327,7 @@
         <label for="message" class="required">{$_('contact.form_message')}</label>
         <textarea
           id="message"
+          class="surface-field"
           bind:value={formData.message}
           rows="6"
           placeholder={$_('contact.form_message_placeholder')}
@@ -432,7 +436,7 @@
     --hero-padding-block-end: clamp(3.5rem, 10vw, 5.5rem);
     --hero-backdrop-inset: clamp(-5rem, -8vw, -2rem) -12% auto;
     --hero-backdrop-height: clamp(18rem, 32vw, 24rem);
-    --hero-backdrop-gradient: radial-gradient(circle at 50% 40%, rgba(19, 81, 255, 0.24), transparent 72%);
+  --hero-backdrop-gradient: radial-gradient(circle at 50% 40%, rgba(var(--voyage-blue-rgb), 0.24), transparent 72%);
     --hero-backdrop-opacity: 0.34;
     --hero-backdrop-opacity-light: 0.4;
     --hero-backdrop-opacity-dark: 0.25;
@@ -467,11 +471,6 @@
     border-radius: clamp(2.4rem, 6vw, 3.4rem);
     max-width: min(100%, var(--measure-lg));
     text-align: center;
-    background: linear-gradient(126deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 24px 55px rgba(22, 30, 56, 0.28);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
   }
 
   .contact-hero__headline :global(.animated-headline) {
@@ -499,9 +498,6 @@
     padding: clamp(1.25rem, 3vw, 1.85rem);
     text-align: left;
     border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.3) 58%, rgba(255, 255, 255, 0.45) 42%);
-    background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--aurora-purple-rgb), 0.14) 14%);
-    box-shadow: 0 20px 48px rgba(12, 22, 48, 0.18);
   }
 
   .contact-hero__cta-label {
@@ -539,17 +535,6 @@
     }
   }
 
-  :global([data-base-theme='dark']) .contact-hero__headline {
-    background: linear-gradient(126deg, rgba(28, 36, 64, 0.84), rgba(28, 36, 64, 0.58));
-    box-shadow: inset 0 0 0 1px rgba(120, 146, 220, 0.36), 0 24px 55px rgba(4, 12, 26, 0.45);
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-hero__headline {
-    background: linear-gradient(126deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.74));
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
-  }
-
-
   .contact-section {
     padding: clamp(6rem, 14vw, 8rem) 0;
   }
@@ -586,25 +571,10 @@
     font-weight: var(--weight-semibold);
   }
 
-.form-group input,
-.form-group textarea {
-  padding: clamp(1.1rem, 2.4vw, 1.4rem);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(19, 81, 255, 0.16);
-  background: var(--bg-surface);
-  transition: border-color var(--duration-fast) var(--ease-out);
-}
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--voyage-blue);
+  .form-group textarea.surface-field {
+    min-height: clamp(8rem, 22vw, 11rem);
+    resize: vertical;
   }
-
-  .form-group input.error,
-  .form-group textarea.error { border-color: var(--cherry-pop); }
-
-  .btn-block { width: 100%; display: inline-flex; justify-content: center; }
 
 :global(.form-card),
 :global(.calendar-card),
@@ -614,10 +584,6 @@
   gap: clamp(1.2rem, 3vw, 1.8rem);
   padding: clamp(2rem, 4vw, 2.6rem);
   border-radius: var(--radius-2xl);
-  border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 58%, rgba(255, 255, 255, 0.45) 42%);
-  background: color-mix(in srgb, var(--surface-glass) 86%, rgba(var(--aurora-purple-rgb), 0.12) 14%);
-  box-shadow: 0 26px 60px rgba(10, 18, 36, 0.2);
-  backdrop-filter: blur(24px);
 }
 
   .info-item,
@@ -657,23 +623,25 @@
 }
 
 .calendar-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.4rem;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(19, 81, 255, 0.22);
-  background: var(--bg-surface);
-  background: color-mix(in srgb, var(--voyage-blue) 6%, transparent);
-  color: var(--text-primary);
-  backdrop-filter: blur(18px);
+  --btn-padding-y: 0.85rem;
+  --btn-padding-x: 1.6rem;
+  --btn-color: color-mix(in srgb, var(--voyage-blue) 62%, var(--text) 38%);
+  --btn-border: color-mix(in srgb, var(--surface-pill-border) 68%, rgba(var(--voyage-blue-rgb), 0.18) 32%);
+  --btn-hover-bg: color-mix(in srgb, var(--surface-pill-bg) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
+  --btn-hover-border: color-mix(in srgb, var(--surface-pill-border) 64%, rgba(var(--voyage-blue-rgb), 0.22) 36%);
+  --btn-shadow: var(--surface-pill-shadow);
+  --btn-hover-shadow: 0 26px 46px rgba(var(--voyage-blue-rgb), 0.2);
 }
 
-  .calendar-button:hover,
-  .social-link:hover {
-    color: var(--voyage-blue);
-    border-color: rgba(19, 81, 255, 0.38);
-  }
+.calendar-button:hover,
+.calendar-button:focus-visible {
+  color: color-mix(in srgb, var(--voyage-blue) 72%, var(--text) 28%);
+}
+
+.social-link:hover {
+  color: var(--voyage-blue);
+  border-color: rgba(var(--voyage-blue-rgb), 0.38);
+}
 
   @media (max-width: 960px) {
     .contact-grid { grid-template-columns: 1fr; }

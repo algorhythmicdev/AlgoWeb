@@ -295,12 +295,12 @@
     z-index: 1;
     max-width: 72ch;
   }
-  h1 {
+  .hero__title {
     margin: 0 0 12px;
-    font-weight: 800;
+    font-weight: var(--weight-black, 800);
     line-height: 1.08;
   }
-  p {
+  .hero__subtitle {
     margin: 0 0 18px;
     color: var(--muted);
   }
@@ -314,7 +314,7 @@
     height: clamp(10px, 3.2vw, 18px);
     background: var(--grad);
     opacity: 0.9;
-    animation: bar-pan var(--slow) ease-in-out infinite alternate;
+    animation: bar-pan var(--bar-speed, var(--slow)) ease-in-out infinite alternate;
     z-index: 0;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -473,8 +473,10 @@
     ></canvas>
   </div>
   <div class="content">
-    <h1>{title}</h1>
-    <p>{subtitle}</p>
+    <h1 class="hero__title heading">{title}</h1>
+    {#if subtitle}
+      <p class="hero__subtitle">{subtitle}</p>
+    {/if}
     <slot />
   </div>
 </div>

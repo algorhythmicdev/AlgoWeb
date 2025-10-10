@@ -258,7 +258,7 @@ export function tilt(node, { max = 12, scale = 1.03, easing = easings.snappy(), 
       node.style.transform = `perspective(800px) scale(${scale}) rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
       if (glow) {
         const intensity = (Math.abs(Number(tiltX)) + Math.abs(Number(tiltY))) / max;
-        node.style.boxShadow = `0 24px 48px rgba(19, 81, 255, ${0.08 + intensity * 0.12}), 0 0 24px rgba(106, 56, 255, ${0.04 + intensity * 0.08})`;
+        node.style.boxShadow = `0 24px 48px rgba(var(--voyage-blue-rgb), ${0.08 + intensity * 0.12}), 0 0 24px rgba(var(--aurora-purple-rgb), ${0.04 + intensity * 0.08})`;
       }
     });
   };
@@ -306,7 +306,7 @@ export function magnetic(node, { strength = 0.28, threshold = 110, glow = true, 
     node.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) scale(${currentScale})`;
     if (glow) {
       const intensity = (1 - distance / threshold) * 0.28;
-      node.style.boxShadow = `0 18px 32px rgba(19, 81, 255, ${intensity}), 0 0 22px rgba(106, 56, 255, ${intensity * 0.6})`;
+      node.style.boxShadow = `0 18px 32px rgba(var(--voyage-blue-rgb), ${intensity}), 0 0 22px rgba(var(--aurora-purple-rgb), ${intensity * 0.6})`;
     }
   };
 

@@ -63,15 +63,18 @@
   <div class="container">
     <header class="founders-header">
       <div class="founders-header__intro">
-        <span class="eyebrow">{$_('founders.subtitle')}</span>
+        <span class="eyebrow surface-chip" data-tone="accent">{$_('founders.subtitle')}</span>
         <h2>{$_('founders.title')}</h2>
       </div>
       <p class="founders-header__lead">{$_('story.vision_text')}</p>
     </header>
 
     <div class="founders-grid" use:staggerReveal={{ stagger: 140 }}>
-      {#each founderProfiles as founder (founder.key)}
-        <article class="founder-card">
+      {#each founderProfiles as founder, index (founder.key)}
+        <article
+          class="founder-card glass-card"
+          data-variant={index % 2 === 0 ? 'halo' : 'grid'}
+        >
           <div class="founder-card__top">
             <div class="founder-card__avatar">
               <img src={founder.avatar} alt={founder.name} loading="lazy" />
@@ -83,13 +86,13 @@
             </div>
             <div class="founder-card__contacts" aria-label={contactLabel}>
               {#if founder.email}
-                <a class="contact-chip chip chip--interactive" href={`mailto:${founder.email}`}>
+                <a class="contact-chip surface-pill" href={`mailto:${founder.email}`}>
                   {$_('founders.email_cta')}
                 </a>
               {/if}
               {#if founder.linkedin}
                 <a
-                  class="contact-chip chip chip--interactive"
+                  class="contact-chip surface-pill"
                   href={founder.linkedin}
                   target="_blank"
                   rel="noreferrer"
@@ -110,10 +113,12 @@
           <div class="founder-card__details">
             {#if founder.expertise.length}
               <div class="founder-card__column" aria-label={expertiseLabel}>
-                <span class="founder-card__eyebrow">{expertiseLabel}</span>
+                <span class="founder-card__eyebrow surface-chip" data-tone="accent">{expertiseLabel}</span>
                 <ul class="founder-card__chips">
                   {#each founder.expertise as item}
-                    <li class="chip">{item}</li>
+                    <li>
+                      <span class="surface-chip">{item}</span>
+                    </li>
                   {/each}
                 </ul>
               </div>
@@ -121,7 +126,7 @@
 
             {#if founder.achievements.length}
               <div class="founder-card__column" aria-label={achievementsLabel}>
-                <span class="founder-card__eyebrow">{achievementsLabel}</span>
+                <span class="founder-card__eyebrow surface-chip" data-tone="accent">{achievementsLabel}</span>
                 <ul class="founder-card__highlights">
                   {#each founder.achievements as item}
                     <li>{item}</li>
@@ -135,12 +140,12 @@
     </div>
 
     <aside class="founders-spotlight" use:staggerReveal={{ delay: 160, stagger: 80 }}>
-      <div class="founders-spotlight__inner">
+      <div class="founders-spotlight__inner glass-card" data-variant="line">
         <span class="founders-spotlight__label">{$_('founders.slaff.brand_title')}</span>
         <p class="founders-spotlight__lead">{$_('founders.slaff.brand_intro')}</p>
         <div class="founders-spotlight__brands">
           {#each brandClients as client}
-            <span class="brand-chip chip">
+            <span class="brand-chip surface-chip">
               <img src={client.logo} alt={client.name} loading="lazy" />
               <span>{client.name}</span>
             </span>
@@ -186,9 +191,6 @@
     gap: clamp(1.4rem, 3vw, 2rem);
     padding: clamp(1.8rem, 4vw, 2.6rem);
     border-radius: clamp(1.8rem, 4vw, 2.6rem);
-    border: 1px solid color-mix(in srgb, var(--hero-secondary) 24%, transparent 76%);
-    background: color-mix(in srgb, var(--hero-surface-layer) 72%, transparent 28%);
-    box-shadow: 0 24px 48px rgba(16, 24, 40, 0.12);
     overflow: hidden;
   }
 
@@ -214,7 +216,7 @@
     height: 100%;
     border-radius: 28px;
     object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.8);
+    border: 3px solid color-mix(in srgb, var(--surface-pill-border) 60%, rgba(var(--voyage-blue-rgb), 0.24) 40%);
     position: relative;
     z-index: 1;
   }
@@ -254,8 +256,11 @@
     position: relative;
     padding: clamp(1rem, 2.6vw, 1.4rem);
     border-radius: clamp(1.4rem, 3vw, 2rem);
-    background: rgba(var(--voyage-blue-rgb), 0.08);
-    border: 1px solid rgba(var(--voyage-blue-rgb), 0.18);
+    background: var(--surface-pill-bg);
+    border: 1px solid var(--surface-pill-border);
+    box-shadow: var(--surface-pill-shadow);
+    backdrop-filter: blur(20px) saturate(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(1.1);
     display: grid;
     gap: 0.6rem;
     z-index: 1;
@@ -266,7 +271,7 @@
     font-weight: var(--weight-semibold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
+    color: color-mix(in srgb, var(--text-secondary) 72%, transparent);
   }
 
   .founder-card__details {
@@ -282,10 +287,13 @@
   }
 
   .founder-card__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
     font-size: var(--text-small);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: color-mix(in srgb, var(--text-secondary) 60%, transparent);
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: color-mix(in srgb, var(--text-secondary) 58%, transparent);
   }
 
   .founder-card__chips {
@@ -295,6 +303,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
+  }
+
+  .founder-card__chips .surface-chip {
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-weight: var(--weight-medium);
   }
 
   .founder-card__highlights {
@@ -321,9 +335,6 @@
     gap: clamp(1.4rem, 3vw, 2rem);
     padding: clamp(1.8rem, 3.6vw, 2.6rem);
     border-radius: clamp(1.8rem, 3.6vw, 2.4rem);
-    border: 1px solid color-mix(in srgb, var(--border-strong) 45%, transparent);
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.86) 70%, transparent);
-    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
     overflow: hidden;
   }
 
@@ -351,8 +362,35 @@
   }
 
   .contact-chip {
-    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.3rem;
+    text-decoration: none;
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--text-secondary) 76%, rgba(var(--voyage-blue-rgb), 0.16) 24%);
+    background: var(--surface-pill-bg);
+    border: 1px solid var(--surface-pill-border);
+    box-shadow: var(--surface-pill-shadow);
+    backdrop-filter: blur(20px) saturate(1.08);
+    -webkit-backdrop-filter: blur(20px) saturate(1.08);
+    transition: color var(--duration-ui) var(--ease-out),
+      border-color var(--duration-ui) var(--ease-out),
+      background var(--duration-ui) var(--ease-out);
+  }
+
+  .contact-chip:hover {
+    background: color-mix(in srgb, var(--surface-pill-bg) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
+    border-color: color-mix(in srgb, var(--surface-pill-border) 64%, rgba(var(--voyage-blue-rgb), 0.2) 36%);
+    color: color-mix(in srgb, var(--voyage-blue) 68%, var(--text) 32%);
+  }
+
+  .contact-chip:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   .founder-card__chips li {
@@ -363,7 +401,10 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.6rem 0.95rem;
+    padding: 0.55rem 0.95rem;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-weight: var(--weight-medium);
   }
 
   .brand-chip img {
@@ -376,66 +417,31 @@
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
     color: var(--text-secondary);
+    text-transform: none;
   }
 
   .founders-spotlight__note {
     position: relative;
     margin: 0;
-    color: rgba(26, 33, 55, 0.65);
+    color: color-mix(in srgb, var(--text-secondary) 72%, transparent);
     font-size: var(--text-small);
     line-height: var(--leading-relaxed);
   }
 
-  :global([data-base-theme='dark']) .founder-card {
-    background: color-mix(in srgb, var(--hero-surface-layer-strong) 72%, transparent 28%);
-    border: 1px solid color-mix(in srgb, var(--hero-secondary) 32%, transparent 68%);
-    box-shadow: 0 28px 55px rgba(4, 12, 26, 0.52);
-  }
-
-  :global([data-base-theme='dark']) .founder-card__role {
-    color: rgba(196, 210, 255, 0.7);
-  }
-
-  :global([data-base-theme='dark']) .founder-card__focus {
-    background: color-mix(in srgb, var(--hero-surface-layer-strong) 68%, transparent 32%);
-    border-color: color-mix(in srgb, var(--hero-secondary) 32%, transparent 68%);
-  }
-
-  :global([data-base-theme='dark']) .founder-card__chips li {
-    background: color-mix(in srgb, var(--hero-surface-layer-strong) 65%, transparent 35%);
-    color: rgba(232, 238, 255, 0.88);
-  }
-
-  :global([data-base-theme='dark']) .contact-chip {
-    background: color-mix(in srgb, var(--hero-surface-layer-strong) 68%, transparent 32%);
-    border-color: color-mix(in srgb, var(--hero-secondary) 34%, transparent 66%);
-    color: rgba(224, 232, 255, 0.9);
-  }
-
-  :global([data-base-theme='dark']) .founders-spotlight__inner {
-    background: color-mix(in srgb, var(--hero-surface-layer-strong) 70%, transparent 30%);
-    border: 1px solid color-mix(in srgb, var(--hero-secondary) 34%, transparent 66%);
-    box-shadow: 0 24px 50px rgba(4, 12, 26, 0.5);
-  }
-
-  :global([data-base-theme='dark']) .brand-chip {
-    background: color-mix(in srgb, var(--hero-surface-layer-strong) 68%, transparent 32%);
-    border-color: color-mix(in srgb, var(--hero-secondary) 30%, transparent 70%);
-    color: rgba(220, 232, 255, 0.9);
-  }
-
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card,
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founders-spotlight__inner {
-    background: var(--card);
-    border: 2px solid #000000;
+    background: transparent;
+    border: 2px solid currentColor;
     box-shadow: none;
-    color: #000000;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-chip,
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card__chips li,
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card__chips li .surface-chip,
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .brand-chip {
-    color: #000000;
+    background: transparent;
+    border-color: currentColor;
+    color: currentColor;
+    box-shadow: none;
   }
 
   @media (max-width: 640px) {

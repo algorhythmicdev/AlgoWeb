@@ -138,7 +138,7 @@
 <!-- Hero -->
 <Hero variant="particles" title={$_('community.hero_title')} subtitle={$_('community.hero_subtitle')}>
   <div class="community-hero">
-    <div class="community-hero__headline">
+    <div class="community-hero__headline surface-pill" data-tone="accent">
       <AnimatedHeadline variant="slide" phrases={heroHeadlinePhrases} holdDuration={2600} />
     </div>
 
@@ -181,7 +181,7 @@
         >
           <div class="feature-header">
             <span
-              class="category-badge"
+              class="category-badge surface-chip" data-tone="accent"
               aria-label={$_('community.category_aria', {
                 values: {
                   category: $_(`community.categories.${feature.product}`)
@@ -202,7 +202,9 @@
           <p class="feature-description">{$_(`community.features.${feature.id}.description`)}</p>
 
           <button
-            class="vote-button"
+            type="button" class="vote-button btn"
+            class:btn-secondary={!$voting[feature.id]}
+            class:btn-gradient={$voting[feature.id]}
             class:voted={$voting[feature.id]}
             on:click={() => handleVote(feature.id)}
             aria-pressed={$voting[feature.id]}
@@ -230,6 +232,7 @@
       <h2>{$_('community.ideas_title')}</h2>
       <div class="idea-form">
         <textarea
+          class="surface-field"
           bind:value={newIdeaText}
           placeholder={$_('community.ideas_placeholder')}
           rows="4"
@@ -281,12 +284,7 @@
     padding: clamp(0.65rem, 2vw, 0.95rem) clamp(1.2rem, 3vw, 1.85rem);
     border-radius: clamp(2.4rem, 5vw, 3.6rem);
     max-width: min(100%, 60ch);
-    background: linear-gradient(128deg,
-        color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--voyage-blue-rgb), 0.28) 18%),
-        color-mix(in srgb, var(--bg-elev-1) 78%, rgba(var(--aurora-purple-rgb), 0.22) 22%));
-    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.4) 40%);
-    box-shadow: 0 24px 55px rgba(10, 22, 44, 0.22);
-    backdrop-filter: blur(18px);
+    text-align: center;
   }
 
   .community-hero__headline :global(.animated-headline) {
@@ -320,9 +318,6 @@
     gap: 0.55rem;
     padding: clamp(1.1rem, 2.4vw, 1.7rem);
     text-align: left;
-    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 55%, rgba(255, 255, 255, 0.4) 45%);
-    background: color-mix(in srgb, var(--bg-surface) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
-    box-shadow: 0 18px 42px rgba(10, 22, 44, 0.12);
   }
 
   .community-hero__metric-value {
@@ -411,14 +406,7 @@
   }
 
   .category-badge {
-    padding: 0.45rem 1rem;
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--voyage) 18%, transparent);
-    border: 1px solid color-mix(in srgb, var(--voyage) 32%, transparent);
-    color: var(--voyage);
-    font-size: var(--text-small);
     letter-spacing: 0.08em;
-    text-transform: uppercase;
   }
 
   .vote-count {
@@ -437,32 +425,11 @@
   }
 
   .vote-button {
-    display: inline-flex;
-    align-items: center;
     gap: 0.45rem;
-    padding: 0.85rem 1.35rem;
-    border-radius: var(--radius-full);
-    border: 1px solid color-mix(in srgb, var(--voyage) 32%, transparent);
-    background: color-mix(in srgb, var(--bg-surface) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    color: var(--text);
-    font-weight: var(--weight-semibold);
-    transition: transform 180ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94)),
-      box-shadow 180ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94)),
-      background-color 180ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94));
-  }
-
-  .vote-button:hover,
-  .vote-button:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 32px rgba(19, 81, 255, 0.25);
-    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
-    color: #fff;
   }
 
   .vote-button.voted {
-    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
-    color: #fff;
-    box-shadow: 0 18px 36px rgba(19, 81, 255, 0.3);
+    --btn-shadow: 0 18px 36px rgba(var(--voyage-blue-rgb), 0.28);
   }
 
   .vote-icon {
@@ -486,21 +453,8 @@
   }
 
   .idea-form textarea {
-    width: 100%;
-    padding: clamp(1.1rem, 3vw, 1.5rem);
-    border-radius: var(--radius-xl);
-    border: 1px solid color-mix(in srgb, var(--voyage) 22%, transparent);
-    background: color-mix(in srgb, var(--bg-surface) 92%, rgba(var(--aurora-purple-rgb), 0.08) 8%);
-    font-family: inherit;
-    font-size: var(--text-body);
-    color: var(--text);
-    transition: border-color 160ms var(--ease-out-soft, cubic-bezier(0.25, 0.46, 0.45, 0.94));
-  }
-
-  .idea-form textarea:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--grad-a) 60%, var(--grad-b) 40%);
-    outline-offset: 2px;
-    border-color: transparent;
+    min-height: clamp(8rem, 22vw, 11rem);
+    resize: vertical;
   }
 
   @media (max-width: 720px) {
@@ -521,9 +475,7 @@
       transition: none;
     }
 
-    .features-grid :global(.feature-card)::before,
-    .vote-button,
-    .idea-form textarea {
+    .features-grid :global(.feature-card)::before {
       transition: none;
     }
   }

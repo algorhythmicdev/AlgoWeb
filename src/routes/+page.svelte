@@ -46,6 +46,28 @@
     .slice()
     .sort((a, b) => parseMilestoneDate(a.date).getTime() - parseMilestoneDate(b.date).getTime());
 
+  const milestoneStatusPriority: Record<string, number> = {
+    active: 0,
+    development: 1,
+    planned: 2,
+    vision: 3,
+    completed: 4
+  };
+  const upcomingPriorityLimit = milestoneStatusPriority.planned ?? 2;
+  let milestoneCandidates: TimelineMilestone[] = [];
+  let timelineHighlights: TimelineMilestone[] = [];
+  let selectedMilestoneIndex = 0;
+  let milestoneProgressTotal = 0;
+  let milestoneProgressCurrent = 0;
+  let milestoneProgressDisplay = '';
+  let milestoneProgressAriaLabel = '';
+  let canNavigateMilestones = false;
+  let previousMilestoneLabel = 'Previous milestone';
+  let nextMilestoneLabel = 'Next milestone';
+
+  const ensureLabelValue = (value: string, key: string, fallback: string) =>
+    value && value !== key ? value : fallback;
+
   const fallbackHeroTitleParts = [
     ensureString(en.hero?.title?.lead, 'AlgoRhythmics'),
     ensureString(en.hero?.title?.brand, ''),
@@ -62,7 +84,7 @@
   const fallbackHeroMilestoneHeading = ensureString(en.hero?.next_milestone, 'Next waypoint');
   const fallbackHeroMilestoneCta = ensureString(en.hero?.milestone_cta, 'See the roadmap');
   const fallbackHeroPillarsTitle = ensureString(en.hero?.pillars_title, 'How we sustain calm momentum');
-  const fallbackHeroActionsLabel = 'Primary hero actions';
+  const fallbackHeroActionsLabel = ensureString(en.hero?.actions_label, 'Primary hero actions');
 
   const heroSignalKeyMap = [
     { id: 'studio_phase', valueKey: 'studio_phase_value' },
@@ -86,6 +108,12 @@
     ? en.hero.pillars.map((pillar) => ensureString(pillar, '')).filter(Boolean)
     : [];
 
+  const fallbackTimelinePreviewLabel = ensureString(en.timeline?.preview_label, 'Roadmap preview');
+  const fallbackTimelineUpcomingBadge = ensureString(en.timeline?.upcoming_badge, 'Upcoming');
+  const fallbackMilestoneLiveLabel = ensureString(
+    en.timeline?.milestone_live_label,
+    'Now viewing {title}{progress}'
+  );
   const fallbackMilestones: Record<string, { title?: string; description?: string; note?: string }> =
     (en.timeline?.milestones as Record<string, { title?: string; description?: string; note?: string }>) ?? {};
 
@@ -104,6 +132,7 @@
   let heroSignals: Array<{ id: string; label: string; value: string }> = heroSignalKeyMap
     .map(({ id }) => ({ id, ...fallbackHeroSignals[id] }))
     .filter((entry) => entry.label || entry.value);
+  let milestoneNavGroupLabel = heroMilestoneHeading;
   let upcomingMilestone: TimelineMilestone | null = sortedMilestones[0] ?? null;
   let upcomingMilestoneTitle = ensureString(
     upcomingMilestone ? fallbackMilestones?.[upcomingMilestone.id]?.title : ''
@@ -118,6 +147,9 @@
   let upcomingMilestonePhaseLabel = '';
   let upcomingMilestoneStatusLabel = '';
   let upcomingMilestoneCategoryLabel = '';
+  let timelinePreviewLabel = fallbackTimelinePreviewLabel;
+  let timelineUpcomingBadgeLabel = fallbackTimelineUpcomingBadge;
+  let milestoneLiveAnnouncement = '';
 
   const toReadableLabel = (value: string): string =>
     value
@@ -126,10 +158,6 @@
           .replace(/\b\w/g, (match) => match.toUpperCase())
           .trim()
       : '';
-
-  const timelineHighlights = sortedMilestones
-    .filter((milestone) => ['active', 'development', 'planned'].includes(milestone.status))
-    .slice(0, 3);
 
   $: heroTitleParts = [
     ensureString($_('hero.title.lead'), fallbackHeroTitleParts[0]),
@@ -143,8 +171,11 @@
   $: heroDescription = ensureString($_('hero.description'), fallbackHeroDescription);
   $: heroPrimaryActionLabel = ensureString($_('hero.cta_products'), fallbackHeroPrimaryCta);
   $: heroSecondaryActionLabel = ensureString($_('hero.cta_consulting'), fallbackHeroSecondaryCta);
+  $: heroActionsLabel = ensureString($_('hero.actions_label'), fallbackHeroActionsLabel);
   $: heroMilestoneHeading = ensureString($_('hero.next_milestone'), fallbackHeroMilestoneHeading);
   $: heroMilestoneCta = ensureString($_('hero.milestone_cta'), fallbackHeroMilestoneCta);
+  $: milestoneNavGroupLabel =
+    heroMilestoneHeading || ensureLabelValue($_('timeline.title'), 'timeline.title', 'Milestones');
   $: heroPillarsTitle = ensureString($_('hero.pillars_title'), fallbackHeroPillarsTitle);
   $: heroPillars = fallbackHeroPillars
     .map((fallbackValue, index) => ensureString($_(`hero.pillars.${index}`), fallbackValue))
@@ -160,12 +191,100 @@
     })
     .filter((entry) => entry.label || entry.value);
 
-  $: upcomingMilestone =
-    sortedMilestones.find((milestone) => milestone.status === 'active') ??
-    sortedMilestones.find((milestone) => milestone.status === 'development') ??
-    sortedMilestones.find((milestone) => milestone.status === 'planned') ??
-    sortedMilestones[0] ??
-    null;
+  $: milestoneCandidates = (() => {
+    const prioritized = sortedMilestones
+      .slice()
+      .sort((a, b) => {
+        const priorityDiff =
+          (milestoneStatusPriority[a.status] ?? Number.POSITIVE_INFINITY) -
+          (milestoneStatusPriority[b.status] ?? Number.POSITIVE_INFINITY);
+        if (priorityDiff !== 0) return priorityDiff;
+        return parseMilestoneDate(a.date).getTime() - parseMilestoneDate(b.date).getTime();
+      });
+
+    const filtered = prioritized.filter(
+      (milestone) =>
+        (milestoneStatusPriority[milestone.status] ?? Number.POSITIVE_INFINITY) <= upcomingPriorityLimit
+    );
+
+    return filtered.length ? filtered : prioritized;
+  })();
+
+  $: timelineHighlights = milestoneCandidates.slice(0, 3);
+
+  $: {
+    const total = milestoneCandidates.length;
+    if (total === 0) {
+      selectedMilestoneIndex = 0;
+    } else if (selectedMilestoneIndex >= total) {
+      selectedMilestoneIndex = total - 1;
+    }
+  }
+
+  $: upcomingMilestone = milestoneCandidates.length
+    ? milestoneCandidates[Math.min(selectedMilestoneIndex, milestoneCandidates.length - 1)]
+    : sortedMilestones[0] ?? null;
+
+  $: milestoneProgressTotal = milestoneCandidates.length;
+  $: milestoneProgressCurrent = upcomingMilestone && milestoneProgressTotal ? selectedMilestoneIndex + 1 : 0;
+  $: milestoneProgressDisplay =
+    milestoneProgressTotal > 1 && milestoneProgressCurrent > 0
+      ? `${milestoneProgressCurrent}/${milestoneProgressTotal}`
+      : '';
+  $: canNavigateMilestones = milestoneProgressTotal > 1;
+  $: milestoneProgressAriaLabel = canNavigateMilestones && milestoneProgressCurrent > 0
+    ? ensureLabelValue(
+        $_('timeline.progress_label', {
+          values: { current: milestoneProgressCurrent, total: milestoneProgressTotal }
+        }),
+        'timeline.progress_label',
+        `Milestone ${milestoneProgressCurrent} of ${milestoneProgressTotal}`
+      )
+    : '';
+  $: previousMilestoneLabel = ensureLabelValue(
+    $_('timeline.nav_previous'),
+    'timeline.nav_previous',
+    'Previous milestone'
+  );
+  $: nextMilestoneLabel = ensureLabelValue($_('timeline.nav_next'), 'timeline.nav_next', 'Next milestone');
+
+  const showNextMilestone = () => {
+    if (!milestoneCandidates.length) return;
+    selectedMilestoneIndex = (selectedMilestoneIndex + 1) % milestoneCandidates.length;
+  };
+
+  const showPreviousMilestone = () => {
+    if (!milestoneCandidates.length) return;
+    selectedMilestoneIndex =
+      (selectedMilestoneIndex - 1 + milestoneCandidates.length) % milestoneCandidates.length;
+  };
+
+  const handleMilestoneKeydown = (event: KeyboardEvent) => {
+    if (!canNavigateMilestones) return;
+
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        showNextMilestone();
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        showPreviousMilestone();
+        break;
+      case 'Home':
+        event.preventDefault();
+        selectedMilestoneIndex = 0;
+        break;
+      case 'End':
+        event.preventDefault();
+        if (milestoneCandidates.length) {
+          selectedMilestoneIndex = milestoneCandidates.length - 1;
+        }
+        break;
+    }
+  };
 
   $: upcomingMilestoneTitle = upcomingMilestone
     ? ensureString(
@@ -189,6 +308,33 @@
   $: upcomingMilestonePhaseLabel = upcomingMilestone ? toReadableLabel(upcomingMilestone.phase) : '';
   $: upcomingMilestoneStatusLabel = upcomingMilestone ? toReadableLabel(upcomingMilestone.status) : '';
   $: upcomingMilestoneCategoryLabel = upcomingMilestone ? toReadableLabel(upcomingMilestone.category) : '';
+  $: timelinePreviewLabel = ensureString($_('timeline.preview_label'), fallbackTimelinePreviewLabel);
+  $: timelineUpcomingBadgeLabel = ensureString(
+    $_('timeline.upcoming_badge'),
+    fallbackTimelineUpcomingBadge
+  );
+  $: milestoneLiveAnnouncement = upcomingMilestoneTitle
+    ? ensureLabelValue(
+        $_('timeline.milestone_live_label', {
+          values: {
+            title: upcomingMilestoneTitle,
+            progress:
+              milestoneProgressTotal > 1 && milestoneProgressCurrent > 0
+                ? ` (${milestoneProgressCurrent}/${milestoneProgressTotal})`
+                : ''
+          }
+        }),
+        'timeline.milestone_live_label',
+        fallbackMilestoneLiveLabel
+          .replace('{title}', upcomingMilestoneTitle)
+          .replace(
+            '{progress}',
+            milestoneProgressTotal > 1 && milestoneProgressCurrent > 0
+              ? ` (${milestoneProgressCurrent}/${milestoneProgressTotal})`
+              : ''
+          )
+      )
+    : '';
 </script>
 
 <section class="hero-section">
@@ -196,7 +342,7 @@
     <div class="home-hero">
       <div class="home-hero__column home-hero__column--main">
         {#if heroStatus}
-          <p class="home-hero__status">{heroStatus}</p>
+          <p class="home-hero__status surface-chip" data-tone="accent">{heroStatus}</p>
         {/if}
 
         {#if heroDescription}
@@ -204,16 +350,16 @@
         {/if}
 
         <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
-          <a class="home-hero__action home-hero__action--primary" href="#products">
+          <a class="home-hero__action btn btn-gradient btn-lg" href="#products">
             <span>{heroPrimaryActionLabel}</span>
           </a>
-          <a class="home-hero__action home-hero__action--secondary" href="/consulting">
+          <a class="home-hero__action btn btn-secondary btn-lg" href="/consulting">
             <span>{heroSecondaryActionLabel}</span>
           </a>
         </div>
 
         {#if heroPillars.length}
-          <div class="home-hero__pillars" aria-labelledby="home-hero-pillars-heading">
+          <div class="home-hero__pillars glass-card" aria-labelledby="home-hero-pillars-heading">
             <p id="home-hero-pillars-heading" class="home-hero__pillars-heading">{heroPillarsTitle}</p>
             <ul class="home-hero__pillars-list">
               {#each heroPillars as pillar}
@@ -229,6 +375,7 @@
       <div class="home-hero__column home-hero__column--aside">
         {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription || upcomingMilestoneNote)}
           <article class="home-hero__milestone glass-card" data-variant="grid">
+            <span class="sr-only" aria-live="polite">{milestoneLiveAnnouncement}</span>
             <div class="home-hero__milestone-header">
               {#if heroMilestoneHeading}
                 <span class="home-hero__milestone-eyebrow">{heroMilestoneHeading}</span>
@@ -246,22 +393,88 @@
               <p>{upcomingMilestoneDescription}</p>
             {/if}
 
+            {#if upcomingMilestoneStatusLabel || upcomingMilestonePhaseLabel || upcomingMilestoneCategoryLabel}
+              <div class="home-hero__milestone-tags">
+                {#if upcomingMilestoneStatusLabel}
+                  <span class="home-hero__milestone-tag surface-chip">{upcomingMilestoneStatusLabel}</span>
+                {/if}
+                {#if upcomingMilestonePhaseLabel}
+                  <span class="home-hero__milestone-tag surface-chip">{upcomingMilestonePhaseLabel}</span>
+                {/if}
+                {#if upcomingMilestoneCategoryLabel}
+                  <span class="home-hero__milestone-tag surface-chip">{upcomingMilestoneCategoryLabel}</span>
+                {/if}
+              </div>
+            {/if}
+
             {#if upcomingMilestoneNote}
               <p class="home-hero__milestone-note">{upcomingMilestoneNote}</p>
             {/if}
 
-            <a class="home-hero__milestone-cta" href="#timeline">
-              <span>{heroMilestoneCta}</span>
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path
-                  d="M4.75 10h10.5M10 4.75 15.25 10 10 15.25"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </a>
+            <div class="home-hero__milestone-footer">
+              {#if canNavigateMilestones}
+                <div class="home-hero__milestone-nav" role="group" aria-label={milestoneNavGroupLabel}>
+                  <button
+                    class="home-hero__milestone-nav-btn"
+                    type="button"
+                    on:click={showPreviousMilestone}
+                    aria-label={previousMilestoneLabel}
+                    on:keydown={handleMilestoneKeydown}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path
+                        d="M12.25 4.75 7.75 10l4.5 5.25"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+
+                  {#if milestoneProgressDisplay}
+                    <span
+                      class="home-hero__milestone-progress"
+                      aria-live="polite"
+                      aria-label={milestoneProgressAriaLabel || undefined}
+                    >
+                      {milestoneProgressDisplay}
+                    </span>
+                  {/if}
+
+                  <button
+                    class="home-hero__milestone-nav-btn"
+                    type="button"
+                    on:click={showNextMilestone}
+                    aria-label={nextMilestoneLabel}
+                    on:keydown={handleMilestoneKeydown}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path
+                        d="M7.75 4.75 12.25 10l-4.5 5.25"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              {/if}
+
+              <a class="home-hero__milestone-cta" href="#timeline">
+                <span>{heroMilestoneCta}</span>
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path
+                    d="M4.75 10h10.5M10 4.75 15.25 10 10 15.25"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
           </article>
         {/if}
 
@@ -380,7 +593,9 @@
           <div class="timeline-overview__highlight glass-stack" aria-labelledby="timeline-next-heading">
             <div class="timeline-overview__header">
               <span class="timeline-overview__date">{upcomingMilestoneDateLabel}</span>
-              <span class="timeline-overview__badge">{upcomingMilestoneStatusLabel || 'Upcoming'}</span>
+              <span class="timeline-overview__badge">
+                {upcomingMilestoneStatusLabel || timelineUpcomingBadgeLabel}
+              </span>
             </div>
             <h3 id="timeline-next-heading">{upcomingMilestoneTitle}</h3>
             {#if upcomingMilestoneDescription}
@@ -402,7 +617,7 @@
         {/if}
 
         {#if timelineHighlights.length > 1}
-          <ul class="timeline-overview__list" aria-label="Roadmap preview">
+          <ul class="timeline-overview__list" aria-label={timelinePreviewLabel}>
             {#each timelineHighlights as highlight (highlight.id)}
               <li>
                 <span class="timeline-overview__list-date">{formatMilestoneDate(highlight.date)}</span>
@@ -441,6 +656,18 @@
 <CallToActionSection />
 
 <style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .hero-section {
     padding-bottom: var(--space-3xl, clamp(2.4rem, 6vw, 3.6rem));
   }
@@ -468,25 +695,7 @@
 
   .home-hero__status {
     margin: 0;
-    display: inline-flex;
-    align-items: center;
     gap: 0.55rem;
-    padding: 0.45rem 0.95rem;
-    font-size: var(--text-small);
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    border-radius: var(--radius-full);
-    border: 1px solid color-mix(in oklab, var(--border) 65%, transparent);
-    background:
-      linear-gradient(
-        135deg,
-        color-mix(in oklab, var(--bg-elev-1) 75%, transparent) 0%,
-        color-mix(in oklab, var(--bg-elev-2) 85%, transparent) 100%
-      );
-    box-shadow: 0 18px 38px rgba(10, 13, 20, 0.08);
-    backdrop-filter: blur(16px);
   }
 
   .home-hero__status::before {
@@ -514,47 +723,7 @@
   }
 
   .home-hero__action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    padding: 0.9rem 1.8rem;
-    border-radius: var(--radius-full);
-    font-weight: var(--weight-semibold);
-    text-decoration: none;
-    transition:
-      transform var(--duration-ui) var(--ease-out),
-      box-shadow var(--duration-ui) var(--ease-out),
-      background var(--duration-ui) var(--ease-out),
-      color var(--duration-ui) var(--ease-out);
-  }
-
-  .home-hero__action--primary {
-    background: linear-gradient(135deg, color-mix(in oklab, var(--grad-a) 88%, transparent), var(--grad-b));
-    color: #fff;
-    box-shadow: 0 22px 32px rgba(19, 81, 255, 0.26);
-  }
-
-  .home-hero__action--primary:hover,
-  .home-hero__action--primary:focus-visible {
-    transform: translateY(-3px);
-  }
-
-  .home-hero__action--secondary {
-    background: color-mix(in oklab, var(--bg-elev-1) 84%, transparent);
-    color: var(--voyage-blue);
-    box-shadow: inset 0 0 0 1px rgba(var(--voyage-blue-rgb), 0.16);
-  }
-
-  .home-hero__action--secondary:hover,
-  .home-hero__action--secondary:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: inset 0 0 0 1px rgba(var(--voyage-blue-rgb), 0.32);
-  }
-
-  .home-hero__action:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
-    outline-offset: 3px;
+    flex-shrink: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -568,11 +737,6 @@
     margin-top: clamp(1.65rem, 4vw, 2.5rem);
     padding: clamp(1.2rem, 3.6vw, 1.9rem);
     border-radius: 26px;
-    border: 1px solid color-mix(in oklab, var(--border) 55%, transparent);
-    background:
-      linear-gradient(180deg, color-mix(in oklab, var(--bg-elev-1) 92%, transparent) 0%, transparent 120%);
-    box-shadow: 0 26px 48px rgba(10, 13, 20, 0.12);
-    backdrop-filter: blur(22px) saturate(1.12);
     overflow: hidden;
   }
 
@@ -669,9 +833,84 @@
     color: var(--text-secondary);
   }
 
+  .home-hero__milestone-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.65rem;
+  }
+
+  .home-hero__milestone-tag {
+    padding: 0.35rem 0.85rem;
+    font-size: var(--text-caption);
+    letter-spacing: 0.14em;
+  }
+
   .home-hero__milestone-note {
     color: var(--voyage-blue);
     font-size: var(--text-small);
+  }
+
+  .home-hero__milestone-footer {
+    margin-top: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .home-hero__milestone-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.65rem;
+    border-radius: calc(var(--radius) * 0.75);
+    border: 1px solid var(--surface-pill-border);
+    background: var(--surface-pill-bg);
+    box-shadow: var(--surface-pill-shadow);
+    backdrop-filter: var(--surface-glass-blur) saturate(1.05);
+    -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.05);
+  }
+
+  .home-hero__milestone-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--surface-chip-border);
+    background: var(--surface-chip-bg);
+    color: var(--text);
+    transition:
+      background-color 160ms var(--ease-in-out),
+      border-color 160ms var(--ease-in-out),
+      transform 160ms var(--ease-in-out);
+  }
+
+  .home-hero__milestone-nav-btn:hover {
+    background: color-mix(in srgb, var(--surface-chip-bg) 70%, rgba(var(--voyage-blue-rgb), 0.16) 30%);
+    border-color: color-mix(in srgb, var(--surface-chip-border) 60%, rgba(var(--voyage-blue-rgb), 0.26) 40%);
+  }
+
+  .home-hero__milestone-nav-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--focus);
+    transform: translateY(-1px);
+  }
+
+  .home-hero__milestone-nav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .home-hero__milestone-progress {
+    min-width: 3ch;
+    text-align: center;
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    color: var(--text-tertiary);
   }
 
   .home-hero__milestone-cta {
@@ -681,7 +920,26 @@
     font-weight: var(--weight-semibold);
     color: var(--voyage-blue);
     text-decoration: none;
-    margin-top: 0.2rem;
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+  @media (max-width: 640px) {
+    .home-hero__milestone-footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .home-hero__milestone-nav {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .home-hero__milestone-cta {
+      width: 100%;
+      justify-content: center;
+      margin-left: 0;
+    }
   }
 
   .home-hero__milestone-cta svg {
@@ -742,26 +1000,14 @@
     }
   }
 
-  :global(html[data-theme='hc']) .home-hero__action--primary {
-    background: var(--text);
-    color: var(--bg);
-  }
-
-  :global(html[data-theme='hc']) .home-hero__status {
-    background: var(--bg-elev-1);
+  :global(html[data-theme='hc']) .home-hero__pillars,
+  :global(html[data-theme='hc']) .home-hero__milestone,
+  :global(html[data-theme='hc']) .home-hero__signals {
+    background: transparent;
     border: 2px solid var(--border);
     box-shadow: none;
-  }
-
-  :global(html[data-theme='hc']) .home-hero__status::before {
-    background: currentColor;
-    box-shadow: none;
-  }
-
-  :global(html[data-theme='hc']) .home-hero__pillars {
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
-    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global(html[data-theme='hc']) .home-hero__pillars::before {
@@ -770,12 +1016,6 @@
 
   :global(html[data-theme='hc']) .home-hero__pillars-item::before {
     background: currentColor;
-    box-shadow: none;
-  }
-
-  :global(html[data-theme='hc']) .home-hero__milestone {
-    background: var(--bg-elev-1);
-    border-color: var(--border);
     box-shadow: none;
   }
 
@@ -788,21 +1028,46 @@
     color: var(--text);
   }
 
-  :global(html[data-theme='hc']) .home-hero__signals {
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
+  :global(html[data-theme='hc']) .home-hero__milestone-tag {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__milestone-nav {
+    background: transparent;
+    border-color: var(--border);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__milestone-nav-btn {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+  }
+
+  :global(html[data-theme='hc']) .home-hero__milestone-nav-btn:hover {
+    background: transparent;
+  }
+
+  :global(html[data-theme='hc']) .home-hero__milestone-progress {
+    color: var(--text);
   }
 
   .glass-stack {
     position: relative;
     border-radius: var(--radius-2xl);
     padding: clamp(1.8rem, 3.6vw, 2.8rem);
-    background: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-    border: 1px solid color-mix(in srgb, var(--border) 58%, rgba(var(--voyage-blue-rgb), 0.12) 42%);
-    box-shadow: 0 28px 60px rgba(16, 24, 40, 0.14);
-    backdrop-filter: blur(22px) saturate(1.08);
-    -webkit-backdrop-filter: blur(22px) saturate(1.08);
+    background: var(--surface-glass-bg);
+    border: 1px solid var(--surface-glass-border);
+    box-shadow: var(--surface-glass-shadow);
+    backdrop-filter: var(--surface-glass-blur) saturate(1.08);
+    -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.08);
     overflow: hidden;
   }
 
@@ -816,16 +1081,12 @@
     pointer-events: none;
   }
 
-  :global(html[data-theme='dark']) .glass-stack {
-    background: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.18) 18%);
-    border-color: color-mix(in srgb, var(--border) 46%, rgba(var(--voyage-blue-rgb), 0.32) 54%);
-    box-shadow: 0 34px 68px rgba(8, 16, 30, 0.28);
-  }
-
   :global(html[data-theme='hc']) .glass-stack {
-    background: var(--bg-elev-1);
+    background: transparent;
     border: 2px solid var(--border);
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global(html[data-theme='hc']) .glass-stack::after { display: none; }
@@ -921,10 +1182,14 @@
     gap: var(--space-sm);
     padding: 0.85rem 1.1rem;
     border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--voyage-blue-rgb), 0.1) 22%);
     color: var(--text-secondary);
     line-height: 1.5;
     position: relative;
+    border: 1px solid var(--surface-chip-border);
+    background: var(--surface-chip-bg);
+    box-shadow: var(--surface-chip-shadow);
+    backdrop-filter: blur(18px) saturate(1.05);
+    -webkit-backdrop-filter: blur(18px) saturate(1.05);
   }
 
   .story-shell__pillars-item::before {
@@ -937,8 +1202,11 @@
   }
 
   :global(html[data-theme='hc']) .story-shell__pillars-item {
-    background: var(--bg-elev-1);
+    background: transparent;
     border: 1px solid var(--border);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global(html[data-theme='hc']) .story-shell__pillars-item::before {
@@ -994,11 +1262,6 @@
     align-items: start;
     padding: clamp(1.8rem, 3.6vw, 2.6rem);
     border-radius: var(--radius-2xl);
-    background: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--aurora-purple-rgb), 0.12) 8%);
-    border: 1px solid color-mix(in srgb, var(--border) 62%, rgba(var(--voyage-blue-rgb), 0.16) 38%);
-    box-shadow: 0 24px 56px rgba(16, 24, 40, 0.12);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
   }
 
   :global(.product-card) .kicker {
@@ -1034,8 +1297,11 @@
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
     color: var(--voyage-blue);
-    background: color-mix(in srgb, var(--voyage-blue) 18%, transparent);
-    border: 1px solid color-mix(in srgb, var(--voyage-blue) 24%, transparent);
+    border: 1px solid var(--surface-pill-border);
+    background: var(--surface-pill-bg);
+    box-shadow: var(--surface-pill-shadow);
+    backdrop-filter: var(--surface-glass-blur) saturate(1.05);
+    -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.05);
   }
 
   .status-pill .dot {
@@ -1078,15 +1344,20 @@
   }
 
   :global(html[data-theme='hc'] .product-card) {
-    background: var(--bg-elev-1);
+    background: transparent;
     border: 2px solid var(--border);
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global(html[data-theme='hc']) .status-pill {
     background: transparent;
     border-color: var(--border);
     color: var(--text);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .timeline-shell {
@@ -1229,9 +1500,6 @@
     gap: var(--space-md);
     padding: clamp(1.6rem, 3.2vw, 2.1rem);
     border-radius: var(--radius-xl);
-    background: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.1) 10%);
-    border: 1px solid color-mix(in srgb, var(--border) 54%, rgba(var(--voyage-blue-rgb), 0.16) 46%);
-    box-shadow: 0 24px 48px rgba(16, 24, 40, 0.1);
   }
 
   .timeline-card__marker {
@@ -1281,9 +1549,11 @@
   }
 
   :global(html[data-theme='hc'] .timeline-card) {
-    background: var(--bg-elev-1);
+    background: transparent;
     border: 2px solid var(--border);
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global(html[data-theme='hc']) .timeline-track::before { background: currentColor; }

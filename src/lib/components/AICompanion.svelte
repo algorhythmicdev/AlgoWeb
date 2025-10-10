@@ -365,7 +365,7 @@
     position: absolute;
     inset: -18%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--voyage-blue-rgb), 0.32), rgba(19, 81, 255, 0));
+    background: radial-gradient(circle, rgba(var(--voyage-blue-rgb), 0.32), rgba(var(--voyage-blue-rgb), 0));
     filter: blur(18px);
     opacity: 0.9;
     animation: pulse 4.5s var(--ease-in-out) infinite;
@@ -376,7 +376,7 @@
     inset: 0;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, rgba(var(--signal-yellow-rgb), 0.24), rgba(var(--aurora-purple-rgb), 0.68));
-    box-shadow: 0 0 24px rgba(var(--voyage-blue-rgb), 0.45), 0 0 64px rgba(106, 56, 255, 0.32);
+    box-shadow: 0 0 24px rgba(var(--voyage-blue-rgb), 0.45), 0 0 64px rgba(var(--aurora-purple-rgb), 0.32);
     transition: transform var(--duration-normal) var(--ease-spring), box-shadow var(--duration-normal) var(--ease-out),
       opacity var(--duration-normal) var(--ease-out);
     opacity: 0.9;
@@ -385,7 +385,7 @@
   .orb:hover .orb__core,
   .orb:focus-visible .orb__core {
     transform: scale(1.06);
-    box-shadow: 0 0 32px rgba(var(--voyage-blue-rgb), 0.58), 0 0 72px rgba(106, 56, 255, 0.42);
+    box-shadow: 0 0 32px rgba(var(--voyage-blue-rgb), 0.58), 0 0 72px rgba(var(--aurora-purple-rgb), 0.42);
     opacity: 1;
   }
 

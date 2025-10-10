@@ -77,7 +77,7 @@
     position: absolute;
     inset: auto -15% -40%;
     height: clamp(16rem, 30vw, 22rem);
-    background: radial-gradient(circle at 60% 20%, rgba(106, 56, 255, 0.16), transparent 70%);
+    background: radial-gradient(circle at 60% 20%, rgba(var(--aurora-purple-rgb), 0.16), transparent 70%);
     filter: blur(120px);
     opacity: 0.6;
     pointer-events: none;
