@@ -18,6 +18,7 @@
   let mediaQuery = null;
 
   const accentClass = accent === 'aurora' ? 'demo-preview--aurora' : 'demo-preview--voyage';
+  const variant = accent === 'aurora' ? 'halo' : 'grid';
 
   const loadPreview = () => {
     if (!shouldLoad) {
@@ -104,7 +105,12 @@
   });
 </script>
 
-<div class={`demo-preview os-window ${accentClass}`} bind:this={container} data-mounted={hasMounted}>
+<div
+  class={`demo-preview glass-card ${accentClass}`}
+  bind:this={container}
+  data-variant={variant}
+  data-mounted={hasMounted}
+>
   <div class="demo-preview__halo" aria-hidden="true">
     <span class="demo-preview__orb demo-preview__orb--primary"></span>
     <span class="demo-preview__orb demo-preview__orb--secondary"></span>

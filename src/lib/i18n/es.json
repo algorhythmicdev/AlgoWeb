@@ -60,6 +60,7 @@
     "description": "Every surface honours reduced-motion settings, signage-born craft, and WCAG AAA contrast so your team stays in control whether you're exploring NodeVoyage, assembling Ideonautix, or partnering through our consulting sprints.",
     "cta_products": "Explore the constellation",
     "cta_consulting": "Plan a strategy session",
+    "actions_label": "Acciones principales del héroe",
     "next_milestone": "Próximo hito",
     "pillars_title": "How we deliver calm momentum",
     "pillars": [
@@ -228,6 +229,12 @@
   "timeline": {
     "title": "Nuestro camino",
     "subtitle": "Construimos el futuro, un hito a la vez",
+    "nav_previous": "Hito anterior",
+    "nav_next": "Siguiente hito",
+    "preview_label": "Vista previa de la hoja de ruta",
+    "upcoming_badge": "Próximo",
+    "milestone_live_label": "Ahora viendo {title}{progress}",
+    "progress_label": "Hito {current} de {total}",
     "milestones": {
       "ideju-kauss": {
         "title": "Competencia Ideju Kauss",

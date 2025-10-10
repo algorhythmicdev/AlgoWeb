@@ -67,6 +67,7 @@
     }
   });
 
+  /** @type {Record<string, 'halo' | 'grid' | 'line'>} */
   const productVariants = {
     nodevoyage: 'halo',
     ideonautix: 'grid'
@@ -223,7 +224,7 @@
             <header class="products-hero__card-header">
               <span class="products-hero__card-name">{entry.name}</span>
               {#if entry.status}
-                <span class="badge-pill">{entry.status}</span>
+                <span class="surface-chip" data-tone="accent">{entry.status}</span>
               {/if}
             </header>
             <h3>{entry.tagline}</h3>
@@ -298,7 +299,7 @@
           <header class="products-catalog__header">
             <span class="products-catalog__eyebrow">{entry.name}</span>
             {#if entry.status}
-              <span class="badge-pill">{entry.status}</span>
+              <span class="surface-chip" data-tone="accent">{entry.status}</span>
             {/if}
           </header>
 
@@ -317,7 +318,7 @@
           {#if entry.features.length}
             <ul class="products-catalog__features">
               {#each entry.features as feature (feature.id)}
-                <li>
+                <li class="surface-panel products-catalog__feature">
                   <span class="products-catalog__feature-icon">
                     <Icon name={feature.icon} size={26} />
                   </span>
@@ -567,10 +568,10 @@
     gap: clamp(0.85rem, 2vw, 1.4rem);
   }
 
-  .products-catalog__features li {
+  .products-catalog__feature {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 0.9rem;
+    gap: clamp(0.75rem, 2vw, 0.95rem);
     align-items: start;
   }
 
@@ -581,8 +582,10 @@
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 0.85rem;
-    background: color-mix(in srgb, var(--grad-a) 18%, transparent);
-    color: var(--grad-b);
+    border: 1px solid var(--surface-pill-border);
+    background: color-mix(in srgb, var(--surface-pill-bg) 72%, rgba(var(--voyage-blue-rgb), 0.18) 28%);
+    box-shadow: var(--surface-pill-shadow);
+    color: color-mix(in srgb, var(--grad-b) 68%, var(--text) 32%);
   }
 
   .products-catalog__feature-copy {
@@ -611,7 +614,7 @@
     align-items: center;
     gap: 0.35rem;
     font-size: var(--text-small);
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--grad-a) 65%, var(--text) 35%);
     text-decoration: none;
   }
 

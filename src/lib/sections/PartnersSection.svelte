@@ -19,7 +19,7 @@
     innovation?: string[] | undefined;
   };
 
-  const partnerOrder = /** @type {const} */ (['reclameFabriek', 'liaa']);
+  const partnerOrder = ['reclameFabriek', 'liaa'] as const;
   const partnerLabels = {
     current: 'Active partnership',
     aspirational: 'Next partnership',
@@ -31,7 +31,21 @@
 
   const ensureArray = (value: unknown): string[] => (Array.isArray(value) ? value : []);
 
-  const ensureLabel = (path: string, fallback: string) => {
+  const ensureRecord = (value: unknown): Record<string, string> | undefined => {
+    if (typeof value !== 'object' || value === null) return undefined;
+    const entries = Object.entries(value as Record<string, unknown>).reduce<Record<string, string>>(
+      (acc, [key, val]) => {
+        if (typeof val === 'string' && val.trim()) {
+          acc[key] = val;
+        }
+        return acc;
+      },
+      {}
+    );
+    return Object.keys(entries).length ? entries : undefined;
+  };
+
+  const ensureLabel = (path: string, fallback: string): string => {
     const value = $json?.(path);
     return typeof value === 'string' && value.trim() ? value : fallback;
   };
@@ -44,12 +58,12 @@
       .replace(/\b\w/g, (match) => match.toUpperCase())
       .trim();
 
-  let currentLabel = partnerLabels.current;
-  let aspirationalLabel = partnerLabels.aspirational;
-  let scaleLabel = partnerLabels.scale;
-  let innovationLabel = partnerLabels.innovation;
-  let reachLabel = partnerLabels.reach;
-  let programsLabel = partnerLabels.programs;
+  let currentLabel: string = partnerLabels.current;
+  let aspirationalLabel: string = partnerLabels.aspirational;
+  let scaleLabel: string = partnerLabels.scale;
+  let innovationLabel: string = partnerLabels.innovation;
+  let reachLabel: string = partnerLabels.reach;
+  let programsLabel: string = partnerLabels.programs;
 
   $: currentLabel = ensureLabel('partners.labels.current', partnerLabels.current);
   $: aspirationalLabel = ensureLabel('partners.labels.aspirational', partnerLabels.aspirational);
@@ -59,7 +73,10 @@
   $: programsLabel = ensureLabel('partners.labels.programs', partnerLabels.programs);
 
   const toPartner = (key: (typeof partnerOrder)[number]): Partner => {
-    const raw = brands[key] as Record<string, unknown>;
+    const rawSource = (brands as Record<string, unknown>)[key];
+    const raw = (rawSource && typeof rawSource === 'object'
+      ? (rawSource as Record<string, unknown>)
+      : {}) as Record<string, unknown>;
     const type = (raw.type as 'current' | 'aspirational') ?? 'current';
 
     const base: Partner = {
@@ -73,8 +90,9 @@
       website: typeof raw.website === 'string' ? raw.website : undefined,
       location: typeof raw.location === 'string' ? raw.location : undefined,
       founded: typeof raw.founded === 'number' ? raw.founded : undefined,
-      scale: (raw.scale as Record<string, string> | undefined) ??
-        (type === 'aspirational' ? (raw.projectedReach as Record<string, string> | undefined) : undefined),
+      scale:
+        ensureRecord(raw.scale) ??
+        (type === 'aspirational' ? ensureRecord(raw.projectedReach) : undefined),
       programs:
         type === 'aspirational'
           ? ensureArray(raw.targetPrograms)

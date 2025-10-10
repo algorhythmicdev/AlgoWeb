@@ -77,10 +77,10 @@
           </div>
 
           <div class="cta-actions" role="group" aria-label={$_('nav.talk_to_us')} use:staggerReveal={{ stagger: 120 }}>
-            <a class="cta-action cta-action--primary" href="/community">
+            <a class="cta-action btn btn-gradient" href="/community">
               <span>{primaryCta}</span>
             </a>
-            <a class="cta-action cta-action--secondary" href="/consulting">
+            <a class="cta-action btn btn-secondary" href="/consulting">
               <span>{secondaryCta}</span>
             </a>
           </div>
@@ -202,7 +202,7 @@
     margin-top: 0.35rem;
     border-radius: 6px;
     background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
-    box-shadow: 0 4px 12px rgba(19, 81, 255, 0.28);
+    box-shadow: 0 4px 12px rgba(var(--voyage-blue-rgb), 0.28);
   }
 
   .cta-point__text {
@@ -217,44 +217,6 @@
 
   .cta-action {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    padding: 0.95rem 1.8rem;
-    border-radius: var(--radius-full);
-    font-weight: var(--weight-semibold);
-    text-decoration: none;
-    transition: transform 180ms var(--ease-out-soft), box-shadow 180ms var(--ease-out-soft);
-  }
-
-  .cta-action--primary {
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    color: #fff;
-    box-shadow: 0 22px 38px rgba(19, 81, 255, 0.28);
-  }
-
-  .cta-action--primary:hover,
-  .cta-action--primary:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 26px 44px rgba(19, 81, 255, 0.36);
-  }
-
-  .cta-action--secondary {
-    border: 1px solid color-mix(in oklab, var(--border) 62%, transparent);
-    background: color-mix(in oklab, var(--bg-elev-1) 86%, transparent 14%);
-    color: var(--voyage-blue);
-  }
-
-  .cta-action--secondary:hover,
-  .cta-action--secondary:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 34px rgba(10, 13, 20, 0.14);
-  }
-
-  .cta-action:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
-    outline-offset: 3px;
   }
 
   @keyframes float {
@@ -298,31 +260,10 @@
     color: var(--text);
   }
 
-  :global(html[data-theme='hc']) .cta-action--primary {
-    background: var(--text);
-    color: var(--bg);
-    box-shadow: none;
-  }
-
-  :global(html[data-theme='hc']) .cta-action--secondary {
-    background: var(--bg-elev-1);
-    border-color: var(--border);
-    color: var(--text);
-    box-shadow: none;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .cta-shell::before,
     .cta-shell::after {
       animation: none;
-    }
-
-    .cta-action,
-    .cta-action--primary,
-    .cta-action--secondary {
-      transition: none;
-      transform: none !important;
-      box-shadow: none !important;
     }
   }
 </style>
