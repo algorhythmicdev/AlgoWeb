@@ -3,6 +3,7 @@
   import FoundersSection from '$sections/FoundersSection.svelte';
   import PartnersSection from '$sections/PartnersSection.svelte';
   import CallToActionSection from '$sections/CallToActionSection.svelte';
+  import SectionDivider from '$components/SectionDivider.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { Button } from '$lib/components';
   import { _ } from 'svelte-i18n';
@@ -635,6 +636,8 @@
   </svelte:fragment>
   </Hero>
 
+  <SectionDivider tone="voyage" />
+
   <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
     <span id="vision" class="section-anchor" aria-hidden="true"></span>
@@ -673,9 +676,15 @@
   </div>
   </section>
 
+  <SectionDivider tone="aurora" />
+
   <FoundersSection />
 
+  <SectionDivider tone="neutral" />
+
   <PartnersSection />
+
+  <SectionDivider tone="citrus" />
 
   <section class="products section" id="products" use:revealOnScroll>
   <div class="container">

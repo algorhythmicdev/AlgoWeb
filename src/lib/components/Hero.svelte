@@ -166,12 +166,19 @@
     <div class="hero__surface" data-hero-layers>
       <div class="hero__layers" aria-hidden="true">
         <span class="hero__layer hero__layer--base"></span>
+        <span class="hero__layer hero__layer--gradient"></span>
+        <span class="hero__layer hero__layer--grain"></span>
         <HeroBackdrop
           class="hero__layer hero__layer--backdrop"
           variant={resolvedVariant}
           tone={resolvedTone}
           intensity={resolvedIntensity}
         />
+        <div class="hero__layer hero__layer--panes">
+          <span class="hero__pane" data-pane="left"></span>
+          <span class="hero__pane" data-pane="center"></span>
+          <span class="hero__pane" data-pane="right"></span>
+        </div>
       </div>
       <div class="hero__content">
         <div class="hero__intro">
@@ -360,8 +367,92 @@
     z-index: var(--hero-layer-base);
   }
 
+  .hero__layer--gradient {
+    background: radial-gradient(
+        60% 80% at 20% 18%,
+        color-mix(in srgb, rgba(var(--hero-tone-highlight-rgb), 0.42) 60%, transparent 40%),
+        transparent 75%
+      ),
+      radial-gradient(
+        40% 60% at 82% 22%,
+        color-mix(in srgb, rgba(var(--hero-tone-secondary-rgb), 0.35) 70%, transparent 30%),
+        transparent 76%
+      ),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, rgba(var(--hero-tone-rgb), 0.54) 68%, rgba(12, 16, 28, 0.35) 32%) 0%,
+        color-mix(in srgb, rgba(var(--hero-tone-secondary-rgb), 0.45) 60%, rgba(8, 12, 24, 0.4) 40%) 48%,
+        color-mix(in srgb, rgba(var(--hero-tone-highlight-rgb), 0.4) 55%, rgba(20, 26, 40, 0.38) 45%) 100%
+      );
+    background-size: 180% 180%;
+    animation: hero-gradient-pan var(--hero-gradient-duration, 48s) ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+    opacity: clamp(0.32, 0.4, 0.48);
+    filter: saturate(1.05);
+    z-index: calc(var(--hero-layer-base) + 1);
+  }
+
+  .hero__layer--grain {
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 240px 240px;
+    mix-blend-mode: soft-light;
+    opacity: 0.085;
+    z-index: calc(var(--hero-layer-base) + 2);
+  }
+
   .hero__layer--backdrop {
     z-index: var(--hero-layer-backdrop);
+  }
+
+  .hero__layer--panes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.75rem, 3vw, 1.5rem);
+    padding: clamp(1rem, 3vw, 2rem);
+    pointer-events: none;
+    z-index: calc(var(--hero-layer-backdrop) + 1);
+  }
+
+  .hero__pane {
+    position: relative;
+    border-radius: clamp(18px, 5vw, 26px);
+    background: color-mix(
+      in srgb,
+      rgba(255, 255, 255, 0.28) 52%,
+      rgba(var(--hero-tone-secondary-rgb), 0.24) 48%
+    );
+    border: 1px solid color-mix(
+      in srgb,
+      rgba(255, 255, 255, 0.65) 58%,
+      rgba(var(--hero-tone-secondary-rgb), 0.38) 42%
+    );
+    box-shadow: 0 26px 56px rgba(var(--hero-tone-rgb), 0.26);
+    backdrop-filter: blur(26px) saturate(1.12);
+    -webkit-backdrop-filter: blur(26px) saturate(1.12);
+    overflow: hidden;
+    opacity: 0.88;
+  }
+
+  .hero__pane::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background-image: var(--grain, var(--grain-texture));
+    opacity: 0.06;
+    mix-blend-mode: soft-light;
+  }
+
+  .hero__pane[data-pane='left'] {
+    transform: translateY(clamp(0.25rem, 1vw, 0.75rem));
+  }
+
+  .hero__pane[data-pane='center'] {
+    transform: translateY(clamp(-0.5rem, -1.8vw, -1rem));
+    opacity: 0.92;
+  }
+
+  .hero__pane[data-pane='right'] {
+    transform: translateY(clamp(0.5rem, 1.6vw, 1.25rem));
   }
 
   :global(html[data-theme='hc']) .hero__surface {
@@ -371,6 +462,12 @@
   }
 
   :global(html[data-theme='hc']) .hero__surface::before {
+    display: none;
+  }
+
+  :global(html[data-theme='hc']) .hero__layer--gradient,
+  :global(html[data-theme='hc']) .hero__layer--grain,
+  :global(html[data-theme='hc']) .hero__layer--panes {
     display: none;
   }
 
@@ -387,6 +484,12 @@
     background: var(--bg-elev-1, var(--bg));
   }
 
+  @media (max-width: 720px) {
+    .hero__layer--panes {
+      display: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero,
     .hero--visible,
@@ -394,6 +497,11 @@
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    .hero__layer--gradient {
+      animation: none;
+      background-position: center;
     }
   }
 
@@ -581,6 +689,18 @@
 
     .hero__title {
       font-size: clamp(2rem, 9vw, 3rem);
+    }
+  }
+
+  @keyframes hero-gradient-pan {
+    0% {
+      background-position: 0% 35%, 80% 20%, 0% 50%;
+    }
+    50% {
+      background-position: 60% 45%, 20% 40%, 40% 50%;
+    }
+    100% {
+      background-position: 100% 55%, 40% 60%, 100% 50%;
     }
   }
 </style>

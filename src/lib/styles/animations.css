@@ -766,13 +766,84 @@ html[data-theme='hc'] .os-window[data-variant="line"]::before {
 }
 
 .magnetic-card {
-  transition: all 0.3s var(--ease-out);
+  position: relative;
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    background 0.4s var(--ease-out);
   cursor: pointer;
+  isolation: isolate;
 }
 
-.magnetic-card:hover {
+.magnetic-card::before,
+.magnetic-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+.magnetic-card::before {
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 60%, transparent 40%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.45) 55%, transparent 45%) 48%,
+    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.4) 40%, transparent 60%) 100%
+  );
+  mix-blend-mode: screen;
+  z-index: -2;
+}
+
+.magnetic-card::after {
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 55%,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 70%, transparent 30%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.28) 65%, transparent 35%) 40%,
+    transparent 75%
+  );
+  transform: scale(0.82);
+  filter: blur(18px);
+  z-index: -3;
+}
+
+.magnetic-card:hover,
+.magnetic-card:focus-visible {
   transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 28px 60px rgba(12, 18, 36, 0.32);
+}
+
+.magnetic-card:hover::before,
+.magnetic-card:focus-visible::before {
+  opacity: 0.55;
+}
+
+.magnetic-card:hover::after,
+.magnetic-card:focus-visible::after {
+  opacity: 0.6;
+  transform: scale(1.05);
+  animation: magnetic-card-halo 8s ease-in-out infinite;
+}
+
+:global(html[data-theme='hc']) .magnetic-card::before,
+:global(html[data-theme='hc']) .magnetic-card::after {
+  display: none;
+}
+
+@keyframes magnetic-card-halo {
+  0%,
+  100% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.1) translate3d(0, -3%, 0);
+    opacity: 0.7;
+  }
 }
 
 /* ==================== GRADIENT ANIMATIONS ==================== */
@@ -864,7 +935,13 @@ html[data-theme='hc'] .os-window[data-variant="line"]::before {
     animation: none;
   }
   .magnetic-hover:hover,
-  .magnetic-card:hover {
-    transform: none;
+  .magnetic-card:hover,
+  .magnetic-card:focus-visible {
+    transform: translateY(-4px);
+  }
+
+  .magnetic-card:hover::after,
+  .magnetic-card:focus-visible::after {
+    animation: none;
   }
 }

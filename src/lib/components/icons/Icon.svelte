@@ -320,10 +320,11 @@
 
   .stroke {
     stroke: currentColor;
-    stroke-width: 1.6;
+    stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
+    vector-effect: non-scaling-stroke;
   }
 
   .fill {
