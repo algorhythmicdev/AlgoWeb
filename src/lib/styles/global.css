@@ -33,6 +33,29 @@
   --surface-glass-blur: blur(22px);
 }
 
+.section {
+  position: relative;
+  padding-block: var(
+    --section-padding,
+    clamp(var(--section-padding-mobile, 4rem), 8vw, var(--section-padding-desktop, 7rem))
+  );
+  background: transparent;
+  isolation: isolate;
+}
+
+.section > .container {
+  width: min(100%, var(--section-container-width, var(--container-xl, 1200px)));
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 3rem);
+}
+
+.section > .container > *:first-child {
+  margin-top: 0;
+}
+
+.section > .container > *:last-child {
+  margin-bottom: 0;
+}
 
 
 /* Gradient bar animation */
