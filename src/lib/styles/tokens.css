@@ -15,6 +15,10 @@
   --accent-2-rgb: 255, 211, 57;
   --red-ch: #e0322c;
   --red-ch-rgb: 224, 50, 44;
+  --atlantic-blue: #1b9bff;
+  --atlantic-blue-rgb: 27, 155, 255;
+  --evergreen: var(--accent-1);
+  --evergreen-rgb: var(--accent-1-rgb);
 
   --voyage-blue: #1351ff;
   --voyage-blue-rgb: 19, 81, 255;
@@ -82,6 +86,10 @@
   --accent-tertiary: var(--signal-yellow);
   --accent-tertiary-rgb: var(--signal-yellow-rgb);
   --accent-critical: var(--cherry-pop);
+
+  --hero-accent: var(--accent-primary);
+  --hero-secondary: color-mix(in srgb, var(--accent-secondary) 70%, var(--accent-primary) 30%);
+  --hero-tertiary: color-mix(in srgb, var(--accent-tertiary) 60%, var(--accent-secondary) 40%);
 
   --nodevoyage-accent: var(--voyage-blue);
   --nodevoyage-highlight: var(--signal-yellow);
@@ -170,6 +178,8 @@
   --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 68%, rgba(16, 24, 40, 0.1) 32%);
   --hero-grid-line: rgba(16, 24, 40, 0.1);
   --hero-grid-line-strong: rgba(16, 24, 40, 0.18);
+  --hero-grid-line-color: var(--hero-grid-line);
+  --hero-grid-line-strong-color: var(--hero-grid-line-strong);
   --hero-orb-opacity: 0.42;
   --hero-surface: color-mix(in srgb, var(--bg-surface) 78%, rgba(var(--aurora-purple-rgb), 0.1) 22%);
   --hero-surface-strong: color-mix(in srgb, var(--bg-surface) 70%, rgba(var(--voyage-blue-rgb), 0.14) 30%);
@@ -316,7 +326,35 @@
   --z-overlay: 400;
   --z-modal: 900;
   --z-toast: 1200;
+
 }
+
+@supports not (color: color-mix(in srgb, white 50%, black 50%)) {
+  :root {
+    --surface: #eef1fb;
+    --surface-subtle: #f4f7ff;
+    --surface-strong: #dfe8ff;
+    --snow: #f2f5f9;
+    --border: #d5ddef;
+    --border-strong: #bcc6de;
+    --surface-glass: rgba(var(--voyage-blue-rgb), 0.1);
+    --surface-glass-strong: rgba(var(--aurora-purple-rgb), 0.12);
+    --surface-tint: rgba(var(--voyage-blue-rgb), 0.08);
+    --hero-accent: var(--accent-primary);
+    --hero-secondary: var(--accent-secondary);
+    --hero-tertiary: var(--accent-tertiary);
+    --hero-overlay-highlight: rgba(var(--voyage-blue-rgb), 0.32);
+    --hero-overlay-subtle: rgba(var(--aurora-purple-rgb), 0.26);
+    --hero-overlay-opacity: 0.74;
+    --hero-phrase-bg-strong: rgba(var(--aurora-purple-rgb), 0.28);
+    --hero-phrase-bg-soft: rgba(var(--voyage-blue-rgb), 0.24);
+    --hero-ring-border: rgba(var(--voyage-blue-rgb), 0.22);
+    --hero-ring-dash: rgba(var(--aurora-purple-rgb), 0.2);
+    --hero-surface: rgba(255, 255, 255, 0.86);
+    --hero-surface-strong: rgba(255, 255, 255, 0.78);
+  }
+}
+
 
 [data-base-theme="dark"] {
   color-scheme: dark;
@@ -327,6 +365,10 @@
   --accent-1-rgb: 16, 227, 214;
   --accent-2: #ffd339;
   --accent-2-rgb: 255, 211, 57;
+  --atlantic-blue: #1f9dff;
+  --atlantic-blue-rgb: 31, 157, 255;
+  --evergreen: var(--accent-1);
+  --evergreen-rgb: var(--accent-1-rgb);
   --bg: #0b0e13;
   --card: #121722;
   --card-subtle: #161c28;
@@ -379,6 +421,11 @@
   --hero-surface-strong: color-mix(in srgb, var(--card) 66%, rgba(var(--aurora-purple-rgb), 0.4) 34%);
   --hero-grid-line: rgba(132, 153, 220, 0.24);
   --hero-grid-line-strong: rgba(132, 153, 220, 0.34);
+  --hero-accent: var(--accent-primary);
+  --hero-secondary: color-mix(in srgb, var(--accent-secondary) 65%, var(--accent-primary) 35%);
+  --hero-tertiary: color-mix(in srgb, var(--accent-tertiary) 55%, var(--accent-secondary) 45%);
+  --hero-grid-line-color: var(--hero-grid-line);
+  --hero-grid-line-strong-color: var(--hero-grid-line-strong);
 
   --shadow-xs: 0 12px 28px rgba(0, 3, 12, 0.55);
   --shadow-sm: 0 20px 44px rgba(0, 3, 12, 0.58);
@@ -409,6 +456,10 @@
   --accent-1-rgb: 0, 122, 115;
   --accent-2: #b78300;
   --accent-2-rgb: 183, 131, 0;
+  --atlantic-blue: #005bff;
+  --atlantic-blue-rgb: 0, 91, 255;
+  --evergreen: #00c4ad;
+  --evergreen-rgb: 0, 196, 173;
   --bg: #ffffff;
   --card: #ffffff;
   --card-subtle: #f0f3fa;
@@ -468,6 +519,11 @@
   --hero-surface-strong: rgba(255, 255, 255, 0.98);
   --hero-grid-line: #000000;
   --hero-grid-line-strong: #000000;
+  --hero-accent: var(--accent-primary);
+  --hero-secondary: var(--accent-secondary);
+  --hero-tertiary: var(--accent-tertiary);
+  --hero-grid-line-color: var(--hero-grid-line);
+  --hero-grid-line-strong-color: var(--hero-grid-line-strong);
 
   --gradient-primary: linear-gradient(0deg, currentColor 0%, currentColor 100%);
   --gradient-secondary: linear-gradient(0deg, currentColor 0%, currentColor 100%);

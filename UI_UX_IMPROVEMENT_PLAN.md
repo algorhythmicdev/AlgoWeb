@@ -92,6 +92,16 @@ html[data-theme="hc"]{
 
 **Status: ✅ Implemented**
 
+_Update 2025-11-04:_ Wired the hero shell with automatic region labelling so each instance generates stable IDs for headings and lead copy, keeping the aria-labelled/ described connections intact even when slots override the default title or description.
+_Update 2025-11-06:_ Tuned `Hero.svelte` to publish tone-aware glass variables and normalized intensity controls so every page can shift between aurora, citrus, crimson, atlantic, and evergreen treatments without re-declaring surface mixes or hero gradients.
+_Update 2025-11-07:_ Shifted the home hero status, milestone canvas, and signal rails onto the tone-aware variables so progress bars, CTA links, and os-window shells inherit the active hero palette instead of hard-coded voyage/aurora mixes.
+_Update 2025-11-08:_ Routed the home roadmap overview and timeline cards through the hero tone tokens so highlights, badges, and progress rails recolor with each tone/intensity combination while keeping high-contrast fallbacks intact.
+_Update 2025-11-09:_ Rebuilt the hero layering stack with shared z-index roles, a tone-aware wash, and normalized backdrop blending so animated canvases fill the shell consistently on mobile and desktop breakpoints.
+_Update 2025-11-10:_ Locked in the gradient-first layering system so every hero now renders a solid tone base, transparent animation overlay, and content plane in sequence—fixing the narrow strip artefact on smaller screens and wrapping the UI/UX hero roadmap.
+_Update 2025-11-11:_ Cleared the residual wash overlays so the hero animation layer renders only transparent particle primitives above the solid gradient base, restoring text contrast across viewports.
+_Update 2025-11-12:_ Backfilled Firefox-safe gradient and token fallbacks so the hero base, tone palettes, and particle overlays render edge-to-edge without the washed sidebar artefact.
+_Update 2025-11-13:_ Hardened the hero base gradient to stay fully opaque across fallback browsers, eliminating the milky underlay and restoring text contrast in Firefox.
+
 Create `src/lib/components/Hero.svelte`.
 
 ```svelte
@@ -407,6 +417,7 @@ Below are concise code snippets demonstrating how you can implement the hero‑a
 **Status: ✅ Implemented**
 
 _Update 2025-10-10:_ `src/lib/styles/theme.css` now exposes `--aurora-speed` and `--bar-speed` tokens that the hero canvas and heading gradients consume, keeping motion pacing consistent across variants.
+_Update 2025-11-06:_ Added dedicated `--atlantic-blue` and `--evergreen` brand swatches (with RGB aliases across light, dark, and high-contrast themes) so hero tones and glass surfaces can lean on shared palette hooks instead of hard-coded mixes.
 
 Define shared custom properties and animations once in a global stylesheet. These tokens control colours, gradient angles and animation speeds; light/dark/high‑contrast modes override them.
 
@@ -1029,6 +1040,11 @@ _Update 2025-10-29:_ Retuned the core theme elevations to drop remaining pure-wh
 _Update 2025-10-30:_ Rebalanced the home hero and shared surface tokens to rely on transparent-first mixes, removed the white-backed status/pillar badges, and tightened the hero layout fallback so every page intro stays readable while the backdrop animations show through.
 
 _Update 2025-10-31:_ Finalized the translucent theme rollout by correcting the voyage blue core token, tinting the base surfaces away from pure white, and aligning ripple/sparkle effects and consulting hero icons with the shared glass palette so every interaction stays on-brand across light, dark, and high-contrast modes.
+
+_Update 2025-11-01:_ Extended the home hero milestone navigator with a translucent progress rail and live progress semantics, pairing the glass pill controls with an accessible progressbar that respects reduced-motion and high-contrast guardrails so roadmap context stays legible while the gradient fill animates smoothly across themes.
+_Update 2025-11-02:_ Repaired the hero animation token handoff so the Aurora backdrop renders its animated halos, beams, and particle grids again, mapping theme accents through the shared tokens while still honouring high-contrast and reduced-motion fallbacks.
+_Update 2025-11-03:_ Layered live canvas-driven aurora and node-drift animations into `HeroBackdrop`, reading theme gradients and reduced-motion preferences directly from the DOM so the hero system fulfils the plan's canvas variants while keeping CSS halos as a graceful fallback.
+_Update 2025-11-05:_ Split the connected nodes canvas into its own `connected-nodes` backdrop while rebuilding the `particle-drift` variant around lightweight halo and spray layers so particles float independently of the network, keeping the page-specific hero assignments aligned with the variant descriptions in the plan.
 
 ## Navigation & founder surfaces alignment
 

@@ -64,6 +64,8 @@
   let canNavigateMilestones = false;
   let previousMilestoneLabel = 'Previous milestone';
   let nextMilestoneLabel = 'Next milestone';
+  const milestoneProgressDisplayId = 'home-hero-milestone-progress';
+  const fallbackMilestoneProgressLabel = 'Milestone progress';
 
   const ensureLabelValue = (value: string, key: string, fallback: string) =>
     value && value !== key ? value : fallback;
@@ -232,6 +234,9 @@
       ? `${milestoneProgressCurrent}/${milestoneProgressTotal}`
       : '';
   $: canNavigateMilestones = milestoneProgressTotal > 1;
+  $: milestoneProgressRatio = canNavigateMilestones && milestoneProgressTotal > 0
+    ? Math.min(1, Math.max(0, milestoneProgressCurrent / milestoneProgressTotal))
+    : 0;
   $: milestoneProgressAriaLabel = canNavigateMilestones && milestoneProgressCurrent > 0
     ? ensureLabelValue(
         $_('timeline.progress_label', {
@@ -337,7 +342,8 @@
     : '';
 </script>
 
-<Hero variant="aurora" title={heroTitle} subtitle={heroSubtitle} tone="primary" intensity="soft">
+<div class="home-page" data-hero-tone="primary" data-hero-intensity="soft">
+  <Hero variant="aurora" title={heroTitle} subtitle={heroSubtitle} tone="primary" intensity="soft">
   <svelte:fragment slot="status">
     {#if heroStatus}
       <p class="home-hero__status surface-chip" data-tone="accent">{heroStatus}</p>
@@ -436,15 +442,33 @@
                 </svg>
               </button>
 
-              {#if milestoneProgressDisplay}
-                <span
-                  class="home-hero__milestone-progress"
-                  aria-live="polite"
-                  aria-label={milestoneProgressAriaLabel || undefined}
+              <div class="home-hero__milestone-progressgroup">
+                {#if milestoneProgressDisplay}
+                  <span
+                    id={milestoneProgressDisplayId}
+                    class="home-hero__milestone-progress"
+                    aria-live="polite"
+                    aria-label={milestoneProgressAriaLabel || undefined}
+                  >
+                    {milestoneProgressDisplay}
+                  </span>
+                {/if}
+
+                <div
+                  class="home-hero__milestone-progressbar"
+                  role="progressbar"
+                  aria-label={milestoneProgressAriaLabel || fallbackMilestoneProgressLabel}
+                  aria-valuemin={1}
+                  aria-valuemax={milestoneProgressTotal}
+                  aria-valuenow={Math.min(Math.max(milestoneProgressCurrent, 1), milestoneProgressTotal)}
+                  aria-describedby={milestoneProgressDisplay ? milestoneProgressDisplayId : undefined}
                 >
-                  {milestoneProgressDisplay}
-                </span>
-              {/if}
+                  <span
+                    class="home-hero__milestone-progressbar-fill"
+                    style={`--progress-ratio:${milestoneProgressRatio};`}
+                  ></span>
+                </div>
+              </div>
 
               <button
                 class="home-hero__milestone-nav-btn surface-chip"
@@ -497,9 +521,9 @@
       </dl>
     {/if}
   </svelte:fragment>
-</Hero>
+  </Hero>
 
-<section class="story section" id="story" use:revealOnScroll>
+  <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
     <span id="vision" class="section-anchor" aria-hidden="true"></span>
     <div class="story-shell os-window" role="group" aria-labelledby="story-heading">
@@ -535,13 +559,13 @@
       </div>
     </div>
   </div>
-</section>
+  </section>
 
-<FoundersSection />
+  <FoundersSection />
 
-<PartnersSection />
+  <PartnersSection />
 
-<section class="products section" id="products" use:revealOnScroll>
+  <section class="products section" id="products" use:revealOnScroll>
   <div class="container">
     <div class="products-shell">
       <header class="products-shell__intro">
@@ -582,9 +606,9 @@
       </div>
     </div>
   </div>
-</section>
+  </section>
 
-<section class="timeline section" id="timeline" use:revealOnScroll>
+  <section class="timeline section" id="timeline" use:revealOnScroll>
   <div class="container">
     <div class="timeline-shell">
       <aside class="timeline-overview">
@@ -653,9 +677,11 @@
       </div>
     </div>
   </div>
-</section>
+  </section>
 
-<CallToActionSection />
+  <CallToActionSection />
+
+</div>
 
 <style>
   .sr-only {
@@ -670,6 +696,58 @@
     border: 0;
   }
 
+  .home-page {
+    display: contents;
+    --home-accent: color-mix(in srgb, var(--voyage-blue) 68%, var(--aurora-purple) 32%);
+    --home-secondary: color-mix(in srgb, var(--aurora-purple) 58%, var(--voyage-blue) 42%);
+    --home-tertiary: color-mix(in srgb, var(--signal-yellow) 56%, var(--aurora-purple) 44%);
+    --home-outline: color-mix(in srgb, var(--home-secondary) 36%, transparent 64%);
+    --home-shadow: color-mix(in srgb, var(--home-accent) 26%, transparent 74%);
+    --home-tertiary-soft: color-mix(in srgb, var(--home-tertiary) 22%, transparent 78%);
+  }
+
+  :global(.home-page[data-hero-tone='aurora']) {
+    --home-accent: color-mix(in srgb, var(--aurora-purple) 74%, var(--voyage-blue) 26%);
+    --home-secondary: color-mix(in srgb, var(--voyage-blue) 60%, var(--aurora-purple) 40%);
+    --home-tertiary: color-mix(in srgb, var(--signal-yellow) 52%, var(--aurora-purple) 48%);
+  }
+
+  :global(.home-page[data-hero-tone='citrus']) {
+    --home-accent: color-mix(in srgb, var(--signal-yellow) 66%, var(--voyage-blue) 34%);
+    --home-secondary: color-mix(in srgb, var(--voyage-blue) 54%, var(--signal-yellow) 46%);
+    --home-tertiary: color-mix(in srgb, var(--aurora-purple) 58%, var(--signal-yellow) 42%);
+  }
+
+  :global(.home-page[data-hero-tone='crimson']) {
+    --home-accent: color-mix(in srgb, var(--cherry-pop) 68%, var(--aurora-purple) 32%);
+    --home-secondary: color-mix(in srgb, var(--aurora-purple) 62%, var(--cherry-pop) 38%);
+    --home-tertiary: color-mix(in srgb, var(--signal-yellow) 54%, var(--cherry-pop) 46%);
+  }
+
+  :global(.home-page[data-hero-tone='atlantic']) {
+    --home-accent: color-mix(in srgb, var(--atlantic-blue) 72%, var(--voyage-blue) 28%);
+    --home-secondary: color-mix(in srgb, var(--voyage-blue) 56%, var(--atlantic-blue) 44%);
+    --home-tertiary: color-mix(in srgb, var(--accent-1) 58%, var(--atlantic-blue) 42%);
+  }
+
+  :global(.home-page[data-hero-tone='evergreen']) {
+    --home-accent: color-mix(in srgb, var(--evergreen) 72%, var(--voyage-blue) 28%);
+    --home-secondary: color-mix(in srgb, var(--voyage-blue) 58%, var(--evergreen) 42%);
+    --home-tertiary: color-mix(in srgb, var(--signal-yellow) 52%, var(--evergreen) 48%);
+  }
+
+  :global(.home-page[data-hero-intensity='balanced']) {
+    --home-outline: color-mix(in srgb, var(--home-secondary) 42%, transparent 58%);
+    --home-shadow: color-mix(in srgb, var(--home-accent) 32%, transparent 68%);
+    --home-tertiary-soft: color-mix(in srgb, var(--home-tertiary) 26%, transparent 74%);
+  }
+
+  :global(.home-page[data-hero-intensity='bold']) {
+    --home-outline: color-mix(in srgb, var(--home-secondary) 48%, transparent 52%);
+    --home-shadow: color-mix(in srgb, var(--home-accent) 38%, transparent 62%);
+    --home-tertiary-soft: color-mix(in srgb, var(--home-tertiary) 32%, transparent 68%);
+  }
+
   .home-hero__status {
     margin: 0;
     gap: 0.55rem;
@@ -680,8 +758,12 @@
     width: 8px;
     height: 8px;
     border-radius: 999px;
-    background: radial-gradient(circle at 30% 30%, var(--grad-a) 0%, transparent 70%);
-    box-shadow: 0 0 0 1px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 70%, transparent 30%);
+    background: radial-gradient(
+      circle at 30% 30%,
+      color-mix(in srgb, var(--hero-accent, var(--grad-a)) 80%, transparent 20%) 0%,
+      transparent 70%
+    );
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--hero-secondary, var(--grad-b)) 65%, transparent 35%);
   }
 
   .home-hero__description {
@@ -716,19 +798,27 @@
     border-radius: 26px;
     overflow: hidden;
     --surface-glass-blur: 24px;
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.6) 24%, transparent 76%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 58%, rgba(255, 255, 255, 0.28) 42%);
-    --surface-glass-shadow: 0 24px 48px rgba(var(--voyage-blue-rgb), 0.22);
+    --home-hero-accent: var(
+      --home-accent,
+      var(--hero-accent, color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%))
+    );
+    --home-hero-secondary: var(
+      --home-secondary,
+      var(--hero-secondary, color-mix(in srgb, var(--aurora-purple) 60%, var(--voyage-blue) 40%))
+    );
+    --surface-glass-bg: color-mix(in srgb, var(--home-hero-secondary) 24%, transparent 76%);
+    --surface-glass-border: color-mix(in srgb, var(--home-hero-secondary) 58%, rgba(255, 255, 255, 0.28) 42%);
+    --surface-glass-shadow: 0 24px 48px color-mix(in srgb, var(--home-hero-accent) 22%, transparent 78%);
     --grain-opacity: 0.06;
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.24) 34%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.24) 42%);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, color-mix(in srgb, var(--home-hero-secondary) 32%, transparent 68%) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, color-mix(in srgb, var(--home-hero-secondary) 34%, transparent 66%) 34%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, color-mix(in srgb, var(--home-hero-secondary) 32%, transparent 68%) 42%);
   }
 
   :global([data-base-theme='dark']) .home-hero__pillars {
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.68) 28%, transparent 72%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.62) 56%, rgba(255, 255, 255, 0.22) 44%);
-    --surface-glass-shadow: 0 28px 54px rgba(var(--voyage-blue-rgb), 0.3);
+    --surface-glass-bg: color-mix(in srgb, var(--home-hero-secondary) 28%, transparent 72%);
+    --surface-glass-border: color-mix(in srgb, var(--home-hero-secondary) 56%, rgba(255, 255, 255, 0.22) 44%);
+    --surface-glass-shadow: 0 28px 54px color-mix(in srgb, var(--home-hero-accent) 30%, transparent 70%);
     --grain-opacity: 0.07;
   }
 
@@ -778,8 +868,12 @@
     width: 0.7rem;
     height: 0.7rem;
     border-radius: 999px;
-    background: radial-gradient(circle at 35% 35%, var(--grad-a) 0%, transparent 65%);
-    box-shadow: 0 0 0 1px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 70%, transparent 30%);
+    background: radial-gradient(
+      circle at 35% 35%,
+      color-mix(in srgb, var(--hero-secondary, var(--grad-a)) 84%, transparent 16%) 0%,
+      transparent 65%
+    );
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--hero-accent, var(--grad-a)) 68%, transparent 32%);
   }
 
   .home-hero__milestone,
@@ -787,59 +881,71 @@
     padding: clamp(1.25rem, 3.4vw, 1.8rem);
     display: grid;
     gap: clamp(0.75rem, 2.6vw, 1.1rem);
+    --home-hero-accent: var(
+      --home-accent,
+      var(--hero-accent, color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%))
+    );
+    --home-hero-secondary: var(
+      --home-secondary,
+      var(--hero-secondary, color-mix(in srgb, var(--aurora-purple) 60%, var(--voyage-blue) 40%))
+    );
+    --home-hero-tertiary: var(
+      --home-tertiary,
+      var(--hero-tertiary, color-mix(in srgb, var(--signal-yellow) 70%, var(--aurora-purple) 30%))
+    );
   }
 
   .home-hero__milestone {
     --surface-glass-blur: 26px;
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 22%, transparent 78%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.54) 60%, rgba(255, 255, 255, 0.3) 40%);
-    --surface-glass-shadow: 0 28px 52px rgba(var(--aurora-purple-rgb), 0.28);
+    --surface-glass-bg: color-mix(in srgb, var(--home-hero-secondary) 24%, transparent 76%);
+    --surface-glass-border: color-mix(in srgb, var(--home-hero-secondary) 60%, rgba(255, 255, 255, 0.3) 40%);
+    --surface-glass-shadow: 0 28px 52px color-mix(in srgb, var(--home-hero-accent) 28%, transparent 72%);
     --grain-opacity: 0.07;
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.14) 5%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.3) 44%);
-    --surface-pill-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.52) 24%, transparent 76%);
-    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.48) 60%, rgba(255, 255, 255, 0.28) 40%);
-    --surface-pill-shadow: 0 22px 44px rgba(var(--aurora-purple-rgb), 0.26);
-    --surface-pill-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.1) 4%);
-    --surface-pill-hc-border: color-mix(in srgb, var(--border-strong) 58%, rgba(var(--aurora-purple-rgb), 0.28) 42%);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, color-mix(in srgb, var(--home-hero-secondary) 40%, transparent 60%) 5%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, color-mix(in srgb, var(--home-hero-secondary) 40%, transparent 60%) 38%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, color-mix(in srgb, var(--home-hero-secondary) 42%, transparent 58%) 44%);
+    --surface-pill-bg: color-mix(in srgb, var(--home-hero-accent) 24%, transparent 76%);
+    --surface-pill-border: color-mix(in srgb, var(--home-hero-accent) 60%, rgba(255, 255, 255, 0.28) 40%);
+    --surface-pill-shadow: 0 22px 44px color-mix(in srgb, var(--home-hero-accent) 26%, transparent 74%);
+    --surface-pill-hc-bg: color-mix(in srgb, var(--bg) 96%, color-mix(in srgb, var(--home-hero-accent) 36%, transparent 64%) 4%);
+    --surface-pill-hc-border: color-mix(in srgb, var(--border-strong) 58%, color-mix(in srgb, var(--home-hero-accent) 38%, transparent 62%) 42%);
     --surface-pill-hc-shadow: none;
-    --surface-chip-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 22%, transparent 78%);
-    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 62%, rgba(255, 255, 255, 0.3) 38%);
-    --surface-chip-shadow: 0 20px 40px rgba(var(--aurora-purple-rgb), 0.24);
-    --surface-chip-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.12) 4%);
-    --surface-chip-hc-border: color-mix(in srgb, var(--border-strong) 60%, rgba(var(--aurora-purple-rgb), 0.3) 40%);
+    --surface-chip-bg: color-mix(in srgb, color-mix(in srgb, var(--home-hero-accent) 60%, var(--home-hero-secondary) 40%) 22%, transparent 78%);
+    --surface-chip-border: color-mix(in srgb, color-mix(in srgb, var(--home-hero-accent) 58%, var(--home-hero-secondary) 42%) 62%, rgba(255, 255, 255, 0.3) 38%);
+    --surface-chip-shadow: 0 20px 40px color-mix(in srgb, var(--home-hero-accent) 24%, transparent 76%);
+    --surface-chip-hc-bg: color-mix(in srgb, var(--bg) 96%, color-mix(in srgb, var(--home-hero-accent) 34%, transparent 66%) 4%);
+    --surface-chip-hc-border: color-mix(in srgb, var(--border-strong) 60%, color-mix(in srgb, var(--home-hero-accent) 36%, transparent 64%) 40%);
     --surface-chip-hc-shadow: none;
     --surface-chip-hc-color: var(--text);
   }
 
   :global([data-base-theme='dark']) .home-hero__milestone {
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.68) 26%, transparent 74%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.62) 56%, rgba(255, 255, 255, 0.18) 44%);
-    --surface-glass-shadow: 0 32px 60px rgba(var(--aurora-purple-rgb), 0.34);
-    --surface-pill-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 24%, transparent 76%);
-    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 58%, rgba(255, 255, 255, 0.2) 42%);
-    --surface-pill-shadow: 0 24px 48px rgba(var(--aurora-purple-rgb), 0.3);
-    --surface-chip-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 22%, transparent 78%);
-    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 58%, rgba(255, 255, 255, 0.18) 42%);
-    --surface-chip-shadow: 0 22px 44px rgba(var(--aurora-purple-rgb), 0.32);
+    --surface-glass-bg: color-mix(in srgb, var(--home-hero-secondary) 28%, transparent 72%);
+    --surface-glass-border: color-mix(in srgb, var(--home-hero-secondary) 56%, rgba(255, 255, 255, 0.18) 44%);
+    --surface-glass-shadow: 0 32px 60px color-mix(in srgb, var(--home-hero-accent) 34%, transparent 66%);
+    --surface-pill-bg: color-mix(in srgb, var(--home-hero-accent) 26%, transparent 74%);
+    --surface-pill-border: color-mix(in srgb, var(--home-hero-accent) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-pill-shadow: 0 24px 48px color-mix(in srgb, var(--home-hero-accent) 30%, transparent 70%);
+    --surface-chip-bg: color-mix(in srgb, color-mix(in srgb, var(--home-hero-accent) 58%, var(--home-hero-secondary) 42%) 24%, transparent 76%);
+    --surface-chip-border: color-mix(in srgb, color-mix(in srgb, var(--home-hero-accent) 56%, var(--home-hero-secondary) 44%) 58%, rgba(255, 255, 255, 0.18) 42%);
+    --surface-chip-shadow: 0 22px 44px color-mix(in srgb, var(--home-hero-accent) 32%, transparent 68%);
   }
 
   .home-hero__signals {
     --surface-glass-blur: 24px;
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 20%, transparent 80%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.48) 58%, rgba(255, 255, 255, 0.3) 42%);
-    --surface-glass-shadow: 0 24px 48px rgba(var(--signal-yellow-rgb), 0.24);
+    --surface-glass-bg: color-mix(in srgb, var(--home-hero-tertiary) 20%, transparent 80%);
+    --surface-glass-border: color-mix(in srgb, var(--home-hero-tertiary) 58%, rgba(255, 255, 255, 0.3) 42%);
+    --surface-glass-shadow: 0 24px 48px color-mix(in srgb, var(--home-hero-tertiary) 24%, transparent 76%);
     --grain-opacity: 0.06;
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--signal-yellow-rgb), 0.12) 4%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--signal-yellow-rgb), 0.28) 38%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.24) 44%);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, color-mix(in srgb, var(--home-hero-tertiary) 32%, transparent 68%) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, color-mix(in srgb, var(--home-hero-tertiary) 36%, transparent 64%) 38%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, color-mix(in srgb, var(--home-hero-tertiary) 32%, transparent 68%) 44%);
   }
 
   :global([data-base-theme='dark']) .home-hero__signals {
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.6) 24%, transparent 76%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.56) 56%, rgba(255, 255, 255, 0.2) 44%);
-    --surface-glass-shadow: 0 28px 54px rgba(var(--signal-yellow-rgb), 0.28);
+    --surface-glass-bg: color-mix(in srgb, var(--home-hero-tertiary) 24%, transparent 76%);
+    --surface-glass-border: color-mix(in srgb, var(--home-hero-tertiary) 56%, rgba(255, 255, 255, 0.2) 44%);
+    --surface-glass-shadow: 0 28px 54px color-mix(in srgb, var(--home-hero-tertiary) 28%, transparent 72%);
     --grain-opacity: 0.07;
   }
 
@@ -856,7 +962,7 @@
     font-weight: var(--weight-semibold);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(var(--voyage-blue-rgb), 0.92);
+    color: color-mix(in srgb, var(--home-hero-secondary) 72%, var(--text-secondary) 28%);
   }
 
   .home-hero__milestone-date {
@@ -867,7 +973,7 @@
   .home-hero__milestone h3 {
     margin: 0;
     font-size: clamp(1.4rem, 3.4vw, 2rem);
-    background: var(--gradient-text);
+    background: var(--hero-heading-gradient, var(--gradient-text));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -893,7 +999,7 @@
   }
 
   .home-hero__milestone-note {
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--home-hero-accent) 78%, var(--text-secondary) 22%);
     font-size: var(--text-small);
   }
 
@@ -914,6 +1020,15 @@
     border-radius: calc(var(--radius) * 0.75);
   }
 
+  .home-hero__milestone-progressgroup {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 72px;
+  }
+
   .home-hero__milestone-nav-btn {
     display: inline-flex;
     align-items: center;
@@ -931,8 +1046,16 @@
   }
 
   .home-hero__milestone-nav-btn:hover {
-    background: color-mix(in srgb, var(--surface-chip-bg) 72%, rgba(var(--aurora-purple-rgb), 0.18) 28%);
-    border-color: color-mix(in srgb, var(--surface-chip-border) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
+    background: color-mix(
+      in srgb,
+      var(--surface-chip-bg) 68%,
+      color-mix(in srgb, var(--home-hero-accent) 28%, transparent 72%) 32%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--surface-chip-border) 60%,
+      color-mix(in srgb, var(--home-hero-secondary) 34%, transparent 66%) 40%
+    );
   }
 
   .home-hero__milestone-nav-btn:focus-visible {
@@ -954,12 +1077,50 @@
     color: var(--text-tertiary);
   }
 
+  .home-hero__milestone-progressbar {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: color-mix(
+      in srgb,
+      color-mix(in srgb, var(--home-hero-secondary) 48%, var(--home-hero-accent) 52%) 72%,
+      transparent 28%
+    );
+    box-shadow: inset 0 0 0 1px color-mix(
+      in srgb,
+      color-mix(in srgb, var(--home-hero-accent) 44%, var(--home-hero-tertiary) 56%) 86%,
+      transparent 14%
+    );
+  }
+
+  .home-hero__milestone-progressbar-fill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--home-hero-accent) 82%, transparent 18%),
+      color-mix(in srgb, var(--home-hero-tertiary) 78%, transparent 22%)
+    );
+    transform: scaleX(var(--progress-ratio, 0));
+    transform-origin: left center;
+    transition: transform 260ms var(--ease-in-out);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero__milestone-progressbar-fill {
+      transition: none;
+    }
+  }
+
   .home-hero__milestone-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     font-weight: var(--weight-semibold);
-    color: var(--voyage-blue);
+    color: var(--home-hero-accent);
     text-decoration: none;
     margin-top: 0;
     margin-left: auto;
@@ -985,6 +1146,7 @@
 
   .home-hero__milestone-cta svg {
     transition: transform 180ms var(--ease-in-out);
+    color: currentColor;
   }
 
   .home-hero__milestone-cta:hover svg,
@@ -993,7 +1155,7 @@
   }
 
   .home-hero__milestone-cta:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
+    outline: 2px solid color-mix(in srgb, var(--home-hero-accent) 64%, var(--home-hero-tertiary) 36%);
     outline-offset: 3px;
   }
 
@@ -1053,6 +1215,15 @@
     color: var(--text);
   }
 
+  :global(html[data-theme='hc']) .home-hero__milestone-progressbar {
+    background: color-mix(in srgb, var(--bg) 55%, var(--border-strong, var(--text)) 45%);
+    box-shadow: inset 0 0 0 1px var(--border-strong, var(--text));
+  }
+
+  :global(html[data-theme='hc']) .home-hero__milestone-progressbar-fill {
+    background: var(--text);
+  }
+
   .story-shell.os-window,
   .timeline-overview__highlight.os-window {
     --grain-blend-mode: soft-light;
@@ -1066,6 +1237,32 @@
 
   .timeline-overview__highlight.os-window {
     border-radius: var(--radius-2xl);
+    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 24%, transparent 76%);
+    --surface-glass-border: color-mix(in srgb, var(--timeline-secondary) 60%, rgba(255, 255, 255, 0.28) 40%);
+    --surface-glass-shadow: 0 26px 52px color-mix(in srgb, var(--timeline-accent) 24%, transparent 76%);
+    --grain-opacity: 0.12;
+    --os-window-hc-bg: color-mix(
+      in srgb,
+      var(--bg) 96%,
+      color-mix(in srgb, var(--timeline-secondary) 36%, transparent 64%) 4%
+    );
+    --os-window-hc-border: color-mix(
+      in srgb,
+      var(--border-strong) 62%,
+      color-mix(in srgb, var(--timeline-secondary) 36%, transparent 64%) 38%
+    );
+    --os-window-hc-shadow: 0 0 0 1px color-mix(
+      in srgb,
+      var(--border-strong) 56%,
+      color-mix(in srgb, var(--timeline-secondary) 32%, transparent 68%) 44%
+    );
+  }
+
+  :global([data-base-theme='dark'] .timeline-overview__highlight.os-window) {
+    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 28%, transparent 72%);
+    --surface-glass-border: color-mix(in srgb, var(--timeline-secondary) 56%, rgba(255, 255, 255, 0.2) 44%);
+    --surface-glass-shadow: 0 30px 58px color-mix(in srgb, var(--timeline-accent) 28%, transparent 72%);
+    --grain-opacity: 0.16;
   }
 
   .section-anchor {
@@ -1337,6 +1534,15 @@
     -webkit-backdrop-filter: none;
   }
 
+  .timeline {
+    --timeline-accent: var(--home-accent, var(--voyage-blue));
+    --timeline-secondary: var(--home-secondary, var(--aurora-purple));
+    --timeline-tertiary: var(--home-tertiary, var(--signal-yellow));
+    --timeline-outline: color-mix(in srgb, var(--timeline-secondary) 32%, transparent 68%);
+    --timeline-shadow: color-mix(in srgb, var(--timeline-accent) 24%, transparent 76%);
+    --timeline-tertiary-soft: color-mix(in srgb, var(--timeline-tertiary) 18%, transparent 82%);
+  }
+
   .timeline-shell {
     display: grid;
     grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
@@ -1392,9 +1598,10 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: var(--weight-semibold);
-    color: var(--aurora-purple);
-    background: color-mix(in srgb, var(--aurora-purple) 16%, transparent);
-    border: 1px solid color-mix(in srgb, var(--aurora-purple) 22%, transparent);
+    color: color-mix(in srgb, var(--timeline-secondary) 82%, var(--text) 18%);
+    background: color-mix(in srgb, var(--timeline-secondary) 18%, transparent 82%);
+    border: 1px solid color-mix(in srgb, var(--timeline-secondary) 40%, transparent 60%);
+    box-shadow: 0 18px 32px color-mix(in srgb, var(--timeline-secondary) 16%, transparent 84%);
   }
 
   .timeline-overview__meta {
@@ -1407,7 +1614,7 @@
 
   .timeline-overview__note {
     margin: 0;
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--timeline-accent) 84%, var(--text-secondary) 16%);
     font-size: var(--text-small);
   }
 
@@ -1416,13 +1623,18 @@
     align-items: center;
     gap: 0.45rem;
     font-weight: var(--weight-semibold);
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--timeline-accent) 80%, var(--text) 20%);
     text-decoration: none;
   }
 
   .timeline-overview__cta::after {
     content: '→';
     font-size: 0.9em;
+  }
+
+  .timeline-overview__cta:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--timeline-accent) 62%, var(--timeline-tertiary) 38%);
+    outline-offset: 3px;
   }
 
   .timeline-overview__list {
@@ -1437,7 +1649,7 @@
     display: grid;
     gap: 0.3rem;
     padding: 0.85rem 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--border) 52%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--timeline-outline) 62%, transparent 38%);
   }
 
   .timeline-overview__list-date {
@@ -1451,7 +1663,7 @@
 
   .timeline-overview__list-status {
     font-size: var(--text-small);
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--timeline-accent) 76%, var(--text) 24%);
   }
 
   .timeline-track {
@@ -1468,7 +1680,40 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.32), transparent 85%);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--timeline-accent) 28%, transparent 72%) 0%,
+      transparent 85%
+    );
+  }
+
+  :global(.timeline-card.os-window) {
+    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 18%, transparent 82%);
+    --surface-glass-border: color-mix(in srgb, var(--timeline-secondary) 56%, rgba(255, 255, 255, 0.26) 44%);
+    --surface-glass-shadow: 0 26px 52px color-mix(in srgb, var(--timeline-accent) 26%, transparent 74%);
+    --grain-opacity: 0.1;
+    --os-window-hc-bg: color-mix(
+      in srgb,
+      var(--bg) 96%,
+      color-mix(in srgb, var(--timeline-secondary) 32%, transparent 68%) 4%
+    );
+    --os-window-hc-border: color-mix(
+      in srgb,
+      var(--border-strong) 60%,
+      color-mix(in srgb, var(--timeline-secondary) 34%, transparent 66%) 40%
+    );
+    --os-window-hc-shadow: 0 0 0 1px color-mix(
+      in srgb,
+      var(--border-strong) 54%,
+      color-mix(in srgb, var(--timeline-secondary) 30%, transparent 70%) 46%
+    );
+  }
+
+  :global([data-base-theme='dark'] .timeline-card.os-window) {
+    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 22%, transparent 78%);
+    --surface-glass-border: color-mix(in srgb, var(--timeline-secondary) 52%, rgba(255, 255, 255, 0.18) 48%);
+    --surface-glass-shadow: 0 30px 56px color-mix(in srgb, var(--timeline-accent) 30%, transparent 70%);
+    --grain-opacity: 0.14;
   }
 
   :global(.timeline-card) {
@@ -1486,8 +1731,8 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--voyage-blue), var(--aurora-purple));
-    box-shadow: 0 0 0 6px rgba(var(--voyage-blue-rgb), 0.1);
+    background: linear-gradient(135deg, var(--timeline-accent), var(--timeline-secondary));
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--timeline-accent) 22%, transparent 78%);
   }
 
   .timeline-card__meta {
@@ -1506,7 +1751,7 @@
 
   .timeline-card__status {
     font-size: var(--text-small);
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--timeline-accent) 80%, var(--text) 20%);
   }
 
   :global(.timeline-card) h3 {
@@ -1521,8 +1766,32 @@
   }
 
   .timeline-card__note {
-    color: var(--voyage-blue);
+    color: color-mix(in srgb, var(--timeline-tertiary) 68%, var(--timeline-accent) 32%);
     font-size: var(--text-small);
+  }
+
+  :global(html[data-theme='hc']) .timeline-overview__badge,
+  :global(html[data-theme='hc']) .timeline-overview__cta,
+  :global(html[data-theme='hc']) .timeline-overview__note,
+  :global(html[data-theme='hc']) .timeline-overview__list-status,
+  :global(html[data-theme='hc']) .timeline-card__status,
+  :global(html[data-theme='hc']) .timeline-card__note {
+    color: currentColor;
+  }
+
+  :global(html[data-theme='hc']) .timeline-overview__badge {
+    background: transparent;
+    border-color: currentColor;
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .timeline-overview__cta {
+    color: currentColor;
+    text-decoration: underline;
+  }
+
+  :global(html[data-theme='hc']) .timeline-overview__cta:focus-visible {
+    outline-color: currentColor;
   }
 
   :global(html[data-theme='hc'] .timeline-card) {
