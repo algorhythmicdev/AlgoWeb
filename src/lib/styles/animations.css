@@ -595,24 +595,7 @@
   animation: slideInWithShimmer 1.2s var(--ease-out) forwards;
 }
 
-/* ==================== GLASSY EFFECTS ==================== */
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.glass-morphism-dark {
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.glass-card {
+.os-window {
   position: relative;
   padding: var(--card-padding-lg, 2rem);
   border-radius: var(--radius-xl, 1.8rem);
@@ -623,15 +606,18 @@
   -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.12);
   overflow: hidden;
   isolation: isolate;
+  --os-window-hc-bg: var(--bg-elev-1);
+  --os-window-hc-border: var(--border);
+  --os-window-hc-shadow: none;
 }
 
-.glass-card > * {
+.os-window > * {
   position: relative;
   z-index: 2;
 }
 
 /* Grain overlay (already in animations.css) */
-.glass-card::after {
+.os-window::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -642,8 +628,21 @@
   z-index: 1;
 }
 
+html[data-theme='hc'] .os-window {
+  background: var(--os-window-hc-bg, var(--bg-elev-1));
+  border: 2px solid var(--os-window-hc-border, var(--border));
+  box-shadow: var(--os-window-hc-shadow, none);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  --grain-opacity: 0;
+}
+
+html[data-theme='hc'] .os-window::after {
+  display: none;
+}
+
 /* Halo variant: radial glow on specific cards */
-.glass-card[data-variant="halo"]::before {
+.os-window[data-variant="halo"]::before {
   content: "";
   position: absolute;
   inset: -20%;
@@ -655,7 +654,7 @@
   animation: halo-pulse 8s ease-in-out infinite alternate;
 }
 
-.glass-card[data-variant="grid"]::before {
+.os-window[data-variant="grid"]::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -672,7 +671,7 @@
   animation: grid-ripple var(--med) ease-in-out infinite alternate;
 }
 
-.glass-card[data-variant="line"]::before {
+.os-window[data-variant="line"]::before {
   content: "";
   position: absolute;
   inset: -40%;
@@ -694,18 +693,18 @@
 }
 
 @media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
-  .glass-card[data-variant="halo"]::before {
+  .os-window[data-variant="halo"]::before {
     animation: none;
   }
-  .glass-card[data-variant="grid"]::before,
-  .glass-card[data-variant="line"]::before {
+  .os-window[data-variant="grid"]::before,
+  .os-window[data-variant="line"]::before {
     animation: none;
   }
 }
 
-html[data-theme='hc'] .glass-card[data-variant="halo"]::before,
-html[data-theme='hc'] .glass-card[data-variant="grid"]::before,
-html[data-theme='hc'] .glass-card[data-variant="line"]::before {
+html[data-theme='hc'] .os-window[data-variant="halo"]::before,
+html[data-theme='hc'] .os-window[data-variant="grid"]::before,
+html[data-theme='hc'] .os-window[data-variant="line"]::before {
   display: none;
 }
 

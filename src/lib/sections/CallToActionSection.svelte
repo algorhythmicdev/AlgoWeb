@@ -51,7 +51,7 @@
 <section class="cta section" id="orbit" use:revealOnScroll>
   <div class="container">
     <div class="cta-shell" role="region" aria-labelledby="cta-heading">
-      <div class="cta-surface glass-card" data-variant="halo">
+      <div class="cta-surface os-window" data-variant="halo">
         <div class="cta-inner">
           <div class="cta-copy">
             {#if eyebrow}
@@ -130,6 +130,8 @@
   .cta-surface {
     position: relative;
     overflow: hidden;
+    --os-window-hc-bg: var(--bg);
+    --os-window-hc-border: var(--border-strong);
   }
 
   .cta-inner {
@@ -247,12 +249,6 @@
   :global(html[data-theme='hc']) .cta-shell::before,
   :global(html[data-theme='hc']) .cta-shell::after {
     display: none;
-  }
-
-  :global(html[data-theme='hc']) .cta-surface {
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
-    box-shadow: none;
   }
 
   :global(html[data-theme='hc']) h2 {

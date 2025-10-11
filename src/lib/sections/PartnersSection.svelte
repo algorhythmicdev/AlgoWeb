@@ -121,7 +121,7 @@
 
     <div class="partners__grid" use:staggerReveal={{ stagger: 160 }}>
       {#each partnerCards as partner (partner.id)}
-        <article class="partner-card glass-card" data-variant={partner.type === 'current' ? 'grid' : 'line'}>
+        <article class="partner-card os-window" data-variant={partner.type === 'current' ? 'grid' : 'line'}>
           <div class="partner-card__header">
             <div class="partner-card__badge" data-type={partner.type}>
               {partner.type === 'current' ? currentLabel : aspirationalLabel}
@@ -169,7 +169,7 @@
           </div>
 
           {#if partner.scale || partner.innovation?.length || partner.programs?.length}
-            <div class="partner-card__meta">
+            <div class="partner-card__meta surface-panel">
               {#if partner.scale}
                 <div class="partner-card__block">
                   <span class="partner-card__label">{partner.type === 'current' ? scaleLabel : reachLabel}</span>
@@ -216,14 +216,14 @@
     </div>
 
     {#if majorClients.length}
-      <aside class="partners__clients glass-card" data-variant="halo" aria-label={$_('partners.clients_label') || 'Selected clients'}>
+      <aside class="partners__clients os-window" data-variant="halo" aria-label={$_('partners.clients_label') || 'Selected clients'}>
         <header>
           <span class="partners__clients-eyebrow">{$_('partners.clients_title') || "Global brands we've supported"}</span>
           <p>{$_('partners.clients_description') || 'Our manufacturing heritage brings signage discipline trusted by global retail, finance, and aviation leaders.'}</p>
         </header>
         <ul class="partners__client-list">
           {#each majorClients as client}
-            <li>
+            <li class="partners__client surface-panel">
               <span class="partners__client-name">{client.name}</span>
               <span class="partners__client-category">{client.category}</span>
               <span class="partners__client-region">{client.region}</span>
@@ -377,13 +377,17 @@
     gap: clamp(1rem, 2.4vw, 1.6rem);
     padding: clamp(1.2rem, 2.8vw, 1.8rem);
     border-radius: clamp(1.2rem, 3vw, 1.8rem);
-    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
-    border: 1px solid color-mix(in srgb, var(--border) 54%, rgba(var(--voyage-blue-rgb), 0.24) 46%);
+    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
+    --surface-panel-border: color-mix(in srgb, var(--border) 54%, rgba(var(--voyage-blue-rgb), 0.24) 46%);
+    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--voyage-blue-rgb), 0.24) 36%);
   }
 
   .partner-card[data-variant='line'] .partner-card__meta {
-    background: color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--signal-yellow-rgb), 0.18) 22%);
-    border-color: color-mix(in srgb, var(--border) 46%, rgba(var(--signal-yellow-rgb), 0.28) 54%);
+    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--signal-yellow-rgb), 0.18) 22%);
+    --surface-panel-border: color-mix(in srgb, var(--border) 46%, rgba(var(--signal-yellow-rgb), 0.28) 54%);
+    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--signal-yellow-rgb), 0.12) 4%);
+    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--signal-yellow-rgb), 0.3) 38%);
   }
 
   .partner-card__block {
@@ -460,13 +464,16 @@
     gap: clamp(0.8rem, 2vw, 1.2rem);
   }
 
-  .partners__client-list li {
+  .partners__client {
     display: grid;
     gap: 0.3rem;
     padding: 0.9rem 1.1rem;
     border-radius: var(--radius-lg, 18px);
-    background: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--voyage-blue-rgb), 0.1) 20%);
-    border: 1px solid color-mix(in srgb, var(--border) 58%, rgba(var(--voyage-blue-rgb), 0.22) 42%);
+    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--voyage-blue-rgb), 0.1) 20%);
+    --surface-panel-border: color-mix(in srgb, var(--border) 58%, rgba(var(--voyage-blue-rgb), 0.22) 42%);
+    --surface-panel-shadow: 0 16px 28px rgba(var(--voyage-blue-rgb), 0.12);
+    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 98%, rgba(var(--voyage-blue-rgb), 0.1) 2%);
+    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.24) 34%);
   }
 
   .partners__client-name {
@@ -495,26 +502,17 @@
   }
 
   :global(html[data-theme='dark']) .partner-card__meta {
-    background: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--aurora-purple-rgb), 0.24) 24%);
-    border-color: color-mix(in srgb, var(--border) 44%, rgba(var(--aurora-purple-rgb), 0.32) 56%);
+    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--aurora-purple-rgb), 0.24) 24%);
+    --surface-panel-border: color-mix(in srgb, var(--border) 44%, rgba(var(--aurora-purple-rgb), 0.32) 56%);
+    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 94%, rgba(var(--aurora-purple-rgb), 0.16) 6%);
+    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 60%, rgba(var(--aurora-purple-rgb), 0.32) 40%);
   }
 
   :global(html[data-theme='dark']) .partner-card[data-variant='line'] .partner-card__meta {
-    background: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--signal-yellow-rgb), 0.26) 30%);
-    border-color: color-mix(in srgb, var(--border) 38%, rgba(var(--signal-yellow-rgb), 0.38) 62%);
-  }
-
-  :global(html[data-theme='hc']) .partner-card,
-  :global(html[data-theme='hc']) .partners__clients {
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
-    box-shadow: none;
-  }
-
-  :global(html[data-theme='hc']) .partner-card__meta,
-  :global(html[data-theme='hc']) .partners__client-list li {
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
+    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--signal-yellow-rgb), 0.26) 30%);
+    --surface-panel-border: color-mix(in srgb, var(--border) 38%, rgba(var(--signal-yellow-rgb), 0.38) 62%);
+    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 92%, rgba(var(--signal-yellow-rgb), 0.18) 8%);
+    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.4) 44%);
   }
 
   :global(html[data-theme='hc']) .partner-card__badge,

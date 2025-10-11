@@ -43,7 +43,7 @@
   <div class="toast-wrapper" role="status" aria-live="polite">
     <button
       type="button"
-      class="toast toast-{type}"
+      class="toast os-window toast-{type}"
       transition:fly={{ y: -50, duration: 300 }}
       on:click={closeToast}
     >
@@ -65,34 +65,72 @@
   }
 
   .toast {
+    --toast-accent: var(--voyage-blue);
+    --toast-accent-rgb: var(--voyage-blue-rgb);
+    --surface-glass-blur: blur(18px);
+    --surface-glass-bg:
+      color-mix(
+        in srgb,
+        var(--bg-elev-1) 86%,
+        rgba(var(--voyage-blue-rgb), 0.22) 14%
+      );
+    --surface-glass-border: color-mix(
+      in srgb,
+      rgba(var(--voyage-blue-rgb), 0.46) 62%,
+      rgba(255, 255, 255, 0.34) 38%
+    );
+    --surface-glass-shadow: 0 22px 44px rgba(var(--voyage-blue-rgb), 0.22);
+    --grain-opacity: 0.06;
+    --grain-blend-mode: soft-light;
+    --os-window-hc-bg: var(--bg-elev-1);
+    --os-window-hc-border: var(--toast-accent, currentColor);
+    --os-window-hc-shadow: none;
+    --card-padding-lg: clamp(1rem, 2.6vw, 1.25rem) clamp(1.5rem, 3.6vw, 2rem);
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    padding: var(--space-4) var(--space-6);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
-    cursor: pointer;
     max-width: 400px;
     font: inherit;
     color: inherit;
     text-align: left;
+    cursor: pointer;
+    border-inline-start: 4px solid var(--toast-accent);
   }
-  
+
   .toast-success {
-    border-left: 4px solid #10B981;
+    --toast-accent: var(--accent-1);
+    --toast-accent-rgb: var(--accent-1-rgb);
+    --surface-glass-bg:
+      color-mix(
+        in srgb,
+        var(--bg-elev-1) 84%,
+        rgba(var(--accent-1-rgb), 0.26) 16%
+      );
+    --surface-glass-border: color-mix(
+      in srgb,
+      rgba(var(--accent-1-rgb), 0.5) 60%,
+      rgba(255, 255, 255, 0.34) 40%
+    );
+    --surface-glass-shadow: 0 22px 46px rgba(var(--accent-1-rgb), 0.22);
   }
-  
+
   .toast-error {
-    border-left: 4px solid var(--cherry-pop);
+    --toast-accent: var(--cherry-pop);
+    --toast-accent-rgb: var(--cherry-pop-rgb);
+    --surface-glass-bg:
+      color-mix(
+        in srgb,
+        var(--bg-elev-1) 82%,
+        rgba(var(--cherry-pop-rgb), 0.28) 18%
+      );
+    --surface-glass-border: color-mix(
+      in srgb,
+      rgba(var(--cherry-pop-rgb), 0.48) 60%,
+      rgba(255, 255, 255, 0.32) 40%
+    );
+    --surface-glass-shadow: 0 22px 48px rgba(var(--cherry-pop-rgb), 0.24);
   }
-  
-  .toast-info {
-    border-left: 4px solid var(--voyage-blue);
-  }
-  
+
   .toast-icon {
     width: 32px;
     height: 32px;
@@ -102,23 +140,10 @@
     border-radius: 50%;
     font-size: 1.25rem;
     font-weight: var(--weight-bold);
-  }
-  
-  .toast-success .toast-icon {
-    background: rgba(var(--accent-1-rgb, 15, 214, 201), 0.1);
-    color: var(--accent-1);
+    background: rgba(var(--toast-accent-rgb, var(--voyage-blue-rgb)), 0.12);
+    color: var(--toast-accent, var(--voyage-blue));
   }
 
-  .toast-error .toast-icon {
-    background: rgba(var(--cherry-pop-rgb), 0.1);
-    color: var(--cherry-pop);
-  }
-  
-  .toast-info .toast-icon {
-    background: rgba(var(--voyage-blue-rgb), 0.1);
-    color: var(--voyage-blue);
-  }
-  
   .toast-message {
     flex: 1;
     color: var(--text-primary);

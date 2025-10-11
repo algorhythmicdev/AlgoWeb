@@ -5,7 +5,6 @@
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const SURFACE_CLASS = 'os-window';
-const SURFACE_HINTS = ['card', 'feature', 'item', 'surface', 'panel'];
 const isBrowser = typeof window !== 'undefined';
 
 const tokenCache = new Map();
@@ -46,10 +45,13 @@ const shouldReduceMotion = () => isBrowser && window.matchMedia(REDUCED_MOTION_Q
  * @param {HTMLElement} node
  */
 const normaliseSurface = (node) => {
-  if (!node.classList.contains('glass-card')) {
-    node.classList.add('glass-card');
+  if (node.classList.contains('glass-card')) {
+    node.classList.remove('glass-card');
+    node.classList.add(SURFACE_CLASS);
+    return;
   }
-  if (node.dataset.surface === 'window' || SURFACE_HINTS.some((cls) => node.classList.contains(cls))) {
+
+  if (node.dataset.surface === 'window') {
     node.classList.add(SURFACE_CLASS);
   }
 };

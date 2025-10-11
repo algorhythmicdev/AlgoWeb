@@ -178,7 +178,7 @@
 <svelte:window on:scroll={handleScroll} on:resize={handleResize} on:keydown={handleKeydown} />
 
 <nav
-  class="nav-shell"
+  class="nav-shell os-window"
   class:nav-condensed={isScrolled}
   class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
   class:menu-open={$navigation.isMenuOpen}
@@ -197,7 +197,7 @@
     <div class="nav-groups">
       <div
         id="primary-navigation"
-        class="nav-links"
+        class="nav-links os-window"
         role="navigation"
         aria-label={$_('nav.primary_label')}
         data-open={$navigation.isMenuOpen}
@@ -219,7 +219,7 @@
 
               {#if item.children?.length}
                 <div
-                  class="nav-submenu glass-card"
+                  class="nav-submenu os-window"
                   data-variant="grid"
                   role="group"
                   aria-label={$_('nav.products_panel_label')}
@@ -278,19 +278,30 @@
     position: fixed;
     inset: 0 0 auto 0;
     z-index: var(--z-sticky);
-    background: color-mix(in srgb, var(--surface-glass-bg) 86%, rgba(var(--voyage-blue-rgb), 0.1) 14%);
-    background-image:
-      linear-gradient(120deg, color-mix(in srgb, var(--grad-a) 16%, transparent) 0%, color-mix(in srgb, var(--grad-b) 12%, transparent) 100%),
-      var(--grain-texture);
-    background-blend-mode: screen, soft-light;
-    backdrop-filter: var(--surface-glass-blur) saturate(1.12);
-    -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.12);
+    --surface-glass-blur: 26px;
+    --surface-glass-bg:
+      linear-gradient(
+        120deg,
+        color-mix(in srgb, var(--grad-a) 16%, transparent) 0%,
+        color-mix(in srgb, var(--grad-b) 12%, transparent) 100%
+      ),
+      color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.16) 10%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 62%, rgba(255, 255, 255, 0.36) 38%);
+    --surface-glass-shadow: 0 24px 52px rgba(var(--voyage-blue-rgb), 0.18);
+    --grain-opacity: 0.05;
+    --grain-blend-mode: soft-light;
+    --os-window-hc-bg: transparent;
+    --os-window-hc-border: transparent;
+    --os-window-hc-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    border: 0;
     border-bottom: 1px solid var(--surface-glass-border);
+    overflow: visible;
     transition: transform var(--duration-normal) var(--ease-out),
       box-shadow var(--duration-normal) var(--ease-out),
       border-color var(--duration-normal) var(--ease-out),
       background var(--duration-normal) var(--ease-out);
-    box-shadow: var(--surface-glass-shadow);
   }
 
   .nav-shell.hidden {
@@ -298,13 +309,50 @@
   }
 
   .nav-shell.nav-condensed {
-    background: color-mix(in srgb, var(--surface-glass-bg) 78%, rgba(var(--voyage-blue-rgb), 0.18) 22%);
-    border-bottom-color: color-mix(in srgb, var(--surface-glass-border) 68%, rgba(var(--voyage-blue-rgb), 0.22) 32%);
-    box-shadow: 0 26px 56px rgba(10, 18, 36, 0.2);
+    --surface-glass-bg:
+      linear-gradient(
+        120deg,
+        color-mix(in srgb, var(--grad-a) 18%, transparent) 0%,
+        color-mix(in srgb, var(--grad-b) 14%, transparent) 100%
+      ),
+      color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--voyage-blue-rgb), 0.24) 16%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.3) 36%);
+    --surface-glass-shadow: 0 26px 56px rgba(10, 18, 36, 0.2);
+    --grain-opacity: 0.065;
+    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.3) 36%);
+  }
+
+  :global([data-base-theme='dark']) .nav-shell {
+    --surface-glass-bg:
+      linear-gradient(
+        120deg,
+        color-mix(in srgb, var(--grad-a) 20%, transparent) 0%,
+        color-mix(in srgb, var(--grad-b) 16%, transparent) 100%
+      ),
+      color-mix(in srgb, var(--bg-elev-2) 84%, rgba(var(--voyage-blue-rgb), 0.32) 16%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-glass-shadow: 0 30px 58px rgba(var(--voyage-blue-rgb), 0.28);
+    --grain-opacity: 0.07;
+    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
+  }
+
+  :global([data-base-theme='dark']) .nav-shell.nav-condensed {
+    --surface-glass-bg:
+      linear-gradient(
+        120deg,
+        color-mix(in srgb, var(--grad-a) 22%, transparent) 0%,
+        color-mix(in srgb, var(--grad-b) 18%, transparent) 100%
+      ),
+      color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--voyage-blue-rgb), 0.4) 22%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-glass-shadow: 0 32px 64px rgba(var(--voyage-blue-rgb), 0.32);
+    --grain-opacity: 0.08;
+    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 60%, rgba(255, 255, 255, 0.22) 40%);
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-shell {
     background: transparent;
+    border: 0;
     border-bottom: 2px solid currentColor;
     box-shadow: none;
     background-image: none;
@@ -340,6 +388,23 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .nav-links.os-window {
+    --surface-glass-bg: transparent;
+    --surface-glass-border: transparent;
+    --surface-glass-shadow: none;
+    --grain-opacity: 0;
+    --os-window-hc-bg: transparent;
+    --os-window-hc-border: transparent;
+    --os-window-hc-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .nav-list {
@@ -423,11 +488,29 @@
     min-width: clamp(220px, 22vw, 320px);
     padding: clamp(0.85rem, 2vw, 1.25rem);
     border-radius: var(--radius-xl);
+    --surface-glass-blur: 24px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 60%, rgba(255, 255, 255, 0.32) 40%);
+    --surface-glass-shadow: 0 24px 48px rgba(var(--voyage-blue-rgb), 0.2);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.1) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 60%, rgba(var(--voyage-blue-rgb), 0.28) 40%);
     transition:
       opacity var(--duration-normal) var(--ease-out),
       transform var(--duration-normal) var(--ease-out),
       visibility var(--duration-normal) var(--ease-out);
     z-index: var(--z-elevated);
+  }
+
+  :global([data-base-theme='dark']) .nav-item--group .nav-submenu {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--voyage-blue-rgb), 0.3) 24%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.2) 40%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.28);
+    --grain-opacity: 0.07;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 94%, rgba(var(--voyage-blue-rgb), 0.14) 6%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--voyage-blue-rgb), 0.26) 36%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
   }
 
   .nav-item--group:hover .nav-submenu,
@@ -570,11 +653,21 @@
       left: clamp(1.25rem, 5vw, 2rem);
       padding: clamp(1rem, 4vw, 1.5rem);
       border-radius: var(--radius-2xl);
-      border: 1px solid var(--surface-glass-border);
-      background: color-mix(in srgb, var(--surface-glass-bg) 86%, rgba(var(--voyage-blue-rgb), 0.14) 14%);
-      box-shadow: var(--surface-glass-shadow);
-      backdrop-filter: var(--surface-glass-blur) saturate(1.08);
-      -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.08);
+      --surface-glass-blur: 26px;
+      --surface-glass-bg:
+        linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--grad-a) 14%, transparent) 0%,
+          color-mix(in srgb, var(--grad-b) 12%, transparent) 100%
+        ),
+        color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.18) 10%);
+      --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 60%, rgba(255, 255, 255, 0.32) 40%);
+      --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.24);
+      --grain-opacity: 0.06;
+      --grain-blend-mode: soft-light;
+      --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%);
+      --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.26) 34%);
+      --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
       transform: translateY(-20px);
       opacity: 0;
       visibility: hidden;
@@ -583,6 +676,24 @@
         opacity var(--duration-normal) var(--ease-out),
         transform var(--duration-normal) var(--ease-out),
         visibility var(--duration-normal) var(--ease-out);
+    }
+
+    .nav-links.os-window {
+      backdrop-filter: var(--surface-glass-blur) saturate(1.08);
+      -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.08);
+    }
+
+    :global([data-base-theme='dark']) .nav-links {
+      --surface-glass-bg:
+        linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--grad-a) 18%, transparent) 0%,
+          color-mix(in srgb, var(--grad-b) 14%, transparent) 100%
+        ),
+        color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.3) 18%);
+      --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
+      --surface-glass-shadow: 0 32px 60px rgba(var(--voyage-blue-rgb), 0.3);
+      --grain-opacity: 0.075;
     }
 
     .nav-links[data-open='true'] {
@@ -614,12 +725,17 @@
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      background: none;
-      border: none;
-      box-shadow: none;
+      --surface-glass-blur: 0px;
+      --surface-glass-bg: transparent;
+      --surface-glass-border: transparent;
+      --surface-glass-shadow: none;
+      --grain-opacity: 0;
+      border: 0;
       padding: 0;
       gap: 0.75rem;
       margin-top: 0.6rem;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     .nav-submenu__link {
@@ -654,6 +770,9 @@
     background: transparent;
     border: 2px solid currentColor;
     box-shadow: none;
+    --os-window-hc-bg: transparent;
+    --os-window-hc-border: currentColor;
+    --os-window-hc-shadow: none;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-button {
@@ -668,5 +787,13 @@
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-submenu__link {
     border: 2px solid currentColor;
     background: transparent;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-item--group .nav-submenu {
+    --os-window-hc-bg: transparent;
+    --os-window-hc-border: currentColor;
+    --os-window-hc-shadow: none;
+    border: 2px solid currentColor;
+    box-shadow: none;
   }
 </style>

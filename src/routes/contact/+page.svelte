@@ -225,7 +225,7 @@
           {#if item.action === 'calendly'}
             <button
               type="button"
-              class="contact-hero__cta glass-card"
+              class="contact-hero__cta os-window"
               on:click={openCalendly}
             >
               <span class="contact-hero__cta-label">{item.label}</span>
@@ -236,7 +236,7 @@
             </button>
           {:else}
             <a
-              class="contact-hero__cta glass-card"
+              class="contact-hero__cta os-window"
               href={item.action}
               target={item.action.startsWith('http') ? '_blank' : undefined}
               rel={item.action.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -498,6 +498,19 @@
     padding: clamp(1.25rem, 3vw, 1.85rem);
     text-align: left;
     border-radius: var(--radius-2xl);
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--voyage-blue-rgb), 0.26) 18%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.44) 60%, rgba(255, 255, 255, 0.34) 40%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.26);
+    --grain-opacity: 0.055;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--voyage-blue-rgb), 0.14) 5%);
+    --os-window-hc-border: var(--border-strong);
+    --os-window-hc-shadow: 0 0 0 1px var(--border-strong);
+  }
+
+  :global([data-base-theme='dark']) .contact-hero__cta {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--voyage-blue-rgb), 0.34) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.6) 56%, rgba(255, 255, 255, 0.22) 44%);
+    --surface-glass-shadow: 0 32px 60px rgba(var(--voyage-blue-rgb), 0.34);
   }
 
   .contact-hero__cta-label {
@@ -527,6 +540,10 @@
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-hero__cta-label {
     color: var(--text-primary);
+  }
+
+  :global(html[data-theme='hc']) .contact-hero__cta-description {
+    color: var(--text-secondary, var(--text));
   }
 
   @media (min-width: 768px) {
