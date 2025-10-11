@@ -375,6 +375,7 @@
   },
   "community": {
     "meta_title": "AlgoRhythmics community",
+    "meta_description": "Co-create every release with feature votes, roadmap updates, and open feedback loops.",
     "hero_title": "Co-create every release",
     "hero_subtitle": "Vote on priorities, share feedback, and follow our progress in real time.",
     "hero_rotating": [
@@ -463,6 +464,7 @@
   },
   "consulting": {
     "meta_title": "AlgoRhythmics consulting",
+    "meta_description": "Join the calm AI consulting pilot for workshops, implementation support, and ongoing advisory care.",
     "hero_title": "Friendly AI consulting for real teams",
     "hero_subtitle": "Strategy, builds, and long-term care tailored to your pace.",
     "hero_description": "We work alongside your team to design AI workflows that respect people, processes, and change management.",
@@ -570,6 +572,7 @@
   },
   "contact": {
     "meta_title": "Contact AlgoRhythmics",
+    "meta_description": "Reach the founders for pilots, partnerships, press, or community collaborations.",
     "hero_title": "Let’s start a conversation",
     "hero_subtitle": "Reach out for pilots, partnerships, press, or community collaborations.",
     "hero_rotating": [

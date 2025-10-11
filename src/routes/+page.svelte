@@ -4,6 +4,7 @@
   import PartnersSection from '$sections/PartnersSection.svelte';
   import CallToActionSection from '$sections/CallToActionSection.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
+  import { Button } from '$lib/components';
   import { _ } from 'svelte-i18n';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
   import productsData from '$data/products.json';
@@ -469,12 +470,12 @@
 
   <svelte:fragment slot="actions">
     <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
-      <a class="home-hero__action btn btn-gradient btn-lg" href="#products">
+      <Button class="home-hero__action" variant="gradient" size="lg" href="#products">
         <span>{heroPrimaryActionLabel}</span>
-      </a>
-      <a class="home-hero__action btn btn-secondary btn-lg" href="/consulting">
+      </Button>
+      <Button class="home-hero__action" variant="secondary" size="lg" href="/consulting">
         <span>{heroSecondaryActionLabel}</span>
-      </a>
+      </Button>
     </div>
   </svelte:fragment>
 

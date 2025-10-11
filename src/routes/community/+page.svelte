@@ -1,13 +1,14 @@
 ﻿<script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
-  import { Icon } from '$lib/components';
+  import { Button, Icon } from '$lib/components';
   import Hero from '$lib/components/Hero.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { voting } from '$stores/voting';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
+  import { revealOnScroll, staggerReveal } from '$lib/utils/animations';
 
   const fallbackHeroPhrases = Array.isArray(en.community?.hero_rotating)
     ? en.community.hero_rotating
@@ -74,6 +75,9 @@
     ideonautix: 'grid'
   };
 
+  const siteOrigin = (en.seo?.default_url ?? 'https://algorhythmics.com').replace(/\/$/, '');
+  const canonicalUrl = `${siteOrigin}/community`;
+
   
   let features = [
     { id: 'ai-trip-optimizer', votes: 127, product: 'nodevoyage' },
@@ -128,7 +132,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('community.meta_title')}</title>
+  <link rel="canonical" href={canonicalUrl} />
 </svelte:head>
 
 {#if showToast}
@@ -158,7 +162,10 @@
 
   <svelte:fragment slot="metrics">
     {#if heroMetrics.length}
-      <ul class="hero-metrics community-hero__metrics">
+      <ul
+        class="hero-metrics community-hero__metrics"
+        use:staggerReveal={{ stagger: 120, selector: '.community-hero__metric' }}
+      >
         {#each heroMetrics as metric (metric.label)}
           <li class="community-hero__metric os-window">
             <span class="community-hero__metric-value">{metric.value}</span>
@@ -171,15 +178,16 @@
 </Hero>
 
 <!-- Voting Section -->
-<section class="voting-section">
+<section class="voting-section" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title">{$_('community.voting_title')}</h2>
     <p class="section-subtitle">{$_('community.voting_subtitle')}</p>
-    
+
     <div
       class="features-grid"
       role="list"
       aria-label={$_('community.voting_list_aria')}
+      use:staggerReveal={{ stagger: 160, selector: '.feature-card' }}
     >
       {#each sortedFeatures as feature, index (feature.id)}
         <MagneticTiltCard
@@ -210,14 +218,13 @@
           <h3 class="feature-name">{$_(`community.features.${feature.id}.name`)}</h3>
           <p class="feature-description">{$_(`community.features.${feature.id}.description`)}</p>
 
-          <button
-            type="button" class="vote-button btn"
-            class:btn-secondary={!$voting[feature.id]}
-            class:btn-gradient={$voting[feature.id]}
-            class:voted={$voting[feature.id]}
+          <Button
+            type="button"
+            class={`vote-button${$voting[feature.id] ? ' voted' : ''}`}
+            variant={$voting[feature.id] ? 'gradient' : 'secondary'}
+            pressed={$voting[feature.id]}
             on:click={() => handleVote(feature.id)}
-            aria-pressed={$voting[feature.id]}
-            aria-label={$_('community.vote_for', { values: { feature: $_(`community.features.${feature.id}.name`) } })}
+            ariaLabel={$_('community.vote_for', { values: { feature: $_(`community.features.${feature.id}.name`) } })}
           >
             {#if $voting[feature.id]}
               <span class="vote-icon" aria-hidden="true">
@@ -227,7 +234,7 @@
             {:else}
               <span>{$_('community.vote_button')}</span>
             {/if}
-          </button>
+          </Button>
         </MagneticTiltCard>
       {/each}
     </div>
@@ -235,7 +242,7 @@
 </section>
 
 <!-- Submit Idea -->
-<section class="idea-section">
+<section class="idea-section" use:revealOnScroll>
   <div class="container">
     <MagneticTiltCard class="idea-card" interactive={false}>
       <h2>{$_('community.ideas_title')}</h2>
@@ -249,12 +256,9 @@
           aria-describedby="idea-help"
         ></textarea>
         <div id="idea-help" class="sr-only">{$_('community.ideas_helper')}</div>
-        <button
-          class="btn btn-primary btn-lg"
-          on:click={submitIdea}
-        >
+        <Button variant="primary" size="lg" on:click={submitIdea}>
           {$_('community.ideas_submit')}
-        </button>
+        </Button>
       </div>
     </MagneticTiltCard>
   </div>
@@ -465,11 +469,11 @@
     line-height: var(--leading-relaxed);
   }
 
-  .vote-button {
+  :global(.vote-button) {
     gap: 0.45rem;
   }
 
-  .vote-button.voted {
+  :global(.vote-button.voted) {
     --btn-shadow: 0 18px 36px rgba(var(--voyage-blue-rgb), 0.28);
   }
 

@@ -27,11 +27,12 @@ static/
     │   ├── brand-star-wars.png
     │   ├── liaa-logo.png
     │   └── reclame-fabriek-logo.png
-    └── products/
-        ├── ideonautix-hero.png
-        ├── ideonautix-icon.png
-        ├── nodevoyage-hero.png
-        └── nodevoyage-icon.png
+    ├── products/
+    │   ├── ideonautix-hero.png
+    │   ├── ideonautix-icon.png
+    │   ├── nodevoyage-hero.png
+    │   └── nodevoyage-icon.png
+    └── ui/
 ```
 
 ## Root Assets
@@ -86,3 +87,4 @@ static/
 - Preserve transparent backgrounds for logos so they render correctly on glass surfaces in both themes.
 - When replacing any file, keep the filename stable or update import paths throughout the codebase to avoid broken references.
 - Maintain the Open Graph image at 1200 × 630 pixels to satisfy major social media platforms.
+- UI grain and glass overlays are now procedurally generated in CSS, so no additional texture bitmaps live under `static/`.

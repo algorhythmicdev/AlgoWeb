@@ -1,6 +1,7 @@
 <script lang="ts">
   import { _, json } from 'svelte-i18n';
   import en from '$lib/i18n/en.json';
+  import { Button } from '$lib/components';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
 
   type CTAConfig = {
@@ -82,12 +83,12 @@
             aria-label={$_('nav.talk_to_us')}
             use:staggerReveal={{ stagger: 120 }}
           >
-            <a class="cta-action btn btn-gradient" href="/community">
+            <Button class="cta-action" variant="gradient" href="/community">
               <span>{primaryCta}</span>
-            </a>
-            <a class="cta-action btn btn-secondary" href="/consulting">
+            </Button>
+            <Button class="cta-action" variant="secondary" href="/consulting">
               <span>{secondaryCta}</span>
-            </a>
+            </Button>
           </div>
         </div>
       </div>
@@ -221,8 +222,9 @@
     justify-items: start;
   }
 
-  .cta-action {
+  :global(.cta-action) {
     position: relative;
+    display: inline-flex;
   }
 
   @keyframes float {
@@ -244,7 +246,7 @@
       justify-items: stretch;
     }
 
-    .cta-action {
+    :global(.cta-action) {
       width: 100%;
     }
   }

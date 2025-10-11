@@ -6,6 +6,7 @@
   import { tick } from 'svelte';
   import { navigation } from '$stores/navigation';
   import { theme } from '$stores/theme';
+  import { Button } from '$lib/components';
   import LanguageSwitcher from './language-switcher.svelte';
   import ThemeToggle from './theme-toggle.svelte';
   import { mainNavigation } from '$config/navigation';
@@ -280,7 +281,9 @@
       <div class="nav-actions">
         <LanguageSwitcher />
         <ThemeToggle />
-        <a href="/contact" class="nav-button btn btn-gradient hover-lift">{$_('nav.talk_to_us')}</a>
+        <Button href="/contact" class="nav-button" variant="gradient" elevate>
+          {$_('nav.talk_to_us')}
+        </Button>
         <button
           class="nav-trigger"
           on:click={() => navigation.toggleMenu()}

@@ -65,8 +65,11 @@
   --border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 42%, #d5ddef 58%);
   --border-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 48%, #bcc6de 52%);
 
-  --focus-ring: 0 0 0 3px color-mix(in oklab, var(--voyage-blue) 55%, white 45%);
-  --focus-ring-contrast: 0 0 0 3px color-mix(in oklab, var(--slate-base) 70%, white 30%);
+  --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, #ffffff 30%);
+  --focus-ring-shadow: 0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 70%, transparent 30%);
+  --focus-ring-offset: 3px;
+  --focus-ring: 0 0 0 2px var(--focus-ring-color);
+  --focus-ring-contrast: 0 0 0 2px color-mix(in srgb, var(--slate-base) 70%, #ffffff 30%);
 
   /* Core surface anchors referenced across themes */
   --surface-aurora-mist: var(--cloud);
@@ -283,7 +286,12 @@
   --shadow-lg: 0 38px 88px rgba(15, 23, 42, 0.18);
   --shadow-xl: 0 52px 132px rgba(15, 23, 42, 0.22);
 
-  --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.24'/%3E%3C/svg%3E");
+  --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)'/%3E%3C/svg%3E");
+  --glass-texture:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 58%),
+    radial-gradient(circle at 82% 28%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 64%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 60%);
+  --glass-layer: var(--glass-texture);
   --backdrop-canvas: linear-gradient(
     180deg,
     color-mix(in srgb, rgba(var(--cloud-rgb), 0.92) 82%, rgba(var(--voyage-blue-rgb), 0.12) 18%) 0%,
@@ -375,8 +383,11 @@
   --border: #222a3a;
   --border-strong: #2e374b;
 
-  --focus-ring: 0 0 0 3px color-mix(in oklab, var(--voyage-blue) 65%, white 20%, black 15%);
-  --focus-ring-contrast: 0 0 0 3px color-mix(in oklab, var(--snow) 70%, black 30%);
+  --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 60%, #dde7ff 40%);
+  --focus-ring-shadow: 0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 80%, transparent 20%);
+  --focus-ring-offset: 3px;
+  --focus-ring: 0 0 0 2px var(--focus-ring-color);
+  --focus-ring-contrast: 0 0 0 2px color-mix(in srgb, #f7f8ff 78%, rgba(0, 0, 0, 0.2) 22%);
 
   --bg-primary: var(--bg);
   --bg-surface: var(--card);
@@ -470,8 +481,11 @@
   --accent-tertiary: var(--accent-2);
   --accent-tertiary-rgb: var(--accent-2-rgb);
 
-  --focus-ring: 0 0 0 3px #000000;
-  --focus-ring-contrast: 0 0 0 3px #000000;
+  --focus-ring-color: currentColor;
+  --focus-ring-shadow: 0 0 0 2px currentColor;
+  --focus-ring-offset: 3px;
+  --focus-ring: 0 0 0 2px currentColor;
+  --focus-ring-contrast: 0 0 0 2px currentColor;
 
   --bg-primary: var(--bg);
   --bg-surface: var(--card);
