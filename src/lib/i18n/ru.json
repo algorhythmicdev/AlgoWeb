@@ -233,6 +233,10 @@
     "nav_next": "Следующий этап",
     "preview_label": "Предпросмотр дорожной карты",
     "upcoming_badge": "Скоро",
+    "filters_label": "Фильтровать этапы по статусу",
+    "filters_reset": "Показать все статусы",
+    "filters_all": "Все статусы",
+    "filters_empty": "Нет этапов, соответствующих выбранным статусам.",
     "milestone_live_label": "Просматривается {title}{progress}",
     "progress_label": "Этап {current} из {total}",
     "milestones": {

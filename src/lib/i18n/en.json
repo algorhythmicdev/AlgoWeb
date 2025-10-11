@@ -232,6 +232,10 @@
     "nav_next": "Next milestone",
     "preview_label": "Roadmap preview",
     "upcoming_badge": "Upcoming",
+    "filters_label": "Filter milestones by status",
+    "filters_reset": "Show all statuses",
+    "filters_all": "All statuses",
+    "filters_empty": "No milestones match the selected statuses yet.",
     "milestone_live_label": "Now viewing {title}{progress}",
     "progress_label": "Milestone {current} of {total}",
     "milestones": {

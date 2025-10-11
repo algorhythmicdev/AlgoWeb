@@ -233,6 +233,10 @@
     "nav_next": "Siguiente hito",
     "preview_label": "Vista previa de la hoja de ruta",
     "upcoming_badge": "Próximo",
+    "filters_label": "Filtrar hitos por estado",
+    "filters_reset": "Mostrar todos los estados",
+    "filters_all": "Todos los estados",
+    "filters_empty": "Ningún hito coincide con los estados seleccionados.",
     "milestone_live_label": "Ahora viendo {title}{progress}",
     "progress_label": "Hito {current} de {total}",
     "milestones": {

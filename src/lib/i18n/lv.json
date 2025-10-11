@@ -233,6 +233,10 @@
     "nav_next": "Nākamais posms",
     "preview_label": "Ceļa kartes priekšskatījums",
     "upcoming_badge": "Gaidāms",
+    "filters_label": "Filtrēt posmus pēc statusa",
+    "filters_reset": "Rādīt visus statusus",
+    "filters_all": "Visi statusi",
+    "filters_empty": "Neviens posms neatbilst izvēlētajiem statusiem.",
     "milestone_live_label": "Skatāt {title}{progress}",
     "progress_label": "Posms {current} no {total}",
     "milestones": {
