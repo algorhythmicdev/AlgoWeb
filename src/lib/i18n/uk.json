@@ -233,6 +233,10 @@
     "nav_next": "Наступний етап",
     "preview_label": "Попередній перегляд дорожньої карти",
     "upcoming_badge": "Незабаром",
+    "filters_label": "Фільтрувати етапи за статусом",
+    "filters_reset": "Показати всі статуси",
+    "filters_all": "Усі статуси",
+    "filters_empty": "Немає етапів, що відповідають вибраним статусам.",
     "milestone_live_label": "Переглядаємо {title}{progress}",
     "progress_label": "Етап {current} з {total}",
     "milestones": {

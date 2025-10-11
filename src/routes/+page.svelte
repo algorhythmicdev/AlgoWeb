@@ -112,6 +112,19 @@
 
   const fallbackTimelinePreviewLabel = ensureString(en.timeline?.preview_label, 'Roadmap preview');
   const fallbackTimelineUpcomingBadge = ensureString(en.timeline?.upcoming_badge, 'Upcoming');
+  const fallbackTimelineFiltersLabel = ensureString(
+    en.timeline?.filters_label,
+    'Filter milestones by status'
+  );
+  const fallbackTimelineFiltersReset = ensureString(
+    en.timeline?.filters_reset,
+    'Show all statuses'
+  );
+  const fallbackTimelineFiltersAll = ensureString(en.timeline?.filters_all, 'All statuses');
+  const fallbackTimelineFiltersEmpty = ensureString(
+    en.timeline?.filters_empty,
+    'No milestones match the selected statuses yet.'
+  );
   const fallbackMilestoneLiveLabel = ensureString(
     en.timeline?.milestone_live_label,
     'Now viewing {title}{progress}'
@@ -151,6 +164,15 @@
   let upcomingMilestoneCategoryLabel = '';
   let timelinePreviewLabel = fallbackTimelinePreviewLabel;
   let timelineUpcomingBadgeLabel = fallbackTimelineUpcomingBadge;
+  let timelineFiltersLabel = fallbackTimelineFiltersLabel;
+  let timelineFiltersResetLabel = fallbackTimelineFiltersReset;
+  let timelineFiltersAllLabel = fallbackTimelineFiltersAll;
+  let timelineFiltersEmptyLabel = fallbackTimelineFiltersEmpty;
+  let timelineFiltersSummary = '';
+  let timelineStatusOptions: Array<{ value: string; label: string; priority: number }> = [];
+  let activeStatusFilters: string[] = [];
+  let timelineFilteredMilestones: TimelineMilestone[] = timelineData.milestones;
+  let timelineOverviewHighlights: TimelineMilestone[] = [];
   let milestoneLiveAnnouncement = '';
 
   const toReadableLabel = (value: string): string =>
@@ -213,6 +235,58 @@
   })();
 
   $: timelineHighlights = milestoneCandidates.slice(0, 3);
+
+  $: timelineStatusOptions = Array.from(
+    new Set(sortedMilestones.map((milestone) => milestone.status).filter(Boolean))
+  )
+    .map((status) => ({
+      value: status,
+      label: toReadableLabel(status),
+      priority: milestoneStatusPriority[status] ?? Number.POSITIVE_INFINITY
+    }))
+    .sort((a, b) => {
+      const priorityDiff = a.priority - b.priority;
+      if (priorityDiff !== 0) return priorityDiff;
+      return a.label.localeCompare(b.label);
+    });
+
+  const orderStatuses = (values: string[]): string[] => {
+    const unique = new Set(values.filter(Boolean));
+    return timelineStatusOptions
+      .filter((option) => unique.has(option.value))
+      .map((option) => option.value);
+  };
+
+  $: {
+    if (!timelineStatusOptions.length) {
+      if (activeStatusFilters.length) {
+        activeStatusFilters = [];
+      }
+    } else if (!activeStatusFilters.length) {
+      activeStatusFilters = timelineStatusOptions.map((option) => option.value);
+    } else {
+      const ordered = orderStatuses(activeStatusFilters);
+      if (ordered.length !== activeStatusFilters.length) {
+        activeStatusFilters = ordered.length
+          ? ordered
+          : timelineStatusOptions.map((option) => option.value);
+      } else if (ordered.some((value, index) => value !== activeStatusFilters[index])) {
+        activeStatusFilters = ordered;
+      }
+    }
+  }
+
+  $: timelineFilteredMilestones = timelineData.milestones.filter((milestone) =>
+    activeStatusFilters.includes(milestone.status)
+  );
+
+  $: timelineOverviewHighlights = (() => {
+    if (!timelineHighlights.length) return [];
+    const filtered = timelineHighlights.filter((milestone) =>
+      activeStatusFilters.includes(milestone.status)
+    );
+    return filtered.length ? filtered : timelineHighlights;
+  })();
 
   $: {
     const total = milestoneCandidates.length;
@@ -291,6 +365,23 @@
     }
   };
 
+  const toggleStatusFilter = (status: string) => {
+    if (!timelineStatusOptions.length) return;
+    const isActive = activeStatusFilters.includes(status);
+    const nextValues = isActive
+      ? activeStatusFilters.filter((value) => value !== status)
+      : [...activeStatusFilters, status];
+
+    const ordered = orderStatuses(nextValues);
+    activeStatusFilters = ordered.length
+      ? ordered
+      : timelineStatusOptions.map((option) => option.value);
+  };
+
+  const resetStatusFilters = () => {
+    activeStatusFilters = timelineStatusOptions.map((option) => option.value);
+  };
+
   $: upcomingMilestoneTitle = upcomingMilestone
     ? ensureString(
         $_(`timeline.milestones.${upcomingMilestone.id}.title`),
@@ -318,6 +409,26 @@
     $_('timeline.upcoming_badge'),
     fallbackTimelineUpcomingBadge
   );
+  $: timelineFiltersLabel = ensureString($_('timeline.filters_label'), fallbackTimelineFiltersLabel);
+  $: timelineFiltersResetLabel = ensureString(
+    $_('timeline.filters_reset'),
+    fallbackTimelineFiltersReset
+  );
+  $: timelineFiltersAllLabel = ensureString($_('timeline.filters_all'), fallbackTimelineFiltersAll);
+  $: timelineFiltersEmptyLabel = ensureString(
+    $_('timeline.filters_empty'),
+    fallbackTimelineFiltersEmpty
+  );
+  $: timelineFiltersSummary = (() => {
+    if (!timelineStatusOptions.length) return '';
+    if (activeStatusFilters.length === timelineStatusOptions.length) {
+      return timelineFiltersAllLabel;
+    }
+    return activeStatusFilters
+      .map((status) => timelineStatusOptions.find((option) => option.value === status)?.label ?? '')
+      .filter(Boolean)
+      .join(' • ');
+  })();
   $: milestoneLiveAnnouncement = upcomingMilestoneTitle
     ? ensureLabelValue(
         $_('timeline.milestone_live_label', {
@@ -642,9 +753,45 @@
           </div>
         {/if}
 
-        {#if timelineHighlights.length > 1}
+        {#if timelineStatusOptions.length}
+          <div class="timeline-filters" role="group" aria-label={timelineFiltersLabel}>
+            <div class="timeline-filters__header">
+              <span class="timeline-filters__label">{timelineFiltersLabel}</span>
+              {#if timelineFiltersSummary}
+                <span class="timeline-filters__summary" aria-live="polite">{timelineFiltersSummary}</span>
+              {/if}
+            </div>
+            <div class="timeline-filters__chips">
+              {#each timelineStatusOptions as option (option.value)}
+                <button
+                  type="button"
+                  class={`timeline-filters__chip surface-chip${
+                    activeStatusFilters.includes(option.value) ? ' is-active' : ''
+                  }`}
+                  on:click={() => toggleStatusFilter(option.value)}
+                  aria-pressed={activeStatusFilters.includes(option.value)}
+                >
+                  {option.label}
+                </button>
+              {/each}
+
+              <button
+                type="button"
+                class={`timeline-filters__chip surface-chip timeline-filters__chip--reset${
+                  activeStatusFilters.length === timelineStatusOptions.length ? ' is-active' : ''
+                }`}
+                on:click={resetStatusFilters}
+                aria-pressed={activeStatusFilters.length === timelineStatusOptions.length}
+              >
+                {timelineFiltersResetLabel}
+              </button>
+            </div>
+          </div>
+        {/if}
+
+        {#if timelineOverviewHighlights.length > 1}
           <ul class="timeline-overview__list" aria-label={timelinePreviewLabel}>
-            {#each timelineHighlights as highlight (highlight.id)}
+            {#each timelineOverviewHighlights as highlight (highlight.id)}
               <li>
                 <span class="timeline-overview__list-date">{formatMilestoneDate(highlight.date)}</span>
                 <span class="timeline-overview__list-title">{$_(`timeline.milestones.${highlight.id}.title`)}</span>
@@ -656,24 +803,36 @@
       </aside>
 
       <div class="timeline-track" id="timeline-track">
-        {#each timelineData.milestones as milestone, index}
-          <MagneticTiltCard class="timeline-card" staggerOptions={{ delay: 80 + index * 60 }}>
-            <div class="timeline-card__marker" aria-hidden="true"></div>
-            <div class="timeline-card__content">
-              <div class="timeline-card__meta">
-                <span class="timeline-card__date">
-                  {new Date(`${milestone.date}-01`).toLocaleString(undefined, { month: 'short', year: 'numeric' })}
-                </span>
-                <span class="timeline-card__status">{toReadableLabel(milestone.status)}</span>
+        {#if timelineFilteredMilestones.length}
+          {#each timelineFilteredMilestones as milestone, index (milestone.id)}
+            <MagneticTiltCard class="timeline-card" staggerOptions={{ delay: 80 + index * 60 }}>
+              <div class="timeline-card__marker" aria-hidden="true"></div>
+              <div class="timeline-card__content">
+                <div class="timeline-card__meta">
+                  <span class="timeline-card__date">
+                    {new Date(`${milestone.date}-01`).toLocaleString(undefined, {
+                      month: 'short',
+                      year: 'numeric'
+                    })}
+                  </span>
+                  <span class="timeline-card__status">{toReadableLabel(milestone.status)}</span>
+                </div>
+                <h3>{$_(`timeline.milestones.${milestone.id}.title`)}</h3>
+                <p>{$_(`timeline.milestones.${milestone.id}.description`)}</p>
+                {#if $_(`timeline.milestones.${milestone.id}.note`)}
+                  <p class="timeline-card__note">{$_(`timeline.milestones.${milestone.id}.note`)}</p>
+                {/if}
               </div>
-              <h3>{$_(`timeline.milestones.${milestone.id}.title`)}</h3>
-              <p>{$_(`timeline.milestones.${milestone.id}.description`)}</p>
-              {#if $_(`timeline.milestones.${milestone.id}.note`)}
-                <p class="timeline-card__note">{$_(`timeline.milestones.${milestone.id}.note`)}</p>
-              {/if}
-            </div>
-          </MagneticTiltCard>
-        {/each}
+            </MagneticTiltCard>
+          {/each}
+        {:else}
+          <div class="timeline-track__empty os-window" role="status">
+            <p>{timelineFiltersEmptyLabel}</p>
+            <button type="button" class="timeline-track__empty-reset surface-pill" on:click={resetStatusFilters}>
+              {timelineFiltersResetLabel}
+            </button>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
@@ -1666,6 +1825,60 @@
     color: color-mix(in srgb, var(--timeline-accent) 76%, var(--text) 24%);
   }
 
+  .timeline-filters {
+    display: grid;
+    gap: 0.85rem;
+    padding: clamp(1rem, 2vw, 1.2rem);
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--timeline-secondary) 12%, transparent 88%);
+    border: 1px solid color-mix(in srgb, var(--timeline-outline) 68%, transparent 32%);
+  }
+
+  .timeline-filters__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .timeline-filters__label {
+    font-size: var(--text-small);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: var(--weight-semibold);
+    color: color-mix(in srgb, var(--timeline-secondary) 78%, var(--text) 22%);
+  }
+
+  .timeline-filters__summary {
+    font-size: var(--text-small);
+    color: color-mix(in srgb, var(--timeline-accent) 74%, var(--text-secondary) 26%);
+  }
+
+  .timeline-filters__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .timeline-filters__chip {
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  }
+
+  .timeline-filters__chip.is-active {
+    background: color-mix(in srgb, var(--timeline-accent) 22%, transparent 78%);
+    border-color: color-mix(in srgb, var(--timeline-accent) 60%, transparent 40%);
+    color: color-mix(in srgb, var(--timeline-accent) 80%, var(--text) 20%);
+  }
+
+  .timeline-filters__chip--reset {
+    font-weight: var(--weight-medium);
+  }
+
   .timeline-track {
     position: relative;
     display: grid;
@@ -1685,6 +1898,30 @@
       color-mix(in srgb, var(--timeline-accent) 28%, transparent 72%) 0%,
       transparent 85%
     );
+  }
+
+  .timeline-track__empty {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    padding: clamp(1.6rem, 3vw, 2rem);
+    border-radius: var(--radius-xl);
+    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 16%, transparent 84%);
+    --surface-glass-border: color-mix(in srgb, var(--timeline-outline) 72%, transparent 28%);
+    --surface-glass-shadow: 0 18px 36px color-mix(in srgb, var(--timeline-shadow) 32%, transparent 68%);
+  }
+
+  .timeline-track__empty p {
+    margin: 0;
+    font-size: var(--text-base);
+    color: color-mix(in srgb, var(--timeline-accent) 82%, var(--text-secondary) 18%);
+  }
+
+  .timeline-track__empty-reset {
+    justify-self: start;
+    font-size: var(--text-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   :global(.timeline-card.os-window) {
@@ -1774,8 +2011,10 @@
   :global(html[data-theme='hc']) .timeline-overview__cta,
   :global(html[data-theme='hc']) .timeline-overview__note,
   :global(html[data-theme='hc']) .timeline-overview__list-status,
+  :global(html[data-theme='hc']) .timeline-filters__summary,
   :global(html[data-theme='hc']) .timeline-card__status,
-  :global(html[data-theme='hc']) .timeline-card__note {
+  :global(html[data-theme='hc']) .timeline-card__note,
+  :global(html[data-theme='hc']) .timeline-track__empty p {
     color: currentColor;
   }
 
@@ -1783,6 +2022,23 @@
     background: transparent;
     border-color: currentColor;
     box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .timeline-filters {
+    background: transparent;
+    border-color: var(--border);
+  }
+
+  :global(html[data-theme='hc']) .timeline-filters__chip {
+    background: transparent;
+    border-color: var(--border);
+    color: currentColor;
+  }
+
+  :global(html[data-theme='hc']) .timeline-filters__chip.is-active {
+    background: var(--bg-elev-1);
+    border-color: currentColor;
+    color: currentColor;
   }
 
   :global(html[data-theme='hc']) .timeline-overview__cta {
@@ -1807,6 +2063,19 @@
   :global(html[data-theme='hc']) .timeline-card__marker {
     background: currentColor;
     box-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .timeline-track__empty {
+    border: 2px solid var(--border);
+    --surface-glass-bg: transparent;
+    --surface-glass-border: var(--border);
+    --surface-glass-shadow: none;
+  }
+
+  :global(html[data-theme='hc']) .timeline-track__empty-reset {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: currentColor;
   }
 
   @media (max-width: 960px) {

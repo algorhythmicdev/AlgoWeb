@@ -102,6 +102,8 @@ _Update 2025-11-11:_ Cleared the residual wash overlays so the hero animation la
 _Update 2025-11-12:_ Backfilled Firefox-safe gradient and token fallbacks so the hero base, tone palettes, and particle overlays render edge-to-edge without the washed sidebar artefact.
 _Update 2025-11-13:_ Hardened the hero base gradient to stay fully opaque across fallback browsers, eliminating the milky underlay and restoring text contrast in Firefox.
 
+_Update 2025-11-14:_ Layered status filters into the home roadmap overview with accessible surface chips, live summaries, and a reset affordance so visitors can spotlight active or development milestones without breaking high-contrast safeguards.
+
 Create `src/lib/components/Hero.svelte`.
 
 ```svelte

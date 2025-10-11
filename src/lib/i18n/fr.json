@@ -233,6 +233,10 @@
     "nav_next": "Jalon suivant",
     "preview_label": "Aperçu de la feuille de route",
     "upcoming_badge": "À venir",
+    "filters_label": "Filtrer les jalons par statut",
+    "filters_reset": "Afficher tous les statuts",
+    "filters_all": "Tous les statuts",
+    "filters_empty": "Aucun jalon ne correspond aux statuts sélectionnés.",
     "milestone_live_label": "Affichage de {title}{progress}",
     "progress_label": "Jalon {current} sur {total}",
     "milestones": {
