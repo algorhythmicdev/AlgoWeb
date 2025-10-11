@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte/svelte5';
 import Icon from '../src/lib/components/icons/Icon.svelte';

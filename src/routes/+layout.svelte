@@ -1,12 +1,11 @@
 <script lang="ts">
   import '../app.css';
-  import '../lib/styles/theme.css';
   import '../lib/styles/global.css';
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import AICompanion from '$components/AICompanion.svelte';
   import LoadingOverlay from '$components/LoadingOverlay.svelte';
-  import ThemedBackground from '$components/ThemedBackground.svelte';
+  import AnimatedBackground from '$components/AnimatedBackground.svelte';
   import FloatingThemeSwitcher from '$components/FloatingThemeSwitcher.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
@@ -20,9 +19,12 @@
 
   let cleanupMorphGradient: { destroy: () => void; };
 
+  const isTheme = (value: string): value is (typeof availableThemes)[number] =>
+    availableThemes.includes(value as (typeof availableThemes)[number]);
+
   onMount(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme && availableThemes.includes(savedTheme)) {
+    if (savedTheme && isTheme(savedTheme)) {
       theme.set(savedTheme);
     }
 
@@ -98,7 +100,7 @@
 
 <svelte:window on:keydown={(e)=>{ if (e.key === 't') theme.toggle(); }} />
 
-<ThemedBackground />
+<AnimatedBackground tone="aurora" />
 
 <div class="app">
   <Navigation />

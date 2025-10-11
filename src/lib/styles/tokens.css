@@ -1,4 +1,6 @@
-﻿/**
+@import './theme-tokens.css';
+
+/**
  * AlgoRhythmics Design Tokens
  * 2026 dynamic minimalism system
  */
@@ -7,11 +9,8 @@
   color-scheme: light;
 
   /* ==================== BRAND CORE ==================== */
-  --primary: #6a38ff;
   --primary-rgb: 106, 56, 255;
-  --accent-1: #0fd6c9;
   --accent-1-rgb: 15, 214, 201;
-  --accent-2: #ffd339;
   --accent-2-rgb: 255, 211, 57;
   --red-ch: #e0322c;
   --red-ch-rgb: 224, 50, 44;
@@ -20,16 +19,12 @@
   --evergreen: var(--accent-1);
   --evergreen-rgb: var(--accent-1-rgb);
 
-  --voyage-blue: #1351ff;
   --voyage-blue-rgb: 19, 81, 255;
   --voyage-blue-strong: #0d3edc;
-  --aurora-purple: var(--primary);
   --aurora-purple-rgb: var(--primary-rgb);
   --aurora-purple-strong: #5628f2;
-  --signal-yellow: var(--accent-2);
   --signal-yellow-rgb: var(--accent-2-rgb);
   --signal-yellow-strong: #dca910;
-  --cherry-pop: var(--red-ch);
   --cherry-pop-rgb: var(--red-ch-rgb);
   --cherry-pop-strong: #b9231f;
 
@@ -359,11 +354,8 @@
 [data-base-theme="dark"] {
   color-scheme: dark;
 
-  --primary: #8a6bff;
   --primary-rgb: 138, 107, 255;
-  --accent-1: #10e3d6;
   --accent-1-rgb: 16, 227, 214;
-  --accent-2: #ffd339;
   --accent-2-rgb: 255, 211, 57;
   --atlantic-blue: #1f9dff;
   --atlantic-blue-rgb: 31, 157, 255;
@@ -450,11 +442,8 @@
 [data-theme-legacy='contrast'] {
   color-scheme: light;
 
-  --primary: #4400ff;
   --primary-rgb: 68, 0, 255;
-  --accent-1: #007a73;
   --accent-1-rgb: 0, 122, 115;
-  --accent-2: #b78300;
   --accent-2-rgb: 183, 131, 0;
   --atlantic-blue: #005bff;
   --atlantic-blue-rgb: 0, 91, 255;

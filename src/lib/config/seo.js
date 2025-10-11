@@ -44,10 +44,10 @@ export const pageConfigs = {
     description: 'AI innovation lab in pre-company phase, creating revolutionary products while preparing to build Latvia\'s startup ecosystem.',
     path: '/'
   },
-  products: {
-    title: 'Our Products - NodeVoyage & Ideonautix | AlgoRhythmics',
-    description: 'Explore NodeVoyage AI travel platform and Ideonautix productivity suite - revolutionary products in development.',
-    path: '/products'
+  platforms: {
+    title: 'Platforms - NodeVoyage & Ideonautix | AlgoRhythmics',
+    description: 'Explore the NodeVoyage travel companion and the Ideonautix founder OS — one calm suite of accessible AI.',
+    path: '/platforms'
   },
   community: {
     title: 'Community - Vote, Share, Build Together | AlgoRhythmics',

@@ -1,20 +1,20 @@
 {
   "site": {
     "title": "AlgoRhythmics",
-    "tagline": "Ideas tuned to human rhythm.",
+    "tagline": "Creative intelligence for calm operating systems.",
     "description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit."
   },
   "seo": {
-    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
-    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
+    "default_title": "AlgoRhythmics — Where logic dances with creativity.",
+    "default_description": "Where logic dances with creativity — building accessible AI for education, startups, and people.",
     "default_og_title": "AlgoRhythmics",
     "default_og_description": "Ideas tuned to human rhythm.",
     "default_url": "https://algorhythmics.com",
     "home": {
       "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
-      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
+      "description": "Discover calm OS platforms, consulting rituals, and accessible AI from AlgoRhythmics.",
       "og_title": "AlgoRhythmics — Calm OS rituals",
-      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+      "og_description": "Where logic dances with creativity — building accessible AI for education, startups, and people."
     }
   },
   "app": {
@@ -38,15 +38,16 @@
     "consulting": "Consulting",
     "contact": "Contact",
     "about": "About",
-    "nodevoyage_desc": "Get to know our adaptive travel guide.",
-    "ideonautix_desc": "Step onto the productivity flight deck.",
+    "nodevoyage_desc": "Explore the NodeVoyage travel co-pilot.",
+    "ideonautix_desc": "Plan deep work inside the Ideonautix cockpit.",
     "pilot_badge": "Pilot",
     "brand_aria": "Navigate to the AlgoRhythmics homepage",
     "brand_name": "AlgoRhythmics",
     "toggle_menu": "Toggle the menu",
     "primary_label": "Primary navigation",
     "products_panel_label": "Product quick links",
-    "talk_to_us": "Talk with us"
+    "talk_to_us": "Talk with us",
+    "platforms": "Platforms"
   },
   "hero": {
     "status": "OS-native AI studio · Riga ↔ Rotterdam",
@@ -55,9 +56,9 @@
       "brand": "AlgoRhythmics",
       "trail": "keeps your crew shipping with clarity."
     },
-    "tagline": "One calm suite uniting NodeVoyage, Ideonautix, and hands-on consulting.",
-    "subtitle": "We choreograph legible AI rituals—from travel copilots to founder dashboards—with glass-shell poise.",
-    "description": "Our layouts respect reduced-motion settings, signage discipline, and AAA contrast so every collaborator stays in control across NodeVoyage, Ideonautix, and studio engagements.",
+    "tagline": "Where logic dances with creativity — building accessible AI for education, startups, and people.",
+    "subtitle": "NodeVoyage, Ideonautix, and consulting live in one accessible studio with calm motion and AAA contrast.",
+    "description": "We choreograph explainable AI rituals so travel crews, founders, and partners stay in control no matter the mode.",
     "cta_products": "Explore the product lineup",
     "cta_consulting": "Book a strategy huddle",
     "actions_label": "Primary hero actions",
@@ -187,25 +188,25 @@
   "products": {
     "meta_title": "AlgoRhythmics products",
     "meta_description": "Discover NodeVoyage, our AI travel co-pilot, and Ideonautix, the productivity OS for founders.",
-    "hero_label": "Product lineup",
-    "title": "Product lineup",
-    "subtitle": "NodeVoyage and Ideonautix orbit the same calm studio.",
+    "hero_label": "Platforms",
+    "title": "Platforms lineup",
+    "subtitle": "One calm OS powering NodeVoyage and Ideonautix pilots.",
     "cta_title": "Stay in our orbit",
     "cta_text": "Join the community for roadmap drops, pilot invites, and AAA accessibility updates.",
     "cta_join": "Join the community",
     "cta_contact": "Arrange a strategy session",
     "nodevoyage": {
       "name": "NodeVoyage",
-      "tagline": "OS-native travel co-pilot for confident itineraries",
-      "description": "Fuses signage craft with explainable AI to plan, translate, and adapt offline.",
+      "tagline": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
+      "description": "Build shareable itineraries, translate moments offline, and surface memories with signage-grade clarity.",
       "status": "Beta pilots",
       "mvp": "Preview: nodevoyage.algorhythmics.dev",
       "cta": "Explore NodeVoyage"
     },
     "ideonautix": {
       "name": "Ideonautix",
-      "tagline": "Calm operating system for founder rituals",
-      "description": "Modular analytics, pitch workflows, and automation patterns that stay human-first.",
+      "tagline": "The productivity suite for modern creators — where every idea gets momentum.",
+      "description": "Map ventures, rituals, and capital flows with modular OS windows tuned for founders and studios.",
       "status": "Research sprint",
       "mvp": "Preview: ideonautix.algorhythmics.dev",
       "cta": "Explore Ideonautix"
@@ -455,7 +456,7 @@
   "consulting": {
     "meta_title": "AlgoRhythmics consulting",
     "hero_title": "Ship AI programmes with confidence",
-    "hero_subtitle": "We translate signage research and cloud expertise into explainable automation for your team.",
+    "hero_subtitle": "From strategy to code — helping organisations embed AI responsibly, ethically, and effectively.",
     "hero_rotating": [
       "Design systems that work in light, dark, and high contrast.",
       "Bring explainable AI to travel, retail, and manufacturing.",
@@ -613,10 +614,10 @@
   },
   "footer": {
     "brand_alt": "AlgoRhythmics wordmark",
-    "tagline": "Ideas tuned to human rhythm",
-    "status": "Pre-company • Ideju Kauss October 2025",
-    "location": "Daugavpils, Latvia",
-    "products_title": "Products",
+    "tagline": "Creative intelligence crafted for accessible AI products.",
+    "status": "NodeVoyage · Ideonautix · Consulting",
+    "location": "Riga, Latvia",
+    "products_title": "Platforms",
     "company": "Company",
     "resources": "Resources",
     "founders": "Founders",
@@ -636,7 +637,7 @@
     "cookies": "Cookie policy",
     "rights": "All rights reserved",
     "made_in": "Made with care in Latvia",
-    "copyright": "© 2025 AlgoRhythmics",
+    "copyright": "© 2025 AlgoRhythmics — Shaping creative intelligence. Riga, Latvia.",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

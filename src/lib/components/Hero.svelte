@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from 'svelte';
+  import { onMount, onDestroy, afterUpdate } from 'svelte';
   import { nextId } from '$lib/utils/uid';
   import HeroBackdrop from './hero/HeroBackdrop.svelte';
 
@@ -54,16 +54,18 @@
   export let subtitle = '';
   export let align: HeroAlign = 'start';
 
-  declare const $$slots: Record<string, unknown>;
-
   let asideContainer: HTMLElement | null = null;
+  let rootElement: HTMLElement | null = null;
   let hasAside = false;
   let asideObserver: MutationObserver | null = null;
+  let intersectionObserver: IntersectionObserver | null = null;
+  let heroVisible = false;
 
   const heroInstanceId = nextId('hero');
   const heroTitleId = `${heroInstanceId}-title`;
   const heroLeadId = `${heroInstanceId}-lead`;
   const heroDescriptionId = `${heroInstanceId}-description`;
+  const slots = $$slots as Record<string, unknown>;
 
   const updateAside = () => {
     if (!asideContainer) {
@@ -84,11 +86,34 @@
       if (asideContainer) {
         asideObserver.observe(asideContainer, { childList: true, subtree: true });
       }
+
+      const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        heroVisible = true;
+      } else if (rootElement) {
+        intersectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                heroVisible = true;
+                intersectionObserver?.unobserve(entry.target as Element);
+              }
+            });
+          },
+          { threshold: 0.25 }
+        );
+        intersectionObserver.observe(rootElement);
+      }
     }
     return () => {
       asideObserver?.disconnect();
       asideObserver = null;
     };
+  });
+
+  onDestroy(() => {
+    intersectionObserver?.disconnect();
+    intersectionObserver = null;
   });
 
   afterUpdate(updateAside);
@@ -112,9 +137,9 @@
   $: toneClass = `hero--tone-${resolvedTone}`;
   $: intensityClass = `hero--intensity-${resolvedIntensity}`;
   $: showLead = subtitle.trim().length > 0;
-  const hasTitleSlot = Boolean($$slots.title);
-  const hasLeadSlot = Boolean($$slots.lead);
-  const hasDescriptionSlot = Boolean($$slots.description);
+  const hasTitleSlot = Boolean(slots.title);
+  const hasLeadSlot = Boolean(slots.lead);
+  const hasDescriptionSlot = Boolean(slots.description);
   $: heroHasTitle = hasTitleSlot || title.trim().length > 0;
   $: heroHasLead = hasLeadSlot || showLead;
   $: heroHasDescription = hasDescriptionSlot;
@@ -129,7 +154,8 @@
 </script>
 
 <section
-  class={`hero ${alignClass} ${asideClass} ${toneClass} ${intensityClass}`}
+  class={`hero ${alignClass} ${asideClass} ${toneClass} ${intensityClass} ${heroVisible ? 'hero--visible' : 'hero--hidden'}`}
+  bind:this={rootElement}
   data-hero-tone={resolvedTone}
   data-hero-intensity={resolvedIntensity}
   aria-labelledby={heroLabelledBy}
@@ -208,6 +234,20 @@
     --hero-tertiary: rgb(var(--hero-tone-highlight-rgb));
     --hero-lead-color: rgba(var(--hero-tone-rgb), 0.72);
     --hero-base-gradient: var(--hero-base-gradient-fallback);
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+    transition:
+      opacity var(--duration-hero, 0.52s) var(--ease-out, cubic-bezier(0.33, 1, 0.68, 1)),
+      transform var(--duration-hero, 0.52s) var(--ease-out, cubic-bezier(0.33, 1, 0.68, 1));
+  }
+
+  .hero--visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero--hidden {
+    opacity: 0;
   }
 
   @supports (color: color-mix(in srgb, red 50%, blue 50%)) {
@@ -265,6 +305,29 @@
     --hero-layer-aside: 12;
   }
 
+  .hero__surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      linear-gradient(
+        160deg,
+        color-mix(in srgb, rgba(var(--hero-tone-rgb), 0.32) 55%, transparent) 0%,
+        color-mix(in srgb, rgba(var(--hero-tone-secondary-rgb), 0.22) 45%, transparent) 48%,
+        transparent 100%
+      ),
+      radial-gradient(
+        60% 60% at 50% 0%,
+        color-mix(in srgb, rgba(10, 13, 20, 0.35) 70%, transparent) 0%,
+        transparent 70%
+      );
+    mix-blend-mode: soft-light;
+    opacity: clamp(0.45, 0.52, 0.6);
+    pointer-events: none;
+    z-index: calc(var(--hero-layer-backdrop) + 1);
+  }
+
   .hero__surface::after {
     content: '';
     position: absolute;
@@ -307,6 +370,10 @@
     box-shadow: none;
   }
 
+  :global(html[data-theme='hc']) .hero__surface::before {
+    display: none;
+  }
+
   .hero__layer--backdrop {
     position: absolute;
     inset: 0;
@@ -318,6 +385,16 @@
 
   :global(html[data-theme='hc']) .hero__layer--base {
     background: var(--bg-elev-1, var(--bg));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero,
+    .hero--visible,
+    .hero--hidden {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 
   .hero__content {

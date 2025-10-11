@@ -12,6 +12,32 @@
     <!-- Google Fonts: Inter and Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
+    <script>
+      (() => {
+        const STORAGE_KEY = 'theme';
+        const root = document.documentElement;
+        const body = document.body;
+        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+        const prefersContrast = window.matchMedia?.('(prefers-contrast: more)').matches;
+        const normalize = (value) => (value === 'contrast' ? 'hc' : value);
+        const stored = normalize(localStorage.getItem(STORAGE_KEY));
+        const candidates = ['light', 'dark', 'hc'];
+        const theme = candidates.includes(stored)
+          ? stored
+          : prefersContrast
+            ? 'hc'
+            : prefersDark
+              ? 'dark'
+              : 'light';
+        const base = theme === 'light' ? 'light' : 'dark';
+        root.dataset.theme = theme;
+        root.dataset.baseTheme = base;
+        body.dataset.theme = theme;
+        body.dataset.baseTheme = base;
+        root.style.colorScheme = base;
+      })();
+    </script>
+
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover" data-theme="light">

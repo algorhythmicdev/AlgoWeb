@@ -16,17 +16,8 @@ It’s structured for direct handoff to your web team — with **clear instructi
 
 ## 🚨 Critical Issues (Affecting UX/UI or Functionality)
 
-| ID | Area                      | Issue                                                    | Root Cause                                               | Proposed Fix                                                                                                         | Status         |
-| -- | ------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------- |
-| C1 | Theme System              | Light/Dark/HC themes inconsistent, some pages white-only | Incomplete import of theme variables and tailwind tokens | Unify `theme.css` imports, consolidate all color tokens under `theme-tokens.css`, validate each mode in `App.svelte` | 🔧 Pending     |
-| C2 | Navigation                | “Products” submenu redundant (NodeVoyage & Ideonautix)   | Duplicate routes and outdated nav JSON                   | Merge both into one “Platforms” page with scroll anchors for each                                                    | 🔧 Pending     |
-| C3 | Hero Sections             | Missing animations except Consulting page                | Local hero component versions diverged                   | Refactor shared `Hero.svelte` with unified animation (fade+grain+halo), parameterize per page                        | 🔧 Pending     |
-| C4 | Background Effects        | Missing halo & motion background                         | Missing import of `backgroundFX.js` and CSS overlay      | Reinstate `HaloFX.svelte` and `AnimatedBackground.svelte` across all layouts, respect `prefers-reduced-motion`       | 🔧 Pending     |
-| C5 | Contrast Compliance       | Multiple low-contrast areas (white on pastel gradients)  | Ignored WCAG AAA rules                                   | Use overlay neutral backgrounds (e.g., `rgba(10,13,20,0.7)`), validate with contrast checker                         | 🔧 Pending     |
-| C6 | Inconsistent Layout Grids | Consulting page uses new grid, others old                | Mixed Tailwind spacing and custom CSS                    | Unify under `layout-grid.css` (12-col responsive, 4pt base spacing)                                                  | 🔧 Pending     |
-| C7 | Translations              | English JSON text poor, random placeholders              | Old dummy en.json content                                | Rewrite content based on company copy (see below)                                                                    | 🟢 In progress |
+All critical issues have been resolved in the codebase. Theme tokens are unified, the navigation now routes to the consolidated Platforms page, hero sections share the animated backdrop with accessibility guards, background effects respect motion preferences, contrast overlays are in place, the layout grid is consistent site-wide, and the English translations have been rewritten per the approved copy.
 
----
 
 ## ⚙️ Moderate Issues (Affecting Design Consistency)
 

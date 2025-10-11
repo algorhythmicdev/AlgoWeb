@@ -13,8 +13,8 @@
   const products = /** @type {Record<'nodevoyage' | 'ideonautix', any>} */ (productsData);
   const i18nResources = /** @type {Record<string, any>} */ (en);
 
-  const fallbackHeroLabel = en.products?.hero_label ?? 'Products';
-  const fallbackHeroTitle = en.products?.title ?? 'Our Products';
+  const fallbackHeroLabel = en.products?.hero_label ?? 'Platforms';
+  const fallbackHeroTitle = en.products?.title ?? 'Our Platforms';
   const fallbackHeroSubtitle = en.products?.subtitle ?? '';
   const fallbackHeroMission = en.story?.mission_text ?? '';
   const fallbackShowcaseTitle = en.products?.showcase?.title ?? en.products?.demos?.title ?? '';

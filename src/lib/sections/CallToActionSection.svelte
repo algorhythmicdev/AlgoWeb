@@ -52,8 +52,8 @@
   <div class="container">
     <div class="cta-shell" role="region" aria-labelledby="cta-heading">
       <div class="cta-surface os-window" data-variant="halo">
-        <div class="cta-inner">
-          <div class="cta-copy">
+        <div class="cta-inner layout-grid" data-gap="loose">
+          <div class="cta-copy col-span-7 sm:col-span-4">
             {#if eyebrow}
               <span class="cta-eyebrow">{eyebrow}</span>
             {/if}
@@ -76,7 +76,12 @@
             {/if}
           </div>
 
-          <div class="cta-actions" role="group" aria-label={$_('nav.talk_to_us')} use:staggerReveal={{ stagger: 120 }}>
+          <div
+            class="cta-actions col-span-5 sm:col-span-4"
+            role="group"
+            aria-label={$_('nav.talk_to_us')}
+            use:staggerReveal={{ stagger: 120 }}
+          >
             <a class="cta-action btn btn-gradient" href="/community">
               <span>{primaryCta}</span>
             </a>
@@ -137,7 +142,6 @@
   .cta-inner {
     position: relative;
     z-index: 1;
-    display: grid;
     gap: clamp(1.8rem, 4vw, 2.6rem);
     padding: clamp(2.4rem, 6vw, 3.4rem);
   }
@@ -212,9 +216,9 @@
   }
 
   .cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
+    display: grid;
+    gap: clamp(0.85rem, 2vw, 1.25rem);
+    justify-items: start;
   }
 
   .cta-action {
@@ -237,8 +241,7 @@
     }
 
     .cta-actions {
-      flex-direction: column;
-      align-items: stretch;
+      justify-items: stretch;
     }
 
     .cta-action {
