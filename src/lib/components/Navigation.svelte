@@ -20,6 +20,8 @@
   /** @type {HTMLElement | null} */
   let restoreFocusTarget = null;
   let wasMenuOpen = false;
+  let lockedScrollY = 0;
+  let isScrollLocked = false;
 
   const focusableSelectors = [
     'a[href]:not([tabindex="-1"])',
@@ -122,6 +124,30 @@
     };
   };
 
+  const lockScroll = () => {
+    if (!browser || isScrollLocked) return;
+    lockedScrollY = window.scrollY;
+    const { style } = document.body;
+    style.position = 'fixed';
+    style.top = `-${lockedScrollY}px`;
+    style.left = '0';
+    style.right = '0';
+    style.width = '100%';
+    isScrollLocked = true;
+  };
+
+  const unlockScroll = () => {
+    if (!browser || !isScrollLocked) return;
+    const { style } = document.body;
+    style.position = '';
+    style.top = '';
+    style.left = '';
+    style.right = '';
+    style.width = '';
+    isScrollLocked = false;
+    window.scrollTo(0, lockedScrollY);
+  };
+
   /** @param {KeyboardEvent} event */
   function handleKeydown(event) {
     if (event.key === 'Escape' && $navigation.isMenuOpen) {
@@ -139,12 +165,19 @@
     if (browser) {
       document.documentElement.classList.remove('nav-menu-open');
     }
+    unlockScroll();
   });
 
   afterUpdate(async () => {
     if (!browser) return;
 
     if ($navigation.isMenuOpen !== wasMenuOpen) {
+      if ($navigation.isMenuOpen) {
+        lockScroll();
+      } else {
+        unlockScroll();
+      }
+
       if ($navigation.isMenuOpen) {
         restoreFocusTarget = document.activeElement instanceof HTMLElement ? document.activeElement : null;
         await tick();
@@ -183,6 +216,7 @@
   class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
   class:menu-open={$navigation.isMenuOpen}
   aria-label={$_('nav.primary_label')}
+  use:focusTrap
 >
   <div class="container nav-surface">
     <a href="/" class="nav-brand" aria-label={$_('nav.brand_aria')}>

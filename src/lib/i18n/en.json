@@ -576,14 +576,14 @@
     "error_phone": "Enter a valid phone number",
     "error_validation": "Fix the highlighted fields before continuing.",
     "required_note": "* Required fields",
-    "helper_company": "Share the organisation or project we’ll collaborate with.",
-    "helper_name": "Who should we stay in touch with?",
-    "helper_email": "We’ll confirm next steps at this address.",
-    "helper_phone": "Add a number we can call if async updates stall.",
-    "helper_industry": "Pick the focus area so we can prepare relevant references.",
-    "helper_description": "Outline goals, constraints, and timing so we calibrate.",
-    "helper_subject": "Add a short headline so we can route your note quickly.",
-    "helper_message": "Drop any context, links, or files we should review."
+    "helper_company": "Name the team or initiative applying for the pilot.",
+    "helper_name": "Tell us who will champion the engagement day to day.",
+    "helper_email": "We'll send the kickoff deck and scheduling links here.",
+    "helper_phone": "Optional, but handy if we need to align quickly.",
+    "helper_industry": "Choose the track so we can share relevant case studies.",
+    "helper_description": "Outline the outcomes you expect from the Strategy, Build, or Care packages.",
+    "helper_subject": "Add a headline so we can route your note without delay.",
+    "helper_message": "Share any context, links, or files we should review in advance."
   },
   "common": {
     "submitting": "Submitting...",

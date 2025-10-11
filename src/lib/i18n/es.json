@@ -577,14 +577,14 @@
     "error_phone": "Número de teléfono no válido",
     "error_validation": "Revisa los errores en el formulario",
     "required_note": "* Campos obligatorios",
-    "helper_company": "Cuéntanos el nombre de la empresa o proyecto con el que colaboraremos.",
-    "helper_name": "Indica la persona de contacto principal para esta conversación.",
-    "helper_email": "Confirmaremos los siguientes pasos en esta dirección.",
-    "helper_phone": "Añade un número al que podamos llamar si el intercambio asíncrono se frena.",
-    "helper_industry": "Elige el sector más cercano para preparar referencias relevantes.",
-    "helper_description": "Describe objetivos, límites y plazos para que podamos calibrar.",
-    "helper_subject": "Escribe el asunto para que podamos dirigir tu mensaje con rapidez.",
-    "helper_message": "Incluye contexto, enlaces y detalles que debamos revisar."
+    "helper_company": "Indica el equipo o iniciativa que solicita el piloto.",
+    "helper_name": "Cuéntanos quién liderará la colaboración día a día.",
+    "helper_email": "Aquí enviaremos la presentación inicial y los enlaces de agenda.",
+    "helper_phone": "Opcional, pero útil si debemos coordinarnos con rapidez.",
+    "helper_industry": "Elige la línea para compartir casos de uso relevantes.",
+    "helper_description": "Describe los resultados que esperas de los paquetes Strategy, Build o Care.",
+    "helper_subject": "Añade un título para que podamos dirigir tu mensaje sin demora.",
+    "helper_message": "Comparte contexto, enlaces o archivos que debamos revisar por adelantado."
   },
   "common": {
     "submitting": "Enviando...",

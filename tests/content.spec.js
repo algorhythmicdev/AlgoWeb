@@ -75,6 +75,18 @@ function hasTranslation(key, dictionary) {
   });
 }
 
+function readTranslationValue(key, dictionary) {
+  return key.split('.').reduce((current, segment) => {
+    if (!segment || current == null) return undefined;
+    if (Array.isArray(current)) {
+      const index = Number(segment);
+      if (Number.isNaN(index)) return undefined;
+      return current[index];
+    }
+    return current?.[segment];
+  }, dictionary);
+}
+
 function extractLiteralKey(argument) {
   if (!argument) return undefined;
   if (argument.type === 'Literal' && typeof argument.value === 'string') {
@@ -274,6 +286,26 @@ describe('localization hygiene', () => {
       const dictionary = await loadJson(file);
       const missing = baseKeys.filter((key) => !hasTranslation(key, dictionary));
       expect(missing, `${path.basename(file)} is missing keys`).toEqual([]);
+    }
+  });
+
+  it('localizes consulting form helper text in every language', async () => {
+    const helperKeys = [
+      'form.helper_company',
+      'form.helper_name',
+      'form.helper_email',
+      'form.helper_phone',
+      'form.helper_industry',
+      'form.helper_description'
+    ];
+
+    for (const file of localeFiles) {
+      const dictionary = await loadJson(file);
+      for (const key of helperKeys) {
+        const value = readTranslationValue(key, dictionary);
+        expect(typeof value).toBe('string');
+        expect(String(value).trim().length, `${path.basename(file)} missing value for ${key}`).toBeGreaterThan(0);
+      }
     }
   });
 
