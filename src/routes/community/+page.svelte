@@ -3,6 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { Button, Icon } from '$lib/components';
   import Hero from '$lib/components/Hero.svelte';
+  import SectionDivider from '$components/SectionDivider.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import { voting } from '$stores/voting';
@@ -176,6 +177,8 @@
     {/if}
   </svelte:fragment>
 </Hero>
+
+<SectionDivider tone="neutral" />
 
 <!-- Voting Section -->
 <section class="voting-section" use:revealOnScroll>

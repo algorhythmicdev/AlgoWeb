@@ -3,6 +3,7 @@
   import { _, json } from 'svelte-i18n';
   import { Button, Icon, FieldSupport } from '$lib/components';
   import Hero from '$lib/components/Hero.svelte';
+  import SectionDivider from '$components/SectionDivider.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
@@ -252,6 +253,8 @@
     </div>
   </svelte:fragment>
 </Hero>
+
+<SectionDivider tone="aurora" />
 
 <!-- Application Form -->
 <section class="form-section" id="form" use:revealOnScroll>

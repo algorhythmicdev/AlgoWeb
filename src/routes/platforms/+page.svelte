@@ -3,6 +3,7 @@
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
   import Hero from '$lib/components/Hero.svelte';
+  import SectionDivider from '$components/SectionDivider.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import ProductDemoPreview from '$components/ProductDemoPreview.svelte';
   import Icon from '$components/icons/Icon.svelte';
@@ -276,6 +277,7 @@
   </svelte:fragment>
 </Hero>
 
+<SectionDivider tone="voyage" />
 
 <section class="products-demos section-sm" id="demos" use:revealOnScroll>
   <div class="container">
@@ -298,6 +300,8 @@
     </div>
   </div>
 </section>
+
+<SectionDivider tone="aurora" />
 
 <section class="products-catalog section-sm" use:revealOnScroll>
   <div class="container">

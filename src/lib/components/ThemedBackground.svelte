@@ -10,6 +10,9 @@
 
   let particles = [];
   const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
+  const fallbackGradient =
+    'radial-gradient(120% 120% at 50% 0%, rgba(19, 81, 255, 0.24) 0%, rgba(106, 56, 255, 0.18) 38%, rgba(255, 210, 89, 0.12) 76%, transparent 100%)';
+  const fallbackGrainOpacity = 0.06;
 
   const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.12, damping: 0.35, precision: 0.001 });
   const scrollSpring = spring(0, { stiffness: 0.08, damping: 0.4, precision: 0.0001 });
@@ -29,8 +32,10 @@
     paletteColors[2] ?? paletteFallback[2]
   ];
 
+  $: routeGradient = theme?.gradient ?? fallbackGradient;
+  $: routeGrainOpacity = typeof theme?.grainOpacity === 'number' ? theme.grainOpacity : fallbackGrainOpacity;
   $: backgroundVars =
-    `--pointer-x:${pointerCoords.x}; --pointer-y:${pointerCoords.y}; --scroll-depth:${scrollDepth}; --theme-primary:${primaryColor}; --theme-secondary:${secondaryColor}; --theme-accent:${accentColor};`;
+    `--pointer-x:${pointerCoords.x}; --pointer-y:${pointerCoords.y}; --scroll-depth:${scrollDepth}; --theme-primary:${primaryColor}; --theme-secondary:${secondaryColor}; --theme-accent:${accentColor}; --route-gradient:${routeGradient}; --route-grain:${routeGrainOpacity};`;
 
   $: theme = getThemeForPath($page.url.pathname);
   $: if (theme) initParticles(theme);
@@ -126,9 +131,11 @@
   });
 </script>
 
-<div class="background" aria-hidden="true">
+<div class="background" aria-hidden="true" style={backgroundVars}>
+  <div class="gradient"></div>
   <div class="wash"></div>
   <div class="flare"></div>
+  <div class="film"></div>
   {#each particles as p (p.id)}
     <span
       class="dot"
@@ -147,9 +154,18 @@
     display: grid;
   }
 
+  .gradient,
   .wash,
-  .flare {
+  .flare,
+  .film {
     grid-area: 1 / 1;
+  }
+
+  .gradient {
+    background: var(--route-gradient);
+    opacity: 1;
+    transition: background 1.6s ease, opacity 1s ease;
+    filter: saturate(1.05);
   }
 
   .wash {
@@ -177,6 +193,12 @@
     mix-blend-mode: screen;
   }
 
+  .film {
+    background-image: var(--grain, var(--grain-texture));
+    opacity: clamp(0.02, var(--route-grain, 0.065), 0.12);
+    mix-blend-mode: soft-light;
+  }
+
   .dot {
     position: absolute;
     border-radius: 50%;
@@ -197,6 +219,10 @@
       radial-gradient(54% 50% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 38%, transparent) 0%, transparent 72%),
       linear-gradient(180deg, rgba(5, 9, 24, 0.94) 0%, rgba(3, 7, 20, 0.88) 50%, rgba(2, 4, 15, 0.86) 100%);
     opacity: 0.76;
+  }
+
+  :global([data-base-theme='dark']) .gradient {
+    filter: saturate(1.12) brightness(0.92);
   }
 
   :global([data-base-theme='dark']) .flare {
@@ -247,5 +273,11 @@
     0% { transform: translate3d(-4px, -6px, 0) scale(0.95); }
     50% { transform: translate3d(6px, 8px, 0) scale(1.05); }
     100% { transform: translate3d(-6px, 4px, 0) scale(0.98); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient {
+      transition-duration: 0.001ms;
+    }
   }
 </style>
