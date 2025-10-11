@@ -37,7 +37,7 @@
 
 <div
   bind:this={cardEl}
-  class="glass-card magnetic-card {$$props.class || ''}"
+  class="os-window magnetic-card {$$props.class || ''}"
   data-variant={forwardedVariant}
   {...restProps}
 >

@@ -359,7 +359,7 @@
         </div>
 
         {#if heroPillars.length}
-          <div class="home-hero__pillars glass-card" aria-labelledby="home-hero-pillars-heading">
+          <div class="home-hero__pillars os-window" aria-labelledby="home-hero-pillars-heading">
             <p id="home-hero-pillars-heading" class="home-hero__pillars-heading">{heroPillarsTitle}</p>
             <ul class="home-hero__pillars-list">
               {#each heroPillars as pillar}
@@ -374,7 +374,7 @@
 
       <div class="home-hero__column home-hero__column--aside">
         {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription || upcomingMilestoneNote)}
-          <article class="home-hero__milestone glass-card" data-variant="grid">
+          <article class="home-hero__milestone os-window" data-variant="grid">
             <span class="sr-only" aria-live="polite">{milestoneLiveAnnouncement}</span>
             <div class="home-hero__milestone-header">
               {#if heroMilestoneHeading}
@@ -413,9 +413,13 @@
 
             <div class="home-hero__milestone-footer">
               {#if canNavigateMilestones}
-                <div class="home-hero__milestone-nav" role="group" aria-label={milestoneNavGroupLabel}>
+                <div
+                  class="home-hero__milestone-nav surface-pill"
+                  role="group"
+                  aria-label={milestoneNavGroupLabel}
+                >
                   <button
-                    class="home-hero__milestone-nav-btn"
+                    class="home-hero__milestone-nav-btn surface-chip"
                     type="button"
                     on:click={showPreviousMilestone}
                     aria-label={previousMilestoneLabel}
@@ -443,7 +447,7 @@
                   {/if}
 
                   <button
-                    class="home-hero__milestone-nav-btn"
+                    class="home-hero__milestone-nav-btn surface-chip"
                     type="button"
                     on:click={showNextMilestone}
                     aria-label={nextMilestoneLabel}
@@ -479,7 +483,7 @@
         {/if}
 
         {#if heroSignals.length}
-          <dl class="home-hero__signals glass-card" data-variant="line">
+          <dl class="home-hero__signals os-window" data-variant="line">
             {#each heroSignals as signal (signal.id)}
               <div class="home-hero__signal">
                 {#if signal.label}
@@ -500,7 +504,7 @@
 <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
     <span id="vision" class="section-anchor" aria-hidden="true"></span>
-    <div class="story-shell glass-stack" role="group" aria-labelledby="story-heading">
+    <div class="story-shell os-window" role="group" aria-labelledby="story-heading">
       <header class="story-shell__intro">
         <span class="eyebrow">{$_('story.title')}</span>
         <h2 id="story-heading">{$_('story.vision_title')}</h2>
@@ -590,7 +594,7 @@
         <h2>{$_('timeline.subtitle')}</h2>
 
         {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription)}
-          <div class="timeline-overview__highlight glass-stack" aria-labelledby="timeline-next-heading">
+          <div class="timeline-overview__highlight os-window" aria-labelledby="timeline-next-heading">
             <div class="timeline-overview__header">
               <span class="timeline-overview__date">{upcomingMilestoneDateLabel}</span>
               <span class="timeline-overview__badge">
@@ -738,6 +742,21 @@
     padding: clamp(1.2rem, 3.6vw, 1.9rem);
     border-radius: 26px;
     overflow: hidden;
+    --surface-glass-blur: 24px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.18) 14%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 64%, rgba(255, 255, 255, 0.34) 36%);
+    --surface-glass-shadow: 0 24px 52px rgba(var(--voyage-blue-rgb), 0.22);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.24) 34%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.24) 42%);
+  }
+
+  :global([data-base-theme='dark']) .home-hero__pillars {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 72%, rgba(var(--voyage-blue-rgb), 0.3) 28%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 58%, rgba(255, 255, 255, 0.22) 42%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.3);
+    --grain-opacity: 0.06;
   }
 
   .home-hero__pillars::before {
@@ -795,6 +814,60 @@
     padding: clamp(1.25rem, 3.4vw, 1.8rem);
     display: grid;
     gap: clamp(0.75rem, 2.6vw, 1.1rem);
+  }
+
+  .home-hero__milestone {
+    --surface-glass-blur: 26px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.26) 18%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.48) 62%, rgba(255, 255, 255, 0.34) 38%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--aurora-purple-rgb), 0.3);
+    --grain-opacity: 0.06;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.14) 5%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.3) 44%);
+    --surface-pill-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.18) 14%);
+    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 62%, rgba(255, 255, 255, 0.32) 38%);
+    --surface-pill-shadow: 0 22px 44px rgba(var(--aurora-purple-rgb), 0.26);
+    --surface-pill-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.1) 4%);
+    --surface-pill-hc-border: color-mix(in srgb, var(--border-strong) 58%, rgba(var(--aurora-purple-rgb), 0.28) 42%);
+    --surface-pill-hc-shadow: none;
+    --surface-chip-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
+    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.44) 64%, rgba(255, 255, 255, 0.34) 36%);
+    --surface-chip-shadow: 0 20px 40px rgba(var(--aurora-purple-rgb), 0.24);
+    --surface-chip-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.12) 4%);
+    --surface-chip-hc-border: color-mix(in srgb, var(--border-strong) 60%, rgba(var(--aurora-purple-rgb), 0.3) 40%);
+    --surface-chip-hc-shadow: none;
+    --surface-chip-hc-color: var(--text);
+  }
+
+  :global([data-base-theme='dark']) .home-hero__milestone {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--aurora-purple-rgb), 0.34) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-glass-shadow: 0 32px 60px rgba(var(--aurora-purple-rgb), 0.34);
+    --surface-pill-bg: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--aurora-purple-rgb), 0.3) 24%);
+    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-pill-shadow: 0 24px 48px rgba(var(--aurora-purple-rgb), 0.3);
+    --surface-chip-bg: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.28) 20%);
+    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.54) 60%, rgba(255, 255, 255, 0.2) 40%);
+    --surface-chip-shadow: 0 22px 44px rgba(var(--aurora-purple-rgb), 0.32);
+  }
+
+  .home-hero__signals {
+    --surface-glass-blur: 24px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--signal-yellow-rgb), 0.22) 16%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.42) 60%, rgba(255, 255, 255, 0.34) 40%);
+    --surface-glass-shadow: 0 24px 50px rgba(var(--signal-yellow-rgb), 0.26);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--signal-yellow-rgb), 0.12) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--signal-yellow-rgb), 0.28) 38%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.24) 44%);
+  }
+
+  :global([data-base-theme='dark']) .home-hero__signals {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--signal-yellow-rgb), 0.34) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.5) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--signal-yellow-rgb), 0.3);
+    --grain-opacity: 0.06;
   }
 
   .home-hero__milestone-header {
@@ -866,11 +939,6 @@
     gap: 0.45rem;
     padding: 0.4rem 0.65rem;
     border-radius: calc(var(--radius) * 0.75);
-    border: 1px solid var(--surface-pill-border);
-    background: var(--surface-pill-bg);
-    box-shadow: var(--surface-pill-shadow);
-    backdrop-filter: var(--surface-glass-blur) saturate(1.05);
-    -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.05);
   }
 
   .home-hero__milestone-nav-btn {
@@ -880,8 +948,8 @@
     width: 34px;
     height: 34px;
     border-radius: var(--radius-full);
-    border: 1px solid var(--surface-chip-border);
-    background: var(--surface-chip-bg);
+    padding: 0;
+    gap: 0;
     color: var(--text);
     transition:
       background-color 160ms var(--ease-in-out),
@@ -890,8 +958,8 @@
   }
 
   .home-hero__milestone-nav-btn:hover {
-    background: color-mix(in srgb, var(--surface-chip-bg) 70%, rgba(var(--voyage-blue-rgb), 0.16) 30%);
-    border-color: color-mix(in srgb, var(--surface-chip-border) 60%, rgba(var(--voyage-blue-rgb), 0.26) 40%);
+    background: color-mix(in srgb, var(--surface-chip-bg) 72%, rgba(var(--aurora-purple-rgb), 0.18) 28%);
+    border-color: color-mix(in srgb, var(--surface-chip-border) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
   }
 
   .home-hero__milestone-nav-btn:focus-visible {
@@ -1000,16 +1068,6 @@
     }
   }
 
-  :global(html[data-theme='hc']) .home-hero__pillars,
-  :global(html[data-theme='hc']) .home-hero__milestone,
-  :global(html[data-theme='hc']) .home-hero__signals {
-    background: transparent;
-    border: 2px solid var(--border);
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
   :global(html[data-theme='hc']) .home-hero__pillars::before {
     display: none;
   }
@@ -1028,68 +1086,24 @@
     color: var(--text);
   }
 
-  :global(html[data-theme='hc']) .home-hero__milestone-tag {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--border);
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  :global(html[data-theme='hc']) .home-hero__milestone-nav {
-    background: transparent;
-    border-color: var(--border);
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  :global(html[data-theme='hc']) .home-hero__milestone-nav-btn {
-    background: transparent;
-    border-color: var(--border);
-    color: var(--text);
-  }
-
-  :global(html[data-theme='hc']) .home-hero__milestone-nav-btn:hover {
-    background: transparent;
-  }
-
   :global(html[data-theme='hc']) .home-hero__milestone-progress {
     color: var(--text);
   }
 
-  .glass-stack {
-    position: relative;
-    border-radius: var(--radius-2xl);
+  .story-shell.os-window,
+  .timeline-overview__highlight.os-window {
+    --grain-blend-mode: soft-light;
+    --grain-opacity: 0.18;
+  }
+
+  .story-shell.os-window {
     padding: clamp(1.8rem, 3.6vw, 2.8rem);
-    background: var(--surface-glass-bg);
-    border: 1px solid var(--surface-glass-border);
-    box-shadow: var(--surface-glass-shadow);
-    backdrop-filter: var(--surface-glass-blur) saturate(1.08);
-    -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.08);
-    overflow: hidden;
+    border-radius: var(--radius-2xl);
   }
 
-  .glass-stack::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    opacity: var(--grain-opacity, 0.18);
-    mix-blend-mode: var(--grain-blend-mode, soft-light);
-    pointer-events: none;
+  .timeline-overview__highlight.os-window {
+    border-radius: var(--radius-2xl);
   }
-
-  :global(html[data-theme='hc']) .glass-stack {
-    background: transparent;
-    border: 2px solid var(--border);
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  :global(html[data-theme='hc']) .glass-stack::after { display: none; }
 
   .section-anchor {
     display: block;
@@ -1603,7 +1617,8 @@
     .story-shell__cards {
       grid-template-columns: 1fr;
     }
-    .glass-stack {
+    .story-shell.os-window,
+    .timeline-overview__highlight.os-window {
       padding: clamp(1.6rem, 5vw, 2.2rem);
       border-radius: var(--radius-xl);
     }

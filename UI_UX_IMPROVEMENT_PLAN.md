@@ -780,19 +780,21 @@ Add subtle texture and frosted panels using CSS; keep text on a separate solid l
 These snippets should integrate easily into your existing SvelteKit project. You can wrap the hero variants in a single `<Hero>` component with props, toggle themes by updating `data-theme` on `<html>`, and rely on the global tokens defined in `base.css`. All animations honour high‑contrast mode and `prefers-reduced-motion`, so your site stays accessible while delivering the glassy, grainy, dynamic minimalism defined in the design kit.
 Below are practical ways to upgrade your **cards and sections** while preserving the brand’s glassy, grainy, dynamic minimalism. These suggestions draw directly from the existing codebase (notably `ThemedBackground.svelte` and `animations.css`) and the design kit’s accessibility rules. Where possible I’ve included actual code patterns from the repo, so you can copy them into your own components.
 
+> **Note:** The original plan referenced the legacy `glass-card` helper. The refreshed implementation renames this surface shell to `.os-window`; all guidance below reflects the new class.
+
 ---
 
-## 1. Glass cards with subtle grain and halo accents
+## 1. OS window shells with subtle grain and halo accents
 
-_Update 2025-02-15:_ Community, Consulting, and Contact surfaces now ship with `glass-card`/Magnetic shells, palette-aware borders, and CTA chips aligned to the NodeVoyage colour rules.
-_Update 2025-10-12:_ Reworked the shared glass-card shell to draw from the new tokenised surfaces and refreshed the Founders spotlight to drop legacy hero variables, keeping sections transparent while cards stay softly translucent.
+_Update 2025-02-15:_ Community, Consulting, and Contact surfaces now ship with `os-window`/Magnetic shells, palette-aware borders, and CTA chips aligned to the NodeVoyage colour rules.
+_Update 2025-10-12:_ Reworked the shared os-window shell to draw from the new tokenised surfaces and refreshed the Founders spotlight to drop legacy hero variables, keeping sections transparent while cards stay softly translucent.
 _Update 2025-10-14:_ Hardened the partner halo/grid cards and product spotlight variants with shared translation guards so the glass tokens render with the correct aura while keeping the build clean.
 
-The repo already defines a `.glass-card` class that gives panels a frosted, blurred effect and adds an ultra‑low‑contrast grain layer. Extend it to support a **halo glow** behind specific cards.
+The repo already defines the `.os-window` class that gives panels a frosted, blurred effect and adds an ultra‑low‑contrast grain layer. Extend it to support a **halo glow** behind specific cards.
 
 ```css
-/* Extend the existing glass card */
-.glass-card {
+/* Extend the updated OS window shell */
+.os-window {
   position: relative;
   padding: 2rem;
   border-radius: 18px;
@@ -804,7 +806,7 @@ The repo already defines a `.glass-card` class that gives panels a frosted, blur
 }
 
 /* Grain overlay (already in animations.css) */
-.glass-card::after {
+.os-window::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -815,7 +817,7 @@ The repo already defines a `.glass-card` class that gives panels a frosted, blur
 }
 
 /* Halo variant: radial glow on specific cards */
-.glass-card[data-variant="halo"]::before {
+.os-window[data-variant="halo"]::before {
   content: "";
   position: absolute;
   inset: -20%;
@@ -832,7 +834,7 @@ The repo already defines a `.glass-card` class that gives panels a frosted, blur
 }
 
 @media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
-  .glass-card[data-variant="halo"]::before {
+  .os-window[data-variant="halo"]::before {
     animation: none;
   }
 }
@@ -848,7 +850,7 @@ The repo already defines a `.glass-card` class that gives panels a frosted, blur
 In `animations.css` there is a `.particle-container` class that creates floating dots behind a panel. Use it to make content blocks feel dynamic without overwhelming the text.
 
 ```html
-<div class="glass-card particle-container">
+<div class="os-window particle-container">
   <h3 class="heading">Key Insight</h3>
   <p>Clear copy goes here…</p>
 </div>
@@ -899,7 +901,7 @@ The repo includes `useTilt` and `useMagnetic` functions in `animations.js` to cr
   });
 </script>
 
-<div bind:this={cardEl} class="glass-card magnetic-card">
+<div bind:this={cardEl} class="os-window magnetic-card">
   <slot />
 </div>
 ```
@@ -918,17 +920,17 @@ To implement, add data attributes to cards:
 
 ```html
 <section class="grid">
-  <div class="glass-card" data-variant="halo">
+  <div class="os-window" data-variant="halo">
     <h3>AI Solutions</h3>
     <p>Custom ML models built to your needs.</p>
   </div>
 
-  <div class="glass-card particle-container">
+  <div class="os-window particle-container">
     <h3>Consulting</h3>
     <p>Expert guidance on data strategy.</p>
   </div>
 
-  <div class="glass-card">
+  <div class="os-window">
     <h3>Community</h3>
     <p>Join our forum to learn and share.</p>
   </div>
@@ -962,8 +964,8 @@ The repo’s `animations.js` also provides `useReveal` and `useStaggerReveal` fu
   });
 </script>
 
-<div bind:this={el => cards = [el]} class="glass-card"> … </div>
-<div bind:this={el => cards = [el]} class="glass-card particle-container"> … </div>
+<div bind:this={el => cards = [el]} class="os-window"> … </div>
+<div bind:this={el => cards = [el]} class="os-window particle-container"> … </div>
 ```
 
 Cards fade in and slide up as they enter the viewport, creating a polished feel. The background gradient on the page gradually shifts between brand colours, which keeps the environment dynamic but still calm thanks to long durations and easing.
@@ -974,9 +976,9 @@ Cards fade in and slide up as they enter the viewport, creating a polished feel.
 
 - Refined the `/products` hero to blend the halo variant with mission copy, action buttons, and spotlight Magnetic cards for NodeVoyage and Ideonautix using the shared gradient and badge tokens.
 - Rebuilt the live demo and catalog grids around the refreshed `os-window` glass surfaces with staggered reveals, feature pills, and palette-coordinated secondary links.
-- Shifted the closing CTA into a `MagneticTiltCard` shell so the section matches the glass-card cadence across consulting, community, and contact while keeping accessible reduced-motion fallbacks.
+- Shifted the closing CTA into a `MagneticTiltCard` shell so the section matches the os-window cadence across consulting, community, and contact while keeping accessible reduced-motion fallbacks.
 
-_Update 2025-10-14:_ Removed the legacy products showcase/CTA component wrappers in favour of the shared page implementation, introduced a reusable `.surface-panel` utility for feature rows, and retuned the demo preview to consume the glass-card variants so every `/products` surface now leans on the centralized translucent tokens.
+_Update 2025-10-14:_ Removed the legacy products showcase/CTA component wrappers in favour of the shared page implementation, introduced a reusable `.surface-panel` utility for feature rows, and retuned the demo preview to consume the os-window variants so every `/products` surface now leans on the centralized translucent tokens.
 
 ---
 
@@ -984,7 +986,7 @@ _Update 2025-10-14:_ Removed the legacy products showcase/CTA component wrappers
 
 **Status: ✅ Implemented**
 
-- Audited every page shell so sections stay transparent while the interactive cards, badges, and hero shells pick up the refreshed `glass-card` tokens instead of ad-hoc fills.
+- Audited every page shell so sections stay transparent while the interactive cards, badges, and hero shells pick up the refreshed `os-window` tokens instead of ad-hoc fills.
 - Replaced hard-coded RGBA brand values across components, sections, and utilities with the central `--voyage-blue-rgb`, `--aurora-purple-rgb`, `--signal-yellow-rgb`, and `--cherry-pop-rgb` tokens to keep the glow math themable.
 - Retired the unused legacy `HeroSection` wrapper so the new animated `Hero` component is the single source of truth for page intros.
 
@@ -1003,14 +1005,33 @@ _Update 2025-10-14:_ Removed the legacy products showcase/CTA component wrappers
 - Migrated the Home, Community, Consulting, and Contact pages to the shared surfaces while trimming duplicate glass shadows from Magnetic cards and section shells so transparent sections stay neutral.
 - Synced the consulting/contact form cards and CTA grids with the refreshed surfaces, keeping background fills only on interactive cards and leaving section canvases fully transparent.
 
-_Update 2025-10-13:_ The NodeVoyage home hero and timeline now consume the refreshed `.surface-chip` / `.surface-pill` tokens and shared `glass-card` shell—milestone tags, navigation pills, story pillars, and roadmap cards dropped their bespoke RGBA gradients in favour of the centralized glass variables, keeping sections transparent while cards stay consistently translucent across breakpoints.
+_Update 2025-10-13:_ The NodeVoyage home hero and timeline now consume the refreshed `.surface-chip` / `.surface-pill` tokens and shared `os-window` shell—milestone tags, navigation pills, story pillars, and roadmap cards dropped their bespoke RGBA gradients in favour of the centralized glass variables, keeping sections transparent while cards stay consistently translucent across breakpoints.
+_Update 2025-10-15:_ Replaced the legacy `glass-stack` wrappers on the story shell and roadmap preview highlight with the shared `os-window` surface, tuning the local grain variables so the page-level cards keep their frosted depth without duplicating styles.
+_Update 2025-10-16:_ Centralised the high-contrast fallback for `.os-window` in `animations.css` so every hero shell and roadmap highlight can drop bespoke overrides while preserving crisp HC borders.
+_Update 2025-10-17:_ Added high-contrast custom properties to `.os-window` so sections can opt into consistent fallback fills without local overrides, and scrubbed redundant CTA, founders, and partners rules now that the shared surface handles blur removal.
+_Update 2025-10-18:_ Routed the partners meta cards and client roster through the shared `surface-panel` utility and set the home CTA window to publish the new high-contrast tokens so bespoke overrides can stay deleted.
+_Update 2025-10-19:_ Tuned the community metrics, consulting testimonial, and contact hero CTA shells to publish branded high-contrast tokens while deepening their light/dark surface mixes on the shared `.os-window` foundation.
+
+_Update 2025-10-20:_ Extended the products hero, catalog, and demo preview shells to publish accent-aware `.os-window` tokens, refreshed the embedded frame chrome, and wired high-contrast fallbacks so the page stays legible without bespoke overrides.
+_Update 2025-10-21:_ Reworked the global footer columns and closing rail to publish shared `.os-window` tokens with dedicated high-contrast fallbacks so the site-wide surfaces stay consistent with the refreshed glass palette.
+_Update 2025-10-22:_ Retuned the global navigation shell and dropdown panels to publish shared `.os-window` surface tokens with gradient overlays, dark-mode mixes, and HC fallbacks so the sticky header and mobile menu align with the refreshed glass palette.
+_Update 2025-10-23:_ Migrated toast notifications onto the shared `.os-window` shell with accent-aware glass tokens, tuned grain, and explicit high-contrast fallbacks so ephemeral feedback matches the refreshed surface system.
+_Update 2025-10-24:_ Brought the floating AI companion chat window onto the shared `.os-window` shell, publishing accent-aware glass tokens, high-contrast-safe message bubbles, and surfaced input controls so the assistant matches the refreshed translucent system.
+
+_Update 2025-10-25:_ Published high-contrast custom properties for the `.surface-chip`, `.surface-pill`, `.surface-field`, and `.surface-panel` utilities, cleared the legacy `.glass` helper, and tuned the founders and partners shells to opt into the new fallbacks so utility surfaces stay legible without local overrides.
+
+_Update 2025-10-26:_ Rebalanced the home hero pillars, milestone spotlight, and signal readouts on accent-aware `os-window` tokens, moved the milestone navigation controls onto the shared pill/chip utilities, and trimmed bespoke high-contrast overrides now that the centralized fallbacks keep the section accessible.
+
+_Update 2025-10-27:_ Retuned the community voting feature cards and idea submission panel to publish accent-aware `os-window` tokens with tailored dark-mode mixes and high-contrast fallbacks so interactive surfaces stay legible without bespoke overrides.
+
+_Update 2025-10-28:_ Reimagined the global loading overlay as a frosted status shell with shared glass tokens, dark-mode gradients, and high-contrast/reduced-motion fallbacks so the entry experience mirrors the refreshed surface system across themes.
 
 ## Navigation & founder surfaces alignment
 
 **Status: ✅ Implemented**
 
 - Rewired the global navigation shell, dropdowns, and contact CTA to the shared glass and button tokens, ensuring sticky and condensed states reuse the translucent palette across light, dark, and high-contrast modes.
-- Migrated the founders spotlight, biographies, and contact chips onto the `glass-card`, `surface-pill`, and `surface-chip` utilities so every card retains transparent section canvases without bespoke RGBA backgrounds.
+- Migrated the founders spotlight, biographies, and contact chips onto the `os-window`, `surface-pill`, and `surface-chip` utilities so every card retains transparent section canvases without bespoke RGBA backgrounds.
 - Updated the contact scheduling button to inherit the shared `.btn` system and documented the roll-out so the improvement plan tracks the navigation/founder parity milestone.
 
 ## Summary

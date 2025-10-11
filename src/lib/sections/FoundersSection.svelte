@@ -72,7 +72,7 @@
     <div class="founders-grid" use:staggerReveal={{ stagger: 140 }}>
       {#each founderProfiles as founder, index (founder.key)}
         <article
-          class="founder-card glass-card"
+          class="founder-card os-window"
           data-variant={index % 2 === 0 ? 'halo' : 'grid'}
         >
           <div class="founder-card__top">
@@ -140,7 +140,7 @@
     </div>
 
     <aside class="founders-spotlight" use:staggerReveal={{ delay: 160, stagger: 80 }}>
-      <div class="founders-spotlight__inner glass-card" data-variant="line">
+      <div class="founders-spotlight__inner os-window" data-variant="line">
         <span class="founders-spotlight__label">{$_('founders.slaff.brand_title')}</span>
         <p class="founders-spotlight__lead">{$_('founders.slaff.brand_intro')}</p>
         <div class="founders-spotlight__brands">
@@ -169,6 +169,12 @@
 
   .founders-header__intro h2 {
     margin: 0;
+  }
+
+  .founders-header .surface-chip {
+    --surface-chip-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --surface-chip-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--voyage-blue-rgb), 0.26) 38%);
+    --surface-chip-hc-color: var(--text);
   }
 
   .founders-header__lead {
@@ -296,6 +302,14 @@
     color: color-mix(in srgb, var(--text-secondary) 58%, transparent);
   }
 
+  .founder-card__eyebrow.surface-chip,
+  .founder-card__chips .surface-chip,
+  .brand-chip.surface-chip {
+    --surface-chip-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.12) 4%);
+    --surface-chip-hc-border: color-mix(in srgb, var(--border-strong) 60%, rgba(var(--aurora-purple-rgb), 0.32) 40%);
+    --surface-chip-hc-color: var(--text);
+  }
+
   .founder-card__chips {
     margin: 0;
     padding: 0;
@@ -380,6 +394,9 @@
     transition: color var(--duration-ui) var(--ease-out),
       border-color var(--duration-ui) var(--ease-out),
       background var(--duration-ui) var(--ease-out);
+    --surface-pill-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --surface-pill-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--voyage-blue-rgb), 0.26) 38%);
+    --surface-pill-hc-color: var(--text);
   }
 
   .contact-chip:hover {
@@ -426,22 +443,6 @@
     color: color-mix(in srgb, var(--text-secondary) 72%, transparent);
     font-size: var(--text-small);
     line-height: var(--leading-relaxed);
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card,
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founders-spotlight__inner {
-    background: transparent;
-    border: 2px solid currentColor;
-    box-shadow: none;
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .contact-chip,
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .founder-card__chips li .surface-chip,
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .brand-chip {
-    background: transparent;
-    border-color: currentColor;
-    color: currentColor;
-    box-shadow: none;
   }
 
   @media (max-width: 640px) {

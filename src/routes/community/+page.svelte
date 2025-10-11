@@ -151,7 +151,7 @@
     {#if heroMetrics.length}
       <ul class="hero-metrics community-hero__metrics">
         {#each heroMetrics as metric (metric.label)}
-          <li class="community-hero__metric glass-card">
+          <li class="community-hero__metric os-window">
             <span class="community-hero__metric-value">{metric.value}</span>
             <span class="community-hero__metric-label">{metric.label}</span>
           </li>
@@ -318,6 +318,19 @@
     gap: 0.55rem;
     padding: clamp(1.1rem, 2.4vw, 1.7rem);
     text-align: left;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--voyage-blue-rgb), 0.22) 16%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 62%, rgba(255, 255, 255, 0.36) 38%);
+    --surface-glass-shadow: 0 24px 48px rgba(var(--voyage-blue-rgb), 0.22);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 60%, rgba(var(--voyage-blue-rgb), 0.28) 40%);
+  }
+
+  :global([data-base-theme='dark']) .community-hero__metric {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 72%, rgba(var(--voyage-blue-rgb), 0.28) 28%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-glass-shadow: 0 26px 50px rgba(var(--voyage-blue-rgb), 0.32);
   }
 
   .community-hero__metric-value {
@@ -326,11 +339,19 @@
     color: color-mix(in srgb, var(--grad-a) 55%, var(--text) 45%);
   }
 
+  :global(html[data-theme='hc']) .community-hero__metric-value {
+    color: var(--text);
+  }
+
   .community-hero__metric-label {
     font-size: var(--text-small);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-secondary);
+  }
+
+  :global(html[data-theme='hc']) .community-hero__metric-label {
+    color: var(--text-secondary, var(--text));
   }
 
   .voting-section {
@@ -378,6 +399,44 @@
     border-radius: var(--radius-2xl);
     position: relative;
     overflow: hidden;
+    --surface-glass-blur: 26px;
+    --grain-opacity: 0.05;
+  }
+
+  .features-grid :global(.feature-card[data-variant='halo']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.2) 14%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.34) 36%);
+    --surface-glass-shadow: 0 26px 54px rgba(var(--voyage-blue-rgb), 0.24);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.26) 34%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
+  }
+
+  .features-grid :global(.feature-card[data-variant='grid']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--aurora-purple-rgb), 0.26) 16%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.46) 62%, rgba(255, 255, 255, 0.34) 38%);
+    --surface-glass-shadow: 0 28px 58px rgba(var(--aurora-purple-rgb), 0.28);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.16) 5%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--aurora-purple-rgb), 0.3) 36%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.32) 44%);
+  }
+
+  :global([data-base-theme='dark']) .features-grid :global(.feature-card[data-variant='halo']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--voyage-blue-rgb), 0.32) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-glass-shadow: 0 30px 60px rgba(var(--voyage-blue-rgb), 0.3);
+    --grain-opacity: 0.06;
+  }
+
+  :global([data-base-theme='dark']) .features-grid :global(.feature-card[data-variant='grid']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 68%, rgba(var(--aurora-purple-rgb), 0.34) 32%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 60%, rgba(255, 255, 255, 0.2) 40%);
+    --surface-glass-shadow: 0 32px 64px rgba(var(--aurora-purple-rgb), 0.34);
+    --grain-opacity: 0.07;
+  }
+
+  :global(html[data-theme='hc']) .features-grid :global(.feature-card) {
+    --grain-opacity: 0;
   }
 
   .features-grid :global(.feature-card)::before {
@@ -415,6 +474,10 @@
     color: color-mix(in srgb, var(--grad-b) 52%, var(--text) 48%);
   }
 
+  :global(html[data-theme='hc']) .features-grid .vote-count {
+    color: var(--text);
+  }
+
   .feature-name {
     font-size: clamp(1.4rem, 3vw, 1.85rem);
   }
@@ -444,6 +507,25 @@
     width: min(100%, 560px);
     margin: 0 auto;
     padding: clamp(2.2rem, 5vw, 3rem);
+    --surface-glass-blur: 26px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.18) 14%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 64%, rgba(255, 255, 255, 0.34) 36%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.24);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--voyage-blue-rgb), 0.28) 36%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.28) 42%);
+  }
+
+  :global([data-base-theme='dark']) .idea-section :global(.idea-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 72%, rgba(var(--voyage-blue-rgb), 0.32) 28%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-glass-shadow: 0 32px 62px rgba(var(--voyage-blue-rgb), 0.3);
+    --grain-opacity: 0.06;
+  }
+
+  :global(html[data-theme='hc']) .idea-section :global(.idea-card) {
+    --grain-opacity: 0;
   }
 
   .idea-form {

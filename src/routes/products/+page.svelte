@@ -417,6 +417,59 @@
     gap: var(--grid-gap-xl);
   }
 
+  :global(.products-hero__card.os-window),
+  :global(.products-catalog__card.os-window),
+  :global(.products-cta__card.os-window) {
+    --surface-glass-blur: 22px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.22) 14%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.36) 36%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.24);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.28) 32%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.3) 42%);
+  }
+
+  :global([data-base-theme='dark'] .products-hero__card.os-window),
+  :global([data-base-theme='dark'] .products-catalog__card.os-window),
+  :global([data-base-theme='dark'] .products-cta__card.os-window) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--voyage-blue-rgb), 0.3) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 58%, rgba(255, 255, 255, 0.22) 42%);
+    --surface-glass-shadow: 0 34px 64px rgba(var(--voyage-blue-rgb), 0.34);
+  }
+
+  :global(.products-hero__card.os-window[data-variant='halo']),
+  :global(.products-catalog__card.os-window[data-variant='halo']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.28) 18%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 62%, rgba(255, 255, 255, 0.36) 38%);
+    --surface-glass-shadow: 0 30px 60px rgba(var(--aurora-purple-rgb), 0.28);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.18) 5%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--aurora-purple-rgb), 0.3) 34%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.32) 44%);
+  }
+
+  :global([data-base-theme='dark'] .products-hero__card.os-window[data-variant='halo']),
+  :global([data-base-theme='dark'] .products-catalog__card.os-window[data-variant='halo']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 68%, rgba(var(--aurora-purple-rgb), 0.36) 32%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 58%, rgba(255, 255, 255, 0.18) 42%);
+    --surface-glass-shadow: 0 36px 68px rgba(var(--aurora-purple-rgb), 0.34);
+  }
+
+  :global(.products-cta__card.os-window[data-variant='line']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--signal-yellow-rgb), 0.24) 16%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 58%, rgba(255, 255, 255, 0.36) 42%);
+    --surface-glass-shadow: 0 32px 62px rgba(var(--signal-yellow-rgb), 0.24);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--signal-yellow-rgb), 0.18) 5%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--signal-yellow-rgb), 0.3) 34%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.3) 44%);
+  }
+
+  :global([data-base-theme='dark'] .products-cta__card.os-window[data-variant='line']) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 68%, rgba(var(--signal-yellow-rgb), 0.34) 32%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.58) 58%, rgba(255, 255, 255, 0.18) 42%);
+    --surface-glass-shadow: 0 36px 68px rgba(var(--signal-yellow-rgb), 0.3);
+  }
+
   :global(.products-hero__card) {
     display: grid;
     gap: clamp(1.1rem, 2.4vw, 1.8rem);
@@ -445,6 +498,14 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
+  }
+
+  :global(html[data-theme='hc'] .products-hero__card h3),
+  :global(html[data-theme='hc'] .products-catalog__card h3),
+  :global(html[data-theme='hc'] .products-cta__card h2) {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--text);
   }
 
   :global(.products-hero__card) p {

@@ -106,7 +106,7 @@
 </script>
 
 <div
-  class={`demo-preview glass-card ${accentClass}`}
+  class={`demo-preview os-window ${accentClass}`}
   bind:this={container}
   data-variant={variant}
   data-mounted={hasMounted}
@@ -160,6 +160,59 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    --surface-glass-blur: 22px;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.22) 14%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 62%, rgba(255, 255, 255, 0.38) 38%);
+    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.24);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.28) 32%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.32) 42%);
+    --preview-frame-bg: color-mix(in srgb, rgba(255, 255, 255, 0.12) 70%, rgba(var(--voyage-blue-rgb), 0.18) 30%);
+    --preview-frame-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(255, 255, 255, 0.4) 40%);
+    --preview-frame-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 32px 64px rgba(12, 18, 36, 0.26);
+    --placeholder-gradient: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.3), rgba(var(--aurora-purple-rgb), 0.24));
+    --placeholder-text: rgba(255, 255, 255, 0.74);
+  }
+
+  :global([data-base-theme='dark']) .demo-preview {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--voyage-blue-rgb), 0.32) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-glass-shadow: 0 34px 64px rgba(var(--voyage-blue-rgb), 0.32);
+    --preview-frame-bg: color-mix(in srgb, rgba(16, 22, 36, 0.68) 68%, rgba(var(--voyage-blue-rgb), 0.3) 32%);
+    --preview-frame-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.58) 58%, rgba(255, 255, 255, 0.16) 42%);
+    --preview-frame-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 36px 70px rgba(5, 9, 18, 0.45);
+    --placeholder-gradient: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.34), rgba(var(--aurora-purple-rgb), 0.28));
+  }
+
+  .demo-preview--aurora {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.26) 18%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.48) 62%, rgba(255, 255, 255, 0.36) 38%);
+    --surface-glass-shadow: 0 30px 58px rgba(var(--aurora-purple-rgb), 0.26);
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.18) 5%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--aurora-purple-rgb), 0.3) 34%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.32) 44%);
+    --preview-frame-bg: color-mix(in srgb, rgba(255, 255, 255, 0.12) 68%, rgba(var(--aurora-purple-rgb), 0.22) 32%);
+    --preview-frame-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 60%, rgba(255, 255, 255, 0.38) 40%);
+    --preview-frame-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 32px 64px rgba(var(--aurora-purple-rgb), 0.28);
+    --placeholder-gradient: linear-gradient(135deg, rgba(var(--aurora-purple-rgb), 0.32), rgba(var(--cherry-pop-rgb), 0.26));
+  }
+
+  :global([data-base-theme='dark']) .demo-preview--aurora {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 68%, rgba(var(--aurora-purple-rgb), 0.34) 32%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 58%, rgba(255, 255, 255, 0.18) 42%);
+    --surface-glass-shadow: 0 34px 64px rgba(var(--aurora-purple-rgb), 0.32);
+    --preview-frame-bg: color-mix(in srgb, rgba(22, 16, 36, 0.68) 66%, rgba(var(--aurora-purple-rgb), 0.32) 34%);
+    --preview-frame-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.6) 58%, rgba(255, 255, 255, 0.16) 42%);
+    --preview-frame-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 38px 74px rgba(9, 6, 16, 0.5);
+  }
+
+  :global(html[data-theme='hc']) .demo-preview {
+    --preview-frame-bg: var(--bg-elev-1);
+    --preview-frame-border: var(--border-strong);
+    --preview-frame-shadow: 0 0 0 1px var(--border-strong);
+    --placeholder-gradient: var(--bg-elev-1);
+    --placeholder-text: var(--text);
   }
 
   .demo-preview::after {
@@ -244,10 +297,10 @@
     position: relative;
     border-radius: clamp(1.6rem, 3vw, 2.6rem);
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.55) 60%, rgba(var(--voyage-blue-rgb), 0.25) 40%);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 32px 64px rgba(15, 23, 42, 0.25);
+    border: 1px solid var(--preview-frame-border);
+    box-shadow: var(--preview-frame-shadow);
     aspect-ratio: 16 / 10;
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.14) 70%, rgba(var(--voyage-blue-rgb), 0.12) 30%);
+    background: var(--preview-frame-bg);
   }
 
   .demo-preview__frame iframe {
@@ -268,11 +321,21 @@
     place-items: center;
     width: 100%;
     height: 100%;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--placeholder-text);
     font-weight: var(--weight-semibold);
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    background: linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.28), rgba(var(--aurora-purple-rgb), 0.24));
+    background: var(--placeholder-gradient);
+  }
+
+  :global(html[data-theme='hc']) .demo-preview__placeholder {
+    border-top: 1px solid var(--border-strong);
+    border-left: 1px solid var(--border-strong);
+  }
+
+  :global(html[data-theme='hc']) .demo-preview::after,
+  :global(html[data-theme='hc']) .demo-preview__halo {
+    display: none;
   }
 
   .demo-preview--aurora .demo-preview__host {

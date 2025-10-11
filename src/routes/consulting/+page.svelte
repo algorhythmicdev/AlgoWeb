@@ -197,7 +197,7 @@
     </div>
 
     {#if testimonial.quote}
-      <div class="consulting-hero__testimonial glass-card">
+      <div class="consulting-hero__testimonial os-window">
         <div class="consulting-hero__testimonial-header">
           <span class="consulting-hero__testimonial-icon" aria-hidden="true">
             <Icon name="sparkles" size={18} />
@@ -502,6 +502,19 @@
     max-width: min(100%, var(--measure-lg));
     text-align: left;
     gap: clamp(0.75rem, 2.4vw, 1.2rem);
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.24) 18%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 58%, rgba(255, 255, 255, 0.36) 42%);
+    --surface-glass-shadow: 0 26px 52px rgba(var(--aurora-purple-rgb), 0.26);
+    --grain-opacity: 0.05;
+    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.1) 4%);
+    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--aurora-purple-rgb), 0.24) 36%);
+    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--aurora-purple-rgb), 0.28) 42%);
+  }
+
+  :global([data-base-theme='dark']) .consulting-hero__testimonial {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--aurora-purple-rgb), 0.36) 30%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 56%, rgba(255, 255, 255, 0.24) 44%);
+    --surface-glass-shadow: 0 32px 60px rgba(var(--aurora-purple-rgb), 0.34);
   }
 
   .consulting-hero__testimonial-header {
@@ -575,6 +588,10 @@
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .consulting-hero__testimonial-header {
     color: var(--text-primary);
+  }
+
+  :global(html[data-theme='hc']) .consulting-hero__quote {
+    color: var(--text);
   }
 
 
