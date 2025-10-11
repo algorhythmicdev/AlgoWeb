@@ -442,17 +442,25 @@
     "metrics": [
       {
         "label": "Contributors",
-        "value": "2.4k"
+        "value": "2.4k",
+        "description": "Builders, travellers, founders, and partners shaping our roadmap."
       },
       {
         "label": "Feature votes",
-        "value": "58k"
+        "value": "58k",
+        "description": "Feature prioritisation powered by the people who will use it."
       },
       {
         "label": "Locales",
-        "value": "6 languages"
+        "value": "6 languages",
+        "description": "Community suggestions that made it into production."
       }
-    ]
+    ],
+    "timeline_title": "Release signals",
+    "timeline_description": "Stay tuned with a weekly digest covering roadmap changes and pilot news.",
+    "cta_title": "Join the community",
+    "cta_description": "Free to join • Early invites • Honest updates",
+    "cta_button": "Enter Discord"
   },
   "consulting": {
     "meta_title": "AlgoRhythmics konsultāciju pilots",
@@ -510,7 +518,57 @@
     "hero_testimonial_label": "Client reflection",
     "hero_testimonial_quote": "AlgoRhythmics translated signage discipline into a calm AI workflow we could ship in weeks.",
     "hero_testimonial_name": "Marta Ozoliņa",
-    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek"
+    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek",
+    "hero_description": "We work alongside your team to design AI workflows that respect people, processes, and change management.",
+    "hero_cta_primary": "Apply for the pilot",
+    "hero_cta_secondary": "Review service menu",
+    "hero_badge": "Pilot open",
+    "packages_title": "How we help",
+    "packages": [
+      {
+        "name": "Strategy",
+        "description": "Map opportunities, align teams, and define a measurable plan.",
+        "benefits": [
+          "Discovery workshops",
+          "AI readiness scorecard",
+          "Roadmap with next best moves"
+        ]
+      },
+      {
+        "name": "Build",
+        "description": "Prototype, integrate, and launch calm AI experiences.",
+        "benefits": [
+          "Rapid proof of concept",
+          "Integration with your stack",
+          "Training sessions for your team"
+        ]
+      },
+      {
+        "name": "Care",
+        "description": "Keep the lights on with governance, improvements, and support.",
+        "benefits": [
+          "Monthly health reviews",
+          "Iteration backlog",
+          "On-call support crew"
+        ]
+      }
+    ],
+    "process_title": "Pilot flow",
+    "process_steps": [
+      {
+        "title": "Kickoff call",
+        "description": "Understand goals, constraints, and desired outcomes."
+      },
+      {
+        "title": "Design sprint",
+        "description": "Prototype the experience and confirm technical approach."
+      },
+      {
+        "title": "Launch support",
+        "description": "Ship, measure, and adjust together."
+      }
+    ],
+    "form_intro": "Tell us a little about your team so we can tailor the session."
   },
   "contact": {
     "meta_title": "Sazinies ar AlgoRhythmics",
@@ -686,7 +744,8 @@
           "unik",
           "laboratorija",
           "aģentūra",
-          "algorhythmics"
+          "algorhythmics",
+          "culture"
         ],
         "answer": "AlgoRhythmics apvieno inženieriju ar kustību iedvesmotu radošumu. Strādājam kā inovāciju laboratorija, palīdzot partneriem ieviest eksperimentēšanas kultūru Baltijas tirgū."
       },
@@ -705,7 +764,8 @@
           "ideonautix",
           "produktivitāte",
           "komanda",
-          "sadarbība"
+          "sadarbība",
+          "collaboration"
         ],
         "answer": "Ideonautix piedāvā AI līdzbraucējus komandām, kas veic attālinātu darbu. Tas palīdz strukturēt sapulces, lēmumus un zīmolu izstrādi latviešu un starptautiskos projektos."
       },
@@ -714,7 +774,8 @@
           "sadarbība",
           "kontakts",
           "konsultācija",
-          "projekts"
+          "projekts",
+          "partnership"
         ],
         "answer": "Droši rakstiet hello@algorhythmics.com vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību."
       },
@@ -723,7 +784,8 @@
           "uzlabot",
           "pilnveidot",
           "stratēģija",
-          "idejas"
+          "idejas",
+          "strategy"
         ],
         "answer": "Iesakām kopīgu darbnīcu: kartējam jūsu biznesa mērķus, izvērtējam datu kvalitāti un izveidojam izmēģinājuma risinājumu, ko var testēt ar vietējo auditoriju."
       }
