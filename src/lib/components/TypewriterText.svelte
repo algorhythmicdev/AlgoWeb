@@ -187,10 +187,14 @@
   .typewriter-text__cursor {
     width: 0.6ch;
     height: 1.1em;
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.85) 70%, rgba(255, 255, 255, 0.92) 30%);
+    background: color-mix(
+      in srgb,
+      rgba(var(--voyage-blue-rgb), 0.82) 68%,
+      rgba(var(--signal-yellow-rgb), 0.32) 32%
+    );
     border-radius: 2px;
     display: inline-block;
-    opacity: 0.7;
+    opacity: 0.72;
     animation: cursorBlink 1s steps(2, start) infinite;
   }
 
@@ -225,6 +229,11 @@
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .typewriter-text {
-    --typewriter-gradient: linear-gradient(120deg, #ffffff 0%, #ffe082 50%, #ff9100 100%);
+    --typewriter-gradient: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--text) 92%, var(--bg) 8%) 0%,
+      color-mix(in srgb, var(--accent-2) 82%, var(--bg) 18%) 50%,
+      color-mix(in srgb, var(--accent-1) 78%, var(--bg) 22%) 100%
+    );
   }
 </style>

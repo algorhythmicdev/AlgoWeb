@@ -213,12 +213,21 @@
 {/if}
 
 <!-- Hero Section -->
-<Hero variant="line" title={$_('contact.hero_title')} subtitle={$_('contact.hero_subtitle')}>
-  <div class="contact-hero">
+<Hero
+  variant="line"
+  title={$_('contact.hero_title')}
+  subtitle={$_('contact.hero_subtitle')}
+  tone="primary"
+  intensity="soft"
+  align="center"
+>
+  <svelte:fragment slot="highlights">
     <div class="contact-hero__headline surface-pill" data-tone="accent">
       <AnimatedHeadline variant="pulse" phrases={heroPhrases} holdDuration={2800} />
     </div>
+  </svelte:fragment>
 
+  <svelte:fragment slot="actions">
     {#if heroCtas.length}
       <div class="contact-hero__cta-grid">
         {#each heroCtas as item (item.label)}
@@ -251,7 +260,7 @@
         {/each}
       </div>
     {/if}
-  </div>
+  </svelte:fragment>
 </Hero>
 
 <!-- Contact Content -->
@@ -444,24 +453,6 @@
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
   }
 
-  :global(.contact-hero)::before {
-    content: '';
-    position: absolute;
-    inset: clamp(-5rem, -8vw, -2rem) -12% auto;
-    height: clamp(18rem, 32vw, 24rem);
-    background: radial-gradient(circle at 50% 40%, var(--hero-glow-primary), transparent 70%);
-    filter: blur(140px);
-    opacity: 0.7;
-    pointer-events: none;
-  }
-
-  .contact-hero :global(h1) {
-    margin: 0;
-    text-align: center;
-    font-size: clamp(2.8rem, 6.5vw, 3.9rem);
-    letter-spacing: -0.02em;
-  }
-
   .contact-hero__headline {
     position: relative;
     display: inline-flex;
@@ -475,14 +466,6 @@
 
   .contact-hero__headline :global(.animated-headline) {
     width: 100%;
-  }
-
-  .contact-hero :global(p) {
-    margin: 0;
-    max-width: var(--measure-lg);
-    color: var(--text-secondary);
-    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
-    text-align: center;
   }
 
   .contact-hero__cta-grid {

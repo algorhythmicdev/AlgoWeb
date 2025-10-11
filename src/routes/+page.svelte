@@ -79,7 +79,7 @@
     en.hero?.description,
     'We choreograph AI rituals with signage discipline and AAA accessibility.'
   );
-  const fallbackHeroPrimaryCta = ensureString(en.hero?.cta_products, 'Explore the constellation');
+  const fallbackHeroPrimaryCta = ensureString(en.hero?.cta_products, 'Explore the product lineup');
   const fallbackHeroSecondaryCta = ensureString(en.hero?.cta_consulting, 'Book a strategy huddle');
   const fallbackHeroMilestoneHeading = ensureString(en.hero?.next_milestone, 'Next waypoint');
   const fallbackHeroMilestoneCta = ensureString(en.hero?.milestone_cta, 'See the roadmap');
@@ -337,169 +337,167 @@
     : '';
 </script>
 
-<section class="hero-section">
-  <Hero variant="aurora" title={heroTitle} subtitle={heroSubtitle}>
-    <div class="home-hero">
-      <div class="home-hero__column home-hero__column--main">
-        {#if heroStatus}
-          <p class="home-hero__status surface-chip" data-tone="accent">{heroStatus}</p>
-        {/if}
+<Hero variant="aurora" title={heroTitle} subtitle={heroSubtitle} tone="primary" intensity="soft">
+  <svelte:fragment slot="status">
+    {#if heroStatus}
+      <p class="home-hero__status surface-chip" data-tone="accent">{heroStatus}</p>
+    {/if}
+  </svelte:fragment>
 
-        {#if heroDescription}
-          <p class="home-hero__description">{heroDescription}</p>
-        {/if}
+  <svelte:fragment slot="description">
+    {#if heroDescription}
+      <p class="home-hero__description">{heroDescription}</p>
+    {/if}
+  </svelte:fragment>
 
-        <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
-          <a class="home-hero__action btn btn-gradient btn-lg" href="#products">
-            <span>{heroPrimaryActionLabel}</span>
-          </a>
-          <a class="home-hero__action btn btn-secondary btn-lg" href="/consulting">
-            <span>{heroSecondaryActionLabel}</span>
-          </a>
+  <svelte:fragment slot="actions">
+    <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
+      <a class="home-hero__action btn btn-gradient btn-lg" href="#products">
+        <span>{heroPrimaryActionLabel}</span>
+      </a>
+      <a class="home-hero__action btn btn-secondary btn-lg" href="/consulting">
+        <span>{heroSecondaryActionLabel}</span>
+      </a>
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="highlights">
+    {#if heroPillars.length}
+      <div class="home-hero__pillars os-window" aria-labelledby="home-hero-pillars-heading">
+        <p id="home-hero-pillars-heading" class="home-hero__pillars-heading">{heroPillarsTitle}</p>
+        <ul class="home-hero__pillars-list">
+          {#each heroPillars as pillar}
+            <li class="home-hero__pillars-item">
+              <span>{pillar}</span>
+            </li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
+  </svelte:fragment>
+
+  <svelte:fragment slot="aside">
+    {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription || upcomingMilestoneNote)}
+      <article class="home-hero__milestone os-window" data-variant="grid">
+        <span class="sr-only" aria-live="polite">{milestoneLiveAnnouncement}</span>
+        <div class="home-hero__milestone-header">
+          {#if heroMilestoneHeading}
+            <span class="home-hero__milestone-eyebrow">{heroMilestoneHeading}</span>
+          {/if}
+          {#if upcomingMilestoneDateLabel}
+            <span class="home-hero__milestone-date">{upcomingMilestoneDateLabel}</span>
+          {/if}
         </div>
 
-        {#if heroPillars.length}
-          <div class="home-hero__pillars os-window" aria-labelledby="home-hero-pillars-heading">
-            <p id="home-hero-pillars-heading" class="home-hero__pillars-heading">{heroPillarsTitle}</p>
-            <ul class="home-hero__pillars-list">
-              {#each heroPillars as pillar}
-                <li class="home-hero__pillars-item">
-                  <span>{pillar}</span>
-                </li>
-              {/each}
-            </ul>
+        {#if upcomingMilestoneTitle}
+          <h3>{upcomingMilestoneTitle}</h3>
+        {/if}
+
+        {#if upcomingMilestoneDescription}
+          <p>{upcomingMilestoneDescription}</p>
+        {/if}
+
+        {#if upcomingMilestoneStatusLabel || upcomingMilestonePhaseLabel || upcomingMilestoneCategoryLabel}
+          <div class="home-hero__milestone-tags">
+            {#if upcomingMilestoneStatusLabel}
+              <span class="home-hero__milestone-tag surface-chip">{upcomingMilestoneStatusLabel}</span>
+            {/if}
+            {#if upcomingMilestonePhaseLabel}
+              <span class="home-hero__milestone-tag surface-chip">{upcomingMilestonePhaseLabel}</span>
+            {/if}
+            {#if upcomingMilestoneCategoryLabel}
+              <span class="home-hero__milestone-tag surface-chip">{upcomingMilestoneCategoryLabel}</span>
+            {/if}
           </div>
         {/if}
-      </div>
 
-      <div class="home-hero__column home-hero__column--aside">
-        {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription || upcomingMilestoneNote)}
-          <article class="home-hero__milestone os-window" data-variant="grid">
-            <span class="sr-only" aria-live="polite">{milestoneLiveAnnouncement}</span>
-            <div class="home-hero__milestone-header">
-              {#if heroMilestoneHeading}
-                <span class="home-hero__milestone-eyebrow">{heroMilestoneHeading}</span>
-              {/if}
-              {#if upcomingMilestoneDateLabel}
-                <span class="home-hero__milestone-date">{upcomingMilestoneDateLabel}</span>
-              {/if}
-            </div>
+        {#if upcomingMilestoneNote}
+          <p class="home-hero__milestone-note">{upcomingMilestoneNote}</p>
+        {/if}
 
-            {#if upcomingMilestoneTitle}
-              <h3>{upcomingMilestoneTitle}</h3>
-            {/if}
-
-            {#if upcomingMilestoneDescription}
-              <p>{upcomingMilestoneDescription}</p>
-            {/if}
-
-            {#if upcomingMilestoneStatusLabel || upcomingMilestonePhaseLabel || upcomingMilestoneCategoryLabel}
-              <div class="home-hero__milestone-tags">
-                {#if upcomingMilestoneStatusLabel}
-                  <span class="home-hero__milestone-tag surface-chip">{upcomingMilestoneStatusLabel}</span>
-                {/if}
-                {#if upcomingMilestonePhaseLabel}
-                  <span class="home-hero__milestone-tag surface-chip">{upcomingMilestonePhaseLabel}</span>
-                {/if}
-                {#if upcomingMilestoneCategoryLabel}
-                  <span class="home-hero__milestone-tag surface-chip">{upcomingMilestoneCategoryLabel}</span>
-                {/if}
-              </div>
-            {/if}
-
-            {#if upcomingMilestoneNote}
-              <p class="home-hero__milestone-note">{upcomingMilestoneNote}</p>
-            {/if}
-
-            <div class="home-hero__milestone-footer">
-              {#if canNavigateMilestones}
-                <div
-                  class="home-hero__milestone-nav surface-pill"
-                  role="group"
-                  aria-label={milestoneNavGroupLabel}
-                >
-                  <button
-                    class="home-hero__milestone-nav-btn surface-chip"
-                    type="button"
-                    on:click={showPreviousMilestone}
-                    aria-label={previousMilestoneLabel}
-                    on:keydown={handleMilestoneKeydown}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                      <path
-                        d="M12.25 4.75 7.75 10l4.5 5.25"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-
-                  {#if milestoneProgressDisplay}
-                    <span
-                      class="home-hero__milestone-progress"
-                      aria-live="polite"
-                      aria-label={milestoneProgressAriaLabel || undefined}
-                    >
-                      {milestoneProgressDisplay}
-                    </span>
-                  {/if}
-
-                  <button
-                    class="home-hero__milestone-nav-btn surface-chip"
-                    type="button"
-                    on:click={showNextMilestone}
-                    aria-label={nextMilestoneLabel}
-                    on:keydown={handleMilestoneKeydown}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                      <path
-                        d="M7.75 4.75 12.25 10l-4.5 5.25"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              {/if}
-
-              <a class="home-hero__milestone-cta" href="#timeline">
-                <span>{heroMilestoneCta}</span>
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <div class="home-hero__milestone-footer">
+          {#if canNavigateMilestones}
+            <div class="home-hero__milestone-nav surface-pill" role="group" aria-label={milestoneNavGroupLabel}>
+              <button
+                class="home-hero__milestone-nav-btn surface-chip"
+                type="button"
+                on:click={showPreviousMilestone}
+                aria-label={previousMilestoneLabel}
+                on:keydown={handleMilestoneKeydown}
+              >
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                   <path
-                    d="M4.75 10h10.5M10 4.75 15.25 10 10 15.25"
+                    d="M12.25 4.75 7.75 10l4.5 5.25"
                     stroke="currentColor"
                     stroke-width="1.6"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
                 </svg>
-              </a>
-            </div>
-          </article>
-        {/if}
+              </button>
 
-        {#if heroSignals.length}
-          <dl class="home-hero__signals os-window" data-variant="line">
-            {#each heroSignals as signal (signal.id)}
-              <div class="home-hero__signal">
-                {#if signal.label}
-                  <dt>{signal.label}</dt>
-                {/if}
-                {#if signal.value}
-                  <dd>{signal.value}</dd>
-                {/if}
-              </div>
-            {/each}
-          </dl>
-        {/if}
-      </div>
-    </div>
-  </Hero>
-</section>
+              {#if milestoneProgressDisplay}
+                <span
+                  class="home-hero__milestone-progress"
+                  aria-live="polite"
+                  aria-label={milestoneProgressAriaLabel || undefined}
+                >
+                  {milestoneProgressDisplay}
+                </span>
+              {/if}
+
+              <button
+                class="home-hero__milestone-nav-btn surface-chip"
+                type="button"
+                on:click={showNextMilestone}
+                aria-label={nextMilestoneLabel}
+                on:keydown={handleMilestoneKeydown}
+              >
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path
+                    d="M7.75 4.75 12.25 10l-4.5 5.25"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          {/if}
+
+          <a class="home-hero__milestone-cta" href="#timeline">
+            <span>{heroMilestoneCta}</span>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path
+                d="M4.75 10h10.5M10 4.75 15.25 10 10 15.25"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </article>
+    {/if}
+
+    {#if heroSignals.length}
+      <dl class="home-hero__signals os-window" data-variant="line">
+        {#each heroSignals as signal (signal.id)}
+          <div class="home-hero__signal">
+            {#if signal.label}
+              <dt>{signal.label}</dt>
+            {/if}
+            {#if signal.value}
+              <dd>{signal.value}</dd>
+            {/if}
+          </div>
+        {/each}
+      </dl>
+    {/if}
+  </svelte:fragment>
+</Hero>
 
 <section class="story section" id="story" use:revealOnScroll>
   <div class="container">
@@ -672,31 +670,6 @@
     border: 0;
   }
 
-  .hero-section {
-    padding-bottom: var(--space-3xl, clamp(2.4rem, 6vw, 3.6rem));
-  }
-
-  .home-hero {
-    --hero-gap: clamp(1.75rem, 6vw, 2.75rem);
-    margin-top: clamp(1.2rem, 2.2vw, 1.6rem);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-    gap: var(--hero-gap);
-    align-items: start;
-  }
-
-  .home-hero__column {
-    display: grid;
-  }
-
-  .home-hero__column--main {
-    gap: clamp(1.15rem, 3vw, 1.85rem);
-  }
-
-  .home-hero__column--aside {
-    gap: clamp(1.2rem, 3vw, 2rem);
-  }
-
   .home-hero__status {
     margin: 0;
     gap: 0.55rem;
@@ -708,7 +681,7 @@
     height: 8px;
     border-radius: 999px;
     background: radial-gradient(circle at 30% 30%, var(--grad-a) 0%, transparent 70%);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 1px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 70%, transparent 30%);
   }
 
   .home-hero__description {
@@ -743,20 +716,20 @@
     border-radius: 26px;
     overflow: hidden;
     --surface-glass-blur: 24px;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.18) 14%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 64%, rgba(255, 255, 255, 0.34) 36%);
-    --surface-glass-shadow: 0 24px 52px rgba(var(--voyage-blue-rgb), 0.22);
-    --grain-opacity: 0.05;
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.6) 24%, transparent 76%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 58%, rgba(255, 255, 255, 0.28) 42%);
+    --surface-glass-shadow: 0 24px 48px rgba(var(--voyage-blue-rgb), 0.22);
+    --grain-opacity: 0.06;
     --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
     --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.24) 34%);
     --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.24) 42%);
   }
 
   :global([data-base-theme='dark']) .home-hero__pillars {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 72%, rgba(var(--voyage-blue-rgb), 0.3) 28%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 58%, rgba(255, 255, 255, 0.22) 42%);
-    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.3);
-    --grain-opacity: 0.06;
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.68) 28%, transparent 72%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.62) 56%, rgba(255, 255, 255, 0.22) 44%);
+    --surface-glass-shadow: 0 28px 54px rgba(var(--voyage-blue-rgb), 0.3);
+    --grain-opacity: 0.07;
   }
 
   .home-hero__pillars::before {
@@ -806,7 +779,7 @@
     height: 0.7rem;
     border-radius: 999px;
     background: radial-gradient(circle at 35% 35%, var(--grad-a) 0%, transparent 65%);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 0 1px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 70%, transparent 30%);
   }
 
   .home-hero__milestone,
@@ -818,21 +791,21 @@
 
   .home-hero__milestone {
     --surface-glass-blur: 26px;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.26) 18%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.48) 62%, rgba(255, 255, 255, 0.34) 38%);
-    --surface-glass-shadow: 0 28px 56px rgba(var(--aurora-purple-rgb), 0.3);
-    --grain-opacity: 0.06;
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 22%, transparent 78%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.54) 60%, rgba(255, 255, 255, 0.3) 40%);
+    --surface-glass-shadow: 0 28px 52px rgba(var(--aurora-purple-rgb), 0.28);
+    --grain-opacity: 0.07;
     --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.14) 5%);
     --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--aurora-purple-rgb), 0.32) 38%);
     --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.3) 44%);
-    --surface-pill-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.18) 14%);
-    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 62%, rgba(255, 255, 255, 0.32) 38%);
+    --surface-pill-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.52) 24%, transparent 76%);
+    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.48) 60%, rgba(255, 255, 255, 0.28) 40%);
     --surface-pill-shadow: 0 22px 44px rgba(var(--aurora-purple-rgb), 0.26);
     --surface-pill-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.1) 4%);
     --surface-pill-hc-border: color-mix(in srgb, var(--border-strong) 58%, rgba(var(--aurora-purple-rgb), 0.28) 42%);
     --surface-pill-hc-shadow: none;
-    --surface-chip-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
-    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.44) 64%, rgba(255, 255, 255, 0.34) 36%);
+    --surface-chip-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 22%, transparent 78%);
+    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 62%, rgba(255, 255, 255, 0.3) 38%);
     --surface-chip-shadow: 0 20px 40px rgba(var(--aurora-purple-rgb), 0.24);
     --surface-chip-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--aurora-purple-rgb), 0.12) 4%);
     --surface-chip-hc-border: color-mix(in srgb, var(--border-strong) 60%, rgba(var(--aurora-purple-rgb), 0.3) 40%);
@@ -841,33 +814,33 @@
   }
 
   :global([data-base-theme='dark']) .home-hero__milestone {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--aurora-purple-rgb), 0.34) 30%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 58%, rgba(255, 255, 255, 0.2) 42%);
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.68) 26%, transparent 74%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.62) 56%, rgba(255, 255, 255, 0.18) 44%);
     --surface-glass-shadow: 0 32px 60px rgba(var(--aurora-purple-rgb), 0.34);
-    --surface-pill-bg: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--aurora-purple-rgb), 0.3) 24%);
-    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-pill-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 24%, transparent 76%);
+    --surface-pill-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 58%, rgba(255, 255, 255, 0.2) 42%);
     --surface-pill-shadow: 0 24px 48px rgba(var(--aurora-purple-rgb), 0.3);
-    --surface-chip-bg: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.28) 20%);
-    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.54) 60%, rgba(255, 255, 255, 0.2) 40%);
+    --surface-chip-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 22%, transparent 78%);
+    --surface-chip-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.56) 58%, rgba(255, 255, 255, 0.18) 42%);
     --surface-chip-shadow: 0 22px 44px rgba(var(--aurora-purple-rgb), 0.32);
   }
 
   .home-hero__signals {
     --surface-glass-blur: 24px;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--signal-yellow-rgb), 0.22) 16%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.42) 60%, rgba(255, 255, 255, 0.34) 40%);
-    --surface-glass-shadow: 0 24px 50px rgba(var(--signal-yellow-rgb), 0.26);
-    --grain-opacity: 0.05;
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 20%, transparent 80%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.48) 58%, rgba(255, 255, 255, 0.3) 42%);
+    --surface-glass-shadow: 0 24px 48px rgba(var(--signal-yellow-rgb), 0.24);
+    --grain-opacity: 0.06;
     --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--signal-yellow-rgb), 0.12) 4%);
     --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--signal-yellow-rgb), 0.28) 38%);
     --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.24) 44%);
   }
 
   :global([data-base-theme='dark']) .home-hero__signals {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--signal-yellow-rgb), 0.34) 30%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.5) 58%, rgba(255, 255, 255, 0.2) 42%);
-    --surface-glass-shadow: 0 28px 56px rgba(var(--signal-yellow-rgb), 0.3);
-    --grain-opacity: 0.06;
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.6) 24%, transparent 76%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.56) 56%, rgba(255, 255, 255, 0.2) 44%);
+    --surface-glass-shadow: 0 28px 54px rgba(var(--signal-yellow-rgb), 0.28);
+    --grain-opacity: 0.07;
   }
 
   .home-hero__milestone-header {
@@ -1045,16 +1018,6 @@
     font-size: clamp(1rem, 2.4vw, 1.18rem);
     font-weight: var(--weight-medium);
     color: var(--text-secondary);
-  }
-
-  @media (max-width: 960px) {
-    .home-hero {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .home-hero__column--aside {
-      order: 2;
-    }
   }
 
   @media (max-width: 640px) {
@@ -1575,16 +1538,6 @@
   :global(html[data-theme='hc']) .timeline-card__marker {
     background: currentColor;
     box-shadow: none;
-  }
-
-  @media (max-width: 1080px) {
-    .home-hero {
-      grid-template-columns: 1fr;
-    }
-
-    .home-hero__column--aside {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
   }
 
   @media (max-width: 960px) {

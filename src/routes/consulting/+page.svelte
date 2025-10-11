@@ -181,13 +181,20 @@
 {/if}
 
 <!-- Hero Section -->
-<Hero variant="nodes" title={$_('consulting.hero_title')} subtitle={$_('consulting.hero_subtitle')}>
-  <div class="consulting-hero">
-    <div class="consulting-hero__body">
-      <div class="consulting-hero__headline surface-pill" data-tone="accent">
-        <AnimatedHeadline variant="glow" phrases={heroRotating} holdDuration={2600} />
-      </div>
+<Hero
+  variant="nodes"
+  title={$_('consulting.hero_title')}
+  subtitle={$_('consulting.hero_subtitle')}
+  tone="atlantic"
+  intensity="soft"
+>
+  <svelte:fragment slot="highlights">
+    <div class="consulting-hero__headline surface-pill" data-tone="accent">
+      <AnimatedHeadline variant="glow" phrases={heroRotating} holdDuration={2600} />
+    </div>
+  </svelte:fragment>
 
+  <svelte:fragment slot="actions">
     <div class="consulting-hero__meta">
       <div class="spots-indicator surface-pill" aria-live="polite" data-tone="accent">
         <div class="spots-number">{spotsRemaining}</div>
@@ -195,7 +202,9 @@
       </div>
       <a href="#form" class="btn btn-gradient">{$_('consulting.form_title')}</a>
     </div>
+  </svelte:fragment>
 
+  <svelte:fragment slot="description">
     {#if testimonial.quote}
       <div class="consulting-hero__testimonial os-window">
         <div class="consulting-hero__testimonial-header">
@@ -211,16 +220,17 @@
         </p>
       </div>
     {/if}
+  </svelte:fragment>
 
-      {#if heroRotating.length > 1}
-        <ul class="consulting-hero__phrases">
-          {#each heroRotating.slice(1) as phrase, index}
-            <li class="consulting-hero__phrase" aria-label={`Focus area ${index + 1}`}>{phrase}</li>
-          {/each}
-        </ul>
-      {/if}
-    </div>
+  {#if heroRotating.length > 1}
+    <ul class="consulting-hero__phrases">
+      {#each heroRotating.slice(1) as phrase, index}
+        <li class="consulting-hero__phrase" aria-label={`Focus area ${index + 1}`}>{phrase}</li>
+      {/each}
+    </ul>
+  {/if}
 
+  <svelte:fragment slot="aside">
     <div class="consulting-hero__features">
       {#each heroFeatureIcons as feature, index}
         <MagneticTiltCard
@@ -236,7 +246,7 @@
         </MagneticTiltCard>
       {/each}
     </div>
-  </div>
+  </svelte:fragment>
 </Hero>
 
 <!-- Application Form -->
@@ -448,24 +458,6 @@
   border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 }
 
-:global(.consulting-hero)::before {
-  content: '';
-  position: absolute;
-  inset: clamp(-5rem, -8vw, -2rem) -15% auto;
-  height: clamp(20rem, 36vw, 26rem);
-  background: radial-gradient(circle at 40% 40%, var(--hero-glow-primary), transparent 70%);
-  filter: blur(140px);
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.consulting-hero :global(h1) {
-  margin: 0;
-  text-align: center;
-  font-size: clamp(2.85rem, 6.5vw, 4.1rem);
-  letter-spacing: -0.02em;
-}
-
   .consulting-hero__headline {
     position: relative;
     display: inline-flex;
@@ -479,14 +471,6 @@
 
   .consulting-hero__headline :global(.animated-headline) {
     max-width: min(90vw, var(--measure-lg));
-  }
-
-  .consulting-hero :global(p) {
-    margin: 0;
-    max-width: var(--measure-lg);
-    color: var(--text-secondary);
-    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
-    text-align: center;
   }
 
 .consulting-hero__meta {
@@ -535,7 +519,7 @@
     height: clamp(2rem, 4vw, 2.5rem);
     border-radius: var(--radius-full);
     background: var(--gradient-spectrum-3);
-    color: #ffffff;
+    color: color-mix(in srgb, var(--snow) 92%, rgba(var(--signal-yellow-rgb), 0.08) 8%);
     box-shadow: 0 18px 32px rgba(var(--voyage-blue-rgb), 0.18);
   }
 
@@ -641,7 +625,7 @@
   height: clamp(2.3rem, 4vw, 2.7rem);
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
-  color: #ffffff;
+  color: color-mix(in srgb, var(--snow) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
   box-shadow: 0 18px 32px rgba(var(--voyage-blue-rgb), 0.25);
 }
 

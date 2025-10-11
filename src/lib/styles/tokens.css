@@ -16,9 +16,9 @@
   --red-ch: #e0322c;
   --red-ch-rgb: 224, 50, 44;
 
-  --voyage-blue: var(--accent-1);
-  --voyage-blue-rgb: var(--accent-1-rgb);
-  --voyage-blue-strong: #0ab3a8;
+  --voyage-blue: #1351ff;
+  --voyage-blue-rgb: 19, 81, 255;
+  --voyage-blue-strong: #0d3edc;
   --aurora-purple: var(--primary);
   --aurora-purple-rgb: var(--primary-rgb);
   --aurora-purple-strong: #5628f2;
@@ -32,12 +32,12 @@
   /* ==================== NEUTRALS & TEXT ==================== */
   --cloud: #f5f7fb;
   --cloud-rgb: 245, 247, 251;
-  --surface: #ffffff;
-  --surface-subtle: #eef1f7;
-  --surface-strong: #e1e6f0;
+  --surface: color-mix(in srgb, var(--cloud) 84%, rgba(var(--voyage-blue-rgb), 0.18) 16%);
+  --surface-subtle: color-mix(in srgb, var(--cloud) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
+  --surface-strong: color-mix(in srgb, var(--cloud) 78%, rgba(var(--voyage-blue-rgb), 0.22) 22%);
   --mist: #e7ecf4;
   --porcelain: var(--surface-subtle);
-  --snow: #f2f5f9;
+  --snow: color-mix(in srgb, var(--cloud) 90%, rgba(var(--voyage-blue-rgb), 0.12) 10%);
   --snow-rgb: 242, 245, 249;
   --ash: #8b9299;
   --slate-base: #1b2230;
@@ -63,8 +63,8 @@
   --text-secondary-base: #25324b;
   --text-tertiary-base: #3b4862;
   --divider: rgba(var(--ink-rgb), 0.14);
-  --border: #d5ddef;
-  --border-strong: #bcc6de;
+  --border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 42%, #d5ddef 58%);
+  --border-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 48%, #bcc6de 52%);
 
   --focus-ring: 0 0 0 3px color-mix(in oklab, var(--voyage-blue) 55%, white 45%);
   --focus-ring-contrast: 0 0 0 3px color-mix(in oklab, var(--slate-base) 70%, white 30%);
@@ -142,13 +142,13 @@
   --bg-surface: var(--card);
   --bg-muted: var(--card-subtle);
   --bg-elevated: var(--card-strong);
-  --surface-glass: color-mix(in srgb, var(--card) 90%, rgba(var(--voyage-blue-rgb), 0.08) 10%);
-  --surface-glass-strong: color-mix(in srgb, var(--card) 86%, rgba(var(--purple-au-rgb), 0.14) 14%);
+  --surface-glass: color-mix(in srgb, var(--card) 86%, rgba(var(--voyage-blue-rgb), 0.14) 14%);
+  --surface-glass-strong: color-mix(in srgb, var(--card) 82%, rgba(var(--aurora-purple-rgb), 0.2) 18%);
   --surface-tint: rgba(var(--voyage-blue-rgb), 0.08);
 
   --border-subtle: var(--divider);
   --border-strong: color-mix(in srgb, var(--border) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
-  --border-glass: rgba(var(--purple-au-rgb), 0.26);
+  --border-glass: rgba(var(--aurora-purple-rgb), 0.26);
 
   --heading-color: var(--text-strong);
   --heading-shadow: 0 16px 38px rgba(10, 13, 20, 0.12);
@@ -159,12 +159,12 @@
   --hero-glow-primary: rgba(var(--voyage-blue-rgb), 0.16);
   --hero-glow-secondary: rgba(var(--aurora-purple-rgb), 0.14);
   --hero-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
-  --hero-overlay-highlight: rgba(255, 255, 255, 0.78);
-  --hero-overlay-subtle: rgba(255, 255, 255, 0.36);
+  --hero-overlay-highlight: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 68%, transparent 32%);
+  --hero-overlay-subtle: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.32) 64%, transparent 36%);
   --hero-overlay-blend: screen;
-  --hero-overlay-opacity: 0.78;
-  --hero-phrase-bg-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.22) 65%, rgba(255, 255, 255, 0.78) 35%);
-  --hero-phrase-bg-soft: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 62%, rgba(255, 255, 255, 0.82) 38%);
+  --hero-overlay-opacity: 0.74;
+  --hero-phrase-bg-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.32) 66%, rgba(var(--voyage-blue-rgb), 0.12) 34%);
+  --hero-phrase-bg-soft: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 64%, rgba(var(--signal-yellow-rgb), 0.16) 36%);
   --hero-phrase-shadow: 0 20px 48px rgba(16, 24, 40, 0.18);
   --hero-ring-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 70%, rgba(16, 24, 40, 0.12) 30%);
   --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 68%, rgba(16, 24, 40, 0.1) 32%);
@@ -279,8 +279,16 @@
   --shadow-xl: 0 52px 132px rgba(15, 23, 42, 0.22);
 
   --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.24'/%3E%3C/svg%3E");
-  --backdrop-canvas: linear-gradient(180deg, rgba(245, 247, 251, 0.96) 0%, rgba(238, 241, 247, 0.96) 100%);
-  --body-wash: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(238, 241, 247, 0.78) 100%);
+  --backdrop-canvas: linear-gradient(
+    180deg,
+    color-mix(in srgb, rgba(var(--cloud-rgb), 0.92) 82%, rgba(var(--voyage-blue-rgb), 0.12) 18%) 0%,
+    color-mix(in srgb, rgba(var(--cloud-rgb), 0.9) 78%, rgba(var(--aurora-purple-rgb), 0.14) 22%) 100%
+  );
+  --body-wash: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%) 0%,
+    color-mix(in srgb, var(--surface-subtle) 86%, rgba(var(--aurora-purple-rgb), 0.18) 14%) 100%
+  );
   --grain-blend-mode: soft-light;
   --grain-opacity: 0.18;
 
@@ -340,8 +348,8 @@
   --bg-surface: var(--card);
   --bg-muted: var(--card-subtle);
   --bg-elevated: var(--card-strong);
-  --surface-glass: color-mix(in srgb, var(--card) 78%, rgba(var(--voyage-blue-rgb), 0.3) 22%);
-  --surface-glass-strong: color-mix(in srgb, var(--card) 72%, rgba(var(--purple-au-rgb), 0.35) 28%);
+  --surface-glass: color-mix(in srgb, var(--card) 74%, rgba(var(--voyage-blue-rgb), 0.34) 26%);
+  --surface-glass-strong: color-mix(in srgb, var(--card) 70%, rgba(var(--aurora-purple-rgb), 0.38) 30%);
   --surface-tint: rgba(var(--voyage-blue-rgb), 0.26);
 
   --border-subtle: rgba(242, 245, 249, 0.2);

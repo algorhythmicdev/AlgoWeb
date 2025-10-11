@@ -1,31 +1,47 @@
 /* Global animations, typography, and base styles */
 :root {
-  --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
-  --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 58%, rgba(255, 255, 255, 0.42) 42%);
-  --surface-glass-shadow: 0 26px 56px rgba(10, 18, 36, 0.22);
-  --surface-chip-bg: color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--aurora-purple-rgb), 0.14) 14%);
-  --surface-chip-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 62%, rgba(255, 255, 255, 0.42) 38%);
-  --surface-chip-shadow: 0 18px 36px rgba(12, 18, 36, 0.16);
+  --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 22%, transparent 78%);
+  --surface-glass-border: color-mix(
+    in srgb,
+    rgba(var(--voyage-blue-rgb), 0.48) 58%,
+    rgba(255, 255, 255, 0.28) 42%
+  );
+  --surface-glass-shadow: 0 26px 52px rgba(10, 18, 36, 0.22);
+  --surface-chip-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.46) 22%, transparent 78%);
+  --surface-chip-border: color-mix(
+    in srgb,
+    rgba(var(--aurora-purple-rgb), 0.44) 60%,
+    rgba(255, 255, 255, 0.26) 40%
+  );
+  --surface-chip-shadow: 0 18px 34px rgba(12, 18, 36, 0.16);
   --surface-chip-color: var(--text-tertiary);
   --surface-chip-hc-bg: transparent;
   --surface-chip-hc-border: currentColor;
   --surface-chip-hc-shadow: none;
   --surface-chip-hc-color: var(--text);
-  --surface-pill-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--voyage-blue-rgb), 0.18) 16%);
-  --surface-pill-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 60%, rgba(255, 255, 255, 0.4) 40%);
-  --surface-pill-shadow: 0 22px 48px rgba(12, 18, 36, 0.2);
+  --surface-pill-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 24%, transparent 76%);
+  --surface-pill-border: color-mix(
+    in srgb,
+    rgba(var(--voyage-blue-rgb), 0.42) 58%,
+    rgba(255, 255, 255, 0.26) 42%
+  );
+  --surface-pill-shadow: 0 22px 44px rgba(12, 18, 36, 0.2);
   --surface-pill-hc-bg: transparent;
   --surface-pill-hc-border: currentColor;
   --surface-pill-hc-shadow: none;
   --surface-pill-hc-color: var(--text);
-  --surface-field-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--aurora-purple-rgb), 0.08) 6%);
-  --surface-field-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 68%, rgba(var(--aurora-purple-rgb), 0.22) 32%);
-  --surface-field-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 70%, rgba(var(--aurora-purple-rgb), 0.36) 30%);
+  --surface-field-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 18%, transparent 82%);
+  --surface-field-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.26) 64%, rgba(var(--aurora-purple-rgb), 0.28) 36%);
+  --surface-field-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 68%, rgba(var(--aurora-purple-rgb), 0.38) 32%);
   --surface-field-hc-bg: var(--bg);
   --surface-field-hc-border: currentColor;
-  --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--voyage-blue-rgb), 0.16) 14%);
-  --surface-panel-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 64%, rgba(255, 255, 255, 0.36) 36%);
-  --surface-panel-shadow: 0 22px 48px rgba(12, 18, 36, 0.2);
+  --surface-panel-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 22%, transparent 78%);
+  --surface-panel-border: color-mix(
+    in srgb,
+    rgba(var(--voyage-blue-rgb), 0.46) 58%,
+    rgba(255, 255, 255, 0.26) 42%
+  );
+  --surface-panel-shadow: 0 22px 46px rgba(12, 18, 36, 0.2);
   --surface-panel-hc-bg: var(--bg);
   --surface-panel-hc-border: currentColor;
   --surface-panel-hc-shadow: none;

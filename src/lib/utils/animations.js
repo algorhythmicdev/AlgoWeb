@@ -349,7 +349,7 @@ export function ripple(node) {
     circle.style.width = circle.style.height = `${diameter}px`;
     circle.style.left = `${event.offsetX - radius}px`;
     circle.style.top = `${event.offsetY - radius}px`;
-    circle.style.background = 'rgba(255, 255, 255, 0.45)';
+    circle.style.background = 'color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 68%, rgba(var(--aurora-purple-rgb), 0.32) 32%)';
     circle.style.transform = 'scale(0)';
     circle.style.opacity = '1';
     circle.style.transition = `transform ${durations.ui()} ${easings.soft()}, opacity ${durations.ui()} ${easings.soft()}`;
@@ -395,8 +395,8 @@ export function sparkleTrail(node) {
       sparkle.style.top = `${event.offsetY + (Math.random() * 16 - 8)}px`;
       sparkle.style.borderRadius = '50%';
       sparkle.style.background = Math.random() > 0.5
-        ? 'linear-gradient(45deg, #ffffff, rgba(var(--voyage-blue-rgb), 0.8))'
-        : 'linear-gradient(45deg, #ffffff, rgba(var(--aurora-purple-rgb), 0.8))';
+        ? 'linear-gradient(45deg, color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.86) 72%, transparent 28%), color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 48%, transparent 52%))'
+        : 'linear-gradient(45deg, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.88) 70%, transparent 30%), color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.58) 50%, transparent 50%))';
       sparkle.style.opacity = '1';
       sparkle.style.transition = `all ${durations.ui()} ${easings.spring()}`;
       node.appendChild(sparkle);
@@ -428,7 +428,7 @@ export function particleExplode(node) {
 
   /** @param {MouseEvent} event */
   const spawn = (event) => {
-    const baseColor = getCssToken('--voyage-blue', '#0fd6c9');
+    const baseColor = getCssToken('--voyage-blue', '#1351ff');
     /**
      * @param {number} angle
      * @param {number} velocity
@@ -562,7 +562,7 @@ export function typewriter(node, { text, speed = 40, loop = false } = {}) {
  * @param {HTMLElement} node
  * @param {{ colors?: string[]; speed?: number }} [options]
  */
-export function morphGradient(node, { colors = ['#6a38ff', '#0fd6c9', '#ffd339'], speed = 3200 } = {}) {
+export function morphGradient(node, { colors = ['#6a38ff', '#1351ff', '#ffd339', '#e0322c'], speed = 3200 } = {}) {
   if (!isBrowser || shouldReduceMotion() || colors.length < 2) {
     node.style.background = colors[0] ?? '#6a38ff';
     return { destroy: () => {} };

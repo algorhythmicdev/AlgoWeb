@@ -7,27 +7,24 @@
   import AICompanion from '$components/AICompanion.svelte';
   import LoadingOverlay from '$components/LoadingOverlay.svelte';
   import ThemedBackground from '$components/ThemedBackground.svelte';
+  import FloatingThemeSwitcher from '$components/FloatingThemeSwitcher.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
   import { onMount, onDestroy } from 'svelte';
   import { page } from '$app/stores';
   import en from '$lib/i18n/en.json';
   import { morphGradient } from '$lib/utils/animations';
+  import { theme, availableThemes } from '$stores/theme';
 
   export let data;
-
-  let theme = 'light';
-  const setTheme = (t: string) => {
-    theme = t;
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('theme', t);
-  };
 
   let cleanupMorphGradient: { destroy: () => void; };
 
   onMount(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme && availableThemes.includes(savedTheme)) {
+      theme.set(savedTheme);
+    }
 
     cleanupMorphGradient = morphGradient(document.documentElement, {
       colors: ['#6A38FF', '#1351FF', '#E0322C', '#FFD339'],
@@ -99,7 +96,7 @@
 
 <LoadingOverlay />
 
-<svelte:window on:keydown={(e)=>{ if (e.key === 't') setTheme(theme==='light'?'dark':'light'); }} />
+<svelte:window on:keydown={(e)=>{ if (e.key === 't') theme.toggle(); }} />
 
 <ThemedBackground />
 
@@ -116,12 +113,7 @@
 </div>
 <AICompanion />
 
-<!-- Optional: fixed theme switcher control -->
-<div style="position:fixed;right:12px;bottom:12px;display:flex;gap:6px">
-  <button on:click={()=>setTheme('light')}>{$_('settings.theme.light')}</button>
-  <button on:click={()=>setTheme('dark')}>{$_('settings.theme.dark')}</button>
-  <button on:click={()=>setTheme('hc')}>{$_('settings.theme.contrast')}</button>
-</div>
+<FloatingThemeSwitcher />
 
 <style>
   :global(body) {
