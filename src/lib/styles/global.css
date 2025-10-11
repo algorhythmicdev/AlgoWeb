@@ -77,6 +77,19 @@ html.nav-menu-open {
   margin-bottom: 0;
 }
 
+:where(a, button, input, textarea, select, summary, [role='button'], [role='link']) {
+  outline: none;
+  transition:
+    outline-color var(--duration-ui, 220ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    outline-offset var(--duration-ui, 220ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
+    box-shadow var(--duration-ui, 220ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+:where(a, button, input, textarea, select, summary, [role='button'], [role='link']):focus-visible {
+  outline: 2px solid var(--focus-ring-color, color-mix(in srgb, var(--voyage-blue) 70%, #ffffff 30%));
+  outline-offset: var(--focus-ring-offset, 3px);
+  box-shadow: var(--focus-ring-shadow, var(--focus-ring));
+}
 
 /* Gradient bar animation */
 @keyframes bar-pan {
@@ -343,8 +356,10 @@ html[data-theme='hc'] .surface-panel {
 }
 
 .btn:focus-visible {
-  outline: none;
-  box-shadow: var(--btn-focus-shadow, var(--btn-hover-shadow, var(--btn-shadow))), var(--focus-ring);
+  outline: 2px solid var(--focus-ring-color, color-mix(in srgb, var(--voyage-blue) 70%, #ffffff 30%));
+  outline-offset: var(--focus-ring-offset, 3px);
+  box-shadow: var(--btn-focus-shadow, var(--btn-hover-shadow, var(--btn-shadow))),
+    var(--focus-ring-shadow, var(--focus-ring));
 }
 
 .btn:disabled,

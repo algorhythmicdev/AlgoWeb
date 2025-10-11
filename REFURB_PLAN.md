@@ -19,18 +19,6 @@ It’s structured for direct handoff to your web team — with **clear instructi
 All critical issues have been resolved in the codebase. Theme tokens are unified, the navigation now routes to the consolidated Platforms page, hero sections share the animated backdrop with accessibility guards, background effects respect motion preferences, contrast overlays are in place, the layout grid is consistent site-wide, and the English translations have been rewritten per the approved copy.
 
 
-## ⚙️ Moderate Issues (Affecting Design Consistency)
-
-| ID | Area          | Issue                                            | Proposed Fix                                                                                 | Status     |
-| -- | ------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------- | ---------- |
-| M1 | Buttons/CTAs  | Some buttons inconsistent (rounded vs square)    | Use shared `Button.svelte` with theme tokens and state indicators (focus ring 3:1)           | 🔧 Pending |
-| M2 | Cards         | Card styling inconsistent, missing glass & grain | Reintroduce glass-layer and grain textures from `/assets/ui/textures` with `backdrop-filter` | 🔧 Pending |
-| M3 | Typography    | Heading margins inconsistent, spacing off        | Use standard type ramp: H1=2.25rem/700, H2=1.75rem/600, body=1rem/500                        | 🔧 Pending |
-| M4 | Animations    | Some transitions abrupt or missing               | Add fade/reveal via IntersectionObserver, hover elevation, scroll-linked animations          | 🔧 Pending |
-| M5 | Accessibility | Keyboard navigation focus not visible            | Add focus ring (`outline-offset: 3px`, `color: var(--focus-ring)`) to all interactives       | 🔧 Pending |
-| M6 | SEO           | Meta tags missing on subpages                    | Add `load` function with `<svelte:head>` per route                                           | 🔧 Pending |
-
----
 
 ## 🎨 Design Refinements (Visual Polish)
 

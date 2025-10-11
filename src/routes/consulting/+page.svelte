@@ -1,18 +1,22 @@
 ﻿<script>
   // @ts-nocheck
   import { _, json } from 'svelte-i18n';
-  import { Icon, FieldSupport } from '$lib/components';
+  import { Button, Icon, FieldSupport } from '$lib/components';
   import Hero from '$lib/components/Hero.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
+  import { revealOnScroll, staggerReveal } from '$lib/utils/animations';
 
   const fallbackHeroRotating = Array.isArray(en.consulting?.hero_rotating)
     ? en.consulting.hero_rotating
     : [en.consulting.hero_subtitle];
 
   const ensureString = (value, fallback = '') => (typeof value === 'string' && value.trim() ? value.trim() : fallback);
+
+  const siteOrigin = (en.seo?.default_url ?? 'https://algorhythmics.com').replace(/\/$/, '');
+  const canonicalUrl = `${siteOrigin}/consulting`;
 
   const fallbackTestimonial = {
     quote: ensureString(en.consulting?.hero_testimonial_quote, ''),
@@ -169,7 +173,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('consulting.meta_title')}</title>
+  <link rel="canonical" href={canonicalUrl} />
 </svelte:head>
 
 {#if showToast}
@@ -200,7 +204,7 @@
         <div class="spots-number">{spotsRemaining}</div>
         <span>{$_('consulting.spots_remaining')}</span>
       </div>
-      <a href="#form" class="btn btn-gradient">{$_('consulting.form_title')}</a>
+      <Button href="#form" variant="gradient">{$_('consulting.form_title')}</Button>
     </div>
   </svelte:fragment>
 
@@ -250,13 +254,13 @@
 </Hero>
 
 <!-- Application Form -->
-<section class="form-section" id="form">
+<section class="form-section" id="form" use:revealOnScroll>
   <div class="container">
-    <MagneticTiltCard class="form-card" interactive={false}>
+    <MagneticTiltCard class="form-card" interactive={false} staggerOptions={{ delay: 120 }}>
       <h2 class="form-title">{$_('consulting.form_title')}</h2>
 
       <form on:submit={handleSubmit}>
-        <div class="form-grid">
+        <div class="form-grid" use:staggerReveal={{ stagger: 90, selector: '.form-group' }}>
           <div class="form-group" class:error={errors.company}>
             <label for="company" class="required">{$_('consulting.form_company')}</label>
             <input
@@ -381,9 +385,11 @@
           </div>
         </div>
         
-        <button
+        <Button
           type="submit"
-          class="btn btn-primary btn-lg btn-block"
+          variant="primary"
+          size="lg"
+          fullWidth
           disabled={isSubmitting}
         >
           {#if isSubmitting}
@@ -392,7 +398,7 @@
           {:else}
             {$_('consulting.form_submit')}
           {/if}
-        </button>
+        </Button>
 
         <p class="form-note">{$_('form.required_note')}</p>
       </form>

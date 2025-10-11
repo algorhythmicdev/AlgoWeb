@@ -1,4 +1,5 @@
 ﻿<script>
+  import { Button } from '$lib/components';
   import { onDestroy, onMount } from 'svelte';
 
   export let title = '';
@@ -124,14 +125,16 @@
     <h3>{title}</h3>
     <p>{description}</p>
     {#if href && cta}
-      <a
-        class="demo-preview__cta btn btn-secondary hover-lift"
+      <Button
+        class="demo-preview__cta"
+        variant="secondary"
         href={href}
         target="_blank"
         rel="noreferrer noopener"
+        elevate
       >
         {cta}
-      </a>
+      </Button>
     {/if}
   </div>
 

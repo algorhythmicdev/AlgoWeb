@@ -7,6 +7,7 @@
   import ProductDemoPreview from '$components/ProductDemoPreview.svelte';
   import Icon from '$components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { Button } from '$lib/components';
 
   /** @type {Array<'nodevoyage' | 'ideonautix'>} */
   const productKeys = ['nodevoyage', 'ideonautix'];
@@ -72,6 +73,9 @@
     nodevoyage: 'halo',
     ideonautix: 'grid'
   };
+
+  const siteOrigin = (en.seo?.default_url ?? 'https://algorhythmics.com').replace(/\/$/, '');
+  const canonicalUrl = `${siteOrigin}/platforms`;
 
   /**
    * @param {unknown} value
@@ -188,8 +192,7 @@
 </script>
 
 <svelte:head>
-  <title>{$_('products.meta_title')}</title>
-  <meta name="description" content={$_('products.meta_description')} />
+  <link rel="canonical" href={canonicalUrl} />
 </svelte:head>
 
 <Hero variant="halo" title={heroTitle} subtitle={heroSubtitle} tone="aurora" intensity="balanced">
@@ -208,10 +211,12 @@
   <svelte:fragment slot="actions">
     <div class="products-hero__actions">
       {#if heroPrimaryActionLabel}
-        <a class="btn btn-gradient" href="#demos">{heroPrimaryActionLabel}</a>
+        <Button variant="gradient" href="#demos">{heroPrimaryActionLabel}</Button>
       {/if}
       {#if heroSecondaryActionLabel}
-        <a class="btn btn-secondary hover-lift" href="/contact">{heroSecondaryActionLabel}</a>
+        <Button variant="secondary" href="/contact" elevate>
+          {heroSecondaryActionLabel}
+        </Button>
       {/if}
     </div>
   </svelte:fragment>
@@ -244,15 +249,17 @@
               {/if}
             </div>
             <div class="products-hero__card-actions">
-              <a
-                class="btn btn-secondary hover-lift"
+              <Button
+                class="products-hero__card-action"
+                variant="secondary"
                 href={entry.demoHref}
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={entry.buttonAriaLabel}
+                elevate
               >
                 {entry.buttonLabel}
-              </a>
+              </Button>
               {#if entry.cta}
                 <a class="products-hero__card-link" href={`#${entry.id}`}>
                   {entry.cta}
@@ -340,15 +347,16 @@
           {/if}
 
           <div class="products-catalog__actions">
-            <a
-              class="btn btn-gradient"
+            <Button
+              class="products-catalog__primary"
+              variant="gradient"
               href={entry.demoHref}
               target="_blank"
               rel="noreferrer noopener"
               aria-label={entry.buttonAriaLabel}
             >
               {entry.buttonLabel}
-            </a>
+            </Button>
             {#if entry.cta}
               <a class="products-catalog__secondary" href={`#spotlight-${entry.id}`}>
                 {entry.cta}
@@ -373,10 +381,10 @@
       </div>
       <div class="products-cta__actions">
         {#if ctaPrimaryLabel}
-          <a href="/community" class="btn btn-gradient">{ctaPrimaryLabel}</a>
+          <Button variant="gradient" href="/community">{ctaPrimaryLabel}</Button>
         {/if}
         {#if ctaSecondaryLabel}
-          <a href="/contact" class="btn btn-secondary hover-lift">{ctaSecondaryLabel}</a>
+          <Button variant="secondary" href="/contact" elevate>{ctaSecondaryLabel}</Button>
         {/if}
       </div>
     </MagneticTiltCard>
@@ -521,7 +529,7 @@
     align-items: center;
   }
 
-  .products-hero__card-actions .btn {
+  :global(.products-hero__card-action) {
     flex-shrink: 0;
   }
 

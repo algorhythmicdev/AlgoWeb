@@ -600,6 +600,13 @@
   padding: var(--card-padding-lg, 2rem);
   border-radius: var(--radius-xl, 1.8rem);
   background: var(--surface-glass-bg);
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
+    var(--glass-layer, none);
+  background-blend-mode: soft-light, normal;
+  background-size: cover, 140%;
+  background-position: center, top left;
+  background-repeat: no-repeat;
   border: 1px solid var(--surface-glass-border);
   box-shadow: var(--surface-glass-shadow);
   backdrop-filter: var(--surface-glass-blur) saturate(1.12);
@@ -630,6 +637,8 @@
 
 html[data-theme='hc'] .os-window {
   background: var(--os-window-hc-bg, var(--bg-elev-1));
+  background-image: none;
+  background-blend-mode: normal;
   border: 2px solid var(--os-window-hc-border, var(--border));
   box-shadow: var(--os-window-hc-shadow, none);
   backdrop-filter: none;

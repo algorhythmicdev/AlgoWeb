@@ -3,12 +3,13 @@
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import { _, json } from 'svelte-i18n';
-  import { Icon, FieldSupport } from '$lib/components';
+  import { Button, Icon, FieldSupport } from '$lib/components';
   import Hero from '$lib/components/Hero.svelte';
   import AnimatedHeadline from '$lib/components/hero/AnimatedHeadline.svelte';
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
+  import { revealOnScroll, staggerReveal } from '$lib/utils/animations';
 
   const fallbackHeroPhrases = Array.isArray(en.contact?.hero_rotating)
     ? en.contact.hero_rotating
@@ -36,6 +37,9 @@
           action: 'https://discord.gg/algorhythmics'
         }
       ];
+
+  const siteOrigin = (en.seo?.default_url ?? 'https://algorhythmics.com').replace(/\/$/, '');
+  const canonicalUrl = `${siteOrigin}/contact`;
 
   /**
    * @param {unknown} value
@@ -204,8 +208,8 @@
 </script>
 
 <svelte:head>
-  <title>{$_('contact.meta_title')}</title>
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <link rel="canonical" href={canonicalUrl} />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
 </svelte:head>
 
 {#if showToast}
@@ -264,11 +268,11 @@
 </Hero>
 
 <!-- Contact Content -->
-<section class="contact-section">
+<section class="contact-section" use:revealOnScroll>
   <div class="container">
-    <div class="contact-grid">
+    <div class="contact-grid" use:staggerReveal={{ stagger: 140 }}>
       <!-- Contact Form -->
-      <MagneticTiltCard class="form-card" interactive={false}>
+      <MagneticTiltCard class="form-card" interactive={false} staggerOptions={{ delay: 80 }}>
         <h2>{$_('contact.form_title')}</h2>
 
         <form on:submit={handleSubmit}>
@@ -352,9 +356,11 @@
         />
       </div>
           
-          <button
+          <Button
             type="submit"
-            class="btn btn-primary btn-lg btn-block"
+            variant="primary"
+            size="lg"
+            fullWidth
             disabled={isSubmitting}
           >
             {#if isSubmitting}
@@ -363,28 +369,31 @@
             {:else}
               {$_('contact.form_submit')}
             {/if}
-          </button>
+          </Button>
         </form>
       </MagneticTiltCard>
 
       <!-- Contact Info & Calendar -->
       <div class="info-container">
         <!-- Calendar Widget -->
-        <MagneticTiltCard class="calendar-card" interactive={false}>
+        <MagneticTiltCard class="calendar-card" interactive={false} staggerOptions={{ delay: 140 }}>
           <h3>{$_('contact.calendar_title')}</h3>
           <p>{$_('contact.calendar_subtitle')}</p>
-          <button
-            class="calendar-button btn btn-secondary btn-lg btn-block"
+          <Button
+            class="calendar-button"
+            variant="secondary"
+            size="lg"
+            fullWidth
             on:click={openCalendly}
             disabled={!calendlyLoaded}
           >
             <Icon name="calendar" size={20} class="button-icon" />
             <span>{$_('contact.calendar_button')}</span>
-          </button>
+          </Button>
         </MagneticTiltCard>
 
         <!-- Contact Information -->
-        <MagneticTiltCard class="info-card" interactive={false}>
+        <MagneticTiltCard class="info-card" interactive={false} staggerOptions={{ delay: 200 }}>
           <h3>{$_('contact.info_title')}</h3>
 
           <div class="info-item">
@@ -411,7 +420,7 @@
         </MagneticTiltCard>
 
         <!-- Social Links -->
-        <MagneticTiltCard class="social-card" interactive={false}>
+        <MagneticTiltCard class="social-card" interactive={false} staggerOptions={{ delay: 260 }}>
           <h3>{$_('contact.social_title')}</h3>
           <div class="social-links">
             <a href="https://linkedin.com/company/algorhythmics" class="social-link" target="_blank" rel="noopener">
@@ -617,12 +626,12 @@
   .info-value,
   .social-link { color: var(--text-secondary); }
 
-.calendar-button,
+:global(.calendar-button),
 .social-link {
   transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
 }
 
-.calendar-button {
+:global(.calendar-button) {
   --btn-padding-y: 0.85rem;
   --btn-padding-x: 1.6rem;
   --btn-color: color-mix(in srgb, var(--voyage-blue) 62%, var(--text) 38%);
@@ -633,8 +642,8 @@
   --btn-hover-shadow: 0 26px 46px rgba(var(--voyage-blue-rgb), 0.2);
 }
 
-.calendar-button:hover,
-.calendar-button:focus-visible {
+:global(.calendar-button:hover),
+:global(.calendar-button:focus-visible) {
   color: color-mix(in srgb, var(--voyage-blue) 72%, var(--text) 28%);
 }
 
