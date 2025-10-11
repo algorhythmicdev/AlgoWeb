@@ -108,7 +108,7 @@
     toastType = 'success';
     showToast = true;
     
-    features = features; // Trigger reactivity
+    features = [...features];
   }
   
   function submitIdea() {
@@ -136,18 +136,27 @@
 {/if}
 
 <!-- Hero -->
-<Hero variant="particles" title={$_('community.hero_title')} subtitle={$_('community.hero_subtitle')}>
-  <div class="community-hero">
+<Hero
+  variant="particles"
+  title={$_('community.hero_title')}
+  subtitle={$_('community.hero_subtitle')}
+  tone="evergreen"
+  intensity="soft"
+  align="center"
+>
+  <svelte:fragment slot="highlights">
     <div class="community-hero__headline surface-pill" data-tone="accent">
       <AnimatedHeadline variant="slide" phrases={heroHeadlinePhrases} holdDuration={2600} />
     </div>
+  </svelte:fragment>
 
+  <svelte:fragment slot="description">
     {#if heroManifest}
-      <div class="hero-highlights">
-        <p class="community-hero__manifest" aria-live="polite">{heroManifest}</p>
-      </div>
+      <p class="community-hero__manifest" aria-live="polite">{heroManifest}</p>
     {/if}
+  </svelte:fragment>
 
+  <svelte:fragment slot="metrics">
     {#if heroMetrics.length}
       <ul class="hero-metrics community-hero__metrics">
         {#each heroMetrics as metric (metric.label)}
@@ -158,7 +167,7 @@
         {/each}
       </ul>
     {/if}
-  </div>
+  </svelte:fragment>
 </Hero>
 
 <!-- Voting Section -->
@@ -252,30 +261,6 @@
 </section>
 
 <style>
-  :global(.community-hero)::before {
-    content: '';
-    position: absolute;
-    inset: -40% -15% auto;
-    height: clamp(18rem, 32vw, 24rem);
-    background: radial-gradient(circle at center, var(--hero-glow-primary), transparent 70%);
-    filter: blur(140px);
-    opacity: 0.68;
-    pointer-events: none;
-  }
-
-  .community-hero {
-    display: grid;
-    justify-items: center;
-    gap: clamp(1.4rem, 4vw, 2.2rem);
-    text-align: center;
-  }
-
-  .community-hero :global(h1) {
-    margin: 0;
-    font-size: clamp(2.8rem, 6.5vw, 4rem);
-    letter-spacing: -0.02em;
-  }
-
   .community-hero__headline {
     position: relative;
     display: inline-flex;
@@ -289,13 +274,6 @@
 
   .community-hero__headline :global(.animated-headline) {
     width: 100%;
-  }
-
-  .community-hero :global(p) {
-    margin: 0;
-    max-width: min(100%, 68ch);
-    color: var(--text-secondary);
-    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
   }
 
   .community-hero__manifest {

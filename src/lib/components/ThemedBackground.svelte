@@ -160,7 +160,11 @@
         transparent 70%
       ),
       radial-gradient(56% 52% at 16% 12%, color-mix(in srgb, var(--theme-secondary) 24%, transparent) 0%, transparent 72%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.05) 60%);
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 46%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 18%, transparent) 60%
+      );
     opacity: 0.82;
     filter: saturate(1.1);
   }
@@ -209,24 +213,28 @@
     background:
       radial-gradient(
         40% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
-        rgba(255, 255, 255, 0.28),
+        color-mix(in srgb, var(--accent-2) 52%, transparent),
         transparent 72%
       ),
-      linear-gradient(180deg, rgba(8, 8, 8, 0.95) 0%, rgba(2, 2, 2, 0.92) 100%);
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 94%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 82%, transparent) 100%
+      );
     opacity: 0.74;
     filter: saturate(1.05);
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .flare {
     background:
-      radial-gradient(42% 42% at 78% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
-      radial-gradient(50% 50% at 24% 80%, rgba(255, 255, 255, 0.28) 0%, transparent 74%);
+      radial-gradient(42% 42% at 78% 20%, color-mix(in srgb, var(--accent-2) 58%, transparent) 0%, transparent 70%),
+      radial-gradient(50% 50% at 24% 80%, color-mix(in srgb, var(--accent-1) 46%, transparent) 0%, transparent 74%);
     opacity: calc(0.45 + var(--scroll-depth) * 0.4);
     mix-blend-mode: normal;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .dot {
-    background: rgba(255, 255, 255, 0.6) !important;
+    background: color-mix(in srgb, var(--accent-2) 70%, transparent) !important;
     mix-blend-mode: normal;
     opacity: 0.6 !important;
   }

@@ -9,7 +9,6 @@
     ['glass-parallax', 'glass-parallax'],
     ['prism', 'glass-parallax'],
     ['particle-drift', 'particle-drift'],
-    ['constellation', 'particle-drift'],
     ['line-sweep', 'line-sweep'],
     ['wave', 'line-sweep'],
     ['spotlight', 'spotlight']
@@ -17,7 +16,7 @@
 
   export let variant =
     /**
-     * @type {'aurora-flow' | 'glass-parallax' | 'grid-ripple' | 'particle-drift' | 'line-sweep' | 'spotlight' | 'aurora' | 'mesh' | 'wave' | 'prism' | 'constellation'}
+     * @type {'aurora-flow' | 'glass-parallax' | 'grid-ripple' | 'particle-drift' | 'line-sweep' | 'spotlight' | 'aurora' | 'mesh' | 'wave' | 'prism'}
      */
     ('aurora-flow');
   export let tone = /** @type {'primary' | 'aurora' | 'citrus' | 'crimson' | 'atlantic' | 'evergreen'} */ ('primary');
@@ -47,13 +46,16 @@
       };
     });
 
-  const constellationNodes = [
-    { top: '22%', left: '26%', size: '10px' },
-    { top: '38%', left: '44%', size: '8px' },
-    { top: '56%', left: '32%', size: '7px' },
-    { top: '64%', left: '52%', size: '9px' },
-    { top: '46%', left: '70%', size: '7px' }
-  ];
+  const createNodeScatter = (count = 7) => {
+    const base = createScatter(count, 0.4, -0.05);
+    return base.map((point, index) => ({
+      ...point,
+      size: `${index < 2 ? 14 : index < 5 ? 10 : 7}px`,
+      emphasis: index < 2,
+      delay: Number(point.delay) + index * 0.4,
+      duration: 12 + (index % 4) * 3.5
+    }));
+  };
 
   $: resolvedVariant = VARIANT_MAP.get(variant) ?? 'aurora-flow';
   $: toneClass = tone ? `hero-backdrop--tone-${tone}` : '';
@@ -74,8 +76,16 @@
     : resolvedVariant === 'glass-parallax'
       ? createScatter(particleCount, 0.38, -0.05)
       : resolvedVariant === 'particle-drift'
-        ? createScatter(particleCount, 0.52)
+        ? createScatter(particleCount, 0.5)
         : [];
+  $: driftNodes = resolvedVariant === 'particle-drift' ? createNodeScatter(7) : [];
+  $: driftParticles =
+    resolvedVariant === 'particle-drift'
+      ? scatter.map((particle, index) => ({
+          ...particle,
+          duration: 18 + (index % 4) * 2.75
+        }))
+      : [];
 </script>
 
 <div class={baseClasses} aria-hidden="true">
@@ -125,18 +135,18 @@
   {:else if resolvedVariant === 'particle-drift'}
     <span class="hero-backdrop__grid hero-backdrop__grid--particle"></span>
     <div class="hero-backdrop__nodes">
-      {#each constellationNodes as node, index (index)}
+      {#each driftNodes as node, index (index)}
         <span
-          class={`hero-backdrop__node ${index === 0 || index === 3 ? 'hero-backdrop__node--major' : 'hero-backdrop__node--minor'}`}
-          style={`top:${node.top};left:${node.left};width:${node.size};height:${node.size};`}
+          class={`hero-backdrop__node${node.emphasis ? ' hero-backdrop__node--major' : ''}`}
+          style={`top:${node.top};left:${node.left};width:${node.size};height:${node.size};animation-delay:${node.delay}s;--drift-node-speed:${node.duration}s;`}
         ></span>
       {/each}
     </div>
     <div class="hero-backdrop__particles hero-backdrop__particles--drift">
-      {#each scatter as particle, index (index)}
+      {#each driftParticles as particle, index (index)}
         <span
           class="hero-backdrop__particle hero-backdrop__particle--star"
-          style={`top:${particle.top};left:${particle.left};animation-delay:${particle.delay}s;`}
+          style={`top:${particle.top};left:${particle.left};animation-delay:${particle.delay}s;--drift-particle-speed:${particle.duration}s;`}
         ></span>
       {/each}
     </div>
@@ -464,17 +474,21 @@
   .hero-backdrop--particle-drift .hero-backdrop__node {
     position: absolute;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--hero-accent) 85%, transparent 15%);
-    box-shadow: 0 0 16px color-mix(in srgb, var(--hero-accent) 35%, transparent 65%);
-    opacity: 0.9;
-    animation: constellationTwinkle 12s ease-in-out infinite;
+    background: color-mix(in srgb, var(--hero-accent) 78%, transparent 22%);
+    box-shadow:
+      0 0 16px color-mix(in srgb, var(--hero-accent) 40%, transparent 60%),
+      0 0 28px color-mix(in srgb, var(--hero-secondary, var(--hero-accent)) 24%, transparent 76%);
+    opacity: 0.82;
+    animation: driftNodePulse var(--drift-node-speed, 14s) ease-in-out infinite;
   }
 
   .hero-backdrop--particle-drift .hero-backdrop__node--major {
     box-shadow:
-      0 0 18px color-mix(in srgb, var(--hero-accent) 45%, transparent 55%),
-      0 0 32px color-mix(in srgb, var(--hero-secondary) 25%, transparent 75%);
-    animation-duration: 18s;
+      0 0 20px color-mix(in srgb, var(--hero-accent) 50%, transparent 50%),
+      0 0 36px color-mix(in srgb, var(--hero-secondary, var(--hero-accent)) 32%, transparent 68%),
+      0 0 48px color-mix(in srgb, var(--hero-accent) 24%, transparent 76%);
+    --drift-node-speed: 20s;
+    opacity: 0.94;
   }
 
   .hero-backdrop--particle-drift .hero-backdrop__particles--drift {
@@ -490,13 +504,9 @@
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--hero-tertiary) 75%, transparent 25%);
+    background: color-mix(in srgb, var(--hero-secondary, var(--hero-accent)) 68%, transparent 32%);
     opacity: 0;
-    animation: constellationParticle 20s linear infinite;
-  }
-
-  .hero-backdrop--particle-drift .hero-backdrop__particle--star:nth-child(odd) {
-    animation-duration: 24s;
+    animation: driftParticleFloat var(--drift-particle-speed, 20s) linear infinite;
   }
 
   .hero-backdrop--particle-drift .hero-backdrop__particles--drift::after {
@@ -602,16 +612,38 @@
     100% { transform: rotate(360deg); }
   }
 
-  @keyframes constellationTwinkle {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+  @keyframes driftNodePulse {
+    0%,
+    100% {
+      opacity: 0.7;
+      transform: translate3d(0, 0, 0) scale(0.92);
+    }
+    45% {
+      opacity: 1;
+      transform: translate3d(0.8%, -1.2%, 0) scale(1.05);
+    }
+    70% {
+      opacity: 0.82;
+      transform: translate3d(-0.6%, 0.8%, 0) scale(0.98);
+    }
   }
 
-  @keyframes constellationParticle {
-    0% { opacity: 0; transform: scale(0.6); }
-    20% { opacity: 1; }
-    50% { transform: scale(1.2); }
-    100% { opacity: 0; transform: scale(0.6); }
+  @keyframes driftParticleFloat {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 0, 0) scale(0.45);
+    }
+    20% {
+      opacity: 1;
+    }
+    55% {
+      opacity: 0.75;
+      transform: translate3d(12px, -14px, 0) scale(1.05);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(-10px, 12px, 0) scale(0.6);
+    }
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .hero-backdrop {

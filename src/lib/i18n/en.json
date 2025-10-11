@@ -55,10 +55,10 @@
       "brand": "AlgoRhythmics",
       "trail": "keeps your crew shipping with clarity."
     },
-    "tagline": "One calm constellation uniting NodeVoyage, Ideonautix, and hands-on consulting.",
+    "tagline": "One calm suite uniting NodeVoyage, Ideonautix, and hands-on consulting.",
     "subtitle": "We choreograph legible AI rituals—from travel copilots to founder dashboards—with glass-shell poise.",
     "description": "Our layouts respect reduced-motion settings, signage discipline, and AAA contrast so every collaborator stays in control across NodeVoyage, Ideonautix, and studio engagements.",
-    "cta_products": "Explore the constellation",
+    "cta_products": "Explore the product lineup",
     "cta_consulting": "Book a strategy huddle",
     "actions_label": "Primary hero actions",
     "next_milestone": "Next waypoint",
@@ -187,8 +187,8 @@
   "products": {
     "meta_title": "AlgoRhythmics products",
     "meta_description": "Discover NodeVoyage, our AI travel co-pilot, and Ideonautix, the productivity OS for founders.",
-    "hero_label": "Product constellation",
-    "title": "Platform constellation",
+    "hero_label": "Product lineup",
+    "title": "Product lineup",
     "subtitle": "NodeVoyage and Ideonautix orbit the same calm studio.",
     "cta_title": "Stay in our orbit",
     "cta_text": "Join the community for roadmap drops, pilot invites, and AAA accessibility updates.",
@@ -703,7 +703,7 @@
           "team",
           "collaboration"
         ],
-        "answer": "Ideonautix is a constellation of collaborative AI copilots for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking."
+        "answer": "Ideonautix is a suite of collaborative AI copilots for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking."
       },
       {
         "keywords": [

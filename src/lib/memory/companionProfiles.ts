@@ -103,7 +103,7 @@ export const companionProfiles = {
           "collaboration",
         ],
         answer:
-          "Ideonautix is a constellation of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking.",
+          "Ideonautix is a suite of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking.",
       },
       {
         keywords: [
@@ -407,7 +407,7 @@ export const companionProfiles = {
       {
         keywords: ["ideonautix", "productivité", "équipe", "collaboration"],
         answer:
-          "Ideonautix est une constellation de copilotes IA. Elle facilite les ateliers de co-création, la prise de décision et le suivi des performances pour les startups.",
+          "Ideonautix est une suite de copilotes IA. Elle facilite les ateliers de co-création, la prise de décision et le suivi des performances pour les startups.",
       },
       {
         keywords: ["contact", "partenariat", "consulting", "collaborer"],

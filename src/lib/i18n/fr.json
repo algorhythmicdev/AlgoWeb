@@ -55,10 +55,10 @@
       "brand": "AlgoRhythmics",
       "trail": "helps teams ship smarter."
     },
-    "tagline": "OS-native studio aligning NodeVoyage, Ideonautix, and consulting into one calm constellation.",
+    "tagline": "OS-native studio aligning NodeVoyage, Ideonautix, and consulting into one calm suite.",
     "subtitle": "We choreograph explainable AI rituals, from travel companions to founder workspaces, with AAA-accessible glass shells.",
     "description": "Every surface honours reduced-motion settings, signage-born craft, and WCAG AAA contrast so your team stays in control whether you're exploring NodeVoyage, assembling Ideonautix, or partnering through our consulting sprints.",
-    "cta_products": "Explore the constellation",
+    "cta_products": "Explore the product lineup",
     "cta_consulting": "Plan a strategy session",
     "actions_label": "Actions principales du héros",
     "next_milestone": "Prochain jalon",
@@ -188,8 +188,8 @@
   "products": {
     "meta_title": "Produits AlgoRhythmics",
     "meta_description": "Découvrez NodeVoyage, notre compagnon de voyage IA, et Ideonautix, la suite de productivité pour fondateurs.",
-    "hero_label": "Product constellation",
-    "title": "Platform Constellation",
+    "hero_label": "Product lineup",
+    "title": "Product lineup",
     "subtitle": "NodeVoyage and Ideonautix orbit one calm OS-native studio.",
     "cta_title": "Stay in orbit with us",
     "cta_text": "Join the community for roadmap drops, pilot invites, and AAA accessibility updates.",
@@ -701,7 +701,7 @@
           "équipe",
           "collaboration"
         ],
-        "answer": "Ideonautix est une constellation de copilotes IA. Elle facilite les ateliers de co-création, la prise de décision et le suivi des performances pour les startups."
+        "answer": "Ideonautix est une suite de copilotes IA. Elle facilite les ateliers de co-création, la prise de décision et le suivi des performances pour les startups."
       },
       {
         "keywords": [

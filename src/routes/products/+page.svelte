@@ -192,25 +192,31 @@
   <meta name="description" content={$_('products.meta_description')} />
 </svelte:head>
 
-<Hero variant="halo" title={heroTitle} subtitle={heroSubtitle}>
-  <div class="products-hero">
-    <div class="products-hero__copy">
-      {#if heroLabel}
-        <span class="products-hero__eyebrow">{heroLabel}</span>
-      {/if}
-      {#if heroMission}
-        <p class="products-hero__mission">{heroMission}</p>
-      {/if}
-      <div class="products-hero__actions">
-        {#if heroPrimaryActionLabel}
-          <a class="btn btn-gradient" href="#demos">{heroPrimaryActionLabel}</a>
-        {/if}
-        {#if heroSecondaryActionLabel}
-          <a class="btn btn-secondary hover-lift" href="/contact">{heroSecondaryActionLabel}</a>
-        {/if}
-      </div>
-    </div>
+<Hero variant="halo" title={heroTitle} subtitle={heroSubtitle} tone="aurora" intensity="balanced">
+  <svelte:fragment slot="status">
+    {#if heroLabel}
+      <span class="products-hero__eyebrow">{heroLabel}</span>
+    {/if}
+  </svelte:fragment>
 
+  <svelte:fragment slot="description">
+    {#if heroMission}
+      <p class="products-hero__mission">{heroMission}</p>
+    {/if}
+  </svelte:fragment>
+
+  <svelte:fragment slot="actions">
+    <div class="products-hero__actions">
+      {#if heroPrimaryActionLabel}
+        <a class="btn btn-gradient" href="#demos">{heroPrimaryActionLabel}</a>
+      {/if}
+      {#if heroSecondaryActionLabel}
+        <a class="btn btn-secondary hover-lift" href="/contact">{heroSecondaryActionLabel}</a>
+      {/if}
+    </div>
+  </svelte:fragment>
+
+  <svelte:fragment slot="aside">
     {#if spotlightEntries.length}
       <div class="products-hero__spotlights">
         {#each spotlightEntries as entry (entry.id)}
@@ -260,7 +266,7 @@
         {/each}
       </div>
     {/if}
-  </div>
+  </svelte:fragment>
 </Hero>
 
 
@@ -378,19 +384,6 @@
 </section>
 
 <style>
-  .products-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: var(--grid-gap-2xl);
-    align-items: stretch;
-  }
-
-  .products-hero__copy {
-    display: grid;
-    gap: clamp(1.5rem, 3vw, 2.4rem);
-    align-content: center;
-  }
-
   .products-hero__eyebrow {
     font-size: var(--text-small);
     text-transform: uppercase;
@@ -719,10 +712,6 @@
   }
 
   @media (max-width: 1100px) {
-    .products-hero {
-      grid-template-columns: 1fr;
-    }
-
     .products-hero__spotlights {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }

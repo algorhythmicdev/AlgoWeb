@@ -26,7 +26,7 @@ This document merges every key from `en.json` with the current `uk.json`. Each r
 | `ai_companion.knowledgeBase[1].keywords[2]` | platform | маршрут |
 | `ai_companion.knowledgeBase[1].keywords[3]` | journey | туризм |
 | `ai_companion.knowledgeBase[1].keywords[4]` | trip |  |
-| `ai_companion.knowledgeBase[2].answer` | Ideonautix is a constellation of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking. | Ideonautix — набір AI-коу-пілотів для команд, що працюють зі складними ідеями. Він структурує брейншторми, аналізує рішення та допомагає координувати міжнародні групи. |
+| `ai_companion.knowledgeBase[2].answer` | Ideonautix is a suite of collaborative AI copilots built for knowledge teams. It orchestrates ideation sessions, decision intelligence, and ambient automation so focus stays on high-value thinking. | Ideonautix — набір AI-коу-пілотів для команд, що працюють зі складними ідеями. Він структурує брейншторми, аналізує рішення та допомагає координувати міжнародні групи. |
 | `ai_companion.knowledgeBase[2].keywords[0]` | ideonautix | ideonautix |
 | `ai_companion.knowledgeBase[2].keywords[1]` | productivity | продуктивність |
 | `ai_companion.knowledgeBase[2].keywords[2]` | suite | команда |

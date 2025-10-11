@@ -1025,6 +1025,10 @@ _Update 2025-10-26:_ Rebalanced the home hero pillars, milestone spotlight, and 
 _Update 2025-10-27:_ Retuned the community voting feature cards and idea submission panel to publish accent-aware `os-window` tokens with tailored dark-mode mixes and high-contrast fallbacks so interactive surfaces stay legible without bespoke overrides.
 
 _Update 2025-10-28:_ Reimagined the global loading overlay as a frosted status shell with shared glass tokens, dark-mode gradients, and high-contrast/reduced-motion fallbacks so the entry experience mirrors the refreshed surface system across themes.
+_Update 2025-10-29:_ Retuned the core theme elevations to drop remaining pure-white fills, pushed the Hero shell onto near-transparent glass so page animations stay visible, and reissued the floating switcher overlay with the new translucent tokens across light, dark, and high-contrast modes.
+_Update 2025-10-30:_ Rebalanced the home hero and shared surface tokens to rely on transparent-first mixes, removed the white-backed status/pillar badges, and tightened the hero layout fallback so every page intro stays readable while the backdrop animations show through.
+
+_Update 2025-10-31:_ Finalized the translucent theme rollout by correcting the voyage blue core token, tinting the base surfaces away from pure white, and aligning ripple/sparkle effects and consulting hero icons with the shared glass palette so every interaction stays on-brand across light, dark, and high-contrast modes.
 
 ## Navigation & founder surfaces alignment
 
@@ -1033,6 +1037,14 @@ _Update 2025-10-28:_ Reimagined the global loading overlay as a frosted status s
 - Rewired the global navigation shell, dropdowns, and contact CTA to the shared glass and button tokens, ensuring sticky and condensed states reuse the translucent palette across light, dark, and high-contrast modes.
 - Migrated the founders spotlight, biographies, and contact chips onto the `os-window`, `surface-pill`, and `surface-chip` utilities so every card retains transparent section canvases without bespoke RGBA backgrounds.
 - Updated the contact scheduling button to inherit the shared `.btn` system and documented the roll-out so the improvement plan tracks the navigation/founder parity milestone.
+
+## Floating theme switcher rollout
+
+**Status: ✅ Implemented**
+
+- Retired the temporary inline theme buttons from `+layout.svelte` in favour of a reusable `FloatingThemeSwitcher` overlay that leans on the shared `os-window` shell, button tokens, and high-contrast fallbacks.
+- Wired the floating control to the centralized `theme` store so keyboard shortcuts, the navigation toggle, and saved preferences stay in sync without duplicate DOM mutations.
+- Added real-time status copy and responsive sizing so testers can confirm light/dark/high-contrast surfaces from any breakpoint while respecting reduced-motion and HC guardrails.
 
 ## Summary
 
