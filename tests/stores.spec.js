@@ -125,6 +125,17 @@ describe('theme store', () => {
 
     unsubscribe();
   });
+
+  it('updates the document color scheme when theme changes', async () => {
+    const { theme } = await loadThemeStore();
+
+    theme.set('dark');
+    expect(document.documentElement.style.colorScheme).toBe('dark');
+
+    theme.set('hc');
+    expect(document.documentElement.style.colorScheme).toBe('dark');
+    expect(document.body.getAttribute('data-theme-legacy')).toBe('contrast');
+  });
 });
 
 describe('language store', () => {

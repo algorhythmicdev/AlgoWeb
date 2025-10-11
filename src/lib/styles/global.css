@@ -49,6 +49,10 @@
   --surface-glass-blur: blur(22px);
 }
 
+html.nav-menu-open {
+  overflow: hidden;
+}
+
 .section {
   position: relative;
   padding-block: var(

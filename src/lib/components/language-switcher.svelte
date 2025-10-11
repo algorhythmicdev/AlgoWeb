@@ -1,5 +1,6 @@
 <script>
   // @ts-nocheck
+  import { get } from 'svelte/store';
   import { onDestroy } from 'svelte';
   import { tick } from 'svelte';
   import { _ } from 'svelte-i18n';
@@ -8,6 +9,7 @@
   let isOpen = false;
   let trigger;
   let optionRefs = [];
+  let listbox;
   let focusedIndex = -1;
   let typeaheadTerm = '';
   let typeaheadTimeout;
@@ -32,8 +34,21 @@
     return index;
   }
 
+  const getOptionId = (code) => `language-option-${code}`;
+
+  function updateActiveDescendant(index) {
+    if (!listbox) return;
+    const languageEntry = languages[index];
+    if (languageEntry) {
+      listbox.setAttribute('aria-activedescendant', getOptionId(languageEntry.code));
+    } else {
+      listbox.removeAttribute('aria-activedescendant');
+    }
+  }
+
   function focusOption(index) {
     focusedIndex = clampIndex(index);
+    updateActiveDescendant(focusedIndex);
     optionRefs[focusedIndex]?.focus();
   }
 
@@ -91,6 +106,7 @@
     resetTypeahead();
     await tick();
     optionRefs[focusedIndex]?.focus();
+    updateActiveDescendant(focusedIndex);
   }
 
   function trackOption(node, index) {
@@ -114,6 +130,7 @@
     isOpen = false;
     focusedIndex = -1;
     resetTypeahead();
+    listbox?.removeAttribute('aria-activedescendant');
     if (restoreFocus) {
       await tick();
       trigger?.focus();
@@ -202,6 +219,11 @@
       return;
     }
 
+    if (event.key === 'Tab') {
+      closeMenu(false);
+      return;
+    }
+
     if (
       !event.altKey &&
       !event.ctrlKey &&
@@ -228,6 +250,7 @@
       isOpen = false;
       focusedIndex = -1;
       resetTypeahead();
+      listbox?.removeAttribute('aria-activedescendant');
     }
   }
 
@@ -254,7 +277,14 @@
   </button>
 
   {#if isOpen}
-    <div class="dropdown" id="language-menu" role="listbox" aria-label={$_('language_switcher.menu_label')} tabindex="-1">
+    <div
+      class="dropdown"
+      id="language-menu"
+      role="listbox"
+      aria-label={$_('language_switcher.menu_label')}
+      tabindex="-1"
+      bind:this={listbox}
+    >
       {#each languages as lang, index}
         <button
           type="button"
@@ -263,6 +293,7 @@
           role="option"
           aria-selected={lang.code === $language}
           use:trackOption={index}
+          id={getOptionId(lang.code)}
           tabindex={focusedIndex === index ? 0 : -1}
           on:click={() => selectLanguage(lang.code)}
           on:keydown={(event) => handleOptionKeydown(event, index)}

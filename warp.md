@@ -4,20 +4,15 @@ This file lists the highest-impact follow-up items surfaced during the latest UI
 
 ## Outstanding Tasks
 
-1. **Language Dropdown Accessibility**  
-   Implement arrow-key navigation and a roving tabindex pattern in `language-switcher.svelte`. Confirm the existing Escape key support and focus return behave consistently across browsers.
+- [x] **Language Dropdown Accessibility** — Added roving tabindex semantics, active descendant management, and tab handling so the menu meets custom listbox guidance.
 
-2. **Mobile Menu Focus Trap**  
-   When the navigation menu is open on small screens, trap focus inside the menu container and restore scroll position when closing.
+- [x] **Mobile Menu Focus Trap** — Bound the primary nav to a focus trap, locked body scroll while open, and restored the original scroll position after closing.
 
-3. **Consulting Page Form Copy**  
-   Localize helper descriptions for the consulting intake form once the final service packages are approved.
+- [x] **Consulting Page Form Copy** — Rewrote helper copy in every locale to reference the Strategy, Build, and Care packages with localized messaging.
 
-4. **Partner Logo Optimization**  
-   Investigate lazy-loading strategies for the partner logo grid to reduce initial payload on slower devices.
+- [x] **Partner Logo Optimization** — Tuned partner logos with explicit dimensions, async decoding, and low fetch priority to defer network cost on slower devices.
 
-5. **Testing Coverage**  
-   Add component tests that confirm theme persistence, translation loading, and icon rendering across light and dark themes.
+- [x] **Testing Coverage** — Extended Vitest configuration with jsdom, added icon rendering specs, verified theme persistence side effects, and enforced helper localization across dictionaries.
 
 ## Recently Addressed
 

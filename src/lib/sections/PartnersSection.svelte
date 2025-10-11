@@ -127,7 +127,17 @@
               {partner.type === 'current' ? currentLabel : aspirationalLabel}
             </div>
             {#if partner.logo}
-              <img class="partner-card__logo" src={partner.logo} alt={partner.name} loading="lazy" />
+              <img
+                class="partner-card__logo"
+                src={partner.logo}
+                alt={partner.name}
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                width="192"
+                height="64"
+                sizes="(max-width: 768px) 160px, 192px"
+              />
             {/if}
           </div>
 
