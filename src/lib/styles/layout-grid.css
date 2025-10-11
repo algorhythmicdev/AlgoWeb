@@ -1,0 +1,116 @@
+/*
+  Responsive 12-column grid using 4pt spacing scale.
+  Apply the `.layout-grid` class to containers that require
+  a consistent layout rhythm across pages. All sections that
+  opt into the grid can then place elements using CSS grid
+  column utilities.
+*/
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .layout-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: clamp(0.75rem, 4vw, 2rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .layout-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(0.65rem, 5vw, 1.5rem);
+  }
+}
+
+.layout-grid[data-columns='6'] {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.layout-grid[data-columns='4'] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.layout-grid[data-gap='tight'] {
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.layout-grid[data-gap='loose'] {
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.layout-grid > * {
+  min-width: 0;
+}
+
+.layout-grid .col-span-12 {
+  grid-column: span 12;
+}
+
+.layout-grid .col-span-8 {
+  grid-column: span 8;
+}
+
+.layout-grid .col-span-6 {
+  grid-column: span 6;
+}
+
+.layout-grid .col-span-5 {
+  grid-column: span 5;
+}
+
+.layout-grid .col-span-4 {
+  grid-column: span 4;
+}
+
+.layout-grid .col-span-3 {
+  grid-column: span 3;
+}
+
+.layout-grid .col-span-2 {
+  grid-column: span 2;
+}
+
+.layout-grid .col-span-1 {
+  grid-column: span 1;
+}
+
+@media (max-width: 1024px) {
+  .layout-grid .lg\:col-span-8 {
+    grid-column: span 8;
+  }
+
+  .layout-grid .lg\:col-span-6 {
+    grid-column: span 6;
+  }
+
+  .layout-grid .lg\:col-span-4 {
+    grid-column: span 4;
+  }
+
+  .layout-grid .lg\:col-span-3 {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .layout-grid [class*='col-span-'] {
+    grid-column: span 4;
+  }
+
+  .layout-grid .sm\:col-span-4 {
+    grid-column: span 4;
+  }
+
+  .layout-grid .sm\:col-span-3 {
+    grid-column: span 3;
+  }
+
+  .layout-grid .sm\:col-span-2 {
+    grid-column: span 2;
+  }
+}

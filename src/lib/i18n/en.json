@@ -46,7 +46,8 @@
     "toggle_menu": "Toggle the menu",
     "primary_label": "Primary navigation",
     "products_panel_label": "Product quick links",
-    "talk_to_us": "Talk with us"
+    "talk_to_us": "Talk with us",
+    "platforms": "Platforms"
   },
   "hero": {
     "status": "Independent AI studio · Riga ↔ Rotterdam",
@@ -693,7 +694,7 @@
     "cookies": "Cookie policy",
     "rights": "All rights reserved",
     "made_in": "Made with care in Latvia",
-    "copyright": "© 2025 AlgoRhythmics",
+    "copyright": "© 2025 AlgoRhythmics — Shaping creative intelligence. Riga, Latvia.",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

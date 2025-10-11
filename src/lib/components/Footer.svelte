@@ -35,7 +35,7 @@
       <div class="footer-links-section os-window">
         <h4>{$_('footer.products_title')}</h4>
         <ul>
-          {#each footerLinks.products as link}
+          {#each footerLinks.platforms as link}
             <li><a href={link.href}>{$_(link.label)}</a></li>
           {/each}
         </ul>

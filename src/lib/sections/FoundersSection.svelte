@@ -61,110 +61,114 @@
 
 <section class="founders section" id="founders" use:revealOnScroll>
   <div class="container">
-    <header class="founders-header">
-      <div class="founders-header__intro">
-        <span class="eyebrow surface-chip" data-tone="accent">{$_('founders.subtitle')}</span>
-        <h2>{$_('founders.title')}</h2>
-      </div>
-      <p class="founders-header__lead">{$_('story.vision_text')}</p>
-    </header>
-
-    <div class="founders-grid" use:staggerReveal={{ stagger: 140 }}>
-      {#each founderProfiles as founder, index (founder.key)}
-        <article
-          class="founder-card os-window"
-          data-variant={index % 2 === 0 ? 'halo' : 'grid'}
-        >
-          <div class="founder-card__top">
-            <div class="founder-card__avatar">
-              <img src={founder.avatar} alt={founder.name} loading="lazy" />
-              <span class="founder-card__glow" aria-hidden="true"></span>
-            </div>
-            <div class="founder-card__identity">
-              <span class="founder-card__role">{founder.role}</span>
-              <h3>{founder.name}</h3>
-            </div>
-            <div class="founder-card__contacts" aria-label={contactLabel}>
-              {#if founder.email}
-                <a class="contact-chip surface-pill" href={`mailto:${founder.email}`}>
-                  {$_('founders.email_cta')}
-                </a>
-              {/if}
-              {#if founder.linkedin}
-                <a
-                  class="contact-chip surface-pill"
-                  href={founder.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {$_('founders.linkedin_cta')}
-                </a>
-              {/if}
-            </div>
-          </div>
-
-          <p class="founder-card__bio">{founder.bio}</p>
-
-          <div class="founder-card__focus">
-            <span class="founder-card__focus-label">{founder.focusLabel}</span>
-            <p>{founder.focus}</p>
-          </div>
-
-          <div class="founder-card__details">
-            {#if founder.expertise.length}
-              <div class="founder-card__column" aria-label={expertiseLabel}>
-                <span class="founder-card__eyebrow surface-chip" data-tone="accent">{expertiseLabel}</span>
-                <ul class="founder-card__chips">
-                  {#each founder.expertise as item}
-                    <li>
-                      <span class="surface-chip">{item}</span>
-                    </li>
-                  {/each}
-                </ul>
-              </div>
-            {/if}
-
-            {#if founder.achievements.length}
-              <div class="founder-card__column" aria-label={achievementsLabel}>
-                <span class="founder-card__eyebrow surface-chip" data-tone="accent">{achievementsLabel}</span>
-                <ul class="founder-card__highlights">
-                  {#each founder.achievements as item}
-                    <li>{item}</li>
-                  {/each}
-                </ul>
-              </div>
-            {/if}
-          </div>
-        </article>
-      {/each}
-    </div>
-
-    <aside class="founders-spotlight" use:staggerReveal={{ delay: 160, stagger: 80 }}>
-      <div class="founders-spotlight__inner os-window" data-variant="line">
-        <span class="founders-spotlight__label">{$_('founders.slaff.brand_title')}</span>
-        <p class="founders-spotlight__lead">{$_('founders.slaff.brand_intro')}</p>
-        <div class="founders-spotlight__brands">
-          {#each brandClients as client}
-            <span class="brand-chip surface-chip">
-              <img src={client.logo} alt={client.name} loading="lazy" />
-              <span>{client.name}</span>
-            </span>
-          {/each}
+    <div class="founders-layout layout-grid" data-gap="loose">
+      <header class="founders-header col-span-7 sm:col-span-4">
+        <div class="founders-header__intro">
+          <span class="eyebrow surface-chip" data-tone="accent">{$_('founders.subtitle')}</span>
+          <h2>{$_('founders.title')}</h2>
         </div>
-        <p class="founders-spotlight__note">{$_('founders.slaff.brand_context')}</p>
+        <p class="founders-header__lead">{$_('story.vision_text')}</p>
+      </header>
+
+      <aside class="founders-spotlight col-span-5 sm:col-span-4" use:staggerReveal={{ delay: 160, stagger: 80 }}>
+        <div class="founders-spotlight__inner os-window" data-variant="line">
+          <span class="founders-spotlight__label">{$_('founders.slaff.brand_title')}</span>
+          <p class="founders-spotlight__lead">{$_('founders.slaff.brand_intro')}</p>
+          <div class="founders-spotlight__brands">
+            {#each brandClients as client}
+              <span class="brand-chip surface-chip">
+                <img src={client.logo} alt={client.name} loading="lazy" />
+                <span>{client.name}</span>
+              </span>
+            {/each}
+          </div>
+          <p class="founders-spotlight__note">{$_('founders.slaff.brand_context')}</p>
+        </div>
+      </aside>
+
+      <div class="founders-grid col-span-12" use:staggerReveal={{ stagger: 140 }}>
+        {#each founderProfiles as founder, index (founder.key)}
+          <article
+            class="founder-card os-window"
+            data-variant={index % 2 === 0 ? 'halo' : 'grid'}
+          >
+            <div class="founder-card__top">
+              <div class="founder-card__avatar">
+                <img src={founder.avatar} alt={founder.name} loading="lazy" />
+                <span class="founder-card__glow" aria-hidden="true"></span>
+              </div>
+              <div class="founder-card__identity">
+                <span class="founder-card__role">{founder.role}</span>
+                <h3>{founder.name}</h3>
+              </div>
+              <div class="founder-card__contacts" aria-label={contactLabel}>
+                {#if founder.email}
+                  <a class="contact-chip surface-pill" href={`mailto:${founder.email}`}>
+                    {$_('founders.email_cta')}
+                  </a>
+                {/if}
+                {#if founder.linkedin}
+                  <a
+                    class="contact-chip surface-pill"
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {$_('founders.linkedin_cta')}
+                  </a>
+                {/if}
+              </div>
+            </div>
+
+            <p class="founder-card__bio">{founder.bio}</p>
+
+            <div class="founder-card__focus">
+              <span class="founder-card__focus-label">{founder.focusLabel}</span>
+              <p>{founder.focus}</p>
+            </div>
+
+            <div class="founder-card__details">
+              {#if founder.expertise.length}
+                <div class="founder-card__column" aria-label={expertiseLabel}>
+                  <span class="founder-card__eyebrow surface-chip" data-tone="accent">{expertiseLabel}</span>
+                  <ul class="founder-card__chips">
+                    {#each founder.expertise as item}
+                      <li>
+                        <span class="surface-chip">{item}</span>
+                      </li>
+                    {/each}
+                  </ul>
+                </div>
+              {/if}
+
+              {#if founder.achievements.length}
+                <div class="founder-card__column" aria-label={achievementsLabel}>
+                  <span class="founder-card__eyebrow surface-chip" data-tone="accent">{achievementsLabel}</span>
+                  <ul class="founder-card__highlights">
+                    {#each founder.achievements as item}
+                      <li>{item}</li>
+                    {/each}
+                  </ul>
+                </div>
+              {/if}
+            </div>
+          </article>
+        {/each}
       </div>
-    </aside>
+    </div>
   </div>
 </section>
 
 <style>
+  .founders-layout {
+    gap: clamp(2rem, 5vw, 3.4rem);
+    align-items: start;
+  }
+
   .founders-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: clamp(1.6rem, 4vw, 2.8rem);
-    margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
+    display: grid;
+    gap: clamp(1.4rem, 3vw, 2.4rem);
+    align-content: start;
   }
 
   .founders-header__intro h2 {

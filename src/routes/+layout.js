@@ -10,7 +10,7 @@ export async function load({ url }) {
   
   // Determine which page config to use
   let pageKey = 'home';
-  if (pathname.startsWith('/products')) pageKey = 'products';
+  if (pathname.startsWith('/platforms')) pageKey = 'platforms';
   else if (pathname.includes('community')) pageKey = 'community';
   else if (pathname.includes('consulting')) pageKey = 'consulting';
   else if (pathname.includes('contact')) pageKey = 'contact';

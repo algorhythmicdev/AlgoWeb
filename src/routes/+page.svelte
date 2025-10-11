@@ -704,7 +704,7 @@
 
               <div class="product-card__body">
                 <p>{$_(`products.${key}.description`)}</p>
-                <a class="product-link" href={`/products#${key}`}>
+                <a class="product-link" href={`/platforms#${key}`}>
                   <span>{$_(`products.${key}.cta`)}</span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                     <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

@@ -9,18 +9,18 @@ export const mainNavigation = [
     icon: 'home'
   },
   {
-    label: 'nav.products',
-    href: '/products',
+    label: 'nav.platforms',
+    href: '/platforms',
     icon: 'products',
     children: [
       {
         label: 'nav.nodevoyage',
-        href: '/products#nodevoyage',
+        href: '/platforms#nodevoyage',
         description: 'nav.nodevoyage_desc'
       },
       {
         label: 'nav.ideonautix',
-        href: '/products#ideonautix',
+        href: '/platforms#ideonautix',
         description: 'nav.ideonautix_desc'
       }
     ]
@@ -49,9 +49,9 @@ export const footerLinks = {
     { label: 'footer.founders', href: '/#founders' },
     { label: 'footer.vision', href: '/#vision' }
   ],
-  products: [
-    { label: 'footer.nodevoyage', href: '/products#nodevoyage' },
-    { label: 'footer.ideonautix', href: '/products#ideonautix' },
+  platforms: [
+    { label: 'footer.nodevoyage', href: '/platforms#nodevoyage' },
+    { label: 'footer.ideonautix', href: '/platforms#ideonautix' },
     { label: 'footer.roadmap', href: '/#timeline' }
   ],
   resources: [
