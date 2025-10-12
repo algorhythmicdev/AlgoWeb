@@ -3,12 +3,14 @@
   import { Button, GlassCard } from '$lib/components';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import FoundersSection from '$lib/sections/FoundersSection.svelte';
+  import PartnersSection from '$lib/sections/PartnersSection.svelte';
   import CallToActionSection from '$lib/sections/CallToActionSection.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import timelineData from '$data/timeline.json';
   import productsData from '$data/products.json';
   import { _ } from 'svelte-i18n';
   import en from '$lib/i18n/en.json';
+  import { translateOrFallback } from '$lib/utils';
 
   type TimelineMilestone = {
     id: string;
@@ -18,9 +20,16 @@
     category?: string;
     dateValue: Date;
   };
+  type TimelineMilestoneDetail = TimelineMilestone & {
+    title: string;
+    description: string;
+    note: string;
+    dateLabel: string;
+  };
 
   const ensureString = (value: unknown, fallback = ''): string =>
     typeof value === 'string' && value.trim().length ? value.trim() : fallback;
+  const translate = (key: string, fallback: string): string => translateOrFallback($_, key, fallback);
 
   const fallbackHeroTitleParts = [
     ensureString(en.home?.hero?.title?.lead, 'AlgoRhythmics'),
@@ -50,14 +59,6 @@
   const fallbackHeroActionsLabel = ensureString(
     en.home?.hero?.actions_label,
     'Primary hero actions'
-  );
-  const fallbackHeroMilestoneHeading = ensureString(
-    en.home?.hero?.next_milestone,
-    'Upcoming milestone'
-  );
-  const fallbackHeroMilestoneCta = ensureString(
-    en.home?.hero?.milestone_cta,
-    'See the roadmap'
   );
   const fallbackHeroPillarsTitle = ensureString(
     en.home?.hero?.pillars_title,
@@ -122,19 +123,26 @@
     completed: 4
   };
 
+  const ALL_STATUS_FILTER = 'all';
+  type TimelineFilterOption = {
+    value: string;
+    label: string;
+    priority: number;
+    isAll?: boolean;
+  };
+
+  let timelineMilestones: TimelineMilestoneDetail[] = [];
+  let baseStatusOptions: TimelineFilterOption[] = [];
+  let statusOptions: TimelineFilterOption[] = [];
+  let filteredMilestones: TimelineMilestoneDetail[] = [];
+  let upcomingMilestone: TimelineMilestoneDetail | null = null;
+
   const translateStatus = (value: string): string => {
     if (!value) return '';
     const key = `home.timeline.statuses.${value}`;
-    const translation = $_(key);
-    if (typeof translation === 'string') {
-      const trimmed = translation.trim();
-      if (trimmed.length && trimmed !== key) {
-        return trimmed;
-      }
-    }
-
     const fallback = ensureString(fallbackTimelineStatuses[value], '');
-    if (fallback) return fallback;
+    const label = translate(key, fallback);
+    if (label) return label;
 
     return value
       .replace(/[-_]+/g, ' ')
@@ -148,120 +156,107 @@
     return new Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' }).format(date);
   };
 
-  let activeStatuses: string[] = [];
+  let activeTimelineFilter: string = ALL_STATUS_FILTER;
 
   $: heroTitleParts = [
-    ensureString($_('home.hero.title.lead'), fallbackHeroTitleParts[0]),
-    ensureString($_('home.hero.title.brand'), fallbackHeroTitleParts[1]),
-    ensureString($_('home.hero.title.trail'), fallbackHeroTitleParts[2])
+    translate('home.hero.title.lead', fallbackHeroTitleParts[0]),
+    translate('home.hero.title.brand', fallbackHeroTitleParts[1]),
+    translate('home.hero.title.trail', fallbackHeroTitleParts[2])
   ].filter(Boolean);
   $: heroTitle = heroTitleParts.join(' ').replace(/\s+/g, ' ').trim() || fallbackHeroTitleParts.join(' ');
-  $: heroSubtitle = ensureString($_('home.hero.tagline'), fallbackHeroSubtitle);
-  $: heroStatus = ensureString($_('home.hero.status'), fallbackHeroStatus);
-  $: heroDescription = ensureString($_('home.hero.description'), fallbackHeroDescription);
-  $: heroPrimaryActionLabel = ensureString($_('home.hero.cta_products'), fallbackHeroPrimaryCta);
-  $: heroSecondaryActionLabel = ensureString($_('home.hero.cta_consulting'), fallbackHeroSecondaryCta);
-  $: heroActionsLabel = ensureString($_('home.hero.actions_label'), fallbackHeroActionsLabel);
-  $: heroMilestoneHeading = ensureString($_('home.hero.next_milestone'), fallbackHeroMilestoneHeading);
-  $: heroMilestoneCta = ensureString($_('home.hero.milestone_cta'), fallbackHeroMilestoneCta);
-  $: heroPillarsTitle = ensureString($_('home.hero.pillars_title'), fallbackHeroPillarsTitle);
+  $: heroSubtitle = translate('home.hero.tagline', fallbackHeroSubtitle);
+  $: heroStatus = translate('home.hero.status', fallbackHeroStatus);
+  $: heroDescription = translate('home.hero.description', fallbackHeroDescription);
+  $: heroPrimaryActionLabel = translate('home.hero.cta_products', fallbackHeroPrimaryCta);
+  $: heroSecondaryActionLabel = translate('home.hero.cta_consulting', fallbackHeroSecondaryCta);
+  $: heroActionsLabel = translate('home.hero.actions_label', fallbackHeroActionsLabel);
+  $: heroPillarsTitle = translate('home.hero.pillars_title', fallbackHeroPillarsTitle);
   $: heroPillars = fallbackHeroPillars
-    .map((fallbackValue, index) => ensureString($_(`home.hero.pillars.${index}`), fallbackValue))
+    .map((fallbackValue, index) => translate(`home.hero.pillars.${index}`, fallbackValue))
     .filter(Boolean);
 
-  $: storyTitle = ensureString($_('home.story.title'), fallbackStoryTitle);
-  $: storyVisionTitle = ensureString($_('home.story.vision_title'), fallbackStoryVisionTitle);
-  $: storyVisionText = ensureString($_('home.story.vision_text'), fallbackStoryVisionText);
-  $: storyMissionTitle = ensureString($_('home.story.mission_title'), fallbackStoryMissionTitle);
-  $: storyMissionText = ensureString($_('home.story.mission_text'), fallbackStoryMissionText);
-  $: storyRealityTitle = ensureString($_('home.story.reality_title'), fallbackStoryRealityTitle);
-  $: storyRealityText = ensureString($_('home.story.reality_text'), fallbackStoryRealityText);
+  $: storyTitle = translate('home.story.title', fallbackStoryTitle);
+  $: storyVisionTitle = translate('home.story.vision_title', fallbackStoryVisionTitle);
+  $: storyVisionText = translate('home.story.vision_text', fallbackStoryVisionText);
+  $: storyMissionTitle = translate('home.story.mission_title', fallbackStoryMissionTitle);
+  $: storyMissionText = translate('home.story.mission_text', fallbackStoryMissionText);
+  $: storyRealityTitle = translate('home.story.reality_title', fallbackStoryRealityTitle);
+  $: storyRealityText = translate('home.story.reality_text', fallbackStoryRealityText);
 
   $: productCards = productKeys
     .map((key) => {
       const info = products?.[key] ?? {};
       const fallback = fallbackCatalog[key] ?? {};
+      const fallbackName = ensureString(fallback.name, ensureString(info.name, ''));
+      const fallbackTagline = ensureString(fallback.tagline, ensureString(info.tagline, ''));
+      const fallbackDescription = ensureString(
+        fallback.description,
+        ensureString(info.description, '')
+      );
+      const fallbackStatus = ensureString(fallback.status, ensureString(info.status, ''));
+      const fallbackCta = ensureString(fallback.cta, ensureString(info.cta, ''));
+
       return {
         key,
         icon: ensureString(info.icon, ''),
-        name: ensureString(
-          $_(`platforms.catalog.${key}.name`),
-          ensureString(fallback.name, ensureString(info.name, ''))
-        ),
-        tagline: ensureString(
-          $_(`platforms.catalog.${key}.tagline`),
-          ensureString(fallback.tagline, ensureString(info.tagline, ''))
-        ),
-        description: ensureString(
-          $_(`platforms.catalog.${key}.description`),
-          ensureString(fallback.description, ensureString(info.description, ''))
-        ),
-        status: ensureString(
-          $_(`platforms.catalog.${key}.status`),
-          ensureString(fallback.status, ensureString(info.status, ''))
-        ),
-        cta: ensureString(
-          $_(`platforms.catalog.${key}.cta`),
-          ensureString(fallback.cta, ensureString(info.cta, ''))
-        )
+        name: translate(`platforms.catalog.${key}.name`, fallbackName),
+        tagline: translate(`platforms.catalog.${key}.tagline`, fallbackTagline),
+        description: translate(`platforms.catalog.${key}.description`, fallbackDescription),
+        status: translate(`platforms.catalog.${key}.status`, fallbackStatus),
+        cta: translate(`platforms.catalog.${key}.cta`, fallbackCta)
       };
     })
     .filter((entry) => entry.name && entry.description);
-  $: productsTitle = ensureString(
-    $_('home.platforms.title'),
-    ensureString(fallbackPlatformHeader.title, 'Platform lineup')
+  const fallbackProductsTitle = ensureString(fallbackPlatformHeader.title, 'Platform lineup');
+  const fallbackProductsSubtitle = ensureString(
+    fallbackPlatformHeader.subtitle,
+    'NodeVoyage and Ideonautix live inside the same relaxed studio.'
   );
-  $: productsSubtitle = ensureString(
-    $_('home.platforms.subtitle'),
-    ensureString(
-      fallbackPlatformHeader.subtitle,
-      'NodeVoyage and Ideonautix live inside the same relaxed studio.'
-    )
-  );
+
+  $: productsTitle = translate('home.platforms.title', fallbackProductsTitle);
+  $: productsSubtitle = translate('home.platforms.subtitle', fallbackProductsSubtitle);
 
   const fallbackTimeline = (en.home?.timeline ?? {}) as Record<string, any>;
   const fallbackTimelineStatuses = (fallbackTimeline.statuses ?? {}) as Record<string, string>;
-  $: timelineHeading = ensureString(
-    $_('home.timeline.title'),
-    ensureString(fallbackTimeline.title, 'Our path')
+  const fallbackTimelineTitle = ensureString(fallbackTimeline.title, 'Our path');
+  const fallbackTimelineSubtitle = ensureString(
+    fallbackTimeline.subtitle,
+    'Milestones that keep us moving'
   );
-  $: timelineSubtitle = ensureString(
-    $_('home.timeline.subtitle'),
-    ensureString(fallbackTimeline.subtitle, 'Milestones that keep us moving')
+  const fallbackTimelineFiltersLabel = ensureString(
+    fallbackTimeline.filters_label,
+    'Filter milestones by status'
   );
-  $: timelineFiltersLabel = ensureString(
-    $_('home.timeline.filters_label'),
-    ensureString(fallbackTimeline.filters_label, 'Filter milestones by status')
+  const fallbackTimelineFiltersReset = ensureString(
+    fallbackTimeline.filters_reset,
+    'Show all statuses'
   );
-  $: timelineFiltersResetLabel = ensureString(
-    $_('home.timeline.filters_reset'),
-    ensureString(fallbackTimeline.filters_reset, 'Show all statuses')
+  const fallbackTimelineFiltersEmpty = ensureString(
+    fallbackTimeline.filters_empty,
+    'No milestones match the selected statuses yet.'
   );
-  $: timelineFiltersEmptyLabel = ensureString(
-    $_('home.timeline.filters_empty'),
-    ensureString(
-      fallbackTimeline.filters_empty,
-      'No milestones match the selected statuses yet.'
-    )
-  );
-  $: timelineUpcomingBadge = ensureString(
-    $_('home.timeline.upcoming_badge'),
-    ensureString(fallbackTimeline.upcoming_badge, 'Upcoming')
-  );
+  const fallbackTimelineUpcoming = ensureString(fallbackTimeline.upcoming_badge, 'Upcoming');
+
+  $: timelineHeading = translate('home.timeline.title', fallbackTimelineTitle);
+  $: timelineSubtitle = translate('home.timeline.subtitle', fallbackTimelineSubtitle);
+  $: timelineFiltersLabel = translate('home.timeline.filters_label', fallbackTimelineFiltersLabel);
+  $: timelineFiltersResetLabel = translate('home.timeline.filters_reset', fallbackTimelineFiltersReset);
+  $: timelineFiltersEmptyLabel = translate('home.timeline.filters_empty', fallbackTimelineFiltersEmpty);
+  $: timelineUpcomingBadge = translate('home.timeline.upcoming_badge', fallbackTimelineUpcoming);
 
   $: timelineMilestones = baseMilestones
     .map((milestone) => {
       const fallback = fallbackMilestones[milestone.id] ?? {};
-      const title = ensureString(
-        $_(`home.timeline.milestones.${milestone.id}.title`),
+      const title = translate(
+        `home.timeline.milestones.${milestone.id}.title`,
         ensureString(fallback.title, '')
       );
-      const description = ensureString(
-        $_(`home.timeline.milestones.${milestone.id}.description`),
+      const description = translate(
+        `home.timeline.milestones.${milestone.id}.description`,
         ensureString(fallback.description, '')
       );
-      const note = ensureString(
-        $_(`home.timeline.milestones.${milestone.id}.note`),
+      const note = translate(
+        `home.timeline.milestones.${milestone.id}.note`,
         ensureString(fallback.note, '')
       );
       return {
@@ -274,7 +269,7 @@
     })
     .sort((a, b) => a.dateValue.getTime() - b.dateValue.getTime());
 
-  $: statusOptions = Array.from(
+  $: baseStatusOptions = Array.from(
     new Map(
       timelineMilestones.map((milestone) => [
         milestone.status,
@@ -291,26 +286,27 @@
     return a.label.localeCompare(b.label);
   });
 
+  $: statusOptions = [
+    ...baseStatusOptions,
+    {
+      value: ALL_STATUS_FILTER,
+      label: timelineFiltersResetLabel,
+      priority: Number.POSITIVE_INFINITY,
+      isAll: true
+    }
+  ];
+
   $: {
-    if (!statusOptions.length) {
-      if (activeStatuses.length) {
-        activeStatuses = [];
-      }
-    } else if (!activeStatuses.length) {
-      activeStatuses = statusOptions.map((option) => option.value);
-    } else {
-      const cleaned = activeStatuses.filter((status) => statusOptions.some((option) => option.value === status));
-      if (!cleaned.length) {
-        activeStatuses = statusOptions.map((option) => option.value);
-      } else if (cleaned.length !== activeStatuses.length) {
-        activeStatuses = cleaned;
-      }
+    const availableValues = statusOptions.map((option) => option.value);
+    if (!availableValues.includes(activeTimelineFilter)) {
+      activeTimelineFilter = ALL_STATUS_FILTER;
     }
   }
 
-  $: filteredMilestones = timelineMilestones.filter((milestone) =>
-    activeStatuses.includes(milestone.status)
-  );
+  $: filteredMilestones =
+    activeTimelineFilter === ALL_STATUS_FILTER
+      ? timelineMilestones
+      : timelineMilestones.filter((milestone) => milestone.status === activeTimelineFilter);
   $: upcomingMilestone = filteredMilestones[0] ?? timelineMilestones[0] ?? null;
   $: upcomingMilestoneTitle = upcomingMilestone?.title ?? '';
   $: upcomingMilestoneDescription = upcomingMilestone?.description ?? '';
@@ -326,18 +322,8 @@
     ? translateStatus(upcomingMilestone.category ?? '')
     : '';
 
-  const toggleStatus = (status: string) => {
-    if (!statusOptions.length) return;
-    const isActive = activeStatuses.includes(status);
-    if (isActive && activeStatuses.length === 1) return;
-
-    activeStatuses = isActive
-      ? activeStatuses.filter((value) => value !== status)
-      : [...activeStatuses, status];
-  };
-
-  const resetStatuses = () => {
-    activeStatuses = statusOptions.map((option) => option.value);
+  const setTimelineFilter = (value: string) => {
+    activeTimelineFilter = value;
   };
 </script>
 
@@ -378,43 +364,6 @@
         </GlassCard>
       {/if}
     </svelte:fragment>
-
-    <svelte:fragment slot="aside">
-      {#if upcomingMilestone && (upcomingMilestoneTitle || upcomingMilestoneDescription)}
-        <GlassCard class="home-hero__milestone" particles padding="lg">
-          <span class="home-hero__milestone-eyebrow">{heroMilestoneHeading}</span>
-          {#if upcomingMilestoneDateLabel}
-            <span class="home-hero__milestone-date">{upcomingMilestoneDateLabel}</span>
-          {/if}
-
-          {#if upcomingMilestoneTitle}
-            <h2>{upcomingMilestoneTitle}</h2>
-          {/if}
-
-          {#if upcomingMilestoneDescription}
-            <p>{upcomingMilestoneDescription}</p>
-          {/if}
-
-          <div class="home-hero__milestone-tags">
-            {#if upcomingMilestoneStatusLabel}
-              <span class="surface-chip">{upcomingMilestoneStatusLabel}</span>
-            {/if}
-            {#if upcomingMilestonePhaseLabel}
-              <span class="surface-chip" data-tone="neutral">{upcomingMilestonePhaseLabel}</span>
-            {/if}
-            {#if upcomingMilestoneCategoryLabel}
-              <span class="surface-chip" data-tone="accent">{upcomingMilestoneCategoryLabel}</span>
-            {/if}
-          </div>
-
-          {#if upcomingMilestoneNote}
-            <p class="home-hero__milestone-note">{upcomingMilestoneNote}</p>
-          {/if}
-
-          <a class="home-hero__milestone-cta" href="#timeline">{heroMilestoneCta}</a>
-        </GlassCard>
-      {/if}
-    </svelte:fragment>
   </Hero>
 
   <section class="story section" id="story" use:revealOnScroll>
@@ -450,7 +399,7 @@
   <section class="products section" id="platforms" use:revealOnScroll>
     <div class="container">
       <header class="section-header">
-        <span class="eyebrow">{$_('home.platforms.title') || productsTitle}</span>
+        <span class="eyebrow">{productsTitle}</span>
         <h2>{productsSubtitle}</h2>
       </header>
 
@@ -477,7 +426,7 @@
             <p class="product-card__description">{product.description}</p>
 
             <a class="product-card__cta" href={`/platforms#${product.key}`}>
-              <span>{product.cta || $_('home.platforms.cta_title')}</span>
+              <span>{product.cta}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
@@ -537,24 +486,15 @@
             {#each statusOptions as option (option.value)}
               <button
                 type="button"
-                class={`timeline__chip${activeStatuses.includes(option.value) ? ' is-active' : ''}`}
-                on:click={() => toggleStatus(option.value)}
-                aria-pressed={activeStatuses.includes(option.value)}
+                class={`timeline__chip${
+                  option.isAll ? ' timeline__chip--all' : ''
+                }${activeTimelineFilter === option.value ? ' is-active' : ''}`}
+                on:click={() => setTimelineFilter(option.value)}
+                aria-pressed={activeTimelineFilter === option.value}
               >
                 {option.label}
               </button>
             {/each}
-
-            <button
-              type="button"
-              class={`timeline__chip timeline__chip--reset${
-                activeStatuses.length === statusOptions.length ? ' is-active' : ''
-              }`}
-              on:click={resetStatuses}
-              aria-pressed={activeStatuses.length === statusOptions.length}
-            >
-              {timelineFiltersResetLabel}
-            </button>
           </div>
         </GlassCard>
       {/if}
@@ -589,7 +529,9 @@
         <div class="timeline__empty">
           <GlassCard padding="md" class="timeline__empty-card">
             <p>{timelineFiltersEmptyLabel}</p>
-            <Button variant="secondary" on:click={resetStatuses}>{timelineFiltersResetLabel}</Button>
+            <Button variant="secondary" on:click={() => setTimelineFilter(ALL_STATUS_FILTER)}>
+              {timelineFiltersResetLabel}
+            </Button>
           </GlassCard>
         </div>
       {/if}
@@ -597,6 +539,8 @@
   </section>
 
   <SectionDivider tone="aurora" />
+
+  <PartnersSection />
 
   <FoundersSection />
 
@@ -669,63 +613,6 @@
     height: 0.6rem;
     border-radius: 999px;
     background: radial-gradient(circle at 30% 30%, var(--voyage-blue) 0%, transparent 70%);
-  }
-
-  :global(.home-hero__milestone) {
-    display: grid;
-    gap: 0.75rem;
-    margin-top: clamp(1.8rem, 4vw, 2.4rem);
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--border-strong) 55%, transparent 45%);
-    --surface-glass-shadow: 0 28px 60px rgba(20, 24, 44, 0.24);
-  }
-
-  :global(.home-hero__milestone) h3 {
-    margin: 0;
-    font-size: clamp(1.35rem, 3.4vw, 1.9rem);
-    line-height: 1.2;
-  }
-
-  :global(.home-hero__milestone) p {
-    margin: 0;
-    color: var(--text-secondary);
-  }
-
-  .home-hero__milestone-eyebrow {
-    font-size: var(--text-small);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-
-  .home-hero__milestone-date {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
-  }
-
-  .home-hero__milestone-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .home-hero__milestone-note {
-    font-size: var(--text-small);
-    color: color-mix(in srgb, var(--aurora-purple) 64%, var(--text-secondary) 36%);
-  }
-
-  .home-hero__milestone-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: var(--weight-semibold);
-    color: var(--voyage-blue);
-    text-decoration: none;
-  }
-
-  .home-hero__milestone-cta:hover,
-  .home-hero__milestone-cta:focus-visible {
-    text-decoration: underline;
   }
 
   .story {
@@ -994,10 +881,19 @@
     background: color-mix(in srgb, var(--voyage-blue) 18%, var(--bg-elev-2) 82%);
     color: var(--text);
     box-shadow: 0 10px 28px rgba(15, 36, 84, 0.16);
+    font-weight: var(--weight-semibold);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
   }
 
-  .timeline__chip--reset {
+  .timeline__chip--all {
     border-style: dashed;
+  }
+
+  .timeline__chip:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--voyage-blue) 45%, transparent 55%);
+    outline-offset: 3px;
   }
 
   .timeline__track {
@@ -1011,12 +907,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--voyage-blue) 60%, transparent 40%),
-      color-mix(in srgb, var(--aurora-purple) 60%, transparent 40%)
-    );
-    opacity: 0.4;
+    background: color-mix(in srgb, var(--border) 60%, transparent 40%);
   }
 
   .timeline__list {

@@ -45,3 +45,6 @@ export {
   generateBreadcrumbs,
   sanitizeForMeta
 } from './seo.js';
+
+// i18n utilities
+export { translateOrFallback } from './i18n.js';

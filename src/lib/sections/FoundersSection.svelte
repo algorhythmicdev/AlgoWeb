@@ -4,6 +4,7 @@
   import foundersData from '$data/founders.json';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import en from '$lib/i18n/en.json';
+  import { translateOrFallback } from '$lib/utils';
 
   const founderKeys = /** @type {const} */ (['nikita', 'slaff']);
 
@@ -28,9 +29,13 @@
     contact: 'Direct lines'
   } as const;
 
-  $: expertiseLabel = ensureString($_('home.founders.labels.expertise'), fallbackLabels.expertise);
-  $: achievementsLabel = ensureString($_('home.founders.labels.achievements'), fallbackLabels.achievements);
-  $: contactLabel = ensureString($_('home.founders.labels.contact'), fallbackLabels.contact);
+  const translate = (key: string, fallback: string): string => translateOrFallback($_, key, fallback);
+
+  $: expertiseLabel = translate('home.founders.labels.expertise', fallbackLabels.expertise);
+  $: achievementsLabel = translate('home.founders.labels.achievements', fallbackLabels.achievements);
+  $: contactLabel = translate('home.founders.labels.contact', fallbackLabels.contact);
+  $: emailCtaLabel = translate('home.founders.email_cta', 'Email');
+  $: linkedinCtaLabel = translate('home.founders.linkedin_cta', 'LinkedIn');
 
   const toProfile = (key: (typeof founderKeys)[number]) => {
     const fallback = (foundersData as Record<string, any>)[key] ?? {};
@@ -51,17 +56,12 @@
     return {
       key,
       avatar: ensureString(fallback.avatar, ''),
-      name: ensureString($_(`${translationBase}.name`), ensureString(fallback.name, key)),
-      role: ensureString($_(`${translationBase}.role`), ensureString(fallback.role, 'Founder')),
-      bio: ensureString($_(`${translationBase}.bio`), ensureString(fallback.bio, '')),
-      focusLabel: ensureString(
-        $_(`${translationBase}.current_title`),
-        ensureString(focusLabelFallback, 'Current focus')
-      ),
-      focus: ensureString(
-        key === 'nikita'
-          ? $_('home.founders.nikita.current_position')
-          : $_('home.founders.slaff.position'),
+      name: translate(`${translationBase}.name`, ensureString(fallback.name, key)),
+      role: translate(`${translationBase}.role`, ensureString(fallback.role, 'Founder')),
+      bio: translate(`${translationBase}.bio`, ensureString(fallback.bio, '')),
+      focusLabel: translate(`${translationBase}.current_title`, ensureString(focusLabelFallback, 'Current focus')),
+      focus: translate(
+        key === 'nikita' ? 'home.founders.nikita.current_position' : 'home.founders.slaff.position',
         ensureString(focusFallback, '')
       ),
       expertise: (expertiseFromTranslations.length
@@ -74,13 +74,13 @@
   };
 
   $: founderProfiles = founderKeys.map((key) => toProfile(key));
-  $: headerEyebrow = ensureString(
-    $_('home.founders.subtitle'),
+  $: headerEyebrow = translate(
+    'home.founders.subtitle',
     'Two makers blending signage craft with calm AI'
   );
-  $: headerTitle = ensureString($_('home.founders.title'), 'Meet the founders');
-  $: headerLead = ensureString(
-    $_('home.founders.nikita.current_position'),
+  $: headerTitle = translate('home.founders.title', 'Meet the founders');
+  $: headerLead = translate(
+    'home.founders.nikita.current_position',
     'Calm AI grows from signage discipline and deliberate engineering.'
   );
 </script>
@@ -112,7 +112,7 @@
             <div class="founder-card__contacts" aria-label={contactLabel}>
               {#if founder.email}
                 <a class="surface-pill" href={`mailto:${founder.email}`}>
-                  {$_('home.founders.email_cta') || 'Email'}
+                  {emailCtaLabel}
                 </a>
               {/if}
               {#if founder.linkedin}
@@ -122,7 +122,7 @@
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {$_('home.founders.linkedin_cta') || 'LinkedIn'}
+                  {linkedinCtaLabel}
                 </a>
               {/if}
             </div>
@@ -170,23 +170,12 @@
 
 <style>
   .founders {
-    padding-block: clamp(4rem, 12vw, 6rem);
+    position: relative;
     background: var(--bg-elev-1);
     border-radius: clamp(28px, 6vw, 44px);
     border: 1px solid color-mix(in srgb, var(--border) 75%, transparent 25%);
     box-shadow: 0 26px 72px rgba(12, 20, 40, 0.12);
     overflow: hidden;
-  }
-
-  .founders::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain, var(--grain-texture));
-    opacity: 0.05;
-    mix-blend-mode: soft-light;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .founders__layout {

@@ -8,10 +8,23 @@
  */
 
 :root {
-  /* Brand primaries */
-  --aurora: #6a38ff;
-  --voyage: #1351ff;
-  --signal: #ffd339;
+  color-scheme: light;
+
+  /* ==================== CORE SURFACES ==================== */
+  --bg: #f5f7fb;
+  --bg-elev-1: #ffffff;
+  --bg-elev-2: #eef1f7;
+  --text: #0a0d14;
+  --primary: #6a38ff;
+  --secondary: #1351ff;
+  --accent: #ffd339;
+  --border: rgba(10, 13, 20, 0.08);
+  --radius: 16px;
+
+  /* ==================== BRAND PRIMARIES ==================== */
+  --aurora: var(--primary);
+  --voyage: var(--secondary);
+  --signal: var(--accent);
   --cherry: #e0322c;
 
   --grad-angle: 120deg;
@@ -20,6 +33,7 @@
   --grad: linear-gradient(var(--grad-angle), var(--grad-a) 0%, var(--grad-b) 100%);
 
   /* Textures */
+  --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)'/%3E%3C/svg%3E");
   --grain: var(--grain-texture);
 
   /* Motion timing */
@@ -43,15 +57,9 @@
   --signal-yellow-rgb: 255, 211, 57;
   --cherry-pop-rgb: 224, 50, 44;
 
-  --radius: 16px;
   --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-:root {
-  color-scheme: light;
 
   /* ==================== BRAND CORE ==================== */
-  --primary: var(--aurora-purple);
   --primary-rgb: 106, 56, 255;
   --accent-1: #10e3d6;
   --accent-1-rgb: 15, 214, 201;
@@ -76,13 +84,11 @@
   /* ==================== NEUTRALS & TEXT ==================== */
   --cloud: #f5f7fb;
   --cloud-rgb: 245, 247, 251;
-  --surface: color-mix(in srgb, var(--cloud) 84%, rgba(var(--voyage-blue-rgb), 0.18) 16%);
-  --surface-subtle: color-mix(in srgb, var(--cloud) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
-  --surface-strong: color-mix(in srgb, var(--cloud) 78%, rgba(var(--voyage-blue-rgb), 0.22) 22%);
-  --mist: #e7ecf4;
-  --porcelain: var(--surface-subtle);
-  --snow: color-mix(in srgb, var(--cloud) 90%, rgba(var(--voyage-blue-rgb), 0.12) 10%);
-  --snow-rgb: 242, 245, 249;
+  --mist: #eef1f7;
+  --mist-rgb: 238, 241, 247;
+  --porcelain: #e7ecf4;
+  --snow: #ffffff;
+  --snow-rgb: 255, 255, 255;
   --ash: #8b9299;
   --slate-base: #1b2230;
   --slate-base-rgb: 27, 34, 48;
@@ -96,6 +102,10 @@
   --graphite-soft: #232834;
   --pure-white: #ffffff;
 
+  --surface: var(--snow);
+  --surface-subtle: var(--mist);
+  --surface-strong: color-mix(in srgb, var(--mist) 80%, rgba(var(--voyage-blue-rgb), 0.08) 20%);
+
   --bg: var(--cloud);
   --card: var(--surface);
   --card-subtle: var(--surface-subtle);
@@ -106,9 +116,9 @@
   --text-strong: var(--slate-base);
   --text-secondary-base: #25324b;
   --text-tertiary-base: #3b4862;
-  --divider: rgba(var(--ink-rgb), 0.14);
-  --border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 42%, #d5ddef 58%);
-  --border-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 48%, #bcc6de 52%);
+  --divider: rgba(var(--ink-rgb), 0.12);
+  --border: rgba(var(--ink-rgb), 0.08);
+  --border-strong: rgba(var(--ink-rgb), 0.14);
   --muted: #5e6a82;
   --link: var(--voyage-blue);
   --focus: var(--signal-yellow);
@@ -334,7 +344,6 @@
   --shadow-lg: 0 38px 88px rgba(15, 23, 42, 0.18);
   --shadow-xl: 0 52px 132px rgba(15, 23, 42, 0.22);
 
-  --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)'/%3E%3C/svg%3E");
   --glass-texture:
     radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 58%),
     radial-gradient(circle at 82% 28%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 64%),
@@ -382,15 +391,15 @@
 
 @supports not (color: color-mix(in srgb, white 50%, black 50%)) {
   :root {
-    --surface: #eef1fb;
-    --surface-subtle: #f4f7ff;
-    --surface-strong: #dfe8ff;
-    --snow: #f2f5f9;
-    --border: #d5ddef;
-    --border-strong: #bcc6de;
-    --surface-glass: rgba(var(--voyage-blue-rgb), 0.1);
+    --surface: #ffffff;
+    --surface-subtle: #eef1f7;
+    --surface-strong: #dce3f1;
+    --snow: #ffffff;
+    --border: rgba(10, 13, 20, 0.08);
+    --border-strong: rgba(10, 13, 20, 0.14);
+    --surface-glass: rgba(var(--voyage-blue-rgb), 0.08);
     --surface-glass-strong: rgba(var(--aurora-purple-rgb), 0.12);
-    --surface-tint: rgba(var(--voyage-blue-rgb), 0.08);
+    --surface-tint: rgba(var(--voyage-blue-rgb), 0.06);
     --hero-accent: var(--accent-primary);
     --hero-secondary: var(--accent-secondary);
     --hero-tertiary: var(--accent-tertiary);

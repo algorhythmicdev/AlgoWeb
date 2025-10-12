@@ -213,14 +213,13 @@ This document merges every key from `en.json` with the current `uk.json`. Each r
 | `footer.cookies` | Cookie Policy | Політика cookies |
 | `footer.copyright` | © 2025 AlgoRhythmics | © 2025 AlgoRhythmics |
 | `footer.founders` | Founders | Засновники |
-| `footer.ideonautix` | Ideonautix | Ideonautix |
 | `footer.legal` | Legal | Правова інформація |
 | `footer.location` | Daugavpils, Latvia | Даугавпілс, Латвія |
 | `footer.made_in` | Made with care in Latvia | Створено з любов'ю в Латвії |
-| `footer.nodevoyage` | NodeVoyage | NodeVoyage |
 | `footer.privacy` | Privacy Policy | Політика конфіденційності |
 | `footer.products_title` | Products | Продукти |
 | `footer.resources` | Resources | Ресурси |
+| `footer.platforms` | Platforms | Платформи |
 | `footer.rights` | All rights reserved | Всі права захищені |
 | `footer.roadmap` | Roadmap | Дорожня карта |
 | `footer.social.email` | Email | E-mail |
@@ -263,9 +262,9 @@ This document merges every key from `en.json` with the current `uk.json`. Each r
 | `founders.subtitle` | Two makers connecting signage R&D with human-first AI | Разом будуємо майбутнє AI |
 | `founders.title` | Meet the Founders | Знайомтесь із засновниками |
 | `hero.brand_aria` | AlgoRhythmics brand highlight in the hero heading | Виділення бренду AlgoRhythmics у заголовку |
-| `hero.cta_consulting` | Book a discovery call | AI-консалтинг |
-| `hero.cta_products` | Explore our work | Переглянути продукти |
-| `hero.description` | Rooted in signage R&D and cloud engineering, we blend tactile hardware discipline with explainable software so human teams stay in control. | Спираємося на R&D вивісок та хмарну інженерію, поєднуючи тактильну дисципліну з пояснюваним софтом, щоб команди людей залишалися в центрі управління. |
+| `hero.cta_consulting` | Book a calm strategy chat | AI-консалтинг |
+| `hero.cta_products` | Explore our platforms | Переглянути продукти |
+| `hero.description` | We pair tactile signage craft with transparent automation notes so every screen stays readable, explainable, and inclusive. | Ми поєднуємо signage-дисципліну з прозорими нотатками автоматизації, щоб кожен екран залишався читабельним, пояснюваним і інклюзивним. |
 | `hero.focus.cta` | Meet the community | Познайомтеся з спільнотою |
 | `hero.focus.description` | Our core duo balances NodeVoyage pilots with Ideonautix rituals so every release stays accountable and human controlled. | Наша основна команда балансує пілоти NodeVoyage та ритуали Ideonautix, щоб кожен реліз був відповідальним і людяним. |
 | `hero.focus.kicker` | Studio focus | Фокус студії |
@@ -285,22 +284,22 @@ This document merges every key from `en.json` with the current `uk.json`. Each r
 | `hero.moments.nodevoyage.meta` | Beta pilots forming | Формуємо бета-пілоти |
 | `hero.moments.nodevoyage.status` | NodeVoyage | NodeVoyage |
 | `hero.next_milestone` | Next milestone | Наступний етап |
-| `hero.pillars_title` | What guides our studio | Що веде нашу студію |
-| `hero.pillars[0]` | Dual tracks: NodeVoyage travel companion & Ideonautix founder OS | Два напрями: тревел-компаньйон NodeVoyage та операційна система Ideonautix |
-| `hero.pillars[1]` | Consulting sprints shaped by Latvian craft and Benelux brands | Людиноцентричні консалтингові спринти з латвійською майстерністю та брендами Бенілюксу |
-| `hero.pillars[2]` | Explainable AI flows bridging signage hardware and cloud software | Пояснювані AI-потоки, що поєднують апарат signage та хмарні платформи |
+| `hero.pillars_title` | How we keep momentum steady | Як ми тримаємо сталість руху |
+| `hero.pillars[0]` | Shared rituals link product sprints, consulting engagements, and education programmes. | Спільні ритуали поєднують продуктові спринти, консалтинг та освітні програми. |
+| `hero.pillars[1]` | Accessibility, localisation, and inclusive writing shape every interface. | Доступність, локалізація та інклюзивний текст формують кожен інтерфейс. |
+| `hero.pillars[2]` | Every automation ships with plain-language documentation and opt-out controls. | Кожна автоматизація супроводжується зрозумілою документацією та можливістю відмови. |
 | `hero.signals.focus_tracks` | Focus tracks | Фокусні напрями |
 | `hero.signals.focus_tracks_value` | NodeVoyage & Ideonautix | NodeVoyage та Ideonautix |
 | `hero.signals.research` | Research roots | Дослідницькі витоки |
 | `hero.signals.research_value` | Signage R&D + Cloud AI | R&D вивісок + хмарний AI |
 | `hero.signals.studio_phase` | Studio phase | Етап студії |
 | `hero.signals.studio_phase_value` | Pilot studio • Since 2023 | Пілотна студія • з 2023 |
-| `hero.status` | In development • Latvian-founded AI studio | У розробці • Формуємо майбутнє AI |
-| `hero.subtitle` | NodeVoyage pilots and Ideonautix rituals keep founders focused while staying human-centred. | Пілоти NodeVoyage та ритуали Ideonautix тримають фаундерів у фокусі й зберігають людяність. |
-| `hero.tagline` | AlgoRhythmics — Riga-to-Rotterdam innovation lab | AlgoRhythmics — лабораторія AI-інновацій |
+| `hero.status` | Independent AI studio · Riga ↔ Rotterdam | Незалежна AI-студія · Рига ↔ Роттердам |
+| `hero.subtitle` | NodeVoyage, Ideonautix, and our consulting practice run on the same deliberate rituals. | NodeVoyage, Ideonautix та наша консалтингова практика працюють за тими самими продуманими ритуалами. |
+| `hero.tagline` | Calm AI for travel crews and founder teams. | Спокійний AI для тревел-команд і фаундерських команд. |
 | `hero.title.brand` | AlgoRhythmics | AlgoRhythmics |
-| `hero.title.lead` | Calm, credible AI from | Де логіка танцює з |
-| `hero.title.trail` | for travel and startup teams | та креативом |
+| `hero.title.lead` | AlgoRhythmics | AlgoRhythmics |
+| `hero.title.trail` | with signage discipline. | з дисципліною signage. |
 | `ideonautix.analytics_desc` | Comprehensive analytics hub combining all your business metrics | Єдиний аналітичний хаб для всіх бізнес-метрик |
 | `ideonautix.cta_description` | Early access launching February 2026. Be part of shaping the future of startup productivity | Ранній доступ стартує у лютому 2026. Долучіться до творення нової продуктивності стартапів |
 | `ideonautix.cta_primary` | Get Early Access | Отримати ранній доступ |

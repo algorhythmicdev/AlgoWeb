@@ -3,6 +3,7 @@
   import en from '$lib/i18n/en.json';
   import { Button, GlassCard } from '$lib/components';
   import { revealOnScroll } from '$lib/animations';
+  import { translateOrFallback } from '$lib/utils';
 
   type CTAConfig = {
     eyebrow: string;
@@ -48,14 +49,16 @@
     return unique(fallbackCta.points);
   };
 
-  $: eyebrow = ensureString($_('home.cta.eyebrow'), fallbackCta.eyebrow);
-  $: title = ensureString($_('home.cta.title'), fallbackCta.title);
-  $: communityText = ensureString($_('home.cta.text'), fallbackCta.community);
-  $: consultingText = ensureString($_('home.cta.consulting'), fallbackCta.consulting);
-  $: primaryCta = ensureString($_('home.cta.primary'), fallbackCta.primary);
-  $: secondaryCta = ensureString($_('home.cta.secondary'), fallbackCta.secondary);
+  const translate = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
+
+  $: eyebrow = translate('home.cta.eyebrow', fallbackCta.eyebrow);
+  $: title = translate('home.cta.title', fallbackCta.title);
+  $: communityText = translate('home.cta.text', fallbackCta.community);
+  $: consultingText = translate('home.cta.consulting', fallbackCta.consulting);
+  $: primaryCta = translate('home.cta.primary', fallbackCta.primary);
+  $: secondaryCta = translate('home.cta.secondary', fallbackCta.secondary);
   $: points = resolvePoints();
-  $: actionsLabel = ensureString($_('nav.talk_to_us'), 'Talk with us');
+  $: actionsLabel = translate('nav.talk_to_us', 'Talk with us');
 </script>
 
 <section class="cta section" id="orbit" use:revealOnScroll>
