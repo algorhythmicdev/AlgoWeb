@@ -1705,11 +1705,11 @@
 
   .timeline {
     --timeline-accent: var(--home-accent, var(--voyage-blue));
-    --timeline-secondary: var(--home-secondary, var(--aurora-purple));
+    --timeline-secondary: color-mix(in srgb, var(--text-secondary) 80%, transparent 20%);
     --timeline-tertiary: var(--home-tertiary, var(--signal-yellow));
-    --timeline-outline: color-mix(in srgb, var(--timeline-secondary) 32%, transparent 68%);
-    --timeline-shadow: color-mix(in srgb, var(--timeline-accent) 24%, transparent 76%);
-    --timeline-tertiary-soft: color-mix(in srgb, var(--timeline-tertiary) 18%, transparent 82%);
+    --timeline-outline: var(--border);
+    --timeline-shadow: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 50%, transparent 50%);
+    --timeline-tertiary-soft: color-mix(in srgb, var(--timeline-tertiary) 14%, transparent 86%);
   }
 
   .timeline-shell {
@@ -1740,6 +1740,9 @@
     gap: var(--space-md);
     padding: clamp(1.6rem, 3.2vw, 2.2rem);
     border-radius: var(--radius-2xl);
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    box-shadow: none;
   }
 
   .timeline-overview__header {
@@ -1767,10 +1770,10 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: var(--weight-semibold);
-    color: color-mix(in srgb, var(--timeline-secondary) 82%, var(--text) 18%);
-    background: color-mix(in srgb, var(--timeline-secondary) 18%, transparent 82%);
-    border: 1px solid color-mix(in srgb, var(--timeline-secondary) 40%, transparent 60%);
-    box-shadow: 0 18px 32px color-mix(in srgb, var(--timeline-secondary) 16%, transparent 84%);
+    color: var(--text);
+    background: color-mix(in srgb, var(--bg-elev-2) 92%, transparent 8%);
+    border: 1px solid var(--border);
+    box-shadow: none;
   }
 
   .timeline-overview__meta {
@@ -1840,8 +1843,9 @@
     gap: 0.85rem;
     padding: clamp(1rem, 2vw, 1.2rem);
     border-radius: var(--radius-xl);
-    background: color-mix(in srgb, var(--timeline-secondary) 12%, transparent 88%);
-    border: 1px solid color-mix(in srgb, var(--timeline-outline) 68%, transparent 32%);
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    box-shadow: none;
   }
 
   .timeline-filters__header {
@@ -1857,12 +1861,12 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     font-weight: var(--weight-semibold);
-    color: color-mix(in srgb, var(--timeline-secondary) 78%, var(--text) 22%);
+    color: var(--text-secondary);
   }
 
   .timeline-filters__summary {
     font-size: var(--text-small);
-    color: color-mix(in srgb, var(--timeline-accent) 74%, var(--text-secondary) 26%);
+    color: var(--text-tertiary);
   }
 
   .timeline-filters__chips {
@@ -1877,12 +1881,15 @@
     text-transform: uppercase;
     border-radius: var(--radius-full);
     transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+    background: color-mix(in srgb, var(--bg-elev-2) 92%, transparent 8%);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
   }
 
   .timeline-filters__chip.is-active {
-    background: color-mix(in srgb, var(--timeline-accent) 22%, transparent 78%);
-    border-color: color-mix(in srgb, var(--timeline-accent) 60%, transparent 40%);
-    color: color-mix(in srgb, var(--timeline-accent) 80%, var(--text) 20%);
+    background: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--voyage-blue-rgb), 0.12) 20%);
+    border-color: color-mix(in srgb, var(--voyage-blue) 40%, var(--border) 60%);
+    color: var(--text);
   }
 
   .timeline-filters__chip--reset {
@@ -1903,11 +1910,7 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--timeline-accent) 28%, transparent 72%) 0%,
-      transparent 85%
-    );
+    background: var(--border);
   }
 
   .timeline-track__empty {
@@ -1916,15 +1919,15 @@
     align-content: start;
     padding: clamp(1.6rem, 3vw, 2rem);
     border-radius: var(--radius-xl);
-    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 16%, transparent 84%);
-    --surface-glass-border: color-mix(in srgb, var(--timeline-outline) 72%, transparent 28%);
-    --surface-glass-shadow: 0 18px 36px color-mix(in srgb, var(--timeline-shadow) 32%, transparent 68%);
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    box-shadow: none;
   }
 
   .timeline-track__empty p {
     margin: 0;
     font-size: var(--text-base);
-    color: color-mix(in srgb, var(--timeline-accent) 82%, var(--text-secondary) 18%);
+    color: var(--text-secondary);
   }
 
   .timeline-track__empty-reset {
@@ -1935,32 +1938,20 @@
   }
 
   :global(.timeline-card.os-window) {
-    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 18%, transparent 82%);
-    --surface-glass-border: color-mix(in srgb, var(--timeline-secondary) 56%, rgba(255, 255, 255, 0.26) 44%);
-    --surface-glass-shadow: 0 26px 52px color-mix(in srgb, var(--timeline-accent) 26%, transparent 74%);
-    --grain-opacity: 0.1;
-    --os-window-hc-bg: color-mix(
-      in srgb,
-      var(--bg) 96%,
-      color-mix(in srgb, var(--timeline-secondary) 32%, transparent 68%) 4%
-    );
-    --os-window-hc-border: color-mix(
-      in srgb,
-      var(--border-strong) 60%,
-      color-mix(in srgb, var(--timeline-secondary) 34%, transparent 66%) 40%
-    );
-    --os-window-hc-shadow: 0 0 0 1px color-mix(
-      in srgb,
-      var(--border-strong) 54%,
-      color-mix(in srgb, var(--timeline-secondary) 30%, transparent 70%) 46%
-    );
+    --surface-glass-bg: var(--bg-elev-1);
+    --surface-glass-border: var(--border);
+    --surface-glass-shadow: none;
+    --grain-opacity: 0.06;
+    --os-window-hc-bg: var(--bg);
+    --os-window-hc-border: var(--border-strong);
+    --os-window-hc-shadow: none;
   }
 
   :global([data-base-theme='dark'] .timeline-card.os-window) {
-    --surface-glass-bg: color-mix(in srgb, var(--timeline-secondary) 22%, transparent 78%);
-    --surface-glass-border: color-mix(in srgb, var(--timeline-secondary) 52%, rgba(255, 255, 255, 0.18) 48%);
-    --surface-glass-shadow: 0 30px 56px color-mix(in srgb, var(--timeline-accent) 30%, transparent 70%);
-    --grain-opacity: 0.14;
+    --surface-glass-bg: var(--bg-elev-1);
+    --surface-glass-border: var(--border);
+    --surface-glass-shadow: none;
+    --grain-opacity: 0.08;
   }
 
   :global(.timeline-card) {
@@ -1978,8 +1969,9 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--timeline-accent), var(--timeline-secondary));
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--timeline-accent) 22%, transparent 78%);
+    background: var(--voyage-blue);
+    border: 2px solid var(--bg-elev-1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, transparent 40%);
   }
 
   .timeline-card__meta {
@@ -2013,7 +2005,7 @@
   }
 
   .timeline-card__note {
-    color: color-mix(in srgb, var(--timeline-tertiary) 68%, var(--timeline-accent) 32%);
+    color: var(--text-tertiary);
     font-size: var(--text-small);
   }
 

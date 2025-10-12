@@ -354,7 +354,7 @@ html[data-theme='hc'] .surface-panel {
   --btn-hover-bg: color-mix(in srgb, var(--control-surface-hover) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%);
   --btn-hover-border: color-mix(in srgb, var(--control-border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.18) 32%);
   --btn-hover-shadow: 0 22px 38px rgba(var(--voyage-blue-rgb), 0.22);
-  --btn-focus-shadow: var(--btn-hover-shadow);
+  --btn-focus-shadow: 0 0 0 6px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 70%, transparent 30%);
   --btn-translate: 0;
   --btn-hover-translate: -2px;
 
@@ -414,22 +414,15 @@ html[data-theme='hc'] .surface-panel {
 
 .btn-primary,
 .btn-gradient {
-  --btn-bg: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--grad-a) 94%, transparent) 0%,
-    color-mix(in srgb, var(--grad-b) 92%, transparent) 100%
-  );
-  --btn-border: color-mix(in srgb, var(--grad-a) 56%, transparent 44%);
-  --btn-color: #ffffff;
-  --btn-shadow: 0 22px 38px rgba(var(--voyage-blue-rgb), 0.26);
-  --btn-hover-bg: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--grad-a) 98%, transparent) 0%,
-    color-mix(in srgb, var(--grad-b) 96%, transparent) 100%
-  );
-  --btn-hover-border: color-mix(in srgb, var(--grad-a) 64%, transparent 36%);
-  --btn-hover-shadow: 0 26px 44px rgba(var(--voyage-blue-rgb), 0.32);
-  --btn-focus-shadow: var(--btn-hover-shadow);
+  --btn-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--voyage-blue-rgb), 0.1) 6%);
+  --btn-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.35) 70%, rgba(255, 255, 255, 0.4) 30%);
+  --btn-color: color-mix(in srgb, var(--voyage-blue) 68%, var(--text) 32%);
+  --btn-shadow: 0 18px 34px rgba(var(--voyage-blue-rgb), 0.18);
+  --btn-hover-bg: color-mix(in srgb, var(--bg-elev-2) 90%, rgba(var(--voyage-blue-rgb), 0.14) 10%);
+  --btn-hover-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 70%, rgba(255, 255, 255, 0.32) 30%);
+  --btn-hover-shadow: 0 24px 42px rgba(var(--voyage-blue-rgb), 0.24);
+  --btn-focus-shadow: 0 0 0 6px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 70%, transparent 30%);
+  --btn-hover-translate: -3px;
 }
 
 .btn-secondary {
@@ -468,7 +461,18 @@ html[data-theme='dark'] .btn {
   --btn-color: color-mix(in srgb, var(--text) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%);
   --btn-shadow: 0 20px 42px rgba(8, 16, 30, 0.32);
   --btn-hover-shadow: 0 26px 50px rgba(8, 16, 30, 0.38);
-  --btn-focus-shadow: var(--btn-hover-shadow);
+  --btn-focus-shadow: 0 0 0 6px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 70%, transparent 30%);
+}
+
+html[data-theme='dark'] .btn-primary,
+html[data-theme='dark'] .btn-gradient {
+  --btn-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.32) 14%);
+  --btn-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 68%, rgba(242, 245, 249, 0.24) 32%);
+  --btn-color: color-mix(in srgb, var(--text) 94%, rgba(var(--voyage-blue-rgb), 0.12) 6%);
+  --btn-hover-bg: color-mix(in srgb, var(--bg-elev-2) 84%, rgba(var(--voyage-blue-rgb), 0.36) 16%);
+  --btn-hover-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.58) 70%, rgba(242, 245, 249, 0.28) 30%);
+  --btn-hover-shadow: 0 26px 50px rgba(8, 16, 30, 0.4);
+  --btn-focus-shadow: 0 0 0 6px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 70%, transparent 30%);
 }
 
 html[data-theme='hc'] .btn {

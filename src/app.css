@@ -1,5 +1,5 @@
-/* Import all style modules */
-@import './lib/theme/theme-tokens.css';
+/* Legacy aggregate for global styles. Layout imports the same modules directly. */
+@import './lib/styles/theme.css';
 @import './lib/styles/global.css';
 @import './lib/styles/typography.css';
 @import './lib/styles/animations.css';

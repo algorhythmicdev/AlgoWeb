@@ -40,7 +40,6 @@
     "about": "Par mums",
     "nodevoyage_desc": "Iepazīsti mūsu MI ceļojumu draugu",
     "ideonautix_desc": "Izpēti startapu produktivitātes komplektu",
-    "pilot_badge": "Pilots",
     "brand_aria": "AlgoRhythmics sākumlapa",
     "brand_name": "AlgoRhythmics",
     "toggle_menu": "Atvērt vai aizvērt izvēlni",
@@ -376,6 +375,7 @@
   },
   "community": {
     "meta_title": "AlgoRhythmics kopiena",
+    "meta_description": "Veido katru laidienu kopā ar balsojumiem, ceļakartes jaunumiem un atvērtām atsauksmju cilpām.",
     "hero_title": "Community Manifest",
     "hero_subtitle": "Signal the features you need, share ideas, and review public metrics in real time.",
     "hero_rotating": [
@@ -464,6 +464,7 @@
   },
   "consulting": {
     "meta_title": "AlgoRhythmics konsultāciju pilots",
+    "meta_description": "Pievienojies mierīgajam AI konsultāciju pilotam: darbnīcas, ieviešanas atbalsts un ilgtermiņa konsultācijas.",
     "hero_title": "MI konsultācijas",
     "hero_subtitle": "Pilot program with OS-native playbooks for regulated teams.",
     "hero_rotating": [
@@ -572,6 +573,7 @@
   },
   "contact": {
     "meta_title": "Sazinies ar AlgoRhythmics",
+    "meta_description": "Sazinies ar dibinātājiem par pilotiem, partnerībām, presi vai kopienas sadarbībām.",
     "hero_title": "Sazināsimies",
     "hero_subtitle": "Choose the lane that fits: email, strategy call, or community handshake.",
     "hero_rotating": [
