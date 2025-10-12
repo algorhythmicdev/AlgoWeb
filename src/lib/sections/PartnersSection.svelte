@@ -1,7 +1,8 @@
 <script lang="ts">
   import { _, json } from 'svelte-i18n';
+  import { GlassCard } from '$lib/components';
   import brands from '$data/brands.json';
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
+  import { revealOnScroll, staggerReveal } from '$lib/animations';
 
   type Partner = {
     id: string;
@@ -19,18 +20,16 @@
     innovation?: string[] | undefined;
   };
 
-  const partnerOrder = ['reclameFabriek', 'liaa'] as const;
-  const partnerLabels = {
-    current: 'Active partnership',
-    aspirational: 'Next partnership',
-    scale: 'Scale at a glance',
-    innovation: 'Innovation focus',
-    reach: 'Projected reach',
-    programs: 'Programs in motion'
-  } as const;
+  type Client = {
+    name: string;
+    logo?: string;
+    category?: string;
+    region?: string;
+  };
 
-  const ensureArray = (value: unknown): string[] => (Array.isArray(value) ? value : []);
-
+  const ensureArray = (value: unknown): string[] => (Array.isArray(value) ? value : []).map((item) =>
+    typeof item === 'string' && item.trim().length ? item.trim() : ''
+  ).filter(Boolean);
   const ensureRecord = (value: unknown): Record<string, string> | undefined => {
     if (typeof value !== 'object' || value === null) return undefined;
     const entries = Object.entries(value as Record<string, unknown>).reduce<Record<string, string>>(
@@ -44,11 +43,27 @@
     );
     return Object.keys(entries).length ? entries : undefined;
   };
-
-  const ensureLabel = (path: string, fallback: string): string => {
+  const ensureLabel = (path: string, fallback: string) => {
     const value = $json?.(path);
-    return typeof value === 'string' && value.trim() ? value : fallback;
+    return typeof value === 'string' && value.trim().length ? value.trim() : fallback;
   };
+
+  const partnerOrder = ['reclameFabriek', 'liaa'] as const;
+  const partnerLabels = {
+    current: 'Active partnership',
+    aspirational: 'Future partnership',
+    scale: 'Scale',
+    reach: 'Reach',
+    innovation: 'Innovation focus',
+    programs: 'Programmes'
+  } as const;
+
+  $: currentLabel = ensureLabel('home.partners.labels.current', partnerLabels.current);
+  $: aspirationalLabel = ensureLabel('home.partners.labels.aspirational', partnerLabels.aspirational);
+  $: scaleLabel = ensureLabel('home.partners.labels.scale', partnerLabels.scale);
+  $: reachLabel = ensureLabel('home.partners.labels.reach', partnerLabels.reach);
+  $: innovationLabel = ensureLabel('home.partners.labels.innovation', partnerLabels.innovation);
+  $: programsLabel = ensureLabel('home.partners.labels.programs', partnerLabels.programs);
 
   const toReadableKey = (value: string) =>
     value
@@ -57,20 +72,6 @@
       .replace(/\s+/g, ' ')
       .replace(/\b\w/g, (match) => match.toUpperCase())
       .trim();
-
-  let currentLabel: string = partnerLabels.current;
-  let aspirationalLabel: string = partnerLabels.aspirational;
-  let scaleLabel: string = partnerLabels.scale;
-  let innovationLabel: string = partnerLabels.innovation;
-  let reachLabel: string = partnerLabels.reach;
-  let programsLabel: string = partnerLabels.programs;
-
-  $: currentLabel = ensureLabel('partners.labels.current', partnerLabels.current);
-  $: aspirationalLabel = ensureLabel('partners.labels.aspirational', partnerLabels.aspirational);
-  $: scaleLabel = ensureLabel('partners.labels.scale', partnerLabels.scale);
-  $: innovationLabel = ensureLabel('partners.labels.innovation', partnerLabels.innovation);
-  $: reachLabel = ensureLabel('partners.labels.reach', partnerLabels.reach);
-  $: programsLabel = ensureLabel('partners.labels.programs', partnerLabels.programs);
 
   const toPartner = (key: (typeof partnerOrder)[number]): Partner => {
     const rawSource = (brands as Record<string, unknown>)[key];
@@ -82,7 +83,7 @@
     const base: Partner = {
       id: key,
       type,
-      name: String(raw.name ?? key),
+      name: typeof raw.name === 'string' ? raw.name : key,
       relationship: typeof raw.relationship === 'string' ? raw.relationship : undefined,
       description: typeof raw.description === 'string' ? raw.description : undefined,
       note: typeof raw.note === 'string' ? raw.note : undefined,
@@ -93,10 +94,7 @@
       scale:
         ensureRecord(raw.scale) ??
         (type === 'aspirational' ? ensureRecord(raw.projectedReach) : undefined),
-      programs:
-        type === 'aspirational'
-          ? ensureArray(raw.targetPrograms)
-          : undefined,
+      programs: type === 'aspirational' ? ensureArray(raw.targetPrograms) : undefined,
       innovation: ensureArray(raw.innovation)
     };
 
@@ -108,86 +106,109 @@
   };
 
   const partnerCards = partnerOrder.map((key) => toPartner(key));
-  const majorClients = Array.isArray(brands.majorClients) ? brands.majorClients.slice(0, 8) : [];
+  const majorClients: Client[] = Array.isArray(brands.majorClients)
+    ? (brands.majorClients as Array<Record<string, unknown>>)
+        .map((entry) => ({
+          name: typeof entry.name === 'string' ? entry.name : '',
+          logo: typeof entry.logo === 'string' ? entry.logo : undefined,
+          category: typeof entry.category === 'string' ? entry.category : undefined,
+          region: typeof entry.region === 'string' ? entry.region : undefined
+        }))
+        .filter((client) => client.name)
+        .slice(0, 8)
+    : [];
+
+  const typeLabel = (type: Partner['type']) => (type === 'current' ? currentLabel : aspirationalLabel);
 </script>
 
 <section class="partners section" id="partners" use:revealOnScroll>
-  <div class="container">
-    <header class="partners__intro">
-      <span class="eyebrow">{$_('partners.eyebrow') || 'Allies in motion'}</span>
-      <h2>{$_('partners.title') || 'Building with trusted operators'}</h2>
-      <p>{$_('partners.description') || 'We operate with signage manufacturers today and line up public-sector allies for the next education wave.'}</p>
+  <div class="container partners__layout">
+    <header class="partners__header">
+      <span class="eyebrow">{$_('home.partners.eyebrow') || 'Collaborators'}</span>
+      <h2>{$_('home.partners.title') || 'Partners who keep us sharp'}</h2>
+      <p>
+        {$_('home.partners.description') ||
+          'We build with signage experts today and nurture education partners so our programmes have real impact.'}
+      </p>
     </header>
 
     <div class="partners__grid" use:staggerReveal={{ stagger: 160 }}>
       {#each partnerCards as partner (partner.id)}
-        <article class="partner-card os-window" data-variant={partner.type === 'current' ? 'grid' : 'line'}>
+        <GlassCard class="partner-card" padding="lg">
           <div class="partner-card__header">
-            <div class="partner-card__badge" data-type={partner.type}>
-              {partner.type === 'current' ? currentLabel : aspirationalLabel}
+            <div class="partner-card__logo-wrap">
+              {#if partner.logo}
+                <img
+                  class="partner-card__logo"
+                  src={partner.logo}
+                  alt={partner.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="160"
+                  height="64"
+                />
+              {:else}
+                <div class="partner-card__logo partner-card__logo--placeholder" aria-hidden="true">{partner.name.charAt(0)}</div>
+              {/if}
             </div>
-            {#if partner.logo}
-              <img
-                class="partner-card__logo"
-                src={partner.logo}
-                alt={partner.name}
-                loading="lazy"
-                decoding="async"
-                fetchpriority="low"
-                width="192"
-                height="64"
-                sizes="(max-width: 768px) 160px, 192px"
-              />
-            {/if}
+            <div class="partner-card__meta">
+              <span class="partner-card__badge" data-type={partner.type}>{typeLabel(partner.type)}</span>
+              <h3>{partner.name}</h3>
+            </div>
           </div>
 
-          <div class="partner-card__body">
-            <h3>{partner.name}</h3>
-            {#if partner.relationship}
-              <p class="partner-card__relationship">{partner.relationship}</p>
+          {#if partner.relationship}
+            <p class="partner-card__relationship">{partner.relationship}</p>
+          {/if}
+
+          {#if partner.description}
+            <p class="partner-card__description">{partner.description}</p>
+          {/if}
+
+          <dl class="partner-card__details">
+            {#if partner.location}
+              <div>
+                <dt>{$_('home.partners.location') || 'Location'}</dt>
+                <dd>{partner.location}</dd>
+              </div>
             {/if}
-            {#if partner.description}
-              <p>{partner.description}</p>
+
+            {#if partner.founded}
+              <div>
+                <dt>{$_('home.partners.founded') || 'Founded'}</dt>
+                <dd>{partner.founded}</dd>
+              </div>
             {/if}
 
-            <dl class="partner-card__details">
-              {#if partner.location}
-                <div>
-                  <dt>{$_('partners.location') || 'Location'}</dt>
-                  <dd>{partner.location}</dd>
-                </div>
-              {/if}
+            {#if partner.website}
+              <div>
+                <dt>{$_('home.partners.website') || 'Website'}</dt>
+                <dd>
+                  <a class="partner-card__link" href={partner.website} target="_blank" rel="noreferrer">
+                    {partner.website.replace(/^https?:\/\//, '')}
+                  </a>
+                </dd>
+              </div>
+            {/if}
 
-              {#if partner.founded}
-                <div>
-                  <dt>{$_('partners.founded') || 'Founded'}</dt>
-                  <dd>{partner.founded}</dd>
-                </div>
-              {/if}
+            {#if partner.note}
+              <div>
+                <dt>{$_('home.partners.note') || 'Note'}</dt>
+                <dd>{partner.note}</dd>
+              </div>
+            {/if}
+          </dl>
 
-              {#if partner.website}
-                <div>
-                  <dt>{$_('partners.website') || 'Website'}</dt>
-                  <dd>
-                    <a class="partner-card__link" href={partner.website} target="_blank" rel="noreferrer">
-                      {partner.website.replace(/^https?:\/\//, '')}
-                    </a>
-                  </dd>
-                </div>
-              {/if}
-            </dl>
-          </div>
-
-          {#if partner.scale || partner.innovation?.length || partner.programs?.length}
-            <div class="partner-card__meta surface-panel">
+          {#if partner.scale || partner.programs?.length || partner.innovation?.length}
+            <div class="partner-card__extra">
               {#if partner.scale}
                 <div class="partner-card__block">
                   <span class="partner-card__label">{partner.type === 'current' ? scaleLabel : reachLabel}</span>
                   <ul>
                     {#each Object.entries(partner.scale) as [label, value]}
                       <li>
-                        <span class="partner-card__meta-key">{toReadableKey(label)}</span>
-                        <span class="partner-card__meta-value">{value}</span>
+                        <span class="partner-card__key">{toReadableKey(label)}</span>
+                        <span>{value}</span>
                       </li>
                     {/each}
                   </ul>
@@ -215,129 +236,155 @@
                   </ul>
                 </div>
               {/if}
-
-              {#if partner.note}
-                <p class="partner-card__note">{partner.note}</p>
-              {/if}
             </div>
           {/if}
-        </article>
+        </GlassCard>
       {/each}
     </div>
 
     {#if majorClients.length}
-      <aside class="partners__clients os-window" data-variant="halo" aria-label={$_('partners.clients_label') || 'Selected clients'}>
-        <header>
-          <span class="partners__clients-eyebrow">{$_('partners.clients_title') || "Global brands we've supported"}</span>
-          <p>{$_('partners.clients_description') || 'Our manufacturing heritage brings signage discipline trusted by global retail, finance, and aviation leaders.'}</p>
-        </header>
-        <ul class="partners__client-list">
+      <GlassCard class="partners__clients" padding="lg">
+        <div>
+          <span class="partners__clients-label">{$_('home.partners.clients_label') || 'Clients'}</span>
+          <p>
+            {$_('home.partners.clients_description') ||
+              'Years of signage delivery for retail, finance, and aviation means our AI work stands on proven operations.'}
+          </p>
+        </div>
+        <div class="partners__client-list">
           {#each majorClients as client}
-            <li class="partners__client surface-panel">
-              <span class="partners__client-name">{client.name}</span>
-              <span class="partners__client-category">{client.category}</span>
-              <span class="partners__client-region">{client.region}</span>
-            </li>
+            <span class="partner-chip">
+              {#if client.logo}
+                <img src={client.logo} alt={client.name} loading="lazy" />
+              {:else}
+                <span class="partner-chip__placeholder" aria-hidden="true">{client.name.charAt(0)}</span>
+              {/if}
+              <span class="partner-chip__label">
+                <strong>{client.name}</strong>
+                {#if client.region}
+                  <small>{client.region}</small>
+                {/if}
+              </span>
+            </span>
           {/each}
-        </ul>
-      </aside>
+        </div>
+      </GlassCard>
     {/if}
   </div>
 </section>
 
 <style>
-  .partners__intro {
+  .partners {
+    padding-block: clamp(4rem, 12vw, 6rem);
+  }
+
+  .partners__layout {
     display: grid;
-    gap: clamp(0.9rem, 2.2vw, 1.4rem);
-    max-width: min(68ch, 100%);
-    margin-bottom: clamp(2.4rem, 6vw, 3.8rem);
+    gap: clamp(2rem, 6vw, 3rem);
   }
 
-  .partners__intro h2 {
+  .partners__header {
+    display: grid;
+    gap: 1rem;
+    max-width: 700px;
+  }
+
+  .partners__header h2 {
     margin: 0;
-    background: var(--gradient-heading);
-    -webkit-background-clip: text;
-    color: transparent;
-    background-clip: text;
+    font-size: clamp(2rem, 5vw, 2.6rem);
   }
 
-  .partners__intro p {
+  .partners__header p {
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(1.05rem, 2.4vw, 1.22rem);
-    line-height: 1.68;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    line-height: 1.6;
   }
 
   .partners__grid {
     display: grid;
-    gap: clamp(1.8rem, 4vw, 2.6rem);
-    margin-bottom: clamp(2.4rem, 6vw, 3.6rem);
+    gap: clamp(1.8rem, 4vw, 2.4rem);
   }
 
-  .partner-card {
+  @media (min-width: 900px) {
+    .partners__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  :global(.partner-card) {
     display: grid;
-    gap: clamp(1.4rem, 3.2vw, 2rem);
-    padding: clamp(1.8rem, 3.6vw, 2.6rem);
-    border-radius: clamp(1.6rem, 3.6vw, 2.4rem);
+    gap: 1.2rem;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--voyage-blue-rgb), 0.12) 6%);
+    --surface-glass-border: color-mix(in srgb, var(--border) 68%, transparent 32%);
   }
 
   .partner-card__header {
     display: flex;
-    justify-content: space-between;
+    gap: 1.2rem;
     align-items: center;
-    gap: clamp(1.2rem, 3vw, 1.8rem);
     flex-wrap: wrap;
+  }
+
+  .partner-card__logo-wrap {
+    flex-shrink: 0;
+  }
+
+  .partner-card__logo {
+    width: clamp(120px, 20vw, 160px);
+    height: auto;
+    object-fit: contain;
+  }
+
+  .partner-card__logo--placeholder {
+    display: grid;
+    place-items: center;
+    width: clamp(120px, 20vw, 160px);
+    height: clamp(60px, 8vw, 80px);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--voyage-blue) 24%, transparent 76%);
+    color: var(--voyage-blue);
+    font-weight: var(--weight-semibold);
+    font-size: 1.8rem;
+  }
+
+  .partner-card__meta h3 {
+    margin: 0.2rem 0 0;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
   }
 
   .partner-card__badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.45rem 1.1rem;
-    border-radius: var(--radius-full, 999px);
+    gap: 0.4rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
     font-size: var(--text-small);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    font-weight: var(--weight-semibold);
-    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--aurora-purple-rgb), 0.18) 18%);
-    border: 1px solid color-mix(in srgb, var(--border) 55%, rgba(var(--aurora-purple-rgb), 0.22) 45%);
+    background: color-mix(in srgb, var(--bg-elev-2) 92%, transparent 8%);
     color: var(--text-tertiary);
   }
 
   .partner-card__badge[data-type='aspirational'] {
-    background: color-mix(in srgb, var(--bg-elev-2) 75%, rgba(var(--signal-yellow-rgb), 0.24) 25%);
-    border-color: color-mix(in srgb, var(--border) 48%, rgba(var(--signal-yellow-rgb), 0.3) 52%);
-    color: color-mix(in srgb, var(--text) 78%, rgba(var(--signal-yellow-rgb), 0.38) 22%);
-  }
-
-  .partner-card__logo {
-    height: clamp(32px, 6vw, 48px);
-    width: auto;
-    filter: drop-shadow(0 12px 24px rgba(10, 13, 20, 0.1));
-  }
-
-  .partner-card__body h3 {
-    margin: 0;
-    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
-    line-height: 1.18;
+    background: color-mix(in srgb, var(--signal-yellow) 18%, var(--bg-elev-2) 82%);
+    color: var(--text);
   }
 
   .partner-card__relationship {
-    margin: 0.35rem 0 0.6rem;
-    font-size: var(--text-small);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
+    margin: 0;
+    font-weight: var(--weight-medium);
+    color: var(--text-secondary);
   }
 
-  .partner-card__body p {
+  .partner-card__description {
     margin: 0;
     color: var(--text-secondary);
-    line-height: 1.68;
+    line-height: 1.55;
   }
 
   .partner-card__details {
-    margin: clamp(1.2rem, 2.6vw, 1.8rem) 0 0;
+    margin: 0;
     display: grid;
     gap: 0.75rem;
   }
@@ -349,8 +396,8 @@
 
   .partner-card__details dt {
     font-size: var(--text-small);
-    text-transform: uppercase;
     letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--text-tertiary);
   }
 
@@ -360,174 +407,115 @@
   }
 
   .partner-card__link {
-    color: inherit;
+    color: var(--voyage-blue);
     text-decoration: none;
-    position: relative;
   }
 
-  .partner-card__link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.32;
-    transition: opacity 160ms var(--ease-in-out);
+  .partner-card__link:hover,
+  .partner-card__link:focus-visible {
+    text-decoration: underline;
   }
 
-  .partner-card__link:hover::after,
-  .partner-card__link:focus-visible::after {
-    opacity: 1;
-  }
-
-  .partner-card__meta {
+  .partner-card__extra {
     display: grid;
-    gap: clamp(1rem, 2.4vw, 1.6rem);
-    padding: clamp(1.2rem, 2.8vw, 1.8rem);
-    border-radius: clamp(1.2rem, 3vw, 1.8rem);
-    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
-    --surface-panel-border: color-mix(in srgb, var(--border) 54%, rgba(var(--voyage-blue-rgb), 0.24) 46%);
-    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
-    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--voyage-blue-rgb), 0.24) 36%);
-  }
-
-  .partner-card[data-variant='line'] .partner-card__meta {
-    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--signal-yellow-rgb), 0.18) 22%);
-    --surface-panel-border: color-mix(in srgb, var(--border) 46%, rgba(var(--signal-yellow-rgb), 0.28) 54%);
-    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--signal-yellow-rgb), 0.12) 4%);
-    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--signal-yellow-rgb), 0.3) 38%);
+    gap: 1rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
   }
 
   .partner-card__block {
     display: grid;
-    gap: 0.65rem;
+    gap: 0.4rem;
   }
 
   .partner-card__label {
     font-size: var(--text-small);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-tertiary);
   }
 
   .partner-card__block ul {
-    list-style: none;
     margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .partner-card__meta-key {
-    font-size: var(--text-small);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-tertiary);
-  }
-
-  .partner-card__meta-value {
-    font-weight: var(--weight-semibold, 600);
-  }
-
-  .partner-card__note {
-    margin: 0;
-    padding: 0.85rem 1rem;
-    border-radius: var(--radius-lg, 18px);
-    background: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.22) 52%, rgba(255, 255, 255, 0.75) 48%);
-    color: color-mix(in srgb, var(--text) 80%, rgba(var(--signal-yellow-rgb), 0.48) 20%);
-    font-size: var(--text-small);
-  }
-
-  .partners__clients {
-    display: grid;
-    gap: clamp(1.4rem, 3vw, 2rem);
-    padding: clamp(1.8rem, 3.4vw, 2.4rem);
-    border-radius: clamp(1.6rem, 3.4vw, 2.2rem);
-  }
-
-  .partners__clients header {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .partners__clients-eyebrow {
-    font-size: var(--text-small);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-
-  .partners__clients p {
-    margin: 0;
+    padding-left: 1.2rem;
     color: var(--text-secondary);
-    line-height: 1.65;
+    line-height: 1.5;
+  }
+
+  .partner-card__key {
+    font-weight: var(--weight-medium);
+  }
+
+  :global(.partners__clients) {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--signal-yellow-rgb), 0.12) 6%);
+  }
+
+  @media (min-width: 900px) {
+    :global(.partners__clients) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  .partners__clients-label {
+    display: inline-flex;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-small);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--bg-elev-2) 92%, transparent 8%);
+    color: var(--text-tertiary);
+  }
+
+  :global(.partners__clients) p {
+    margin: 0.8rem 0 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
   }
 
   .partners__client-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .partner-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--bg-elev-2) 92%, transparent 8%);
+  }
+
+  .partner-chip img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .partner-chip__placeholder {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: clamp(0.8rem, 2vw, 1.2rem);
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--voyage-blue) 22%, transparent 78%);
+    color: var(--voyage-blue);
+    font-weight: var(--weight-semibold);
   }
 
-  .partners__client {
+  .partner-chip__label {
     display: grid;
-    gap: 0.3rem;
-    padding: 0.9rem 1.1rem;
-    border-radius: var(--radius-lg, 18px);
-    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--voyage-blue-rgb), 0.1) 20%);
-    --surface-panel-border: color-mix(in srgb, var(--border) 58%, rgba(var(--voyage-blue-rgb), 0.22) 42%);
-    --surface-panel-shadow: 0 16px 28px rgba(var(--voyage-blue-rgb), 0.12);
-    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 98%, rgba(var(--voyage-blue-rgb), 0.1) 2%);
-    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.24) 34%);
-  }
-
-  .partners__client-name {
-    font-weight: var(--weight-semibold, 600);
-  }
-
-  .partners__client-category {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
-    letter-spacing: 0.08em;
-  }
-
-  .partners__client-region {
+    gap: 0.2rem;
     font-size: var(--text-small);
     color: var(--text-secondary);
   }
 
-  @media (max-width: 768px) {
-    .partner-card__meta {
-      padding: 1rem 1.2rem;
-    }
-
-    .partner-card__details {
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    }
-  }
-
-  :global(html[data-theme='dark']) .partner-card__meta {
-    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--aurora-purple-rgb), 0.24) 24%);
-    --surface-panel-border: color-mix(in srgb, var(--border) 44%, rgba(var(--aurora-purple-rgb), 0.32) 56%);
-    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 94%, rgba(var(--aurora-purple-rgb), 0.16) 6%);
-    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 60%, rgba(var(--aurora-purple-rgb), 0.32) 40%);
-  }
-
-  :global(html[data-theme='dark']) .partner-card[data-variant='line'] .partner-card__meta {
-    --surface-panel-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--signal-yellow-rgb), 0.26) 30%);
-    --surface-panel-border: color-mix(in srgb, var(--border) 38%, rgba(var(--signal-yellow-rgb), 0.38) 62%);
-    --surface-panel-hc-bg: color-mix(in srgb, var(--bg) 92%, rgba(var(--signal-yellow-rgb), 0.18) 8%);
-    --surface-panel-hc-border: color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.4) 44%);
-  }
-
-  :global(html[data-theme='hc']) .partner-card__badge,
-  :global(html[data-theme='hc']) .partners__clients-eyebrow,
-  :global(html[data-theme='hc']) .partner-card__label {
+  .partner-chip__label strong {
     color: var(--text);
   }
 </style>

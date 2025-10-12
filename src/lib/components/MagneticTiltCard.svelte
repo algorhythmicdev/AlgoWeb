@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { tilt, magnetic, staggerReveal } from '$lib/utils/animations';
+  import { tilt, magnetic, staggerReveal } from '$lib/animations';
 
   export let magneticStrength = 0.3; // 0 to 1
   export let maxTilt = 7; // Max tilt in degrees

@@ -1,5 +1,5 @@
 <script lang="ts">
-  export type SectionDividerTone = 'neutral' | 'voyage' | 'aurora' | 'citrus';
+  type SectionDividerTone = 'neutral' | 'voyage' | 'aurora' | 'citrus';
   export let tone: SectionDividerTone = 'neutral';
   export let label: string | null = null;
 

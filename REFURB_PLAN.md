@@ -2,7 +2,7 @@ Here is a structured task list for a developer (Codex agent) to bring the Algorh
 
 ---
 
-## 1. Unify the theme system & remove the floating theme chooser
+## 1. ✅ Unify the theme system & remove the floating theme chooser
 
 **Context:**
 The current site mixes multiple ad‑hoc style sheets and uses a floating “Choose a theme” widget that overlaps content. Light/dark/high‑contrast modes are inconsistent.
@@ -65,7 +65,7 @@ The current site mixes multiple ad‑hoc style sheets and uses a floating “Cho
 
 ---
 
-## 2. Simplify navigation and merge product pages
+## 2. ✅ Simplify navigation and merge product pages
 
 **Context:**
 Navigation still lists separate NodeVoyage/Ideonautix pages and a “Pilot” link. The plan calls for a single “Platforms” page.
@@ -114,7 +114,7 @@ Navigation still lists separate NodeVoyage/Ideonautix pages and a “Pilot” li
 
 ---
 
-## 3. Build reusable UI components (Hero, GlassCard, Button)
+## 3. ✅ Build reusable UI components (Hero, GlassCard, Button)
 
 **Context:**
 Various pages still have bespoke hero and card markup, with inconsistent gradients, shadows and spacing.  Only the consulting page uses the modern hero pattern.
@@ -161,7 +161,7 @@ Various pages still have bespoke hero and card markup, with inconsistent gradien
 
 ---
 
-## 4. Redesign and declutter site sections
+## 4. ✅ Redesign and declutter site sections
 
 **Context:**
 Several sections are overloaded: duplicate bullet lists (“calm delivery rhythm”), broken headings in “Stay in our orbit”, misaligned CTA buttons and busy timelines.
@@ -200,7 +200,7 @@ Several sections are overloaded: duplicate bullet lists (“calm delivery rhythm
 
 ---
 
-## 5. Clean up content, translations and localisation
+## 5. ✅ Clean up content, translations and localisation
 
 **Context:**
 The site still contains placeholder copy (e.g., “AI products with a people-first beat”) and duplicated bullet lists. Localisation keys are not consistently used.
@@ -242,7 +242,7 @@ The site still contains placeholder copy (e.g., “AI products with a people-fir
 
 ---
 
-## 6. Clean the repository and enforce accessibility
+## 6. ✅ Clean the repository and enforce accessibility
 
 **Context:**
 The codebase still contains unused CSS files, outdated hero components, duplicate animation scripts and unnecessary assets. The site also lacks systematic accessibility checks (e.g., contrast, motion reduction).

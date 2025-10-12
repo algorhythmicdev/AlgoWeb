@@ -17,3 +17,4 @@ export { default as ProductDemoPreview } from './ProductDemoPreview.svelte';
 export { default as Icon } from './icons/Icon.svelte';
 export { default as FieldSupport } from './forms/FieldSupport.svelte';
 export { default as Button } from './Button.svelte';
+export { default as GlassCard } from './GlassCard.svelte';
