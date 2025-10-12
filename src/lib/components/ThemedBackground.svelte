@@ -11,8 +11,8 @@
   let particles = [];
   const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
   const fallbackGradient =
-    'radial-gradient(120% 120% at 50% 0%, rgba(19, 81, 255, 0.24) 0%, rgba(106, 56, 255, 0.18) 38%, rgba(255, 210, 89, 0.12) 76%, transparent 100%)';
-  const fallbackGrainOpacity = 0.06;
+    'radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%) 0%, color-mix(in srgb, var(--bg-elev-1, var(--bg)) 98%, rgba(var(--aurora-purple-rgb), 0.1) 2%) 48%, var(--bg) 100%)';
+  const fallbackGrainOpacity = 0.05;
 
   const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.12, damping: 0.35, precision: 0.001 });
   const scrollSpring = spring(0, { stiffness: 0.08, damping: 0.4, precision: 0.0001 });
@@ -165,31 +165,27 @@
     background: var(--route-gradient);
     opacity: 1;
     transition: background 1.6s ease, opacity 1s ease;
-    filter: saturate(1.05);
+    filter: none;
   }
 
   .wash {
     background:
       radial-gradient(
-        40% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
-        color-mix(in srgb, var(--theme-primary) 40%, transparent),
-        transparent 70%
+        42% 42% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
+        color-mix(in srgb, var(--theme-primary) 18%, transparent),
+        transparent 68%
       ),
-      radial-gradient(56% 52% at 16% 12%, color-mix(in srgb, var(--theme-secondary) 24%, transparent) 0%, transparent 72%),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--bg) 46%, transparent) 0%,
-        color-mix(in srgb, var(--bg) 18%, transparent) 60%
-      );
-    opacity: 0.82;
-    filter: saturate(1.1);
+      radial-gradient(58% 56% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%, transparent 74%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 96%, transparent) 0%, color-mix(in srgb, var(--bg) 98%, transparent) 100%);
+    opacity: 0.65;
+    filter: none;
   }
 
   .flare {
     background:
-      radial-gradient(38% 38% at 78% 20%, color-mix(in srgb, var(--theme-secondary) 28%, transparent) 0%, transparent 70%),
-      radial-gradient(46% 46% at 24% 86%, color-mix(in srgb, var(--theme-accent) 20%, transparent) 0%, transparent 74%);
-    opacity: calc(0.25 + var(--scroll-depth) * 0.45);
+      radial-gradient(38% 38% at 78% 22%, color-mix(in srgb, var(--theme-accent) 16%, transparent) 0%, transparent 72%),
+      radial-gradient(44% 44% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%, transparent 74%);
+    opacity: calc(0.18 + var(--scroll-depth) * 0.32);
     mix-blend-mode: screen;
   }
 
@@ -213,20 +209,20 @@
     background:
       radial-gradient(
         44% 44% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
-        color-mix(in srgb, var(--theme-primary) 55%, transparent),
+        color-mix(in srgb, var(--theme-primary) 24%, transparent),
         transparent 74%
       ),
-      radial-gradient(54% 50% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 38%, transparent) 0%, transparent 72%),
-      linear-gradient(180deg, rgba(5, 9, 24, 0.94) 0%, rgba(3, 7, 20, 0.88) 50%, rgba(2, 4, 15, 0.86) 100%);
-    opacity: 0.76;
+      radial-gradient(56% 52% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 18%, transparent) 0%, transparent 74%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 88%, transparent) 0%, color-mix(in srgb, var(--bg) 96%, transparent) 100%);
+    opacity: 0.58;
   }
 
   :global([data-base-theme='dark']) .gradient {
-    filter: saturate(1.12) brightness(0.92);
+    filter: none;
   }
 
   :global([data-base-theme='dark']) .flare {
-    opacity: calc(0.32 + var(--scroll-depth) * 0.48);
+    opacity: calc(0.22 + var(--scroll-depth) * 0.34);
     mix-blend-mode: lighten;
   }
 
@@ -238,24 +234,20 @@
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .wash {
     background:
       radial-gradient(
-        40% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
-        color-mix(in srgb, var(--accent-2) 52%, transparent),
+        42% 42% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
+        color-mix(in srgb, var(--accent-2) 32%, transparent),
         transparent 72%
       ),
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--bg) 94%, transparent) 0%,
-        color-mix(in srgb, var(--bg) 82%, transparent) 100%
-      );
-    opacity: 0.74;
-    filter: saturate(1.05);
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 94%, transparent) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 100%);
+    opacity: 0.68;
+    filter: none;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .flare {
     background:
-      radial-gradient(42% 42% at 78% 20%, color-mix(in srgb, var(--accent-2) 58%, transparent) 0%, transparent 70%),
-      radial-gradient(50% 50% at 24% 80%, color-mix(in srgb, var(--accent-1) 46%, transparent) 0%, transparent 74%);
-    opacity: calc(0.45 + var(--scroll-depth) * 0.4);
+      radial-gradient(42% 42% at 78% 22%, color-mix(in srgb, var(--accent-2) 34%, transparent) 0%, transparent 72%),
+      radial-gradient(48% 48% at 24% 82%, color-mix(in srgb, var(--accent-1) 28%, transparent) 0%, transparent 74%);
+    opacity: calc(0.32 + var(--scroll-depth) * 0.34);
     mix-blend-mode: normal;
   }
 

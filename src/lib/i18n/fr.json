@@ -307,7 +307,30 @@
         "innovation": "Innovation focus",
         "programs": "Programmes"
       },
-      "note": "Note"
+      "note": "Note",
+      "featured": {
+        "summary": "We prototype signage-grade experiences with trusted partners.",
+        "relationship_label": "Relationship",
+        "location_label": "Based in",
+        "highlights_label": "Why it matters",
+        "highlights": [
+          "Signage R&D keeps our material tests honest.",
+          "Controller engineering informs realtime product design.",
+          "Export-first installs keep accessibility requirements front of mind."
+        ],
+        "cta": "Visit site",
+        "aria": "Visit {name}",
+        "items": {
+          "reclameFabriek": {
+            "summary": "Reclame Fabriek runs the signage R&D floor where we test materials, controllers, and fabrication-ready automation.",
+            "highlights": [
+              "300+ LED neon colours engineered and certified in-house.",
+              "Custom controllers inform our realtime product design.",
+              "Export-first installs keep accessibility requirements front of mind."
+            ]
+          }
+        }
+      }
     }
   },
   "story": {
@@ -869,6 +892,7 @@
     "status": "Pré-entreprise • Ideju Kauss octobre 2025",
     "location": "Daugavpils, Lettonie",
     "products_title": "Produits",
+    "platforms": "Plateformes",
     "company": "Entreprise",
     "resources": "Ressources",
     "founders": "Fondateurs",
@@ -891,6 +915,7 @@
     "copyright": "© 2025 AlgoRhythmics",
     "partners_title": "Partenaires",
     "partners_summary": "Nous co-créons avec des spécialistes de la signalétique pour ancrer chaque pilote dans la réalité de fabrication.",
+    "partners_link": "Rencontrer nos partenaires",
     "partners_relationship": "Relation",
     "partners_location": "Localisation",
     "partners_visit": "Visiter le site",

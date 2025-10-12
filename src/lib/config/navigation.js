@@ -53,11 +53,10 @@ export const footerLinks = {
     { label: 'footer.vision', href: '/#vision' }
   ],
   platforms: [
-    { label: 'footer.nodevoyage', href: '/platforms#nodevoyage' },
-    { label: 'footer.ideonautix', href: '/platforms#ideonautix' },
-    { label: 'footer.roadmap', href: '/#timeline' }
+    { label: 'footer.platforms', href: '/platforms' }
   ],
   resources: [
+    { label: 'footer.roadmap', href: '/#timeline' },
     { label: 'footer.community', href: '/community' },
     { label: 'footer.consulting', href: '/consulting' },
     { label: 'footer.contact', href: '/contact' }

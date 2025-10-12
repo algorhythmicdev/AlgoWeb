@@ -101,11 +101,27 @@ html.nav-menu-open {
     --section-padding,
     clamp(var(--section-padding-mobile, 4rem), 8vw, var(--section-padding-desktop, 7rem))
   );
-  background: transparent;
+  background: var(--bg-elev-1);
+  color: var(--text);
   isolation: isolate;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain, var(--grain-texture));
+  background-size: 320px 320px;
+  opacity: 0.05;
+  pointer-events: none;
+  mix-blend-mode: var(--grain-blend-mode, soft-light);
+  z-index: 0;
 }
 
 .section > .container {
+  position: relative;
+  z-index: 1;
   width: min(100%, var(--section-container-width, var(--container-xl, 1200px)));
   margin-inline: auto;
   padding-inline: clamp(1.5rem, 5vw, 3rem);

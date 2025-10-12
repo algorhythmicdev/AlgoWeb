@@ -108,37 +108,37 @@
   },
   "home": {
     "cta": {
-      "eyebrow": "Продовжуйте досліджувати",
-      "title": "Залишайтесь в нашій орбіті",
-      "text": "Долучайтеся до спільноти спокійного OS, щоб першими отримувати новини дорожньої карти, запрошення в пілоти та доступні ритуали.",
-      "primary": "Приєднатися до спільноти",
-      "secondary": "Запланувати стратегічну сесію",
+      "eyebrow": "Keep exploring",
+      "title": "Stay in our orbit",
+      "text": "Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.",
+      "primary": "Join the community",
+      "secondary": "Book a calm strategy chat",
       "points": [
-        "Щомісячні прев’ю NodeVoyage та Ideonautix.",
-        "Пілотні програми спершу оголошуються підписникам.",
-        "Аудити доступності та анімації у форматі шпаргалок."
+        "Roadmap walkthroughs before they reach the blog.",
+        "Pilot invitations go to subscribers first.",
+        "Accessibility checklists and signage-inspired playbooks."
       ],
-      "consulting": "Надаєте перевагу індивідуальному супроводу? Забронюйте спокійну стратегічну розмову, і ми разом окреслимо наступні кроки."
+      "consulting": "Prefer a guided walkthrough? Book a calm strategy chat and we will map your next steps together."
     },
     "hero": {
       "status": "Independent AI studio · Riga ↔ Rotterdam",
       "title": {
-        "lead": "Build calm workflows with",
-        "brand": "AlgoRhythmics",
-        "trail": "as your guide."
+        "lead": "AlgoRhythmics",
+        "brand": "shapes calm AI workflows",
+        "trail": "with signage discipline."
       },
-      "tagline": "Accessible AI platforms for travel and founder ops, built with signage discipline.",
-      "subtitle": "NodeVoyage, Ideonautix, and our consulting sprints share one calm operating rhythm.",
-      "description": "We design every surface with AAA contrast, honour reduced-motion settings, and document automation decisions in plain language.",
-      "cta_products": "Explore the platform lineup",
-      "cta_consulting": "Schedule a consulting session",
-      "actions_label": "Main hero actions",
+      "tagline": "Calm AI for travel crews and founder teams.",
+      "subtitle": "NodeVoyage, Ideonautix, and our consulting practice run on the same deliberate rituals.",
+      "description": "We pair tactile signage craft with transparent automation notes so every screen stays readable, explainable, and inclusive.",
+      "cta_products": "Explore our platforms",
+      "cta_consulting": "Book a calm strategy chat",
+      "actions_label": "Primary hero actions",
       "next_milestone": "Upcoming milestone",
-      "pillars_title": "Our calm delivery rhythm",
+      "pillars_title": "How we keep momentum steady",
       "pillars": [
-        "One shared design system connects NodeVoyage, Ideonautix, and consulting engagements.",
-        "Accessibility and inclusive writing guide every screen, animation, and notification.",
-        "We document decisions in plain language so automation remains explainable."
+        "Shared rituals link product sprints, consulting engagements, and education programmes.",
+        "Accessibility, localisation, and inclusive writing shape every interface.",
+        "Every automation ships with plain-language documentation and opt-out controls."
       ],
       "signals": {
         "studio_phase": "Studio snapshot",
@@ -146,7 +146,7 @@
         "focus_tracks": "Focus tracks",
         "focus_tracks_value": "NodeVoyage · Ideonautix · Consulting",
         "research": "Research roots",
-        "research_value": "Signage craft × practical AI"
+        "research_value": "Signage R&D + Cloud AI"
       },
       "moments": {
         "nodevoyage": {
@@ -180,32 +180,32 @@
     },
     "story": {
       "title": "Our story",
-      "reality_title": "What we’re building",
-      "reality_text": "We want AI to feel helpful, not hectic. That means clarity for travellers, founders, and anyone leaning on our tools.",
-      "mission_title": "Our mission",
-      "mission_text": "Deliver approachable AI products and services that explain themselves and invite collaboration.",
-      "vision_title": "Our vision",
-      "vision_text": "By 2026, every AlgoRhythmics product will share one trustworthy operating rhythm so partners can switch between them without friction."
+      "reality_title": "What keeps us grounded",
+      "reality_text": "We stay close to signage floors and partner operations to keep prototypes practical.",
+      "mission_title": "Mission",
+      "mission_text": "Ship approachable AI tools and consulting loops that explain themselves and invite collaboration.",
+      "vision_title": "Vision",
+      "vision_text": "By 2026 every AlgoRhythmics launch will share one trusted workflow so partners can switch contexts without friction."
     },
     "timeline": {
       "title": "Our path",
-      "subtitle": "Milestones that keep us moving",
+      "subtitle": "Milestones keeping us honest",
       "filters_label": "Filter milestones by status",
       "filters_reset": "Show all statuses",
-      "filters_empty": "No milestones match the selected statuses yet.",
+      "filters_empty": "No milestones match the selected status yet.",
       "upcoming_badge": "Upcoming",
       "statuses": {
-        "active": "Активний",
-        "development": "У розробці",
-        "planned": "Заплановано",
-        "vision": "Довгострокове бачення",
-        "current": "У процесі",
-        "completed": "Завершено"
+        "active": "Active now",
+        "development": "In development",
+        "planned": "Planned",
+        "vision": "Long-term vision",
+        "current": "In motion",
+        "completed": "Completed"
       },
       "milestones": {
         "ideju-kauss": {
-          "title": "Ideju Kauss competition",
-          "description": "Entering Latvia's flagship startup arena with the NodeVoyage concept.",
+          "title": "Ideju Kauss pitch",
+          "description": "Pitch NodeVoyage inside Latvia's flagship startup arena.",
           "note": ""
         },
         "company-formation": {
@@ -214,22 +214,22 @@
           "note": ""
         },
         "liaa-application": {
-          "title": "LIAA partnership application",
-          "description": "Apply for collaboration with Latvia's Investment Agency to co-run education programmes.",
-          "note": "Aspirational — pending approval"
+          "title": "LIAA partnership",
+          "description": "Apply for collaboration with Latvia's Investment and Development Agency to co-run education programmes.",
+          "note": "Pending approval"
         },
         "mvp-ideonautix": {
-          "title": "Ideonautix MVP launch",
+          "title": "Ideonautix MVP",
           "description": "Release the first public version of the Ideonautix productivity platform.",
           "note": ""
         },
         "pilot-consulting": {
           "title": "AI consulting pilot",
-          "description": "Offer a no-cost pilot to three partners exploring AI integration.",
+          "description": "Offer a no-cost pilot to three partners exploring calm AI integration.",
           "note": ""
         },
         "mvp-nodevoyage": {
-          "title": "NodeVoyage MVP launch",
+          "title": "NodeVoyage beta",
           "description": "Open the NodeVoyage travel platform to public beta with Nodi on board.",
           "note": ""
         },
@@ -242,7 +242,7 @@
     },
     "platforms": {
       "title": "Platform lineup",
-      "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed studio.",
+      "subtitle": "NodeVoyage and Ideonautix share one calm studio.",
       "cta_title": "Stay close",
       "cta_text": "Join the community for release news, pilot invites, and accessibility updates.",
       "cta_join": "Join the community",
@@ -256,9 +256,9 @@
       "nikita": {
         "name": "Nikita Jurtaevs",
         "role": "Co-Founder & CEO",
-        "bio": "Nikita keeps the story, product direction, and partnerships aligned across NodeVoyage and Ideonautix. His background in signage design helps our digital work stay tactile and clear.",
+        "bio": "Nikita keeps product direction, story, and partnerships aligned so every release feels tactile and honest.",
         "current_title": "Current focus",
-        "current_position": "Reclame Fabriek — guiding lighting, coatings, and fabrication tests that inspire our interfaces.",
+        "current_position": "Reclame Fabriek — shaping lighting, coating, and fabrication trials that inform our interfaces.",
         "expertise": [
           "Narrative-led product strategy",
           "Experience design and quality assurance",
@@ -269,13 +269,13 @@
         "name": "Vjaceslavs \"Slaff\" Trosins",
         "role": "Co-Founder & CTO",
         "current_title": "Current focus",
-        "bio": "Slaff leads the engineering stack, data flows, and AI integrations that power our products. Years in signage-controller hardware keep our releases grounded in real-world use.",
-        "position": "Reclame Fabriek — evolving controllers, LED systems, and tooling that inform our software choices.",
+        "bio": "Slaff leads the engineering stack, data flows, and AI integrations powering our platforms.",
+        "position": "Reclame Fabriek — refining controllers, LED systems, and tooling that steer our software choices.",
         "philosophy": "Systems thinking across hardware and software keeps solutions honest and dependable.",
         "achievements": [
           "Runs a Google Cloud–first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
-          "Connects signage-grade controllers with transparent AI experiences.",
-          "Leads fundraising and builds multi-disciplinary teams for both flagships."
+          "Bridges signage-grade controllers with transparent AI experiences.",
+          "Leads fundraising and multidisciplinary teams across both flagships."
         ],
         "brand_title": "Brand experience",
         "brand_intro": "We honed our craft while partnering with global brands on premium signage systems:",
@@ -292,7 +292,7 @@
     "partners": {
       "eyebrow": "Collaborators",
       "title": "Partners who keep us sharp",
-      "description": "We build with signage experts today and nurture education partners so our programmes have real impact.",
+      "description": "Signage specialists and educators help us keep prototypes grounded in real production.",
       "location": "Location",
       "founded": "Founded",
       "website": "Website",
@@ -307,7 +307,30 @@
         "innovation": "Innovation focus",
         "programs": "Programmes"
       },
-      "note": "Note"
+      "note": "Note",
+      "featured": {
+        "summary": "We prototype signage-grade experiences with trusted partners.",
+        "relationship_label": "Relationship",
+        "location_label": "Based in",
+        "highlights_label": "Why it matters",
+        "highlights": [
+          "Signage R&D keeps our material tests honest.",
+          "Controller engineering informs realtime UX choices.",
+          "Education partners shape inclusive playbooks."
+        ],
+        "cta": "Visit site",
+        "aria": "Visit {name}",
+        "items": {
+          "reclameFabriek": {
+            "summary": "Reclame Fabriek runs the signage R&D floor where we test materials, controllers, and fabrication-ready automation.",
+            "highlights": [
+              "300+ LED neon colours engineered and certified in-house.",
+              "Custom controllers inform our realtime product design.",
+              "Export-first installs keep accessibility requirements front of mind."
+            ]
+          }
+        }
+      }
     }
   },
   "story": {
@@ -865,16 +888,15 @@
   },
   "footer": {
     "brand_alt": "AlgoRhythmics wordmark",
-    "tagline": "Де логіка танцює з креативом",
-    "status": "Пре-компанія • Ideju Kauss жовтень 2025",
-    "location": "Даугавпілс, Латвія",
+    "tagline": "Calm AI tools grounded in signage craft.",
+    "status": "Pre-company • Ideju Kauss October 2025",
+    "location": "Daugavpils, Latvia",
     "products_title": "Продукти",
     "company": "Компанія",
     "resources": "Ресурси",
+    "platforms": "Платформи",
     "founders": "Засновники",
     "vision": "Бачення",
-    "nodevoyage": "NodeVoyage",
-    "ideonautix": "Ideonautix",
     "roadmap": "Дорожня карта",
     "community": "Спільнота",
     "consulting": "Консалтинг",
@@ -889,16 +911,17 @@
     "rights": "Всі права захищені",
     "made_in": "Створено з любов'ю в Латвії",
     "copyright": "© 2025 AlgoRhythmics",
-    "partners_title": "Партнери",
-    "partners_summary": "Працюємо з фахівцями з вивісок, щоб кожен пілот базувався на реальних виробничих процесах.",
+    "partners_title": "Partners",
+    "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",
     "partners_relationship": "Співпраця",
     "partners_location": "Локація",
-    "partners_visit": "Відвідати сайт",
+    "partners_visit": "Visit site",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "email": "E-mail"
-    }
+    },
+    "partners_link": "Meet our collaborators"
   },
   "ai_companion": {
     "name": "Люмен",

@@ -18,6 +18,15 @@ Here is a detailed assessment and structured tasklist for the Codex agent based 
 
 Each task includes context, detailed steps and sample code.  Tasks should be completed sequentially; cross‑references note dependencies.
 
+### 📈 Progress tracker
+
+- [x] Task 1: Finalise the unified theme & neutral backgrounds
+- [x] Task 2: Consolidate platforms & navigation
+- [x] Task 3: Standardise hero sections & CTA spacing
+- [x] Task 4: Redesign the timeline with interactive filters
+- [x] Task 5: Transform founders & partners sections into `GlassCard`s
+- [x] Task 6: Polish copy and localisation
+
 ### **Task 1: Finalise the unified theme & neutral backgrounds**
 
 **Context:** Gradients dominate the hero, founders and timeline.  The design plan requires neutral backgrounds (Cloud, Mist, Night) with subtle grain; gradients should appear only in bars or halos.  The theme toggles exist but are not applied consistently.
@@ -67,6 +76,8 @@ Each task includes context, detailed steps and sample code.  Tasks should be com
 
 ### **Task 2: Consolidate platforms & navigation**
 
+**Status:** ✅ Unified `/platforms` as the single destination, updated footer/navigation links, and neutralised the animated background system to retire the old gradient styling.
+
 **Context:** The top nav now lists “Platforms”, but separate NodeVoyage and Ideonautix pages remain in the footer and in `/routes`.
 
 **Actions:**
@@ -97,6 +108,8 @@ Each task includes context, detailed steps and sample code.  Tasks should be com
 ---
 
 ### **Task 3: Standardise hero sections & CTA spacing**
+
+**Status:** ✅ Homepage hero now sits on a calm neutral surface with a dedicated CTA row and the roadmap preview relocated into the timeline highlight.
 
 **Context:** The hero still uses a saturated gradient and overlapping milestone card; the tagline mentions AAA contrast but the background conflicts with it.
 
@@ -136,6 +149,8 @@ Each task includes context, detailed steps and sample code.  Tasks should be com
 
 ### **Task 4: Redesign the timeline with interactive filters**
 
+**Status:** ✅ Timeline milestones sit in GlassCards with a single-select status filter and accessible chips replacing the old static labels.
+
 **Context:** The timeline rows have tinted backgrounds and the category labels are not clickable.
 
 **Actions:**
@@ -160,6 +175,8 @@ Each task includes context, detailed steps and sample code.  Tasks should be com
 ---
 
 ### **Task 5: Transform founders & partners sections into `GlassCard`s**
+
+**Status:** ✅ Founders now sit inside calm GlassCards with unique bullet lists, and the partner spotlight lives in a dedicated GlassCard section with a concise footer summary.
 
 **Context:** Founders’ cards still use tinted gradients; Nikita’s “core strengths” and Andrey’s list repeat the same bullet points.  Partners have long paragraphs and bright backgrounds.
 
@@ -194,6 +211,8 @@ Each task includes context, detailed steps and sample code.  Tasks should be com
 ---
 
 ### **Task 6: Polish copy and localisation**
+
+**Status:** ✅ Homepage copy now comes from refreshed localisation files with concise hero, timeline, founders, and partner messaging across all supported locales.
 
 **Context:** Some placeholder text remains, and not all content is loaded from localisation files.  The design plan emphasises clear, meaningful copy.
 
