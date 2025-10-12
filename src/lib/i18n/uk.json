@@ -194,6 +194,14 @@
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected statuses yet.",
       "upcoming_badge": "Upcoming",
+      "statuses": {
+        "active": "Активний",
+        "development": "У розробці",
+        "planned": "Заплановано",
+        "vision": "Довгострокове бачення",
+        "current": "У процесі",
+        "completed": "Завершено"
+      },
       "milestones": {
         "ideju-kauss": {
           "title": "Ideju Kauss competition",
@@ -881,6 +889,11 @@
     "rights": "Всі права захищені",
     "made_in": "Створено з любов'ю в Латвії",
     "copyright": "© 2025 AlgoRhythmics",
+    "partners_title": "Партнери",
+    "partners_summary": "Працюємо з фахівцями з вивісок, щоб кожен пілот базувався на реальних виробничих процесах.",
+    "partners_relationship": "Співпраця",
+    "partners_location": "Локація",
+    "partners_visit": "Відвідати сайт",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

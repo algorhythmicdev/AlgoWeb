@@ -3,7 +3,6 @@
   import { Button, GlassCard } from '$lib/components';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import FoundersSection from '$lib/sections/FoundersSection.svelte';
-  import PartnersSection from '$lib/sections/PartnersSection.svelte';
   import CallToActionSection from '$lib/sections/CallToActionSection.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import timelineData from '$data/timeline.json';
@@ -123,13 +122,25 @@
     completed: 4
   };
 
-  const toReadableStatus = (value: string): string =>
-    value
-      ? value
-          .replace(/[-_]+/g, ' ')
-          .replace(/\b\w/g, (match) => match.toUpperCase())
-          .trim()
-      : '';
+  const translateStatus = (value: string): string => {
+    if (!value) return '';
+    const key = `home.timeline.statuses.${value}`;
+    const translation = $_(key);
+    if (typeof translation === 'string') {
+      const trimmed = translation.trim();
+      if (trimmed.length && trimmed !== key) {
+        return trimmed;
+      }
+    }
+
+    const fallback = ensureString(fallbackTimelineStatuses[value], '');
+    if (fallback) return fallback;
+
+    return value
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, (match) => match.toUpperCase())
+      .trim();
+  };
 
   const formatMilestoneDate = (value: string): string => {
     const date = parseMilestoneDate(value);
@@ -209,6 +220,7 @@
   );
 
   const fallbackTimeline = (en.home?.timeline ?? {}) as Record<string, any>;
+  const fallbackTimelineStatuses = (fallbackTimeline.statuses ?? {}) as Record<string, string>;
   $: timelineHeading = ensureString(
     $_('home.timeline.title'),
     ensureString(fallbackTimeline.title, 'Our path')
@@ -268,7 +280,7 @@
         milestone.status,
         {
           value: milestone.status,
-          label: toReadableStatus(milestone.status),
+          label: translateStatus(milestone.status),
           priority: statusPriority[milestone.status] ?? Number.POSITIVE_INFINITY
         }
       ])
@@ -305,13 +317,13 @@
   $: upcomingMilestoneNote = upcomingMilestone?.note ?? '';
   $: upcomingMilestoneDateLabel = upcomingMilestone ? formatMilestoneDate(upcomingMilestone.date) : '';
   $: upcomingMilestoneStatusLabel = upcomingMilestone
-    ? toReadableStatus(upcomingMilestone.status)
+    ? translateStatus(upcomingMilestone.status)
     : '';
   $: upcomingMilestonePhaseLabel = upcomingMilestone
-    ? toReadableStatus(upcomingMilestone.phase ?? '')
+    ? translateStatus(upcomingMilestone.phase ?? '')
     : '';
   $: upcomingMilestoneCategoryLabel = upcomingMilestone
-    ? toReadableStatus(upcomingMilestone.category ?? '')
+    ? translateStatus(upcomingMilestone.category ?? '')
     : '';
 
   const toggleStatus = (status: string) => {
@@ -557,7 +569,7 @@
                 <GlassCard class="timeline__card" padding="md">
                   <div class="timeline__card-meta">
                     <span class="timeline__card-date">{milestone.dateLabel}</span>
-                    <span class="timeline__card-status">{toReadableStatus(milestone.status)}</span>
+                    <span class="timeline__card-status">{translateStatus(milestone.status)}</span>
                   </div>
                   {#if milestone.title}
                     <h3>{milestone.title}</h3>
@@ -587,10 +599,6 @@
   <SectionDivider tone="aurora" />
 
   <FoundersSection />
-
-  <SectionDivider tone="neutral" />
-
-  <PartnersSection />
 
   <CallToActionSection />
 </div>
@@ -889,11 +897,29 @@
 
   .timeline {
     padding-block: clamp(4rem, 12vw, 6rem);
+    background: var(--bg-elev-1);
+    border-radius: clamp(28px, 6vw, 44px);
+    border: 1px solid color-mix(in srgb, var(--border) 75%, transparent 25%);
+    box-shadow: 0 26px 72px rgba(12, 20, 40, 0.12);
+    overflow: hidden;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain, var(--grain-texture));
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .timeline__layout {
     display: grid;
     gap: clamp(2rem, 6vw, 3rem);
+    position: relative;
+    z-index: 1;
   }
 
   .timeline__intro h2 {
@@ -905,8 +931,8 @@
     margin-top: clamp(1.8rem, 4vw, 2.4rem);
     display: grid;
     gap: 0.6rem;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--aurora-purple-rgb), 0.16) 6%);
-    --surface-glass-border: color-mix(in srgb, var(--border) 68%, transparent 32%);
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 97%, rgba(var(--aurora-purple-rgb), 0.06) 3%);
+    --surface-glass-border: color-mix(in srgb, var(--border) 72%, transparent 28%);
   }
 
   .timeline__highlight-header {
@@ -941,7 +967,8 @@
   :global(.timeline__filters) {
     display: grid;
     gap: 1rem;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.1) 8%);
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 97%, rgba(var(--voyage-blue-rgb), 0.06) 3%);
+    --surface-glass-border: color-mix(in srgb, var(--border) 72%, transparent 28%);
   }
 
   .timeline__chips {
@@ -1034,7 +1061,8 @@
 
   :global(.timeline__card) {
     margin-left: clamp(1.2rem, 3vw, 1.6rem);
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%);
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--voyage-blue-rgb), 0.05) 2%);
+    --surface-glass-border: color-mix(in srgb, var(--border) 72%, transparent 28%);
   }
 
   .timeline__card-meta {

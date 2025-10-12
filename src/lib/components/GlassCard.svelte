@@ -32,11 +32,11 @@
     border-radius: var(--radius-lg, 24px);
     border: 1px solid var(
       --surface-glass-border,
-      color-mix(in srgb, var(--border) 65%, transparent 35%)
+      color-mix(in srgb, var(--border) 68%, transparent 32%)
     );
     background: var(
       --surface-glass-bg,
-      color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--aurora-purple-rgb), 0.14) 8%)
+      color-mix(in srgb, var(--bg-elev-1) 96%, rgba(var(--voyage-blue-rgb), 0.06) 4%)
     );
     color: inherit;
     overflow: hidden;
@@ -57,16 +57,16 @@
     inset: 0;
     border-radius: inherit;
     background:
-      radial-gradient(circle at 20% 20%, rgba(var(--voyage-blue-rgb), 0.22), transparent 60%),
-      radial-gradient(circle at 80% 30%, rgba(var(--aurora-purple-rgb), 0.18), transparent 65%),
+      radial-gradient(circle at 20% 20%, rgba(var(--voyage-blue-rgb), 0.18), transparent 65%),
+      radial-gradient(circle at 78% 28%, rgba(var(--aurora-purple-rgb), 0.14), transparent 70%),
       var(
         --surface-glass-bg,
-        color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.1) 10%)
+        color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--voyage-blue-rgb), 0.08) 6%)
       );
-    opacity: var(--surface-glass-opacity, 0.88);
+    opacity: var(--surface-glass-opacity, 0.9);
     pointer-events: none;
-    backdrop-filter: blur(var(--surface-glass-blur, 20px)) saturate(1.25);
-    -webkit-backdrop-filter: blur(var(--surface-glass-blur, 20px)) saturate(1.25);
+    backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.15);
+    -webkit-backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.15);
     transition: opacity var(--duration-fast, 240ms) ease;
   }
 
@@ -95,8 +95,8 @@
   }
 
   .glass-card::before {
-    background-image: radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.18), transparent 70%);
-    opacity: var(--grain-opacity, 0.08);
+    background-image: radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.16), transparent 72%);
+    opacity: var(--grain-opacity, 0.06);
     transition: opacity var(--duration-slow, 600ms) ease;
   }
 

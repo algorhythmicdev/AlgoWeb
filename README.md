@@ -9,22 +9,24 @@ The site presents company positioning, product roadmaps, founder biographies, an
 ## Key Features
 
 - Homepage with hero, story, product highlights, and milestones
-- Dedicated product pages for NodeVoyage and Ideonautix
+- Unified platforms page featuring NodeVoyage and Ideonautix previews
 - Consulting, contact, and community pages with interactive elements
 - Persistent theme and language preferences stored in local storage
 - SVG-based icon system shared across the application
+- Footer partner spotlight sourced from the shared `brands.json` dataset and rendered with the reusable `GlassCard` shell
 
 ## Design System (2026 Refurb)
 
 - **Surfaces:** Aurora Mist (light), Midnight Nebula (dark), and Obsidian Matrix (high contrast) power the refreshed OS-window shells.
 - **Palette:** Voyage Blue, Aurora Purple, Signal Yellow, and Cherry Pop drive navigation, accents, metrics, and alerts while maintaining WCAG AAA contrast.
 - **Themes:** High-contrast mode now mirrors tokenised borders, focus rings, and frosted glass treatments for parity with light and dark experiences.
+- **Tokens:** All colour, spacing, and motion variables live in `src/lib/styles/theme.css`. New surfaces should consume these tokens rather than defining ad-hoc values.
 
 ## Motion Blueprint
 
 - **Timing tokens:** `--duration-micro` (120 ms), `--duration-ui` (240 ms), `--duration-hero` (520 ms), and `--duration-epic` (720 ms) guide micro to hero interactions.
 - **Easing tokens:** `--ease-out-soft`, `--ease-in-out`, `--ease-snappy`, and `--ease-spring` align Svelte actions and CSS transitions across the site.
-- **Svelte actions:** `useReveal`, `useStaggerReveal`, and `useParallax` now include reduced-motion fallbacks alongside hover `tilt`, `magnetic`, and CTA sparkle utilities.
+- **Svelte actions:** `useReveal`, `useStaggerReveal`, `tilt`, `magnetic`, and `morphGradient` respect reduced-motion fallbacks and share the same timing tokens.
 
 ## QA & Accessibility Checklist
 

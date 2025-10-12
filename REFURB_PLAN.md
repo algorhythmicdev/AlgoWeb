@@ -1,4 +1,4 @@
-1. Finalise the unified theme and remove gradient overload
+1. Finalise the unified theme and remove gradient overload *(Status: ✅ Completed — hero, founders, partners, and timeline now sit on neutral grain surfaces with softened accents)*
 
 Context:
 Gradients still dominate many backgrounds (hero, founders, partners, timeline), reducing legibility
@@ -32,7 +32,7 @@ Example snippet:
   pointer-events: none;
 }
 
-2. Merge NodeVoyage & Ideonautix into one Platforms page
+2. Merge NodeVoyage & Ideonautix into one Platforms page *(Status: ✅ Completed — legacy routes removed, unified platforms hub live, and all internal links point to anchors on /platforms)*
 
 Context:
 Navigation uses a “Platforms” link, but the footer still lists NodeVoyage and Ideonautix as separate pages and their route files likely exist
@@ -65,7 +65,7 @@ Example layout code:
   </GlassCard>
 </section>
 
-3. Refactor founders and partners into reusable GlassCard components
+3. Refactor founders and partners into reusable GlassCard components *(Status: ✅ Completed — shared GlassCard layout now powers founders and partners with deduped content and neutral frosted styling)*
 
 Context:
 Founders and partners sections use tinted gradient cards with duplicated bullets and inconsistent layouts
@@ -100,7 +100,7 @@ Example GlassCard skeleton:
 }
 </style>
 
-4. Enhance the timeline with interactive filtering & neutral styling
+4. Enhance the timeline with interactive filtering & neutral styling *(Status: ✅ Completed — timeline cards now sit on neutral glass surfaces with clickable status filters)*
 
 Context:
 The timeline has been simplified but still uses a tinted gradient; the category text (“Active / Development / Planned / Vision”) is not interactive
@@ -150,7 +150,7 @@ Example filter snippet:
   {/each}
 </ul>
 
-5. Polish content and translations
+5. Polish content and translations *(Status: ✅ Completed — refreshed English copy, timeline statuses translated, and stray literals aligned with localisation)*
 
 Context:
 The English copy is mostly improved, but some filler remains (e.g. “AI products with a people-first beat” in the footer
@@ -196,7 +196,7 @@ Example en.json update:
   }
 }
 
-6. Clean up unused code and files
+6. Clean up unused code and files *(Status: ✅ Completed — retired legacy partner assets, trimmed unused components, and documented the surviving design tokens)*
 
 Context:
 The repo may still contain old page components (e.g., nodevoyage/+page.svelte, ideonautix/+page.svelte), outdated CSS or JS, and placeholder assets.
