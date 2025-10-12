@@ -29,6 +29,7 @@
 >
   <div class="hero__backdrop" aria-hidden="true">
     <span class="hero__layer hero__layer--base"></span>
+    <span class="hero__layer hero__layer--grain"></span>
     <span class="hero__layer hero__layer--glow"></span>
     <span class="hero__layer hero__layer--grid"></span>
     <span class="hero__layer hero__layer--particles"></span>
@@ -86,15 +87,10 @@
     overflow: hidden;
     padding-block: clamp(3.5rem, 6vw, 6rem);
     color: var(--hero-text, var(--text));
-    background: linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--bg) 92%, rgba(var(--voyage-blue-rgb), 0.15) 8%),
-        color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.12) 12%)
-      )
-      no-repeat;
+    background: var(--bg-elev-1);
     border-radius: clamp(28px, 5vw, 48px);
     border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
-    box-shadow: 0 32px 80px rgba(6, 20, 53, 0.18);
+    box-shadow: 0 28px 64px rgba(6, 20, 53, 0.12);
   }
 
   .hero__layout {
@@ -109,6 +105,7 @@
     overflow: hidden;
     border-radius: inherit;
     opacity: 0.92;
+    background: var(--bg-elev-1);
   }
 
   .hero__layer {
@@ -119,42 +116,38 @@
   }
 
   .hero__layer--base {
-    background: radial-gradient(
-        circle at top left,
-        color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.12) 12%),
-        transparent 60%
-      ),
-      radial-gradient(
-        circle at bottom right,
-        color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--voyage-blue-rgb), 0.2) 22%),
-        transparent 55%
-      ),
-      var(--bg);
+    background: var(--bg-elev-1);
+  }
+
+  .hero__layer--grain {
+    background-image: var(--grain, var(--grain-texture));
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
   }
 
   .hero__layer--glow {
     background: radial-gradient(
       circle at 20% 30%,
-      color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%),
-      transparent 70%
+      color-mix(in srgb, var(--aurora-purple) 24%, transparent 76%),
+      transparent 72%
     );
-    opacity: 0.7;
+    opacity: 0.32;
     transform: translate3d(0, 0, 0);
   }
 
   .hero__layer--grid {
     background-image: linear-gradient(
         90deg,
-        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.2) 65%, transparent 35%),
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.12) 70%, transparent 30%),
         transparent 60%
       ),
       linear-gradient(
         0deg,
-        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 70%, transparent 30%),
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.1) 70%, transparent 30%),
         transparent 60%
       );
     background-size: 120px 120px;
-    opacity: 0.3;
+    opacity: 0.14;
     mix-blend-mode: soft-light;
   }
 
@@ -165,33 +158,33 @@
       transparent 70%
     );
     background-size: 160px 160px;
-    opacity: 0.25;
-    filter: saturate(1.1);
-    animation: heroParticles 32s linear infinite;
+    opacity: 0.12;
+    filter: saturate(1.05);
+    animation: heroParticles 40s linear infinite;
   }
 
   .hero__layer--halo {
     background: radial-gradient(
       circle at 80% 20%,
-      color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.28) 60%, transparent 40%),
-      transparent 65%
+      color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.18) 60%, transparent 40%),
+      transparent 68%
     );
-    opacity: 0.45;
+    opacity: 0.22;
     transform: translate3d(0, 0, 0);
   }
 
   .hero__layer--lines {
     background-image: repeating-linear-gradient(
         75deg,
-        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 65%, transparent 35%) 0 2px,
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.1) 65%, transparent 35%) 0 2px,
         transparent 2px 16px
       ),
       repeating-linear-gradient(
         -75deg,
-        color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.22) 50%, transparent 50%) 0 2px,
+        color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.12) 50%, transparent 50%) 0 2px,
         transparent 2px 18px
       );
-    opacity: 0.2;
+    opacity: 0.12;
     mix-blend-mode: screen;
   }
 

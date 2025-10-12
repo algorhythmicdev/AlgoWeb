@@ -194,6 +194,14 @@
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected statuses yet.",
       "upcoming_badge": "Upcoming",
+      "statuses": {
+        "active": "Actif",
+        "development": "En développement",
+        "planned": "Planifié",
+        "vision": "Vision à long terme",
+        "current": "En cours",
+        "completed": "Terminé"
+      },
       "milestones": {
         "ideju-kauss": {
           "title": "Ideju Kauss competition",
@@ -881,6 +889,11 @@
     "rights": "Tous droits réservés",
     "made_in": "Fabriqué avec soin en Lettonie",
     "copyright": "© 2025 AlgoRhythmics",
+    "partners_title": "Partenaires",
+    "partners_summary": "Nous co-créons avec des spécialistes de la signalétique pour ancrer chaque pilote dans la réalité de fabrication.",
+    "partners_relationship": "Relation",
+    "partners_location": "Localisation",
+    "partners_visit": "Visiter le site",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

@@ -194,6 +194,14 @@
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected statuses yet.",
       "upcoming_badge": "Upcoming",
+      "statuses": {
+        "active": "Activo",
+        "development": "En desarrollo",
+        "planned": "Planificado",
+        "vision": "Visión a largo plazo",
+        "current": "En marcha",
+        "completed": "Completado"
+      },
       "milestones": {
         "ideju-kauss": {
           "title": "Ideju Kauss competition",
@@ -881,6 +889,11 @@
     "rights": "Todos los derechos reservados",
     "made_in": "Hecho con cariño en Letonia",
     "copyright": "© 2025 AlgoRhythmics",
+    "partners_title": "Socios",
+    "partners_summary": "Iteramos con especialistas en señalización para que cada piloto respete la realidad de fabricación.",
+    "partners_relationship": "Relación",
+    "partners_location": "Ubicación",
+    "partners_visit": "Visitar sitio",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

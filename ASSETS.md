@@ -17,15 +17,6 @@ static/
     │   ├── founder-nikita.png
     │   └── founder-slaff.png
     ├── partners/
-    │   ├── brand-deutsche-bank.png
-    │   ├── brand-hm.png
-    │   ├── brand-kfc.png
-    │   ├── brand-klm.png
-    │   ├── brand-longchamp.png
-    │   ├── brand-mcdonalds.png
-    │   ├── brand-puma.png
-    │   ├── brand-star-wars.png
-    │   ├── liaa-logo.png
     │   └── reclame-fabriek-logo.png
     ├── products/
     │   ├── ideonautix-hero.png
@@ -70,15 +61,6 @@ static/
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `brand-deutsche-bank.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-hm.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-kfc.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-klm.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-longchamp.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-mcdonalds.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-puma.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `brand-star-wars.png` | Partner logo in monochrome grid | Generated PNG with high-contrast background. |
-| `liaa-logo.png` | LIAA partner mark | Generated PNG on dark gradient. |
 | `reclame-fabriek-logo.png` | Reclame Fabriek partner mark | Generated PNG on dark gradient. |
 
 ## Maintenance Notes

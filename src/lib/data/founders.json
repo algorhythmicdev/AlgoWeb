@@ -14,18 +14,6 @@
         "Maintains honest early-stage positioning: AlgoRhythmics is in development while the founders actively work in Reclame Fabriek R&D, emphasizing real execution over vanity metrics."
       ]
     },
-    "brandExperience": {
-      "clients": [
-        { "name": "KFC", "logo": "/images/partners/brand-kfc.png", "category": "QSR" },
-        { "name": "McDonald's", "logo": "/images/partners/brand-mcdonalds.png", "category": "QSR" },
-        { "name": "H&M", "logo": "/images/partners/brand-hm.png", "category": "Retail" },
-        { "name": "Deutsche Bank", "logo": "/images/partners/brand-deutsche-bank.png", "category": "Finance" },
-        { "name": "LONGCHAMP", "logo": "/images/partners/brand-longchamp.png", "category": "Luxury" },
-        { "name": "PUMA", "logo": "/images/partners/brand-puma.png", "category": "Sports" },
-        { "name": "Star Wars", "logo": "/images/partners/brand-star-wars.png", "category": "Entertainment" },
-        { "name": "KLM", "logo": "/images/partners/brand-klm.png", "category": "Airlines" }
-      ]
-    },
     "expertise": [
       "Co-Leadership & Brand Strategy",
       "Product Management & UX/QA Orchestration",
@@ -48,55 +36,6 @@
         "Brings hands-on R&D experience from Reclame Fabriek’s innovation hub, aligning signage-grade controller engineering and LED neon systems with explainable AI features and real-time UX patterns in consumer software.",
         "Near-term delivery focuses on three funding sprints—Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard—to underwrite NodeVoyage and Ideonautix scale-up while recruiting for design and full-stack roles."
       ]
-    },
-    "brandExperience": {
-      "clients": [
-        {
-          "name": "KFC",
-          "logo": "/images/partners/brand-kfc.png",
-          "category": "QSR"
-        },
-        {
-          "name": "McDonald's",
-          "logo": "/images/partners/brand-mcdonalds.png",
-          "category": "QSR"
-        },
-        {
-          "name": "H&M",
-          "logo": "/images/partners/brand-hm.png",
-          "category": "Retail"
-        },
-        {
-          "name": "Deutsche Bank",
-          "logo": "/images/partners/brand-deutsche-bank.png",
-          "category": "Finance"
-        },
-        {
-          "name": "LONGCHAMP",
-          "logo": "/images/partners/brand-longchamp.png",
-          "category": "Luxury"
-        },
-        {
-          "name": "PUMA",
-          "logo": "/images/partners/brand-puma.png",
-          "category": "Sports"
-        },
-        {
-          "name": "Star Wars",
-          "logo": "/images/partners/brand-star-wars.png",
-          "category": "Entertainment"
-        },
-        {
-          "name": "KLM",
-          "logo": "/images/partners/brand-klm.png",
-          "category": "Airlines"
-        }
-      ],
-      "scale": {
-        "exportFocus": "99%",
-        "facilitySize": "6,000+ m²",
-        "production": "Multi-million EUR capacity"
-      }
     },
     "internationalExposure": [
       {

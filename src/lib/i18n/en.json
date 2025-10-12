@@ -166,6 +166,14 @@
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected statuses yet.",
       "upcoming_badge": "Upcoming",
+      "statuses": {
+        "active": "Active",
+        "development": "In development",
+        "planned": "Planned",
+        "vision": "Long-term vision",
+        "current": "In motion",
+        "completed": "Completed"
+      },
       "milestones": {
         "ideju-kauss": {
           "title": "Ideju Kauss competition",
@@ -235,7 +243,7 @@
         "role": "Co-Founder & CEO",
         "bio": "Nikita keeps the story, product direction, and partnerships aligned across NodeVoyage and Ideonautix. His background in signage design helps our digital work stay tactile and clear.",
         "current_title": "Current focus",
-        "current_position": "Reclame Fabriek — guiding lighting, coatings, and fabrication tests that inspire our interfaces.",
+        "current_position": "Reclame Fabriek — guiding lighting, coating, and fabrication trials that inform our interfaces.",
         "expertise": [
           "Narrative-led product strategy",
           "Experience design and quality assurance",
@@ -247,12 +255,12 @@
         "role": "Co-Founder & CTO",
         "current_title": "Current focus",
         "bio": "Slaff leads the engineering stack, data flows, and AI integrations that power our products. Years in signage-controller hardware keep our releases grounded in real-world use.",
-        "position": "Reclame Fabriek — evolving controllers, LED systems, and tooling that inform our software choices.",
+        "position": "Reclame Fabriek — refining controllers, LED systems, and tooling that steer our software choices.",
         "philosophy": "Systems thinking across hardware and software keeps solutions honest and dependable.",
         "achievements": [
           "Runs a Google Cloud–first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
-          "Connects signage-grade controllers with transparent AI experiences.",
-          "Leads fundraising and builds multi-disciplinary teams for both flagships."
+          "Bridges signage-grade controllers with transparent AI experiences.",
+          "Leads fundraising and multidisciplinary teams across both flagships."
         ],
         "brand_title": "Brand experience",
         "brand_intro": "We honed our craft while partnering with global brands on premium signage systems:",
@@ -269,13 +277,13 @@
     "partners": {
       "eyebrow": "Collaborators",
       "title": "Partners who keep us sharp",
-      "description": "We build with signage experts today and nurture education partners so our programmes have real impact.",
+      "description": "We work with signage experts and education allies so every programme stays practical.",
       "location": "Location",
       "founded": "Founded",
       "website": "Website",
       "clients_label": "Clients",
       "clients_title": "Brands we have supported",
-      "clients_description": "Years of signage delivery for retail, finance, and aviation means our AI work stands on proven operations.",
+      "clients_description": "Years of signage delivery for retail, finance, and aviation keep our AI work anchored in proven operations.",
       "labels": {
         "current": "Active partnership",
         "aspirational": "Future partnership",
@@ -629,7 +637,7 @@
   },
   "footer": {
     "brand_alt": "AlgoRhythmics wordmark",
-    "tagline": "AI products with a people-first beat",
+    "tagline": "AI products with a human-centred approach",
     "status": "Pre-company • Ideju Kauss October 2025",
     "location": "Daugavpils, Latvia",
     "products_title": "Products",
@@ -653,6 +661,11 @@
     "rights": "All rights reserved",
     "made_in": "Made with care in Latvia",
     "copyright": "© 2025 AlgoRhythmics — Shaping creative intelligence. Riga, Latvia.",
+    "partners_title": "Partners",
+    "partners_summary": "We experiment with signage specialists so every pilot is grounded in fabrication reality.",
+    "partners_relationship": "Relationship",
+    "partners_location": "Location",
+    "partners_visit": "Visit site",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

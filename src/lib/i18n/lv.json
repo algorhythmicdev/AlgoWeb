@@ -194,6 +194,14 @@
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected statuses yet.",
       "upcoming_badge": "Upcoming",
+      "statuses": {
+        "active": "Active",
+        "development": "In development",
+        "planned": "Planned",
+        "vision": "Long-term vision",
+        "current": "In motion",
+        "completed": "Completed"
+      },
       "milestones": {
         "ideju-kauss": {
           "title": "Ideju Kauss competition",
@@ -881,6 +889,11 @@
     "rights": "Visas tiesības aizsargātas",
     "made_in": "Radīts ar rūpēm Latvijā",
     "copyright": "© 2025 AlgoRhythmics",
+    "partners_title": "Partners",
+    "partners_summary": "We co-create with signage specialists so every pilot respects fabrication reality.",
+    "partners_relationship": "Relationship",
+    "partners_location": "Location",
+    "partners_visit": "Visit site",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub",

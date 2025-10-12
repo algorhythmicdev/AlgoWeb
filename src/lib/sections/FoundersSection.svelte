@@ -12,6 +12,16 @@
   const ensureArray = (value: unknown): string[] =>
     Array.isArray(value) ? value.map((item) => ensureString(item)).filter(Boolean) : [];
 
+  const unique = (items: string[]): string[] => {
+    const seen = new Set<string>();
+    return items.filter((item) => {
+      const signature = item.toLocaleLowerCase();
+      if (seen.has(signature)) return false;
+      seen.add(signature);
+      return true;
+    });
+  };
+
   const fallbackLabels = {
     expertise: 'Core strengths',
     achievements: 'Recent wins',
@@ -26,8 +36,8 @@
     const fallback = (foundersData as Record<string, any>)[key] ?? {};
     const translationBase = `home.founders.${key}`;
 
-    const expertiseFromTranslations = ensureArray($json?.(`${translationBase}.expertise`));
-    const achievementsFromData = ensureArray(fallback.currentPosition?.achievements).slice(0, 3);
+    const expertiseFromTranslations = unique(ensureArray($json?.(`${translationBase}.expertise`)));
+    const achievementsFromData = unique(ensureArray(fallback.currentPosition?.achievements)).slice(0, 3);
 
     const focusLabelFallback =
       key === 'nikita'
@@ -54,9 +64,9 @@
           : $_('home.founders.slaff.position'),
         ensureString(focusFallback, '')
       ),
-      expertise: expertiseFromTranslations.length
+      expertise: (expertiseFromTranslations.length
         ? expertiseFromTranslations
-        : ensureArray(fallback.expertise).slice(0, 4),
+        : unique(ensureArray(fallback.expertise))).slice(0, 4),
       achievements: achievementsFromData,
       email: ensureString(fallback.email, ''),
       linkedin: ensureString(fallback.linkedin, '')
@@ -161,11 +171,29 @@
 <style>
   .founders {
     padding-block: clamp(4rem, 12vw, 6rem);
+    background: var(--bg-elev-1);
+    border-radius: clamp(28px, 6vw, 44px);
+    border: 1px solid color-mix(in srgb, var(--border) 75%, transparent 25%);
+    box-shadow: 0 26px 72px rgba(12, 20, 40, 0.12);
+    overflow: hidden;
+  }
+
+  .founders::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain, var(--grain-texture));
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .founders__layout {
     display: grid;
     gap: clamp(2rem, 6vw, 3rem);
+    position: relative;
+    z-index: 1;
   }
 
   .founders__header {

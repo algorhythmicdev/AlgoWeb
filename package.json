@@ -35,8 +35,7 @@
     "svelte": "^5.39.9",
     "svelte-check": "^4.0.2",
     "vite": "^5.4.7",
-    "vitest": "^3.2.4",
-    "vitest-axe": "^0.1.0"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@heroui/theme": "^2.4.23",

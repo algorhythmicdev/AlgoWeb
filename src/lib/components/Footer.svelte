@@ -3,6 +3,62 @@
   import { footerLinks } from '$config/navigation';
   import { siteConfig } from '$config/seo';
   import { theme } from '$stores/theme';
+  import brands from '$lib/data/brands.json';
+
+  /**
+   * @param {unknown} value
+   * @param {string} [fallback]
+   * @returns {string}
+   */
+  const ensureString = (value, fallback = '') =>
+    typeof value === 'string' && value.trim().length ? value.trim() : fallback;
+
+  const fallbackPartnerTitle = 'Partners';
+  const fallbackPartnerSummary =
+    'We iterate alongside signage specialists so every AI prototype respects fabrication reality.';
+  const fallbackPartnerRelationshipLabel = 'Relationship';
+  const fallbackPartnerLocationLabel = 'Location';
+  const fallbackPartnerVisitLabel = 'Visit site';
+
+  /**
+   * @param {unknown} source
+   */
+  const toFeaturedPartner = (source) => {
+    if (!source || typeof source !== 'object') return null;
+    const record = /** @type {Record<string, unknown>} */ (source);
+    const name = ensureString(record.name, '');
+    if (!name) return null;
+
+    const website = ensureString(record.website, '');
+
+    return {
+      name,
+      description: ensureString(record.description, ''),
+      relationship: ensureString(record.relationship ?? record.note, ''),
+      location: ensureString(record.location, ''),
+      logo: ensureString(record.logo, ''),
+      website,
+      websiteLabel: website.replace(/^https?:\/\//, '')
+    };
+  };
+
+  const featuredPartner = toFeaturedPartner(
+    brands && typeof brands === 'object' && 'reclameFabriek' in brands
+      ? /** @type {Record<string, unknown>} */ (brands).reclameFabriek
+      : null
+  );
+
+  $: partnerTitle = ensureString($_('footer.partners_title'), fallbackPartnerTitle);
+  $: partnerSummary = ensureString($_('footer.partners_summary'), fallbackPartnerSummary);
+  $: partnerRelationshipLabel = ensureString(
+    $_('footer.partners_relationship'),
+    fallbackPartnerRelationshipLabel
+  );
+  $: partnerLocationLabel = ensureString(
+    $_('footer.partners_location'),
+    fallbackPartnerLocationLabel
+  );
+  $: partnerVisitLabel = ensureString($_('footer.partners_visit'), fallbackPartnerVisitLabel);
 </script>
 
 <footer class="footer">
@@ -22,39 +78,107 @@
           <a href="mailto:{siteConfig.contact.email}">{siteConfig.contact.email}</a>
         </div>
       </div>
-      
-      <nav class="footer-links-section" aria-labelledby="footer-company-heading">
-        <h4 id="footer-company-heading">{$_('footer.company')}</h4>
-        <ul>
-          {#each footerLinks.company as link}
-            <li>
-              <a href={link.href}>{$_(link.label)}</a>
-            </li>
-          {/each}
-        </ul>
-      </nav>
 
-      <nav class="footer-links-section" aria-labelledby="footer-products-heading">
-        <h4 id="footer-products-heading">{$_('footer.products_title')}</h4>
-        <ul>
-          {#each footerLinks.platforms as link}
-            <li>
-              <a href={link.href}>{$_(link.label)}</a>
-            </li>
-          {/each}
-        </ul>
-      </nav>
+      <div class="footer-meta">
+        <nav class="footer-links-section" aria-labelledby="footer-company-heading">
+          <h4 id="footer-company-heading">{$_('footer.company')}</h4>
+          <ul>
+            {#each footerLinks.company as link}
+              <li>
+                <a href={link.href}>{$_(link.label)}</a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
 
-      <nav class="footer-links-section" aria-labelledby="footer-resources-heading">
-        <h4 id="footer-resources-heading">{$_('footer.resources')}</h4>
-        <ul>
-          {#each footerLinks.resources as link}
-            <li>
-              <a href={link.href}>{$_(link.label)}</a>
-            </li>
-          {/each}
-        </ul>
-      </nav>
+        <nav class="footer-links-section" aria-labelledby="footer-products-heading">
+          <h4 id="footer-products-heading">{$_('footer.products_title')}</h4>
+          <ul>
+            {#each footerLinks.platforms as link}
+              <li>
+                <a href={link.href}>{$_(link.label)}</a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
+
+        <nav class="footer-links-section" aria-labelledby="footer-resources-heading">
+          <h4 id="footer-resources-heading">{$_('footer.resources')}</h4>
+          <ul>
+            {#each footerLinks.resources as link}
+              <li>
+                <a href={link.href}>{$_(link.label)}</a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
+
+        {#if featuredPartner}
+          <aside class="footer-partners" aria-labelledby="footer-partners-heading">
+            <h4 id="footer-partners-heading">{partnerTitle}</h4>
+            <p class="footer-partners__summary">{partnerSummary}</p>
+
+            <div class="footer-partner-card">
+              {#if featuredPartner.logo}
+                <img
+                  src={featuredPartner.logo}
+                  alt={featuredPartner.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="96"
+                  height="48"
+                />
+              {/if}
+
+              <div class="footer-partner-card__body">
+                <p class="footer-partner-card__name">{featuredPartner.name}</p>
+
+                {#if featuredPartner.relationship || featuredPartner.location}
+                  <dl class="footer-partner-card__meta">
+                    {#if featuredPartner.relationship}
+                      <div>
+                        <dt>{partnerRelationshipLabel}</dt>
+                        <dd>{featuredPartner.relationship}</dd>
+                      </div>
+                    {/if}
+                    {#if featuredPartner.location}
+                      <div>
+                        <dt>{partnerLocationLabel}</dt>
+                        <dd>{featuredPartner.location}</dd>
+                      </div>
+                    {/if}
+                  </dl>
+                {/if}
+              </div>
+            </div>
+
+            {#if featuredPartner.description}
+              <p class="footer-partners__description">{featuredPartner.description}</p>
+            {/if}
+
+            {#if featuredPartner.website}
+              <a
+                class="footer-partners__cta"
+                href={featuredPartner.website}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${partnerVisitLabel}: ${featuredPartner.name}`}
+              >
+                <span>{partnerVisitLabel}</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M5.333 10.667 10.667 5.333M10.667 5.333h-4m4 0v4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            {/if}
+          </aside>
+        {/if}
+      </div>
     </div>
     
     <div class="footer-bottom">
@@ -87,9 +211,22 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
     gap: clamp(2rem, 5vw, 3rem);
     margin-bottom: clamp(2rem, 6vw, 3rem);
+  }
+
+  @media (min-width: 960px) {
+    .footer-grid {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 2fr);
+      align-items: start;
+    }
+  }
+
+  .footer-meta {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 2rem);
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    align-items: start;
   }
 
   .footer-brand {
@@ -137,6 +274,121 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  .footer-partners {
+    position: relative;
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.1rem);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-radius: clamp(16px, 3vw, 24px);
+    background: color-mix(in srgb, rgba(20, 28, 44, 0.88) 88%, rgba(255, 255, 255, 0.05) 12%);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.16) 72%, rgba(0, 0, 0, 0.6) 28%);
+    box-shadow: 0 22px 48px rgba(5, 9, 18, 0.45);
+  }
+
+  .footer-partners h4 {
+    margin: 0;
+    font-size: var(--text-title);
+    color: color-mix(in srgb, #ffffff 94%, rgba(214, 224, 250, 0.78) 6%);
+  }
+
+  .footer-partners__summary,
+  .footer-partners__description {
+    margin: 0;
+    color: color-mix(in srgb, rgba(240, 243, 255, 0.88) 80%, rgba(214, 224, 250, 0.72) 20%);
+    font-size: var(--text-small);
+    line-height: 1.6;
+  }
+
+  .footer-partner-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(0.9rem, 2.4vw, 1.2rem);
+    align-items: center;
+  }
+
+  .footer-partner-card img {
+    width: clamp(64px, 14vw, 96px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+  }
+
+  .footer-partner-card__body {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .footer-partner-card__name {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    font-weight: var(--weight-semibold);
+    color: #ffffff;
+  }
+
+  .footer-partner-card__meta {
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .footer-partner-card__meta div {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .footer-partner-card__meta dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, rgba(214, 224, 250, 0.72) 80%, rgba(255, 255, 255, 0.78) 20%);
+  }
+
+  .footer-partner-card__meta dd {
+    margin: 0;
+    color: color-mix(in srgb, rgba(240, 243, 255, 0.88) 82%, rgba(214, 224, 250, 0.7) 18%);
+  }
+
+  .footer-partners__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    width: fit-content;
+    font-weight: var(--weight-semibold);
+    color: color-mix(in srgb, rgba(240, 243, 255, 0.92) 85%, rgba(214, 224, 250, 0.76) 15%);
+    text-decoration: none;
+    transition: color var(--duration-ui, 240ms) var(--ease-out),
+      transform var(--duration-ui, 240ms) var(--ease-out);
+  }
+
+  .footer-partners__cta svg {
+    transition: transform var(--duration-ui, 240ms) var(--ease-out);
+  }
+
+  .footer-partners__cta:hover,
+  .footer-partners__cta:focus-visible {
+    color: #ffffff;
+  }
+
+  .footer-partners__cta:hover svg,
+  .footer-partners__cta:focus-visible svg {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 720px) {
+    .footer-partner-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .footer-partner-card__body {
+      align-items: center;
+    }
+
+    .footer-partner-card__meta {
+      justify-items: center;
+    }
   }
 
   .footer-links-section a,
@@ -203,20 +455,11 @@
     gap: clamp(1rem, 2.5vw, 1.75rem);
   }
 
-  @media (max-width: 1024px) {
-    .footer-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
   @media (max-width: 768px) {
-    .footer-grid {
-      grid-template-columns: 1fr;
-    }
-
     .footer-brand,
     .footer-links-section,
-    .footer-bottom {
+    .footer-bottom,
+    .footer-partners {
       text-align: center;
       align-items: center;
       justify-content: center;
@@ -241,6 +484,16 @@
   :global([data-theme='hc']) .footer-links-section a::after,
   :global([data-theme='hc']) .social-links a::after {
     display: none;
+  }
+
+  :global([data-theme='hc']) .footer-partners {
+    background: transparent;
+    border: 2px solid currentColor;
+    box-shadow: none;
+  }
+
+  :global([data-theme='hc']) .footer-partners__cta {
+    color: var(--text);
   }
 
   :global([data-theme='hc']) .footer-bottom {
