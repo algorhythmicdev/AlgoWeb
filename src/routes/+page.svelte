@@ -471,7 +471,7 @@
 
   <svelte:fragment slot="actions">
     <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
-      <Button class="home-hero__action" variant="gradient" size="lg" href="#products">
+      <Button class="home-hero__action" variant="gradient" size="lg" href="#platforms">
         <span>{heroPrimaryActionLabel}</span>
       </Button>
       <Button class="home-hero__action" variant="secondary" size="lg" href="/consulting">
@@ -686,7 +686,7 @@
 
   <SectionDivider tone="citrus" />
 
-  <section class="products section" id="products" use:revealOnScroll>
+  <section class="products section" id="platforms" use:revealOnScroll>
   <div class="container">
     <div class="products-shell">
       <header class="products-shell__intro">

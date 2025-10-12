@@ -74,7 +74,7 @@ beforeEach(() => {
 });
 
 async function loadThemeStore() {
-  return await import('../src/lib/stores/theme.js');
+  return await import('../src/lib/stores/theme.ts');
 }
 
 async function loadLanguageStore() {

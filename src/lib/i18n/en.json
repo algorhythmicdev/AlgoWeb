@@ -31,7 +31,7 @@
   },
   "nav": {
     "home": "Home",
-    "products": "Products",
+    "products": "Platforms",
     "nodevoyage": "NodeVoyage",
     "ideonautix": "Ideonautix",
     "community": "Community",
@@ -45,7 +45,7 @@
     "brand_name": "AlgoRhythmics",
     "toggle_menu": "Toggle the menu",
     "primary_label": "Primary navigation",
-    "products_panel_label": "Product quick links",
+    "products_panel_label": "Platform quick links",
     "talk_to_us": "Talk with us",
     "platforms": "Platforms"
   },
@@ -56,10 +56,10 @@
       "brand": "AlgoRhythmics",
       "trail": "as your co-pilot."
     },
-    "tagline": "We design friendly AI helpers for travel planners, founders, and partners who value clarity.",
+    "tagline": "Where logic dances with creativity — building accessible AI for education, startups, and people.",
     "subtitle": "NodeVoyage, Ideonautix, and our consulting practice share the same promise: honest automation that keeps people confident.",
     "description": "Every experience is crafted with accessibility, motion sensitivity, and plain-language explanations so your team always understands the next step.",
-    "cta_products": "Browse the product family",
+    "cta_products": "Browse the platform lineup",
     "cta_consulting": "Plan a consulting call",
     "actions_label": "Main hero actions",
     "next_milestone": "Upcoming milestone",
@@ -79,16 +79,16 @@
     },
     "moments": {
       "nodevoyage": {
-        "kicker": "Product spotlight",
+        "kicker": "Platform spotlight",
         "status": "NodeVoyage",
-        "copy": "Your travel co-pilot that plans routes, translates on the fly, and stays reliable offline.",
+        "copy": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
         "meta": "Beta invites open",
         "cta": "Preview NodeVoyage"
       },
       "ideonautix": {
-        "kicker": "Product spotlight",
+        "kicker": "Platform spotlight",
         "status": "Ideonautix",
-        "copy": "A founder cockpit that combines analytics, rituals, and investor updates in one calm place.",
+        "copy": "The productivity suite for modern creators — where every idea gets momentum.",
         "meta": "Research sprint underway",
         "cta": "Preview Ideonautix"
       }
@@ -186,10 +186,10 @@
     }
   },
   "products": {
-    "meta_title": "AlgoRhythmics products",
-    "meta_description": "Discover NodeVoyage, the AI travel co-pilot, and Ideonautix, the calm workspace for founders.",
-    "hero_label": "Products",
-    "title": "Product lineup",
+    "meta_title": "AlgoRhythmics platforms",
+    "meta_description": "Discover NodeVoyage and Ideonautix, the calm AI platforms from AlgoRhythmics.",
+    "hero_label": "Platforms",
+    "title": "Platform lineup",
     "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed studio.",
     "cta_title": "Stay close",
     "cta_text": "Join the community for release news, pilot invites, and accessibility updates.",
@@ -198,7 +198,7 @@
     "nodevoyage": {
       "name": "NodeVoyage",
       "tagline": "Travel co-pilot for confident journeys",
-      "description": "Plan trips, translate moments, and explore offline with help from Nodi, your friendly guide.",
+      "description": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
       "status": "Beta invites",
       "mvp": "Preview: nodevoyage.algorhythmics.dev",
       "cta": "Discover NodeVoyage"
@@ -206,7 +206,7 @@
     "ideonautix": {
       "name": "Ideonautix",
       "tagline": "Founder cockpit for steady growth",
-      "description": "Keep investor updates, rituals, and team insights in one calm operating rhythm.",
+      "description": "The productivity suite for modern creators — where every idea gets momentum.",
       "status": "Research sprint",
       "mvp": "Preview: ideonautix.algorhythmics.dev",
       "cta": "Discover Ideonautix"
@@ -466,7 +466,7 @@
     "meta_title": "AlgoRhythmics consulting",
     "meta_description": "Join the calm AI consulting pilot for workshops, implementation support, and ongoing advisory care.",
     "hero_title": "Friendly AI consulting for real teams",
-    "hero_subtitle": "Strategy, builds, and long-term care tailored to your pace.",
+    "hero_subtitle": "From strategy to code — helping organizations embed AI responsibly, ethically, and effectively.",
     "hero_description": "We work alongside your team to design AI workflows that respect people, processes, and change management.",
     "hero_cta_primary": "Apply for the pilot",
     "hero_cta_secondary": "Review service menu",

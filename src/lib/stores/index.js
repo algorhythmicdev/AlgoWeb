@@ -3,7 +3,7 @@
  * Central export point for all Svelte stores
  */
 
-export { theme } from './theme.js';
+export { theme } from './theme';
 export { language } from './language.js';
 export { navigation } from './navigation.js';
 export { voting } from './voting.js';
