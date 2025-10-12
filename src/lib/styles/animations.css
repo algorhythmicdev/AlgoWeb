@@ -265,18 +265,6 @@
   }
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 /* ==================== HERO ANIMATION CLASSES ==================== */
 .animate-typewriter {
   overflow: hidden;
@@ -327,12 +315,6 @@
 
 .animate-text-glow {
   animation: textGlow 2s ease-in-out infinite;
-}
-
-.animate-gradient-shift {
-  background: linear-gradient(-45deg, var(--voyage-blue), var(--aurora-purple), var(--signal-yellow), var(--cherry-pop));
-  background-size: 400% 400%;
-  animation: gradientShift 3s ease infinite;
 }
 
 /* ==================== STAGGER ANIMATIONS ==================== */
@@ -767,10 +749,16 @@ html[data-theme='hc'] .os-window[data-variant="line"]::before {
 
 .magnetic-card {
   position: relative;
+  background: var(--surface-panel-bg);
+  border: 1px solid var(--surface-panel-border);
+  box-shadow: var(--surface-panel-shadow);
+  backdrop-filter: var(--surface-glass-blur) saturate(1.05);
+  -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.05);
   transition:
     transform 0.3s var(--ease-out),
     box-shadow 0.4s var(--ease-out),
-    background 0.4s var(--ease-out);
+    background 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
   cursor: pointer;
   isolation: isolate;
 }
@@ -834,6 +822,12 @@ html[data-theme='hc'] .os-window[data-variant="line"]::before {
   display: none;
 }
 
+:global(html[data-theme='hc']) .magnetic-card {
+  background: var(--bg);
+  border: 2px solid currentColor;
+  box-shadow: none;
+}
+
 @keyframes magnetic-card-halo {
   0%,
   100% {
@@ -844,22 +838,6 @@ html[data-theme='hc'] .os-window[data-variant="line"]::before {
     transform: scale(1.1) translate3d(0, -3%, 0);
     opacity: 0.7;
   }
-}
-
-/* ==================== GRADIENT ANIMATIONS ==================== */
-.animated-gradient-bg {
-  background: linear-gradient(-45deg, #1351FF, #6A38FF, #FFD339, #E0322C);
-  background-size: 400% 400%;
-  animation: gradientShift 8s ease infinite;
-}
-
-.animated-gradient-text {
-  background: linear-gradient(-45deg, #1351FF, #6A38FF, #FFD339, #E0322C);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3s ease infinite;
 }
 
 /* ==================== PULSE AND GLOW EFFECTS ==================== */
