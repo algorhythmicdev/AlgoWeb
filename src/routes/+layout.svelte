@@ -14,7 +14,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { page } from '$app/stores';
   import en from '$lib/i18n/en.json';
-  import { morphGradient } from '$lib/utils/animations';
+  import { morphGradient } from '$lib/animations';
   import { theme, availableThemes } from '$stores/theme';
 
   export let data;

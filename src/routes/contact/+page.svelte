@@ -10,7 +10,7 @@
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
-  import { revealOnScroll, staggerReveal } from '$lib/utils/animations';
+  import { revealOnScroll, staggerReveal } from '$lib/animations';
 
   const fallbackHeroPhrases = Array.isArray(en.contact?.hero_rotating)
     ? en.contact.hero_rotating
@@ -222,8 +222,6 @@
   variant="line"
   title={$_('contact.hero_title')}
   subtitle={$_('contact.hero_subtitle')}
-  tone="primary"
-  intensity="soft"
   align="center"
 >
   <svelte:fragment slot="highlights">
@@ -235,7 +233,7 @@
   <svelte:fragment slot="actions">
     {#if heroCtas.length}
       <div class="contact-hero__cta-grid">
-        {#each heroCtas as item (item.label)}
+        {#each heroCtas as item, index (`${index}-${item.label}`)}
           {#if item.action === 'calendly'}
             <button
               type="button"

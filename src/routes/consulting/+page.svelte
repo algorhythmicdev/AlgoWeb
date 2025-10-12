@@ -8,7 +8,7 @@
   import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
-  import { revealOnScroll, staggerReveal } from '$lib/utils/animations';
+  import { revealOnScroll, staggerReveal } from '$lib/animations';
 
   const fallbackHeroRotating = Array.isArray(en.consulting?.hero_rotating)
     ? en.consulting.hero_rotating
@@ -187,11 +187,9 @@
 
 <!-- Hero Section -->
 <Hero
-  variant="nodes"
+  variant="halo"
   title={$_('consulting.hero_title')}
   subtitle={$_('consulting.hero_subtitle')}
-  tone="atlantic"
-  intensity="soft"
 >
   <svelte:fragment slot="highlights">
     <div class="consulting-hero__headline surface-pill" data-tone="accent">

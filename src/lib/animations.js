@@ -1,7 +1,6 @@
-// Motion utilities and Svelte actions for the AlgoRhythmics refurb
-// These helpers lean on the refreshed timing tokens and surface patterns
-// declared in `tokens.css`, and they respect the new motion blueprint from
-// `REFURB_PLAN.md`.
+// Central motion utilities for the AlgoRhythmics experience.
+// These helpers respect motion preferences, reuse shared timing tokens,
+// and keep glass surfaces consistent by normalising older class names.
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const SURFACE_CLASS = 'os-window';
@@ -11,7 +10,7 @@ const tokenCache = new Map();
 
 /**
  * Read a CSS custom property from the root element with a JS fallback.
- * Values are cached to avoid thrashing layout on successive reads.
+ * Values are cached to avoid layout thrashing on successive reads.
  * @param {string} name
  * @param {string} fallback
  */
@@ -87,6 +86,12 @@ export function useReveal(node, options = {}) {
   if (shouldReduceMotion()) {
     node.style.opacity = String(finalState.opacity ?? 1);
     node.style.transform = finalState.transform ?? 'none';
+    return { destroy: () => {} };
+  }
+
+  if (typeof IntersectionObserver !== 'function') {
+    node.style.opacity = String(finalState.opacity ?? 1);
+    node.style.transform = finalState.transform ?? 'translate3d(0, 0, 0)';
     return { destroy: () => {} };
   }
 
@@ -194,47 +199,7 @@ export function useStaggerReveal(node, options = {}) {
 export const staggerReveal = useStaggerReveal;
 
 /**
- * Lightweight parallax that throttles work to animation frames.
- * @param {HTMLElement} node
- * @param {{ intensity?: number; axis?: 'x' | 'y' }} [options]
- */
-export function useParallax(node, { intensity = 30, axis = 'y' } = {}) {
-  if (shouldReduceMotion()) return { destroy: () => {} };
-
-  let frame = 0;
-  const update = () => {
-    const rect = node.getBoundingClientRect();
-    const viewport = window.innerHeight;
-    if (rect.bottom < 0 || rect.top > viewport) return;
-    const offset = ((rect.top + rect.height / 2 - viewport / 2) / viewport) * intensity;
-    const x = axis === 'x' ? offset : 0;
-    const y = axis === 'y' ? offset : 0;
-    node.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-  };
-
-  const onScroll = () => {
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(update);
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  update();
-
-  return {
-    destroy() {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
-    }
-  };
-}
-
-/**
- * Alias for backwards compatibility with previous parallax export.
- */
-export const parallax = useParallax;
-
-/**
- * 3D hover tilt that respects reduced motion and mobile pointers.
+ * 3D hover tilt that respects reduced motion and coarse pointers.
  * @param {HTMLElement} node
  * @param {{ max?: number; scale?: number; easing?: string; glow?: boolean }} [options]
  */
@@ -329,235 +294,6 @@ export function magnetic(node, { strength = 0.28, threshold = 110, glow = true, 
 }
 
 /**
- * Ripple feedback for button presses.
- * @param {HTMLElement} node
- */
-export function ripple(node) {
-  if (!isBrowser) return { destroy: () => {} };
-  node.style.position = node.style.position || 'relative';
-  node.style.overflow = 'hidden';
-
-  /** @param {PointerEvent} event */
-  const handlePointerDown = (event) => {
-    const diameter = Math.max(node.clientWidth, node.clientHeight);
-    const radius = diameter / 2;
-    const circle = document.createElement('span');
-    circle.className = 'motion-ripple';
-    circle.style.position = 'absolute';
-    circle.style.borderRadius = '50%';
-    circle.style.pointerEvents = 'none';
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.offsetX - radius}px`;
-    circle.style.top = `${event.offsetY - radius}px`;
-    circle.style.background = 'color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 68%, rgba(var(--aurora-purple-rgb), 0.32) 32%)';
-    circle.style.transform = 'scale(0)';
-    circle.style.opacity = '1';
-    circle.style.transition = `transform ${durations.ui()} ${easings.soft()}, opacity ${durations.ui()} ${easings.soft()}`;
-
-    node.appendChild(circle);
-    requestAnimationFrame(() => {
-      circle.style.transform = 'scale(1)';
-      circle.style.opacity = '0';
-    });
-
-    setTimeout(() => circle.remove(), parseFloat(durations.ui()) + 300);
-  };
-
-  node.addEventListener('pointerdown', handlePointerDown);
-
-  return {
-    destroy() {
-      node.removeEventListener('pointerdown', handlePointerDown);
-    }
-  };
-}
-
-/**
- * Sparkle trail on hover/focus used for hero CTAs.
- * @param {HTMLElement} node
- */
-export function sparkleTrail(node) {
-  if (!isBrowser || shouldReduceMotion()) return { destroy: () => {} };
-
-  /**
-   * @param {PointerEvent | FocusEvent} event
-   */
-  const spawn = (event) => {
-    if (!('offsetX' in event) || !('offsetY' in event)) return;
-    const count = 10;
-    for (let i = 0; i < count; i += 1) {
-      const sparkle = document.createElement('span');
-      sparkle.className = 'motion-sparkle';
-      sparkle.style.position = 'absolute';
-      sparkle.style.pointerEvents = 'none';
-      sparkle.style.width = sparkle.style.height = `${Math.random() * 6 + 4}px`;
-      sparkle.style.left = `${event.offsetX + (Math.random() * 24 - 12)}px`;
-      sparkle.style.top = `${event.offsetY + (Math.random() * 16 - 8)}px`;
-      sparkle.style.borderRadius = '50%';
-      sparkle.style.background = Math.random() > 0.5
-        ? 'linear-gradient(45deg, color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.86) 72%, transparent 28%), color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 48%, transparent 52%))'
-        : 'linear-gradient(45deg, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.88) 70%, transparent 30%), color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.58) 50%, transparent 50%))';
-      sparkle.style.opacity = '1';
-      sparkle.style.transition = `all ${durations.ui()} ${easings.spring()}`;
-      node.appendChild(sparkle);
-      requestAnimationFrame(() => {
-        sparkle.style.opacity = '0';
-        sparkle.style.transform = `translate3d(${(Math.random() - 0.5) * 24}px, ${(Math.random() - 0.5) * 18}px, 0)`;
-      });
-      setTimeout(() => sparkle.remove(), 480);
-    }
-  };
-
-  node.addEventListener('pointerenter', spawn);
-  node.addEventListener('focus', spawn);
-
-  return {
-    destroy() {
-      node.removeEventListener('pointerenter', spawn);
-      node.removeEventListener('focus', spawn);
-    }
-  };
-}
-
-/**
- * Particle burst on click for celebratory actions.
- * @param {HTMLElement} node
- */
-export function particleExplode(node) {
-  if (!isBrowser || shouldReduceMotion()) return { destroy: () => {} };
-
-  /** @param {MouseEvent} event */
-  const spawn = (event) => {
-    const baseColor = getCssToken('--voyage-blue', '#1351ff');
-    /**
-     * @param {number} angle
-     * @param {number} velocity
-     * @param {number} lifetime
-     */
-    const createParticle = (angle, velocity, lifetime) => {
-      const particle = document.createElement('span');
-      particle.className = 'motion-particle';
-      particle.style.position = 'fixed';
-      particle.style.left = `${event.clientX}px`;
-      particle.style.top = `${event.clientY}px`;
-      particle.style.width = particle.style.height = '4px';
-      particle.style.borderRadius = '50%';
-      particle.style.pointerEvents = 'none';
-      particle.style.background = baseColor;
-      particle.style.zIndex = '9999';
-      document.body.appendChild(particle);
-
-      const start = performance.now();
-      /** @param {number} now */
-      const animate = (now) => {
-        const progress = (now - start) / lifetime;
-        if (progress >= 1) {
-          particle.remove();
-          return;
-        }
-        const dx = Math.cos(angle) * velocity * progress * 16;
-        const dy = Math.sin(angle) * velocity * progress * 16 + progress * 4;
-        particle.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-        particle.style.opacity = String(1 - progress);
-        requestAnimationFrame(animate);
-      };
-
-      requestAnimationFrame(animate);
-    };
-
-    const count = 14;
-    for (let i = 0; i < count; i += 1) {
-      const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
-      const velocity = 0.6 + Math.random() * 0.8;
-      const lifetime = 600 + Math.random() * 260;
-      createParticle(angle, velocity, lifetime);
-    }
-  };
-
-  node.addEventListener('click', spawn);
-
-  return {
-    destroy() {
-      node.removeEventListener('click', spawn);
-    }
-  };
-}
-
-/**
- * Morphing blob animation for hero backgrounds.
- * @param {SVGPathElement} node
- * @param {{ duration?: number; scale?: number }} [options]
- */
-export function morphBlob(node, { duration = 6500, scale = 1.2 } = {}) {
-  if (!isBrowser || shouldReduceMotion()) return { destroy: () => {} };
-  let frameId = 0;
-
-  /** @param {number} time */
-  const animate = (time) => {
-    const cycle = (time % duration) / duration;
-    const angle = cycle * Math.PI * 2;
-    const center = 100;
-    const r1 = 80 * scale;
-    const r2 = 100 * scale;
-    const path = `M${center + r1 * Math.cos(angle)},${center + r1 * Math.sin(angle)}
-      C${center + r2 * Math.cos(angle + 1)},${center + r2 * Math.sin(angle + 1)},
-      ${center + r2 * Math.cos(angle + 2)},${center + r2 * Math.sin(angle + 2)},
-      ${center + r1 * Math.cos(angle + Math.PI)},${center + r1 * Math.sin(angle + Math.PI)} Z`;
-    node.setAttribute('d', path);
-    node.style.transform = `scale(${scale})`;
-    frameId = requestAnimationFrame(animate);
-  };
-
-  frameId = requestAnimationFrame(animate);
-
-  return {
-    destroy() {
-      cancelAnimationFrame(frameId);
-    }
-  };
-}
-
-/**
- * Typewriter helper for hero captions.
- * @param {HTMLElement} node
- * @param {{ text?: string; speed?: number; loop?: boolean }} [options]
- */
-export function typewriter(node, { text, speed = 40, loop = false } = {}) {
-  if (shouldReduceMotion()) {
-    node.textContent = text ?? node.textContent ?? '';
-    return { destroy: () => {} };
-  }
-
-  const content = text ?? node.textContent ?? '';
-  let index = 0;
-  let active = true;
-  node.textContent = '';
-
-  const step = () => {
-    if (!active) return;
-    if (index < content.length) {
-      node.textContent += content.charAt(index);
-      index += 1;
-      setTimeout(step, speed);
-    } else if (loop) {
-      setTimeout(() => {
-        node.textContent = '';
-        index = 0;
-        step();
-      }, 700);
-    }
-  };
-
-  step();
-
-  return {
-    destroy() {
-      active = false;
-    }
-  };
-}
-
-/**
  * Gradient morph helper used on hero panels.
  * @param {HTMLElement} node
  * @param {{ colors?: string[]; speed?: number }} [options]
@@ -590,14 +326,7 @@ export default {
   revealOnScroll,
   useStaggerReveal,
   staggerReveal,
-  useParallax,
-  parallax,
   tilt,
   magnetic,
-  ripple,
-  sparkleTrail,
-  particleExplode,
-  morphBlob,
-  typewriter,
   morphGradient
 };

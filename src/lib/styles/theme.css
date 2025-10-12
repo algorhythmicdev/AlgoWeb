@@ -51,8 +51,11 @@
   color-scheme: light;
 
   /* ==================== BRAND CORE ==================== */
+  --primary: var(--aurora-purple);
   --primary-rgb: 106, 56, 255;
+  --accent-1: #10e3d6;
   --accent-1-rgb: 15, 214, 201;
+  --accent-2: var(--signal-yellow);
   --accent-2-rgb: 255, 211, 57;
   --red-ch: #e0322c;
   --red-ch-rgb: 224, 50, 44;
@@ -106,6 +109,9 @@
   --divider: rgba(var(--ink-rgb), 0.14);
   --border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 42%, #d5ddef 58%);
   --border-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 48%, #bcc6de 52%);
+  --muted: #5e6a82;
+  --link: var(--voyage-blue);
+  --focus: var(--signal-yellow);
 
   --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, #ffffff 30%);
   --focus-ring-shadow: 0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 70%, transparent 30%);
@@ -407,6 +413,12 @@
   --primary-rgb: 138, 107, 255;
   --accent-1-rgb: 16, 227, 214;
   --accent-2-rgb: 255, 211, 57;
+  --primary: #8a6bff;
+  --accent-1: #10e3d6;
+  --accent-2: var(--signal-yellow);
+  --muted: #bbc5d6;
+  --link: #a795ff;
+  --focus: #ffd339;
   --atlantic-blue: #1f9dff;
   --atlantic-blue-rgb: 31, 157, 255;
   --evergreen: var(--accent-1);
@@ -498,6 +510,12 @@
   --primary-rgb: 68, 0, 255;
   --accent-1-rgb: 0, 122, 115;
   --accent-2-rgb: 183, 131, 0;
+  --primary: #4400ff;
+  --accent-1: #007a73;
+  --accent-2: #b78300;
+  --muted: #111111;
+  --link: #0000ee;
+  --focus: #000000;
   --atlantic-blue: #005bff;
   --atlantic-blue-rgb: 0, 91, 255;
   --evergreen: #00c4ad;
@@ -536,6 +554,7 @@
   --surface-glass: rgba(0, 0, 0, 0.08);
   --surface-glass-strong: rgba(0, 0, 0, 0.12);
   --surface-tint: rgba(0, 0, 0, 0.18);
+  --grain: none;
 
   --border-subtle: #000000;
   --border-strong: #000000;
@@ -616,94 +635,3 @@
   --accent-tertiary-rgb: var(--voyage-blue-rgb);
 }
 
-/* Legacy theme palettes kept for runtime theme switching */
-html[data-theme='dark'] {
-  --grad-a: #3a71ff;
-  --grad-b: #8a6bff;
-  --bg: #0b0e13;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 70%, rgba(58, 113, 255, 0.28) 30%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 78%, rgba(138, 107, 255, 0.24) 22%);
-  --text: #f2f5f9;
-  --primary: #8a6bff;
-  --accent-1: #10e3d6;
-  --accent-2: var(--signal);
-  --muted: #bbc5d6;
-  --link: #a795ff;
-  --border: #2b3446;
-  --focus: #ffd339;
-}
-
-html[data-theme='hc'] {
-  --bg: #f9fbff;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 92%, rgba(68, 68, 68, 0.12) 8%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 88%, rgba(0, 0, 0, 0.18) 12%);
-  --text: #000000;
-  --primary: #ffffff;
-  --accent-1: #00c4ad;
-  --accent-2: var(--signal);
-  --muted: #111111;
-  --link: #0000ee;
-  --border: #000000;
-  --focus: #000000;
-  --grain: none;
-}
-
-html[data-theme='nodevoyage-light'] {
-  --bg: #f4f8ff;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 82%, rgba(19, 81, 255, 0.18) 18%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 90%, rgba(27, 199, 169, 0.14) 10%);
-  --text: #0a0d14;
-  --primary: #1351ff;
-  --accent-1: #1bc7a9;
-  --accent-2: #ffd339;
-}
-
-html[data-theme='nodevoyage-dark'] {
-  --bg: #081018;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 68%, rgba(58, 113, 255, 0.3) 32%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 76%, rgba(39, 226, 193, 0.26) 24%);
-  --text: #f2f5f9;
-  --primary: #3a71ff;
-  --accent-1: #27e2c1;
-  --accent-2: #ffd339;
-}
-
-html[data-theme='nodevoyage-hc'] {
-  --bg: #050505;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 84%, rgba(0, 0, 0, 0.18) 16%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 80%, rgba(255, 211, 57, 0.12) 20%);
-  --text: #ffffff;
-  --primary: #ffffff;
-  --accent-1: #00c4ad;
-  --accent-2: #ffd339;
-}
-
-html[data-theme='ideonautix-light'] {
-  --bg: #f6faff;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 84%, rgba(0, 163, 255, 0.2) 16%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 90%, rgba(106, 56, 255, 0.16) 10%);
-  --text: #0a0d14;
-  --primary: #00a3ff;
-  --accent-1: #ff4d6d;
-  --accent-2: #6a38ff;
-}
-
-html[data-theme='ideonautix-dark'] {
-  --bg: #0a0f16;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 70%, rgba(54, 186, 255, 0.3) 30%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 78%, rgba(138, 107, 255, 0.24) 22%);
-  --text: #f2f5f9;
-  --primary: #36baff;
-  --accent-1: #ff6f86;
-  --accent-2: #8a6bff;
-}
-
-html[data-theme='ideonautix-hc'] {
-  --bg: #f9fbff;
-  --bg-elev-1: color-mix(in srgb, var(--bg) 92%, rgba(0, 0, 0, 0.12) 8%);
-  --bg-elev-2: color-mix(in srgb, var(--bg) 88%, rgba(106, 56, 255, 0.16) 12%);
-  --text: #000000;
-  --primary: #000000;
-  --accent-1: #7a0015;
-  --accent-2: #4400ff;
-}

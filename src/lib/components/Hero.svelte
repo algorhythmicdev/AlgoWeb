@@ -1,706 +1,388 @@
 <script lang="ts">
-  import { onMount, onDestroy, afterUpdate } from 'svelte';
-  import { nextId } from '$lib/utils/uid';
-  import HeroBackdrop from './hero/HeroBackdrop.svelte';
-
+  type HeroVariant = 'aurora' | 'grid' | 'halo' | 'line' | 'particles';
   type HeroAlign = 'start' | 'center';
-  type HeroTone = 'primary' | 'aurora' | 'citrus' | 'crimson' | 'atlantic' | 'evergreen';
-  type HeroIntensity = 'soft' | 'balanced' | 'bold';
-  type BackdropVariant =
-    | 'aurora-flow'
-    | 'glass-parallax'
-    | 'grid-ripple'
-    | 'connected-nodes'
-    | 'particle-drift'
-    | 'line-sweep'
-    | 'spotlight';
 
-  const VARIANT_ALIASES: Record<string, BackdropVariant> = {
-    aurora: 'aurora-flow',
-    halo: 'glass-parallax',
-    grid: 'grid-ripple',
-    mesh: 'grid-ripple',
-    nodes: 'connected-nodes',
-    particles: 'particle-drift',
-    line: 'line-sweep',
-    prism: 'glass-parallax',
-    wave: 'line-sweep'
-  };
+  const VALID_VARIANTS = new Set<HeroVariant>(['aurora', 'grid', 'halo', 'line', 'particles']);
 
-  const VALID_VARIANTS = new Set<BackdropVariant>([
-    'aurora-flow',
-    'glass-parallax',
-    'grid-ripple',
-    'connected-nodes',
-    'particle-drift',
-    'line-sweep',
-    'spotlight'
-  ]);
-
-  const VALID_TONES = new Set<HeroTone>([
-    'primary',
-    'aurora',
-    'citrus',
-    'crimson',
-    'atlantic',
-    'evergreen'
-  ]);
-  const VALID_INTENSITIES = new Set<HeroIntensity>(['soft', 'balanced', 'bold']);
-
-  export let variant: string = 'aurora-flow';
-  export let tone: HeroTone = 'primary';
-  export let intensity: HeroIntensity = 'soft';
+  export let variant: HeroVariant | string = 'aurora';
   export let title = '';
   export let subtitle = '';
   export let align: HeroAlign = 'start';
 
-  let asideContainer: HTMLElement | null = null;
-  let rootElement: HTMLElement | null = null;
-  let hasAside = false;
-  let asideObserver: MutationObserver | null = null;
-  let intersectionObserver: IntersectionObserver | null = null;
-  let heroVisible = false;
-
-  const heroInstanceId = nextId('hero');
-  const heroTitleId = `${heroInstanceId}-title`;
-  const heroLeadId = `${heroInstanceId}-lead`;
-  const heroDescriptionId = `${heroInstanceId}-description`;
-  const slots = $$slots as Record<string, unknown>;
-
-  const updateAside = () => {
-    if (!asideContainer) {
-      hasAside = false;
-      return;
-    }
-    hasAside = Array.from(asideContainer.childNodes).some((node) => {
-      if (node.nodeType === 1) return true;
-      if (node.nodeType === 3) return Boolean(node.textContent?.trim());
-      return false;
-    });
-  };
-
-  onMount(() => {
-    updateAside();
-    if (typeof window !== 'undefined') {
-      asideObserver = new MutationObserver(updateAside);
-      if (asideContainer) {
-        asideObserver.observe(asideContainer, { childList: true, subtree: true });
-      }
-
-      const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) {
-        heroVisible = true;
-      } else if (rootElement) {
-        intersectionObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                heroVisible = true;
-                intersectionObserver?.unobserve(entry.target as Element);
-              }
-            });
-          },
-          { threshold: 0.25 }
-        );
-        intersectionObserver.observe(rootElement);
-      }
-    }
-    return () => {
-      asideObserver?.disconnect();
-      asideObserver = null;
-    };
-  });
-
-  onDestroy(() => {
-    intersectionObserver?.disconnect();
-    intersectionObserver = null;
-  });
-
-  afterUpdate(updateAside);
-
-  $: if (asideObserver && asideContainer) {
-    asideObserver.disconnect();
-    asideObserver.observe(asideContainer, { childList: true, subtree: true });
-  }
-
-  $: resolvedTone = VALID_TONES.has(tone) ? tone : 'primary';
-  $: resolvedIntensity = VALID_INTENSITIES.has(intensity) ? intensity : 'soft';
-  $: resolvedVariant = (() => {
-    if (VALID_VARIANTS.has(variant as BackdropVariant)) {
-      return variant as BackdropVariant;
-    }
-    return VARIANT_ALIASES[variant] ?? 'aurora-flow';
-  })();
-
-  $: alignClass = align === 'center' ? 'hero--align-center' : 'hero--align-start';
-  $: asideClass = hasAside ? 'hero--with-aside' : 'hero--no-aside';
-  $: toneClass = `hero--tone-${resolvedTone}`;
-  $: intensityClass = `hero--intensity-${resolvedIntensity}`;
-  $: showLead = subtitle.trim().length > 0;
-  const hasTitleSlot = Boolean(slots.title);
-  const hasLeadSlot = Boolean(slots.lead);
-  const hasDescriptionSlot = Boolean(slots.description);
-  $: heroHasTitle = hasTitleSlot || title.trim().length > 0;
-  $: heroHasLead = hasLeadSlot || showLead;
-  $: heroHasDescription = hasDescriptionSlot;
-  $: heroLabelledBy = heroHasTitle ? heroTitleId : undefined;
-  $: heroDescribedBy = (() => {
-    const references: string[] = [];
-    if (heroHasLead) references.push(heroLeadId);
-    if (heroHasDescription) references.push(heroDescriptionId);
-    return references.join(' ') || undefined;
-  })();
-  $: heroAriaLabel = heroLabelledBy ? undefined : (title.trim() || subtitle.trim() || undefined);
+  const instanceId = Math.random().toString(36).slice(2, 8);
+  $: resolvedVariant = VALID_VARIANTS.has(variant as HeroVariant) ? (variant as HeroVariant) : 'aurora';
+  $: titleId = title.trim().length ? `hero-${instanceId}-title` : undefined;
+  $: leadId = subtitle.trim().length ? `hero-${instanceId}-lead` : undefined;
+  $: descriptionId = $$slots.description ? `hero-${instanceId}-description` : undefined;
+  $: highlightsId = $$slots.highlights ? `hero-${instanceId}-highlights` : undefined;
+  $: ariaLabelledBy = titleId ?? undefined;
+  $: ariaDescribedBy = [leadId, descriptionId, highlightsId].filter(Boolean).join(' ') || undefined;
+  $: alignmentClass = align === 'center' ? 'hero--align-center' : 'hero--align-start';
+  $: hasAside = Boolean($$slots.aside);
 </script>
 
 <section
-  class={`hero ${alignClass} ${asideClass} ${toneClass} ${intensityClass} ${heroVisible ? 'hero--visible' : 'hero--hidden'}`}
-  bind:this={rootElement}
-  data-hero-tone={resolvedTone}
-  data-hero-intensity={resolvedIntensity}
-  aria-labelledby={heroLabelledBy}
-  aria-describedby={heroDescribedBy}
-  aria-label={heroAriaLabel}
+  class={`hero ${alignmentClass} ${hasAside ? 'hero--with-aside' : 'hero--solo'}`}
+  data-variant={resolvedVariant}
+  aria-labelledby={ariaLabelledBy}
+  aria-describedby={ariaDescribedBy}
 >
-  <div class="hero__container">
-    <div class="hero__surface" data-hero-layers>
-      <div class="hero__layers" aria-hidden="true">
-        <span class="hero__layer hero__layer--base"></span>
-        <span class="hero__layer hero__layer--gradient"></span>
-        <span class="hero__layer hero__layer--grain"></span>
-        <HeroBackdrop
-          class="hero__layer hero__layer--backdrop"
-          variant={resolvedVariant}
-          tone={resolvedTone}
-          intensity={resolvedIntensity}
-        />
-        <div class="hero__layer hero__layer--panes">
-          <span class="hero__pane" data-pane="left"></span>
-          <span class="hero__pane" data-pane="center"></span>
-          <span class="hero__pane" data-pane="right"></span>
-        </div>
-      </div>
-      <div class="hero__content">
-        <div class="hero__intro">
+  <div class="hero__backdrop" aria-hidden="true">
+    <span class="hero__layer hero__layer--base"></span>
+    <span class="hero__layer hero__layer--glow"></span>
+    <span class="hero__layer hero__layer--grid"></span>
+    <span class="hero__layer hero__layer--particles"></span>
+    <span class="hero__layer hero__layer--halo"></span>
+    <span class="hero__layer hero__layer--lines"></span>
+  </div>
+
+  <div class="hero__layout">
+    <div class="hero__main">
+      {#if $$slots.status}
+        <div class="hero__status">
           <slot name="status" />
-          <span class="hero__title-slot" id={heroHasTitle ? heroTitleId : undefined}>
-            <slot name="title">
-              {#if title.trim().length}
-                <h1 class="hero__title">{title}</h1>
-              {/if}
-            </slot>
-          </span>
-          <span class="hero__lead-slot" id={heroHasLead ? heroLeadId : undefined}>
-            <slot name="lead">
-              {#if showLead}
-                <p class="hero__lead">{subtitle}</p>
-              {/if}
-            </slot>
-          </span>
-          <span class="hero__description-slot" id={heroHasDescription ? heroDescriptionId : undefined}>
-            <slot name="description" />
-          </span>
-          <slot name="actions" />
-          <slot name="highlights" />
-          <slot name="metrics" />
-          <slot />
         </div>
-        <aside class="hero__aside" bind:this={asideContainer}>
-          <slot name="aside" />
-        </aside>
-      </div>
+      {/if}
+
+      {#if titleId}
+        <h1 id={titleId} class="hero__title">{title}</h1>
+      {/if}
+
+      {#if leadId}
+        <p id={leadId} class="hero__lead">{subtitle}</p>
+      {/if}
+
+      {#if $$slots.description}
+        <div id={descriptionId} class="hero__description">
+          <slot name="description" />
+        </div>
+      {/if}
+
+      {#if $$slots.actions}
+        <div class="hero__actions">
+          <slot name="actions" />
+        </div>
+      {/if}
+
+      {#if $$slots.highlights}
+        <div id={highlightsId} class="hero__highlights">
+          <slot name="highlights" />
+        </div>
+      {/if}
     </div>
+
+    {#if hasAside}
+      <div class="hero__aside">
+        <slot name="aside" />
+      </div>
+    {/if}
   </div>
 </section>
 
 <style>
   .hero {
     position: relative;
-    padding-block: clamp(5.5rem, 12vw, 8.5rem);
     isolation: isolate;
-    --hero-tone-rgb: var(--voyage-blue-rgb);
-    --hero-tone-secondary-rgb: var(--aurora-purple-rgb);
-    --hero-tone-highlight-rgb: var(--signal-yellow-rgb);
-    --hero-overlay-alpha: 0.5;
-    --hero-border-alpha: 0.46;
-    --hero-shadow-alpha: 0.22;
-    --hero-overlay-strength: 26%;
-    --hero-base-gradient-fallback: linear-gradient(
-      134deg,
-      rgb(var(--hero-tone-rgb)) 0%,
-      rgb(var(--hero-tone-secondary-rgb)) 48%,
-      rgb(var(--hero-tone-highlight-rgb)) 100%
-    );
-    --hero-heading-gradient: linear-gradient(
-      128deg,
-      rgba(var(--hero-tone-rgb), 0.94) 0%,
-      rgba(var(--hero-tone-secondary-rgb), 0.92) 100%
-    );
-    --hero-accent: rgb(var(--hero-tone-rgb));
-    --hero-secondary: rgb(var(--hero-tone-secondary-rgb));
-    --hero-tertiary: rgb(var(--hero-tone-highlight-rgb));
-    --hero-lead-color: rgba(var(--hero-tone-rgb), 0.72);
-    --hero-base-gradient: var(--hero-base-gradient-fallback);
-    opacity: 0;
-    transform: translate3d(0, 32px, 0);
-    transition:
-      opacity var(--duration-hero, 0.52s) var(--ease-out, cubic-bezier(0.33, 1, 0.68, 1)),
-      transform var(--duration-hero, 0.52s) var(--ease-out, cubic-bezier(0.33, 1, 0.68, 1));
-  }
-
-  .hero--visible {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .hero--hidden {
-    opacity: 0;
-  }
-
-  @supports (color: color-mix(in srgb, red 50%, blue 50%)) {
-    .hero {
-      --hero-heading-gradient: linear-gradient(
-        128deg,
-        color-mix(in srgb, rgb(var(--hero-tone-rgb)) 72%, rgb(var(--hero-tone-secondary-rgb)) 28%) 0%,
-        color-mix(in srgb, rgb(var(--hero-tone-highlight-rgb)) 42%, rgb(var(--hero-tone-secondary-rgb)) 58%) 100%
-      );
-      --hero-accent: color-mix(in srgb, rgb(var(--hero-tone-rgb)) 68%, rgb(var(--hero-tone-secondary-rgb)) 32%);
-      --hero-secondary: color-mix(in srgb, rgb(var(--hero-tone-secondary-rgb)) 58%, rgb(var(--hero-tone-rgb)) 42%);
-      --hero-tertiary: color-mix(in srgb, rgb(var(--hero-tone-highlight-rgb)) 52%, rgb(var(--hero-tone-secondary-rgb)) 48%);
-      --hero-ring-border: color-mix(
-        in srgb,
-        rgba(var(--hero-tone-secondary-rgb), 0.24) 68%,
-        rgba(16, 24, 40, 0.12) 32%
-      );
-      --hero-lead-color: color-mix(in srgb, rgb(var(--hero-tone-rgb)) 18%, var(--text-secondary) 82%);
-      --hero-base-gradient: linear-gradient(
-        134deg,
-        color-mix(in srgb, rgb(var(--hero-tone-rgb)) 82%, rgb(14, 18, 35) 18%) 0%,
-        color-mix(in srgb, rgb(var(--hero-tone-secondary-rgb)) 74%, rgb(10, 14, 28) 26%) 48%,
-        color-mix(in srgb, rgb(var(--hero-tone-highlight-rgb)) 70%, rgb(32, 42, 60) 30%) 100%
-      );
-    }
-  }
-
-  .hero__container {
-    width: min(100%, var(--container-xl, 1200px));
-    margin-inline: auto;
-    padding-inline: clamp(1.5rem, 5vw, 3rem);
-  }
-
-  .hero__surface {
-    position: relative;
-    border-radius: clamp(28px, 6vw, 36px);
-    --hero-surface-padding: clamp(2rem, 5vw, 3.25rem);
-    padding: var(--hero-surface-padding);
-    --hero-surface-border: color-mix(
-      in srgb,
-      rgba(var(--hero-tone-secondary-rgb), var(--hero-border-alpha)) 60%,
-      rgba(255, 255, 255, 0.3) 40%
-    );
-    --hero-surface-shadow: 0 30px 64px rgba(var(--hero-tone-rgb), var(--hero-shadow-alpha));
-    background: var(--hero-base-gradient);
-    border: 1px solid var(--hero-surface-border);
-    box-shadow: var(--hero-surface-shadow);
-    backdrop-filter: blur(28px) saturate(1.08);
-    -webkit-backdrop-filter: blur(28px) saturate(1.08);
-    overflow: visible;
-    isolation: isolate;
-    --hero-layer-base: -1;
-    --hero-layer-backdrop: 0;
-    --hero-layer-content: 10;
-    --hero-layer-aside: 12;
-  }
-
-  .hero__surface::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background:
-      linear-gradient(
-        160deg,
-        color-mix(in srgb, rgba(var(--hero-tone-rgb), 0.32) 55%, transparent) 0%,
-        color-mix(in srgb, rgba(var(--hero-tone-secondary-rgb), 0.22) 45%, transparent) 48%,
-        transparent 100%
-      ),
-      radial-gradient(
-        60% 60% at 50% 0%,
-        color-mix(in srgb, rgba(10, 13, 20, 0.35) 70%, transparent) 0%,
-        transparent 70%
-      );
-    mix-blend-mode: soft-light;
-    opacity: clamp(0.45, 0.52, 0.6);
-    pointer-events: none;
-    z-index: calc(var(--hero-layer-backdrop) + 1);
-  }
-
-  .hero__surface::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: var(--grain, none);
-    opacity: clamp(0.04, 0.08, 0.08);
-    pointer-events: none;
-    mix-blend-mode: soft-light;
-    z-index: var(--hero-layer-backdrop);
-  }
-
-  .hero__layers {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
     overflow: hidden;
-    pointer-events: none;
-    z-index: var(--hero-layer-backdrop);
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+    color: var(--hero-text, var(--text));
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 92%, rgba(var(--voyage-blue-rgb), 0.15) 8%),
+        color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.12) 12%)
+      )
+      no-repeat;
+    border-radius: clamp(28px, 5vw, 48px);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
+    box-shadow: 0 32px 80px rgba(6, 20, 53, 0.18);
+  }
+
+  .hero__layout {
+    position: relative;
+    display: grid;
+    gap: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .hero__backdrop {
+    position: absolute;
+    inset: -1px;
+    overflow: hidden;
+    border-radius: inherit;
+    opacity: 0.92;
   }
 
   .hero__layer {
     position: absolute;
     inset: 0;
     border-radius: inherit;
+    transition: opacity var(--duration-slow, 600ms) ease, transform var(--duration-slow, 600ms) ease;
   }
 
   .hero__layer--base {
-    background: var(--hero-base-gradient);
-    transform: translateZ(0);
-    z-index: var(--hero-layer-base);
-  }
-
-  .hero__layer--gradient {
     background: radial-gradient(
-        60% 80% at 20% 18%,
-        color-mix(in srgb, rgba(var(--hero-tone-highlight-rgb), 0.42) 60%, transparent 40%),
-        transparent 75%
+        circle at top left,
+        color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.12) 12%),
+        transparent 60%
       ),
       radial-gradient(
-        40% 60% at 82% 22%,
-        color-mix(in srgb, rgba(var(--hero-tone-secondary-rgb), 0.35) 70%, transparent 30%),
-        transparent 76%
+        circle at bottom right,
+        color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--voyage-blue-rgb), 0.2) 22%),
+        transparent 55%
+      ),
+      var(--bg);
+  }
+
+  .hero__layer--glow {
+    background: radial-gradient(
+      circle at 20% 30%,
+      color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%),
+      transparent 70%
+    );
+    opacity: 0.7;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero__layer--grid {
+    background-image: linear-gradient(
+        90deg,
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.2) 65%, transparent 35%),
+        transparent 60%
       ),
       linear-gradient(
-        135deg,
-        color-mix(in srgb, rgba(var(--hero-tone-rgb), 0.54) 68%, rgba(12, 16, 28, 0.35) 32%) 0%,
-        color-mix(in srgb, rgba(var(--hero-tone-secondary-rgb), 0.45) 60%, rgba(8, 12, 24, 0.4) 40%) 48%,
-        color-mix(in srgb, rgba(var(--hero-tone-highlight-rgb), 0.4) 55%, rgba(20, 26, 40, 0.38) 45%) 100%
+        0deg,
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 70%, transparent 30%),
+        transparent 60%
       );
-    background-size: 180% 180%;
-    animation: hero-gradient-pan var(--hero-gradient-duration, 48s) ease-in-out infinite alternate;
+    background-size: 120px 120px;
+    opacity: 0.3;
+    mix-blend-mode: soft-light;
+  }
+
+  .hero__layer--particles {
+    background-image: radial-gradient(
+      2px 2px at 20% 30%,
+      rgba(var(--voyage-blue-rgb), 0.25),
+      transparent 70%
+    );
+    background-size: 160px 160px;
+    opacity: 0.25;
+    filter: saturate(1.1);
+    animation: heroParticles 32s linear infinite;
+  }
+
+  .hero__layer--halo {
+    background: radial-gradient(
+      circle at 80% 20%,
+      color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.28) 60%, transparent 40%),
+      transparent 65%
+    );
+    opacity: 0.45;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero__layer--lines {
+    background-image: repeating-linear-gradient(
+        75deg,
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 65%, transparent 35%) 0 2px,
+        transparent 2px 16px
+      ),
+      repeating-linear-gradient(
+        -75deg,
+        color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.22) 50%, transparent 50%) 0 2px,
+        transparent 2px 18px
+      );
+    opacity: 0.2;
     mix-blend-mode: screen;
-    opacity: clamp(0.32, 0.4, 0.48);
-    filter: saturate(1.05);
-    z-index: calc(var(--hero-layer-base) + 1);
   }
 
-  .hero__layer--grain {
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 240px 240px;
-    mix-blend-mode: soft-light;
-    opacity: 0.085;
-    z-index: calc(var(--hero-layer-base) + 2);
-  }
-
-  .hero__layer--backdrop {
-    z-index: var(--hero-layer-backdrop);
-  }
-
-  .hero__layer--panes {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.75rem, 3vw, 1.5rem);
-    padding: clamp(1rem, 3vw, 2rem);
-    pointer-events: none;
-    z-index: calc(var(--hero-layer-backdrop) + 1);
-  }
-
-  .hero__pane {
-    position: relative;
-    border-radius: clamp(18px, 5vw, 26px);
-    background: color-mix(
-      in srgb,
-      rgba(255, 255, 255, 0.28) 52%,
-      rgba(var(--hero-tone-secondary-rgb), 0.24) 48%
-    );
-    border: 1px solid color-mix(
-      in srgb,
-      rgba(255, 255, 255, 0.65) 58%,
-      rgba(var(--hero-tone-secondary-rgb), 0.38) 42%
-    );
-    box-shadow: 0 26px 56px rgba(var(--hero-tone-rgb), 0.26);
-    backdrop-filter: blur(26px) saturate(1.12);
-    -webkit-backdrop-filter: blur(26px) saturate(1.12);
-    overflow: hidden;
-    opacity: 0.88;
-  }
-
-  .hero__pane::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background-image: var(--grain, var(--grain-texture));
-    opacity: 0.06;
-    mix-blend-mode: soft-light;
-  }
-
-  .hero__pane[data-pane='left'] {
-    transform: translateY(clamp(0.25rem, 1vw, 0.75rem));
-  }
-
-  .hero__pane[data-pane='center'] {
-    transform: translateY(clamp(-0.5rem, -1.8vw, -1rem));
-    opacity: 0.92;
-  }
-
-  .hero__pane[data-pane='right'] {
-    transform: translateY(clamp(0.5rem, 1.6vw, 1.25rem));
-  }
-
-  :global(html[data-theme='hc']) .hero__surface {
-    background: color-mix(in srgb, var(--bg) 94%, rgba(var(--voyage-blue-rgb), 0.14) 6%);
-    border-color: var(--border-strong, var(--text));
-    box-shadow: none;
-  }
-
-  :global(html[data-theme='hc']) .hero__surface::before {
-    display: none;
-  }
-
-  :global(html[data-theme='hc']) .hero__layer--gradient,
-  :global(html[data-theme='hc']) .hero__layer--grain,
-  :global(html[data-theme='hc']) .hero__layer--panes {
-    display: none;
-  }
-
-  .hero__layer--backdrop {
-    position: absolute;
-    inset: 0;
-  }
-
-  :global(html[data-theme='hc']) .hero__layer--backdrop {
-    display: none;
-  }
-
-  :global(html[data-theme='hc']) .hero__layer--base {
-    background: var(--bg-elev-1, var(--bg));
-  }
-
-  @media (max-width: 720px) {
-    .hero__layer--panes {
-      display: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero,
-    .hero--visible,
-    .hero--hidden {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-
-    .hero__layer--gradient {
-      animation: none;
-      background-position: center;
-    }
-  }
-
-  .hero__content {
+  .hero__main {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(2rem, 5vw, 3.2rem);
-    z-index: var(--hero-layer-content);
+    gap: 1.25rem;
+    z-index: 1;
   }
 
-  .hero__intro {
-    position: relative;
-    display: grid;
-    gap: clamp(1.2rem, 3vw, 2.1rem);
-    align-content: start;
-    color: var(--text);
+  .hero__status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--aurora-purple-rgb), 0.2) 16%);
+    border: 1px solid color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 65%, rgba(255, 255, 255, 0.4) 35%);
+    font-size: clamp(0.75rem, 1vw, 0.85rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   .hero__title {
-    margin: 0;
-    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-size: clamp(2.35rem, 5vw, 3.75rem);
     line-height: 1.05;
-    font-weight: var(--weight-black, 800);
-    letter-spacing: -0.01em;
-    background: var(--hero-heading-gradient, var(--gradient-heading, var(--grad)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .hero__title-slot,
-  .hero__lead-slot,
-  .hero__description-slot {
-    display: contents;
+    font-weight: var(--weight-extrabold, 700);
+    letter-spacing: -0.02em;
   }
 
   .hero__lead {
-    margin: 0;
-    color: var(--hero-lead-color);
-    font-size: clamp(1.05rem, 2.6vw, 1.32rem);
-    line-height: 1.6;
-    text-wrap: balance;
+    max-width: 38ch;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    color: color-mix(in srgb, var(--text) 82%, rgba(var(--voyage-blue-rgb), 0.1) 18%);
   }
 
-  :global(html[data-theme='hc']) .hero__lead {
-    color: var(--text-secondary);
+  .hero__description {
+    max-width: 60ch;
+    display: grid;
+    gap: 1rem;
   }
 
-  .hero--tone-aurora {
-    --hero-tone-rgb: var(--aurora-purple-rgb);
-    --hero-tone-secondary-rgb: var(--voyage-blue-rgb);
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
   }
 
-  .hero--tone-citrus {
-    --hero-tone-rgb: var(--signal-yellow-rgb);
-    --hero-tone-secondary-rgb: var(--voyage-blue-rgb);
-    --hero-tone-highlight-rgb: var(--aurora-purple-rgb);
-    --hero-overlay-alpha: 0.46;
-    --hero-border-alpha: 0.4;
-    --hero-shadow-alpha: 0.18;
-    --hero-overlay-strength: 22%;
-  }
-
-  .hero--tone-crimson {
-    --hero-tone-rgb: var(--cherry-pop-rgb);
-    --hero-tone-secondary-rgb: var(--aurora-purple-rgb);
-    --hero-shadow-alpha: 0.28;
-    --hero-overlay-strength: 24%;
-  }
-
-  .hero--tone-atlantic {
-    --hero-tone-rgb: var(--atlantic-blue-rgb);
-    --hero-tone-secondary-rgb: var(--voyage-blue-rgb);
-    --hero-tone-highlight-rgb: var(--accent-1-rgb);
-  }
-
-  .hero--tone-evergreen {
-    --hero-tone-rgb: var(--evergreen-rgb);
-    --hero-tone-secondary-rgb: var(--voyage-blue-rgb);
-    --hero-border-alpha: 0.44;
-    --hero-overlay-strength: 24%;
-  }
-
-  .hero--intensity-soft {
-    --hero-overlay-alpha: 0.42;
-    --hero-border-alpha: 0.42;
-    --hero-shadow-alpha: 0.18;
-    --hero-overlay-strength: 20%;
-  }
-
-  .hero--intensity-balanced {
-    --hero-overlay-alpha: 0.5;
-    --hero-border-alpha: 0.46;
-    --hero-shadow-alpha: 0.22;
-    --hero-overlay-strength: 26%;
-  }
-
-  .hero--intensity-bold {
-    --hero-overlay-alpha: 0.62;
-    --hero-border-alpha: 0.58;
-    --hero-shadow-alpha: 0.32;
-    --hero-overlay-strength: 30%;
-  }
-
-  :global([data-base-theme='dark']) .hero.hero--intensity-soft {
-    --hero-overlay-alpha: 0.5;
-    --hero-border-alpha: 0.5;
-    --hero-shadow-alpha: 0.24;
-    --hero-overlay-strength: 22%;
-  }
-
-  :global([data-base-theme='dark']) .hero.hero--intensity-balanced {
-    --hero-overlay-alpha: 0.58;
-    --hero-border-alpha: 0.54;
-    --hero-shadow-alpha: 0.3;
-    --hero-overlay-strength: 28%;
-  }
-
-  :global([data-base-theme='dark']) .hero.hero--intensity-bold {
-    --hero-overlay-alpha: 0.7;
-    --hero-border-alpha: 0.62;
-    --hero-shadow-alpha: 0.36;
-    --hero-overlay-strength: 32%;
+  .hero__highlights {
+    display: grid;
+    gap: 0.75rem;
   }
 
   .hero__aside {
     position: relative;
     display: grid;
-    gap: clamp(1.3rem, 3vw, 2rem);
-    z-index: var(--hero-layer-aside);
+    gap: 1rem;
+    align-content: start;
+    z-index: 1;
   }
 
-  .hero__aside:empty {
-    display: none;
-  }
-
-  .hero--no-aside .hero__aside {
-    display: none;
-  }
-
-  .hero--no-aside .hero__content {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .hero--align-center .hero__surface {
+  .hero--align-center .hero__layout {
     text-align: center;
-  }
-
-  .hero--align-center .hero__intro {
     justify-items: center;
   }
 
-  .hero--align-center .hero__intro :global(.hero-actions) {
+  .hero--align-center .hero__actions {
     justify-content: center;
   }
 
-  .hero--align-center .hero__intro :global(.hero-highlights) {
-    justify-items: center;
+  .hero--align-center .hero__lead,
+  .hero--align-center .hero__description {
+    margin-inline: auto;
   }
 
-  @media (max-width: 1024px) {
-    .hero__content {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .hero__aside {
-      order: -1;
-    }
+  .hero--with-aside .hero__layout {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
   }
 
-  @media (max-width: 720px) {
-    .hero {
-      padding-block: clamp(4.5rem, 18vw, 6rem);
-    }
-
-    .hero__surface {
-      --hero-surface-padding: clamp(1.6rem, 6vw, 2.4rem);
-    }
-
-    .hero__content {
-      gap: clamp(1.6rem, 5vw, 2.4rem);
-    }
-
-    .hero__title {
-      font-size: clamp(2rem, 9vw, 3rem);
+  @media (min-width: 960px) {
+    .hero--with-aside .hero__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      align-items: center;
     }
   }
 
-  @keyframes hero-gradient-pan {
-    0% {
-      background-position: 0% 35%, 80% 20%, 0% 50%;
+  @media (min-width: 1200px) {
+    .hero--with-aside .hero__layout {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.85fr);
+    }
+  }
+
+  [data-variant='grid'] .hero__layer--grid {
+    opacity: 0.45;
+    animation: heroGridPan 36s linear infinite;
+  }
+
+  [data-variant='grid'] .hero__layer--halo,
+  [data-variant='grid'] .hero__layer--particles {
+    opacity: 0.15;
+  }
+
+  [data-variant='halo'] .hero__layer--halo {
+    opacity: 0.65;
+    animation: heroHaloPulse 18s ease-in-out infinite;
+  }
+
+  [data-variant='halo'] .hero__layer--grid {
+    opacity: 0.2;
+  }
+
+  [data-variant='line'] .hero__layer--lines {
+    opacity: 0.45;
+    animation: heroLinesSweep 28s linear infinite;
+  }
+
+  [data-variant='line'] .hero__layer--particles {
+    opacity: 0.1;
+  }
+
+  [data-variant='particles'] .hero__layer--particles {
+    opacity: 0.5;
+  }
+
+  [data-variant='particles'] .hero__layer--grid,
+  [data-variant='particles'] .hero__layer--lines {
+    opacity: 0.15;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__layer--particles,
+    .hero__layer--halo,
+    .hero__layer--grid,
+    .hero__layer--lines {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+
+  @keyframes heroParticles {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-120px, -80px, 0);
+    }
+  }
+
+  @keyframes heroGridPan {
+    from {
+      background-position: 0 0, 0 0;
+    }
+    to {
+      background-position: 120px 120px, -120px -120px;
+    }
+  }
+
+  @keyframes heroHaloPulse {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.9);
     }
     50% {
-      background-position: 60% 45%, 20% 40%, 40% 50%;
+      opacity: 0.75;
+      transform: scale(1.08);
     }
-    100% {
-      background-position: 100% 55%, 40% 60%, 100% 50%;
+  }
+
+  @keyframes heroLinesSweep {
+    from {
+      background-position: 0 0, 0 0;
     }
+    to {
+      background-position: 320px 220px, -320px -220px;
+    }
+  }
+
+  :global(html[data-theme='hc'] .hero) {
+    background: var(--bg);
+    box-shadow: none;
+  }
+
+  :global(html[data-theme='hc'] .hero__layer) {
+    opacity: 0.18;
+    mix-blend-mode: normal;
+    animation: none !important;
+  }
+
+  :global(html[data-theme='hc'] .hero__status) {
+    background: var(--bg);
+    border-color: var(--border-strong);
   }
 </style>

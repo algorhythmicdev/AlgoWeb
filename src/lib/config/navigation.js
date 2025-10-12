@@ -1,7 +1,23 @@
 /**
+ * @typedef {Object} NavigationChild
+ * @property {string} label
+ * @property {string} href
+ * @property {string} [description]
+ */
+
+/**
+ * @typedef {Object} NavigationItem
+ * @property {string} label
+ * @property {string} href
+ * @property {string} icon
+ * @property {NavigationChild[]} [children]
+ */
+
+/**
  * Navigation Configuration
  */
 
+/** @type {NavigationItem[]} */
 export const mainNavigation = [
   {
     label: 'nav.home',
@@ -11,24 +27,7 @@ export const mainNavigation = [
   {
     label: 'nav.platforms',
     href: '/platforms',
-    icon: 'products',
-    children: [
-      {
-        label: 'nav.nodevoyage',
-        href: '/platforms#nodevoyage',
-        description: 'nav.nodevoyage_desc'
-      },
-      {
-        label: 'nav.ideonautix',
-        href: '/platforms#ideonautix',
-        description: 'nav.ideonautix_desc'
-      }
-    ]
-  },
-  {
-    label: 'nav.community',
-    href: '/community',
-    icon: 'community'
+    icon: 'products'
   },
   {
     label: 'nav.consulting',
@@ -36,9 +35,14 @@ export const mainNavigation = [
     icon: 'consulting'
   },
   {
-    label: 'nav.about',
-    href: '/#story',
-    icon: 'about'
+    label: 'nav.community',
+    href: '/community',
+    icon: 'community'
+  },
+  {
+    label: 'nav.contact',
+    href: '/contact',
+    icon: 'contact'
   }
 ];
 

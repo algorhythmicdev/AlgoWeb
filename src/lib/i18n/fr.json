@@ -117,7 +117,189 @@
         "Aperçus de NodeVoyage et Ideonautix mis à jour chaque mois.",
         "Les programmes pilotes sont annoncés en priorité aux abonnés.",
         "Audits d’accessibilité et de motion envoyés sous forme de fiches."
-      ]
+      ],
+      "consulting": "Vous préférez un accompagnement guidé ? Réservez une séance stratégique sereine et nous tracerons ensemble vos prochaines étapes."
+    },
+    "hero": {
+      "status": "Independent AI studio · Riga ↔ Rotterdam",
+      "title": {
+        "lead": "Build calm workflows with",
+        "brand": "AlgoRhythmics",
+        "trail": "as your guide."
+      },
+      "tagline": "Accessible AI platforms for travel and founder ops, built with signage discipline.",
+      "subtitle": "NodeVoyage, Ideonautix, and our consulting sprints share one calm operating rhythm.",
+      "description": "We design every surface with AAA contrast, honour reduced-motion settings, and document automation decisions in plain language.",
+      "cta_products": "Explore the platform lineup",
+      "cta_consulting": "Schedule a consulting session",
+      "actions_label": "Main hero actions",
+      "next_milestone": "Upcoming milestone",
+      "pillars_title": "Our calm delivery rhythm",
+      "pillars": [
+        "One shared design system connects NodeVoyage, Ideonautix, and consulting engagements.",
+        "Accessibility and inclusive writing guide every screen, animation, and notification.",
+        "We document decisions in plain language so automation remains explainable."
+      ],
+      "signals": {
+        "studio_phase": "Studio snapshot",
+        "studio_phase_value": "Founder-led studio • Est. 2023",
+        "focus_tracks": "Focus tracks",
+        "focus_tracks_value": "NodeVoyage · Ideonautix · Consulting",
+        "research": "Research roots",
+        "research_value": "Signage craft × practical AI"
+      },
+      "moments": {
+        "nodevoyage": {
+          "kicker": "Platform spotlight",
+          "status": "NodeVoyage",
+          "copy": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
+          "meta": "Beta invites open",
+          "cta": "Preview NodeVoyage"
+        },
+        "ideonautix": {
+          "kicker": "Platform spotlight",
+          "status": "Ideonautix",
+          "copy": "The productivity suite for modern creators — where every idea gets momentum.",
+          "meta": "Research sprint underway",
+          "cta": "Preview Ideonautix"
+        }
+      },
+      "focus": {
+        "kicker": "Studio focus",
+        "title": "Respect for the humans using AI",
+        "description": "We slow down to explain the why, map the hand-offs, and keep every control easy to discover.",
+        "points": [
+          "Light, dark, and contrast themes stay readable and consistent.",
+          "Reduced-motion preferences are honoured across interactions.",
+          "Clear audit trails keep AI decisions transparent."
+        ],
+        "cta": "Visit the community"
+      },
+      "milestone_cta": "See the roadmap",
+      "brand_aria": "AlgoRhythmics logomark highlighted in the hero heading"
+    },
+    "story": {
+      "title": "Our story",
+      "reality_title": "What we’re building",
+      "reality_text": "We want AI to feel helpful, not hectic. That means clarity for travellers, founders, and anyone leaning on our tools.",
+      "mission_title": "Our mission",
+      "mission_text": "Deliver approachable AI products and services that explain themselves and invite collaboration.",
+      "vision_title": "Our vision",
+      "vision_text": "By 2026, every AlgoRhythmics product will share one trustworthy operating rhythm so partners can switch between them without friction."
+    },
+    "timeline": {
+      "title": "Our path",
+      "subtitle": "Milestones that keep us moving",
+      "filters_label": "Filter milestones by status",
+      "filters_reset": "Show all statuses",
+      "filters_empty": "No milestones match the selected statuses yet.",
+      "upcoming_badge": "Upcoming",
+      "milestones": {
+        "ideju-kauss": {
+          "title": "Ideju Kauss competition",
+          "description": "Entering Latvia's flagship startup arena with the NodeVoyage concept.",
+          "note": ""
+        },
+        "company-formation": {
+          "title": "Company formation",
+          "description": "Complete registration, legal setup, and founder agreements.",
+          "note": ""
+        },
+        "liaa-application": {
+          "title": "LIAA partnership application",
+          "description": "Apply for collaboration with Latvia's Investment Agency to co-run education programmes.",
+          "note": "Aspirational — pending approval"
+        },
+        "mvp-ideonautix": {
+          "title": "Ideonautix MVP launch",
+          "description": "Release the first public version of the Ideonautix productivity platform.",
+          "note": ""
+        },
+        "pilot-consulting": {
+          "title": "AI consulting pilot",
+          "description": "Offer a no-cost pilot to three partners exploring AI integration.",
+          "note": ""
+        },
+        "mvp-nodevoyage": {
+          "title": "NodeVoyage MVP launch",
+          "description": "Open the NodeVoyage travel platform to public beta with Nodi on board.",
+          "note": ""
+        },
+        "education-program": {
+          "title": "Education programme rollout",
+          "description": "Bring our AI education sessions to secondary schools across Latvia.",
+          "note": "Goal: 75+ institutes"
+        }
+      }
+    },
+    "platforms": {
+      "title": "Platform lineup",
+      "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed studio.",
+      "cta_title": "Stay close",
+      "cta_text": "Join the community for release news, pilot invites, and accessibility updates.",
+      "cta_join": "Join the community",
+      "cta_contact": "Book a chat"
+    },
+    "founders": {
+      "title": "Meet the founders",
+      "subtitle": "Two makers blending signage craft with calm AI",
+      "email_cta": "Email",
+      "linkedin_cta": "LinkedIn",
+      "nikita": {
+        "name": "Nikita Jurtaevs",
+        "role": "Co-Founder & CEO",
+        "bio": "Nikita keeps the story, product direction, and partnerships aligned across NodeVoyage and Ideonautix. His background in signage design helps our digital work stay tactile and clear.",
+        "current_title": "Current focus",
+        "current_position": "Reclame Fabriek — guiding lighting, coatings, and fabrication tests that inspire our interfaces.",
+        "expertise": [
+          "Narrative-led product strategy",
+          "Experience design and quality assurance",
+          "Partnership and education outreach"
+        ]
+      },
+      "slaff": {
+        "name": "Vjaceslavs \"Slaff\" Trosins",
+        "role": "Co-Founder & CTO",
+        "current_title": "Current focus",
+        "bio": "Slaff leads the engineering stack, data flows, and AI integrations that power our products. Years in signage-controller hardware keep our releases grounded in real-world use.",
+        "position": "Reclame Fabriek — evolving controllers, LED systems, and tooling that inform our software choices.",
+        "philosophy": "Systems thinking across hardware and software keeps solutions honest and dependable.",
+        "achievements": [
+          "Runs a Google Cloud–first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
+          "Connects signage-grade controllers with transparent AI experiences.",
+          "Leads fundraising and builds multi-disciplinary teams for both flagships."
+        ],
+        "brand_title": "Brand experience",
+        "brand_intro": "We honed our craft while partnering with global brands on premium signage systems:",
+        "brand_context": "Projects delivered with Reclame Fabriek (Daugavpils, LV) by both founders",
+        "algorhythmics_title": "Vision for AlgoRhythmics",
+        "algorhythmics_vision": "Blend signage precision with cloud agility so AlgoRhythmics ships trustworthy, ready-to-use AI experiences."
+      },
+      "labels": {
+        "expertise": "Core strengths",
+        "achievements": "Recent wins",
+        "contact": "Direct lines"
+      }
+    },
+    "partners": {
+      "eyebrow": "Collaborators",
+      "title": "Partners who keep us sharp",
+      "description": "We build with signage experts today and nurture education partners so our programmes have real impact.",
+      "location": "Location",
+      "founded": "Founded",
+      "website": "Website",
+      "clients_label": "Clients",
+      "clients_title": "Brands we have supported",
+      "clients_description": "Years of signage delivery for retail, finance, and aviation means our AI work stands on proven operations.",
+      "labels": {
+        "current": "Active partnership",
+        "aspirational": "Future partnership",
+        "scale": "Scale",
+        "reach": "Reach",
+        "innovation": "Innovation focus",
+        "programs": "Programmes"
+      },
+      "note": "Note"
     }
   },
   "story": {
@@ -822,6 +1004,88 @@
       "es": {
         "short": "ES",
         "name": "Español"
+      }
+    }
+  },
+  "platforms": {
+    "meta_title": "AlgoRhythmics platforms",
+    "meta_description": "Discover NodeVoyage and Ideonautix, the calm AI platforms from AlgoRhythmics.",
+    "hero": {
+      "label": "Platforms",
+      "title": "Platform lineup",
+      "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed studio.",
+      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
+      "primary": "Test-drive our previews",
+      "secondary": "Book a chat"
+    },
+    "cta": {
+      "title": "Stay close",
+      "text": "Join the community for release news, pilot invites, and accessibility updates.",
+      "primary": "Join the community",
+      "secondary": "Book a chat"
+    },
+    "demos": {
+      "title": "Test-drive our previews",
+      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
+      "nodevoyage": "Launch the NodeVoyage demo",
+      "ideonautix": "Open the Ideonautix studio",
+      "nodevoyage_host": "nodevoyage.algorhythmics.dev",
+      "ideonautix_host": "ideonautix.algorhythmics.dev",
+      "nodevoyage_description": "Build itineraries with AI-assisted routing, offline maps, and collaborative planning.",
+      "ideonautix_description": "Prototype venture rituals and pitch narratives inside a glassy, tactile workspace."
+    },
+    "catalog": {
+      "nodevoyage": {
+        "name": "NodeVoyage",
+        "tagline": "Travel co-pilot for confident journeys",
+        "description": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
+        "status": "Beta invites",
+        "mvp": "Preview: nodevoyage.algorhythmics.dev",
+        "cta": "Discover NodeVoyage",
+        "features": {
+          "nodi-ai": {
+            "title": "Nodi, your guide",
+            "description": "A friendly assistant that learns your style and shapes routes in moments."
+          },
+          "smart-builder": {
+            "title": "Visual trip builder",
+            "description": "Drag, drop, and remix plans with vibe presets and real-time updates."
+          },
+          "mobile-suite": {
+            "title": "Mobile capture kit",
+            "description": "AR translation, live interpretation, photo recognition, and full offline mode."
+          },
+          "community": {
+            "title": "Community sharing",
+            "description": "Swap routes with fellow explorers and plan group trips together."
+          }
+        }
+      },
+      "ideonautix": {
+        "name": "Ideonautix",
+        "tagline": "Founder cockpit for steady growth",
+        "description": "The productivity suite for modern creators — where every idea gets momentum.",
+        "status": "Research sprint",
+        "mvp": "Preview: ideonautix.algorhythmics.dev",
+        "cta": "Discover Ideonautix",
+        "features": {
+          "pitch": {
+            "title": "Pitch assistant",
+            "description": "Get AI-backed feedback on your deck with investor-style pointers."
+          },
+          "revenue": {
+            "title": "Revenue boards",
+            "description": "Track KPIs, forecasts, and cash flow in one glance."
+          },
+          "team": {
+            "title": "Team dynamics",
+            "description": "Spot collaboration patterns and celebrate team wins with AI insights."
+          },
+          "market": {
+            "title": "Market intelligence",
+            "description": "Watch competitors, market shifts, and fresh opportunities with digestible alerts."
+          }
+        }
       }
     }
   }

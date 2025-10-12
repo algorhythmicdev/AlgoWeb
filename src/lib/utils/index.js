@@ -9,17 +9,10 @@ export {
   revealOnScroll,
   useStaggerReveal,
   staggerReveal,
-  useParallax,
-  parallax,
   tilt,
   magnetic,
-  typewriter,
-  morphBlob,
-  ripple,
-  sparkleTrail,
-  particleExplode,
   morphGradient
-} from './animations.js';
+} from '../animations.js';
 
 // Validation utilities
 export {

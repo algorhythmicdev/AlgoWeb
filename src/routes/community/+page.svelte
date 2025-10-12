@@ -9,7 +9,7 @@
   import { voting } from '$stores/voting';
   import Toast from '$components/toast.svelte';
   import en from '$lib/i18n/en.json';
-  import { revealOnScroll, staggerReveal } from '$lib/utils/animations';
+  import { revealOnScroll, staggerReveal } from '$lib/animations';
 
   const fallbackHeroPhrases = Array.isArray(en.community?.hero_rotating)
     ? en.community.hero_rotating
@@ -145,8 +145,6 @@
   variant="particles"
   title={$_('community.hero_title')}
   subtitle={$_('community.hero_subtitle')}
-  tone="evergreen"
-  intensity="soft"
   align="center"
 >
   <svelte:fragment slot="highlights">

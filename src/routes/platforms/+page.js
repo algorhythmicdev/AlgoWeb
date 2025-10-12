@@ -2,7 +2,7 @@ import en from '$lib/i18n/en.json';
 
 export const load = () => {
   const fallbackUrl = en.seo?.default_url ?? 'https://algorhythmics.com';
-  const baseMeta = en.products ?? {};
+  const baseMeta = en.platforms ?? {};
 
   return {
     meta: {

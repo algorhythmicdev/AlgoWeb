@@ -1,79 +1,64 @@
-﻿<script>
-  import { _, json } from 'svelte-i18n';
+<script>
+  import { json } from 'svelte-i18n';
+  import Hero from '$lib/components/Hero.svelte';
+  import { Button, GlassCard, Icon } from '$lib/components';
   import productsData from '$data/products.json';
   import en from '$lib/i18n/en.json';
-  import Hero from '$lib/components/Hero.svelte';
-  import SectionDivider from '$components/SectionDivider.svelte';
-  import MagneticTiltCard from '$lib/components/MagneticTiltCard.svelte';
-  import ProductDemoPreview from '$components/ProductDemoPreview.svelte';
-  import Icon from '$components/icons/Icon.svelte';
-  import { revealOnScroll, staggerReveal } from '$utils/animations';
-  import { Button } from '$lib/components';
 
-  /** @type {Array<'nodevoyage' | 'ideonautix'>} */
-  const productKeys = ['nodevoyage', 'ideonautix'];
-  const products = /** @type {Record<'nodevoyage' | 'ideonautix', any>} */ (productsData);
-  const i18nResources = /** @type {Record<string, any>} */ (en);
+  const productKeys = /** @type {const} */ (['nodevoyage', 'ideonautix']);
 
-  const fallbackHeroLabel = en.products?.hero_label ?? 'Platforms';
-  const fallbackHeroTitle = en.products?.title ?? 'Our Platforms';
-  const fallbackHeroSubtitle = en.products?.subtitle ?? '';
-  const fallbackHeroMission = en.story?.mission_text ?? '';
-  const fallbackShowcaseTitle = en.products?.showcase?.title ?? en.products?.demos?.title ?? '';
-  const fallbackShowcaseSubtitle = en.products?.showcase?.subtitle ?? en.products?.demos?.description ?? '';
-  const fallbackDemosTitle = en.products?.demos?.title ?? '';
-  const fallbackCtaTitle = en.products?.cta_title ?? '';
-  const fallbackCtaText = en.products?.cta_text ?? '';
-  const fallbackCtaJoin = en.products?.cta_join ?? '';
-  const fallbackCtaContact = en.products?.cta_contact ?? '';
-
-  const fallbackProductCopy = productKeys.reduce((acc, key) => {
-    const copy = /** @type {{ name?: string; tagline?: string; description?: string; status?: string; mvp?: string; cta?: string }} */ (
-      en.products?.[key] ?? {}
-    );
-    acc[key] = {
-      name: copy.name ?? '',
-      tagline: copy.tagline ?? '',
-      description: copy.description ?? '',
-      status: copy.status ?? '',
-      mvp: copy.mvp ?? '',
-      cta: copy.cta ?? ''
-    };
-    return acc;
-  }, /** @type {Record<string, { name: string; tagline: string; description: string; status: string; mvp: string; cta: string }>} */ ({}));
-
-  const fallbackFeatureCopy = productKeys.reduce((acc, key) => {
-    const featureCopy = /** @type {Record<string, { title?: string; description?: string }> | undefined} */ (
-      i18nResources[key]?.features
-    );
-    acc[key] = featureCopy ?? {};
-    return acc;
-  }, /** @type {Record<string, Record<string, { title?: string; description?: string }>>} */ ({}));
-
-  const fallbackDemoContent = /** @type {Record<'nodevoyage' | 'ideonautix', { title: string; description: string; host: string; href: string; cta: string; accent: 'voyage' | 'aurora' }>} */ ({
-    nodevoyage: {
-      title: en.products?.demos?.nodevoyage ?? '',
-      description: en.products?.demos?.nodevoyage_description ?? '',
-      host: products.nodevoyage?.demoHost ?? en.products?.demos?.nodevoyage_host ?? '',
-      href: products.nodevoyage?.demoUrl ?? 'https://nodevoyage.algorhythmics.dev/',
-      cta: en.products?.demos?.nodevoyage ?? '',
-      accent: 'voyage'
-    },
-    ideonautix: {
-      title: en.products?.demos?.ideonautix ?? '',
-      description: en.products?.demos?.ideonautix_description ?? '',
-      host: products.ideonautix?.demoHost ?? en.products?.demos?.ideonautix_host ?? '',
-      href: products.ideonautix?.demoUrl ?? 'https://ideonautix.algorhythmics.dev/',
-      cta: en.products?.demos?.ideonautix ?? '',
-      accent: 'aurora'
-    }
+  const accentMap = /** @type {const} */ ({
+    nodevoyage: 'voyage',
+    ideonautix: 'aurora'
   });
 
-  /** @type {Record<string, 'halo' | 'grid' | 'line'>} */
-  const productVariants = {
-    nodevoyage: 'halo',
-    ideonautix: 'grid'
+  const fallbackHero = {
+    label: en.platforms?.hero?.label ?? 'Platforms',
+    title: en.platforms?.hero?.title ?? 'Platform lineup',
+    subtitle: en.platforms?.hero?.subtitle ?? 'Two paths to AI mastery',
+    description:
+      en.platforms?.hero?.description ??
+      'Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.',
+    primaryAction: en.platforms?.hero?.primary ?? 'Test-drive our previews',
+    secondaryAction: en.platforms?.hero?.secondary ?? 'Book a chat',
+    ctaTitle: en.platforms?.cta?.title ?? 'Stay close',
+    ctaText:
+      en.platforms?.cta?.text ??
+      'Join the community for release news, pilot invites, and accessibility updates.',
+    ctaPrimary: en.platforms?.cta?.primary ?? 'Join the community',
+    ctaSecondary: en.platforms?.cta?.secondary ?? 'Book a chat'
   };
+
+  const catalogCopy = /** @type {Record<string, any>} */ (en.platforms?.catalog ?? {});
+  const demosCopy = /** @type {Record<string, any>} */ (en.platforms?.demos ?? {});
+
+  const fallbackProducts = productKeys.reduce(
+    (acc, key) => {
+      const productCopy = /** @type {Record<string, any>} */ (catalogCopy?.[key] ?? {});
+      const productData = /** @type {Record<string, any>} */ (productsData?.[key] ?? {});
+      const featureCopy = /** @type {Record<string, { title?: string; description?: string }>} */ (
+        productCopy.features ?? {}
+      );
+
+      acc[key] = {
+        name: productCopy.name ?? '',
+        tagline: productCopy.tagline ?? '',
+        description: productCopy.description ?? '',
+        status: productCopy.status ?? '',
+        mvp: productCopy.mvp ?? '',
+        cta: productCopy.cta ?? '',
+        demoHref: productData.demoUrl ?? '',
+        demoHost: productData.demoHost ?? demosCopy?.[`${key}_host`] ?? '',
+        demoCta: demosCopy?.[key] ?? productCopy.cta ?? '',
+        features: featureCopy,
+        icon: productData.icon ?? '',
+        accent: accentMap[key] ?? 'voyage'
+      };
+
+      return acc;
+    },
+    /** @type {Record<string, { name: string; tagline: string; description: string; status: string; mvp: string; cta: string; demoHref: string; demoHost: string; demoCta: string; features: Record<string, { title?: string; description?: string }>; icon: string; accent: string }>} */ ({})
+  );
 
   const siteOrigin = (en.seo?.default_url ?? 'https://algorhythmics.com').replace(/\/$/, '');
   const canonicalUrl = `${siteOrigin}/platforms`;
@@ -82,267 +67,140 @@
    * @param {unknown} value
    * @param {string} fallback
    */
-  const ensureString = (value, fallback) => (typeof value === 'string' && value.trim().length ? value : fallback);
+  const ensureString = (value, fallback) =>
+    typeof value === 'string' && value.trim().length ? value : fallback;
 
-  let heroLabel = fallbackHeroLabel;
-  let heroTitle = fallbackHeroTitle;
-  let heroSubtitle = fallbackHeroSubtitle;
-  let heroMission = fallbackHeroMission;
-  let showcaseTitle = fallbackShowcaseTitle;
-  let showcaseSubtitle = fallbackShowcaseSubtitle;
-  let heroPrimaryActionLabel = fallbackDemosTitle;
-  let heroSecondaryActionLabel = fallbackCtaContact;
-  let ctaTitle = fallbackCtaTitle;
-  let ctaText = fallbackCtaText;
-  let ctaPrimaryLabel = fallbackCtaJoin;
-  let ctaSecondaryLabel = fallbackCtaContact;
+  $: heroLabel = ensureString($json?.('platforms.hero.label'), fallbackHero.label);
+  $: heroTitle = ensureString($json?.('platforms.hero.title'), fallbackHero.title);
+  $: heroSubtitle = ensureString($json?.('platforms.hero.subtitle'), fallbackHero.subtitle);
+  $: heroDescription = ensureString($json?.('platforms.hero.description'), fallbackHero.description);
+  $: heroPrimaryAction = ensureString($json?.('platforms.hero.primary'), fallbackHero.primaryAction);
+  $: heroSecondaryAction = ensureString($json?.('platforms.hero.secondary'), fallbackHero.secondaryAction);
 
-  $: heroLabel = ensureString($json?.('products.hero_label'), fallbackHeroLabel);
-  $: heroTitle = ensureString($json?.('products.title'), fallbackHeroTitle);
-  $: heroSubtitle = ensureString($json?.('products.subtitle'), fallbackHeroSubtitle);
-  $: heroMission = ensureString($json?.('story.mission_text'), fallbackHeroMission);
-  $: showcaseTitle = ensureString($json?.('products.showcase.title'), fallbackShowcaseTitle);
-  $: showcaseSubtitle = ensureString($json?.('products.showcase.subtitle'), fallbackShowcaseSubtitle);
-  $: heroPrimaryActionLabel = ensureString($json?.('products.demos.title'), fallbackDemosTitle);
-  $: heroSecondaryActionLabel = ensureString($json?.('products.cta_contact'), fallbackCtaContact);
-  $: ctaTitle = ensureString($json?.('products.cta_title'), fallbackCtaTitle);
-  $: ctaText = ensureString($json?.('products.cta_text'), fallbackCtaText);
-  $: ctaPrimaryLabel = ensureString($json?.('products.cta_join'), fallbackCtaJoin);
-  $: ctaSecondaryLabel = ensureString($json?.('products.cta_contact'), fallbackCtaContact);
+  $: ctaTitle = ensureString($json?.('platforms.cta.title'), fallbackHero.ctaTitle);
+  $: ctaText = ensureString($json?.('platforms.cta.text'), fallbackHero.ctaText);
+  $: ctaPrimaryLabel = ensureString($json?.('platforms.cta.primary'), fallbackHero.ctaPrimary);
+  $: ctaSecondaryLabel = ensureString($json?.('platforms.cta.secondary'), fallbackHero.ctaSecondary);
 
-  $: catalogEntries = productKeys.reduce((acc, key) => {
-    const fallback = fallbackProductCopy[key];
-    const source = products[key];
-    const name = ensureString($json?.(`products.${key}.name`), fallback.name);
-    if (name.trim().length) {
-      const fallbackDemo = fallbackDemoContent[key];
-      const previewLabel = ensureString($json?.(`products.demos.${key}`), fallbackDemo.cta);
-      const ctaLabel = ensureString($json?.(`products.${key}.cta`), fallback.cta);
-      const buttonLabel = previewLabel || ctaLabel || `Visit ${name}`;
-      acc.push({
-        id: key,
-        name,
-        status: ensureString($json?.(`products.${key}.status`), fallback.status),
-        tagline: ensureString($json?.(`products.${key}.tagline`), fallback.tagline),
-        description: ensureString($json?.(`products.${key}.description`), fallback.description),
-        mvp: ensureString($json?.(`products.${key}.mvp`), fallback.mvp),
-        cta: ctaLabel,
-        previewLabel,
-        buttonLabel,
-        buttonAriaLabel: `${buttonLabel} (opens in a new tab)`,
-        demoHref: ensureString(source?.demoUrl, fallbackDemo.href),
-        demoHost: ensureString(source?.demoHost, fallbackDemo.host),
-        features: (source?.features ?? []).slice(0, 4).map(
-          /** @param {{ id: string; icon: string }} feature */ (feature) => {
-            const fallbackFeature = fallbackFeatureCopy[key]?.[feature.id] ?? {};
-            return {
-              id: feature.id,
-              icon: feature.icon,
-              title: ensureString($json?.(`${key}.features.${feature.id}.title`), fallbackFeature.title ?? ''),
-              description: ensureString(
-                $json?.(`${key}.features.${feature.id}.description`),
-                fallbackFeature.description ?? ''
-              )
-            };
-          }
-        ).filter(
-          /** @param {{ title: string }} feature */
-          (feature) => feature.title
-        )
-      });
-    }
-    return acc;
-  }, /** @type {Array<{
-    id: string;
-    name: string;
-    status: string;
-    tagline: string;
-    description: string;
-    mvp: string;
-    cta: string;
-    previewLabel: string;
-    buttonLabel: string;
-    buttonAriaLabel: string;
-    demoHref: string;
-    demoHost: string;
-    features: Array<{ id: string; icon: string; title: string; description: string }>;
-  }>} */ ([]));
+  $: platforms = productKeys.map((key) => {
+    const fallback = fallbackProducts[key];
+    const product = /** @type {Record<string, any>} */ (productsData?.[key] ?? {});
 
-  $: demos = productKeys.reduce((acc, key) => {
-    const fallback = fallbackDemoContent[key];
-    const source = products[key];
-    const titleValue = ensureString($json?.(`products.demos.${key}`), fallback.title);
-    const descriptionValue = ensureString($json?.(`products.demos.${key}_description`), fallback.description);
-    const hostValue = ensureString($json?.(`products.demos.${key}_host`), fallback.host);
-    if (titleValue.trim().length || descriptionValue.trim().length) {
-      acc.push({
-        id: key,
-        title: titleValue,
-        description: descriptionValue,
-        host: hostValue,
-        href: ensureString(source?.demoUrl, fallback.href),
-        cta: ensureString($json?.(`products.demos.${key}`), fallback.cta),
-        accent: fallback.accent
-      });
-    }
-    return acc;
-  }, /** @type {Array<{ id: string; title: string; description: string; host: string; href: string; cta: string; accent: 'voyage' | 'aurora' }>} */ ([]));
+    const featureEntries = /** @type {Array<{ id: string; icon: string }>} */ (product.features ?? []);
 
-  let spotlightEntries = [];
-  $: spotlightEntries = catalogEntries.slice(0, 2);
+    const features = featureEntries.reduce(
+      (list, feature) => {
+        const fallbackFeature = fallback.features?.[feature.id] ?? {};
+        const title = ensureString(
+          $json?.(`platforms.catalog.${key}.features.${feature.id}.title`),
+          fallbackFeature.title ?? ''
+        );
+
+        if (!title) {
+          return list;
+        }
+
+        list.push({
+          id: feature.id,
+          icon: feature.icon,
+          title,
+          description: ensureString(
+            $json?.(`platforms.catalog.${key}.features.${feature.id}.description`),
+            fallbackFeature.description ?? ''
+          )
+        });
+
+        return list;
+      },
+      /** @type {Array<{ id: string; icon: string; title: string; description: string }> } */ ([])
+    );
+
+    return {
+      id: key,
+      name: ensureString($json?.(`platforms.catalog.${key}.name`), fallback.name),
+      tagline: ensureString($json?.(`platforms.catalog.${key}.tagline`), fallback.tagline),
+      description: ensureString($json?.(`platforms.catalog.${key}.description`), fallback.description),
+      status: ensureString($json?.(`platforms.catalog.${key}.status`), fallback.status),
+      mvp: ensureString($json?.(`platforms.catalog.${key}.mvp`), fallback.mvp),
+      cta: ensureString($json?.(`platforms.catalog.${key}.cta`), fallback.cta),
+      demoHref: ensureString(product.demoUrl, fallback.demoHref),
+      demoHost: ensureString(product.demoHost, fallback.demoHost),
+      demoCta: ensureString($json?.(`platforms.demos.${key}`), fallback.demoCta),
+      icon: fallback.icon,
+      accent: fallback.accent,
+      features
+    };
+  });
 </script>
 
 <svelte:head>
   <link rel="canonical" href={canonicalUrl} />
 </svelte:head>
 
-<Hero variant="halo" title={heroTitle} subtitle={heroSubtitle} tone="aurora" intensity="balanced">
+<Hero variant="grid" title={heroTitle} subtitle={heroSubtitle}>
   <svelte:fragment slot="status">
-    {#if heroLabel}
-      <span class="products-hero__eyebrow">{heroLabel}</span>
-    {/if}
+    <span class="platforms-hero__status">{heroLabel}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="description">
-    {#if heroMission}
-      <p class="products-hero__mission">{heroMission}</p>
+    {#if heroDescription}
+      <p class="platforms-hero__description">{heroDescription}</p>
     {/if}
   </svelte:fragment>
 
   <svelte:fragment slot="actions">
-    <div class="products-hero__actions">
-      {#if heroPrimaryActionLabel}
-        <Button variant="gradient" href="#demos">{heroPrimaryActionLabel}</Button>
+    <div class="platforms-hero__actions">
+      {#if heroPrimaryAction}
+        <Button href="#platforms-overview" variant="gradient" size="lg">
+          {heroPrimaryAction}
+        </Button>
       {/if}
-      {#if heroSecondaryActionLabel}
-        <Button variant="secondary" href="/contact" elevate>
-          {heroSecondaryActionLabel}
+      {#if heroSecondaryAction}
+        <Button href="/contact" variant="secondary" size="lg">
+          {heroSecondaryAction}
         </Button>
       {/if}
     </div>
   </svelte:fragment>
-
-  <svelte:fragment slot="aside">
-    {#if spotlightEntries.length}
-      <div class="products-hero__spotlights">
-        {#each spotlightEntries as entry (entry.id)}
-          <MagneticTiltCard
-            class="products-hero__card"
-            data-variant={productVariants[entry.id] ?? 'halo'}
-            interactive={false}
-            id={`spotlight-${entry.id}`}
-            aria-label={`${entry.name} overview`}
-          >
-            <header class="products-hero__card-header">
-              <span class="products-hero__card-name">{entry.name}</span>
-              {#if entry.status}
-                <span class="surface-chip" data-tone="accent">{entry.status}</span>
-              {/if}
-            </header>
-            <h3>{entry.tagline}</h3>
-            <p>{entry.description}</p>
-            <div class="products-hero__card-meta">
-              {#if entry.mvp}
-                <span>{entry.mvp}</span>
-              {/if}
-              {#if entry.demoHost}
-                <span>{entry.demoHost}</span>
-              {/if}
-            </div>
-            <div class="products-hero__card-actions">
-              <Button
-                class="products-hero__card-action"
-                variant="secondary"
-                href={entry.demoHref}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label={entry.buttonAriaLabel}
-                elevate
-              >
-                {entry.buttonLabel}
-              </Button>
-              {#if entry.cta}
-                <a class="products-hero__card-link" href={`#${entry.id}`}>
-                  {entry.cta}
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              {/if}
-            </div>
-          </MagneticTiltCard>
-        {/each}
-      </div>
-    {/if}
-  </svelte:fragment>
 </Hero>
 
-<SectionDivider tone="voyage" />
-
-<section class="products-demos section-sm" id="demos" use:revealOnScroll>
+<section id="platforms-overview" class="platforms-overview">
   <div class="container">
-    <div class="products-demos__header" use:staggerReveal={{ stagger: 120 }}>
-      <span class="products-demos__eyebrow text-gradient">{$_('products.demos.title')}</span>
-      <h2>{showcaseTitle}</h2>
-      <p>{showcaseSubtitle}</p>
-    </div>
-    <div class="products-demos__grid" use:staggerReveal={{ stagger: 160, selector: '.demo-preview' }}>
-      {#each demos as demo (demo.id)}
-        <ProductDemoPreview
-          title={demo.title}
-          description={demo.description}
-          host={demo.host}
-          href={demo.href}
-          cta={demo.cta}
-          accent={demo.accent}
-        />
-      {/each}
-    </div>
-  </div>
-</section>
-
-<SectionDivider tone="aurora" />
-
-<section class="products-catalog section-sm" use:revealOnScroll>
-  <div class="container">
-    <div class="products-catalog__grid">
-      {#each catalogEntries as entry, index (entry.id)}
-        <MagneticTiltCard
-          class="products-catalog__card"
-          data-variant={productVariants[entry.id] ?? 'grid'}
-          id={entry.id}
-          staggerOptions={{ delay: 140 + index * 90 }}
+    <div class="platforms-grid">
+      {#each platforms as platform}
+        <GlassCard
+          as="article"
+          id={platform.id}
+          class="platform-card"
+          halo={platform.accent === 'aurora'}
+          particles={platform.accent !== 'aurora'}
+          padding="lg"
         >
-          <header class="products-catalog__header">
-            <span class="products-catalog__eyebrow">{entry.name}</span>
-            {#if entry.status}
-              <span class="surface-chip" data-tone="accent">{entry.status}</span>
+          <header class="platform-card__header">
+            {#if platform.status}
+              <span class="platform-card__status">{platform.status}</span>
+            {/if}
+            <h2 class="platform-card__title">{platform.name}</h2>
+            {#if platform.tagline}
+              <p class="platform-card__tagline">{platform.tagline}</p>
             {/if}
           </header>
 
-          <h3 class="products-catalog__tagline">{entry.tagline}</h3>
-          <p>{entry.description}</p>
+          {#if platform.description}
+            <p class="platform-card__description">{platform.description}</p>
+          {/if}
 
-          <div class="products-catalog__meta">
-            {#if entry.mvp}
-              <span>{entry.mvp}</span>
-            {/if}
-            {#if entry.demoHost}
-              <span>{entry.demoHost}</span>
-            {/if}
-          </div>
-
-          {#if entry.features.length}
-            <ul class="products-catalog__features">
-              {#each entry.features as feature (feature.id)}
-                <li class="surface-panel products-catalog__feature">
-                  <span class="products-catalog__feature-icon">
-                    <Icon name={feature.icon} size={26} />
+          {#if platform.features.length}
+            <ul class="platform-card__features">
+              {#each platform.features as feature}
+                <li class="platform-card__feature">
+                  <span class="platform-card__feature-icon">
+                    <Icon name={feature.icon} size="22" />
                   </span>
-                  <div class="products-catalog__feature-copy">
-                    <span class="products-catalog__feature-title">{feature.title}</span>
+                  <div class="platform-card__feature-copy">
+                    <span class="platform-card__feature-title">{feature.title}</span>
                     {#if feature.description}
-                      <span class="products-catalog__feature-description">{feature.description}</span>
+                      <span class="platform-card__feature-description">{feature.description}</span>
                     {/if}
                   </div>
                 </li>
@@ -350,418 +208,222 @@
             </ul>
           {/if}
 
-          <div class="products-catalog__actions">
+          <div class="platform-card__actions">
             <Button
-              class="products-catalog__primary"
-              variant="gradient"
-              href={entry.demoHref}
+              href={platform.demoHref}
               target="_blank"
-              rel="noreferrer noopener"
-              aria-label={entry.buttonAriaLabel}
+              rel="noopener noreferrer"
+              variant="gradient"
+              elevate
+              aria-label={`${platform.demoCta || platform.cta || platform.name} (${platform.demoHost})`}
             >
-              {entry.buttonLabel}
+              {platform.demoCta || platform.cta || platform.name}
             </Button>
-            {#if entry.cta}
-              <a class="products-catalog__secondary" href={`#spotlight-${entry.id}`}>
-                {entry.cta}
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
+            {#if platform.mvp}
+              <span class="platform-card__meta">{platform.mvp}</span>
             {/if}
           </div>
-        </MagneticTiltCard>
+        </GlassCard>
       {/each}
     </div>
   </div>
 </section>
 
-<section class="products-cta section" use:revealOnScroll>
+<section class="platforms-cta">
   <div class="container">
-    <MagneticTiltCard class="products-cta__card" data-variant="line" interactive={false}>
-      <div class="products-cta__copy">
+    <GlassCard class="platforms-cta__surface" particles padding="lg">
+      <div class="platforms-cta__copy">
         <h2>{ctaTitle}</h2>
         <p>{ctaText}</p>
       </div>
-      <div class="products-cta__actions">
+      <div class="platforms-cta__actions">
         {#if ctaPrimaryLabel}
-          <Button variant="gradient" href="/community">{ctaPrimaryLabel}</Button>
+          <Button href="/community" variant="gradient">{ctaPrimaryLabel}</Button>
         {/if}
         {#if ctaSecondaryLabel}
-          <Button variant="secondary" href="/contact" elevate>{ctaSecondaryLabel}</Button>
+          <Button href="/contact" variant="secondary">{ctaSecondaryLabel}</Button>
         {/if}
       </div>
-    </MagneticTiltCard>
+    </GlassCard>
   </div>
 </section>
 
 <style>
-  .products-hero__eyebrow {
+  .platforms-hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
     font-size: var(--text-small);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: color-mix(in srgb, var(--muted) 70%, transparent);
+    background: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.28) 12%);
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 65%, rgba(255, 255, 255, 0.3) 35%);
   }
 
-  .products-hero__mission {
-    max-width: 58ch;
-    color: var(--text-secondary);
-    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  .platforms-hero__description {
+    max-width: 60ch;
+    margin: 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
     line-height: 1.6;
+    color: var(--text-secondary);
   }
 
-  .products-hero__actions {
+  .platforms-hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-md, 1rem);
     align-items: center;
   }
 
-  .products-hero__spotlights {
+  .platforms-overview {
+    padding: clamp(3.5rem, 8vw, 6.5rem) 0;
+  }
+
+  .platforms-grid {
     display: grid;
-    gap: var(--grid-gap-xl);
+    gap: clamp(1.75rem, 4vw, 2.75rem);
   }
 
-  :global(.products-hero__card.os-window),
-  :global(.products-catalog__card.os-window),
-  :global(.products-cta__card.os-window) {
-    --surface-glass-blur: 22px;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.22) 14%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.36) 36%);
-    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.24);
-    --grain-opacity: 0.05;
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.28) 32%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.3) 42%);
-  }
-
-  :global([data-base-theme='dark'] .products-hero__card.os-window),
-  :global([data-base-theme='dark'] .products-catalog__card.os-window),
-  :global([data-base-theme='dark'] .products-cta__card.os-window) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--voyage-blue-rgb), 0.3) 30%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 58%, rgba(255, 255, 255, 0.22) 42%);
-    --surface-glass-shadow: 0 34px 64px rgba(var(--voyage-blue-rgb), 0.34);
-  }
-
-  :global(.products-hero__card.os-window[data-variant='halo']),
-  :global(.products-catalog__card.os-window[data-variant='halo']) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--aurora-purple-rgb), 0.28) 18%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 62%, rgba(255, 255, 255, 0.36) 38%);
-    --surface-glass-shadow: 0 30px 60px rgba(var(--aurora-purple-rgb), 0.28);
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--aurora-purple-rgb), 0.18) 5%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--aurora-purple-rgb), 0.3) 34%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--aurora-purple-rgb), 0.32) 44%);
-  }
-
-  :global([data-base-theme='dark'] .products-hero__card.os-window[data-variant='halo']),
-  :global([data-base-theme='dark'] .products-catalog__card.os-window[data-variant='halo']) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 68%, rgba(var(--aurora-purple-rgb), 0.36) 32%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.58) 58%, rgba(255, 255, 255, 0.18) 42%);
-    --surface-glass-shadow: 0 36px 68px rgba(var(--aurora-purple-rgb), 0.34);
-  }
-
-  :global(.products-cta__card.os-window[data-variant='line']) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--signal-yellow-rgb), 0.24) 16%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 58%, rgba(255, 255, 255, 0.36) 42%);
-    --surface-glass-shadow: 0 32px 62px rgba(var(--signal-yellow-rgb), 0.24);
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 95%, rgba(var(--signal-yellow-rgb), 0.18) 5%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--signal-yellow-rgb), 0.3) 34%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--signal-yellow-rgb), 0.3) 44%);
-  }
-
-  :global([data-base-theme='dark'] .products-cta__card.os-window[data-variant='line']) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 68%, rgba(var(--signal-yellow-rgb), 0.34) 32%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.58) 58%, rgba(255, 255, 255, 0.18) 42%);
-    --surface-glass-shadow: 0 36px 68px rgba(var(--signal-yellow-rgb), 0.3);
-  }
-
-  :global(.products-hero__card) {
+  :global(.platform-card) {
     display: grid;
-    gap: clamp(1.1rem, 2.4vw, 1.8rem);
-    padding: var(--card-padding-lg);
-    min-height: 100%;
+    gap: clamp(1.1rem, 3vw, 1.8rem);
   }
 
-  .products-hero__card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-sm, 0.75rem);
-  }
-
-  .products-hero__card-name {
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  :global(.products-hero__card) h3 {
-    margin: 0;
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    line-height: 1.25;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-  }
-
-  :global(html[data-theme='hc'] .products-hero__card h3),
-  :global(html[data-theme='hc'] .products-catalog__card h3),
-  :global(html[data-theme='hc'] .products-cta__card h2) {
-    background: none;
-    -webkit-text-fill-color: currentColor;
-    color: var(--text);
-  }
-
-  :global(.products-hero__card) p {
-    margin: 0;
-    color: var(--text-secondary);
-  }
-
-  .products-hero__card-meta {
-    display: flex;
-    flex-wrap: wrap;
+  .platform-card__header {
+    display: grid;
     gap: 0.75rem;
-    font-size: var(--text-small);
-    color: color-mix(in srgb, var(--text-secondary) 78%, transparent);
   }
 
-  .products-hero__card-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
-    align-items: center;
-  }
-
-  :global(.products-hero__card-action) {
-    flex-shrink: 0;
-  }
-
-  :global(.products-hero__card-link) {
+  .platform-card__status {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
     font-size: var(--text-small);
-    color: var(--voyage-blue);
-    text-decoration: none;
-  }
-
-  :global(.products-hero__card-link) svg {
-    transition: transform 180ms var(--ease-in-out);
-  }
-
-  :global(.products-hero__card-link:hover) svg,
-  :global(.products-hero__card-link:focus-visible) svg {
-    transform: translateX(4px);
-  }
-
-  .products-demos__header {
-    display: grid;
-    gap: clamp(0.75rem, 2vw, 1.4rem);
-    max-width: min(72ch, 100%);
-    margin: 0 auto var(--space-2xl, clamp(2rem, 5vw, 3rem));
-    text-align: center;
-  }
-
-  .products-demos__header h2 {
-    margin: 0;
-  }
-
-  .products-demos__header p {
-    margin: 0;
-    color: var(--text-secondary);
-  }
-
-  .products-demos__grid {
-    display: grid;
-    gap: var(--grid-gap-xl);
-  }
-
-  .products-catalog__grid {
-    display: grid;
-    gap: var(--grid-gap-2xl);
-  }
-
-  :global(.products-catalog__card) {
-    display: grid;
-    gap: clamp(1.2rem, 2.8vw, 2.2rem);
-    padding: var(--card-padding-xl);
-  }
-
-  .products-catalog__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-sm, 0.75rem);
-  }
-
-  .products-catalog__eyebrow {
-    font-size: var(--text-small);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: color-mix(in srgb, var(--muted) 65%, transparent);
+    color: color-mix(in srgb, var(--text) 82%, rgba(var(--voyage-blue-rgb), 0.2) 18%);
+    background: color-mix(in srgb, var(--bg) 84%, rgba(var(--voyage-blue-rgb), 0.22) 16%);
+    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 68%, rgba(255, 255, 255, 0.32) 32%);
   }
 
-  .products-catalog__tagline {
+  .platform-card__title {
     margin: 0;
-    font-size: clamp(1.55rem, 3vw, 2.2rem);
-    line-height: 1.3;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    font-size: clamp(2rem, 4vw, 2.6rem);
   }
 
-  :global(.products-catalog__card) p {
+  .platform-card__tagline {
     margin: 0;
+    font-size: clamp(1.2rem, 3vw, 1.45rem);
     color: var(--text-secondary);
   }
 
-  .products-catalog__meta {
+  .platform-card__description {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .platform-card__features {
+    list-style: none;
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.2rem);
+    margin: 0;
+    padding: 0;
+  }
+
+  .platform-card__feature {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: start;
+  }
+
+  .platform-card__feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.9rem;
+    border: 1px solid var(--surface-pill-border, color-mix(in srgb, var(--border) 70%, transparent));
+    background: color-mix(in srgb, var(--surface-pill-bg, var(--bg-elev-2)) 76%, rgba(var(--voyage-blue-rgb), 0.18) 24%);
+    box-shadow: var(--surface-pill-shadow, 0 10px 24px rgba(15, 23, 42, 0.12));
+    color: color-mix(in srgb, var(--grad-b) 65%, var(--text) 35%);
+  }
+
+  .platform-card__feature-title {
+    display: block;
+    font-weight: 600;
+  }
+
+  .platform-card__feature-description {
+    display: block;
+    font-size: var(--text-small);
+    color: color-mix(in srgb, var(--text-secondary) 72%, transparent);
+  }
+
+  .platform-card__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: var(--space-sm, 0.75rem);
+    align-items: center;
+  }
+
+  .platform-card__meta {
     font-size: var(--text-small);
     color: color-mix(in srgb, var(--text-secondary) 75%, transparent);
   }
 
-  .products-catalog__features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .platforms-cta {
+    padding: clamp(3.75rem, 8vw, 6.5rem) 0;
+  }
+
+  :global(.platforms-cta__surface) {
     display: grid;
-    gap: clamp(0.85rem, 2vw, 1.4rem);
-  }
-
-  .products-catalog__feature {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: clamp(0.75rem, 2vw, 0.95rem);
-    align-items: start;
-  }
-
-  .products-catalog__feature-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 0.85rem;
-    border: 1px solid var(--surface-pill-border);
-    background: color-mix(in srgb, var(--surface-pill-bg) 72%, rgba(var(--voyage-blue-rgb), 0.18) 28%);
-    box-shadow: var(--surface-pill-shadow);
-    color: color-mix(in srgb, var(--grad-b) 68%, var(--text) 32%);
-  }
-
-  .products-catalog__feature-copy {
-    display: grid;
-    gap: 0.35rem;
-  }
-
-  .products-catalog__feature-title {
-    font-weight: 600;
-  }
-
-  .products-catalog__feature-description {
-    font-size: var(--text-small);
-    color: color-mix(in srgb, var(--text-secondary) 70%, transparent);
-  }
-
-  .products-catalog__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
     align-items: center;
   }
 
-  .products-catalog__secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: var(--text-small);
-    color: color-mix(in srgb, var(--grad-a) 65%, var(--text) 35%);
-    text-decoration: none;
-  }
-
-  .products-catalog__secondary svg {
-    transition: transform 180ms var(--ease-in-out);
-  }
-
-  .products-catalog__secondary:hover svg,
-  .products-catalog__secondary:focus-visible svg {
-    transform: translateX(4px);
-  }
-
-  :global(.products-cta__card) {
+  .platforms-cta__copy {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: center;
-    gap: var(--grid-gap-xl);
-    padding: var(--card-padding-xl);
+    gap: 0.75rem;
   }
 
-  .products-cta__copy {
-    display: grid;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
-  }
-
-  .products-cta__copy h2 {
+  .platforms-cta__copy h2 {
     margin: 0;
   }
 
-  .products-cta__copy p {
+  .platforms-cta__copy p {
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+    line-height: 1.6;
   }
 
-  .products-cta__actions {
+  .platforms-cta__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm, 0.75rem);
-    justify-content: flex-end;
   }
 
-  @media (max-width: 1100px) {
-    .products-hero__spotlights {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-  }
-
-  @media (max-width: 880px) {
-    .products-demos__grid,
-    .products-catalog__grid {
-      gap: var(--grid-gap-xl);
+  @media (min-width: 960px) {
+    .platforms-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    :global(.products-catalog__card),
-    :global(.products-hero__card) {
-      padding: var(--card-padding-md);
-    }
-
-    :global(.products-cta__card) {
-      grid-template-columns: 1fr;
-      text-align: left;
-    }
-
-    .products-cta__actions {
-      justify-content: flex-start;
+    :global(.platforms-cta__surface) {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     }
   }
 
-  @media (max-width: 640px) {
-    .products-hero__actions,
-    .products-hero__card-actions,
-    .products-catalog__actions,
-    .products-cta__actions {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    :global(.products-hero__card-link),
-    :global(.products-catalog__secondary) {
-      justify-content: center;
+  @media (prefers-reduced-motion: reduce) {
+    :global(.platform-card),
+    :global(.platforms-cta__surface) {
+      animation: none;
     }
   }
 </style>
