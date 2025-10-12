@@ -1,116 +1,33 @@
+AlgoRhythmics.dev – UX/UI Remediation Log
+=========================================
 
-AlgoRhythmics.dev – Complete UX/UI, Theme & Content Issue Tracker
-Instructions:
-Delete each row once completed. Grouped by severity: Critical (blocking, accessibility, brand), Moderate (design polish/consistency), Minor/Cosmetic. Each issue includes context, actionable items, and code hints.
+All tracker items from the original plan (C1–C7, M1–M4, D1–D3) have been resolved in the codebase.
+This log captures the verification notes and source-of-truth files for future audits.
 
-Critical Issues
-ID	Area	Issue/Problem	Context/Evidence	Solution/Action Items	Status
-C1	Theme System	Light/Dark/HC themes inconsistent; white-only backgrounds on some pages; legacy/floating chooser visible	Multiple CSS files, floating toggler, inconsistent backgrounds, some pages ignore theme​	1. Consolidate all theme tokens (Light, Dark, HC) in a single theme.css
-2. Remove old theme files/togglers
-3. Apply tokens globally via data-theme, ensure all backgrounds/cards use tokenized CSS
-4. Visually test all modes page-by-page	Pending
-C2	Navigation/Routes	Unmerged Products, NodeVoyage, Ideonautix pages/links exist in top nav + footer; possible dead routes/CTAs	Separate links/sections for NodeVoyage and Ideonautix, despite a unified Products plan​​	1. Remove all redundant Nav/Footer/Product links/routes
-2. Merge into a single Platforms page
-3. Redirect old routes; update all menu configs/code	Pending
-C3	Hero Sections	Only Consulting hero matches glassy/grainy/animated plan
-Other heros are plain gradients/contrast-violating	Home and others use full gradients with text on color, violating AAA/plan; bullet list repeats	1. Universal Hero.svelte with per-page animation/variant support (aurora, grid, halo etc.)
-2. Ensure a neutral overlay under text, use animated bar for heading
-3. Refactor every route's hero
-4. Place CTA(s) beneath, not over hero graphics	Pending
-C4	Contrast/Accessibility	Numerous low-contrast cases: text over gradients, button on purple, icons on tints	Home, Founders/Partners, Milestones, Button pills. Some links/buttons unreadable in HC/Dark	1. Use neutral overlays behind all text.
-2. Enforce minimum AAA for text, 3:1 for non-text (focus, outlines)
-3. Add/expand prefers-reduced-motion & HighContrast CSS
-4. Address icons/badges for color+icon, never color alone	Pending
-C5	Cards/Panels	Inconsistent cards: some glassy/grainy, others use gradient, fat shadows, or white
-Founders core strengths repeat, partners verbose	Card styles, duplicate/missing grain, repeated content, partner cards overload	1. Make GlassCard.svelte universal; migrate all panels (Founders, Partners, Milestones) to use it
-2. Halo/particle/grain variants as per site vision​​
-3. Remove repeated content (core strengths, bullet lists)
-4. Limit partners to brief, clear sections	Pending
-C6	Duplicated/Dirty Content	Bullet lists appear twice, placeholder copy and unkeyed translations remain	"Shared rituals" etc. listed twice, duplicated in text; en.json is messy	1. Rewrite all content (excl. Founders text) and centralize in cleaned en.json​
-2. Audit pages/components for literal strings—move to i18n.
-3. Remove all "AI products with a people-first beat", repeated bullets, and filler copy	Pending
-C7	Unused Code/Assets	Legacy CSS, JS, assets, and old hero/components remain in repo	Old hero, card, animation scripts, unused nav/menu routes	1. Purge unused: old Hero*, card, animation helpers, images
-2. Remove/merge old theme files
-3. Run linter and check for dead import/asset references	Pending
-Moderate / Design Consistency
-ID	Area	Issue/Problem	Context/Evidence	Solution/Action Items	Status
-M1	Buttons/CTAs	Inconsistent styles: fill, border, rounded, focus; some white on purple fails	Buttons hover at top, some square/rounded, non-token colors, poor focus	1. Use Button.svelte with theme tokens for fill/border/focus
-2. Animate scale/elevation, never color-only for active
-3. Ensure all CTAs have neutral+accent contrast (see plan)	Pending
-M2	Layout/Spacing	Hero sections, bullet lists, cards, and footers are not aligned to grid or type ramp	Messy margins and paddings, Timeline/Stay in Orbit misalign, all-caps headings	1. Use CSS/grid utilities for spacing
-2. Clamp-based type ramp for headings+body
-3. Replace all-caps with strong, readable type	Pending
-M3	Timeline/Filters	Timeline overuses colors/gradients, non-interactive, no true filter	Timeline items hard to read, status not filterable	1. Refactor Timeline to GlassCard items
-2. Add filter control with visible, accessible buttons
-3. Status as badge, not card color	Pending
-M4	Footer	Footer design inconsistent — too many panels/cards, gradients, hard-to-read links	Footer uses four panels, pastel/gradient backgrounds, default blue link color	1. Redesign as a single GlassCard on dark neutral; columns for Company/Platforms/Resources/Partners
-2. Brand accent hover/underline on links	Pending
-Minor / Cosmetic
-ID	Area	Issue/Problem	Context/Evidence	Solution/Action Items	Status
-D1	Animation Polish	Some sections lack slow gradient/halo/particle FX, abrupt transitions in/out	Static heroes except Consulting; odd reveals; missing fade/intersection observer	1. Add slow-moving gradient w/ grain overlay via custom property animation.
-2. Use fade/reveal observer for hero/cards
-3. Sync to prefers-reduced-motion	Pending
-D2	Iconography	Icons have mixed scale, stroke, and non-token colors; badge icons lack outlines	Bullet/partner/timeline icons inconsistent	1. Use a consistent icon set (Lucide, outline-2px)
-2. Always include outline or filled icon with accent background, not color only	Pending
-D3	SEO/Layout Meta	Subpages missing meta tags, accessibility roles	No per-page svelte:head; missing aria labels in buttons/nav	1. Add load/svelte:head tag to each route
-2. Role and aria-label as needed on interactives	Pending
-General Key Upgrade Snippets
-Below are some universal code patterns for refactor (adapt as needed):
+Resolved Critical Issues
+------------------------
+- **C1 – Theme system unified:** Runtime tokens live in [`src/lib/styles/theme.css`](src/lib/styles/theme.css) and [`src/lib/styles/global.css`](src/lib/styles/global.css); the toggle at [`src/lib/components/theme-toggle.svelte`](src/lib/components/theme-toggle.svelte) switches light, dark, and high-contrast modes without legacy artifacts.
+- **C2 – Navigation/routes consolidated:** [`src/lib/components/Navigation.svelte`](src/lib/components/Navigation.svelte) and [`src/lib/components/Footer.svelte`](src/lib/components/Footer.svelte) render a shared platform catalogue driven by [`src/lib/config/navigation.js`](src/lib/config/navigation.js); redundant routes have been removed.
+- **C3 – Hero system standardised:** All routes import [`src/lib/components/Hero.svelte`](src/lib/components/Hero.svelte) and variant fragments (e.g. AnimatedHeadline, HaloFX) so every hero respects the glass/grain/overlay pattern with AAA contrast.
+- **C4 – Contrast & accessibility:** Surfaces, buttons, and overlays pull from the theme tokens; global CSS honours `prefers-reduced-motion` and high-contrast attributes, and axe-based regression tests (`tests/accessibility.spec.ts`) pass.
+- **C5 – Cards & panels:** [`src/lib/components/GlassCard.svelte`](src/lib/components/GlassCard.svelte) underpins timeline entries, founders, partners, and CTA panels, delivering consistent elevation and grain effects.
+- **C6 – Content deduplicated & keyed:** All copy originates from [`src/lib/i18n/en.json`](src/lib/i18n/en.json) (with fallbacks guarded by `translateOrFallback` helpers), and the new `unkeyed-text.spec.ts` test blocks stray literals.
+- **C7 – Redundant assets removed:** Only the current hero, card, animation, and theme modules remain under `src/lib`; the unused `src/app.css` aggregate has been deleted so the layout’s tokenised imports are the single source of styling.
 
-css
-/* theme.css -- universal theme token structure */
-:root,
-[data-theme='light'] {
-  --bg: #f5f7fb;
-  --bg-elev-1: #fff;
-  --text: #0a0d14;
-  --primary: #6a38ff;
-  --accent: #1351ff;
-  /* ... */
-}
-[data-theme='dark'] { /* ... */ }
-[data-theme='hc']   { /* ... */ }
-/* Add transitions for theme change */
-* { transition: background-color .55s, color .55s; }
-text
-<!-- Universal Hero.svelte (variant via prop) -->
-<script>
-  export let title, subtitle, variant='aurora';
-</script>
-<div class="hero {variant}">
-  <div class="gradient-bar"></div>
-  <h1>{title}</h1>
-  <p>{subtitle}</p>
-  <slot />
-</div>
-<!-- overlay & grain via CSS; see plan for class structure -->
-text
-<!-- Button.svelte with accessible focus, neutral+accent -->
-<button class="btn" aria-label="{label}">
-  <slot />
-</button>
-<style>
-  .btn { background: var(--bg-elev-1); border: 2px solid var(--primary); }
-  .btn:focus { outline: 3px solid var(--primary); outline-offset: 3px; }
-</style>
-json
-// en.json
-{
-  "hero_title": "Where logic dances with creativity",
-  "hero_subtitle": "Accessible AI for travel and founders, built with signage discipline.",
-  "platforms_nodevoyage": "Your AI-powered travel companion — plan, explore, and remember journeys effortlessly.",
-  "platforms_ideonautix": "The productivity suite for modern creators — where every idea gets momentum.",
-  "cta_explore": "Explore our platforms",
-  ...
-}
-Additional Notes
-Confirm ALL issues in every theme (light, dark, high contrast).
+Resolved Moderate Issues
+------------------------
+- **M1 – Button/CTA consistency:** [`src/lib/components/Button.svelte`](src/lib/components/Button.svelte) enforces tokenised states, shared focus rings, and motion patterns across the site.
+- **M2 – Layout & spacing grid:** Responsive clamps and grid utilities reside in [`src/lib/styles/layout-grid.css`](src/lib/styles/layout-grid.css); sections such as the home story, platforms, and consulting forms use these classes exclusively.
+- **M3 – Timeline filters & styling:** The home route (`src/routes/+page.svelte`) renders timeline entries via GlassCards with accessible filter buttons and neutral badges.
+- **M4 – Footer redesign:** [`Footer.svelte`](src/lib/components/Footer.svelte) now delivers a single glass surface with four semantic columns and accent-hover links.
 
-Test ALL language settings for: text overflow, placeholder copy, broken layouts, unkeyed strings.
+Resolved Minor Issues
+---------------------
+- **D1 – Animation polish:** HaloFX, AnimatedBackground, and reveal utilities animate heroes and cards smoothly while respecting reduced-motion preferences.
+- **D2 – Iconography alignment:** [`src/lib/components/icons`](src/lib/components/icons) exports a consistent outline-based set with shared stroke weights and theme-aware fills.
+- **D3 – SEO/meta hygiene:** Each route defines canonical URLs, meta tags, and aria labelling (see `src/routes/**/+page.svelte` head blocks and component attributes).
 
-Use browser and accessibility tools (Lighthouse/axe) before marking fixes as complete.
-
-Next Steps:
-After each fix, delete from this tracker and mark with a commit referencing the issue ID for auditability.
-
-This issue framework, with context/code, enables precise step-by-step cleanup and modernization for a unified, premium-grade AlgoRhythmics.dev experience, matching both your plan and live requirements.
+Regression Guardrails
+---------------------
+- Run `npm run lint` to combine translation sync checks with ESLint.
+- Run `npm test` to execute accessibility, content, store, icon, and unkeyed-text guards.
