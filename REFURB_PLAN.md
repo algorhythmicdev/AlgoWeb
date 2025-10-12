@@ -1,270 +1,216 @@
-Here is a structured task list for a developer (Codex agent) to bring the Algorhythmics website into line with the design plan, fix existing bugs and inconsistencies, and remove obsolete code. Each task includes context, specific action items and sample code snippets to guide implementation.
+1. Finalise the unified theme and remove gradient overload
 
----
+Context:
+Gradients still dominate many backgrounds (hero, founders, partners, timeline), reducing legibility
+algorhythmics.dev
+. The plan calls for neutral surfaces with grain and subtle gradients only in hero backgrounds.
 
-## 1. ✅ Unify the theme system & remove the floating theme chooser
+Actions:
 
-**Context:**
-The current site mixes multiple ad‑hoc style sheets and uses a floating “Choose a theme” widget that overlaps content. Light/dark/high‑contrast modes are inconsistent.
+Consolidate all colour tokens in theme.css (light, dark, high‑contrast) and import once in +layout.svelte.
 
-**Actions:**
+Create semantic variables (--bg, --bg-elev-1, etc.) and remove per-component gradient backgrounds. Apply these tokens throughout.
 
-* Create a single `src/lib/styles/theme.css` defining neutral backgrounds (Cloud, Mist, Night), accent colours (Aurora Purple, Voyage Blue, Signal Yellow, Cherry Pop) and semantic tokens (e.g., `--bg`, `--text`, `--bg-elev-1`, `--border`, `--focus`).
-* Import this file once in `src/routes/+layout.svelte` and remove `light.css`, `dark.css`, `hc.css` and other redundant theme files.
-* Delete the floating theme chooser component; instead, add a small toggle in the header that switches the `data-theme` attribute on `<html>`.
-* Ensure dark and high‑contrast modes override only the necessary tokens.
+Replace gradient backgrounds in founders, partners, timeline and hero with neutral surfaces (var(--bg-elev-1)) and apply a subtle grain overlay via CSS.
 
-**Sample:**
+Adjust accent gradients (Aurora Purple/Voyage Blue) to appear in hero bars or halo overlays rather than behind body text.
 
-```css
-/* theme.css */
-:root {
-  --bg: #F5F7FB;
-  --bg-elev-1: #FFFFFF;
-  --bg-elev-2: #EEF1F7;
-  --text: #0A0D14;
-  --primary: #6A38FF; /* Aurora Purple */
-  --secondary: #1351FF; /* Voyage Blue */
-  --accent: #FFD339;
-  --border: rgba(0,0,0,0.08);
-  --radius: 16px;
+Example snippet:
+
+/* apply neutral backgrounds on sections */
+.section {
+  background: var(--bg-elev-1);
+  color: var(--text);
 }
-[data-theme='dark'] {
-  --bg: #0B0E13;
-  --bg-elev-1: #121722;
-  --bg-elev-2: #1A1D23;
-  --text: #F2F5F9;
-  --primary: #8A6BFF;
-  --secondary: #3A71FF;
-  --accent: #FFD339;
+/* optional grain overlay */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/grain.png');
+  opacity: 0.05;
+  pointer-events: none;
 }
-[data-theme='hc'] {
-  --bg: #FFFFFF;
-  --bg-elev-1: #FFFFFF;
-  --bg-elev-2: #F0F3FA;
-  --text: #000000;
-  --primary: #4400FF;
-  --secondary: #007A73;
-  --accent: #B78300;
-}
-```
 
-**Header toggle example (Svelte):**
+2. Merge NodeVoyage & Ideonautix into one Platforms page
 
-```svelte
-<script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-  }
-</script>
+Context:
+Navigation uses a “Platforms” link, but the footer still lists NodeVoyage and Ideonautix as separate pages and their route files likely exist
+algorhythmics.dev
+.
 
-<button on:click={() => setTheme('light')}>☀️</button>
-<button on:click={() => setTheme('dark')}>🌙</button>
-<button on:click={() => setTheme('hc')}>HC</button>
-```
+Actions:
 
----
+Delete src/routes/nodevoyage/+page.svelte and src/routes/ideonautix/+page.svelte.
 
-## 2. ✅ Simplify navigation and merge product pages
+Build a unified src/routes/platforms/+page.svelte featuring two GlassCard components for NodeVoyage and Ideonautix, each with a short description and CTA.
 
-**Context:**
-Navigation still lists separate NodeVoyage/Ideonautix pages and a “Pilot” link. The plan calls for a single “Platforms” page.
+Update any internal links to point to /platforms instead of the old pages.
 
-**Actions:**
+In the footer’s “Products” column, list only “Platforms” or use scroll anchors (#nodevoyage, #ideonautix) to jump within the unified page.
 
-* Remove `nodevoyage/+page.svelte` and `ideonautix/+page.svelte`.
-* Create `src/routes/products/+page.svelte` (or `platforms/+page.svelte`) that showcases both NodeVoyage and Ideonautix using unified cards.
-* Update the navigation menu (`src/lib/components/Nav.svelte` or `menu.js`) to use:
-
-  ```js
-  export const menu = [
-    { label: 'Home', href: '/' },
-    { label: 'Platforms', href: '/products' },
-    { label: 'Consulting', href: '/consulting' },
-    { label: 'Community', href: '/community' },
-    { label: 'Contact', href: '/contact' }
-  ];
-  ```
-* Remove any unused “Pilot” or “About” links if they no longer match the plan.
-
-**Sample product page layout (Svelte):**
-
-```svelte
-<script>
-  import Hero from '$lib/components/Hero.svelte';
-  import GlassCard from '$lib/components/GlassCard.svelte';
-</script>
+Example layout code:
 
 <Hero variant="grid" title="Platforms" subtitle="Two paths to AI mastery" />
-
-<section class="grid gap-6">
+<section class="grid md:grid-cols-2 gap-6">
   <GlassCard halo>
     <h3>NodeVoyage</h3>
-    <p>Self‑guided learning journeys that teach algorithms and data structures through interactive challenges.</p>
-    <a class="btn" href="/platforms/nodevoyage">Learn more</a>
+    <p>Your AI-powered travel companion — plan, explore and remember journeys effortlessly.</p>
+    <Button href="/platforms#nodevoyage">Learn more</Button>
   </GlassCard>
-
   <GlassCard particles>
     <h3>Ideonautix</h3>
-    <p>A collaborative sandbox for rapid prototyping and deploying AI ideas using modular components.</p>
-    <a class="btn" href="/platforms/ideonautix">Learn more</a>
+    <p>The productivity suite for modern creators — where every idea gets momentum.</p>
+    <Button href="/platforms#ideonautix">Learn more</Button>
   </GlassCard>
 </section>
-```
 
----
+3. Refactor founders and partners into reusable GlassCard components
 
-## 3. ✅ Build reusable UI components (Hero, GlassCard, Button)
+Context:
+Founders and partners sections use tinted gradient cards with duplicated bullets and inconsistent layouts
+algorhythmics.dev
+.
 
-**Context:**
-Various pages still have bespoke hero and card markup, with inconsistent gradients, shadows and spacing.  Only the consulting page uses the modern hero pattern.
+Actions:
 
-**Actions:**
+Create a GlassCard.svelte component using a frosted background (backdrop-filter: blur(12px)) and soft border.
 
-* **Hero component**: Create `src/lib/components/Hero.svelte` with props `{ variant, title, subtitle }`.  Implement variants: `aurora`, `grid`, `halo`, `line`, `particles`, respecting `prefers-reduced-motion` and high-contrast mode.  Use a neutral overlay behind text.
-* **GlassCard component**: Create `src/lib/components/GlassCard.svelte` that applies a frosted translucent background (`backdrop-filter: blur(12px) saturate(1.2)`), subtle grain overlay (`background-image: var(--grain)`), border and shadow.  Accept props or `data-variant` attributes to add halo or particle underlays.
-* **Button component**: Build `src/lib/components/Button.svelte` with a neutral surface and accent border; add focus ring and accessible text.
+Move the founders’ content into two GlassCard instances with consistent formatting: header (role), name, contact buttons, one list of core strengths, one list of recent wins. Remove duplicate bullet points on Nikita’s card.
 
-**Sample GlassCard:**
+Similarly, represent each partner as a GlassCard with fields (Name, Description, Website, Focus). Shorten copy to avoid wall of text and maintain vertical rhythm.
 
-```svelte
-<script>
-  export let halo = false;
-  export let particles = false;
-</script>
+Ensure text remains readable on neutral backgrounds and accent colors are used only for links or badges.
 
-<div class={`glass-card ${halo ? 'halo' : ''} ${particles ? 'particles' : ''}`}>
-  <slot />
+Example GlassCard skeleton:
+
+<div class="glass-card">
+  <h4 class="text-sm uppercase">{title}</h4>
+  <h3 class="text-xl font-semibold">{name}</h3>
+  <slot /> <!-- body content -->
 </div>
-
 <style>
 .glass-card {
-  position: relative;
-  padding: 2rem;
-  border-radius: var(--radius);
   background: rgba(255,255,255,0.6);
   backdrop-filter: blur(14px);
   border: 1px solid var(--border);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-.glass-card.halo::before {
-  /* radial halo effect */
-}
-.glass-card.particles::before {
-  /* subtle particle noise */
+  border-radius: var(--radius);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  padding: 1.5rem;
 }
 </style>
-```
 
-**Refactor pages:** replace custom card markup with `<GlassCard>`. For each route, import the `Hero` component and choose the appropriate variant.
+4. Enhance the timeline with interactive filtering & neutral styling
 
----
+Context:
+The timeline has been simplified but still uses a tinted gradient; the category text (“Active / Development / Planned / Vision”) is not interactive
+algorhythmics.dev
+.
 
-## 4. ✅ Redesign and declutter site sections
+Actions:
 
-**Context:**
-Several sections are overloaded: duplicate bullet lists (“calm delivery rhythm”), broken headings in “Stay in our orbit”, misaligned CTA buttons and busy timelines.
+Change the timeline section background to var(--bg-elev-1). Remove tinted overlays from milestone cards.
 
-**Actions:**
+Represent each milestone as a GlassCard or neutral card with a left-aligned accent dot (colour-coded by status).
 
-* **Hero & tagline**: Move hero CTAs outside gradient overlays; ensure headings have enough padding and contrast.
-* **Our story / vision**: Keep the mission and calm delivery rhythm once. Remove duplication. Use a two-column layout on large screens with neutral backgrounds instead of tinted gradients.
-* **Founders and partners**: Use `GlassCard` and unify layout: image (or placeholder), name/role, description, and contact links. Remove the theme chooser from this area.
-* **Timeline**: Simplify the timeline UI. Use neutral surfaces for each milestone, accent-coloured dots along a vertical line, and place the filter panel above. Avoid overlapping nodes.
-* **Stay in our orbit**: Rewrite the heading to “Stay in our orbit”. Provide a short paragraph about joining the community and another about booking a chat. List benefits once. Align the two CTA buttons horizontally below the text.
-* **Footer**: Replace the four dark gradient cards with a single dark neutral bar. Add three columns: Company, Platforms, Resources. Use light text and underline links on hover.
+Implement a simple category filter: clicking a status badge filters the list by status. Use Svelte reactive variables or stores to manage state.
 
-**Example timeline markup:**
+For accessibility, ensure the timeline is keyboard navigable and the filter is announced by screen readers.
 
-```svelte
-<div class="timeline">
-  <div class="filter-panel glass-card">
-    <button on:click={() => setFilter('all')}>All</button>
-    <button on:click={() => setFilter('active')}>Active</button>
-    <!-- etc. -->
-  </div>
-  <ul class="timeline-list">
-    {#each milestones as m}
-      <li class="milestone">
-        <span class="dot" style="background: var(--primary)"></span>
-        <div class="milestone-content glass-card">
-          <h4>{m.title}</h4>
-          <p>{m.description}</p>
-        </div>
-      </li>
-    {/each}
-  </ul>
+Example filter snippet:
+
+<script>
+  let filter = 'all';
+  const milestones = [...]; // array with { status: 'active', title, ... }
+
+  $: filtered = filter === 'all'
+    ? milestones
+    : milestones.filter(m => m.status === filter);
+</script>
+
+<div class="filter flex gap-4">
+  {#each ['all','active','development','planned','vision'] as status}
+    <button
+      class:selected={filter === status}
+      on:click={() => filter = status}>
+      {status}
+    </button>
+  {/each}
 </div>
-```
 
----
+<ul class="timeline">
+  {#each filtered as m}
+    <li class="milestone">
+      <span class="dot status-{m.status}"></span>
+      <GlassCard>
+        <h4>{m.title}</h4>
+        <p>{m.description}</p>
+      </GlassCard>
+    </li>
+  {/each}
+</ul>
 
-## 5. ✅ Clean up content, translations and localisation
+5. Polish content and translations
 
-**Context:**
-The site still contains placeholder copy (e.g., “AI products with a people-first beat”) and duplicated bullet lists. Localisation keys are not consistently used.
+Context:
+The English copy is mostly improved, but some filler remains (e.g. “AI products with a people-first beat” in the footer
+algorhythmics.dev
+) and some strings are hard-coded rather than pulled from localisation files.
 
-**Actions:**
+Actions:
 
-* Rewrite the English localisation file (`src/lib/i18n/en.json`) using the approved text from your content strategy.  Organise by page (home, platforms, consulting, community, contact, footer).
-* Replace hard‑coded strings in components with references to translation keys via your i18n helper (e.g., `$t('home.tagline')`).
-* Remove duplicated bullets and filler paragraphs.  Keep the founder’s biography unchanged if you prefer.
-* Add fallback keys for future languages; ensure every string is keyed.
+Update src/lib/i18n/en.json with refined text. For example:
 
-**Example `en.json`:**
+Footer tagline: replace “AI products with a people-first beat” with “AI products with a human‑centred approach”.
 
-```json
+Founder bios: ensure bullet lists are unique and succinct.
+
+Partners: shorten long paragraphs.
+
+Audit components for literal strings and replace them with $t('key').
+
+Remove obsolete bullet lists (e.g., duplicated strengths).
+
+Provide translation keys for timeline statuses (“active”, “development”, etc.) to ease future localisation.
+
+Example en.json update:
+
 {
-  "home": {
-    "title": "AlgoRhythmics",
-    "tagline": "Where logic dances with creativity — building accessible AI for education, startups, and people.",
-    "features": {
-      "learn": "Learn at your pace",
-      "collaborate": "Collaborate and create",
-      "consult": "Expert consulting"
-    }
+  "footer": {
+    "tagline": "AI products with a human-centred approach",
+    "address": "Daugavpils, Latvia",
+    "rights": "© 2025 AlgoRhythmics. All rights reserved."
   },
-  "platforms": {
-    "title": "Platforms",
-    "nodevoyage": {
-      "heading": "NodeVoyage",
-      "body": "Interactive lessons and challenges guide you from fundamentals to advanced topics."
-    },
-    "ideonautix": {
-      "heading": "Ideonautix",
-      "body": "A collaborative sandbox for building, sharing and deploying algorithmic prototypes."
+  "founders": {
+    "nikita": {
+      "coreStrengths": [
+        "Narrative-led product strategy",
+        "Experience design and quality assurance",
+        "Partnership and education outreach"
+      ],
+      "recentWins": [
+        "Leads brand and product direction with accessibility-first, multilingual delivery",
+        "Contributes to signage R&D with next-gen LED neon tubes and custom coatings"
+      ]
     }
   }
-  /* ... */
 }
-```
 
----
+6. Clean up unused code and files
 
-## 6. ✅ Clean the repository and enforce accessibility
+Context:
+The repo may still contain old page components (e.g., nodevoyage/+page.svelte, ideonautix/+page.svelte), outdated CSS or JS, and placeholder assets.
 
-**Context:**
-The codebase still contains unused CSS files, outdated hero components, duplicate animation scripts and unnecessary assets. The site also lacks systematic accessibility checks (e.g., contrast, motion reduction).
+Actions:
 
-**Actions:**
+Delete all unused route folders and components related to the old site structure.
 
-* Delete unused files: `light.css`, `dark.css`, `hc.css`, old `Hero*.svelte` components, experimental scripts and unreferenced images.
-* Consolidate animation helpers into `src/lib/animations.js` and import them as needed. Remove duplicate or unused classes from `animations.css`.
-* Use ESLint/Stylelint to identify unused code and enforce consistent styling.
-* Integrate automated accessibility tests (e.g., Lighthouse CI or `axe-core`) into the build pipeline: check colour contrast, keyboard navigation, focus visibility, and `prefers-reduced-motion`.
-* Document coding standards and design guidelines in `CONTRIBUTING.md` so future changes remain consistent with the design system.
+Remove legacy CSS files (light.css, dark.css etc.) and merge relevant rules into theme.css.
 
-**Example script to clean unused imports (JS):**
+Consolidate animation helpers in animations.js and remove duplicate functions.
 
-```bash
-# run in project root
-npx eslint --rule 'no-unused-vars: error' --ext .js,.svelte src/ > unused.txt
-# review unused.txt and remove obsolete imports and files
-```
+Prune unused assets from /static (old images, icons, backgrounds).
 
----
+Run ESLint/Prettier to tidy imports and remove unused variables.
 
-### Summary
-
-By following these six tasks, the website will transition from a patchwork of conflicting styles and duplicate content to a coherent, accessible experience consistent with the brand’s calm minimalism and glassy grain aesthetic. Each task encapsulates several subtasks and includes code examples to help the developer get started.
+Document new component usage and design tokens in a README or CONTRIBUTING guide to prevent regression.
