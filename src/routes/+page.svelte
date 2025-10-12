@@ -409,7 +409,7 @@
     <div class="container story__grid">
       <div class="story__copy">
         <span class="eyebrow">{storyTitle}</span>
-        <h2>{storyVisionTitle}</h2>
+        <h2 id="vision">{storyVisionTitle}</h2>
         <p class="story__lead">{storyVisionText}</p>
 
         {#if heroPillars.length}
