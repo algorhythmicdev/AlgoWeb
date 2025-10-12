@@ -33,8 +33,7 @@ export const mainNavigation = [
   {
     label: 'nav.consulting',
     href: '/consulting',
-    icon: 'consulting',
-    badge: 'nav.pilot_badge'
+    icon: 'consulting'
   },
   {
     label: 'nav.about',

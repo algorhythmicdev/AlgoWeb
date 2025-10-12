@@ -1,20 +1,20 @@
 {
   "site": {
     "title": "AlgoRhythmics",
-    "tagline": "AI products with a people-first beat.",
-    "description": "AlgoRhythmics is a friendly AI studio building the NodeVoyage travel guide, the Ideonautix founder cockpit, and supportive consulting programmes."
+    "tagline": "Calm AI for travel and founder operations.",
+    "description": "AlgoRhythmics is an independent studio crafting the NodeVoyage travel companion, the Ideonautix founder cockpit, and consulting rituals grounded in signage discipline."
   },
   "seo": {
-    "default_title": "AlgoRhythmics — AI products with a people-first beat.",
-    "default_description": "Meet AlgoRhythmics, the AI studio behind NodeVoyage, Ideonautix, and hands-on consulting that keeps teams in control.",
+    "default_title": "AlgoRhythmics — Calm AI for real teams.",
+    "default_description": "Meet AlgoRhythmics, the calm AI studio behind NodeVoyage, Ideonautix, and hands-on consulting that keeps teams in control.",
     "default_og_title": "AlgoRhythmics",
-    "default_og_description": "AI products with a people-first beat.",
+    "default_og_description": "Calm AI for travel crews and founders.",
     "default_url": "https://algorhythmics.com",
     "home": {
-      "title": "AlgoRhythmics — AI that stays calm under pressure",
-      "description": "Explore NodeVoyage, Ideonautix, and our consulting practice in one welcoming home.",
-      "og_title": "AlgoRhythmics — Calm AI for real teams",
-      "og_description": "AI products and services that feel approachable, transparent, and supportive."
+      "title": "AlgoRhythmics — Calm AI that explains itself",
+      "description": "Explore NodeVoyage, Ideonautix, and our consulting rituals in one signage-informed studio.",
+      "og_title": "AlgoRhythmics — Calm AI that explains itself",
+      "og_description": "AI products and services that stay approachable, transparent, and supportive."
     }
   },
   "app": {
@@ -40,7 +40,6 @@
     "about": "About",
     "nodevoyage_desc": "See our travel co-pilot in action.",
     "ideonautix_desc": "Step into the founder workspace.",
-    "pilot_badge": "Pilot",
     "brand_aria": "Go to the AlgoRhythmics homepage",
     "brand_name": "AlgoRhythmics",
     "toggle_menu": "Toggle the menu",
@@ -54,13 +53,13 @@
     "title": {
       "lead": "Build calm workflows with",
       "brand": "AlgoRhythmics",
-      "trail": "as your co-pilot."
+      "trail": "as your guide."
     },
-    "tagline": "Where logic dances with creativity — building accessible AI for education, startups, and people.",
-    "subtitle": "NodeVoyage, Ideonautix, and our consulting practice share the same promise: honest automation that keeps people confident.",
-    "description": "Every experience is crafted with accessibility, motion sensitivity, and plain-language explanations so your team always understands the next step.",
-    "cta_products": "Browse the platform lineup",
-    "cta_consulting": "Plan a consulting call",
+    "tagline": "Accessible AI platforms for travel and founder ops, built with signage discipline.",
+    "subtitle": "NodeVoyage, Ideonautix, and our consulting sprints share one calm operating rhythm.",
+    "description": "We design every surface with AAA contrast, honour reduced-motion settings, and document automation decisions in plain language.",
+    "cta_products": "Explore the platform lineup",
+    "cta_consulting": "Schedule a consulting session",
     "actions_label": "Main hero actions",
     "next_milestone": "Upcoming milestone",
     "pillars_title": "Our calm delivery rhythm",
@@ -111,13 +110,13 @@
     "cta": {
       "eyebrow": "Keep exploring",
       "title": "Stay in our orbit",
-      "text": "Join the community for relaxed updates, pilot invites, and behind-the-scenes notes.",
+      "text": "Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.",
       "primary": "Join the community",
-      "secondary": "Book a friendly chat",
+      "secondary": "Book a calm strategy chat",
       "points": [
-        "Monthly peeks at NodeVoyage and Ideonautix.",
+        "Roadmap walkthroughs before they reach the blog.",
         "Pilot programmes open to subscribers first.",
-        "Accessibility, research, and tooling tips you can use."
+        "Accessibility checklists and tooling tips you can use right away."
       ]
     }
   },

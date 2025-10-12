@@ -31,14 +31,21 @@
 
   const resolvePoints = (): string[] => {
     const value = $json?.('home.cta.points');
+    const normalise = (source: string[], fallback: string[]): string[] => {
+      const merged = source.length ? source : fallback;
+      const unique = Array.from(new Set(merged.map((point) => point.trim()))).filter(Boolean);
+      return unique.slice(0, 3);
+    };
+
     if (Array.isArray(value)) {
-      const points = value
-        .map((point, index) => ensureString(point, fallbackCta.points[index] ?? ''))
-        .filter(Boolean);
-      if (points.length) return points;
+      const points = value.map((point, index) => ensureString(point, fallbackCta.points[index] ?? ''));
+      const cleaned = points.filter(Boolean);
+      if (cleaned.length) {
+        return normalise(cleaned, fallbackCta.points);
+      }
     }
 
-    return fallbackCta.points;
+    return normalise(fallbackCta.points, fallbackCta.points);
   };
 
   $: eyebrow = ensureString($_('home.cta.eyebrow'), fallbackCta.eyebrow);
@@ -217,14 +224,17 @@
   }
 
   .cta-actions {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     gap: clamp(0.85rem, 2vw, 1.25rem);
-    justify-items: start;
+    align-items: center;
   }
 
   :global(.cta-action) {
     position: relative;
     display: inline-flex;
+    min-width: clamp(10rem, 22vw, 14rem);
+    justify-content: center;
   }
 
   @keyframes float {
@@ -243,11 +253,13 @@
     }
 
     .cta-actions {
-      justify-items: stretch;
+      flex-direction: column;
+      align-items: stretch;
     }
 
     :global(.cta-action) {
       width: 100%;
+      min-width: 0;
     }
   }
 

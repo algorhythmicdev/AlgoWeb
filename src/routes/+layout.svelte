@@ -1,12 +1,14 @@
 <script lang="ts">
-  import '../app.css';
-  import '../lib/styles/global.css';
+  import '$lib/styles/theme.css';
+  import '$lib/styles/global.css';
+  import '$lib/styles/typography.css';
+  import '$lib/styles/animations.css';
+  import '$lib/styles/layout-grid.css';
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import AICompanion from '$components/AICompanion.svelte';
   import LoadingOverlay from '$components/LoadingOverlay.svelte';
   import AnimatedBackground from '$components/AnimatedBackground.svelte';
-  import FloatingThemeSwitcher from '$components/FloatingThemeSwitcher.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
   import { onMount, onDestroy } from 'svelte';
@@ -114,8 +116,6 @@
   <Footer />
 </div>
 <AICompanion />
-
-<FloatingThemeSwitcher />
 
 <style>
   :global(body) {

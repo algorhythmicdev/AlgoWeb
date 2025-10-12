@@ -40,7 +40,6 @@
     "about": "À propos",
     "nodevoyage_desc": "Découvrez notre compagnon de voyage IA",
     "ideonautix_desc": "Explorez la suite de productivité pour startups",
-    "pilot_badge": "Pilote",
     "brand_aria": "Accueil AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
     "toggle_menu": "Ouvrir ou fermer le menu",
@@ -376,6 +375,7 @@
   },
   "community": {
     "meta_title": "Communauté AlgoRhythmics",
+    "meta_description": "Co-créez chaque version avec des votes, des mises à jour de feuille de route et des boucles de retour ouvertes.",
     "hero_title": "Community Manifest",
     "hero_subtitle": "Signal the features you need, share ideas, and review public metrics in real time.",
     "hero_rotating": [
@@ -464,6 +464,7 @@
   },
   "consulting": {
     "meta_title": "Programme de conseil AlgoRhythmics",
+    "meta_description": "Rejoignez notre pilote de conseil en IA calme : ateliers, intégration sur mesure et accompagnement continu.",
     "hero_title": "Conseil en IA",
     "hero_subtitle": "Pilot program with OS-native playbooks for regulated teams.",
     "hero_rotating": [
@@ -572,6 +573,7 @@
   },
   "contact": {
     "meta_title": "Contact AlgoRhythmics",
+    "meta_description": "Contactez les fondateurs pour les pilotes, partenariats, demandes presse ou collaborations communautaires.",
     "hero_title": "Entrons en contact",
     "hero_subtitle": "Choose the lane that fits: email, strategy call, or community handshake.",
     "hero_rotating": [

@@ -247,9 +247,6 @@
                 on:click={() => navigation.closeMenu()}
               >
                 <span class="nav-link__label">{$_(item.label)}</span>
-                {#if item.badge}
-                  <span class="nav-link__badge">{$_(item.badge)}</span>
-                {/if}
               </a>
 
               {#if item.children?.length}
@@ -490,18 +487,6 @@
     background: color-mix(in srgb, var(--surface-chip-bg) 82%, rgba(var(--voyage-blue-rgb), 0.18) 18%);
     border-color: color-mix(in srgb, var(--surface-chip-border) 62%, rgba(var(--voyage-blue-rgb), 0.2) 38%);
     box-shadow: var(--surface-chip-shadow);
-  }
-
-  .nav-link__badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.1rem 0.55rem;
-    font-size: 0.75rem;
-    font-weight: var(--weight-semibold);
-    border-radius: var(--radius-full);
-    background: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.22) 65%, rgba(255, 255, 255, 0.16) 35%);
-    color: color-mix(in srgb, var(--text-strong) 82%, rgba(var(--voyage-blue-rgb), 0.28) 18%);
   }
 
   .nav-item--group {

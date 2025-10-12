@@ -8,7 +8,7 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand os-window">
+      <div class="footer-brand">
         <img
           src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
           alt={$_('footer.brand_alt')}
@@ -23,7 +23,7 @@
         </div>
       </div>
       
-      <nav class="footer-links-section os-window" aria-labelledby="footer-company-heading">
+      <nav class="footer-links-section" aria-labelledby="footer-company-heading">
         <h4 id="footer-company-heading">{$_('footer.company')}</h4>
         <ul>
           {#each footerLinks.company as link}
@@ -34,7 +34,7 @@
         </ul>
       </nav>
 
-      <nav class="footer-links-section os-window" aria-labelledby="footer-products-heading">
+      <nav class="footer-links-section" aria-labelledby="footer-products-heading">
         <h4 id="footer-products-heading">{$_('footer.products_title')}</h4>
         <ul>
           {#each footerLinks.platforms as link}
@@ -45,7 +45,7 @@
         </ul>
       </nav>
 
-      <nav class="footer-links-section os-window" aria-labelledby="footer-resources-heading">
+      <nav class="footer-links-section" aria-labelledby="footer-resources-heading">
         <h4 id="footer-resources-heading">{$_('footer.resources')}</h4>
         <ul>
           {#each footerLinks.resources as link}
@@ -57,7 +57,7 @@
       </nav>
     </div>
     
-    <div class="footer-bottom os-window">
+    <div class="footer-bottom">
       <p class="copyright">{$_('footer.copyright')}</p>
       <div class="social-links">
         {#each footerLinks.social as social}
@@ -72,100 +72,52 @@
 
 <style>
   .footer {
-    margin-top: var(--space-24);
-    padding: clamp(4rem, 10vw, 6rem) 0 clamp(2rem, 6vw, 3rem);
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(120% 120% at 50% 0%, rgba(16, 28, 56, 0.78) 0%, rgba(8, 14, 32, 0.92) 55%, rgba(6, 10, 24, 0.96) 100%),
-      linear-gradient(180deg, rgba(5, 8, 18, 0.94) 0%, rgba(5, 9, 20, 0.96) 100%);
-    color: color-mix(in srgb, rgba(255, 255, 255, 0.86) 78%, rgba(214, 224, 250, 0.82) 22%);
-    border-top: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.12) 55%, rgba(8, 14, 28, 0.6) 45%);
+    margin-top: clamp(3rem, 8vw, 5rem);
+    padding: clamp(3rem, 8vw, 4.5rem) 0 clamp(2rem, 6vw, 3rem);
+    background: color-mix(in srgb, var(--graphite, #0f141f) 88%, rgba(0, 0, 0, 0.12) 12%);
+    color: color-mix(in srgb, #ffffff 90%, rgba(214, 224, 250, 0.85) 10%);
+    border-top: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.18) 70%, rgba(0, 0, 0, 0.5) 30%);
   }
 
-  .footer::before {
-    content: '';
-    position: absolute;
-    inset: auto -15% -40%;
-    height: clamp(16rem, 30vw, 22rem);
-    background: radial-gradient(circle at 65% 20%, rgba(var(--aurora-purple-rgb), 0.28), transparent 72%);
-    filter: blur(160px);
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  :global([data-base-theme='dark']) .footer::before {
-    background: radial-gradient(circle at 60% 18%, rgba(var(--aurora-purple-rgb), 0.42), transparent 76%);
-    opacity: 0.7;
-  }
-
-  .footer::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
-    pointer-events: none;
-    mix-blend-mode: soft-light;
+  .footer > .container {
+    width: min(100%, var(--container-xl, 1200px));
+    margin-inline: auto;
+    padding-inline: clamp(1.5rem, 5vw, 3rem);
   }
 
   .footer-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
-    gap: clamp(2rem, 5vw, 3.4rem);
-    margin-bottom: clamp(2rem, 6vw, 3.5rem);
-    position: relative;
-    z-index: 1;
-  }
-
-  .footer-grid > * {
-    --surface-glass-blur: 26px;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--voyage-blue-rgb), 0.18) 16%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 62%, rgba(255, 255, 255, 0.36) 38%);
-    --surface-glass-bg: color-mix(in srgb, rgba(16, 28, 56, 0.86) 78%, rgba(var(--voyage-blue-rgb), 0.24) 22%);
-    --surface-glass-border: color-mix(in srgb, rgba(92, 112, 160, 0.52) 62%, rgba(255, 255, 255, 0.18) 38%);
-    --surface-glass-shadow: 0 32px 60px rgba(6, 12, 28, 0.38);
-    --grain-opacity: 0.055;
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.26) 34%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.3) 44%);
-    border-radius: var(--radius-2xl);
-    padding: clamp(1.6rem, 3vw, 2.1rem);
+    gap: clamp(2rem, 5vw, 3rem);
+    margin-bottom: clamp(2rem, 6vw, 3rem);
   }
 
   .footer-brand {
     display: grid;
-    gap: 0.75rem;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    max-width: 32rem;
   }
 
   .footer-brand img {
-    max-width: clamp(160px, 18vw, 200px);
+    max-width: clamp(150px, 18vw, 200px);
     transition: opacity var(--duration-fast) var(--ease-out);
-    filter: drop-shadow(0 18px 28px rgba(6, 12, 28, 0.45));
   }
 
   .footer-brand img:hover {
-    opacity: 0.92;
+    opacity: 0.9;
   }
 
-  .tagline {
-    color: var(--text-secondary);
+  .tagline,
+  .status,
+  .contact-info,
+  .contact-info a {
+    color: color-mix(in srgb, rgba(240, 243, 255, 0.88) 85%, rgba(214, 224, 250, 0.72) 15%);
     font-size: var(--text-small);
   }
 
   .status {
-    font-size: var(--text-small);
-    color: var(--voyage-blue);
     font-weight: var(--weight-semibold);
   }
-
-  .contact-info {
-    display: grid;
-    gap: 0.35rem;
-    color: var(--text-secondary);
-    font-size: var(--text-small);
-  }
-
-  .contact-info a { color: var(--text-primary); }
 
   .footer-links-section {
     display: grid;
@@ -174,132 +126,124 @@
   }
 
   .footer-links-section h4 {
-    font-size: var(--text-title);
     margin: 0;
-    color: color-mix(in srgb, rgba(255, 255, 255, 0.9) 82%, rgba(192, 204, 236, 0.78) 18%);
+    font-size: var(--text-title);
+    color: color-mix(in srgb, #ffffff 92%, rgba(214, 224, 250, 0.78) 8%);
   }
 
   .footer-links-section ul {
     display: grid;
-    gap: 0.6rem;
-    font-size: var(--text-small);
-    list-style: none;
-    padding: 0;
+    gap: 0.65rem;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .footer-links-section a {
+  .footer-links-section a,
+  .social-links a {
     position: relative;
-    color: color-mix(in srgb, rgba(212, 220, 248, 0.85) 80%, rgba(255, 255, 255, 0.78) 20%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: color-mix(in srgb, rgba(240, 243, 255, 0.9) 82%, rgba(214, 224, 250, 0.8) 18%);
     text-decoration: none;
-    transition: color var(--duration-fast) var(--ease-out), text-decoration-color var(--duration-fast) var(--ease-out);
+    transition: color var(--duration-ui, 240ms) var(--ease-out),
+      transform var(--duration-ui, 240ms) var(--ease-out);
   }
 
-  .footer-links-section a::after {
+  .footer-links-section a::after,
+  .social-links a::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -0.15rem;
-    width: 100%;
-    height: 1px;
+    bottom: -0.2rem;
+    width: 0;
+    height: 2px;
     background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--duration-fast) var(--ease-out);
+    transition: width var(--duration-ui, 240ms) var(--ease-out);
   }
 
   .footer-links-section a:hover,
-  .footer-links-section a:focus-visible {
-    color: color-mix(in srgb, rgba(255, 255, 255, 0.95) 85%, rgba(var(--signal-yellow-rgb), 0.4) 15%);
-    text-decoration: underline;
-    text-decoration-color: currentColor;
+  .footer-links-section a:focus-visible,
+  .social-links a:hover,
+  .social-links a:focus-visible {
+    color: #ffffff;
   }
 
   .footer-links-section a:hover::after,
-  .footer-links-section a:focus-visible::after {
-    transform: scaleX(1);
+  .footer-links-section a:focus-visible::after,
+  .social-links a:hover::after,
+  .social-links a:focus-visible::after {
+    width: 100%;
+  }
+
+  .footer-links-section a:focus-visible,
+  .social-links a:focus-visible {
+    outline: none;
   }
 
   .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    gap: clamp(1.2rem, 3vw, 2rem);
-    padding: clamp(1.6rem, 3vw, 2.2rem);
-    --surface-glass-blur: 28px;
-    --surface-glass-bg: color-mix(in srgb, rgba(18, 24, 40, 0.86) 72%, rgba(var(--aurora-purple-rgb), 0.28) 28%);
-    --surface-glass-border: color-mix(in srgb, rgba(118, 132, 190, 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
-    --surface-glass-shadow: 0 34px 64px rgba(8, 12, 28, 0.4);
-    --grain-opacity: 0.06;
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 94%, rgba(var(--aurora-purple-rgb), 0.14) 6%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 62%, rgba(var(--aurora-purple-rgb), 0.28) 38%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 54%, rgba(var(--aurora-purple-rgb), 0.28) 46%);
-    border-radius: var(--radius-2xl);
+    justify-content: space-between;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    padding-top: clamp(1.75rem, 4vw, 2.25rem);
+    border-top: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.16) 70%, rgba(0, 0, 0, 0.5) 30%);
+  }
+
+  .copyright {
+    margin: 0;
     font-size: var(--text-small);
-    color: var(--text-tertiary);
-    position: relative;
-    z-index: 1;
-  }
-
-  :global([data-base-theme='dark']) .footer-grid > * {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 72%, rgba(var(--voyage-blue-rgb), 0.3) 28%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.18) 40%);
-    --surface-glass-shadow: 0 30px 58px rgba(var(--voyage-blue-rgb), 0.3);
-    --grain-opacity: 0.06;
-  }
-
-  :global([data-base-theme='dark']) .footer-bottom {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 70%, rgba(var(--aurora-purple-rgb), 0.34) 30%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.52) 58%, rgba(255, 255, 255, 0.2) 42%);
-    --surface-glass-shadow: 0 34px 64px rgba(var(--aurora-purple-rgb), 0.3);
-    --grain-opacity: 0.065;
+    color: color-mix(in srgb, rgba(214, 224, 250, 0.85) 85%, rgba(255, 255, 255, 0.88) 15%);
   }
 
   .social-links {
     display: flex;
-    gap: clamp(1rem, 3vw, 1.5rem);
+    gap: clamp(1rem, 2.5vw, 1.75rem);
   }
 
-  .social-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    position: relative;
-    color: color-mix(in srgb, rgba(212, 220, 248, 0.85) 82%, rgba(255, 255, 255, 0.8) 18%);
-    text-decoration: none;
-    font-weight: var(--weight-medium);
-  }
-
-  .social-links a::after {
-    content: '';
-    position: absolute;
-    inset: auto 0 -0.1rem;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .social-links a:hover,
-  .social-links a:focus-visible {
-    color: color-mix(in srgb, rgba(255, 255, 255, 0.95) 85%, rgba(var(--signal-yellow-rgb), 0.45) 15%);
-    text-decoration: underline;
-  }
-
-  .social-links a:hover::after,
-  .social-links a:focus-visible::after {
-    transform: scaleX(1);
-  }
-
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     .footer-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (max-width: 640px) {
-    .footer-grid { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; text-align: center; }
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-brand,
+    .footer-links-section,
+    .footer-bottom {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+  }
+
+  :global([data-theme='hc']) .footer {
+    background: var(--bg);
+    color: var(--text);
+    border-top: 2px solid currentColor;
+  }
+
+  :global([data-theme='hc']) .footer-links-section a,
+  :global([data-theme='hc']) .social-links a {
+    color: var(--text);
+  }
+
+  :global([data-theme='hc']) .footer-links-section a::after,
+  :global([data-theme='hc']) .social-links a::after {
+    display: none;
+  }
+
+  :global([data-theme='hc']) .footer-bottom {
+    border-top: 2px solid currentColor;
   }
 </style>

@@ -347,7 +347,6 @@ This document merges every key from `en.json` with the current `uk.json`. Each r
 | `nav.ideonautix_desc` | Explore the startup productivity suite | Дослідіть продуктивний набір для стартапів |
 | `nav.nodevoyage` | NodeVoyage | NodeVoyage |
 | `nav.nodevoyage_desc` | Discover our AI travel companion | Познайомтесь з нашим AI-супутником |
-| `nav.pilot_badge` | Pilot | Пілот |
 | `nav.products` | Products | Продукти |
 | `nav.toggle_menu` | Toggle menu | Відкрити або закрити меню |
 | `nodevoyage.cta_button` | Join Waitlist | Долучитися до листа |
