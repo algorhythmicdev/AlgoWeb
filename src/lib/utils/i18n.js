@@ -29,7 +29,7 @@ export function translateOrFallback(translator, key, fallback = '', params) {
         return trimmed;
       }
     }
-  } catch (error) {
+  } catch {
     // ignore translator errors and return fallback
   }
 
