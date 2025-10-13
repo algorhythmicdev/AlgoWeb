@@ -143,7 +143,7 @@
         labelFallback: 'Explore Platforms'
       },
       secondary: {
-        href: '/resources#case-studies',
+        href: '/education-hub#case-studies',
         labelKey: 'home.page.offerings.items.platforms.secondary_cta',
         labelFallback: 'View Case Studies'
       }
@@ -176,63 +176,63 @@
         labelFallback: 'Join the Programme'
       },
       secondary: {
-        href: '/resources#documentation',
+        href: '/education-hub#toolkits',
         labelKey: 'home.page.offerings.items.education.secondary_cta',
         labelFallback: 'Access Resource Library'
       }
     }
   ] satisfies ReadonlyArray<Offering>;
 
-  const resourceSpotlight = {
-    eyebrowKey: 'home.page.resources.eyebrow',
+  const educationShowcase = {
+    eyebrowKey: 'home.page.education_hub.eyebrow',
     eyebrowFallback: 'Stay in the loop',
-    titleKey: 'home.page.resources.title',
-    titleFallback: 'Keep up with the rhythm',
-    descriptionKey: 'home.page.resources.description',
+    titleKey: 'home.page.education_hub.title',
+    titleFallback: 'Keep up with the calm AI rhythm',
+    descriptionKey: 'home.page.education_hub.description',
     descriptionFallback:
-      'Our blog, case studies, and events share the playbooks behind calm AI—from classroom wins to product breakthroughs.',
+      'Our Education Hub shares calm AI stories, classroom toolkits, and community highlights—everything you need to bring inclusive innovation to life.',
     items: [
       {
         icon: 'blog',
-        eyebrowKey: 'home.page.resources.items.blog.eyebrow',
-        eyebrowFallback: 'Blog',
-        titleKey: 'home.page.resources.items.blog.title',
-        titleFallback: 'AlgoRhythmics Insights & Blog',
-        copyKey: 'home.page.resources.items.blog.copy',
+        eyebrowKey: 'home.page.education_hub.items.insights.eyebrow',
+        eyebrowFallback: 'Insights',
+        titleKey: 'home.page.education_hub.items.insights.title',
+        titleFallback: 'Latest calm AI articles',
+        copyKey: 'home.page.education_hub.items.insights.copy',
         copyFallback:
-          'Dive into stories, how-to guides, and behind-the-scenes notes where logic meets creativity in writing.',
+          'Readable, multilingual stories co-written with educators, founders, and families.',
         cta: {
-          href: '/resources#blog',
-          labelKey: 'home.page.resources.items.blog.cta',
-          labelFallback: 'Read the blog'
+          href: '/education-hub#insights',
+          labelKey: 'home.page.education_hub.items.insights.cta',
+          labelFallback: 'Browse insights'
         }
       },
       {
         icon: 'cases',
-        eyebrowKey: 'home.page.resources.items.case_studies.eyebrow',
+        eyebrowKey: 'home.page.education_hub.items.case_studies.eyebrow',
         eyebrowFallback: 'Case studies',
-        titleKey: 'home.page.resources.items.case_studies.title',
-        titleFallback: 'Impact & Success Stories',
-        copyKey: 'home.page.resources.items.case_studies.copy',
-        copyFallback: 'See how teams, students, and communities turn calm AI into measurable outcomes.',
+        titleKey: 'home.page.education_hub.items.case_studies.title',
+        titleFallback: 'Impact stories & pilots',
+        copyKey: 'home.page.education_hub.items.case_studies.copy',
+        copyFallback: 'See classrooms, startups, and cultural partners practicing calm AI.',
         cta: {
-          href: '/resources#case-studies',
-          labelKey: 'home.page.resources.items.case_studies.cta',
-          labelFallback: 'Explore case studies'
+          href: '/education-hub#case-studies',
+          labelKey: 'home.page.education_hub.items.case_studies.cta',
+          labelFallback: 'Explore spotlights'
         }
       },
       {
         icon: 'events',
-        eyebrowKey: 'home.page.resources.items.events.eyebrow',
+        eyebrowKey: 'home.page.education_hub.items.events.eyebrow',
         eyebrowFallback: 'Events',
-        titleKey: 'home.page.resources.items.events.title',
-        titleFallback: 'Workshops, webinars & meetups',
-        copyKey: 'home.page.resources.items.events.copy',
-        copyFallback: 'Join upcoming sessions that demystify AI and celebrate co-creation across ages.',
+        titleKey: 'home.page.education_hub.items.events.title',
+        titleFallback: 'Workshops & community jams',
+        copyKey: 'home.page.education_hub.items.events.copy',
+        copyFallback: 'Join monthly gatherings with transcripts, captions, and shared notes.',
         cta: {
-          href: '/resources#events',
-          labelKey: 'home.page.resources.items.events.cta',
-          labelFallback: 'Browse events'
+          href: '/education-hub#events',
+          labelKey: 'home.page.education_hub.items.events.cta',
+          labelFallback: 'See upcoming events'
         }
       }
     ]
@@ -350,13 +350,13 @@
 <section class="resources" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">{t(resourceSpotlight.eyebrowKey, resourceSpotlight.eyebrowFallback)}</span>
-      <h2>{t(resourceSpotlight.titleKey, resourceSpotlight.titleFallback)}</h2>
-      <p>{t(resourceSpotlight.descriptionKey, resourceSpotlight.descriptionFallback)}</p>
+      <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
+      <h2>{t(educationShowcase.titleKey, educationShowcase.titleFallback)}</h2>
+      <p>{t(educationShowcase.descriptionKey, educationShowcase.descriptionFallback)}</p>
     </header>
 
     <div class="resources__grid" use:staggerReveal>
-      {#each resourceSpotlight.items as item (item.titleKey)}
+      {#each educationShowcase.items as item (item.titleKey)}
         <GlassCard class="resource-card" padding="lg" halo interactive>
           <div class="resource-icon">
             <Icon name={item.icon} size={28} />

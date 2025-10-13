@@ -138,7 +138,7 @@
         labelFallback: 'Explore Ideonautix'
       },
       secondaryCta: {
-        href: '/resources#case-studies',
+        href: '/education-hub#case-studies',
         labelKey: 'services.page.platforms.ideonautix.secondary_cta',
         labelFallback: 'View Ideonautix Highlights'
       }
@@ -172,7 +172,7 @@
         labelFallback: 'Discover NodeVoyage'
       },
       secondaryCta: {
-        href: '/resources#case-studies',
+        href: '/education-hub#case-studies',
         labelKey: 'services.page.platforms.nodevoyage.secondary_cta',
         labelFallback: 'See Travel Case Studies'
       }
@@ -208,7 +208,7 @@
       labelFallback: 'Join the Program'
     },
     secondaryCta: {
-      href: '/resources#documentation',
+      href: '/education-hub#toolkits',
       labelKey: 'services.page.education.secondary_cta',
       labelFallback: 'Access Educator Resources'
     }
@@ -228,7 +228,7 @@
       labelFallback: 'Contact AlgoRhythmics'
     },
     secondary: {
-      href: '/resources#case-studies',
+      href: '/education-hub#case-studies',
       labelKey: 'services.page.finale.secondary_cta',
       labelFallback: 'Read Success Stories'
     }

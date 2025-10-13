@@ -164,6 +164,15 @@
 
   $: currentPath = $page.url?.pathname ?? '';
 
+  const isItemActive = (item) => {
+    if (!item || typeof item !== 'object') return false;
+    if (currentPath === item.href) return true;
+    if (Array.isArray(item.children)) {
+      return item.children.some((child) => typeof child?.href === 'string' && currentPath.startsWith(child.href));
+    }
+    return false;
+  };
+
   $: if (browser) {
     document.documentElement.classList.toggle('nav-menu-open', $navigation.isMenuOpen);
   }
@@ -257,7 +266,7 @@
               <a
                 href={item.href}
                 class="nav-link"
-                class:active={currentPath === item.href}
+                class:active={isItemActive(item)}
                 on:click={() => navigation.closeMenu()}
               >
                 <span class="nav-link__label">{$_(item.label)}</span>
@@ -268,7 +277,7 @@
                   class="nav-submenu os-window"
                   data-variant="grid"
                   role="group"
-                  aria-label={$_('nav.resources_panel_label')}
+                  aria-label={item.panelLabel ? $_(item.panelLabel) : $_('nav.resources_panel_label')}
                 >
                   {#each item.children as child}
                     <a

@@ -51,7 +51,7 @@
     if (pathname.startsWith('/consulting')) return 'page-consulting';
     if (pathname.startsWith('/education')) return 'page-education';
     if (pathname.startsWith('/about')) return 'page-about';
-    if (pathname.startsWith('/resources')) return 'page-resources';
+    if (pathname.startsWith('/education-hub') || pathname.startsWith('/resources')) return 'page-education-hub';
     if (pathname.startsWith('/contact')) return 'page-contact';
     return 'page-generic';
   };
@@ -59,7 +59,15 @@
   $: currentAccentClass = accentClassForPath($page.url.pathname);
 
   $: if (browser) {
-    document.body.classList.remove('page-home', 'page-services', 'page-outreach', 'page-about', 'page-resources', 'page-contact', 'page-generic');
+    document.body.classList.remove(
+      'page-home',
+      'page-services',
+      'page-outreach',
+      'page-about',
+      'page-education-hub',
+      'page-contact',
+      'page-generic'
+    );
     document.body.classList.add(currentAccentClass);
   }
 

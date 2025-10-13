@@ -23,7 +23,7 @@
       labelFallback: 'Join the Program'
     },
     secondaryCta: {
-      href: '/resources#documentation',
+      href: '/education-hub#toolkits',
       labelKey: 'education.page.hero.secondary_cta',
       labelFallback: 'Access Resources'
     }
@@ -113,7 +113,7 @@
         }
       ],
       primaryCta: {
-        href: '/resources#events',
+        href: '/education-hub#events',
         labelKey: 'education.page.partnerships.community.cta',
         labelFallback: 'See Upcoming Events'
       }
@@ -193,7 +193,7 @@
     copyFallback:
       'Our outreach stretches beyond Latvia through European education networks, exchange programs, and shared research. Students collaborate across borders, trading ideas and building empathy through responsible AI projects.',
     primaryCta: {
-      href: '/resources#blog',
+      href: '/education-hub#insights',
       labelKey: 'education.page.global.primary_cta',
       labelFallback: 'Join Our Community Forum'
     },
@@ -218,7 +218,7 @@
       labelFallback: 'Start the Conversation'
     },
     secondary: {
-      href: '/resources#documentation',
+      href: '/education-hub#toolkits',
       labelKey: 'education.page.finale.secondary_cta',
       labelFallback: 'Download Program Overview'
     }

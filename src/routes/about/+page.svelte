@@ -145,7 +145,7 @@
       labelFallback: 'Connect with AlgoRhythmics'
     },
     secondary: {
-      href: '/resources#newsletter',
+      href: '/education-hub#newsletter',
       labelKey: 'about.page.finale.secondary_cta',
       labelFallback: 'Subscribe to Updates'
     }
@@ -184,7 +184,7 @@
         {/each}
       </ul>
       <div class="card-actions">
-        <Button href="/resources#case-studies" variant="secondary" size="md">{t('about.page.story.cta', 'Read success stories')}</Button>
+        <Button href="/education-hub#case-studies" variant="secondary" size="md">{t('about.page.story.cta', 'Read success stories')}</Button>
       </div>
     </GlassCard>
   </div>
