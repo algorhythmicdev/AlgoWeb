@@ -32,20 +32,19 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "services": "Services",
-    "educational_outreach": "Educational Outreach",
-    "resources": "Resources",
-    "resources_blog": "Blog",
-    "resources_blog_desc": "Insights, news, and creative stories",
-    "resources_cases": "Case Studies",
-    "resources_cases_desc": "See AlgoRhythmics solutions in action",
-    "resources_events": "Events",
-    "resources_events_desc": "Join upcoming webinars and community meetups",
+    "solutions": "Solutions",
+    "solutions_panel_label": "Solutions menu",
+    "solutions_nodevoyage": "NodeVoyage Travel OS",
+    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
+    "solutions_ideonautix": "Ideonautix Startup OS",
+    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
+    "solutions_consulting": "AI Consulting Services",
+    "solutions_consulting_desc": "Tailored integration, training, and strategy",
     "contact": "Contact",
     "brand_aria": "Go to the AlgoRhythmics homepage",
     "brand_name": "AlgoRhythmics",
     "primary_label": "Primary navigation",
-    "resources_panel_label": "Quick access to resource highlights",
+    "resources_panel_label": "Quick access to highlights",
     "talk_to_us": "Talk with us",
     "toggle_menu": "Toggle the menu",
     "skip_to_content": "Skip to content"
@@ -396,37 +395,37 @@
           }
         }
       },
-      "resources": {
-        "eyebrow": "Stay in the loop",
-        "title": "Keep up with the rhythm",
-        "description": "Our blog, case studies, and events share the playbooks behind calm AI—from classroom wins to product breakthroughs.",
-        "items": {
-          "blog": {
-            "eyebrow": "Blog",
-            "title": "AlgoRhythmics Insights & Blog",
-            "copy": "Dive into stories, how-to guides, and behind-the-scenes notes where logic meets creativity in writing.",
-            "cta": "Read the blog"
-          },
-          "case_studies": {
-            "eyebrow": "Case studies",
-            "title": "Impact & Success Stories",
-            "copy": "See how teams, students, and communities turn calm AI into measurable outcomes.",
-            "cta": "Explore case studies"
-          },
-          "events": {
-            "eyebrow": "Events",
-            "title": "Workshops, webinars & meetups",
-            "copy": "Join upcoming sessions that demystify AI and celebrate co-creation across ages.",
-            "cta": "Browse events"
-          }
-        }
-      },
       "finale": {
         "eyebrow": "Let’s collaborate",
         "title": "Ready to choreograph your next idea?",
         "copy": "Bring your roadmap, classroom goals, or community vision. We will help orchestrate the right mix of consulting, products, and outreach to make AI feel friendly and focused.",
         "primary_cta": "Explore Our Services",
         "secondary_cta": "Connect with the Team"
+      },
+      "education_hub": {
+        "eyebrow": "Stay in the loop",
+        "title": "Keep up with the calm AI rhythm",
+        "description": "Our Education Hub shares calm AI stories, classroom toolkits, and community highlights—everything you need to bring inclusive innovation to life.",
+        "items": {
+          "insights": {
+            "eyebrow": "Insights",
+            "title": "Latest calm AI articles",
+            "copy": "Readable, multilingual stories co-written with educators, founders, and families.",
+            "cta": "Browse insights"
+          },
+          "case_studies": {
+            "eyebrow": "Case studies",
+            "title": "Impact stories & pilots",
+            "copy": "See classrooms, startups, and cultural partners practicing calm AI.",
+            "cta": "Explore spotlights"
+          },
+          "events": {
+            "eyebrow": "Events",
+            "title": "Workshops & community jams",
+            "copy": "Join monthly gatherings with transcripts, captions, and shared notes.",
+            "cta": "See upcoming events"
+          }
+        }
       }
     }
   },
@@ -536,17 +535,81 @@
     "what_title": "What we help you do",
     "what_1": "Design accessible, human-friendly AI workflows.",
     "what_2": "Prototype, integrate, and launch with confidence.",
-    "what_3": "Support your team with training and iteration loops."
+    "what_3": "Support your team with training and iteration loops.",
+    "approach": {
+      "title": "How we work",
+      "intro": "Every engagement blends signage discipline with collaborative rituals. We reduce noise, document decisions, and co-create calm delivery loops.",
+      "points": [
+        {
+          "title": "Collaborative discovery",
+          "description": "We listen first, mapping opportunities, constraints, and stakeholders so every move respects your context."
+        },
+        {
+          "title": "Responsible delivery",
+          "description": "Accessible design, privacy, and change management guide each prototype before it reaches production."
+        },
+        {
+          "title": "Ongoing enablement",
+          "description": "Training, documentation, and mentorship keep teams confident long after launch."
+        }
+      ]
+    },
+    "examples": {
+      "title": "Example engagements",
+      "intro": "Imagining how calm AI can support your sector helps teams visualise the impact before we start.",
+      "items": [
+        {
+          "title": "School network feedback assistant",
+          "description": "Co-designed a multilingual assistant so teachers capture student reflections faster while staying GDPR-aligned.",
+          "meta": "Education • 8-week sprint"
+        },
+        {
+          "title": "Startup go-to-market co-pilot",
+          "description": "Guided a three-person marketing crew with ideation rituals, automated briefs, and inclusive analytics dashboards.",
+          "meta": "Creative industry • 6-week pilot"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to join the pilot?",
+      "copy": "Share your goals and we will choreograph the mix of strategy, build, and care that keeps AI friendly for your teams.",
+      "primary": "Book a consultation",
+      "secondary": "Download capabilities overview"
+    },
+    "form_mailto_subject": "Consulting pilot application from {company}",
+    "form_mailto_body": "Company: {company}\nContact: {name}\nEmail: {email}\nPhone: {phone}\nIndustry: {industry}\n\nGoals:\n{description}",
+    "form_errors": {
+      "company_required": "Please add your company or initiative name.",
+      "name_required": "Let us know who we will be speaking with.",
+      "email_required": "Email helps us reply.",
+      "email_invalid": "Add a valid email address.",
+      "industry_required": "Select the industry closest to your work.",
+      "description_required": "Share a little about your goals."
+    },
+    "page": {
+      "quick_facts_eyebrow": "At a glance",
+      "packages_title": "Strategy, build, and care in one rhythm",
+      "packages_description": "Choose the mix that fits your roadmap. Most partnerships weave all three phases together for continuity.",
+      "approach_eyebrow": "Our philosophy",
+      "process_eyebrow": "Pilot flow",
+      "supporting_info_eyebrow": "Need something else?",
+      "supporting_info_title": "We adapt to complex environments",
+      "supporting_info_copy": "Regulated industries, multilingual teams, and hybrid infrastructures are welcome. We document every decision for smooth audits.",
+      "supporting_info_cta": "Email the consulting crew",
+      "examples_eyebrow": "Sample impact",
+      "application_title": "Tell us about your team",
+      "cta_eyebrow": "Next steps"
+    }
   },
   "contact": {
     "meta_title": "Contact AlgoRhythmics",
     "meta_description": "Reach the founders for pilots, partnerships, press, or community collaborations.",
-    "hero_title": "Letâ€™s start a conversation",
+    "hero_title": "Let’s start a conversation",
     "hero_subtitle": "Reach out for pilots, partnerships, press, or community collaborations.",
     "hero_rotating": [
       "Founder inbox, calendar, and community in one place.",
       "Choose the pace that fits your runway.",
-      "Bring your roadmapâ€”leave with calm momentum."
+      "Bring your roadmap—leave with calm momentum."
     ],
     "form_title": "Send us a note",
     "form_name": "Name",
@@ -567,19 +630,19 @@
     "info_title": "Contact information",
     "info_email": "Email",
     "info_location": "Location",
-    "info_email_value": "AlgoRhythmics.dev@gmail.com",
-    "info_location_value": "Daugavpils, Latvia",
+    "info_email_value": "help@algorhythmics.com",
+    "info_location_value": "Latvia · Remote-first",
     "social_title": "Follow us",
     "social_linkedin": "LinkedIn",
     "social_github": "GitHub",
     "social_twitter": "Twitter",
-    "location_value": "Daugavpils, Latvia",
+    "location_value": "Latvia · Remote-first",
     "hero_ctas": [
       {
         "label": "Email the studio",
         "description": "Reach the founder inbox for partnerships, pilots, and press.",
         "cta": "Write an email",
-        "action": "mailto:AlgoRhythmics.dev@gmail.com"
+        "action": "mailto:help@algorhythmics.com"
       },
       {
         "label": "Book a strategy call",
@@ -600,37 +663,37 @@
     "success_subtitle": "Thanks for reaching out. We reply within two working days.",
     "page": {
       "hero": {
-        "title": "Get in Touch with AlgoRhythmics",
-        "subtitle": "Questions about our platforms, partnerships, educational programmes, or community events? We are here for you.",
-        "cta_email": "Email the studio",
-        "cta_events": "Join an event"
+        "title": "Let’s build calm AI together",
+        "subtitle": "AlgoRhythmics operates remotely from Latvia, serving partners worldwide. Reach out for product pilots, consulting, or community collaborations.",
+        "cta_email": "Email help@algorhythmics.com",
+        "cta_events": "Explore our solutions"
       },
       "cards": {
         "general": {
-          "title": "General inquiries",
-          "copy": "Partnerships, media, or big ideas—send us a note and we will respond within two business days.",
-          "cta": "Email the studio"
+          "title": "General enquiries",
+          "copy": "Questions about AlgoRhythmics or our roadmap? Drop us a line and we will reply within one business day.",
+          "cta": "Email help@algorhythmics.com"
         },
         "support": {
-          "title": "Customer support",
-          "copy": "Already using Ideonautix or NodeVoyage? Our support chatbot is available 24/7, or write to support@algorhythmics.ai.",
-          "cta": "Open support chat"
+          "title": "Product pilots & consulting",
+          "copy": "Partner with us on NodeVoyage, Ideonautix, or bespoke consulting engagements. We co-design pilots and long-term rollouts.",
+          "cta": "View solutions overview"
         },
         "education": {
-          "title": "Educational outreach",
-          "copy": "Educators and community organisers can reach our outreach coordinators at education@algorhythmics.ai for tailored programmes.",
-          "cta": "Contact outreach team"
+          "title": "Education & community",
+          "copy": "Schools, libraries, and community organisations can reach our outreach coordinators at education@algorhythmics.com.",
+          "cta": "Email the outreach team"
         },
         "visit": {
-          "title": "Visit us",
-          "copy": "Headquarters: 123 Innovation Way, Riga, LV-1001. Drop by during office hours or book a visit in advance.",
-          "cta": "View on map"
+          "title": "Partnerships & media",
+          "copy": "For collaborations, press enquiries, or speaking invitations, contact hello@algorhythmics.com and we will coordinate a session.",
+          "cta": "Email hello@algorhythmics.com"
         },
         "heading": "Ways to connect"
       },
       "form": {
         "eyebrow": "Send a message",
-        "title": "We reply within two business days",
+        "title": "We reply within one business day",
         "description": "Please share your name, email, and what you would like to explore. We respect your privacy and handle all messages with care.",
         "fields": {
           "name": {
@@ -638,6 +701,15 @@
           },
           "email": {
             "label": "Email"
+          },
+          "reason": {
+            "label": "Reason for contacting",
+            "options": {
+              "general": "General question",
+              "consulting": "Consulting or pilot",
+              "education": "Education & community",
+              "media": "Media or partnership"
+            }
           },
           "message": {
             "label": "Message"
@@ -651,21 +723,29 @@
           "name_required": "Please add your name.",
           "email_required": "We use this to reply.",
           "email_invalid": "Add a valid email address.",
+          "reason_required": "Select a reason.",
           "message_required": "Tell us how we can help."
         },
-        "mailto_subject": "Website inquiry from {name}",
-        "mailto_body": "Name: {name}\\nEmail: {email}\\n\\n{message}"
+        "mailto_subject": "Website enquiry from {name} ({reason})",
+        "mailto_body": "Name: {name}\\nEmail: {email}\\nReason: {reason}\\n\\n{message}"
+      },
+      "newsletter": {
+        "title": "Subscribe for launch updates",
+        "copy": "Get a quarterly roundup on NodeVoyage, Ideonautix, and our consulting stories. No spam—just honest progress.",
+        "cta": "Email newsletter@algorhythmics.com",
+        "secondary": "Read about our solutions",
+        "note": "Prefer a form? Mention “Newsletter” in the message above and we will add you manually."
       }
     }
   },
   "footer": {
     "brand_alt": "AlgoRhythmics wordmark",
     "tagline": "Calm AI tools grounded in signage craft.",
-    "status": "Pre-company — Ideju Kauss October 2025",
-    "location": "Daugavpils, Latvia",
+    "status": "Pre-incorporation — Ideju Kauss October 2025",
+    "location": "Based in Latvia · remote-first team",
     "company": "Company",
     "support": "Solutions & tools",
-    "resources": "Resources",
+    "resources": "Education Hub",
     "about": "About us",
     "services": "Services",
     "educational_outreach": "Educational outreach",
@@ -690,7 +770,9 @@
       "facebook": "Facebook",
       "email": "Email"
     },
-    "copyright": "© 2026 AlgoRhythmics — Where logic dances with creativity."
+    "copyright": "© 2026 AlgoRhythmics — Where logic dances with creativity.",
+    "education_hub": "Education Hub",
+    "toolkits": "Learning toolkits"
   },
   "ai_companion": {
     "name": "Lumen",
@@ -1071,6 +1153,169 @@
       }
     }
   },
+  "educationHub": {
+    "page": {
+      "hero": {
+        "title": "Education Hub: Calm AI stories & learning paths",
+        "subtitle": "Discover inclusive AI resources, classroom-ready toolkits, and community highlights from the AlgoRhythmics crew.",
+        "description": "Explore how calm AI comes to life across classrooms, studios, and cities. Our Education Hub curates stories, toolkits, and events so every learner can join the rhythm.",
+        "primary_cta": "Browse latest insights",
+        "secondary_cta": "Subscribe for updates",
+        "highlights": [
+          "AAA-accessible articles translated across six languages",
+          "Classroom-ready toolkits shaped with teachers and families",
+          "Monthly community events with recordings & transcripts"
+        ]
+      },
+      "featured": {
+        "eyebrow": "Featured story",
+        "title": "How a Riga classroom built a calm AI newsroom",
+        "summary": "Students co-created responsible reporting workflows with Ideonautix, pairing signage-inspired rituals with explainable automation.",
+        "meta": "16-week pilot • Journalism & civic tech",
+        "primary_cta": "Read the pilot recap",
+        "secondary_cta": "Download classroom toolkit"
+      },
+      "sections": {
+        "insights": {
+          "label": "Latest insights",
+          "eyebrow": "Insights",
+          "title": "Fresh perspectives on calm AI",
+          "copy": "Articles crafted with educators, founders, and families to keep AI human and hopeful."
+        },
+        "toolkits": {
+          "label": "Learning toolkits",
+          "eyebrow": "Toolkits",
+          "title": "Ready-to-use calm AI resources",
+          "copy": "Downloadable lesson arcs, operating guides, and family activities designed with accessibility at the core."
+        },
+        "spotlights": {
+          "label": "Community spotlights",
+          "eyebrow": "Spotlights",
+          "title": "Impact stories & collaborations",
+          "copy": "Follow pilots, residencies, and community experiments that show calm AI in action."
+        },
+        "events": {
+          "label": "Upcoming events",
+          "eyebrow": "Events",
+          "title": "Upcoming workshops, webinars & community jams",
+          "copy": "Join sessions where we sketch prototypes together, explore ethical guardrails, and celebrate student showcases. Most events include live captioning and recorded replays."
+        },
+        "newsletter": {
+          "label": "Stay connected",
+          "eyebrow": "Newsletter",
+          "title": "Stay in the calm loop",
+          "copy": "Monthly highlights with new toolkits, impact stories, and early invites to pilots. Short, friendly, and focused on actionable inspiration."
+        }
+      },
+      "insights": {
+        "read": "Read article",
+        "items": [
+          {
+            "title": "Designing inclusive AI rituals for morning assemblies",
+            "summary": "A step-by-step guide for teachers hosting calm AI “news shows” with younger students.",
+            "meta": "March 2026 • Accessibility",
+            "href": "#"
+          },
+          {
+            "title": "From idea to launch: documenting an Ideonautix founder sprint",
+            "summary": "See how a three-person team used calm check-ins, AI copilots, and tactile rituals to ship faster.",
+            "meta": "February 2026 • Product practice",
+            "href": "#"
+          },
+          {
+            "title": "Parent ambassadors keeping AI conversations joyful at home",
+            "summary": "Lessons from monthly library circles that mix storytelling, crafts, and calm automation demos.",
+            "meta": "January 2026 • Community",
+            "href": "#"
+          }
+        ]
+      },
+      "toolkits": {
+        "items": [
+          {
+            "eyebrow": "Teachers",
+            "title": "AI lesson arcs with signage-inspired visuals",
+            "copy": "Plug-and-play modules with bilingual slides, tactile prompts, and printable pacing cards.",
+            "bullets": [
+              "Grades 4–12 differentiation paths with accessibility notes",
+              "Assessment rubrics that honour creativity and collaboration",
+              "Mini reflection rituals to keep AI use transparent"
+            ],
+            "href": "#",
+            "cta": "Preview a module"
+          },
+          {
+            "eyebrow": "Founders & teams",
+            "title": "Calm AI operating guide for startups",
+            "copy": "Workshop decks and service blueprints for teams adopting explainable automation.",
+            "bullets": [
+              "Weekly sprint rituals with inclusive facilitation tips",
+              "Consent-forward data intake templates and governance checklists",
+              "Case study workbook for mapping impact stories"
+            ],
+            "href": "#",
+            "cta": "Download the guide"
+          },
+          {
+            "eyebrow": "Families",
+            "title": "Home rituals for curious makers",
+            "copy": "Story cards, unplugged activities, and conversation starters for multi-generational learning.",
+            "bullets": [
+              "Printable zines that explain algorithms without jargon",
+              "Audio guides with calming narration in multiple languages",
+              "Monthly challenges that mix art, data, and storytelling"
+            ],
+            "href": "#",
+            "cta": "Start a family challenge"
+          }
+        ]
+      },
+      "spotlights": {
+        "read": "Open story",
+        "items": [
+          {
+            "title": "Teacher roundtables with Latvia’s Mentor Network",
+            "copy": "Monthly conversations surface what educators need next—from translation support to reflective journaling prompts.",
+            "meta": "Hybrid • Hosted with LIAA",
+            "href": "#"
+          },
+          {
+            "title": "Calm AI residencies inside cultural institutions",
+            "copy": "Museums and theatres pair artists with technologists to co-create sensory storytelling installations.",
+            "meta": "On-site • Riga & Liepāja",
+            "href": "#"
+          },
+          {
+            "title": "Parent ambassador circles for inclusive tech nights",
+            "copy": "Families co-host gentle demos, lending libraries, and discussion prompts to demystify AI at home.",
+            "meta": "Virtual • Monthly",
+            "href": "#"
+          }
+        ]
+      },
+      "events": {
+        "eyebrow": "Events",
+        "title": "Upcoming workshops, webinars & community jams",
+        "copy": "Join sessions where we sketch prototypes together, explore ethical guardrails, and celebrate student showcases. Most events include live captioning and recorded replays.",
+        "bullets": [
+          "Workshop: Calm AI storytelling for libraries (Apr 18, hybrid)",
+          "Webinar: Ideonautix focus rituals for remote teams (May 9, virtual)",
+          "Community jam: NodeVoyage climate missions (Jun 1, Riga & online)"
+        ],
+        "primary_cta": "Open the event calendar",
+        "primary_cta_href": "https://lu.ma/algorhythmics",
+        "secondary_cta": "Host a session with us",
+        "secondary_cta_href": "/contact"
+      },
+      "newsletter": {
+        "eyebrow": "Newsletter",
+        "title": "Stay in the calm loop",
+        "copy": "Monthly highlights with new toolkits, impact stories, and early invites to pilots. Short, friendly, and focused on actionable inspiration.",
+        "primary_cta": "Subscribe to newsletter",
+        "primary_cta_href": "https://algorhythmics.substack.com"
+      }
+    }
+  },
   "about": {
     "hero": {
       "eyebrow": "Inside AlgoRhythmics",
@@ -1245,147 +1490,6 @@
         "copy": "We welcome collaborators who care about accessible technology, joyful learning, and responsible automation. Whether you are exploring careers, partnerships, or sponsorships, let’s build together.",
         "primary_cta": "Connect with AlgoRhythmics",
         "secondary_cta": "Subscribe to Updates"
-      }
-    }
-  },
-  "resources": {
-    "hero": {
-      "title": "Resources for calm AI teams",
-      "subtitle": "Case studies, accessibility notes, and tooling guidelines.",
-      "description": "Signals from the AlgoRhythmics studio.",
-      "primary": "Browse case studies",
-      "secondary": "Subscribe to updates"
-    },
-    "featured": {
-      "title": "Featured case study",
-      "description": "How calm AI entered a Baltic classroom.",
-      "meta": "16-week pilot",
-      "cta": "Read the case",
-      "href": "#case-studies"
-    },
-    "blog": {
-      "title": "Latest articles",
-      "read": "Read article",
-      "items": [
-        {
-          "title": "Designing accessible AI rituals",
-          "summary": "Checklist for pairing signage craft with automation.",
-          "date": "Feb 2025",
-          "category": "Accessibility",
-          "href": "#"
-        },
-        {
-          "title": "Why calm AI beats novelty",
-          "summary": "Lessons from NodeVoyage pilots.",
-          "date": "Jan 2025",
-          "category": "Product",
-          "href": "#"
-        },
-        {
-          "title": "Documentation that invites collaboration",
-          "summary": "Automation notes teams actually read.",
-          "date": "Dec 2024",
-          "category": "Operations",
-          "href": "#"
-        }
-      ]
-    },
-    "cases": {
-      "title": "Case studies",
-      "read": "Open case study",
-      "items": [
-        {
-          "title": "NodeVoyage accessibility refresh",
-          "summary": "AAA contrast and multilingual support in six weeks.",
-          "stat": "+22% itinerary completion",
-          "href": "#",
-          "accent": "voyage"
-        },
-        {
-          "title": "Ideonautix founder cockpit",
-          "summary": "Dashboards that balance focus and metrics.",
-          "stat": "4.8/5 satisfaction",
-          "href": "#",
-          "accent": "aurora"
-        },
-        {
-          "title": "Calm consulting blueprint",
-          "summary": "Explainable AI adoption for logistics teams.",
-          "stat": "12-week roadmap",
-          "href": "#",
-          "accent": "signal"
-        }
-      ]
-    },
-    "newsletter": {
-      "title": "Stay in the calm loop",
-      "description": "Monthly notes covering accessibility upgrades and experiments.",
-      "cta": "Join the list",
-      "href": "https://algorhythmics.substack.com"
-    },
-    "page": {
-      "hero": {
-        "title": "AlgoRhythmics Insights & Resources",
-        "subtitle": "Stories, case studies, documentation, and events that share our calm AI playbooks.",
-        "description": "Whether you are exploring creative productivity, planning educational programmes, or piloting AI inside your organisation, these resources keep you in step with our studio.",
-        "primary_cta": "Read the blog",
-        "secondary_cta": "Subscribe to Newsletter"
-      },
-      "sections": {
-        "blog": {
-          "eyebrow": "Blog",
-          "title": "AlgoRhythmics Insights & Blog",
-          "copy": "A space where logic meets creativity in writing. Discover trend analyses, creative productivity tips, product updates, and behind-the-scenes stories from our educational pilots.",
-          "highlights": [
-            "Accessible, jargon-light articles for multi-generational readers",
-            "Spotlights on educators, founders, and students using calm AI",
-            "Practical checklists inspired by signage craft and inclusive design"
-          ],
-          "primary_cta": "Visit the blog",
-          "secondary_cta": "Subscribe for monthly highlights"
-        },
-        "cases": {
-          "eyebrow": "Case studies",
-          "title": "Impact & success stories",
-          "copy": "Interactive narratives that show how AlgoRhythmics solutions deliver results—from classrooms adopting AI literacy to teams streamlining creative workflows.",
-          "highlights": [
-            "NodeVoyage accessibility refresh with +22% itinerary completion",
-            "Ideonautix founder cockpit raising satisfaction to 4.8/5",
-            "Calm consulting blueprint guiding logistics teams through adoption"
-          ],
-          "primary_cta": "Explore case studies",
-          "secondary_cta": "Download briefing kits"
-        },
-        "docs": {
-          "eyebrow": "Documentation",
-          "title": "Guides, APIs, and curriculum packs",
-          "copy": "Every platform ships with clear guides, inclusive language, and signage-inspired diagrams. Educators can also download curriculum packs aligned with LIAA pilots.",
-          "highlights": [
-            "User guides covering NodeVoyage and Ideonautix fundamentals",
-            "API references with transparent data usage explanations",
-            "Lesson plans, workshop decks, and classroom management tips"
-          ],
-          "primary_cta": "Access documentation",
-          "secondary_cta": "Contact education team"
-        }
-      },
-      "events": {
-        "eyebrow": "Events",
-        "title": "Upcoming workshops, webinars & community events",
-        "copy": "Join monthly sessions that demystify AI, celebrate creativity, and connect peers across disciplines. Most events are free and archived for replay.",
-        "bullets": [
-          "Hands-on workshops for families, teachers, and founders",
-          "Virtual webinars with live Q&A and accessible transcripts",
-          "Community hackathons and cultural collaborations blending AI with art"
-        ],
-        "primary_cta": "Browse the event calendar",
-        "secondary_cta": "Host an event with us"
-      },
-      "newsletter": {
-        "eyebrow": "Newsletter",
-        "title": "Stay in the calm loop",
-        "copy": "Subscribe to receive monthly highlights—product updates, educational wins, accessibility upgrades, and invitations to upcoming pilots.",
-        "primary_cta": "Subscribe to newsletter"
       }
     }
   },

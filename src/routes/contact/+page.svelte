@@ -13,22 +13,22 @@
 
   const hero = {
     titleKey: 'contact.page.hero.title',
-    titleFallback: 'Get in Touch with AlgoRhythmics',
+    titleFallback: 'Let’s build calm AI together',
     subtitleKey: 'contact.page.hero.subtitle',
     subtitleFallback:
-      'Questions about our platforms, partnerships, educational programmes, or community events? We are here for you.',
+      'AlgoRhythmics operates remotely from Latvia, serving partners worldwide. Reach out for product pilots, consulting, or community collaborations.',
     actions: [
       {
-        href: 'mailto:AlgoRhythmics.dev@gmail.com',
+        href: 'mailto:help@algorhythmics.com',
         variant: 'gradient' as const,
         labelKey: 'contact.page.hero.cta_email',
-        labelFallback: 'Email the studio'
+        labelFallback: 'Email help@algorhythmics.com'
       },
       {
-        href: '/resources#events',
+        href: '/solutions',
         variant: 'secondary' as const,
         labelKey: 'contact.page.hero.cta_events',
-        labelFallback: 'Join an event'
+        labelFallback: 'Explore our solutions'
       }
     ]
   } as const;
@@ -37,53 +37,53 @@
     {
       icon: 'email',
       titleKey: 'contact.page.cards.general.title',
-      titleFallback: 'General inquiries',
+      titleFallback: 'General enquiries',
       copyKey: 'contact.page.cards.general.copy',
       copyFallback:
-        'Partnerships, media, or big ideas—send us a note and we will respond within two business days.',
+        'Questions about AlgoRhythmics or our roadmap? Drop us a line and we will reply within one business day.',
       action: {
-        href: 'mailto:AlgoRhythmics.dev@gmail.com',
+        href: 'mailto:help@algorhythmics.com',
         labelKey: 'contact.page.cards.general.cta',
-        labelFallback: 'Email the studio'
+        labelFallback: 'Email help@algorhythmics.com'
       }
     },
     {
       icon: 'target',
       titleKey: 'contact.page.cards.support.title',
-      titleFallback: 'Customer support',
+      titleFallback: 'Product pilots & consulting',
       copyKey: 'contact.page.cards.support.copy',
       copyFallback:
-        'Already using Ideonautix or NodeVoyage? Our support chatbot is available 24/7, or write to support@algorhythmics.ai.',
+        'Partner with us on NodeVoyage, Ideonautix, or bespoke consulting engagements. We co-design pilots and long-term rollouts.',
       action: {
-        href: '/services#platforms',
+        href: '/solutions',
         labelKey: 'contact.page.cards.support.cta',
-        labelFallback: 'Open support chat'
+        labelFallback: 'View solutions overview'
       }
     },
     {
       icon: 'education',
       titleKey: 'contact.page.cards.education.title',
-      titleFallback: 'Educational outreach',
+      titleFallback: 'Education & community',
       copyKey: 'contact.page.cards.education.copy',
       copyFallback:
-        'Educators and community organisers can reach our outreach coordinators at education@algorhythmics.ai for tailored programmes.',
+        'Schools, libraries, and community organisations can reach our outreach coordinators at education@algorhythmics.com.',
       action: {
-        href: 'mailto:education@algorhythmics.ai',
+        href: 'mailto:education@algorhythmics.com',
         labelKey: 'contact.page.cards.education.cta',
-        labelFallback: 'Contact outreach team'
+        labelFallback: 'Email the outreach team'
       }
     },
     {
-      icon: 'location',
+      icon: 'idea',
       titleKey: 'contact.page.cards.visit.title',
-      titleFallback: 'Visit us',
+      titleFallback: 'Partnerships & media',
       copyKey: 'contact.page.cards.visit.copy',
       copyFallback:
-        'Headquarters: 123 Innovation Way, Riga, LV-1001. Drop by during office hours or book a visit in advance.',
+        'For collaborations, press enquiries, or speaking invitations, contact hello@algorhythmics.com and we will coordinate a session.',
       action: {
-        href: 'https://maps.google.com/?q=123+Innovation+Way+Riga+LV-1001',
+        href: 'mailto:hello@algorhythmics.com',
         labelKey: 'contact.page.cards.visit.cta',
-        labelFallback: 'View on map'
+        labelFallback: 'Email hello@algorhythmics.com'
       }
     }
   ] as const;
@@ -91,6 +91,7 @@
   let formData = {
     name: '',
     email: '',
+    reason: 'general',
     message: ''
   };
 
@@ -106,6 +107,7 @@
     if (!formData.name.trim()) next.name = t('contact.page.form.errors.name_required', 'Please add your name.');
     if (!formData.email.trim()) next.email = t('contact.page.form.errors.email_required', 'We use this to reply.');
     else if (!/^\S+@\S+\.\S+$/.test(formData.email)) next.email = t('contact.page.form.errors.email_invalid', 'Add a valid email address.');
+    if (!formData.reason.trim()) next.reason = t('contact.page.form.errors.reason_required', 'Select a reason.');
     if (!formData.message.trim()) next.message = t('contact.page.form.errors.message_required', 'Tell us how we can help.');
     errors = next;
     return Object.keys(next).length === 0;
@@ -119,21 +121,24 @@
     }
 
     const subject = encodeURIComponent(
-      t('contact.page.form.mailto_subject', 'Website inquiry from {name}').replace('{name}', formData.name)
+      t('contact.page.form.mailto_subject', 'Website enquiry from {name} ({reason})')
+        .replace('{name}', formData.name)
+        .replace('{reason}', formData.reason)
     );
     const bodyTemplate = t(
       'contact.page.form.mailto_body',
-      'Name: {name}\nEmail: {email}\n\n{message}'
+      'Name: {name}\nEmail: {email}\nReason: {reason}\n\n{message}'
     );
     const body = encodeURIComponent(
       bodyTemplate
         .replace('{name}', formData.name)
         .replace('{email}', formData.email)
+        .replace('{reason}', formData.reason)
         .replace('{message}', formData.message)
     );
-    window.location.href = `mailto:AlgoRhythmics.dev@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:help@algorhythmics.com?subject=${subject}&body=${body}`;
     status = 'success';
-    formData = { name: '', email: '', message: '' };
+    formData = { name: '', email: '', reason: 'general', message: '' };
   };
 
   onMount(() => {
@@ -206,6 +211,19 @@
         </label>
 
         <label>
+          <span>{t('contact.page.form.fields.reason.label', 'Reason for contacting')}</span>
+          <select bind:value={formData.reason} on:change={resetStatus} aria-invalid={errors.reason ? 'true' : 'false'}>
+            <option value="general">{t('contact.page.form.fields.reason.options.general', 'General question')}</option>
+            <option value="consulting">{t('contact.page.form.fields.reason.options.consulting', 'Consulting or pilot')}</option>
+            <option value="education">{t('contact.page.form.fields.reason.options.education', 'Education & community')}</option>
+            <option value="media">{t('contact.page.form.fields.reason.options.media', 'Media or partnership')}</option>
+          </select>
+          {#if errors.reason}
+            <span class="field-error">{errors.reason}</span>
+          {/if}
+        </label>
+
+        <label>
           <span>{t('contact.page.form.fields.message.label', 'Message')}</span>
           <textarea
             rows="6"
@@ -233,6 +251,39 @@
   </div>
 </section>
 
+<SectionDivider tone="aurora" />
+
+<section id="newsletter" class="contact-newsletter" use:revealOnScroll>
+  <div class="container">
+    <GlassCard class="newsletter-card" padding="lg">
+      <span class="section-eyebrow">Studio updates</span>
+      <h2>{t('contact.page.newsletter.title', 'Subscribe for launch updates')}</h2>
+      <p>
+        {t(
+          'contact.page.newsletter.copy',
+          'Get a quarterly roundup on NodeVoyage, Ideonautix, and our consulting stories. No spam—just honest progress.'
+        )}
+      </p>
+      <div class="newsletter-actions">
+        <Button href="mailto:newsletter@algorhythmics.com" variant="gradient">{t(
+            'contact.page.newsletter.cta',
+            'Email newsletter@algorhythmics.com'
+          )}</Button>
+        <Button href="/solutions" variant="secondary">{t(
+            'contact.page.newsletter.secondary',
+            'Read about our solutions'
+          )}</Button>
+      </div>
+      <p class="newsletter-note">
+        {t(
+          'contact.page.newsletter.note',
+          'Prefer a form? Mention “Newsletter” in the message above and we will add you manually.'
+        )}
+      </p>
+    </GlassCard>
+  </div>
+</section>
+
 <style>
   .hero-actions {
     display: flex;
@@ -242,7 +293,8 @@
   }
 
   .contact-options,
-  .contact-form {
+  .contact-form,
+  .contact-newsletter {
     padding: clamp(3.5rem, 8vw, 6rem) 0;
   }
 
@@ -300,6 +352,7 @@
   }
 
   input,
+  select,
   textarea {
     font: inherit;
     padding: 0.85rem 1rem;
@@ -310,6 +363,7 @@
   }
 
   input:focus-visible,
+  select:focus-visible,
   textarea:focus-visible {
     outline: 2px solid var(--voyage-blue);
     outline-offset: 2px;
@@ -334,6 +388,26 @@
   .form-status {
     font-size: var(--text-small);
     color: var(--voyage-blue);
+  }
+
+  .contact-newsletter :global(.newsletter-card) {
+    display: grid;
+    gap: clamp(1rem, 3vw, 1.6rem);
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .newsletter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md, 1rem);
+    justify-content: center;
+  }
+
+  .newsletter-note {
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
   }
 
   @media (min-width: 900px) {

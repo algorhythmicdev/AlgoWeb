@@ -29,8 +29,8 @@ export const siteConfig = {
     }
   ],
   contact: {
-    email: 'AlgoRhythmics.dev@gmail.com',
-    location: 'Daugavpils, Latvia'
+    email: 'help@algorhythmics.com',
+    location: 'Latvia · Remote-first'
   },
   social: {
     linkedin: 'https://linkedin.com/company/algorhythmics',
@@ -52,9 +52,9 @@ export const pageConfigs = {
     path: '/services'
   },
   consulting: {
-    title: 'Consulting Services | AlgoRhythmics',
+    title: 'AI Consulting Services & Pilot Program | AlgoRhythmics',
     description:
-      'Redirect to our services hub covering consulting, integration support, and calm AI delivery.',
+      'Explore the AlgoRhythmics consulting pilot with strategy workshops, implementation support, and advisory care for responsible AI delivery.',
     path: '/consulting'
   },
   educationalOutreach: {
@@ -76,10 +76,10 @@ export const pageConfigs = {
     path: '/about'
   },
   resources: {
-    title: 'Resources - Blog, Case Studies & Events | AlgoRhythmics',
+    title: 'Education Hub & Calm AI Blog | AlgoRhythmics',
     description:
-      'Dive into insights, success stories, documentation, and events from the AlgoRhythmics community.',
-    path: '/resources'
+      'Explore inclusive AI insights, classroom toolkits, community spotlights, and upcoming events from the AlgoRhythmics Education Hub.',
+    path: '/education-hub'
   },
   contact: {
     title: 'Contact AlgoRhythmics - Let\'s Build Together',

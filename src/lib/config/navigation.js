@@ -11,6 +11,7 @@
  * @property {string} href
  * @property {string} icon
  * @property {NavigationChild[]} [children]
+ * @property {string} [panelLabel]
  */
 
 /**
@@ -30,34 +31,25 @@ export const mainNavigation = [
     icon: 'about'
   },
   {
-    label: 'nav.services',
-    href: '/services',
-    icon: 'services'
-  },
-  {
-    label: 'nav.educational_outreach',
-    href: '/educational-outreach',
-    icon: 'education'
-  },
-  {
-    label: 'nav.resources',
-    href: '/resources',
-    icon: 'resources',
+    label: 'nav.solutions',
+    href: '/solutions',
+    icon: 'services',
+    panelLabel: 'nav.solutions_panel_label',
     children: [
       {
-        label: 'nav.resources_blog',
-        href: '/resources#blog',
-        description: 'nav.resources_blog_desc'
+        label: 'nav.solutions_nodevoyage',
+        href: '/nodevoyage',
+        description: 'nav.solutions_nodevoyage_desc'
       },
       {
-        label: 'nav.resources_cases',
-        href: '/resources#case-studies',
-        description: 'nav.resources_cases_desc'
+        label: 'nav.solutions_ideonautix',
+        href: '/ideonautix',
+        description: 'nav.solutions_ideonautix_desc'
       },
       {
-        label: 'nav.resources_events',
-        href: '/resources#events',
-        description: 'nav.resources_events_desc'
+        label: 'nav.solutions_consulting',
+        href: '/consulting',
+        description: 'nav.solutions_consulting_desc'
       }
     ]
   },
@@ -71,21 +63,21 @@ export const mainNavigation = [
 export const footerLinks = {
   company: [
     { label: 'footer.about', href: '/about' },
-    { label: 'footer.services', href: '/services' },
-    { label: 'footer.educational_outreach', href: '/educational-outreach' },
-    { label: 'footer.contact', href: '/contact' }
+    { label: 'footer.contact', href: '/contact' },
+    { label: 'footer.educational_outreach', href: '/educational-outreach' }
   ],
   resources: [
-    { label: 'footer.blog', href: '/resources#blog' },
-    { label: 'footer.case_studies', href: '/resources#case-studies' },
-    { label: 'footer.documentation', href: '/resources#documentation' },
-    { label: 'footer.events', href: '/resources#events' }
+    { label: 'footer.education_hub', href: '/education-hub' },
+    { label: 'footer.blog', href: '/education-hub#insights' },
+    { label: 'footer.case_studies', href: '/education-hub#case-studies' },
+    { label: 'footer.toolkits', href: '/education-hub#toolkits' },
+    { label: 'footer.events', href: '/education-hub#events' }
   ],
   support: [
-    { label: 'footer.nodevoyage', href: '/services#nodevoyage' },
-    { label: 'footer.ideonautix', href: '/services#ideonautix' },
-    { label: 'footer.consulting', href: '/services#consulting' },
-    { label: 'footer.newsletter', href: '/resources#newsletter' }
+    { label: 'footer.nodevoyage', href: '/nodevoyage' },
+    { label: 'footer.ideonautix', href: '/ideonautix' },
+    { label: 'footer.consulting', href: '/consulting' },
+    { label: 'footer.newsletter', href: '/contact#newsletter' }
   ],
   social: [
     { label: 'footer.social.linkedin', href: 'https://linkedin.com/company/algorhythmics', icon: 'linkedin' },

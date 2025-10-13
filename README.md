@@ -1,4 +1,11 @@
 AlgoRhythmics 2026 Website Redesign Plan
+Progress Tracker
+- [x] Refresh top-level navigation with a dedicated Solutions hub linking to NodeVoyage, Ideonautix, and consulting.
+- [x] Build dedicated NodeVoyage product page with roadmap, differentiators, and Explorers Club signup.
+- [x] Build dedicated Ideonautix product page with module highlights, pilot invitation, and use cases.
+- [x] Update Contact page with remote-first messaging, reason selector, and newsletter call-to-action.
+- [x] Launch future Education Hub / blog to replace legacy resources section.
+- [x] Launch dedicated consulting services pilot page with application flow and supporting materials.
 Design System (2026 Refresh)
 
 A Unified, Accessible Aesthetic: The 2026 redesign introduces a cohesive design system across AlgoRhythmics and its platforms, emphasizing clarity, playfulness, and WCAG AAA accessibility. The visual style is dynamic minimalism with restrained use of frosted glass effects, subtle grain textures, and gentle motion that supports content without distracting. All interactive elements meet or exceed strict contrast standards (AAA for text, ≥3:1 for non-text UI) to ensure the site is usable by all audiences.
