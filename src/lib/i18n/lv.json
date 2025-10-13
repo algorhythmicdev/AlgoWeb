@@ -31,96 +31,75 @@
   },
   "nav": {
     "home": "Sākums",
-    "products": "Produkti",
-    "nodevoyage": "NodeVoyage",
-    "ideonautix": "Ideonautix",
-    "consulting": "Konsultācijas",
-    "contact": "Kontakti",
     "about": "Par mums",
-    "nodevoyage_desc": "Iepazīsti mūsu MI ceļojumu draugu",
-    "ideonautix_desc": "Izpēti startapu produktivitātes komplektu",
+    "services": "Services",
+    "educational_outreach": "Educational Outreach",
+    "resources": "Resources",
+    "resources_blog": "Blog",
+    "resources_blog_desc": "Insights, news, and creative stories",
+    "resources_cases": "Case Studies",
+    "resources_cases_desc": "See AlgoRhythmics solutions in action",
+    "resources_events": "Events",
+    "resources_events_desc": "Join upcoming webinars and community meetups",
+    "contact": "Kontakti",
     "brand_aria": "AlgoRhythmics sākumlapa",
     "brand_name": "AlgoRhythmics",
-    "toggle_menu": "Atvērt vai aizvērt izvēlni",
     "primary_label": "Galvenā navigācija",
-    "products_panel_label": "Produktu saites",
+    "resources_panel_label": "Quick access to resource highlights",
     "talk_to_us": "Sazinies ar mums",
-    "education": "Education",
-    "resources": "Resources",
+    "toggle_menu": "Atvērt vai aizvērt izvēlni",
     "skip_to_content": "Skip to content"
   },
-  "hero": {
-    "status": "OS-native AI studio • Riga ↔ Rotterdam",
-    "title": {
-      "lead": "Think faster.",
-      "brand": "AlgoRhythmics",
-      "trail": "helps teams ship smarter."
-    },
-    "tagline": "OS-native studio aligning NodeVoyage, Ideonautix, and consulting into one calm suite.",
-    "subtitle": "We choreograph explainable AI rituals, from travel companions to founder workspaces, with AAA-accessible glass shells.",
-    "description": "Every surface honours reduced-motion settings, signage-born craft, and WCAG AAA contrast so your team stays in control whether you're exploring NodeVoyage, assembling Ideonautix, or partnering through our consulting sprints.",
-    "cta_products": "Explore the product lineup",
-    "cta_consulting": "Plan a strategy session",
-    "actions_label": "Galvenās hero darbības",
-    "next_milestone": "Nākamais posms",
-    "pillars_title": "How we deliver calm momentum",
-    "pillars": [
-      "Story-led OS windows frame NodeVoyage, Ideonautix, and consulting within shared Aurora Mist surfaces.",
-      "Think Faster. Ship Smarter. Motion, focus, and colour tokens default to reduced-motion and AAA ratios.",
-      "Explainable automation fuses signage hardware discipline with cloud delivery for trustworthy launches."
-    ],
-    "signals": {
-      "studio_phase": "Studijas posms",
-      "studio_phase_value": "OS-native studio • Since 2023",
-      "focus_tracks": "Fokusa virzieni",
-      "focus_tracks_value": "NodeVoyage • Ideonautix • Consulting",
-      "research": "Pētījumu saknes",
-      "research_value": "Signage systems + cloud AI"
-    },
-    "moments": {
-      "nodevoyage": {
-        "kicker": "Produkta virziens",
-        "status": "NodeVoyage",
-        "copy": "Travel companion with OS-inspired itineraries, offline reliability, and explainable suggestions.",
-        "meta": "Beta pilots forming",
-        "cta": "Open NodeVoyage preview"
+  "language_switcher": {
+    "group_label": "Valodu izvēle",
+    "trigger_label": "Izvēlies valodu",
+    "menu_label": "Pieejamās valodas",
+    "languages": {
+      "en": {
+        "short": "EN",
+        "name": "English"
       },
-      "ideonautix": {
-        "kicker": "Produkta virziens",
-        "status": "Ideonautix",
-        "copy": "Founder OS with modular rituals, venture metrics, and transparent automation.",
-        "meta": "Research sprint in progress",
-        "cta": "Preview Ideonautix"
+      "lv": {
+        "short": "LV",
+        "name": "Latviešu"
+      },
+      "ru": {
+        "short": "RU",
+        "name": "Русский"
+      },
+      "uk": {
+        "short": "UK",
+        "name": "Українська"
+      },
+      "fr": {
+        "short": "FR",
+        "name": "Français"
+      },
+      "es": {
+        "short": "ES",
+        "name": "Español"
       }
-    },
-    "focus": {
-      "kicker": "Studijas fokuss",
-      "title": "Calm OS rituals across products",
-      "description": "We maintain one timing, colour, and accessibility system so travel teams, founders, and partners feel at home in every surface.",
-      "points": [
-        "OS-window shells stay legible in light, dark, and high-contrast modes.",
-        "Reduced-motion fallbacks keep essential context visible when animations pause.",
-        "Signage R&D meets cloud delivery so automation remains explainable and accountable."
-      ],
-      "cta": "Meet the community"
-    },
-    "milestone_cta": "Skatīt ceļa karti",
-    "brand_aria": "AlgoRhythmics zīmola akcents hero virsrakstā"
+    }
+  },
+  "common": {
+    "submitting": "Nosūta..."
+  },
+  "form": {
+    "error_required": "Šis lauks ir obligāts",
+    "error_email": "Nederīga e-pasta adrese",
+    "error_phone": "Nederīgs telefona numurs",
+    "error_validation": "Lūdzu, izlabo kļūdas formā",
+    "required_note": "* Obligātie lauki",
+    "helper_company": "Nosauc komandu vai iniciatīvu, kas piesakās pilotam.",
+    "helper_name": "Norādi cilvēku, kurš vadīs sadarbību ikdienā.",
+    "helper_email": "Šeit nosūtīsim sākuma prezentāciju un tikšanās saites.",
+    "helper_phone": "Nav obligāti, bet noder, ja jāvienojas steigā.",
+    "helper_industry": "Izvēlies jomu, lai varam dalīties ar atbilstošiem piemēriem.",
+    "helper_description": "Apraksti rezultātus, ko gaidi no Strategy, Build vai Care pakotnēm.",
+    "helper_subject": "Pievieno virsrakstu, lai varam ātri novirzīt ziņu.",
+    "helper_message": "Iekļauj kontekstu, saites vai failus, kurus vajadzētu pārskatīt."
   },
   "home": {
-    "cta": {
-      "eyebrow": "Keep exploring",
-      "title": "Stay in our orbit",
-      "text": "Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.",
-      "primary": "Join the community",
-      "secondary": "Book a calm strategy chat",
-      "points": [
-        "Roadmap walkthroughs before they reach the blog.",
-        "Pilot invitations go to subscribers first.",
-        "Accessibility checklists and signage-inspired playbooks."
-      ],
-      "consulting": "Prefer a guided walkthrough? Book a calm strategy chat and we will map your next steps together."
-    },
     "hero": {
       "status": "Independent AI studio · Riga ↔ Rotterdam",
       "title": {
@@ -192,7 +171,6 @@
       "title": "Our path",
       "subtitle": "Milestones keeping us honest",
       "filters_label": "Filter milestones by status",
-      "filters_announcement": "Showing {count} milestones",
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected status yet.",
       "upcoming_badge": "Upcoming",
@@ -240,7 +218,21 @@
           "description": "Bring our AI education sessions to secondary schools across Latvia.",
           "note": "Goal: 75+ institutes"
         }
-      }
+      },
+      "filters_announcement": "Showing {count} milestones"
+    },
+    "cta": {
+      "eyebrow": "Keep exploring",
+      "title": "Stay in our orbit",
+      "text": "Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.",
+      "primary": "Join the community",
+      "secondary": "Book a calm strategy chat",
+      "points": [
+        "Roadmap walkthroughs before they reach the blog.",
+        "Pilot invitations go to subscribers first.",
+        "Accessibility checklists and signage-inspired playbooks."
+      ],
+      "consulting": "Prefer a guided walkthrough? Book a calm strategy chat and we will map your next steps together."
     },
     "founders": {
       "title": "Meet the founders",
@@ -333,278 +325,116 @@
       "cta_text": "Join the community for release news, pilot invites, and accessibility updates.",
       "cta_join": "Join the community",
       "cta_contact": "Book a chat"
-    }
-  },
-  "story": {
-    "title": "Mūsu stāsts",
-    "reality_title": "Realitāte, ko būvējam",
-    "reality_text": "We orchestrate OS-native experiences that make travel planning and founder rituals calmer and more transparent.",
-    "mission_title": "Mūsu misija",
-    "mission_text": "To deliver explainable, accessible AI platforms that keep humans in the loop across journeys, startups, and consulting engagements.",
-    "vision_title": "Mūsu vīzija",
-    "vision_text": "A 2026 design language where frosted glass, grain, and motion support focus while NodeVoyage and Ideonautix share a single trustworthy operating system."
-  },
-  "founders": {
-    "title": "Satieciet dibinātājus",
-    "subtitle": "Kopā veidojam MI nākotni",
-    "email_cta": "E-pasts",
-    "linkedin_cta": "LinkedIn",
-    "nikita": {
-      "name": "Nikita Jurtaevs",
-      "role": "Līdzdibinātājs un CEO",
-      "bio": "Nikita Jurtaevs strādā kā CEO dokumentētā 50/50 līdzvadības modelī: viņš vada stratēģiju, partnerības un zīmola virzienu, vienlaikus sākumposmā koordinējot NodeVoyage un Ideonautix produkta vadību un UX/QA.",
-      "current_title": "Pašreizējais amats",
-      "current_position": "Reclame Fabriek zīmju pētījumu nodaļā vada nākamās paaudzes LED neona, iekšējo LED kontrolieru, speciālo pārklājumu un 3D drukas iniciatīvas, kas tieši stiprina AlgoRhythmics piegādes.",
-      "expertise": [
-        "Radošā vīzija un zīmola stratēģija",
-        "MI produktu dizains",
-        "Lietotāju pieredzes inovācijas",
-        "Stratēģiskās partnerības"
-      ]
     },
-    "slaff": {
-      "name": "Vjaceslavs \"Slaff\" Trosins",
-      "role": "Līdzdibinātājs un CTO",
-      "bio": "Vjaceslavs “Slaff” Trosins kopīgi vada tehnoloģisko redzējumu: mākoņu arhitektūra, datu plūsmas un MI integrācijas NodeVoyage un Ideonautix platformām.",
-      "current_title": "Pašreizējais amats",
-      "position": "CTO un līdz-CEO, kurš atbild par platformas piegādi web/mobilajās vidēs, API un MI, vienlaikus izstrādājot zīmju kvalitātes kontrolieru sistēmas Reclame Fabriek pētījumu nodaļā.",
-      "philosophy": "Domāšana sistēmās starp signāltehnikas pētniecību un patērētāju programmatūru notur mūsu steku praktisku: dienā prototipējam kontrolierus, naktī šo noturību pārvēršam MI produktos.",
-      "achievements": [
-        "Vada piegādi ar Google Cloud kā pamatu (Cloud Run, Vertex AI/Gemini, Memorystore, Cloud SQL) un mūsdienīgām slāņiem (SvelteKit/TypeScript, Flutter/Dart, Fastify, Prisma/PostgreSQL, Redis/BullMQ, WebSockets/SSE)",
-        "Saskaņo signāltehnikas kontrolieru inženieriju un nākamās paaudzes LED neona līnijas ar skaidrojamām reāllaika MI pieredzēm",
-        "Vada trīs finansējuma sprintus — Pomodoro Coach, Startup Pitch Assistant, Competitive Intelligence Dashboard — lai mērogotu NodeVoyage un Ideonautix"
-      ],
-      "brand_title": "Zīmolu pieredze",
-      "brand_intro": "Strādājis ar pasaules zīmoliem pie premium reklāmas displeju sistēmām:",
-      "brand_context": "Projekti īstenoti kopā ar Reclame Fabriek (Daugavpils, LV), abiem dibinātājiem daloties pieredzē",
-      "algorhythmics_title": "Vīzija AlgoRhythmics",
-      "algorhythmics_vision": "Apvienot signāltehnikas pētniecības disciplīnu ar mākonī dzimušu piegādi, lai AlgoRhythmics radītu skaidrojamas un izturīgas MI pieredzes, gatavas reālām instalācijām."
-    }
-  },
-  "partners": {
-    "eyebrow": "Operatīvās alianses",
-    "title": "Partneri, kas virza studiju",
-    "description": "Šodien strādājam ar izkārtnes industrijas līderiem un gatavojam valsts sektorālos sabiedrotos, lai paplašinātu mūsu izglītības programmas.",
-    "location": "Atrašanās vieta",
-    "founded": "Dibināts",
-    "website": "Vietne",
-    "clients_label": "Atlasītie klienti",
-    "clients_title": "Globālie zīmoli, kurus esam atbalstījuši",
-    "clients_description": "Gadu desmitu pieredze izkārtnes projektos mazumtirdzniecībā, finanšu un aviācijas nozarēs dod stingru pamatu mūsu AI risinājumiem.",
-    "labels": {
-      "current": "Aktīva partnerība",
-      "aspirational": "Nākamā partnerība",
-      "scale": "Mērogs īsumā",
-      "reach": "Prognozētā ietekme",
-      "innovation": "Inovāciju fokuss",
-      "programs": "Programmas kustībā"
-    }
-  },
-  "timeline": {
-    "title": "Mūsu ceļš",
-    "subtitle": "Veidojam nākotni soli pa solim",
-    "nav_previous": "Iepriekšējais posms",
-    "nav_next": "Nākamais posms",
-    "preview_label": "Ceļa kartes priekšskatījums",
-    "upcoming_badge": "Gaidāms",
-    "filters_label": "Filtrēt posmus pēc statusa",
-    "filters_reset": "Rādīt visus statusus",
-    "filters_all": "Visi statusi",
-    "filters_empty": "Neviens posms neatbilst izvēlētajiem statusiem.",
-    "milestone_live_label": "Skatāt {title}{progress}",
-    "progress_label": "Posms {current} no {total}",
-    "milestones": {
-      "ideju-kauss": {
-        "title": "Ideju Kauss konkurss",
-        "description": "Dalība Latvijas vadošajā startup konkursā ar NodeVoyage koncepciju",
-        "note": ""
+    "page": {
+      "hero": {
+        "title": "Where logic dances with creativity.",
+        "subtitle": "AlgoRhythmics builds AI platforms, consulting rituals, and educational programmes that keep innovation approachable for everyone—from students to enterprises.",
+        "description": "We choreograph technology with human-friendly signage craft, inclusive localisation, and transparent automation notes. The result is AI that feels calm, clear, and collaborative.",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Learn About Our Mission"
       },
-      "company-formation": {
-        "title": "Uzņēmuma izveide",
-        "description": "Oficiāla reģistrācija, juridiskā struktūra un sākuma komandas veidošana",
-        "note": ""
+      "highlights": {
+        "eyebrow": "Key highlights",
+        "title": "Innovation that feels welcoming",
+        "description": "Every AlgoRhythmics experience blends rigorous logic with imaginative play. These highlights show how our rhythm supports travellers, founders, students, and lifelong learners.",
+        "items": {
+          "innovative_ai": {
+            "title": "Innovative AI Solutions",
+            "copy": "NodeVoyage and Ideonautix adapt to your journeys and workflows with playful precision."
+          },
+          "educational_impact": {
+            "title": "Educational Impact",
+            "copy": "Curriculum pilots, teacher labs, and student hackathons nurture confident creators."
+          },
+          "consulting_excellence": {
+            "title": "Consulting Excellence",
+            "copy": "Hands-on integration sprints pair transparent automation with lasting change."
+          },
+          "community_creativity": {
+            "title": "Community & Creativity",
+            "copy": "Blogs, events, and community forums let families, founders, and students learn together."
+          }
+        }
       },
-      "liaa-application": {
-        "title": "LIAA partnerības pieteikums",
-        "description": "Pieteikums sadarbībai ar Latvijas Investīciju un attīstības aģentūru izglītības programmām",
-        "note": "Mērķis — vēl nav apstiprināts"
+      "offerings": {
+        "eyebrow": "What we offer",
+        "title": "Services, platforms, and programmes in one rhythm",
+        "description": "Choose the path that fits your journey. We keep transitions effortless—partnerships often blend consulting, products, and outreach to meet evolving goals.",
+        "items": {
+          "consulting": {
+            "title": "AI Consulting & Integration",
+            "summary": "Map opportunities, run pilot sprints, and launch explainable automation with founder-led guidance.",
+            "bullets": [
+              "Discovery workshops grounded in signage-inspired clarity",
+              "Pilot roadmaps with opt-out controls and transparent documentation",
+              "Training and change support to keep teams confident"
+            ],
+            "primary_cta": "Request a Consultation"
+          },
+          "platforms": {
+            "title": "Flagship Platforms",
+            "summary": "NodeVoyage reimagines travel planning while Ideonautix accelerates creative productivity—both share the same accessible rhythm.",
+            "bullets": [
+              "Personalised itineraries and collaborative travel workspaces",
+              "Creative canvases, pitch assistants, and multilingual workflows",
+              "AAA contrast modes, reduced-motion support, and localisation baked in"
+            ],
+            "primary_cta": "Explore Platforms",
+            "secondary_cta": "View Case Studies"
+          },
+          "education": {
+            "title": "Educational Outreach",
+            "summary": "In partnership with LIAA, schools, and cultural institutions, we bring AI literacy to classrooms, libraries, and community hubs.",
+            "bullets": [
+              "Ready-to-run lesson plans and bilingual classroom kits",
+              "Parent ambassador network and mentorship pipelines",
+              "Community events that blend logic, art, and storytelling"
+            ],
+            "primary_cta": "Join the Programme",
+            "secondary_cta": "Access Resource Library"
+          }
+        }
       },
-      "mvp-ideonautix": {
-        "title": "Ideonautix MVP palaišana",
-        "description": "Pirmā Ideonautix produktivitātes platformas versija ar galvenajiem mikropakalpojumiem",
-        "note": ""
+      "resources": {
+        "eyebrow": "Stay in the loop",
+        "title": "Keep up with the rhythm",
+        "description": "Our blog, case studies, and events share the playbooks behind calm AI—from classroom wins to product breakthroughs.",
+        "items": {
+          "blog": {
+            "eyebrow": "Blog",
+            "title": "AlgoRhythmics Insights & Blog",
+            "copy": "Dive into stories, how-to guides, and behind-the-scenes notes where logic meets creativity in writing.",
+            "cta": "Read the blog"
+          },
+          "case_studies": {
+            "eyebrow": "Case studies",
+            "title": "Impact & Success Stories",
+            "copy": "See how teams, students, and communities turn calm AI into measurable outcomes.",
+            "cta": "Explore case studies"
+          },
+          "events": {
+            "eyebrow": "Events",
+            "title": "Workshops, webinars & meetups",
+            "copy": "Join upcoming sessions that demystify AI and celebrate co-creation across ages.",
+            "cta": "Browse events"
+          }
+        }
       },
-      "pilot-consulting": {
-        "title": "MI konsultāciju pilots",
-        "description": "Bezmaksas pilots ar 3 atlasītiem uzņēmumiem MI integrācijas konsultācijām",
-        "note": ""
-      },
-      "mvp-nodevoyage": {
-        "title": "NodeVoyage MVP palaišana",
-        "description": "Publiska beta ar pamatfunkcijām un MI draugu Nodi",
-        "note": ""
-      },
-      "education-program": {
-        "title": "Izglītības programmas uzsākšana",
-        "description": "MI izglītības programmu ieviešana Latvijas vidusskolās",
-        "note": "Mērķis: 75+ skolas (pētījumu prognoze)"
+      "finale": {
+        "eyebrow": "Let’s collaborate",
+        "title": "Ready to choreograph your next idea?",
+        "copy": "Bring your roadmap, classroom goals, or community vision. We will help orchestrate the right mix of consulting, products, and outreach to make AI feel friendly and focused.",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Connect with the Team"
       }
     }
-  },
-  "nodevoyage": {
-    "meta_title": "NodeVoyage – AlgoRhythmics",
-    "name": "NodeVoyage",
-    "status": "Izstrāde • MVP 2026. gada septembris",
-    "tagline": "Tavs MI ceļojumu draugs",
-    "hero_rotating": [
-      "Nodi izveido pielāgotus maršrutus sekundēs",
-      "Bezsaistes rīki drošiem ceļojumiem",
-      "Cilvēcīgs kopilots ar MI atbalstu"
-    ],
-    "hero_description": "MI plānošana, kas padara piedzīvojumu radīšanu vieglu, jautru un personīgu. Iepazīsti Nodi — gudro ceļabiedru.",
-    "seo_description": "MI ceļojumu platforma ar gudriem maršrutiem, AR rīkiem un kopienu, ko vada Nodi — tavs ceļojumu draugs.",
-    "hero_alt": "NodeVoyage interfeisa priekšskatījums",
-    "cta_primary": "Pievienoties gaidītāju sarakstam",
-    "cta_secondary": "Apskatīt funkcijas",
-    "stat1_value": "2026. sept.",
-    "stat1_label": "MVP palaišana",
-    "stat2_value": "MI spēks",
-    "stat2_label": "Gudra plānošana",
-    "stat3_value": "Mobile First",
-    "stat3_label": "AR + bezsaistē",
-    "features_title": "Iedvesmojošas iespējas",
-    "features_subtitle": "Viss nepieciešamais ideālam ceļojumam",
-    "features": {
-      "nodi-ai": {
-        "title": "MI draugs Nodi",
-        "description": "Draudzīgs asistents, kas apgūst tavas vēlmes un sekundēs rada personalizētus maršrutus"
-      },
-      "smart-builder": {
-        "title": "Gudrais maršruta veidotājs",
-        "description": "Vizuals plānotājs ar velc-un-nomet mezgliem, noskaņu priekšiestatījumiem un reāllaika optimizāciju"
-      },
-      "mobile-suite": {
-        "title": "Mobilā pieredzes suite",
-        "description": "AR tulkošana, tiešraides tulks, foto atpazīšana un pilna bezsaistes funkcionalitāte"
-      },
-      "community": {
-        "title": "Ceļotāju kopiena",
-        "description": "Dalies piedzīvojumos, atklāj citu ceļotāju maršrutus un plāno kopā"
-      }
-    },
-    "how_title": "Kā darbojas NodeVoyage",
-    "step1_title": "Pastāsti Nodi par sapni",
-    "step1_desc": "Parunā ar MI Nodi par savām vēlmēm, budžetu un interesēm",
-    "step2_title": "Saņem gudrus ieteikumus",
-    "step2_desc": "Saņem personalizētus maršrutus ar optimizētiem ceļiem un vietējām atziņām",
-    "step3_title": "Pielāgo savu braucienu",
-    "step3_desc": "Pielāgo ar mūsu vizuālo mezglu plānotāju",
-    "step4_title": "Ceļo droši",
-    "step4_desc": "Izmanto mobilos AR rīkus, bezsaistes kartes un reāllaika atbalstu",
-    "tech_title": "Tehnoloģijas priekšgalā",
-    "tech_subtitle": "Google Cloud, MI un moderni tīmekļa standarti",
-    "cta_title": "Gatavs mainīt ceļošanas paradumus?",
-    "cta_description": "Pievienojies gaidītāju sarakstam un būsi starp pirmajiem, kas izmēģina NodeVoyage 2026. gada septembrī",
-    "cta_button": "Pievienoties sarakstam",
-    "cta_note": "Nav vajadzīga karte • Agrīnās piekļuves priekšrocības"
-  },
-  "ideonautix": {
-    "meta_title": "Ideonautix – AlgoRhythmics",
-    "name": "Ideonautix",
-    "status": "Plānošana • MVP 2026. gada februāris",
-    "tagline": "Inteliģence startapiem",
-    "hero_rotating": [
-      "Mikropakalpojumi, kas saprot jūsu startup",
-      "Ideonautix analizē, kamēr komanda saglabā fokusu",
-      "Automatizācija cilvēka uzraudzībā katram pitch"
-    ],
-    "hero_description": "Modulāra produktivitātes suite dibinātājiem un augošām komandām. MI mikropakalpojumi, kas patiesi izprot tavu biznesu.",
-    "seo_description": "MI produktivitātes suite startapiem ar piču, ieņēmumu un komandas inteliģences mikropakalpojumiem.",
-    "hero_alt": "Ideonautix paneļa priekšskatījums",
-    "cta_primary": "Saņemt agrīnu piekļuvi",
-    "cta_secondary": "Skatīt mikropakalpojumus",
-    "stat1_value": "2026. febr.",
-    "stat1_label": "MVP palaišana",
-    "stat2_value": "8+ rīki",
-    "stat2_label": "Mikropakalpojumi",
-    "stat3_value": "AI-First",
-    "stat3_label": "Inteliģence",
-    "microservices_title": "Jaudīgi mikropakalpojumi",
-    "microservices_subtitle": "Aktivizē tikai to, kas vajadzīgs tieši tagad",
-    "pitch_title": "Pitch asistents",
-    "pitch_desc": "Saņem MI vērtējumu, punktus un investoru skatījumu savam pitch deck",
-    "revenue_title": "Ieņēmumu paneļi",
-    "revenue_desc": "Reāllaika analītikas dēļi ar KPI uzraudzību, prognozēm un ieteikumiem",
-    "team_title": "Komandas dinamika",
-    "team_desc": "Iepazīsti komandas veselību, saziņas un sadarbības paradumus ar MI analīzi",
-    "market_desc": "Seko konkurentiem, tirgus tendencēm un iespējām ar MI inteliģenci",
-    "finance_desc": "Automatizēta finanšu uzskaite, prognozes un atskaites startapiem",
-    "growth_desc": "Growth hacking rīki un analītika straujākam izrāvienam",
-    "investor_desc": "Vienuviet pārvaldi investoru attiecības, atskaites un komunikāciju",
-    "analytics_desc": "Visaptverošs analītikas centrs ar visiem tava biznesa rādītājiem",
-    "how_title": "Kā strādā Ideonautix",
-    "integrations_title": "Vienmērīgas integrācijas",
-    "cta_title": "Paātrini sava startapa izaugsmi",
-    "cta_description": "Agrīna piekļuve startēs 2026. gada februārī — kļūsti par jaunās produktivitātes līdzradītāju"
   },
   "consulting": {
     "meta_title": "AlgoRhythmics konsultāciju pilots",
     "meta_description": "Pievienojies mierīgajam AI konsultāciju pilotam: darbnīcas, ieviešanas atbalsts un ilgtermiņa konsultācijas.",
     "hero_title": "MI konsultācijas",
     "hero_subtitle": "Pilot program with OS-native playbooks for regulated teams.",
-    "hero_rotating": [
-      "Frosted OS shells for enterprise pilots",
-      "Explainable automation that survives audits",
-      "Latvian craft meets Benelux delivery"
-    ],
-    "spots_remaining": "brīvas vietas",
-    "what_title": "Ko piedāvājam",
-    "what_1": "MI stratēģija un ieviešana",
-    "what_2": "Tehniskā konsultēšana",
-    "what_3": "Pielāgotu risinājumu dizains",
-    "form_title": "Piesakies pilotam",
-    "form_company": "Uzņēmuma nosaukums",
-    "form_company_placeholder": "Acme Corp",
-    "form_name": "Tavs vārds",
-    "form_name_placeholder": "Alex Founder",
-    "form_email": "E-pasta adrese",
-    "form_email_placeholder": "founder@acme.com",
-    "form_phone": "Telefona numurs",
-    "form_phone_placeholder": "+371 12345678",
-    "form_industry": "Nozare",
-    "form_industry_placeholder": "Ceļojumi, viesmīlība, SaaS...",
-    "form_description": "Apraksti savas MI vajadzības",
-    "form_description_placeholder": "Pastāsti par izaicinājumiem, risinājumiem un mērķiem...",
-    "form_submit": "Iesniegt pieteikumu",
-    "form_success": "Pieteikums saņemts! Sazināsimies 48 stundu laikā.",
-    "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
-    "select_industry": "Izvēlies nozari...",
-    "industries": {
-      "technology": "Tehnoloģijas",
-      "fintech": "FinTech",
-      "ecommerce": "E-komercija",
-      "healthcare": "Veselība",
-      "education": "Izglītība",
-      "manufacturing": "Ražošana",
-      "other": "Cita"
-    },
-    "benefits_title": "Ko iegūsi",
-    "benefit_1": "Bezmaksas MI stratēģijas konsultācija",
-    "benefit_2": "Tehniskais ieviešanas plāns",
-    "benefit_3": "3 mēnešu atbalsts",
-    "benefit_4": "Prioritāra piekļuve mūsu produktiem",
-    "timeline_title": "Procesa grafiks",
-    "week_1": "1. nedēļa: Iepazīšanās konsultācija",
-    "week_2": "2. nedēļa: Stratēģijas izstrāde",
-    "week_3_12": "3.–12. nedēļa: Ieviešanas atbalsts",
-    "requirements_title": "Prasības",
-    "req_1": "Darbība Eiropā vai gatavība strādāt pēc CET",
-    "req_2": "Apņēmība transformēt uzņēmumu ar MI",
-    "req_3": "Atvērtība sadarbībai un atgriezeniskajai saitei",
-    "hero_testimonial_label": "Client reflection",
-    "hero_testimonial_quote": "AlgoRhythmics translated signage discipline into a calm AI workflow we could ship in weeks.",
-    "hero_testimonial_name": "Marta Ozoliņa",
-    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek",
     "hero_description": "We work alongside your team to design AI workflows that respect people, processes, and change management.",
     "hero_cta_primary": "Apply for the pilot",
     "hero_cta_secondary": "Review service menu",
@@ -654,7 +484,59 @@
         "description": "Ship, measure, and adjust together."
       }
     ],
-    "form_intro": "Tell us a little about your team so we can tailor the session."
+    "form_title": "Piesakies pilotam",
+    "form_intro": "Tell us a little about your team so we can tailor the session.",
+    "form_company": "Uzņēmuma nosaukums",
+    "form_company_placeholder": "Acme Corp",
+    "form_name": "Tavs vārds",
+    "form_name_placeholder": "Alex Founder",
+    "form_email": "E-pasta adrese",
+    "form_email_placeholder": "founder@acme.com",
+    "form_phone": "Telefona numurs",
+    "form_phone_placeholder": "+371 12345678",
+    "form_industry": "Nozare",
+    "form_description": "Apraksti savas MI vajadzības",
+    "form_description_placeholder": "Pastāsti par izaicinājumiem, risinājumiem un mērķiem...",
+    "form_submit": "Iesniegt pieteikumu",
+    "form_success": "Pieteikums saņemts! Sazināsimies 48 stundu laikā.",
+    "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
+    "select_industry": "Izvēlies nozari...",
+    "industries": {
+      "technology": "Tehnoloģijas",
+      "fintech": "FinTech",
+      "ecommerce": "E-komercija",
+      "healthcare": "Veselība",
+      "education": "Izglītība",
+      "manufacturing": "Ražošana",
+      "other": "Cita"
+    },
+    "benefits_title": "Ko iegūsi",
+    "benefit_1": "Bezmaksas MI stratēģijas konsultācija",
+    "benefit_2": "Tehniskais ieviešanas plāns",
+    "benefit_3": "3 mēnešu atbalsts",
+    "benefit_4": "Prioritāra piekļuve mūsu produktiem",
+    "timeline_title": "Procesa grafiks",
+    "week_1": "1. nedēļa: Iepazīšanās konsultācija",
+    "week_2": "2. nedēļa: Stratēģijas izstrāde",
+    "week_3_12": "3.–12. nedēļa: Ieviešanas atbalsts",
+    "requirements_title": "Prasības",
+    "req_1": "Darbība Eiropā vai gatavība strādāt pēc CET",
+    "req_2": "Apņēmība transformēt uzņēmumu ar MI",
+    "req_3": "Atvērtība sadarbībai un atgriezeniskajai saitei",
+    "hero_testimonial_label": "Client reflection",
+    "hero_testimonial_quote": "AlgoRhythmics translated signage discipline into a calm AI workflow we could ship in weeks.",
+    "hero_testimonial_name": "Marta Ozoliņa",
+    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek",
+    "hero_rotating": [
+      "Frosted OS shells for enterprise pilots",
+      "Explainable automation that survives audits",
+      "Latvian craft meets Benelux delivery"
+    ],
+    "spots_remaining": "brīvas vietas",
+    "what_title": "Ko piedāvājam",
+    "what_1": "MI stratēģija un ieviešana",
+    "what_2": "Tehniskā konsultēšana",
+    "what_3": "Pielāgotu risinājumu dizains"
   },
   "contact": {
     "meta_title": "Sazinies ar AlgoRhythmics",
@@ -715,95 +597,100 @@
     "form_topic": "Tēma",
     "form_topic_placeholder": "Par ko vēlaties runāt?",
     "success_title": "Ziņa saņemta",
-    "success_subtitle": "Paldies par ziņu. Atbildēsim divu darba dienu laikā."
-  },
-  "form": {
-    "error_required": "Šis lauks ir obligāts",
-    "error_email": "Nederīga e-pasta adrese",
-    "error_phone": "Nederīgs telefona numurs",
-    "error_validation": "Lūdzu, izlabo kļūdas formā",
-    "required_note": "* Obligātie lauki",
-    "helper_company": "Nosauc komandu vai iniciatīvu, kas piesakās pilotam.",
-    "helper_name": "Norādi cilvēku, kurš vadīs sadarbību ikdienā.",
-    "helper_email": "Šeit nosūtīsim sākuma prezentāciju un tikšanās saites.",
-    "helper_phone": "Nav obligāti, bet noder, ja jāvienojas steigā.",
-    "helper_industry": "Izvēlies jomu, lai varam dalīties ar atbilstošiem piemēriem.",
-    "helper_description": "Apraksti rezultātus, ko gaidi no Strategy, Build vai Care pakotnēm.",
-    "helper_subject": "Pievieno virsrakstu, lai varam ātri novirzīt ziņu.",
-    "helper_message": "Iekļauj kontekstu, saites vai failus, kurus vajadzētu pārskatīt."
-  },
-  "common": {
-    "submitting": "Nosūta...",
-    "loading": "Ielādē...",
-    "planning": "Plānošanā",
-    "in_development": "Izstrāde",
-    "coming_soon": "Drīzumā",
-    "early_access": "Agrīna piekļuve",
-    "learn_more": "Uzzināt vairāk",
-    "get_started": "Sākt",
-    "read_more": "Lasīt vairāk",
-    "close": "Aizvērt",
-    "back": "Atpakaļ",
-    "next": "Tālāk",
-    "previous": "Iepriekšējais",
-    "submit": "Iesniegt",
-    "cancel": "Atcelt",
-    "save": "Saglabāt",
-    "edit": "Rediģēt",
-    "delete": "Dzēst",
-    "search": "Meklēt",
-    "filter": "Filtrēt",
-    "sort": "Kārtot",
-    "view_all": "Skatīt visus",
-    "show_more": "Rādīt vairāk",
-    "show_less": "Rādīt mazāk"
+    "success_subtitle": "Paldies par ziņu. Atbildēsim divu darba dienu laikā.",
+    "page": {
+      "hero": {
+        "title": "Get in Touch with AlgoRhythmics",
+        "subtitle": "Questions about our platforms, partnerships, educational programmes, or community events? We are here for you.",
+        "cta_email": "Email the studio",
+        "cta_events": "Join an event"
+      },
+      "cards": {
+        "general": {
+          "title": "General inquiries",
+          "copy": "Partnerships, media, or big ideas—send us a note and we will respond within two business days.",
+          "cta": "Email the studio"
+        },
+        "support": {
+          "title": "Customer support",
+          "copy": "Already using Ideonautix or NodeVoyage? Our support chatbot is available 24/7, or write to support@algorhythmics.ai.",
+          "cta": "Open support chat"
+        },
+        "education": {
+          "title": "Educational outreach",
+          "copy": "Educators and community organisers can reach our outreach coordinators at education@algorhythmics.ai for tailored programmes.",
+          "cta": "Contact outreach team"
+        },
+        "visit": {
+          "title": "Visit us",
+          "copy": "Headquarters: 123 Innovation Way, Riga, LV-1001. Drop by during office hours or book a visit in advance.",
+          "cta": "View on map"
+        },
+        "heading": "Ways to connect"
+      },
+      "form": {
+        "eyebrow": "Send a message",
+        "title": "We reply within two business days",
+        "description": "Please share your name, email, and what you would like to explore. We respect your privacy and handle all messages with care.",
+        "fields": {
+          "name": {
+            "label": "Name"
+          },
+          "email": {
+            "label": "Email"
+          },
+          "message": {
+            "label": "Message"
+          }
+        },
+        "submit": "Send message",
+        "note": "By emailing us you agree to our respectful data handling.",
+        "success": "Thank you! Your email client is opening with a pre-filled message.",
+        "error": "Please fix the highlighted fields.",
+        "errors": {
+          "name_required": "Please add your name.",
+          "email_required": "We use this to reply.",
+          "email_invalid": "Add a valid email address.",
+          "message_required": "Tell us how we can help."
+        },
+        "mailto_subject": "Website inquiry from {name}",
+        "mailto_body": "Name: {name}\\nEmail: {email}\\n\\n{message}"
+      }
+    }
   },
   "footer": {
     "brand_alt": "AlgoRhythmics wordmark",
     "tagline": "Calm AI tools grounded in signage craft.",
     "status": "Pre-company • Ideju Kauss October 2025",
     "location": "Daugavpils, Latvia",
-    "products_title": "Produkti",
     "company": "Uzņēmums",
-    "resources": {
-      "blog": "Blog",
-      "case_studies": "Case studies",
-      "education": "Education"
-    },
-    "platforms": "Platformas",
-    "founders": "Dibinātāji",
-    "vision": "Vīzija",
-    "roadmap": "Ceļvedis",
-    "community": "Kopiena",
-    "consulting": "Konsultācijas",
-    "contact": "Kontakti",
+    "support": "Solutions & tools",
+    "resources": "Resources",
     "about": "Par mums",
-    "careers": "Karjera",
+    "services": "Services",
+    "educational_outreach": "Educational outreach",
+    "contact": "Kontakti",
     "blog": "Blogs",
-    "legal": "Juridiskā informācija",
-    "privacy": "Privātuma politika",
-    "terms": "Lietošanas noteikumi",
-    "cookies": "Sīkdatņu politika",
-    "rights": "Visas tiesības aizsargātas",
-    "made_in": "Radīts ar rūpēm Latvijā",
-    "copyright": "© 2025 AlgoRhythmics",
+    "case_studies": "Case studies",
+    "documentation": "Documentation",
+    "events": "Events",
+    "nodevoyage": "NodeVoyage",
+    "ideonautix": "Ideonautix",
+    "consulting": "Konsultācijas",
+    "newsletter": "Newsletter",
     "partners_title": "Partners",
     "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",
     "partners_relationship": "Relationship",
     "partners_location": "Location",
     "partners_visit": "Visit site",
+    "partners_link": "Meet our collaborators",
     "social": {
       "linkedin": "LinkedIn",
-      "github": "GitHub",
+      "twitter": "Twitter",
+      "facebook": "Facebook",
       "email": "E-pasts"
     },
-    "partners_link": "Meet our collaborators",
-    "products": {
-      "nodevoyage": "NodeVoyage overview",
-      "ideonautix": "Ideonautix overview"
-    },
-    "story": "Our story",
-    "team": "Team"
+    "copyright": "© 2025 AlgoRhythmics"
   },
   "ai_companion": {
     "name": "Lumen",
@@ -893,37 +780,6 @@
       }
     ],
     "fallback": "Vēl mācos, bet varu jūs savienot ar komandu vai dalīties ar informāciju par mūsu produktiem un pakalpojumiem."
-  },
-  "language_switcher": {
-    "group_label": "Valodu izvēle",
-    "trigger_label": "Izvēlies valodu",
-    "menu_label": "Pieejamās valodas",
-    "languages": {
-      "en": {
-        "short": "EN",
-        "name": "English"
-      },
-      "lv": {
-        "short": "LV",
-        "name": "Latviešu"
-      },
-      "ru": {
-        "short": "RU",
-        "name": "Русский"
-      },
-      "uk": {
-        "short": "UK",
-        "name": "Українська"
-      },
-      "fr": {
-        "short": "FR",
-        "name": "Français"
-      },
-      "es": {
-        "short": "ES",
-        "name": "Español"
-      }
-    }
   },
   "products": {
     "meta_title": "AlgoRhythmics platforms",
@@ -1104,7 +960,116 @@
         "question": "Do students need AI experience?",
         "answer": "No. We start with fundamentals and build steadily."
       }
-    ]
+    ],
+    "page": {
+      "hero": {
+        "title": "Educational Outreach & Community Building",
+        "subtitle": "Empowering learners, educators, and communities through AI.",
+        "description": "AlgoRhythmics is as much an educational movement as it is a tech studio. We nurture AI literacy across classrooms, libraries, and community hubs with programs that welcome every age.",
+        "primary_cta": "Join the Program",
+        "secondary_cta": "Access Resources"
+      },
+      "intro": {
+        "why_title": "Why outreach matters",
+        "why_copy": "Early exposure to AI concepts nurtures curiosity, confidence, and ethical awareness. Our outreach programmes are designed with signage clarity, playful experimentation, and rigorous safeguards so every learner can participate.",
+        "partners_copy": "We build bridges between schools, parents, industry mentors, and cultural partners. The result is a supportive ecosystem where logic and creativity collaborate in real time.",
+        "how_title": "How we collaborate",
+        "how_items": [
+          "Co-create pilots with educators and align them with national curricula.",
+          "Pair every workshop with inclusive materials and multilingual support.",
+          "Document outcomes so communities can continue the rhythm independently."
+        ],
+        "how_cta": "Email our Outreach Coordinators"
+      },
+      "partnerships": {
+        "eyebrow": "Programmes in motion",
+        "title": "Anchors for learners, families, and mentors",
+        "copy": "From nationwide initiatives to after-school labs, each partnership invites communities to experience AI as something welcoming and responsible.",
+        "liaa": {
+          "eyebrow": "National collaboration",
+          "title": "LIAA Partnership",
+          "copy": "As the education sector ambassador with Latvia's Investment and Development Agency (LIAA), we co-create policy-ready pilots that bring AI literacy into formal curricula.",
+          "bullets": [
+            "Curriculum integration with bilingual lesson kits and signage-inspired visuals",
+            "Teacher coaching cohorts and certification pathways that demystify AI",
+            "Shared research loops to publish findings and refine national standards"
+          ],
+          "cta": "Talk with the Outreach Team"
+        },
+        "schools": {
+          "eyebrow": "Hands-on discovery",
+          "title": "School Programs",
+          "copy": "We activate classrooms with experiential AI—coding clubs, innovation labs, and creative sprints where students see logic dance with imagination.",
+          "bullets": [
+            "Plug-and-play project modules for math, science, arts, and humanities",
+            "Workshops where students train mini AIs, compose generative art, or design ethical guidelines",
+            "Free or subsidised Ideonautix access so practice continues beyond the bell"
+          ],
+          "cta": "Request a Pilot Pack"
+        },
+        "community": {
+          "eyebrow": "Beyond the classroom",
+          "title": "Community Events",
+          "copy": "Monthly workshops, webinars, and neighbourhood hackathons make AI approachable for parents, professionals, and the next wave of makers.",
+          "bullets": [
+            "Open-to-all sessions that explain machine learning with tangible analogies",
+            "Parent Ambassador Network where families co-host learning circles at libraries",
+            "Guest mentors from industry and culture bridging real projects with storytelling"
+          ],
+          "cta": "See Upcoming Events"
+        },
+        "cultural": {
+          "eyebrow": "Logic meets art",
+          "title": "Cultural Partnerships",
+          "copy": "Museums, libraries, and creative labs collaborate with AlgoRhythmics to blend technology with heritage—sparking curiosity across generations.",
+          "bullets": [
+            "AI + Art exhibits that translate algorithms into sound, movement, and light",
+            "Story-driven installations where elders and kids explore AI together",
+            "Shared archives of lesson prompts and accessible exhibition guides"
+          ],
+          "cta": "Propose a Collaboration"
+        }
+      },
+      "impact": {
+        "items": {
+          "teachers": {
+            "label": "Teachers trained",
+            "value": "200+",
+            "description": "Certified through our calm AI pedagogy labs."
+          },
+          "students": {
+            "label": "Students engaged",
+            "value": "5,000+",
+            "description": "Across clubs, camps, and classroom pilots."
+          },
+          "goal": {
+            "label": "Goal for 2026",
+            "value": "80% of Latvian schools",
+            "description": "Onboarded with ready-to-run AI literacy modules."
+          },
+          "feedback": {
+            "label": "Positive feedback",
+            "value": "90%",
+            "description": "Educators reporting higher confidence in teaching AI topics."
+          }
+        },
+        "note": "Metrics guide our iteration, but the stories matter most—like the student who chose a tech career after an AlgoRhythmics camp or the teacher who now leads AI clubs with confidence."
+      },
+      "global": {
+        "eyebrow": "Sharing the rhythm worldwide",
+        "title": "A global rhythm of shared learning",
+        "copy": "Our outreach stretches beyond Latvia through European education networks, exchange programs, and shared research. Students collaborate across borders, trading ideas and building empathy through responsible AI projects.",
+        "primary_cta": "Join Our Community Forum",
+        "secondary_cta": "Partner with Us"
+      },
+      "finale": {
+        "eyebrow": "Open invitation",
+        "title": "Get involved with AlgoRhythmics outreach",
+        "copy": "Students, educators, parents, and sponsors are welcome. We will help you orchestrate workshops, integrate curriculum, or spark community events that pair logic with creativity.",
+        "primary_cta": "Start the Conversation",
+        "secondary_cta": "Download Program Overview"
+      }
+    }
   },
   "about": {
     "hero": {
@@ -1201,6 +1166,86 @@
       "body": "Bring your roadmap and we will map the rituals.",
       "primary": "Schedule a strategy session",
       "secondary": "Explore our products"
+    },
+    "page": {
+      "hero": {
+        "eyebrow": "Inside AlgoRhythmics",
+        "title": "Calm AI, crafted in Riga and Rotterdam",
+        "subtitle": "We are a Latvian-born studio where algorithms and artistry share the same rhythm. Our work blends signage precision, inclusive design, and playful experimentation.",
+        "description": "Founded in 2025 by technologists and educators, AlgoRhythmics believes logic and creativity belong together. From AI platforms to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Meet the Team"
+      },
+      "story": {
+        "heading": "Who we are",
+        "intro": "What began as a small startup in Riga has grown into a bridge between education, culture, and industry. Early collaborations with Latvia's Investment and Development Agency (LIAA) helped us champion AI education nationwide.",
+        "culture": "Inside the studio we host Logic/Dance sessions—one day a data science hackathon, the next an improv design workshop. This fusion of play and rigor shapes the experiences we ship.",
+        "milestones_heading": "Our story",
+        "milestones": [
+          "Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.",
+          "Tailored Ideonautix for startups after listening to founders who needed calm, creative productivity support.",
+          "Expanded partnerships with museums, libraries, and international conferences—proving that logic and art thrive together."
+        ],
+        "cta": "Read success stories"
+      },
+      "values": {
+        "eyebrow": "Mission & values",
+        "title": "Where logic dances with creativity",
+        "copy": "Our mission is simple: make advanced AI accessible, enjoyable, and trustworthy. We pursue this mission through values that keep people at the centre.",
+        "items": {
+          "education_first": {
+            "title": "Education first",
+            "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner."
+          },
+          "empowerment": {
+            "title": "Empowerment through technology",
+            "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred."
+          },
+          "integrity": {
+            "title": "Innovation with integrity",
+            "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact."
+          },
+          "community": {
+            "title": "Community & collaboration",
+            "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act."
+          }
+        }
+      },
+      "team": {
+        "eyebrow": "Founders & stewards",
+        "title": "The people behind the rhythm",
+        "copy": "Our team spans AI researchers, designers, educators, and community builders. Meet the founders who set the tone for collaboration and craft.",
+        "focus_label": "Focus: {focus}",
+        "members": {
+          "nikita": {
+            "name": "Nikita Jurtaevs",
+            "role": "Co-founder & CEO",
+            "focus": "Signage craft, storytelling, and partner delivery",
+            "bio": "Nikita keeps product direction, accessibility, and partnerships aligned. He brings signage-floor realism to every interface and programme.",
+            "links": {
+              "email": "Email",
+              "linkedin": "LinkedIn"
+            }
+          },
+          "slaff": {
+            "name": "Vjaceslavs \"Slaff\" Trosins",
+            "role": "Co-founder & CTO",
+            "focus": "Cloud architecture, explainable AI, and operations",
+            "bio": "Slaff orchestrates engineering, data flows, and AI integrations. He connects hardware-grade discipline with transparent software experiences.",
+            "links": {
+              "email": "Email",
+              "linkedin": "LinkedIn"
+            }
+          }
+        }
+      },
+      "finale": {
+        "eyebrow": "Join us",
+        "title": "Join the rhythm",
+        "copy": "We welcome collaborators who care about accessible technology, joyful learning, and responsible automation. Whether you are exploring careers, partnerships, or sponsorships, let’s build together.",
+        "primary_cta": "Connect with AlgoRhythmics",
+        "secondary_cta": "Subscribe to Updates"
+      }
     }
   },
   "resources": {
@@ -1277,6 +1322,159 @@
       "description": "Monthly notes covering accessibility upgrades and experiments.",
       "cta": "Join the list",
       "href": "https://algorhythmics.substack.com"
+    },
+    "page": {
+      "hero": {
+        "title": "AlgoRhythmics Insights & Resources",
+        "subtitle": "Stories, case studies, documentation, and events that share our calm AI playbooks.",
+        "description": "Whether you are exploring creative productivity, planning educational programmes, or piloting AI inside your organisation, these resources keep you in step with our studio.",
+        "primary_cta": "Read the blog",
+        "secondary_cta": "Subscribe to Newsletter"
+      },
+      "sections": {
+        "blog": {
+          "eyebrow": "Blog",
+          "title": "AlgoRhythmics Insights & Blog",
+          "copy": "A space where logic meets creativity in writing. Discover trend analyses, creative productivity tips, product updates, and behind-the-scenes stories from our educational pilots.",
+          "highlights": [
+            "Accessible, jargon-light articles for multi-generational readers",
+            "Spotlights on educators, founders, and students using calm AI",
+            "Practical checklists inspired by signage craft and inclusive design"
+          ],
+          "primary_cta": "Visit the blog",
+          "secondary_cta": "Subscribe for monthly highlights"
+        },
+        "cases": {
+          "eyebrow": "Case studies",
+          "title": "Impact & success stories",
+          "copy": "Interactive narratives that show how AlgoRhythmics solutions deliver results—from classrooms adopting AI literacy to teams streamlining creative workflows.",
+          "highlights": [
+            "NodeVoyage accessibility refresh with +22% itinerary completion",
+            "Ideonautix founder cockpit raising satisfaction to 4.8/5",
+            "Calm consulting blueprint guiding logistics teams through adoption"
+          ],
+          "primary_cta": "Explore case studies",
+          "secondary_cta": "Download briefing kits"
+        },
+        "docs": {
+          "eyebrow": "Documentation",
+          "title": "Guides, APIs, and curriculum packs",
+          "copy": "Every platform ships with clear guides, inclusive language, and signage-inspired diagrams. Educators can also download curriculum packs aligned with LIAA pilots.",
+          "highlights": [
+            "User guides covering NodeVoyage and Ideonautix fundamentals",
+            "API references with transparent data usage explanations",
+            "Lesson plans, workshop decks, and classroom management tips"
+          ],
+          "primary_cta": "Access documentation",
+          "secondary_cta": "Contact education team"
+        }
+      },
+      "events": {
+        "eyebrow": "Events",
+        "title": "Upcoming workshops, webinars & community events",
+        "copy": "Join monthly sessions that demystify AI, celebrate creativity, and connect peers across disciplines. Most events are free and archived for replay.",
+        "bullets": [
+          "Hands-on workshops for families, teachers, and founders",
+          "Virtual webinars with live Q&A and accessible transcripts",
+          "Community hackathons and cultural collaborations blending AI with art"
+        ],
+        "primary_cta": "Browse the event calendar",
+        "secondary_cta": "Host an event with us"
+      },
+      "newsletter": {
+        "eyebrow": "Newsletter",
+        "title": "Stay in the calm loop",
+        "copy": "Subscribe to receive monthly highlights—product updates, educational wins, accessibility upgrades, and invitations to upcoming pilots.",
+        "primary_cta": "Subscribe to newsletter"
+      }
+    }
+  },
+  "services": {
+    "page": {
+      "hero": {
+        "title": "Services & Solutions for Calm, Creative AI",
+        "subtitle": "Discover how AlgoRhythmics blends consulting, flagship platforms, and education to move ideas from spark to launch.",
+        "description": "Whether you are integrating AI into operations, equipping classrooms, or piloting a new product, our team choreographs the rhythm from strategy to support.",
+        "primary_cta": "Request a Demo / Consultation",
+        "secondary_cta": "Explore Platforms"
+      },
+      "consulting": {
+        "eyebrow": "Consulting & support",
+        "title": "Strategy that keeps pace with your team",
+        "copy": "Every engagement starts with signage-inspired clarity and ends with teams who understand their tools. These services pair calm rituals with measurable outcomes.",
+        "cards": {
+          "consulting": {
+            "eyebrow": "Guided by signage discipline",
+            "title": "AI Consulting & Integration",
+            "summary": "Leverage our founder-led consulting to map opportunities, translate them into transparent automation, and deliver AI that teams actually trust.",
+            "bullets": [
+              "Discovery workshops that decode workflows and user journeys",
+              "Pilot sprints with explainable automation notes and opt-out paths",
+              "Change-management playbooks and training to keep crews confident"
+            ],
+            "primary_cta": "Contact for AI Consulting"
+          },
+          "implementation": {
+            "eyebrow": "From pilot to steady state",
+            "title": "Technical Implementation & Training",
+            "summary": "We stay on deck after the strategy is signed off. Our team deploys, documents, and trains your people so calm, inclusive AI becomes routine.",
+            "bullets": [
+              "Hands-on configuration across cloud, data, and governance checkpoints",
+              "AAA-accessible documentation, onboarding guides, and office hours",
+              "Ongoing success metrics and iteration roadmaps tuned to your rhythm"
+            ],
+            "primary_cta": "Plan Your Rollout"
+          }
+        }
+      },
+      "platforms": {
+        "eyebrow": "Flagship platforms",
+        "title": "Products where logic dances with creativity",
+        "copy": "Our studio platforms are living proof of the methodologies we teach. They inherit the same frosted-glass calm, multilingual access, and rhythm you will feel in every engagement.",
+        "ideonautix": {
+          "eyebrow": "Creative productivity suite",
+          "title": "Ideonautix",
+          "summary": "An AI partner for founders, educators, and teams who need momentum. Brainstorm, storyboard, and orchestrate projects with clarity and delight.",
+          "bullets": [
+            "AI Pitch Assistant for decks, grants, and stakeholder updates",
+            "Collaborative canvases that balance focus dashboards with playful prompts",
+            "Inclusive localisation and voice options for multilingual communities"
+          ],
+          "primary_cta": "Explore Ideonautix",
+          "secondary_cta": "View Ideonautix Highlights"
+        },
+        "nodevoyage": {
+          "eyebrow": "AI travel companion",
+          "title": "NodeVoyage",
+          "summary": "Plan journeys with a companion that choreographs logistics and wonder. From family trips to nomad itineraries, NodeVoyage adapts to every explorer.",
+          "bullets": [
+            "Personalised itineraries with live context, accessibility, and language options",
+            "Route optimisation and collaborative trip workspaces for teams or classrooms",
+            "Hospitality-ready previews for partners and agencies"
+          ],
+          "primary_cta": "Discover NodeVoyage",
+          "secondary_cta": "See Travel Case Studies"
+        }
+      },
+      "education": {
+        "eyebrow": "Built with LIAA and Baltic schools",
+        "title": "Educational Programs & Partnerships",
+        "summary": "Bring AI literacy into classrooms, libraries, and community hubs. We co-design workshops, curriculum modules, and mentorship sprints that welcome every learner.",
+        "bullets": [
+          "Curriculum blueprints, teacher training, and ready-to-run lesson plans",
+          "Community hackathons, parent ambassador network, and internship pathways",
+          "Impact tracking dashboards tuned to student confidence and reach goals"
+        ],
+        "primary_cta": "Join the Program",
+        "secondary_cta": "Access Educator Resources"
+      },
+      "finale": {
+        "eyebrow": "Next step",
+        "title": "Let’s choreograph your next milestone",
+        "copy": "Share your roadmap, pain points, or classrooms and we will assemble the right mix of consulting, platforms, and education support. Calm, human-centred AI is a conversation away.",
+        "primary_cta": "Contact AlgoRhythmics",
+        "secondary_cta": "Read Success Stories"
+      }
     }
   }
 }

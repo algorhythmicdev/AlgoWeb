@@ -5,122 +5,248 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { _ } from 'svelte-i18n';
+  import { translateOrFallback } from '$lib/utils/i18n';
+
+  const t = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
 
   const hero = {
-    titleLead: 'Where logic dances with creativity.',
-    subtitle:
+    titleKey: 'home.page.hero.title',
+    titleFallback: 'Where logic dances with creativity.',
+    subtitleKey: 'home.page.hero.subtitle',
+    subtitleFallback:
       'AlgoRhythmics builds AI platforms, consulting rituals, and educational programmes that keep innovation approachable for everyone—from students to enterprises.',
-    description:
-      'We choreograph technology with human-friendly signage craft, inclusive localisation, and transparent automation notes. The result is AI that feels calm, clear, and collaborative.'
-  };
+    descriptionKey: 'home.page.hero.description',
+    descriptionFallback:
+      'We choreograph technology with human-friendly signage craft, inclusive localisation, and transparent automation notes. The result is AI that feels calm, clear, and collaborative.',
+    actions: [
+      {
+        href: '/services',
+        variant: 'gradient' as const,
+        size: 'lg' as const,
+        labelKey: 'home.page.hero.primary_cta',
+        labelFallback: 'Explore Our Services'
+      },
+      {
+        href: '/about',
+        variant: 'secondary' as const,
+        size: 'lg' as const,
+        labelKey: 'home.page.hero.secondary_cta',
+        labelFallback: 'Learn About Our Mission'
+      }
+    ]
+  } as const;
 
   const highlights = [
     {
       icon: 'idea',
-      title: 'Innovative AI Solutions',
-      copy: 'NodeVoyage and Ideonautix adapt to your journeys and workflows with playful precision.'
+      titleKey: 'home.page.highlights.items.innovative_ai.title',
+      titleFallback: 'Innovative AI Solutions',
+      copyKey: 'home.page.highlights.items.innovative_ai.copy',
+      copyFallback: 'NodeVoyage and Ideonautix adapt to your journeys and workflows with playful precision.'
     },
     {
       icon: 'education',
-      title: 'Educational Impact',
-      copy: 'Curriculum pilots, teacher labs, and student hackathons nurture confident creators.'
+      titleKey: 'home.page.highlights.items.educational_impact.title',
+      titleFallback: 'Educational Impact',
+      copyKey: 'home.page.highlights.items.educational_impact.copy',
+      copyFallback: 'Curriculum pilots, teacher labs, and student hackathons nurture confident creators.'
     },
     {
       icon: 'target',
-      title: 'Consulting Excellence',
-      copy: 'Hands-on integration sprints pair transparent automation with lasting change.'
+      titleKey: 'home.page.highlights.items.consulting_excellence.title',
+      titleFallback: 'Consulting Excellence',
+      copyKey: 'home.page.highlights.items.consulting_excellence.copy',
+      copyFallback: 'Hands-on integration sprints pair transparent automation with lasting change.'
     },
     {
       icon: 'people',
-      title: 'Community & Creativity',
-      copy: 'Blogs, events, and community forums let families, founders, and students learn together.'
+      titleKey: 'home.page.highlights.items.community_creativity.title',
+      titleFallback: 'Community & Creativity',
+      copyKey: 'home.page.highlights.items.community_creativity.copy',
+      copyFallback: 'Blogs, events, and community forums let families, founders, and students learn together.'
     }
-  ];
+  ] as const;
 
   const offerings = [
     {
       id: 'consulting',
-      title: 'AI Consulting & Integration',
-      summary:
+      titleKey: 'home.page.offerings.items.consulting.title',
+      titleFallback: 'AI Consulting & Integration',
+      summaryKey: 'home.page.offerings.items.consulting.summary',
+      summaryFallback:
         'Map opportunities, run pilot sprints, and launch explainable automation with founder-led guidance.',
       bullets: [
-        'Discovery workshops grounded in signage-inspired clarity',
-        'Pilot roadmaps with opt-out controls and transparent documentation',
-        'Training and change support to keep teams confident'
+        {
+          key: 'home.page.offerings.items.consulting.bullets.0',
+          fallback: 'Discovery workshops grounded in signage-inspired clarity'
+        },
+        {
+          key: 'home.page.offerings.items.consulting.bullets.1',
+          fallback: 'Pilot roadmaps with opt-out controls and transparent documentation'
+        },
+        {
+          key: 'home.page.offerings.items.consulting.bullets.2',
+          fallback: 'Training and change support to keep teams confident'
+        }
       ],
-      primary: { label: 'Request a Consultation', href: '/services#consulting' }
+      primary: {
+        href: '/services#consulting',
+        labelKey: 'home.page.offerings.items.consulting.primary_cta',
+        labelFallback: 'Request a Consultation'
+      }
     },
     {
       id: 'platforms',
-      title: 'Flagship Platforms',
-      summary:
+      titleKey: 'home.page.offerings.items.platforms.title',
+      titleFallback: 'Flagship Platforms',
+      summaryKey: 'home.page.offerings.items.platforms.summary',
+      summaryFallback:
         'NodeVoyage reimagines travel planning while Ideonautix accelerates creative productivity—both share the same accessible rhythm.',
       bullets: [
-        'Personalised itineraries and collaborative travel workspaces',
-        'Creative canvases, pitch assistants, and multilingual workflows',
-        'AAA contrast modes, reduced-motion support, and localisation baked in'
+        {
+          key: 'home.page.offerings.items.platforms.bullets.0',
+          fallback: 'Personalised itineraries and collaborative travel workspaces'
+        },
+        {
+          key: 'home.page.offerings.items.platforms.bullets.1',
+          fallback: 'Creative canvases, pitch assistants, and multilingual workflows'
+        },
+        {
+          key: 'home.page.offerings.items.platforms.bullets.2',
+          fallback: 'AAA contrast modes, reduced-motion support, and localisation baked in'
+        }
       ],
-      primary: { label: 'Explore Platforms', href: '/services#platforms' },
-      secondary: { label: 'View Case Studies', href: '/resources#case-studies' }
+      primary: {
+        href: '/services#platforms',
+        labelKey: 'home.page.offerings.items.platforms.primary_cta',
+        labelFallback: 'Explore Platforms'
+      },
+      secondary: {
+        href: '/resources#case-studies',
+        labelKey: 'home.page.offerings.items.platforms.secondary_cta',
+        labelFallback: 'View Case Studies'
+      }
     },
     {
       id: 'education',
-      title: 'Educational Outreach',
-      summary:
+      titleKey: 'home.page.offerings.items.education.title',
+      titleFallback: 'Educational Outreach',
+      summaryKey: 'home.page.offerings.items.education.summary',
+      summaryFallback:
         'In partnership with LIAA, schools, and cultural institutions, we bring AI literacy to classrooms, libraries, and community hubs.',
       bullets: [
-        'Ready-to-run lesson plans and bilingual classroom kits',
-        'Parent ambassador network and mentorship pipelines',
-        'Community events that blend logic, art, and storytelling'
+        {
+          key: 'home.page.offerings.items.education.bullets.0',
+          fallback: 'Ready-to-run lesson plans and bilingual classroom kits'
+        },
+        {
+          key: 'home.page.offerings.items.education.bullets.1',
+          fallback: 'Parent ambassador network and mentorship pipelines'
+        },
+        {
+          key: 'home.page.offerings.items.education.bullets.2',
+          fallback: 'Community events that blend logic, art, and storytelling'
+        }
       ],
-      primary: { label: 'Join the Programme', href: '/educational-outreach' },
-      secondary: { label: 'Access Resource Library', href: '/resources#documentation' }
+      primary: {
+        href: '/educational-outreach',
+        labelKey: 'home.page.offerings.items.education.primary_cta',
+        labelFallback: 'Join the Programme'
+      },
+      secondary: {
+        href: '/resources#documentation',
+        labelKey: 'home.page.offerings.items.education.secondary_cta',
+        labelFallback: 'Access Resource Library'
+      }
     }
-  ];
+  ] as const;
 
   const resourceSpotlight = {
-    title: 'Keep up with the rhythm',
-    description:
+    eyebrowKey: 'home.page.resources.eyebrow',
+    eyebrowFallback: 'Stay in the loop',
+    titleKey: 'home.page.resources.title',
+    titleFallback: 'Keep up with the rhythm',
+    descriptionKey: 'home.page.resources.description',
+    descriptionFallback:
       'Our blog, case studies, and events share the playbooks behind calm AI—from classroom wins to product breakthroughs.',
     items: [
       {
-        eyebrow: 'Blog',
-        title: 'AlgoRhythmics Insights & Blog',
-        copy: 'Dive into stories, how-to guides, and behind-the-scenes notes where logic meets creativity in writing.',
-        cta: { label: 'Read the blog', href: '/resources#blog' }
+        icon: 'blog',
+        eyebrowKey: 'home.page.resources.items.blog.eyebrow',
+        eyebrowFallback: 'Blog',
+        titleKey: 'home.page.resources.items.blog.title',
+        titleFallback: 'AlgoRhythmics Insights & Blog',
+        copyKey: 'home.page.resources.items.blog.copy',
+        copyFallback:
+          'Dive into stories, how-to guides, and behind-the-scenes notes where logic meets creativity in writing.',
+        cta: {
+          href: '/resources#blog',
+          labelKey: 'home.page.resources.items.blog.cta',
+          labelFallback: 'Read the blog'
+        }
       },
       {
-        eyebrow: 'Case studies',
-        title: 'Impact & Success Stories',
-        copy: 'See how teams, students, and communities turn calm AI into measurable outcomes.',
-        cta: { label: 'Explore case studies', href: '/resources#case-studies' }
+        icon: 'cases',
+        eyebrowKey: 'home.page.resources.items.case_studies.eyebrow',
+        eyebrowFallback: 'Case studies',
+        titleKey: 'home.page.resources.items.case_studies.title',
+        titleFallback: 'Impact & Success Stories',
+        copyKey: 'home.page.resources.items.case_studies.copy',
+        copyFallback: 'See how teams, students, and communities turn calm AI into measurable outcomes.',
+        cta: {
+          href: '/resources#case-studies',
+          labelKey: 'home.page.resources.items.case_studies.cta',
+          labelFallback: 'Explore case studies'
+        }
       },
       {
-        eyebrow: 'Events',
-        title: 'Workshops, webinars & meetups',
-        copy: 'Join upcoming sessions that demystify AI and celebrate co-creation across ages.',
-        cta: { label: 'Browse events', href: '/resources#events' }
+        icon: 'events',
+        eyebrowKey: 'home.page.resources.items.events.eyebrow',
+        eyebrowFallback: 'Events',
+        titleKey: 'home.page.resources.items.events.title',
+        titleFallback: 'Workshops, webinars & meetups',
+        copyKey: 'home.page.resources.items.events.copy',
+        copyFallback: 'Join upcoming sessions that demystify AI and celebrate co-creation across ages.',
+        cta: {
+          href: '/resources#events',
+          labelKey: 'home.page.resources.items.events.cta',
+          labelFallback: 'Browse events'
+        }
       }
     ]
-  };
+  } as const;
 
   const finale = {
-    title: 'Ready to choreograph your next idea?',
-    copy:
+    eyebrowKey: 'home.page.finale.eyebrow',
+    eyebrowFallback: 'Let’s collaborate',
+    titleKey: 'home.page.finale.title',
+    titleFallback: 'Ready to choreograph your next idea?',
+    copyKey: 'home.page.finale.copy',
+    copyFallback:
       'Bring your roadmap, classroom goals, or community vision. We will help orchestrate the right mix of consulting, products, and outreach to make AI feel friendly and focused.',
-    primary: { label: 'Explore Our Services', href: '/services' },
-    secondary: { label: 'Connect with the Team', href: '/contact' }
-  };
+    primary: {
+      href: '/services',
+      labelKey: 'home.page.finale.primary_cta',
+      labelFallback: 'Explore Our Services'
+    },
+    secondary: {
+      href: '/contact',
+      labelKey: 'home.page.finale.secondary_cta',
+      labelFallback: 'Connect with the Team'
+    }
+  } as const;
 </script>
 
-<Hero variant="grid" title={hero.titleLead} subtitle={hero.subtitle}>
+<Hero variant="grid" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
   <svelte:fragment slot="description">
-    <p class="hero-description">{hero.description}</p>
+    <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
     <div class="hero-actions">
-      <Button href="/services" variant="gradient" size="lg">Explore Our Services</Button>
-      <Button href="/about" variant="secondary" size="lg">Learn About Our Mission</Button>
+      {#each hero.actions as action (action.href)}
+        <Button href={action.href} variant={action.variant} size={action.size}>{t(action.labelKey, action.labelFallback)}</Button>
+      {/each}
     </div>
   </svelte:fragment>
 </Hero>
@@ -128,21 +254,24 @@
 <section class="highlights" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">Key highlights</span>
-      <h2>Innovation that feels welcoming</h2>
+      <span class="section-eyebrow">{t('home.page.highlights.eyebrow', 'Key highlights')}</span>
+      <h2>{t('home.page.highlights.title', 'Innovation that feels welcoming')}</h2>
       <p>
-        Every AlgoRhythmics experience blends rigorous logic with imaginative play. These highlights show how our rhythm supports travellers, founders, students, and lifelong learners.
+        {t(
+          'home.page.highlights.description',
+          'Every AlgoRhythmics experience blends rigorous logic with imaginative play. These highlights show how our rhythm supports travellers, founders, students, and lifelong learners.'
+        )}
       </p>
     </header>
 
     <div class="highlights__grid" use:staggerReveal>
-      {#each highlights as item (item.title)}
+      {#each highlights as item (item.titleKey)}
         <GlassCard class="highlight-card" padding="lg" halo>
           <div class="highlight-icon">
             <Icon name={item.icon} size={28} />
           </div>
-          <h3>{item.title}</h3>
-          <p>{item.copy}</p>
+          <h3>{t(item.titleKey, item.titleFallback)}</h3>
+          <p>{t(item.copyKey, item.copyFallback)}</p>
         </GlassCard>
       {/each}
     </div>
@@ -154,27 +283,34 @@
 <section class="offerings" aria-labelledby="offerings-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">What we offer</span>
-      <h2 id="offerings-heading">Services, platforms, and programmes in one rhythm</h2>
+      <span class="section-eyebrow">{t('home.page.offerings.eyebrow', 'What we offer')}</span>
+      <h2 id="offerings-heading">{t('home.page.offerings.title', 'Services, platforms, and programmes in one rhythm')}</h2>
       <p>
-        Choose the path that fits your journey. We keep transitions effortless—partnerships often blend consulting, products, and outreach to meet evolving goals.
+        {t(
+          'home.page.offerings.description',
+          'Choose the path that fits your journey. We keep transitions effortless—partnerships often blend consulting, products, and outreach to meet evolving goals.'
+        )}
       </p>
     </header>
 
     <div class="offerings__grid" use:staggerReveal>
       {#each offerings as item (item.id)}
         <GlassCard class="offering-card" padding="lg" id={item.id}>
-          <h3>{item.title}</h3>
-          <p>{item.summary}</p>
+          <h3>{t(item.titleKey, item.titleFallback)}</h3>
+          <p>{t(item.summaryKey, item.summaryFallback)}</p>
           <ul>
-            {#each item.bullets as bullet (bullet)}
-              <li>{bullet}</li>
+            {#each item.bullets as bullet (bullet.key)}
+              <li>{t(bullet.key, bullet.fallback)}</li>
             {/each}
           </ul>
           <div class="card-actions">
-            <Button href={item.primary.href} variant="gradient" size="md">{item.primary.label}</Button>
+            <Button href={item.primary.href} variant="gradient" size="md">
+              {t(item.primary.labelKey, item.primary.labelFallback)}
+            </Button>
             {#if item.secondary}
-              <Button href={item.secondary.href} variant="secondary" size="md">{item.secondary.label}</Button>
+              <Button href={item.secondary.href} variant="secondary" size="md">
+                {t(item.secondary.labelKey, item.secondary.labelFallback)}
+              </Button>
             {/if}
           </div>
         </GlassCard>
@@ -188,19 +324,19 @@
 <section class="resources" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">Stay in the loop</span>
-      <h2>{resourceSpotlight.title}</h2>
-      <p>{resourceSpotlight.description}</p>
+      <span class="section-eyebrow">{t(resourceSpotlight.eyebrowKey, resourceSpotlight.eyebrowFallback)}</span>
+      <h2>{t(resourceSpotlight.titleKey, resourceSpotlight.titleFallback)}</h2>
+      <p>{t(resourceSpotlight.descriptionKey, resourceSpotlight.descriptionFallback)}</p>
     </header>
 
     <div class="resources__grid" use:staggerReveal>
-      {#each resourceSpotlight.items as item (item.title)}
+      {#each resourceSpotlight.items as item (item.titleKey)}
         <GlassCard class="resource-card" padding="lg" halo>
-          <span class="resource-eyebrow">{item.eyebrow}</span>
-          <h3>{item.title}</h3>
-          <p>{item.copy}</p>
+          <span class="resource-eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
+          <h3>{t(item.titleKey, item.titleFallback)}</h3>
+          <p>{t(item.copyKey, item.copyFallback)}</p>
           <div class="card-actions">
-            <Button href={item.cta.href} variant="secondary" size="md">{item.cta.label}</Button>
+            <Button href={item.cta.href} variant="secondary" size="md">{t(item.cta.labelKey, item.cta.labelFallback)}</Button>
           </div>
         </GlassCard>
       {/each}
@@ -211,12 +347,16 @@
 <section class="finale" use:revealOnScroll>
   <div class="container">
     <GlassCard class="finale-card" halo padding="lg">
-      <span class="section-eyebrow">Let’s collaborate</span>
-      <h2>{finale.title}</h2>
-      <p>{finale.copy}</p>
+      <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
+      <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
+      <p>{t(finale.copyKey, finale.copyFallback)}</p>
       <div class="card-actions">
-        <Button href={finale.primary.href} variant="gradient" size="lg">{finale.primary.label}</Button>
-        <Button href={finale.secondary.href} variant="secondary" size="lg">{finale.secondary.label}</Button>
+        <Button href={finale.primary.href} variant="gradient" size="lg">
+          {t(finale.primary.labelKey, finale.primary.labelFallback)}
+        </Button>
+        <Button href={finale.secondary.href} variant="secondary" size="lg">
+          {t(finale.secondary.labelKey, finale.secondary.labelFallback)}
+        </Button>
       </div>
     </GlassCard>
   </div>

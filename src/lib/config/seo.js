@@ -51,11 +51,23 @@ export const pageConfigs = {
       'Discover AI consulting, NodeVoyage, Ideonautix, integration support, and educational partnerships inside one calm lineup.',
     path: '/services'
   },
+  consulting: {
+    title: 'Consulting Services | AlgoRhythmics',
+    description:
+      'Redirect to our services hub covering consulting, integration support, and calm AI delivery.',
+    path: '/consulting'
+  },
   educationalOutreach: {
     title: 'Educational Outreach & Community | AlgoRhythmics',
     description:
       'Explore LIAA partnerships, school programs, community events, and impact stories advancing AI literacy.',
     path: '/educational-outreach'
+  },
+  education: {
+    title: 'Education Programs | AlgoRhythmics',
+    description:
+      'Discover how AlgoRhythmics supports AI literacy across schools, libraries, and community partners.',
+    path: '/education'
   },
   about: {
     title: 'About AlgoRhythmics - Story, Team & Values',
@@ -74,6 +86,12 @@ export const pageConfigs = {
     description:
       'Reach the AlgoRhythmics team for platform questions, partnerships, educational outreach, or support.',
     path: '/contact'
+  },
+  products: {
+    title: 'Products & Platforms | AlgoRhythmics',
+    description:
+      'Explore NodeVoyage, Ideonautix, and the calm AI rituals powering our platforms.',
+    path: '/products'
   }
 };
 
