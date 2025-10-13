@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SEO Configuration
  */
 
@@ -41,37 +41,39 @@ export const siteConfig = {
 export const pageConfigs = {
   home: {
     title: 'AlgoRhythmics - Where Logic Dances with Creativity',
-    description: 'AI innovation lab in pre-company phase, creating revolutionary products while preparing to build Latvia\'s startup ecosystem.',
+    description:
+      'AI innovation lab in pre-company phase, creating revolutionary products while preparing to build Latvia\'s startup ecosystem.',
     path: '/'
   },
-  products: {
-    title: 'Products - NodeVoyage & Ideonautix | AlgoRhythmics',
-    description: 'Explore NodeVoyage and Ideonautix inside one calm, glassy lineup with AAA accessibility.',
-    path: '/products'
+  services: {
+    title: 'Services - AI Consulting & Platforms | AlgoRhythmics',
+    description:
+      'Discover AI consulting, NodeVoyage, Ideonautix, integration support, and educational partnerships inside one calm lineup.',
+    path: '/services'
   },
-  consulting: {
-    title: 'AI Consulting - Free Pilot Program | AlgoRhythmics',
-    description: '3 free pilot spots available. AI integration, technical advisory, and strategic innovation consulting.',
-    path: '/consulting'
-  },
-  education: {
-    title: 'Education - LIAA Partnership & Schools | AlgoRhythmics',
-    description: 'Discover calm AI programmes for schools and partners, co-created with Latvian innovation teams.',
-    path: '/education'
+  educationalOutreach: {
+    title: 'Educational Outreach & Community | AlgoRhythmics',
+    description:
+      'Explore LIAA partnerships, school programs, community events, and impact stories advancing AI literacy.',
+    path: '/educational-outreach'
   },
   about: {
     title: 'About AlgoRhythmics - Story, Team & Values',
-    description: 'Meet the founders, values, and studio rituals shaping AlgoRhythmics across Riga and Rotterdam.',
+    description:
+      'Meet the founders, values, and studio rituals shaping AlgoRhythmics across Riga and Rotterdam.',
     path: '/about'
   },
   resources: {
-    title: 'Resources - Blog & Case Studies | AlgoRhythmics',
-    description: 'Read case studies, accessibility notes, and product updates from the AlgoRhythmics studio.',
+    title: 'Resources - Blog, Case Studies & Events | AlgoRhythmics',
+    description:
+      'Dive into insights, success stories, documentation, and events from the AlgoRhythmics community.',
     path: '/resources'
   },
   contact: {
-    title: 'Contact Us - Let\'s Build Together | AlgoRhythmics',
-    description: 'Get in touch with AlgoRhythmics team in Daugavpils, Latvia. Book a meeting or send us a message.',
+    title: 'Contact AlgoRhythmics - Let\'s Build Together',
+    description:
+      'Reach the AlgoRhythmics team for platform questions, partnerships, educational outreach, or support.',
     path: '/contact'
   }
 };
+

@@ -1,4 +1,4 @@
-/* Global animations, typography, and base styles */
+﻿/* Global animations, typography, and base styles */
 :root {
   --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 22%, transparent 78%);
   --surface-glass-border: color-mix(
@@ -79,17 +79,14 @@ body::after {
   opacity: 0.025;
 }
 
-body.page-products {
+body.page-services {
   --accent-primary: var(--nodevoyage-accent);
   --accent-secondary: var(--nodevoyage-highlight);
 }
 
-body.page-consulting {
-  --accent-primary: var(--aurora);
-  --accent-secondary: var(--signal);
-}
 
-body.page-education {
+
+body.page-outreach {
   --accent-primary: var(--aurora);
   --accent-secondary: var(--signal);
 }
@@ -388,3 +385,4 @@ html[data-theme='hc'] .surface-panel {
     transition: none;
   }
 }
+

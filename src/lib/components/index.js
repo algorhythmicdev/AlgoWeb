@@ -1,4 +1,4 @@
-/**
+﻿/**
  * AlgoRhythmics Components - Barrel Export
  * Central export point for all reusable components
  */
@@ -10,11 +10,10 @@ export { default as AnimatedBackground } from './AnimatedBackground.svelte';
 export { default as HaloFX } from './HaloFX.svelte';
 export { default as LanguageSwitcher } from './language-switcher.svelte';
 export { default as ThemeToggle } from './theme-toggle.svelte';
-export { default as Toast } from './toast.svelte';
 export { default as AICompanion } from './AICompanion.svelte';
 export { default as LoadingOverlay } from './LoadingOverlay.svelte';
-export { default as ProductDemoPreview } from './ProductDemoPreview.svelte';
 export { default as Icon } from './icons/Icon.svelte';
-export { default as FieldSupport } from './forms/FieldSupport.svelte';
 export { default as Button } from './Button.svelte';
 export { default as GlassCard } from './GlassCard.svelte';
+
+

@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import { pageConfigs, siteConfig } from '$config/seo';
 import { waitLocale } from 'svelte-i18n';
 
@@ -28,3 +28,4 @@ export async function load({ url }) {
     }
   };
 }
+

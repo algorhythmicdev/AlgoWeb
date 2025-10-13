@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
@@ -260,7 +260,7 @@
                   class="nav-submenu os-window"
                   data-variant="grid"
                   role="group"
-                  aria-label={$_('nav.products_panel_label')}
+                  aria-label={$_('nav.resources_panel_label')}
                 >
                   {#each item.children as child}
                     <a
@@ -825,3 +825,4 @@
     box-shadow: none;
   }
 </style>
+

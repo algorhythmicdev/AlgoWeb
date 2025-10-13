@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { footerLinks } from '$config/navigation';
@@ -98,10 +98,10 @@
           </ul>
         </nav>
 
-        <nav class="footer-links-section" aria-labelledby="footer-products-heading">
-          <h4 id="footer-products-heading">{$_('footer.products_title')}</h4>
+        <nav class="footer-links-section" aria-labelledby="footer-support-heading">
+          <h4 id="footer-support-heading">{$_('footer.support')}</h4>
           <ul>
-            {#each footerLinks.products as link}
+            {#each footerLinks.support as link}
               <li>
                 <a href={link.href}>{$_(link.label)}</a>
               </li>
@@ -430,3 +430,5 @@
     border-top: 2px solid currentColor;
   }
 </style>
+
+

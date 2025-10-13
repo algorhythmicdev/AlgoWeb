@@ -1,122 +1,198 @@
-<script lang="ts">
+﻿<script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
-  import { revealOnScroll } from '$lib/animations';
-  import { translateOrFallback } from '$lib/utils';
-  import { _ } from 'svelte-i18n';
-  import en from '$lib/i18n/en.json';
+  import { revealOnScroll, staggerReveal } from '$lib/animations';
 
-  const ensureString = (value: unknown, fallback = ''): string =>
-    typeof value === 'string' && value.trim().length ? value.trim() : fallback;
+  const hero = {
+    eyebrow: 'Inside AlgoRhythmics',
+    title: 'Calm AI, crafted in Riga and Rotterdam',
+    subtitle:
+      'We are a Latvian-born studio where algorithms and artistry share the same rhythm. Our work blends signage precision, inclusive design, and playful experimentation.',
+    description:
+      'Founded in 2025 by technologists and educators, AlgoRhythmics believes logic and creativity belong together. From AI platforms to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.',
+    primary: { label: 'Explore Our Services', href: '/services' },
+    secondary: { label: 'Meet the Team', href: '#team' }
+  };
 
-  const translate = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
+  const values = [
+    {
+      icon: 'education',
+      title: 'Education first',
+      copy:
+        'We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner.'
+    },
+    {
+      icon: 'target',
+      title: 'Empowerment through technology',
+      copy:
+        'Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred.'
+    },
+    {
+      icon: 'idea',
+      title: 'Innovation with integrity',
+      copy:
+        'Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact.'
+    },
+    {
+      icon: 'people',
+      title: 'Community & collaboration',
+      copy:
+        'Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.'
+    }
+  ];
 
-  const heroCopy = (en.about?.hero ?? {}) as Record<string, any>;
-  $: heroEyebrow = translate('about.hero.eyebrow', ensureString(heroCopy.eyebrow, 'Inside AlgoRhythmics'));
-  $: heroTitle = translate('about.hero.title', ensureString(heroCopy.title, 'Calm AI, crafted in Riga and Rotterdam'));
-  $: heroSubtitle = translate('about.hero.subtitle', ensureString(heroCopy.subtitle, 'One operating rhythm across products, consulting, and education.'));
-  $: heroDescription = translate('about.hero.description', ensureString(heroCopy.description, 'Signage craft, accessible design, and transparent automation.'));
-  $: heroPrimary = translate('about.hero.primary', ensureString(heroCopy.primary, 'Explore products'));
-  $: heroSecondary = translate('about.hero.secondary', ensureString(heroCopy.secondary, 'Talk with the founders'));
+  const story = {
+    intro:
+      'What began as a small startup in Riga has grown into a bridge between education, culture, and industry. Early collaborations with Latvia\'s Investment and Development Agency (LIAA) helped us champion AI education nationwide.',
+    milestones: [
+      'Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.',
+      'Tailored Ideonautix for startups after listening to founders who needed calm, creative productivity support.',
+      'Expanded partnerships with museums, libraries, and international conferences—proving that logic and art thrive together.'
+    ],
+    culture:
+      'Inside the studio we host Logic/Dance sessions—one day a data science hackathon, the next an improv design workshop. This fusion of play and rigor shapes the experiences we ship.'
+  };
 
-  const valueList = (en.about?.values ?? []) as Array<Record<string, string>>;
-  $: values = valueList.slice(0, 3).map((entry, index) => ({
-    icon: ensureString(entry.icon, 'idea'),
-    title: translate(`about.values.${index}.title`, ensureString(entry.title, 'Value title')),
-    body: translate(`about.values.${index}.body`, ensureString(entry.body, 'Value description.'))
-  }));
+  const team = [
+    {
+      name: 'Nikita Jurtaevs',
+      role: 'Co-founder & CEO',
+      focus: 'Signage craft, storytelling, and partner delivery',
+      bio:
+        'Nikita keeps product direction, accessibility, and partnerships aligned. He brings signage-floor realism to every interface and programme.',
+      links: [
+        { label: 'Email', href: 'mailto:nikita@algorhythmics.ai' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nikitajurtaevs/' }
+      ]
+    },
+    {
+      name: 'Vjaceslavs "Slaff" Trosins',
+      role: 'Co-founder & CTO',
+      focus: 'Cloud architecture, explainable AI, and operations',
+      bio:
+        'Slaff orchestrates engineering, data flows, and AI integrations. He connects hardware-grade discipline with transparent software experiences.',
+      links: [
+        { label: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
+      ]
+    }
+  ];
 
-  const timelineList = (en.about?.timeline?.items ?? []) as Array<Record<string, string>>;
-  $: timeline = timelineList.slice(0, 3).map((entry, index) => ({
-    year: translate(`about.timeline.items.${index}.year`, ensureString(entry.year, '2023')),
-    title: translate(`about.timeline.items.${index}.title`, ensureString(entry.title, 'Milestone')),
-    description: translate(`about.timeline.items.${index}.description`, ensureString(entry.description, 'Brief note.'))
-  }));
-
-  const teamList = (en.about?.team?.members ?? []) as Array<Record<string, string>>;
-  $: team = teamList.slice(0, 2).map((entry, index) => ({
-    name: translate(`about.team.members.${index}.name`, ensureString(entry.name, 'Founder')),
-    role: translate(`about.team.members.${index}.role`, ensureString(entry.role, 'Role')),
-    bio: translate(`about.team.members.${index}.bio`, ensureString(entry.bio, 'Short bio.'))
-  }));
-
-  const ctaCopy = (en.about?.cta ?? {}) as Record<string, any>;
-  $: ctaEyebrow = translate('about.cta.eyebrow', ensureString(ctaCopy.eyebrow, 'Collaborate with us'));
-  $: ctaTitle = translate('about.cta.title', ensureString(ctaCopy.title, 'Let’s build calm AI together'));
-  $: ctaBody = translate('about.cta.body', ensureString(ctaCopy.body, 'Bring your roadmap and we will help choreograph accessible rituals.'));
-  $: ctaPrimary = translate('about.cta.primary', ensureString(ctaCopy.primary, 'Schedule a strategy session'));
-  $: ctaSecondary = translate('about.cta.secondary', ensureString(ctaCopy.secondary, 'Explore our products'));
+  const finale = {
+    title: 'Join the rhythm',
+    copy:
+      'We welcome collaborators who care about accessible technology, joyful learning, and responsible automation. Whether you are exploring careers, partnerships, or sponsorships, let’s build together.',
+    primary: { label: 'Connect with AlgoRhythmics', href: '/contact' },
+    secondary: { label: 'Subscribe to Updates', href: '/resources#newsletter' }
+  };
 </script>
 
-<Hero variant="grid" title={heroTitle} subtitle={heroSubtitle}>
+<Hero variant="grid" title={hero.title} subtitle={hero.subtitle}>
   <svelte:fragment slot="status">
-    <span class="hero-kicker surface-pill" data-tone="accent">{heroEyebrow}</span>
+    <span class="hero-kicker surface-pill" data-tone="accent">{hero.eyebrow}</span>
   </svelte:fragment>
   <svelte:fragment slot="description">
-    <p class="hero-description">{heroDescription}</p>
+    <p class="hero-description">{hero.description}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
     <div class="hero-actions">
-      <Button variant="gradient" size="lg" href="/products">{heroPrimary}</Button>
-      <Button variant="secondary" size="lg" href="/contact">{heroSecondary}</Button>
+      <Button variant="gradient" size="lg" href={hero.primary.href}>{hero.primary.label}</Button>
+      <Button variant="secondary" size="lg" href={hero.secondary.href}>{hero.secondary.label}</Button>
     </div>
   </svelte:fragment>
 </Hero>
 
-<section class="values" use:revealOnScroll>
-  <div class="container values__grid">
-    {#each values as value (value.title)}
-      <GlassCard class="values__card" padding="lg">
-        <div class="values__icon">
-          <Icon name={value.icon} size={22} />
-        </div>
-        <h3>{value.title}</h3>
-        <p>{value.body}</p>
-      </GlassCard>
-    {/each}
+<section class="who-we-are" use:revealOnScroll>
+  <div class="container who-we-are__grid">
+    <GlassCard class="about-card" padding="lg">
+      <h2>Who we are</h2>
+      <p>{story.intro}</p>
+      <p>
+        {story.culture}
+      </p>
+    </GlassCard>
+    <GlassCard class="about-card" padding="lg" halo>
+      <h2>Our story</h2>
+      <ul>
+        {#each story.milestones as milestone (milestone)}
+          <li>{milestone}</li>
+        {/each}
+      </ul>
+      <div class="card-actions">
+        <Button href="/resources#case-studies" variant="secondary" size="md">Read success stories</Button>
+      </div>
+    </GlassCard>
   </div>
 </section>
 
 <SectionDivider tone="neutral" />
 
-<section class="timeline" use:revealOnScroll>
-  <div class="container timeline__grid">
-    {#each timeline as item (item.title)}
-      <GlassCard class="timeline__card" padding="lg">
-        <span class="timeline__year">{item.year}</span>
-        <h3>{item.title}</h3>
-        <p>{item.description}</p>
-      </GlassCard>
-    {/each}
+<section class="values" aria-labelledby="values-heading" use:revealOnScroll>
+  <div class="container">
+    <header class="section-heading">
+      <span class="section-eyebrow">Mission & values</span>
+      <h2 id="values-heading">Where logic dances with creativity</h2>
+      <p>
+        Our mission is simple: make advanced AI accessible, enjoyable, and trustworthy. We pursue this mission through values that keep people at the centre.
+      </p>
+    </header>
+
+    <div class="values__grid" use:staggerReveal>
+      {#each values as value (value.title)}
+        <GlassCard class="value-card" padding="lg">
+          <div class="value-icon">
+            <Icon name={value.icon} size={26} />
+          </div>
+          <h3>{value.title}</h3>
+          <p>{value.copy}</p>
+        </GlassCard>
+      {/each}
+    </div>
   </div>
 </section>
 
 <SectionDivider tone="aurora" />
 
-<section class="team" use:revealOnScroll>
-  <div class="container team__grid">
-    {#each team as member (member.name)}
-      <GlassCard class="team-card" padding="lg">
-        <h3>{member.name}</h3>
-        <span class="team-card__role">{member.role}</span>
-        <p>{member.bio}</p>
-      </GlassCard>
-    {/each}
+<section class="team" id="team" use:revealOnScroll>
+  <div class="container">
+    <header class="section-heading">
+      <span class="section-eyebrow">Founders & stewards</span>
+      <h2>The people behind the rhythm</h2>
+      <p>
+        Our team spans AI researchers, designers, educators, and community builders. Meet the founders who set the tone for collaboration and craft.
+      </p>
+    </header>
+
+    <div class="team__grid" use:staggerReveal>
+      {#each team as member (member.name)}
+        <GlassCard class="team-card" padding="lg" halo>
+          <h3>{member.name}</h3>
+          <span class="team-role">{member.role}</span>
+          <p class="team-focus">Focus: {member.focus}</p>
+          <p>{member.bio}</p>
+          <div class="team-links">
+            {#each member.links as link (link.href)}
+              <a href={link.href}>{link.label}</a>
+            {/each}
+          </div>
+        </GlassCard>
+      {/each}
+    </div>
   </div>
 </section>
 
-<section class="about-cta" use:revealOnScroll>
+<section class="finale" use:revealOnScroll>
   <div class="container">
-    <GlassCard class="about-cta__card" halo padding="lg">
-      <span class="about-cta__eyebrow">{ctaEyebrow}</span>
-      <h2>{ctaTitle}</h2>
-      <p>{ctaBody}</p>
-      <div class="about-cta__actions">
-        <Button variant="gradient" size="lg" href="/contact">{ctaPrimary}</Button>
-        <Button variant="secondary" size="lg" href="/products">{ctaSecondary}</Button>
+    <GlassCard class="finale-card" halo padding="lg">
+      <span class="section-eyebrow">Join us</span>
+      <h2>{finale.title}</h2>
+      <p>{finale.copy}</p>
+      <div class="card-actions">
+        <Button href={finale.primary.href} variant="gradient" size="lg">{finale.primary.label}</Button>
+        <Button href={finale.secondary.href} variant="secondary" size="lg">{finale.secondary.label}</Button>
       </div>
     </GlassCard>
   </div>
@@ -133,7 +209,7 @@
   }
 
   .hero-description {
-    max-width: 60ch;
+    max-width: 70ch;
     margin: 0;
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.6vw, 1.3rem);
@@ -147,81 +223,120 @@
     align-items: center;
   }
 
+  .who-we-are,
   .values,
-  .timeline,
   .team,
-  .about-cta {
-    padding: clamp(3.5rem, 9vw, 6rem) 0;
+  .finale {
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
   }
 
+  .who-we-are__grid,
   .values__grid,
-  .timeline__grid,
   .team__grid {
     display: grid;
-    gap: clamp(1.4rem, 3.5vw, 2.2rem);
+    gap: clamp(1.6rem, 3vw, 2.4rem);
   }
 
-  :global(.values__card),
-  :global(.timeline__card),
-  :global(.team-card) {
+  :global(.about-card),
+  :global(.value-card),
+  :global(.team-card),
+  :global(.finale-card) {
     display: grid;
-    gap: 0.75rem;
+    gap: clamp(1rem, 3vw, 1.6rem);
   }
 
-  .values__icon {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-full);
+  :global(.about-card) ul {
+    margin: 0;
+    padding-left: 1.2rem;
     display: grid;
-    place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--voyage-blue-rgb), 0.2) 14%);
-  }
-
-  .timeline__year {
+    gap: 0.45rem;
+    color: var(--text-secondary);
     font-size: var(--text-small);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
   }
 
-  .team-card__role {
+  .section-heading {
+    max-width: 70ch;
+    margin: 0 auto clamp(2rem, 6vw, 3rem);
+    text-align: center;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.9rem;
+    border-radius: 999px;
+    font-size: var(--text-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%);
+    color: color-mix(in srgb, var(--aurora-purple) 72%, var(--text-secondary) 28%);
+  }
+
+  .value-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    display: inline-grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.18) 18%);
+    color: var(--voyage-blue);
+  }
+
+  .team-role {
     font-size: var(--text-small);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-tertiary);
   }
 
-  :global(.about-cta__card) {
-    display: grid;
-    gap: 1rem;
-    text-align: center;
+  .team-focus {
+    font-weight: var(--weight-semibold);
+    color: var(--text-secondary);
   }
 
-  .about-cta__eyebrow {
-    font-size: var(--text-small);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-
-  .about-cta__actions {
+  .team-links {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-sm, 0.75rem);
   }
 
-  @media (min-width: 768px) {
-    .values__grid,
-    .timeline__grid,
+  .team-links a {
+    color: var(--voyage-blue);
+    font-weight: var(--weight-semibold);
+  }
+
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm, 0.75rem);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .who-we-are__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .values__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
     .team__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (min-width: 1024px) {
-    .values__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (prefers-reduced-motion: reduce) {
+    .who-we-are,
+    .values,
+    .team,
+    .finale {
+      animation: none;
     }
   }
 </style>
+
+

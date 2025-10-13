@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
   import '$lib/styles/theme.css';
   import '$lib/styles/global.css';
   import '$lib/styles/typography.css';
@@ -59,7 +59,7 @@
   $: currentAccentClass = accentClassForPath($page.url.pathname);
 
   $: if (browser) {
-    document.body.classList.remove('page-home', 'page-products', 'page-consulting', 'page-education', 'page-about', 'page-resources', 'page-contact', 'page-generic');
+    document.body.classList.remove('page-home', 'page-services', 'page-outreach', 'page-about', 'page-resources', 'page-contact', 'page-generic');
     document.body.classList.add(currentAccentClass);
   }
 
@@ -68,7 +68,7 @@
   $: metaData = /** @type {Record<string, any>} */ (data?.meta ?? {});
 
   const fallbackMeta = {
-    title: en.seo?.default_title ?? `${en.site.title} — ${en.site.tagline}`,
+    title: en.seo?.default_title ?? `${en.site.title} â€” ${en.site.tagline}`,
     description: en.seo?.default_description ?? en.site.description,
     ogTitle: en.seo?.default_og_title ?? en.site.title,
     ogDescription: en.seo?.default_og_description ?? en.site.tagline,
@@ -180,3 +180,4 @@
     }
   }
 </style>
+
