@@ -164,11 +164,17 @@
 
   $: currentPath = $page.url?.pathname ?? '';
 
+  /**
+   * @type {(item: { href?: string; children?: { href?: string }[] } | null | undefined) => boolean}
+   */
   const isItemActive = (item) => {
     if (!item || typeof item !== 'object') return false;
     if (currentPath === item.href) return true;
     if (Array.isArray(item.children)) {
-      return item.children.some((child) => typeof child?.href === 'string' && currentPath.startsWith(child.href));
+      return item.children.some(
+        /** @type {(child: { href?: string }) => boolean} */
+        ((child) => typeof child?.href === 'string' && currentPath.startsWith(child.href))
+      );
     }
     return false;
   };

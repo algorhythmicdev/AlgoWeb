@@ -132,7 +132,7 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section" use:revealOnScroll>
+<section class="section section--modules" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title">Tools that keep ideas moving</h2>
     <p class="section-lead">
@@ -156,7 +156,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="section" use:revealOnScroll>
+<section class="section section--status" use:revealOnScroll>
   <div class="container status">
     <GlassCard class="status-card" padding="lg">
       <span class="section-eyebrow">Status & invitation</span>
@@ -177,7 +177,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section" use:revealOnScroll>
+<section class="section section--use-cases" use:revealOnScroll>
   <div class="container use-cases">
     <div class="use-cases-copy">
       <span class="section-eyebrow">Use cases</span>
@@ -200,7 +200,7 @@
 
 <SectionDivider tone="cherry" />
 
-<section id="pilot-request" class="section pilot" use:revealOnScroll>
+<section id="pilot-request" class="section pilot section--pilot" use:revealOnScroll>
   <div class="container">
     <GlassCard class="pilot-card" padding="lg" particles>
       <span class="section-eyebrow">Pilot access</span>
@@ -265,7 +265,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section cta" use:revealOnScroll>
+<section class="section cta section--cta" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>Need hands-on support?</h2>
@@ -283,7 +283,86 @@
 
 <style>
   .section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     padding: clamp(3rem, 8vw, 5rem) 0;
+  }
+
+  .section > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section::before,
+  .section::after {
+    content: '';
+    position: absolute;
+    inset: -18% -18% -26% -18%;
+    border-radius: clamp(36px, 7vw, 64px);
+    pointer-events: none;
+    opacity: 0.82;
+    z-index: 0;
+  }
+
+  .section::after {
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 280px 280px;
+    mix-blend-mode: soft-light;
+    opacity: 0.09;
+  }
+
+  .section--modules::before {
+    background:
+      radial-gradient(90% 100% at 14% 18%, rgba(var(--aurora-purple-rgb), 0.32), transparent 72%),
+      radial-gradient(70% 90% at 84% 20%, rgba(var(--cherry-pop-rgb), 0.24), transparent 74%),
+      linear-gradient(140deg, rgba(var(--ink-rgb), 0.12), transparent 62%);
+    animation: ideonautixPulse 48s ease-in-out infinite alternate;
+  }
+
+  .section--status::before {
+    inset: -22% -24% -30% -24%;
+    border-radius: clamp(42px, 9vw, 74px);
+    background:
+      conic-gradient(from 160deg, rgba(var(--aurora-purple-rgb), 0.28), rgba(var(--cherry-pop-rgb), 0.24), rgba(var(--aurora-purple-rgb), 0.26));
+    mask: radial-gradient(88% 88% at 52% 22%, rgba(0, 0, 0, 0.82), transparent 82%);
+    animation: ideonautixOrbit 56s linear infinite;
+  }
+
+  .section--use-cases::before {
+    background:
+      radial-gradient(70% 95% at 16% 32%, rgba(var(--cherry-pop-rgb), 0.2), transparent 72%),
+      radial-gradient(90% 115% at 82% 10%, rgba(var(--aurora-purple-rgb), 0.26), transparent 76%),
+      linear-gradient(180deg, rgba(var(--ink-rgb), 0.16), transparent 70%);
+    animation: ideonautixPulse 52s ease-in-out infinite alternate-reverse;
+  }
+
+  .section--pilot::before {
+    inset: -24% -18% -28% -18%;
+    border-radius: clamp(44px, 9vw, 76px);
+    background:
+      radial-gradient(110% 130% at 18% 24%, rgba(var(--aurora-purple-rgb), 0.32), transparent 74%),
+      radial-gradient(85% 115% at 80% 26%, rgba(var(--cherry-pop-rgb), 0.28), transparent 72%),
+      linear-gradient(140deg, rgba(var(--ink-rgb), 0.1), transparent 64%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--aurora-purple) 26%, transparent 74%);
+  }
+
+  .section--cta::before {
+    inset: -16% -22% -30% -22%;
+    border-radius: clamp(48px, 10vw, 82px);
+    background:
+      radial-gradient(120% 120% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.3), transparent 76%),
+      radial-gradient(85% 110% at 84% 18%, rgba(var(--cherry-pop-rgb), 0.24), transparent 72%),
+      linear-gradient(130deg, rgba(var(--ink-rgb), 0.12), transparent 60%);
+    animation: ideonautixPulse 44s ease-in-out infinite;
+  }
+
+  .section--status::after {
+    opacity: 0.06;
+  }
+
+  .section--pilot::after {
+    opacity: 0.1;
   }
 
   .section-title {
@@ -327,6 +406,12 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
+  :global(.module-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 68%, var(--cherry-pop) 32%);
+  }
+
   :global(.module-card) h3 {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
@@ -355,6 +440,9 @@
   :global(.status-card) {
     display: grid;
     gap: 1.25rem;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 34%, transparent 66%);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 64%, var(--cherry-pop) 36%);
   }
 
   .status-list {
@@ -376,9 +464,19 @@
     gap: clamp(1.5rem, 4vw, 2.4rem);
   }
 
+  :global(.use-case-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.15) 10%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 34%, transparent 66%);
+    --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 58%, var(--aurora-purple) 42%);
+  }
+
   :global(.pilot-card) {
     display: grid;
     gap: 1.5rem;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.2) 14%);
+    --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 40%, transparent 60%);
+    --surface-glass-shadow: 0 28px 70px rgba(24, 18, 38, 0.28);
+    --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 62%, var(--aurora-purple) 38%);
   }
 
   .pilot-form {
@@ -439,6 +537,9 @@
     display: grid;
     gap: 1.2rem;
     text-align: center;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.22) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 42%, transparent 58%);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 62%, var(--cherry-pop) 38%);
   }
 
   .cta-actions {
@@ -446,6 +547,30 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+  }
+
+  @keyframes ideonautixPulse {
+    0% {
+      transform: translate3d(-2%, -1%, 0) scale(1.02) rotate(-1deg);
+    }
+
+    55% {
+      transform: translate3d(1.8%, 1.2%, 0) scale(1.05) rotate(1.1deg);
+    }
+
+    100% {
+      transform: translate3d(-1%, 2%, 0) scale(1.01) rotate(-0.6deg);
+    }
+  }
+
+  @keyframes ideonautixOrbit {
+    0% {
+      transform: rotate(0deg) scale(1.08);
+    }
+
+    100% {
+      transform: rotate(-360deg) scale(1.08);
+    }
   }
 
   @media (min-width: 720px) {
@@ -465,6 +590,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .section::before {
+      animation: none;
+    }
+
     :global(.module-card),
     :global(.status-card),
     :global(.use-case-card),

@@ -153,7 +153,7 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section" use:revealOnScroll>
+<section class="section section--features" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title">What makes NodeVoyage different?</h2>
     <p class="section-lead">
@@ -177,7 +177,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="section" use:revealOnScroll>
+<section class="section section--roadmap" use:revealOnScroll>
   <div class="container roadmap">
     <div>
       <span class="section-eyebrow">Roadmap</span>
@@ -203,7 +203,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section" use:revealOnScroll>
+<section class="section section--differentiators" use:revealOnScroll>
   <div class="container differentiators">
     <div class="differentiators-copy">
       <span class="section-eyebrow">Why explorers stay</span>
@@ -230,7 +230,7 @@
 
 <SectionDivider tone="voyage" />
 
-<section id="explorers-club" class="section explorers" use:revealOnScroll>
+<section id="explorers-club" class="section explorers section--explorers" use:revealOnScroll>
   <div class="container">
     <GlassCard class="explorers-card" padding="lg" particles>
       <span class="section-eyebrow">NodeVoyage Explorers Club</span>
@@ -285,7 +285,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section cta" use:revealOnScroll>
+<section class="section cta section--cta" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>Curious about Ideonautix too?</h2>
@@ -303,7 +303,86 @@
 
 <style>
   .section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     padding: clamp(3rem, 8vw, 5rem) 0;
+  }
+
+  .section > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section::before,
+  .section::after {
+    content: '';
+    position: absolute;
+    inset: -18% -18% -24% -18%;
+    border-radius: clamp(36px, 7vw, 64px);
+    pointer-events: none;
+    opacity: 0.85;
+    z-index: 0;
+  }
+
+  .section::after {
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 280px 280px;
+    mix-blend-mode: soft-light;
+    opacity: 0.08;
+  }
+
+  .section--features::before {
+    background:
+      radial-gradient(85% 95% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.32), transparent 70%),
+      radial-gradient(60% 80% at 78% 26%, rgba(var(--aurora-purple-rgb), 0.28), transparent 72%),
+      linear-gradient(140deg, rgba(var(--signal-yellow-rgb), 0.24), transparent 62%);
+    animation: voyageDrift 46s ease-in-out infinite alternate;
+  }
+
+  .section--roadmap::before {
+    inset: -24% -26% -30% -26%;
+    border-radius: clamp(42px, 9vw, 72px);
+    background:
+      conic-gradient(from 200deg, rgba(var(--voyage-blue-rgb), 0.2), rgba(var(--aurora-purple-rgb), 0.24), rgba(var(--voyage-blue-rgb), 0.18), rgba(var(--signal-yellow-rgb), 0.18), rgba(var(--aurora-purple-rgb), 0.22));
+    mask: radial-gradient(88% 88% at 48% 20%, rgba(0, 0, 0, 0.82), transparent 82%);
+    animation: mapSweep 54s linear infinite;
+  }
+
+  .section--differentiators::before {
+    background:
+      radial-gradient(70% 90% at 18% 32%, rgba(var(--signal-yellow-rgb), 0.2), transparent 72%),
+      radial-gradient(80% 110% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.28), transparent 76%),
+      linear-gradient(160deg, rgba(var(--aurora-purple-rgb), 0.22), transparent 58%);
+    animation: voyageDrift 52s ease-in-out infinite alternate-reverse;
+  }
+
+  .section--explorers::before {
+    inset: -22% -18% -26% -18%;
+    border-radius: clamp(40px, 8vw, 68px);
+    background:
+      radial-gradient(95% 110% at 20% 24%, rgba(var(--voyage-blue-rgb), 0.32), transparent 74%),
+      radial-gradient(75% 105% at 78% 18%, rgba(var(--signal-yellow-rgb), 0.2), transparent 72%),
+      linear-gradient(180deg, rgba(var(--ink-rgb), 0.12), transparent 72%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--voyage-blue) 26%, transparent 74%);
+  }
+
+  .section--cta::before {
+    inset: -18% -22% -30% -22%;
+    border-radius: clamp(48px, 10vw, 80px);
+    background:
+      radial-gradient(120% 120% at 12% 18%, rgba(var(--aurora-purple-rgb), 0.26), transparent 74%),
+      radial-gradient(85% 110% at 84% 20%, rgba(var(--voyage-blue-rgb), 0.26), transparent 72%),
+      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.18), transparent 60%);
+    animation: voyageDrift 40s ease-in-out infinite;
+  }
+
+  .section--roadmap::after {
+    opacity: 0.06;
+  }
+
+  .section--explorers::after {
+    opacity: 0.1;
   }
 
   .section-title {
@@ -345,6 +424,12 @@
     display: grid;
     gap: clamp(1.5rem, 4vw, 2.5rem);
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  :global(.feature-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 40%, transparent 60%);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 68%, var(--aurora-purple) 32%);
   }
 
   :global(.feature-card) h3 {
@@ -419,6 +504,12 @@
     gap: clamp(1.5rem, 4vw, 2.4rem);
   }
 
+  :global(.differentiator-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.15) 10%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 36%, transparent 64%);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 62%, var(--signal-yellow) 38%);
+  }
+
   :global(.differentiator-card) h3 {
     margin-bottom: 0.5rem;
   }
@@ -426,6 +517,10 @@
   :global(.explorers-card) {
     display: grid;
     gap: 1.5rem;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.2) 14%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 42%, transparent 58%);
+    --surface-glass-shadow: 0 28px 70px rgba(14, 28, 54, 0.26);
+    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 58%, var(--voyage-blue) 42%);
   }
 
   .explorers-form {
@@ -476,6 +571,9 @@
     display: grid;
     gap: 1.2rem;
     text-align: center;
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.22) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 66%, var(--aurora-purple) 34%);
   }
 
   .cta-actions {
@@ -483,6 +581,30 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+  }
+
+  @keyframes voyageDrift {
+    0% {
+      transform: translate3d(-2%, -1%, 0) scale(1.02) rotate(-1deg);
+    }
+
+    50% {
+      transform: translate3d(1.5%, 1.5%, 0) scale(1.04) rotate(1deg);
+    }
+
+    100% {
+      transform: translate3d(-1%, 2%, 0) scale(1.01) rotate(-0.6deg);
+    }
+  }
+
+  @keyframes mapSweep {
+    0% {
+      transform: rotate(0deg) scale(1.08);
+    }
+
+    100% {
+      transform: rotate(360deg) scale(1.08);
+    }
   }
 
   @media (min-width: 960px) {
@@ -500,6 +622,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .section::before {
+      animation: none;
+    }
+
     :global(.feature-card),
     :global(.differentiator-card),
     :global(.explorers-card),

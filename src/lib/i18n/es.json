@@ -56,7 +56,8 @@
     "solutions_ideonautix": "Ideonautix Startup OS",
     "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
     "solutions_consulting": "AI Consulting Services",
-    "solutions_consulting_desc": "Tailored integration, training, and strategy"
+    "solutions_consulting_desc": "Tailored integration, training, and strategy",
+    "help_center": "Help Center"
   },
   "language_switcher": {
     "group_label": "Selector de idioma",
@@ -766,6 +767,7 @@
     "nodevoyage": "NodeVoyage",
     "ideonautix": "Ideonautix",
     "consulting": "Consultoría",
+    "help_center": "Help Center",
     "newsletter": "Newsletter",
     "partners_title": "Partners",
     "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",

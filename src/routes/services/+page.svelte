@@ -248,121 +248,129 @@
   </svelte:fragment>
 </Hero>
 
-<section class="services" aria-labelledby="service-heading" use:revealOnScroll>
-  <div class="container">
-    <header class="section-heading">
-      <span class="section-eyebrow">{t('services.page.consulting.eyebrow', 'Consulting & support')}</span>
-      <h2 id="service-heading">{t('services.page.consulting.title', 'Strategy that keeps pace with your team')}</h2>
-      <p>
-        {t(
-          'services.page.consulting.copy',
-          'Every engagement starts with signage-inspired clarity and ends with teams who understand their tools. These services pair calm rituals with measurable outcomes.'
-        )}
-      </p>
-    </header>
+<div class="aurora-wrap aurora-wrap--consulting">
+  <section class="services" aria-labelledby="service-heading" use:revealOnScroll>
+    <div class="container">
+      <header class="section-heading">
+        <span class="section-eyebrow">{t('services.page.consulting.eyebrow', 'Consulting & support')}</span>
+        <h2 id="service-heading">{t('services.page.consulting.title', 'Strategy that keeps pace with your team')}</h2>
+        <p>
+          {t(
+            'services.page.consulting.copy',
+            'Every engagement starts with signage-inspired clarity and ends with teams who understand their tools. These services pair calm rituals with measurable outcomes.'
+          )}
+        </p>
+      </header>
 
-    <div class="cards" use:staggerReveal>
-      {#each serviceCards as card (card.id)}
-        <GlassCard class="service-card" padding="lg" halo id={card.id}>
-          {#if card.eyebrowKey}
-            <span class="service-eyebrow">{t(card.eyebrowKey, card.eyebrowFallback ?? '')}</span>
-          {/if}
-          <h3>{t(card.titleKey, card.titleFallback)}</h3>
-          <p>{t(card.summaryKey, card.summaryFallback)}</p>
-          <ul>
-            {#each card.bullets as bullet (bullet.key)}
-              <li>{t(bullet.key, bullet.fallback)}</li>
-            {/each}
-          </ul>
-          <div class="card-actions">
-            <Button href={card.primaryCta.href} variant="gradient" size="md">{t(card.primaryCta.labelKey, card.primaryCta.labelFallback)}</Button>
-          </div>
-        </GlassCard>
-      {/each}
+      <div class="cards" use:staggerReveal>
+        {#each serviceCards as card (card.id)}
+          <GlassCard class={`service-card service-card--${card.id}`} padding="lg" halo id={card.id}>
+            {#if card.eyebrowKey}
+              <span class="service-eyebrow">{t(card.eyebrowKey, card.eyebrowFallback ?? '')}</span>
+            {/if}
+            <h3>{t(card.titleKey, card.titleFallback)}</h3>
+            <p>{t(card.summaryKey, card.summaryFallback)}</p>
+            <ul>
+              {#each card.bullets as bullet (bullet.key)}
+                <li>{t(bullet.key, bullet.fallback)}</li>
+              {/each}
+            </ul>
+            <div class="card-actions">
+              <Button href={card.primaryCta.href} variant="gradient" size="md">{t(card.primaryCta.labelKey, card.primaryCta.labelFallback)}</Button>
+            </div>
+          </GlassCard>
+        {/each}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <SectionDivider tone="aurora" />
 
-<section class="services" aria-labelledby="platform-heading" id="platforms" use:revealOnScroll>
-  <div class="container">
-    <header class="section-heading">
-      <span class="section-eyebrow">{t('services.page.platforms.eyebrow', 'Flagship platforms')}</span>
-      <h2 id="platform-heading">{t('services.page.platforms.title', 'Products where logic dances with creativity')}</h2>
-      <p>
-        {t(
-          'services.page.platforms.copy',
-          'Our studio platforms are living proof of the methodologies we teach. They inherit the same frosted-glass calm, multilingual access, and rhythm you will feel in every engagement.'
-        )}
-      </p>
-    </header>
+<div class="aurora-wrap aurora-wrap--platforms">
+  <section class="services" aria-labelledby="platform-heading" id="platforms" use:revealOnScroll>
+    <div class="container">
+      <header class="section-heading">
+        <span class="section-eyebrow">{t('services.page.platforms.eyebrow', 'Flagship platforms')}</span>
+        <h2 id="platform-heading">{t('services.page.platforms.title', 'Products where logic dances with creativity')}</h2>
+        <p>
+          {t(
+            'services.page.platforms.copy',
+            'Our studio platforms are living proof of the methodologies we teach. They inherit the same frosted-glass calm, multilingual access, and rhythm you will feel in every engagement.'
+          )}
+        </p>
+      </header>
 
-    <div class="cards" use:staggerReveal>
-      {#each productEntries as product (product.id)}
-        <GlassCard class="service-card" padding="lg" halo id={product.id}>
-          {#if product.eyebrowKey}
-            <span class="service-eyebrow">{t(product.eyebrowKey, product.eyebrowFallback)}</span>
-          {/if}
-          <h3>{t(product.titleKey, product.titleFallback)}</h3>
-          <p>{t(product.summaryKey, product.summaryFallback)}</p>
+      <div class="cards" use:staggerReveal>
+        {#each productEntries as product (product.id)}
+          <GlassCard class={`service-card service-card--${product.id}`} padding="lg" halo id={product.id}>
+            {#if product.eyebrowKey}
+              <span class="service-eyebrow">{t(product.eyebrowKey, product.eyebrowFallback)}</span>
+            {/if}
+            <h3>{t(product.titleKey, product.titleFallback)}</h3>
+            <p>{t(product.summaryKey, product.summaryFallback)}</p>
+            <ul>
+              {#each product.bullets as bullet (bullet.key)}
+                <li>{t(bullet.key, bullet.fallback)}</li>
+              {/each}
+            </ul>
+            <div class="card-actions">
+              <Button href={product.primaryCta.href} variant="gradient" size="md">{t(product.primaryCta.labelKey, product.primaryCta.labelFallback)}</Button>
+              {#if product.secondaryCta}
+                <Button href={product.secondaryCta.href} variant="secondary" size="md">{t(product.secondaryCta.labelKey, product.secondaryCta.labelFallback)}</Button>
+              {/if}
+            </div>
+          </GlassCard>
+        {/each}
+      </div>
+    </div>
+  </section>
+</div>
+
+<SectionDivider tone="neutral" />
+
+<div class="aurora-wrap aurora-wrap--education">
+  <section class="services" aria-labelledby="education-heading" use:revealOnScroll>
+    <div class="container">
+      <GlassCard class="education-card" padding="lg" halo id={educationCard.id}>
+        <span class="service-eyebrow">{t(educationCard.eyebrowKey ?? '', educationCard.eyebrowFallback ?? '')}</span>
+        <div class="education-grid">
+          <div>
+            <h2 id="education-heading">{t(educationCard.titleKey, educationCard.titleFallback)}</h2>
+            <p>{t(educationCard.summaryKey, educationCard.summaryFallback)}</p>
+          </div>
           <ul>
-            {#each product.bullets as bullet (bullet.key)}
+            {#each educationCard.bullets as bullet (bullet.key)}
               <li>{t(bullet.key, bullet.fallback)}</li>
             {/each}
           </ul>
           <div class="card-actions">
-            <Button href={product.primaryCta.href} variant="gradient" size="md">{t(product.primaryCta.labelKey, product.primaryCta.labelFallback)}</Button>
-            {#if product.secondaryCta}
-              <Button href={product.secondaryCta.href} variant="secondary" size="md">{t(product.secondaryCta.labelKey, product.secondaryCta.labelFallback)}</Button>
+            <Button href={educationCard.primaryCta.href} variant="gradient" size="md">{t(educationCard.primaryCta.labelKey, educationCard.primaryCta.labelFallback)}</Button>
+            {#if educationCard.secondaryCta}
+              <Button href={educationCard.secondaryCta.href} variant="secondary" size="md">{t(educationCard.secondaryCta.labelKey, educationCard.secondaryCta.labelFallback)}</Button>
             {/if}
           </div>
-        </GlassCard>
-      {/each}
+        </div>
+      </GlassCard>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<SectionDivider tone="neutral" />
-
-<section class="services" aria-labelledby="education-heading" use:revealOnScroll>
-  <div class="container">
-    <GlassCard class="education-card" padding="lg" halo id={educationCard.id}>
-      <span class="service-eyebrow">{t(educationCard.eyebrowKey ?? '', educationCard.eyebrowFallback ?? '')}</span>
-      <div class="education-grid">
-        <div>
-          <h2 id="education-heading">{t(educationCard.titleKey, educationCard.titleFallback)}</h2>
-          <p>{t(educationCard.summaryKey, educationCard.summaryFallback)}</p>
-        </div>
-        <ul>
-          {#each educationCard.bullets as bullet (bullet.key)}
-            <li>{t(bullet.key, bullet.fallback)}</li>
-          {/each}
-        </ul>
+<div class="aurora-wrap aurora-wrap--finale">
+  <section class="services finale" use:revealOnScroll>
+    <div class="container">
+      <GlassCard class="finale-card service-card--finale" halo padding="lg">
+        <span class="service-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
+        <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
+        <p>{t(finale.copyKey, finale.copyFallback)}</p>
         <div class="card-actions">
-          <Button href={educationCard.primaryCta.href} variant="gradient" size="md">{t(educationCard.primaryCta.labelKey, educationCard.primaryCta.labelFallback)}</Button>
-          {#if educationCard.secondaryCta}
-            <Button href={educationCard.secondaryCta.href} variant="secondary" size="md">{t(educationCard.secondaryCta.labelKey, educationCard.secondaryCta.labelFallback)}</Button>
-          {/if}
+          <Button href={finale.primary.href} variant="gradient" size="lg">{t(finale.primary.labelKey, finale.primary.labelFallback)}</Button>
+          <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
         </div>
-      </div>
-    </GlassCard>
-  </div>
-</section>
-
-<section class="services finale" use:revealOnScroll>
-  <div class="container">
-    <GlassCard class="finale-card" halo padding="lg">
-      <span class="service-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
-      <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
-      <p>{t(finale.copyKey, finale.copyFallback)}</p>
-      <div class="card-actions">
-        <Button href={finale.primary.href} variant="gradient" size="lg">{t(finale.primary.labelKey, finale.primary.labelFallback)}</Button>
-        <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
-      </div>
-    </GlassCard>
-  </div>
-</section>
+      </GlassCard>
+    </div>
+  </section>
+</div>
 
 <style>
   .hero-description {
@@ -378,6 +386,89 @@
     flex-wrap: wrap;
     gap: var(--space-md, 1rem);
     align-items: center;
+  }
+
+  .aurora-wrap {
+    position: relative;
+    isolation: isolate;
+    padding: clamp(1.8rem, 5vw, 3rem) 0;
+    overflow: hidden;
+  }
+
+  .aurora-wrap::before,
+  .aurora-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0.92;
+  }
+
+  .aurora-wrap::before {
+    will-change: transform;
+  }
+
+  .aurora-wrap::after {
+    z-index: -1;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+
+  .aurora-wrap--consulting::before {
+    background:
+      radial-gradient(110% 70% at 18% 16%, rgba(var(--aurora-purple-rgb), 0.34), transparent 70%),
+      radial-gradient(120% 80% at 84% 10%, rgba(var(--signal-yellow-rgb), 0.18), transparent 76%),
+      linear-gradient(120deg, color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%), transparent 72%);
+    animation: floatGlow 48s ease-in-out infinite alternate;
+  }
+
+  .aurora-wrap--consulting::after {
+    background:
+      radial-gradient(60% 40% at 20% 80%, rgba(var(--aurora-purple-rgb), 0.22), transparent 68%),
+      radial-gradient(70% 50% at 82% 82%, rgba(var(--signal-yellow-rgb), 0.18), transparent 72%);
+  }
+
+  .aurora-wrap--platforms::before {
+    background:
+      radial-gradient(100% 75% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.26), transparent 72%),
+      radial-gradient(85% 70% at 82% 30%, rgba(var(--aurora-purple-rgb), 0.3), transparent 74%),
+      conic-gradient(from 160deg at 52% 48%, rgba(var(--voyage-blue-rgb), 0.18), rgba(var(--aurora-purple-rgb), 0.18), transparent 65%);
+    animation: floatGlow 56s ease-in-out infinite alternate;
+  }
+
+  .aurora-wrap--platforms::after {
+    background:
+      radial-gradient(70% 60% at 78% 88%, rgba(var(--signal-yellow-rgb), 0.16), transparent 76%),
+      radial-gradient(75% 50% at 12% 86%, rgba(var(--voyage-blue-rgb), 0.2), transparent 80%);
+  }
+
+  .aurora-wrap--education::before {
+    background:
+      radial-gradient(120% 75% at 20% 18%, rgba(var(--aurora-purple-rgb), 0.28), transparent 76%),
+      radial-gradient(100% 70% at 82% 18%, rgba(var(--signal-yellow-rgb), 0.16), transparent 78%),
+      linear-gradient(140deg, color-mix(in srgb, var(--bg-elev-2) 90%, rgba(var(--aurora-purple-rgb), 0.14) 10%), transparent 70%);
+    animation: floatGlow 60s ease-in-out infinite alternate;
+  }
+
+  .aurora-wrap--education::after {
+    background:
+      radial-gradient(70% 60% at 30% 90%, rgba(var(--aurora-purple-rgb), 0.2), transparent 76%),
+      radial-gradient(70% 60% at 74% 82%, rgba(var(--signal-yellow-rgb), 0.14), transparent 78%);
+  }
+
+  .aurora-wrap--finale::before {
+    background:
+      radial-gradient(120% 80% at 12% 14%, rgba(var(--aurora-purple-rgb), 0.32), transparent 76%),
+      radial-gradient(105% 70% at 88% 12%, rgba(var(--voyage-blue-rgb), 0.24), transparent 74%),
+      linear-gradient(145deg, color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--aurora-purple-rgb), 0.2) 14%), transparent 70%);
+    animation: floatGlow 52s ease-in-out infinite alternate;
+  }
+
+  .aurora-wrap--finale::after {
+    background:
+      radial-gradient(65% 40% at 80% 90%, rgba(var(--signal-yellow-rgb), 0.2), transparent 78%),
+      radial-gradient(60% 50% at 14% 86%, rgba(var(--aurora-purple-rgb), 0.24), transparent 80%);
   }
 
   .services {
@@ -404,6 +495,44 @@
     text-transform: uppercase;
     background: color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--aurora-purple-rgb), 0.2) 14%);
     color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text-secondary) 32%);
+  }
+
+  :global(.aurora-wrap--consulting .service-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 36%, transparent 64%);
+    --surface-glass-shadow: 0 20px 60px rgba(var(--aurora-purple-rgb), 0.18);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
+  }
+
+  :global(.aurora-wrap--platforms .service-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.2) 14%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 42%, transparent 58%);
+    --surface-glass-shadow: 0 22px 65px rgba(var(--voyage-blue-rgb), 0.18);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
+  }
+
+  :global(.aurora-wrap--platforms .service-card--ideonautix) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--aurora-purple-rgb), 0.22) 16%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 40%, transparent 60%);
+  }
+
+  :global(.aurora-wrap--platforms .service-card--nodevoyage) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.26) 14%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 46%, transparent 54%);
+  }
+
+  :global(.aurora-wrap--education .education-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--signal-yellow-rgb), 0.16) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 42%, transparent 58%);
+    --surface-glass-shadow: 0 18px 55px rgba(var(--signal-yellow-rgb), 0.18);
+    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 68%, var(--aurora-purple) 32%);
+  }
+
+  :global(.aurora-wrap--finale .service-card--finale) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.24) 14%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 48%, transparent 52%);
+    --surface-glass-shadow: 0 24px 70px rgba(var(--aurora-purple-rgb), 0.22);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
   }
 
   .cards {
@@ -469,9 +598,29 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .aurora-wrap::before,
+    .aurora-wrap::after {
+      animation: none !important;
+      transform: none !important;
+    }
+
     .cards,
     .services {
       animation: none;
+    }
+  }
+
+  @keyframes floatGlow {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate3d(0, -3%, 0) scale(1.02);
+    }
+
+    100% {
+      transform: translate3d(0, 3%, 0) scale(1.01);
     }
   }
 </style>

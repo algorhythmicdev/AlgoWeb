@@ -413,6 +413,20 @@
     text-align: center;
     display: grid;
     gap: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-heading::after {
+    content: '';
+    position: absolute;
+    inset-inline: clamp(-2rem, -4vw, -1.2rem);
+    inset-block-end: -1.5rem;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--aurora-purple) 86%, transparent 14%), color-mix(in srgb, var(--voyage-blue) 70%, var(--signal-yellow) 30%));
+    opacity: 0.55;
+    pointer-events: none;
   }
 
   .section-eyebrow {
@@ -424,15 +438,114 @@
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    background: color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%);
+    background:
+      linear-gradient(120deg, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 68%, transparent 32%), transparent 74%),
+      color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.1) 12%);
     color: color-mix(in srgb, var(--aurora-purple) 72%, var(--text-secondary) 28%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--aurora-purple) 26%, transparent 74%);
   }
 
   .highlights,
   .offerings,
   .resources,
   .finale {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     padding: clamp(3.5rem, 8vw, 6rem) 0;
+  }
+
+  .highlights > .container,
+  .offerings > .container,
+  .resources > .container,
+  .finale > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .highlights::before,
+  .highlights::after,
+  .offerings::before,
+  .offerings::after,
+  .resources::before,
+  .resources::after,
+  .finale::before,
+  .finale::after {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    border-radius: clamp(36px, 7vw, 56px);
+    pointer-events: none;
+  }
+
+  .highlights::before {
+    background:
+      radial-gradient(65% 85% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.3), transparent 72%),
+      radial-gradient(70% 90% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.32), transparent 74%),
+      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.22), transparent 68%);
+    filter: saturate(1.05);
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0) scale(1.05);
+    animation: auroraDrift 42s ease-in-out infinite alternate;
+  }
+
+  .highlights::after {
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 320px 320px;
+    opacity: 0.08;
+  }
+
+  .offerings::before {
+    background:
+      conic-gradient(from 120deg, rgba(var(--aurora-purple-rgb), 0.22), rgba(var(--voyage-blue-rgb), 0.18), rgba(var(--signal-yellow-rgb), 0.18), rgba(var(--aurora-purple-rgb), 0.22));
+    mask: radial-gradient(80% 80% at 50% 20%, rgba(0, 0, 0, 0.82), transparent 82%);
+    opacity: 0.75;
+    transform: rotate(3deg) scale(1.1);
+    animation: orbitStripe 48s linear infinite;
+  }
+
+  .offerings::after {
+    inset: -24%;
+    border-radius: clamp(42px, 8vw, 64px);
+    background: linear-gradient(180deg, rgba(var(--ink-rgb), 0.08), transparent 68%);
+    opacity: 0.3;
+  }
+
+  .resources::before {
+    inset: -16% -12% -28% -12%;
+    border-radius: clamp(40px, 9vw, 72px);
+    background:
+      radial-gradient(120% 120% at 12% 18%, rgba(var(--signal-yellow-rgb), 0.24), transparent 72%),
+      radial-gradient(90% 120% at 82% 6%, rgba(var(--aurora-purple-rgb), 0.28), transparent 70%),
+      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.2), transparent 62%);
+    opacity: 0.88;
+    animation: shimmerSweep 36s ease-in-out infinite;
+  }
+
+  .resources::after {
+    inset: -18%;
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 320px 320px;
+    opacity: 0.07;
+  }
+
+  .finale::before {
+    inset: -26%;
+    border-radius: clamp(60px, 12vw, 88px);
+    background:
+      radial-gradient(90% 120% at 20% 20%, rgba(var(--aurora-purple-rgb), 0.32), transparent 72%),
+      radial-gradient(120% 120% at 80% 0%, rgba(var(--signal-yellow-rgb), 0.22), transparent 70%),
+      linear-gradient(160deg, rgba(var(--voyage-blue-rgb), 0.2), transparent 60%);
+    opacity: 0.9;
+    animation: finaleGlow 28s ease-in-out infinite alternate;
+  }
+
+  .finale::after {
+    inset: -20%;
+    border-radius: clamp(60px, 12vw, 88px);
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 300px 300px;
+    opacity: 0.06;
   }
 
   .highlights__grid,
@@ -456,8 +569,12 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.18) 18%);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(var(--voyage-blue-rgb), 0.32), transparent 72%),
+      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
     color: var(--voyage-blue);
+    box-shadow: 0 10px 22px rgba(16, 41, 95, 0.22);
+    animation: floaty 18s ease-in-out infinite;
   }
 
   .offering-title {
@@ -473,8 +590,12 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.2) 20%);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(var(--aurora-purple-rgb), 0.3), transparent 70%),
+      color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.18) 20%);
     color: var(--aurora-purple);
+    box-shadow: 0 8px 18px rgba(58, 28, 120, 0.28);
+    animation: floaty 22s ease-in-out infinite reverse;
   }
 
   :global(.offering-card) ul,
@@ -493,8 +614,12 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.22) 18%);
+    background:
+      radial-gradient(circle at 28% 28%, rgba(var(--signal-yellow-rgb), 0.32), transparent 72%),
+      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.18) 18%);
     color: var(--signal-yellow);
+    box-shadow: 0 8px 20px rgba(148, 110, 10, 0.24);
+    animation: floaty 24s ease-in-out infinite;
   }
 
   .resource-eyebrow {
@@ -509,6 +634,44 @@
     flex-wrap: wrap;
     gap: var(--space-sm, 0.75rem);
     align-items: center;
+  }
+
+  .highlights :global(.highlight-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 35%, transparent 65%);
+    --surface-glass-shadow: 0 22px 48px rgba(9, 21, 58, 0.18);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
+  }
+
+  .highlights :global(.highlight-card:hover .highlight-icon),
+  .highlights :global(.highlight-card:focus-visible .highlight-icon) {
+    animation-duration: 14s;
+  }
+
+  .offerings :global(.offering-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.14) 10%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
+    --surface-glass-shadow: 0 26px 60px rgba(20, 8, 62, 0.22);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
+  }
+
+  .resources :global(.resource-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 93%, rgba(var(--signal-yellow-rgb), 0.12) 7%);
+    --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 30%, transparent 70%);
+    --surface-glass-shadow: 0 22px 46px rgba(95, 68, 4, 0.22);
+    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 70%, var(--aurora-purple) 30%);
+  }
+
+  .finale :global(.finale-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 42%, transparent 58%);
+    --surface-glass-shadow: 0 32px 72px rgba(24, 12, 58, 0.28);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
+  }
+
+  .finale :global(.finale-card)::after {
+    border: 1px solid rgba(var(--signal-yellow-rgb), 0.25);
+    mix-blend-mode: screen;
   }
 
   :global(.finale-card) {
@@ -537,11 +700,79 @@
     }
   }
 
+  @keyframes auroraDrift {
+    from {
+      transform: translate3d(-2%, -1%, 0) scale(1.05);
+    }
+
+    to {
+      transform: translate3d(2%, 1%, 0) scale(1.08);
+    }
+  }
+
+  @keyframes orbitStripe {
+    from {
+      transform: rotate(0deg) scale(1.1);
+    }
+
+    to {
+      transform: rotate(360deg) scale(1.1);
+    }
+  }
+
+  @keyframes shimmerSweep {
+    from {
+      transform: translate3d(-2%, -1%, 0) scale(1.04);
+    }
+
+    to {
+      transform: translate3d(1%, 1.5%, 0) scale(1.06);
+    }
+  }
+
+  @keyframes finaleGlow {
+    from {
+      transform: translate3d(-1%, -1.2%, 0) scale(1.03);
+    }
+
+    to {
+      transform: translate3d(1.4%, 1.2%, 0) scale(1.07);
+    }
+  }
+
+  @keyframes floaty {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+      transform: translate3d(0, -6px, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .section-heading::after {
+      display: none;
+    }
+
     .highlights,
     .offerings,
     .resources,
     .finale {
+      animation: none;
+    }
+
+    .highlights::before,
+    .offerings::before,
+    .resources::before,
+    .finale::before,
+    .highlight-icon,
+    .offering-icon,
+    .resource-icon {
       animation: none;
     }
   }

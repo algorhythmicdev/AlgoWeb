@@ -54,6 +54,11 @@ export const mainNavigation = [
     ]
   },
   {
+    label: 'nav.help_center',
+    href: '/help-center',
+    icon: 'info'
+  },
+  {
     label: 'nav.contact',
     href: '/contact',
     icon: 'contact'
@@ -74,6 +79,7 @@ export const footerLinks = {
     { label: 'footer.events', href: '/education-hub#events' }
   ],
   support: [
+    { label: 'footer.help_center', href: '/help-center' },
     { label: 'footer.nodevoyage', href: '/nodevoyage' },
     { label: 'footer.ideonautix', href: '/ideonautix' },
     { label: 'footer.consulting', href: '/consulting' },
