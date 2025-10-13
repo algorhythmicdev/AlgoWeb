@@ -68,6 +68,20 @@
     box-shadow: 0 30px 70px rgba(10, 18, 39, 0.22);
   }
 
+  .glass-card--interactive:hover .glass-card__surface,
+  .glass-card--interactive:focus-within .glass-card__surface {
+    opacity: calc(var(--surface-glass-opacity, 1) * 0.88);
+  }
+
+  .glass-card:focus-within {
+    outline: 2px solid color-mix(
+      in srgb,
+      var(--focus-ring-color, color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%)) 82%,
+      rgba(var(--signal-yellow-rgb, 255, 211, 57), 0.35) 18%
+    );
+    outline-offset: 3px;
+  }
+
   .glass-card::after,
   .glass-card::before {
     content: '';
@@ -114,6 +128,10 @@
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-shadow: none;
+  }
+
+  :global(html[data-theme='hc'] .glass-card:focus-within) {
+    outline: 2px solid currentColor;
   }
 
   :global(html[data-theme='hc'] .glass-card::after),

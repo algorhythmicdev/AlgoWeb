@@ -330,13 +330,23 @@
       box-shadow var(--duration-fast) var(--ease-out);
   }
 
-  .current-lang:hover,
+  .current-lang:hover {
+    background: var(--control-surface-hover);
+    border-color: var(--control-border-strong);
+    color: var(--voyage-blue);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--control-ring) 70%, transparent 30%);
+  }
+
   .current-lang:focus-visible {
     outline: none;
     background: var(--control-surface-hover);
     border-color: var(--control-border-strong);
     color: var(--voyage-blue);
-    box-shadow: 0 0 0 4px var(--control-ring);
+    box-shadow:
+      var(--focus-ring),
+      0 0 0 5px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
+      0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
+    animation: switcherFocusPulse 1.6s ease-in-out infinite;
   }
 
   .dropdown {
@@ -368,9 +378,14 @@
       color var(--duration-fast) var(--ease-out);
   }
 
-  .lang-option:hover,
+  .lang-option:hover {
+    background: var(--control-surface-hover);
+  }
+
   .lang-option:focus-visible {
     background: var(--control-surface-hover);
+    outline: 2px solid var(--focus-ring-color, var(--voyage-blue));
+    outline-offset: 2px;
   }
 
   .lang-option.active {
@@ -389,4 +404,36 @@
   }
 
   svg { pointer-events: none; }
+
+  @keyframes switcherFocusPulse {
+    0%,
+    100% {
+      box-shadow:
+        var(--focus-ring),
+        0 0 0 5px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
+        0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
+    }
+
+    50% {
+      box-shadow:
+        0 0 0 4px color-mix(in srgb, var(--focus-ring-color, var(--voyage-blue)) 75%, transparent 25%),
+        0 0 0 8px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
+        0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .current-lang:focus-visible {
+      animation: none;
+    }
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .current-lang:focus-visible {
+    box-shadow: var(--focus-ring-contrast);
+    animation: none;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .lang-option:focus-visible {
+    outline: 2px solid currentColor;
+  }
 </style>
