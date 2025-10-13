@@ -125,7 +125,7 @@
           <p class="footer-partners__summary">{partnerSummary}</p>
 
           <div class="footer-partners__actions">
-            <a class="footer-partners__cta" href="/#partners">{partnerLinkLabel}</a>
+            <a class="footer-partners__cta" href="/about#team">{partnerLinkLabel}</a>
 
             {#if featuredPartner?.website}
               <a

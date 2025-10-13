@@ -5,126 +5,244 @@
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import productsData from '$data/products.json';
+  import { _ } from 'svelte-i18n';
+  import { translateOrFallback } from '$lib/utils/i18n';
 
-  const heroTitle = 'Services & Solutions for Calm, Creative AI';
-  const heroSubtitle =
-    'Discover how AlgoRhythmics blends consulting, flagship platforms, and education to move ideas from spark to launch.';
-  const heroDescription =
-    'Whether you are integrating AI into operations, equipping classrooms, or piloting a new product, our team choreographs the rhythm from strategy to support.';
+  const t = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
 
-  const heroCtas = [
-    { label: 'Request a Demo / Consultation', href: '/contact', variant: 'gradient' as const },
-    { label: 'Explore Platforms', href: '#platforms', variant: 'secondary' as const }
-  ];
+  const hero = {
+    titleKey: 'services.page.hero.title',
+    titleFallback: 'Services & Solutions for Calm, Creative AI',
+    subtitleKey: 'services.page.hero.subtitle',
+    subtitleFallback: 'Discover how AlgoRhythmics blends consulting, flagship platforms, and education to move ideas from spark to launch.',
+    descriptionKey: 'services.page.hero.description',
+    descriptionFallback:
+      'Whether you are integrating AI into operations, equipping classrooms, or piloting a new product, our team choreographs the rhythm from strategy to support.',
+    actions: [
+      {
+        href: '/contact',
+        variant: 'gradient' as const,
+        labelKey: 'services.page.hero.primary_cta',
+        labelFallback: 'Request a Demo / Consultation'
+      },
+      {
+        href: '#platforms',
+        variant: 'secondary' as const,
+        labelKey: 'services.page.hero.secondary_cta',
+        labelFallback: 'Explore Platforms'
+      }
+    ]
+  } as const;
 
   type ServiceCard = {
     id: string;
-    eyebrow?: string;
-    title: string;
-    summary: string;
-    bullets: string[];
-    primaryCta: { label: string; href: string };
-    secondaryCta?: { label: string; href: string };
+    eyebrowKey?: string;
+    eyebrowFallback?: string;
+    titleKey: string;
+    titleFallback: string;
+    summaryKey: string;
+    summaryFallback: string;
+    bullets: { key: string; fallback: string }[];
+    primaryCta: { href: string; labelKey: string; labelFallback: string };
+    secondaryCta?: { href: string; labelKey: string; labelFallback: string };
   };
 
   const serviceCards: ServiceCard[] = [
     {
       id: 'consulting',
-      eyebrow: 'Guided by signage discipline',
-      title: 'AI Consulting & Integration',
-      summary:
+      eyebrowKey: 'services.page.consulting.cards.consulting.eyebrow',
+      eyebrowFallback: 'Guided by signage discipline',
+      titleKey: 'services.page.consulting.cards.consulting.title',
+      titleFallback: 'AI Consulting & Integration',
+      summaryKey: 'services.page.consulting.cards.consulting.summary',
+      summaryFallback:
         'Leverage our founder-led consulting to map opportunities, translate them into transparent automation, and deliver AI that teams actually trust.',
       bullets: [
-        'Discovery workshops that decode workflows and user journeys',
-        'Pilot sprints with explainable automation notes and opt-out paths',
-        'Change-management playbooks and training to keep crews confident'
+        {
+          key: 'services.page.consulting.cards.consulting.bullets.0',
+          fallback: 'Discovery workshops that decode workflows and user journeys'
+        },
+        {
+          key: 'services.page.consulting.cards.consulting.bullets.1',
+          fallback: 'Pilot sprints with explainable automation notes and opt-out paths'
+        },
+        {
+          key: 'services.page.consulting.cards.consulting.bullets.2',
+          fallback: 'Change-management playbooks and training to keep crews confident'
+        }
       ],
-      primaryCta: { label: 'Contact for AI Consulting', href: '/contact' }
+      primaryCta: {
+        href: '/contact',
+        labelKey: 'services.page.consulting.cards.consulting.primary_cta',
+        labelFallback: 'Contact for AI Consulting'
+      }
     },
     {
       id: 'implementation',
-      eyebrow: 'From pilot to steady state',
-      title: 'Technical Implementation & Training',
-      summary:
+      eyebrowKey: 'services.page.consulting.cards.implementation.eyebrow',
+      eyebrowFallback: 'From pilot to steady state',
+      titleKey: 'services.page.consulting.cards.implementation.title',
+      titleFallback: 'Technical Implementation & Training',
+      summaryKey: 'services.page.consulting.cards.implementation.summary',
+      summaryFallback:
         'We stay on deck after the strategy is signed off. Our team deploys, documents, and trains your people so calm, inclusive AI becomes routine.',
       bullets: [
-        'Hands-on configuration across cloud, data, and governance checkpoints',
-        'AAA-accessible documentation, onboarding guides, and office hours',
-        'Ongoing success metrics and iteration roadmaps tuned to your rhythm'
+        {
+          key: 'services.page.consulting.cards.implementation.bullets.0',
+          fallback: 'Hands-on configuration across cloud, data, and governance checkpoints'
+        },
+        {
+          key: 'services.page.consulting.cards.implementation.bullets.1',
+          fallback: 'AAA-accessible documentation, onboarding guides, and office hours'
+        },
+        {
+          key: 'services.page.consulting.cards.implementation.bullets.2',
+          fallback: 'Ongoing success metrics and iteration roadmaps tuned to your rhythm'
+        }
       ],
-      primaryCta: { label: 'Plan Your Rollout', href: '/contact' }
+      primaryCta: {
+        href: '/contact',
+        labelKey: 'services.page.consulting.cards.implementation.primary_cta',
+        labelFallback: 'Plan Your Rollout'
+      }
     }
   ];
 
   const productEntries = [
     {
       id: 'ideonautix',
-      eyebrow: 'Creative productivity suite',
-      title: 'Ideonautix',
-      summary:
+      eyebrowKey: 'services.page.platforms.ideonautix.eyebrow',
+      eyebrowFallback: 'Creative productivity suite',
+      titleKey: 'services.page.platforms.ideonautix.title',
+      titleFallback: 'Ideonautix',
+      summaryKey: 'services.page.platforms.ideonautix.summary',
+      summaryFallback:
         'An AI partner for founders, educators, and teams who need momentum. Brainstorm, storyboard, and orchestrate projects with clarity and delight.',
       bullets: [
-        'AI Pitch Assistant for decks, grants, and stakeholder updates',
-        'Collaborative canvases that balance focus dashboards with playful prompts',
-        'Inclusive localisation and voice options for multilingual communities'
+        {
+          key: 'services.page.platforms.ideonautix.bullets.0',
+          fallback: 'AI Pitch Assistant for decks, grants, and stakeholder updates'
+        },
+        {
+          key: 'services.page.platforms.ideonautix.bullets.1',
+          fallback: 'Collaborative canvases that balance focus dashboards with playful prompts'
+        },
+        {
+          key: 'services.page.platforms.ideonautix.bullets.2',
+          fallback: 'Inclusive localisation and voice options for multilingual communities'
+        }
       ],
       primaryCta: {
-        label: 'Explore Ideonautix',
-        href: productsData?.ideonautix?.demoUrl ?? 'https://ideonautix.algorhythmics.dev/'
+        href: productsData?.ideonautix?.demoUrl ?? 'https://ideonautix.algorhythmics.dev/',
+        labelKey: 'services.page.platforms.ideonautix.primary_cta',
+        labelFallback: 'Explore Ideonautix'
       },
-      secondaryCta: { label: 'View Ideonautix Highlights', href: '/resources#case-studies' }
+      secondaryCta: {
+        href: '/resources#case-studies',
+        labelKey: 'services.page.platforms.ideonautix.secondary_cta',
+        labelFallback: 'View Ideonautix Highlights'
+      }
     },
     {
       id: 'nodevoyage',
-      eyebrow: 'AI travel companion',
-      title: 'NodeVoyage',
-      summary:
+      eyebrowKey: 'services.page.platforms.nodevoyage.eyebrow',
+      eyebrowFallback: 'AI travel companion',
+      titleKey: 'services.page.platforms.nodevoyage.title',
+      titleFallback: 'NodeVoyage',
+      summaryKey: 'services.page.platforms.nodevoyage.summary',
+      summaryFallback:
         'Plan journeys with a companion that choreographs logistics and wonder. From family trips to nomad itineraries, NodeVoyage adapts to every explorer.',
       bullets: [
-        'Personalised itineraries with live context, accessibility, and language options',
-        'Route optimisation and collaborative trip workspaces for teams or classrooms',
-        'Hospitality-ready previews for partners and agencies'
+        {
+          key: 'services.page.platforms.nodevoyage.bullets.0',
+          fallback: 'Personalised itineraries with live context, accessibility, and language options'
+        },
+        {
+          key: 'services.page.platforms.nodevoyage.bullets.1',
+          fallback: 'Route optimisation and collaborative trip workspaces for teams or classrooms'
+        },
+        {
+          key: 'services.page.platforms.nodevoyage.bullets.2',
+          fallback: 'Hospitality-ready previews for partners and agencies'
+        }
       ],
       primaryCta: {
-        label: 'Discover NodeVoyage',
-        href: productsData?.nodevoyage?.demoUrl ?? 'https://nodevoyage.algorhythmics.dev/'
+        href: productsData?.nodevoyage?.demoUrl ?? 'https://nodevoyage.algorhythmics.dev/',
+        labelKey: 'services.page.platforms.nodevoyage.primary_cta',
+        labelFallback: 'Discover NodeVoyage'
       },
-      secondaryCta: { label: 'See Travel Case Studies', href: '/resources#case-studies' }
+      secondaryCta: {
+        href: '/resources#case-studies',
+        labelKey: 'services.page.platforms.nodevoyage.secondary_cta',
+        labelFallback: 'See Travel Case Studies'
+      }
     }
-  ];
+  ] as const;
 
   const educationCard: ServiceCard = {
     id: 'educational-partnerships',
-    eyebrow: 'Built with LIAA and Baltic schools',
-    title: 'Educational Programs & Partnerships',
-    summary:
+    eyebrowKey: 'services.page.education.eyebrow',
+    eyebrowFallback: 'Built with LIAA and Baltic schools',
+    titleKey: 'services.page.education.title',
+    titleFallback: 'Educational Programs & Partnerships',
+    summaryKey: 'services.page.education.summary',
+    summaryFallback:
       'Bring AI literacy into classrooms, libraries, and community hubs. We co-design workshops, curriculum modules, and mentorship sprints that welcome every learner.',
     bullets: [
-      'Curriculum blueprints, teacher training, and ready-to-run lesson plans',
-      'Community hackathons, parent ambassador network, and internship pathways',
-      'Impact tracking dashboards tuned to student confidence and reach goals'
+      {
+        key: 'services.page.education.bullets.0',
+        fallback: 'Curriculum blueprints, teacher training, and ready-to-run lesson plans'
+      },
+      {
+        key: 'services.page.education.bullets.1',
+        fallback: 'Community hackathons, parent ambassador network, and internship pathways'
+      },
+      {
+        key: 'services.page.education.bullets.2',
+        fallback: 'Impact tracking dashboards tuned to student confidence and reach goals'
+      }
     ],
-    primaryCta: { label: 'Join the Program', href: '/educational-outreach' },
-    secondaryCta: { label: 'Access Educator Resources', href: '/resources#documentation' }
+    primaryCta: {
+      href: '/educational-outreach',
+      labelKey: 'services.page.education.primary_cta',
+      labelFallback: 'Join the Program'
+    },
+    secondaryCta: {
+      href: '/resources#documentation',
+      labelKey: 'services.page.education.secondary_cta',
+      labelFallback: 'Access Educator Resources'
+    }
   };
 
   const finale = {
-    title: 'Let’s choreograph your next milestone',
-    copy:
+    eyebrowKey: 'services.page.finale.eyebrow',
+    eyebrowFallback: 'Next step',
+    titleKey: 'services.page.finale.title',
+    titleFallback: 'Let’s choreograph your next milestone',
+    copyKey: 'services.page.finale.copy',
+    copyFallback:
       'Share your roadmap, pain points, or classrooms and we will assemble the right mix of consulting, platforms, and education support. Calm, human-centred AI is a conversation away.',
-    primary: { label: 'Contact AlgoRhythmics', href: '/contact' },
-    secondary: { label: 'Read Success Stories', href: '/resources#case-studies' }
-  };
+    primary: {
+      href: '/contact',
+      labelKey: 'services.page.finale.primary_cta',
+      labelFallback: 'Contact AlgoRhythmics'
+    },
+    secondary: {
+      href: '/resources#case-studies',
+      labelKey: 'services.page.finale.secondary_cta',
+      labelFallback: 'Read Success Stories'
+    }
+  } as const;
 </script>
 
-<Hero variant="grid" title={heroTitle} subtitle={heroSubtitle}>
+<Hero variant="grid" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
   <svelte:fragment slot="description">
-    <p class="hero-description">{heroDescription}</p>
+    <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
     <div class="hero-actions">
-      {#each heroCtas as action}
-        <Button href={action.href} variant={action.variant} size="lg">{action.label}</Button>
+      {#each hero.actions as action (action.href)}
+        <Button href={action.href} variant={action.variant} size="lg">{t(action.labelKey, action.labelFallback)}</Button>
       {/each}
     </div>
   </svelte:fragment>
@@ -133,28 +251,31 @@
 <section class="services" aria-labelledby="service-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">Consulting & support</span>
-      <h2 id="service-heading">Strategy that keeps pace with your team</h2>
+      <span class="section-eyebrow">{t('services.page.consulting.eyebrow', 'Consulting & support')}</span>
+      <h2 id="service-heading">{t('services.page.consulting.title', 'Strategy that keeps pace with your team')}</h2>
       <p>
-        Every engagement starts with signage-inspired clarity and ends with teams who understand their tools. These services pair calm rituals with measurable outcomes.
+        {t(
+          'services.page.consulting.copy',
+          'Every engagement starts with signage-inspired clarity and ends with teams who understand their tools. These services pair calm rituals with measurable outcomes.'
+        )}
       </p>
     </header>
 
     <div class="cards" use:staggerReveal>
       {#each serviceCards as card (card.id)}
         <GlassCard class="service-card" padding="lg" halo id={card.id}>
-          {#if card.eyebrow}
-            <span class="service-eyebrow">{card.eyebrow}</span>
+          {#if card.eyebrowKey}
+            <span class="service-eyebrow">{t(card.eyebrowKey, card.eyebrowFallback ?? '')}</span>
           {/if}
-          <h3>{card.title}</h3>
-          <p>{card.summary}</p>
+          <h3>{t(card.titleKey, card.titleFallback)}</h3>
+          <p>{t(card.summaryKey, card.summaryFallback)}</p>
           <ul>
-            {#each card.bullets as bullet (bullet)}
-              <li>{bullet}</li>
+            {#each card.bullets as bullet (bullet.key)}
+              <li>{t(bullet.key, bullet.fallback)}</li>
             {/each}
           </ul>
           <div class="card-actions">
-            <Button href={card.primaryCta.href} variant="gradient" size="md">{card.primaryCta.label}</Button>
+            <Button href={card.primaryCta.href} variant="gradient" size="md">{t(card.primaryCta.labelKey, card.primaryCta.labelFallback)}</Button>
           </div>
         </GlassCard>
       {/each}
@@ -167,30 +288,33 @@
 <section class="services" aria-labelledby="platform-heading" id="platforms" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">Flagship platforms</span>
-      <h2 id="platform-heading">Products where logic dances with creativity</h2>
+      <span class="section-eyebrow">{t('services.page.platforms.eyebrow', 'Flagship platforms')}</span>
+      <h2 id="platform-heading">{t('services.page.platforms.title', 'Products where logic dances with creativity')}</h2>
       <p>
-        Our studio platforms are living proof of the methodologies we teach. They inherit the same frosted-glass calm, multilingual access, and rhythm you will feel in every engagement.
+        {t(
+          'services.page.platforms.copy',
+          'Our studio platforms are living proof of the methodologies we teach. They inherit the same frosted-glass calm, multilingual access, and rhythm you will feel in every engagement.'
+        )}
       </p>
     </header>
 
     <div class="cards" use:staggerReveal>
       {#each productEntries as product (product.id)}
         <GlassCard class="service-card" padding="lg" halo id={product.id}>
-          {#if product.eyebrow}
-            <span class="service-eyebrow">{product.eyebrow}</span>
+          {#if product.eyebrowKey}
+            <span class="service-eyebrow">{t(product.eyebrowKey, product.eyebrowFallback)}</span>
           {/if}
-          <h3>{product.title}</h3>
-          <p>{product.summary}</p>
+          <h3>{t(product.titleKey, product.titleFallback)}</h3>
+          <p>{t(product.summaryKey, product.summaryFallback)}</p>
           <ul>
-            {#each product.bullets as bullet (bullet)}
-              <li>{bullet}</li>
+            {#each product.bullets as bullet (bullet.key)}
+              <li>{t(bullet.key, bullet.fallback)}</li>
             {/each}
           </ul>
           <div class="card-actions">
-            <Button href={product.primaryCta.href} variant="gradient" size="md">{product.primaryCta.label}</Button>
+            <Button href={product.primaryCta.href} variant="gradient" size="md">{t(product.primaryCta.labelKey, product.primaryCta.labelFallback)}</Button>
             {#if product.secondaryCta}
-              <Button href={product.secondaryCta.href} variant="secondary" size="md">{product.secondaryCta.label}</Button>
+              <Button href={product.secondaryCta.href} variant="secondary" size="md">{t(product.secondaryCta.labelKey, product.secondaryCta.labelFallback)}</Button>
             {/if}
           </div>
         </GlassCard>
@@ -204,21 +328,21 @@
 <section class="services" aria-labelledby="education-heading" use:revealOnScroll>
   <div class="container">
     <GlassCard class="education-card" padding="lg" halo id={educationCard.id}>
-      <span class="service-eyebrow">{educationCard.eyebrow}</span>
+      <span class="service-eyebrow">{t(educationCard.eyebrowKey ?? '', educationCard.eyebrowFallback ?? '')}</span>
       <div class="education-grid">
         <div>
-          <h2 id="education-heading">{educationCard.title}</h2>
-          <p>{educationCard.summary}</p>
+          <h2 id="education-heading">{t(educationCard.titleKey, educationCard.titleFallback)}</h2>
+          <p>{t(educationCard.summaryKey, educationCard.summaryFallback)}</p>
         </div>
         <ul>
-          {#each educationCard.bullets as bullet (bullet)}
-            <li>{bullet}</li>
+          {#each educationCard.bullets as bullet (bullet.key)}
+            <li>{t(bullet.key, bullet.fallback)}</li>
           {/each}
         </ul>
         <div class="card-actions">
-          <Button href={educationCard.primaryCta.href} variant="gradient" size="md">{educationCard.primaryCta.label}</Button>
+          <Button href={educationCard.primaryCta.href} variant="gradient" size="md">{t(educationCard.primaryCta.labelKey, educationCard.primaryCta.labelFallback)}</Button>
           {#if educationCard.secondaryCta}
-            <Button href={educationCard.secondaryCta.href} variant="secondary" size="md">{educationCard.secondaryCta.label}</Button>
+            <Button href={educationCard.secondaryCta.href} variant="secondary" size="md">{t(educationCard.secondaryCta.labelKey, educationCard.secondaryCta.labelFallback)}</Button>
           {/if}
         </div>
       </div>
@@ -229,12 +353,12 @@
 <section class="services finale" use:revealOnScroll>
   <div class="container">
     <GlassCard class="finale-card" halo padding="lg">
-      <span class="service-eyebrow">Next step</span>
-      <h2>{finale.title}</h2>
-      <p>{finale.copy}</p>
+      <span class="service-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
+      <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
+      <p>{t(finale.copyKey, finale.copyFallback)}</p>
       <div class="card-actions">
-        <Button href={finale.primary.href} variant="gradient" size="lg">{finale.primary.label}</Button>
-        <Button href={finale.secondary.href} variant="secondary" size="lg">{finale.secondary.label}</Button>
+        <Button href={finale.primary.href} variant="gradient" size="lg">{t(finale.primary.labelKey, finale.primary.labelFallback)}</Button>
+        <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
       </div>
     </GlassCard>
   </div>

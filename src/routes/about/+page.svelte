@@ -5,102 +5,164 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { _ } from 'svelte-i18n';
+  import { translateOrFallback } from '$lib/utils/i18n';
+
+  const t = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
 
   const hero = {
-    eyebrow: 'Inside AlgoRhythmics',
-    title: 'Calm AI, crafted in Riga and Rotterdam',
-    subtitle:
+    eyebrowKey: 'about.page.hero.eyebrow',
+    eyebrowFallback: 'Inside AlgoRhythmics',
+    titleKey: 'about.page.hero.title',
+    titleFallback: 'Calm AI, crafted in Riga and Rotterdam',
+    subtitleKey: 'about.page.hero.subtitle',
+    subtitleFallback:
       'We are a Latvian-born studio where algorithms and artistry share the same rhythm. Our work blends signage precision, inclusive design, and playful experimentation.',
-    description:
+    descriptionKey: 'about.page.hero.description',
+    descriptionFallback:
       'Founded in 2025 by technologists and educators, AlgoRhythmics believes logic and creativity belong together. From AI platforms to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.',
-    primary: { label: 'Explore Our Services', href: '/services' },
-    secondary: { label: 'Meet the Team', href: '#team' }
-  };
+    primary: {
+      href: '/services',
+      labelKey: 'about.page.hero.primary_cta',
+      labelFallback: 'Explore Our Services'
+    },
+    secondary: {
+      href: '#team',
+      labelKey: 'about.page.hero.secondary_cta',
+      labelFallback: 'Meet the Team'
+    }
+  } as const;
 
   const values = [
     {
       icon: 'education',
-      title: 'Education first',
-      copy:
+      titleKey: 'about.page.values.education_first.title',
+      titleFallback: 'Education first',
+      copyKey: 'about.page.values.education_first.copy',
+      copyFallback:
         'We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner.'
     },
     {
       icon: 'target',
-      title: 'Empowerment through technology',
-      copy:
+      titleKey: 'about.page.values.empowerment.title',
+      titleFallback: 'Empowerment through technology',
+      copyKey: 'about.page.values.empowerment.copy',
+      copyFallback:
         'Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred.'
     },
     {
       icon: 'idea',
-      title: 'Innovation with integrity',
-      copy:
+      titleKey: 'about.page.values.integrity.title',
+      titleFallback: 'Innovation with integrity',
+      copyKey: 'about.page.values.integrity.copy',
+      copyFallback:
         'Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact.'
     },
     {
       icon: 'people',
-      title: 'Community & collaboration',
-      copy:
+      titleKey: 'about.page.values.community.title',
+      titleFallback: 'Community & collaboration',
+      copyKey: 'about.page.values.community.copy',
+      copyFallback:
         'Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.'
     }
-  ];
+  ] as const;
 
   const story = {
-    intro:
-      'What began as a small startup in Riga has grown into a bridge between education, culture, and industry. Early collaborations with Latvia\'s Investment and Development Agency (LIAA) helped us champion AI education nationwide.',
+    introKey: 'about.page.story.intro',
+    introFallback:
+      "What began as a small startup in Riga has grown into a bridge between education, culture, and industry. Early collaborations with Latvia's Investment and Development Agency (LIAA) helped us champion AI education nationwide.",
     milestones: [
-      'Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.',
-      'Tailored Ideonautix for startups after listening to founders who needed calm, creative productivity support.',
-      'Expanded partnerships with museums, libraries, and international conferences—proving that logic and art thrive together.'
+      {
+        key: 'about.page.story.milestones.0',
+        fallback:
+          'Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.'
+      },
+      {
+        key: 'about.page.story.milestones.1',
+        fallback:
+          'Tailored Ideonautix for startups after listening to founders who needed calm, creative productivity support.'
+      },
+      {
+        key: 'about.page.story.milestones.2',
+        fallback:
+          'Expanded partnerships with museums, libraries, and international conferences—proving that logic and art thrive together.'
+      }
     ],
-    culture:
+    cultureKey: 'about.page.story.culture',
+    cultureFallback:
       'Inside the studio we host Logic/Dance sessions—one day a data science hackathon, the next an improv design workshop. This fusion of play and rigor shapes the experiences we ship.'
-  };
+  } as const;
 
   const team = [
     {
-      name: 'Nikita Jurtaevs',
-      role: 'Co-founder & CEO',
-      focus: 'Signage craft, storytelling, and partner delivery',
-      bio:
+      nameKey: 'about.page.team.members.nikita.name',
+      nameFallback: 'Nikita Jurtaevs',
+      roleKey: 'about.page.team.members.nikita.role',
+      roleFallback: 'Co-founder & CEO',
+      focusKey: 'about.page.team.members.nikita.focus',
+      focusFallback: 'Signage craft, storytelling, and partner delivery',
+      bioKey: 'about.page.team.members.nikita.bio',
+      bioFallback:
         'Nikita keeps product direction, accessibility, and partnerships aligned. He brings signage-floor realism to every interface and programme.',
       links: [
-        { label: 'Email', href: 'mailto:nikita@algorhythmics.ai' },
-        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nikitajurtaevs/' }
+        { labelKey: 'about.page.team.members.nikita.links.email', labelFallback: 'Email', href: 'mailto:nikita@algorhythmics.ai' },
+        {
+          labelKey: 'about.page.team.members.nikita.links.linkedin',
+          labelFallback: 'LinkedIn',
+          href: 'https://www.linkedin.com/in/nikitajurtaevs/'
+        }
       ]
     },
     {
-      name: 'Vjaceslavs "Slaff" Trosins',
-      role: 'Co-founder & CTO',
-      focus: 'Cloud architecture, explainable AI, and operations',
-      bio:
+      nameKey: 'about.page.team.members.slaff.name',
+      nameFallback: 'Vjaceslavs "Slaff" Trosins',
+      roleKey: 'about.page.team.members.slaff.role',
+      roleFallback: 'Co-founder & CTO',
+      focusKey: 'about.page.team.members.slaff.focus',
+      focusFallback: 'Cloud architecture, explainable AI, and operations',
+      bioKey: 'about.page.team.members.slaff.bio',
+      bioFallback:
         'Slaff orchestrates engineering, data flows, and AI integrations. He connects hardware-grade discipline with transparent software experiences.',
       links: [
-        { label: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
-        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
+        { labelKey: 'about.page.team.members.slaff.links.email', labelFallback: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
+        { labelKey: 'about.page.team.members.slaff.links.linkedin', labelFallback: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
       ]
     }
-  ];
+  ] as const;
 
   const finale = {
-    title: 'Join the rhythm',
-    copy:
+    eyebrowKey: 'about.page.finale.eyebrow',
+    eyebrowFallback: 'Join us',
+    titleKey: 'about.page.finale.title',
+    titleFallback: 'Join the rhythm',
+    copyKey: 'about.page.finale.copy',
+    copyFallback:
       'We welcome collaborators who care about accessible technology, joyful learning, and responsible automation. Whether you are exploring careers, partnerships, or sponsorships, let’s build together.',
-    primary: { label: 'Connect with AlgoRhythmics', href: '/contact' },
-    secondary: { label: 'Subscribe to Updates', href: '/resources#newsletter' }
-  };
+    primary: {
+      href: '/contact',
+      labelKey: 'about.page.finale.primary_cta',
+      labelFallback: 'Connect with AlgoRhythmics'
+    },
+    secondary: {
+      href: '/resources#newsletter',
+      labelKey: 'about.page.finale.secondary_cta',
+      labelFallback: 'Subscribe to Updates'
+    }
+  } as const;
 </script>
 
-<Hero variant="grid" title={hero.title} subtitle={hero.subtitle}>
+<Hero variant="grid" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
   <svelte:fragment slot="status">
-    <span class="hero-kicker surface-pill" data-tone="accent">{hero.eyebrow}</span>
+    <span class="hero-kicker surface-pill" data-tone="accent">{t(hero.eyebrowKey, hero.eyebrowFallback)}</span>
   </svelte:fragment>
   <svelte:fragment slot="description">
-    <p class="hero-description">{hero.description}</p>
+    <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
     <div class="hero-actions">
-      <Button variant="gradient" size="lg" href={hero.primary.href}>{hero.primary.label}</Button>
-      <Button variant="secondary" size="lg" href={hero.secondary.href}>{hero.secondary.label}</Button>
+      <Button variant="gradient" size="lg" href={hero.primary.href}>{t(hero.primary.labelKey, hero.primary.labelFallback)}</Button>
+      <Button variant="secondary" size="lg" href={hero.secondary.href}>{t(hero.secondary.labelKey, hero.secondary.labelFallback)}</Button>
     </div>
   </svelte:fragment>
 </Hero>
@@ -108,21 +170,21 @@
 <section class="who-we-are" use:revealOnScroll>
   <div class="container who-we-are__grid">
     <GlassCard class="about-card" padding="lg">
-      <h2>Who we are</h2>
-      <p>{story.intro}</p>
+      <h2>{t('about.page.story.heading', 'Who we are')}</h2>
+      <p>{t(story.introKey, story.introFallback)}</p>
       <p>
-        {story.culture}
+        {t(story.cultureKey, story.cultureFallback)}
       </p>
     </GlassCard>
     <GlassCard class="about-card" padding="lg" halo>
-      <h2>Our story</h2>
+      <h2>{t('about.page.story.milestones_heading', 'Our story')}</h2>
       <ul>
-        {#each story.milestones as milestone (milestone)}
-          <li>{milestone}</li>
+        {#each story.milestones as milestone (milestone.key)}
+          <li>{t(milestone.key, milestone.fallback)}</li>
         {/each}
       </ul>
       <div class="card-actions">
-        <Button href="/resources#case-studies" variant="secondary" size="md">Read success stories</Button>
+        <Button href="/resources#case-studies" variant="secondary" size="md">{t('about.page.story.cta', 'Read success stories')}</Button>
       </div>
     </GlassCard>
   </div>
@@ -133,21 +195,24 @@
 <section class="values" aria-labelledby="values-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">Mission & values</span>
-      <h2 id="values-heading">Where logic dances with creativity</h2>
+      <span class="section-eyebrow">{t('about.page.values.eyebrow', 'Mission & values')}</span>
+      <h2 id="values-heading">{t('about.page.values.title', 'Where logic dances with creativity')}</h2>
       <p>
-        Our mission is simple: make advanced AI accessible, enjoyable, and trustworthy. We pursue this mission through values that keep people at the centre.
+        {t(
+          'about.page.values.copy',
+          'Our mission is simple: make advanced AI accessible, enjoyable, and trustworthy. We pursue this mission through values that keep people at the centre.'
+        )}
       </p>
     </header>
 
     <div class="values__grid" use:staggerReveal>
-      {#each values as value (value.title)}
+      {#each values as value (value.titleKey)}
         <GlassCard class="value-card" padding="lg">
           <div class="value-icon">
             <Icon name={value.icon} size={26} />
           </div>
-          <h3>{value.title}</h3>
-          <p>{value.copy}</p>
+          <h3>{t(value.titleKey, value.titleFallback)}</h3>
+          <p>{t(value.copyKey, value.copyFallback)}</p>
         </GlassCard>
       {/each}
     </div>
@@ -159,23 +224,28 @@
 <section class="team" id="team" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">Founders & stewards</span>
-      <h2>The people behind the rhythm</h2>
+      <span class="section-eyebrow">{t('about.page.team.eyebrow', 'Founders & stewards')}</span>
+      <h2>{t('about.page.team.title', 'The people behind the rhythm')}</h2>
       <p>
-        Our team spans AI researchers, designers, educators, and community builders. Meet the founders who set the tone for collaboration and craft.
+        {t(
+          'about.page.team.copy',
+          'Our team spans AI researchers, designers, educators, and community builders. Meet the founders who set the tone for collaboration and craft.'
+        )}
       </p>
     </header>
 
     <div class="team__grid" use:staggerReveal>
-      {#each team as member (member.name)}
+      {#each team as member (member.nameKey)}
         <GlassCard class="team-card" padding="lg" halo>
-          <h3>{member.name}</h3>
-          <span class="team-role">{member.role}</span>
-          <p class="team-focus">Focus: {member.focus}</p>
-          <p>{member.bio}</p>
+          <h3>{t(member.nameKey, member.nameFallback)}</h3>
+          <span class="team-role">{t(member.roleKey, member.roleFallback)}</span>
+          <p class="team-focus">
+            {t('about.page.team.focus_label', 'Focus: {focus}').replace('{focus}', t(member.focusKey, member.focusFallback))}
+          </p>
+          <p>{t(member.bioKey, member.bioFallback)}</p>
           <div class="team-links">
             {#each member.links as link (link.href)}
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href}>{t(link.labelKey, link.labelFallback)}</a>
             {/each}
           </div>
         </GlassCard>
@@ -187,12 +257,12 @@
 <section class="finale" use:revealOnScroll>
   <div class="container">
     <GlassCard class="finale-card" halo padding="lg">
-      <span class="section-eyebrow">Join us</span>
-      <h2>{finale.title}</h2>
-      <p>{finale.copy}</p>
+      <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
+      <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
+      <p>{t(finale.copyKey, finale.copyFallback)}</p>
       <div class="card-actions">
-        <Button href={finale.primary.href} variant="gradient" size="lg">{finale.primary.label}</Button>
-        <Button href={finale.secondary.href} variant="secondary" size="lg">{finale.secondary.label}</Button>
+        <Button href={finale.primary.href} variant="gradient" size="lg">{t(finale.primary.labelKey, finale.primary.labelFallback)}</Button>
+        <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
       </div>
     </GlassCard>
   </div>
