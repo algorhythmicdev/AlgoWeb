@@ -1,601 +1,384 @@
-Upgrade Guide for AlgoRhythmics.dev (2026 Design System Alignment)
+AlgoRhythmics 2026 Website Redesign Plan
+Design System (2026 Refresh)
 
-This guide provides a detailed audit of the current site and a roadmap for upgrading components, code, and themes to fully realize the 2026 design vision. All recommendations emphasize AAA accessibility compliance, the new frosted-glass + grain aesthetic, and the OS-like interface patterns outlined in the strategy document.
+A Unified, Accessible Aesthetic: The 2026 redesign introduces a cohesive design system across AlgoRhythmics and its platforms, emphasizing clarity, playfulness, and WCAG AAA accessibility. The visual style is dynamic minimalism with restrained use of frosted glass effects, subtle grain textures, and gentle motion that supports content without distracting. All interactive elements meet or exceed strict contrast standards (AAA for text, ≥3:1 for non-text UI) to ensure the site is usable by all audiences.
 
-1. UI/UX Component Audit & Critique
-Navigation Bar (Header)
+Color Themes & Identity
 
-Current: The header already implements a sticky, translucent “glass” nav-shell with blur and dynamic behavior. It condenses on scroll (becoming more opaque for readability) and hides on scroll-down to maximize content space
-GitHub
-. The nav includes a language switcher (“EN”) and theme toggles (“Keep it light / Go dark / High contrast”), plus a prominent “Talk with us” button. It uses proper semantic elements (<nav> with ARIA labels) and includes a skip-link for keyboard users (ensuring direct content access). The hover and focus states on menu links are styled with a soft lift and frosted chip background
-GitHub
-, which is good for feedback.
+Shared Brand Color: Aurora Purple (#6A38FF) is the unifying thread across the company’s web presence. This vibrant purple appears in logos, highlights, and call-to-action elements, creating a consistent brand feel.
 
-Issues & Gaps: These elements largely align with the 2026 vision of “restrained glass” and clear focus indicators. To refine further:
+AlgoRhythmics (Corporate Site): The corporate palette centers on Aurora Purple, complemented by Signal Yellow (#FFD339) for attention-grabbing accents (e.g. notifications, small highlights). Neutral colors (“Ink” #0A0D14 for text, “Cloud” #F5F7FB for backgrounds) provide high legibility. This yields an approachable yet professional look, with purple as the primary brand color (superseding the old blue).
 
-✅ OS-like Styling: Introduce subtle “window” affordances to reinforce the desktop-OS metaphor. For example, a slight draggable cursor hint or minimalist window controls (• ● ■) on very large screens can suggest the nav is a fixed OS top bar (optional).
+NodeVoyage (Travel OS): NodeVoyage’s theme is adventurous and fun, featuring Voyage Blue (#1351FF) as its primary hue alongside the common Aurora Purple. Signal Yellow remains an accent for interactive hints or badges. This blue-purple-yellow combination evokes travel vibes (sky and sunshine) while maintaining accessibility (e.g. using red “Cherry Pop” #E0322C only for warnings, and ensuring sufficient contrast).
 
-✅ Focus Visibility: The header’s focus ring uses a blended color that meets the 3:1 contrast rule
-GitHub
-. Ensure this is highly visible on all backgrounds (e.g. white focus outline on dark mode nav) and consider an animated focus outline (slight glow or pulse) to improve visibility for low-vision users. This aligns with the guideline that focus indicators must be prominent and not color-alone. Currently, the nav trigger (hamburger) adds a visible outline on focus
-GitHub
-, which is good. We can further emphasize focus on the language and theme toggles (e.g. add a focus style since they are plain text).
+Ideonautix (Startup OS): Ideonautix adopts a sleeker, “futuristic” scheme with Aurora Purple plus a deep slate gray tone (#1B2230) for UI backgrounds/titles, and a bold Cherry Red (#E0322C) for emphatic highlights or errors. This gives a decisive, analytical feel in line with a productivity tool. The palette is restrained and modular, reinforcing a tech-savvy atmosphere while still using the shared tokens for consistency.
 
-✅ Theme Toggle Clarity: The theme switches are text-based. To avoid relying on color or text alone, add an icon or indicator for the current theme. For example, a sun 🌞 icon for light, moon 🌙 for dark, and a contrast icon (high-contrast symbol) for the HC mode can accompany or replace the text labels. This ensures the active theme is recognizable at a glance (and not just by the absence of a link) – fulfilling the “state is never conveyed by color alone” rule. Each toggle should have aria-pressed or similar to denote which theme is active to assistive tech.
+Theming & Modes: Each color scheme is implemented in Light, Dark, and High-Contrast modes via CSS custom properties and the global theme stylesheet. Semantic CSS variables (e.g. --color-bg, --color-card, --color-text, --color-border, --color-accent) define colors for backgrounds, cards/surfaces, text, borders, and overlay states. The theme is toggled based on user preference or OS setting (with a user override toggle), using the file src/lib/styles/theme.css to apply [data-theme="light"], [data-theme="dark"], or high-contrast styles. In light mode, for example, body text is nearly black on a cloud-white background (meeting AAA contrast), whereas dark mode inverts to off-white text on night-sky neutrals. High-contrast mode further boosts the difference between foreground and background and simplifies decorative colors. All modes preserve the brand’s core colors while ensuring text is always crystal-clear.
 
-High Contrast Mode: The nav already adapts in High Contrast mode by removing background transparency and using a 2px solid border (currentColor) for a clear divider
-GitHub
-. This is excellent for AAA compliance. Just double-check that the menu icon and text have sufficient contrast in HC (most likely black on white, which is fine).
+Typography & Icons
 
-Code Suggestions (Navbar): Below is a snippet illustrating some enhancements:
+Font Choices: Montserrat is used for headlines and titles (for a clean, prominent look), and Inter for body text and UI labels (for readability in paragraphs and across languages). This combination appears welcoming and modern. Font sizes and weights are managed with responsive type ramps (scaled via CSS clamp or Tailwind responsive utilities) to maintain optimal readability on all devices. Generous line-heights and spacing are applied for comfortable reading, even for longer educational content.
 
-<!-- Example: Wrap theme toggles in a button group for clearer structure -->
-<div class="theme-toggle-group" role="radiogroup" aria-label="Choose a theme">
-  <button class="theme-btn light" aria-pressed="true">
-    🌞 <span>Light</span>
-  </button>
-  <button class="theme-btn dark" aria-pressed="false">
-    🌜 <span>Dark</span>
-  </button>
-  <button class="theme-btn hc" aria-pressed="false">
-    ◼️ <span>High Contrast</span>
-  </button>
-</div>
+Accessible Text: The design strictly enforces at least AA contrast for large text and AAA for normal body text wherever possible. For example, default body copy in light mode is nearly black on white (which is AAA), and in dark mode it’s near-white on very dark gray. The color tokens for text and surfaces are chosen to guarantee these contrast ratios. Additionally, content is fully internationalized: the site supports multiple languages (initially English and Latvian, expanding to Russian and more) with a language switcher in the header. All text is written in plain language suitable for a general audience – avoiding technical jargon so that students, educators, and non-technical visitors can easily understand.
 
-/* Example CSS: distinct focus style for theme buttons, and icons for context */
-.theme-btn:focus-visible {
-  outline: 2px solid var(--focus-ring-color); /* existing focus token */
-  outline-offset: 3px;
-  /* perhaps add a slight glow animation */
-}
-.theme-btn.light::before { content: "🌞"; margin-right: 0.25rem; }
-.theme-btn.dark::before { content: "🌜"; margin-right: 0.25rem; }
-.theme-btn.hc::before { content: "◻️"; margin-right: 0.25rem; }
+Icons & Imagery: Icons use simple, rounded shapes and consistent stroke widths (approx 2px) for clarity at small sizes. Icons and graphics never rely on color alone to convey meaning – they’re paired with labels or distinct shapes so that even in monochrome or high-contrast view, users can interpret them. Where applicable, imagery will adapt culturally (e.g. photos or illustrations in localized pages) to ensure relevance across audiences. All images include descriptive alt text for screen readers.
 
+Layout & Components
 
-These changes ensure the header fully embodies the 2026 aesthetic: a frosted top bar with OS cues, obvious focus states, and accessible toggles. The nav’s glass blur and gradient background can remain as in current code (mixing Aurora Purple/Voyage Blue into the backdrop)
-GitHub
-, which already matches the design language.
+Responsive Layouts: The site is built on a responsive grid using Tailwind CSS utility classes. Core layout primitives include a <Container> (max-width wrapper, e.g. max-w-7xl mx-auto px-4) and <Section> (block with consistent vertical padding, e.g. py-16 md:py-24) to establish a consistent vertical rhythm across pages. This ensures a smooth flow as users scroll, with ample whitespace (“calm whitespace”) so content isn’t overwhelming. A 4pt baseline grid is used for spacing and sizing tokens (most margins/paddings are multiples of 4px), resulting in a harmonious, balanced layout.
 
-Hero Section (Jumbotron)
+Navigation & Structure: A persistent top navigation bar provides access to all main sections (with clear distinctions between corporate and product areas, detailed in the Site Structure section below). The header and footer use high-contrast backgrounds (e.g. dark slate with light text in one mode, or vice versa) to frame the content. Focus outlines are clearly visible on navigation links and buttons (using browser default or custom outline styles that meet 3:1 contrast for the outline ring). The design remains fully usable via keyboard only, with logical tab order and :focus styles on all interactive elements.
 
-Current: The homepage hero features the tagline “Where logic dances with creativity.” and a brief description, with CTAs like “Explore Our Services”. The hero likely uses a gradient background with overlays for text legibility. (The design tokens define --gradient-hero and overlay variables, implying the hero has a colorful backdrop tempered by a neutral overlay for contrast
-GitHub
-GitHub
-.) The title “AlgoRhythmics” might be highlighted with a gradient text effect or a “halo” background – the codebase has a HaloFX and AnimatedBackground component, suggesting some dynamic visual in the hero. The hero text uses Montserrat for the branded line and is sizable for impact, with Inter for supporting text, aligning with the typography guidelines.
+Hero Section: Each page can start with a Hero component that features an engaging background and a bold message. The hero uses an animated background gradient or subtle video loop to add visual interest, overlaid by a translucent neutral layer for text legibility. For example, the home page hero might show an Aurora Purple to Voyage Blue gradient animation (slowly shifting or rotating) behind the tagline. The hero text is centered and uses Montserrat in a large size for the headline, with a supporting subheadline and a call-to-action button. (See code snippet below.) The animation is carefully tuned: it’s motion-safe (pauses if the user prefers reduced motion) and kept subtle (slow transitions, no flashing), ensuring it enhances rather than distracts.
 
-Issues & Gaps: Overall, the hero conveys the brand message well, but we can upgrade it to fully reflect dynamic minimalism and AAA contrast:
+Hero Component Example (Svelte + Tailwind):
 
-✅ Gradient + Overlay: Ensure the background gradient is paired with a semi-opaque neutral overlay behind text. According to the design vision, no body text should sit directly on a raw gradient. If not already done, apply a translucent white/black layer under the tagline and description. The current design tokens include --hero-overlay-opacity and similar
-GitHub
-, so use those in CSS: e.g. .hero-section { background: var(--gradient-hero), var(--neutral-overlay); }. This maintains the vibrant “Aurora Purple + Voyage Blue” hero look while keeping text easily readable (AAA contrast).
+<script lang="ts">
+  // No dynamic data needed for static hero; background animation via CSS
+</script>
 
-✅ Motion & Depth: Introduce subtle motion to draw interest without overwhelming. The hero can have scroll-linked or time-based animations that honor reduced-motion preferences. For example, a gentle floating grain or a slow pan of the background gradient can add depth. The site already has a useReveal function for scroll reveals
-GitHub
-GitHub
- – applying this to the hero text and CTAs would create a smooth fade-up entrance as the page loads (with prefers-reduced-motion automatically short-circuiting to no animation, as in current code
-GitHub
-).
+<section class="relative overflow-hidden py-24 text-center text-white">
+  <!-- Animated gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#6A38FF] to-[#1351FF] 
+              animate-[spin_30s_linear_infinite] motion-reduce:animate-none"></div>
+  <!-- Neutral overlay for contrast -->
+  <div class="absolute inset-0 bg-white/30 dark:bg-black/30 mix-blend-overlay"></div>
 
-✅ “Frosted Glass” Elements: Consider a frosted highlight panel behind the hero heading or as a “glass card” containing the key message. This could be a semi-transparent white panel with a slight blur (similar to the .surface-panel style) placed behind the text, giving a calm OS-dialog feel. It would reinforce the tactile feel and ensure contrast. For instance, a translucent card behind “AlgoRhythmics shapes calm AI workflows…” could use the .surface-panel class (which applies blur and a subtle border/shadow)
-GitHub
-. This echoes the design directive to introduce refined grain and restrained glass in hero/OS shell contexts.
-
-Visual Hierarchy: The hero already uses large, bold text for the main slogan and smaller text for the subtitle/tagline. We should maintain generous line-heights and whitespace around these as currently defined (the CSS uses clamp() to scale spacing, which is great). Verify the color of the hero text is either pure var(--text-primary) on a neutral overlay or uses the gradient text style for the brand name. If gradient text is used (as suggested by the .text-gradient utility
-GitHub
-), ensure in High Contrast mode it falls back to solid color
-GitHub
- – the code already ensures .text-gradient is disabled in HC
-GitHub
-, which is correct.
-
-Code Suggestions (Hero): To illustrate, here’s how the hero section might be structured and styled after upgrades:
-
-<section class="hero-section section">
-  <div class="container">
-    <h1>
-      <span class="hero-lead">Where logic dances with</span><br/>
-      <span class="hero-brand text-gradient">creativity.</span>
+  <!-- Hero content -->
+  <div class="relative z-10 max-w-3xl mx-auto px-4">
+    <h1 class="font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl mb-4">
+      Unlock Your Creative Potential
     </h1>
-    <p class="hero-tagline">AlgoRhythmics builds AI platforms... approachable for everyone.</p>
-    <div class="hero-ctas">
-      <a href="/services" class="btn primary">Explore Our Services</a>
-      <a href="/about" class="btn secondary">Learn About Our Mission</a>
-    </div>
+    <p class="font-inter text-lg md:text-2xl mb-8">
+      AI tools and consulting that blend <span class="font-semibold">logic</span> and 
+      <span class="font-semibold">imagination</span>, for solutions as 
+      <em>powerful</em> as they are <em>playful</em>.
+    </p>
+    <a href="/about" class="inline-block bg-[var(--color-brand)] text-white font-semibold 
+               px-6 py-3 rounded-lg shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 
+               focus:ring-[var(--color-brand)] focus:ring-opacity-50">
+      Learn More
+    </a>
   </div>
 </section>
 
-.hero-section {
-  /* Hero background: frosted Aurora/Voyage gradient with overlay */
-  background: linear-gradient(140deg, rgba(19,81,255,0.92), rgba(106,56,255,0.88) 48%, rgba(255,211,57,0.8) 100%), 
-              color-mix(in srgb, var(--bg-primary) 70%, transparent 30%); /* neutral overlay mix */
-  color: var(--text-primary);
-  position: relative;
-}
-.hero-section::before {
-  /* Add a fine grain texture over the hero for a tactile feel */
-  content: ""; 
-  position: absolute; inset: 0;
-  background-image: var(--grain-texture);
-  opacity: 0.03;             /* slightly higher grain in hero */
-  pointer-events: none;
-}
-.hero-brand {
-  /* If using gradient text for brand name */
-  display: inline-block;
-  background: var(--gradient-heading);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.hero-ctas a.btn {
-  /* ensure CTA buttons meet AA contrast on color */
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-}
 
+In this hero snippet: The background is a CSS gradient from Aurora Purple to Voyage Blue, set to slowly spin (using a custom Tailwind animation) – this creates a subtle shifting aurora effect behind the content. A semi-transparent overlay (bg-white/30 with mix-blend) lies on top to ensure the white headline text stays high-contrast and readable. The motion-reduce:animate-none utility ensures that if a user has prefers-reduced-motion set, the background will remain static. The call-to-action button uses the --color-brand variable (Aurora Purple in this context) for its background, ensuring brand consistency. Focus states (on hover/focus of the button) use a visible ring that meets contrast guidelines.
 
-In this snippet, the hero background uses the defined gradient with an overlay (mixing in --bg-primary which is a neutral) to satisfy the rule that text never sits directly on pure gradients. We’ve added a grain overlay (opacity:0.03) on the hero, slightly higher than the global 0.025, to emphasize texture at this large scale (per the vision of adding ultra-low contrast grain for tactile feel). The CTA buttons should use the Aurora Purple or Voyage Blue as appropriate but with font sizing/weight ensuring at least AA contrast for the text on the colored button (the current site’s Tailwind/Tokens already handle this by using white text on purple, and adjusting blue intensity if needed for smaller text).
+GlassCard Component: Content sections throughout the site use GlassCard components – panels with a frosted-glass aesthetic and soft drop shadows, perfect for highlighting key information or showcasing features. These GlassCards have a semi-transparent background (with backdrop blur) that lets the underlying background image or color slightly show through, creating a modern “frosted” effect. A very subtle noise/grain texture is layered on these cards to give a tactile feel without reducing readability. They come in variants (e.g. default, hoverable, dark) to suit different contexts. For instance, a GlassCard could be used behind a feature icon and description on the home page, or as a container for testimonial quotes.
 
-Key Highlights & Content Sections
+GlassCard Component Example (markup):
 
-Current: Below the hero, the site lists “Key highlights” – four pillars such as Innovative AI Solutions, Educational Impact, etc., each with a one-line description
-algorhythmics.dev
-algorhythmics.dev
-. Further down, under “What we offer”, the site outlines AI Consulting, Flagship Platforms, Educational Outreach with bullet points and CTA links
-algorhythmics.dev
-algorhythmics.dev
-algorhythmics.dev
-. These sections likely use a simple grid or flex layout to arrange content. From the code and design tokens, it appears these sections currently use a flat neutral background (white in light mode) with dark text – ensuring high contrast (e.g. Ink #0A0D14 on Cloud #F5F7FB yields ~12:1 contrast, AAA【25†】). This is in line with the guidance to use neutral cards for content surfaces to maintain AAA text contrast.
+<div class="relative rounded-xl px-6 py-8 bg-white/50 dark:bg-neutral-800/50 
+            backdrop-blur-md backdrop-saturate-150 border border-white/30 dark:border-neutral-800/30 
+            shadow-lg">
+  <!-- Grain texture overlay -->
+  <div class="absolute inset-0 bg-[url('/textures/grain.png')] bg-repeat opacity-5 pointer-events-none"></div>
 
-Issues & Gaps: To fully realize the OS-like “desktop workspace” feel, we should present these content blocks as windowed panels or cards rather than just text on a page:
-
-✅ Windowed Panels: Wrap each major content block (the highlight list, the offerings, etc.) in a <div class="surface-panel"> or equivalent GlassCard component. The .surface-panel class in the codebase already provides a frosted-glass panel styling: it sets a translucent background with backdrop-blur (20px) and a subtle border and shadow
-GitHub
-. Using this will give each section a subtle “raised window” appearance, as if these highlights are separate app windows on a desktop. For example, the three offering columns (Consulting, Platforms, Outreach) can each be inside a .surface-panel card with border-radius: var(--radius-xl) and some margin between them. This aligns with the strategy of desktop-OS feel with windowed workspaces and resizable panes for web platforms. It also introduces visual separation and depth without losing contrast (the panel uses a mostly neutral backdrop).
-
-✅ Layout & Grid: Use a responsive grid to mimic an “arranged windows” layout. Currently, the site likely stacks these sections vertically. We can improve the visual layout by, for instance, showing the four Key Highlights as cards in a 2x2 grid on desktop, or the three Offerings as side-by-side panels. Tailwind can be used here (e.g., grid grid-cols-1 md:grid-cols-2 gap-8 etc.) or custom CSS. Ensuring sufficient whitespace (the site uses clamp for section padding which is good) keeps the UI calm and content-focused.
-
-✅ Interactive Hover: While these highlight panels are mostly static text, we can add slight hover or focus effects to indicate interactivity or simply to add polish. For instance, on hover, a panel might lift by 2px or brighten slightly (transform: translateY(-2px) with a shadow) to create a sense of depth (the design vision mentions hover elevations and reveals to support wayfinding). If the highlight items are not links, the hover effect can be purely decorative. But if they link to sub-pages, ensure a visible focus style as well (maybe the entire card gets a focus outline similar to buttons).
-
-✅ Icons or Illustrations: To help young or non-expert users (kids, elders) quickly grok the content, consider adding simple icons next to section titles. The design system advises using rounded, simple icons for clarity at small sizes. For example, an icon of a lightbulb for “Innovative AI”, a graduation cap for “Educational Impact”, etc., can be placed before those headings. Use SVG icons with sufficient contrast (or our icon component). Keep them stylistically consistent (line icons with 2px stroke as noted in the guidelines). These visual cues will make the content more scannable and approachable without heavy reading, aiding users of all ages.
-
-Code Suggestions (Sections):
-
-<section class="section highlights">
-  <div class="container grid md:grid-cols-2 gap-8">
-    <div class="surface-panel">
-      <h3><svg><!-- icon --></svg> Innovative AI Solutions</h3>
-      <p>NodeVoyage and Ideonautix adapt to your journeys and workflows with playful precision.</p>
-    </div>
-    <!-- ...other 3 highlight panels ... -->
-  </div>
-</section>
-
-<section class="section offerings">
-  <div class="container grid md:grid-cols-3 gap-6">
-    <div class="surface-panel offering-card">
-      <h3>AI Consulting &amp; Integration</h3>
-      <ul class="bullets">
-        <li>Discovery workshops grounded in signage-inspired clarity</li>
-        <li>Pilot roadmaps with opt-out controls and transparent docs</li>
-        <li>Training and change support to keep teams confident</li>
-      </ul>
-      <a href="/contact" class="btn primary">Request a Consultation</a>
-    </div>
-    <!-- ...Platforms card... Outreach card... -->
-  </div>
-</section>
-
-.offering-card h3 {
-  margin-bottom: 0.5rem;
-  font: var(--font-display); /* Montserrat */
-}
-.offering-card .bullets li {
-  margin-left: 1rem;
-  list-style: inside disc;
-}
-.surface-panel:hover {
-  /* Hover elevation effect */
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-.surface-panel:focus-within {
-  outline: 2px solid var(--focus-ring-color);
-  outline-offset: 2px;
-}
-
-
-In this code, each content block is enclosed in a surface-panel which automatically applies the frosted glass styling (blur, semi-transparent background) from our design tokens
-GitHub
-. We leverage Tailwind’s grid classes for brevity (assuming Tailwind is configured; if not, the .grid styles can be in CSS). The focus-within style ensures keyboard users tabbing into links inside a panel still see a visible outline on the panel – this large outline helps those with limited vision know which panel they’re in, satisfying WCAG non-text contrast requirements.
-
-By structuring content as above, the site will start to feel like a desktop with multiple windows rather than a flat page, while still being responsive and accessible. This implements the OS-like design goal in a user-friendly way.
-
-Footer
-
-Current: The footer contains the AlgoRhythmics logo, tagline (“Calm AI tools grounded in signage craft.”), status (“Pre-company — Ideju Kauss October 2025”), location (Daugavpils, Latvia), and contact email
-algorhythmics.dev
-. It also has columns of links under headings “Company”, “Solutions & tools”, “Resources”, plus a Partners section highlighting a collaborator with a brief description and external link
-algorhythmics.dev
-algorhythmics.dev
-. Social media links are listed as text (“LinkedIn”, “Twitter”, etc.) at the bottom. Structurally, it uses appropriate elements: <nav> for link groups, <aside> for the partner info, and presumably <footer> wrapper. The background in light mode is a light neutral (var(--bg-elev-1) which is white
-GitHub
-) with a thin top border. Text is in a secondary color (gray)
-GitHub
-. This matches the design approach of keeping footers muted and neutral to let main content shine.
-
-Issues & Gaps: The footer is well-organized and mostly accessible, but a few enhancements can align it with the new aesthetic and AAA compliance:
-
-✅ Contrast in Dark Mode: Ensure the footer text meets AAA contrast on the dark theme background. Currently, the footer uses --text-secondary for most text
-GitHub
-. In dark mode, --text-secondary is a mid-gray (#8B9299)
-GitHub
- on a dark card background (#121722). This yields about a 5.7:1 contrast (short of AAA 7:1 for normal text). We should lighten the footer text in dark mode to at least meet 7:1. We can map footer text to --muted (which in dark theme is a lighter gray, #BBC5D6
-GitHub
-) or simply override footer { color: #BBC5D6; } when data-base-theme='dark'. This small change pushes contrast to AAA without overpowering the design.
-
-✅ Frosted Footer Bar: To continue the frosted glass theme all the way down, we can give the footer a slight frosted effect. One idea is to make the footer background translucent and blurred, like a “dock” or taskbar. For example, using backdrop-filter: blur(10px) on the footer with a semi-transparent background (background: color-mix(in srgb, var(--bg-elev-1) 85%, transparent)) would make it feel like a glass dock over whatever is beneath (in practice just the page background). This should be subtle, since footers typically should not distract. We’d also need to darken the text a bit more in light mode if the footer becomes translucent over a light page (or keep a mostly opaque footer). If a frosted footer is too visually busy, maintaining a solid neutral color is acceptable as it provides a visual “grounding” element at the bottom.
-
-Taskbar Concept: As an alternative to a traditional footer style, consider a fixed “taskbar” at the bottom of the screen on desktop view. This would truly mimic an OS. The taskbar could contain key links (or even the same content as the current footer but arranged horizontally with icons). For instance, a left side could have the logo and “© 2026” info, center could have minimal nav icons, right side could have social icons. This is an ambitious redesign, so it depends on the desired user experience. If implemented, ensure it’s responsive (perhaps collapsing to a normal footer on mobile) and keyboard-accessible (tab order through icons). The design strategy did mention dock/taskbar patterns for the web, so this could be a forward-looking enhancement. However, if time is short, a stylized footer with slight glass effect can suffice.
-
-Code Suggestions (Footer):
-
-To address contrast and aesthetic:
-
-footer.footer {
-  background-color: var(--bg-elev-1); /* default white */
-  color: var(--text-secondary);
-  border-top: 1px solid var(--border);
-  /* Add a subtle backdrop blur effect */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-html[data-base-theme="dark"] footer.footer {
-  color: #bbc5d6; /* lighter text for dark mode AAA */
-  background-color: rgba(18,23,34, 0.8); /* a translucent dark background */
-}
-html[data-theme="hc"] footer.footer {
-  background: #ffffff !important;
-  color: #000000 !important;
-  backdrop-filter: none !important;
-}
-
-
-If converting to a fixed taskbar:
-
-footer.footer {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  z-index: var(--z-sticky);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  backdrop-filter: blur(10px);
-  background: color-mix(in srgb, var(--bg-elev-1) 90%, transparent);
-}
-footer .social-links a::before {
-  /* Example: add icons for social links */
-  content: attr(aria-label);
-  /* In HC mode, these could just show text or high-contrast icons */
-}
-
-
-This CSS keeps the footer content but styles it like a translucent bar. We’ve added a dark-mode override to use an 80% opaque dark background so that white text in the footer still has a solid backdrop (ensuring contrast). In high contrast mode, we remove the transparency and blur for maximum clarity
-GitHub
-GitHub
-.
-
-By implementing these footer changes, we uphold AAA contrast (e.g. using #BBC5D6 on #121722 in dark, which is ~8:1 contrast) and propagate the frosted aesthetic to the page’s end. The footer will still serve its informational purpose while subtly echoing the OS shell feeling (especially if using the taskbar approach, per the design goal of merging OS-like affordances into the web experience).
-
-2. Code-Level Improvements & Snippets
-
-Building on the UI critique, below are specific code-level recommendations and examples (primarily in Svelte/Tailwind context) to fix bugs and improve structure:
-
-Centralize Design Tokens: The site already has a theme.css with custom properties for colors, spacing, etc. Ensure Tailwind config also knows these values for utility classes. For example, in tailwind.config.js map the design colors:
-
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        ink: '#0A0D14',         // dark text
-        cloud: '#F5F7FB',       // light bg
-        aurora: '#6A38FF',      // Aurora Purple
-        voyage: '#1351FF',      // Voyage Blue
-        signal: '#FFD339',      // Signal Yellow
-        cherry: '#E0322C',      // Cherry Pop
-        night: '#0B0E13',       // dark bg
-        graphite: '#1A1D23',    // dark surface
-        snow: '#F2F5F9'        // light text on dark
-      }
-    }
-  }
-}
-
-
-This allows using Tailwind classes like bg-aurora or text-cloud if needed in markup, which can simplify templates. It also makes it easy to adjust palette in one place. (Note: The site mostly uses CSS vars, so this is optional, but for consistency, connecting Tailwind to the token values can prevent mismatches.)
-
-Spacing and Sizing: The design uses a 4px baseline grid with responsive scaling. The code shows --space-sm, --space-md tokens etc. You can continue using these via utility classes or CSS. For example, apply p-[var(--space-md)] in Svelte (Tailwind might not parse CSS vars directly, so you might instead use classes like p-4 md:p-6 approximating the clamp). The snippet under highlights already uses gap-8 (Tailwind) which roughly corresponds to a medium space. Consistency is key: define section paddings once (the .section class in global.css already does with clamp()
-GitHub
-). Use those section classes in all pages for uniform vertical rhythm.
-
-Component Structure: Refactor repetitious structures into Svelte components where possible. For example, a Card component for repetitive panel layouts (like highlights or offerings) could be created. The codebase has a GlassCard.svelte; if it’s not already in use, repurpose it to encapsulate the frosted panel markup. That component can accept props like tone (accent tone) or slot content. This way, pages remain clean and the glass effect is consistently applied. E.g.:
-
-<!-- GlassCard.svelte (conceptual) -->
-<div class="surface-panel" data-tone={accentTone}>
-  <slot />
+  <h3 class="font-montserrat text-2xl font-semibold mb-2 text-neutral-900 dark:text-neutral-100">
+    Our Mission
+  </h3>
+  <p class="font-inter text-neutral-800 dark:text-neutral-200">
+    AlgoRhythmics exists to unlock the creative potential in every organization through 
+    AI tools and consulting that blend logic and imagination:contentReference[oaicite:28]{index=28}.
+  </p>
 </div>
 
 
-Then in pages:
+About this GlassCard: The container uses a semi-transparent white (50% opacity) in light mode and semi-transparent dark neutral in dark mode to create the frosted look. The backdrop-blur-md class applies a moderate Gaussian blur to whatever is behind the card, enhancing the glass effect. A low-opacity grain texture image is absolutely positioned on top to add warmth and visual interest. The text inside uses high-contrast colors (nearly black on light card, nearly white on dark card) for readability. This component can be re-used for feature highlights, info sections, or any content box that should stand out with a soft, floating appearance. Variants of GlassCard might adjust padding and shadow (e.g. a small variant with less padding, or a hover variant that raises the shadow on hover for interactivity).
 
-<GlassCard accentTone="accent">
-  <h3>Educational Outreach</h3>
-  <p>In partnership with LIAA... AI literacy to classrooms...</p>
-  <Button href="/outreach" ...>Join the Programme</Button>
-</GlassCard>
+Interactive States & Motion: All interactive components (buttons, links, cards) have clear hover and focus states. For example, buttons brighten or elevate slightly on hover, and show a focus ring when focused via keyboard. These states are designed with non-color cues as well: slight scaling, underline on links, icon changes, etc., so that even color-blind or high-contrast users can detect interaction (no state is conveyed by color alone). Motion is used sparingly and purposefully. We utilize scroll reveal animations for content sections (e.g. a GlassCard might fade-and-slide into view as it enters the viewport) using the Intersection Observer API in Svelte onMount – but these animations are subtle and disabled if prefers-reduced-motion is set. Transitions are kept calm in form fields and reading-heavy areas to avoid fatigue. Overall, the motion design philosophy is “futuristic yet calm”: it adds a sense of modern interactivity (like a desktop OS window behavior or a mobile OS swipe) while maintaining focus on the user’s task.
 
+Platform-Specific UI Cues: To differentiate NodeVoyage and Ideonautix sections from the main corporate site, we infuse subtle thematic cues:
 
-This uses the existing .surface-panel styles and ensures any future tweaks to panel styling are done in one place.
+NodeVoyage pages adopt an adventurous travel OS vibe: for example, the page might feature a “windowed” interface motif (imagine a map window and a planning sidebar in a desktop-like frame). We use a playful cursor highlight or a faux taskbar element to make it feel like an explorer’s workstation. Colors lean into Voyage Blue for buttons or highlights on NodeVoyage pages to immediately signal the travel theme.
 
-Visual Bug Fixes: If any visual bugs exist (like overflow issues with the frosted backdrop, or text overlapping on resize), address them with CSS containment or adjustments. For example, adding isolation: isolate; on .section (already present in global.css
-GitHub
-) is great to ensure each section’s pseudo-elements (like grain overlays) don’t bleed out. Continue to use modern CSS like color-mix() for blending colors – the code shows extensive use of color-mix for borders and backgrounds which is very future-friendly. Just verify browser support or provide fallbacks if needed (most modern browsers support it now).
+Ideonautix pages feel like a productivity dashboard: a more structured layout with cards and charts, using the slate gray and red accents for a serious, startup-like tone. For instance, an analytics dashboard screenshot might be shown within a laptop frame. The design system’s tokens are reused here, so accessibility is consistent, but the flavor comes from the specific color usage and iconography (e.g. rocket icons, graph motifs).
 
-State Management: The Svelte stores for navigation and theme are well-used (e.g., $navigation.isMenuOpen controlling the mobile menu). Make sure to reset states on route changes if needed (e.g., close the mobile menu when navigating). The current Navigation.svelte does call navigation.closeMenu() on link clicks
-GitHub
-GitHub
- which is good. Also ensure the LanguageSwitcher and ThemeToggle components properly use ARIA attributes (like aria-expanded on language menu, which likely they do). These aren’t visual per se, but code-level accessibility tweaks – which are crucial for AAA compliance.
+Despite these differences, both platforms still share base styles with AlgoRhythmics (fonts, base components, etc.), ensuring a coherent brand family. The OS-like interactions (draggable panels, etc.) remain intuitive and are implemented accessibly (e.g. keyboard-accessible controls and proper ARIA labels where needed).
 
-Focus Trapping & Modals: If introducing new modals or panels (say a “Preview NodeVoyage” modal window), leverage the existing focusTrap action in Navigation.svelte
-GitHub
- by generalizing it. The code already has a robust focus trap implementation for the nav menu; consider moving that to a utility and reusing for any popup windows. Additionally, ensure Escape key closes modals, and add aria-modal="true" and appropriate roles to modals. These code patterns follow the same logic seen in the nav (close on Escape is implemented at 
-GitHub
-).
+Site Structure & Content Outline
 
-✅ Performance & Cleanup: Remove any legacy code that doesn’t serve the new design. The animations.js has a normalization for old “glass-card” classes
-GitHub
- – if we unify on .os-window or .surface-panel, ensure all instances are updated and then drop legacy class usage. This keeps the codebase clean. Similarly, check for any unused Tailwind classes or stray utility first (maybe there’s an old .glass-card class definition that can be deleted if everything uses .surface-panel now).
+The new website structure reflects AlgoRhythmics’ current status as a pre-incorporated startup entering 2026, focusing on transparency, upcoming products, and services. All content is written in a friendly, clear tone suitable for all ages and non-technical readers. The deprecated Resources section from the old site has been removed entirely (outdated content will be replaced by a new educational blog later in 2026). The main navigation will include: Home, About, Solutions (Products & Services), and Contact. Below is an outline of each page/section with its content:
 
-In summary, these code-level changes focus on reusability (creating components for repeated patterns), consistency (centralized tokens and styles), and maintaining accessibility (through ARIA and focus handling). They set the foundation for an easier refactor: developers can start applying surface-panel and related classes to sections, confident that the core styles meet the new design standards for blur, grain, and contrast.
+Home Page (/)
 
-3. Updated Tailwind Design Tokens (2026 Aesthetic)
+Purpose: Provide a welcoming overview, introduce AlgoRhythmics’ mission and offerings at a glance, and guide visitors to learn more or get involved (e.g. join a pilot, contact for consulting).
 
-The new design language introduces a shared Aurora Purple theme with platform-specific accents, all while enforcing WCAG 2.2 AAA. Here are the key design tokens to update or verify in your Tailwind/CSS:
+Hero Banner: A full-screen hero section with the tagline and a visually engaging background. The headline conveys our mission in simple terms, e.g. “Unlock Your Creative Potential with AI”, with a subtext like “Intelligent solutions that are as playful as they are powerful” drawing directly from our mission statement. A prominent Call-To-Action button (“Learn More” or “Our Mission”) leads deeper into the site (perhaps to About or Solutions). (As shown in the hero snippet above.)
 
-Colors: Adopt the 2026 palettes as custom properties and Tailwind colors. The core brand palette for AlgoRhythmics is:
+Introduction Blurb: A brief paragraph underneath the hero, summarizing who we are. For example: “AlgoRhythmics is a new kind of creative technology studio. We blend logical algorithms with human imagination to help everyone – from students to businesses – explore AI with confidence and joy. Founded in 2025 in Latvia, we’re on a mission to make AI accessible, ethical, and fun for all.” This sets the stage in an all-ages-friendly tone (no heavy jargon).
 
-auroraPurple = #6A38FF – Aurora Purple (common primary across brand)
+Products & Services Highlights: An overview section featuring the two main products and the consulting service. This could be a three-column layout or a vertical stack of GlassCards:
 
-signalYellow = #FFD339 – Signal Yellow (accent for attention states)
+NodeVoyage – introduced with its logo or icon (e.g. a stylized palm tree 🌴 or compass) and tagline “Fun. Travel. Memories. Community.”. A short description follows: “An AI-powered travel planning platform that turns trips into adventures. Meet Nodi, your smart travel assistant for planning itineraries, translating on the go, and discovering eco-friendly missions worldwide..” A “Learn More” link directs to the NodeVoyage detail page.
 
-Neutral background and text: cloud = #F5F7FB (light bg) and ink = #0A0D14 (dark ink text) – these provide a clean high-contrast base (Ink on Cloud is AAA).
+Ideonautix – with a rocket 🚀 icon and tagline “Explore, Invent, Launch.”. Description: “A modular productivity OS for startups and dreamers. From an AI Pitch Assistant that crafts your next winning pitch deck, to a Pomodoro coach that keeps you on track, Ideonautix helps new ideas take off..” Include a link to its page, perhaps labeled “Join the Pilot” if we want to encourage early sign-ups (since Ideonautix will have a 2026 pilot program).
 
-For dark mode neutrals: night = #0B0E13 (deep dark bg) and snow = #F2F5F9 (light text) – Snow on Night is AAA. Use graphite = #1A1D23 for raised dark surfaces (cards), as it’s slightly lighter than Night for differentiation.
+AI Consulting Services – with a simple icon (🤖💼 perhaps) or the consulting practice logo, and tagline “Embed AI. Ignite Possibility.”. Description: “Tailored AI integration and workflow automation for your organization. We offer strategy sessions, hands-on development, and training programs to help you harness AI – no matter your size or industry..” A link “Consulting Services” or “Get in Touch” leads to the Contact page.
 
-Platform accents: If showcasing NodeVoyage or Ideonautix:
+Key Differentiators/Values: A section to build trust and show what makes AlgoRhythmics special. This might be presented as a set of iconified bullet points or small cards. It draws from our core values and competitive advantages:
 
-voyageBlue = #1351FF (a vivid blue for NodeVoyage), used in gradients and links.
+Accessibility First – “Built for everyone, with inclusive design and WCAG 2.2 AAA accessibility from day one.”
 
-slate = #1B2230 (a deep slate for Ideonautix UI elements).
+Educational Impact – “Strong ties with educators and initiatives to boost learning with technology” (highlighting our LIAA partnership ambitions and focus on students).
 
-cherryPop = #E0322C (vibrant red for warnings/errors) common to both.
+Ethical AI – “AI you can trust: transparent algorithms and privacy by design”.
 
-These are mostly in code already (as --voyage-blue, --slate-base, etc.). Ensure Tailwind knows them if needed (as shown in the config snippet above).
-All text color tokens should map to these neutrals and accents appropriately. For example, --text-primary on light = Ink, on dark = Snow; --link color on light = Voyage Blue (for clickable text) and on dark = a lavender (#A795FF as in code) which ensures link text is AAA on dark
-GitHub
-【53†】. Double-check those link colors against backgrounds; the current choice yields ~7.16:1 contrast on dark, which is good.
+Local Roots, Global Vision – “Starting in Latvia, expanding to the world – combining local insight with global best practices” (emphasizing we use Latvia as a testbed and plan EU expansion).
 
-Typography: Continue using Montserrat for headlines and Inter for body text. These are already likely included via @font-face or Google Fonts. In Tailwind, you could define fontFamily: { sans: ['Inter', ...fallbacks], display: ['Montserrat', ...] } for convenience. Key typographic tokens to maintain:
+These could each be a short phrase with an emoji or icon (e.g. ♿ for accessibility, 🎓 for education, 🛡️ for trust, 🌍 for global). The tone remains positive and understandable.
 
-Font sizes and line-heights (the site uses custom properties like --font-h1-size, --font-body-line etc. in typography.css). Keep the generous line-height (e.g. ~1.5 for body text
-GitHub
-) to aid readability for long content and multiple languages.
+Call to Action / Updates: Concluding the home page might be a call-to-action banner. For example: “2026 is just the beginning. We’re launching our first products and partnering with innovators. <u>Join our journey!</u>” followed by buttons: “Get Early Access” (for signing up to product pilots or newsletter) and “Contact Us”. Additionally, a small note like “🏆 Proud participant in LIAA’s Ideju Kauss 2025 startup competition” can be included to lend credibility and context about our origins.
 
-Scaling: Ensure that text is easily scalable (the user should be able to zoom 200% or increase OS font size and content remains accessible). Using rem units (as done) means it will scale automatically. For truly adaptive text for kids/elders, you might consider a toggle to increase base font-size or provide alternate styles with larger text. This isn’t explicitly in the 2026 design doc, but it’s a AAA consideration. For now, sticking to a base font ~16px and ensuring headings are distinctive (as they are with Montserrat and colored or gradient) should suffice.
+(All home page text is kept high-level and inspiring, avoiding technical details. Jargon from internal plans (e.g. “microservices” or specific technologies) is omitted on Home to keep it friendly for non-technical visitors.)
 
-Spacing & Layout: The design uses 4pt grid increments – in code, we see --space-sm: clamp(0.5rem, 1vw, 0.75rem) etc.
-GitHub
-. These map to roughly 8px, 12px, etc., scaled fluidly. In Tailwind, you might approximate these with spacing utilities (e.g., p-4 for 16px, p-6 for 24px). However, since the site already employs clamp() for responsiveness, continue using those CSS custom properties for margins/gaps (as done in .footer-grid and others). The goal is a consistent rhythm across pages – e.g., same padding around each section, uniform gap between grid items, etc., so the site feels “calm and breathable” as intended.
+About Us Page (/about)
 
-Radii and Shadows: The tokens indicate using moderately rounded corners: --radius: 16px (and larger radii for full pills)
-GitHub
-. Keep using those (Tailwind’s default rounded-lg is 0.5rem ~ 8px, so you might define a larger custom radius class or use the CSS var for exact 16px rounding on cards). The design calls for soft, non-intrusive shadows – e.g., --shadow-1: 0 10px 30px rgba(0,0,0,0.08)
-GitHub
-. These are used on panels and modals to create separation. Verify that the shadow intensity and spread are consistent with design (you may adjust the existing ones slightly to match examples given, like maybe a 24px blur for larger modals). For high contrast mode, remove decorative shadows entirely
-GitHub
- (the code already sets box-shadow: none for surface elements in HC
-GitHub
-).
+Purpose: Provide deeper insight into AlgoRhythmics’ mission, vision, values, team, and story. This page builds trust by being transparent about our purpose and background (important since we are pre-incorporation). It can also include a brief timeline of our journey and future roadmap highlights.
 
-Grain & Frosted Glass: Introduce or confirm tokens for the grain texture and glass blur:
+Mission & Vision: A section that clearly states our mission and vision statements. These can be presented as two blocks or a combined narrative:
 
-The code defines --grain-texture (an inline SVG noise pattern) and uses --grain-opacity at different values
-GitHub
-GitHub
-. Standardize grain usage: perhaps a base opacity of 0.025 globally, slightly higher (0.05) on elements that need more tactile feel (nav, hero), and 0 in high contrast (as done: --grain-opacity: 0 in HC
-GitHub
-). Tailwind doesn’t directly handle this, so just ensure the CSS custom props are applied where needed. For example, add background-image: var(--grain) in the .section::before (which we saw in global.css) to overlay grain on all sections
-GitHub
-.
+Mission: “AlgoRhythmics exists to unlock the creative potential in every organization through AI tools and consulting that blend logic and imagination.” – directly quoted from our internal overview. We follow it with a plain explanation, e.g.: “In other words, we believe technology should feel powerful but also playful, and that anyone – businesses, students, families – can solve problems in innovative ways if given the right tools.”
 
-For blur, use a consistent blur radius for glass panels – e.g., 20px as in .surface-panel
-GitHub
-, and slightly more for nav when scrolling (--surface-glass-blur: 26px in nav when not condensed
-GitHub
-). These choices seem to align with a smooth glass effect. The frosted glass tokens should include:
+Vision: “To be recognized globally as the most inviting gateway to AI, where business problems are solved with delight and algorithms pulse with human creativity.” We might simplify this for all ages: “We imagine a world where using AI is like an upbeat journey, not just a technical challenge. Our vision is to be a friendly guide to that world – making AI solutions that people find joyful, transparent, and empowering.”
 
---glass-blur: 18px (default)
-GitHub
- which is used in backdrop-filter.
+Core Values: A list of our six core values, likely presented as an attractive list with icons or emojis (carrying over the playful symbols from internal docs). For example:
 
---glass-bg and --glass-border default to subtle white transparencies
-GitHub
-; but nav and panels override them with color-mix including accent hues (giving that slight purple/blue tint). Continue to leverage color-mix with Aurora Purple and Voyage Blue in borders for brand feel – e.g., the nav border mixes blue and white
-GitHub
-, giving a cool tinted line. These nuanced tokens make the glass feel polished and are fine to keep as is.
+🧠 Curiosity & Continuous Learning – We embrace the unknown, always asking questions and learning new things.
 
-In summary, most tokens from the design system are already present in the code. The upgrade here is about verifying values against the design spec and tweaking where needed:
+🎨 Playful Innovation – We experiment boldly and find fun in creative problem-solving.
 
-Aurora Purple at the right hex (ensure no deviation like using #8A6BFF unless intentionally for dark mode – actually the code uses a slightly lighter purple in dark theme #8a6bff
-GitHub
- to account for contrast on dark, which is clever).
+🔍 Radical Transparency – We share our progress and setbacks openly. Honesty builds trust.
 
-Enforcing AAA contrast by adjusting text-secondary in dark, as noted.
+🛡️ Trust & Ethical Leadership – We do what’s right and protect privacy, championing responsible AI.
 
-Making sure Light, Dark, High Contrast themes each have complete token sets. The site’s theme.css defines all three modes with data attributes
-GitHub
-GitHub
-. Double-check those definitions against spec:
+👐 Welcoming Accessibility – We design for everyone, across abilities, backgrounds, and cultures.
 
-Light: Ink on Cloud (done)
-GitHub
-GitHub
-.
+🤝 Collaboration & Empathy – We listen first, support each other, and value every perspective.
 
-Dark: Snow on Night (done)
-GitHub
-GitHub
-.
+These values are written in simple terms so that even a younger student could grasp them. They underline our commitment to things like ethics and accessibility which set us apart.
 
-High Contrast: Black on White with minimal accents (done, they set primary #4400FF etc., but essentially everything is high contrast)
-GitHub
-GitHub
-. The design guideline explicitly says offer an HC toggle with AAA and pattern redundancy (no info conveyed by color only) – our high contrast mode does exactly that by removing grain, blur, and using currentColor outlines
-GitHub
-GitHub
-. So tokens here are fine – just ensure any new UI element you add also respects high contrast (e.g., if you add an icon, provide an outline alternative or label in HC mode).
+Founding Team: Introduce the co-founders with brief, humanizing bios:
 
-By updating and reaffirming these design tokens, the site’s Tailwind setup and CSS will fully embody the 2026 AAA-compliant frosted-glass aesthetic. It provides a single source of truth for colors and sizing, making it easier to maintain consistency as you refactor components.
+Vjaceslavs “Slaff” Trosins – CEO & Co-founder. A one-liner like: “Slaff leads AlgoRhythmics’ brand vision, business strategy, and educational outreach. He brings years of experience in visual communication (currently innovating in the signage industry) and infuses creativity into our strategy.”
 
-4. Light, Dark, and High Contrast Theme Definitions
+Nikita Jurtaevs – CTO & Co-founder. “Nikita drives our technical vision and AI product development. With a background in R&D for visual technologies, he is passionate about building platforms that blend human-centric design with cutting-edge AI.”
 
-To comply with WCAG AAA, each theme variant needs careful color choices and testing. Below is a breakdown of the expected Light, Dark, and High Contrast themes, using Aurora Purple as the common thread:
+We note that both founders are currently building AlgoRhythmics alongside day jobs (which shows dedication), perhaps phrased as: “Our founders combine their expertise in signage/visual communication with a passion for AI, and are now fully focused on bringing AlgoRhythmics to life.”
 
-🌞 Light Theme: The Light theme uses a very light background and dark text for maximum contrast. Primary surfaces are Cloud white (#F5F7FB) and cards are pure white (#FFF) for a clean look. Body text is Ink black (#0A0D14), yielding AAA contrast on Cloud. Aurora Purple (#6A38FF) is used for primary action elements (e.g. buttons, links) – on the light background, purple itself is quite vibrant, so ensure button text on purple is white and at least 14px bold (or use a slightly darker purple for small text). Voyage Blue (#1351FF) might accent some headings or links, but should be used sparingly to not reduce contrast (on white it’s ~4.5:1 against white for normal text, so mainly use it for larger or bold elements or alongside an outline). Signal Yellow (#FFD339) is only used alongside dark text or as an accent icon, never as a background for body text because yellow against white wouldn’t meet contrast. The Light theme should also incorporate neutral gray tones (e.g., --ash or the text-secondary) for secondary text, but as we noted, keep those above 7:1 (the current #25324B on white is ~12:1, which is good). Focus indicators in light mode often use a mix of Voyage Blue and white
-GitHub
- to be visible on light backgrounds (the code’s focus ring is a whitish-blue outline
-GitHub
-). Test all interactive elements in light theme with a contrast checker – they should meet at least AA, and ideally AAA. Since the palette was chosen for AAA, you should find body text and large icons are AAA, and things like button text at least AA (often AAA too, e.g., white on purple is ~7.9:1 which is AAA for large text and AA for normal).
+If possible, include small profile photos with alt text, to make the page more personal.
 
-🌚 Dark Theme: The Dark theme inverts neutrals: backgrounds are Night black (#0B0E13) and Graphite (#1A1D23) for cards. Text flips to Snow off-white (#F2F5F9) as the primary color. This yields AAA contrast (Snow on Graphite ~13:1). Aurora Purple remains in play as an accent, but on dark mode it may need to be lightened or saturated differently to stand out – the tokens show a slightly brighter purple (#8A6BFF) used in dark mode for primary, likely for this reason
-GitHub
-. So use the token rather than raw #6A38FF on dark surfaces to ensure it pops (the code’s --primary is adjusted in dark). Focus outlines in dark mode use a mix of Voyage Blue and a light tint (#dde7ff)
-GitHub
-, which creates a visible halo on dark backgrounds. Voyage Blue and Signal Yellow can be used for highlights in dark mode as well, but be mindful: pure #1351FF on near-black is extremely vivid – that’s fine for small accents (it meets contrast easily), but large swaths of bright blue can cause visual vibration. The design advice is to use strong focus rings and shadows to separate elements in dark mode, rather than bright neon blocks. So, for example, use Aurora Purple for icons or small highlights, and use shading (drop shadows, borders) to delineate components instead of large colored surfaces. Dark theme should be tested with common forms and cards under low-light conditions to ensure no element blends into the background (the slight Graphite vs Night difference helps here). Also verify that semi-transparency effects (glass panels) still provide enough backdrop in dark mode – e.g., the nav glass in dark uses a bit more opacity (70% card + 30% blur layer)
-GitHub
-, which seems to work. If any dark glass feels too transparent (text not as readable), bump up its --surface-glass-strong to include a bit more opaque base.
+Our Story / Timeline: Since we are pre-incorporation, this section builds credibility by sharing milestones and what’s ahead:
 
-⚫ High Contrast Theme: The High Contrast theme is a special mode aimed at users with low vision or specific contrast needs. In this mode, colors are reduced to essentially black, white, and a few high-contrast accents. The site’s HC tokens set background to pure white and text to pure black
-GitHub
-, which is ideal (contrast 21:1). All decorative gradients, shadows, and textures are turned off
-GitHub
-GitHub
- – as we saw, --grain-opacity is 0, --glass-blur is 0, and even the gradient variables are overridden so that any gradient becomes a solid currentColor fill
-GitHub
-. This ensures nothing compromises legibility. Aurora Purple is still the base “color” (#4400FF in HC mode as per code, which is a very saturated purple)
-GitHub
-, but it will only appear for things like links or icons, and even then, we maintain contrast. E.g., the HC palette in code uses a darker yellow (#b78300) for accent to have more contrast than bright yellow
-GitHub
-. In high contrast, borders and focus indicators are typically 2px solid black (or white when on a dark element) – the code sets currentColor for focus outlines
-GitHub
-, meaning it will use whatever the text color is (black or white) which is a clever way to ensure contrast. In practice, a focused link in HC mode might show a black outline on a white background – that’s 21:1 contrast, perfect. Check interactive components in HC: for example, a button normally purple would in HC be either black text on white or vice versa (depending on how you implement it; the code’s HC definitions make primary = #4400FF and treat it as an accent, but one could decide to force buttons to grayscale in HC for simplicity). The main point is HC mode should have no reliance on color to convey information – use underlines, shapes, labels. The design doc emphasizes redundancy in high contrast. E.g., if a form field is required and normally indicated by a colored outline, also add an asterisk or label so HC users know. If a link is usually just colored, in HC you might underline it. Our current implementation seems to cover this by using default browser focus and link styles in HC (which are often underlined). High contrast theme should be tested with a color blindness simulator or simply by viewing it in grayscale – things like icons should still be decipherable (the outline icons recommended help here).
+2025: Ideation and Inspiration. AlgoRhythmics was conceived in 2025. We submitted our NodeVoyage concept to the Ideju Kauss startup competition in October 2025, sparking the journey. By late 2025, we laid the groundwork (team formation and planning) and prepared to officially register the company.
 
-In code, these theme differences are activated via the data-base-theme and data-theme="hc" attributes on <html> or <body>. The site already toggles these when the user selects a theme. Just make sure any new CSS respects these conditions. For example, if you add a custom component with a colored background, add a rule under [data-theme='hc'] .your-component { background: transparent; border: 1px solid #000; } so that it transforms in HC mode. The base theme definitions we reviewed in theme.css should cover most elements globally.
+Early 2026: Formation and First Launches. We plan to formally incorporate in Latvia by Jan 2026 (our “Foundation” phase) and launch this website as our public presence. Q1 2026 also marks the start of our AI Consulting services and an Ideonautix pilot with select users (testing our startup productivity tools in real-world scenarios).
 
-5. Layout Redesign for an OS-like Desktop Feel
+Mid 2026: Product Releases. Ideonautix is slated for a wider release by February 2026, offering its core features (Pitch Assistant, Competitive Intelligence dashboard, Pomodoro Coach) to early adopters. NodeVoyage will follow with an alpha launch by Spring 2026 (around April) and a public beta by June 2026, just in time for the summer travel season. We’ll also be securing initial funding (through LIAA programs or angel investors) in this period to fuel growth.
 
-One of the ambitious goals for 2026 is to make the web experience mimic a desktop operating system where appropriate. Here are suggestions to nudge the layout in that direction, without harming usability:
+Late 2026 and Beyond: Growth and Expansion. By late 2026, our goal is to have ~10,000 active users across our platforms in Latvia. We aim to expand NodeVoyage and Ideonautix to neighboring European markets by 2027, and pursue a larger seed funding round (or Series A) as we demonstrate traction. Our long-term roadmap includes educational program rollouts (partnering with schools) and continuous platform improvements driven by user feedback.
 
-Multi-Window Layouts: As discussed for content sections, treat major parts of pages as draggable or at least visually separate “windows.” In a future iteration, you might make some panels draggable within the viewport (using a tiny script or Svelte action for drag). For now, even a static simulation (with panels offset or overlapping slightly) can convey the idea. For instance, on a wide screen, you could intentionally overlap the edge of the “NodeVoyage Preview” panel with the “Ideonautix Preview” panel by a few pixels, as if two app windows are open. Be cautious to not actually hide content behind another – this is more of a visual hint of overlap (maybe use margin-left: -20px on one). Use shadows to differentiate layers. This approach should be used sparingly on marketing pages, but could be powerful in a dashboard or demo page. It gives that sense of depth and multiple workspaces, aligning with the “windowed workspaces” concept.
+(The timeline is presented concisely, perhaps as an illustrated horizontal timeline or list of milestones. It gives visitors a sense of where we come from and where we’re going, without overwhelming with too many dates. Key data like the 10k users target and launch timings come from our internal plans, lending honesty to our story.)
 
-Dock/Taskbar Behavior: If implementing a fixed bottom bar (taskbar), consider also a “start menu” style overlay for navigation. For example, clicking an AlgoRhythmics logo button on the taskbar could pop up a menu (similar to a start menu) with links (Home, About, etc.). This would replace the need for a traditional nav menu at top on desktop. It’s an advanced design move and might be overkill now, but it’s something to keep in mind as you evolve the site. The key is to do it in a way that doesn’t confuse users – OS metaphors are cool for those who recognize them, but basic navigation must remain clear. Perhaps keep the regular nav for now and treat the “OS shell” elements as progressive enhancement (maybe an Easter egg mode or a toggle in a future “experience mode” setting).
+Technology & Approach: A brief mention (for those interested, like potential partners or tech-savvy readers) of how we build and operate:
 
-Resizable Panes in Content: For any pages that show a lot of data (maybe case studies or documentation pages), you could allow the user to toggle between a full-page view and a split view, as if they are arranging windows. For example, a documentation page could have a left pane (table of contents) and a right pane (content) that the user can drag to resize. Web APIs (CSS grid with draggable dividers) can achieve this. It aligns with giving users a sense of control like on a desktop. This is more applicable to web app interfaces (NodeVoyage app itself) than the marketing site, but implementing it in smaller ways on the site (like a before-and-after comparison window, etc.) can set the stage.
+“We build on a modern tech stack (SvelteKit frontend with a fast Node/TypeScript backend, and AI powered by Google Vertex AI and OpenAI models) – but what matters is the experience, not the tech buzzwords. We prioritize privacy (on-device processing where possible), internationalization (supporting 6 languages), and robust performance so that our tools work for everyone, everywhere.”
 
-Desktop Wallpaper Aesthetic: Consider the site background (outside the content container) to be like a desktop wallpaper – perhaps a subtle gradient or abstract image that ties into the brand (with very low opacity so as not to distract). The design doc mentions whitespace and calm backgrounds, so don’t go too far here. But a hint of a wallpaper (like a faint Aurora gradient in the corners) plus the grain texture can subconsciously evoke an OS desktop behind the floating windows of content.
+“Behind the scenes, we follow rigorous operational practices: we monitor our systems and user feedback continuously and improve in agile cycles. We also have contingency plans for everything from outages to data privacy to ensure reliability. (You can read more in our upcoming blog about how we run things!).”
 
-In implementing these, always maintain responsiveness. On mobile, the OS paradigm shifts to mobile OS (the doc suggests Flutter apps will feel like mobile OS) – for the web site on small screens, you’ll likely stick to a normal vertical scroll layout (windows will just stack full-width, taskbar might just become a regular footer). That’s fine; we can have these OS-like enhancements visible on larger screens where there’s room to play.
+This segment is kept short and optional – the main point is to reinforce trust (that we’re serious about security, privacy, and quality). It references our internal operations manual highlights (like contingency plans and continuous improvement) without going into detail that general audiences don’t need.
 
-Finally, any such layout changes should be accessible: if content is visually overlapping, it should still be logically ordered in HTML for screen readers. If draggable, ensure keyboard alternatives (maybe arrow keys to move a focus on a “window”). These are complex, but mention them as goals. For now, the actionable step is to style content in separate containers (already covered) and perhaps implement the fixed footer bar as the first step toward a dock.
+Solutions Page (/solutions or separate Product Pages)
 
-6. Accessibility, Focus & Motion Enhancements
+Purpose: Present more detailed information on our offerings: NodeVoyage, Ideonautix, and AI Consulting. We can implement this as either a single page with sections for each, or separate pages (e.g. /nodevoyage, /ideonautix, /consulting) linked from a main "Solutions" hub. Given the need for distinct visual identities, we will create dedicated pages for NodeVoyage and Ideonautix, allowing each to use its thematic styling, and a section or page for Consulting services.
 
-To reach WCAG 2.2 AAA, we must not only hit contrast ratios but also ensure keyboard accessibility, focus management, and reduced motion options are top-notch. Here are additional enhancements on that front:
+NodeVoyage Page (/nodevoyage)
 
-Dynamic Focus Indicators: The site has good focus outlines; make them even more pronounced and dynamic. For example, add a CSS animation on focus (a brief pulse or an expanding ring) to help cognitively reinforce focus movement. This can be done with @keyframes on a pseudo-element. However, be sure to disable such animation if prefers-reduced-motion is set (which you can detect in CSS). The design guidelines explicitly call for focus rings that meet non-text contrast 3:1 – our current outlines (light blue on dark, etc.) do this. We just ensure they’re present on all interactive elements: links, buttons, form fields, toggle switches, etc. Doing a tab-through test of the site is crucial: each tab stop should be visible. If any custom component (like a card link) is missing an outline, add one (e.g., via the :focus-visible utility we saw in global.css
-GitHub
- which covers most elements by default).
+This page carries the NodeVoyage branding (adventurous theme). Its design might use a slightly different background or frame (for example, a faint travel map or an “app window” mockup in the background, and more Voyage Blue in headings/buttons to distinguish from the corporate purple).
 
-Motion & Reduced Motion: The motion system should be “purposeful and subtle”, with respect for users who prefer reduced motion. Continue using the prefers-reduced-motion media query (we see it used for text gradient and in JS for reveals
-GitHub
-GitHub
-). Expand this to any new animations: for instance, if you add a hovering parallax effect in hero or a spinning icon, wrap it in a @media (prefers-reduced-motion: no-preference) query so it doesn’t run for those who opt out. Also avoid motion in places like forms or long-reading content to prevent distraction. Save the fancy animations for entry transitions, hero sections, or illustrations. We should also test keyboard-triggered animations: e.g., if a user tabs to a link that triggers a tooltip or submenu, ensure that doesn’t cause any jarring motion (maybe just a fade-in).
+Content to include:
 
-Semantic HTML Upgrades: Go through the HTML structure and verify semantics: use <main> for main content (wrap the primary sections on each page in <main role="main">), which helps screen reader users jump content. The skip-link already targets an element with id="content" presumably – ensure that id is on the main content container. Use <header> and <footer> tags for those regions (likely already done). Ensure every <section> has an appropriate heading (which it seems to: “Key highlights” has an h2, etc.). For form elements, use proper <label> for inputs and fieldset/legend for groups. The i18n keys for form helper text and error messages are there – make sure those are tied to inputs via aria-describedby. These semantic touches don’t change the visual design but are crucial for AAA (which includes assistive tech considerations).
+Overview: Hero section with NodeVoyage logo and tagline "Fun. Travel. Memories. Community." prominently. A short pitch: “NodeVoyage is an AI-powered travel planning platform that turns your trip ideas into reality. Plan collaboratively, get smart suggestions from Nodi (your AI travel buddy), and make every journey memorable.” The hero might feature an animated world map or a slideshow of travel photos behind a frosted glass overlay, to evoke wanderlust.
 
-Text for All Ages: “Better text layering for kids/elder users” likely means making content comprehensible and readable by varying abilities. Some strategies:
+Key Features: Use engaging visuals (icons or small screenshots) with brief explanations of core features:
 
-Use plain language in critical places (the site’s copy is somewhat marketing-flavored but still clear; just avoid unnecessary jargon in UI labels).
+Smart Trip Planner (Nodi): “Describe your dream trip in natural language, and Nodi will build an itinerary for you – complete with hidden gems and optimal routes.” (AI-generated itineraries, route optimization, etc.)
 
-Ensure text is layered on high-contrast backgrounds (we’ve done that with overlays).
+Collaborative Planning: “Plan with friends or family in real-time. Share trips, vote on options, and see who’s editing live.”
 
-Possibly provide an alternate text size toggle as mentioned. Not strictly required by WCAG, but it can be a nice feature. For now, ensure that if someone zooms in or uses browser reader mode, the site’s layout doesn’t break. The fluid spacing should accommodate that.
+AR Translation & Capture: “Use our mobile app to translate signs or menus on the fly and capture voice notes or photos. Augmented reality features help you leave ‘memory anchors’ at real locations to revisit later.”
 
-For older users, having visible cues is important: we’ve added icons, underlines for links, etc., to reinforce meaning beyond just text color. Continue this practice (e.g., an external link has an icon indicating it opens a new site, as done in the footer partner link with an SVG arrow
-GitHub
-).
+Eco & Community Missions: “Take on fun challenges like reducing your carbon footprint or completing local cultural missions during your travels. Earn points and share experiences on the community feed.”
 
-Testing: Once updates are in place, test the site with a variety of tools:
+Travel Journal & Reel: “Automatically get a beautiful story of your trip. NodeVoyage can compile your photos, notes, and even generate a travelogue or video reel for you after your trip.”
 
-Use a contrast checker for all text/background pairs – the design doc mandates AAA for body text, AA for any larger or incidental text if AAA can’t be met. Our aim is AAA across the board where humanly possible.
+(These feature descriptions are adapted from the feature matrix, but phrased in a user-friendly way. We avoid overly technical terms – e.g., we say “AI travel buddy” instead of “AI microservice” and “real-time editing” instead of mentioning WebSocket.)
 
-Test with screen reader (NVDA/VoiceOver) to ensure the flow of content is logical. E.g., does the nav menu announce submenus properly? The code’s ARIA labels (like aria-label={$_('nav.resources_panel_label')}) show they considered this
-GitHub
-GitHub
-. Keep that up.
+Status & Roadmap: Because NodeVoyage is in development, we inform visitors of its status and how they can engage:
 
-Test keyboard navigation thoroughly (we did focus on focus outlines; also ensure you can access all interactive elements by keyboard – e.g., is there any on-hover content that also needs a focus or click event to trigger for keyboard? Provide that).
+“Status: NodeVoyage is currently in development and coming in 2026. An early alpha is planned for April 2026, with a public launch expected by summer 2026. We are actively working with early supporters and gathering feedback to shape the platform.”
 
-Consider cognitive load: the calm design and familiar OS patterns should help users with cognitive disabilities by providing a consistent frame of reference. Don’t introduce patterns that are too unfamiliar without explanation (the OS paradigm is recognizable to most, but if you did something truly novel, you’d want a tooltip or guide).
+Call to Action: Encourage interested users to sign up for updates or beta access: e.g. a signup form for the “NodeVoyage Explorers Club” where they can leave an email to get an invite when ready.
 
-By implementing these accessibility and motion enhancements, you ensure the site is not only visually aligned with 2026 goals but also holistically accessible. The design system explicitly frames accessibility as a first-class citizen (multiple mentions of AAA, focus, opt-out controls, localization). Embracing that will improve UX for everyone.
+Perhaps include a note: “Our Ideju Kauss competition entry in 2025 was the NodeVoyage concept – now we’re making it real! 🏝️” to connect backstory.
 
-For example, the focus state pairing with shape changes guideline – we have done this by adding icons and outlines (shape change: e.g., the nav submenu opens not just by color but by an actual menu panel shape appearing, which is a non-color indication of state). Continue to look for such opportunities: if something toggles, does its label or shape change? If a section is active, is it only highlighted by color or also an icon? These subtle improvements make a big difference for users who might not distinguish color well or who are navigating by voice/screen reader.
+Differentiation: A short comparison or statement of how NodeVoyage differs from typical travel planners:
 
-7. WCAG 2.2 AAA Compliance Checklist
+Emphasize our AI-first approach and community focus: “Unlike standard travel sites, NodeVoyage isn’t just a booking tool – it’s a creative travel companion. It learns your preferences, avoids crowds, suggests local secrets, and even helps you be a more sustainable traveler. And it’s built to be inclusive (affordable plans and multi-language support from day one), so everyone can adventure.”
 
-To wrap up, here’s a checklist of AAA compliance as it pertains to our updates – ensure all are satisfied:
+Screenshots or Mockups: Show a sneak peek if available – e.g. a mock itinerary interface – inside a GlassCard or device frame. Use alt text to describe for accessibility.
 
-Contrast: All text is AAA (7:1) against its background (or 4.5:1 for large text, though we strive for 7:1 everywhere). We adjusted dark mode secondary text to hit this. Verify placeholder text in forms is at least 4.5:1 (often placeholders are lighter; our CSS sets them via color-mix to be 74% of text-secondary
-GitHub
- – that likely meets AA but maybe not AAA; consider making placeholders a bit darker or use <label> floating labels instead of relying on placeholders). Non-text elements (icons, borders, focus outlines) have at least 3:1 contrast against adjacent colors, which our focus ring color choices address.
+Link back: Provide navigation to the Ideonautix page or back to Solutions overview. Also a “Contact us about NodeVoyage” link for potential partners (like travel content providers or testers).
 
-Keyboard Accessibility: No keyboard trap, and the focus order is logical. The mobile nav focus trap implemented ensures users can escape menus
-GitHub
-GitHub
-. Continue using such patterns wherever modals or overlays exist.
+(Visual design notes: NodeVoyage page will use the OS-like layout cues – perhaps sections framed as “app windows.” Focus rings, etc., are tuned for its color scheme (blue focus highlights). But it still uses the same base components and is fully accessible.)
 
-Timing: No critical information disappears automatically. (Not much timed content on site, but if any auto-rotating banners or such are added, allow pause controls or obey reduced-motion.)
+Ideonautix Page (/ideonautix)
 
-Content on Hover/Focus: Ensure any content that appears on hover (tooltips, submenus) is also accessible via focus and stays visible long enough to be read. The nav submenu in code appears on hover and focus-within – that’s good. Just confirm it is mouse-leave/focus-out that hides it, which is standard.
+The Ideonautix page carries a more “startup toolkit” vibe. It might use geometric backgrounds or subtle grid patterns, with slate gray and red accents. The content focuses on how Ideonautix helps entrepreneurs and students turn ideas into action.
 
-Forms: Provide clear error messages and instructions. The i18n strings for form errors and helper text indicate the site plans for this
-GitHub
-GitHub
-. Implement those visibly (e.g., below each field) and ensure errors are described to screen readers (use aria-live="polite" on an error message container). Also, use asterisks or “(required)” labels for required fields as the text suggests (with a note that “All fields marked * are required.”
-GitHub
-). This is both an accessibility and UX improvement.
+Content:
 
-Language and Localization: The site is multilingual (we see EN, LV, RU, etc.). Make sure the lang attribute on HTML changes accordingly when switching language. This helps screen readers use correct pronunciation. Also verify that all strings (even alt text of images, ARIA labels, etc.) are localized via the i18n system. AAA accessibility includes catering to a broad audience, and supporting multiple languages is part of that (which the site is doing). Also check that the English copy is plain and clear, and that translations are accurate and easy to read in their language.
+Overview Hero: Ideonautix logo + tagline "Explore, Invent, Launch" on a hero banner. Subheading example: “All your startup tools in one modular AI-powered workspace. Ideonautix helps you brainstorm, plan, and execute your ideas – from first pitch to final product – with a little creative spark.” A background graphic could suggest a dashboard or a rocket launch (keeping it subtle). CTA button could be “Request Pilot Access” (since we plan a pilot).
 
-By following this guide, developers should be able to immediately start refactoring the AlgoRhythmics.dev site. The result will be a UI that feels modern and “futuristic yet calm”, with an OS-like interface metaphor that still works in a browser, and an experience that is welcoming to all users – fulfilling the vision of “innovation that feels welcoming”
-GitHub
- and accessible. Each recommendation above references either the design system mandates or current code behavior, so you can cross-check as you implement:
+Key Modules/Features: Highlight the core modules of Ideonautix:
 
-Use the design system quotes (cited) as a checklist for compliance (e.g., “neutral overlays so no body copy sits directly on blends” – did we do that? Yes, in hero overlay).
+Pitch Deck Assistant: “Answer a few questions, and our AI builds a draft pitch deck for you – complete with slides and speaker notes. Customize it, ask for tweaks, and wow your audience with a polished presentation.”
 
-Use the code references to locate where changes are needed (e.g., adjusting dark theme text-secondary – in theme.css under [data-base-theme="dark"] – and footer styles in Footer.svelte CSS).
+Competitive Dashboard: “Stay ahead by tracking competitors and market trends. Ideonautix aggregates news, analyses, and insights relevant to your project, all in one dashboard.”
 
-Once these upgrades are applied, the site will not only look aligned with AlgoRhythmics’ 2026 branding (frosted glass, grain textures, Aurora accents) but will also function like a robust, accessible application interface ready for the future. Calm, clear, collaborative – and now fully modernized. 🚀
+Pomodoro Coach: “Boost your productivity with an integrated Pomodoro timer and coach. It not only keeps time, but also gives smart break suggestions and focus tips to maximize your workflow.”
+
+Workflow Library: (if available) “Pick from templates and tools for common startup tasks – from OKR planning to user research. Mix and match modules as you need; Ideonautix is completely modular, so you can use just one tool or the whole suite.”
+
+Possibly mention AI Brainstorm: “Stuck on a problem? Ideonautix includes a creative brainstorming chat where you can bounce ideas off an AI (trained with entrepreneurial knowledge) to get past blockers.”
+
+Status & Invitation:
+
+“Status: Ideonautix is launching in pilot form in early 2026. We plan to onboard a small group of startups and students in Q1 2026 to refine the platform. A public beta with our first set of modules (Pitch, Pomodoro, etc.) will go live by Spring 2026.”
+
+Invite interested visitors: “Interested in being a pilot user? We’d love to collaborate! If you’re a founder, student, or team that wants to test Ideonautix, please contact us or join our waitlist form. Pilot users get early access and a say in shaping the product.”
+
+Use Cases: Give a couple of illustrative examples:
+
+“Meet Anna, a student entrepreneur: Using Ideonautix, she brainstormed a project idea, drafted a pitch for a university competition, and organized her team’s tasks – all in one place.”
+
+“Meet SafeRide Startup: A 3-person startup used Ideonautix’s competitive dashboard to identify a market gap and the pitch assistant to quickly create a deck for investors, saving them weeks.”
+
+(These short stories make it relatable to non-technical users how they might use it.)
+
+Why Ideonautix: A small section on how we blend creativity and logic here, echoing the brand mission. E.g., “Ideonautix is built on the idea that innovation should be fun and accessible. It’s like having a team of mentors and an AI co-founder by your side. We focus on explainable AI too – every suggestion or generated slide comes with an explanation so you trust the results.”
+
+Screens or Visuals: Show an example interface (maybe a generated slide preview, or the Pomodoro timer screen). Ensure any text in images is also provided in alt text or described.
+
+Navigation: link to NodeVoyage page or back to Solutions. Possibly also mention “Check out our consulting services if you need custom help with AI in your business” as a cross-link.
+
+(Design note: Ideonautix pages will use a more structured card layout (to reflect modular tools). We’ll reuse GlassCards for module descriptions, perhaps with slight variant styling to fit the slate/red theme. The page will still be under the main header/footer of AlgoRhythmics but might have an accent stripe or colored header section to differentiate.)
+
+AI Consulting Services Page (/consulting)
+
+If the content is brief, this could also be a section on a combined Solutions page. However, to give it due attention (and to allow sharing a link specifically for service clients), a dedicated page is useful.
+
+Content:
+
+Overview: Introduce our consulting in straightforward terms: “AlgoRhythmics AI Consulting helps organizations large and small integrate AI into their workflows. Whether you’re new to AI or looking to optimize what you have, we provide end-to-end support – from ideation to deployment – with a focus on ethics and accessibility.”
+
+Services Offered: List out our offerings in a friendly bullet format:
+
+Automation & Integration: We analyze your business processes and identify how AI can save you time – e.g. automating data entry, customer support, or creative tasks.
+
+Custom AI Solutions: Development of tailor-made AI tools (like custom chatbots, predictive models, or data dashboards) to solve your specific challenges.
+
+Training & Workshops: Hands-on training sessions for your team to learn how to leverage AI tools, and educational workshops for students or professionals (leveraging our educational focus).
+
+AI Strategy Consulting: High-level guidance on AI adoption, including data ethics, privacy compliance, and aligning AI with your business goals.
+
+Approach & Values: Emphasize what makes us different:
+
+“We don’t do one-size-fits-all. We start by understanding your needs. Our approach is collaborative and iterative – we prototype quickly, gather feedback, and ensure the solution truly fits.”
+
+“Responsible AI is non-negotiable for us. We implement transparent AI systems (you’ll know how it works), respect privacy (your data stays safe), and ensure accessibility (tools usable by anyone on your team).”
+
+“Affordable and inclusive: Because we believe in accessible technology, we offer special pricing for small businesses, schools, and nonprofits (and we always discuss budget openly to find a viable plan).”
+
+Examples/Case Studies: Since we are just starting, we might not have real case studies yet. Instead, we can describe hypothetical examples or areas of impact:
+
+“For example, we helped a local school automate student feedback using an AI tool, freeing teachers to focus more on teaching (while our system maintained GDPR-compliant data privacy).”
+
+“We advised a marketing agency on using AI to generate campaign ideas and A/B test them – boosting their creativity and cutting down ideation time.”
+
+These show the range (education, business, creative) and tie back to our mission of blending logic and imagination.
+
+Call to Action: Encourage contact: “Let’s Talk: If you have a project in mind or just want to explore possibilities, get in touch for a free initial consultation. We’re excited to brainstorm how AI can work for you.” Provide a contact form or at least an email link (e.g. consulting@algorhythmics.com or just hello@ for now).
+
+Trust Indicators: Mention any partnerships or recognitions relevant: e.g. “Supported by LIAA” or “Member of [some startup network]” if applicable. If we have mentors or advisors, list a couple to show credibility. (These details may evolve; we’ll update as our consulting arm gains clients.)
+
+(Design integration: Use a clean layout with perhaps illustrations instead of heavy text, if possible – e.g. small icons for each service type. Keep the page visually consistent with corporate style: purple/yellow accents. This page is more corporate in flavor since it targets business clients, but still approachable in language.)
+
+Contact Page (/contact)
+
+Purpose: Provide a clear way for visitors to reach out, whether they are potential clients, pilot participants, partners, or media. Also list support channels and possibly an FAQ link.
+
+Content:
+
+Contact Form: A simple, accessible form with fields like Name, Email, and Message. If possible, include a dropdown or checkboxes for “Reason for contacting” (e.g. Consulting Inquiry, Product Early Access, General Question, Feedback). This helps route the message appropriately. The form should be keyboard and screen-reader friendly, with clear labels and validation.
+
+Contact Information: List direct contact details:
+
+Email: For general inquiries and support: help@algorhythmics.com (as per operations manual, we have this address). Possibly also list the education@algorhythmics.com if we expect queries related to educational partnerships. These are mailto links for convenience.
+
+Social Media: Icons/links to any social profiles (Twitter, LinkedIn, etc.) if available, to let users follow updates.
+
+Newsletter Signup: A field to subscribe to our newsletter for updates on product launches and blog posts (if we plan to start one).
+
+Office Info: Since we are pre-incorporation and likely don’t have a physical office yet, we might state something like “Based in Latvia, operating globally (remote team)” as a placeholder for address. If we have a planned HQ, mention city, e.g. “Riga, Latvia (planned)”. Once incorporated, we will update with an address.
+
+Support Commitment: Include a short note on our support response times or philosophy, to set expectations and show we care:
+
+E.g. “We respond to most inquiries within 1 business day. For our users and partners, we’re committed to timely support – critical issues are addressed within 24 hours. We’re here to help!”
+
+This is derived from our support standards (critical issues 4 hours in business hours, etc., but we’ll simplify).
+
+FAQ/Help Center: If we have or plan a self-serve help center or community forum, mention it: “Looking for quick answers? Check out our Help Center (coming soon) or join our community forum to ask questions and share ideas.” (We can stand up a simple FAQ page later or use this as future placeholder.)
+
+Footer Reminder: The contact page content will also likely appear in the site footer (email address, etc.), which remains on all pages for easy access.
+
+(Design: The contact form should have large, easy-to-read fields and buttons. Use the design system form styles – high contrast text, clear focus ring on each input, and accessible error messages. We will ensure even the submit button has at least 3:1 contrast in all modes and a visible focus outline, per accessibility guidelines.)
+
+Accessibility & Compliance
+
+Throughout the site redesign, accessibility is paramount. All pages adhere to WCAG 2.2 guidelines at AA/AAA levels: text contrast, keyboard navigation, screen reader semantics, etc., as detailed in the design system. Key practices include:
+
+Sufficient color contrast for text and UI elements (checked via automated tests and manual review for each theme).
+
+Clear focus indicators on all interactive elements (e.g. using Tailwind’s focus:ring utilities with a 3:1 contrast ring).
+
+Using ARIA labels and roles where needed (for example, labeling the navigation menu, providing <nav> landmarks, alt text for images, etc.).
+
+Respect for user preferences: if prefers-reduced-motion is on, all animations (hero, scroll reveals, etc.) are disabled or minimized; if prefers-color-scheme is set, we default to their system dark/light mode.
+
+High-Contrast Mode: An optional toggle or automatic high-contrast mode ensures even users with severe visual impairments can switch to a mode with stripped-down visuals (minimal gradients/textures) and maximum contrast. In this mode, for instance, background images might be hidden in favor of plain backgrounds, and all text is rendered at highest contrast colors.
+
+Localization: We will gradually introduce translations for content into multiple languages. By the end of 2026, the goal is to fully support 6 languages (English, Latvian, Russian, Ukrainian, French, Spanish) across the site. This includes proper locale routing (or a language switcher), and ensuring text expansion in other languages doesn’t break layouts. We’ll also implement hreflang tags and other SEO best practices for multilingual content.
+
+Compliance with privacy laws is also addressed: the site will have a clear Privacy Policy and Terms of Service (linked in the footer). We use a GDPR-compliant cookie consent mechanism and minimal tracking. Any user data (like emails from the contact form or newsletter) will be handled according to our privacy principles (only used for the stated purpose, stored securely).
+
+2026 Rollout Plan (By Quarter)
+
+We have a phased plan to launch and enhance the website in sync with our product development and branding efforts throughout 2026. This ensures the site stays up-to-date with our progress and adheres to the evolving design strategy:
+
+Q1 2026 (Foundation & Launch): Finalize the core design system and launch the new site. In this quarter, we complete all token definitions (colors, spacing, typography) for the refreshed design and implement the new components (Hero, GlassCard, etc.) across the site. We validate that all pages meet AAA contrast in both light and dark themes (using grayscale and color-blind simulators to double-check). By January 2026, we release the fully redesigned corporate website with initial content in English (and Latvian) – marking our official web presence going into the new year. The Resources section is removed at launch, simplifying navigation. We also ensure basic internationalization framework is in place (so more languages can be added). This quarter, the design system is essentially “locked in” and proven on our site components.
+
+Q2 2026 (Product Integration & Audit): Enhance platform-specific sections and refine visuals. As NodeVoyage and Ideonautix move into pilot/launch phases, we update their pages with more details, screenshots, and possibly live demo elements. We implement the “desktop-OS” style layouts for the NodeVoyage and Ideonautix pages to give them that app-like feel. The hero sections site-wide are upgraded with the final gradient + overlay treatments (any placeholder images are replaced with real graphics or animations). We conduct an audit of all interactive elements (buttons, links, forms) for consistent focus states and contrast, making minor tweaks to CTAs, icons, or text sizes as needed to meet 3:1 non-text contrast across the board. By end of Q2, as our products publicly launch (Ideonautix around Q1/Q2, NodeVoyage in Q2), the site will have sections like “Try the Demo” or “Download App” appropriately linked or activated. We also expand content to the promised primary languages: by summer 2026, the site will be fully available in English, Latvian, and Russian (our key user groups) – aligning with our goal of multi-language support at launch in Latvia.
+
+Q3 2026 (Expansion of Content & Polishing): Grow the content offerings and marketing reach of the site. This quarter, we plan to introduce the “Education Hub” or blog section as a replacement for the old resources. Using the neutral card design and frosted glass aesthetic, we create a blog/news page to share updates, AI education content, and success stories. The focus will be on quality educational content (aligned with our content pillars like AI innovation, sustainable tech, and startup advice). Visually, we’ll refresh any marketing pages or demo content to incorporate the refined design elements: e.g., adding gentle grain textures to section backgrounds, using more GlassCards for testimonies or case studies, and ensuring a consistent “calm tech” vibe throughout. We will also do a mid-year performance and SEO optimization sweep: optimizing images (serving WebP/AVIF, adding lazy loading), refining meta tags and structured data for better search results. By end of Q3, the site should not only look polished but also load fast (meeting Core Web Vitals targets) and rank well for relevant keywords (e.g. “AI consulting Latvia”, “travel planning app”).
+
+Q4 2026 (Finalize Localization & Accessibility Audit): Fine-tune for global audience and future consistency. In the final quarter, we conduct a thorough cross-platform audit – testing the website across various devices, browsers, and assistive technologies. We’ll specifically do an accessibility review with external tools or consultants to ensure compliance (e.g., screen reader navigation is smooth, high-contrast mode is effective, forms have proper labels). We complete the addition of all six languages so the site is fully localized by year-end (English, Latvian, Russian, plus French, Spanish, and Ukrainian as planned). This involves not just translating text, but also adjusting design for longer text in some languages and ensuring culturally appropriate imagery where needed. After incorporating any feedback from our growing user base (we expect more feedback as our user community expands in late 2026), we lock in the design patterns and content structure so that heading into 2027, the brand and site have a stable, consistent foundation. Essentially, Q4 is about documentation and governance: writing a brief style guide for any future team members, documenting our components, and making sure the 2026 design system will carry forward. By this point, the site should exemplify a unified visual language that feels “futuristic yet calm” and is proven to be accessible and user-friendly across our diverse audience.
+
+Each quarter’s rollout steps ensure the website evolves in tandem with our startup’s growth, keeping content honest and up-to-date. By following this plan, AlgoRhythmics’ site will not only launch strong in early 2026, but also scale up its content and capabilities responsibly throughout the year – supporting our consulting launch, product pilots, and broader outreach in education and global markets.
+
+Conclusion
+
+This Markdown-based site plan provides the content and structural blueprint for AlgoRhythmics’ redesigned corporate website. It incorporates real data and statements from our internal documents to ensure authenticity (mission, product details, timelines), and it demonstrates how to implement our 2026 design system with Tailwind and Svelte (through example components and detailed guidelines). The final deliverable is a web experience that clearly distinguishes AlgoRhythmics as a brand (unified by Aurora Purple and our playful-professional tone), while giving NodeVoyage and Ideonautix their own unique but accessible identities.
+
+By adhering to this plan, the site will be welcoming to non-technical audiences (e.g. educators, students, families) and informative for professionals – all while meeting the highest standards of design, accessibility, and honesty. We aim for AlgoRhythmics.dev to not just be a corporate webpage, but a living demonstration of our values: curiosity, innovation, transparency, trust, accessibility, and collaboration – the very qualities that will carry us from a humble 2025 beginning to our ambitious future.
