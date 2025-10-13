@@ -167,14 +167,35 @@
 
 <style>
   .footer {
+    --footer-text: var(--text-secondary);
+    --footer-strong: var(--text-strong);
+    --footer-muted: var(--text-tertiary);
+    --footer-border: var(--border);
     margin-top: clamp(3rem, 8vw, 5rem);
     padding: clamp(3rem, 8vw, 4.5rem) 0 clamp(2rem, 6vw, 3rem);
-    background: var(--bg-elev-1);
-    color: var(--text-secondary);
-    border-top: 1px solid var(--border);
+    position: relative;
+    background: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--ink-rgb), 0.06) 8%);
+    color: var(--footer-text);
+    border-top: 1px solid var(--footer-border);
+    backdrop-filter: blur(8px) saturate(1.04);
+    -webkit-backdrop-filter: blur(8px) saturate(1.04);
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 320px 320px;
+    mix-blend-mode: soft-light;
+    opacity: 0.04;
   }
 
   .footer > .container {
+    position: relative;
+    z-index: 1;
     width: min(100%, var(--container-xl, 1200px));
     margin-inline: auto;
     padding-inline: clamp(1.5rem, 5vw, 3rem);
@@ -219,7 +240,7 @@
   .status,
   .contact-info,
   .contact-info a {
-    color: var(--text-secondary);
+    color: var(--footer-text);
     font-size: var(--text-small);
   }
 
@@ -246,7 +267,7 @@
   .footer-links-section h4 {
     margin: 0;
     font-size: var(--text-title);
-    color: var(--text-strong);
+    color: var(--footer-strong);
   }
 
   .footer-links-section ul {
@@ -263,18 +284,18 @@
     padding: clamp(1.25rem, 3vw, 1.75rem);
     border-radius: clamp(16px, 3vw, 24px);
     background: var(--bg-elev-2);
-    border: 1px solid var(--border);
+    border: 1px solid var(--footer-border);
   }
 
   .footer-partners h4 {
     margin: 0;
     font-size: var(--text-title);
-    color: var(--text-strong);
+    color: var(--footer-strong);
   }
 
   .footer-partners__summary {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--footer-text);
     font-size: var(--text-small);
     line-height: 1.6;
   }
@@ -291,13 +312,13 @@
     gap: 0.4rem;
     padding: 0.45rem 0.9rem;
     border-radius: var(--radius-full);
-    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
+    border: 1px solid color-mix(in srgb, var(--footer-border) 70%, transparent 30%);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--text-secondary);
+    color: var(--footer-text);
     transition: color var(--duration-ui, 240ms) var(--ease-out),
       border-color var(--duration-ui, 240ms) var(--ease-out);
   }
@@ -327,7 +348,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    color: var(--text-secondary);
+    color: var(--footer-text);
     text-decoration: none;
     transition: color var(--duration-ui, 240ms) var(--ease-out),
       transform var(--duration-ui, 240ms) var(--ease-out);
@@ -371,13 +392,13 @@
     justify-content: space-between;
     gap: clamp(1rem, 2.5vw, 1.5rem);
     padding-top: clamp(1.75rem, 4vw, 2.25rem);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--footer-border);
   }
 
   .copyright {
     margin: 0;
     font-size: var(--text-small);
-    color: var(--text-tertiary);
+    color: var(--footer-muted);
   }
 
   .social-links {
@@ -404,6 +425,8 @@
     background: var(--bg);
     color: var(--text);
     border-top: 2px solid currentColor;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global([data-theme='hc']) .footer-links-section a,
@@ -428,6 +451,22 @@
 
   :global([data-theme='hc']) .footer-bottom {
     border-top: 2px solid currentColor;
+  }
+
+  :global([data-base-theme='dark']) .footer {
+    --footer-text: #bbc5d6;
+    --footer-strong: #f2f5f9;
+    --footer-muted: color-mix(in srgb, #bbc5d6 70%, rgba(12, 16, 24, 0.56) 30%);
+    --footer-border: color-mix(in srgb, rgba(187, 197, 214, 0.55) 70%, transparent 30%);
+    background: rgba(18, 23, 34, 0.82);
+    border-top: 1px solid var(--footer-border);
+    box-shadow: 0 -12px 32px rgba(5, 8, 14, 0.32);
+    backdrop-filter: blur(10px) saturate(1.08);
+    -webkit-backdrop-filter: blur(10px) saturate(1.08);
+  }
+
+  :global([data-base-theme='dark']) .footer::before {
+    opacity: 0.06;
   }
 </style>
 

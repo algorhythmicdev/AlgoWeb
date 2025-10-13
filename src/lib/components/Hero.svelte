@@ -29,31 +29,33 @@
 >
   <div class="hero__layout">
     <div class="hero__main">
-      {#if $$slots.status}
-        <div class="hero__status">
-          <slot name="status" />
-        </div>
-      {/if}
+      <div class="hero__content">
+        {#if $$slots.status}
+          <div class="hero__status">
+            <slot name="status" />
+          </div>
+        {/if}
 
-      {#if titleId}
-        <h1 id={titleId} class="hero__title">{title}</h1>
-      {/if}
+        {#if titleId}
+          <h1 id={titleId} class="hero__title">{title}</h1>
+        {/if}
 
-      {#if leadId}
-        <p id={leadId} class="hero__lead">{subtitle}</p>
-      {/if}
+        {#if leadId}
+          <p id={leadId} class="hero__lead">{subtitle}</p>
+        {/if}
 
-      {#if $$slots.description}
-        <div id={descriptionId} class="hero__description">
-          <slot name="description" />
-        </div>
-      {/if}
+        {#if $$slots.description}
+          <div id={descriptionId} class="hero__description">
+            <slot name="description" />
+          </div>
+        {/if}
 
-      {#if $$slots.actions}
-        <div class="hero__actions">
-          <slot name="actions" />
-        </div>
-      {/if}
+        {#if $$slots.actions}
+          <div class="hero__actions">
+            <slot name="actions" />
+          </div>
+        {/if}
+      </div>
 
       {#if $$slots.highlights}
         <div id={highlightsId} class="hero__highlights">
@@ -68,15 +70,18 @@
       </div>
     {/if}
   </div>
+
+  <div class="hero__accent" aria-hidden="true"></div>
 </section>
 
 <style>
   .hero {
-    --hero-surface: var(--bg-elev-1);
-    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.05) 2%);
+    --hero-surface: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--ink-rgb), 0.06) 6%);
+    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 96%, rgba(var(--ink-rgb), 0.08) 4%);
     --hero-text: var(--text);
     --hero-grad-start: var(--aurora-purple);
     --hero-grad-stop: var(--voyage-blue);
+    --hero-overlay: color-mix(in srgb, var(--bg) 72%, transparent 28%);
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -91,24 +96,53 @@
   .hero::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 320px 320px;
-    opacity: 0.05;
+    inset: -12%;
+    background:
+      radial-gradient(120% 150% at 18% 20%, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.55) 78%, transparent 22%), transparent 72%),
+      radial-gradient(140% 180% at 82% 0%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 70%, transparent 30%), transparent 78%),
+      linear-gradient(130deg, color-mix(in srgb, var(--voyage-blue) 86%, transparent 14%), color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%)),
+      var(--hero-overlay);
+    filter: saturate(1.05);
+    opacity: 0.94;
     pointer-events: none;
-    mix-blend-mode: soft-light;
+    transform: translate3d(0, 0, 0);
+    animation: hero-pan 46s ease-in-out infinite alternate;
+    z-index: 0;
   }
 
   .hero::after {
     content: '';
     position: absolute;
-    inset-inline: 0;
-    bottom: 0;
+    inset: -1px;
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 320px 320px;
+    opacity: 0.06;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    z-index: 0;
+  }
+
+  .hero__accent {
+    position: absolute;
+    inset-inline: clamp(1.2rem, 6vw, 3.2rem);
+    bottom: clamp(1.2rem, 3vw, 2rem);
     height: 12px;
+    border-radius: 999px;
     background: linear-gradient(90deg, var(--hero-grad-start), var(--hero-grad-stop));
     background-size: 200% 100%;
-    animation: hero-bar 18s ease-in-out infinite alternate;
     opacity: 0.9;
+    animation: hero-bar 18s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes hero-pan {
+    from {
+      transform: translate3d(-2%, -3%, 0) scale(1.05);
+    }
+    to {
+      transform: translate3d(3%, 2%, 0) scale(1.05);
+    }
   }
 
   @keyframes hero-bar {
@@ -140,7 +174,44 @@
 
   .hero__main {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.75rem);
+    gap: clamp(1.4rem, 3.4vw, 2.2rem);
+  }
+
+  .hero__content {
+    position: relative;
+    display: grid;
+    gap: clamp(1rem, 2.8vw, 1.8rem);
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    border-radius: clamp(22px, 4vw, 32px);
+    background: color-mix(in srgb, var(--hero-surface) 82%, rgba(var(--ink-rgb), 0.08) 18%);
+    border: 1px solid color-mix(in srgb, var(--border) 62%, transparent 38%);
+    box-shadow: 0 26px 60px rgba(6, 20, 53, 0.16);
+    backdrop-filter: blur(20px) saturate(1.08);
+    -webkit-backdrop-filter: blur(20px) saturate(1.08);
+    overflow: hidden;
+    isolation: isolate;
+    animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+
+  .hero__content::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(120% 120% at 12% 20%, rgba(var(--voyage-blue-rgb), 0.14), transparent 70%);
+    opacity: 0.9;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero__content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 280px 280px;
+    opacity: 0.08;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
   }
 
   .hero__status {
@@ -194,7 +265,7 @@
   }
 
   .hero__highlights {
-    margin-top: clamp(1.4rem, 4vw, 2.4rem);
+    margin-top: clamp(1.6rem, 4vw, 2.6rem);
     padding: clamp(1.5rem, 3vw, 2.25rem);
     border-radius: var(--radius-lg, 24px);
     background: var(--hero-surface-elev);
@@ -202,6 +273,8 @@
     box-shadow: 0 18px 42px rgba(12, 20, 40, 0.08);
     display: grid;
     gap: clamp(0.75rem, 2vw, 1.2rem);
+    animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 120ms;
   }
 
   .hero__highlights :global(h2),
@@ -228,6 +301,8 @@
   .hero__aside {
     display: grid;
     gap: clamp(1rem, 3vw, 1.6rem);
+    animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 160ms;
   }
 
   .hero--align-center .hero__main {
@@ -263,25 +338,44 @@
     --hero-grad-stop: color-mix(in srgb, var(--voyage-blue) 40%, var(--signal-yellow) 60%);
   }
 
+  @keyframes hero-entrance {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   :global(html[data-theme='hc'] .hero) {
     background: var(--bg);
     border: 2px solid currentColor;
     box-shadow: none;
   }
 
-  :global(html[data-theme='hc'] .hero::before) {
-    opacity: 0;
+  :global(html[data-theme='hc'] .hero::before),
+  :global(html[data-theme='hc'] .hero::after) {
+    display: none;
   }
 
-  :global(html[data-theme='hc'] .hero::after) {
+  :global(html[data-theme='hc'] .hero__accent) {
+    position: static;
+    width: 100%;
+    height: 0.4rem;
+    margin-top: clamp(1.2rem, 3vw, 1.8rem);
     background: currentColor;
     opacity: 1;
   }
 
+  :global(html[data-theme='hc'] .hero__content),
   :global(html[data-theme='hc'] .hero__highlights) {
     background: transparent;
     border: 2px solid currentColor;
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   @media (max-width: 640px) {
@@ -296,14 +390,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero::after {
+    .hero::before,
+    .hero__accent {
       animation: none;
       background-position: 50% 50%;
     }
 
     .hero__actions,
-    .hero__highlights {
+    .hero__highlights,
+    .hero__content,
+    .hero__aside {
       transition: none;
+      animation: none;
     }
   }
 </style>

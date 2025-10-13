@@ -226,14 +226,22 @@
   use:focusTrap
 >
   <div class="container nav-surface">
-    <a href="/" class="nav-brand" aria-label={$_('nav.brand_aria')}>
-      <img
-        src={navLogoSrc}
-        alt={$_('nav.brand_name')}
-        width="148"
-        height="40"
-      />
-    </a>
+    <div class="nav-leading">
+      <div class="nav-window-controls" aria-hidden="true">
+        <span class="nav-window-control nav-window-control--close"></span>
+        <span class="nav-window-control nav-window-control--minimise"></span>
+        <span class="nav-window-control nav-window-control--expand"></span>
+      </div>
+
+      <a href="/" class="nav-brand" aria-label={$_('nav.brand_aria')}>
+        <img
+          src={navLogoSrc}
+          alt={$_('nav.brand_name')}
+          width="148"
+          height="40"
+        />
+      </a>
+    </div>
 
     <div class="nav-groups">
       <div
@@ -402,12 +410,104 @@
     border-bottom-color: currentColor;
   }
 
+  :global([data-base-theme='dark']) .nav-window-controls {
+    background: color-mix(in srgb, rgba(12, 18, 32, 0.72) 82%, transparent 18%);
+    border-color: color-mix(in srgb, rgba(255, 255, 255, 0.24) 64%, transparent 36%);
+    box-shadow: 0 18px 32px rgba(2, 8, 20, 0.32);
+  }
+
+  :global([data-base-theme='dark']) .nav-window-control--close {
+    background: color-mix(in srgb, var(--cherry-pop) 70%, rgba(255, 255, 255, 0.1) 30%);
+  }
+
+  :global([data-base-theme='dark']) .nav-window-control--minimise {
+    background: color-mix(in srgb, var(--signal-yellow) 74%, rgba(255, 255, 255, 0.08) 26%);
+  }
+
+  :global([data-base-theme='dark']) .nav-window-control--expand {
+    background: color-mix(in srgb, var(--voyage-blue) 68%, rgba(255, 255, 255, 0.14) 32%);
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-window-controls {
+    background: transparent;
+    border: 1px solid currentColor;
+    box-shadow: none;
+    padding: 0.3rem 0.35rem;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-window-control {
+    background: currentColor;
+    border-color: currentColor;
+    box-shadow: none;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-window-control::after {
+    display: none;
+  }
+
   .nav-surface {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: clamp(1.5rem, 3vw, 2.75rem);
     padding: clamp(1rem, 2.5vw, 1.5rem) 0;
+  }
+
+  .nav-leading {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.1rem);
+  }
+
+  .nav-window-controls {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.4rem, 1vw, 0.65rem);
+    padding: 0.35rem 0.45rem;
+    border-radius: var(--radius-full, 999px);
+    background: color-mix(in srgb, var(--surface-chip-bg) 70%, transparent 30%);
+    border: 1px solid color-mix(in srgb, var(--surface-chip-border) 60%, transparent 40%);
+    box-shadow: 0 12px 28px rgba(10, 18, 36, 0.08);
+  }
+
+  .nav-window-control {
+    width: clamp(0.6rem, 1.1vw, 0.75rem);
+    height: clamp(0.6rem, 1.1vw, 0.75rem);
+    position: relative;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 1px 2px rgba(10, 18, 36, 0.18);
+  }
+
+  .nav-window-control--close {
+    background: color-mix(in srgb, var(--cherry-pop) 82%, #ffffff 18%);
+    border-color: color-mix(in srgb, var(--cherry-pop) 62%, rgba(0, 0, 0, 0.08) 38%);
+  }
+
+  .nav-window-control--minimise {
+    background: color-mix(in srgb, var(--signal-yellow) 86%, #ffffff 14%);
+    border-color: color-mix(in srgb, var(--signal-yellow) 58%, rgba(0, 0, 0, 0.12) 42%);
+  }
+
+  .nav-window-control--expand {
+    background: color-mix(in srgb, var(--voyage-blue) 78%, #ffffff 22%);
+    border-color: color-mix(in srgb, var(--voyage-blue) 60%, rgba(0, 0, 0, 0.1) 40%);
+  }
+
+  .nav-window-control::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  @media (max-width: 720px) {
+    .nav-window-controls {
+      display: none;
+    }
   }
 
   .nav-brand img {
@@ -472,6 +572,7 @@
     font-weight: var(--weight-medium);
     color: var(--text-secondary);
     border: 1px solid transparent;
+    outline: none;
     transition:
       color var(--duration-fast) var(--ease-out),
       background var(--duration-fast) var(--ease-out),
@@ -479,13 +580,22 @@
       transform var(--duration-fast) var(--ease-out);
   }
 
-  .nav-link:hover,
-  .nav-link:focus-visible {
+  .nav-link:hover {
     color: var(--text-primary);
     background: var(--surface-chip-bg);
     border-color: var(--surface-chip-border);
     box-shadow: var(--surface-chip-shadow);
     transform: translateY(-1px);
+  }
+
+  .nav-link:focus-visible {
+    color: var(--text-primary);
+    background: var(--surface-chip-bg);
+    border-color: var(--surface-chip-border);
+    transform: translateY(-1px);
+    --nav-focus-shadow-base: var(--surface-chip-shadow);
+    box-shadow: var(--focus-ring), var(--nav-focus-shadow-base);
+    animation: navFocusPulse 1.6s ease-in-out infinite;
   }
 
   .nav-link.active {
@@ -562,10 +672,15 @@
     transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
   }
 
-  .nav-submenu__link:hover,
+  .nav-submenu__link:hover {
+    border-color: color-mix(in srgb, var(--surface-field-border) 68%, rgba(var(--aurora-purple-rgb), 0.28) 32%);
+    transform: translateY(-2px);
+  }
+
   .nav-submenu__link:focus-visible {
     border-color: color-mix(in srgb, var(--surface-field-border) 68%, rgba(var(--aurora-purple-rgb), 0.28) 32%);
     transform: translateY(-2px);
+    box-shadow: var(--focus-ring);
   }
 
   .nav-submenu__title {
@@ -620,7 +735,9 @@
 
   .nav-trigger:focus-visible {
     outline: none;
-    box-shadow: var(--focus-ring);
+    --nav-focus-shadow-base: var(--surface-pill-shadow);
+    box-shadow: var(--focus-ring), var(--nav-focus-shadow-base);
+    animation: navFocusPulse 1.6s ease-in-out infinite;
   }
 
   .nav-shell.menu-open .nav-trigger span:nth-child(1) {
@@ -657,6 +774,40 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  @keyframes navFocusPulse {
+    0%,
+    100% {
+      box-shadow: var(--focus-ring), var(--nav-focus-shadow-base, transparent);
+    }
+
+    50% {
+      box-shadow:
+        0 0 0 4px color-mix(in srgb, var(--focus-ring-color, var(--voyage-blue)) 70%, transparent 30%),
+        var(--nav-focus-shadow-base, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link:focus-visible,
+    .nav-trigger:focus-visible {
+      animation: none;
+    }
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-link:focus-visible {
+    box-shadow: var(--focus-ring-contrast);
+    animation: none;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-submenu__link:focus-visible {
+    box-shadow: var(--focus-ring-contrast);
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-trigger:focus-visible {
+    box-shadow: var(--focus-ring-contrast);
+    animation: none;
   }
 
   @media (max-width: 1200px) {

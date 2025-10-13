@@ -13,15 +13,15 @@ GitHub
 
 Issues & Gaps: These elements largely align with the 2026 vision of “restrained glass” and clear focus indicators. To refine further:
 
-OS-like Styling: Introduce subtle “window” affordances to reinforce the desktop-OS metaphor. For example, a slight draggable cursor hint or minimalist window controls (• ● ■) on very large screens can suggest the nav is a fixed OS top bar (optional).
+✅ OS-like Styling: Introduce subtle “window” affordances to reinforce the desktop-OS metaphor. For example, a slight draggable cursor hint or minimalist window controls (• ● ■) on very large screens can suggest the nav is a fixed OS top bar (optional).
 
-Focus Visibility: The header’s focus ring uses a blended color that meets the 3:1 contrast rule
+✅ Focus Visibility: The header’s focus ring uses a blended color that meets the 3:1 contrast rule
 GitHub
 . Ensure this is highly visible on all backgrounds (e.g. white focus outline on dark mode nav) and consider an animated focus outline (slight glow or pulse) to improve visibility for low-vision users. This aligns with the guideline that focus indicators must be prominent and not color-alone. Currently, the nav trigger (hamburger) adds a visible outline on focus
 GitHub
 , which is good. We can further emphasize focus on the language and theme toggles (e.g. add a focus style since they are plain text).
 
-Theme Toggle Clarity: The theme switches are text-based. To avoid relying on color or text alone, add an icon or indicator for the current theme. For example, a sun 🌞 icon for light, moon 🌙 for dark, and a contrast icon (high-contrast symbol) for the HC mode can accompany or replace the text labels. This ensures the active theme is recognizable at a glance (and not just by the absence of a link) – fulfilling the “state is never conveyed by color alone” rule. Each toggle should have aria-pressed or similar to denote which theme is active to assistive tech.
+✅ Theme Toggle Clarity: The theme switches are text-based. To avoid relying on color or text alone, add an icon or indicator for the current theme. For example, a sun 🌞 icon for light, moon 🌙 for dark, and a contrast icon (high-contrast symbol) for the HC mode can accompany or replace the text labels. This ensures the active theme is recognizable at a glance (and not just by the absence of a link) – fulfilling the “state is never conveyed by color alone” rule. Each toggle should have aria-pressed or similar to denote which theme is active to assistive tech.
 
 High Contrast Mode: The nav already adapts in High Contrast mode by removing background transparency and using a 2px solid border (currentColor) for a clear divider
 GitHub
@@ -66,18 +66,18 @@ GitHub
 
 Issues & Gaps: Overall, the hero conveys the brand message well, but we can upgrade it to fully reflect dynamic minimalism and AAA contrast:
 
-Gradient + Overlay: Ensure the background gradient is paired with a semi-opaque neutral overlay behind text. According to the design vision, no body text should sit directly on a raw gradient. If not already done, apply a translucent white/black layer under the tagline and description. The current design tokens include --hero-overlay-opacity and similar
+✅ Gradient + Overlay: Ensure the background gradient is paired with a semi-opaque neutral overlay behind text. According to the design vision, no body text should sit directly on a raw gradient. If not already done, apply a translucent white/black layer under the tagline and description. The current design tokens include --hero-overlay-opacity and similar
 GitHub
 , so use those in CSS: e.g. .hero-section { background: var(--gradient-hero), var(--neutral-overlay); }. This maintains the vibrant “Aurora Purple + Voyage Blue” hero look while keeping text easily readable (AAA contrast).
 
-Motion & Depth: Introduce subtle motion to draw interest without overwhelming. The hero can have scroll-linked or time-based animations that honor reduced-motion preferences. For example, a gentle floating grain or a slow pan of the background gradient can add depth. The site already has a useReveal function for scroll reveals
+✅ Motion & Depth: Introduce subtle motion to draw interest without overwhelming. The hero can have scroll-linked or time-based animations that honor reduced-motion preferences. For example, a gentle floating grain or a slow pan of the background gradient can add depth. The site already has a useReveal function for scroll reveals
 GitHub
 GitHub
  – applying this to the hero text and CTAs would create a smooth fade-up entrance as the page loads (with prefers-reduced-motion automatically short-circuiting to no animation, as in current code
 GitHub
 ).
 
-“Frosted Glass” Elements: Consider a frosted highlight panel behind the hero heading or as a “glass card” containing the key message. This could be a semi-transparent white panel with a slight blur (similar to the .surface-panel style) placed behind the text, giving a calm OS-dialog feel. It would reinforce the tactile feel and ensure contrast. For instance, a translucent card behind “AlgoRhythmics shapes calm AI workflows…” could use the .surface-panel class (which applies blur and a subtle border/shadow)
+✅ “Frosted Glass” Elements: Consider a frosted highlight panel behind the hero heading or as a “glass card” containing the key message. This could be a semi-transparent white panel with a slight blur (similar to the .surface-panel style) placed behind the text, giving a calm OS-dialog feel. It would reinforce the tactile feel and ensure contrast. For instance, a translucent card behind “AlgoRhythmics shapes calm AI workflows…” could use the .surface-panel class (which applies blur and a subtle border/shadow)
 GitHub
 . This echoes the design directive to introduce refined grain and restrained glass in hero/OS shell contexts.
 
@@ -149,15 +149,15 @@ algorhythmics.dev
 
 Issues & Gaps: To fully realize the OS-like “desktop workspace” feel, we should present these content blocks as windowed panels or cards rather than just text on a page:
 
-Windowed Panels: Wrap each major content block (the highlight list, the offerings, etc.) in a <div class="surface-panel"> or equivalent GlassCard component. The .surface-panel class in the codebase already provides a frosted-glass panel styling: it sets a translucent background with backdrop-blur (20px) and a subtle border and shadow
+✅ Windowed Panels: Wrap each major content block (the highlight list, the offerings, etc.) in a <div class="surface-panel"> or equivalent GlassCard component. The .surface-panel class in the codebase already provides a frosted-glass panel styling: it sets a translucent background with backdrop-blur (20px) and a subtle border and shadow
 GitHub
 . Using this will give each section a subtle “raised window” appearance, as if these highlights are separate app windows on a desktop. For example, the three offering columns (Consulting, Platforms, Outreach) can each be inside a .surface-panel card with border-radius: var(--radius-xl) and some margin between them. This aligns with the strategy of desktop-OS feel with windowed workspaces and resizable panes for web platforms. It also introduces visual separation and depth without losing contrast (the panel uses a mostly neutral backdrop).
 
-Layout & Grid: Use a responsive grid to mimic an “arranged windows” layout. Currently, the site likely stacks these sections vertically. We can improve the visual layout by, for instance, showing the four Key Highlights as cards in a 2x2 grid on desktop, or the three Offerings as side-by-side panels. Tailwind can be used here (e.g., grid grid-cols-1 md:grid-cols-2 gap-8 etc.) or custom CSS. Ensuring sufficient whitespace (the site uses clamp for section padding which is good) keeps the UI calm and content-focused.
+✅ Layout & Grid: Use a responsive grid to mimic an “arranged windows” layout. Currently, the site likely stacks these sections vertically. We can improve the visual layout by, for instance, showing the four Key Highlights as cards in a 2x2 grid on desktop, or the three Offerings as side-by-side panels. Tailwind can be used here (e.g., grid grid-cols-1 md:grid-cols-2 gap-8 etc.) or custom CSS. Ensuring sufficient whitespace (the site uses clamp for section padding which is good) keeps the UI calm and content-focused.
 
-Interactive Hover: While these highlight panels are mostly static text, we can add slight hover or focus effects to indicate interactivity or simply to add polish. For instance, on hover, a panel might lift by 2px or brighten slightly (transform: translateY(-2px) with a shadow) to create a sense of depth (the design vision mentions hover elevations and reveals to support wayfinding). If the highlight items are not links, the hover effect can be purely decorative. But if they link to sub-pages, ensure a visible focus style as well (maybe the entire card gets a focus outline similar to buttons).
+✅ Interactive Hover: While these highlight panels are mostly static text, we can add slight hover or focus effects to indicate interactivity or simply to add polish. For instance, on hover, a panel might lift by 2px or brighten slightly (transform: translateY(-2px) with a shadow) to create a sense of depth (the design vision mentions hover elevations and reveals to support wayfinding). If the highlight items are not links, the hover effect can be purely decorative. But if they link to sub-pages, ensure a visible focus style as well (maybe the entire card gets a focus outline similar to buttons).
 
-Icons or Illustrations: To help young or non-expert users (kids, elders) quickly grok the content, consider adding simple icons next to section titles. The design system advises using rounded, simple icons for clarity at small sizes. For example, an icon of a lightbulb for “Innovative AI”, a graduation cap for “Educational Impact”, etc., can be placed before those headings. Use SVG icons with sufficient contrast (or our icon component). Keep them stylistically consistent (line icons with 2px stroke as noted in the guidelines). These visual cues will make the content more scannable and approachable without heavy reading, aiding users of all ages.
+✅ Icons or Illustrations: To help young or non-expert users (kids, elders) quickly grok the content, consider adding simple icons next to section titles. The design system advises using rounded, simple icons for clarity at small sizes. For example, an icon of a lightbulb for “Innovative AI”, a graduation cap for “Educational Impact”, etc., can be placed before those headings. Use SVG icons with sufficient contrast (or our icon component). Keep them stylistically consistent (line icons with 2px stroke as noted in the guidelines). These visual cues will make the content more scannable and approachable without heavy reading, aiding users of all ages.
 
 Code Suggestions (Sections):
 
@@ -226,7 +226,7 @@ GitHub
 
 Issues & Gaps: The footer is well-organized and mostly accessible, but a few enhancements can align it with the new aesthetic and AAA compliance:
 
-Contrast in Dark Mode: Ensure the footer text meets AAA contrast on the dark theme background. Currently, the footer uses --text-secondary for most text
+✅ Contrast in Dark Mode: Ensure the footer text meets AAA contrast on the dark theme background. Currently, the footer uses --text-secondary for most text
 GitHub
 . In dark mode, --text-secondary is a mid-gray (#8B9299)
 GitHub
@@ -234,7 +234,7 @@ GitHub
 GitHub
 ) or simply override footer { color: #BBC5D6; } when data-base-theme='dark'. This small change pushes contrast to AAA without overpowering the design.
 
-Frosted Footer Bar: To continue the frosted glass theme all the way down, we can give the footer a slight frosted effect. One idea is to make the footer background translucent and blurred, like a “dock” or taskbar. For example, using backdrop-filter: blur(10px) on the footer with a semi-transparent background (background: color-mix(in srgb, var(--bg-elev-1) 85%, transparent)) would make it feel like a glass dock over whatever is beneath (in practice just the page background). This should be subtle, since footers typically should not distract. We’d also need to darken the text a bit more in light mode if the footer becomes translucent over a light page (or keep a mostly opaque footer). If a frosted footer is too visually busy, maintaining a solid neutral color is acceptable as it provides a visual “grounding” element at the bottom.
+✅ Frosted Footer Bar: To continue the frosted glass theme all the way down, we can give the footer a slight frosted effect. One idea is to make the footer background translucent and blurred, like a “dock” or taskbar. For example, using backdrop-filter: blur(10px) on the footer with a semi-transparent background (background: color-mix(in srgb, var(--bg-elev-1) 85%, transparent)) would make it feel like a glass dock over whatever is beneath (in practice just the page background). This should be subtle, since footers typically should not distract. We’d also need to darken the text a bit more in light mode if the footer becomes translucent over a light page (or keep a mostly opaque footer). If a frosted footer is too visually busy, maintaining a solid neutral color is acceptable as it provides a visual “grounding” element at the bottom.
 
 Taskbar Concept: As an alternative to a traditional footer style, consider a fixed “taskbar” at the bottom of the screen on desktop view. This would truly mimic an OS. The taskbar could contain key links (or even the same content as the current footer but arranged horizontally with icons). For instance, a left side could have the logo and “© 2026” info, center could have minimal nav icons, right side could have social icons. This is an ambitious redesign, so it depends on the desired user experience. If implemented, ensure it’s responsive (perhaps collapsing to a normal footer on mobile) and keyboard-accessible (tab order through icons). The design strategy did mention dock/taskbar patterns for the web, so this could be a forward-looking enhancement. However, if time is short, a stylized footer with slight glass effect can suffice.
 
@@ -354,7 +354,7 @@ GitHub
 GitHub
 ).
 
-Performance & Cleanup: Remove any legacy code that doesn’t serve the new design. The animations.js has a normalization for old “glass-card” classes
+✅ Performance & Cleanup: Remove any legacy code that doesn’t serve the new design. The animations.js has a normalization for old “glass-card” classes
 GitHub
  – if we unify on .os-window or .surface-panel, ensure all instances are updated and then drop legacy class usage. This keeps the codebase clean. Similarly, check for any unused Tailwind classes or stray utility first (maybe there’s an old .glass-card class definition that can be deleted if everything uses .surface-panel now).
 

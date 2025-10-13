@@ -46,38 +46,39 @@
         name="color-mode"
         value={option.value}
         checked={option.value === $theme}
-        aria-label={$_(option.label)}
         on:change={() => selectTheme(option.value)}
       />
       <span class="theme-option__body">
-        {#if option.icon === 'sun'}
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <circle cx="10" cy="10" r="4.5" stroke-width="1.8" />
-            <line x1="10" y1="1" x2="10" y2="4" />
-            <line x1="10" y1="16" x2="10" y2="19" />
-            <line x1="1" y1="10" x2="4" y2="10" />
-            <line x1="16" y1="10" x2="19" y2="10" />
-            <line x1="4.1" y1="4.1" x2="6.4" y2="6.4" />
-            <line x1="13.6" y1="13.6" x2="15.9" y2="15.9" />
-            <line x1="4.1" y1="15.9" x2="6.4" y2="13.6" />
-            <line x1="13.6" y1="6.4" x2="15.9" y2="4.1" />
-          </svg>
-        {:else if option.icon === 'moon'}
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path
-              d="M15.8 13.6c-1.4 2.4-4 3.9-6.8 3.9c-4.4 0-8-3.6-8-8c0-3 1.7-5.6 4.2-7c-.3.7-.4 1.5-.4 2.3c0 3.7 3 6.7 6.7 6.7c.8 0 1.6-.2 2.3-.4z"
-              stroke-width="1.6"
-              fill="none"
-            />
-          </svg>
-        {:else}
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <rect x="3" y="3" width="14" height="14" rx="3" ry="3" stroke-width="1.8" fill="none" />
-            <line x1="6" y1="3" x2="6" y2="17" />
-            <line x1="14" y1="3" x2="14" y2="17" />
-          </svg>
-        {/if}
-        <span class="sr-only">{$_(option.label)}</span>
+        <span class="theme-option__icon" aria-hidden="true">
+          {#if option.icon === 'sun'}
+            <svg viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="4.5" stroke-width="1.8" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="10" y1="16" x2="10" y2="19" />
+              <line x1="1" y1="10" x2="4" y2="10" />
+              <line x1="16" y1="10" x2="19" y2="10" />
+              <line x1="4.1" y1="4.1" x2="6.4" y2="6.4" />
+              <line x1="13.6" y1="13.6" x2="15.9" y2="15.9" />
+              <line x1="4.1" y1="15.9" x2="6.4" y2="13.6" />
+              <line x1="13.6" y1="6.4" x2="15.9" y2="4.1" />
+            </svg>
+          {:else if option.icon === 'moon'}
+            <svg viewBox="0 0 20 20">
+              <path
+                d="M15.8 13.6c-1.4 2.4-4 3.9-6.8 3.9c-4.4 0-8-3.6-8-8c0-3 1.7-5.6 4.2-7c-.3.7-.4 1.5-.4 2.3c0 3.7 3 6.7 6.7 6.7c.8 0 1.6-.2 2.3-.4z"
+                stroke-width="1.6"
+                fill="none"
+              />
+            </svg>
+          {:else}
+            <svg viewBox="0 0 20 20">
+              <rect x="3" y="3" width="14" height="14" rx="3" ry="3" stroke-width="1.8" fill="none" />
+              <line x1="6" y1="3" x2="6" y2="17" />
+              <line x1="14" y1="3" x2="14" y2="17" />
+            </svg>
+          {/if}
+        </span>
+        <span class="theme-option__label">{$_(option.label)}</span>
       </span>
     </label>
   {/each}
@@ -91,7 +92,7 @@
   .theme-switcher {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.35rem;
     background: var(--control-surface);
     border: 1px solid var(--control-border);
     border-radius: var(--radius-lg);
@@ -114,17 +115,33 @@
 
   .theme-option__body {
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
+    gap: 0.25rem;
+    min-width: 64px;
+    min-height: 48px;
+    padding: 0.4rem 0.65rem;
+    border-radius: var(--radius-lg);
     color: var(--text-secondary);
     transition:
       background var(--duration-fast) var(--ease-out),
       color var(--duration-fast) var(--ease-out),
       box-shadow var(--duration-fast) var(--ease-out),
       transform var(--duration-fast) var(--ease-out);
+  }
+
+  .theme-option__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-option__label {
+    font-size: 0.7rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
 
   .theme-option.active .theme-option__body {
@@ -134,9 +151,14 @@
     transform: translateY(-1px);
   }
 
+  .theme-option.active .theme-option__label {
+    color: var(--text-primary);
+  }
+
   .theme-option input:focus-visible + .theme-option__body {
-    outline: 2px solid var(--control-ring);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
+    animation: themeFocusPulse 1.6s ease-in-out infinite;
   }
 
   svg {
@@ -167,8 +189,54 @@
     }
 
     .theme-option__body {
-      width: 36px;
-      height: 36px;
+      min-width: 54px;
+      min-height: 42px;
+      padding: 0.35rem 0.5rem;
     }
+
+    .theme-option__label {
+      font-size: 0.64rem;
+    }
+  }
+
+  @keyframes themeFocusPulse {
+    0%,
+    100% {
+      box-shadow: var(--focus-ring);
+    }
+
+    50% {
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus-ring-color, var(--voyage-blue)) 70%, transparent 30%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-option input:focus-visible + .theme-option__body {
+      animation: none;
+    }
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .theme-switcher {
+    box-shadow: none;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .theme-option__body {
+    background: transparent;
+    border: 2px solid currentColor;
+    box-shadow: none;
+    color: currentColor;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .theme-option.active .theme-option__body {
+    border-width: 3px;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .theme-option input:focus-visible + .theme-option__body {
+    box-shadow: var(--focus-ring-contrast);
+    animation: none;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .theme-option__label {
+    color: inherit;
   }
 </style>

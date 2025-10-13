@@ -10,6 +10,24 @@
 
   const t = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
 
+  type CTA = {
+    href: string;
+    labelKey: string;
+    labelFallback: string;
+  };
+
+  type Offering = {
+    readonly id: string;
+    readonly icon: string;
+    readonly titleKey: string;
+    readonly titleFallback: string;
+    readonly summaryKey: string;
+    readonly summaryFallback: string;
+    readonly bullets: readonly { key: string; fallback: string }[];
+    readonly primary: CTA;
+    readonly secondary?: CTA;
+  };
+
   const hero = {
     titleKey: 'home.page.hero.title',
     titleFallback: 'Where logic dances with creativity.',
@@ -71,6 +89,7 @@
   const offerings = [
     {
       id: 'consulting',
+      icon: 'target',
       titleKey: 'home.page.offerings.items.consulting.title',
       titleFallback: 'AI Consulting & Integration',
       summaryKey: 'home.page.offerings.items.consulting.summary',
@@ -98,6 +117,7 @@
     },
     {
       id: 'platforms',
+      icon: 'ai',
       titleKey: 'home.page.offerings.items.platforms.title',
       titleFallback: 'Flagship Platforms',
       summaryKey: 'home.page.offerings.items.platforms.summary',
@@ -130,6 +150,7 @@
     },
     {
       id: 'education',
+      icon: 'people',
       titleKey: 'home.page.offerings.items.education.title',
       titleFallback: 'Educational Outreach',
       summaryKey: 'home.page.offerings.items.education.summary',
@@ -160,7 +181,7 @@
         labelFallback: 'Access Resource Library'
       }
     }
-  ] as const;
+  ] satisfies ReadonlyArray<Offering>;
 
   const resourceSpotlight = {
     eyebrowKey: 'home.page.resources.eyebrow',
@@ -266,7 +287,7 @@
 
     <div class="highlights__grid" use:staggerReveal>
       {#each highlights as item (item.titleKey)}
-        <GlassCard class="highlight-card" padding="lg" halo>
+        <GlassCard class="highlight-card" padding="lg" halo interactive>
           <div class="highlight-icon">
             <Icon name={item.icon} size={28} />
           </div>
@@ -295,8 +316,13 @@
 
     <div class="offerings__grid" use:staggerReveal>
       {#each offerings as item (item.id)}
-        <GlassCard class="offering-card" padding="lg" id={item.id}>
-          <h3>{t(item.titleKey, item.titleFallback)}</h3>
+        <GlassCard class="offering-card" padding="lg" id={item.id} interactive>
+          <h3 class="offering-title">
+            <span class="offering-icon">
+              <Icon name={item.icon} size={26} />
+            </span>
+            {t(item.titleKey, item.titleFallback)}
+          </h3>
           <p>{t(item.summaryKey, item.summaryFallback)}</p>
           <ul>
             {#each item.bullets as bullet (bullet.key)}
@@ -331,7 +357,10 @@
 
     <div class="resources__grid" use:staggerReveal>
       {#each resourceSpotlight.items as item (item.titleKey)}
-        <GlassCard class="resource-card" padding="lg" halo>
+        <GlassCard class="resource-card" padding="lg" halo interactive>
+          <div class="resource-icon">
+            <Icon name={item.icon} size={28} />
+          </div>
           <span class="resource-eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
           <h3>{t(item.titleKey, item.titleFallback)}</h3>
           <p>{t(item.copyKey, item.copyFallback)}</p>
@@ -346,7 +375,7 @@
 
 <section class="finale" use:revealOnScroll>
   <div class="container">
-    <GlassCard class="finale-card" halo padding="lg">
+    <GlassCard class="finale-card" halo padding="lg" interactive>
       <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
       <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
       <p>{t(finale.copyKey, finale.copyFallback)}</p>
@@ -431,6 +460,23 @@
     color: var(--voyage-blue);
   }
 
+  .offering-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .offering-icon {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    border-radius: var(--radius-full);
+    display: inline-grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.2) 20%);
+    color: var(--aurora-purple);
+  }
+
   :global(.offering-card) ul,
   :global(.resource-card) ul {
     margin: 0;
@@ -439,6 +485,16 @@
     gap: 0.4rem;
     color: var(--text-secondary);
     font-size: var(--text-small);
+  }
+
+  .resource-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    display: inline-grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.22) 18%);
+    color: var(--signal-yellow);
   }
 
   .resource-eyebrow {
@@ -457,6 +513,17 @@
 
   :global(.finale-card) {
     text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .highlights__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .offerings__grid,
+    .resources__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 900px) {

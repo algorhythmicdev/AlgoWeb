@@ -40,17 +40,15 @@ const easings = {
 const shouldReduceMotion = () => isBrowser && window.matchMedia(REDUCED_MOTION_QUERY).matches;
 
 /**
- * Swap legacy glass-card classes for the refreshed os-window shell.
+ * Historically this helper swapped legacy `glass-card` classes for the
+ * refreshed `os-window` shell. The component library now owns that
+ * styling, so we simply opt-in elements that explicitly request the
+ * window treatment via data attributes while leaving component classes
+ * untouched.
  * @param {HTMLElement} node
  */
 const normaliseSurface = (node) => {
-  if (node.classList.contains('glass-card')) {
-    node.classList.remove('glass-card');
-    node.classList.add(SURFACE_CLASS);
-    return;
-  }
-
-  if (node.dataset.surface === 'window') {
+  if (node.dataset.surface === 'window' || node.classList.contains(SURFACE_CLASS)) {
     node.classList.add(SURFACE_CLASS);
   }
 };
