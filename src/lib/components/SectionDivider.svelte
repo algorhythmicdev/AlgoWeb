@@ -1,5 +1,5 @@
 <script lang="ts">
-  type SectionDividerTone = 'neutral' | 'voyage' | 'aurora' | 'citrus';
+  type SectionDividerTone = 'neutral' | 'voyage' | 'aurora' | 'citrus' | 'cherry';
   export let tone: SectionDividerTone = 'neutral';
   export let label: string | null = null;
 
@@ -110,6 +110,12 @@
     --divider-accent: rgba(var(--voyage-blue-rgb), 0.6);
     --divider-secondary: rgba(var(--aurora-purple-rgb), 0.38);
     --divider-highlight: rgba(140, 196, 255, 0.32);
+  }
+
+  .section-divider--cherry {
+    --divider-accent: rgba(var(--cherry-pop-rgb), 0.6);
+    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.4);
+    --divider-highlight: rgba(255, 202, 209, 0.38);
   }
 
   .section-divider--neutral {

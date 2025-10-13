@@ -1,16 +1,34 @@
 AlgoRhythmics 2026 Website Redesign Plan
 Progress Tracker
-- [x] Refresh top-level navigation with a dedicated Solutions hub linking to NodeVoyage, Ideonautix, and consulting.
-- [x] Build dedicated NodeVoyage product page with roadmap, differentiators, and Explorers Club signup.
-- [x] Build dedicated Ideonautix product page with module highlights, pilot invitation, and use cases.
-- [x] Update Contact page with remote-first messaging, reason selector, and newsletter call-to-action.
-- [x] Launch future Education Hub / blog to replace legacy resources section.
-- [x] Launch dedicated consulting services pilot page with application flow and supporting materials.
+- [x] Refresh top-level navigation with a dedicated Solutions hub linking to NodeVoyage, Ideonautix, and consulting. (See
+  `src/lib/components/Navigation.svelte` and `src/lib/config/navigation.js`.)
+- [x] Build dedicated NodeVoyage product page with roadmap, differentiators, and Explorers Club signup—now restyled with
+  Voyage Blue aurora scenes, OS-like glass cards, and motion-safe halos around every explorer touchpoint. (See
+  `src/routes/nodevoyage/+page.svelte`.)
+- [x] Build dedicated Ideonautix product page with module highlights, pilot invitation, and use cases—now framed by
+  Cherry-accent aurora wraps, productivity dashboard glass, and reduced-motion friendly pulses. (See
+  `src/routes/ideonautix/+page.svelte`.)
+- [x] Update Contact page with remote-first messaging, reason selector, and newsletter call-to-action. (See
+  `src/routes/contact/+page.svelte`.)
+- [x] Launch future Education Hub / blog to replace legacy resources section. (See
+  `src/routes/education-hub/+page.svelte` and redirect in `src/routes/resources/+page.js`.)
+- [x] Launch dedicated consulting services pilot page with application flow and supporting materials. (See
+  `src/routes/consulting/+page.svelte`.)
+- [x] Launch Help Center knowledge base with onboarding guides, quick answers, and live status updates, now wrapped in animated
+  aurora backdrops and interactive glass cards for each support path. (See `src/routes/help-center/+page.svelte`.)
+- [x] Refresh the shared Services hub with aurora gradient wraps, section-specific glass tokens, and motion-safe halos to
+  highlight consulting, platforms, education, and finale calls-to-action. (See `src/routes/services/+page.svelte`.)
 Design System (2026 Refresh)
+
+> ✅ Implemented via unified token catalogue in `src/lib/styles/theme.css`, global styles in `src/lib/styles`, and theme
+> utilities in `src/lib/theme/theme-utils.ts`.
 
 A Unified, Accessible Aesthetic: The 2026 redesign introduces a cohesive design system across AlgoRhythmics and its platforms, emphasizing clarity, playfulness, and WCAG AAA accessibility. The visual style is dynamic minimalism with restrained use of frosted glass effects, subtle grain textures, and gentle motion that supports content without distracting. All interactive elements meet or exceed strict contrast standards (AAA for text, ≥3:1 for non-text UI) to ensure the site is usable by all audiences.
 
 Color Themes & Identity
+
+> ✅ Aurora Purple, Voyage Blue, Signal Yellow, and Cherry Pop tokens are defined in `src/lib/styles/theme.css` and applied
+> across components via CSS variables.
 
 Shared Brand Color: Aurora Purple (#6A38FF) is the unifying thread across the company’s web presence. This vibrant purple appears in logos, highlights, and call-to-action elements, creating a consistent brand feel.
 
@@ -22,7 +40,13 @@ Ideonautix (Startup OS): Ideonautix adopts a sleeker, “futuristic” scheme wi
 
 Theming & Modes: Each color scheme is implemented in Light, Dark, and High-Contrast modes via CSS custom properties and the global theme stylesheet. Semantic CSS variables (e.g. --color-bg, --color-card, --color-text, --color-border, --color-accent) define colors for backgrounds, cards/surfaces, text, borders, and overlay states. The theme is toggled based on user preference or OS setting (with a user override toggle), using the file src/lib/styles/theme.css to apply [data-theme="light"], [data-theme="dark"], or high-contrast styles. In light mode, for example, body text is nearly black on a cloud-white background (meeting AAA contrast), whereas dark mode inverts to off-white text on night-sky neutrals. High-contrast mode further boosts the difference between foreground and background and simplifies decorative colors. All modes preserve the brand’s core colors while ensuring text is always crystal-clear.
 
+> ✅ Theme toggling and attribute management live in `src/lib/stores/theme.ts` and `src/lib/theme/theme-utils.ts`, with
+> high-contrast overrides defined in the stylesheets. Keyboard shortcut “t” is wired in `src/routes/+layout.svelte`.
+
 Typography & Icons
+
+> ✅ Font stacks and type ramps live in `src/lib/styles/typography.css`, while icon components reside under
+> `src/lib/components/icons/`.
 
 Font Choices: Montserrat is used for headlines and titles (for a clean, prominent look), and Inter for body text and UI labels (for readability in paragraphs and across languages). This combination appears welcoming and modern. Font sizes and weights are managed with responsive type ramps (scaled via CSS clamp or Tailwind responsive utilities) to maintain optimal readability on all devices. Generous line-heights and spacing are applied for comfortable reading, even for longer educational content.
 
@@ -32,11 +56,20 @@ Icons & Imagery: Icons use simple, rounded shapes and consistent stroke widths (
 
 Layout & Components
 
+> ✅ Layout primitives (Hero, GlassCard, SectionDivider, etc.) are implemented in `src/lib/components/` with utility grids in
+> `src/lib/styles/layout-grid.css`.
+
 Responsive Layouts: The site is built on a responsive grid using Tailwind CSS utility classes. Core layout primitives include a <Container> (max-width wrapper, e.g. max-w-7xl mx-auto px-4) and <Section> (block with consistent vertical padding, e.g. py-16 md:py-24) to establish a consistent vertical rhythm across pages. This ensures a smooth flow as users scroll, with ample whitespace (“calm whitespace”) so content isn’t overwhelming. A 4pt baseline grid is used for spacing and sizing tokens (most margins/paddings are multiples of 4px), resulting in a harmonious, balanced layout.
 
 Navigation & Structure: A persistent top navigation bar provides access to all main sections (with clear distinctions between corporate and product areas, detailed in the Site Structure section below). The header and footer use high-contrast backgrounds (e.g. dark slate with light text in one mode, or vice versa) to frame the content. Focus outlines are clearly visible on navigation links and buttons (using browser default or custom outline styles that meet 3:1 contrast for the outline ring). The design remains fully usable via keyboard only, with logical tab order and :focus styles on all interactive elements.
 
+> ✅ Implemented by `src/lib/components/Navigation.svelte` and `src/lib/components/Footer.svelte`, including focus
+> management, keyboard traps, and theme-aware accents.
+
 Hero Section: Each page can start with a Hero component that features an engaging background and a bold message. The hero uses an animated background gradient or subtle video loop to add visual interest, overlaid by a translucent neutral layer for text legibility. For example, the home page hero might show an Aurora Purple to Voyage Blue gradient animation (slowly shifting or rotating) behind the tagline. The hero text is centered and uses Montserrat in a large size for the headline, with a supporting subheadline and a call-to-action button. (See code snippet below.) The animation is carefully tuned: it’s motion-safe (pauses if the user prefers reduced motion) and kept subtle (slow transitions, no flashing), ensuring it enhances rather than distracts.
+
+> ✅ Componentized in `src/lib/components/Hero.svelte` and reused across `src/routes/*/+page.svelte` views with reduced-motion
+> considerations.
 
 Hero Component Example (Svelte + Tailwind):
 
@@ -96,6 +129,9 @@ About this GlassCard: The container uses a semi-transparent white (50% opacity) 
 
 Interactive States & Motion: All interactive components (buttons, links, cards) have clear hover and focus states. For example, buttons brighten or elevate slightly on hover, and show a focus ring when focused via keyboard. These states are designed with non-color cues as well: slight scaling, underline on links, icon changes, etc., so that even color-blind or high-contrast users can detect interaction (no state is conveyed by color alone). Motion is used sparingly and purposefully. We utilize scroll reveal animations for content sections (e.g. a GlassCard might fade-and-slide into view as it enters the viewport) using the Intersection Observer API in Svelte onMount – but these animations are subtle and disabled if prefers-reduced-motion is set. Transitions are kept calm in form fields and reading-heavy areas to avoid fatigue. Overall, the motion design philosophy is “futuristic yet calm”: it adds a sense of modern interactivity (like a desktop OS window behavior or a mobile OS swipe) while maintaining focus on the user’s task.
 
+> ✅ Motion hooks are defined in `src/lib/animations.js` and applied through directives across page components with
+> `prefers-reduced-motion` safeguards.
+
 Platform-Specific UI Cues: To differentiate NodeVoyage and Ideonautix sections from the main corporate site, we infuse subtle thematic cues:
 
 NodeVoyage pages adopt an adventurous travel OS vibe: for example, the page might feature a “windowed” interface motif (imagine a map window and a planning sidebar in a desktop-like frame). We use a playful cursor highlight or a faux taskbar element to make it feel like an explorer’s workstation. Colors lean into Voyage Blue for buttons or highlights on NodeVoyage pages to immediately signal the travel theme.
@@ -109,6 +145,9 @@ Site Structure & Content Outline
 The new website structure reflects AlgoRhythmics’ current status as a pre-incorporated startup entering 2026, focusing on transparency, upcoming products, and services. All content is written in a friendly, clear tone suitable for all ages and non-technical readers. The deprecated Resources section from the old site has been removed entirely (outdated content will be replaced by a new educational blog later in 2026). The main navigation will include: Home, About, Solutions (Products & Services), and Contact. Below is an outline of each page/section with its content:
 
 Home Page (/)
+
+> ✅ Content implemented in `src/routes/+page.svelte` with Hero, highlights, offerings, and CTA sections mirroring the plan,
+> now accented by aurora gradient wraps, animated glass surfaces, and section-specific focus styling for stronger contrast.
 
 Purpose: Provide a welcoming overview, introduce AlgoRhythmics’ mission and offerings at a glance, and guide visitors to learn more or get involved (e.g. join a pilot, contact for consulting).
 
@@ -141,6 +180,8 @@ Call to Action / Updates: Concluding the home page might be a call-to-action ban
 (All home page text is kept high-level and inspiring, avoiding technical details. Jargon from internal plans (e.g. “microservices” or specific technologies) is omitted on Home to keep it friendly for non-technical visitors.)
 
 About Us Page (/about)
+
+> ✅ Realized in `src/routes/about/+page.svelte` including mission, vision, values, founding team bios, and timeline content.
 
 Purpose: Provide deeper insight into AlgoRhythmics’ mission, vision, values, team, and story. This page builds trust by being transparent about our purpose and background (important since we are pre-incorporation). It can also include a brief timeline of our journey and future roadmap highlights.
 
@@ -198,9 +239,17 @@ This segment is kept short and optional – the main point is to reinforce trust
 
 Solutions Page (/solutions or separate Product Pages)
 
+> ✅ `/solutions` re-exports the services hub from `src/routes/services/+page.svelte`, with metadata tailored in
+> `src/routes/solutions/+page.js`, while dedicated product pages live in `src/routes/nodevoyage/+page.svelte` and
+> `src/routes/ideonautix/+page.svelte`. The shared hub now mirrors the home page polish with aurora gradient wraps,
+> section-specific glass tokens, and reduced-motion halos guiding each service lane.
+
 Purpose: Present more detailed information on our offerings: NodeVoyage, Ideonautix, and AI Consulting. We can implement this as either a single page with sections for each, or separate pages (e.g. /nodevoyage, /ideonautix, /consulting) linked from a main "Solutions" hub. Given the need for distinct visual identities, we will create dedicated pages for NodeVoyage and Ideonautix, allowing each to use its thematic styling, and a section or page for Consulting services.
 
 NodeVoyage Page (/nodevoyage)
+
+> ✅ Fully implemented in `src/routes/nodevoyage/+page.svelte` with hero, differentiators, roadmap, Explorers Club signup, and
+> CTA cross-links.
 
 This page carries the NodeVoyage branding (adventurous theme). Its design might use a slightly different background or frame (for example, a faint travel map or an “app window” mockup in the background, and more Voyage Blue in headings/buttons to distinguish from the corporate purple).
 
@@ -241,6 +290,9 @@ Link back: Provide navigation to the Ideonautix page or back to Solutions overvi
 (Visual design notes: NodeVoyage page will use the OS-like layout cues – perhaps sections framed as “app windows.” Focus rings, etc., are tuned for its color scheme (blue focus highlights). But it still uses the same base components and is fully accessible.)
 
 Ideonautix Page (/ideonautix)
+
+> ✅ Delivered in `src/routes/ideonautix/+page.svelte`, covering hero, module highlights, pilot invitation, cherry-accent
+> dividers, and relatable use cases.
 
 The Ideonautix page carries a more “startup toolkit” vibe. It might use geometric backgrounds or subtle grid patterns, with slate gray and red accents. The content focuses on how Ideonautix helps entrepreneurs and students turn ideas into action.
 
@@ -284,6 +336,9 @@ Navigation: link to NodeVoyage page or back to Solutions. Possibly also mention 
 
 AI Consulting Services Page (/consulting)
 
+> ✅ Structured in `src/routes/consulting/+page.svelte` with pilot flow, service packages, testimonials, and application
+> guidance.
+
 If the content is brief, this could also be a section on a combined Solutions page. However, to give it due attention (and to allow sharing a link specifically for service clients), a dedicated page is useful.
 
 Content:
@@ -324,6 +379,8 @@ Trust Indicators: Mention any partnerships or recognitions relevant: e.g. “Sup
 
 Contact Page (/contact)
 
+> ✅ Implemented in `src/routes/contact/+page.svelte` with hero messaging, segmented contact cards, accessible form with reason selector, mailto handoff, newsletter CTA, and a support hub covering response pledges, upcoming help center resources, and social follow links.
+
 Purpose: Provide a clear way for visitors to reach out, whether they are potential clients, pilot participants, partners, or media. Also list support channels and possibly an FAQ link.
 
 Content:
@@ -346,13 +403,20 @@ E.g. “We respond to most inquiries within 1 business day. For our users and pa
 
 This is derived from our support standards (critical issues 4 hours in business hours, etc., but we’ll simplify).
 
+> ✅ Support pledge callout implemented in `src/routes/contact/+page.svelte`, detailing one-business-day replies plus 24-hour escalations for pilots and consulting partners.
+
 FAQ/Help Center: If we have or plan a self-serve help center or community forum, mention it: “Looking for quick answers? Check out our Help Center (coming soon) or join our community forum to ask questions and share ideas.” (We can stand up a simple FAQ page later or use this as future placeholder.)
+
+> ✅ Help Center card on the Contact page now links to the live knowledge base in `src/routes/help-center/+page.svelte`, offering onboarding packs, quick answers, and status updates alongside escalation guidance.
 
 Footer Reminder: The contact page content will also likely appear in the site footer (email address, etc.), which remains on all pages for easy access.
 
 (Design: The contact form should have large, easy-to-read fields and buttons. Use the design system form styles – high contrast text, clear focus ring on each input, and accessible error messages. We will ensure even the submit button has at least 3:1 contrast in all modes and a visible focus outline, per accessibility guidelines.)
 
 Accessibility & Compliance
+
+> ✅ Accessibility tokens, focus rings, skip links, and theme data attributes are implemented across stylesheets and layout
+> (`src/routes/+layout.svelte`, `src/lib/styles/global.css`), with localization via `svelte-i18n` setup in `src/lib/i18n`.
 
 Throughout the site redesign, accessibility is paramount. All pages adhere to WCAG 2.2 guidelines at AA/AAA levels: text contrast, keyboard navigation, screen reader semantics, etc., as detailed in the design system. Key practices include:
 
@@ -371,6 +435,9 @@ Localization: We will gradually introduce translations for content into multiple
 Compliance with privacy laws is also addressed: the site will have a clear Privacy Policy and Terms of Service (linked in the footer). We use a GDPR-compliant cookie consent mechanism and minimal tracking. Any user data (like emails from the contact form or newsletter) will be handled according to our privacy principles (only used for the stated purpose, stored securely).
 
 2026 Rollout Plan (By Quarter)
+
+> ✅ Timeline messaging represented across product pages (roadmaps, status banners) and documentation sections to align with
+> the described quarterly updates.
 
 We have a phased plan to launch and enhance the website in sync with our product development and branding efforts throughout 2026. This ensures the site stays up-to-date with our progress and adheres to the evolving design strategy:
 

@@ -88,6 +88,74 @@
     }
   ] as const;
 
+  const supportCommitment = {
+    eyebrowKey: 'contact.page.support.eyebrow',
+    eyebrowFallback: 'Support promise',
+    titleKey: 'contact.page.support.title',
+    titleFallback: 'Responsive, human support every step of the way',
+    copyKey: 'contact.page.support.copy',
+    copyFallback:
+      'We pair every pilot, consulting sprint, and classroom programme with clear expectations so you always know when to expect a reply.',
+    bullets: [
+      {
+        key: 'contact.page.support.bullets.0',
+        fallback: 'Most enquiries receive a personal response within one business day.'
+      },
+      {
+        key: 'contact.page.support.bullets.1',
+        fallback: 'Pilot partners and consulting clients get a dedicated escalation channel with 24-hour turnaround on critical issues.'
+      },
+      {
+        key: 'contact.page.support.bullets.2',
+        fallback: 'We document every conversation transparently so teams can pick up where they left off.'
+      }
+    ]
+  } as const;
+
+  const helpCenter = {
+    eyebrowKey: 'contact.page.help.eyebrow',
+    eyebrowFallback: 'Guides & self-serve',
+    titleKey: 'contact.page.help.title',
+    titleFallback: 'Help Center now live with calm AI guides',
+    copyKey: 'contact.page.help.copy',
+    copyFallback:
+      'Dive into onboarding packs, troubleshooting checklists, and multilingual resources inside our Help Center knowledge base.',
+    cta: {
+      href: '/help-center',
+      labelKey: 'contact.page.help.cta',
+      labelFallback: 'Visit the Help Center'
+    },
+    noteKey: 'contact.page.help.note',
+    noteFallback: 'Need something now? Email help@algorhythmics.com for personalised guidance or escalation.'
+  } as const;
+
+  const socialLinks = [
+    {
+      icon: 'linkedin',
+      labelKey: 'contact.page.social.linkedin',
+      labelFallback: 'Follow on LinkedIn',
+      href: 'https://www.linkedin.com/company/algorhythmics',
+      descriptionKey: 'contact.page.social.linkedin.description',
+      descriptionFallback: 'Studio updates & hiring notes'
+    },
+    {
+      icon: 'twitter',
+      labelKey: 'contact.page.social.twitter',
+      labelFallback: 'Join the conversation on X/Twitter',
+      href: 'https://twitter.com/AlgoRhythmics',
+      descriptionKey: 'contact.page.social.twitter.description',
+      descriptionFallback: 'Event recaps & pilot progress'
+    },
+    {
+      icon: 'github',
+      labelKey: 'contact.page.social.github',
+      labelFallback: 'Explore our open tooling on GitHub',
+      href: 'https://github.com/AlgoRhythmics',
+      descriptionKey: 'contact.page.social.github.description',
+      descriptionFallback: 'Starter kits & calm AI experiments'
+    }
+  ] as const;
+
   let formData = {
     name: '',
     email: '',
@@ -156,7 +224,7 @@
   </svelte:fragment>
 </Hero>
 
-<section class="contact-options" use:revealOnScroll>
+<section id="options" class="contact-options" use:revealOnScroll>
   <div class="container">
     <h2 class="contact-options__heading">{t('contact.page.cards.heading', 'Ways to connect')}</h2>
     <div class="contact-options__grid" use:staggerReveal>
@@ -176,7 +244,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="contact-form" use:revealOnScroll>
+<section id="form" class="contact-form" use:revealOnScroll>
   <div class="container">
     <GlassCard class="form-card" padding="lg" halo>
       <span class="section-eyebrow">{t('contact.page.form.eyebrow', 'Send a message')}</span>
@@ -251,6 +319,56 @@
   </div>
 </section>
 
+<SectionDivider tone="citrus" />
+
+<section id="support" class="contact-support" use:revealOnScroll>
+  <div class="container">
+    <div class="support-grid" use:staggerReveal>
+      <GlassCard class="support-card" padding="lg" halo>
+        <span class="section-eyebrow">{t(supportCommitment.eyebrowKey, supportCommitment.eyebrowFallback)}</span>
+        <h2>{t(supportCommitment.titleKey, supportCommitment.titleFallback)}</h2>
+        <p>{t(supportCommitment.copyKey, supportCommitment.copyFallback)}</p>
+        <ul class="support-list">
+          {#each supportCommitment.bullets as bullet (bullet.key)}
+            <li>{t(bullet.key, bullet.fallback)}</li>
+          {/each}
+        </ul>
+      </GlassCard>
+
+      <GlassCard class="support-card" padding="lg">
+        <span class="section-eyebrow">{t(helpCenter.eyebrowKey, helpCenter.eyebrowFallback)}</span>
+        <h2>{t(helpCenter.titleKey, helpCenter.titleFallback)}</h2>
+        <p>{t(helpCenter.copyKey, helpCenter.copyFallback)}</p>
+        <Button href={helpCenter.cta.href} variant="secondary">{t(helpCenter.cta.labelKey, helpCenter.cta.labelFallback)}</Button>
+        <p class="support-note">{t(helpCenter.noteKey, helpCenter.noteFallback)}</p>
+      </GlassCard>
+
+      <GlassCard class="support-card" padding="lg" halo>
+        <span class="section-eyebrow">{t('contact.page.social.eyebrow', 'Stay connected')}</span>
+        <h2>{t('contact.page.social.title', 'Follow the AlgoRhythmics journey')}</h2>
+        <p>{t('contact.page.social.copy', 'Join our channels for calm AI experiments, hiring notes, and event invites.')}</p>
+        <div class="social-links">
+          {#each socialLinks as link (link.href)}
+            <Button
+              href={link.href}
+              variant="subtle"
+              target="_blank"
+              rel="noreferrer noopener"
+              ariaLabel={t(link.labelKey, link.labelFallback)}
+            >
+              <Icon name={link.icon} size={22} />
+              <span class="social-text">
+                <span class="social-label">{t(link.labelKey, link.labelFallback)}</span>
+                <span class="social-description">{t(link.descriptionKey, link.descriptionFallback)}</span>
+              </span>
+            </Button>
+          {/each}
+        </div>
+      </GlassCard>
+    </div>
+  </div>
+</section>
+
 <SectionDivider tone="aurora" />
 
 <section id="newsletter" class="contact-newsletter" use:revealOnScroll>
@@ -294,8 +412,80 @@
 
   .contact-options,
   .contact-form,
+  .contact-support,
   .contact-newsletter {
     padding: clamp(3.5rem, 8vw, 6rem) 0;
+  }
+
+  .contact-support {
+    background: transparent;
+  }
+
+  .support-grid {
+    display: grid;
+    gap: clamp(1.6rem, 3vw, 2.4rem);
+  }
+
+  @media (min-width: 960px) {
+    .support-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  :global(.support-card) {
+    display: grid;
+    gap: clamp(0.8rem, 2.2vw, 1.4rem);
+    align-content: start;
+    height: 100%;
+  }
+
+  .support-list {
+    margin: 0;
+    padding: 0 0 0 1.1rem;
+    display: grid;
+    gap: 0.5rem;
+    list-style: disc;
+    list-style-position: outside;
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+
+  .support-note {
+    margin-top: 0.75rem;
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+  }
+
+  .social-links {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .social-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .social-label {
+    font-weight: var(--weight-semibold);
+  }
+
+  .social-description {
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+  }
+
+  .social-links :global(.btn) {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .social-links :global(.btn__content) {
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .contact-options__grid {
