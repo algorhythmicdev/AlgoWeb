@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { describe, it, expect } from 'vitest';
 import fg from 'fast-glob';
 import { readFile } from 'node:fs/promises';

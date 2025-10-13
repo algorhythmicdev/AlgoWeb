@@ -79,6 +79,36 @@ body::after {
   opacity: 0.025;
 }
 
+body.page-products {
+  --accent-primary: var(--nodevoyage-accent);
+  --accent-secondary: var(--nodevoyage-highlight);
+}
+
+body.page-consulting {
+  --accent-primary: var(--aurora);
+  --accent-secondary: var(--signal);
+}
+
+body.page-education {
+  --accent-primary: var(--aurora);
+  --accent-secondary: var(--signal);
+}
+
+body.page-about {
+  --accent-primary: var(--aurora);
+  --accent-secondary: var(--voyage);
+}
+
+body.page-resources {
+  --accent-primary: var(--voyage);
+  --accent-secondary: var(--signal);
+}
+
+body.page-contact {
+  --accent-primary: var(--aurora);
+  --accent-secondary: var(--signal);
+}
+
 :root,
 html,
 body,

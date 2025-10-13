@@ -164,7 +164,7 @@
       color-mix(in srgb, var(--voyage-blue) 78%, rgba(255, 255, 255, 0.14) 22%)
     );
     --btn-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 70%, rgba(255, 255, 255, 0.5) 30%);
-    --btn-color: #fff;
+    --btn-color: var(--cta-primary-text, #ffffff);
     --btn-hover-bg: linear-gradient(
       135deg,
       color-mix(in srgb, var(--aurora-purple) 78%, rgba(255, 255, 255, 0.08) 22%),

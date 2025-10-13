@@ -32,10 +32,10 @@
           action: 'calendly'
         },
         {
-          label: 'Join the community',
-          description: 'Vote on features, review open metrics, and co-create releases.',
-          cta: 'Enter Discord',
-          action: 'https://discord.gg/algorhythmics'
+          label: 'Explore resources',
+          description: 'Read case studies, accessibility notes, and calm AI updates.',
+          cta: 'Visit resources',
+          action: '/resources'
         }
       ];
 

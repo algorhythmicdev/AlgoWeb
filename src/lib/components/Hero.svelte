@@ -27,16 +27,6 @@
   aria-labelledby={ariaLabelledBy}
   aria-describedby={ariaDescribedBy}
 >
-  <div class="hero__backdrop" aria-hidden="true">
-    <span class="hero__layer hero__layer--base"></span>
-    <span class="hero__layer hero__layer--grain"></span>
-    <span class="hero__layer hero__layer--glow"></span>
-    <span class="hero__layer hero__layer--grid"></span>
-    <span class="hero__layer hero__layer--particles"></span>
-    <span class="hero__layer hero__layer--halo"></span>
-    <span class="hero__layer hero__layer--lines"></span>
-  </div>
-
   <div class="hero__layout">
     <div class="hero__main">
       {#if $$slots.status}
@@ -82,300 +72,238 @@
 
 <style>
   .hero {
+    --hero-surface: var(--bg-elev-1);
+    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.05) 2%);
+    --hero-text: var(--text);
+    --hero-grad-start: var(--aurora-purple);
+    --hero-grad-stop: var(--voyage-blue);
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding-block: clamp(3.5rem, 6vw, 6rem);
-    color: var(--hero-text, var(--text));
-    background: var(--bg-elev-1);
-    border-radius: clamp(28px, 5vw, 48px);
-    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
-    box-shadow: 0 28px 64px rgba(6, 20, 53, 0.12);
+    padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.5rem, 5vw, 3.5rem);
+    color: var(--hero-text);
+    background: var(--hero-surface);
+    border-radius: clamp(24px, 5vw, 40px);
+    border: 1px solid color-mix(in srgb, var(--border) 72%, transparent 28%);
+    box-shadow: 0 26px 64px rgba(6, 20, 53, 0.12);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain, var(--grain-texture));
+    background-size: 320px 320px;
+    opacity: 0.05;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 12px;
+    background: linear-gradient(90deg, var(--hero-grad-start), var(--hero-grad-stop));
+    background-size: 200% 100%;
+    animation: hero-bar 18s ease-in-out infinite alternate;
+    opacity: 0.9;
+  }
+
+  @keyframes hero-bar {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
   }
 
   .hero__layout {
     position: relative;
     display: grid;
-    gap: clamp(2.5rem, 4vw, 3.5rem);
+    gap: clamp(2rem, 4vw, 3rem);
+    align-items: start;
+    z-index: 1;
   }
 
-  .hero__backdrop {
-    position: absolute;
-    inset: -1px;
-    overflow: hidden;
-    border-radius: inherit;
-    opacity: 0.92;
-    background: var(--bg-elev-1);
+  .hero--with-aside .hero__layout {
+    gap: clamp(2.5rem, 5vw, 4rem);
   }
 
-  .hero__layer {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    transition: opacity var(--duration-slow, 600ms) ease, transform var(--duration-slow, 600ms) ease;
-  }
-
-  .hero__layer--base {
-    background: var(--bg-elev-1);
-  }
-
-  .hero__layer--grain {
-    background-image: var(--grain, var(--grain-texture));
-    opacity: 0.05;
-    mix-blend-mode: soft-light;
-  }
-
-  .hero__layer--glow {
-    background: radial-gradient(
-      circle at 20% 30%,
-      color-mix(in srgb, var(--aurora-purple) 24%, transparent 76%),
-      transparent 72%
-    );
-    opacity: 0.32;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .hero__layer--grid {
-    background-image: linear-gradient(
-        90deg,
-        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.12) 70%, transparent 30%),
-        transparent 60%
-      ),
-      linear-gradient(
-        0deg,
-        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.1) 70%, transparent 30%),
-        transparent 60%
-      );
-    background-size: 120px 120px;
-    opacity: 0.14;
-    mix-blend-mode: soft-light;
-  }
-
-  .hero__layer--particles {
-    background-image: radial-gradient(
-      2px 2px at 20% 30%,
-      rgba(var(--voyage-blue-rgb), 0.25),
-      transparent 70%
-    );
-    background-size: 160px 160px;
-    opacity: 0.12;
-    filter: saturate(1.05);
-    animation: heroParticles 40s linear infinite;
-  }
-
-  .hero__layer--halo {
-    background: radial-gradient(
-      circle at 80% 20%,
-      color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.18) 60%, transparent 40%),
-      transparent 68%
-    );
-    opacity: 0.22;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .hero__layer--lines {
-    background-image: repeating-linear-gradient(
-        75deg,
-        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.1) 65%, transparent 35%) 0 2px,
-        transparent 2px 16px
-      ),
-      repeating-linear-gradient(
-        -75deg,
-        color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.12) 50%, transparent 50%) 0 2px,
-        transparent 2px 18px
-      );
-    opacity: 0.12;
-    mix-blend-mode: screen;
+  @media (min-width: 960px) {
+    .hero--with-aside .hero__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    }
   }
 
   .hero__main {
-    position: relative;
     display: grid;
-    gap: 1.25rem;
-    z-index: 1;
+    gap: clamp(1rem, 3vw, 1.75rem);
   }
 
   .hero__status {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--aurora-purple-rgb), 0.2) 16%);
-    border: 1px solid color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 65%, rgba(255, 255, 255, 0.4) 35%);
-    font-size: clamp(0.75rem, 1vw, 0.85rem);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    gap: 0.5rem;
   }
 
   .hero__title {
-    font-size: clamp(2.35rem, 5vw, 3.75rem);
-    line-height: 1.05;
-    font-weight: var(--weight-extrabold, 700);
-    letter-spacing: -0.02em;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: var(--font-h1-weight, 700);
+    font-size: var(--font-h1-size, 2.25rem);
+    line-height: var(--font-h1-line, 1.2);
+    letter-spacing: -0.01em;
+    color: var(--heading-color, var(--hero-text));
+    text-wrap: balance;
   }
 
   .hero__lead {
-    max-width: 38ch;
-    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-    color: color-mix(in srgb, var(--text) 82%, rgba(var(--voyage-blue-rgb), 0.1) 18%);
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: clamp(1.08rem, 2.6vw, 1.28rem);
+    line-height: 1.6;
+    max-width: 48ch;
+    text-wrap: balance;
+  }
+
+  .hero--align-center .hero__lead {
+    margin-inline: auto;
   }
 
   .hero__description {
-    max-width: 60ch;
     display: grid;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2.4vw, 1.2rem);
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    line-height: 1.6;
+    max-width: 60ch;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
+    gap: clamp(0.85rem, 2vw, 1.2rem);
+    margin-top: clamp(1.4rem, 3.6vw, 2.2rem);
+  }
+
+  .hero__actions :global(*) {
+    flex-shrink: 0;
   }
 
   .hero__highlights {
+    margin-top: clamp(1.4rem, 4vw, 2.4rem);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-radius: var(--radius-lg, 24px);
+    background: var(--hero-surface-elev);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
+    box-shadow: 0 18px 42px rgba(12, 20, 40, 0.08);
     display: grid;
-    gap: 0.75rem;
+    gap: clamp(0.75rem, 2vw, 1.2rem);
+  }
+
+  .hero__highlights :global(h2),
+  .hero__highlights :global(h3) {
+    margin: 0;
+    font-size: var(--font-h3-size, 1.5rem);
+  }
+
+  .hero__highlights :global(p) {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .hero__highlights :global(ul) {
+    margin: 0;
+    padding-left: 1.2rem;
+    list-style: disc;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--text-secondary);
   }
 
   .hero__aside {
-    position: relative;
     display: grid;
-    gap: 1rem;
-    align-content: start;
-    z-index: 1;
+    gap: clamp(1rem, 3vw, 1.6rem);
   }
 
-  .hero--align-center .hero__layout {
+  .hero--align-center .hero__main {
     text-align: center;
-    justify-items: center;
+    align-items: center;
   }
 
   .hero--align-center .hero__actions {
     justify-content: center;
   }
 
-  .hero--align-center .hero__lead,
-  .hero--align-center .hero__description {
-    margin-inline: auto;
+  .hero--align-center .hero__highlights {
+    text-align: left;
   }
 
-  .hero--with-aside .hero__layout {
-    display: grid;
-    gap: clamp(2rem, 5vw, 4rem);
+  [data-variant='grid'] {
+    --hero-grad-start: var(--voyage-blue);
+    --hero-grad-stop: var(--signal-yellow);
   }
 
-  @media (min-width: 960px) {
-    .hero--with-aside .hero__layout {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-      align-items: center;
-    }
+  [data-variant='halo'] {
+    --hero-grad-start: color-mix(in srgb, var(--aurora-purple) 80%, var(--voyage-blue) 20%);
+    --hero-grad-stop: color-mix(in srgb, var(--signal-yellow) 70%, var(--aurora-purple) 30%);
   }
 
-  @media (min-width: 1200px) {
-    .hero--with-aside .hero__layout {
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.85fr);
-    }
+  [data-variant='line'] {
+    --hero-grad-start: var(--voyage-blue);
+    --hero-grad-stop: var(--cherry-pop);
   }
 
-  [data-variant='grid'] .hero__layer--grid {
-    opacity: 0.45;
-    animation: heroGridPan 36s linear infinite;
-  }
-
-  [data-variant='grid'] .hero__layer--halo,
-  [data-variant='grid'] .hero__layer--particles {
-    opacity: 0.15;
-  }
-
-  [data-variant='halo'] .hero__layer--halo {
-    opacity: 0.65;
-    animation: heroHaloPulse 18s ease-in-out infinite;
-  }
-
-  [data-variant='halo'] .hero__layer--grid {
-    opacity: 0.2;
-  }
-
-  [data-variant='line'] .hero__layer--lines {
-    opacity: 0.45;
-    animation: heroLinesSweep 28s linear infinite;
-  }
-
-  [data-variant='line'] .hero__layer--particles {
-    opacity: 0.1;
-  }
-
-  [data-variant='particles'] .hero__layer--particles {
-    opacity: 0.5;
-  }
-
-  [data-variant='particles'] .hero__layer--grid,
-  [data-variant='particles'] .hero__layer--lines {
-    opacity: 0.15;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__layer--particles,
-    .hero__layer--halo,
-    .hero__layer--grid,
-    .hero__layer--lines {
-      animation: none !important;
-      transform: none !important;
-    }
-  }
-
-  @keyframes heroParticles {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(-120px, -80px, 0);
-    }
-  }
-
-  @keyframes heroGridPan {
-    from {
-      background-position: 0 0, 0 0;
-    }
-    to {
-      background-position: 120px 120px, -120px -120px;
-    }
-  }
-
-  @keyframes heroHaloPulse {
-    0%,
-    100% {
-      opacity: 0.35;
-      transform: scale(0.9);
-    }
-    50% {
-      opacity: 0.75;
-      transform: scale(1.08);
-    }
-  }
-
-  @keyframes heroLinesSweep {
-    from {
-      background-position: 0 0, 0 0;
-    }
-    to {
-      background-position: 320px 220px, -320px -220px;
-    }
+  [data-variant='particles'] {
+    --hero-grad-start: color-mix(in srgb, var(--aurora-purple) 60%, var(--voyage-blue) 40%);
+    --hero-grad-stop: color-mix(in srgb, var(--voyage-blue) 40%, var(--signal-yellow) 60%);
   }
 
   :global(html[data-theme='hc'] .hero) {
     background: var(--bg);
+    border: 2px solid currentColor;
     box-shadow: none;
   }
 
-  :global(html[data-theme='hc'] .hero__layer) {
-    opacity: 0.18;
-    mix-blend-mode: normal;
-    animation: none !important;
+  :global(html[data-theme='hc'] .hero::before) {
+    opacity: 0;
   }
 
-  :global(html[data-theme='hc'] .hero__status) {
-    background: var(--bg);
-    border-color: var(--border-strong);
+  :global(html[data-theme='hc'] .hero::after) {
+    background: currentColor;
+    opacity: 1;
+  }
+
+  :global(html[data-theme='hc'] .hero__highlights) {
+    background: transparent;
+    border: 2px solid currentColor;
+    box-shadow: none;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: clamp(3rem, 8vw, 4rem) clamp(1.25rem, 5vw, 2rem);
+    }
+
+    .hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero::after {
+      animation: none;
+      background-position: 50% 50%;
+    }
+
+    .hero__actions,
+    .hero__highlights {
+      transition: none;
+    }
   }
 </style>

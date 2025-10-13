@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import axe from 'axe-core';
 
 import HomePage from '../src/routes/+page.svelte';
-import PlatformsPage from '../src/routes/platforms/+page.svelte';
+import ProductsPage from '../src/routes/products/+page.svelte';
 import ContactPage from '../src/routes/contact/+page.svelte';
 
 async function ensureAccessible(Component: any, label: string) {
@@ -22,8 +22,8 @@ describe('core surfaces meet accessibility expectations', () => {
     await ensureAccessible(HomePage, 'home page');
   });
 
-  it('platforms page renders without axe violations', async () => {
-    await ensureAccessible(PlatformsPage, 'platforms page');
+  it('products page renders without axe violations', async () => {
+    await ensureAccessible(ProductsPage, 'products page');
   });
 
   it('contact page renders without axe violations', async () => {

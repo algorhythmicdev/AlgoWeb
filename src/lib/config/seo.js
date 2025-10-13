@@ -44,20 +44,30 @@ export const pageConfigs = {
     description: 'AI innovation lab in pre-company phase, creating revolutionary products while preparing to build Latvia\'s startup ecosystem.',
     path: '/'
   },
-  platforms: {
-    title: 'Platforms - NodeVoyage & Ideonautix | AlgoRhythmics',
-    description: 'Explore the NodeVoyage travel companion and the Ideonautix founder OS — one calm suite of accessible AI.',
-    path: '/platforms'
-  },
-  community: {
-    title: 'Community - Vote, Share, Build Together | AlgoRhythmics',
-    description: 'Vote on features, share ideas, and help shape the future of NodeVoyage and Ideonautix.',
-    path: '/community'
+  products: {
+    title: 'Products - NodeVoyage & Ideonautix | AlgoRhythmics',
+    description: 'Explore NodeVoyage and Ideonautix inside one calm, glassy lineup with AAA accessibility.',
+    path: '/products'
   },
   consulting: {
     title: 'AI Consulting - Free Pilot Program | AlgoRhythmics',
     description: '3 free pilot spots available. AI integration, technical advisory, and strategic innovation consulting.',
     path: '/consulting'
+  },
+  education: {
+    title: 'Education - LIAA Partnership & Schools | AlgoRhythmics',
+    description: 'Discover calm AI programmes for schools and partners, co-created with Latvian innovation teams.',
+    path: '/education'
+  },
+  about: {
+    title: 'About AlgoRhythmics - Story, Team & Values',
+    description: 'Meet the founders, values, and studio rituals shaping AlgoRhythmics across Riga and Rotterdam.',
+    path: '/about'
+  },
+  resources: {
+    title: 'Resources - Blog & Case Studies | AlgoRhythmics',
+    description: 'Read case studies, accessibility notes, and product updates from the AlgoRhythmics studio.',
+    path: '/resources'
   },
   contact: {
     title: 'Contact Us - Let\'s Build Together | AlgoRhythmics',

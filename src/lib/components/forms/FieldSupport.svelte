@@ -24,9 +24,10 @@
     aria-live={tone === 'error' ? announce : undefined}
   >
     <Icon
+      class="field-support__icon"
       name={iconByTone[tone]}
       size={16}
-      style={`color: ${tone === 'error' ? 'var(--critical, #E0322C)' : 'var(--voyage-blue)'}; margin-top: 0.1rem;`}
+      aria-hidden="true"
     />
     <span>{message}</span>
   </p>
@@ -44,9 +45,15 @@
     color: var(--text-secondary);
   }
 
-  .field-support--error {
-    color: var(--critical-text, var(--error-strong, var(--critical, #E0322C)));
+  .field-support__icon {
+    margin-top: 0.1rem;
+    color: var(--voyage-blue);
   }
+
+  .field-support--error {
+    color: var(--critical-text);
+  }
+
 
   @media (prefers-reduced-motion: no-preference) {
     .field-support {

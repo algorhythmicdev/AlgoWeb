@@ -23,8 +23,8 @@ export const backgroundThemes = {
     interactivity: 'medium'
   },
 
-  platforms: {
-    name: 'platforms',
+  products: {
+    name: 'products',
     palette: ['voyage-blue', 'signal-yellow', 'aurora-purple'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--signal-yellow-rgb)'),
     grainOpacity: 0.045,
@@ -38,8 +38,38 @@ export const backgroundThemes = {
     interactivity: 'medium'
   },
 
-  community: {
-    name: 'community',
+  education: {
+    name: 'education',
+    palette: ['aurora-purple', 'signal-yellow', 'voyage-blue'],
+    gradient: neutralGradient('var(--aurora-purple-rgb)', 'var(--signal-yellow-rgb)'),
+    grainOpacity: 0.052,
+    shapes: [
+      { type: 'book', count: 8, color: 'aurora-purple', size: 'small' },
+      { type: 'sparkle', count: 6, color: 'signal-yellow', size: 'small' },
+      { type: 'node', count: 4, color: 'voyage-blue', size: 'small' }
+    ],
+    animation: 'gentle-float',
+    density: 'medium',
+    interactivity: 'medium'
+  },
+
+  about: {
+    name: 'about',
+    palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
+    gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--aurora-purple-rgb)'),
+    grainOpacity: 0.04,
+    shapes: [
+      { type: 'timeline', count: 6, color: 'voyage-blue', size: 'small' },
+      { type: 'sparkle', count: 5, color: 'signal-yellow', size: 'small' },
+      { type: 'orbit', count: 4, color: 'aurora-purple', size: 'small' }
+    ],
+    animation: 'gentle-float',
+    density: 'low',
+    interactivity: 'medium'
+  },
+
+  resources: {
+    name: 'resources',
     palette: ['voyage-blue', 'signal-yellow', 'aurora-purple'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--signal-yellow-rgb)'),
     grainOpacity: 0.05,
@@ -86,8 +116,10 @@ export const backgroundThemes = {
 
 export function getThemeForPath(pathname) {
   if (pathname === '/') return backgroundThemes.home;
-  if (pathname.includes('platforms')) return backgroundThemes.platforms;
-  if (pathname.includes('community')) return backgroundThemes.community;
+  if (pathname.includes('products')) return backgroundThemes.products;
+  if (pathname.includes('education')) return backgroundThemes.education;
+  if (pathname.includes('about')) return backgroundThemes.about;
+  if (pathname.includes('resources')) return backgroundThemes.resources;
   if (pathname.includes('consulting')) return backgroundThemes.consulting;
   if (pathname.includes('contact')) return backgroundThemes.contact;
   return backgroundThemes.home;

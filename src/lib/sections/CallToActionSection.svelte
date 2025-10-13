@@ -23,7 +23,7 @@
       'Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.',
     consulting:
       'Prefer a guided walkthrough? Book a calm strategy chat and we will map your next steps together.',
-    primary: en.home?.cta?.primary ?? 'Join the community',
+    primary: en.home?.cta?.primary ?? 'Read the latest resources',
     secondary: en.home?.cta?.secondary ?? 'Book a calm strategy chat',
     points: Array.isArray(en.home?.cta?.points)
       ? en.home.cta.points.filter((point): point is string => typeof point === 'string')
@@ -88,7 +88,7 @@
       {/if}
 
       <div class="cta-actions" role="group" aria-label={actionsLabel}>
-        <Button variant="gradient" href="/community">
+        <Button variant="gradient" href="/resources">
           <span>{primaryCta}</span>
         </Button>
         <Button variant="secondary" href="/consulting">

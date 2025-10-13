@@ -87,8 +87,8 @@
 
   const productKeys = /** @type {const} */ (['nodevoyage', 'ideonautix']);
   const products: Record<string, any> = productsData as Record<string, any>;
-  const fallbackPlatformHeader = (en.home?.platforms ?? {}) as Record<string, any>;
-  const fallbackCatalog = (en.platforms?.catalog ?? {}) as Record<string, any>;
+  const fallbackProductsHeader = (en.home?.products ?? {}) as Record<string, any>;
+  const fallbackCatalog = (en.products?.catalog ?? {}) as Record<string, any>;
 
   const parseMilestoneDate = (value: string): Date => {
     const [yearString = '1970', monthString = '1'] = value.split('-');
@@ -207,14 +207,14 @@
       };
     })
     .filter((entry) => entry.name && entry.description);
-  const fallbackProductsTitle = ensureString(fallbackPlatformHeader.title, 'Platform lineup');
+  const fallbackProductsTitle = ensureString(fallbackProductsHeader.title, 'Product lineup');
   const fallbackProductsSubtitle = ensureString(
-    fallbackPlatformHeader.subtitle,
+    fallbackProductsHeader.subtitle,
     'NodeVoyage and Ideonautix live inside the same relaxed studio.'
   );
 
-  $: productsTitle = translate('home.platforms.title', fallbackProductsTitle);
-  $: productsSubtitle = translate('home.platforms.subtitle', fallbackProductsSubtitle);
+  $: productsTitle = translate('home.products.title', fallbackProductsTitle);
+  $: productsSubtitle = translate('home.products.subtitle', fallbackProductsSubtitle);
 
   const fallbackTimeline = (en.home?.timeline ?? {}) as Record<string, any>;
   const fallbackTimelineStatuses = (fallbackTimeline.statuses ?? {}) as Record<string, string>;
@@ -343,7 +343,7 @@
 
     <svelte:fragment slot="actions">
       <div class="home-hero__actions" role="group" aria-label={heroActionsLabel}>
-        <Button class="home-hero__action" variant="gradient" size="lg" href="#platforms">
+        <Button class="home-hero__action" variant="gradient" size="lg" href="#products">
           <span>{heroPrimaryActionLabel}</span>
         </Button>
         <Button class="home-hero__action" variant="secondary" size="lg" href="/consulting">
@@ -352,19 +352,7 @@
       </div>
     </svelte:fragment>
 
-    <svelte:fragment slot="highlights">
-      {#if heroPillars.length}
-        <GlassCard class="home-hero__pillars" padding="lg">
-          <h2>{heroPillarsTitle}</h2>
-          <ul class="home-hero__pillars-list">
-            {#each heroPillars as pillar}
-              <li>{pillar}</li>
-            {/each}
-          </ul>
-        </GlassCard>
-      {/if}
-    </svelte:fragment>
-  </Hero>
+      </Hero>
 
   <section class="story section" id="story" use:revealOnScroll>
     <div class="container story__grid">
@@ -374,11 +362,14 @@
         <p class="story__lead">{storyVisionText}</p>
 
         {#if heroPillars.length}
-          <ul class="story__pillars">
-            {#each heroPillars as pillar}
-              <li>{pillar}</li>
-            {/each}
-          </ul>
+          <div class="story__values">
+            <h3>{heroPillarsTitle}</h3>
+            <ul>
+              {#each heroPillars as pillar}
+                <li>{pillar}</li>
+              {/each}
+            </ul>
+          </div>
         {/if}
       </div>
 
@@ -396,7 +387,7 @@
     </div>
   </section>
 
-  <section class="products section" id="platforms" use:revealOnScroll>
+  <section class="products section" id="products" use:revealOnScroll>
     <div class="container">
       <header class="section-header">
         <span class="eyebrow">{productsTitle}</span>
@@ -425,7 +416,7 @@
 
             <p class="product-card__description">{product.description}</p>
 
-            <a class="product-card__cta" href={`/platforms#${product.key}`}>
+            <a class="product-card__cta" href={`/products#${product.key}`}>
               <span>{product.cta}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -577,44 +568,6 @@
     min-width: clamp(200px, 36vw, 240px);
   }
 
-  :global(.home-hero__pillars) {
-    margin-top: clamp(2rem, 5vw, 2.8rem);
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--voyage-blue-rgb), 0.12) 6%);
-    --surface-glass-border: color-mix(in srgb, var(--border) 70%, transparent 30%);
-    --surface-glass-shadow: 0 24px 50px rgba(12, 20, 36, 0.16);
-  }
-
-  :global(.home-hero__pillars) h3 {
-    margin: 0 0 1.2rem;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-  }
-
-  .home-hero__pillars-list {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.8rem;
-    list-style: none;
-    color: var(--text-secondary);
-  }
-
-  .home-hero__pillars-list li {
-    position: relative;
-    padding-left: 1.4rem;
-    line-height: 1.5;
-  }
-
-  .home-hero__pillars-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55rem;
-    width: 0.6rem;
-    height: 0.6rem;
-    border-radius: 999px;
-    background: radial-gradient(circle at 30% 30%, var(--voyage-blue) 0%, transparent 70%);
-  }
-
   .story {
     padding-block: clamp(4rem, 12vw, 6rem);
   }
@@ -644,29 +597,32 @@
     line-height: 1.6;
   }
 
-  .story__pillars {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  .story__values {
+    margin: clamp(1.6rem, 4vw, 2.2rem) 0 0;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-radius: var(--radius-lg);
+    border: 1px solid color-mix(in srgb, var(--border) 72%, transparent 28%);
+    background: color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.04) 2%);
     display: grid;
-    gap: 0.75rem;
+    gap: clamp(0.75rem, 2vw, 1.2rem);
+  }
+
+  .story__values h3 {
+    margin: 0;
+    font-size: var(--font-h3-size, 1.5rem);
+  }
+
+  .story__values ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    list-style: disc;
     color: var(--text-secondary);
-  }
-
-  .story__pillars li {
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-  }
-
-  .story__pillars li::before {
-    content: '•';
-    color: var(--voyage-blue);
-    font-weight: var(--weight-semibold);
-    margin-top: -0.1rem;
+    display: grid;
+    gap: 0.5rem;
   }
 
   .story__cards {
+
     display: grid;
     gap: clamp(1.6rem, 4vw, 2.2rem);
   }
@@ -818,7 +774,7 @@
     margin-top: clamp(1.8rem, 4vw, 2.4rem);
     display: grid;
     gap: 0.6rem;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 97%, rgba(var(--aurora-purple-rgb), 0.06) 3%);
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 99%, rgba(var(--ink-rgb), 0.05) 1%);
     --surface-glass-border: color-mix(in srgb, var(--border) 72%, transparent 28%);
   }
 
@@ -848,7 +804,7 @@
   .timeline__highlight-note {
     margin: 0;
     font-size: var(--text-small);
-    color: color-mix(in srgb, var(--aurora-purple) 64%, var(--text-secondary) 36%);
+    color: var(--text-secondary);
   }
 
   :global(.timeline__filters) {

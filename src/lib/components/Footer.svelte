@@ -1,5 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
+  import { onMount } from 'svelte';
   import { footerLinks } from '$config/navigation';
   import { siteConfig } from '$config/seo';
   import { theme } from '$stores/theme';
@@ -13,6 +14,13 @@
    */
   const ensureString = (value, fallback = '') =>
     typeof value === 'string' && value.trim().length ? value.trim() : fallback;
+
+  let isMounted = false;
+  $: footerLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png';
+
+  onMount(() => {
+    isMounted = true;
+  });
 
   const fallbackPartnerTitle = 'Partners';
   const fallbackPartnerSummary =
@@ -48,6 +56,10 @@
       : null
   );
 
+  /**
+   * @param {string} key
+   * @param {string} fallback
+   */
   const translate = (key, fallback) => translateOrFallback($_, key, fallback);
 
   $: partnerTitle = translate('footer.partners_title', fallbackPartnerTitle);
@@ -61,7 +73,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img
-          src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
+          src={footerLogoSrc}
           alt={$_('footer.brand_alt')}
           width="180"
           height="48"
@@ -89,7 +101,7 @@
         <nav class="footer-links-section" aria-labelledby="footer-products-heading">
           <h4 id="footer-products-heading">{$_('footer.products_title')}</h4>
           <ul>
-            {#each footerLinks.platforms as link}
+            {#each footerLinks.products as link}
               <li>
                 <a href={link.href}>{$_(link.label)}</a>
               </li>

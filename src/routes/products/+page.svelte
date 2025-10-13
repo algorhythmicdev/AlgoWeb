@@ -13,24 +13,24 @@
   });
 
   const fallbackHero = {
-    label: en.platforms?.hero?.label ?? 'Platforms',
-    title: en.platforms?.hero?.title ?? 'Platform lineup',
-    subtitle: en.platforms?.hero?.subtitle ?? 'Two paths to AI mastery',
+    label: en.products?.hero?.label ?? 'Products',
+    title: en.products?.hero?.title ?? 'Product lineup',
+    subtitle: en.products?.hero?.subtitle ?? 'Two paths to AI mastery',
     description:
-      en.platforms?.hero?.description ??
-      'Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.',
-    primaryAction: en.platforms?.hero?.primary ?? 'Test-drive our previews',
-    secondaryAction: en.platforms?.hero?.secondary ?? 'Book a chat',
-    ctaTitle: en.platforms?.cta?.title ?? 'Stay close',
+      en.products?.hero?.description ??
+      'Step into Ideonautix and NodeVoyage inside one calm, glassy studio shell.',
+    primaryAction: en.products?.hero?.primary ?? 'Test-drive our previews',
+    secondaryAction: en.products?.hero?.secondary ?? 'Book a chat',
+    ctaTitle: en.products?.cta?.title ?? 'Stay close',
     ctaText:
-      en.platforms?.cta?.text ??
+      en.products?.cta?.text ??
       'Join the community for release news, pilot invites, and accessibility updates.',
-    ctaPrimary: en.platforms?.cta?.primary ?? 'Join the community',
-    ctaSecondary: en.platforms?.cta?.secondary ?? 'Book a chat'
+    ctaPrimary: en.products?.cta?.primary ?? 'Join the community',
+    ctaSecondary: en.products?.cta?.secondary ?? 'Book a chat'
   };
 
-  const catalogCopy = /** @type {Record<string, any>} */ (en.platforms?.catalog ?? {});
-  const demosCopy = /** @type {Record<string, any>} */ (en.platforms?.demos ?? {});
+  const catalogCopy = /** @type {Record<string, any>} */ (en.products?.catalog ?? {});
+  const demosCopy = /** @type {Record<string, any>} */ (en.products?.demos ?? {});
 
   const fallbackProducts = productKeys.reduce(
     (acc, key) => {
@@ -61,7 +61,7 @@
   );
 
   const siteOrigin = (en.seo?.default_url ?? 'https://algorhythmics.com').replace(/\/$/, '');
-  const canonicalUrl = `${siteOrigin}/platforms`;
+  const canonicalUrl = `${siteOrigin}/products`;
 
   /**
    * @param {unknown} value
@@ -70,19 +70,19 @@
   const ensureString = (value, fallback) =>
     typeof value === 'string' && value.trim().length ? value : fallback;
 
-  $: heroLabel = ensureString($json?.('platforms.hero.label'), fallbackHero.label);
-  $: heroTitle = ensureString($json?.('platforms.hero.title'), fallbackHero.title);
-  $: heroSubtitle = ensureString($json?.('platforms.hero.subtitle'), fallbackHero.subtitle);
-  $: heroDescription = ensureString($json?.('platforms.hero.description'), fallbackHero.description);
-  $: heroPrimaryAction = ensureString($json?.('platforms.hero.primary'), fallbackHero.primaryAction);
-  $: heroSecondaryAction = ensureString($json?.('platforms.hero.secondary'), fallbackHero.secondaryAction);
+  $: heroLabel = ensureString($json?.('products.hero.label'), fallbackHero.label);
+  $: heroTitle = ensureString($json?.('products.hero.title'), fallbackHero.title);
+  $: heroSubtitle = ensureString($json?.('products.hero.subtitle'), fallbackHero.subtitle);
+  $: heroDescription = ensureString($json?.('products.hero.description'), fallbackHero.description);
+  $: heroPrimaryAction = ensureString($json?.('products.hero.primary'), fallbackHero.primaryAction);
+  $: heroSecondaryAction = ensureString($json?.('products.hero.secondary'), fallbackHero.secondaryAction);
 
-  $: ctaTitle = ensureString($json?.('platforms.cta.title'), fallbackHero.ctaTitle);
-  $: ctaText = ensureString($json?.('platforms.cta.text'), fallbackHero.ctaText);
-  $: ctaPrimaryLabel = ensureString($json?.('platforms.cta.primary'), fallbackHero.ctaPrimary);
-  $: ctaSecondaryLabel = ensureString($json?.('platforms.cta.secondary'), fallbackHero.ctaSecondary);
+  $: ctaTitle = ensureString($json?.('products.cta.title'), fallbackHero.ctaTitle);
+  $: ctaText = ensureString($json?.('products.cta.text'), fallbackHero.ctaText);
+  $: ctaPrimaryLabel = ensureString($json?.('products.cta.primary'), fallbackHero.ctaPrimary);
+  $: ctaSecondaryLabel = ensureString($json?.('products.cta.secondary'), fallbackHero.ctaSecondary);
 
-  $: platforms = productKeys.map((key) => {
+  $: productEntries = productKeys.map((key) => {
     const fallback = fallbackProducts[key];
     const product = /** @type {Record<string, any>} */ (productsData?.[key] ?? {});
 
@@ -92,7 +92,7 @@
       (list, feature) => {
         const fallbackFeature = fallback.features?.[feature.id] ?? {};
         const title = ensureString(
-          $json?.(`platforms.catalog.${key}.features.${feature.id}.title`),
+          $json?.(`products.catalog.${key}.features.${feature.id}.title`),
           fallbackFeature.title ?? ''
         );
 
@@ -105,7 +105,7 @@
           icon: feature.icon,
           title,
           description: ensureString(
-            $json?.(`platforms.catalog.${key}.features.${feature.id}.description`),
+            $json?.(`products.catalog.${key}.features.${feature.id}.description`),
             fallbackFeature.description ?? ''
           )
         });
@@ -117,15 +117,15 @@
 
     return {
       id: key,
-      name: ensureString($json?.(`platforms.catalog.${key}.name`), fallback.name),
-      tagline: ensureString($json?.(`platforms.catalog.${key}.tagline`), fallback.tagline),
-      description: ensureString($json?.(`platforms.catalog.${key}.description`), fallback.description),
-      status: ensureString($json?.(`platforms.catalog.${key}.status`), fallback.status),
-      mvp: ensureString($json?.(`platforms.catalog.${key}.mvp`), fallback.mvp),
-      cta: ensureString($json?.(`platforms.catalog.${key}.cta`), fallback.cta),
+      name: ensureString($json?.(`products.catalog.${key}.name`), fallback.name),
+      tagline: ensureString($json?.(`products.catalog.${key}.tagline`), fallback.tagline),
+      description: ensureString($json?.(`products.catalog.${key}.description`), fallback.description),
+      status: ensureString($json?.(`products.catalog.${key}.status`), fallback.status),
+      mvp: ensureString($json?.(`products.catalog.${key}.mvp`), fallback.mvp),
+      cta: ensureString($json?.(`products.catalog.${key}.cta`), fallback.cta),
       demoHref: ensureString(product.demoUrl, fallback.demoHref),
       demoHost: ensureString(product.demoHost, fallback.demoHost),
-      demoCta: ensureString($json?.(`platforms.demos.${key}`), fallback.demoCta),
+      demoCta: ensureString($json?.(`products.demos.${key}`), fallback.demoCta),
       icon: fallback.icon,
       accent: fallback.accent,
       features
@@ -139,19 +139,19 @@
 
 <Hero variant="grid" title={heroTitle} subtitle={heroSubtitle}>
   <svelte:fragment slot="status">
-    <span class="platforms-hero__status">{heroLabel}</span>
+    <span class="products-hero__status">{heroLabel}</span>
   </svelte:fragment>
 
   <svelte:fragment slot="description">
     {#if heroDescription}
-      <p class="platforms-hero__description">{heroDescription}</p>
+      <p class="products-hero__description">{heroDescription}</p>
     {/if}
   </svelte:fragment>
 
   <svelte:fragment slot="actions">
-    <div class="platforms-hero__actions">
+    <div class="products-hero__actions">
       {#if heroPrimaryAction}
-        <Button href="#platforms-overview" variant="gradient" size="lg">
+        <Button href="#products-overview" variant="gradient" size="lg">
           {heroPrimaryAction}
         </Button>
       {/if}
@@ -164,43 +164,43 @@
   </svelte:fragment>
 </Hero>
 
-<section id="platforms-overview" class="platforms-overview">
+<section id="products-overview" class="products-overview">
   <div class="container">
-    <div class="platforms-grid">
-      {#each platforms as platform}
+    <div class="products-grid">
+      {#each productEntries as product}
         <GlassCard
           as="article"
-          id={platform.id}
-          class="platform-card"
-          halo={platform.accent === 'aurora'}
-          particles={platform.accent !== 'aurora'}
+          id={product.id}
+          class="products-card"
+          halo={product.accent === 'aurora'}
+          particles={product.accent !== 'aurora'}
           padding="lg"
         >
-          <header class="platform-card__header">
-            {#if platform.status}
-              <span class="platform-card__status">{platform.status}</span>
+          <header class="products-card__header">
+            {#if product.status}
+              <span class="products-card__status">{product.status}</span>
             {/if}
-            <h2 class="platform-card__title">{platform.name}</h2>
-            {#if platform.tagline}
-              <p class="platform-card__tagline">{platform.tagline}</p>
+            <h2 class="products-card__title">{product.name}</h2>
+            {#if product.tagline}
+              <p class="products-card__tagline">{product.tagline}</p>
             {/if}
           </header>
 
-          {#if platform.description}
-            <p class="platform-card__description">{platform.description}</p>
+          {#if product.description}
+            <p class="products-card__description">{product.description}</p>
           {/if}
 
-          {#if platform.features.length}
-            <ul class="platform-card__features">
-              {#each platform.features as feature}
-                <li class="platform-card__feature">
-                  <span class="platform-card__feature-icon">
+          {#if product.features.length}
+            <ul class="products-card__features">
+              {#each product.features as feature}
+                <li class="products-card__feature">
+                  <span class="products-card__feature-icon">
                     <Icon name={feature.icon} size="22" />
                   </span>
-                  <div class="platform-card__feature-copy">
-                    <span class="platform-card__feature-title">{feature.title}</span>
+                  <div class="products-card__feature-copy">
+                    <h3>{feature.title}</h3>
                     {#if feature.description}
-                      <span class="platform-card__feature-description">{feature.description}</span>
+                      <p>{feature.description}</p>
                     {/if}
                   </div>
                 </li>
@@ -208,37 +208,46 @@
             </ul>
           {/if}
 
-          <div class="platform-card__actions">
-            <Button
-              href={platform.demoHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="gradient"
-              elevate
-              aria-label={`${platform.demoCta || platform.cta || platform.name} (${platform.demoHost})`}
-            >
-              {platform.demoCta || platform.cta || platform.name}
-            </Button>
-            {#if platform.mvp}
-              <span class="platform-card__meta">{platform.mvp}</span>
-            {/if}
-          </div>
+          <footer class="products-card__footer">
+            <div class="products-card__meta">
+              {#if product.demoHost}
+                <span>{product.demoHost}</span>
+              {/if}
+              {#if product.mvp}
+                <span>{product.mvp}</span>
+              {/if}
+            </div>
+
+            <div class="products-card__actions">
+              {#if product.cta}
+                <Button href={`/products#${product.id}`} size="lg" variant="secondary">
+                  {product.cta}
+                </Button>
+              {/if}
+
+              {#if product.demoHref}
+                <Button href={product.demoHref} target="_blank" rel="noreferrer" size="lg" variant="subtle">
+                  {product.demoCta}
+                </Button>
+              {/if}
+            </div>
+          </footer>
         </GlassCard>
       {/each}
     </div>
   </div>
 </section>
 
-<section class="platforms-cta">
+<section class="products-cta">
   <div class="container">
-    <GlassCard class="platforms-cta__surface" particles padding="lg">
-      <div class="platforms-cta__copy">
+    <GlassCard class="products-cta__surface" particles padding="lg">
+      <div class="products-cta__copy">
         <h2>{ctaTitle}</h2>
         <p>{ctaText}</p>
       </div>
-      <div class="platforms-cta__actions">
+      <div class="products-cta__actions">
         {#if ctaPrimaryLabel}
-          <Button href="/community" variant="gradient">{ctaPrimaryLabel}</Button>
+          <Button href="/resources" variant="gradient">{ctaPrimaryLabel}</Button>
         {/if}
         {#if ctaSecondaryLabel}
           <Button href="/contact" variant="secondary">{ctaSecondaryLabel}</Button>
@@ -249,7 +258,7 @@
 </section>
 
 <style>
-  .platforms-hero__status {
+  .products-hero__status {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -262,7 +271,7 @@
     border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 65%, rgba(255, 255, 255, 0.3) 35%);
   }
 
-  .platforms-hero__description {
+  .products-hero__description {
     max-width: 60ch;
     margin: 0;
     font-size: clamp(1.05rem, 2.4vw, 1.3rem);
@@ -270,33 +279,33 @@
     color: var(--text-secondary);
   }
 
-  .platforms-hero__actions {
+  .products-hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-md, 1rem);
     align-items: center;
   }
 
-  .platforms-overview {
+  .products-overview {
     padding: clamp(3.5rem, 8vw, 6.5rem) 0;
   }
 
-  .platforms-grid {
+  .products-grid {
     display: grid;
     gap: clamp(1.75rem, 4vw, 2.75rem);
   }
 
-  :global(.platform-card) {
+  :global(.products-card) {
     display: grid;
     gap: clamp(1.1rem, 3vw, 1.8rem);
   }
 
-  .platform-card__header {
+  .products-card__header {
     display: grid;
     gap: 0.75rem;
   }
 
-  .platform-card__status {
+  .products-card__status {
     display: inline-flex;
     align-items: center;
     padding: 0.25rem 0.75rem;
@@ -309,25 +318,25 @@
     border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 68%, rgba(255, 255, 255, 0.32) 32%);
   }
 
-  .platform-card__title {
+  .products-card__title {
     margin: 0;
     font-size: clamp(2rem, 4vw, 2.6rem);
   }
 
-  .platform-card__tagline {
+  .products-card__tagline {
     margin: 0;
     font-size: clamp(1.2rem, 3vw, 1.45rem);
     color: var(--text-secondary);
   }
 
-  .platform-card__description {
+  .products-card__description {
     margin: 0;
     font-size: 1.05rem;
     color: var(--text-secondary);
     line-height: 1.6;
   }
 
-  .platform-card__features {
+  .products-card__features {
     list-style: none;
     display: grid;
     gap: clamp(0.9rem, 2vw, 1.2rem);
@@ -335,14 +344,14 @@
     padding: 0;
   }
 
-  .platform-card__feature {
+  .products-card__feature {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 0.8rem;
     align-items: start;
   }
 
-  .platform-card__feature-icon {
+  .products-card__feature-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -355,74 +364,79 @@
     color: color-mix(in srgb, var(--grad-b) 65%, var(--text) 35%);
   }
 
-  .platform-card__feature-title {
-    display: block;
+  .products-card__feature-copy {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .products-card__feature-copy h3 {
+    margin: 0;
     font-weight: 600;
   }
 
-  .platform-card__feature-description {
-    display: block;
+  .products-card__feature-copy p {
+    margin: 0;
     font-size: var(--text-small);
     color: color-mix(in srgb, var(--text-secondary) 72%, transparent);
   }
 
-  .platform-card__actions {
+  .products-card__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm, 0.75rem);
     align-items: center;
   }
 
-  .platform-card__meta {
+  .products-card__meta {
     font-size: var(--text-small);
     color: color-mix(in srgb, var(--text-secondary) 75%, transparent);
   }
 
-  .platforms-cta {
+  .products-cta {
     padding: clamp(3.75rem, 8vw, 6.5rem) 0;
   }
 
-  :global(.platforms-cta__surface) {
+  :global(.products-cta__surface) {
     display: grid;
     gap: clamp(1.5rem, 3vw, 2rem);
     align-items: center;
   }
 
-  .platforms-cta__copy {
+  .products-cta__copy {
     display: grid;
     gap: 0.75rem;
   }
 
-  .platforms-cta__copy h2 {
+  .products-cta__copy h2 {
     margin: 0;
   }
 
-  .platforms-cta__copy p {
+  .products-cta__copy p {
     margin: 0;
     color: var(--text-secondary);
     font-size: clamp(1.05rem, 2.6vw, 1.3rem);
     line-height: 1.6;
   }
 
-  .platforms-cta__actions {
+  .products-cta__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm, 0.75rem);
   }
 
   @media (min-width: 960px) {
-    .platforms-grid {
+    .products-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    :global(.platforms-cta__surface) {
+    :global(.products-cta__surface) {
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    :global(.platform-card),
-    :global(.platforms-cta__surface) {
+    :global(.products-card),
+    :global(.products-cta__surface) {
       animation: none;
     }
   }

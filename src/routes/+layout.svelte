@@ -16,6 +16,7 @@
   import en from '$lib/i18n/en.json';
   import { morphGradient } from '$lib/animations';
   import { theme, availableThemes } from '$stores/theme';
+  import { browser } from '$app/environment';
 
   export let data;
 
@@ -43,6 +44,24 @@
   });
 
   $: routeKey = $page.url.pathname;
+
+  const accentClassForPath = (pathname: string): string => {
+    if (pathname === '/') return 'page-home';
+    if (pathname.startsWith('/products')) return 'page-products';
+    if (pathname.startsWith('/consulting')) return 'page-consulting';
+    if (pathname.startsWith('/education')) return 'page-education';
+    if (pathname.startsWith('/about')) return 'page-about';
+    if (pathname.startsWith('/resources')) return 'page-resources';
+    if (pathname.startsWith('/contact')) return 'page-contact';
+    return 'page-generic';
+  };
+
+  $: currentAccentClass = accentClassForPath($page.url.pathname);
+
+  $: if (browser) {
+    document.body.classList.remove('page-home', 'page-products', 'page-consulting', 'page-education', 'page-about', 'page-resources', 'page-contact', 'page-generic');
+    document.body.classList.add(currentAccentClass);
+  }
 
   /** @type {Record<string, any>} */
   let metaData: { [key: string]: any } = {};
@@ -105,9 +124,10 @@
 <AnimatedBackground tone="aurora" />
 
 <div class="app">
+  <a class="skip-link" href="#main-content">{$_('nav.skip_to_content') || 'Skip to content'}</a>
   <Navigation />
   
-  <main>
+  <main id="main-content">
     {#key routeKey}
       <slot />
     {/key}
@@ -128,7 +148,27 @@
     display: flex;
     flex-direction: column;
   }
-  
+
+  .skip-link {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md, 12px);
+    background: var(--bg-elev-1);
+    color: var(--text);
+    border: 1px solid var(--border);
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+    z-index: var(--z-overlay, 400);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+    outline: 3px solid var(--focus-ring-color, var(--voyage-blue));
+    outline-offset: 4px;
+  }
+
   main {
     flex: 1;
     padding-top: 80px;

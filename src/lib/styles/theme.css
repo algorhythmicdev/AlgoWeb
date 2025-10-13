@@ -20,12 +20,15 @@
   --accent: #ffd339;
   --border: rgba(10, 13, 20, 0.08);
   --radius: 16px;
+  --cta-primary-text: #ffffff;
 
   /* ==================== BRAND PRIMARIES ==================== */
   --aurora: var(--primary);
   --voyage: var(--secondary);
   --signal: var(--accent);
   --cherry: #e0322c;
+  --critical: var(--cherry);
+  --critical-text: var(--critical);
 
   --grad-angle: 120deg;
   --grad-a: var(--voyage);
@@ -35,6 +38,9 @@
   /* Textures */
   --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)'/%3E%3C/svg%3E");
   --grain: var(--grain-texture);
+  --glass-blur: 18px;
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.18);
 
   /* Motion timing */
   --slow: 22s;
@@ -258,24 +264,36 @@
   --text-headline: clamp(2rem, 4.5vw, 2.75rem);
   --text-title: clamp(1.65rem, 3.25vw, 2.25rem);
   --text-subtitle: clamp(1.35rem, 2.75vw, 1.9rem);
-  --text-body: clamp(1rem, 1.5vw, 1.125rem);
-  --text-small: clamp(0.875rem, 1.25vw, 1rem);
+  --text-body: var(--font-body-size, 1rem);
+  --text-small: clamp(0.875rem, 1.6vw, 0.95rem);
   --text-caption: clamp(0.75rem, 1vw, 0.875rem);
   --text: var(--text-body);
   --small: var(--text-small);
 
-  --h1: clamp(3rem, 7vw, 4.75rem);
-  --h2: clamp(2.5rem, 5.5vw, 3.5rem);
-  --h3: clamp(2rem, 4.5vw, 2.75rem);
+  --font-h1-size: clamp(2.25rem, 4.5vw, 2.75rem);
+  --font-h1-weight: 700;
+  --font-h1-line: 1.2;
+  --font-h2-size: clamp(1.75rem, 3.6vw, 2.1rem);
+  --font-h2-weight: 600;
+  --font-h2-line: 1.3;
+  --font-h3-size: clamp(1.5rem, 3.2vw, 1.85rem);
+  --font-h3-weight: 600;
+  --font-h3-line: 1.32;
+  --font-body-size: 1rem;
+  --font-body-weight: 400;
+  --font-body-line: 1.55;
+
+  --h1: var(--font-h1-size, 2.25rem);
+  --h2: var(--font-h2-size, 1.75rem);
+  --h3: var(--font-h3-size, 1.5rem);
   --h4: clamp(1.6rem, 3.5vw, 2.1rem);
   --h5: clamp(1.35rem, 3vw, 1.7rem);
   --h6: clamp(1.15rem, 2.25vw, 1.35rem);
-  --leading-tight: 1.1;
-  --leading-snug: 1.3;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
   --leading-normal: 1.5;
-  --leading-relaxed: 1.65;
-  --leading-loose: 1.9;
-
+  --leading-relaxed: 1.58;
+  --leading-loose: 1.75;
   --weight-light: 300;
   --weight-normal: 400;
   --weight-medium: 500;
@@ -425,6 +443,7 @@
   --primary: #8a6bff;
   --accent-1: #10e3d6;
   --accent-2: var(--signal-yellow);
+  --cta-primary-text: var(--snow);
   --muted: #bbc5d6;
   --link: #a795ff;
   --focus: #ffd339;
@@ -525,6 +544,9 @@
   --muted: #111111;
   --link: #0000ee;
   --focus: #000000;
+  --cta-primary-text: #ffffff;
+  --critical: #000000;
+  --critical-text: #000000;
   --atlantic-blue: #005bff;
   --atlantic-blue-rgb: 0, 91, 255;
   --evergreen: #00c4ad;
@@ -564,6 +586,9 @@
   --surface-glass-strong: rgba(0, 0, 0, 0.12);
   --surface-tint: rgba(0, 0, 0, 0.18);
   --grain: none;
+  --glass-blur: 0;
+  --glass-bg: transparent;
+  --glass-border: currentColor;
 
   --border-subtle: #000000;
   --border-strong: #000000;
@@ -643,4 +668,3 @@
   --accent-tertiary: var(--voyage-blue);
   --accent-tertiary-rgb: var(--voyage-blue-rgb);
 }
-

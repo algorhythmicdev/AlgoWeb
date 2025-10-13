@@ -30,18 +30,12 @@
     position: relative;
     padding: clamp(1.5rem, 3vw, 2.4rem);
     border-radius: var(--radius-lg, 24px);
-    border: 1px solid var(
-      --surface-glass-border,
-      color-mix(in srgb, var(--border) 68%, transparent 32%)
-    );
-    background: var(
-      --surface-glass-bg,
-      color-mix(in srgb, var(--bg-elev-1) 96%, rgba(var(--voyage-blue-rgb), 0.06) 4%)
-    );
+    border: 1px solid var(--surface-glass-border, color-mix(in srgb, var(--border) 68%, transparent 32%));
+    background: var(--surface-glass-bg, color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.04) 2%));
     color: inherit;
     overflow: hidden;
     isolation: isolate;
-    box-shadow: var(--surface-glass-shadow, 0 24px 60px rgba(10, 18, 39, 0.18));
+    box-shadow: var(--surface-glass-shadow, 0 20px 48px rgba(12, 20, 40, 0.12));
   }
 
   .glass-card--pad-sm {
@@ -56,17 +50,11 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(var(--voyage-blue-rgb), 0.18), transparent 65%),
-      radial-gradient(circle at 78% 28%, rgba(var(--aurora-purple-rgb), 0.14), transparent 70%),
-      var(
-        --surface-glass-bg,
-        color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--voyage-blue-rgb), 0.08) 6%)
-      );
-    opacity: var(--surface-glass-opacity, 0.9);
+    background: var(--surface-glass-fill, color-mix(in srgb, var(--bg-elev-1) 99%, rgba(var(--ink-rgb), 0.05) 1%));
+    opacity: var(--surface-glass-opacity, 1);
     pointer-events: none;
-    backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.15);
-    -webkit-backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.15);
+    backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.08);
+    -webkit-backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.08);
     transition: opacity var(--duration-fast, 240ms) ease;
   }
 
@@ -87,33 +75,32 @@
     inset: -30%;
     border-radius: inherit;
     pointer-events: none;
-  }
-
-  .glass-card::after {
-    opacity: 0;
+    background-size: 240px 240px;
+    background-repeat: repeat;
     transition: opacity var(--duration-slow, 600ms) ease;
   }
 
   .glass-card::before {
-    background-image: radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.16), transparent 72%);
-    opacity: var(--grain-opacity, 0.06);
-    transition: opacity var(--duration-slow, 600ms) ease;
+    background-image: var(--grain, var(--grain-texture));
+    opacity: var(--glass-grain-opacity, 0.05);
+  }
+
+  .glass-card::after {
+    background-image: var(--grain, var(--grain-texture));
+    opacity: 0;
   }
 
   .glass-card--halo::after {
-    background: radial-gradient(
-      circle at 50% 50%,
-      color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.45) 65%, transparent 35%),
-      transparent 70%
-    );
-    opacity: 0.65;
+    background: radial-gradient(circle at 50% 50%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.28) 60%, transparent 40%), transparent 72%);
+    opacity: 0.45;
   }
 
   .glass-card--particles::before {
-    background-image: radial-gradient(2px 2px at 30% 30%, rgba(var(--voyage-blue-rgb), 0.3), transparent 80%);
-    background-size: 180px 180px;
-    opacity: var(--grain-opacity, 0.35);
-    animation: glassParticles 40s linear infinite;
+    background-image: radial-gradient(1px 1px at 28% 30%, rgba(var(--voyage-blue-rgb), 0.22), transparent 78%), var(--grain, var(--grain-texture));
+    background-size: 220px 220px, 240px 240px;
+    background-repeat: repeat;
+    opacity: var(--glass-grain-opacity, 0.18);
+    animation: glassParticles 48s linear infinite;
   }
 
   .glass-card :global(*) {

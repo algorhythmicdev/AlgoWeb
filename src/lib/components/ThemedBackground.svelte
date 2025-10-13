@@ -205,6 +205,10 @@
     animation-delay: var(--delay);
   }
 
+  :global(html[data-theme='hc']) .background {
+    display: none;
+  }
+
   :global([data-base-theme='dark']) .wash {
     background:
       radial-gradient(

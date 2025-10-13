@@ -2,7 +2,7 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
-  import { afterUpdate, onDestroy } from 'svelte';
+  import { afterUpdate, onDestroy, onMount } from 'svelte';
   import { tick } from 'svelte';
   import { navigation } from '$stores/navigation';
   import { theme } from '$stores/theme';
@@ -23,6 +23,12 @@
   let wasMenuOpen = false;
   let lockedScrollY = 0;
   let isScrollLocked = false;
+  let isMounted = false;
+  $: navLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png';
+
+  onMount(() => {
+    isMounted = true;
+  });
 
   const focusableSelectors = [
     'a[href]:not([tabindex="-1"])',
@@ -222,7 +228,7 @@
   <div class="container nav-surface">
     <a href="/" class="nav-brand" aria-label={$_('nav.brand_aria')}>
       <img
-        src={$theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png'}
+        src={navLogoSrc}
         alt={$_('nav.brand_name')}
         width="148"
         height="40"

@@ -298,16 +298,36 @@ export function magnetic(node, { strength = 0.28, threshold = 110, glow = true, 
  * @param {HTMLElement} node
  * @param {{ colors?: string[]; speed?: number }} [options]
  */
-export function morphGradient(node, { colors = ['#6a38ff', '#1351ff', '#ffd339', '#e0322c'], speed = 3200 } = {}) {
-  if (!isBrowser || shouldReduceMotion() || colors.length < 2) {
-    node.style.background = colors[0] ?? '#6a38ff';
+export function morphGradient(
+  node,
+  {
+    colors,
+    speed = 3200
+  } = {}
+) {
+  if (!isBrowser) {
+    node.style.background = getCssToken('--gradient-primary', '#6a38ff');
+    return { destroy: () => {} };
+  }
+
+  const resolvedColors = (colors ?? [
+    getCssToken('--aurora', '#6a38ff'),
+    getCssToken('--voyage', '#1351ff'),
+    getCssToken('--signal', '#ffd339'),
+    getCssToken('--cherry', '#e0322c')
+  ]).filter(Boolean);
+
+  const isHighContrast = document.documentElement.dataset.theme === 'hc';
+
+  if (shouldReduceMotion() || isHighContrast || resolvedColors.length < 2) {
+    node.style.background = getCssToken('--gradient-primary', resolvedColors[0] ?? '#6a38ff');
     return { destroy: () => {} };
   }
 
   let index = 0;
   const apply = () => {
-    const next = (index + 1) % colors.length;
-    node.style.background = `linear-gradient(135deg, ${colors[index]}, ${colors[next]})`;
+    const next = (index + 1) % resolvedColors.length;
+    node.style.background = `linear-gradient(135deg, ${resolvedColors[index]}, ${resolvedColors[next]})`;
     index = next;
   };
 

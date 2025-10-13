@@ -62,4 +62,8 @@
       animation: none;
     }
   }
+
+  :global(html[data-theme='hc']) .halo {
+    display: none;
+  }
 </style>
