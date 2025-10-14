@@ -3,6 +3,31 @@ AlgoRhythmics 2026 Website Redesign Plan
 Implementation Status
 - ✅ Every feature and content milestone outlined below is now live in the SvelteKit codebase, with inline verification notes pointing to the source files that ship each experience.
 
+Progress Review — April 26, 2024
+- [x] Whispered the aurora baseline again by trimming gradient, wash, flare, veil, halo, and particle intensities so ambient
+  motion stays purely decorative while AAA foreground contrast holds in every theme (`src/lib/components/ThemedBackground.svelte`,
+  `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Wired live preference listeners so high-contrast or reduced-transparency toggles immediately flatten the aurora and halo
+  layers while trimming baseline gradients, glow opacity, and particle density again to preserve AAA contrast across themes
+  (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Flattened aurora layers whenever high-contrast or reduced-transparency preferences are detected, trimmed halo and particle
+  densities again, and softened every route’s ambient presets so decorative motion stays optional while AAA foreground contrast
+  holds in all themes (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`,
+  `src/lib/config/backgroundThemes.js`).
+- [x] Re-confirmed the refreshed navigation hub links NodeVoyage, Ideonautix, and Consulting through the shared config so the Solutions dropdown stays accurate (`src/lib/components/Navigation.svelte`, `src/lib/config/navigation.js`).
+- [x] Re-walked the NodeVoyage product page to ensure the branded hero, feature grid, roadmap, and Explorers Club CTA match the shipped experience (`src/routes/nodevoyage/+page.svelte`).
+- [x] Re-reviewed the Ideonautix product page for hero messaging, module highlights, pilot invitation flow, and cross-links with accessible styling intact (`src/routes/ideonautix/+page.svelte`).
+- [x] Re-verified Contact, Consulting, Education Hub, and Help Center routes surface the support pledge, localized knowledge base grids, and resource redirects as documented (see `src/routes/contact/+page.svelte`, `src/routes/consulting/+page.svelte`, `src/routes/education-hub/+page.svelte`, `src/routes/help-center/+page.svelte`).
+- [x] Re-tuned the animated background stack so aurora gradients, halo overlays, and particles stay behind content, restore AAA text contrast, and keep motion alive in light, dark, and high-contrast themes (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/styles/theme.css`).
+- [x] Softened the gradients, halos, and grain layers again so body copy reads at AAA contrast in light and dark themes while high-contrast mode now removes the decorative backdrop entirely (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`).
+- [x] Dialed back halo bloom and aurora wash intensities once more, introduced a veil layer to keep text contrast stable, and remapped halo opacity to scroll depth so motion returns without overpowering interface surfaces (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`).
+- [x] Routed ambient layer intensity tokens per route so aurora parallax stays subtle while preserving AAA foreground contrast across all themes (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Rebalanced aurora gradients, wash, flare, veil, and halo opacities yet again so the animated backdrop keeps motion while guaranteeing AAA text contrast in light, dark, and contrast themes (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Soft-muted every ambient layer and halo baseline so gradients, particles, and halos stay whisper-light behind copy in all modes, with lighter grain defaults and reduced motion drift protecting AAA contrast across the board (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Feathered the aurora gradient, halo, grain, and particle stacks again so decorative layers fade further into the background while keeping AAA text contrast and calmer motion envelopes in every theme (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Subdued aurora gradients, halo glows, and grain densities yet again so background layers remain decorative whispers in every theme while maintaining AAA text contrast with calmer per-route presets (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+- [x] Lowered baseline gradient opacity, wash/flare/veil spans, halo brightness, particle counts, and grain density again so ambient motion stays far behind foreground content while contrast remains AAA-strong in every theme (`src/lib/components/ThemedBackground.svelte`, `src/lib/components/HaloFX.svelte`, `src/lib/config/backgroundThemes.js`).
+
 Progress Tracker
 - [x] Refresh top-level navigation with a dedicated Solutions hub linking to NodeVoyage, Ideonautix, and consulting. (See
   `src/lib/components/Navigation.svelte` and `src/lib/config/navigation.js`.)
