@@ -36,8 +36,8 @@
   --grad: linear-gradient(var(--grad-angle), var(--grad-a) 0%, var(--grad-b) 100%);
 
   /* Textures */
-  --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)'/%3E%3C/svg%3E");
-  --grain: var(--grain-texture);
+  --grain-texture: none;
+  --grain: none;
   /* ==================== GLASSMORPHISM ==================== */
   --glass-blur: 18px;
   --glass-blur-sm: 24px;
@@ -433,8 +433,8 @@
     color-mix(in srgb, var(--surface) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%) 0%,
     color-mix(in srgb, var(--surface-subtle) 86%, rgba(var(--aurora-purple-rgb), 0.18) 14%) 100%
   );
-  --grain-blend-mode: soft-light;
-  --grain-opacity: 0.18;
+  --grain-blend-mode: normal;
+  --grain-opacity: 0;
 
   /* ==================== MOTION & ELEVATION ==================== */
   /* ==================== MOTION ==================== */

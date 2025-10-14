@@ -28,14 +28,14 @@
 <style>
   .glass-card {
     position: relative;
-    padding: var(--card-padding-lg);
-    border-radius: 48px;
+    padding: var(--space-3xl);
+    border-radius: 64px;
     border: 2px solid var(--border);
     background: var(--bg-elev-1);
     color: var(--text);
     overflow: visible;
     isolation: isolate;
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-2xl);
   }
 
   .glass-card--pad-sm {
@@ -84,40 +84,7 @@
     outline-offset: 3px;
   }
 
-  .glass-card::after,
-  .glass-card::before {
-    content: '';
-    position: absolute;
-    inset: -30%;
-    border-radius: inherit;
-    pointer-events: none;
-    background-size: 240px 240px;
-    background-repeat: repeat;
-    transition: opacity var(--duration-slow, 600ms) ease;
-  }
 
-  .glass-card::before {
-    background-image: var(--grain, var(--grain-texture));
-    opacity: var(--glass-grain-opacity, 0.05);
-  }
-
-  .glass-card::after {
-    background-image: var(--grain, var(--grain-texture));
-    opacity: 0;
-  }
-
-  .glass-card--halo::after {
-    background: radial-gradient(circle at 50% 50%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.28) 60%, transparent 40%), transparent 72%);
-    opacity: 0.45;
-  }
-
-  .glass-card--particles::before {
-    background-image: radial-gradient(1px 1px at 28% 30%, rgba(var(--voyage-blue-rgb), 0.22), transparent 78%), var(--grain, var(--grain-texture));
-    background-size: 220px 220px, 240px 240px;
-    background-repeat: repeat;
-    opacity: var(--glass-grain-opacity, 0.18);
-    animation: glassParticles 48s linear infinite;
-  }
 
   .glass-card :global(*) {
     position: relative;
@@ -150,30 +117,12 @@
     outline: 2px solid currentColor;
   }
 
-  :global(html[data-theme='hc'] .glass-card::after),
-  :global(html[data-theme='hc'] .glass-card::before) {
-    display: none;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .glass-card--interactive,
     .glass-card--interactive:hover,
     .glass-card--interactive:focus-visible {
       transform: none;
-      box-shadow: 0 24px 60px rgba(10, 18, 39, 0.18);
-    }
-
-    .glass-card--particles::before {
-      animation: none;
-    }
-  }
-
-  @keyframes glassParticles {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(-200px, -120px, 0);
+      box-shadow: var(--shadow-xl);
     }
   }
 </style>

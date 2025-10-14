@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import '$lib/styles/theme.css';
   import '$lib/styles/global.css';
   import '$lib/styles/typography.css';
@@ -8,7 +8,7 @@
   import Footer from '$components/Footer.svelte';
   import AICompanion from '$components/AICompanion.svelte';
   import LoadingOverlay from '$components/LoadingOverlay.svelte';
-  import AnimatedBackground from '$components/AnimatedBackground.svelte';
+  import ParticleNetwork from '$components/ParticleNetwork.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
   import { onMount, onDestroy } from 'svelte';
@@ -131,7 +131,7 @@
 
 <svelte:window on:keydown={(e)=>{ if (e.key === 't') theme.toggle(); }} />
 
-<AnimatedBackground tone="aurora" />
+<ParticleNetwork />
 
 <div class="app">
   <a class="skip-link" href="#main-content">{$_('nav.skip_to_content') || 'Skip to content'}</a>

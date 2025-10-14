@@ -42,7 +42,6 @@
   <div class="hero__background" aria-hidden="true">
     <div class="hero__background-layer hero__background-layer--gradient"></div>
     <div class="hero__background-layer hero__background-layer--overlay"></div>
-    <div class="hero__background-layer hero__background-layer--grain"></div>
   </div>
 
   <div class="hero__layout">
@@ -142,12 +141,7 @@
     opacity: 0.95;
   }
 
-  .hero__background-layer--grain {
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 320px 320px;
-    opacity: 0.06;
-    mix-blend-mode: soft-light;
-  }
+
 
   .hero__accent {
     position: absolute;
@@ -207,9 +201,9 @@
     position: relative;
     z-index: var(--z-content);
     display: grid;
-    gap: var(--space-lg);
-    padding: var(--space-3xl);
-    border-radius: 48px;
+    gap: var(--space-xl);
+    padding: var(--space-4xl);
+    border-radius: 64px;
     background: var(--bg-elev-1);
     border: 2px solid var(--border);
     box-shadow: var(--shadow-2xl);
@@ -228,16 +222,7 @@
     transform: translate3d(0, 0, 0);
   }
 
-  .hero__content::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 280px 280px;
-    opacity: 0.08;
-    mix-blend-mode: soft-light;
-    pointer-events: none;
-  }
+
 
   .hero__status {
     display: inline-flex;
@@ -300,14 +285,14 @@
   .hero__highlights {
     position: relative;
     z-index: var(--z-content);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-2xl);
     padding: var(--space-3xl);
-    border-radius: 48px;
+    border-radius: 64px;
     background: var(--bg-elev-1);
     border: 2px solid var(--border);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-2xl);
     display: grid;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     animation: hero-entrance var(--duration-hero) var(--ease-spring) both;
     animation-delay: var(--duration-micro);
   }
