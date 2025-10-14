@@ -32,7 +32,6 @@
     }
 
     cleanupMorphGradient = morphGradient(document.documentElement, {
-      colors: ['#6A38FF', '#1351FF', '#E0322C', '#FFD339'],
       speed: 20000 // A longer duration for a subtle, calm shift
     });
   });

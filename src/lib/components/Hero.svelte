@@ -27,6 +27,12 @@
   aria-labelledby={ariaLabelledBy}
   aria-describedby={ariaDescribedBy}
 >
+  <div class="hero__background" aria-hidden="true">
+    <div class="hero__background-layer hero__background-layer--gradient"></div>
+    <div class="hero__background-layer hero__background-layer--overlay"></div>
+    <div class="hero__background-layer hero__background-layer--grain"></div>
+  </div>
+
   <div class="hero__layout">
     <div class="hero__main">
       <div class="hero__content">
@@ -81,59 +87,70 @@
     --hero-text: var(--text);
     --hero-grad-start: var(--aurora-purple);
     --hero-grad-stop: var(--voyage-blue);
-    --hero-overlay: color-mix(in srgb, var(--bg) 72%, transparent 28%);
+    --hero-overlay: color-mix(in srgb, var(--bg) 70%, transparent 30%);
+    --hero-padding-block: var(--section-padding-desktop);
+    --hero-padding-inline: var(--space-4xl);
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.5rem, 5vw, 3.5rem);
+    padding-block: var(--hero-padding-block);
+    padding-inline: var(--hero-padding-inline);
     color: var(--hero-text);
     background: var(--hero-surface);
-    border-radius: clamp(24px, 5vw, 40px);
+    border-radius: var(--radius-2xl);
     border: 1px solid color-mix(in srgb, var(--border) 72%, transparent 28%);
     box-shadow: 0 26px 64px rgba(6, 20, 53, 0.12);
   }
 
-  .hero::before {
-    content: '';
+  .hero__background {
     position: absolute;
-    inset: -12%;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero__background-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero__background-layer--gradient {
     background:
       radial-gradient(120% 150% at 18% 20%, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.55) 78%, transparent 22%), transparent 72%),
       radial-gradient(140% 180% at 82% 0%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 70%, transparent 30%), transparent 78%),
-      linear-gradient(130deg, color-mix(in srgb, var(--voyage-blue) 86%, transparent 14%), color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%)),
-      var(--hero-overlay);
+      linear-gradient(130deg, color-mix(in srgb, var(--voyage-blue) 86%, transparent 14%), color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%));
     filter: saturate(1.05);
-    opacity: 0.94;
-    pointer-events: none;
-    transform: translate3d(0, 0, 0);
-    animation: hero-pan 46s ease-in-out infinite alternate;
-    z-index: 0;
+    opacity: 0.9;
+    animation: hero-pan var(--aurora-speed, 46s) ease-in-out infinite alternate;
   }
 
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
+  .hero__background-layer--overlay {
+    background: var(--hero-overlay);
+    mix-blend-mode: var(--hero-overlay-blend, overlay);
+    opacity: var(--hero-overlay-opacity, 0.72);
+  }
+
+  .hero__background-layer--grain {
     background-image: var(--grain, var(--grain-texture));
     background-size: 320px 320px;
     opacity: 0.06;
-    pointer-events: none;
     mix-blend-mode: soft-light;
-    z-index: 0;
   }
 
   .hero__accent {
     position: absolute;
-    inset-inline: clamp(1.2rem, 6vw, 3.2rem);
-    bottom: clamp(1.2rem, 3vw, 2rem);
-    height: 12px;
-    border-radius: 999px;
+    inset-inline: var(--space-xl);
+    bottom: var(--space-lg);
+    height: var(--space-sm);
+    border-radius: var(--radius-full);
     background: linear-gradient(90deg, var(--hero-grad-start), var(--hero-grad-stop));
     background-size: 200% 100%;
     opacity: 0.9;
     animation: hero-bar 18s ease-in-out infinite alternate;
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
   }
 
   @keyframes hero-pan {
@@ -157,13 +174,13 @@
   .hero__layout {
     position: relative;
     display: grid;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: var(--space-2xl);
     align-items: start;
     z-index: 1;
   }
 
   .hero--with-aside .hero__layout {
-    gap: clamp(2.5rem, 5vw, 4rem);
+    gap: var(--space-3xl);
   }
 
   @media (min-width: 960px) {
@@ -174,15 +191,15 @@
 
   .hero__main {
     display: grid;
-    gap: clamp(1.4rem, 3.4vw, 2.2rem);
+    gap: var(--space-xl);
   }
 
   .hero__content {
     position: relative;
     display: grid;
-    gap: clamp(1rem, 2.8vw, 1.8rem);
-    padding: clamp(1.6rem, 3vw, 2.4rem);
-    border-radius: clamp(22px, 4vw, 32px);
+    gap: var(--space-lg);
+    padding: var(--space-3xl);
+    border-radius: var(--radius-xl);
     background: color-mix(in srgb, var(--hero-surface) 82%, rgba(var(--ink-rgb), 0.08) 18%);
     border: 1px solid color-mix(in srgb, var(--border) 62%, transparent 38%);
     box-shadow: 0 26px 60px rgba(6, 20, 53, 0.16);
@@ -217,14 +234,14 @@
   .hero__status {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
   }
 
   .hero__title {
     margin: 0;
     font-family: var(--font-display);
     font-weight: var(--font-h1-weight, 700);
-    font-size: var(--font-h1-size, 2.25rem);
+    font-size: var(--h1);
     line-height: var(--font-h1-line, 1.2);
     letter-spacing: -0.01em;
     color: var(--heading-color, var(--hero-text));
@@ -234,8 +251,8 @@
   .hero__lead {
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(1.08rem, 2.6vw, 1.28rem);
-    line-height: 1.6;
+    font-size: var(--text-subtitle);
+    line-height: var(--leading-relaxed);
     max-width: 48ch;
     text-wrap: balance;
   }
@@ -246,18 +263,18 @@
 
   .hero__description {
     display: grid;
-    gap: clamp(0.75rem, 2.4vw, 1.2rem);
+    gap: var(--space-md);
     color: var(--text-secondary);
-    font-size: clamp(1rem, 2.2vw, 1.1rem);
-    line-height: 1.6;
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
     max-width: 60ch;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(0.85rem, 2vw, 1.2rem);
-    margin-top: clamp(1.4rem, 3.6vw, 2.2rem);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
   }
 
   .hero__actions :global(*) {
@@ -265,14 +282,14 @@
   }
 
   .hero__highlights {
-    margin-top: clamp(1.6rem, 4vw, 2.6rem);
-    padding: clamp(1.5rem, 3vw, 2.25rem);
+    margin-top: var(--space-xl);
+    padding: var(--space-3xl);
     border-radius: var(--radius-lg, 24px);
     background: var(--hero-surface-elev);
     border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
     box-shadow: 0 18px 42px rgba(12, 20, 40, 0.08);
     display: grid;
-    gap: clamp(0.75rem, 2vw, 1.2rem);
+    gap: var(--space-md);
     animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
     animation-delay: 120ms;
   }
@@ -280,27 +297,27 @@
   .hero__highlights :global(h2),
   .hero__highlights :global(h3) {
     margin: 0;
-    font-size: var(--font-h3-size, 1.5rem);
+    font-size: var(--h3);
   }
 
   .hero__highlights :global(p) {
     margin: 0;
     color: var(--text-secondary);
-    line-height: 1.55;
+    line-height: var(--leading-relaxed);
   }
 
   .hero__highlights :global(ul) {
     margin: 0;
-    padding-left: 1.2rem;
+    padding-inline-start: var(--space-xl);
     list-style: disc;
     display: grid;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     color: var(--text-secondary);
   }
 
   .hero__aside {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.6rem);
+    gap: var(--space-lg);
     animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
     animation-delay: 160ms;
   }
@@ -355,16 +372,15 @@
     box-shadow: none;
   }
 
-  :global(html[data-theme='hc'] .hero::before),
-  :global(html[data-theme='hc'] .hero::after) {
+  :global(html[data-theme='hc'] .hero__background-layer) {
     display: none;
   }
 
   :global(html[data-theme='hc'] .hero__accent) {
     position: static;
     width: 100%;
-    height: 0.4rem;
-    margin-top: clamp(1.2rem, 3vw, 1.8rem);
+    height: var(--space-sm);
+    margin-top: var(--space-lg);
     background: currentColor;
     opacity: 1;
   }
@@ -380,7 +396,8 @@
 
   @media (max-width: 640px) {
     .hero {
-      padding: clamp(3rem, 8vw, 4rem) clamp(1.25rem, 5vw, 2rem);
+      --hero-padding-block: var(--section-padding-mobile);
+      --hero-padding-inline: var(--space-2xl);
     }
 
     .hero__actions {
@@ -390,7 +407,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero::before,
+    .hero__background-layer--gradient,
     .hero__accent {
       animation: none;
       background-position: 50% 50%;

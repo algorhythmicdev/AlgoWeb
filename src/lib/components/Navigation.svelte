@@ -482,7 +482,7 @@
     border-radius: var(--radius-full, 999px);
     background: color-mix(in srgb, var(--surface-chip-bg) 70%, transparent 30%);
     border: 1px solid color-mix(in srgb, var(--surface-chip-border) 60%, transparent 40%);
-    box-shadow: 0 12px 28px rgba(10, 18, 36, 0.08);
+    box-shadow: 0 12px 28px rgba(var(--ink-rgb), 0.08);
   }
 
   .nav-window-control {
@@ -491,22 +491,22 @@
     position: relative;
     border-radius: 999px;
     border: 1px solid transparent;
-    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 1px 2px rgba(10, 18, 36, 0.18);
+    box-shadow: inset 0 1px 2px rgba(var(--snow-rgb), 0.35), 0 1px 2px rgba(var(--ink-rgb), 0.18);
   }
 
   .nav-window-control--close {
-    background: color-mix(in srgb, var(--cherry-pop) 82%, #ffffff 18%);
-    border-color: color-mix(in srgb, var(--cherry-pop) 62%, rgba(0, 0, 0, 0.08) 38%);
+    background: color-mix(in srgb, var(--cherry-pop) 82%, var(--snow) 18%);
+    border-color: color-mix(in srgb, var(--cherry-pop) 62%, rgba(var(--ink-rgb), 0.08) 38%);
   }
 
   .nav-window-control--minimise {
-    background: color-mix(in srgb, var(--signal-yellow) 86%, #ffffff 14%);
-    border-color: color-mix(in srgb, var(--signal-yellow) 58%, rgba(0, 0, 0, 0.12) 42%);
+    background: color-mix(in srgb, var(--signal-yellow) 86%, var(--snow) 14%);
+    border-color: color-mix(in srgb, var(--signal-yellow) 58%, rgba(var(--ink-rgb), 0.12) 42%);
   }
 
   .nav-window-control--expand {
-    background: color-mix(in srgb, var(--voyage-blue) 78%, #ffffff 22%);
-    border-color: color-mix(in srgb, var(--voyage-blue) 60%, rgba(0, 0, 0, 0.1) 40%);
+    background: color-mix(in srgb, var(--voyage-blue) 78%, var(--snow) 22%);
+    border-color: color-mix(in srgb, var(--voyage-blue) 60%, rgba(var(--ink-rgb), 0.1) 40%);
   }
 
   .nav-window-control::after {
@@ -514,7 +514,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+    background: linear-gradient(145deg, rgba(var(--snow-rgb), 0.45), rgba(var(--snow-rgb), 0));
     opacity: 0.75;
     pointer-events: none;
   }
@@ -609,7 +609,7 @@
     border-color: var(--surface-chip-border);
     transform: translateY(-1px);
     --nav-focus-shadow-base: var(--surface-chip-shadow);
-    box-shadow: var(--focus-ring), var(--nav-focus-shadow-base);
+    box-shadow: var(--focus-ring-shadow), var(--nav-focus-shadow-base);
     animation: navFocusPulse 1.6s ease-in-out infinite;
   }
 
@@ -695,7 +695,7 @@
   .nav-submenu__link:focus-visible {
     border-color: color-mix(in srgb, var(--surface-field-border) 68%, rgba(var(--aurora-purple-rgb), 0.28) 32%);
     transform: translateY(-2px);
-    box-shadow: var(--focus-ring);
+    box-shadow: var(--focus-ring-shadow);
   }
 
   .nav-submenu__title {
@@ -751,7 +751,7 @@
   .nav-trigger:focus-visible {
     outline: none;
     --nav-focus-shadow-base: var(--surface-pill-shadow);
-    box-shadow: var(--focus-ring), var(--nav-focus-shadow-base);
+    box-shadow: var(--focus-ring-shadow), var(--nav-focus-shadow-base);
     animation: navFocusPulse 1.6s ease-in-out infinite;
   }
 
@@ -794,7 +794,7 @@
   @keyframes navFocusPulse {
     0%,
     100% {
-      box-shadow: var(--focus-ring), var(--nav-focus-shadow-base, transparent);
+      box-shadow: var(--focus-ring-shadow), var(--nav-focus-shadow-base, transparent);
     }
 
     50% {

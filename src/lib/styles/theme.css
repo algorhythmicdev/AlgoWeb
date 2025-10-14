@@ -132,7 +132,7 @@
   --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, #ffffff 30%);
   --focus-ring-shadow: 0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 70%, transparent 30%);
   --focus-ring-offset: 3px;
-  --focus-ring: 0 0 0 2px var(--focus-ring-color);
+  --focus-ring: 2px solid var(--focus-ring-color);
   --focus-ring-contrast: 0 0 0 2px color-mix(in srgb, var(--slate-base) 70%, #ffffff 30%);
 
   /* Core surface anchors referenced across themes */
@@ -468,7 +468,7 @@
   --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 60%, #dde7ff 40%);
   --focus-ring-shadow: 0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 80%, transparent 20%);
   --focus-ring-offset: 3px;
-  --focus-ring: 0 0 0 2px var(--focus-ring-color);
+  --focus-ring: 2px solid var(--focus-ring-color);
   --focus-ring-contrast: 0 0 0 2px color-mix(in srgb, #f7f8ff 78%, rgba(0, 0, 0, 0.2) 22%);
 
   --bg-primary: var(--bg);
@@ -575,7 +575,7 @@
   --focus-ring-color: currentColor;
   --focus-ring-shadow: 0 0 0 2px currentColor;
   --focus-ring-offset: 3px;
-  --focus-ring: 0 0 0 2px currentColor;
+  --focus-ring: 2px solid var(--focus-ring-color);
   --focus-ring-contrast: 0 0 0 2px currentColor;
 
   --bg-primary: var(--bg);

@@ -343,7 +343,7 @@
     border-color: var(--control-border-strong);
     color: var(--voyage-blue);
     box-shadow:
-      var(--focus-ring),
+      var(--focus-ring-shadow),
       0 0 0 5px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
       0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
     animation: switcherFocusPulse 1.6s ease-in-out infinite;
@@ -409,7 +409,7 @@
     0%,
     100% {
       box-shadow:
-        var(--focus-ring),
+        var(--focus-ring-shadow),
         0 0 0 5px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
         0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
     }

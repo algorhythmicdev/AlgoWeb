@@ -454,15 +454,15 @@
   }
 
   :global([data-base-theme='dark']) .footer {
-    --footer-text: #bbc5d6;
-    --footer-strong: #f2f5f9;
-    --footer-muted: color-mix(in srgb, #bbc5d6 70%, rgba(12, 16, 24, 0.56) 30%);
-    --footer-border: color-mix(in srgb, rgba(187, 197, 214, 0.55) 70%, transparent 30%);
-    background: rgba(18, 23, 34, 0.82);
+    --footer-text: var(--text-secondary);
+    --footer-strong: var(--text-strong);
+    --footer-muted: color-mix(in srgb, var(--text-secondary) 70%, rgba(var(--night-rgb), 0.56) 30%);
+    --footer-border: color-mix(in srgb, var(--border-strong) 70%, transparent 30%);
+    background: rgba(var(--night-rgb), 0.82);
     border-top: 1px solid var(--footer-border);
-    box-shadow: 0 -12px 32px rgba(5, 8, 14, 0.32);
-    backdrop-filter: blur(10px) saturate(1.08);
-    -webkit-backdrop-filter: blur(10px) saturate(1.08);
+    box-shadow: 0 -12px 32px rgba(var(--ink-rgb), 0.32);
+    backdrop-filter: blur(var(--glass-blur, 10px)) saturate(1.08);
+    -webkit-backdrop-filter: blur(var(--glass-blur, 10px)) saturate(1.08);
   }
 
   :global([data-base-theme='dark']) .footer::before {
