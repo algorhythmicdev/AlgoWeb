@@ -5,94 +5,216 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { _ } from 'svelte-i18n';
+  import { translateOrFallback } from '$lib/utils/i18n';
+
+  const t = (key: string, fallback: string, params?: Record<string, unknown>) =>
+    translateOrFallback($_, key, fallback, params);
 
   const hero = {
-    title: 'NodeVoyage',
-    subtitle:
+    titleKey: 'nodevoyage.hero.title',
+    titleFallback: 'NodeVoyage',
+    subtitleKey: 'nodevoyage.hero.subtitle',
+    subtitleFallback:
       'Fun. Travel. Memories. Community. Your AI travel companion that keeps every explorer in the loop.',
-    description:
+    descriptionKey: 'nodevoyage.hero.description',
+    descriptionFallback:
       'Describe your dream journey and Nodi orchestrates an itinerary with accessibility, sustainability, and surprise in mind. Plan with friends in real time, translate signs on the go, and capture stories that outlast the flight home.',
     primaryCta: {
       href: '#explorers-club',
-      label: 'Join the Explorers Club'
+      labelKey: 'nodevoyage.hero.primary_cta',
+      labelFallback: 'Join the Explorers Club'
     },
     secondaryCta: {
       href: '/solutions',
-      label: 'Back to solutions overview'
+      labelKey: 'nodevoyage.hero.secondary_cta',
+      labelFallback: 'Back to solutions overview'
+    },
+    highlights: [
+      {
+        labelKey: 'nodevoyage.hero.highlights.status_label',
+        labelFallback: 'Status',
+        valueKey: 'nodevoyage.hero.highlights.status_value',
+        valueFallback: 'Alpha in progress'
+      },
+      {
+        labelKey: 'nodevoyage.hero.highlights.focus_label',
+        labelFallback: 'Focus',
+        valueKey: 'nodevoyage.hero.highlights.focus_value',
+        valueFallback: 'Collaborative, sustainable travel'
+      },
+      {
+        labelKey: 'nodevoyage.hero.highlights.milestone_label',
+        labelFallback: 'Next milestone',
+        valueKey: 'nodevoyage.hero.highlights.milestone_value',
+        valueFallback: 'Public beta · June 2026'
+      }
+    ]
+  } as const;
+
+  const features = {
+    titleKey: 'nodevoyage.features.title',
+    titleFallback: 'What makes NodeVoyage different?',
+    leadKey: 'nodevoyage.features.lead',
+    leadFallback:
+      'NodeVoyage feels like a playful travel OS: windowed layouts, frosted panels, and an AI buddy who keeps plans tidy while celebrating spontaneity.',
+    cards: [
+      {
+        icon: 'map',
+        titleKey: 'nodevoyage.features.cards.0.title',
+        titleFallback: 'Smart Trip Planner',
+        copyKey: 'nodevoyage.features.cards.0.copy',
+        copyFallback:
+          'Tell Nodi how you want to feel on your next adventure. NodeVoyage balances hidden gems with essentials, optimises routes, and adjusts for mobility or sensory needs automatically.'
+      },
+      {
+        icon: 'people',
+        titleKey: 'nodevoyage.features.cards.1.title',
+        titleFallback: 'Collaborative Crews',
+        copyKey: 'nodevoyage.features.cards.1.copy',
+        copyFallback:
+          'Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with calm notifications.'
+      },
+      {
+        icon: 'device',
+        titleKey: 'nodevoyage.features.cards.2.title',
+        titleFallback: 'AR Translation & Capture',
+        copyKey: 'nodevoyage.features.cards.2.copy',
+        copyFallback:
+          'Use the mobile app to translate menus, capture audio notes, or pin AR “memory anchors” to revisit favourite spots later.'
+      },
+      {
+        icon: 'target',
+        titleKey: 'nodevoyage.features.cards.3.title',
+        titleFallback: 'Eco & Community Missions',
+        copyKey: 'nodevoyage.features.cards.3.copy',
+        copyFallback:
+          'Earn badges for low-impact choices, community storytelling, and cultural challenges curated with local partners.'
+      },
+      {
+        icon: 'idea',
+        titleKey: 'nodevoyage.features.cards.4.title',
+        titleFallback: 'Travel Journal & Reel',
+        copyKey: 'nodevoyage.features.cards.4.copy',
+        copyFallback:
+          'After the trip, NodeVoyage weaves your photos, notes, and check-ins into a shareable story or highlight reel—always with edit controls and privacy toggles.'
+      }
+    ]
+  } as const;
+
+  const roadmap = {
+    eyebrowKey: 'nodevoyage.roadmap.eyebrow',
+    eyebrowFallback: 'Roadmap',
+    titleKey: 'nodevoyage.roadmap.title',
+    titleFallback: '2026 journey',
+    leadKey: 'nodevoyage.roadmap.lead',
+    leadFallback:
+      'We are building NodeVoyage out in the open. Each phase brings more collaborative magic while reinforcing accessibility, localisation, and transparent AI coaching.',
+    items: [
+      {
+        phaseKey: 'nodevoyage.roadmap.items.0.phase',
+        phaseFallback: 'Alpha launch',
+        timingKey: 'nodevoyage.roadmap.items.0.timing',
+        timingFallback: 'April 2026',
+        detailsKey: 'nodevoyage.roadmap.items.0.details',
+        detailsFallback:
+          'First wave of explorers test collaborative itineraries, AR translation, and sustainability missions alongside our team.'
+      },
+      {
+        phaseKey: 'nodevoyage.roadmap.items.1.phase',
+        phaseFallback: 'Public beta',
+        timingKey: 'nodevoyage.roadmap.items.1.timing',
+        timingFallback: 'June 2026',
+        detailsKey: 'nodevoyage.roadmap.items.1.details',
+        detailsFallback:
+          'Expanded language support, travel journal exports, and integrations with accessibility partners land for summer adventures.'
+      },
+      {
+        phaseKey: 'nodevoyage.roadmap.items.2.phase',
+        phaseFallback: 'Community rollout',
+        timingKey: 'nodevoyage.roadmap.items.2.timing',
+        timingFallback: 'Late 2026',
+        detailsKey: 'nodevoyage.roadmap.items.2.details',
+        detailsFallback:
+          'Goal of 10,000 travellers across Latvia and neighbouring regions, with classroom pilots and tourism collaborations.'
+      }
+    ]
+  } as const;
+
+  const differentiators = {
+    eyebrowKey: 'nodevoyage.differentiators.eyebrow',
+    eyebrowFallback: 'Why explorers stay',
+    titleKey: 'nodevoyage.differentiators.title',
+    titleFallback: 'Calm, trustworthy travel intelligence',
+    leadKey: 'nodevoyage.differentiators.lead',
+    leadFallback:
+      'NodeVoyage blends signage-inspired clarity with travel storytelling. It is approachable for first-time travellers and powerful for adventure planners who want deeper context.',
+    ctaKey: 'nodevoyage.differentiators.cta',
+    ctaFallback: 'Partner with us',
+    cards: [
+      {
+        icon: 'bolt',
+        titleKey: 'nodevoyage.differentiators.cards.0.title',
+        titleFallback: 'AI that explains itself',
+        copyKey: 'nodevoyage.differentiators.cards.0.copy',
+        copyFallback: 'Every itinerary comes with plain-language reasoning, accessible alternatives, and opt-out controls.'
+      },
+      {
+        icon: 'chart',
+        titleKey: 'nodevoyage.differentiators.cards.1.title',
+        titleFallback: 'Inclusive by default',
+        copyKey: 'nodevoyage.differentiators.cards.1.copy',
+        copyFallback: 'AAA contrast themes, reduced-motion support, and multi-language content are core—not add-ons.'
+      },
+      {
+        icon: 'package',
+        titleKey: 'nodevoyage.differentiators.cards.2.title',
+        titleFallback: 'Built with partners',
+        copyKey: 'nodevoyage.differentiators.cards.2.copy',
+        copyFallback:
+          'Co-designed with travel educators, accessibility advocates, and signage specialists from Ideju Kauss programmes.'
+      }
+    ]
+  } as const;
+
+  const explorers = {
+    eyebrowKey: 'nodevoyage.explorers.eyebrow',
+    eyebrowFallback: 'NodeVoyage Explorers Club',
+    titleKey: 'nodevoyage.explorers.title',
+    titleFallback: 'Be first aboard the beta',
+    copyKey: 'nodevoyage.explorers.copy',
+    copyFallback:
+      'Leave your details to receive early access invites, mission briefs, and behind-the-scenes updates as we prepare the public beta. We keep emails minimal and never share your contact.',
+    form: {
+      nameLabelKey: 'nodevoyage.explorers.form.name_label',
+      nameLabelFallback: 'Name (optional)',
+      emailLabelKey: 'nodevoyage.explorers.form.email_label',
+      emailLabelFallback: 'Email',
+      submitKey: 'nodevoyage.explorers.form.submit',
+      submitFallback: 'Request invite',
+      successKey: 'nodevoyage.explorers.form.success',
+      successFallback: 'Thanks! We just opened your email client so you can confirm the request.',
+      privacyKey: 'nodevoyage.explorers.form.privacy',
+      privacyFallback:
+        'By joining, you agree to receive NodeVoyage development updates. You can unsubscribe anytime and we will only use your email for these messages.',
+      errorKey: 'nodevoyage.explorers.form.error',
+      errorFallback: 'Add a valid email so we can send your invite.',
+      subjectKey: 'nodevoyage.explorers.form.subject',
+      subjectFallback: 'NodeVoyage Explorers Club signup'
     }
   } as const;
 
-  const featureCards = [
-    {
-      icon: 'map',
-      title: 'Smart Trip Planner',
-      copy:
-        'Tell Nodi how you want to feel on your next adventure. NodeVoyage balances hidden gems with essentials, optimises routes, and adjusts for mobility or sensory needs automatically.'
-    },
-    {
-      icon: 'people',
-      title: 'Collaborative Crews',
-      copy:
-        'Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with calm notifications.'
-    },
-    {
-      icon: 'device',
-      title: 'AR Translation & Capture',
-      copy:
-        'Use the mobile app to translate menus, capture audio notes, or pin AR “memory anchors” to revisit favourite spots later.'
-    },
-    {
-      icon: 'target',
-      title: 'Eco & Community Missions',
-      copy:
-        'Earn badges for low-impact choices, community storytelling, and cultural challenges curated with local partners.'
-    },
-    {
-      icon: 'idea',
-      title: 'Travel Journal & Reel',
-      copy:
-        'After the trip, NodeVoyage weaves your photos, notes, and check-ins into a shareable story or highlight reel—always with edit controls and privacy toggles.'
-    }
-  ] as const;
-
-  const roadmap = [
-    {
-      phase: 'Alpha launch',
-      timing: 'April 2026',
-      details:
-        'First wave of explorers test collaborative itineraries, AR translation, and sustainability missions alongside our team.'
-    },
-    {
-      phase: 'Public beta',
-      timing: 'June 2026',
-      details:
-        'Expanded language support, travel journal exports, and integrations with accessibility partners land for summer adventures.'
-    },
-    {
-      phase: 'Community rollout',
-      timing: 'Late 2026',
-      details:
-        'Goal of 10,000 travellers across Latvia and neighbouring regions, with classroom pilots and tourism collaborations.'
-    }
-  ] as const;
-
-  const differentiators = [
-    {
-      icon: 'bolt',
-      title: 'AI that explains itself',
-      copy: 'Every itinerary comes with plain-language reasoning, accessible alternatives, and opt-out controls.'
-    },
-    {
-      icon: 'chart',
-      title: 'Inclusive by default',
-      copy: 'AAA contrast themes, reduced-motion support, and multi-language content are core—not add-ons.'
-    },
-    {
-      icon: 'package',
-      title: 'Built with partners',
-      copy: 'Co-designed with travel educators, accessibility advocates, and signage specialists from Ideju Kauss programmes.'
-    }
-  ] as const;
+  const related = {
+    titleKey: 'nodevoyage.cta.title',
+    titleFallback: 'Curious about Ideonautix too?',
+    copyKey: 'nodevoyage.cta.copy',
+    copyFallback:
+      'If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our startup OS that keeps creative projects on track. Both platforms share the same inclusive design system.',
+    primaryCtaKey: 'nodevoyage.cta.primary',
+    primaryCtaFallback: 'Explore Ideonautix',
+    secondaryCtaKey: 'nodevoyage.cta.secondary',
+    secondaryCtaFallback: 'Talk to our team'
+  } as const;
 
   let explorerEmail = '';
   let explorerName = '';
@@ -109,12 +231,12 @@
     const trimmedEmail = explorerEmail.trim();
     if (!trimmedEmail || !/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
       explorerStatus = 'error';
-      explorerError = 'Add a valid email so we can send your invite.';
+      explorerError = t(explorers.form.errorKey, explorers.form.errorFallback);
       return;
     }
 
     const namePart = explorerName.trim() ? `Name: ${explorerName.trim()}%0A` : '';
-    const subject = encodeURIComponent('NodeVoyage Explorers Club signup');
+    const subject = encodeURIComponent(t(explorers.form.subjectKey, explorers.form.subjectFallback));
     const body = encodeURIComponent(`${namePart}Email: ${trimmedEmail}`);
     window.location.href = `mailto:help@algorhythmics.com?subject=${subject}&body=${body}`;
     explorerStatus = 'success';
@@ -123,52 +245,52 @@
   };
 </script>
 
-<Hero variant="aurora" align="center" title={hero.title} subtitle={hero.subtitle}>
+<Hero
+  variant="aurora"
+  align="center"
+  title={t(hero.titleKey, hero.titleFallback)}
+  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+>
   <svelte:fragment slot="description">
-    <p>{hero.description}</p>
+    <p>{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
 
   <svelte:fragment slot="actions">
     <div class="hero-actions">
-      <Button href={hero.primaryCta.href} variant="gradient" size="lg">{hero.primaryCta.label}</Button>
-      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{hero.secondaryCta.label}</Button>
+      <Button href={hero.primaryCta.href} variant="gradient" size="lg">
+        {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
+      </Button>
+      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">
+        {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+      </Button>
     </div>
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
     <div class="hero-highlights">
-      <div>
-        <span class="hero-eyebrow">Status</span>
-        <strong>Alpha in progress</strong>
-      </div>
-      <div>
-        <span class="hero-eyebrow">Focus</span>
-        <strong>Collaborative, sustainable travel</strong>
-      </div>
-      <div>
-        <span class="hero-eyebrow">Next milestone</span>
-        <strong>Public beta · June 2026</strong>
-      </div>
+      {#each hero.highlights as highlight (highlight.labelKey)}
+        <div>
+          <span class="hero-eyebrow">{t(highlight.labelKey, highlight.labelFallback)}</span>
+          <strong>{t(highlight.valueKey, highlight.valueFallback)}</strong>
+        </div>
+      {/each}
     </div>
   </svelte:fragment>
 </Hero>
 
 <section class="section section--features" use:revealOnScroll>
   <div class="container">
-    <h2 class="section-title">What makes NodeVoyage different?</h2>
-    <p class="section-lead">
-      NodeVoyage feels like a playful travel OS: windowed layouts, frosted panels, and an AI buddy who keeps plans tidy
-      while celebrating spontaneity.
-    </p>
+    <h2 class="section-title">{t(features.titleKey, features.titleFallback)}</h2>
+    <p class="section-lead">{t(features.leadKey, features.leadFallback)}</p>
 
     <div class="feature-grid" use:staggerReveal>
-      {#each featureCards as card (card.title)}
+      {#each features.cards as card (card.titleKey)}
         <GlassCard class="feature-card" halo padding="lg" interactive>
           <div class="feature-icon" aria-hidden="true">
             <Icon name={card.icon} size={28} />
           </div>
-          <h3>{card.title}</h3>
-          <p>{card.copy}</p>
+          <h3>{t(card.titleKey, card.titleFallback)}</h3>
+          <p>{t(card.copyKey, card.copyFallback)}</p>
         </GlassCard>
       {/each}
     </div>
@@ -180,20 +302,17 @@
 <section class="section section--roadmap" use:revealOnScroll>
   <div class="container roadmap">
     <div>
-      <span class="section-eyebrow">Roadmap</span>
-      <h2>2026 journey</h2>
-      <p>
-        We are building NodeVoyage out in the open. Each phase brings more collaborative magic while reinforcing accessibility,
-        localisation, and transparent AI coaching.
-      </p>
+      <span class="section-eyebrow">{t(roadmap.eyebrowKey, roadmap.eyebrowFallback)}</span>
+      <h2>{t(roadmap.titleKey, roadmap.titleFallback)}</h2>
+      <p>{t(roadmap.leadKey, roadmap.leadFallback)}</p>
     </div>
     <ol class="roadmap-list">
-      {#each roadmap as item (item.phase)}
+      {#each roadmap.items as item (item.phaseKey)}
         <li class="roadmap-item">
           <GlassCard padding="md">
-            <span class="roadmap-phase">{item.phase}</span>
-            <span class="roadmap-timing">{item.timing}</span>
-            <p>{item.details}</p>
+            <span class="roadmap-phase">{t(item.phaseKey, item.phaseFallback)}</span>
+            <span class="roadmap-timing">{t(item.timingKey, item.timingFallback)}</span>
+            <p>{t(item.detailsKey, item.detailsFallback)}</p>
           </GlassCard>
         </li>
       {/each}
@@ -206,22 +325,21 @@
 <section class="section section--differentiators" use:revealOnScroll>
   <div class="container differentiators">
     <div class="differentiators-copy">
-      <span class="section-eyebrow">Why explorers stay</span>
-      <h2>Calm, trustworthy travel intelligence</h2>
-      <p>
-        NodeVoyage blends signage-inspired clarity with travel storytelling. It is approachable for first-time travellers and
-        powerful for adventure planners who want deeper context.
-      </p>
-      <Button href="/contact" variant="gradient">Partner with us</Button>
+      <span class="section-eyebrow">{t(differentiators.eyebrowKey, differentiators.eyebrowFallback)}</span>
+      <h2>{t(differentiators.titleKey, differentiators.titleFallback)}</h2>
+      <p>{t(differentiators.leadKey, differentiators.leadFallback)}</p>
+      <Button href="/contact" variant="gradient">
+        {t(differentiators.ctaKey, differentiators.ctaFallback)}
+      </Button>
     </div>
     <div class="differentiators-grid" use:staggerReveal>
-      {#each differentiators as item (item.title)}
+      {#each differentiators.cards as item (item.titleKey)}
         <GlassCard padding="md" class="differentiator-card" halo>
           <div class="feature-icon" aria-hidden="true">
             <Icon name={item.icon} size={26} />
           </div>
-          <h3>{item.title}</h3>
-          <p>{item.copy}</p>
+          <h3>{t(item.titleKey, item.titleFallback)}</h3>
+          <p>{t(item.copyKey, item.copyFallback)}</p>
         </GlassCard>
       {/each}
     </div>
@@ -233,16 +351,13 @@
 <section id="explorers-club" class="section explorers section--explorers" use:revealOnScroll>
   <div class="container">
     <GlassCard class="explorers-card" padding="lg" particles>
-      <span class="section-eyebrow">NodeVoyage Explorers Club</span>
-      <h2>Be first aboard the beta</h2>
-      <p>
-        Leave your details to receive early access invites, mission briefs, and behind-the-scenes updates as we prepare the
-        public beta. We keep emails minimal and never share your contact.
-      </p>
+      <span class="section-eyebrow">{t(explorers.eyebrowKey, explorers.eyebrowFallback)}</span>
+      <h2>{t(explorers.titleKey, explorers.titleFallback)}</h2>
+      <p>{t(explorers.copyKey, explorers.copyFallback)}</p>
 
       <form class="explorers-form" on:submit={handleExplorerSubmit}>
         <div class="form-field">
-          <label for="explorer-name">Name (optional)</label>
+          <label for="explorer-name">{t(explorers.form.nameLabelKey, explorers.form.nameLabelFallback)}</label>
           <input
             id="explorer-name"
             name="name"
@@ -253,7 +368,7 @@
         </div>
 
         <div class="form-field">
-          <label for="explorer-email">Email</label>
+          <label for="explorer-email">{t(explorers.form.emailLabelKey, explorers.form.emailLabelFallback)}</label>
           <input
             id="explorer-email"
             name="email"
@@ -268,17 +383,16 @@
           {/if}
         </div>
 
-        <Button type="submit" variant="gradient" size="lg">Request invite</Button>
+        <Button type="submit" variant="gradient" size="lg">
+          {t(explorers.form.submitKey, explorers.form.submitFallback)}
+        </Button>
 
         {#if explorerStatus === 'success'}
-          <p class="success">Thanks! We just opened your email client so you can confirm the request.</p>
+          <p class="success">{t(explorers.form.successKey, explorers.form.successFallback)}</p>
         {/if}
       </form>
 
-      <p class="privacy-note">
-        By joining, you agree to receive NodeVoyage development updates. You can unsubscribe anytime and we will only use your
-        email for these messages.
-      </p>
+      <p class="privacy-note">{t(explorers.form.privacyKey, explorers.form.privacyFallback)}</p>
     </GlassCard>
   </div>
 </section>
@@ -288,14 +402,15 @@
 <section class="section cta section--cta" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo>
-      <h2>Curious about Ideonautix too?</h2>
-      <p>
-        If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our startup OS that
-        keeps creative projects on track. Both platforms share the same inclusive design system.
-      </p>
+      <h2>{t(related.titleKey, related.titleFallback)}</h2>
+      <p>{t(related.copyKey, related.copyFallback)}</p>
       <div class="cta-actions">
-        <Button href="/ideonautix" variant="secondary">Explore Ideonautix</Button>
-        <Button href="/contact" variant="gradient">Talk to our team</Button>
+        <Button href="/ideonautix" variant="secondary">
+          {t(related.primaryCtaKey, related.primaryCtaFallback)}
+        </Button>
+        <Button href="/contact" variant="gradient">
+          {t(related.secondaryCtaKey, related.secondaryCtaFallback)}
+        </Button>
       </div>
     </GlassCard>
   </div>

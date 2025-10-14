@@ -434,12 +434,37 @@
     "meta_title": "AlgoRhythmics consulting",
     "meta_description": "Join the calm AI consulting pilot for workshops, implementation support, and ongoing advisory care.",
     "hero_title": "Friendly AI consulting for real teams",
-    "hero_subtitle": "From strategy to code â€” helping organizations embed AI responsibly, ethically, and effectively.",
-    "hero_description": "We work alongside your team to design AI workflows that respect people, processes, and change management.",
+    "hero_subtitle": "From strategy to code — helping organizations embed AI responsibly, ethically, and effectively.",
+    "hero_description": "We partner with your team to design AI workflows that respect people, processes, and change management. Expect signage-inspired clarity, transparent automation, and rituals that stick.",
     "hero_cta_primary": "Apply for the pilot",
     "hero_cta_secondary": "Review service menu",
     "hero_badge": "Pilot open",
-    "packages_title": "How we help",
+    "hero_rotating": [
+      "Design sessions that translate ideas into clear plans.",
+      "Launch AI assistants that teams actually enjoy using.",
+      "Pair signage craftsmanship with cloud know-how."
+    ],
+    "hero_testimonial_label": "Client reflection",
+    "hero_testimonial_quote": "AlgoRhythmics turned a complex AI brief into a friendly, repeatable workflow for our team.",
+    "hero_testimonial_name": "Marta Ozoliņa",
+    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek",
+    "spots_remaining": "{count} pilot spots remaining",
+    "page": {
+      "quick_facts_eyebrow": "At a glance",
+      "packages_title": "Strategy, build, and care in one rhythm",
+      "packages_description": "Choose the mix that fits your roadmap. Most partnerships weave all three phases together for continuity.",
+      "approach_eyebrow": "Our philosophy",
+      "process_eyebrow": "Pilot flow",
+      "supporting_info_eyebrow": "Need something else?",
+      "supporting_info_title": "We adapt to complex environments",
+      "supporting_info_copy": "Regulated industries, multilingual teams, and hybrid infrastructures are welcome. We document every decision for smooth audits.",
+      "supporting_info_cta": "Email the consulting crew",
+      "examples_eyebrow": "Sample impact"
+    },
+    "what_title": "What we help you do",
+    "what_1": "Design accessible, human-friendly AI workflows.",
+    "what_2": "Prototype, integrate, and launch with confidence.",
+    "what_3": "Support your team with training and iteration loops.",
     "packages": [
       {
         "name": "Strategy",
@@ -469,74 +494,6 @@
         ]
       }
     ],
-    "process_title": "Pilot flow",
-    "process_steps": [
-      {
-        "title": "Kickoff call",
-        "description": "Understand goals, constraints, and desired outcomes."
-      },
-      {
-        "title": "Design sprint",
-        "description": "Prototype the experience and confirm technical approach."
-      },
-      {
-        "title": "Launch support",
-        "description": "Ship, measure, and adjust together."
-      }
-    ],
-    "form_title": "Apply for the pilot",
-    "form_intro": "Tell us a little about your team so we can tailor the session.",
-    "form_company": "Company",
-    "form_company_placeholder": "Company or initiative name",
-    "form_name": "Contact name",
-    "form_name_placeholder": "Who should we speak with?",
-    "form_email": "Email",
-    "form_email_placeholder": "you@example.com",
-    "form_phone": "Phone (optional)",
-    "form_phone_placeholder": "+371 0000 0000",
-    "form_industry": "Industry",
-    "form_description": "Describe your AI needs",
-    "form_description_placeholder": "Share your AI goals, current hurdles, and the outcomes youâ€™re chasing...",
-    "form_submit": "Submit application",
-    "form_success": "Application received! We'll reach out within 48 hours.",
-    "form_error": "Something went wrong. Please try again.",
-    "select_industry": "Select industry...",
-    "industries": {
-      "technology": "Technology",
-      "fintech": "FinTech",
-      "ecommerce": "E-commerce",
-      "healthcare": "Healthcare",
-      "education": "Education",
-      "manufacturing": "Manufacturing",
-      "other": "Other"
-    },
-    "benefits_title": "What you get",
-    "benefit_1": "Complimentary AI strategy workshop",
-    "benefit_2": "Hands-on implementation plan",
-    "benefit_3": "Three months of advisory support",
-    "benefit_4": "Priority access to our products",
-    "timeline_title": "Process timeline",
-    "week_1": "Week 1: Discovery conversation",
-    "week_2": "Week 2: Strategy blueprint",
-    "week_3_12": "Week 3-12: Implementation support",
-    "requirements_title": "Requirements",
-    "req_1": "Based in Europe or comfortable with CET hours",
-    "req_2": "Committed to AI transformation",
-    "req_3": "Open to collaboration and feedback",
-    "hero_testimonial_label": "Client reflection",
-    "hero_testimonial_quote": "AlgoRhythmics turned a complex AI brief into a friendly, repeatable workflow for our team.",
-    "hero_testimonial_name": "Marta OzoliÅ†a",
-    "hero_testimonial_role": "Innovation Lead, Reclame Fabriek",
-    "hero_rotating": [
-      "Design sessions that translate ideas into clear plans.",
-      "Launch AI assistants that teams actually enjoy using.",
-      "Pair signage craftsmanship with cloud know-how."
-    ],
-    "spots_remaining": "{count} pilot spots remaining",
-    "what_title": "What we help you do",
-    "what_1": "Design accessible, human-friendly AI workflows.",
-    "what_2": "Prototype, integrate, and launch with confidence.",
-    "what_3": "Support your team with training and iteration loops.",
     "approach": {
       "title": "How we work",
       "intro": "Every engagement blends signage discipline with collaborative rituals. We reduce noise, document decisions, and co-create calm delivery loops.",
@@ -555,6 +512,34 @@
         }
       ]
     },
+    "process_title": "Pilot flow",
+    "process_steps": [
+      {
+        "title": "Kickoff call",
+        "description": "Understand goals, constraints, and desired outcomes."
+      },
+      {
+        "title": "Design sprint",
+        "description": "Prototype the experience and confirm technical approach."
+      },
+      {
+        "title": "Launch support",
+        "description": "Ship, measure, and adjust together."
+      }
+    ],
+    "timeline_title": "Process timeline",
+    "week_1": "Week 1: Discovery conversation",
+    "week_2": "Week 2: Strategy blueprint",
+    "week_3_12": "Week 3-12: Implementation support",
+    "benefits_title": "What you get",
+    "benefit_1": "Complimentary AI strategy workshop",
+    "benefit_2": "Hands-on implementation plan",
+    "benefit_3": "Three months of advisory support",
+    "benefit_4": "Priority access to our products",
+    "requirements_title": "Requirements",
+    "req_1": "Based in Europe or comfortable with CET hours",
+    "req_2": "Committed to AI transformation",
+    "req_3": "Open to collaboration and feedback",
     "examples": {
       "title": "Example engagements",
       "intro": "Imagining how calm AI can support your sector helps teams visualise the impact before we start.",
@@ -577,8 +562,32 @@
       "primary": "Book a consultation",
       "secondary": "Download capabilities overview"
     },
-    "form_mailto_subject": "Consulting pilot application from {company}",
-    "form_mailto_body": "Company: {company}\nContact: {name}\nEmail: {email}\nPhone: {phone}\nIndustry: {industry}\n\nGoals:\n{description}",
+    "form_title": "Apply for the pilot",
+    "form_intro": "Tell us a little about your team so we can tailor the session.",
+    "form_company": "Company",
+    "form_company_placeholder": "Company or initiative name",
+    "form_name": "Contact name",
+    "form_name_placeholder": "Who should we speak with?",
+    "form_email": "Email",
+    "form_email_placeholder": "you@example.com",
+    "form_phone": "Phone (optional)",
+    "form_phone_placeholder": "+371 0000 0000",
+    "form_industry": "Industry",
+    "form_description": "Describe your AI needs",
+    "form_description_placeholder": "Share your AI goals, current hurdles, and the outcomes you're chasing...",
+    "form_submit": "Submit application",
+    "form_success": "Application received! We'll reach out within 48 hours.",
+    "form_error": "Something went wrong. Please try again.",
+    "select_industry": "Select industry...",
+    "industries": {
+      "technology": "Technology",
+      "fintech": "FinTech",
+      "ecommerce": "E-commerce",
+      "healthcare": "Healthcare",
+      "education": "Education",
+      "manufacturing": "Manufacturing",
+      "other": "Other"
+    },
     "form_errors": {
       "company_required": "Please add your company or initiative name.",
       "name_required": "Let us know who we will be speaking with.",
@@ -587,20 +596,9 @@
       "industry_required": "Select the industry closest to your work.",
       "description_required": "Share a little about your goals."
     },
-    "page": {
-      "quick_facts_eyebrow": "At a glance",
-      "packages_title": "Strategy, build, and care in one rhythm",
-      "packages_description": "Choose the mix that fits your roadmap. Most partnerships weave all three phases together for continuity.",
-      "approach_eyebrow": "Our philosophy",
-      "process_eyebrow": "Pilot flow",
-      "supporting_info_eyebrow": "Need something else?",
-      "supporting_info_title": "We adapt to complex environments",
-      "supporting_info_copy": "Regulated industries, multilingual teams, and hybrid infrastructures are welcome. We document every decision for smooth audits.",
-      "supporting_info_cta": "Email the consulting crew",
-      "examples_eyebrow": "Sample impact",
-      "application_title": "Tell us about your team",
-      "cta_eyebrow": "Next steps"
-    }
+    "form_mailto_subject": "Consulting pilot application from {company}",
+    "form_mailto_body": "Company: {company}\nContact: {name}\nEmail: {email}\nPhone: {phone}\nIndustry: {industry}\n\nGoals:\n{description}",
+    "packages_title": "How we help"
   },
   "contact": {
     "meta_title": "Contact AlgoRhythmics",
@@ -735,7 +733,185 @@
         "copy": "Get a quarterly roundup on NodeVoyage, Ideonautix, and our consulting stories. No spam—just honest progress.",
         "cta": "Email newsletter@algorhythmics.com",
         "secondary": "Read about our solutions",
-        "note": "Prefer a form? Mention “Newsletter” in the message above and we will add you manually."
+        "note": "Prefer a form? Mention “Newsletter” in the message above and we will add you manually.",
+        "eyebrow": "Studio updates"
+      },
+      "support": {
+        "eyebrow": "Support promise",
+        "title": "Responsive, human support every step of the way",
+        "copy": "We pair every pilot, consulting sprint, and classroom programme with clear expectations so you always know when to expect a reply.",
+        "bullets": [
+          "Most enquiries receive a personal response within one business day.",
+          "Pilot partners and consulting clients get a dedicated escalation channel with 24-hour turnaround on critical issues.",
+          "We document every conversation transparently so teams can pick up where they left off."
+        ]
+      },
+      "help": {
+        "eyebrow": "Guides & self-serve",
+        "title": "Help Center now live with calm AI guides",
+        "copy": "Dive into onboarding packs, troubleshooting checklists, and multilingual resources inside our Help Center knowledge base.",
+        "cta": "Visit the Help Center",
+        "note": "Need something now? Email help@algorhythmics.com for personalised guidance or escalation."
+      },
+      "social": {
+        "linkedin": "Follow on LinkedIn",
+        "linkedin_description": "Studio updates & hiring notes",
+        "twitter": "Join the conversation on X/Twitter",
+        "twitter_description": "Event recaps & pilot progress",
+        "github": "Explore our open tooling on GitHub",
+        "github_description": "Starter kits & calm AI experiments"
+      }
+    }
+  },
+  "help": {
+    "page": {
+      "hero": {
+        "eyebrow": "Support & knowledge base",
+        "title": "Welcome to the AlgoRhythmics Help Center",
+        "subtitle": "Guides, calm AI rituals, and live status updates to help your team feel confident with our products and programmes.",
+        "description": "Explore walkthroughs for NodeVoyage and Ideonautix, download onboarding packs, or connect with a human in just a few clicks. We keep every article AAA accessible and localised for our core languages.",
+        "primary": "Message support",
+        "secondary": "Jump to quick answers"
+      },
+      "knowledge": {
+        "eyebrow": "Browse by focus",
+        "title": "Curated paths for every collaborator",
+        "copy": "Pick the guide that matches your role to see recommended rituals, checklists, and downloads.",
+        "items": {
+          "onboarding": {
+            "eyebrow": "Start here",
+            "title": "Onboarding rituals & rollout plans",
+            "copy": "Step-by-step launch plans for NodeVoyage journeys, Ideonautix pilots, and consulting engagements—complete with printable pacing cards.",
+            "bullets": [
+              "Facilitator checklists for travel crews and startup pods",
+              "Orientation slides and talking points in EN · LV · RU",
+              "Opt-in email templates and privacy notices ready to send"
+            ],
+            "cta": "Download starter packs"
+          },
+          "nodevoyage": {
+            "eyebrow": "NodeVoyage",
+            "title": "Trips, missions, and travel journaling",
+            "copy": "Understand itinerary co-creation, mission scoring, and accessibility controls for the travel OS.",
+            "bullets": [
+              "Configure shared boards for family and classroom trips",
+              "How memory anchors, AR translation, and offline mode work",
+              "Service levels & response windows for premium pilots"
+            ],
+            "cta": "Visit NodeVoyage overview"
+          },
+          "ideonautix": {
+            "eyebrow": "Ideonautix",
+            "title": "Modular copilots & calm productivity",
+            "copy": "Explore module-by-module tutorials, workspace governance tips, and explainable AI prompts to share with your team.",
+            "bullets": [
+              "Pitch Assistant script library with rehearsal notes",
+              "Pomodoro Coach and focus rituals for hybrid teams",
+              "Security briefings and API scopes for technical leads"
+            ],
+            "cta": "Review Ideonautix modules"
+          },
+          "policies": {
+            "eyebrow": "Policies",
+            "title": "Trust, accessibility, and compliance",
+            "copy": "Plain-language policies for privacy, data retention, high-contrast design, and emergency support escalation.",
+            "bullets": [
+              "GDPR-ready privacy templates and data processing notes",
+              "AAA accessibility commitments and reporting loop",
+              "Status communication workflow for outages and incidents"
+            ],
+            "cta": "Read status playbook"
+          }
+        }
+      },
+      "faq": {
+        "eyebrow": "Quick answers",
+        "title": "Frequently asked questions",
+        "copy": "Short reads that cover the topics we hear about most from teams and families alike.",
+        "items": [
+          {
+            "question": "How fast will support reply to my ticket?",
+            "answer": "We respond to most enquiries within one business day. Pilot partners and consulting teams have a dedicated escalation inbox with a four-hour response window during business hours."
+          },
+          {
+            "question": "Where can I find training for my classroom or team?",
+            "answer": "Download facilitator packs in the resources section below or join our monthly live onboarding circles. Each session includes recordings, transcripts, and bilingual worksheets."
+          },
+          {
+            "question": "Do you offer SLA-backed support for enterprises?",
+            "answer": "Yes. Consulting retainers include a calm AI operations handbook, quarterly architecture reviews, and priority response for critical issues. Contact us to tailor the SLA to your team size and region."
+          },
+          {
+            "question": "Is content available in multiple languages?",
+            "answer": "Core help articles ship in English, Latvian, and Russian today, with French, Spanish, and Ukrainian arriving through 2026. Articles note their translation status and provide request links for additional languages."
+          }
+        ]
+      },
+      "status": {
+        "eyebrow": "Live status & history",
+        "title": "Transparent updates for every product",
+        "copy": "Follow current uptime, upcoming maintenance, and resolved incidents. Each update links to its full report when available.",
+        "items": [
+          {
+            "status": "All systems operational",
+            "meta": "Last updated 12 April 2026 · 09:00 EEST",
+            "description": "NodeVoyage APIs, Ideonautix modules, and contact channels are running smoothly. Next maintenance window: 20 April 2026 (rolling restart, < 10 minutes)."
+          },
+          {
+            "status": "Knowledge base refresh in progress",
+            "meta": "Editing window: 8–15 April 2026",
+            "description": "We are translating the consulting playbook and Ideonautix Pomodoro Coach docs into French and Spanish. Articles remain available; expect incremental updates daily."
+          },
+          {
+            "status": "Previous incident: Ideonautix sync delay",
+            "meta": "Resolved 2 April 2026",
+            "description": "An infrastructure upgrade briefly delayed cross-device sync for Ideonautix workspaces. We added automated integrity checks and published the root-cause report in the resources archive."
+          }
+        ]
+      },
+      "escalation": {
+        "eyebrow": "Need a hand?",
+        "title": "Reach our calm support crew",
+        "copy": "If you cannot find what you need, our humans are ready. Choose a channel that matches your urgency and we will guide you every step.",
+        "cta": "Open channel",
+        "channels": [
+          {
+            "title": "Email support",
+            "copy": "help@algorhythmics.com replies within one business day with transparent next steps."
+          },
+          {
+            "title": "Priority pilot hotline",
+            "copy": "Pilot and consulting partners get a dedicated Signal channel with 24-hour coverage."
+          },
+          {
+            "title": "Monthly office hours",
+            "copy": "Join our calm AI clinics for live demos, Q&A, and peer learning stories."
+          }
+        ]
+      },
+      "resources": {
+        "eyebrow": "Resource archive",
+        "title": "Latest help center releases",
+        "copy": "Browse freshly published articles, recordings, and templates. Each entry lists translation availability so your teams know what to expect.",
+        "cta": "Open resource",
+        "secondary": "View all insights",
+        "items": [
+          {
+            "title": "Calm AI onboarding playbook — April 2026 update",
+            "meta": "EN · LV · RU • PDF & slides",
+            "description": "Updated facilitator prompts, signage-inspired icebreakers, and data transparency briefing for new cohorts."
+          },
+          {
+            "title": "Ideonautix Pomodoro Coach — troubleshooting checklist",
+            "meta": "EN • Interactive guide",
+            "description": "Diagnose sync issues, calibrate focus modes, and share best practices for neurodiverse teams."
+          },
+          {
+            "title": "NodeVoyage Mission Studio educator tips",
+            "meta": "EN · LV • Worksheet bundle",
+            "description": "Co-create travel challenges with students, embed sustainability goals, and collect reflection stories responsibly."
+          }
+        ]
       }
     }
   },
@@ -945,6 +1121,221 @@
           }
         }
       }
+    }
+  },
+  "ideonautix": {
+    "hero": {
+      "title": "Ideonautix",
+      "subtitle": "Explore. Invent. Launch. Your modular AI workspace for founders, students, and creative teams.",
+      "description": "Ideonautix keeps momentum steady with copilots for pitching, research, and focus. Build presentations, run experiments, and manage rituals with explainable AI nudges that honour your process.",
+      "primary_cta": "Request pilot access",
+      "secondary_cta": "Back to solutions overview",
+      "highlights": {
+        "status_label": "Status",
+        "status_value": "Pilot onboarding · Q1 2026",
+        "modules_label": "Modules",
+        "modules_value": "Pitch · Intelligence · Focus · Library",
+        "promise_label": "Promise",
+        "promise_value": "Explainable AI for builders"
+      }
+    },
+    "modules": {
+      "title": "Tools that keep ideas moving",
+      "lead": "Ideonautix pairs playful visuals with serious operations. Every module lives inside a windowed workspace so you can drag, resize, and focus without losing the bigger picture.",
+      "cards": [
+        {
+          "icon": "idea",
+          "title": "Pitch Deck Assistant",
+          "copy": "Answer a short creative brief and Ideonautix drafts slides, speaker notes, and evidence to fit your audience—with transparent citations and edit history."
+        },
+        {
+          "icon": "chart",
+          "title": "Competitive Dashboard",
+          "copy": "Track market shifts, competitor releases, and trend digests curated for your vertical. Summaries stay human-readable and exportable."
+        },
+        {
+          "icon": "bolt",
+          "title": "Pomodoro Coach",
+          "copy": "Keep your rhythm with adaptive focus sessions, break prompts, and gentle accountability nudges based on your schedule."
+        },
+        {
+          "icon": "package",
+          "title": "Workflow Library",
+          "copy": "Mix-and-match canvases for OKRs, research sprints, and retrospectives. Each template includes guidance drawn from our consulting rituals."
+        },
+        {
+          "icon": "ai",
+          "title": "AI Brainstorm",
+          "copy": "Bounce ideas with a multilingual AI co-founder trained on ethical innovation playbooks. Every suggestion ships with rationale and references."
+        }
+      ]
+    },
+    "status": {
+      "eyebrow": "Status & invitation",
+      "title": "Pilot in early 2026",
+      "copy": "We are inviting a small circle of founders, educators, and student teams to shape Ideonautix. Pilot members test modules, share feedback in live sessions, and receive lifetime discounts when we launch publicly in spring 2026.",
+      "bullets": [
+        "Multilingual interface: English & Latvian at pilot, Russian in beta.",
+        "AAA contrast themes and reduced-motion support mirror our design system.",
+        "All AI suggestions include citations and exportable audit trails."
+      ],
+      "cta": "Join the pilot waitlist"
+    },
+    "use_cases": {
+      "eyebrow": "Use cases",
+      "title": "Stories from the lab",
+      "copy": "Ideonautix was born from our consulting rituals. Each pilot builds on real problems founders and educators face when they lack clear documentation or accessible AI support.",
+      "items": [
+        {
+          "name": "Anna · Student entrepreneur",
+          "story": "Anna used Ideonautix to map a sustainable fashion concept. The pitch assistant built a grant-ready deck, while Pomodoro Coach kept her team on track for demo day."
+        },
+        {
+          "name": "SafeRide · Mobility startup",
+          "story": "SafeRide analysed competitors and regulatory news through the dashboard, rapidly iterated prototypes, and walked into investor meetings with confidence."
+        }
+      ]
+    },
+    "pilot": {
+      "eyebrow": "Pilot access",
+      "title": "Request an invite",
+      "copy": "Share a few details and we will follow up with onboarding options. We reply within one business day and respect your privacy—data is only used to coordinate pilot participation.",
+      "form": {
+        "name_label": "Name",
+        "email_label": "Email",
+        "role_label": "Role",
+        "role_options": {
+          "founder": "Founder / startup team",
+          "student": "Student team",
+          "educator": "Educator / mentor",
+          "other": "Other collaborator"
+        },
+        "message_label": "What would you like to explore?",
+        "submit": "Submit request",
+        "success": "Thank you! We just opened an email draft—send it to confirm your spot.",
+        "error": "Share your name and a valid email so we can reach out.",
+        "privacy": "We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.com.",
+        "subject": "Ideonautix pilot request"
+      }
+    },
+    "cta": {
+      "title": "Need hands-on support?",
+      "copy": "Our consulting team helps adapt Ideonautix modules for enterprise or education partners. We can tailor workflows, build governance, and train your crews.",
+      "primary": "Consulting services",
+      "secondary": "Chat with us"
+    }
+  },
+  "nodevoyage": {
+    "hero": {
+      "title": "NodeVoyage",
+      "subtitle": "Fun. Travel. Memories. Community. Your AI travel companion that keeps every explorer in the loop.",
+      "description": "Describe your dream journey and Nodi orchestrates an itinerary with accessibility, sustainability, and surprise in mind. Plan with friends in real time, translate signs on the go, and capture stories that outlast the flight home.",
+      "primary_cta": "Join the Explorers Club",
+      "secondary_cta": "Back to solutions overview",
+      "highlights": {
+        "status_label": "Status",
+        "status_value": "Alpha in progress",
+        "focus_label": "Focus",
+        "focus_value": "Collaborative, sustainable travel",
+        "milestone_label": "Next milestone",
+        "milestone_value": "Public beta · June 2026"
+      }
+    },
+    "features": {
+      "title": "What makes NodeVoyage different?",
+      "lead": "NodeVoyage feels like a playful travel OS: windowed layouts, frosted panels, and an AI buddy who keeps plans tidy while celebrating spontaneity.",
+      "cards": [
+        {
+          "icon": "map",
+          "title": "Smart Trip Planner",
+          "copy": "Tell Nodi how you want to feel on your next adventure. NodeVoyage balances hidden gems with essentials, optimises routes, and adjusts for mobility or sensory needs automatically."
+        },
+        {
+          "icon": "people",
+          "title": "Collaborative Crews",
+          "copy": "Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with calm notifications."
+        },
+        {
+          "icon": "device",
+          "title": "AR Translation & Capture",
+          "copy": "Use the mobile app to translate menus, capture audio notes, or pin AR “memory anchors” to revisit favourite spots later."
+        },
+        {
+          "icon": "target",
+          "title": "Eco & Community Missions",
+          "copy": "Earn badges for low-impact choices, community storytelling, and cultural challenges curated with local partners."
+        },
+        {
+          "icon": "idea",
+          "title": "Travel Journal & Reel",
+          "copy": "After the trip, NodeVoyage weaves your photos, notes, and check-ins into a shareable story or highlight reel—always with edit controls and privacy toggles."
+        }
+      ]
+    },
+    "roadmap": {
+      "eyebrow": "Roadmap",
+      "title": "2026 journey",
+      "lead": "We are building NodeVoyage out in the open. Each phase brings more collaborative magic while reinforcing accessibility, localisation, and transparent AI coaching.",
+      "items": [
+        {
+          "phase": "Alpha launch",
+          "timing": "April 2026",
+          "details": "First wave of explorers test collaborative itineraries, AR translation, and sustainability missions alongside our team."
+        },
+        {
+          "phase": "Public beta",
+          "timing": "June 2026",
+          "details": "Expanded language support, travel journal exports, and integrations with accessibility partners land for summer adventures."
+        },
+        {
+          "phase": "Community rollout",
+          "timing": "Late 2026",
+          "details": "Goal of 10,000 travellers across Latvia and neighbouring regions, with classroom pilots and tourism collaborations."
+        }
+      ]
+    },
+    "differentiators": {
+      "eyebrow": "Why explorers stay",
+      "title": "Calm, trustworthy travel intelligence",
+      "lead": "NodeVoyage blends signage-inspired clarity with travel storytelling. It is approachable for first-time travellers and powerful for adventure planners who want deeper context.",
+      "cta": "Partner with us",
+      "cards": [
+        {
+          "icon": "bolt",
+          "title": "AI that explains itself",
+          "copy": "Every itinerary comes with plain-language reasoning, accessible alternatives, and opt-out controls."
+        },
+        {
+          "icon": "chart",
+          "title": "Inclusive by default",
+          "copy": "AAA contrast themes, reduced-motion support, and multi-language content are core—not add-ons."
+        },
+        {
+          "icon": "package",
+          "title": "Built with partners",
+          "copy": "Co-designed with travel educators, accessibility advocates, and signage specialists from Ideju Kauss programmes."
+        }
+      ]
+    },
+    "explorers": {
+      "eyebrow": "NodeVoyage Explorers Club",
+      "title": "Be first aboard the beta",
+      "copy": "Leave your details to receive early access invites, mission briefs, and behind-the-scenes updates as we prepare the public beta. We keep emails minimal and never share your contact.",
+      "form": {
+        "name_label": "Name (optional)",
+        "email_label": "Email",
+        "submit": "Request invite",
+        "success": "Thanks! We just opened your email client so you can confirm the request.",
+        "privacy": "By joining, you agree to receive NodeVoyage development updates. You can unsubscribe anytime and we will only use your email for these messages.",
+        "error": "Add a valid email so we can send your invite.",
+        "subject": "NodeVoyage Explorers Club signup"
+      }
+    },
+    "cta": {
+      "title": "Curious about Ideonautix too?",
+      "copy": "If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our startup OS that keeps creative projects on track. Both platforms share the same inclusive design system.",
+      "primary": "Explore Ideonautix",
+      "secondary": "Talk to our team"
     }
   },
   "education": {

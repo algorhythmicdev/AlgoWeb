@@ -342,7 +342,7 @@
     <GlassCard class="testimonial" padding="lg" halo>
       <span class="testimonial__label">{t(heroTestimonial.labelKey, heroTestimonial.labelFallback)}</span>
       <blockquote>
-        “{t(heroTestimonial.quoteKey, heroTestimonial.quoteFallback)}”
+        {t(heroTestimonial.quoteKey, heroTestimonial.quoteFallback)}
       </blockquote>
       <p class="testimonial__meta">
         <strong>{t(heroTestimonial.nameKey, heroTestimonial.nameFallback)}</strong>

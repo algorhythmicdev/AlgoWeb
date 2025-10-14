@@ -5,67 +5,214 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { _ } from 'svelte-i18n';
+  import { translateOrFallback } from '$lib/utils/i18n';
+
+  const t = (key: string, fallback: string, params?: Record<string, unknown>) =>
+    translateOrFallback($_, key, fallback, params);
 
   const hero = {
-    title: 'Ideonautix',
-    subtitle: 'Explore. Invent. Launch. Your modular AI workspace for founders, students, and creative teams.',
-    description:
+    titleKey: 'ideonautix.hero.title',
+    titleFallback: 'Ideonautix',
+    subtitleKey: 'ideonautix.hero.subtitle',
+    subtitleFallback: 'Explore. Invent. Launch. Your modular AI workspace for founders, students, and creative teams.',
+    descriptionKey: 'ideonautix.hero.description',
+    descriptionFallback:
       'Ideonautix keeps momentum steady with copilots for pitching, research, and focus. Build presentations, run experiments, and manage rituals with explainable AI nudges that honour your process.',
     primaryCta: {
       href: '#pilot-request',
-      label: 'Request pilot access'
+      labelKey: 'ideonautix.hero.primary_cta',
+      labelFallback: 'Request pilot access'
     },
     secondaryCta: {
       href: '/solutions',
-      label: 'Back to solutions overview'
+      labelKey: 'ideonautix.hero.secondary_cta',
+      labelFallback: 'Back to solutions overview'
+    },
+    highlights: [
+      {
+        labelKey: 'ideonautix.hero.highlights.status_label',
+        labelFallback: 'Status',
+        valueKey: 'ideonautix.hero.highlights.status_value',
+        valueFallback: 'Pilot onboarding · Q1 2026'
+      },
+      {
+        labelKey: 'ideonautix.hero.highlights.modules_label',
+        labelFallback: 'Modules',
+        valueKey: 'ideonautix.hero.highlights.modules_value',
+        valueFallback: 'Pitch · Intelligence · Focus · Library'
+      },
+      {
+        labelKey: 'ideonautix.hero.highlights.promise_label',
+        labelFallback: 'Promise',
+        valueKey: 'ideonautix.hero.highlights.promise_value',
+        valueFallback: 'Explainable AI for builders'
+      }
+    ]
+  } as const;
+
+  const modules = {
+    titleKey: 'ideonautix.modules.title',
+    titleFallback: 'Tools that keep ideas moving',
+    leadKey: 'ideonautix.modules.lead',
+    leadFallback:
+      'Ideonautix pairs playful visuals with serious operations. Every module lives inside a windowed workspace so you can drag, resize, and focus without losing the bigger picture.',
+    cards: [
+      {
+        icon: 'idea',
+        titleKey: 'ideonautix.modules.cards.0.title',
+        titleFallback: 'Pitch Deck Assistant',
+        copyKey: 'ideonautix.modules.cards.0.copy',
+        copyFallback:
+          'Answer a short creative brief and Ideonautix drafts slides, speaker notes, and evidence to fit your audience—with transparent citations and edit history.'
+      },
+      {
+        icon: 'chart',
+        titleKey: 'ideonautix.modules.cards.1.title',
+        titleFallback: 'Competitive Dashboard',
+        copyKey: 'ideonautix.modules.cards.1.copy',
+        copyFallback:
+          'Track market shifts, competitor releases, and trend digests curated for your vertical. Summaries stay human-readable and exportable.'
+      },
+      {
+        icon: 'bolt',
+        titleKey: 'ideonautix.modules.cards.2.title',
+        titleFallback: 'Pomodoro Coach',
+        copyKey: 'ideonautix.modules.cards.2.copy',
+        copyFallback:
+          'Keep your rhythm with adaptive focus sessions, break prompts, and gentle accountability nudges based on your schedule.'
+      },
+      {
+        icon: 'package',
+        titleKey: 'ideonautix.modules.cards.3.title',
+        titleFallback: 'Workflow Library',
+        copyKey: 'ideonautix.modules.cards.3.copy',
+        copyFallback:
+          'Mix-and-match canvases for OKRs, research sprints, and retrospectives. Each template includes guidance drawn from our consulting rituals.'
+      },
+      {
+        icon: 'ai',
+        titleKey: 'ideonautix.modules.cards.4.title',
+        titleFallback: 'AI Brainstorm',
+        copyKey: 'ideonautix.modules.cards.4.copy',
+        copyFallback:
+          'Bounce ideas with a multilingual AI co-founder trained on ethical innovation playbooks. Every suggestion ships with rationale and references.'
+      }
+    ]
+  } as const;
+
+  const statusSection = {
+    eyebrowKey: 'ideonautix.status.eyebrow',
+    eyebrowFallback: 'Status & invitation',
+    titleKey: 'ideonautix.status.title',
+    titleFallback: 'Pilot in early 2026',
+    copyKey: 'ideonautix.status.copy',
+    copyFallback:
+      'We are inviting a small circle of founders, educators, and student teams to shape Ideonautix. Pilot members test modules, share feedback in live sessions, and receive lifetime discounts when we launch publicly in spring 2026.',
+    bullets: [
+      {
+        key: 'ideonautix.status.bullets.0',
+        fallback: 'Multilingual interface: English & Latvian at pilot, Russian in beta.'
+      },
+      {
+        key: 'ideonautix.status.bullets.1',
+        fallback: 'AAA contrast themes and reduced-motion support mirror our design system.'
+      },
+      {
+        key: 'ideonautix.status.bullets.2',
+        fallback: 'All AI suggestions include citations and exportable audit trails.'
+      }
+    ],
+    ctaKey: 'ideonautix.status.cta',
+    ctaFallback: 'Join the pilot waitlist'
+  } as const;
+
+  const useCases = {
+    eyebrowKey: 'ideonautix.use_cases.eyebrow',
+    eyebrowFallback: 'Use cases',
+    titleKey: 'ideonautix.use_cases.title',
+    titleFallback: 'Stories from the lab',
+    copyKey: 'ideonautix.use_cases.copy',
+    copyFallback:
+      'Ideonautix was born from our consulting rituals. Each pilot builds on real problems founders and educators face when they lack clear documentation or accessible AI support.',
+    items: [
+      {
+        nameKey: 'ideonautix.use_cases.items.0.name',
+        nameFallback: 'Anna · Student entrepreneur',
+        storyKey: 'ideonautix.use_cases.items.0.story',
+        storyFallback:
+          'Anna used Ideonautix to map a sustainable fashion concept. The pitch assistant built a grant-ready deck, while Pomodoro Coach kept her team on track for demo day.'
+      },
+      {
+        nameKey: 'ideonautix.use_cases.items.1.name',
+        nameFallback: 'SafeRide · Mobility startup',
+        storyKey: 'ideonautix.use_cases.items.1.story',
+        storyFallback:
+          'SafeRide analysed competitors and regulatory news through the dashboard, rapidly iterated prototypes, and walked into investor meetings with confidence.'
+      }
+    ]
+  } as const;
+
+  const pilot = {
+    eyebrowKey: 'ideonautix.pilot.eyebrow',
+    eyebrowFallback: 'Pilot access',
+    titleKey: 'ideonautix.pilot.title',
+    titleFallback: 'Request an invite',
+    copyKey: 'ideonautix.pilot.copy',
+    copyFallback:
+      'Share a few details and we will follow up with onboarding options. We reply within one business day and respect your privacy—data is only used to coordinate pilot participation.',
+    form: {
+      nameLabelKey: 'ideonautix.pilot.form.name_label',
+      nameLabelFallback: 'Name',
+      emailLabelKey: 'ideonautix.pilot.form.email_label',
+      emailLabelFallback: 'Email',
+      roleLabelKey: 'ideonautix.pilot.form.role_label',
+      roleLabelFallback: 'Role',
+      roleOptions: {
+        founder: {
+          key: 'ideonautix.pilot.form.role_options.founder',
+          fallback: 'Founder / startup team'
+        },
+        student: {
+          key: 'ideonautix.pilot.form.role_options.student',
+          fallback: 'Student team'
+        },
+        educator: {
+          key: 'ideonautix.pilot.form.role_options.educator',
+          fallback: 'Educator / mentor'
+        },
+        other: {
+          key: 'ideonautix.pilot.form.role_options.other',
+          fallback: 'Other collaborator'
+        }
+      },
+      messageLabelKey: 'ideonautix.pilot.form.message_label',
+      messageLabelFallback: 'What would you like to explore?',
+      submitKey: 'ideonautix.pilot.form.submit',
+      submitFallback: 'Submit request',
+      successKey: 'ideonautix.pilot.form.success',
+      successFallback: 'Thank you! We just opened an email draft—send it to confirm your spot.',
+      errorKey: 'ideonautix.pilot.form.error',
+      errorFallback: 'Share your name and a valid email so we can reach out.',
+      privacyKey: 'ideonautix.pilot.form.privacy',
+      privacyFallback:
+        'We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.com.',
+      subjectKey: 'ideonautix.pilot.form.subject',
+      subjectFallback: 'Ideonautix pilot request'
     }
   } as const;
 
-  const modules = [
-    {
-      icon: 'idea',
-      title: 'Pitch Deck Assistant',
-      copy:
-        'Answer a short creative brief and Ideonautix drafts slides, speaker notes, and evidence to fit your audience—with transparent citations and edit history.'
-    },
-    {
-      icon: 'chart',
-      title: 'Competitive Dashboard',
-      copy:
-        'Track market shifts, competitor releases, and trend digests curated for your vertical. Summaries stay human-readable and exportable.'
-    },
-    {
-      icon: 'bolt',
-      title: 'Pomodoro Coach',
-      copy:
-        'Keep your rhythm with adaptive focus sessions, break prompts, and gentle accountability nudges based on your schedule.'
-    },
-    {
-      icon: 'package',
-      title: 'Workflow Library',
-      copy:
-        'Mix-and-match canvases for OKRs, research sprints, and retrospectives. Each template includes guidance drawn from our consulting rituals.'
-    },
-    {
-      icon: 'ai',
-      title: 'AI Brainstorm',
-      copy:
-        'Bounce ideas with a multilingual AI co-founder trained on ethical innovation playbooks. Every suggestion ships with rationale and references.'
-    }
-  ] as const;
-
-  const useCases = [
-    {
-      name: 'Anna · Student entrepreneur',
-      story:
-        'Anna used Ideonautix to map a sustainable fashion concept. The pitch assistant built a grant-ready deck, while Pomodoro Coach kept her team on track for demo day.'
-    },
-    {
-      name: 'SafeRide · Mobility startup',
-      story:
-        'SafeRide analysed competitors and regulatory news through the dashboard, rapidly iterated prototypes, and walked into investor meetings with confidence.'
-    }
-  ] as const;
+  const cta = {
+    titleKey: 'ideonautix.cta.title',
+    titleFallback: 'Need hands-on support?',
+    copyKey: 'ideonautix.cta.copy',
+    copyFallback:
+      'Our consulting team helps adapt Ideonautix modules for enterprise or education partners. We can tailor workflows, build governance, and train your crews.',
+    primaryCtaKey: 'ideonautix.cta.primary',
+    primaryCtaFallback: 'Consulting services',
+    secondaryCtaKey: 'ideonautix.cta.secondary',
+    secondaryCtaFallback: 'Chat with us'
+  } as const;
 
   let pilotName = '';
   let pilotEmail = '';
@@ -85,11 +232,11 @@
     const trimmedName = pilotName.trim();
     if (!trimmedName || !trimmedEmail || !/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
       pilotStatus = 'error';
-      pilotError = 'Share your name and a valid email so we can reach out.';
+      pilotError = t(pilot.form.errorKey, pilot.form.errorFallback);
       return;
     }
 
-    const subject = encodeURIComponent('Ideonautix pilot request');
+    const subject = encodeURIComponent(t(pilot.form.subjectKey, pilot.form.subjectFallback));
     const body = encodeURIComponent(
       `Name: ${trimmedName}\nEmail: ${trimmedEmail}\nRole: ${pilotRole}\nMessage: ${pilotMessage.trim()}`
     );
@@ -102,52 +249,52 @@
   };
 </script>
 
-<Hero variant="halo" align="center" title={hero.title} subtitle={hero.subtitle}>
+<Hero
+  variant="halo"
+  align="center"
+  title={t(hero.titleKey, hero.titleFallback)}
+  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+>
   <svelte:fragment slot="description">
-    <p>{hero.description}</p>
+    <p>{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
 
   <svelte:fragment slot="actions">
     <div class="hero-actions">
-      <Button href={hero.primaryCta.href} variant="gradient" size="lg">{hero.primaryCta.label}</Button>
-      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{hero.secondaryCta.label}</Button>
+      <Button href={hero.primaryCta.href} variant="gradient" size="lg">
+        {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
+      </Button>
+      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">
+        {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+      </Button>
     </div>
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
     <div class="hero-highlights">
-      <div>
-        <span class="hero-eyebrow">Status</span>
-        <strong>Pilot onboarding · Q1 2026</strong>
-      </div>
-      <div>
-        <span class="hero-eyebrow">Modules</span>
-        <strong>Pitch · Intelligence · Focus · Library</strong>
-      </div>
-      <div>
-        <span class="hero-eyebrow">Promise</span>
-        <strong>Explainable AI for builders</strong>
-      </div>
+      {#each hero.highlights as highlight (highlight.labelKey)}
+        <div>
+          <span class="hero-eyebrow">{t(highlight.labelKey, highlight.labelFallback)}</span>
+          <strong>{t(highlight.valueKey, highlight.valueFallback)}</strong>
+        </div>
+      {/each}
     </div>
   </svelte:fragment>
 </Hero>
 
 <section class="section section--modules" use:revealOnScroll>
   <div class="container">
-    <h2 class="section-title">Tools that keep ideas moving</h2>
-    <p class="section-lead">
-      Ideonautix pairs playful visuals with serious operations. Every module lives inside a windowed workspace so you can drag,
-      resize, and focus without losing the bigger picture.
-    </p>
+    <h2 class="section-title">{t(modules.titleKey, modules.titleFallback)}</h2>
+    <p class="section-lead">{t(modules.leadKey, modules.leadFallback)}</p>
 
     <div class="module-grid" use:staggerReveal>
-      {#each modules as module (module.title)}
+      {#each modules.cards as module (module.titleKey)}
         <GlassCard class="module-card" halo padding="lg" interactive>
           <div class="module-icon" aria-hidden="true">
             <Icon name={module.icon} size={28} />
           </div>
-          <h3>{module.title}</h3>
-          <p>{module.copy}</p>
+          <h3>{t(module.titleKey, module.titleFallback)}</h3>
+          <p>{t(module.copyKey, module.copyFallback)}</p>
         </GlassCard>
       {/each}
     </div>
@@ -159,18 +306,17 @@
 <section class="section section--status" use:revealOnScroll>
   <div class="container status">
     <GlassCard class="status-card" padding="lg">
-      <span class="section-eyebrow">Status & invitation</span>
-      <h2>Pilot in early 2026</h2>
-      <p>
-        We are inviting a small circle of founders, educators, and student teams to shape Ideonautix. Pilot members test modules,
-        share feedback in live sessions, and receive lifetime discounts when we launch publicly in spring 2026.
-      </p>
+      <span class="section-eyebrow">{t(statusSection.eyebrowKey, statusSection.eyebrowFallback)}</span>
+      <h2>{t(statusSection.titleKey, statusSection.titleFallback)}</h2>
+      <p>{t(statusSection.copyKey, statusSection.copyFallback)}</p>
       <ul class="status-list">
-        <li>Multilingual interface: English & Latvian at pilot, Russian in beta.</li>
-        <li>AAA contrast themes and reduced-motion support mirror our design system.</li>
-        <li>All AI suggestions include citations and exportable audit trails.</li>
+        {#each statusSection.bullets as bullet (bullet.key)}
+          <li>{t(bullet.key, bullet.fallback)}</li>
+        {/each}
       </ul>
-      <Button href="#pilot-request" variant="gradient">Join the pilot waitlist</Button>
+      <Button href="#pilot-request" variant="gradient">
+        {t(statusSection.ctaKey, statusSection.ctaFallback)}
+      </Button>
     </GlassCard>
   </div>
 </section>
@@ -180,18 +326,15 @@
 <section class="section section--use-cases" use:revealOnScroll>
   <div class="container use-cases">
     <div class="use-cases-copy">
-      <span class="section-eyebrow">Use cases</span>
-      <h2>Stories from the lab</h2>
-      <p>
-        Ideonautix was born from our consulting rituals. Each pilot builds on real problems founders and educators face when they
-        lack clear documentation or accessible AI support.
-      </p>
+      <span class="section-eyebrow">{t(useCases.eyebrowKey, useCases.eyebrowFallback)}</span>
+      <h2>{t(useCases.titleKey, useCases.titleFallback)}</h2>
+      <p>{t(useCases.copyKey, useCases.copyFallback)}</p>
     </div>
     <div class="use-cases-grid" use:staggerReveal>
-      {#each useCases as story (story.name)}
+      {#each useCases.items as story (story.nameKey)}
         <GlassCard padding="md" class="use-case-card" halo>
-          <h3>{story.name}</h3>
-          <p>{story.story}</p>
+          <h3>{t(story.nameKey, story.nameFallback)}</h3>
+          <p>{t(story.storyKey, story.storyFallback)}</p>
         </GlassCard>
       {/each}
     </div>
@@ -203,22 +346,19 @@
 <section id="pilot-request" class="section pilot section--pilot" use:revealOnScroll>
   <div class="container">
     <GlassCard class="pilot-card" padding="lg" particles>
-      <span class="section-eyebrow">Pilot access</span>
-      <h2>Request an invite</h2>
-      <p>
-        Share a few details and we will follow up with onboarding options. We reply within one business day and respect your
-        privacy—data is only used to coordinate pilot participation.
-      </p>
+      <span class="section-eyebrow">{t(pilot.eyebrowKey, pilot.eyebrowFallback)}</span>
+      <h2>{t(pilot.titleKey, pilot.titleFallback)}</h2>
+      <p>{t(pilot.copyKey, pilot.copyFallback)}</p>
 
       <form class="pilot-form" on:submit={handlePilotSubmit}>
         <div class="form-grid">
           <label>
-            <span>Name</span>
+            <span>{t(pilot.form.nameLabelKey, pilot.form.nameLabelFallback)}</span>
             <input type="text" bind:value={pilotName} required on:input={resetPilotStatus} />
           </label>
 
           <label>
-            <span>Email</span>
+            <span>{t(pilot.form.emailLabelKey, pilot.form.emailLabelFallback)}</span>
             <input
               type="email"
               bind:value={pilotEmail}
@@ -229,18 +369,18 @@
           </label>
 
           <label>
-            <span>Role</span>
+            <span>{t(pilot.form.roleLabelKey, pilot.form.roleLabelFallback)}</span>
             <select bind:value={pilotRole} on:change={resetPilotStatus}>
-              <option value="founder">Founder / startup team</option>
-              <option value="student">Student team</option>
-              <option value="educator">Educator / mentor</option>
-              <option value="other">Other collaborator</option>
+              <option value="founder">{t(pilot.form.roleOptions.founder.key, pilot.form.roleOptions.founder.fallback)}</option>
+              <option value="student">{t(pilot.form.roleOptions.student.key, pilot.form.roleOptions.student.fallback)}</option>
+              <option value="educator">{t(pilot.form.roleOptions.educator.key, pilot.form.roleOptions.educator.fallback)}</option>
+              <option value="other">{t(pilot.form.roleOptions.other.key, pilot.form.roleOptions.other.fallback)}</option>
             </select>
           </label>
         </div>
 
         <label>
-          <span>What would you like to explore?</span>
+          <span>{t(pilot.form.messageLabelKey, pilot.form.messageLabelFallback)}</span>
           <textarea rows="4" bind:value={pilotMessage} on:input={resetPilotStatus}></textarea>
         </label>
 
@@ -248,17 +388,16 @@
           <p class="field-error">{pilotError}</p>
         {/if}
 
-        <Button type="submit" variant="gradient" size="lg">Submit request</Button>
+        <Button type="submit" variant="gradient" size="lg">
+          {t(pilot.form.submitKey, pilot.form.submitFallback)}
+        </Button>
 
         {#if pilotStatus === 'success'}
-          <p class="success">Thank you! We just opened an email draft—send it to confirm your spot.</p>
+          <p class="success">{t(pilot.form.successKey, pilot.form.successFallback)}</p>
         {/if}
       </form>
 
-      <p class="privacy-note">
-        We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing
-        help@algorhythmics.com.
-      </p>
+      <p class="privacy-note">{t(pilot.form.privacyKey, pilot.form.privacyFallback)}</p>
     </GlassCard>
   </div>
 </section>
@@ -268,14 +407,15 @@
 <section class="section cta section--cta" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo>
-      <h2>Need hands-on support?</h2>
-      <p>
-        Our consulting team helps adapt Ideonautix modules for enterprise or education partners. We can tailor workflows, build
-        governance, and train your crews.
-      </p>
+      <h2>{t(cta.titleKey, cta.titleFallback)}</h2>
+      <p>{t(cta.copyKey, cta.copyFallback)}</p>
       <div class="cta-actions">
-        <Button href="/consulting" variant="secondary">Consulting services</Button>
-        <Button href="/contact" variant="gradient">Chat with us</Button>
+        <Button href="/consulting" variant="secondary">
+          {t(cta.primaryCtaKey, cta.primaryCtaFallback)}
+        </Button>
+        <Button href="/contact" variant="gradient">
+          {t(cta.secondaryCtaKey, cta.secondaryCtaFallback)}
+        </Button>
       </div>
     </GlassCard>
   </div>
