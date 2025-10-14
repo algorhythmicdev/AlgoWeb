@@ -136,7 +136,7 @@
 
   .btn:focus-visible {
     outline: none;
-    box-shadow: 0 24px 48px rgba(10, 18, 39, 0.22), var(--btn-focus-ring);
+    box-shadow: var(--shadow-button-hover), var(--btn-focus-ring);
   }
 
   .btn:disabled,

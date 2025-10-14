@@ -314,93 +314,97 @@
   .current-lang {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
-    padding: var(--space-2) var(--space-3);
-    background: var(--control-surface);
-    border: 1px solid var(--control-border);
-    border-radius: var(--radius-md);
-    font-weight: var(--weight-medium);
-    color: var(--text-primary);
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    min-width: 120px;
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-body);
+    color: var(--text);
     cursor: pointer;
-    box-shadow: 0 14px 30px rgba(var(--voyage-blue-rgb), 0.12);
+    box-shadow: var(--shadow-md);
     transition:
-      background var(--duration-fast) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out),
-      color var(--duration-fast) var(--ease-out),
-      box-shadow var(--duration-fast) var(--ease-out);
+      transform var(--duration-normal) var(--ease-spring),
+      box-shadow var(--duration-normal) var(--ease-smooth),
+      border-color var(--duration-fast) ease;
   }
 
   .current-lang:hover {
-    background: var(--control-surface-hover);
-    border-color: var(--control-border-strong);
-    color: var(--voyage-blue);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--control-ring) 70%, transparent 30%);
+    transform: var(--transform-hover-lift);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-xl);
   }
 
   .current-lang:focus-visible {
     outline: none;
-    background: var(--control-surface-hover);
-    border-color: var(--control-border-strong);
-    color: var(--voyage-blue);
-    box-shadow:
-      var(--focus-ring-shadow),
-      0 0 0 5px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
-      0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
-    animation: switcherFocusPulse 1.6s ease-in-out infinite;
+    transform: var(--transform-hover-lift);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-xl), var(--focus-ring-shadow);
   }
 
   .dropdown {
     position: absolute;
-    top: calc(100% + var(--space-2));
+    top: calc(100% + var(--space-md));
     right: 0;
-    min-width: 180px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--control-border);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 32px 60px rgba(15, 23, 42, 0.18);
-    padding: var(--space-2);
+    min-width: 220px;
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-2xl);
+    padding: var(--space-md);
     z-index: var(--z-overlay);
   }
 
   .lang-option {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    justify-content: space-between;
+    gap: var(--space-md);
     width: 100%;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-md) var(--space-lg);
     background: transparent;
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: 16px;
     text-align: left;
     cursor: pointer;
     transition:
-      background var(--duration-fast) var(--ease-out),
-      color var(--duration-fast) var(--ease-out);
+      transform var(--duration-fast) var(--ease-spring),
+      background var(--duration-fast) ease;
   }
 
   .lang-option:hover {
-    background: var(--control-surface-hover);
+    background: var(--bg-elev-2);
+    transform: var(--transform-hover-card);
   }
 
   .lang-option:focus-visible {
-    background: var(--control-surface-hover);
-    outline: 2px solid var(--focus-ring-color, var(--voyage-blue));
+    background: var(--bg-elev-2);
+    outline: 2px solid var(--focus-ring-color);
     outline-offset: 2px;
   }
 
   .lang-option.active {
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 70%, var(--control-surface) 30%);
+    background: color-mix(in srgb, var(--voyage-blue) 10%, var(--bg-elev-2) 90%);
     color: var(--voyage-blue);
+    font-weight: var(--weight-bold);
   }
 
   .label {
     font-weight: var(--weight-semibold);
-    font-size: var(--text-small);
+    font-size: var(--text-body);
+    color: var(--text);
+    white-space: nowrap;
   }
 
   .name {
-    font-size: var(--text-caption);
+    font-size: var(--text-small);
     color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   svg { pointer-events: none; }

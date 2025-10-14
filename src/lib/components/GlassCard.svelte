@@ -28,27 +28,22 @@
 <style>
   .glass-card {
     position: relative;
-    padding: clamp(1.5rem, 3vw, 2.4rem);
-    border-radius: clamp(24px, 4vw, 40px);
-    border: 1.5px solid color-mix(in srgb, rgba(255, 255, 255, 0.3) 80%, transparent 20%);
-    background-color: color-mix(in srgb, var(--bg-elev-1) 88%, transparent 12%);
-    background-image: var(--glass-layer, var(--glass-texture));
+    padding: var(--card-padding-lg);
+    border-radius: 48px;
+    border: 2px solid var(--border);
+    background: var(--bg-elev-1);
     color: var(--text);
-    overflow: hidden;
+    overflow: visible;
     isolation: isolate;
-    box-shadow: 
-      0 16px 48px rgba(10, 18, 32, 0.16),
-      0 4px 16px rgba(10, 18, 32, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 rgba(10, 18, 32, 0.03);
+    box-shadow: var(--shadow-xl);
   }
 
   .glass-card--pad-sm {
-    padding: clamp(1rem, 2.2vw, 1.6rem);
+    padding: var(--card-padding-sm);
   }
 
   .glass-card--pad-lg {
-    padding: clamp(2rem, 4vw, 3rem);
+    padding: var(--card-padding-xl);
   }
 
   .glass-card__surface {
@@ -56,39 +51,28 @@
     inset: 0;
     border-radius: inherit;
     background: transparent;
-    opacity: 1;
+    opacity: 0;
     pointer-events: none;
-    backdrop-filter: blur(40px) saturate(1.4) brightness(1.08);
-    -webkit-backdrop-filter: blur(40px) saturate(1.4) brightness(1.08);
-    transition: backdrop-filter var(--duration-normal, 320ms) cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 0;
+    z-index: var(--z-behind);
   }
 
   .glass-card--interactive {
     cursor: pointer;
     transition: 
-      transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      box-shadow 320ms cubic-bezier(0.4, 0, 0.2, 1),
-      border-color 240ms ease;
+      transform var(--duration-smooth) var(--ease-spring),
+      box-shadow var(--duration-smooth) var(--ease-smooth),
+      border-color var(--duration-fast) ease;
   }
 
   .glass-card--interactive:hover {
-    transform: translateY(-4px) scale(1.01);
-    border-color: color-mix(in srgb, rgba(255, 255, 255, 0.5) 85%, transparent 15%);
-    box-shadow: 
-      0 24px 64px rgba(10, 18, 32, 0.2),
-      0 8px 24px rgba(10, 18, 32, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  .glass-card--interactive:hover .glass-card__surface {
-    backdrop-filter: blur(48px) saturate(1.5) brightness(1.12);
-    -webkit-backdrop-filter: blur(48px) saturate(1.5) brightness(1.12);
+    transform: var(--transform-hover-card);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-2xl);
   }
 
   .glass-card--interactive:active {
-    transform: translateY(-2px) scale(0.99);
-    transition-duration: 150ms;
+    transform: var(--transform-active-card);
+    transition-duration: var(--duration-micro);
   }
 
   .glass-card:focus-within {
@@ -137,7 +121,21 @@
 
   .glass-card :global(*) {
     position: relative;
-    z-index: 2;
+    z-index: var(--z-text);
+  }
+  
+  .glass-card :global(h1),
+  .glass-card :global(h2),
+  .glass-card :global(h3),
+  .glass-card :global(h4),
+  .glass-card :global(h5),
+  .glass-card :global(h6),
+  .glass-card :global(p),
+  .glass-card :global(span),
+  .glass-card :global(a),
+  .glass-card :global(button) {
+    position: relative;
+    z-index: var(--z-text);
   }
 
   :global(html[data-theme='hc'] .glass-card),

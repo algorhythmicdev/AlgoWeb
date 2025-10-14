@@ -38,9 +38,26 @@
   /* Textures */
   --grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)'/%3E%3C/svg%3E");
   --grain: var(--grain-texture);
+  /* ==================== GLASSMORPHISM ==================== */
   --glass-blur: 18px;
+  --glass-blur-sm: 24px;
+  --glass-blur-md: 32px;
+  --glass-blur-lg: 40px;
+  --glass-blur-xl: 48px;
+  --glass-saturate: 1.4;
+  --glass-brightness: 1.08;
+  --glass-brightness-hover: 1.12;
+  
   --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-light: color-mix(in srgb, var(--bg-elev-1) 88%, transparent 12%);
+  --glass-bg-lighter: color-mix(in srgb, var(--bg-elev-1) 92%, transparent 8%);
+  --glass-bg-lightest: color-mix(in srgb, var(--bg-elev-1) 94%, transparent 6%);
+  --glass-bg-strong: color-mix(in srgb, var(--bg-elev-1) 95%, transparent 5%);
+  
   --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-light: color-mix(in srgb, rgba(255, 255, 255, 0.3) 80%, transparent 20%);
+  --glass-border-strong: color-mix(in srgb, rgba(255, 255, 255, 0.4) 80%, transparent 20%);
+  --glass-border-hover: color-mix(in srgb, rgba(255, 255, 255, 0.5) 85%, transparent 15%);
 
   /* Motion timing */
   --slow: 22s;
@@ -63,6 +80,39 @@
   --signal-yellow-rgb: 255, 211, 57;
   --cherry-pop-rgb: 224, 50, 44;
 
+  /* ==================== SHADOWS ==================== */
+  --shadow-xs: 0 2px 8px rgba(var(--ink-rgb), 0.06);
+  --shadow-sm: 0 4px 12px rgba(var(--ink-rgb), 0.08);
+  --shadow-md: 0 8px 20px rgba(var(--ink-rgb), 0.1);
+  --shadow-lg: 0 12px 32px rgba(var(--ink-rgb), 0.14);
+  --shadow-xl: 0 16px 48px rgba(var(--ink-rgb), 0.16);
+  --shadow-2xl: 0 24px 64px rgba(var(--ink-rgb), 0.2);
+  --shadow-3xl: 0 32px 80px rgba(var(--ink-rgb), 0.24);
+  
+  /* Multi-layer shadows */
+  --shadow-glass-sm: 0 8px 24px rgba(var(--ink-rgb), 0.1), 0 2px 8px rgba(var(--ink-rgb), 0.06);
+  --shadow-glass-md: 0 12px 32px rgba(var(--ink-rgb), 0.14), 0 4px 12px rgba(var(--ink-rgb), 0.08);
+  --shadow-glass-lg: 0 16px 48px rgba(var(--ink-rgb), 0.16), 0 4px 16px rgba(var(--ink-rgb), 0.08);
+  --shadow-glass-xl: 0 24px 64px rgba(var(--ink-rgb), 0.2), 0 8px 24px rgba(var(--ink-rgb), 0.12);
+  --shadow-glass-2xl: 0 32px 80px rgba(var(--ink-rgb), 0.24), 0 12px 32px rgba(var(--ink-rgb), 0.14);
+  
+  /* Button shadows */
+  --shadow-button: 0 12px 32px rgba(var(--ink-rgb), 0.14), 0 4px 12px rgba(var(--ink-rgb), 0.08);
+  --shadow-button-hover: 0 20px 48px rgba(var(--ink-rgb), 0.2), 0 8px 20px rgba(var(--ink-rgb), 0.12);
+  --shadow-button-elevate: 0 16px 40px rgba(var(--ink-rgb), 0.18), 0 6px 16px rgba(var(--ink-rgb), 0.1);
+  
+  /* Hero shadows */
+  --shadow-hero: 0 24px 72px rgba(var(--ink-rgb), 0.18), 0 8px 24px rgba(var(--ink-rgb), 0.1);
+  --shadow-hero-content: 0 20px 56px rgba(var(--ink-rgb), 0.14), 0 8px 20px rgba(var(--ink-rgb), 0.08);
+  
+  /* Inset shadows */
+  --shadow-inset-light: inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
+  --shadow-inset-light-strong: inset 0 1px 0 rgba(var(--snow-rgb), 0.5);
+  --shadow-inset-light-subtle: inset 0 1px 0 rgba(var(--snow-rgb), 0.6);
+  --shadow-inset-dark: inset 0 -1px 0 rgba(var(--ink-rgb), 0.03);
+  --shadow-inset-dark-strong: inset 0 -1px 0 rgba(var(--ink-rgb), 0.04);
+  
+  /* Legacy */
   --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
 
   /* ==================== BRAND CORE ==================== */
@@ -354,6 +404,12 @@
   --radius-xl: 2.2rem;
   --radius-2xl: 3.2rem;
   --radius-full: 999px;
+  
+  /* Responsive bubble borders - VERY ROUNDED */
+  --radius-bubble-sm: clamp(20px, 4vw, 36px);
+  --radius-bubble-md: clamp(28px, 5vw, 48px);
+  --radius-bubble-lg: clamp(32px, 6vw, 56px);
+  --radius-bubble-xl: clamp(40px, 7vw, 64px);
 
   /* ==================== SHADOWS & TEXTURES ==================== */
   --shadow-xs: 0 6px 18px rgba(17, 24, 39, 0.06);
@@ -381,24 +437,40 @@
   --grain-opacity: 0.18;
 
   /* ==================== MOTION & ELEVATION ==================== */
+  /* ==================== MOTION ==================== */
   --ease-out-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-snappy: cubic-bezier(0.33, 1, 0.68, 1);
-  --ease-spring: cubic-bezier(0.28, 0.84, 0.42, 1.1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce: cubic-bezier(0.28, 0.84, 0.42, 1.1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: var(--ease-out-soft);
 
   --duration-micro: 120ms;
-  --duration-fast: var(--duration-micro);
-  --duration-ui: 240ms;
-  --duration-normal: var(--duration-ui);
-  --duration-hero: 520ms;
+  --duration-fast: 240ms;
+  --duration-ui: var(--duration-fast);
+  --duration-normal: 280ms;
+  --duration-smooth: 320ms;
+  --duration-hero: 680ms;
   --duration-slow: var(--duration-hero);
-  --duration-epic: 720ms;
+  --duration-epic: 880ms;
   --duration-slower: var(--duration-epic);
+  
+  /* ==================== TRANSFORMS ==================== */
+  --transform-hover-lift: translateY(-4px) scale(1.02);
+  --transform-hover-card: translateY(-4px) scale(1.01);
+  --transform-active-squash: translateY(-1px) scale(0.98);
+  --transform-active-card: translateY(-2px) scale(0.99);
 
   /* ==================== Z-INDEX ==================== */
   --z-background: -20;
+  --z-behind: -10;
   --z-base: 0;
+  --z-content: 1;
+  --z-text: 2;
+  --z-interactive: 3;
+  --z-surface: 5;
+  --z-card: 10;
   --z-elevated: 10;
   --z-sticky: 100;
   --z-overlay: 400;

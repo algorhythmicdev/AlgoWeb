@@ -92,12 +92,12 @@
   .theme-switcher {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    background: var(--control-surface);
-    border: 1px solid var(--control-border);
-    border-radius: var(--radius-lg);
-    padding: 0.25rem;
-    box-shadow: var(--shadow-sm);
+    gap: var(--space-sm);
+    background: var(--bg-elev-1);
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    padding: var(--space-sm);
+    box-shadow: var(--shadow-md);
   }
 
   .theme-option {
@@ -118,17 +118,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
-    min-width: 64px;
-    min-height: 48px;
-    padding: 0.4rem 0.65rem;
-    border-radius: var(--radius-lg);
+    gap: var(--space-xs);
+    min-width: 72px;
+    min-height: 56px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 16px;
     color: var(--text-secondary);
+    cursor: pointer;
     transition:
-      background var(--duration-fast) var(--ease-out),
-      color var(--duration-fast) var(--ease-out),
-      box-shadow var(--duration-fast) var(--ease-out),
-      transform var(--duration-fast) var(--ease-out);
+      background var(--duration-fast) ease,
+      color var(--duration-fast) ease,
+      transform var(--duration-normal) var(--ease-spring);
   }
 
   .theme-option__icon {
@@ -138,27 +138,31 @@
   }
 
   .theme-option__label {
-    font-size: var(--text-caption);
+    font-size: var(--text-small);
     font-weight: var(--weight-semibold);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .theme-option__body:hover {
+    background: var(--bg-elev-2);
+    color: var(--text);
+    transform: var(--transform-hover-card);
   }
 
   .theme-option.active .theme-option__body {
-    background: var(--control-surface-hover);
-    color: var(--text-primary);
-    box-shadow: var(--shadow-sm);
-    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--voyage-blue) 10%, var(--bg-elev-2) 90%);
+    color: var(--voyage-blue);
+    font-weight: var(--weight-bold);
   }
 
   .theme-option.active .theme-option__label {
-    color: var(--text-primary);
+    color: var(--voyage-blue);
   }
 
   .theme-option input:focus-visible + .theme-option__body {
-    outline: none;
-    box-shadow: var(--focus-ring-shadow);
-    animation: themeFocusPulse 1.6s ease-in-out infinite;
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
   }
 
   svg {

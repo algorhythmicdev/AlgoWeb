@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @typedef {Object} NavigationChild
  * @property {string} label
  * @property {string} href
@@ -57,11 +57,6 @@ export const mainNavigation = [
     label: 'nav.help_center',
     href: '/help-center',
     icon: 'info'
-  },
-  {
-    label: 'nav.contact',
-    href: '/contact',
-    icon: 'contact'
   }
 ];
 
