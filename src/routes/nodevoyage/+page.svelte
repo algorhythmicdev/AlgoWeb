@@ -669,7 +669,7 @@
   }
 
   .field-error {
-    color: var(--cherry-pop, #e0322c);
+    color: var(--cherry-pop);
     font-size: 0.9rem;
   }
 

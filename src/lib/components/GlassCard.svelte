@@ -29,16 +29,18 @@
   .glass-card {
     position: relative;
     padding: clamp(1.5rem, 3vw, 2.4rem);
-    border-radius: var(--radius-2xl, 32px);
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.2) 70%, transparent 30%);
-    background-color: color-mix(in srgb, var(--bg-elev-1) 70%, transparent 30%);
+    border-radius: clamp(24px, 4vw, 40px);
+    border: 1.5px solid color-mix(in srgb, rgba(255, 255, 255, 0.3) 80%, transparent 20%);
+    background-color: color-mix(in srgb, var(--bg-elev-1) 88%, transparent 12%);
     background-image: var(--glass-layer, var(--glass-texture));
-    color: inherit;
+    color: var(--text);
     overflow: hidden;
     isolation: isolate;
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      0 16px 48px rgba(10, 18, 32, 0.16),
+      0 4px 16px rgba(10, 18, 32, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(10, 18, 32, 0.03);
   }
 
   .glass-card--pad-sm {
@@ -56,25 +58,37 @@
     background: transparent;
     opacity: 1;
     pointer-events: none;
-    backdrop-filter: blur(24px) saturate(1.2) brightness(1.1);
-    -webkit-backdrop-filter: blur(24px) saturate(1.2) brightness(1.1);
-    transition: opacity var(--duration-fast, 240ms) ease;
+    backdrop-filter: blur(40px) saturate(1.4) brightness(1.08);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4) brightness(1.08);
+    transition: backdrop-filter var(--duration-normal, 320ms) cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
   }
 
   .glass-card--interactive {
-    transition: transform var(--duration-fast, 240ms) ease, box-shadow var(--duration-fast, 240ms) ease;
+    cursor: pointer;
+    transition: 
+      transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 320ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 240ms ease;
   }
 
-  .glass-card--interactive:hover,
-  .glass-card--interactive:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: 0 30px 70px rgba(10, 18, 39, 0.22);
+  .glass-card--interactive:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: color-mix(in srgb, rgba(255, 255, 255, 0.5) 85%, transparent 15%);
+    box-shadow: 
+      0 24px 64px rgba(10, 18, 32, 0.2),
+      0 8px 24px rgba(10, 18, 32, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
-  .glass-card--interactive:hover .glass-card__surface,
-  .glass-card--interactive:focus-within .glass-card__surface {
-    opacity: calc(var(--surface-glass-opacity, 1) * 0.88);
+  .glass-card--interactive:hover .glass-card__surface {
+    backdrop-filter: blur(48px) saturate(1.5) brightness(1.12);
+    -webkit-backdrop-filter: blur(48px) saturate(1.5) brightness(1.12);
+  }
+
+  .glass-card--interactive:active {
+    transform: translateY(-2px) scale(0.99);
+    transition-duration: 150ms;
   }
 
   .glass-card:focus-within {

@@ -64,14 +64,12 @@
 
 <style>
   .btn {
-    --btn-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
-    --btn-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 65%, rgba(255, 255, 255, 0.4) 35%);
-    --btn-color: color-mix(in srgb, var(--text) 85%, rgba(var(--voyage-blue-rgb), 0.12) 15%);
-    --btn-shadow: 0 18px 36px rgba(10, 18, 39, 0.16);
-    --btn-hover-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.16) 12%);
+    --btn-bg: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--voyage-blue-rgb), 0.06) 6%);
+    --btn-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 65%, rgba(255, 255, 255, 0.4) 35%);
+    --btn-color: var(--text);
+    --btn-shadow: 0 12px 32px rgba(10, 18, 32, 0.14), 0 4px 12px rgba(10, 18, 32, 0.08);
+    --btn-hover-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.12) 10%);
     --btn-hover-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.55) 70%, rgba(255, 255, 255, 0.5) 30%);
-    --btn-hover-shadow: 0 24px 48px rgba(10, 18, 39, 0.22);
-    --btn-active-translate: -2px;
     --btn-padding-y: 0.85rem;
     --btn-padding-x: 1.7rem;
     --btn-gap: 0.65rem;
@@ -84,7 +82,7 @@
     gap: var(--btn-gap, 0.65rem);
     padding: var(--btn-padding-y, 0.85rem) var(--btn-padding-x, 1.7rem);
     border-radius: var(--radius-pill, 999px);
-    border: 1px solid var(--btn-border);
+    border: 1.5px solid var(--btn-border);
     background: var(--btn-bg);
     color: var(--btn-color);
     font-weight: var(--weight-semibold, 600);
@@ -95,10 +93,10 @@
     box-shadow: var(--btn-shadow);
     transform: translateY(0);
     transition:
-      transform var(--duration-fast, 220ms) var(--ease-out, ease-out),
-      box-shadow var(--duration-fast, 220ms) var(--ease-out, ease-out),
-      background var(--duration-fast, 220ms) var(--ease-out, ease-out),
-      border-color var(--duration-fast, 220ms) var(--ease-out, ease-out);
+      transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+      background 240ms ease,
+      border-color 240ms ease;
   }
 
   .btn__content {
@@ -118,16 +116,22 @@
   }
 
   .btn--elevate {
-    --btn-hover-shadow: 0 28px 54px rgba(10, 18, 39, 0.28);
-    --btn-active-translate: -3px;
+    --btn-shadow: 0 16px 40px rgba(10, 18, 32, 0.18), 0 6px 16px rgba(10, 18, 32, 0.1);
   }
 
   .btn:hover,
   .btn:focus-visible {
     background: var(--btn-hover-bg);
     border-color: var(--btn-hover-border);
-    transform: translateY(var(--btn-active-translate));
-    box-shadow: var(--btn-hover-shadow, 0 24px 48px rgba(10, 18, 39, 0.22));
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 20px 48px rgba(10, 18, 32, 0.2),
+      0 8px 20px rgba(10, 18, 32, 0.12);
+  }
+
+  .btn:active {
+    transform: translateY(-1px) scale(0.98);
+    transition-duration: 120ms;
   }
 
   .btn:focus-visible {
@@ -164,7 +168,7 @@
       color-mix(in srgb, var(--voyage-blue) 78%, rgba(255, 255, 255, 0.14) 22%)
     );
     --btn-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 70%, rgba(255, 255, 255, 0.5) 30%);
-    --btn-color: var(--cta-primary-text, #ffffff);
+    --btn-color: var(--cta-primary-text);
     --btn-hover-bg: linear-gradient(
       135deg,
       color-mix(in srgb, var(--aurora-purple) 78%, rgba(255, 255, 255, 0.08) 22%),

@@ -956,7 +956,7 @@
   }
 
   .field-error {
-    color: var(--critical, #e0322c);
+    color: var(--cherry-pop);
     font-size: 0.9rem;
   }
 
@@ -973,8 +973,8 @@
   }
 
   .form-status--error {
-    background: color-mix(in srgb, var(--critical, #e0322c) 16%, transparent 84%);
-    color: var(--critical, #e0322c);
+    background: color-mix(in srgb, var(--cherry-pop) 16%, transparent 84%);
+    color: var(--cherry-pop);
   }
 
   :global(.cta-card) {

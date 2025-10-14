@@ -324,7 +324,6 @@
     opacity: var(--gradient-opacity, 1);
     transition: background 1.6s ease, opacity 1s ease;
     filter: var(--gradient-filter, saturate(0.72) brightness(0.92));
-    animation: gradient-orbit var(--aurora-speed, 32s) ease-in-out infinite alternate;
   }
 
   .wash {
@@ -357,7 +356,6 @@
     );
     mix-blend-mode: var(--flare-blend, screen);
     filter: var(--flare-filter, blur(12px) saturate(0.46));
-    animation: flare-drift var(--bar-speed, 40s) ease-in-out infinite alternate;
   }
 
   .veil {
@@ -470,23 +468,7 @@
     }
   }
 
-  @keyframes gradient-orbit {
-    from {
-      transform: scale(1.01) translate3d(-1.2%, -1.2%, 0);
-    }
-    to {
-      transform: scale(1.03) translate3d(1.2%, 1.2%, 0);
-    }
-  }
 
-  @keyframes flare-drift {
-    from {
-      transform: translate3d(-1.2%, -1.6%, 0);
-    }
-    to {
-      transform: translate3d(1.4%, 1.2%, 0);
-    }
-  }
 
   @keyframes floaty {
     0% {
@@ -501,11 +483,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .gradient,
-    .flare {
-      animation: none;
-    }
-
     .gradient {
       transition-duration: 0.001ms;
     }

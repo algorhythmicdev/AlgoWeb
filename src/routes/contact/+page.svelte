@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -566,7 +566,7 @@
 
   .field-error {
     font-size: var(--text-small);
-    color: var(--cherry-pop, #e0322c);
+    color: var(--cherry-pop);
   }
 
   .form-actions {

@@ -94,12 +94,12 @@
 
 <style>
   .hero {
-    --hero-surface: color-mix(in srgb, var(--bg-elev-1) 70%, transparent 30%);
-    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 75%, transparent 25%);
+    --hero-surface: color-mix(in srgb, var(--bg-elev-1) 92%, transparent 8%);
+    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 95%, transparent 5%);
     --hero-text: var(--text);
     --hero-grad-start: var(--aurora-purple);
     --hero-grad-stop: var(--voyage-blue);
-    --hero-overlay: color-mix(in srgb, var(--bg) 40%, transparent 60%);
+    --hero-overlay: color-mix(in srgb, var(--bg) 75%, transparent 25%);
     --hero-padding-block: var(--section-padding-desktop);
     --hero-padding-inline: var(--space-4xl);
     position: relative;
@@ -107,15 +107,17 @@
     overflow: hidden;
     padding-block: var(--hero-padding-block);
     padding-inline: var(--hero-padding-inline);
-    color: var(--hero-text);
+    color: var(--text);
     background: var(--hero-surface);
-    border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.2) 70%, transparent 30%);
+    border-radius: clamp(28px, 5vw, 48px);
+    border: 1.5px solid color-mix(in srgb, rgba(255, 255, 255, 0.35) 85%, transparent 15%);
     box-shadow: 
-      0 20px 60px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(40px) saturate(1.4) brightness(1.2);
-    -webkit-backdrop-filter: blur(40px) saturate(1.4) brightness(1.2);
+      0 24px 72px rgba(10, 18, 32, 0.18),
+      0 8px 24px rgba(10, 18, 32, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(10, 18, 32, 0.04);
+    backdrop-filter: blur(48px) saturate(1.3) brightness(1.06);
+    -webkit-backdrop-filter: blur(48px) saturate(1.3) brightness(1.06);
   }
 
   .hero__background {
@@ -134,18 +136,16 @@
 
   .hero__background-layer--gradient {
     background:
-      radial-gradient(120% 150% at 18% 20%, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.55) 78%, transparent 22%), transparent 72%),
-      radial-gradient(140% 180% at 82% 0%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.52) 70%, transparent 30%), transparent 78%),
-      linear-gradient(130deg, color-mix(in srgb, var(--voyage-blue) 86%, transparent 14%), color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%));
-    filter: saturate(1.05);
-    opacity: 0.9;
-    animation: hero-pan var(--aurora-speed, 46s) ease-in-out infinite alternate;
+      radial-gradient(120% 150% at 18% 20%, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.08) 78%, transparent 22%), transparent 72%),
+      radial-gradient(140% 180% at 82% 0%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.06) 70%, transparent 30%), transparent 78%);
+    filter: saturate(0.9);
+    opacity: 0.5;
   }
 
   .hero__background-layer--overlay {
     background: var(--hero-overlay);
-    mix-blend-mode: var(--hero-overlay-blend, overlay);
-    opacity: var(--hero-overlay-opacity, 0.72);
+    mix-blend-mode: normal;
+    opacity: 0.95;
   }
 
   .hero__background-layer--grain {
@@ -159,31 +159,30 @@
     position: absolute;
     inset-inline: var(--space-xl);
     bottom: var(--space-lg);
-    height: var(--space-sm);
+    height: 3px;
     border-radius: var(--radius-full);
-    background: linear-gradient(90deg, var(--hero-grad-start), var(--hero-grad-stop));
-    background-size: 200% 100%;
-    opacity: 0.9;
-    animation: hero-bar 18s ease-in-out infinite alternate;
+    background: color-mix(in srgb, var(--voyage-blue) 50%, var(--aurora-purple) 50%);
+    opacity: 0.4;
     pointer-events: none;
     z-index: 1;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--voyage-blue) 30%, transparent 70%);
   }
 
   @keyframes hero-pan {
-    from {
-      transform: translate3d(-2%, -3%, 0) scale(1.05);
+    0%, 100% {
+      opacity: 0.5;
     }
-    to {
-      transform: translate3d(3%, 2%, 0) scale(1.05);
+    50% {
+      opacity: 0.6;
     }
   }
 
   @keyframes hero-bar {
-    from {
-      background-position: 0% 50%;
+    0%, 100% {
+      opacity: 0.9;
     }
-    to {
-      background-position: 100% 50%;
+    50% {
+      opacity: 1;
     }
   }
 
@@ -215,17 +214,19 @@
     display: grid;
     gap: var(--space-lg);
     padding: var(--space-3xl);
-    border-radius: var(--radius-2xl);
-    background: color-mix(in srgb, var(--hero-surface) 60%, transparent 40%);
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.25) 70%, transparent 30%);
+    border-radius: clamp(20px, 4vw, 36px);
+    background: color-mix(in srgb, var(--bg-elev-1) 94%, transparent 6%);
+    border: 1.5px solid color-mix(in srgb, rgba(255, 255, 255, 0.4) 80%, transparent 20%);
     box-shadow: 
-      0 16px 48px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(28px) saturate(1.3) brightness(1.15);
-    -webkit-backdrop-filter: blur(28px) saturate(1.3) brightness(1.15);
+      0 20px 56px rgba(10, 18, 32, 0.14),
+      0 8px 20px rgba(10, 18, 32, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -1px 0 rgba(10, 18, 32, 0.03);
+    backdrop-filter: blur(32px) saturate(1.2) brightness(1.04);
+    -webkit-backdrop-filter: blur(32px) saturate(1.2) brightness(1.04);
     overflow: hidden;
     isolation: isolate;
-    animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation: hero-entrance 680ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
   .hero__content::before {
