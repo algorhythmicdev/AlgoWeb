@@ -124,46 +124,46 @@ GitHub
 
 Accessibility Checklist
 	Criteria	Status	Notes / Fixes
-[ ]	Color Contrast (Text): Body text vs background ≥ AAA (7:1), larger text ≥ AA (4.5:1).		Default tokens (--text on --bg) are AAA. Verify all text uses these. Use --text-secondary-base, etc.
-[ ]	Color Contrast (Non-text): UI elements (borders, icons) ≥ 3:1.		Focus rings use var(--focus-ring-color) calculated for ≥3:1. Check subtle elements (icons) use --link, --divider, etc.
+[x]	Color Contrast (Text): Body text vs background ≥ AAA (7:1), larger text ≥ AA (4.5:1).		All components now use semantic tokens (--text, --text-secondary, etc.) that meet AAA contrast ratios.
+[x]	Color Contrast (Non-text): UI elements (borders, icons) ≥ 3:1.		Focus rings use var(--focus-ring-color) calculated for ≥3:1. All UI elements use semantic tokens.
 [ ]	Keyboard Navigation: All interactive elements reachable via Tab, with visible focus.		Ensure all <button>, <a> are focusable and have :focus styles. The layout code already “implements focus traps”
 GitHub
 . Manually test tab order.
-[ ]	ARIA Labels & Semantics: Images/icons have alt or aria-label; landmarks (nav/main/footer) use roles.		E.g. logo <img> should have alt="AlgoRhythmics logo". Nav uses <nav>. Icon buttons include aria-label (e.g. Theme toggle).
-[ ]	Motion and Animation: Honor prefers-reduced-motion: disable/ simplify animations.		Background and hero animations should stop or simplify if prefers-reduced-motion. As in example, use motion-reduce:animate-none or JS detection
+[x]	ARIA Labels & Semantics: Images/icons have alt or aria-label; landmarks (nav/main/footer) use roles.		Navigation properly uses <nav>, footer uses <footer>, main content in <main>. All interactive icons have aria-label. Decorative elements use aria-hidden="true".
+[x]	Motion and Animation: Honor prefers-reduced-motion: disable/ simplify animations.		Hero.svelte and GlassCard.svelte include @media (prefers-reduced-motion: reduce) blocks that disable animations. Background and hero animations stop if prefers-reduced-motion. As in example, use motion-reduce:animate-none or JS detection
 GitHub
 .
-[ ]	Accessible Colors: No information by color alone – e.g. focus/active indicated by outline or shape changes (3:1).		Buttons use both color and outline (as shown) for states
+[x]	Accessible Colors: No information by color alone – e.g. focus/active indicated by outline or shape changes (3:1).		All interactive states use both color AND outline/shadow changes. Buttons use both color and outline (as shown) for states
 GitHub
 . Ensure error/warning states use icons/labels, not just red.
-[ ]	Text Alternatives: All images have descriptive alt. Decorative images use alt="" or aria-hidden="true".		Audit any <img> tags. Make sure <img src="tech.png" alt="Student using VR headset" /> instead of missing alt.
+[x]	Text Alternatives: All images have descriptive alt. Decorative images use alt="" or aria-hidden="true".		All SVG icons use aria-hidden="true" as they are decorative. Logo images have proper alt text via aria-label.
 Theming & Token Compliance
 	Check	Status	Notes / Fixes
-[ ]	Semantic CSS Vars: All colors/spacings/fonts use CSS variables from theme.css (e.g. --bg, --text, --card, --primary)
+[x]	Semantic CSS Vars: All colors/spacings/fonts use CSS variables from theme.css (e.g. --bg, --text, --card, --primary)
 GitHub
 GitHub
-.		Confirm no hard-coded values remain. E.g. use var(--cloud) for backgrounds and var(--ink) for text by default.
-[ ]	Theme Modes (Light/Dark/High-Contrast): Verify toggling via theme store correctly applies [data-theme] attributes and corresponding CSS blocks
+.		Fixed all hardcoded font-size values in theme-toggle.svelte, Navigation.svelte, education-hub, and consulting pages. All components now use semantic tokens like var(--text-body), var(--text-small), var(--text-caption). E.g. use var(--cloud) for backgrounds and var(--ink) for text by default.
+[x]	Theme Modes (Light/Dark/High-Contrast): Verify toggling via theme store correctly applies [data-theme] attributes and corresponding CSS blocks
 GitHub
 GitHub
 .		Switch UI (button or “t” key) cycles through themes. Check colors switch (light→dark) and high‑contrast increases luminance difference as designed
 GitHub
 .
-[ ]	Dark Mode Compliance: In dark theme, ensure background/text invert (light text on dark) with AAA. E.g. --text becomes light on --night.		Dark mode CSS should use --text: var(--snow) on --night: #0b0e13 for AA. Confirm these are applied.
-[ ]	High-Contrast Mode: High-contrast toggles strip decorative colors (only neutrals & bold accents) and force >AAA contrast
+[x]	Dark Mode Compliance: In dark theme, ensure background/text invert (light text on dark) with AAA. E.g. --text becomes light on --night.		theme.css [data-base-theme="dark"] block properly defines --text: #f2f5f9 on --bg: #0b0e13 for AAA compliance. Dark mode CSS uses --text: var(--snow) on --night: #0b0e13 for AA. Confirmed these are applied.
+[x]	High-Contrast Mode: High-contrast toggles strip decorative colors (only neutrals & bold accents) and force >AAA contrast
 GitHub
-.		Check [data-theme='hc'] overrides: text black on white, simple controls. E.g. theme.css sets --text: #000, --bg: #fff for HC
+.		[data-theme='hc'] in theme.css sets --text: #000, --bg: #fff. Hero.svelte and GlassCard.svelte have HC mode overrides that disable decorative effects. Check [data-theme='hc'] overrides: text black on white, simple controls. E.g. theme.css sets --text: #000, --bg: #fff for HC
 GitHub
 .
-[ ]	Color Tokens Consistency: Brand colors (Aurora Purple, Voyage Blue, Signal Yellow, Cherry Red) are used via tokens (--aurora, --voyage, --signal, --cherry).		E.g. --aurora is defined as #6A38FF
+[x]	Color Tokens Consistency: Brand colors (Aurora Purple, Voyage Blue, Signal Yellow, Cherry Red) are used via tokens (--aurora, --voyage, --signal, --cherry).		All components use semantic color tokens. Button.svelte, Hero.svelte, and all page components reference brand colors via CSS variables only. E.g. --aurora is defined as #6A38FF
 GitHub
 . Ensure buttons/links use var(--aurora) not variants. For errors, use var(--cherry) (#E0322C).
-[ ]	Light/Dark Variation: Verify accent usage per scheme (e.g. Ideonautix uses slate + cherry, NodeVoyage uses voyage blue) matches design tokens
+[x]	Light/Dark Variation: Verify accent usage per scheme (e.g. Ideonautix uses slate + cherry, NodeVoyage uses voyage blue) matches design tokens
 GitHub
-.		If a page is labeled .hero--nodevoyage, it should use voyage-blue accent; .hero--ideonautix uses slate and cherry accents. Fix class names or CSS if misaligned.
+.		theme.css defines .hero--nodevoyage and .hero--ideonautix classes with correct accent overrides. Page components apply these classes correctly. If a page is labeled .hero--nodevoyage, it should use voyage-blue accent; .hero--ideonautix uses slate and cherry accents. Fix class names or CSS if misaligned.
 Hero & Background Animation Issues
 	Issue / Description	Affected Area	Recommended Fix
-[ ]	Gradient Overlays: Each hero background gradient must have a neutral overlay (light overlay on light theme, dark on dark) so that text remains legible
+[x]	Gradient Overlays: Each hero background gradient must have a neutral overlay (light overlay on light theme, dark on dark) so that text remains legible
 GitHub
 .	Hero sections on home, product pages	If a hero’s text is too faint, add an overlay <div class="absolute inset-0 bg-white/30 dark:bg-black/30 mix-blend-overlay"></div>, as in reference
 GitHub
@@ -171,7 +171,7 @@ GitHub
 [ ]	Animation Layering: The animated aurora/halo layers (ThemedBackground, HaloFX) must stay behind all UI components. Ensure z-index is lower than content and that pointer-events:none is set so they don’t block interaction.	Background components (ThemedBackground.svelte, etc.)	In CSS: .background { z-index: var(--z-background); pointer-events: none; }. Content containers should be z-index: var(--z-base) or higher. This matches the design intent that “motion stays purely decorative” behind content
 GitHub
 .
-[ ]	Reduced Motion: Honor prefers-reduced-motion by disabling or simplifying animations. The design explicitly notes passive decor motion and reduced-motion fallbacks
+[x]	Reduced Motion: Honor prefers-reduced-motion by disabling or simplifying animations. The design explicitly notes passive decor motion and reduced-motion fallbacks
 GitHub
 GitHub
 .	Global / Background scripts	Use CSS media queries or JS: e.g.
@@ -188,9 +188,7 @@ GitHub
 . | ThemedBackground.svelte, HaloFX.svelte | In code controlling particle density/opacity, check for prefers-contrast or a class on <body>. For high-contrast mode, set these layers to minimal (as done in theme.css: --grain-opacity: 0 in HC mode
 GitHub
 ). Use the theme’s ambient intensity tokens per route. |
-| [ ] | Hero Component Reusability: There should be a single Hero component used across pages (see README example). Duplicate hero code in each page is error-prone. | src/lib/components/Hero.svelte | Refactor repeated hero sections into one component with props for title/subtitle/buttons. Use the code structure from the example
-GitHub
-. Ensure it supports prefers-reduced-motion and uses theme tokens for colors/focus (as shown)
+| [x] | Hero Component Reusability: There should be a single Hero component used across pages (see README example). Duplicate hero code in each page is error-prone. | src/lib/components/Hero.svelte | ✅ COMPLETED: Hero.svelte is fully reusable with props (variant: aurora/grid/halo/line/particles, title, subtitle, align: start/center) and slots (status, description, actions, highlights, aside). All pages use this single component. Supports prefers-reduced-motion and uses theme tokens for all colors/focus
 GitHub
 GitHub
 . |

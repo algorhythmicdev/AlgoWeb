@@ -97,7 +97,7 @@
     border: 1px solid var(--control-border);
     border-radius: var(--radius-lg);
     padding: 0.25rem;
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+    box-shadow: var(--shadow-sm);
   }
 
   .theme-option {
@@ -138,7 +138,7 @@
   }
 
   .theme-option__label {
-    font-size: 0.7rem;
+    font-size: var(--text-caption);
     font-weight: var(--weight-semibold);
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -147,7 +147,7 @@
   .theme-option.active .theme-option__body {
     background: var(--control-surface-hover);
     color: var(--text-primary);
-    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+    box-shadow: var(--shadow-sm);
     transform: translateY(-1px);
   }
 
@@ -195,7 +195,7 @@
     }
 
     .theme-option__label {
-      font-size: 0.64rem;
+      font-size: var(--text-caption);
     }
   }
 

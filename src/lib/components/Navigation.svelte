@@ -1,4 +1,4 @@
-﻿<script>
+<script>
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { _ } from 'svelte-i18n';
@@ -583,7 +583,7 @@
     gap: 0.55rem;
     padding: 0.65rem 1.05rem;
     border-radius: var(--radius-full);
-    font-size: 0.98rem;
+    font-size: var(--text-body);
     font-weight: var(--weight-medium);
     color: var(--text-secondary);
     border: 1px solid transparent;
@@ -704,7 +704,7 @@
   }
 
   .nav-submenu__description {
-    font-size: 0.9rem;
+    font-size: var(--text-small);
     color: var(--text-secondary);
   }
 

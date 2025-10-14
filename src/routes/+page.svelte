@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -438,16 +438,19 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.25rem 0.9rem;
-    border-radius: 999px;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--radius-full, 999px);
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    background:
-      linear-gradient(120deg, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 68%, transparent 32%), transparent 74%),
-      color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.1) 12%);
-    color: color-mix(in srgb, var(--aurora-purple) 72%, var(--text-secondary) 28%);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--aurora-purple) 26%, transparent 74%);
+    background: color-mix(in srgb, var(--aurora-purple) 15%, var(--bg-elev-1) 85%);
+    color: var(--aurora-purple);
+    border: 1px solid color-mix(in srgb, var(--aurora-purple) 30%, transparent 70%);
+    box-shadow: 
+      0 4px 12px rgba(var(--aurora-purple-rgb), 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .highlights,
@@ -566,6 +569,13 @@
   :global(.finale-card) {
     display: grid;
     gap: clamp(1rem, 3vw, 1.6rem);
+    background: color-mix(in srgb, var(--bg-elev-1) 65%, transparent 35%) !important;
+    backdrop-filter: blur(32px) saturate(1.3) brightness(1.15) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(1.3) brightness(1.15) !important;
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.25) 70%, transparent 30%) !important;
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
 
   .highlight-icon {

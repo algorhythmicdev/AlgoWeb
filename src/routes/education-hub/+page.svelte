@@ -438,7 +438,7 @@
   .hero-highlights {
     display: grid;
     gap: 0.6rem;
-    font-size: 0.95rem;
+    font-size: var(--text-small);
     text-align: left;
     list-style: none;
     padding: 0;
@@ -467,14 +467,14 @@
   }
 
   .featured__eyebrow {
-    font-size: 0.9rem;
+    font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--voyage-blue) 70%, rgba(var(--ink-rgb), 0.64) 30%);
   }
 
   .featured__meta {
-    font-size: 0.95rem;
+    font-size: var(--text-small);
     color: color-mix(in srgb, var(--text) 75%, rgba(var(--ink-rgb), 0.6) 25%);
   }
 
@@ -501,7 +501,7 @@
   .section-heading__eyebrow {
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-size: 0.82rem;
+    font-size: var(--text-caption);
     color: color-mix(in srgb, var(--voyage-blue) 70%, rgba(var(--ink-rgb), 0.6) 30%);
   }
 

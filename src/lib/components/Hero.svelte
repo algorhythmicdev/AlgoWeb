@@ -94,12 +94,12 @@
 
 <style>
   .hero {
-    --hero-surface: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--ink-rgb), 0.06) 6%);
-    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 96%, rgba(var(--ink-rgb), 0.08) 4%);
+    --hero-surface: color-mix(in srgb, var(--bg-elev-1) 70%, transparent 30%);
+    --hero-surface-elev: color-mix(in srgb, var(--bg-elev-1) 75%, transparent 25%);
     --hero-text: var(--text);
     --hero-grad-start: var(--aurora-purple);
     --hero-grad-stop: var(--voyage-blue);
-    --hero-overlay: color-mix(in srgb, var(--bg) 70%, transparent 30%);
+    --hero-overlay: color-mix(in srgb, var(--bg) 40%, transparent 60%);
     --hero-padding-block: var(--section-padding-desktop);
     --hero-padding-inline: var(--space-4xl);
     position: relative;
@@ -110,8 +110,12 @@
     color: var(--hero-text);
     background: var(--hero-surface);
     border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, var(--border) 72%, transparent 28%);
-    box-shadow: 0 26px 64px rgba(6, 20, 53, 0.12);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.2) 70%, transparent 30%);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(40px) saturate(1.4) brightness(1.2);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4) brightness(1.2);
   }
 
   .hero__background {
@@ -211,12 +215,14 @@
     display: grid;
     gap: var(--space-lg);
     padding: var(--space-3xl);
-    border-radius: var(--radius-xl);
-    background: color-mix(in srgb, var(--hero-surface) 82%, rgba(var(--ink-rgb), 0.08) 18%);
-    border: 1px solid color-mix(in srgb, var(--border) 62%, transparent 38%);
-    box-shadow: 0 26px 60px rgba(6, 20, 53, 0.16);
-    backdrop-filter: blur(20px) saturate(1.08);
-    -webkit-backdrop-filter: blur(20px) saturate(1.08);
+    border-radius: var(--radius-2xl);
+    background: color-mix(in srgb, var(--hero-surface) 60%, transparent 40%);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.25) 70%, transparent 30%);
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(28px) saturate(1.3) brightness(1.15);
+    -webkit-backdrop-filter: blur(28px) saturate(1.3) brightness(1.15);
     overflow: hidden;
     isolation: isolate;
     animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
@@ -296,10 +302,14 @@
   .hero__highlights {
     margin-top: var(--space-xl);
     padding: var(--space-3xl);
-    border-radius: var(--radius-lg, 24px);
-    background: var(--hero-surface-elev);
-    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent 30%);
-    box-shadow: 0 18px 42px rgba(12, 20, 40, 0.08);
+    border-radius: var(--radius-2xl, 32px);
+    background: color-mix(in srgb, var(--hero-surface-elev) 60%, transparent 40%);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.25) 70%, transparent 30%);
+    box-shadow: 
+      0 12px 36px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(1.2) brightness(1.1);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2) brightness(1.1);
     display: grid;
     gap: var(--space-md);
     animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;

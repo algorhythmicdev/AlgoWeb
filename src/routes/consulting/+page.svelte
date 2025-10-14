@@ -638,7 +638,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.85rem;
+    font-size: var(--text-small);
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -663,7 +663,7 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    font-size: 0.95rem;
+    font-size: var(--text-small);
   }
 
   .hero-highlights li {
@@ -688,7 +688,7 @@
   }
 
   .testimonial__label {
-    font-size: 0.8rem;
+    font-size: var(--text-caption);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted, color-mix(in srgb, var(--text) 60%, rgba(var(--ink-rgb), 0.3) 40%));
