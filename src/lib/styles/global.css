@@ -170,10 +170,20 @@ html.nav-menu-open {
     box-shadow var(--duration-ui, 220ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
+:where(a, button, input, textarea, select, summary, [role='button'], [role='link']):focus,
 :where(a, button, input, textarea, select, summary, [role='button'], [role='link']):focus-visible {
-  outline: 2px solid var(--focus-ring-color, color-mix(in srgb, var(--voyage-blue) 70%, #ffffff 30%));
+  outline: var(
+    --focus-ring,
+    2px solid var(
+      --focus-ring-color,
+      color-mix(in srgb, var(--voyage-blue) 70%, var(--snow) 30%)
+    )
+  );
   outline-offset: var(--focus-ring-offset, 3px);
-  box-shadow: var(--focus-ring-shadow, var(--focus-ring));
+  box-shadow: var(
+    --focus-ring-shadow,
+    0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 70%, transparent 30%)
+  );
 }
 
 /* Gradient bar animation */

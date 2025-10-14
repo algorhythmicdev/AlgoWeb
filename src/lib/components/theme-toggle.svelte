@@ -157,7 +157,7 @@
 
   .theme-option input:focus-visible + .theme-option__body {
     outline: none;
-    box-shadow: var(--focus-ring);
+    box-shadow: var(--focus-ring-shadow);
     animation: themeFocusPulse 1.6s ease-in-out infinite;
   }
 
@@ -202,7 +202,7 @@
   @keyframes themeFocusPulse {
     0%,
     100% {
-      box-shadow: var(--focus-ring);
+      box-shadow: var(--focus-ring-shadow);
     }
 
     50% {

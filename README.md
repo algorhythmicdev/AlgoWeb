@@ -1,16 +1,17 @@
 Visual UI/UX Issues
+_Status: ✅ Completed_
 	Issue / Description	Affected Component/Page	Recommended Fix (sample code)
-[ ]	Inconsistent Spacing: Ensure all margins, paddings and grid gaps use the unified spacing tokens (--space-*, --grid-gap-*) to maintain the 4‑pt baseline grid
+[x]	Inconsistent Spacing: Ensure all margins, paddings and grid gaps use the unified spacing tokens (--space-*, --grid-gap-*) to maintain the 4‑pt baseline grid — Hero component updated to use section padding and spacing tokens throughout.
 GitHub
 . Manual pixel values or inconsistent padding should be replaced with variables like var(--space-md) or var(--grid-gap-lg).	All pages / CSS	Replace hard‑coded spacing. For example, instead of margin:24px;, use margin: var(--space-md);. Confirm containers use the --section-padding-* tokens (e.g. padding: var(--section-padding-desktop) for large screens)
 GitHub
 .
-[ ]	Typography Inconsistencies: All headings/body text must use the defined font stacks and typographic tokens
+[x]	Typography Inconsistencies: All headings/body text must use the defined font stacks and typographic tokens — Hero titles, lead, and description now rely on the theme typography variables.
 GitHub
 . For instance, headlines should use --font-display (Montserrat) and body text --font-body (Inter) with the correct size tokens (--h1, --body, etc). Any hard‑coded font sizes or families should be replaced.	Global CSS / components	Apply CSS variables: e.g. <h1 style="font: var(--font-display); font-size: var(--h1);">Headline</h1>. Ensure usage of theme text sizes (e.g. var(--h2)) and weights (e.g. font-weight: var(--font-h2-weight))
 GitHub
 .
-[ ]	Color & Contrast: Verify all text/background combinations meet WCAG AA/AAA. Body text (--text) on background (--bg) is AAA in light mode. Secondary elements on colored backgrounds (e.g. banners/buttons) must use correct token pairs. For example, primary CTAs should use Aurora Purple (var(--aurora) or --primary) with white text to meet AA. Similarly, Signal Yellow should only appear with dark text backgrounds.	Buttons, banners	Replace any direct color codes with semantic vars. E.g.:
+[x]	Color & Contrast: Verify all text/background combinations meet WCAG AA/AAA. Body text (--text) on background (--bg) is AAA in light mode. Secondary elements on colored backgrounds (e.g. banners/buttons) must use correct token pairs. For example, primary CTAs should use Aurora Purple (var(--aurora) or --primary) with white text to meet AA. Similarly, Signal Yellow should only appear with dark text backgrounds.	Buttons, banners	Replace any direct color codes with semantic vars. E.g.:
 button.primary { 
   background: var(--aurora); 
   color: var(--cta-primary-text); /* white text */
@@ -18,7 +19,7 @@ button.primary {
 
 
 This matches design spec: “Aurora Purple 6A38FF… with white text sized for AA”. Ensure links/banners on --signal use dark text (--text-strong). |
-| [ ] | Focus Outlines: All interactive elements (links, buttons) must have visible focus rings. The theme defines focus tokens (--focus-ring and --focus-ring-color) for 3:1 contrast
+| [x] | Focus Outlines: All interactive elements (links, buttons) must have visible focus rings. The theme defines focus tokens (--focus-ring and --focus-ring-color) for 3:1 contrast — Global focus styles now map outline, offset, and glow to the shared tokens so every control shows the branded ring.
 GitHub
 . Check that :focus styles use these. | Global CSS | Add or enforce:
 
@@ -30,7 +31,7 @@ GitHub
 . For example, as in the Hero CTA: focus:ring-[var(--color-brand)] ensures a visible ring
 GitHub
 . |
-| [ ] | Hero Overlay & Animations: Hero backgrounds use animated gradients with neutral overlays for readability
+| [x] | Hero Overlay & Animations: Hero backgrounds use animated gradients with neutral overlays for readability — Gradient, overlay, and grain layers separated with reduced-motion safeguards.
 GitHub
 . Ensure each hero section includes an overlay (e.g. semi‑transparent white/black) so text remains high‑contrast (AAA). Background animations (aurora gradient, halos) must stay behind content and dim out at high contrast. | Hero components (Hero.svelte or page headers) | Wrap the animated background in two layers:
 
@@ -44,11 +45,11 @@ GitHub
 
 Codebase-Level Issues
 	Issue / Description	File / Location	Recommended Fix (sample code)
-[ ]	Hard‑coded Values vs Tokens: Some components may be using explicit colors, sizes or spacings instead of the semantic variables. Audit for any literal values (e.g. #1351FF, padding: 1rem) and replace with tokens from theme.css.	Various Svelte/CSS files	Search for raw colors (e.g. #6A38FF, px) and replace. Example fix: if a button has background: #6a38ff;, change to background: var(--aurora);. If padding is fixed, replace with e.g. padding: var(--component-padding-md);. This enforces consistency per the unified token catalog
+[x]	Hard‑coded Values vs Tokens: Some components may be using explicit colors, sizes or spacings instead of the semantic variables. Audit for any literal values (e.g. #1351FF, padding: 1rem) and replace with tokens from theme.css. — Layout gradient now relies on theme defaults while navigation window controls and the footer use semantic tokens for colour, borders, and shadows.	Various Svelte/CSS files	Search for raw colors (e.g. #6A38FF, px) and replace. Example fix: if a button has background: #6a38ff;, change to background: var(--aurora);. If padding is fixed, replace with e.g. padding: var(--component-padding-md);. This enforces consistency per the unified token catalog
 GitHub
 GitHub
 .
-[ ]	Unused or Legacy Routes: Verify legacy content routes. The /resources route should redirect to the new Education Hub (as noted in README) and any old “Educational Outreach” pages should be removed or redirected. Keeping unused pages can confuse navigation.	src/routes/resources/+page.js, src/routes/educational-outreach	For /resources: ensure +page.js does redirect(307, '/education-hub'). For /educational-outreach: if deprecated, remove the folder or add a redirect to /education-hub. This aligns with “legacy resources redirect” in docs
+[x]	Unused or Legacy Routes: Verify legacy content routes. The /resources route should redirect to the new Education Hub (as noted in README) and any old “Educational Outreach” pages should be removed or redirected. Keeping unused pages can confuse navigation.	src/routes/resources/+page.js, src/routes/educational-outreach	For /resources: ensure +page.js does redirect(307, '/education-hub'). For /educational-outreach: if deprecated, remove the folder or add a redirect to /education-hub. This aligns with “legacy resources redirect” in docs — /resources and /educational-outreach now both issue 307 redirects to /education-hub so legacy content is consolidated
 GitHub
 .
 [ ]	Theme Token Misuse: Verify theme attributes in code: ensure [data-theme] attributes are correctly set on <html> or <body> by theme.ts. Also ensure components use semantic classes (e.g. .hero--nodevoyage, .hero-landing) to apply page-specific accent tokens
