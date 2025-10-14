@@ -250,6 +250,7 @@
 </script>
 
 <Hero
+  class="hero--ideonautix"
   variant="halo"
   align="center"
   title={t(hero.titleKey, hero.titleFallback)}

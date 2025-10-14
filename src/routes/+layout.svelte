@@ -60,7 +60,10 @@
   $: if (browser) {
     document.body.classList.remove(
       'page-home',
+      'page-products',
       'page-services',
+      'page-consulting',
+      'page-education',
       'page-outreach',
       'page-about',
       'page-education-hub',

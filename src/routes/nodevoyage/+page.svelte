@@ -246,6 +246,7 @@
 </script>
 
 <Hero
+  class="hero--nodevoyage"
   variant="aurora"
   align="center"
   title={t(hero.titleKey, hero.titleFallback)}

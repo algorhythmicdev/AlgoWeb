@@ -30,12 +30,14 @@
     position: relative;
     padding: clamp(1.5rem, 3vw, 2.4rem);
     border-radius: var(--radius-lg, 24px);
-    border: 1px solid var(--surface-glass-border, color-mix(in srgb, var(--border) 68%, transparent 32%));
-    background: var(--surface-glass-bg, color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.04) 2%));
+    border: 1px solid var(--glass-border, var(--surface-glass-border, color-mix(in srgb, var(--border) 68%, transparent 32%)));
+    background-color:
+      var(--glass-bg, var(--surface-glass-bg, color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.04) 2%)));
+    background-image: var(--glass-layer, var(--glass-texture, var(--grain, var(--grain-texture))));
     color: inherit;
     overflow: hidden;
     isolation: isolate;
-    box-shadow: var(--surface-glass-shadow, 0 20px 48px rgba(12, 20, 40, 0.12));
+    box-shadow: var(--glass-shadow, var(--surface-glass-shadow, 0 20px 48px rgba(12, 20, 40, 0.12)));
   }
 
   .glass-card--pad-sm {
@@ -50,11 +52,16 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: var(--surface-glass-fill, color-mix(in srgb, var(--bg-elev-1) 99%, rgba(var(--ink-rgb), 0.05) 1%));
-    opacity: var(--surface-glass-opacity, 1);
+    background:
+      var(--glass-inner-bg, var(--surface-glass-fill, color-mix(in srgb, var(--bg-elev-1) 99%, rgba(var(--ink-rgb), 0.05) 1%)));
+    opacity: var(--glass-inner-opacity, var(--surface-glass-opacity, 1));
     pointer-events: none;
-    backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.08);
-    -webkit-backdrop-filter: blur(var(--surface-glass-blur, 12px)) saturate(1.08);
+    backdrop-filter:
+      var(--surface-glass-blur, blur(var(--glass-blur, 18px)))
+      saturate(var(--glass-saturation, 1.08));
+    -webkit-backdrop-filter:
+      var(--surface-glass-blur, blur(var(--glass-blur, 18px)))
+      saturate(var(--glass-saturation, 1.08));
     transition: opacity var(--duration-fast, 240ms) ease;
   }
 

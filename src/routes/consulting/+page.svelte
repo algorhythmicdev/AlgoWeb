@@ -312,7 +312,12 @@
   });
 </script>
 
-<Hero variant="halo" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
+<Hero
+  class="hero--products"
+  variant="halo"
+  title={t(hero.titleKey, hero.titleFallback)}
+  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+>
   <svelte:fragment slot="status">
     <span class="hero-badge surface-pill" data-tone="accent">{t(hero.badgeKey, hero.badgeFallback)}</span>
   </svelte:fragment>

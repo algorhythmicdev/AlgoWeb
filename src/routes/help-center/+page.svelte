@@ -296,7 +296,12 @@
   } as const;
 </script>
 
-<Hero variant="halo" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
+<Hero
+  class="hero--products"
+  variant="halo"
+  title={t(hero.titleKey, hero.titleFallback)}
+  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+>
   <svelte:fragment slot="status">
     <span class="hero-kicker surface-pill" data-tone="accent">{t(hero.eyebrowKey, hero.eyebrowFallback)}</span>
   </svelte:fragment>

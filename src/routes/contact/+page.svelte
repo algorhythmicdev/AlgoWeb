@@ -214,7 +214,12 @@
   });
 </script>
 
-<Hero variant="halo" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
+<Hero
+  class="hero--products"
+  variant="halo"
+  title={t(hero.titleKey, hero.titleFallback)}
+  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+>
   <svelte:fragment slot="actions">
     <div class="hero-actions">
       {#each hero.actions as action (action.href)}
