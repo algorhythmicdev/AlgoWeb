@@ -135,7 +135,7 @@
       labelKey: 'contact.page.social.linkedin',
       labelFallback: 'Follow on LinkedIn',
       href: 'https://www.linkedin.com/company/algorhythmics',
-      descriptionKey: 'contact.page.social.linkedin.description',
+      descriptionKey: 'contact.page.social.linkedin_description',
       descriptionFallback: 'Studio updates & hiring notes'
     },
     {
@@ -143,7 +143,7 @@
       labelKey: 'contact.page.social.twitter',
       labelFallback: 'Join the conversation on X/Twitter',
       href: 'https://twitter.com/AlgoRhythmics',
-      descriptionKey: 'contact.page.social.twitter.description',
+      descriptionKey: 'contact.page.social.twitter_description',
       descriptionFallback: 'Event recaps & pilot progress'
     },
     {
@@ -151,7 +151,7 @@
       labelKey: 'contact.page.social.github',
       labelFallback: 'Explore our open tooling on GitHub',
       href: 'https://github.com/AlgoRhythmics',
-      descriptionKey: 'contact.page.social.github.description',
+      descriptionKey: 'contact.page.social.github_description',
       descriptionFallback: 'Starter kits & calm AI experiments'
     }
   ] as const;
@@ -374,7 +374,7 @@
 <section id="newsletter" class="contact-newsletter" use:revealOnScroll>
   <div class="container">
     <GlassCard class="newsletter-card" padding="lg">
-      <span class="section-eyebrow">Studio updates</span>
+      <span class="section-eyebrow">{t('contact.page.newsletter.eyebrow', 'Studio updates')}</span>
       <h2>{t('contact.page.newsletter.title', 'Subscribe for launch updates')}</h2>
       <p>
         {t(
