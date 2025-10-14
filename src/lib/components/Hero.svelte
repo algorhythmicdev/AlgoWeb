@@ -9,6 +9,14 @@
   export let subtitle = '';
   export let align: HeroAlign = 'start';
 
+  type $$Props = {
+    class?: string;
+    variant?: HeroVariant | string;
+    title?: string;
+    subtitle?: string;
+    align?: HeroAlign;
+  };
+
   const instanceId = Math.random().toString(36).slice(2, 8);
   $: resolvedVariant = VALID_VARIANTS.has(variant as HeroVariant) ? (variant as HeroVariant) : 'aurora';
   $: titleId = title.trim().length ? `hero-${instanceId}-title` : undefined;
@@ -19,10 +27,14 @@
   $: ariaDescribedBy = [leadId, descriptionId, highlightsId].filter(Boolean).join(' ') || undefined;
   $: alignmentClass = align === 'center' ? 'hero--align-center' : 'hero--align-start';
   $: hasAside = Boolean($$slots.aside);
+  $: extraClass = typeof $$props.class === 'string' ? $$props.class.trim() : '';
+  $: rootClass = ['hero', alignmentClass, hasAside ? 'hero--with-aside' : 'hero--solo', extraClass]
+    .filter(Boolean)
+    .join(' ');
 </script>
 
 <section
-  class={`hero ${alignmentClass} ${hasAside ? 'hero--with-aside' : 'hero--solo'}`}
+  class={rootClass}
   data-variant={resolvedVariant}
   aria-labelledby={ariaLabelledBy}
   aria-describedby={ariaDescribedBy}

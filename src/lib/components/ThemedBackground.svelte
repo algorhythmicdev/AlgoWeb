@@ -4,6 +4,7 @@
   import { spring } from 'svelte/motion';
   import { page } from '$app/stores';
   import { getThemeForPath } from '$config/backgroundThemes';
+  import { theme as themeStore } from '$stores/theme';
 
   let prefersReducedMotion = false;
   let prefersHighContrast = false;
@@ -88,7 +89,8 @@
     paletteColors[2] ?? paletteFallback[2]
   ];
 
-  $: flattenAmbient = prefersHighContrast || prefersLessTransparency;
+  $: currentThemeName = $themeStore;
+  $: flattenAmbient = prefersHighContrast || prefersLessTransparency || currentThemeName === 'hc';
 
   $: routeGradient = theme?.gradient ?? fallbackGradient;
   $: routeGrainOpacity = typeof theme?.grainOpacity === 'number' ? theme.grainOpacity : fallbackGrainOpacity;

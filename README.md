@@ -52,12 +52,12 @@ GitHub
 [x]	Unused or Legacy Routes: Verify legacy content routes. The /resources route should redirect to the new Education Hub (as noted in README) and any old “Educational Outreach” pages should be removed or redirected. Keeping unused pages can confuse navigation.	src/routes/resources/+page.js, src/routes/educational-outreach	For /resources: ensure +page.js does redirect(307, '/education-hub'). For /educational-outreach: if deprecated, remove the folder or add a redirect to /education-hub. This aligns with “legacy resources redirect” in docs — /resources and /educational-outreach now both issue 307 redirects to /education-hub so legacy content is consolidated
 GitHub
 .
-[ ]	Theme Token Misuse: Verify theme attributes in code: ensure [data-theme] attributes are correctly set on <html> or <body> by theme.ts. Also ensure components use semantic classes (e.g. .hero--nodevoyage, .hero-landing) to apply page-specific accent tokens
+[x]	Theme Token Misuse: Verify theme attributes in code: ensure [data-theme] attributes are correctly set on <html> or <body> by theme.ts. Also ensure components use semantic classes (e.g. .hero--nodevoyage, .hero-landing) to apply page-specific accent tokens
 GitHub
 .	src/lib/stores/theme.ts, component classes	In theme.ts, applyThemeAttributes() should set the data-theme attribute on <html>. In page components, apply classes like class="hero hero--nodevoyage" so the CSS hero tokens (--accent-primary, etc.) apply as intended
 GitHub
 . Fix any mismatches.
-[ ]	Glass Card Reusability: Components such as <GlassCard> should use the same frosted‑glass effect tokens (blur, transparency) everywhere. Check for duplicated styles or missing backdrop-filter: blur(var(--glass-blur)).	GlassCard.svelte	Use the theme’s glass tokens:
+[x]	Glass Card Reusability: Components such as <GlassCard> should use the same frosted‑glass effect tokens (blur, transparency) everywhere. Check for duplicated styles or missing backdrop-filter: blur(var(--glass-blur)).	GlassCard.svelte	Use the theme’s glass tokens:
 .glass-card { 
   background: var(--glass-bg); 
   border: 1px solid var(--glass-border); 
@@ -183,7 +183,7 @@ GitHub
 Or add motion-reduce:animate-none utility (Tailwind) on animated elements
 GitHub
 . Ensure any looping animations stop under reduced-motion. |
-| [ ] | Particle/Veil Visibility: Background effects like particles and dust should not obscure content. Ensure opacity is low (≈0.1–0.2) and intensity is reduced in high-contrast mode
+| [x] | Particle/Veil Visibility: Background effects like particles and dust should not obscure content. Ensure opacity is low (≈0.1–0.2) and intensity is reduced in high-contrast mode
 GitHub
 . | ThemedBackground.svelte, HaloFX.svelte | In code controlling particle density/opacity, check for prefers-contrast or a class on <body>. For high-contrast mode, set these layers to minimal (as done in theme.css: --grain-opacity: 0 in HC mode
 GitHub

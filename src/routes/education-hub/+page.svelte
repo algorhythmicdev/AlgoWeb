@@ -271,7 +271,12 @@
   } as const;
 </script>
 
-<Hero variant="grid" title={t(hero.titleKey, hero.titleFallback)} subtitle={t(hero.subtitleKey, hero.subtitleFallback)}>
+<Hero
+  class="hero--products"
+  variant="grid"
+  title={t(hero.titleKey, hero.titleFallback)}
+  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+>
   <svelte:fragment slot="description">
     <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
