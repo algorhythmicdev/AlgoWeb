@@ -262,9 +262,19 @@
   </svelte:fragment>
 </Hero>
 
-<section id="options" class="contact-options" use:revealOnScroll>
+<section id="options" class="section contact-options" use:revealOnScroll>
   <div class="container">
-    <h2 class="contact-options__heading">{t('contact.page.cards.heading', 'Ways to connect')}</h2>
+    <header class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t('contact.page.cards.eyebrow', 'Ways to connect')}</span>
+      <h2>{t('contact.page.cards.heading', 'How to reach the team')}</h2>
+      <p>
+        {t(
+          'contact.page.cards.supporting_copy',
+          'Pick the option that fits best—every path connects you with a calm, friendly specialist ready to help.'
+        )}
+      </p>
+    </header>
+
     <div class="contact-options__grid" use:staggerReveal>
       {#each contactCards as card (card.titleKey)}
         <GlassCard class="contact-card" padding="lg" halo>
@@ -282,7 +292,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section id="form" class="contact-form" use:revealOnScroll>
+<section id="form" class="section contact-form" use:revealOnScroll>
   <div class="container">
     <GlassCard class="form-card" padding="lg" halo>
       <span class="section-eyebrow">{t('contact.page.form.eyebrow', 'Send a message')}</span>
@@ -290,7 +300,7 @@
       <p>{t('contact.page.form.description', 'Please share your name, email, and what you would like to explore. We respect your privacy and handle all messages with care.')}</p>
 
       <form class="form" on:submit={handleSubmit}>
-        <label>
+        <label class="form-field">
           <span>{t('contact.page.form.fields.name.label', 'Name')}</span>
           <input
             type="text"
@@ -303,7 +313,7 @@
           {/if}
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('contact.page.form.fields.email.label', 'Email')}</span>
           <input
             type="email"
@@ -316,7 +326,7 @@
           {/if}
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('contact.page.form.fields.reason.label', 'Reason for contacting')}</span>
           <select bind:value={formData.reason} on:change={resetStatus} aria-invalid={errors.reason ? 'true' : 'false'}>
             <option value="general">{t('contact.page.form.fields.reason.options.general', 'General question')}</option>
@@ -329,7 +339,7 @@
           {/if}
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('contact.page.form.fields.message.label', 'Message')}</span>
           <textarea
             rows="6"
@@ -359,8 +369,19 @@
 
 <SectionDivider tone="citrus" />
 
-<section id="support" class="contact-support" use:revealOnScroll>
-  <div class="container">
+<section id="support" class="section contact-support" use:revealOnScroll>
+  <div class="container contact-support__container">
+    <header class="section-heading">
+      <span class="section-eyebrow">{t('contact.page.support.section_eyebrow', 'Support & follow-up')}</span>
+      <h2>{t('contact.page.support.section_title', 'Always-on guidance for every partnership')}</h2>
+      <p>
+        {t(
+          'contact.page.support.section_copy',
+          'Reach out for tailored assistance, browse self-serve resources, or follow our studio channels for calm AI updates.'
+        )}
+      </p>
+    </header>
+
     <div class="support-grid" use:staggerReveal>
       <GlassCard class="support-card" padding="lg" halo>
         <span class="section-eyebrow">{t(supportCommitment.eyebrowKey, supportCommitment.eyebrowFallback)}</span>
@@ -423,7 +444,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section id="newsletter" class="contact-newsletter" use:revealOnScroll>
+<section id="newsletter" class="section contact-newsletter" use:revealOnScroll>
   <div class="container">
     <GlassCard class="newsletter-card" padding="lg">
       <span class="section-eyebrow">{t('contact.page.newsletter.eyebrow', 'Studio updates')}</span>
@@ -460,17 +481,6 @@
     flex-wrap: wrap;
     gap: var(--space-md, 1rem);
     align-items: center;
-  }
-
-  .contact-options,
-  .contact-form,
-  .contact-support,
-  .contact-newsletter {
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
-  }
-
-  .contact-support {
-    background: transparent;
   }
 
   .support-grid {
@@ -535,16 +545,13 @@
     gap: 0.75rem;
   }
 
+  .contact-support__container {
+    gap: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
   .contact-options__grid {
     display: grid;
     gap: clamp(1.6rem, 3vw, 2.4rem);
-  }
-
-  .contact-options__heading {
-    margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
-    text-align: center;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: var(--weight-semibold);
   }
 
   :global(.contact-card) {
@@ -577,54 +584,36 @@
   }
 
   .form {
-    display: grid;
-    gap: clamp(1rem, 3vw, 1.4rem);
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    font-weight: var(--weight-semibold);
-  }
-
-  input,
-  select,
-  textarea {
-    font: inherit;
-    padding: 0.85rem 1rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--surface-field-border, color-mix(in srgb, var(--border) 72%, transparent 28%));
-    background: var(--surface-field-bg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%));
-    color: var(--text);
-  }
-
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible {
-    outline: 2px solid var(--voyage-blue);
-    outline-offset: 2px;
-  }
-
-  .field-error {
-    font-size: var(--text-small);
-    color: var(--cherry-pop);
-  }
-
-  .form-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    --form-gap: clamp(1rem, 3vw, 1.4rem);
+    --form-field-radius: var(--radius-lg);
+    --form-field-padding-y: 0.85rem;
+    --form-field-padding-x: 1rem;
+    --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
+    --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --form-field-border: color-mix(
+      in srgb,
+      var(--surface-field-border, color-mix(in srgb, var(--border) 78%, transparent 22%)) 84%,
+      transparent 16%
+    );
+    --form-field-border-focus: color-mix(
+      in srgb,
+      var(--voyage-blue) 52%,
+      rgba(var(--aurora-purple-rgb), 0.42) 48%
+    );
+    --form-focus-ring-color: color-mix(in srgb, var(--voyage-blue) 78%, var(--aurora-purple) 22%);
+    --form-field-shadow: 0 12px 24px rgba(var(--ink-rgb), 0.08), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
+    --form-textarea-min-height: 180px;
+    --form-note-color: color-mix(in srgb, var(--text) 60%, transparent 40%);
+    --form-actions-gap: 0.5rem;
+    --form-status-success-color: color-mix(in srgb, var(--voyage-blue) 68%, var(--text) 32%);
   }
 
   .form-note {
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
+    text-wrap: balance;
   }
 
   .form-status {
-    font-size: var(--text-small);
-    color: var(--voyage-blue);
+    text-wrap: balance;
   }
 
   .contact-newsletter :global(.newsletter-card) {

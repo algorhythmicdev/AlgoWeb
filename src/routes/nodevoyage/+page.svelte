@@ -296,9 +296,9 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section section--snapshot" use:revealOnScroll>
+<section class="section section--snapshot" data-surface="glow" use:revealOnScroll>
   <div class="container snapshot">
-    <figure class="snapshot-card glass-card glass-card--pad-lg">
+    <GlassCard class="snapshot-card" padding="lg" halo>
       <img
         src={snapshot.image}
         alt={t(snapshot.altKey, snapshot.altFallback)}
@@ -306,18 +306,18 @@
         height="600"
         loading="lazy"
       />
-      <figcaption>
+      <div class="snapshot-card__body">
         <h2>{t('nodevoyage.snapshot.title', 'A calm travel timeline')}</h2>
         <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
         <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
           {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
         </Button>
-      </figcaption>
-    </figure>
+      </div>
+    </GlassCard>
   </div>
 </section>
 
-<section class="section section--features" use:revealOnScroll>
+<section class="section section--features" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title">{t(features.titleKey, features.titleFallback)}</h2>
     <p class="section-lead">{t(features.leadKey, features.leadFallback)}</p>
@@ -338,7 +338,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="section section--roadmap" use:revealOnScroll>
+<section class="section section--roadmap" data-surface="glow" use:revealOnScroll>
   <div class="container roadmap">
     <div>
       <span class="section-eyebrow">{t(roadmap.eyebrowKey, roadmap.eyebrowFallback)}</span>
@@ -361,7 +361,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section section--differentiators" use:revealOnScroll>
+<section class="section section--differentiators" data-surface="glow" use:revealOnScroll>
   <div class="container differentiators">
     <div class="differentiators-copy">
       <span class="section-eyebrow">{t(differentiators.eyebrowKey, differentiators.eyebrowFallback)}</span>
@@ -387,14 +387,14 @@
 
 <SectionDivider tone="voyage" />
 
-<section id="explorers-club" class="section explorers section--explorers" use:revealOnScroll>
+<section id="explorers-club" class="section explorers section--explorers" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="explorers-card" padding="lg" particles>
       <span class="section-eyebrow">{t(explorers.eyebrowKey, explorers.eyebrowFallback)}</span>
       <h2>{t(explorers.titleKey, explorers.titleFallback)}</h2>
       <p>{t(explorers.copyKey, explorers.copyFallback)}</p>
 
-      <form class="explorers-form" on:submit={handleExplorerSubmit}>
+      <form class="explorers-form form" on:submit={handleExplorerSubmit}>
         <div class="form-field">
           <label for="explorer-name">{t(explorers.form.nameLabelKey, explorers.form.nameLabelFallback)}</label>
           <input
@@ -427,7 +427,7 @@
         </Button>
 
         {#if explorerStatus === 'success'}
-          <p class="success">{t(explorers.form.successKey, explorers.form.successFallback)}</p>
+          <p class="form-status form-status--success">{t(explorers.form.successKey, explorers.form.successFallback)}</p>
         {/if}
       </form>
 
@@ -438,7 +438,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section cta section--cta" use:revealOnScroll>
+<section class="section cta section--cta" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>{t(related.titleKey, related.titleFallback)}</h2>
@@ -484,68 +484,52 @@
     opacity: 0.18;
   }
 
-  .section--features::before {
-    background:
-      radial-gradient(85% 95% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.18), transparent 74%),
-      radial-gradient(60% 80% at 78% 26%, rgba(var(--aurora-purple-rgb), 0.14), transparent 78%),
-      linear-gradient(140deg, rgba(var(--signal-yellow-rgb), 0.12), transparent 64%);
-    animation: voyageDrift 46s ease-in-out infinite alternate;
+  .section.section--snapshot {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section--roadmap::before {
-    inset: -24% -26% -30% -26%;
-    border-radius: clamp(42px, 9vw, 72px);
-    background:
-      conic-gradient(from 200deg, rgba(var(--voyage-blue-rgb), 0.14), rgba(var(--aurora-purple-rgb), 0.16), rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--signal-yellow-rgb), 0.12), rgba(var(--aurora-purple-rgb), 0.14));
-    mask: radial-gradient(88% 88% at 48% 20%, rgba(0, 0, 0, 0.46), transparent 82%);
-    animation: mapSweep 54s linear infinite;
+  .section.section--features {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section--differentiators::before {
-    background:
-      radial-gradient(70% 90% at 18% 32%, rgba(var(--signal-yellow-rgb), 0.12), transparent 76%),
-      radial-gradient(80% 110% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.16), transparent 80%),
-      linear-gradient(160deg, rgba(var(--aurora-purple-rgb), 0.12), transparent 60%);
-    animation: voyageDrift 52s ease-in-out infinite alternate-reverse;
+  .section.section--roadmap {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section--explorers::before {
-    inset: -22% -18% -26% -18%;
-    border-radius: clamp(40px, 8vw, 68px);
-    background:
-      radial-gradient(95% 110% at 20% 24%, rgba(var(--voyage-blue-rgb), 0.18), transparent 78%),
-      radial-gradient(75% 105% at 78% 18%, rgba(var(--signal-yellow-rgb), 0.12), transparent 78%),
-      linear-gradient(180deg, rgba(var(--ink-rgb), 0.08), transparent 72%);
+  .section.section--differentiators {
+    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.2);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--aurora-purple-rgb), 0.14);
   }
 
-  .section--cta::before {
-    inset: -18% -22% -30% -22%;
-    border-radius: clamp(48px, 10vw, 80px);
-    background:
-      radial-gradient(120% 120% at 12% 18%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
-      radial-gradient(85% 110% at 84% 20%, rgba(var(--voyage-blue-rgb), 0.16), transparent 78%),
-      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.1), transparent 64%);
-    animation: voyageDrift 40s ease-in-out infinite;
+  .section.section--explorers {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--signal-yellow-rgb), 0.16);
+    --section-glow-accent: rgba(var(--aurora-purple-rgb), 0.18);
   }
 
-  .section--roadmap::after {
-    opacity: 0.06;
-  }
-
-  .section--explorers::after {
-    opacity: 0.1;
+  .section.section--cta {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.18);
   }
 
   .snapshot {
     display: grid;
   }
 
-  .snapshot-card {
+  :global(.snapshot-card) {
     display: grid;
     gap: clamp(1.5rem, 3vw, 2.25rem);
   }
 
-  .snapshot-card img {
+  :global(.snapshot-card img) {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
@@ -553,7 +537,7 @@
     box-shadow: var(--shadow-xl);
   }
 
-  .snapshot-card figcaption {
+  :global(.snapshot-card__body) {
     display: grid;
     gap: clamp(0.75rem, 2vw, 1.5rem);
   }
@@ -700,6 +684,35 @@
     display: grid;
     gap: 1.25rem;
     max-width: 520px;
+    --form-gap: 1.25rem;
+    --form-field-radius: 12px;
+    --form-field-padding-y: 0.75rem;
+    --form-field-padding-x: 1rem;
+    --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
+    --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --form-field-border: color-mix(
+      in srgb,
+      var(--surface-field-border, color-mix(in srgb, var(--border) 80%, transparent 20%)) 85%,
+      transparent 15%
+    );
+    --form-field-border-focus: color-mix(
+      in srgb,
+      var(--nodevoyage-highlight, var(--signal-yellow)) 52%,
+      rgba(var(--voyage-blue-rgb), 0.42) 48%
+    );
+    --form-focus-ring-color: color-mix(
+      in srgb,
+      var(--nodevoyage-highlight, var(--signal-yellow)) 60%,
+      var(--voyage-blue) 40%
+    );
+    --form-field-shadow: 0 16px 34px rgba(12, 24, 48, 0.18), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
+    --form-error-color: color-mix(in srgb, var(--cherry-pop) 82%, var(--text) 18%);
+    --form-status-success-bg: color-mix(in srgb, var(--glass-bg-lightest) 62%, transparent 38%);
+    --form-status-success-color: color-mix(
+      in srgb,
+      var(--nodevoyage-highlight, var(--signal-yellow)) 64%,
+      var(--text) 36%
+    );
   }
 
   .form-field {
@@ -711,28 +724,8 @@
     font-weight: 600;
   }
 
-  .form-field input {
-    border-radius: 12px;
-    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent 20%);
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
-    color: var(--text);
-  }
-
-  .form-field input:focus {
-    outline: 3px solid color-mix(in srgb, var(--nodevoyage-highlight) 70%, var(--voyage-blue) 30%);
-    outline-offset: 3px;
-  }
-
-  .field-error {
-    color: var(--cherry-pop);
-    font-size: 0.9rem;
-  }
-
-  .success {
-    color: var(--nodevoyage-highlight, var(--signal-yellow));
-    font-weight: 600;
+  .explorers-form .form-status {
+    max-width: 32ch;
   }
 
   .privacy-note {
@@ -756,29 +749,6 @@
     justify-content: center;
   }
 
-  @keyframes voyageDrift {
-    0% {
-      transform: translate3d(-2%, -1%, 0) scale(1.02) rotate(-1deg);
-    }
-
-    50% {
-      transform: translate3d(1.5%, 1.5%, 0) scale(1.04) rotate(1deg);
-    }
-
-    100% {
-      transform: translate3d(-1%, 2%, 0) scale(1.01) rotate(-0.6deg);
-    }
-  }
-
-  @keyframes mapSweep {
-    0% {
-      transform: rotate(0deg) scale(1.08);
-    }
-
-    100% {
-      transform: rotate(360deg) scale(1.08);
-    }
-  }
 
   @media (min-width: 960px) {
     .roadmap {

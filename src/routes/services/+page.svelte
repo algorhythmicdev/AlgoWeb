@@ -257,10 +257,14 @@
   </svelte:fragment>
 </Hero>
 
-<div class="aurora-wrap aurora-wrap--consulting">
-  <section class="services" aria-labelledby="service-heading" use:revealOnScroll>
-    <div class="container">
-      <header class="section-heading">
+<section
+  class="section services-block services-block--consulting"
+  data-surface="glow"
+  aria-labelledby="service-heading"
+  use:revealOnScroll
+>
+  <div class="container">
+      <header class="section-heading" data-align="center">
         <span class="section-eyebrow">{t('services.page.consulting.eyebrow', 'Consulting & support')}</span>
         <h2 id="service-heading">{t('services.page.consulting.title', 'Strategy that keeps pace with your team')}</h2>
         <p>
@@ -290,16 +294,20 @@
           </GlassCard>
         {/each}
       </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <SectionDivider tone="aurora" />
 
-<div class="aurora-wrap aurora-wrap--platforms">
-  <section class="services" aria-labelledby="platform-heading" id="platforms" use:revealOnScroll>
-    <div class="container">
-      <header class="section-heading">
+<section
+  class="section services-block services-block--platforms"
+  data-surface="glow"
+  aria-labelledby="platform-heading"
+  id="platforms"
+  use:revealOnScroll
+>
+  <div class="container">
+      <header class="section-heading" data-align="center">
         <span class="section-eyebrow">{t('services.page.platforms.eyebrow', 'Flagship platforms')}</span>
         <h2 id="platform-heading">{t('services.page.platforms.title', 'Products where logic dances with creativity')}</h2>
         <p>
@@ -340,15 +348,18 @@
           </GlassCard>
         {/each}
       </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <SectionDivider tone="neutral" />
 
-<div class="aurora-wrap aurora-wrap--education">
-  <section class="services" aria-labelledby="education-heading" use:revealOnScroll>
-    <div class="container">
+<section
+  class="section services-block services-block--education"
+  data-surface="glow"
+  aria-labelledby="education-heading"
+  use:revealOnScroll
+>
+  <div class="container">
       <GlassCard class="education-card" padding="lg" halo id={educationCard.id}>
         <span class="service-eyebrow">{t(educationCard.eyebrowKey ?? '', educationCard.eyebrowFallback ?? '')}</span>
         <div class="education-grid">
@@ -369,13 +380,15 @@
           </div>
         </div>
       </GlassCard>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
-<div class="aurora-wrap aurora-wrap--finale">
-  <section class="services finale" use:revealOnScroll>
-    <div class="container">
+<section
+  class="section services-block services-block--finale finale"
+  data-surface="glow"
+  use:revealOnScroll
+>
+  <div class="container">
       <GlassCard class="finale-card service-card--finale" halo padding="lg">
         <span class="service-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
         <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
@@ -385,9 +398,8 @@
           <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
         </div>
       </GlassCard>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <style>
   .hero-description {
@@ -405,108 +417,41 @@
     align-items: center;
   }
 
-  .aurora-wrap {
-    position: relative;
-    isolation: isolate;
-    padding: clamp(1.8rem, 5vw, 3rem) 0;
-    overflow: hidden;
-  }
-
-  .aurora-wrap::before,
-  .aurora-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: -2;
-    opacity: 0.32;
-    filter: saturate(0.78);
-  }
-
-  .aurora-wrap::before {
-    will-change: transform;
-    opacity: 0.36;
-  }
-
-  .aurora-wrap::after {
-    z-index: -1;
-    mix-blend-mode: screen;
-    opacity: 0.18;
-  }
-
-  .aurora-wrap--consulting::before {
-    background:
-      radial-gradient(110% 70% at 18% 16%, rgba(var(--aurora-purple-rgb), 0.18), transparent 72%),
-      radial-gradient(120% 80% at 84% 10%, rgba(var(--signal-yellow-rgb), 0.12), transparent 78%),
-      linear-gradient(120deg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%), transparent 74%);
-    animation: floatGlow 48s ease-in-out infinite alternate;
-  }
-
-  .aurora-wrap--consulting::after {
-    background:
-      radial-gradient(60% 40% at 20% 80%, rgba(var(--aurora-purple-rgb), 0.14), transparent 72%),
-      radial-gradient(70% 50% at 82% 82%, rgba(var(--signal-yellow-rgb), 0.12), transparent 76%);
-  }
-
-  .aurora-wrap--platforms::before {
-    background:
-      radial-gradient(100% 75% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.16), transparent 76%),
-      radial-gradient(85% 70% at 82% 30%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
-      conic-gradient(from 160deg at 52% 48%, rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--aurora-purple-rgb), 0.12), transparent 68%);
-    animation: floatGlow 56s ease-in-out infinite alternate;
-  }
-
-  .aurora-wrap--platforms::after {
-    background:
-      radial-gradient(70% 60% at 78% 88%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%),
-      radial-gradient(75% 50% at 12% 86%, rgba(var(--voyage-blue-rgb), 0.14), transparent 82%);
-  }
-
-  .aurora-wrap--education::before {
-    background:
-      radial-gradient(120% 75% at 20% 18%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
-      radial-gradient(100% 70% at 82% 18%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%),
-      linear-gradient(140deg, color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%), transparent 72%);
-    animation: floatGlow 60s ease-in-out infinite alternate;
-  }
-
-  .aurora-wrap--education::after {
-    background:
-      radial-gradient(70% 60% at 30% 90%, rgba(var(--aurora-purple-rgb), 0.12), transparent 80%),
-      radial-gradient(70% 60% at 74% 82%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%);
-  }
-
-  .aurora-wrap--finale::before {
-    background:
-      radial-gradient(120% 80% at 12% 14%, rgba(var(--aurora-purple-rgb), 0.2), transparent 78%),
-      radial-gradient(105% 70% at 88% 12%, rgba(var(--voyage-blue-rgb), 0.16), transparent 78%),
-      linear-gradient(145deg, color-mix(in srgb, var(--glass-bg-lightest) 62%, transparent 38%), transparent 72%);
-    animation: floatGlow 52s ease-in-out infinite alternate;
-  }
-
-  .aurora-wrap--finale::after {
-    background:
-      radial-gradient(65% 40% at 80% 90%, rgba(var(--signal-yellow-rgb), 0.12), transparent 80%),
-      radial-gradient(60% 50% at 14% 86%, rgba(var(--aurora-purple-rgb), 0.14), transparent 82%);
-  }
-
-  .services {
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
-  }
-
   .section-heading {
-    max-width: 70ch;
-    margin: 0 auto clamp(2rem, 6vw, 3rem);
-    text-align: center;
-    display: grid;
-    gap: 0.8rem;
+    margin-block-end: clamp(2rem, 6vw, 3rem);
   }
 
-  .section-eyebrow,
+  .services-block {
+    isolation: isolate;
+  }
+
+  .services-block--consulting {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .services-block--platforms {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .services-block--education {
+    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.2);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
+    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.12);
+  }
+
+  .services-block--finale {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.18);
+  }
+
   .service-eyebrow {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     padding: 0.25rem 0.9rem;
     border-radius: 999px;
     font-size: var(--text-small);
@@ -516,38 +461,38 @@
     color: color-mix(in srgb, var(--aurora-purple) 64%, var(--text-secondary) 36%);
   }
 
-  :global(.aurora-wrap--consulting .service-card) {
+  :global(.services-block--consulting .service-card) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
     --surface-glass-shadow: 0 18px 50px rgba(var(--aurora-purple-rgb), 0.16);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
-  :global(.aurora-wrap--platforms .service-card) {
+  :global(.services-block--platforms .service-card) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 32%, transparent 68%);
     --surface-glass-shadow: 0 20px 54px rgba(var(--voyage-blue-rgb), 0.16);
     --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
   }
 
-  :global(.aurora-wrap--platforms .service-card--ideonautix) {
+  :global(.services-block--platforms .service-card--ideonautix) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 30%, transparent 70%);
   }
 
-  :global(.aurora-wrap--platforms .service-card--nodevoyage) {
+  :global(.services-block--platforms .service-card--nodevoyage) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 34%, transparent 66%);
   }
 
-  :global(.aurora-wrap--education .education-card) {
+  :global(.services-block--education .education-card) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
     --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 28%, transparent 72%);
     --surface-glass-shadow: 0 18px 48px rgba(var(--signal-yellow-rgb), 0.16);
     --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 68%, var(--aurora-purple) 32%);
   }
 
-  :global(.aurora-wrap--finale .service-card--finale) {
+  :global(.services-block--finale .service-card--finale) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%);
     --surface-glass-shadow: 0 22px 58px rgba(var(--aurora-purple-rgb), 0.18);
@@ -599,10 +544,6 @@
     gap: clamp(1rem, 3vw, 1.8rem);
   }
 
-  .finale {
-    padding-bottom: clamp(4rem, 10vw, 6.5rem);
-  }
-
   :global(.finale-card) {
     text-align: center;
     display: grid;
@@ -625,29 +566,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .aurora-wrap::before,
-    .aurora-wrap::after {
-      animation: none !important;
-      transform: none !important;
-    }
-
-    .cards,
-    .services {
+    .cards {
       animation: none;
-    }
-  }
-
-  @keyframes floatGlow {
-    0% {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-
-    50% {
-      transform: translate3d(0, -3%, 0) scale(1.02);
-    }
-
-    100% {
-      transform: translate3d(0, 3%, 0) scale(1.01);
     }
   }
 </style>

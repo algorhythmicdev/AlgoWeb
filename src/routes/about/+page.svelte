@@ -174,7 +174,7 @@
   </svelte:fragment>
 </Hero>
 
-<section class="who-we-are" use:revealOnScroll>
+<section class="section who-we-are" data-surface="glow" use:revealOnScroll>
   <div class="container who-we-are__grid">
     <GlassCard class="about-card" padding="lg">
       <h2>{t('about.page.story.heading', 'Who we are')}</h2>
@@ -199,9 +199,9 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="values" aria-labelledby="values-heading" use:revealOnScroll>
+<section class="section values" data-surface="glow" aria-labelledby="values-heading" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.values.eyebrow', 'Mission & values')}</span>
       <h2 id="values-heading">{t('about.page.values.title', 'Where logic dances with creativity')}</h2>
       <p>
@@ -228,9 +228,9 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="team" id="team" use:revealOnScroll>
+<section class="section team" data-surface="glow" id="team" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.team.eyebrow', 'Founders & stewards')}</span>
       <h2>{t('about.page.team.title', 'The people behind the rhythm')}</h2>
       <p>
@@ -269,7 +269,7 @@
   </div>
 </section>
 
-<section class="finale" use:revealOnScroll>
+<section class="section finale" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="finale-card" halo padding="lg">
       <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
@@ -308,11 +308,35 @@
     align-items: center;
   }
 
-  .who-we-are,
-  .values,
-  .team,
-  .finale {
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
+  .section.who-we-are,
+  .section.values,
+  .section.team,
+  .section.finale {
+    isolation: isolate;
+  }
+
+  .section.who-we-are {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.values {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.2);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .section.team {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .section.finale {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
   }
 
   .who-we-are__grid,
@@ -348,24 +372,7 @@
   }
 
   .section-heading {
-    max-width: 70ch;
-    margin: 0 auto clamp(2rem, 6vw, 3rem);
-    text-align: center;
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .section-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.25rem 0.9rem;
-    border-radius: 999px;
-    font-size: var(--text-small);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
-    color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text-secondary) 32%);
+    margin-block-end: clamp(2rem, 6vw, 3rem);
   }
 
   .value-icon {

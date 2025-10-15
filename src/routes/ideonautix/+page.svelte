@@ -300,9 +300,9 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section section--snapshot" use:revealOnScroll>
+<section class="section section--snapshot" data-surface="glow" use:revealOnScroll>
   <div class="container snapshot">
-    <figure class="snapshot-card glass-card glass-card--pad-lg">
+    <GlassCard class="snapshot-card" padding="lg" halo>
       <img
         src={snapshot.image}
         alt={t(snapshot.altKey, snapshot.altFallback)}
@@ -310,18 +310,18 @@
         height="600"
         loading="lazy"
       />
-      <figcaption>
+      <div class="snapshot-card__body">
         <h2>{t('ideonautix.snapshot.title', 'Your launch cockpit')}</h2>
         <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
         <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
           {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
         </Button>
-      </figcaption>
-    </figure>
+      </div>
+    </GlassCard>
   </div>
 </section>
 
-<section class="section section--modules" use:revealOnScroll>
+<section class="section section--modules" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <h2 class="section-title">{t(modules.titleKey, modules.titleFallback)}</h2>
     <p class="section-lead">{t(modules.leadKey, modules.leadFallback)}</p>
@@ -342,7 +342,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="section section--status" use:revealOnScroll>
+<section class="section section--status" data-surface="glow" use:revealOnScroll>
   <div class="container status">
     <GlassCard class="status-card" padding="lg">
       <span class="section-eyebrow">{t(statusSection.eyebrowKey, statusSection.eyebrowFallback)}</span>
@@ -362,7 +362,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section section--use-cases" use:revealOnScroll>
+<section class="section section--use-cases" data-surface="glow" use:revealOnScroll>
   <div class="container use-cases">
     <div class="use-cases-copy">
       <span class="section-eyebrow">{t(useCases.eyebrowKey, useCases.eyebrowFallback)}</span>
@@ -382,21 +382,21 @@
 
 <SectionDivider tone="cherry" />
 
-<section id="pilot-request" class="section pilot section--pilot" use:revealOnScroll>
+<section id="pilot-request" class="section pilot section--pilot" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="pilot-card" padding="lg" particles>
       <span class="section-eyebrow">{t(pilot.eyebrowKey, pilot.eyebrowFallback)}</span>
       <h2>{t(pilot.titleKey, pilot.titleFallback)}</h2>
       <p>{t(pilot.copyKey, pilot.copyFallback)}</p>
 
-      <form class="pilot-form" on:submit={handlePilotSubmit}>
+      <form class="pilot-form form" on:submit={handlePilotSubmit}>
         <div class="form-grid">
-          <label>
+          <label class="form-field">
             <span>{t(pilot.form.nameLabelKey, pilot.form.nameLabelFallback)}</span>
             <input type="text" bind:value={pilotName} required on:input={resetPilotStatus} />
           </label>
 
-          <label>
+          <label class="form-field">
             <span>{t(pilot.form.emailLabelKey, pilot.form.emailLabelFallback)}</span>
             <input
               type="email"
@@ -407,7 +407,7 @@
             />
           </label>
 
-          <label>
+          <label class="form-field">
             <span>{t(pilot.form.roleLabelKey, pilot.form.roleLabelFallback)}</span>
             <select bind:value={pilotRole} on:change={resetPilotStatus}>
               <option value="founder">{t(pilot.form.roleOptions.founder.key, pilot.form.roleOptions.founder.fallback)}</option>
@@ -418,7 +418,7 @@
           </label>
         </div>
 
-        <label>
+        <label class="form-field">
           <span>{t(pilot.form.messageLabelKey, pilot.form.messageLabelFallback)}</span>
           <textarea rows="4" bind:value={pilotMessage} on:input={resetPilotStatus}></textarea>
         </label>
@@ -432,7 +432,7 @@
         </Button>
 
         {#if pilotStatus === 'success'}
-          <p class="success">{t(pilot.form.successKey, pilot.form.successFallback)}</p>
+          <p class="form-status form-status--success">{t(pilot.form.successKey, pilot.form.successFallback)}</p>
         {/if}
       </form>
 
@@ -443,7 +443,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="section cta section--cta" use:revealOnScroll>
+<section class="section cta section--cta" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>{t(cta.titleKey, cta.titleFallback)}</h2>
@@ -489,68 +489,52 @@
     opacity: 0.18;
   }
 
-  .section--modules::before {
-    background:
-      radial-gradient(90% 100% at 14% 18%, rgba(var(--aurora-purple-rgb), 0.18), transparent 74%),
-      radial-gradient(70% 90% at 84% 20%, rgba(var(--cherry-pop-rgb), 0.12), transparent 76%),
-      linear-gradient(140deg, rgba(var(--ink-rgb), 0.08), transparent 64%);
-    animation: ideonautixPulse 48s ease-in-out infinite alternate;
+  .section.section--snapshot {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.16);
+    --section-glow-accent: rgba(var(--ink-rgb), 0.12);
   }
 
-  .section--status::before {
-    inset: -22% -24% -30% -24%;
-    border-radius: clamp(42px, 9vw, 74px);
-    background:
-      conic-gradient(from 160deg, rgba(var(--aurora-purple-rgb), 0.18), rgba(var(--cherry-pop-rgb), 0.14), rgba(var(--aurora-purple-rgb), 0.16));
-    mask: radial-gradient(88% 88% at 52% 22%, rgba(0, 0, 0, 0.46), transparent 82%);
-    animation: ideonautixOrbit 56s linear infinite;
+  .section.section--modules {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
+    --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.18);
+    --section-glow-accent: rgba(var(--ink-rgb), 0.1);
   }
 
-  .section--use-cases::before {
-    background:
-      radial-gradient(70% 95% at 16% 32%, rgba(var(--cherry-pop-rgb), 0.12), transparent 74%),
-      radial-gradient(90% 115% at 82% 10%, rgba(var(--aurora-purple-rgb), 0.16), transparent 78%),
-      linear-gradient(180deg, rgba(var(--ink-rgb), 0.1), transparent 70%);
-    animation: ideonautixPulse 52s ease-in-out infinite alternate-reverse;
+  .section.section--status {
+    --section-glow-primary: rgba(var(--cherry-pop-rgb), 0.2);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
+    --section-glow-accent: rgba(var(--ink-rgb), 0.12);
   }
 
-  .section--pilot::before {
-    inset: -24% -18% -28% -18%;
-    border-radius: clamp(44px, 9vw, 76px);
-    background:
-      radial-gradient(110% 130% at 18% 24%, rgba(var(--aurora-purple-rgb), 0.18), transparent 76%),
-      radial-gradient(85% 115% at 80% 26%, rgba(var(--cherry-pop-rgb), 0.16), transparent 76%),
-      linear-gradient(140deg, rgba(var(--ink-rgb), 0.08), transparent 66%);
+  .section.section--use-cases {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.18);
+    --section-glow-accent: rgba(var(--ink-rgb), 0.1);
   }
 
-  .section--cta::before {
-    inset: -16% -22% -30% -22%;
-    border-radius: clamp(48px, 10vw, 82px);
-    background:
-      radial-gradient(120% 120% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
-      radial-gradient(85% 110% at 84% 18%, rgba(var(--cherry-pop-rgb), 0.14), transparent 76%),
-      linear-gradient(130deg, rgba(var(--ink-rgb), 0.08), transparent 64%);
-    animation: ideonautixPulse 44s ease-in-out infinite;
+  .section.section--pilot {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
+    --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.2);
+    --section-glow-accent: rgba(var(--ink-rgb), 0.12);
   }
 
-  .section--status::after {
-    opacity: 0.06;
-  }
-
-  .section--pilot::after {
-    opacity: 0.1;
+  .section.section--cta {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.32);
+    --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.22);
+    --section-glow-accent: rgba(var(--ink-rgb), 0.16);
   }
 
   .snapshot {
     display: grid;
   }
 
-  .snapshot-card {
+  :global(.snapshot-card) {
     display: grid;
     gap: clamp(1.5rem, 3vw, 2.25rem);
   }
 
-  .snapshot-card img {
+  :global(.snapshot-card img) {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
@@ -558,7 +542,7 @@
     box-shadow: var(--shadow-xl);
   }
 
-  .snapshot-card figcaption {
+  :global(.snapshot-card__body) {
     display: grid;
     gap: clamp(0.75rem, 2vw, 1.5rem);
   }
@@ -681,6 +665,36 @@
     display: grid;
     gap: 1.5rem;
     max-width: 620px;
+    --form-gap: 1.4rem;
+    --form-field-radius: 12px;
+    --form-field-padding-y: 0.75rem;
+    --form-field-padding-x: 1rem;
+    --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
+    --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --form-field-border: color-mix(
+      in srgb,
+      var(--surface-field-border, color-mix(in srgb, var(--border) 78%, transparent 22%)) 84%,
+      transparent 16%
+    );
+    --form-field-border-focus: color-mix(
+      in srgb,
+      var(--ideonautix-accent, var(--aurora-purple)) 58%,
+      rgba(var(--cherry-pop-rgb), 0.42) 42%
+    );
+    --form-focus-ring-color: color-mix(
+      in srgb,
+      var(--ideonautix-accent, var(--aurora-purple)) 70%,
+      var(--cherry-pop) 30%
+    );
+    --form-field-shadow: 0 16px 36px rgba(22, 12, 32, 0.16), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
+    --form-textarea-min-height: 160px;
+    --form-error-color: color-mix(in srgb, var(--cherry-pop) 85%, var(--text) 15%);
+    --form-status-success-bg: color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%);
+    --form-status-success-color: color-mix(
+      in srgb,
+      var(--ideonautix-accent, var(--aurora-purple)) 66%,
+      var(--text) 34%
+    );
   }
 
   .form-grid {
@@ -688,42 +702,15 @@
     gap: 1rem;
   }
 
-  .form-grid label,
-  .pilot-form label {
+  .form-grid .form-field,
+  .pilot-form .form-field {
     display: grid;
     gap: 0.5rem;
     font-weight: 600;
   }
 
-  input,
-  select,
-  textarea {
-    border-radius: 12px;
-    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent 20%);
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
-    color: var(--text);
-  }
-
-  textarea {
-    resize: vertical;
-  }
-
-  input:focus,
-  select:focus,
-  textarea:focus {
-    outline: 3px solid color-mix(in srgb, var(--ideonautix-accent, var(--aurora-purple)) 70%, var(--cherry-pop) 30%);
-    outline-offset: 3px;
-  }
-
-  .field-error {
-    color: var(--cherry-pop);
-  }
-
-  .success {
-    color: var(--ideonautix-accent, var(--aurora-purple));
-    font-weight: 600;
+  .pilot-form .form-status {
+    text-wrap: balance;
   }
 
   .privacy-note {
@@ -747,29 +734,6 @@
     justify-content: center;
   }
 
-  @keyframes ideonautixPulse {
-    0% {
-      transform: translate3d(-2%, -1%, 0) scale(1.02) rotate(-1deg);
-    }
-
-    55% {
-      transform: translate3d(1.8%, 1.2%, 0) scale(1.05) rotate(1.1deg);
-    }
-
-    100% {
-      transform: translate3d(-1%, 2%, 0) scale(1.01) rotate(-0.6deg);
-    }
-  }
-
-  @keyframes ideonautixOrbit {
-    0% {
-      transform: rotate(0deg) scale(1.08);
-    }
-
-    100% {
-      transform: rotate(-360deg) scale(1.08);
-    }
-  }
 
   @media (min-width: 720px) {
     .form-grid {

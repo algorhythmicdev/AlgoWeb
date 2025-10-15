@@ -317,9 +317,9 @@
   </svelte:fragment>
 </Hero>
 
-<section class="highlights" use:revealOnScroll>
+<section class="section highlights" data-surface="glow" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('home.page.highlights.eyebrow', 'Key highlights')}</span>
       <h2>{t('home.page.highlights.title', 'Innovation that feels welcoming')}</h2>
       <p>
@@ -346,9 +346,9 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="offerings" aria-labelledby="offerings-heading" use:revealOnScroll>
+<section class="section offerings" data-surface="glow" aria-labelledby="offerings-heading" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('home.page.offerings.eyebrow', 'What we offer')}</span>
       <h2 id="offerings-heading">{t('home.page.offerings.title', 'Services, platforms, and programmes in one rhythm')}</h2>
       <p>
@@ -392,7 +392,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="platform-showcase" aria-labelledby="platform-showcase-heading" use:revealOnScroll>
+<section class="section platform-showcase" data-surface="glow" aria-labelledby="platform-showcase-heading" use:revealOnScroll>
   <div class="container">
     <div class="platform-showcase__header">
       <span class="section-eyebrow">{t(platformShowcase.eyebrowKey, platformShowcase.eyebrowFallback)}</span>
@@ -402,7 +402,7 @@
 
     <div class="platform-showcase__grid" use:staggerReveal>
       {#each platformShowcase.items as item (item.id)}
-        <figure class="platform-card glass-card glass-card--pad-lg">
+        <GlassCard as="article" class="platform-card" padding="lg" halo>
           <img
             src={item.image}
             alt={t(item.altKey, item.altFallback)}
@@ -410,20 +410,20 @@
             height="600"
             loading="lazy"
           />
-          <figcaption class="platform-card__body">
+          <div class="platform-card__body">
             <h3>{t(item.titleKey, item.titleFallback)}</h3>
             <p>{t(item.copyKey, item.copyFallback)}</p>
             <Button href={item.ctaHref} variant="secondary" size="md">{t(item.ctaKey, item.ctaFallback)}</Button>
-          </figcaption>
-        </figure>
+          </div>
+        </GlassCard>
       {/each}
     </div>
   </div>
 </section>
 
-<section class="resources" use:revealOnScroll>
+<section class="section resources" data-surface="glow" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
       <h2>{t(educationShowcase.titleKey, educationShowcase.titleFallback)}</h2>
       <p>{t(educationShowcase.descriptionKey, educationShowcase.descriptionFallback)}</p>
@@ -447,7 +447,7 @@
   </div>
 </section>
 
-<section class="finale" use:revealOnScroll>
+<section class="section finale" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="finale-card" halo padding="lg" interactive>
       <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
@@ -482,11 +482,6 @@
   }
 
   .section-heading {
-    max-width: 72ch;
-    margin: 0 auto clamp(2rem, 6vw, 3rem);
-    text-align: center;
-    display: grid;
-    gap: 0.8rem;
     position: relative;
     z-index: 1;
   }
@@ -494,46 +489,56 @@
   .section-heading::after {
     content: '';
     position: absolute;
-    inset-inline: clamp(-2rem, -4vw, -1.2rem);
-    inset-block-end: -1.5rem;
+    inset-inline: clamp(-1.5rem, -4vw, -1rem);
+    inset-block-end: -1.25rem;
     height: 2px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--aurora-purple) 86%, transparent 14%), color-mix(in srgb, var(--voyage-blue) 70%, var(--signal-yellow) 30%));
+    border-radius: var(--radius-full);
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--aurora-purple) 82%, transparent 18%),
+      color-mix(in srgb, var(--voyage-blue) 70%, var(--signal-yellow) 30%)
+    );
     opacity: 0.55;
     pointer-events: none;
   }
 
-  .section-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1.2rem;
-    border-radius: var(--radius-full, 999px);
-    font-size: var(--text-small);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: color-mix(in srgb, var(--glass-bg-lightest) 38%, transparent 62%);
-    color: var(--aurora-purple);
-    border: 1px solid color-mix(in srgb, var(--aurora-purple) 18%, transparent 82%);
-    box-shadow: 0 4px 12px rgba(var(--aurora-purple-rgb), 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .highlights,
-  .offerings,
-  .resources,
-  .finale {
-    position: relative;
+  .section.highlights,
+  .section.offerings,
+  .section.platform-showcase,
+  .section.resources,
+  .section.finale {
     isolation: isolate;
     overflow: hidden;
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
   }
 
-  .platform-showcase {
-    position: relative;
-    isolation: isolate;
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
+  .section.highlights {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.offerings {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .section.platform-showcase {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.resources {
+    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.2);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
+    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.14);
+  }
+
+  .section.finale {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
   }
 
   .platform-showcase__header {
@@ -551,12 +556,12 @@
     gap: clamp(1.75rem, 4vw, 3rem);
   }
 
-  .platform-card {
+  :global(.platform-card) {
     display: grid;
     gap: clamp(1.25rem, 3vw, 2rem);
   }
 
-  .platform-card img {
+  :global(.platform-card img) {
     width: 100%;
     height: auto;
     border-radius: max(0px, calc(var(--glass-card-radius, 0) + 0.75rem));
@@ -564,7 +569,7 @@
     box-shadow: 0 18px 44px rgba(var(--ink-rgb), 0.12);
   }
 
-  .platform-card__body {
+  :global(.platform-card__body) {
     display: grid;
     gap: clamp(0.75rem, 2vw, 1.5rem);
   }
@@ -577,87 +582,6 @@
     z-index: 1;
   }
 
-  .highlights::before,
-  .highlights::after,
-  .offerings::before,
-  .offerings::after,
-  .resources::before,
-  .resources::after,
-  .finale::before,
-  .finale::after {
-    content: '';
-    position: absolute;
-    inset: -20%;
-    border-radius: clamp(36px, 7vw, 56px);
-    pointer-events: none;
-  }
-
-  .highlights::before {
-    background:
-      radial-gradient(65% 85% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
-      radial-gradient(70% 90% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.1), transparent 80%),
-      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.08), transparent 72%);
-    filter: saturate(0.82);
-    opacity: 0.18;
-    transform: translate3d(0, 0, 0) scale(1.015);
-    animation: auroraDrift 42s ease-in-out infinite alternate;
-  }
-
-  .highlights::after {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%) 0%, transparent 100%);
-    opacity: 0.12;
-  }
-
-  .offerings::before {
-    background:
-      conic-gradient(from 120deg, rgba(var(--aurora-purple-rgb), 0.1), rgba(var(--voyage-blue-rgb), 0.08), rgba(var(--signal-yellow-rgb), 0.06), rgba(var(--aurora-purple-rgb), 0.1));
-    mask: radial-gradient(80% 80% at 50% 20%, rgba(0, 0, 0, 0.38), transparent 82%);
-    opacity: 0.18;
-    transform: rotate(2deg) scale(1.03);
-    animation: orbitStripe 48s linear infinite;
-  }
-
-  .offerings::after {
-    inset: -24%;
-    border-radius: clamp(42px, 8vw, 64px);
-    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 40%, transparent 60%) 0%, transparent 100%);
-    opacity: 0.12;
-  }
-
-  .resources::before {
-    inset: -16% -12% -28% -12%;
-    border-radius: clamp(32px, 8vw, 64px);
-    background:
-      radial-gradient(120% 120% at 12% 18%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%),
-      radial-gradient(90% 120% at 82% 6%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
-      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.08), transparent 66%);
-    opacity: 0.18;
-    animation: shimmerSweep 36s ease-in-out infinite;
-  }
-
-  .resources::after {
-    inset: -18%;
-    background: radial-gradient(120% 120% at 50% 100%, color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%) 0%, transparent 100%);
-    opacity: 0.12;
-  }
-
-  .finale::before {
-    inset: -26%;
-    border-radius: clamp(60px, 12vw, 88px);
-    background:
-      radial-gradient(90% 120% at 20% 20%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
-      radial-gradient(120% 120% at 80% 0%, rgba(var(--signal-yellow-rgb), 0.08), transparent 76%),
-      linear-gradient(160deg, rgba(var(--voyage-blue-rgb), 0.08), transparent 64%);
-    opacity: 0.2;
-    animation: finaleGlow 28s ease-in-out infinite alternate;
-  }
-
-  .finale::after {
-    inset: -20%;
-    border-radius: clamp(60px, 12vw, 88px);
-    background: linear-gradient(160deg, color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%) 0%, transparent 100%);
-    opacity: 0.1;
-  }
 
   .highlights__grid,
   .offerings__grid,
@@ -806,46 +730,6 @@
     .resources__grid,
     .platform-showcase__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  @keyframes auroraDrift {
-    from {
-      transform: translate3d(-2%, -1%, 0) scale(1.05);
-    }
-
-    to {
-      transform: translate3d(2%, 1%, 0) scale(1.08);
-    }
-  }
-
-  @keyframes orbitStripe {
-    from {
-      transform: rotate(0deg) scale(1.1);
-    }
-
-    to {
-      transform: rotate(360deg) scale(1.1);
-    }
-  }
-
-  @keyframes shimmerSweep {
-    from {
-      transform: translate3d(-2%, -1%, 0) scale(1.04);
-    }
-
-    to {
-      transform: translate3d(1%, 1.5%, 0) scale(1.06);
-    }
-  }
-
-  @keyframes finaleGlow {
-    from {
-      transform: translate3d(-1%, -1.2%, 0) scale(1.03);
-    }
-
-    to {
-      transform: translate3d(1.4%, 1.2%, 0) scale(1.07);
     }
   }
 

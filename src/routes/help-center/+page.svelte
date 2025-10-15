@@ -349,9 +349,9 @@
   </svelte:fragment>
 </Hero>
 
-<section class="knowledge" use:revealOnScroll>
+<section class="section knowledge" data-surface="glow" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('help.page.knowledge.eyebrow', 'Browse by focus')}</span>
       <h2>{t('help.page.knowledge.title', 'Curated paths for every collaborator')}</h2>
       <p>{t('help.page.knowledge.copy', 'Pick the guide that matches your role to see recommended rituals, checklists, and downloads.')}</p>
@@ -393,9 +393,9 @@
 
 <SectionDivider tone="neutral" />
 
-<section id="faq" class="faq" use:revealOnScroll>
+<section id="faq" class="section faq" data-surface="glow" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('help.page.faq.eyebrow', 'Quick answers')}</span>
       <h2>{t('help.page.faq.title', 'Frequently asked questions')}</h2>
       <p>{t('help.page.faq.copy', 'Short reads that cover the topics we hear about most from teams and families alike.')}</p>
@@ -415,9 +415,9 @@
 
 <SectionDivider tone="citrus" />
 
-<section id="status" class="status" use:revealOnScroll>
+<section id="status" class="section status" data-surface="glow" use:revealOnScroll>
   <div class="container">
-    <header class="section-heading">
+    <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('help.page.status.eyebrow', 'Live status & history')}</span>
       <h2>{t('help.page.status.title', 'Transparent updates for every product')}</h2>
       <p>{t('help.page.status.copy', 'Follow current uptime, upcoming maintenance, and resolved incidents. Each update links to its full report when available.')}</p>
@@ -436,7 +436,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="escalation" use:revealOnScroll>
+<section class="section escalation" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <div class="escalation-grid" use:staggerReveal>
       <GlassCard class="escalation-card" padding="lg" halo interactive data-tone="escalation">
@@ -496,79 +496,39 @@
     margin-inline: auto;
   }
 
-  .knowledge,
-  .faq,
-  .status,
-  .escalation {
-    position: relative;
+  .section.knowledge,
+  .section.faq,
+  .section.status,
+  .section.escalation {
     isolation: isolate;
-    overflow: hidden;
-    padding: clamp(3.5rem, 8vw, 6rem) 0;
   }
 
-  .knowledge::before,
-  .faq::before,
-  .status::before,
-  .escalation::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(140% 100% at 15% 0%, rgba(var(--aurora-purple-rgb), 0.1), transparent 74%),
-      radial-gradient(120% 100% at 85% 40%, rgba(var(--signal-yellow-rgb), 0.08), transparent 72%),
-      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.08), transparent);
-    opacity: 0.26;
-    transform: translate3d(0, 0, 0);
-    filter: saturate(0.88);
-    pointer-events: none;
-    animation: section-glow 38s ease-in-out infinite alternate;
-    z-index: 0;
+  .section.knowledge {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .knowledge::before {
-    background: radial-gradient(120% 100% at 18% 20%, rgba(var(--aurora-purple-rgb), 0.12), transparent 76%),
-      radial-gradient(120% 100% at 82% 10%, rgba(var(--signal-yellow-rgb), 0.08), transparent 76%),
-      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.06), transparent);
+  .section.faq {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .faq::before {
-    background: radial-gradient(120% 100% at 14% 12%, rgba(var(--voyage-blue-rgb), 0.12), transparent 74%),
-      radial-gradient(140% 100% at 88% 32%, rgba(var(--aurora-purple-rgb), 0.1), transparent 76%),
-      linear-gradient(180deg, rgba(var(--signal-yellow-rgb), 0.06), transparent);
+  .section.status {
+    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.18);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.16);
+    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.12);
   }
 
-  .status::before {
-    background: radial-gradient(120% 100% at 16% 8%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
-      radial-gradient(140% 100% at 80% 18%, rgba(var(--voyage-blue-rgb), 0.1), transparent 78%),
-      linear-gradient(180deg, rgba(var(--signal-yellow-rgb), 0.06), transparent);
-  }
-
-  .escalation::before {
-    background: radial-gradient(120% 100% at 22% 16%, rgba(var(--signal-yellow-rgb), 0.12), transparent 80%),
-      radial-gradient(130% 100% at 84% 30%, rgba(var(--aurora-purple-rgb), 0.1), transparent 78%),
-      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.05), transparent);
-  }
-
-  .knowledge > *,
-  .faq > *,
-  .status > *,
-  .escalation > * {
-    position: relative;
-    z-index: 1;
+  .section.escalation {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
   }
 
   .section-heading {
-    max-width: 720px;
-    margin: 0 auto clamp(2rem, 5vw, 3rem);
-    text-align: center;
-    display: grid;
-    gap: clamp(0.75rem, 2vw, 1.25rem);
-  }
-
-  .section-eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: var(--text-small);
-    color: var(--text-tertiary);
+    margin-block-end: clamp(2rem, 5vw, 3rem);
   }
 
   .knowledge-grid {
@@ -594,23 +554,40 @@
   }
 
   :global(.knowledge-card[data-tone='aurora']) {
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--aurora-purple-rgb), 0.1) 8%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.4) 48%, transparent 52%);
+    --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--aurora-purple-rgb), 0.12) 8%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 50%, transparent 50%);
+    --glass-card-spot-a: rgba(var(--aurora-purple-rgb), 0.28);
+    --glass-card-spot-b: rgba(var(--voyage-blue-rgb), 0.2);
+    --glass-card-veil: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.24) 38%, transparent 62%);
+    --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.3);
   }
 
   :global(.knowledge-card[data-tone='voyage']) {
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.12) 10%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 50%, transparent 50%);
+    --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.12) 10%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 52%, transparent 48%);
+    --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.3);
+    --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.18);
+    --glass-card-veil: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.24) 40%, transparent 60%);
+    --glass-card-halo: rgba(var(--voyage-blue-rgb), 0.26);
   }
 
   :global(.knowledge-card[data-tone='ideonautix']) {
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--slate-base-rgb), 0.18) 12%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--slate-base-rgb), 0.42) 52%, transparent 48%);
+    --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--slate-base-rgb), 0.2) 12%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--slate-base-rgb), 0.45) 52%, transparent 48%);
+    --glass-card-spot-a: rgba(var(--slate-base-rgb), 0.28);
+    --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.18);
+    --glass-card-veil: color-mix(in srgb, rgba(var(--slate-base-rgb), 0.28) 40%, transparent 60%);
+    --glass-card-halo: rgba(var(--slate-base-rgb), 0.26);
   }
 
   :global(.knowledge-card[data-tone='neutral']) {
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--ink-rgb), 0.08) 6%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--ink-rgb), 0.16) 56%, transparent 44%);
+    --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 94%, rgba(var(--ink-rgb), 0.08) 6%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--ink-rgb), 0.18) 56%, transparent 44%);
+    --glass-card-spot-a: rgba(var(--ink-rgb), 0.16);
+    --glass-card-spot-b: rgba(var(--voyage-blue-rgb), 0.12);
+    --glass-card-veil: color-mix(in srgb, rgba(var(--ink-rgb), 0.14) 42%, transparent 58%);
+    --glass-card-halo: rgba(var(--ink-rgb), 0.2);
+    --glass-card-veil-opacity: 0.5;
   }
 
   :global(.knowledge-card) ul {
@@ -640,8 +617,11 @@
 
   :global(.faq-card) {
     padding: clamp(1.2rem, 2.4vw, 1.6rem);
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 50%, transparent 50%);
+    --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 50%, transparent 50%);
+    --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.22);
+    --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.14);
+    --glass-card-halo: rgba(var(--voyage-blue-rgb), 0.24);
   }
 
   details {
@@ -703,8 +683,12 @@
   :global(.status-card) {
     display: grid;
     gap: clamp(0.8rem, 2vw, 1.2rem);
-    --surface-glass-fill: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.26) 48%, transparent 52%);
+    --glass-card-surface: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.26) 48%, transparent 52%);
+    --glass-card-spot-a: rgba(var(--aurora-purple-rgb), 0.28);
+    --glass-card-spot-b: rgba(var(--voyage-blue-rgb), 0.2);
+    --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.26);
+    --glass-card-halo-opacity: 0.3;
   }
 
   :global(.status-card[data-tone='status']) .status-pill {
@@ -740,13 +724,20 @@
   }
 
   :global(.escalation-card[data-tone='escalation']) {
-    --surface-glass-fill: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.22) 52%, transparent 48%);
+    --glass-card-surface: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.22) 52%, transparent 48%);
+    --glass-card-spot-a: rgba(var(--signal-yellow-rgb), 0.26);
+    --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.16);
+    --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.28);
   }
 
   :global(.resources-card[data-tone='resources']) {
-    --surface-glass-fill: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 54%, transparent 46%);
+    --glass-card-surface: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --glass-card-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 54%, transparent 46%);
+    --glass-card-spot-a: rgba(var(--aurora-purple-rgb), 0.26);
+    --glass-card-spot-b: rgba(var(--voyage-blue-rgb), 0.18);
+    --glass-card-veil: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.24) 36%, transparent 64%);
+    --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.26);
   }
 
   .channel-list {
@@ -807,21 +798,6 @@
   .resources-footer {
     display: flex;
     justify-content: center;
-  }
-
-  @keyframes section-glow {
-    0% {
-      transform: translate3d(-1%, -2%, 0) scale(1.02);
-      opacity: 0.82;
-    }
-    50% {
-      transform: translate3d(1%, 2%, 0) scale(1.04);
-      opacity: 0.96;
-    }
-    100% {
-      transform: translate3d(-0.5%, 1%, 0) scale(1.02);
-      opacity: 0.86;
-    }
   }
 
   @media (min-width: 880px) {
