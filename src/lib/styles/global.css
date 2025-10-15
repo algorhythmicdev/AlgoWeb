@@ -52,54 +52,58 @@ html[data-theme='hc'] body::after {
 body.page-products {
   --accent-primary: var(--aurora);
   --accent-secondary: var(--voyage);
+  --accent-tertiary: var(--signal);
 }
 
 body.page-services,
 body.page-solutions {
   --accent-primary: var(--nodevoyage-accent);
   --accent-secondary: var(--nodevoyage-highlight);
+  --accent-tertiary: var(--aurora);
 }
 
 body.page-consulting {
   --accent-primary: var(--aurora);
   --accent-secondary: var(--signal);
+  --accent-tertiary: var(--voyage);
 }
 
 body.page-about {
   --accent-primary: var(--aurora);
   --accent-secondary: var(--voyage);
+  --accent-tertiary: var(--signal);
 }
 
 body.page-contact {
   --accent-primary: var(--aurora);
   --accent-secondary: var(--signal);
+  --accent-tertiary: var(--voyage);
 }
 
 body.page-education-hub,
 body.page-resources {
   --accent-primary: var(--voyage);
   --accent-secondary: var(--aurora);
+  --accent-tertiary: var(--signal);
 }
 
 body.page-support {
   --accent-primary: var(--voyage);
   --accent-secondary: var(--signal);
+  --accent-tertiary: var(--aurora);
 }
 
 body.page-outreach,
 body.page-nodevoyage {
   --accent-primary: var(--nodevoyage-accent);
   --accent-secondary: var(--nodevoyage-highlight);
-}
-
-body.page-outreach {
-  --accent-primary: var(--aurora);
-  --accent-secondary: var(--signal);
+  --accent-tertiary: var(--aurora);
 }
 
 body.page-ideonautix {
   --accent-primary: var(--aurora);
   --accent-secondary: var(--voyage);
+  --accent-tertiary: var(--signal);
 }
 
 :root,
@@ -352,45 +356,9 @@ html[data-theme='dark'] .section[data-surface='glow']::after {
   );
 }
 
-/* Gradient bar animation */
-@keyframes bar-pan {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
-}
-
-.heading {
-  position: relative;
-  display: inline-block;
-  font-weight: var(--weight-black, 800);
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.05;
-  color: var(--text);
-  padding-bottom: 0.1em;
-  z-index: 0;
-}
-
-.heading::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 0.3em;
-  background: linear-gradient(var(--grad-angle), var(--grad-a), var(--grad-b));
-  animation: bar-pan var(--bar-speed, 16s) ease-in-out infinite alternate;
-  z-index: -1;
-}
-
-@media (prefers-reduced-motion: reduce),
-       (prefers-contrast: more) {
-  .heading::after {
-    animation: none;
-  }
-}
-
 /* Accessibility: reduce non-essential animations */
 @media (prefers-reduced-motion: reduce){
-  * { 
+  * {
     animation-duration:.001ms !important; 
     animation-iteration-count:1 !important; 
     transition:none !important; 

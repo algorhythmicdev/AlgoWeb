@@ -83,16 +83,6 @@ html[data-theme='hc'] .os-window {
   mix-blend-mode: screen;
 }
 
-@keyframes halo-pulse {
-  0%,
-  100% {
-    opacity: 0.16;
-  }
-  45% {
-    opacity: 0.22;
-  }
-}
-
 .os-window[data-variant='halo']::before,
 .os-window[data-variant='grid']::before,
 .os-window[data-variant='line']::before {
@@ -106,115 +96,9 @@ html[data-theme='hc'] .os-window[data-variant='line']::before {
   display: none;
 }
 
-.magnetic-card {
-  position: relative;
-  background: color-mix(in srgb, var(--surface-panel-bg) 86%, transparent 14%);
-  border: 1px solid color-mix(in srgb, var(--surface-panel-border) 82%, transparent 18%);
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
-  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
-  transition:
-    transform 0.3s var(--ease-out),
-    box-shadow 0.3s var(--ease-out),
-    background 0.3s var(--ease-out),
-    border-color 0.3s var(--ease-out);
-  cursor: pointer;
-  isolation: isolate;
-}
-
-.magnetic-card::before,
-.magnetic-card::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
-}
-
-.magnetic-card::before {
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 60%, transparent 40%) 0%,
-    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.24) 55%, transparent 45%) 48%,
-    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.2) 40%, transparent 60%) 100%
-  );
-  mix-blend-mode: screen;
-  z-index: -2;
-}
-
-.magnetic-card::after {
-  inset: -16%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 50% 55%,
-    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 70%, transparent 30%) 0%,
-    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.22) 65%, transparent 35%) 40%,
-    transparent 75%
-  );
-  transform: scale(0.84);
-  filter: blur(14px);
-  z-index: -3;
-}
-
-.magnetic-card:hover,
-.magnetic-card:focus-visible {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-xl);
-}
-
-.magnetic-card:hover::before,
-.magnetic-card:focus-visible::before {
-  opacity: 0.45;
-}
-
-.magnetic-card:hover::after,
-.magnetic-card:focus-visible::after {
-  opacity: 0.5;
-  transform: scale(0.95);
-  animation: magnetic-card-halo 16s ease-in-out infinite;
-}
-
-@keyframes magnetic-card-halo {
-  0%,
-  100% {
-    transform: scale(0.95) translate3d(0, 0, 0);
-    opacity: 0.42;
-  }
-  50% {
-    transform: scale(1) translate3d(0, -2%, 0);
-    opacity: 0.52;
-  }
-}
-
-html[data-theme='hc'] .magnetic-card::before,
-html[data-theme='hc'] .magnetic-card::after {
-  display: none;
-}
-
-html[data-theme='hc'] .magnetic-card {
-  background: var(--bg);
-  border: 2px solid currentColor;
-  box-shadow: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .os-window[data-variant]::before {
     animation: none;
     opacity: 0.25;
-  }
-
-  .magnetic-card,
-  .magnetic-card:hover,
-  .magnetic-card:focus-visible {
-    transform: none !important;
-    box-shadow: var(--surface-panel-shadow);
-    transition: none;
-  }
-
-  .magnetic-card::after,
-  .magnetic-card::before {
-    animation: none;
   }
 }
