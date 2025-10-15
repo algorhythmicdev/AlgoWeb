@@ -100,6 +100,8 @@
     box-shadow: var(--surface-pill-shadow);
     backdrop-filter: blur(calc(var(--glass-blur) * 0.65)) saturate(1.04);
     -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.65)) saturate(1.04);
+    flex-shrink: 1;
+    min-width: 0;
   }
 
   .theme-option {
@@ -244,18 +246,73 @@
 
   @media (max-width: 768px) {
     .theme-switcher {
-      gap: 0.25rem;
-      padding: 0.35rem 0.4rem;
+      gap: clamp(0.25rem, 1.5vw, 0.4rem);
+      padding: clamp(0.25rem, 1.2vw, 0.4rem) clamp(0.3rem, 2vw, 0.5rem);
     }
 
     .theme-option__body {
-      min-width: clamp(3.2rem, 18vw, 3.8rem);
-      min-height: clamp(2.4rem, 12vw, 2.8rem);
-      padding: 0.35rem 0.55rem;
+      min-width: clamp(3.1rem, 16vw, 3.7rem);
+      min-height: clamp(2.2rem, 10vw, 2.6rem);
+      padding: clamp(0.3rem, 1.5vw, 0.5rem) clamp(0.45rem, 2.4vw, 0.7rem);
     }
 
     .theme-option__label {
-      letter-spacing: 0.06em;
+      font-size: clamp(0.7rem, 2.2vw, 0.78rem);
+      letter-spacing: 0.05em;
+    }
+
+    svg {
+      width: clamp(1rem, 3vw, 1.2rem);
+      height: clamp(1rem, 3vw, 1.2rem);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .theme-switcher {
+      gap: clamp(0.2rem, 1.6vw, 0.35rem);
+      padding: 0.25rem clamp(0.25rem, 1.8vw, 0.4rem);
+    }
+
+    .theme-option__body {
+      min-width: clamp(2.6rem, 22vw, 3.1rem);
+      min-height: clamp(1.9rem, 9vw, 2.2rem);
+      padding: clamp(0.25rem, 1vw, 0.35rem) clamp(0.35rem, 4vw, 0.55rem);
+      gap: 0.2rem;
+      border-radius: clamp(0.65rem, 3vw, 0.85rem);
+    }
+
+    .theme-option__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    svg {
+      width: clamp(0.95rem, 4vw, 1.05rem);
+      height: clamp(0.95rem, 4vw, 1.05rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .theme-switcher {
+      gap: 0.18rem;
+      padding: 0.22rem 0.3rem;
+    }
+
+    .theme-option__body {
+      min-width: clamp(2.45rem, 24vw, 2.9rem);
+      min-height: clamp(1.85rem, 10vw, 2.15rem);
+      padding: 0.26rem clamp(0.3rem, 5vw, 0.5rem);
+    }
+
+    .theme-option__label {
+      letter-spacing: 0.045em;
     }
   }
 

@@ -25,10 +25,15 @@
   let lockedScrollY = 0;
   let isScrollLocked = false;
   let isMounted = false;
+  let isCompactViewport = false;
   $: navLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.svg' : '/images/brand/logo-white.svg';
 
   onMount(() => {
     isMounted = true;
+
+    if (browser) {
+      isCompactViewport = window.innerWidth <= 960;
+    }
   });
 
   const focusableSelectors = [
@@ -87,6 +92,8 @@
   }
 
   function handleResize() {
+    isCompactViewport = window.innerWidth <= 960;
+
     if (window.innerWidth > 960 && $navigation.isMenuOpen) {
       navigation.closeMenu();
     }
@@ -267,8 +274,25 @@
         role="navigation"
         aria-label={$_('nav.primary_label')}
         data-open={$navigation.isMenuOpen}
+        aria-hidden={isCompactViewport && !$navigation.isMenuOpen ? 'true' : undefined}
         padding="sm"
       >
+        <div class="nav-mobile-header">
+          <a
+            href="/"
+            class="nav-mobile-brand"
+            aria-label={$_('nav.brand_aria')}
+            on:click={() => navigation.closeMenu()}
+          >
+            <img
+              src={navLogoSrc}
+              alt={$_('nav.brand_name')}
+              width="148"
+              height="40"
+            />
+          </a>
+        </div>
+
         <ul class="nav-list">
           {#each mainNavigation as item}
             <li class={`nav-item${item.children ? ' nav-item--group' : ''}`}>
@@ -305,6 +329,14 @@
             </li>
           {/each}
         </ul>
+
+        <div class="nav-mobile-controls" role="group" aria-labelledby="nav-mobile-controls-heading">
+          <p id="nav-mobile-controls-heading" class="nav-mobile-controls__label">
+            {$_('nav.quick_controls')}
+          </p>
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
       </GlassCard>
 
       <div class="nav-actions">
@@ -358,6 +390,24 @@
       box-shadow var(--duration-normal) var(--ease-out),
       border-color var(--duration-normal) var(--ease-out),
       background var(--duration-normal) var(--ease-out);
+  }
+
+  .nav-shell > .container {
+    width: min(100%, var(--container-xl, 1200px));
+    margin-inline: auto;
+    padding-inline: clamp(1.75rem, 5vw, 2.75rem);
+  }
+
+  @media (max-width: 960px) {
+    .nav-shell > .container {
+      padding-inline: clamp(1.25rem, 6vw, 2rem);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav-shell > .container {
+      padding-inline: clamp(0.85rem, 5vw, 1.4rem);
+    }
   }
 
   .nav-shell.hidden {
@@ -457,6 +507,12 @@
     display: flex;
     align-items: center;
     gap: clamp(0.75rem, 2vw, 1.1rem);
+  }
+
+  .nav-leading,
+  .nav-links,
+  .nav-actions {
+    min-width: 0;
   }
 
   .nav-window-controls {
@@ -710,7 +766,38 @@
   .nav-actions {
     display: inline-flex;
     align-items: center;
-    gap: clamp(0.75rem, 2vw, 1.25rem);
+    gap: clamp(0.65rem, 2vw, 1.2rem);
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .nav-mobile-controls {
+    display: none;
+  }
+
+  .nav-mobile-header {
+    display: none;
+  }
+
+  .nav-mobile-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .nav-mobile-brand img {
+    display: block;
+    width: clamp(128px, 45vw, 164px);
+    height: auto;
+  }
+
+  .nav-mobile-controls__label {
+    font-size: clamp(0.75rem, 1.4vw, 0.85rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: var(--weight-semibold);
+    color: var(--text-tertiary);
+    margin: 0;
   }
 
   .nav-button {
@@ -839,6 +926,19 @@
       gap: 0.75rem;
     }
 
+    .nav-mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(0.75rem, 4vw, 1.25rem);
+      padding-bottom: clamp(0.35rem, 2vw, 0.6rem);
+      border-bottom: 1px solid color-mix(in srgb, var(--surface-field-border) 78%, transparent 22%);
+    }
+
+    .nav-list {
+      margin-top: clamp(0.6rem, 3vw, 0.9rem);
+    }
+
     .nav-links {
       position: fixed;
       top: clamp(4.25rem, 12vw, 5.5rem);
@@ -865,10 +965,20 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
+      max-height: calc(100vh - clamp(5.25rem, 14vw, 7rem));
+      overflow-y: auto;
       transition:
         opacity var(--duration-normal) var(--ease-out),
         transform var(--duration-normal) var(--ease-out),
         visibility var(--duration-normal) var(--ease-out);
+    }
+
+    .nav-shell:not(.menu-open) .nav-links {
+      display: none;
+    }
+
+    .nav-shell.menu-open .nav-links {
+      display: flex;
     }
 
     :global([data-base-theme='dark']) .nav-links {
@@ -893,6 +1003,15 @@
       transform: translateY(0);
     }
 
+    :global(.nav-links[data-open='true'])::-webkit-scrollbar {
+      width: 0.45rem;
+    }
+
+    :global(.nav-links[data-open='true'])::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, rgba(var(--ink-rgb), 0.25) 70%, transparent 30%);
+      border-radius: 999px;
+    }
+
     .nav-list {
       flex-direction: column;
       align-items: stretch;
@@ -907,6 +1026,7 @@
     .nav-link {
       width: 100%;
       justify-content: space-between;
+      padding: clamp(0.75rem, 3vw, 1rem) clamp(0.9rem, 4vw, 1.25rem);
     }
 
     :global(.nav-item--group .nav-submenu) {
@@ -934,7 +1054,7 @@
     }
 
     .nav-actions {
-      gap: 0.85rem;
+      gap: clamp(0.6rem, 3vw, 0.9rem);
     }
 
     .nav-button {
@@ -944,15 +1064,150 @@
     .nav-trigger {
       display: inline-flex;
     }
+
+    .nav-mobile-controls {
+      display: grid;
+      gap: clamp(0.75rem, 4vw, 1.1rem);
+      margin-top: clamp(0.75rem, 4vw, 1.25rem);
+      padding-top: clamp(0.75rem, 4vw, 1.1rem);
+      border-top: 1px solid color-mix(in srgb, var(--surface-field-border) 80%, transparent 20%);
+      grid-template-columns: minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .nav-mobile-controls :global(.language-switcher),
+    .nav-mobile-controls :global(.theme-switcher) {
+      width: 100%;
+    }
+
+    .nav-mobile-controls :global(.language-switcher) {
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav-mobile-controls :global(.language-switcher .current-lang) {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .nav-mobile-controls :global(.theme-switcher) {
+      display: flex;
+      justify-content: center;
+      max-width: 100%;
+    }
+
+    .nav-mobile-controls :global(.theme-switcher .theme-option__body) {
+      min-width: clamp(2.6rem, 22vw, 3.2rem);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .nav-surface {
+      gap: clamp(0.85rem, 4vw, 1.35rem);
+    }
+
+    .nav-leading {
+      flex: 1 1 auto;
+    }
+
+    .nav-groups {
+      flex: 0 0 auto;
+    }
+
+    .nav-actions {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav-shell > .container {
+      padding-inline: clamp(0.75rem, 5.5vw, 1.15rem);
+    }
+
+    .nav-surface {
+      justify-content: flex-start;
+      gap: clamp(0.75rem, 5vw, 1.1rem);
+      padding-block: clamp(0.75rem, 5vw, 1rem);
+    }
+
+    .nav-leading {
+      display: none;
+    }
+
+    .nav-groups {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .nav-actions {
+      width: 100%;
+      justify-content: flex-start;
+      gap: clamp(0.4rem, 4vw, 0.65rem);
+    }
+
+    .nav-actions :global(.language-switcher),
+    .nav-actions :global(.theme-switcher) {
+      display: none;
+    }
+
+    .nav-trigger {
+      display: inline-flex;
+      width: clamp(48px, 14vw, 56px);
+      height: clamp(48px, 14vw, 56px);
+    }
   }
 
   @media (max-width: 600px) {
     .nav-surface {
       padding: clamp(0.85rem, 4vw, 1rem) 0;
+      align-items: center;
     }
 
     .nav-brand img {
       width: clamp(116px, 40vw, 140px);
+    }
+
+    .nav-links {
+      top: clamp(4.75rem, 16vw, 5.85rem);
+      right: clamp(1rem, 6vw, 1.6rem);
+      left: clamp(1rem, 6vw, 1.6rem);
+      max-height: calc(100vh - clamp(5.25rem, 18vw, 7.5rem));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .nav-links {
+      top: clamp(4.6rem, 18vw, 5.5rem);
+      left: clamp(0.85rem, 6vw, 1.3rem);
+      right: clamp(0.85rem, 6vw, 1.3rem);
+      max-height: calc(100vh - clamp(5rem, 20vw, 7.25rem));
+    }
+
+    .nav-actions :global(.language-switcher),
+    .nav-actions :global(.theme-switcher) {
+      display: none;
+    }
+
+    .nav-mobile-controls {
+      gap: clamp(0.65rem, 5vw, 1rem);
+    }
+  }
+
+  @media (max-width: 440px) {
+    .nav-surface {
+      gap: clamp(0.85rem, 6vw, 1.15rem);
+    }
+
+    .nav-brand img {
+      width: clamp(96px, 46vw, 128px);
+    }
+
+    .nav-actions {
+      gap: clamp(0.32rem, 5vw, 0.5rem);
+    }
+
+    .nav-mobile-controls {
+      gap: clamp(0.55rem, 6vw, 0.85rem);
     }
   }
 
