@@ -44,20 +44,20 @@
   --glass-blur-md: 32px;
   --glass-blur-lg: 40px;
   --glass-blur-xl: 48px;
-  --glass-saturate: 1.4;
-  --glass-brightness: 1.08;
-  --glass-brightness-hover: 1.12;
-  
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-bg-light: color-mix(in srgb, var(--bg-elev-1) 88%, transparent 12%);
-  --glass-bg-lighter: color-mix(in srgb, var(--bg-elev-1) 92%, transparent 8%);
-  --glass-bg-lightest: color-mix(in srgb, var(--bg-elev-1) 94%, transparent 6%);
-  --glass-bg-strong: color-mix(in srgb, var(--bg-elev-1) 95%, transparent 5%);
-  
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-border-light: color-mix(in srgb, rgba(255, 255, 255, 0.3) 80%, transparent 20%);
-  --glass-border-strong: color-mix(in srgb, rgba(255, 255, 255, 0.4) 80%, transparent 20%);
-  --glass-border-hover: color-mix(in srgb, rgba(255, 255, 255, 0.5) 85%, transparent 15%);
+  --glass-saturate: 1.3;
+  --glass-brightness: 1.05;
+  --glass-brightness-hover: 1.08;
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-light: color-mix(in srgb, var(--bg-elev-1) 76%, transparent 24%);
+  --glass-bg-lighter: color-mix(in srgb, var(--bg-elev-1) 70%, transparent 30%);
+  --glass-bg-lightest: color-mix(in srgb, var(--bg-elev-1) 64%, transparent 36%);
+  --glass-bg-strong: color-mix(in srgb, var(--bg-elev-1) 82%, transparent 18%);
+
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-border-light: color-mix(in srgb, rgba(255, 255, 255, 0.26) 68%, transparent 32%);
+  --glass-border-strong: color-mix(in srgb, rgba(255, 255, 255, 0.32) 74%, transparent 26%);
+  --glass-border-hover: color-mix(in srgb, rgba(255, 255, 255, 0.44) 80%, transparent 20%);
 
   /* Motion timing */
   --slow: 22s;
@@ -314,9 +314,9 @@
   --text-headline: clamp(2rem, 4.5vw, 2.75rem);
   --text-title: clamp(1.65rem, 3.25vw, 2.25rem);
   --text-subtitle: clamp(1.35rem, 2.75vw, 1.9rem);
-  --text-body: var(--font-body-size, 1rem);
-  --text-small: clamp(0.875rem, 1.6vw, 0.95rem);
-  --text-caption: clamp(0.75rem, 1vw, 0.875rem);
+  --text-body: clamp(1rem, 1.35vw, 1.12rem);
+  --text-small: clamp(0.95rem, 1.5vw, 1.05rem);
+  --text-caption: clamp(0.82rem, 1.2vw, 0.9rem);
   --text: var(--text-body);
   --small: var(--text-small);
 
@@ -329,7 +329,7 @@
   --font-h3-size: clamp(1.5rem, 3.2vw, 1.85rem);
   --font-h3-weight: 600;
   --font-h3-line: 1.32;
-  --font-body-size: 1rem;
+  --font-body-size: clamp(1.05rem, 1.85vw, 1.16rem);
   --font-body-weight: 400;
   --font-body-line: 1.55;
 

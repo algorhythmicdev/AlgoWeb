@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360">
+  <defs>
+    <linearGradient id="fn-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#130f26" />
+      <stop offset="100%" stop-color="#271f46" />
+    </linearGradient>
+    <linearGradient id="fn-accent" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#ff9bfb" />
+      <stop offset="100%" stop-color="#7f83ff" />
+    </linearGradient>
+  </defs>
+  <rect width="360" height="360" rx="48" fill="url(#fn-bg)" />
+  <circle cx="180" cy="150" r="84" fill="#1c1533" opacity="0.75" />
+  <rect x="92" y="220" width="176" height="96" rx="42" fill="#1c1533" opacity="0.75" />
+  <text x="50%" y="58%" font-family="'Inter', 'Segoe UI', sans-serif" font-size="84" font-weight="600" fill="url(#fn-accent)" text-anchor="middle">Nikita</text>
+</svg>

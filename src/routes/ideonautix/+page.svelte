@@ -29,6 +29,11 @@
       labelKey: 'ideonautix.hero.secondary_cta',
       labelFallback: 'Back to solutions overview'
     },
+    demoCta: {
+      href: 'https://ideonautix.algorhythmics.dev',
+      labelKey: 'ideonautix.hero.demo_cta',
+      labelFallback: 'Launch the live demo'
+    },
     highlights: [
       {
         labelKey: 'ideonautix.hero.highlights.status_label',
@@ -49,6 +54,15 @@
         valueFallback: 'Explainable AI for builders'
       }
     ]
+  } as const;
+
+  const snapshot = {
+    image: '/images/placeholders/platform-ideonautix.svg',
+    altKey: 'ideonautix.snapshot.alt',
+    altFallback: 'Preview of the Ideonautix creative cockpit layout',
+    captionKey: 'ideonautix.snapshot.caption',
+    captionFallback:
+      'A modular writing desk with explainable AI suggestions, creative rituals, and multilingual notes ready for your next pitch.'
   } as const;
 
   const modules = {
@@ -265,8 +279,11 @@
       <Button href={hero.primaryCta.href} variant="gradient" size="lg">
         {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
       </Button>
-      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">
+      <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
         {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+      </Button>
+      <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
+        {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
       </Button>
     </div>
   </svelte:fragment>
@@ -282,6 +299,27 @@
     </div>
   </svelte:fragment>
 </Hero>
+
+<section class="section section--snapshot" use:revealOnScroll>
+  <div class="container snapshot">
+    <figure class="snapshot-card glass-card glass-card--pad-lg">
+      <img
+        src={snapshot.image}
+        alt={t(snapshot.altKey, snapshot.altFallback)}
+        width="960"
+        height="600"
+        loading="lazy"
+      />
+      <figcaption>
+        <h2>{t('ideonautix.snapshot.title', 'Your launch cockpit')}</h2>
+        <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
+        <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
+          {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+        </Button>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
 <section class="section section--modules" use:revealOnScroll>
   <div class="container">
@@ -442,22 +480,20 @@
     inset: -18% -18% -26% -18%;
     border-radius: clamp(36px, 7vw, 64px);
     pointer-events: none;
-    opacity: 0.82;
+    opacity: 0.24;
     z-index: 0;
   }
 
   .section::after {
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 280px 280px;
-    mix-blend-mode: soft-light;
-    opacity: 0.09;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%) 0%, transparent 100%);
+    opacity: 0.18;
   }
 
   .section--modules::before {
     background:
-      radial-gradient(90% 100% at 14% 18%, rgba(var(--aurora-purple-rgb), 0.32), transparent 72%),
-      radial-gradient(70% 90% at 84% 20%, rgba(var(--cherry-pop-rgb), 0.24), transparent 74%),
-      linear-gradient(140deg, rgba(var(--ink-rgb), 0.12), transparent 62%);
+      radial-gradient(90% 100% at 14% 18%, rgba(var(--aurora-purple-rgb), 0.18), transparent 74%),
+      radial-gradient(70% 90% at 84% 20%, rgba(var(--cherry-pop-rgb), 0.12), transparent 76%),
+      linear-gradient(140deg, rgba(var(--ink-rgb), 0.08), transparent 64%);
     animation: ideonautixPulse 48s ease-in-out infinite alternate;
   }
 
@@ -465,16 +501,16 @@
     inset: -22% -24% -30% -24%;
     border-radius: clamp(42px, 9vw, 74px);
     background:
-      conic-gradient(from 160deg, rgba(var(--aurora-purple-rgb), 0.28), rgba(var(--cherry-pop-rgb), 0.24), rgba(var(--aurora-purple-rgb), 0.26));
-    mask: radial-gradient(88% 88% at 52% 22%, rgba(0, 0, 0, 0.82), transparent 82%);
+      conic-gradient(from 160deg, rgba(var(--aurora-purple-rgb), 0.18), rgba(var(--cherry-pop-rgb), 0.14), rgba(var(--aurora-purple-rgb), 0.16));
+    mask: radial-gradient(88% 88% at 52% 22%, rgba(0, 0, 0, 0.46), transparent 82%);
     animation: ideonautixOrbit 56s linear infinite;
   }
 
   .section--use-cases::before {
     background:
-      radial-gradient(70% 95% at 16% 32%, rgba(var(--cherry-pop-rgb), 0.2), transparent 72%),
-      radial-gradient(90% 115% at 82% 10%, rgba(var(--aurora-purple-rgb), 0.26), transparent 76%),
-      linear-gradient(180deg, rgba(var(--ink-rgb), 0.16), transparent 70%);
+      radial-gradient(70% 95% at 16% 32%, rgba(var(--cherry-pop-rgb), 0.12), transparent 74%),
+      radial-gradient(90% 115% at 82% 10%, rgba(var(--aurora-purple-rgb), 0.16), transparent 78%),
+      linear-gradient(180deg, rgba(var(--ink-rgb), 0.1), transparent 70%);
     animation: ideonautixPulse 52s ease-in-out infinite alternate-reverse;
   }
 
@@ -482,19 +518,18 @@
     inset: -24% -18% -28% -18%;
     border-radius: clamp(44px, 9vw, 76px);
     background:
-      radial-gradient(110% 130% at 18% 24%, rgba(var(--aurora-purple-rgb), 0.32), transparent 74%),
-      radial-gradient(85% 115% at 80% 26%, rgba(var(--cherry-pop-rgb), 0.28), transparent 72%),
-      linear-gradient(140deg, rgba(var(--ink-rgb), 0.1), transparent 64%);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--aurora-purple) 26%, transparent 74%);
+      radial-gradient(110% 130% at 18% 24%, rgba(var(--aurora-purple-rgb), 0.18), transparent 76%),
+      radial-gradient(85% 115% at 80% 26%, rgba(var(--cherry-pop-rgb), 0.16), transparent 76%),
+      linear-gradient(140deg, rgba(var(--ink-rgb), 0.08), transparent 66%);
   }
 
   .section--cta::before {
     inset: -16% -22% -30% -22%;
     border-radius: clamp(48px, 10vw, 82px);
     background:
-      radial-gradient(120% 120% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.3), transparent 76%),
-      radial-gradient(85% 110% at 84% 18%, rgba(var(--cherry-pop-rgb), 0.24), transparent 72%),
-      linear-gradient(130deg, rgba(var(--ink-rgb), 0.12), transparent 60%);
+      radial-gradient(120% 120% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
+      radial-gradient(85% 110% at 84% 18%, rgba(var(--cherry-pop-rgb), 0.14), transparent 76%),
+      linear-gradient(130deg, rgba(var(--ink-rgb), 0.08), transparent 64%);
     animation: ideonautixPulse 44s ease-in-out infinite;
   }
 
@@ -504,6 +539,28 @@
 
   .section--pilot::after {
     opacity: 0.1;
+  }
+
+  .snapshot {
+    display: grid;
+  }
+
+  .snapshot-card {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .snapshot-card img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .snapshot-card figcaption {
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
   }
 
   .section-title {
@@ -548,9 +605,9 @@
   }
 
   :global(.module-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
-    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 68%, var(--cherry-pop) 32%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 64%, var(--cherry-pop) 36%);
   }
 
   :global(.module-card) h3 {
@@ -566,7 +623,7 @@
     width: 3rem;
     height: 3rem;
     border-radius: 16px;
-    background: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.18) 70%, rgba(255, 255, 255, 0.82) 30%);
+    background: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.12) 60%, transparent 40%);
     display: grid;
     place-items: center;
     margin-bottom: 1rem;
@@ -581,9 +638,9 @@
   :global(.status-card) {
     display: grid;
     gap: 1.25rem;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 34%, transparent 66%);
-    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 64%, var(--cherry-pop) 36%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 26%, transparent 74%);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 62%, var(--cherry-pop) 38%);
   }
 
   .status-list {
@@ -606,18 +663,18 @@
   }
 
   :global(.use-case-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.15) 10%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 34%, transparent 66%);
-    --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 58%, var(--aurora-purple) 42%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
+    --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 54%, var(--aurora-purple) 46%);
   }
 
   :global(.pilot-card) {
     display: grid;
     gap: 1.5rem;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.2) 14%);
-    --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 40%, transparent 60%);
-    --surface-glass-shadow: 0 28px 70px rgba(24, 18, 38, 0.28);
-    --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 62%, var(--aurora-purple) 38%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 28%, transparent 72%);
+    --surface-glass-shadow: 0 20px 50px rgba(24, 18, 38, 0.18);
+    --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 58%, var(--aurora-purple) 42%);
   }
 
   .pilot-form {
@@ -645,7 +702,7 @@
     border: 1px solid color-mix(in srgb, var(--border) 80%, transparent 20%);
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    background: color-mix(in srgb, var(--bg-elev-1) 96%, rgba(var(--aurora-purple-rgb), 0.08) 4%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
     color: var(--text);
   }
 
@@ -678,9 +735,9 @@
     display: grid;
     gap: 1.2rem;
     text-align: center;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.22) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 42%, transparent 58%);
-    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 62%, var(--cherry-pop) 38%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%);
+    --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 60%, var(--cherry-pop) 40%);
   }
 
   .cta-actions {

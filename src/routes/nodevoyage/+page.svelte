@@ -30,6 +30,11 @@
       labelKey: 'nodevoyage.hero.secondary_cta',
       labelFallback: 'Back to solutions overview'
     },
+    demoCta: {
+      href: 'https://nodevoyage.algorhythmics.dev',
+      labelKey: 'nodevoyage.hero.demo_cta',
+      labelFallback: 'Launch the live demo'
+    },
     highlights: [
       {
         labelKey: 'nodevoyage.hero.highlights.status_label',
@@ -50,6 +55,15 @@
         valueFallback: 'Public beta · June 2026'
       }
     ]
+  } as const;
+
+  const snapshot = {
+    image: '/images/placeholders/platform-nodevoyage.svg',
+    altKey: 'nodevoyage.snapshot.alt',
+    altFallback: 'Preview of the NodeVoyage travel timeline layout',
+    captionKey: 'nodevoyage.snapshot.caption',
+    captionFallback:
+      'Planning missions, accessibility notes, and collaborative editing are all woven into the upcoming public beta experience.'
   } as const;
 
   const features = {
@@ -261,8 +275,11 @@
       <Button href={hero.primaryCta.href} variant="gradient" size="lg">
         {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
       </Button>
-      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">
+      <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
         {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+      </Button>
+      <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
+        {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
       </Button>
     </div>
   </svelte:fragment>
@@ -278,6 +295,27 @@
     </div>
   </svelte:fragment>
 </Hero>
+
+<section class="section section--snapshot" use:revealOnScroll>
+  <div class="container snapshot">
+    <figure class="snapshot-card glass-card glass-card--pad-lg">
+      <img
+        src={snapshot.image}
+        alt={t(snapshot.altKey, snapshot.altFallback)}
+        width="960"
+        height="600"
+        loading="lazy"
+      />
+      <figcaption>
+        <h2>{t('nodevoyage.snapshot.title', 'A calm travel timeline')}</h2>
+        <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
+        <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
+          {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+        </Button>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
 <section class="section section--features" use:revealOnScroll>
   <div class="container">
@@ -437,22 +475,20 @@
     inset: -18% -18% -24% -18%;
     border-radius: clamp(36px, 7vw, 64px);
     pointer-events: none;
-    opacity: 0.85;
+    opacity: 0.24;
     z-index: 0;
   }
 
   .section::after {
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 280px 280px;
-    mix-blend-mode: soft-light;
-    opacity: 0.08;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%) 0%, transparent 100%);
+    opacity: 0.18;
   }
 
   .section--features::before {
     background:
-      radial-gradient(85% 95% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.32), transparent 70%),
-      radial-gradient(60% 80% at 78% 26%, rgba(var(--aurora-purple-rgb), 0.28), transparent 72%),
-      linear-gradient(140deg, rgba(var(--signal-yellow-rgb), 0.24), transparent 62%);
+      radial-gradient(85% 95% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.18), transparent 74%),
+      radial-gradient(60% 80% at 78% 26%, rgba(var(--aurora-purple-rgb), 0.14), transparent 78%),
+      linear-gradient(140deg, rgba(var(--signal-yellow-rgb), 0.12), transparent 64%);
     animation: voyageDrift 46s ease-in-out infinite alternate;
   }
 
@@ -460,16 +496,16 @@
     inset: -24% -26% -30% -26%;
     border-radius: clamp(42px, 9vw, 72px);
     background:
-      conic-gradient(from 200deg, rgba(var(--voyage-blue-rgb), 0.2), rgba(var(--aurora-purple-rgb), 0.24), rgba(var(--voyage-blue-rgb), 0.18), rgba(var(--signal-yellow-rgb), 0.18), rgba(var(--aurora-purple-rgb), 0.22));
-    mask: radial-gradient(88% 88% at 48% 20%, rgba(0, 0, 0, 0.82), transparent 82%);
+      conic-gradient(from 200deg, rgba(var(--voyage-blue-rgb), 0.14), rgba(var(--aurora-purple-rgb), 0.16), rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--signal-yellow-rgb), 0.12), rgba(var(--aurora-purple-rgb), 0.14));
+    mask: radial-gradient(88% 88% at 48% 20%, rgba(0, 0, 0, 0.46), transparent 82%);
     animation: mapSweep 54s linear infinite;
   }
 
   .section--differentiators::before {
     background:
-      radial-gradient(70% 90% at 18% 32%, rgba(var(--signal-yellow-rgb), 0.2), transparent 72%),
-      radial-gradient(80% 110% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.28), transparent 76%),
-      linear-gradient(160deg, rgba(var(--aurora-purple-rgb), 0.22), transparent 58%);
+      radial-gradient(70% 90% at 18% 32%, rgba(var(--signal-yellow-rgb), 0.12), transparent 76%),
+      radial-gradient(80% 110% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.16), transparent 80%),
+      linear-gradient(160deg, rgba(var(--aurora-purple-rgb), 0.12), transparent 60%);
     animation: voyageDrift 52s ease-in-out infinite alternate-reverse;
   }
 
@@ -477,19 +513,18 @@
     inset: -22% -18% -26% -18%;
     border-radius: clamp(40px, 8vw, 68px);
     background:
-      radial-gradient(95% 110% at 20% 24%, rgba(var(--voyage-blue-rgb), 0.32), transparent 74%),
-      radial-gradient(75% 105% at 78% 18%, rgba(var(--signal-yellow-rgb), 0.2), transparent 72%),
-      linear-gradient(180deg, rgba(var(--ink-rgb), 0.12), transparent 72%);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--voyage-blue) 26%, transparent 74%);
+      radial-gradient(95% 110% at 20% 24%, rgba(var(--voyage-blue-rgb), 0.18), transparent 78%),
+      radial-gradient(75% 105% at 78% 18%, rgba(var(--signal-yellow-rgb), 0.12), transparent 78%),
+      linear-gradient(180deg, rgba(var(--ink-rgb), 0.08), transparent 72%);
   }
 
   .section--cta::before {
     inset: -18% -22% -30% -22%;
     border-radius: clamp(48px, 10vw, 80px);
     background:
-      radial-gradient(120% 120% at 12% 18%, rgba(var(--aurora-purple-rgb), 0.26), transparent 74%),
-      radial-gradient(85% 110% at 84% 20%, rgba(var(--voyage-blue-rgb), 0.26), transparent 72%),
-      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.18), transparent 60%);
+      radial-gradient(120% 120% at 12% 18%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
+      radial-gradient(85% 110% at 84% 20%, rgba(var(--voyage-blue-rgb), 0.16), transparent 78%),
+      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.1), transparent 64%);
     animation: voyageDrift 40s ease-in-out infinite;
   }
 
@@ -499,6 +534,28 @@
 
   .section--explorers::after {
     opacity: 0.1;
+  }
+
+  .snapshot {
+    display: grid;
+  }
+
+  .snapshot-card {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .snapshot-card img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .snapshot-card figcaption {
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
   }
 
   .section-title {
@@ -543,9 +600,9 @@
   }
 
   :global(.feature-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 40%, transparent 60%);
-    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 68%, var(--aurora-purple) 32%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 28%, transparent 72%);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 66%, var(--aurora-purple) 34%);
   }
 
   :global(.feature-card) h3 {
@@ -561,7 +618,7 @@
     width: 3rem;
     height: 3rem;
     border-radius: 16px;
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.15) 70%, rgba(255, 255, 255, 0.8) 30%);
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.12) 60%, transparent 40%);
     display: grid;
     place-items: center;
     margin-bottom: 1rem;
@@ -621,9 +678,9 @@
   }
 
   :global(.differentiator-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.15) 10%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 36%, transparent 64%);
-    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 62%, var(--signal-yellow) 38%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 26%, transparent 74%);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 60%, var(--signal-yellow) 40%);
   }
 
   :global(.differentiator-card) h3 {
@@ -633,10 +690,10 @@
   :global(.explorers-card) {
     display: grid;
     gap: 1.5rem;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.2) 14%);
-    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 42%, transparent 58%);
-    --surface-glass-shadow: 0 28px 70px rgba(14, 28, 54, 0.26);
-    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 58%, var(--voyage-blue) 42%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 30%, transparent 70%);
+    --surface-glass-shadow: 0 20px 50px rgba(14, 28, 54, 0.18);
+    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 56%, var(--voyage-blue) 44%);
   }
 
   .explorers-form {
@@ -659,7 +716,7 @@
     border: 1px solid color-mix(in srgb, var(--border) 80%, transparent 20%);
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    background: color-mix(in srgb, var(--bg-elev-1) 96%, rgba(var(--voyage-blue-rgb), 0.06) 4%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
     color: var(--text);
   }
 
@@ -687,9 +744,9 @@
     display: grid;
     gap: 1.2rem;
     text-align: center;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.22) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
-    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 66%, var(--aurora-purple) 34%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
+    --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 64%, var(--aurora-purple) 36%);
   }
 
   .cta-actions {

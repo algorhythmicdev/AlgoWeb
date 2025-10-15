@@ -33,6 +33,15 @@
     }
   } as const;
 
+  const heroMedia = {
+    image: '/images/placeholders/help-center-desk.svg',
+    altKey: 'help.page.hero.media.alt',
+    altFallback: 'Support desk with glowing nodes connected across calm displays',
+    captionKey: 'help.page.hero.media.caption',
+    captionFallback:
+      'Every channel feeds into the same calm command centre—transcripts, status notes, and playbooks stay transparent for your crew.'
+  } as const;
+
   const knowledgeBase = [
     {
       icon: 'idea',
@@ -155,6 +164,15 @@
       }
     }
   ] as const;
+
+  const knowledgeMedia = {
+    image: '/images/placeholders/education-lab.svg',
+    altKey: 'help.page.knowledge.media.alt',
+    altFallback: 'Calm AI lab with touchscreen displays and inclusive learning stations',
+    captionKey: 'help.page.knowledge.media.caption',
+    captionFallback:
+      'Walk through guided paths for teachers, founders, and families—each toolkit blends signage clarity with multilingual support.'
+  } as const;
 
   const faqs = [
     {
@@ -314,6 +332,21 @@
       <Button variant="secondary" size="lg" href={hero.secondary.href}>{t(hero.secondary.labelKey, hero.secondary.labelFallback)}</Button>
     </div>
   </svelte:fragment>
+  <svelte:fragment slot="aside">
+    <GlassCard class="hero-media help-hero-media" padding="lg" particles>
+      <figure class="media-card">
+        <img
+          class="media-card__image"
+          src={heroMedia.image}
+          alt={t(heroMedia.altKey, heroMedia.altFallback)}
+          loading="lazy"
+          width="640"
+          height="400"
+        />
+        <figcaption class="media-card__caption">{t(heroMedia.captionKey, heroMedia.captionFallback)}</figcaption>
+      </figure>
+    </GlassCard>
+  </svelte:fragment>
 </Hero>
 
 <section class="knowledge" use:revealOnScroll>
@@ -324,6 +357,20 @@
       <p>{t('help.page.knowledge.copy', 'Pick the guide that matches your role to see recommended rituals, checklists, and downloads.')}</p>
     </header>
     <div class="knowledge-grid" use:staggerReveal>
+      <GlassCard class="knowledge-card knowledge-card--media" padding="lg" particles>
+        <figure class="media-card">
+          <img
+            class="media-card__image"
+            src={knowledgeMedia.image}
+            alt={t(knowledgeMedia.altKey, knowledgeMedia.altFallback)}
+            loading="lazy"
+            width="640"
+            height="400"
+          />
+          <figcaption class="media-card__caption">{t(knowledgeMedia.captionKey, knowledgeMedia.captionFallback)}</figcaption>
+        </figure>
+      </GlassCard>
+
       {#each knowledgeBase as category (category.titleKey)}
         <GlassCard class="knowledge-card" padding="lg" halo interactive data-tone={category.accent}>
           <div class="card-eyebrow">
@@ -466,39 +513,39 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(140% 100% at 15% 0%, rgba(var(--aurora-purple-rgb), 0.16), transparent 70%),
-      radial-gradient(120% 100% at 85% 40%, rgba(var(--signal-yellow-rgb), 0.14), transparent 68%),
-      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.12), transparent);
-    opacity: 0.9;
+    background: radial-gradient(140% 100% at 15% 0%, rgba(var(--aurora-purple-rgb), 0.1), transparent 74%),
+      radial-gradient(120% 100% at 85% 40%, rgba(var(--signal-yellow-rgb), 0.08), transparent 72%),
+      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.08), transparent);
+    opacity: 0.26;
     transform: translate3d(0, 0, 0);
-    filter: saturate(1.02);
+    filter: saturate(0.88);
     pointer-events: none;
     animation: section-glow 38s ease-in-out infinite alternate;
     z-index: 0;
   }
 
   .knowledge::before {
-    background: radial-gradient(120% 100% at 18% 20%, rgba(var(--aurora-purple-rgb), 0.18), transparent 72%),
-      radial-gradient(120% 100% at 82% 10%, rgba(var(--signal-yellow-rgb), 0.16), transparent 72%),
-      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.1), transparent);
+    background: radial-gradient(120% 100% at 18% 20%, rgba(var(--aurora-purple-rgb), 0.12), transparent 76%),
+      radial-gradient(120% 100% at 82% 10%, rgba(var(--signal-yellow-rgb), 0.08), transparent 76%),
+      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.06), transparent);
   }
 
   .faq::before {
-    background: radial-gradient(120% 100% at 14% 12%, rgba(var(--voyage-blue-rgb), 0.18), transparent 70%),
-      radial-gradient(140% 100% at 88% 32%, rgba(var(--aurora-purple-rgb), 0.16), transparent 72%),
-      linear-gradient(180deg, rgba(var(--signal-yellow-rgb), 0.08), transparent);
+    background: radial-gradient(120% 100% at 14% 12%, rgba(var(--voyage-blue-rgb), 0.12), transparent 74%),
+      radial-gradient(140% 100% at 88% 32%, rgba(var(--aurora-purple-rgb), 0.1), transparent 76%),
+      linear-gradient(180deg, rgba(var(--signal-yellow-rgb), 0.06), transparent);
   }
 
   .status::before {
-    background: radial-gradient(120% 100% at 16% 8%, rgba(var(--aurora-purple-rgb), 0.2), transparent 74%),
-      radial-gradient(140% 100% at 80% 18%, rgba(var(--voyage-blue-rgb), 0.16), transparent 74%),
-      linear-gradient(180deg, rgba(var(--signal-yellow-rgb), 0.1), transparent);
+    background: radial-gradient(120% 100% at 16% 8%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
+      radial-gradient(140% 100% at 80% 18%, rgba(var(--voyage-blue-rgb), 0.1), transparent 78%),
+      linear-gradient(180deg, rgba(var(--signal-yellow-rgb), 0.06), transparent);
   }
 
   .escalation::before {
-    background: radial-gradient(120% 100% at 22% 16%, rgba(var(--signal-yellow-rgb), 0.22), transparent 74%),
-      radial-gradient(130% 100% at 84% 30%, rgba(var(--aurora-purple-rgb), 0.18), transparent 74%),
-      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.08), transparent);
+    background: radial-gradient(120% 100% at 22% 16%, rgba(var(--signal-yellow-rgb), 0.12), transparent 80%),
+      radial-gradient(130% 100% at 84% 30%, rgba(var(--aurora-purple-rgb), 0.1), transparent 78%),
+      linear-gradient(180deg, rgba(var(--voyage-blue-rgb), 0.05), transparent);
   }
 
   .knowledge > *,
@@ -527,6 +574,7 @@
   .knowledge-grid {
     display: grid;
     gap: clamp(1.6rem, 3vw, 2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
   :global(.knowledge-card) {
@@ -535,6 +583,14 @@
     align-content: start;
     height: 100%;
     transition: box-shadow var(--duration-fast, 240ms) ease;
+  }
+
+  :global(.knowledge-card--media) {
+    align-content: stretch;
+  }
+
+  :global(.help-hero-media) {
+    margin-top: clamp(1rem, 3vw, 1.6rem);
   }
 
   :global(.knowledge-card[data-tone='aurora']) {
@@ -647,13 +703,13 @@
   :global(.status-card) {
     display: grid;
     gap: clamp(0.8rem, 2vw, 1.2rem);
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--aurora-purple-rgb), 0.08) 8%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.36) 48%, transparent 52%);
+    --surface-glass-fill: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.26) 48%, transparent 52%);
   }
 
   :global(.status-card[data-tone='status']) .status-pill {
-    background: color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.24) 20%);
-    color: color-mix(in srgb, var(--aurora-purple) 80%, rgba(var(--ink-rgb), 0.2) 20%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
+    color: color-mix(in srgb, var(--aurora-purple) 78%, rgba(var(--ink-rgb), 0.2) 22%);
   }
 
   .status-pill {
@@ -661,7 +717,7 @@
     align-items: center;
     padding: 0.35rem 0.75rem;
     border-radius: var(--radius-pill, 999px);
-    background: color-mix(in srgb, var(--bg-elev-2) 85%, rgba(var(--aurora-purple-rgb), 0.22) 15%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
     color: var(--aurora-purple);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
@@ -684,13 +740,13 @@
   }
 
   :global(.escalation-card[data-tone='escalation']) {
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--signal-yellow-rgb), 0.16) 10%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.32) 52%, transparent 48%);
+    --surface-glass-fill: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.22) 52%, transparent 48%);
   }
 
   :global(.resources-card[data-tone='resources']) {
-    --surface-glass-fill: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.1) 8%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.28) 54%, transparent 46%);
+    --surface-glass-fill: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.2) 54%, transparent 46%);
   }
 
   .channel-list {
@@ -711,7 +767,7 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--signal-yellow-rgb), 0.18) 10%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--signal-yellow);
   }
 

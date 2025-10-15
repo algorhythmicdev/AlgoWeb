@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-labelledby="title desc">
+  <title id="title">AlgoRhythmics inverse logotype</title>
+  <desc id="desc">Translucent capsule with bright gradient outline and white AlgoRhythmics wordmark</desc>
+  <defs>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5ef1ff" />
+      <stop offset="100%" stop-color="#9d7bff" />
+    </linearGradient>
+    <radialGradient id="fill" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.28)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.08)" />
+    </radialGradient>
+  </defs>
+  <rect x="8" y="28" width="584" height="144" rx="72" fill="url(#fill)" stroke="url(#border)" stroke-width="3" />
+  <g fill="white" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="700" font-size="72" text-anchor="middle">
+    <text x="300" y="122">AlgoRhythmics</text>
+  </g>
+</svg>

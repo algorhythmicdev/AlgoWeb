@@ -33,6 +33,15 @@
     ]
   } as const;
 
+  const heroMedia = {
+    image: '/images/placeholders/contact-lobby.svg',
+    altKey: 'contact.page.hero.media.alt',
+    altFallback: 'Lounge area with glass walls, calm lighting, and collaborative screens',
+    captionKey: 'contact.page.hero.media.caption',
+    captionFallback:
+      'Our distributed studio keeps a calm “ops lounge” ready for founders, educators, and partners to drop in virtually.'
+  } as const;
+
   const contactCards = [
     {
       icon: 'email',
@@ -127,6 +136,15 @@
     },
     noteKey: 'contact.page.help.note',
     noteFallback: 'Need something now? Email help@algorhythmics.com for personalised guidance or escalation.'
+  } as const;
+
+  const supportShowcase = {
+    image: '/images/placeholders/solutions-suite.svg',
+    altKey: 'contact.page.support.visual.alt',
+    altFallback: 'Support specialists reviewing calm AI dashboards together',
+    captionKey: 'contact.page.support.visual.caption',
+    captionFallback:
+      'Dedicated calm AI specialists keep an eye on every pilot. Expect transparent status dashboards and documented replies.'
   } as const;
 
   const socialLinks = [
@@ -226,6 +244,21 @@
         <Button href={action.href} variant={action.variant} size="lg">{t(action.labelKey, action.labelFallback)}</Button>
       {/each}
     </div>
+  </svelte:fragment>
+  <svelte:fragment slot="aside">
+    <GlassCard class="hero-media" padding="lg" particles>
+      <figure class="media-card">
+        <img
+          class="media-card__image"
+          src={heroMedia.image}
+          alt={t(heroMedia.altKey, heroMedia.altFallback)}
+          loading="lazy"
+          width="640"
+          height="400"
+        />
+        <figcaption class="media-card__caption">{t(heroMedia.captionKey, heroMedia.captionFallback)}</figcaption>
+      </figure>
+    </GlassCard>
   </svelte:fragment>
 </Hero>
 
@@ -340,6 +373,20 @@
         </ul>
       </GlassCard>
 
+      <GlassCard class="support-card" padding="lg" particles>
+        <figure class="media-card">
+          <img
+            class="media-card__image"
+            src={supportShowcase.image}
+            alt={t(supportShowcase.altKey, supportShowcase.altFallback)}
+            loading="lazy"
+            width="620"
+            height="388"
+          />
+          <figcaption class="media-card__caption">{t(supportShowcase.captionKey, supportShowcase.captionFallback)}</figcaption>
+        </figure>
+      </GlassCard>
+
       <GlassCard class="support-card" padding="lg">
         <span class="section-eyebrow">{t(helpCenter.eyebrowKey, helpCenter.eyebrowFallback)}</span>
         <h2>{t(helpCenter.titleKey, helpCenter.titleFallback)}</h2>
@@ -429,12 +476,7 @@
   .support-grid {
     display: grid;
     gap: clamp(1.6rem, 3vw, 2.4rem);
-  }
-
-  @media (min-width: 960px) {
-    .support-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
   :global(.support-card) {
@@ -516,7 +558,7 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.18) 18%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--voyage-blue);
   }
 
@@ -553,7 +595,7 @@
     padding: 0.85rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--surface-field-border, color-mix(in srgb, var(--border) 72%, transparent 28%));
-    background: var(--surface-field-bg, color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%));
+    background: var(--surface-field-bg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%));
     color: var(--text);
   }
 

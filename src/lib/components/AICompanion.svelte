@@ -395,18 +395,10 @@
     grid-template-rows: auto minmax(0, 1fr) auto;
     pointer-events: auto;
     gap: 0;
-    --surface-glass-blur: blur(24px);
-    --surface-glass-bg:
-      linear-gradient(
-        140deg,
-        color-mix(in srgb, var(--grad-a) 16%, transparent) 0%,
-        color-mix(in srgb, var(--grad-b) 12%, transparent) 100%
-      ),
-      color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.36) 40%);
-    --surface-glass-shadow: 0 32px 62px rgba(var(--voyage-blue-rgb), 0.26);
-    --grain-opacity: 0.06;
-    --grain-blend-mode: soft-light;
+    --surface-glass-blur: var(--glass-blur-lg);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-light) 88%, transparent 12%);
+    --surface-glass-border: var(--glass-border);
+    --surface-glass-shadow: var(--shadow-2xl);
     --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.12) 4%);
     --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
     --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 58%, rgba(var(--voyage-blue-rgb), 0.28) 42%);
@@ -438,16 +430,13 @@
   }
 
   :global([data-base-theme='dark']) .panel {
-    --surface-glass-bg:
-      linear-gradient(
-        140deg,
-        color-mix(in srgb, var(--grad-a) 18%, transparent) 0%,
-        color-mix(in srgb, var(--grad-b) 14%, transparent) 100%
-      ),
-      color-mix(in srgb, var(--bg-elev-2) 72%, rgba(var(--voyage-blue-rgb), 0.34) 28%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 58%, rgba(255, 255, 255, 0.22) 42%);
-    --surface-glass-shadow: 0 36px 68px rgba(var(--voyage-blue-rgb), 0.34);
-    --grain-opacity: 0.08;
+    --surface-glass-bg: color-mix(
+      in srgb,
+      rgba(var(--graphite-rgb), 0.9) 70%,
+      rgba(var(--voyage-blue-rgb), 0.3) 30%
+    );
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-glass-shadow: var(--shadow-3xl);
     --companion-message-bg: color-mix(in srgb, rgba(12, 16, 28, 0.86) 62%, rgba(var(--voyage-blue-rgb), 0.34) 38%);
     --companion-message-color: color-mix(in srgb, var(--text) 92%, rgba(255, 255, 255, 0.88) 8%);
     --companion-user-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.82) 70%, rgba(8, 14, 26, 0.4) 30%);

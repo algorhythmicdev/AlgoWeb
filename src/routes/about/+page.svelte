@@ -112,7 +112,8 @@
           labelFallback: 'LinkedIn',
           href: 'https://www.linkedin.com/in/nikitajurtaevs/'
         }
-      ]
+      ],
+      photo: '/images/placeholders/team-nikita.svg'
     },
     {
       nameKey: 'about.page.team.members.slaff.name',
@@ -127,7 +128,8 @@
       links: [
         { labelKey: 'about.page.team.members.slaff.links.email', labelFallback: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
         { labelKey: 'about.page.team.members.slaff.links.linkedin', labelFallback: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
-      ]
+      ],
+      photo: '/images/placeholders/team-slaff.svg'
     }
   ] as const;
 
@@ -241,7 +243,15 @@
 
     <div class="team__grid" use:staggerReveal>
       {#each team as member (member.nameKey)}
-        <GlassCard class="team-card" padding="lg" halo>
+        <GlassCard class="team-card" padding="lg">
+          <img
+            class="team-photo"
+            src={member.photo}
+            alt={`${t(member.nameKey, member.nameFallback)} portrait`}
+            width="480"
+            height="360"
+            loading="lazy"
+          />
           <h3>{t(member.nameKey, member.nameFallback)}</h3>
           <span class="team-role">{t(member.roleKey, member.roleFallback)}</span>
           <p class="team-focus">
@@ -312,6 +322,14 @@
     gap: clamp(1.6rem, 3vw, 2.4rem);
   }
 
+  .team-photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-lg);
+  }
+
   :global(.about-card),
   :global(.value-card),
   :global(.team-card),
@@ -346,8 +364,8 @@
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    background: color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%);
-    color: color-mix(in srgb, var(--aurora-purple) 72%, var(--text-secondary) 28%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
+    color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text-secondary) 32%);
   }
 
   .value-icon {
@@ -356,7 +374,7 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background: color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.18) 18%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
     color: var(--voyage-blue);
   }
 

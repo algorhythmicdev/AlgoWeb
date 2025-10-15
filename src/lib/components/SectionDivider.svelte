@@ -17,7 +17,6 @@
 >
   <div class="section-divider__blur" aria-hidden="true"></div>
   <div class="section-divider__line" aria-hidden="true"></div>
-  <div class="section-divider__grain" aria-hidden="true"></div>
   {#if hasLabel}
     <span class="section-divider__label">{trimmedLabel}</span>
   {/if}
@@ -27,54 +26,40 @@
   .section-divider {
     position: relative;
     width: min(100%, var(--section-divider-width, 1040px));
-    margin: clamp(3rem, 8vw, 5rem) auto;
+    margin: clamp(2.5rem, 7vw, 4rem) auto;
     display: grid;
     place-items: center;
-    padding: clamp(0.75rem, 3vw, 1.5rem) clamp(1.5rem, 5vw, 2.5rem);
-    --divider-accent: rgba(var(--voyage-blue-rgb), 0.45);
-    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.34);
-    --divider-highlight: rgba(var(--signal-yellow-rgb), 0.3);
-    --divider-base: rgba(255, 255, 255, 0.12);
+    padding: clamp(0.65rem, 2.5vw, 1.25rem) clamp(1.25rem, 4vw, 2rem);
+    --divider-accent: rgba(var(--voyage-blue-rgb), 0.32);
+    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.24);
+    --divider-highlight: rgba(var(--signal-yellow-rgb), 0.2);
+    --divider-base: rgba(255, 255, 255, 0.08);
     isolation: isolate;
   }
 
   .section-divider__blur {
     position: absolute;
     inset: 0;
-    border-radius: clamp(2rem, 6vw, 3rem);
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--divider-accent) 72%, transparent 28%) 0%,
-      color-mix(in srgb, var(--divider-secondary) 68%, transparent 32%) 52%,
-      color-mix(in srgb, var(--divider-highlight) 62%, transparent 38%) 100%
-    );
-    opacity: 0.75;
-    filter: blur(28px);
-    animation: section-divider-shimmer 24s ease-in-out infinite alternate;
+    border-radius: max(0px, calc(var(--glass-card-radius, 0) + 1.25rem));
+    background: color-mix(in srgb, var(--glass-bg-lightest) 46%, transparent 54%);
+    box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.08);
+    filter: blur(10px);
+    opacity: 0.38;
   }
 
   .section-divider__line {
     position: absolute;
-    inset-inline: clamp(1.5rem, 8vw, 6rem);
+    inset-inline: clamp(1.25rem, 6vw, 4.5rem);
     height: 1px;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      color-mix(in srgb, var(--divider-accent) 60%, var(--divider-base) 40%) 18%,
-      color-mix(in srgb, var(--divider-secondary) 55%, var(--divider-base) 45%) 50%,
-      color-mix(in srgb, var(--divider-highlight) 50%, var(--divider-base) 50%) 82%,
+      color-mix(in srgb, var(--divider-accent) 65%, var(--divider-base) 35%) 24%,
+      color-mix(in srgb, var(--divider-secondary) 60%, var(--divider-base) 40%) 50%,
+      color-mix(in srgb, var(--divider-highlight) 55%, var(--divider-base) 45%) 76%,
       transparent 100%
     );
-    box-shadow: 0 0 32px rgba(14, 18, 36, 0.18);
-  }
-
-  .section-divider__grain {
-    position: absolute;
-    inset: -1px;
-    border-radius: clamp(2rem, 6vw, 3rem);
-    background-image: var(--grain, var(--grain-texture));
-    opacity: 0.06;
-    mix-blend-mode: soft-light;
+    box-shadow: 0 10px 20px rgba(var(--ink-rgb), 0.06);
   }
 
   .section-divider__label {
@@ -82,16 +67,16 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.45rem 1.25rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, rgba(255, 255, 255, 0.08) 55%, rgba(14, 18, 36, 0.38) 45%);
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.38) 60%, rgba(14, 18, 36, 0.32) 40%);
-    backdrop-filter: blur(18px) saturate(1.05);
-    -webkit-backdrop-filter: blur(18px) saturate(1.05);
+    padding: 0.35rem 1.1rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%);
+    border: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
+    backdrop-filter: blur(calc(var(--glass-blur) * 0.6)) saturate(1.02);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.6)) saturate(1.02);
     font-size: var(--text-label, 0.75rem);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: color-mix(in srgb, rgb(var(--voyage-blue-rgb)) 65%, rgba(255, 255, 255, 0.9) 35%);
+    color: color-mix(in srgb, rgb(var(--voyage-blue-rgb)) 58%, rgba(255, 255, 255, 0.88) 42%);
   }
 
   .section-divider--aurora {
@@ -125,13 +110,12 @@
   }
 
   :global([data-base-theme='dark']) .section-divider__label {
-    background: color-mix(in srgb, rgba(12, 18, 36, 0.72) 70%, rgba(255, 255, 255, 0.08) 30%);
-    border-color: color-mix(in srgb, rgba(255, 255, 255, 0.22) 55%, rgba(12, 18, 36, 0.6) 45%);
+    background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.92) 70%, rgba(255, 255, 255, 0.08) 30%);
+    border-color: color-mix(in srgb, rgba(255, 255, 255, 0.22) 55%, rgba(var(--graphite-rgb), 0.6) 45%);
     color: color-mix(in srgb, rgba(255, 255, 255, 0.9) 70%, rgb(var(--voyage-blue-rgb)) 30%);
   }
 
-  :global(html[data-theme='hc']) .section-divider__blur,
-  :global(html[data-theme='hc']) .section-divider__grain {
+  :global(html[data-theme='hc']) .section-divider__blur {
     display: none;
   }
 

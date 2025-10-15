@@ -7,21 +7,18 @@
 .os-window {
   position: relative;
   padding: var(--card-padding-lg, 2rem);
-  border-radius: var(--radius-xl, 1.8rem);
-  background: var(--surface-glass-bg);
-  background-image:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
-    var(--glass-layer, none);
-  background-blend-mode: soft-light, normal;
-  background-size: cover, 140%;
-  background-position: center, top left;
-  background-repeat: no-repeat;
-  border: 1px solid var(--surface-glass-border);
-  box-shadow: var(--surface-glass-shadow);
-  backdrop-filter: var(--surface-glass-blur) saturate(1.12);
-  -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.12);
+  border-radius: var(--radius-md, 1rem);
+  background: color-mix(in srgb, var(--surface-glass-bg) 86%, transparent 14%);
+  border: 1px solid color-mix(in srgb, var(--surface-glass-border) 82%, transparent 18%);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.82)) saturate(1.04);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.82)) saturate(1.04);
   overflow: hidden;
   isolation: isolate;
+  transition:
+    background var(--duration-normal) var(--ease-smooth),
+    border-color var(--duration-normal) var(--ease-smooth),
+    box-shadow var(--duration-normal) var(--ease-smooth);
   --os-window-hc-bg: var(--bg-elev-1);
   --os-window-hc-border: var(--border);
   --os-window-hc-shadow: none;
@@ -30,17 +27,6 @@
 .os-window > * {
   position: relative;
   z-index: 2;
-}
-
-.os-window::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--grain, var(--grain-texture));
-  opacity: var(--grain-opacity, 0.035);
-  mix-blend-mode: var(--grain-blend-mode, normal);
-  pointer-events: none;
-  z-index: 1;
 }
 
 html[data-theme='hc'] .os-window {
@@ -54,20 +40,16 @@ html[data-theme='hc'] .os-window {
   --grain-opacity: 0;
 }
 
-html[data-theme='hc'] .os-window::after {
-  display: none;
-}
-
 .os-window[data-variant='halo']::before {
   content: '';
   position: absolute;
-  inset: -20%;
+  inset: -12%;
   background:
-    radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--grad-a) 50%, transparent) 0%, transparent 65%),
-    radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--grad-b) 45%, transparent) 0%, transparent 70%);
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--grad-a) 32%, transparent) 0%, transparent 62%),
+    radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--grad-b) 28%, transparent) 0%, transparent 68%);
   mix-blend-mode: screen;
-  opacity: 0.4;
-  animation: halo-pulse 8s ease-in-out infinite alternate;
+  opacity: 0.16;
+  filter: blur(12px);
 }
 
 .os-window[data-variant='grid']::before {
@@ -77,49 +59,45 @@ html[data-theme='hc'] .os-window::after {
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at var(--grid-spot-x, 58%) var(--grid-spot-y, 42%), color-mix(in oklab, var(--grad-a) 32%, transparent) 0%, transparent 55%),
-    linear-gradient(to right, color-mix(in oklab, var(--grad-a) 12%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--grad-b) 12%, transparent) 1px, transparent 1px);
+    radial-gradient(circle at var(--grid-spot-x, 58%) var(--grid-spot-y, 42%), color-mix(in srgb, var(--grad-a) 24%, transparent) 0%, transparent 55%),
+    linear-gradient(to right, color-mix(in srgb, var(--grad-a) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--grad-b) 10%, transparent) 1px, transparent 1px);
   background-size: auto, 34px 34px, 34px 34px;
-  opacity: 0.45;
+  opacity: 0.18;
   mix-blend-mode: screen;
-  transform-origin: center;
-  animation: grid-ripple var(--med) ease-in-out infinite alternate;
 }
 
 .os-window[data-variant='line']::before {
   content: '';
   position: absolute;
-  inset: -40%;
+  inset: -28%;
   z-index: 0;
   pointer-events: none;
   background: conic-gradient(
     from var(--line-angle, 42deg),
-    transparent 0 30%,
-    color-mix(in oklab, var(--grad-a) 38%, transparent) 45%,
-    transparent 70%
+    transparent 0 32%,
+    color-mix(in srgb, var(--grad-a) 24%, transparent) 48%,
+    transparent 72%
   );
-  opacity: 0.36;
+  opacity: 0.14;
   mix-blend-mode: screen;
-  animation: sweep var(--slow) linear infinite;
 }
 
 @keyframes halo-pulse {
   0%,
   100% {
-    opacity: 0.38;
-    transform: scale(1);
+    opacity: 0.16;
   }
   45% {
-    opacity: 0.62;
-    transform: scale(1.08);
+    opacity: 0.22;
   }
 }
 
 .os-window[data-variant='halo']::before,
 .os-window[data-variant='grid']::before,
 .os-window[data-variant='line']::before {
-  transition: opacity var(--duration-hero, 520ms) var(--ease-out, ease);
+  transition: opacity var(--duration-hero, 520ms) var(--ease-out, ease),
+    filter var(--duration-hero, 520ms) var(--ease-out, ease);
 }
 
 html[data-theme='hc'] .os-window[data-variant='halo']::before,
@@ -130,16 +108,16 @@ html[data-theme='hc'] .os-window[data-variant='line']::before {
 
 .magnetic-card {
   position: relative;
-  background: var(--surface-panel-bg);
-  border: 1px solid var(--surface-panel-border);
-  box-shadow: var(--surface-panel-shadow);
-  backdrop-filter: var(--surface-glass-blur) saturate(1.05);
-  -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.05);
+  background: color-mix(in srgb, var(--surface-panel-bg) 86%, transparent 14%);
+  border: 1px solid color-mix(in srgb, var(--surface-panel-border) 82%, transparent 18%);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
   transition:
     transform 0.3s var(--ease-out),
-    box-shadow 0.4s var(--ease-out),
-    background 0.4s var(--ease-out),
-    border-color 0.4s var(--ease-out);
+    box-shadow 0.3s var(--ease-out),
+    background 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
   cursor: pointer;
   isolation: isolate;
 }
@@ -158,55 +136,55 @@ html[data-theme='hc'] .os-window[data-variant='line']::before {
 .magnetic-card::before {
   background: linear-gradient(
     140deg,
-    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.45) 60%, transparent 40%) 0%,
-    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.45) 55%, transparent 45%) 48%,
-    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.4) 40%, transparent 60%) 100%
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 60%, transparent 40%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.24) 55%, transparent 45%) 48%,
+    color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.2) 40%, transparent 60%) 100%
   );
   mix-blend-mode: screen;
   z-index: -2;
 }
 
 .magnetic-card::after {
-  inset: -18%;
+  inset: -16%;
   border-radius: 50%;
   background: radial-gradient(
     circle at 50% 55%,
-    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 70%, transparent 30%) 0%,
-    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.28) 65%, transparent 35%) 40%,
+    color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 70%, transparent 30%) 0%,
+    color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.22) 65%, transparent 35%) 40%,
     transparent 75%
   );
-  transform: scale(0.82);
-  filter: blur(18px);
+  transform: scale(0.84);
+  filter: blur(14px);
   z-index: -3;
 }
 
 .magnetic-card:hover,
 .magnetic-card:focus-visible {
-  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-  box-shadow: 0 28px 60px rgba(12, 18, 36, 0.32);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
 }
 
 .magnetic-card:hover::before,
 .magnetic-card:focus-visible::before {
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .magnetic-card:hover::after,
 .magnetic-card:focus-visible::after {
-  opacity: 0.6;
-  transform: scale(1.05);
-  animation: magnetic-card-halo 8s ease-in-out infinite;
+  opacity: 0.5;
+  transform: scale(0.95);
+  animation: magnetic-card-halo 16s ease-in-out infinite;
 }
 
 @keyframes magnetic-card-halo {
   0%,
   100% {
-    transform: scale(1.02) translate3d(0, 0, 0);
-    opacity: 0.55;
+    transform: scale(0.95) translate3d(0, 0, 0);
+    opacity: 0.42;
   }
   50% {
-    transform: scale(1.1) translate3d(0, -3%, 0);
-    opacity: 0.7;
+    transform: scale(1) translate3d(0, -2%, 0);
+    opacity: 0.52;
   }
 }
 

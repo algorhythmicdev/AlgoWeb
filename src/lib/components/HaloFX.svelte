@@ -72,21 +72,21 @@
 
 <style>
   .halo {
-    --halo-opacity-min: 0.0008;
-    --halo-opacity-base: 0.0022;
-    --halo-opacity-span: 0.008;
-    --halo-opacity-max: 0.0048;
-    --halo-filter: blur(120px) saturate(0.26) brightness(0.72);
+    --halo-opacity-min: 0.0004;
+    --halo-opacity-base: 0.0012;
+    --halo-opacity-span: 0.0045;
+    --halo-opacity-max: 0.0026;
+    --halo-filter: blur(84px) saturate(0.22) brightness(0.78);
     --halo-blend: screen;
-    --halo-duration: 34s;
+    --halo-duration: 42s;
     position: fixed;
-    inset: -16vh 0 0 0;
+    inset: -12vh 0 0 0;
     pointer-events: none;
     z-index: calc(var(--z-background, -20) + 2);
     background:
-      radial-gradient(circle at 50% 12%, color-mix(in srgb, var(--halo-color) 1%, transparent) 0%, transparent 66%),
-      radial-gradient(circle at 18% 42%, color-mix(in srgb, var(--halo-color) 0.8%, transparent) 0%, transparent 72%),
-      radial-gradient(circle at 84% 34%, color-mix(in srgb, var(--signal-yellow) 0.6%, transparent) 0%, transparent 70%);
+      radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--halo-color) 0.6%, transparent) 0%, transparent 62%),
+      radial-gradient(circle at 22% 48%, color-mix(in srgb, var(--halo-color) 0.5%, transparent) 0%, transparent 68%),
+      radial-gradient(circle at 78% 60%, color-mix(in srgb, var(--signal-yellow) 0.35%, transparent) 0%, transparent 72%);
     opacity: clamp(
       var(--halo-opacity-min),
       var(--halo-opacity-base) + var(--scroll-depth, 0) * var(--halo-opacity-span),
@@ -95,29 +95,29 @@
     filter: var(--halo-filter);
     mix-blend-mode: var(--halo-blend, screen);
     transform: translate3d(0, 0, 0);
-    animation: halo-drift var(--halo-duration, 36s) ease-in-out infinite alternate;
+    animation: halo-drift var(--halo-duration, 42s) ease-in-out infinite alternate;
   }
 
   .halo--primary,
   .halo--aurora {
-    --halo-opacity-base: 0.0026;
-    --halo-opacity-max: 0.0055;
+    --halo-opacity-base: 0.0013;
+    --halo-opacity-max: 0.0028;
   }
 
   .halo--voyage {
-    --halo-filter: blur(124px) saturate(0.28) brightness(0.72);
-    --halo-opacity-max: 0.005;
+    --halo-filter: blur(88px) saturate(0.24) brightness(0.76);
+    --halo-opacity-max: 0.0026;
   }
 
   .halo--citrus {
-    --halo-opacity-base: 0.0028;
-    --halo-opacity-max: 0.006;
-    --halo-filter: blur(122px) saturate(0.3) brightness(0.74);
+    --halo-opacity-base: 0.0014;
+    --halo-opacity-max: 0.003;
+    --halo-filter: blur(90px) saturate(0.25) brightness(0.78);
   }
 
   .halo--evergreen {
-    --halo-filter: blur(120px) saturate(0.26) brightness(0.7);
-    --halo-opacity-max: 0.005;
+    --halo-filter: blur(86px) saturate(0.22) brightness(0.74);
+    --halo-opacity-max: 0.0028;
   }
 
   .halo::after {
@@ -135,12 +135,12 @@
 
   @keyframes halo-drift {
     from {
-      transform: translate3d(0, -0.2%, 0) scale(1.0015);
-      opacity: 0.022;
+      transform: translate3d(0, -0.12%, 0) scale(1.001);
+      opacity: 0.016;
     }
     to {
-      transform: translate3d(0, 0.4%, 0) scale(1.0035);
-      opacity: 0.045;
+      transform: translate3d(0, 0.28%, 0) scale(1.0025);
+      opacity: 0.028;
     }
   }
 
@@ -151,11 +151,11 @@
   }
 
   :global([data-base-theme='dark']) .halo {
-    --halo-opacity-min: 0.0015;
-    --halo-opacity-base: 0.0032;
-    --halo-opacity-span: 0.009;
-    --halo-opacity-max: 0.0065;
-    --halo-filter: blur(132px) saturate(0.24) brightness(0.52);
+    --halo-opacity-min: 0.0006;
+    --halo-opacity-base: 0.0014;
+    --halo-opacity-span: 0.0048;
+    --halo-opacity-max: 0.0032;
+    --halo-filter: blur(96px) saturate(0.24) brightness(0.58);
     --halo-blend: lighten;
   }
 
