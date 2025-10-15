@@ -13,33 +13,32 @@
   let animationId: number | undefined;
   let particles: Particle[] = [];
   let mouse = { x: 0, y: 0, active: false };
+  let activePointerId: number | null = null;
   let prefersReducedMotion = false;
   let resizeObserver: ResizeObserver | null = null;
   let lastTimestamp = 0;
   let dpr = 1;
+  let lastCanvasWidth = 0;
+  let lastCanvasHeight = 0;
 
   type RGB = { r: number; g: number; b: number };
 
   type Palette = {
-    node: string;
-    nodeAlt: string;
-    link: string;
-    glow: string;
+    primary: RGB;
+    secondary: RGB;
+    tertiary: RGB;
+    link: RGB;
+    isDark: boolean;
   };
 
-  const DEFAULT_LIGHT_PALETTE: Palette = {
-    node: 'rgba(30, 92, 255, 0.85)',
-    nodeAlt: 'rgba(30, 92, 255, 0)',
-    link: 'rgba(30, 92, 255, 0.18)',
-    glow: 'rgba(120, 170, 255, 0.26)'
-  };
+  const FALLBACK_LIGHT_PRIMARY: RGB = { r: 30, g: 92, b: 255 };
+  const FALLBACK_LIGHT_SECONDARY: RGB = { r: 106, g: 56, b: 255 };
+  const FALLBACK_LIGHT_TERTIARY: RGB = { r: 255, g: 211, b: 57 };
 
-  const DEFAULT_DARK_PALETTE: Palette = {
-    node: 'rgba(124, 90, 255, 0.85)',
-    nodeAlt: 'rgba(124, 90, 255, 0)',
-    link: 'rgba(124, 90, 255, 0.22)',
-    glow: 'rgba(110, 134, 255, 0.28)'
-  };
+  const FALLBACK_DARK_PRIMARY: RGB = { r: 136, g: 108, b: 255 };
+  const FALLBACK_DARK_SECONDARY: RGB = { r: 66, g: 132, b: 255 };
+  const FALLBACK_DARK_TERTIARY: RGB = { r: 255, g: 196, b: 88 };
+  const BLACK: RGB = { r: 0, g: 0, b: 0 };
 
   class Particle {
     x: number;
@@ -48,6 +47,8 @@
     vy: number;
     radius: number;
     depth: number;
+    phase: number;
+    phaseSpeed: number;
 
     constructor(width: number, height: number) {
       this.depth = Math.random() * 0.6 + 0.4;
@@ -55,7 +56,9 @@
       this.y = Math.random() * height;
       this.vx = (Math.random() - 0.5) * BASE_SPEED;
       this.vy = (Math.random() - 0.5) * BASE_SPEED;
-      this.radius = Math.random() * 1.8 + 0.8 + this.depth * 0.6;
+      this.radius = Math.random() * 2.4 + 1.2 + this.depth * 0.8;
+      this.phase = Math.random();
+      this.phaseSpeed = Math.random() * 0.004 + 0.0015;
     }
 
     update(width: number, height: number, delta: number) {
@@ -82,35 +85,49 @@
           this.vy -= (dy / dist) * force * 0.05;
         }
       }
+
+      this.phase = (this.phase + this.phaseSpeed * delta) % 1;
     }
 
     draw(context: CanvasRenderingContext2D, palette: Palette) {
+      const cycleColor = brandCycleColor(palette, this.phase + this.depth * 0.35);
+      const haloColor = brandCycleColor(palette, this.phase + 0.18);
+      const haloTint = palette.isDark ? haloColor : shadeRgb(haloColor, 0.18);
+      const coreBase = mixRgb(palette.primary, haloColor, 0.32 + this.depth * 0.18);
+      const coreColor = palette.isDark ? coreBase : shadeRgb(coreBase, 0.22);
+      const rimColor = palette.isDark ? cycleColor : shadeRgb(cycleColor, 0.28);
+      const midColor = mixRgb(rimColor, coreColor, 0.52);
+
       const gradient = context.createRadialGradient(
         this.x,
         this.y,
         0,
         this.x,
         this.y,
-        this.radius * 2.4
+        this.radius * 3.4
       );
-      gradient.addColorStop(0, palette.node);
-      gradient.addColorStop(1, palette.nodeAlt);
+      gradient.addColorStop(0, withAlpha(coreColor, palette.isDark ? 0.96 : 0.94));
+      gradient.addColorStop(0.6, withAlpha(midColor, palette.isDark ? 0.84 : 0.86));
+      gradient.addColorStop(0.88, withAlpha(rimColor, palette.isDark ? 0.64 : 0.72));
+      gradient.addColorStop(1, withAlpha(rimColor, 0));
 
       context.save();
       context.fillStyle = gradient;
-      context.globalAlpha = 0.85;
-      context.shadowColor = palette.glow;
-      context.shadowBlur = this.radius * 6;
+      context.shadowColor = withAlpha(haloTint, palette.isDark ? 0.46 : 0.52);
+      context.shadowBlur = this.radius * (palette.isDark ? 9.5 : 10.5);
       context.shadowOffsetX = 0;
       context.shadowOffsetY = 0;
       context.beginPath();
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       context.fill();
+      context.lineWidth = palette.isDark ? Math.max(1.1, this.radius * 0.42) : Math.max(1.2, this.radius * 0.58);
+      context.strokeStyle = withAlpha(rimColor, palette.isDark ? 0.88 : 0.95);
+      context.stroke();
       context.restore();
     }
   }
 
-  let palette: Palette = DEFAULT_LIGHT_PALETTE;
+  let palette: Palette = fallbackPalette();
   let paletteSignature = '';
 
   function parseHex(value: string): RGB | null {
@@ -159,6 +176,11 @@
     };
   }
 
+  function shadeRgb(color: RGB, amount: number): RGB {
+    const ratio = Math.min(Math.max(amount, 0), 1);
+    return mixRgb(color, BLACK, ratio);
+  }
+
   function resolveColorValue(
     value: string,
     bodyStyles: CSSStyleDeclaration,
@@ -182,20 +204,49 @@
     return resolveColorValue(nextValue, bodyStyles, rootStyles, depth + 1);
   }
 
-  function readAccentPalette(): { primary: RGB | null; secondary: RGB | null } | null {
+  function readAccentPalette(): { primary: RGB | null; secondary: RGB | null; tertiary: RGB | null } | null {
     if (!browser || !document.body) return null;
     const bodyStyles = getComputedStyle(document.body);
     const rootStyles = getComputedStyle(document.documentElement);
     const primaryValue = resolveColorValue(bodyStyles.getPropertyValue('--accent-primary'), bodyStyles, rootStyles);
     const secondaryValue = resolveColorValue(bodyStyles.getPropertyValue('--accent-secondary'), bodyStyles, rootStyles);
+    const tertiaryValue = resolveColorValue(bodyStyles.getPropertyValue('--accent-tertiary'), bodyStyles, rootStyles);
     const primary = primaryValue ? parseColor(primaryValue) : null;
     const secondary = secondaryValue ? parseColor(secondaryValue) : null;
-    if (!primary && !secondary) return null;
-    return { primary, secondary };
+    const tertiary = tertiaryValue ? parseColor(tertiaryValue) : null;
+    if (!primary && !secondary && !tertiary) return null;
+    return { primary, secondary, tertiary };
+  }
+
+  function createPalette(primary: RGB, secondary: RGB, tertiary: RGB, isDark: boolean): Palette {
+    const paired = mixRgb(primary, secondary, 0.55);
+    const spectrumLink = mixRgb(paired, tertiary, 0.35);
+    return {
+      primary,
+      secondary,
+      tertiary,
+      link: spectrumLink,
+      isDark
+    };
   }
 
   function fallbackPalette(): Palette {
-    return $theme === 'dark' ? DEFAULT_DARK_PALETTE : DEFAULT_LIGHT_PALETTE;
+    const isDark = $theme === 'dark';
+    if (isDark) {
+      return createPalette(
+        { ...FALLBACK_DARK_PRIMARY },
+        { ...FALLBACK_DARK_SECONDARY },
+        { ...FALLBACK_DARK_TERTIARY },
+        true
+      );
+    }
+
+    return createPalette(
+      { ...FALLBACK_LIGHT_PRIMARY },
+      { ...FALLBACK_LIGHT_SECONDARY },
+      { ...FALLBACK_LIGHT_TERTIARY },
+      false
+    );
   }
 
   function buildPalette(): Palette {
@@ -205,18 +256,12 @@
     }
 
     const themeName = $theme;
-    const primary = accentPalette.primary ?? { r: 30, g: 92, b: 255 };
-    const secondary = accentPalette.secondary ?? primary;
+    const primary = accentPalette.primary ?? (themeName === 'dark' ? FALLBACK_DARK_PRIMARY : FALLBACK_LIGHT_PRIMARY);
+    const secondary = accentPalette.secondary ?? (themeName === 'dark' ? FALLBACK_DARK_SECONDARY : FALLBACK_LIGHT_SECONDARY);
+    const tertiary = accentPalette.tertiary ?? accentPalette.primary ?? (themeName === 'dark' ? FALLBACK_DARK_TERTIARY : FALLBACK_LIGHT_TERTIARY);
     const isDark = themeName === 'dark';
 
-    const altBase = mixRgb(primary, { r: 255, g: 255, b: 255 }, isDark ? 0.22 : 0.3);
-
-    return {
-      node: withAlpha(primary, isDark ? 0.88 : 0.84),
-      nodeAlt: withAlpha(altBase, 0),
-      link: withAlpha(secondary, isDark ? 0.28 : 0.22),
-      glow: withAlpha(primary, isDark ? 0.36 : 0.3)
-    };
+    return createPalette({ ...primary }, { ...secondary }, { ...tertiary }, isDark);
   }
 
   function updatePalette(force = false) {
@@ -236,14 +281,32 @@
     return Math.min(MAX_PARTICLES, Math.max(36, Math.round(area / density)));
   }
 
-  function configureCanvas() {
+  function configureCanvas(preserveParticles = false) {
     if (!canvas) return;
     const width = canvas.clientWidth || window.innerWidth;
     const height = canvas.clientHeight || window.innerHeight;
+    const previousWidth = lastCanvasWidth || width;
+    const previousHeight = lastCanvasHeight || height;
     dpr = Math.min(browser ? window.devicePixelRatio || 1 : 1, 2);
 
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
+    const nextWidth = Math.round(width * dpr);
+    const nextHeight = Math.round(height * dpr);
+
+    const resized = canvas.width !== nextWidth || canvas.height !== nextHeight;
+
+    const count = targetParticleCount(width, height);
+
+    const shouldRebuild = !preserveParticles || particles.length === 0;
+    const sameDensity = particles.length === count;
+
+    if (!shouldRebuild && !resized && sameDensity && ctx) {
+      lastCanvasWidth = width;
+      lastCanvasHeight = height;
+      return;
+    }
+
+    canvas.width = nextWidth;
+    canvas.height = nextHeight;
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
@@ -252,8 +315,37 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
 
-    const count = targetParticleCount(width, height);
-    particles = Array.from({ length: count }, () => new Particle(width, height));
+    if (shouldRebuild) {
+      particles = Array.from({ length: count }, () => new Particle(width, height));
+    } else {
+      if (resized) {
+        const widthRatio = previousWidth ? width / previousWidth : 1;
+        const heightRatio = previousHeight ? height / previousHeight : 1;
+        const velocityScale = Math.sqrt(
+          Math.max(0.25, (widthRatio * widthRatio + heightRatio * heightRatio) * 0.5)
+        );
+        const sizeScale = Math.sqrt(Math.max(0.25, widthRatio * heightRatio));
+
+        particles.forEach((particle) => {
+          particle.x = Math.max(0, Math.min(width, particle.x * widthRatio));
+          particle.y = Math.max(0, Math.min(height, particle.y * heightRatio));
+          particle.vx *= velocityScale;
+          particle.vy *= velocityScale;
+          particle.radius = Math.max(0.8, particle.radius * sizeScale);
+        });
+      }
+
+      if (particles.length > count) {
+        particles.length = count;
+      } else {
+        while (particles.length < count) {
+          particles.push(new Particle(width, height));
+        }
+      }
+    }
+
+    lastCanvasWidth = width;
+    lastCanvasHeight = height;
   }
 
   function clear() {
@@ -291,6 +383,7 @@
 
   function drawConnections(context: CanvasRenderingContext2D, palette: Palette) {
     context.save();
+    context.lineCap = 'round';
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const a = particles[i];
@@ -298,13 +391,17 @@
         const dx = a.x - b.x;
         const dy = a.y - b.y;
         const dist = Math.hypot(dx, dy);
-        const maxDistance = 160 * (a.depth + b.depth) * 0.55;
+        const maxDistance = 180 * (a.depth + b.depth) * 0.62;
 
         if (dist < maxDistance) {
-          const alpha = 1 - dist / maxDistance;
-          context.strokeStyle = palette.link;
-          context.globalAlpha = alpha * 0.9;
-          context.lineWidth = 1;
+          const strength = 1 - dist / maxDistance;
+          const phase = ((a.phase + b.phase) * 0.5 + lastTimestamp / 5400) % 1;
+          const cycleColor = brandCycleColor(palette, phase);
+          const linkColor = mixRgb(cycleColor, palette.link, 0.32 + strength * 0.18);
+          const tinted = palette.isDark ? linkColor : shadeRgb(linkColor, 0.24);
+          context.strokeStyle = withAlpha(tinted, palette.isDark ? 0.56 : 0.64);
+          context.globalAlpha = Math.pow(strength, 0.62) * (palette.isDark ? 0.96 : 0.98);
+          context.lineWidth = palette.isDark ? 0.85 + strength * 0.95 : 1 + strength * 1.2;
           context.beginPath();
           context.moveTo(a.x, a.y);
           context.lineTo(b.x, b.y);
@@ -319,14 +416,29 @@
     if (!mouse.active) return;
     context.save();
     context.globalAlpha = 1;
-    const gradient = context.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, POINTER_PULL);
-    gradient.addColorStop(0, palette.glow);
+    const pointerColor = brandCycleColor(palette, (lastTimestamp / 3200 + 0.25) % 1);
+    const pointerBlend = mixRgb(pointerColor, palette.tertiary, 0.42);
+    const pointerTint = palette.isDark ? pointerBlend : shadeRgb(pointerBlend, 0.22);
+    const gradient = context.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, POINTER_PULL * 1.05);
+    gradient.addColorStop(0, withAlpha(pointerTint, palette.isDark ? 0.36 : 0.34));
+    gradient.addColorStop(0.45, withAlpha(mixRgb(pointerTint, palette.primary, 0.38), palette.isDark ? 0.26 : 0.28));
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     context.fillStyle = gradient;
     context.beginPath();
     context.arc(mouse.x, mouse.y, POINTER_PULL, 0, Math.PI * 2);
     context.fill();
     context.restore();
+  }
+
+  function brandCycleColor(palette: Palette, progress: number): RGB {
+    const sequence = [palette.secondary, palette.tertiary, palette.primary, palette.secondary];
+    const normalized = ((progress % 1) + 1) % 1;
+    const scaled = normalized * (sequence.length - 1);
+    const index = Math.floor(scaled);
+    const ratio = scaled - index;
+    const start = sequence[index];
+    const end = sequence[index + 1];
+    return mixRgb(start, end, ratio);
   }
 
   function start() {
@@ -343,12 +455,66 @@
     }
   }
 
+  function setPointerPosition(x: number, y: number) {
+    mouse = { x, y, active: true };
+  }
+
+  function deactivatePointer() {
+    activePointerId = null;
+    mouse.active = false;
+  }
+
   function handleMouseMove(event: MouseEvent) {
-    mouse = { x: event.clientX, y: event.clientY, active: true };
+    setPointerPosition(event.clientX, event.clientY);
   }
 
   function handleMouseLeave() {
-    mouse.active = false;
+    deactivatePointer();
+  }
+
+  function handlePointerMove(event: PointerEvent) {
+    if (event.pointerType === 'mouse') {
+      setPointerPosition(event.clientX, event.clientY);
+      return;
+    }
+
+    if (activePointerId !== null && event.pointerId !== activePointerId) {
+      return;
+    }
+
+    activePointerId = event.pointerId;
+    setPointerPosition(event.clientX, event.clientY);
+  }
+
+  function handlePointerDown(event: PointerEvent) {
+    activePointerId = event.pointerId;
+    setPointerPosition(event.clientX, event.clientY);
+  }
+
+  function handlePointerEnd(event: PointerEvent) {
+    if (activePointerId !== null && event.pointerId !== activePointerId) {
+      return;
+    }
+    deactivatePointer();
+  }
+
+  function handleTouchMove(event: TouchEvent) {
+    if (event.touches.length === 0) return;
+    const touch = event.touches[0];
+    setPointerPosition(touch.clientX, touch.clientY);
+  }
+
+  function handleTouchEnd() {
+    deactivatePointer();
+  }
+
+  function handleVisibilityChange() {
+    if (document.visibilityState === 'hidden') {
+      deactivatePointer();
+      stop();
+    } else if (!prefersReducedMotion) {
+      start();
+    }
   }
 
   type LegacyMediaQueryList = MediaQueryList & {
@@ -408,15 +574,31 @@
 
     const resizeTarget = document.documentElement;
     resizeObserver = new ResizeObserver(() => {
-      configureCanvas();
+      configureCanvas(true);
       if (!prefersReducedMotion) {
         start();
       }
     });
     resizeObserver.observe(resizeTarget);
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    const pointerSupported = typeof window.PointerEvent !== 'undefined';
+
+    if (pointerSupported) {
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+      window.addEventListener('pointerdown', handlePointerDown, { passive: true });
+      window.addEventListener('pointerup', handlePointerEnd, { passive: true });
+      window.addEventListener('pointercancel', handlePointerEnd, { passive: true });
+      window.addEventListener('pointerleave', handlePointerEnd, { passive: true });
+    } else {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+      window.addEventListener('touchmove', handleTouchMove, { passive: true });
+      window.addEventListener('touchstart', handleTouchMove, { passive: true });
+      window.addEventListener('touchend', handleTouchEnd, { passive: true });
+      window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       stop();
@@ -425,19 +607,39 @@
       } else if (legacyMotionQuery.removeListener) {
         legacyMotionQuery.removeListener(onMotionChange);
       }
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
+      if (pointerSupported) {
+        window.removeEventListener('pointermove', handlePointerMove);
+        window.removeEventListener('pointerdown', handlePointerDown);
+        window.removeEventListener('pointerup', handlePointerEnd);
+        window.removeEventListener('pointercancel', handlePointerEnd);
+        window.removeEventListener('pointerleave', handlePointerEnd);
+      } else {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseleave', handleMouseLeave);
+        window.removeEventListener('touchmove', handleTouchMove);
+        window.removeEventListener('touchstart', handleTouchMove);
+        window.removeEventListener('touchend', handleTouchEnd);
+        window.removeEventListener('touchcancel', handleTouchEnd);
+      }
       resizeObserver?.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   });
 
   onDestroy(() => {
     stop();
     resizeObserver?.disconnect();
+    if (browser) {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }
   });
 </script>
 
-<canvas bind:this={canvas} class="particle-network" aria-hidden="true"></canvas>
+<canvas
+  bind:this={canvas}
+  class="particle-network"
+  data-theme={$theme}
+  aria-hidden="true"></canvas>
 
 <style>
   .particle-network {
@@ -445,9 +647,23 @@
     inset: 0;
     z-index: var(--z-behind, -10);
     pointer-events: none;
-    opacity: 0.52;
+    opacity: 0.65;
     mix-blend-mode: screen;
-    transition: opacity var(--duration-smooth) var(--ease-smooth);
+    filter: saturate(1.18) contrast(1.08) brightness(1.05);
+    transition:
+      opacity var(--duration-smooth) var(--ease-smooth),
+      filter var(--duration-smooth) var(--ease-smooth);
+  }
+
+  .particle-network[data-theme='dark'] {
+    opacity: 0.72;
+    filter: saturate(1.26) contrast(1.12) brightness(1.06);
+  }
+
+  .particle-network[data-theme='light'] {
+    opacity: 0.82;
+    mix-blend-mode: multiply;
+    filter: saturate(1.35) contrast(1.22) brightness(0.94);
   }
 
   :global([data-theme='hc']) .particle-network {
