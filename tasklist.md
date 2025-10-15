@@ -176,3 +176,37 @@ This checklist tracks the outstanding follow-ups needed to finish the dark theme
   ```
   _Next step:_ Wire up the visibility listener during mount and remove it on teardown so the animation auto-pauses in the background and resumes when the user returns.
 
+## 📱 Responsive Polish
+- [x] **Scale navigation controls for compact viewports**
+  _Context:_ On sub-600px screens the language switcher, theme toggle, and trigger crowd the logo causing wrapping and overflow. Tighten spacing, shrink the toggle controls, and adjust the nav container padding so the bar remains balanced on phones.
+  _Snippet:_
+  ```svelte
+  @media (max-width: 600px) {
+    .nav-actions {
+      gap: clamp(0.5rem, 4vw, 0.75rem);
+    }
+  }
+  ```
+  _Next step:_ Verify the header aligns with the logo and menu button without overlap at 320px and resizes smoothly across breakpoints.
+  _Progress update:_ Language and theme switchers collapse into a "Quick controls" block inside the mobile drawer below 520px, freeing the toolbar to stay within 320px widths without wrapping.
+
+- [x] **Tune particle density for coarse pointers**
+  _Context:_ The background lattice rendered too many nodes on mobile, taxing GPUs and dulling the glow radius on touch devices. Detect coarse pointers, ease particle density, and adapt the pointer halo radius so the animation feels responsive on handhelds.
+  _Snippet:_
+  ```ts
+  const useCoarseDensity = coarsePointer || shortSide < 720;
+  const density = useCoarseDensity ? 36000 : 28000;
+  pointerPull = Math.max(MIN_POINTER_PULL, base);
+  ```
+  _Next step:_ Exercise the animation on both desktop and mobile simulators to confirm smooth motion and consistent accent cycling.
+
+## 📱 Navigation Polish
+- [x] **Simplify the mobile header layout**
+  _Context:_ The mobile navbar felt cramped with glass controls competing for space. On narrow phones the header should collapse to a lightweight bar with the brand mark and a single menu trigger.
+  _Next step:_ Let the leading group expand, push the trigger to the edge, and hide decorative window chrome below 720 px so the top bar stays usable on small screens.
+  _Progress update:_ The toolbar now collapses to a single menu button on handsets, with the logo relocating to a drawer header alongside the quick controls so the compact top bar stays clean.
+
+- [x] **Let the drawer stack links vertically and scroll**
+  _Context:_ The drawer kept desktop spacing, forcing navigation links to wrap horizontally on sub-400 px devices.
+  _Next step:_ Give the menu card a viewport-based max-height with overflow, widen the tap targets, and reflow the link list into a simple column so every route is legible on phones.
+

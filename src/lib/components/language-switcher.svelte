@@ -312,6 +312,8 @@
     display: inline-flex;
     align-items: stretch;
     isolation: isolate;
+    flex-shrink: 1;
+    min-width: 0;
   }
 
   .current-lang {
@@ -502,13 +504,64 @@
 
   @media (max-width: 720px) {
     .current-lang {
-      padding-inline: clamp(0.85rem, 4vw, 1.05rem);
-      min-width: 0;
+      min-width: clamp(4.5rem, 18vw, 5.75rem);
+      padding: calc(var(--space-sm) + 0.1rem) clamp(0.75rem, 6vw, 1rem);
+      font-size: clamp(0.88rem, 2.4vw, 0.95rem);
+      gap: clamp(0.45rem, 2vw, 0.55rem);
+    }
+
+    .current-lang svg {
+      width: 12px;
+      height: 8px;
     }
 
     .dropdown {
       inset-inline: auto 0;
       min-width: clamp(12rem, 60vw, 15rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .current-lang {
+      min-width: clamp(3.5rem, 28vw, 4.5rem);
+      padding: 0.4rem clamp(0.6rem, 8vw, 0.9rem);
+      letter-spacing: 0.015em;
+      gap: 0.35rem;
+    }
+
+    .current-lang svg {
+      width: 11px;
+      height: 7px;
+    }
+
+    .dropdown {
+      min-width: clamp(11rem, 70vw, 14rem);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .current-lang {
+      min-width: clamp(3.15rem, 34vw, 3.9rem);
+      padding: 0.35rem clamp(0.5rem, 8vw, 0.75rem);
+      font-size: clamp(0.82rem, 3vw, 0.9rem);
+      letter-spacing: 0.02em;
+    }
+
+    .current-lang svg {
+      width: 10px;
+      height: 6px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .current-lang {
+      min-width: clamp(2.9rem, 38vw, 3.4rem);
+      padding-inline: clamp(0.45rem, 9vw, 0.65rem);
+    }
+
+    .dropdown {
+      inset-inline-end: 0;
+      min-width: clamp(10.5rem, 74vw, 13rem);
     }
   }
 

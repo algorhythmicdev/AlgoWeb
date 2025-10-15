@@ -6,7 +6,10 @@
 
   const MAX_PARTICLES = 96;
   const BASE_SPEED = 0.18;
-  const POINTER_PULL = 120;
+  const BASE_POINTER_PULL = 120;
+  const MIN_POINTER_PULL = 82;
+  let pointerPull = BASE_POINTER_PULL;
+  let coarsePointer = false;
 
   let canvas: HTMLCanvasElement | null = null;
   let ctx: CanvasRenderingContext2D | null = null;
@@ -79,8 +82,8 @@
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const dist = Math.hypot(dx, dy) || 1;
-        if (dist < POINTER_PULL) {
-          const force = (1 - dist / POINTER_PULL) * 0.65;
+        if (dist < pointerPull) {
+          const force = (1 - dist / pointerPull) * 0.65;
           this.vx -= (dx / dist) * force * 0.05;
           this.vy -= (dy / dist) * force * 0.05;
         }
@@ -277,8 +280,17 @@
 
   function targetParticleCount(width: number, height: number) {
     const area = width * height;
-    const density = 28000;
-    return Math.min(MAX_PARTICLES, Math.max(36, Math.round(area / density)));
+    const shortSide = Math.min(width, height);
+    const useCoarseDensity = coarsePointer || shortSide < 720;
+    const density = useCoarseDensity ? 36000 : 28000;
+    const minimum = useCoarseDensity ? 28 : 36;
+    return Math.min(MAX_PARTICLES, Math.max(minimum, Math.round(area / density)));
+  }
+
+  function updateInteractionSettings(width: number, height: number) {
+    const shortestSide = Math.max(240, Math.min(width, height));
+    const base = coarsePointer ? Math.min(BASE_POINTER_PULL, shortestSide * 0.38) : Math.min(BASE_POINTER_PULL, shortestSide * 0.45);
+    pointerPull = Math.max(MIN_POINTER_PULL, base);
   }
 
   function configureCanvas(preserveParticles = false) {
@@ -287,6 +299,7 @@
     const height = canvas.clientHeight || window.innerHeight;
     const previousWidth = lastCanvasWidth || width;
     const previousHeight = lastCanvasHeight || height;
+    updateInteractionSettings(width, height);
     dpr = Math.min(browser ? window.devicePixelRatio || 1 : 1, 2);
 
     const nextWidth = Math.round(width * dpr);
@@ -419,13 +432,17 @@
     const pointerColor = brandCycleColor(palette, (lastTimestamp / 3200 + 0.25) % 1);
     const pointerBlend = mixRgb(pointerColor, palette.tertiary, 0.42);
     const pointerTint = palette.isDark ? pointerBlend : shadeRgb(pointerBlend, 0.22);
-    const gradient = context.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, POINTER_PULL * 1.05);
-    gradient.addColorStop(0, withAlpha(pointerTint, palette.isDark ? 0.36 : 0.34));
-    gradient.addColorStop(0.45, withAlpha(mixRgb(pointerTint, palette.primary, 0.38), palette.isDark ? 0.26 : 0.28));
+    const haloScale = coarsePointer ? 0.85 : 1;
+    const gradient = context.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, pointerPull * 1.05);
+    gradient.addColorStop(0, withAlpha(pointerTint, (palette.isDark ? 0.36 : 0.34) * haloScale));
+    gradient.addColorStop(
+      0.45,
+      withAlpha(mixRgb(pointerTint, palette.primary, 0.38), (palette.isDark ? 0.26 : 0.28) * haloScale)
+    );
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     context.fillStyle = gradient;
     context.beginPath();
-    context.arc(mouse.x, mouse.y, POINTER_PULL, 0, Math.PI * 2);
+    context.arc(mouse.x, mouse.y, pointerPull, 0, Math.PI * 2);
     context.fill();
     context.restore();
   }
@@ -546,6 +563,10 @@
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const legacyMotionQuery = motionQuery as LegacyMediaQueryList;
+    const pointerQuery = window.matchMedia('(pointer: coarse)');
+    const legacyPointerQuery = pointerQuery as LegacyMediaQueryList;
+    const hoverQuery = window.matchMedia('(hover: none)');
+    const legacyHoverQuery = hoverQuery as LegacyMediaQueryList;
 
     const updateMotionPreference = (matches: boolean) => {
       prefersReducedMotion = matches;
@@ -558,11 +579,38 @@
     };
 
     const onMotionChange = (event: MediaQueryListEvent) => updateMotionPreference(event.matches);
+    const computeCoarsePointer = () => {
+      const pointerMatches = pointerQuery.matches;
+      const hoverNone = hoverQuery.matches;
+      const touchPoints = typeof navigator !== 'undefined' ? navigator.maxTouchPoints ?? 0 : 0;
+      return pointerMatches || hoverNone || touchPoints > 0;
+    };
+    const updatePointerPrecision = () => {
+      const nextCoarse = computeCoarsePointer();
+      if (nextCoarse === coarsePointer) return;
+      coarsePointer = nextCoarse;
+      configureCanvas(true);
+    };
+    const onPointerChange = () => updatePointerPrecision();
 
     if (typeof motionQuery.addEventListener === 'function') {
       motionQuery.addEventListener('change', onMotionChange);
     } else if (legacyMotionQuery.addListener) {
       legacyMotionQuery.addListener(onMotionChange);
+    }
+
+    updatePointerPrecision();
+
+    if (typeof pointerQuery.addEventListener === 'function') {
+      pointerQuery.addEventListener('change', onPointerChange);
+    } else if (legacyPointerQuery.addListener) {
+      legacyPointerQuery.addListener(onPointerChange);
+    }
+
+    if (typeof hoverQuery.addEventListener === 'function') {
+      hoverQuery.addEventListener('change', onPointerChange);
+    } else if (legacyHoverQuery.addListener) {
+      legacyHoverQuery.addListener(onPointerChange);
     }
 
     tick().then(() => {
@@ -606,6 +654,17 @@
         motionQuery.removeEventListener('change', onMotionChange);
       } else if (legacyMotionQuery.removeListener) {
         legacyMotionQuery.removeListener(onMotionChange);
+      }
+      if (typeof pointerQuery.removeEventListener === 'function') {
+        pointerQuery.removeEventListener('change', onPointerChange);
+      } else if (legacyPointerQuery.removeListener) {
+        legacyPointerQuery.removeListener(onPointerChange);
+      }
+
+      if (typeof hoverQuery.removeEventListener === 'function') {
+        hoverQuery.removeEventListener('change', onPointerChange);
+      } else if (legacyHoverQuery.removeListener) {
+        legacyHoverQuery.removeListener(onPointerChange);
       }
       if (pointerSupported) {
         window.removeEventListener('pointermove', handlePointerMove);
