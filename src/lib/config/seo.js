@@ -7,7 +7,7 @@ export const siteConfig = {
   title: 'AlgoRhythmics - Where Logic Dances with Creativity',
   description: 'AI innovation lab creating NodeVoyage travel platform and Ideonautix productivity suite. Pre-company phase, building Latvia\'s AI future from Daugavpils.',
   url: 'https://algorhythmics.com',
-  ogImage: '/og-image.png',
+  ogImage: '/og-image.svg',
   keywords: [
     'AI Latvia',
     'Daugavpils startup',

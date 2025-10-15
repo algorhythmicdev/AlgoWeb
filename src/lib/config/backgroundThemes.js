@@ -12,13 +12,13 @@ export const backgroundThemes = {
     name: 'home',
     palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--aurora-purple-rgb)'),
-    grainOpacity: 0.0032,
+    grainOpacity: 0,
     layers: {
-      gradient: { filter: 'saturate(0.14) brightness(0.996)' },
-      wash: { min: 0.0016, base: 0.0026, span: 0.0075, max: 0.0044 },
-      flare: { min: 0.001, base: 0.0022, span: 0.007, max: 0.0045 },
-      veil: { color: 'rgba(16, 22, 33, 0.008)', max: 0.011 },
-      film: { max: 0.004 }
+      gradient: { filter: 'saturate(0.12) brightness(0.998)' },
+      wash: { min: 0.0012, base: 0.002, span: 0.005, max: 0.0032 },
+      flare: { min: 0.0008, base: 0.0016, span: 0.004, max: 0.0028 },
+      veil: { color: 'rgba(16, 22, 33, 0.006)', max: 0.008 },
+      film: { max: 0.0028 }
     },
     shapes: [
       { type: 'node', count: 3, color: 'voyage-blue', size: 'medium' },
@@ -34,11 +34,11 @@ export const backgroundThemes = {
     name: 'products',
     palette: ['voyage-blue', 'signal-yellow', 'aurora-purple'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--signal-yellow-rgb)'),
-    grainOpacity: 0.003,
+    grainOpacity: 0,
     layers: {
-      wash: { min: 0.0015, base: 0.0025, span: 0.007, max: 0.0042 },
-      flare: { min: 0.001, base: 0.002, span: 0.0065, max: 0.0042 },
-      film: { max: 0.004 }
+      wash: { min: 0.0011, base: 0.0019, span: 0.0045, max: 0.003 },
+      flare: { min: 0.0008, base: 0.0015, span: 0.004, max: 0.0026 },
+      film: { max: 0.0026 }
     },
     shapes: [
       { type: 'connection', count: 2, color: 'voyage-blue', size: 'small' },
@@ -54,12 +54,12 @@ export const backgroundThemes = {
     name: 'education',
     palette: ['aurora-purple', 'signal-yellow', 'voyage-blue'],
     gradient: neutralGradient('var(--aurora-purple-rgb)', 'var(--signal-yellow-rgb)'),
-    grainOpacity: 0.0032,
+    grainOpacity: 0,
     layers: {
-      gradient: { filter: 'saturate(0.16) brightness(0.994)' },
-      wash: { min: 0.0017, base: 0.0028, span: 0.0075, max: 0.0046 },
-      flare: { min: 0.0011, base: 0.0023, span: 0.007, max: 0.0045 },
-      veil: { color: 'rgba(14, 22, 36, 0.009)', span: 0.014, max: 0.012 }
+      gradient: { filter: 'saturate(0.14) brightness(0.996)' },
+      wash: { min: 0.0013, base: 0.0022, span: 0.005, max: 0.0034 },
+      flare: { min: 0.0009, base: 0.0017, span: 0.004, max: 0.0028 },
+      veil: { color: 'rgba(14, 22, 36, 0.007)', span: 0.01, max: 0.008 }
     },
     shapes: [
       { type: 'book', count: 3, color: 'aurora-purple', size: 'small' },
@@ -75,12 +75,12 @@ export const backgroundThemes = {
     name: 'about',
     palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--aurora-purple-rgb)'),
-    grainOpacity: 0.003,
+    grainOpacity: 0,
     layers: {
-      gradient: { filter: 'saturate(0.14) brightness(0.99)' },
-      wash: { min: 0.0016, base: 0.0026, span: 0.007, max: 0.0043 },
-      flare: { min: 0.001, base: 0.0022, span: 0.0065, max: 0.0043 },
-      film: { max: 0.004 }
+      gradient: { filter: 'saturate(0.12) brightness(0.996)' },
+      wash: { min: 0.0012, base: 0.002, span: 0.005, max: 0.0031 },
+      flare: { min: 0.0008, base: 0.0016, span: 0.004, max: 0.0028 },
+      film: { max: 0.0028 }
     },
     shapes: [
       { type: 'timeline', count: 2, color: 'voyage-blue', size: 'small' },
@@ -96,11 +96,11 @@ export const backgroundThemes = {
     name: 'resources',
     palette: ['voyage-blue', 'signal-yellow', 'aurora-purple'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--signal-yellow-rgb)'),
-    grainOpacity: 0.003,
+    grainOpacity: 0,
     layers: {
-      wash: { min: 0.0017, base: 0.0028, span: 0.0075, max: 0.0046 },
-      flare: { min: 0.0011, base: 0.0023, span: 0.007, max: 0.0046 },
-      veil: { color: 'rgba(18, 24, 36, 0.009)', max: 0.012 }
+      wash: { min: 0.0012, base: 0.0021, span: 0.005, max: 0.0032 },
+      flare: { min: 0.0009, base: 0.0017, span: 0.0042, max: 0.0029 },
+      veil: { color: 'rgba(18, 24, 36, 0.007)', max: 0.008 }
     },
     shapes: [
       { type: 'speech-bubble', count: 3, color: 'voyage-blue', size: 'small' },
@@ -116,12 +116,12 @@ export const backgroundThemes = {
     name: 'consulting',
     palette: ['aurora-purple', 'voyage-blue', 'signal-yellow'],
     gradient: neutralGradient('var(--aurora-purple-rgb)', 'var(--voyage-blue-rgb)'),
-    grainOpacity: 0.0032,
+    grainOpacity: 0,
     layers: {
-      gradient: { filter: 'saturate(0.16) brightness(0.97)' },
-      wash: { min: 0.0018, base: 0.003, span: 0.0075, max: 0.0048 },
-      flare: { min: 0.0012, base: 0.0024, span: 0.007, max: 0.0048 },
-      veil: { color: 'rgba(18, 24, 36, 0.011)', max: 0.014 }
+      gradient: { filter: 'saturate(0.14) brightness(0.992)' },
+      wash: { min: 0.0013, base: 0.0022, span: 0.0052, max: 0.0034 },
+      flare: { min: 0.0009, base: 0.0018, span: 0.0042, max: 0.003 },
+      veil: { color: 'rgba(18, 24, 36, 0.008)', max: 0.01 }
     },
     shapes: [
       { type: 'briefcase', count: 2, color: 'voyage-blue', size: 'small' },
@@ -137,11 +137,11 @@ export const backgroundThemes = {
     name: 'contact',
     palette: ['voyage-blue', 'aurora-purple', 'signal-yellow'],
     gradient: neutralGradient('var(--voyage-blue-rgb)', 'var(--aurora-purple-rgb)'),
-    grainOpacity: 0.0032,
+    grainOpacity: 0,
     layers: {
-      wash: { min: 0.0018, base: 0.003, span: 0.0075, max: 0.0048 },
-      flare: { min: 0.0012, base: 0.0024, span: 0.007, max: 0.0048 },
-      veil: { color: 'rgba(15, 23, 35, 0.01)', max: 0.014 }
+      wash: { min: 0.0013, base: 0.0021, span: 0.005, max: 0.0032 },
+      flare: { min: 0.0009, base: 0.0018, span: 0.0042, max: 0.003 },
+      veil: { color: 'rgba(15, 23, 35, 0.008)', max: 0.01 }
     },
     shapes: [
       { type: 'email', count: 3, color: 'voyage-blue', size: 'small' },

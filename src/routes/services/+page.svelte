@@ -141,7 +141,9 @@
         href: '/education-hub#case-studies',
         labelKey: 'services.page.platforms.ideonautix.secondary_cta',
         labelFallback: 'View Ideonautix Highlights'
-      }
+      },
+      image: '/images/placeholders/dashboard-overview.svg',
+      imageAlt: 'Placeholder of the Ideonautix workspace overview'
     },
     {
       id: 'nodevoyage',
@@ -175,7 +177,9 @@
         href: '/education-hub#case-studies',
         labelKey: 'services.page.platforms.nodevoyage.secondary_cta',
         labelFallback: 'See Travel Case Studies'
-      }
+      },
+      image: '/images/placeholders/mobile-preview.svg',
+      imageAlt: 'Placeholder of the NodeVoyage mobile planning view'
     }
   ] as const;
 
@@ -309,6 +313,14 @@
       <div class="cards" use:staggerReveal>
         {#each productEntries as product (product.id)}
           <GlassCard class={`service-card service-card--${product.id}`} padding="lg" halo id={product.id}>
+            <img
+              class="service-card__image"
+              src={product.image}
+              alt={product.imageAlt}
+              width="960"
+              height="600"
+              loading="lazy"
+            />
             {#if product.eyebrowKey}
               <span class="service-eyebrow">{t(product.eyebrowKey, product.eyebrowFallback)}</span>
             {/if}
@@ -407,73 +419,75 @@
     inset: 0;
     pointer-events: none;
     z-index: -2;
-    opacity: 0.92;
+    opacity: 0.32;
+    filter: saturate(0.78);
   }
 
   .aurora-wrap::before {
     will-change: transform;
+    opacity: 0.36;
   }
 
   .aurora-wrap::after {
     z-index: -1;
     mix-blend-mode: screen;
-    opacity: 0.7;
+    opacity: 0.18;
   }
 
   .aurora-wrap--consulting::before {
     background:
-      radial-gradient(110% 70% at 18% 16%, rgba(var(--aurora-purple-rgb), 0.34), transparent 70%),
-      radial-gradient(120% 80% at 84% 10%, rgba(var(--signal-yellow-rgb), 0.18), transparent 76%),
-      linear-gradient(120deg, color-mix(in srgb, var(--bg-elev-2) 88%, rgba(var(--aurora-purple-rgb), 0.18) 12%), transparent 72%);
+      radial-gradient(110% 70% at 18% 16%, rgba(var(--aurora-purple-rgb), 0.18), transparent 72%),
+      radial-gradient(120% 80% at 84% 10%, rgba(var(--signal-yellow-rgb), 0.12), transparent 78%),
+      linear-gradient(120deg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%), transparent 74%);
     animation: floatGlow 48s ease-in-out infinite alternate;
   }
 
   .aurora-wrap--consulting::after {
     background:
-      radial-gradient(60% 40% at 20% 80%, rgba(var(--aurora-purple-rgb), 0.22), transparent 68%),
-      radial-gradient(70% 50% at 82% 82%, rgba(var(--signal-yellow-rgb), 0.18), transparent 72%);
+      radial-gradient(60% 40% at 20% 80%, rgba(var(--aurora-purple-rgb), 0.14), transparent 72%),
+      radial-gradient(70% 50% at 82% 82%, rgba(var(--signal-yellow-rgb), 0.12), transparent 76%);
   }
 
   .aurora-wrap--platforms::before {
     background:
-      radial-gradient(100% 75% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.26), transparent 72%),
-      radial-gradient(85% 70% at 82% 30%, rgba(var(--aurora-purple-rgb), 0.3), transparent 74%),
-      conic-gradient(from 160deg at 52% 48%, rgba(var(--voyage-blue-rgb), 0.18), rgba(var(--aurora-purple-rgb), 0.18), transparent 65%);
+      radial-gradient(100% 75% at 18% 18%, rgba(var(--voyage-blue-rgb), 0.16), transparent 76%),
+      radial-gradient(85% 70% at 82% 30%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
+      conic-gradient(from 160deg at 52% 48%, rgba(var(--voyage-blue-rgb), 0.12), rgba(var(--aurora-purple-rgb), 0.12), transparent 68%);
     animation: floatGlow 56s ease-in-out infinite alternate;
   }
 
   .aurora-wrap--platforms::after {
     background:
-      radial-gradient(70% 60% at 78% 88%, rgba(var(--signal-yellow-rgb), 0.16), transparent 76%),
-      radial-gradient(75% 50% at 12% 86%, rgba(var(--voyage-blue-rgb), 0.2), transparent 80%);
+      radial-gradient(70% 60% at 78% 88%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%),
+      radial-gradient(75% 50% at 12% 86%, rgba(var(--voyage-blue-rgb), 0.14), transparent 82%);
   }
 
   .aurora-wrap--education::before {
     background:
-      radial-gradient(120% 75% at 20% 18%, rgba(var(--aurora-purple-rgb), 0.28), transparent 76%),
-      radial-gradient(100% 70% at 82% 18%, rgba(var(--signal-yellow-rgb), 0.16), transparent 78%),
-      linear-gradient(140deg, color-mix(in srgb, var(--bg-elev-2) 90%, rgba(var(--aurora-purple-rgb), 0.14) 10%), transparent 70%);
+      radial-gradient(120% 75% at 20% 18%, rgba(var(--aurora-purple-rgb), 0.18), transparent 78%),
+      radial-gradient(100% 70% at 82% 18%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%),
+      linear-gradient(140deg, color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%), transparent 72%);
     animation: floatGlow 60s ease-in-out infinite alternate;
   }
 
   .aurora-wrap--education::after {
     background:
-      radial-gradient(70% 60% at 30% 90%, rgba(var(--aurora-purple-rgb), 0.2), transparent 76%),
-      radial-gradient(70% 60% at 74% 82%, rgba(var(--signal-yellow-rgb), 0.14), transparent 78%);
+      radial-gradient(70% 60% at 30% 90%, rgba(var(--aurora-purple-rgb), 0.12), transparent 80%),
+      radial-gradient(70% 60% at 74% 82%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%);
   }
 
   .aurora-wrap--finale::before {
     background:
-      radial-gradient(120% 80% at 12% 14%, rgba(var(--aurora-purple-rgb), 0.32), transparent 76%),
-      radial-gradient(105% 70% at 88% 12%, rgba(var(--voyage-blue-rgb), 0.24), transparent 74%),
-      linear-gradient(145deg, color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--aurora-purple-rgb), 0.2) 14%), transparent 70%);
+      radial-gradient(120% 80% at 12% 14%, rgba(var(--aurora-purple-rgb), 0.2), transparent 78%),
+      radial-gradient(105% 70% at 88% 12%, rgba(var(--voyage-blue-rgb), 0.16), transparent 78%),
+      linear-gradient(145deg, color-mix(in srgb, var(--glass-bg-lightest) 62%, transparent 38%), transparent 72%);
     animation: floatGlow 52s ease-in-out infinite alternate;
   }
 
   .aurora-wrap--finale::after {
     background:
-      radial-gradient(65% 40% at 80% 90%, rgba(var(--signal-yellow-rgb), 0.2), transparent 78%),
-      radial-gradient(60% 50% at 14% 86%, rgba(var(--aurora-purple-rgb), 0.24), transparent 80%);
+      radial-gradient(65% 40% at 80% 90%, rgba(var(--signal-yellow-rgb), 0.12), transparent 80%),
+      radial-gradient(60% 50% at 14% 86%, rgba(var(--aurora-purple-rgb), 0.14), transparent 82%);
   }
 
   .services {
@@ -498,51 +512,59 @@
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    background: color-mix(in srgb, var(--bg-elev-2) 86%, rgba(var(--aurora-purple-rgb), 0.2) 14%);
-    color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text-secondary) 32%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
+    color: color-mix(in srgb, var(--aurora-purple) 64%, var(--text-secondary) 36%);
   }
 
   :global(.aurora-wrap--consulting .service-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.16) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 36%, transparent 64%);
-    --surface-glass-shadow: 0 20px 60px rgba(var(--aurora-purple-rgb), 0.18);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
+    --surface-glass-shadow: 0 18px 50px rgba(var(--aurora-purple-rgb), 0.16);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
   :global(.aurora-wrap--platforms .service-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.2) 14%);
-    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 42%, transparent 58%);
-    --surface-glass-shadow: 0 22px 65px rgba(var(--voyage-blue-rgb), 0.18);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 32%, transparent 68%);
+    --surface-glass-shadow: 0 20px 54px rgba(var(--voyage-blue-rgb), 0.16);
     --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
   }
 
   :global(.aurora-wrap--platforms .service-card--ideonautix) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--aurora-purple-rgb), 0.22) 16%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 40%, transparent 60%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 30%, transparent 70%);
   }
 
   :global(.aurora-wrap--platforms .service-card--nodevoyage) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.26) 14%);
-    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 46%, transparent 54%);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 34%, transparent 66%);
   }
 
   :global(.aurora-wrap--education .education-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--signal-yellow-rgb), 0.16) 12%);
-    --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 42%, transparent 58%);
-    --surface-glass-shadow: 0 18px 55px rgba(var(--signal-yellow-rgb), 0.18);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
+    --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 28%, transparent 72%);
+    --surface-glass-shadow: 0 18px 48px rgba(var(--signal-yellow-rgb), 0.16);
     --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 68%, var(--aurora-purple) 32%);
   }
 
   :global(.aurora-wrap--finale .service-card--finale) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.24) 14%);
-    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 48%, transparent 52%);
-    --surface-glass-shadow: 0 24px 70px rgba(var(--aurora-purple-rgb), 0.22);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%);
+    --surface-glass-shadow: 0 22px 58px rgba(var(--aurora-purple-rgb), 0.18);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
   }
 
   .cards {
     display: grid;
     gap: clamp(1.6rem, 3vw, 2.4rem);
+  }
+
+  .service-card__image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-xl);
   }
 
   :global(.service-card) {

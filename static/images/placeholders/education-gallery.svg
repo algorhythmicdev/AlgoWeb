@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="edu-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#110f24" />
+      <stop offset="100%" stop-color="#1e1b3f" />
+    </linearGradient>
+    <linearGradient id="edu-frame" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#211d42" />
+      <stop offset="100%" stop-color="#2f2a5d" />
+    </linearGradient>
+    <linearGradient id="edu-accent" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#ff9bfb" />
+      <stop offset="100%" stop-color="#7f83ff" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="32" fill="url(#edu-bg)" />
+  <g transform="translate(80 72)" opacity="0.9">
+    <rect x="0" y="0" width="200" height="144" rx="20" fill="url(#edu-frame)" />
+    <rect x="220" y="-24" width="200" height="144" rx="20" fill="url(#edu-frame)" opacity="0.75" />
+    <rect x="160" y="120" width="200" height="144" rx="20" fill="url(#edu-frame)" opacity="0.85" />
+    <rect x="28" y="24" width="144" height="16" rx="8" fill="url(#edu-accent)" opacity="0.7" />
+    <rect x="248" y="0" width="144" height="16" rx="8" fill="url(#edu-accent)" opacity="0.6" />
+    <rect x="188" y="144" width="144" height="16" rx="8" fill="url(#edu-accent)" opacity="0.65" />
+  </g>
+  <g opacity="0.24">
+    <circle cx="520" cy="120" r="120" fill="#ff9bfb" />
+    <circle cx="140" cy="300" r="130" fill="#7f83ff" />
+  </g>
+</svg>

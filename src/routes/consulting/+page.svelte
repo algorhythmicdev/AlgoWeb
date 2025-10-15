@@ -34,6 +34,15 @@
     badgeFallback: 'Pilot open'
   } as const;
 
+  const heroMedia = {
+    image: '/images/placeholders/consulting-studio.svg',
+    altKey: 'consulting.hero.media.alt',
+    altFallback: 'Consulting studio with glass panels, planning walls, and a calm collaboration table',
+    captionKey: 'consulting.hero.media.caption',
+    captionFallback:
+      'Founder-led workshops run in a glassy studio so remote and in-person teams can see the same calm dashboards and rituals.'
+  } as const;
+
   const heroHighlights = [
     { key: 'consulting.hero_rotating.0', fallback: 'Design sessions that translate ideas into clear plans.' },
     { key: 'consulting.hero_rotating.1', fallback: 'Launch AI assistants that teams actually enjoy using.' },
@@ -353,6 +362,20 @@
         <strong>{t(heroTestimonial.nameKey, heroTestimonial.nameFallback)}</strong>
         <span>{t(heroTestimonial.roleKey, heroTestimonial.roleFallback)}</span>
       </p>
+    </GlassCard>
+
+    <GlassCard class="hero-media consulting-hero-media" padding="lg" particles>
+      <figure class="media-card">
+        <img
+          class="media-card__image"
+          src={heroMedia.image}
+          alt={t(heroMedia.altKey, heroMedia.altFallback)}
+          loading="lazy"
+          width="640"
+          height="400"
+        />
+        <figcaption class="media-card__caption">{t(heroMedia.captionKey, heroMedia.captionFallback)}</figcaption>
+      </figure>
     </GlassCard>
   </svelte:fragment>
 </Hero>
@@ -701,6 +724,10 @@
     font-style: italic;
   }
 
+  :global(.consulting-hero-media) {
+    margin-top: clamp(1rem, 3vw, 1.6rem);
+  }
+
   .testimonial__meta {
     display: grid;
     gap: 0.1rem;
@@ -751,7 +778,7 @@
     display: inline-flex;
     padding: 0.75rem;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--accent-secondary, var(--voyage-blue)) 14%, transparent 86%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
     color: var(--accent-secondary, var(--voyage-blue));
   }
 
@@ -793,7 +820,7 @@
     display: inline-flex;
     padding: 0.65rem;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--accent-primary, var(--aurora-purple)) 16%, transparent 84%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 54%, transparent 46%);
     color: var(--accent-primary, var(--aurora-purple));
   }
 
@@ -834,7 +861,7 @@
     display: grid;
     place-items: center;
     font-weight: 600;
-    background: color-mix(in srgb, var(--accent-primary, var(--aurora-purple)) 18%, transparent 82%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--accent-primary, var(--aurora-purple));
   }
 
@@ -907,7 +934,7 @@
     display: inline-flex;
     padding: 0.75rem;
     border-radius: 18px;
-    background: color-mix(in srgb, var(--accent-tertiary, var(--signal-yellow)) 18%, transparent 82%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--accent-tertiary, var(--signal-yellow));
   }
 
@@ -941,7 +968,7 @@
     padding: 0.75rem 1rem;
     border-radius: 14px;
     border: 1px solid color-mix(in srgb, var(--border) 80%, transparent 20%);
-    background: color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--ink-rgb), 0.04) 2%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
     color: var(--text);
     font-size: 1rem;
   }
@@ -968,12 +995,12 @@
   }
 
   .form-status--success {
-    background: color-mix(in srgb, var(--accent-primary, var(--aurora-purple)) 16%, transparent 84%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%);
     color: var(--accent-primary, var(--aurora-purple));
   }
 
   .form-status--error {
-    background: color-mix(in srgb, var(--cherry-pop) 16%, transparent 84%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--cherry-pop);
   }
 

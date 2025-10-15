@@ -1,58 +1,42 @@
 /* Global animations, typography, and base styles */
 :root {
-  --surface-glass-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 22%, transparent 78%);
-  --surface-glass-border: color-mix(
-    in srgb,
-    rgba(var(--voyage-blue-rgb), 0.48) 58%,
-    rgba(255, 255, 255, 0.28) 42%
-  );
-  --surface-glass-shadow: 0 26px 52px rgba(10, 18, 36, 0.22);
-  --surface-chip-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.46) 22%, transparent 78%);
-  --surface-chip-border: color-mix(
-    in srgb,
-    rgba(var(--aurora-purple-rgb), 0.44) 60%,
-    rgba(255, 255, 255, 0.26) 40%
-  );
-  --surface-chip-shadow: 0 18px 34px rgba(12, 18, 36, 0.16);
-  --surface-chip-color: var(--text-tertiary);
+  --glass-card-radius: clamp(0rem, 0.35vw, 0.2rem);
+  --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
+  --surface-glass-border: color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
+  --surface-glass-shadow: 0 16px 44px rgba(var(--ink-rgb), 0.12);
+  --surface-chip-bg: color-mix(in srgb, var(--glass-bg-light) 86%, transparent 14%);
+  --surface-chip-border: var(--glass-border-light);
+  --surface-chip-shadow: var(--shadow-sm);
+  --surface-chip-color: var(--text-secondary);
   --surface-chip-hc-bg: transparent;
   --surface-chip-hc-border: currentColor;
   --surface-chip-hc-shadow: none;
   --surface-chip-hc-color: var(--text);
-  --surface-pill-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 24%, transparent 76%);
-  --surface-pill-border: color-mix(
-    in srgb,
-    rgba(var(--voyage-blue-rgb), 0.42) 58%,
-    rgba(255, 255, 255, 0.26) 42%
-  );
-  --surface-pill-shadow: 0 22px 44px rgba(12, 18, 36, 0.2);
+  --surface-pill-bg: color-mix(in srgb, var(--glass-bg-lighter) 86%, transparent 14%);
+  --surface-pill-border: var(--glass-border-light);
+  --surface-pill-shadow: var(--shadow-md);
   --surface-pill-hc-bg: transparent;
   --surface-pill-hc-border: currentColor;
   --surface-pill-hc-shadow: none;
   --surface-pill-hc-color: var(--text);
-  --surface-field-bg: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 18%, transparent 82%);
-  --surface-field-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.26) 64%, rgba(var(--aurora-purple-rgb), 0.28) 36%);
-  --surface-field-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 68%, rgba(var(--aurora-purple-rgb), 0.38) 32%);
+  --surface-field-bg: color-mix(in srgb, var(--glass-bg-light) 84%, transparent 16%);
+  --surface-field-border: color-mix(in srgb, var(--glass-border) 70%, rgba(var(--aurora-purple-rgb), 0.2) 30%);
+  --surface-field-border-strong: color-mix(in srgb, var(--glass-border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.28) 32%);
   --surface-field-hc-bg: var(--bg);
   --surface-field-hc-border: currentColor;
-  --surface-panel-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 22%, transparent 78%);
-  --surface-panel-border: color-mix(
-    in srgb,
-    rgba(var(--voyage-blue-rgb), 0.46) 58%,
-    rgba(255, 255, 255, 0.26) 42%
-  );
-  --surface-panel-shadow: 0 22px 46px rgba(12, 18, 36, 0.2);
+  --surface-panel-bg: color-mix(in srgb, var(--glass-bg-light) 56%, transparent 44%);
+  --surface-panel-border: color-mix(in srgb, var(--glass-border) 58%, rgba(var(--voyage-blue-rgb), 0.18) 42%);
+  --surface-panel-shadow: 0 14px 40px rgba(var(--ink-rgb), 0.12);
   --surface-panel-hc-bg: var(--bg);
   --surface-panel-hc-border: currentColor;
   --surface-panel-hc-shadow: none;
   --surface-panel-hc-color: var(--text);
-  --surface-glass-blur: blur(22px);
+  --surface-glass-blur: blur(var(--glass-blur));
 }
 
 body {
-  background-color: var(--bg);
+  background: var(--backdrop-canvas, var(--bg));
   color: var(--text);
-  background: var(--bg);
   transition:
     background-color var(--theme-dur, 0.55s) var(--theme-ease, cubic-bezier(0.2, 0.7, 0.2, 1)),
     color var(--theme-dur, 0.55s) var(--theme-ease, cubic-bezier(0.2, 0.7, 0.2, 1));
@@ -67,16 +51,6 @@ body {
 html[data-theme='hc'] body,
 html[data-theme='hc'] body::after {
   background-color: var(--bg);
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="f" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23f)"/></svg>');
-  opacity: 0.025;
 }
 
 body.page-services {
@@ -126,7 +100,7 @@ html.nav-menu-open {
   position: relative;
   padding-block: var(
     --section-padding,
-    clamp(var(--section-padding-mobile, 4rem), 8vw, var(--section-padding-desktop, 7rem))
+    clamp(var(--section-padding-tablet, 5rem), 7vw, var(--section-padding-desktop, 8rem))
   );
   background: transparent;
   color: var(--text);
@@ -143,7 +117,39 @@ html.nav-menu-open {
   z-index: var(--z-content);
   width: min(100%, var(--section-container-width, var(--container-xl, 1200px)));
   margin-inline: auto;
-  padding-inline: clamp(1.5rem, 5vw, 3rem);
+  padding-inline: clamp(1.75rem, 5vw, 3.25rem);
+  display: grid;
+  gap: clamp(2rem, 4.75vw, 2.75rem);
+}
+
+.media-card {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.media-card__image {
+  width: 100%;
+  height: auto;
+  border-radius: max(0px, calc(var(--glass-card-radius) - 0.1rem));
+  box-shadow: 0 16px 36px rgba(var(--ink-rgb, 14, 22, 38), 0.14);
+  border: 1px solid color-mix(in srgb, var(--glass-border-light) 56%, transparent 44%);
+  background: color-mix(in srgb, var(--bg-elev-1) 68%, transparent 32%);
+}
+
+.media-card__caption {
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.hero-media {
+  display: grid;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  align-content: start;
+}
+
+.hero-media .media-card__image {
+  border-radius: max(0px, calc(var(--glass-card-radius) - 0.15rem));
 }
 
 .section > .container > *:first-child {
@@ -241,16 +247,6 @@ html.nav-menu-open {
     animation-iteration-count:1 !important; 
     transition:none !important; 
   }
-}
-
-/* Grain overlay */
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--grain);
-  opacity: 0.04; /* extremely low contrast */
-  pointer-events: none;
 }
 
 .surface-chip {

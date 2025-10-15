@@ -43,6 +43,15 @@
     ]
   } as const;
 
+  const heroMedia = {
+    image: '/images/placeholders/education-gallery.svg',
+    altKey: 'educationHub.page.hero.media.alt',
+    altFallback: 'A calm gallery of interactive tables, signage-inspired posters, and soft lighting for workshops',
+    captionKey: 'educationHub.page.hero.media.caption',
+    captionFallback:
+      'Our learning lab blends signage, storytelling, and inclusive tech so classrooms and communities can experiment together.'
+  } as const;
+
   const featuredStory = {
     eyebrowKey: 'educationHub.page.featured.eyebrow',
     eyebrowFallback: 'Featured story',
@@ -63,6 +72,15 @@
       labelKey: 'educationHub.page.featured.secondary_cta',
       labelFallback: 'Download classroom toolkit'
     }
+  } as const;
+
+  const featuredMedia = {
+    image: '/images/placeholders/education-lab.svg',
+    altKey: 'educationHub.page.featured.media.alt',
+    altFallback: 'Students co-creating in a calm AI lab with collaborative displays and tactile props',
+    captionKey: 'educationHub.page.featured.media.caption',
+    captionFallback:
+      'Every pilot documents rituals, translations, and accessibility tweaks so other schools can remix them quickly.'
   } as const;
 
   const latestArticles = [
@@ -293,11 +311,37 @@
       {/each}
     </ul>
   </svelte:fragment>
+  <svelte:fragment slot="aside">
+    <GlassCard class="hero-media education-hero-media" padding="lg" particles>
+      <figure class="media-card">
+        <img
+          class="media-card__image"
+          src={heroMedia.image}
+          alt={t(heroMedia.altKey, heroMedia.altFallback)}
+          loading="lazy"
+          width="640"
+          height="400"
+        />
+        <figcaption class="media-card__caption">{t(heroMedia.captionKey, heroMedia.captionFallback)}</figcaption>
+      </figure>
+    </GlassCard>
+  </svelte:fragment>
 </Hero>
 
 <section class="featured" aria-labelledby="featured-heading" use:revealOnScroll>
   <div class="container">
     <GlassCard as="article" class="featured__card" halo padding="lg">
+      <figure class="media-card featured__media">
+        <img
+          class="media-card__image"
+          src={featuredMedia.image}
+          alt={t(featuredMedia.altKey, featuredMedia.altFallback)}
+          loading="lazy"
+          width="960"
+          height="520"
+        />
+        <figcaption class="media-card__caption">{t(featuredMedia.captionKey, featuredMedia.captionFallback)}</figcaption>
+      </figure>
       <header class="featured__header">
         <p class="featured__eyebrow">{t(featuredStory.eyebrowKey, featuredStory.eyebrowFallback)}</p>
         <h2 id="featured-heading">{t(featuredStory.titleKey, featuredStory.titleFallback)}</h2>
@@ -418,10 +462,6 @@
 </section>
 
 <style>
-  :global(body.page-education-hub) {
-    background: var(--bg-elev-0);
-  }
-
   .hero-description {
     font-size: clamp(1rem, 2.2vw, 1.3rem);
     line-height: 1.7;
@@ -458,7 +498,6 @@
   :global(.featured__card) {
     display: grid;
     gap: clamp(1.25rem, 3vw, 2rem);
-    background: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--aurora-purple-rgb), 0.12) 14%);
   }
 
   .featured__header {
@@ -488,6 +527,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
+  }
+
+  .featured__media {
+    margin-bottom: clamp(1rem, 3vw, 1.8rem);
+  }
+
+  :global(.education-hero-media) {
+    margin-top: clamp(1rem, 3vw, 1.6rem);
   }
 
   .section-heading {
@@ -622,7 +669,6 @@
     display: grid;
     gap: 1rem;
     text-align: center;
-    background: color-mix(in srgb, var(--bg-elev-1) 82%, rgba(var(--voyage-blue-rgb), 0.15) 18%);
   }
 
   .newsletter__eyebrow {

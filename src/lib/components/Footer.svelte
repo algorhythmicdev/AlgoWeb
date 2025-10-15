@@ -16,7 +16,7 @@
     typeof value === 'string' && value.trim().length ? value.trim() : fallback;
 
   let isMounted = false;
-  $: footerLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png';
+  $: footerLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.svg' : '/images/brand/logo-white.svg';
 
   onMount(() => {
     isMounted = true;
@@ -174,23 +174,17 @@
     margin-top: clamp(3rem, 8vw, 5rem);
     padding: clamp(3rem, 8vw, 4.5rem) 0 clamp(2rem, 6vw, 3rem);
     position: relative;
-    background: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--ink-rgb), 0.06) 8%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 48%, transparent 52%);
     color: var(--footer-text);
-    border-top: 1px solid var(--footer-border);
-    backdrop-filter: blur(8px) saturate(1.04);
-    -webkit-backdrop-filter: blur(8px) saturate(1.04);
+    border-top: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
+    box-shadow: 0 -12px 36px rgba(var(--ink-rgb), 0.08);
+    backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
     overflow: hidden;
-  }
-
-  .footer::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 320px 320px;
-    mix-blend-mode: soft-light;
-    opacity: 0.04;
+    transition:
+      background var(--duration-normal) var(--ease-smooth),
+      border-color var(--duration-normal) var(--ease-smooth),
+      box-shadow var(--duration-normal) var(--ease-smooth);
   }
 
   .footer > .container {
@@ -282,9 +276,10 @@
     display: grid;
     gap: clamp(0.75rem, 2vw, 1.1rem);
     padding: clamp(1.25rem, 3vw, 1.75rem);
-    border-radius: clamp(16px, 3vw, 24px);
-    background: var(--bg-elev-2);
-    border: 1px solid var(--footer-border);
+    border-radius: max(0px, calc(var(--glass-card-radius, 0) + 0.75rem));
+    background: color-mix(in srgb, var(--glass-bg-light) 46%, transparent 54%);
+    border: 1px solid color-mix(in srgb, var(--glass-border-light) 60%, transparent 40%);
+    box-shadow: 0 12px 32px rgba(var(--ink-rgb), 0.08);
   }
 
   .footer-partners h4 {
@@ -456,17 +451,17 @@
   :global([data-base-theme='dark']) .footer {
     --footer-text: var(--text-secondary);
     --footer-strong: var(--text-strong);
-    --footer-muted: color-mix(in srgb, var(--text-secondary) 70%, rgba(var(--night-rgb), 0.56) 30%);
-    --footer-border: color-mix(in srgb, var(--border-strong) 70%, transparent 30%);
-    background: rgba(var(--night-rgb), 0.82);
+    --footer-muted: color-mix(in srgb, var(--text-secondary) 68%, rgba(var(--night-rgb), 0.5) 32%);
+    --footer-border: color-mix(in srgb, var(--border-strong) 64%, transparent 36%);
+    background: color-mix(in srgb, rgba(var(--night-rgb), 0.86) 70%, rgba(var(--voyage-blue-rgb), 0.12) 30%);
     border-top: 1px solid var(--footer-border);
-    box-shadow: 0 -12px 32px rgba(var(--ink-rgb), 0.32);
-    backdrop-filter: blur(var(--glass-blur, 10px)) saturate(1.08);
-    -webkit-backdrop-filter: blur(var(--glass-blur, 10px)) saturate(1.08);
+    box-shadow: 0 -10px 28px rgba(var(--ink-rgb), 0.26);
+    backdrop-filter: blur(calc(var(--glass-blur, 10px) * 0.9)) saturate(1.06);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur, 10px) * 0.9)) saturate(1.06);
   }
 
   :global([data-base-theme='dark']) .footer::before {
-    opacity: 0.06;
+    opacity: 0.08;
   }
 </style>
 

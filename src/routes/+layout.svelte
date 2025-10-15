@@ -118,13 +118,13 @@
   <meta property="og:description" content={ogDescription} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={metaUrl} />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content="/og-image.svg" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={metaTitle} />
   <meta name="twitter:description" content={ogDescription} />
-  <meta name="twitter:image" content="/og-image.png" />
+  <meta name="twitter:image" content="/og-image.svg" />
 </svelte:head>
 
 <LoadingOverlay />

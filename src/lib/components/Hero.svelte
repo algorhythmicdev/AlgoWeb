@@ -98,7 +98,7 @@
     --hero-text: var(--text);
     --hero-grad-start: var(--aurora-purple);
     --hero-grad-stop: var(--voyage-blue);
-    --hero-overlay: var(--bg-elev-1);
+    --hero-overlay: color-mix(in srgb, var(--bg-elev-1) 42%, transparent 58%);
     --hero-padding-block: var(--section-padding-desktop);
     --hero-padding-inline: var(--space-4xl);
     position: relative;
@@ -108,7 +108,7 @@
     padding-inline: var(--hero-padding-inline);
     color: var(--text);
     background: var(--hero-surface);
-    border-radius: var(--radius-bubble-xl);
+    border-radius: max(0px, var(--glass-card-radius, 0));
     border: none;
     box-shadow: none;
   }
@@ -129,16 +129,16 @@
 
   .hero__background-layer--gradient {
     background:
-      radial-gradient(120% 150% at 18% 20%, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.08) 78%, transparent 22%), transparent 72%),
-      radial-gradient(140% 180% at 82% 0%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.06) 70%, transparent 30%), transparent 78%);
-    filter: saturate(0.9);
-    opacity: 0.5;
+      radial-gradient(120% 150% at 18% 20%, color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.05) 60%, transparent 40%), transparent 74%),
+      radial-gradient(140% 180% at 82% 0%, color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.03) 60%, transparent 40%), transparent 80%);
+    filter: saturate(0.82);
+    opacity: 0.3;
   }
 
   .hero__background-layer--overlay {
     background: var(--hero-overlay);
     mix-blend-mode: normal;
-    opacity: 0.95;
+    opacity: 0.58;
   }
 
 
@@ -149,8 +149,8 @@
     bottom: var(--space-lg);
     height: 3px;
     border-radius: var(--radius-full);
-    background: color-mix(in srgb, var(--voyage-blue) 50%, var(--aurora-purple) 50%);
-    opacity: 0.4;
+    background: color-mix(in srgb, var(--voyage-blue) 46%, var(--aurora-purple) 54%);
+    opacity: 0.18;
     pointer-events: none;
     z-index: var(--z-content);
     box-shadow: var(--shadow-xs);

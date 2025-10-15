@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="lab-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111a2c" />
+      <stop offset="100%" stop-color="#1c2f4a" />
+    </linearGradient>
+    <linearGradient id="lab-panel" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#162a43" />
+      <stop offset="100%" stop-color="#224263" />
+    </linearGradient>
+    <linearGradient id="lab-accent" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#63e0ff" />
+      <stop offset="100%" stop-color="#8cfff1" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="32" fill="url(#lab-bg)" />
+  <g transform="translate(120 80)">
+    <rect x="0" y="0" width="400" height="200" rx="28" fill="url(#lab-panel)" opacity="0.9" />
+    <rect x="48" y="48" width="160" height="32" rx="14" fill="#0f1a28" opacity="0.6" />
+    <rect x="48" y="96" width="160" height="12" rx="6" fill="#63e0ff" opacity="0.35" />
+    <rect x="48" y="120" width="136" height="12" rx="6" fill="#63e0ff" opacity="0.28" />
+    <rect x="240" y="48" width="112" height="84" rx="18" fill="#0f1a28" opacity="0.55" />
+    <rect x="240" y="144" width="112" height="16" rx="8" fill="url(#lab-accent)" opacity="0.6" />
+  </g>
+  <g opacity="0.2">
+    <circle cx="520" cy="120" r="120" fill="#63e0ff" />
+    <circle cx="160" cy="280" r="140" fill="#7f83ff" />
+  </g>
+</svg>

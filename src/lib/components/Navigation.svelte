@@ -24,7 +24,7 @@
   let lockedScrollY = 0;
   let isScrollLocked = false;
   let isMounted = false;
-  $: navLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.png' : '/images/brand/logo-white.png';
+  $: navLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.svg' : '/images/brand/logo-white.svg';
 
   onMount(() => {
     isMounted = true;
@@ -341,27 +341,17 @@
     position: fixed;
     inset: 0 0 auto 0;
     z-index: var(--z-sticky);
-    --surface-glass-blur: 26px;
-    --surface-glass-bg:
-      linear-gradient(
-        120deg,
-        color-mix(in srgb, var(--grad-a) 16%, transparent) 0%,
-        color-mix(in srgb, var(--grad-b) 12%, transparent) 100%
-      ),
-      color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.16) 10%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 62%, rgba(255, 255, 255, 0.36) 38%);
-    --surface-glass-shadow: 0 24px 52px rgba(var(--voyage-blue-rgb), 0.18);
-    --grain-opacity: 0.05;
-    --grain-blend-mode: soft-light;
-    --os-window-hc-bg: transparent;
-    --os-window-hc-border: transparent;
-    --os-window-hc-shadow: none;
     padding: 0;
     border-radius: 0;
     border: 0;
-    border-bottom: 1px solid var(--surface-glass-border);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 54%, transparent 46%);
+    border-bottom: 1px solid color-mix(in srgb, var(--glass-border) 62%, transparent 38%);
+    box-shadow: 0 18px 60px rgba(var(--ink-rgb), 0.08);
+    backdrop-filter: blur(calc(var(--glass-blur) * 0.85)) saturate(1.04);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.85)) saturate(1.04);
     overflow: visible;
-    transition: transform var(--duration-normal) var(--ease-out),
+    transition:
+      transform var(--duration-normal) var(--ease-out),
       box-shadow var(--duration-normal) var(--ease-out),
       border-color var(--duration-normal) var(--ease-out),
       background var(--duration-normal) var(--ease-out);
@@ -372,45 +362,37 @@
   }
 
   .nav-shell.nav-condensed {
-    --surface-glass-bg:
-      linear-gradient(
-        120deg,
-        color-mix(in srgb, var(--grad-a) 18%, transparent) 0%,
-        color-mix(in srgb, var(--grad-b) 14%, transparent) 100%
-      ),
-      color-mix(in srgb, var(--bg-elev-1) 84%, rgba(var(--voyage-blue-rgb), 0.24) 16%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.3) 36%);
-    --surface-glass-shadow: 0 26px 56px rgba(10, 18, 36, 0.2);
-    --grain-opacity: 0.065;
-    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(255, 255, 255, 0.3) 36%);
+    background: color-mix(in srgb, var(--glass-bg-light) 52%, transparent 48%);
+    border-bottom-color: color-mix(in srgb, var(--glass-border-strong) 62%, transparent 38%);
+    box-shadow: 0 22px 70px rgba(var(--ink-rgb), 0.12);
   }
 
   :global([data-base-theme='dark']) .nav-shell {
-    --surface-glass-bg:
-      linear-gradient(
-        120deg,
-        color-mix(in srgb, var(--grad-a) 20%, transparent) 0%,
-        color-mix(in srgb, var(--grad-b) 16%, transparent) 100%
-      ),
-      color-mix(in srgb, var(--bg-elev-2) 84%, rgba(var(--voyage-blue-rgb), 0.32) 16%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
-    --surface-glass-shadow: 0 30px 58px rgba(var(--voyage-blue-rgb), 0.28);
-    --grain-opacity: 0.07;
-    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
+    background: color-mix(
+      in srgb,
+      rgba(var(--graphite-rgb), 0.72) 52%,
+      rgba(var(--voyage-blue-rgb), 0.34) 48%
+    );
+    border-bottom-color: color-mix(
+      in srgb,
+      rgba(var(--voyage-blue-rgb), 0.34) 54%,
+      rgba(var(--snow-rgb), 0.16) 46%
+    );
+    box-shadow: 0 22px 68px rgba(4, 12, 30, 0.38);
   }
 
   :global([data-base-theme='dark']) .nav-shell.nav-condensed {
-    --surface-glass-bg:
-      linear-gradient(
-        120deg,
-        color-mix(in srgb, var(--grad-a) 22%, transparent) 0%,
-        color-mix(in srgb, var(--grad-b) 18%, transparent) 100%
-      ),
-      color-mix(in srgb, var(--bg-elev-2) 78%, rgba(var(--voyage-blue-rgb), 0.4) 22%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 60%, rgba(255, 255, 255, 0.22) 40%);
-    --surface-glass-shadow: 0 32px 64px rgba(var(--voyage-blue-rgb), 0.32);
-    --grain-opacity: 0.08;
-    border-bottom-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.56) 60%, rgba(255, 255, 255, 0.22) 40%);
+    background: color-mix(
+      in srgb,
+      rgba(var(--graphite-rgb), 0.78) 50%,
+      rgba(var(--voyage-blue-rgb), 0.38) 50%
+    );
+    border-bottom-color: color-mix(
+      in srgb,
+      rgba(var(--voyage-blue-rgb), 0.4) 54%,
+      rgba(var(--snow-rgb), 0.16) 46%
+    );
+    box-shadow: 0 26px 82px rgba(1, 6, 20, 0.48);
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-shell {
@@ -550,7 +532,6 @@
     --surface-glass-bg: transparent;
     --surface-glass-border: transparent;
     --surface-glass-shadow: none;
-    --grain-opacity: 0;
     --os-window-hc-bg: transparent;
     --os-window-hc-border: transparent;
     --os-window-hc-shadow: none;
@@ -641,11 +622,10 @@
     min-width: clamp(220px, 22vw, 320px);
     padding: clamp(0.85rem, 2vw, 1.25rem);
     border-radius: var(--radius-xl);
-    --surface-glass-blur: 24px;
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 60%, rgba(255, 255, 255, 0.32) 40%);
-    --surface-glass-shadow: 0 24px 48px rgba(var(--voyage-blue-rgb), 0.2);
-    --grain-opacity: 0.05;
+    --surface-glass-blur: var(--glass-blur-lg);
+    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-light) 88%, transparent 12%);
+    --surface-glass-border: var(--glass-border);
+    --surface-glass-shadow: var(--shadow-lg);
     --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.1) 4%);
     --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
     --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 60%, rgba(var(--voyage-blue-rgb), 0.28) 40%);
@@ -657,10 +637,9 @@
   }
 
   :global([data-base-theme='dark']) .nav-item--group .nav-submenu {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-2) 76%, rgba(var(--voyage-blue-rgb), 0.3) 24%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.2) 40%);
-    --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.28);
-    --grain-opacity: 0.07;
+    --surface-glass-bg: color-mix(in srgb, rgba(var(--graphite-rgb), 0.9) 72%, rgba(var(--voyage-blue-rgb), 0.28) 28%);
+    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 60%, rgba(255, 255, 255, 0.22) 40%);
+    --surface-glass-shadow: var(--shadow-2xl);
     --os-window-hc-bg: color-mix(in srgb, var(--bg) 94%, rgba(var(--voyage-blue-rgb), 0.14) 6%);
     --os-window-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--voyage-blue-rgb), 0.26) 36%);
     --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
@@ -847,18 +826,10 @@
       left: clamp(1.25rem, 5vw, 2rem);
       padding: clamp(1rem, 4vw, 1.5rem);
       border-radius: var(--radius-2xl);
-      --surface-glass-blur: 26px;
-      --surface-glass-bg:
-        linear-gradient(
-          135deg,
-          color-mix(in srgb, var(--grad-a) 14%, transparent) 0%,
-          color-mix(in srgb, var(--grad-b) 12%, transparent) 100%
-        ),
-        color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--voyage-blue-rgb), 0.18) 10%);
-      --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 60%, rgba(255, 255, 255, 0.32) 40%);
-      --surface-glass-shadow: 0 28px 56px rgba(var(--voyage-blue-rgb), 0.24);
-      --grain-opacity: 0.06;
-      --grain-blend-mode: soft-light;
+      --surface-glass-blur: var(--glass-blur-lg);
+      --surface-glass-bg: color-mix(in srgb, var(--glass-bg-light) 90%, transparent 10%);
+      --surface-glass-border: color-mix(in srgb, var(--glass-border) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
+      --surface-glass-shadow: var(--shadow-2xl);
       --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%);
       --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.26) 34%);
       --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
@@ -878,16 +849,13 @@
     }
 
     :global([data-base-theme='dark']) .nav-links {
-      --surface-glass-bg:
-        linear-gradient(
-          135deg,
-          color-mix(in srgb, var(--grad-a) 18%, transparent) 0%,
-          color-mix(in srgb, var(--grad-b) 14%, transparent) 100%
-        ),
-        color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.3) 18%);
+      --surface-glass-bg: color-mix(
+        in srgb,
+        rgba(var(--graphite-rgb), 0.9) 70%,
+        rgba(var(--voyage-blue-rgb), 0.3) 30%
+      );
       --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
-      --surface-glass-shadow: 0 32px 60px rgba(var(--voyage-blue-rgb), 0.3);
-      --grain-opacity: 0.075;
+      --surface-glass-shadow: var(--shadow-3xl);
     }
 
     .nav-links[data-open='true'] {
@@ -923,7 +891,6 @@
       --surface-glass-bg: transparent;
       --surface-glass-border: transparent;
       --surface-glass-shadow: none;
-      --grain-opacity: 0;
       border: 0;
       padding: 0;
       gap: 0.75rem;

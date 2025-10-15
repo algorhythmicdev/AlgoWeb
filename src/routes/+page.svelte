@@ -257,6 +257,46 @@
       labelFallback: 'Connect with the Team'
     }
   } as const;
+
+  const platformShowcase = {
+    eyebrowKey: 'home.page.platform_showcase.eyebrow',
+    eyebrowFallback: 'Product snapshots',
+    titleKey: 'home.page.platform_showcase.title',
+    titleFallback: 'Experience our flagship platforms',
+    descriptionKey: 'home.page.platform_showcase.description',
+    descriptionFallback:
+      'Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.',
+    items: [
+      {
+        id: 'ideonautix',
+        titleKey: 'home.page.platform_showcase.items.ideonautix.title',
+        titleFallback: 'Ideonautix creative cockpit',
+        copyKey: 'home.page.platform_showcase.items.ideonautix.copy',
+        copyFallback:
+          'A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion.',
+        ctaHref: '/ideonautix',
+        ctaKey: 'home.page.platform_showcase.items.ideonautix.cta',
+        ctaFallback: 'Explore Ideonautix',
+        image: '/images/placeholders/platform-ideonautix.svg',
+        altKey: 'home.page.platform_showcase.items.ideonautix.alt',
+        altFallback: 'Mockup of the Ideonautix creative cockpit interface'
+      },
+      {
+        id: 'nodevoyage',
+        titleKey: 'home.page.platform_showcase.items.nodevoyage.title',
+        titleFallback: 'NodeVoyage travel timeline',
+        copyKey: 'home.page.platform_showcase.items.nodevoyage.copy',
+        copyFallback:
+          'Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller.',
+        ctaHref: '/nodevoyage',
+        ctaKey: 'home.page.platform_showcase.items.nodevoyage.cta',
+        ctaFallback: 'Tour NodeVoyage',
+        image: '/images/placeholders/platform-nodevoyage.svg',
+        altKey: 'home.page.platform_showcase.items.nodevoyage.alt',
+        altFallback: 'Mockup of the NodeVoyage planning board'
+      }
+    ]
+  } as const;
 </script>
 
 <Hero
@@ -352,6 +392,35 @@
 
 <SectionDivider tone="neutral" />
 
+<section class="platform-showcase" aria-labelledby="platform-showcase-heading" use:revealOnScroll>
+  <div class="container">
+    <div class="platform-showcase__header">
+      <span class="section-eyebrow">{t(platformShowcase.eyebrowKey, platformShowcase.eyebrowFallback)}</span>
+      <h2 id="platform-showcase-heading">{t(platformShowcase.titleKey, platformShowcase.titleFallback)}</h2>
+      <p class="platform-showcase__intro">{t(platformShowcase.descriptionKey, platformShowcase.descriptionFallback)}</p>
+    </div>
+
+    <div class="platform-showcase__grid" use:staggerReveal>
+      {#each platformShowcase.items as item (item.id)}
+        <figure class="platform-card glass-card glass-card--pad-lg">
+          <img
+            src={item.image}
+            alt={t(item.altKey, item.altFallback)}
+            width="960"
+            height="600"
+            loading="lazy"
+          />
+          <figcaption class="platform-card__body">
+            <h3>{t(item.titleKey, item.titleFallback)}</h3>
+            <p>{t(item.copyKey, item.copyFallback)}</p>
+            <Button href={item.ctaHref} variant="secondary" size="md">{t(item.ctaKey, item.ctaFallback)}</Button>
+          </figcaption>
+        </figure>
+      {/each}
+    </div>
+  </div>
+</section>
+
 <section class="resources" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
@@ -443,14 +512,12 @@
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    background: color-mix(in srgb, var(--aurora-purple) 15%, var(--bg-elev-1) 85%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 38%, transparent 62%);
     color: var(--aurora-purple);
-    border: 1px solid color-mix(in srgb, var(--aurora-purple) 30%, transparent 70%);
-    box-shadow: 
-      0 4px 12px rgba(var(--aurora-purple-rgb), 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--aurora-purple) 18%, transparent 82%);
+    box-shadow: 0 4px 12px rgba(var(--aurora-purple-rgb), 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .highlights,
@@ -461,6 +528,45 @@
     isolation: isolate;
     overflow: hidden;
     padding: clamp(3.5rem, 8vw, 6rem) 0;
+  }
+
+  .platform-showcase {
+    position: relative;
+    isolation: isolate;
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
+  }
+
+  .platform-showcase__header {
+    max-width: var(--measure-lg);
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.4rem);
+  }
+
+  .platform-showcase__intro {
+    color: var(--text-secondary);
+  }
+
+  .platform-showcase__grid {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .platform-card {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .platform-card img {
+    width: 100%;
+    height: auto;
+    border-radius: max(0px, calc(var(--glass-card-radius, 0) + 0.75rem));
+    border: 1px solid color-mix(in srgb, var(--glass-border) 54%, transparent 46%);
+    box-shadow: 0 18px 44px rgba(var(--ink-rgb), 0.12);
+  }
+
+  .platform-card__body {
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
   }
 
   .highlights > .container,
@@ -488,72 +594,69 @@
 
   .highlights::before {
     background:
-      radial-gradient(65% 85% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.3), transparent 72%),
-      radial-gradient(70% 90% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.32), transparent 74%),
-      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.22), transparent 68%);
-    filter: saturate(1.05);
-    opacity: 0.9;
-    transform: translate3d(0, 0, 0) scale(1.05);
+      radial-gradient(65% 85% at 12% 22%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
+      radial-gradient(70% 90% at 82% 12%, rgba(var(--voyage-blue-rgb), 0.1), transparent 80%),
+      linear-gradient(120deg, rgba(var(--signal-yellow-rgb), 0.08), transparent 72%);
+    filter: saturate(0.82);
+    opacity: 0.18;
+    transform: translate3d(0, 0, 0) scale(1.015);
     animation: auroraDrift 42s ease-in-out infinite alternate;
   }
 
   .highlights::after {
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 320px 320px;
-    opacity: 0.08;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%) 0%, transparent 100%);
+    opacity: 0.12;
   }
 
   .offerings::before {
     background:
-      conic-gradient(from 120deg, rgba(var(--aurora-purple-rgb), 0.22), rgba(var(--voyage-blue-rgb), 0.18), rgba(var(--signal-yellow-rgb), 0.18), rgba(var(--aurora-purple-rgb), 0.22));
-    mask: radial-gradient(80% 80% at 50% 20%, rgba(0, 0, 0, 0.82), transparent 82%);
-    opacity: 0.75;
-    transform: rotate(3deg) scale(1.1);
+      conic-gradient(from 120deg, rgba(var(--aurora-purple-rgb), 0.1), rgba(var(--voyage-blue-rgb), 0.08), rgba(var(--signal-yellow-rgb), 0.06), rgba(var(--aurora-purple-rgb), 0.1));
+    mask: radial-gradient(80% 80% at 50% 20%, rgba(0, 0, 0, 0.38), transparent 82%);
+    opacity: 0.18;
+    transform: rotate(2deg) scale(1.03);
     animation: orbitStripe 48s linear infinite;
   }
 
   .offerings::after {
     inset: -24%;
     border-radius: clamp(42px, 8vw, 64px);
-    background: linear-gradient(180deg, rgba(var(--ink-rgb), 0.08), transparent 68%);
-    opacity: 0.3;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 40%, transparent 60%) 0%, transparent 100%);
+    opacity: 0.12;
   }
 
   .resources::before {
     inset: -16% -12% -28% -12%;
-    border-radius: clamp(40px, 9vw, 72px);
+    border-radius: clamp(32px, 8vw, 64px);
     background:
-      radial-gradient(120% 120% at 12% 18%, rgba(var(--signal-yellow-rgb), 0.24), transparent 72%),
-      radial-gradient(90% 120% at 82% 6%, rgba(var(--aurora-purple-rgb), 0.28), transparent 70%),
-      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.2), transparent 62%);
-    opacity: 0.88;
+      radial-gradient(120% 120% at 12% 18%, rgba(var(--signal-yellow-rgb), 0.1), transparent 80%),
+      radial-gradient(90% 120% at 82% 6%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
+      linear-gradient(135deg, rgba(var(--voyage-blue-rgb), 0.08), transparent 66%);
+    opacity: 0.18;
     animation: shimmerSweep 36s ease-in-out infinite;
   }
 
   .resources::after {
     inset: -18%;
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 320px 320px;
-    opacity: 0.07;
+    background: radial-gradient(120% 120% at 50% 100%, color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%) 0%, transparent 100%);
+    opacity: 0.12;
   }
 
   .finale::before {
     inset: -26%;
     border-radius: clamp(60px, 12vw, 88px);
     background:
-      radial-gradient(90% 120% at 20% 20%, rgba(var(--aurora-purple-rgb), 0.32), transparent 72%),
-      radial-gradient(120% 120% at 80% 0%, rgba(var(--signal-yellow-rgb), 0.22), transparent 70%),
-      linear-gradient(160deg, rgba(var(--voyage-blue-rgb), 0.2), transparent 60%);
-    opacity: 0.9;
+      radial-gradient(90% 120% at 20% 20%, rgba(var(--aurora-purple-rgb), 0.12), transparent 78%),
+      radial-gradient(120% 120% at 80% 0%, rgba(var(--signal-yellow-rgb), 0.08), transparent 76%),
+      linear-gradient(160deg, rgba(var(--voyage-blue-rgb), 0.08), transparent 64%);
+    opacity: 0.2;
     animation: finaleGlow 28s ease-in-out infinite alternate;
   }
 
   .finale::after {
     inset: -20%;
     border-radius: clamp(60px, 12vw, 88px);
-    background-image: var(--grain, var(--grain-texture));
-    background-size: 300px 300px;
-    opacity: 0.06;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--glass-bg-lightest) 42%, transparent 58%) 0%, transparent 100%);
+    opacity: 0.1;
   }
 
   .highlights__grid,
@@ -569,13 +672,6 @@
   :global(.finale-card) {
     display: grid;
     gap: clamp(1rem, 3vw, 1.6rem);
-    background: color-mix(in srgb, var(--bg-elev-1) 65%, transparent 35%) !important;
-    backdrop-filter: blur(32px) saturate(1.3) brightness(1.15) !important;
-    -webkit-backdrop-filter: blur(32px) saturate(1.3) brightness(1.15) !important;
-    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.25) 70%, transparent 30%) !important;
-    box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   }
 
   .highlight-icon {
@@ -584,11 +680,9 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(var(--voyage-blue-rgb), 0.32), transparent 72%),
-      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--voyage-blue-rgb), 0.16) 18%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 38%, transparent 62%);
     color: var(--voyage-blue);
-    box-shadow: 0 10px 22px rgba(16, 41, 95, 0.22);
+    box-shadow: 0 8px 18px rgba(16, 41, 95, 0.12);
     animation: floaty 18s ease-in-out infinite;
   }
 
@@ -605,11 +699,9 @@
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(var(--aurora-purple-rgb), 0.3), transparent 70%),
-      color-mix(in srgb, var(--bg-elev-2) 80%, rgba(var(--aurora-purple-rgb), 0.18) 20%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--aurora-purple);
-    box-shadow: 0 8px 18px rgba(58, 28, 120, 0.28);
+    box-shadow: 0 8px 18px rgba(58, 28, 120, 0.2);
     animation: floaty 22s ease-in-out infinite reverse;
   }
 
@@ -699,7 +791,8 @@
     }
 
     .offerings__grid,
-    .resources__grid {
+    .resources__grid,
+    .platform-showcase__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
@@ -710,7 +803,8 @@
     }
 
     .offerings__grid,
-    .resources__grid {
+    .resources__grid,
+    .platform-showcase__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }

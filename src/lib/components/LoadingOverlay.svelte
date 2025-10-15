@@ -81,26 +81,16 @@
     z-index: 9999;
   }
 
-  .loading-overlay::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain, none);
-    opacity: 0.08;
-    pointer-events: none;
-    mix-blend-mode: soft-light;
-  }
-
   .loading-shell {
     position: relative;
     width: min(420px, 100%);
     padding: clamp(2rem, 4.5vw, 2.75rem);
     border-radius: var(--radius-2xl);
-    border: 1px solid color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.42) 40%);
-    background: color-mix(in srgb, var(--bg-elev-1) 86%, rgba(var(--voyage-blue-rgb), 0.16) 14%);
-    box-shadow: 0 32px 72px rgba(12, 18, 36, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(24px) saturate(1.1);
-    -webkit-backdrop-filter: blur(24px) saturate(1.1);
+    border: 1px solid var(--glass-border);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 90%, transparent 10%);
+    box-shadow: var(--shadow-2xl);
+    backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
     display: grid;
     justify-items: center;
     gap: clamp(1.5rem, 4vw, 2rem);

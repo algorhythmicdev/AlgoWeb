@@ -17,7 +17,7 @@
   const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
   const fallbackGradient =
     'radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.92%, rgba(var(--voyage-blue-rgb), 0.006) 0.08%) 0%, color-mix(in srgb, var(--bg-elev-1, var(--bg)) 99.92%, rgba(var(--aurora-purple-rgb), 0.006) 0.08%) 42%, var(--bg) 100%)';
-  const fallbackGrainOpacity = 0.0025;
+  const fallbackFilmOpacity = 0.045;
 
   const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.12, damping: 0.35, precision: 0.001 });
   const scrollSpring = spring(0, { stiffness: 0.08, damping: 0.4, precision: 0.0001 });
@@ -93,7 +93,7 @@
   $: flattenAmbient = prefersHighContrast || prefersLessTransparency || currentThemeName === 'hc';
 
   $: routeGradient = theme?.gradient ?? fallbackGradient;
-  $: routeGrainOpacity = typeof theme?.grainOpacity === 'number' ? theme.grainOpacity : fallbackGrainOpacity;
+  $: routeFilmOpacity = typeof theme?.grainOpacity === 'number' ? theme.grainOpacity * 12 : fallbackFilmOpacity;
   function buildLayerVars(layerOverrides = {}) {
     const list = [];
     const add = (key, value) => {
@@ -145,7 +145,7 @@
     `--theme-secondary:${secondaryColor}`,
     `--theme-accent:${accentColor}`,
     `--route-gradient:${routeGradient}`,
-    `--route-grain:${routeGrainOpacity}`
+    `--route-film:${routeFilmOpacity}`
   ];
 
   $: backgroundVars = joinVars([...backgroundVarList, ...layerVars]);
@@ -369,9 +369,13 @@
   }
 
   .film {
-    background-image: var(--grain, var(--grain-texture));
-    opacity: clamp(0.0015, var(--route-grain, 0.0045), var(--film-opacity-max, 0.007));
-    mix-blend-mode: soft-light;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--glass-bg-lightest) 65%, transparent 35%) 0%,
+      transparent 100%
+    );
+    opacity: clamp(0.02, var(--route-film, 0.045), var(--film-opacity-max, 0.08));
+    mix-blend-mode: normal;
   }
 
   :global([data-base-theme='dark']) .background {
@@ -391,7 +395,7 @@
     --veil-opacity-min: 0.0055;
     --veil-opacity-max: 0.016;
     --veil-opacity-span: 0.014;
-    --film-opacity-max: 0.006;
+    --film-opacity-max: 0.065;
   }
 
   :global([data-base-theme='dark']) .background .wash {
