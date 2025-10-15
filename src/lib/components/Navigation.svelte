@@ -7,6 +7,7 @@
   import { navigation } from '$stores/navigation';
   import { theme } from '$stores/theme';
   import { Button } from '$lib/components';
+  import GlassCard from './GlassCard.svelte';
   import LanguageSwitcher from './language-switcher.svelte';
   import ThemeToggle from './theme-toggle.svelte';
   import { mainNavigation } from '$config/navigation';
@@ -259,12 +260,14 @@
     </div>
 
     <div class="nav-groups">
-      <div
+      <GlassCard
+        as="nav"
         id="primary-navigation"
-        class="nav-links os-window"
+        class="nav-links"
         role="navigation"
         aria-label={$_('nav.primary_label')}
         data-open={$navigation.isMenuOpen}
+        padding="sm"
       >
         <ul class="nav-list">
           {#each mainNavigation as item}
@@ -279,11 +282,11 @@
               </a>
 
               {#if item.children?.length}
-                <div
-                  class="nav-submenu os-window"
-                  data-variant="grid"
+                <GlassCard
+                  class="nav-submenu"
                   role="group"
                   aria-label={item.panelLabel ? $_(item.panelLabel) : $_('nav.resources_panel_label')}
+                  padding="sm"
                 >
                   {#each item.children as child}
                     <a
@@ -297,12 +300,12 @@
                       {/if}
                     </a>
                   {/each}
-                </div>
+                </GlassCard>
               {/if}
             </li>
           {/each}
         </ul>
-      </div>
+      </GlassCard>
 
       <div class="nav-actions">
         <LanguageSwitcher />
@@ -525,22 +528,35 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    overflow: visible;
+    align-items: center;
+    gap: clamp(0.9rem, 2vw, 1.35rem);
+    padding: clamp(0.55rem, 1.8vw, 0.85rem) clamp(0.9rem, 3vw, 1.6rem);
+    margin: 0 0 0 auto;
+    max-width: min(100%, 860px);
+    background: none;
+    --card-gap: clamp(0.5rem, 1.4vw, 0.9rem);
+    --glass-card-radius: clamp(1.65rem, 4vw, 2.6rem);
+    --glass-card-veil-opacity: 0.32;
+    --glass-card-highlight: rgba(var(--snow-rgb, 244, 246, 255), 0.24);
+    --glass-card-halo-opacity: 0.18;
+    --glass-card-halo-blur: 32px;
+    --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.26);
+    --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.14);
+    --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.12);
+    --glass-card-border: color-mix(in srgb, var(--glass-border-strong) 70%, transparent 30%);
+    --glass-card-shadow: 0 22px 60px rgba(var(--ink-rgb), 0.12);
+    --glass-card-surface: color-mix(in srgb, var(--glass-bg-lighter) 90%, transparent 10%);
   }
 
-  .nav-links.os-window {
-    --surface-glass-bg: transparent;
-    --surface-glass-border: transparent;
-    --surface-glass-shadow: none;
-    --os-window-hc-bg: transparent;
-    --os-window-hc-border: transparent;
-    --os-window-hc-shadow: none;
-    padding: 0;
-    border-radius: 0;
-    border: 0;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+  :global([data-base-theme='dark']) .nav-links {
+    --glass-card-surface: color-mix(
+      in srgb,
+      rgba(var(--graphite-rgb), 0.86) 70%,
+      rgba(var(--voyage-blue-rgb), 0.32) 30%
+    );
+    --glass-card-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 62%, rgba(255, 255, 255, 0.24) 38%);
+    --glass-card-shadow: 0 28px 78px rgba(2, 10, 28, 0.35);
+    --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.28);
   }
 
   .nav-list {
@@ -609,7 +625,7 @@
     padding-right: 1.25rem;
   }
 
-  .nav-item--group .nav-submenu {
+  :global(.nav-item--group .nav-submenu) {
     position: absolute;
     top: calc(100% + 0.75rem);
     left: 50%;
@@ -618,17 +634,18 @@
     visibility: hidden;
     pointer-events: none;
     display: grid;
-    gap: var(--space-sm);
-    min-width: clamp(220px, 22vw, 320px);
+    gap: clamp(0.6rem, 1.6vw, 0.95rem);
+    min-width: clamp(240px, 24vw, 340px);
     padding: clamp(0.85rem, 2vw, 1.25rem);
-    border-radius: var(--radius-xl);
-    --surface-glass-blur: var(--glass-blur-lg);
-    --surface-glass-bg: color-mix(in srgb, var(--glass-bg-light) 88%, transparent 12%);
-    --surface-glass-border: var(--glass-border);
-    --surface-glass-shadow: var(--shadow-lg);
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.1) 4%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 68%, rgba(var(--voyage-blue-rgb), 0.24) 32%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 60%, rgba(var(--voyage-blue-rgb), 0.28) 40%);
+    --card-gap: clamp(0.65rem, 2vw, 0.95rem);
+    --glass-card-radius: clamp(1.4rem, 3vw, 2.2rem);
+    --glass-card-surface: color-mix(in srgb, var(--glass-bg-lighter) 88%, transparent 12%);
+    --glass-card-border: color-mix(in srgb, var(--glass-border-strong) 72%, transparent 28%);
+    --glass-card-shadow: 0 26px 76px rgba(var(--ink-rgb), 0.16);
+    --glass-card-veil-opacity: 0.38;
+    --glass-card-halo-opacity: 0.24;
+    --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.28);
+    --glass-card-halo-blur: 40px;
     transition:
       opacity var(--duration-normal) var(--ease-out),
       transform var(--duration-normal) var(--ease-out),
@@ -636,17 +653,20 @@
     z-index: var(--z-elevated);
   }
 
-  :global([data-base-theme='dark']) .nav-item--group .nav-submenu {
-    --surface-glass-bg: color-mix(in srgb, rgba(var(--graphite-rgb), 0.9) 72%, rgba(var(--voyage-blue-rgb), 0.28) 28%);
-    --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 60%, rgba(255, 255, 255, 0.22) 40%);
-    --surface-glass-shadow: var(--shadow-2xl);
-    --os-window-hc-bg: color-mix(in srgb, var(--bg) 94%, rgba(var(--voyage-blue-rgb), 0.14) 6%);
-    --os-window-hc-border: color-mix(in srgb, var(--border-strong) 64%, rgba(var(--voyage-blue-rgb), 0.26) 36%);
-    --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
+  :global([data-base-theme='dark'] .nav-item--group .nav-submenu) {
+    --glass-card-surface: color-mix(
+      in srgb,
+      rgba(var(--graphite-rgb), 0.92) 70%,
+      rgba(var(--voyage-blue-rgb), 0.34) 30%
+    );
+    --glass-card-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 62%, rgba(255, 255, 255, 0.24) 38%);
+    --glass-card-shadow: 0 32px 82px rgba(2, 10, 28, 0.42);
+    --glass-card-veil-opacity: 0.44;
+    --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.32);
   }
 
-  .nav-item--group:hover .nav-submenu,
-  .nav-item--group:focus-within .nav-submenu {
+  :global(.nav-item--group:hover .nav-submenu),
+  :global(.nav-item--group:focus-within .nav-submenu) {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -824,15 +844,23 @@
       top: clamp(4.25rem, 12vw, 5.5rem);
       right: clamp(1.25rem, 5vw, 2rem);
       left: clamp(1.25rem, 5vw, 2rem);
+      width: auto;
+      max-width: none;
       padding: clamp(1rem, 4vw, 1.5rem);
-      border-radius: var(--radius-2xl);
-      --surface-glass-blur: var(--glass-blur-lg);
-      --surface-glass-bg: color-mix(in srgb, var(--glass-bg-light) 90%, transparent 10%);
-      --surface-glass-border: color-mix(in srgb, var(--glass-border) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
-      --surface-glass-shadow: var(--shadow-2xl);
-      --os-window-hc-bg: color-mix(in srgb, var(--bg) 96%, rgba(var(--voyage-blue-rgb), 0.14) 4%);
-      --os-window-hc-border: color-mix(in srgb, var(--border-strong) 66%, rgba(var(--voyage-blue-rgb), 0.26) 34%);
-      --os-window-hc-shadow: 0 0 0 1px color-mix(in srgb, var(--border-strong) 56%, rgba(var(--voyage-blue-rgb), 0.28) 44%);
+      border-radius: clamp(1.9rem, 6vw, 2.8rem);
+      flex-direction: column;
+      align-items: stretch;
+      gap: clamp(1rem, 4vw, 1.5rem);
+      --card-gap: clamp(0.75rem, 3vw, 1.1rem);
+      --glass-card-radius: clamp(1.9rem, 6vw, 2.8rem);
+      --glass-card-surface: color-mix(in srgb, var(--glass-bg-lighter) 88%, rgba(var(--voyage-blue-rgb), 0.08) 12%);
+      --glass-card-border: color-mix(in srgb, var(--glass-border-strong) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
+      --glass-card-shadow: var(--shadow-3xl);
+      --glass-card-veil-opacity: 0.44;
+      --glass-card-halo-opacity: 0.28;
+      --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.32);
+      backdrop-filter: blur(26px) saturate(1.12);
+      -webkit-backdrop-filter: blur(26px) saturate(1.12);
       transform: translateY(-20px);
       opacity: 0;
       visibility: hidden;
@@ -843,22 +871,22 @@
         visibility var(--duration-normal) var(--ease-out);
     }
 
-    .nav-links.os-window {
-      backdrop-filter: var(--surface-glass-blur) saturate(1.08);
-      -webkit-backdrop-filter: var(--surface-glass-blur) saturate(1.08);
-    }
-
     :global([data-base-theme='dark']) .nav-links {
-      --surface-glass-bg: color-mix(
+      --glass-card-surface: color-mix(
         in srgb,
         rgba(var(--graphite-rgb), 0.9) 70%,
         rgba(var(--voyage-blue-rgb), 0.3) 30%
       );
-      --surface-glass-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.5) 60%, rgba(255, 255, 255, 0.22) 40%);
-      --surface-glass-shadow: var(--shadow-3xl);
+      --glass-card-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.52) 60%,
+        rgba(255, 255, 255, 0.22) 40%
+      );
+      --glass-card-shadow: 0 46px 120px rgba(1, 6, 24, 0.46);
+      --glass-card-halo: rgba(var(--voyage-blue-rgb), 0.36);
     }
 
-    .nav-links[data-open='true'] {
+    :global(.nav-links[data-open='true']) {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -881,17 +909,18 @@
       justify-content: space-between;
     }
 
-    .nav-item--group .nav-submenu {
+    :global(.nav-item--group .nav-submenu) {
       position: static;
       transform: none;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      --surface-glass-blur: 0px;
-      --surface-glass-bg: transparent;
-      --surface-glass-border: transparent;
-      --surface-glass-shadow: none;
-      border: 0;
+      --glass-card-surface: transparent;
+      --glass-card-border: transparent;
+      --glass-card-shadow: none;
+      --glass-card-veil-opacity: 0;
+      --glass-card-halo-opacity: 0;
+      border: none;
       padding: 0;
       gap: 0.75rem;
       margin-top: 0.6rem;
@@ -931,9 +960,18 @@
     background: transparent;
     border: 2px solid currentColor;
     box-shadow: none;
-    --os-window-hc-bg: transparent;
-    --os-window-hc-border: currentColor;
-    --os-window-hc-shadow: none;
+    --glass-card-surface: transparent;
+    --glass-card-border: currentColor;
+    --glass-card-shadow: none;
+    --glass-card-veil-opacity: 0;
+    --glass-card-halo-opacity: 0;
+  }
+
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .nav-links::before),
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .nav-links::after),
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .nav-item--group .nav-submenu::before),
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .nav-item--group .nav-submenu::after) {
+    display: none;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-button {
@@ -950,12 +988,14 @@
     background: transparent;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-item--group .nav-submenu {
-    --os-window-hc-bg: transparent;
-    --os-window-hc-border: currentColor;
-    --os-window-hc-shadow: none;
+  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .nav-item--group .nav-submenu) {
     border: 2px solid currentColor;
     box-shadow: none;
+    --glass-card-surface: transparent;
+    --glass-card-border: currentColor;
+    --glass-card-shadow: none;
+    --glass-card-veil-opacity: 0;
+    --glass-card-halo-opacity: 0;
   }
 </style>
 

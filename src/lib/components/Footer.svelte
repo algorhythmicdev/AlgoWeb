@@ -6,6 +6,7 @@
   import { theme } from '$stores/theme';
   import brands from '$lib/data/brands.json';
   import { translateOrFallback } from '$lib/utils';
+  import GlassCard from '$lib/components/GlassCard.svelte';
 
   /**
    * @param {unknown} value
@@ -71,7 +72,7 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
+      <GlassCard as="section" class="footer-card footer-card--brand" particles padding="lg">
         <img
           src={footerLogoSrc}
           alt={$_('footer.brand_alt')}
@@ -84,9 +85,9 @@
           <p>{$_('footer.location')}</p>
           <a href="mailto:{siteConfig.contact.email}">{siteConfig.contact.email}</a>
         </div>
-      </div>
+      </GlassCard>
 
-      <div class="footer-meta">
+      <GlassCard as="section" class="footer-card footer-card--links" halo padding="lg">
         <nav class="footer-links-section" aria-labelledby="footer-company-heading">
           <h4 id="footer-company-heading">{$_('footer.company')}</h4>
           <ul>
@@ -149,19 +150,21 @@
             {/if}
           </div>
         </aside>
-      </div>
+      </GlassCard>
     </div>
-    
-    <div class="footer-bottom">
-      <p class="copyright">{$_('footer.copyright')}</p>
-      <div class="social-links">
-        {#each footerLinks.social as social}
-          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={$_(social.label)}>
-            {$_(social.label)}
-          </a>
-        {/each}
+
+    <GlassCard as="section" class="footer-card footer-card--bottom" padding="md">
+      <div class="footer-bottom">
+        <p class="copyright">{$_('footer.copyright')}</p>
+        <div class="social-links">
+          {#each footerLinks.social as social}
+            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={$_(social.label)}>
+              {$_(social.label)}
+            </a>
+          {/each}
+        </div>
       </div>
-    </div>
+    </GlassCard>
   </div>
 </footer>
 
@@ -174,59 +177,48 @@
     margin-top: clamp(3rem, 8vw, 5rem);
     padding: clamp(3rem, 8vw, 4.5rem) 0 clamp(2rem, 6vw, 3rem);
     position: relative;
-    background: color-mix(in srgb, var(--glass-bg-lightest) 48%, transparent 52%);
+    background: color-mix(in srgb, var(--bg) 88%, transparent 12%);
     color: var(--footer-text);
-    border-top: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
-    box-shadow: 0 -12px 36px rgba(var(--ink-rgb), 0.08);
-    backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
-    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.8)) saturate(1.04);
-    overflow: hidden;
-    transition:
-      background var(--duration-normal) var(--ease-smooth),
-      border-color var(--duration-normal) var(--ease-smooth),
-      box-shadow var(--duration-normal) var(--ease-smooth);
+    border-top: 1px solid color-mix(in srgb, var(--glass-border) 56%, transparent 44%);
   }
 
   .footer > .container {
-    position: relative;
-    z-index: 1;
     width: min(100%, var(--container-xl, 1200px));
     margin-inline: auto;
     padding-inline: clamp(1.5rem, 5vw, 3rem);
+    display: grid;
+    gap: clamp(2rem, 6vw, 3.5rem);
   }
 
   .footer-grid {
     display: grid;
-    gap: clamp(2rem, 5vw, 3rem);
-    margin-bottom: clamp(2rem, 6vw, 3rem);
+    gap: clamp(1.75rem, 5vw, 3rem);
   }
 
   @media (min-width: 960px) {
     .footer-grid {
       grid-template-columns: minmax(0, 1.6fr) minmax(0, 2fr);
-      align-items: start;
+      align-items: stretch;
     }
   }
 
-  .footer-meta {
+  :global(.footer-card) {
     display: grid;
-    gap: clamp(1.5rem, 4vw, 2rem);
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    align-items: start;
+    gap: clamp(1rem, 3vw, 1.6rem);
+    color: var(--footer-text);
   }
 
-  .footer-brand {
-    display: grid;
-    gap: clamp(0.75rem, 2vw, 1.25rem);
-    max-width: 32rem;
+  :global(.footer-card--brand) {
+    align-content: start;
+    gap: clamp(0.85rem, 2vw, 1.35rem);
   }
 
-  .footer-brand img {
+  :global(.footer-card--brand) img {
     max-width: clamp(150px, 18vw, 200px);
     transition: opacity var(--duration-fast) var(--ease-out);
   }
 
-  .footer-brand img:hover {
+  :global(.footer-card--brand) img:hover {
     opacity: 0.9;
   }
 
@@ -236,6 +228,11 @@
   .contact-info a {
     color: var(--footer-text);
     font-size: var(--text-small);
+  }
+
+  .status {
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.02em;
   }
 
   .contact-info a {
@@ -248,17 +245,12 @@
     color: var(--link);
   }
 
-  .status {
-    font-weight: var(--weight-semibold);
+  :global(.footer-card--links) {
+    gap: clamp(1.5rem, 4vw, 2.25rem);
   }
 
-  .footer-links-section {
-    display: grid;
-    gap: clamp(1rem, 3vw, 1.5rem);
-    align-content: start;
-  }
-
-  .footer-links-section h4 {
+  .footer-links-section h4,
+  .footer-partners h4 {
     margin: 0;
     font-size: var(--text-title);
     color: var(--footer-strong);
@@ -272,20 +264,26 @@
     list-style: none;
   }
 
-  .footer-partners {
-    display: grid;
-    gap: clamp(0.75rem, 2vw, 1.1rem);
-    padding: clamp(1.25rem, 3vw, 1.75rem);
-    border-radius: max(0px, calc(var(--glass-card-radius, 0) + 0.75rem));
-    background: color-mix(in srgb, var(--glass-bg-light) 46%, transparent 54%);
-    border: 1px solid color-mix(in srgb, var(--glass-border-light) 60%, transparent 40%);
-    box-shadow: 0 12px 32px rgba(var(--ink-rgb), 0.08);
+  .footer-links-section a {
+    color: inherit;
+    text-decoration: none;
+    font-size: var(--text-small);
+    transition: color var(--duration-ui, 240ms) var(--ease-out);
   }
 
-  .footer-partners h4 {
-    margin: 0;
-    font-size: var(--text-title);
-    color: var(--footer-strong);
+  .footer-links-section a:hover,
+  .footer-links-section a:focus-visible {
+    color: var(--link);
+  }
+
+  .footer-partners {
+    display: grid;
+    gap: clamp(0.85rem, 2vw, 1.2rem);
+    padding: clamp(0.75rem, 2vw, 1.15rem);
+    border-radius: calc(var(--glass-card-radius) * 0.9);
+    background: color-mix(in srgb, var(--glass-bg-light) 52%, transparent 48%);
+    border: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
+    box-shadow: 0 18px 42px rgba(var(--ink-rgb), 0.12);
   }
 
   .footer-partners__summary {
@@ -305,9 +303,9 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.45rem 0.9rem;
+    padding: 0.5rem 1rem;
     border-radius: var(--radius-full);
-    border: 1px solid color-mix(in srgb, var(--footer-border) 70%, transparent 30%);
+    border: 1px solid color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
     letter-spacing: 0.08em;
@@ -315,7 +313,8 @@
     text-decoration: none;
     color: var(--footer-text);
     transition: color var(--duration-ui, 240ms) var(--ease-out),
-      border-color var(--duration-ui, 240ms) var(--ease-out);
+      border-color var(--duration-ui, 240ms) var(--ease-out),
+      background-color var(--duration-ui, 240ms) var(--ease-out);
   }
 
   .footer-partners__cta svg {
@@ -324,95 +323,77 @@
 
   .footer-partners__cta:hover,
   .footer-partners__cta:focus-visible {
-    color: var(--accent-primary);
-    border-color: color-mix(in srgb, var(--accent-primary) 52%, transparent 48%);
+    color: var(--footer-strong);
+    border-color: color-mix(in srgb, var(--footer-border) 40%, var(--accent-primary) 60%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%);
   }
 
   .footer-partners__cta:hover svg,
   .footer-partners__cta:focus-visible svg {
-    transform: translate(3px, -3px);
+    transform: translateX(4px);
   }
 
-  .footer-partners__cta--external {
-    color: var(--link);
+  .footer-partners__cta--external svg {
+    width: 1rem;
+    height: 1rem;
   }
 
-  .footer-links-section a,
-  .social-links a {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--footer-text);
-    text-decoration: none;
-    transition: color var(--duration-ui, 240ms) var(--ease-out),
-      transform var(--duration-ui, 240ms) var(--ease-out);
-  }
-
-  .footer-links-section a::after,
-  .social-links a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -0.2rem;
-    width: 0;
-    height: 2px;
-    background: color-mix(in srgb, var(--link) 70%, transparent 30%);
-    transition: width var(--duration-ui, 240ms) var(--ease-out);
-  }
-
-  .footer-links-section a:hover,
-  .footer-links-section a:focus-visible,
-  .social-links a:hover,
-  .social-links a:focus-visible {
-    color: var(--link);
-  }
-
-  .footer-links-section a:hover::after,
-  .footer-links-section a:focus-visible::after,
-  .social-links a:hover::after,
-  .social-links a:focus-visible::after {
-    width: 100%;
-  }
-
-  .footer-links-section a:focus-visible,
-  .social-links a:focus-visible {
-    outline: none;
+  :global(.footer-card--bottom) {
+    padding-block: clamp(1.2rem, 3vw, 1.75rem);
   }
 
   .footer-bottom {
     display: flex;
     flex-wrap: wrap;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
     align-items: center;
     justify-content: space-between;
-    gap: clamp(1rem, 2.5vw, 1.5rem);
-    padding-top: clamp(1.75rem, 4vw, 2.25rem);
-    border-top: 1px solid var(--footer-border);
   }
 
-  .copyright {
-    margin: 0;
+  .footer-bottom a {
+    color: var(--footer-text);
+    text-decoration: none;
     font-size: var(--text-small);
-    color: var(--footer-muted);
+    transition: color var(--duration-ui, 240ms) var(--ease-out);
+  }
+
+  .footer-bottom a:hover,
+  .footer-bottom a:focus-visible {
+    color: var(--link);
   }
 
   .social-links {
     display: flex;
-    gap: clamp(1rem, 2.5vw, 1.75rem);
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    flex-wrap: wrap;
   }
 
-  @media (max-width: 768px) {
-    .footer-brand,
-    .footer-links-section,
-    .footer-bottom,
-    .footer-partners {
-      text-align: center;
-      align-items: center;
-      justify-content: center;
+  .social-links a {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 960px) {
+    :global(.footer-card--links) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .footer-partners__actions {
+      flex-direction: column;
+      align-items: stretch;
     }
 
-    .social-links {
+    .footer-partners__cta {
       justify-content: center;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
@@ -420,18 +401,11 @@
     background: var(--bg);
     color: var(--text);
     border-top: 2px solid currentColor;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 
   :global([data-theme='hc']) .footer-links-section a,
   :global([data-theme='hc']) .social-links a {
     color: var(--text);
-  }
-
-  :global([data-theme='hc']) .footer-links-section a::after,
-  :global([data-theme='hc']) .social-links a::after {
-    display: none;
   }
 
   :global([data-theme='hc']) .footer-partners {
@@ -442,6 +416,7 @@
 
   :global([data-theme='hc']) .footer-partners__cta {
     color: var(--text);
+    border-color: currentColor;
   }
 
   :global([data-theme='hc']) .footer-bottom {
@@ -455,14 +430,9 @@
     --footer-border: color-mix(in srgb, var(--border-strong) 64%, transparent 36%);
     background: color-mix(in srgb, rgba(var(--night-rgb), 0.86) 70%, rgba(var(--voyage-blue-rgb), 0.12) 30%);
     border-top: 1px solid var(--footer-border);
-    box-shadow: 0 -10px 28px rgba(var(--ink-rgb), 0.26);
-    backdrop-filter: blur(calc(var(--glass-blur, 10px) * 0.9)) saturate(1.06);
-    -webkit-backdrop-filter: blur(calc(var(--glass-blur, 10px) * 0.9)) saturate(1.06);
   }
 
-  :global([data-base-theme='dark']) .footer::before {
-    opacity: 0.08;
-  }
 </style>
+
 
 

@@ -328,7 +328,7 @@
   </svelte:fragment>
 </Hero>
 
-<section class="featured" aria-labelledby="featured-heading" use:revealOnScroll>
+<section class="section featured" data-surface="glow" aria-labelledby="featured-heading" use:revealOnScroll>
   <div class="container">
     <GlassCard as="article" class="featured__card" halo padding="lg">
       <figure class="media-card featured__media">
@@ -358,10 +358,10 @@
 
 <SectionDivider label={t('educationHub.page.sections.insights.label', 'Latest insights')} tone="aurora" />
 
-<section id="insights" class="insights" aria-labelledby="insights-heading" use:revealOnScroll>
+<section id="insights" class="section insights" data-surface="glow" aria-labelledby="insights-heading" use:revealOnScroll>
   <div class="container">
-    <div class="section-heading">
-      <p class="section-heading__eyebrow">{t('educationHub.page.sections.insights.eyebrow', 'Insights')}</p>
+    <div class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t('educationHub.page.sections.insights.eyebrow', 'Insights')}</span>
       <h2 id="insights-heading">{t('educationHub.page.sections.insights.title', 'Fresh perspectives on calm AI')}</h2>
       <p class="section-heading__copy">{t('educationHub.page.sections.insights.copy', 'Articles crafted with educators, founders, and families to keep AI human and hopeful.')}</p>
     </div>
@@ -380,10 +380,10 @@
 
 <SectionDivider label={t('educationHub.page.sections.toolkits.label', 'Learning toolkits')} tone="voyage" />
 
-<section id="toolkits" class="toolkits" aria-labelledby="toolkits-heading" use:revealOnScroll>
+<section id="toolkits" class="section toolkits" data-surface="glow" aria-labelledby="toolkits-heading" use:revealOnScroll>
   <div class="container">
-    <div class="section-heading">
-      <p class="section-heading__eyebrow">{t('educationHub.page.sections.toolkits.eyebrow', 'Toolkits')}</p>
+    <div class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t('educationHub.page.sections.toolkits.eyebrow', 'Toolkits')}</span>
       <h2 id="toolkits-heading">{t('educationHub.page.sections.toolkits.title', 'Ready-to-use calm AI resources')}</h2>
       <p class="section-heading__copy">{t('educationHub.page.sections.toolkits.copy', 'Downloadable lesson arcs, operating guides, and family activities designed with accessibility at the core.')}</p>
     </div>
@@ -407,10 +407,10 @@
 
 <SectionDivider label={t('educationHub.page.sections.spotlights.label', 'Community spotlights')} tone="citrus" />
 
-<section id="case-studies" class="spotlights" aria-labelledby="spotlights-heading" use:revealOnScroll>
+<section id="case-studies" class="section spotlights" data-surface="glow" aria-labelledby="spotlights-heading" use:revealOnScroll>
   <div class="container">
-    <div class="section-heading">
-      <p class="section-heading__eyebrow">{t('educationHub.page.sections.spotlights.eyebrow', 'Spotlights')}</p>
+    <div class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t('educationHub.page.sections.spotlights.eyebrow', 'Spotlights')}</span>
       <h2 id="spotlights-heading">{t('educationHub.page.sections.spotlights.title', 'Impact stories & collaborations')}</h2>
       <p class="section-heading__copy">{t('educationHub.page.sections.spotlights.copy', 'Follow pilots, residencies, and community experiments that show calm AI in action.')}</p>
     </div>
@@ -429,7 +429,7 @@
 
 <SectionDivider label={t('educationHub.page.sections.events.label', 'Upcoming events')} tone="aurora" />
 
-<section id="events" class="events" aria-labelledby="events-heading" use:revealOnScroll>
+<section id="events" class="section events" data-surface="glow" aria-labelledby="events-heading" use:revealOnScroll>
   <div class="container">
     <GlassCard class="events__card" padding="lg">
       <p class="events__eyebrow">{t(events.eyebrowKey, events.eyebrowFallback)}</p>
@@ -450,7 +450,7 @@
 
 <SectionDivider label={t('educationHub.page.sections.newsletter.label', 'Stay connected')} tone="voyage" />
 
-<section id="newsletter" class="newsletter" aria-labelledby="newsletter-heading" use:revealOnScroll>
+<section id="newsletter" class="section newsletter" data-surface="glow" aria-labelledby="newsletter-heading" use:revealOnScroll>
   <div class="container">
     <GlassCard class="newsletter__card" particles padding="lg">
       <p class="newsletter__eyebrow">{t(newsletter.eyebrowKey, newsletter.eyebrowFallback)}</p>
@@ -491,8 +491,49 @@
     color: var(--signal-yellow);
   }
 
-  .featured {
-    padding-block: clamp(2.5rem, 6vw, 4rem);
+  .section.featured,
+  .section.insights,
+  .section.toolkits,
+  .section.spotlights,
+  .section.events,
+  .section.newsletter {
+    isolation: isolate;
+  }
+
+  .section.featured {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.insights {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.1);
+  }
+
+  .section.toolkits {
+    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.18);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.16);
+    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.12);
+  }
+
+  .section.spotlights {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.events {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .section.newsletter {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
   }
 
   :global(.featured__card) {
@@ -538,31 +579,12 @@
   }
 
   .section-heading {
-    display: grid;
-    gap: 0.6rem;
-    max-width: 720px;
-    margin: 0 auto clamp(2rem, 4vw, 3rem);
-    text-align: center;
-  }
-
-  .section-heading__eyebrow {
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: var(--text-caption);
-    color: color-mix(in srgb, var(--voyage-blue) 70%, rgba(var(--ink-rgb), 0.6) 30%);
+    margin-block-end: clamp(2rem, 4vw, 3rem);
   }
 
   .section-heading__copy {
-    font-size: 1.05rem;
-    color: color-mix(in srgb, var(--text) 82%, rgba(var(--ink-rgb), 0.7) 18%);
-  }
-
-  .insights,
-  .toolkits,
-  .spotlights,
-  .events,
-  .newsletter {
-    padding-block: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(1.08rem, 2vw, 1.26rem);
+    color: color-mix(in srgb, var(--text) 84%, rgba(var(--ink-rgb), 0.65) 16%);
   }
 
   .insights__grid,

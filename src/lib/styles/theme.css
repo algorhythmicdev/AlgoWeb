@@ -39,25 +39,25 @@
   --grain-texture: none;
   --grain: none;
   /* ==================== GLASSMORPHISM ==================== */
-  --glass-blur: 18px;
-  --glass-blur-sm: 24px;
-  --glass-blur-md: 32px;
-  --glass-blur-lg: 40px;
-  --glass-blur-xl: 48px;
-  --glass-saturate: 1.3;
-  --glass-brightness: 1.05;
-  --glass-brightness-hover: 1.08;
+  --glass-blur: 22px;
+  --glass-blur-sm: 28px;
+  --glass-blur-md: 36px;
+  --glass-blur-lg: 48px;
+  --glass-blur-xl: 60px;
+  --glass-saturate: 1.18;
+  --glass-brightness: 1.02;
+  --glass-brightness-hover: 1.06;
 
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-light: color-mix(in srgb, var(--bg-elev-1) 76%, transparent 24%);
-  --glass-bg-lighter: color-mix(in srgb, var(--bg-elev-1) 70%, transparent 30%);
-  --glass-bg-lightest: color-mix(in srgb, var(--bg-elev-1) 64%, transparent 36%);
-  --glass-bg-strong: color-mix(in srgb, var(--bg-elev-1) 82%, transparent 18%);
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-light: color-mix(in srgb, var(--bg-elev-1) 62%, transparent 38%);
+  --glass-bg-lighter: color-mix(in srgb, var(--bg-elev-1) 56%, transparent 44%);
+  --glass-bg-lightest: color-mix(in srgb, var(--bg-elev-1) 48%, transparent 52%);
+  --glass-bg-strong: color-mix(in srgb, var(--bg-elev-1) 72%, transparent 28%);
 
-  --glass-border: rgba(255, 255, 255, 0.16);
-  --glass-border-light: color-mix(in srgb, rgba(255, 255, 255, 0.26) 68%, transparent 32%);
-  --glass-border-strong: color-mix(in srgb, rgba(255, 255, 255, 0.32) 74%, transparent 26%);
-  --glass-border-hover: color-mix(in srgb, rgba(255, 255, 255, 0.44) 80%, transparent 20%);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-border-light: color-mix(in srgb, rgba(255, 255, 255, 0.32) 70%, transparent 30%);
+  --glass-border-strong: color-mix(in srgb, rgba(255, 255, 255, 0.4) 75%, transparent 25%);
+  --glass-border-hover: color-mix(in srgb, rgba(255, 255, 255, 0.5) 82%, transparent 18%);
 
   /* Motion timing */
   --slow: 22s;
@@ -213,47 +213,40 @@
 
   /* ==================== GRADIENTS ==================== */
   --gradient-primary: linear-gradient(
-    135deg,
-    rgba(var(--aurora-purple-rgb), 0.94) 0%,
-    rgba(var(--voyage-blue-rgb), 0.9) 52%,
-    rgba(var(--signal-yellow-rgb), 0.86) 100%
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 18%, transparent) 0%,
+    color-mix(in srgb, var(--accent-secondary) 18%, transparent) 100%
   );
   --gradient-secondary: linear-gradient(
-    142deg,
-    rgba(var(--voyage-blue-rgb), 0.92) 0%,
-    rgba(var(--aurora-purple-rgb), 0.9) 46%,
-    rgba(var(--cherry-pop-rgb), 0.84) 78%,
-    rgba(var(--voyage-blue-rgb), 0.88) 100%
+    180deg,
+    color-mix(in srgb, var(--accent-secondary) 18%, transparent) 0%,
+    color-mix(in srgb, var(--accent-tertiary) 18%, transparent) 100%
   );
   --gradient-accent: linear-gradient(
-    148deg,
-    rgba(var(--signal-yellow-rgb), 0.9) 0%,
-    rgba(var(--cherry-pop-rgb), 0.84) 42%,
-    rgba(var(--voyage-blue-rgb), 0.86) 100%
+    180deg,
+    color-mix(in srgb, var(--accent-tertiary) 18%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 18%, transparent) 100%
   );
   --gradient-text: linear-gradient(
-    128deg,
-    rgba(var(--voyage-blue-rgb), 0.96) 0%,
-    rgba(var(--aurora-purple-rgb), 0.94) 42%,
-    rgba(var(--signal-yellow-rgb), 0.82) 100%
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 22%, transparent) 0%,
+    color-mix(in srgb, var(--accent-secondary) 22%, transparent) 100%
   );
   --gradient-heading: var(--gradient-text);
   --gradient-heading-strong: linear-gradient(
-    132deg,
-    rgba(var(--voyage-blue-rgb), 0.98) 0%,
-    rgba(var(--aurora-purple-rgb), 0.96) 34%,
-    rgba(var(--signal-yellow-rgb), 0.88) 76%,
-    rgba(var(--voyage-blue-rgb), 0.96) 100%
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 26%, transparent) 0%,
+    color-mix(in srgb, var(--accent-secondary) 26%, transparent) 50%,
+    color-mix(in srgb, var(--accent-tertiary) 26%, transparent) 100%
   );
   --gradient-hero: linear-gradient(
-    140deg,
-    rgba(var(--voyage-blue-rgb), 0.92) 0%,
-    rgba(var(--aurora-purple-rgb), 0.88) 48%,
-    rgba(var(--signal-yellow-rgb), 0.8) 100%
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 14%, transparent) 0%,
+    color-mix(in srgb, var(--accent-secondary) 14%, transparent) 100%
   );
-  --gradient-spectrum-1: linear-gradient(142deg, rgba(var(--voyage-blue-rgb), 0.86) 0%, rgba(var(--aurora-purple-rgb), 0.82) 54%, rgba(var(--cherry-pop-rgb), 0.78) 100%);
-  --gradient-spectrum-2: linear-gradient(146deg, rgba(var(--aurora-purple-rgb), 0.86) 0%, rgba(var(--cherry-pop-rgb), 0.8) 48%, rgba(var(--signal-yellow-rgb), 0.78) 100%);
-  --gradient-spectrum-3: linear-gradient(150deg, rgba(var(--voyage-blue-rgb), 0.84) 0%, rgba(var(--signal-yellow-rgb), 0.8) 52%, rgba(var(--aurora-purple-rgb), 0.82) 100%);
+  --gradient-spectrum-1: linear-gradient(180deg, color-mix(in srgb, var(--accent-primary) 18%, transparent) 0%, color-mix(in srgb, var(--accent-secondary) 18%, transparent) 100%);
+  --gradient-spectrum-2: linear-gradient(180deg, color-mix(in srgb, var(--accent-secondary) 18%, transparent) 0%, color-mix(in srgb, var(--accent-tertiary) 18%, transparent) 100%);
+  --gradient-spectrum-3: linear-gradient(180deg, color-mix(in srgb, var(--accent-tertiary) 18%, transparent) 0%, color-mix(in srgb, var(--accent-primary) 18%, transparent) 100%);
 
   /* ==================== SURFACES & TEXT ==================== */
   --grad-a: var(--voyage-blue);
@@ -308,37 +301,37 @@
   --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --text-mega: clamp(3.5rem, 9vw, 6.5rem);
-  --text-hero: clamp(3rem, 7vw, 5rem);
-  --text-display: clamp(2.25rem, 5.5vw, 3.75rem);
-  --text-headline: clamp(2rem, 4.5vw, 2.75rem);
-  --text-title: clamp(1.65rem, 3.25vw, 2.25rem);
-  --text-subtitle: clamp(1.35rem, 2.75vw, 1.9rem);
-  --text-body: clamp(1rem, 1.35vw, 1.12rem);
-  --text-small: clamp(0.95rem, 1.5vw, 1.05rem);
-  --text-caption: clamp(0.82rem, 1.2vw, 0.9rem);
+  --text-mega: clamp(4rem, 10vw, 7rem);
+  --text-hero: clamp(3.25rem, 7.5vw, 5.5rem);
+  --text-display: clamp(2.5rem, 6vw, 4.25rem);
+  --text-headline: clamp(2.2rem, 5vw, 3rem);
+  --text-title: clamp(1.8rem, 3.8vw, 2.6rem);
+  --text-subtitle: clamp(1.5rem, 3vw, 2.1rem);
+  --text-body: clamp(1.12rem, 2vw, 1.3rem);
+  --text-small: clamp(1rem, 1.7vw, 1.12rem);
+  --text-caption: clamp(0.9rem, 1.35vw, 1rem);
   --text: var(--text-body);
   --small: var(--text-small);
 
-  --font-h1-size: clamp(2.25rem, 4.5vw, 2.75rem);
+  --font-h1-size: clamp(2.85rem, 5.2vw, 3.85rem);
   --font-h1-weight: 700;
   --font-h1-line: 1.2;
-  --font-h2-size: clamp(1.75rem, 3.6vw, 2.1rem);
+  --font-h2-size: clamp(2.2rem, 4.5vw, 3rem);
   --font-h2-weight: 600;
   --font-h2-line: 1.3;
-  --font-h3-size: clamp(1.5rem, 3.2vw, 1.85rem);
+  --font-h3-size: clamp(1.85rem, 3.8vw, 2.35rem);
   --font-h3-weight: 600;
   --font-h3-line: 1.32;
-  --font-body-size: clamp(1.05rem, 1.85vw, 1.16rem);
+  --font-body-size: clamp(1.12rem, 2vw, 1.3rem);
   --font-body-weight: 400;
-  --font-body-line: 1.55;
+  --font-body-line: 1.7;
 
   --h1: var(--font-h1-size, 2.25rem);
   --h2: var(--font-h2-size, 1.75rem);
   --h3: var(--font-h3-size, 1.5rem);
-  --h4: clamp(1.6rem, 3.5vw, 2.1rem);
-  --h5: clamp(1.35rem, 3vw, 1.7rem);
-  --h6: clamp(1.15rem, 2.25vw, 1.35rem);
+  --h4: clamp(1.65rem, 3.6vw, 2.25rem);
+  --h5: clamp(1.4rem, 3.2vw, 1.85rem);
+  --h6: clamp(1.2rem, 2.4vw, 1.45rem);
   --leading-tight: 1.2;
   --leading-snug: 1.35;
   --leading-normal: 1.5;
@@ -369,10 +362,10 @@
   --measure-lg: 60ch;
   --measure-xl: 72ch;
 
-  --section-padding-mobile: clamp(3.5rem, 9vw, 4.5rem);
-  --section-padding-tablet: clamp(4.75rem, 11vw, 6.5rem);
-  --section-padding-desktop: clamp(6.5rem, 13vw, 8.5rem);
-  --section-padding-xl: clamp(8.5rem, 17vw, 12.5rem);
+  --section-padding-mobile: clamp(4.25rem, 10vw, 5.5rem);
+  --section-padding-tablet: clamp(5.5rem, 12vw, 7.25rem);
+  --section-padding-desktop: clamp(7.25rem, 14vw, 9.5rem);
+  --section-padding-xl: clamp(9.5rem, 18vw, 13.5rem);
 
   --component-padding-sm: clamp(1rem, 2vw, 1.5rem);
   --component-padding-md: clamp(1.5rem, 3vw, 2.5rem);
@@ -385,11 +378,11 @@
   --grid-gap-xl: clamp(2rem, 4vw, 3.5rem);
   --grid-gap-2xl: clamp(2.5rem, 5vw, 4rem);
 
-  --card-padding-sm: clamp(1rem, 2vw, 1.5rem);
-  --card-padding-md: clamp(1.25rem, 2.5vw, 2rem);
-  --card-padding-lg: clamp(1.5rem, 3vw, 2.5rem);
-  --card-padding-xl: clamp(2rem, 4vw, 3rem);
-  --card-gap: clamp(1rem, 2vw, 1.75rem);
+  --card-padding-sm: clamp(1.4rem, 2.6vw, 2rem);
+  --card-padding-md: clamp(1.65rem, 3.1vw, 2.5rem);
+  --card-padding-lg: clamp(2rem, 3.8vw, 3.1rem);
+  --card-padding-xl: clamp(2.5rem, 4.6vw, 3.75rem);
+  --card-gap: clamp(1.35rem, 2.6vw, 2.15rem);
 
   --container-sm: 640px;
   --container-md: 760px;
@@ -423,16 +416,8 @@
     radial-gradient(circle at 82% 28%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 64%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 60%);
   --glass-layer: var(--glass-texture);
-  --backdrop-canvas: linear-gradient(
-    180deg,
-    color-mix(in srgb, rgba(var(--cloud-rgb), 0.92) 82%, rgba(var(--voyage-blue-rgb), 0.12) 18%) 0%,
-    color-mix(in srgb, rgba(var(--cloud-rgb), 0.9) 78%, rgba(var(--aurora-purple-rgb), 0.14) 22%) 100%
-  );
-  --body-wash: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--surface) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%) 0%,
-    color-mix(in srgb, var(--surface-subtle) 86%, rgba(var(--aurora-purple-rgb), 0.18) 14%) 100%
-  );
+  --backdrop-canvas: var(--bg);
+  --body-wash: var(--bg);
   --grain-blend-mode: normal;
   --grain-opacity: 0;
 
@@ -523,19 +508,19 @@
   --atlantic-blue-rgb: 31, 157, 255;
   --evergreen: var(--accent-1);
   --evergreen-rgb: var(--accent-1-rgb);
-  --bg: #0b0e13;
-  --card: #121722;
-  --card-subtle: #161c28;
-  --card-strong: #1c2433;
+  --bg: #050a17;
+  --card: #101c33;
+  --card-subtle: #14223d;
+  --card-strong: #192a4c;
   --bg-elev-1: var(--card);
   --bg-elev-2: var(--card-subtle);
-  --text: #f2f5f9;
+  --text: #f7f9ff;
   --text-strong: #ffffff;
-  --text-secondary-base: #8b9299;
-  --text-tertiary-base: #6c7480;
-  --divider: rgba(242, 245, 249, 0.12);
-  --border: #222a3a;
-  --border-strong: #2e374b;
+  --text-secondary-base: #d6def2;
+  --text-tertiary-base: #b4c1de;
+  --divider: rgba(204, 214, 235, 0.24);
+  --border: color-mix(in srgb, rgba(126, 158, 255, 0.42) 65%, rgba(6, 10, 24, 0.82) 35%);
+  --border-strong: color-mix(in srgb, rgba(126, 158, 255, 0.5) 72%, rgba(6, 10, 24, 0.82) 28%);
 
   --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 60%, #dde7ff 40%);
   --focus-ring-shadow: 0 0 0 2px color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 80%, transparent 20%);
@@ -547,13 +532,13 @@
   --bg-surface: var(--card);
   --bg-muted: var(--card-subtle);
   --bg-elevated: var(--card-strong);
-  --surface-glass: color-mix(in srgb, var(--card) 74%, rgba(var(--voyage-blue-rgb), 0.34) 26%);
-  --surface-glass-strong: color-mix(in srgb, var(--card) 70%, rgba(var(--aurora-purple-rgb), 0.38) 30%);
-  --surface-tint: rgba(var(--voyage-blue-rgb), 0.26);
+  --surface-glass: color-mix(in srgb, rgba(18, 28, 48, 0.92) 58%, rgba(var(--voyage-blue-rgb), 0.38) 42%);
+  --surface-glass-strong: color-mix(in srgb, rgba(18, 28, 48, 0.94) 54%, rgba(var(--aurora-purple-rgb), 0.42) 46%);
+  --surface-tint: rgba(var(--voyage-blue-rgb), 0.28);
 
-  --border-subtle: rgba(242, 245, 249, 0.2);
-  --border-strong: rgba(242, 245, 249, 0.38);
-  --border-glass: rgba(242, 245, 249, 0.48);
+  --border-subtle: rgba(214, 224, 248, 0.32);
+  --border-strong: rgba(214, 224, 248, 0.5);
+  --border-glass: rgba(214, 224, 248, 0.58);
 
   --heading-color: var(--text-strong);
   --heading-shadow: 0 18px 48px rgba(0, 2, 12, 0.6);
@@ -561,44 +546,44 @@
   --text-secondary: var(--text-secondary-base);
   --text-tertiary: var(--text-tertiary-base);
 
-  --hero-glow-primary: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.36) 68%, rgba(2, 6, 14, 0.88) 32%);
-  --hero-glow-secondary: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.32) 66%, rgba(2, 6, 14, 0.88) 34%);
-  --hero-glow-accent: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.26) 60%, rgba(4, 8, 16, 0.88) 40%);
-  --hero-overlay-highlight: rgba(92, 138, 255, 0.32);
-  --hero-overlay-subtle: rgba(48, 88, 220, 0.26);
-  --hero-overlay-blend: lighten;
-  --hero-overlay-opacity: 0.7;
-  --hero-phrase-bg-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.45) 58%, rgba(4, 6, 14, 0.9) 42%);
-  --hero-phrase-bg-soft: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 56%, rgba(4, 6, 14, 0.9) 44%);
-  --hero-phrase-shadow: 0 28px 66px rgba(0, 2, 10, 0.64);
-  --hero-ring-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 66%, rgba(2, 6, 12, 0.92) 34%);
-  --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.38) 62%, rgba(2, 6, 12, 0.92) 38%);
+  --hero-glow-primary: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 70%, rgba(6, 10, 24, 0.78) 30%);
+  --hero-glow-secondary: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.36) 68%, rgba(6, 10, 24, 0.78) 32%);
+  --hero-glow-accent: color-mix(in srgb, rgba(var(--signal-yellow-rgb), 0.32) 65%, rgba(6, 10, 24, 0.78) 35%);
+  --hero-overlay-highlight: rgba(118, 154, 255, 0.34);
+  --hero-overlay-subtle: rgba(86, 126, 255, 0.26);
+  --hero-overlay-blend: screen;
+  --hero-overlay-opacity: 0.68;
+  --hero-phrase-bg-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 54%, rgba(10, 16, 32, 0.92) 46%);
+  --hero-phrase-bg-soft: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 52%, rgba(10, 16, 32, 0.92) 48%);
+  --hero-phrase-shadow: 0 32px 72px rgba(4, 8, 20, 0.56);
+  --hero-ring-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 66%, rgba(6, 10, 24, 0.82) 34%);
+  --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 62%, rgba(6, 10, 24, 0.82) 38%);
   --hero-orb-opacity: 0.48;
-  --hero-surface: color-mix(in srgb, var(--card) 68%, rgba(var(--voyage-blue-rgb), 0.36) 32%);
-  --hero-surface-strong: color-mix(in srgb, var(--card) 66%, rgba(var(--aurora-purple-rgb), 0.4) 34%);
-  --hero-grid-line: rgba(132, 153, 220, 0.24);
-  --hero-grid-line-strong: rgba(132, 153, 220, 0.34);
+  --hero-surface: color-mix(in srgb, var(--card) 62%, rgba(var(--voyage-blue-rgb), 0.4) 38%);
+  --hero-surface-strong: color-mix(in srgb, var(--card) 60%, rgba(var(--aurora-purple-rgb), 0.46) 40%);
+  --hero-grid-line: rgba(156, 178, 242, 0.32);
+  --hero-grid-line-strong: rgba(156, 178, 242, 0.42);
   --hero-accent: var(--accent-primary);
   --hero-secondary: color-mix(in srgb, var(--accent-secondary) 65%, var(--accent-primary) 35%);
   --hero-tertiary: color-mix(in srgb, var(--accent-tertiary) 55%, var(--accent-secondary) 45%);
   --hero-grid-line-color: var(--hero-grid-line);
   --hero-grid-line-strong-color: var(--hero-grid-line-strong);
 
-  --shadow-xs: 0 12px 28px rgba(0, 3, 12, 0.55);
-  --shadow-sm: 0 20px 44px rgba(0, 3, 12, 0.58);
-  --shadow-md: 0 32px 68px rgba(0, 3, 12, 0.62);
-  --shadow-lg: 0 44px 92px rgba(0, 3, 12, 0.66);
-  --shadow-xl: 0 60px 128px rgba(0, 3, 12, 0.7);
+  --shadow-xs: 0 14px 32px rgba(4, 12, 30, 0.42);
+  --shadow-sm: 0 24px 52px rgba(4, 12, 30, 0.48);
+  --shadow-md: 0 34px 78px rgba(4, 12, 30, 0.54);
+  --shadow-lg: 0 48px 108px rgba(4, 12, 30, 0.6);
+  --shadow-xl: 0 68px 140px rgba(4, 12, 30, 0.66);
 
   --grain-blend-mode: soft-light;
-  --grain-opacity: 0.22;
+  --grain-opacity: 0.2;
 
-  --control-surface: color-mix(in srgb, var(--card) 74%, rgba(var(--voyage-blue-rgb), 0.34) 26%);
-  --control-surface-hover: color-mix(in srgb, var(--card) 72%, rgba(var(--aurora-purple-rgb), 0.36) 28%);
-  --control-surface-active: color-mix(in srgb, var(--card) 70%, rgba(var(--aurora-purple-rgb), 0.4) 30%);
-  --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 64%, rgba(242, 245, 249, 0.24) 36%);
-  --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.54) 66%, rgba(242, 245, 249, 0.32) 34%);
-  --control-ring: rgba(var(--voyage-blue-rgb), 0.54);
+  --control-surface: color-mix(in srgb, rgba(18, 28, 48, 0.92) 58%, rgba(var(--voyage-blue-rgb), 0.36) 42%);
+  --control-surface-hover: color-mix(in srgb, rgba(18, 28, 48, 0.94) 56%, rgba(var(--aurora-purple-rgb), 0.38) 44%);
+  --control-surface-active: color-mix(in srgb, rgba(18, 28, 48, 0.96) 52%, rgba(var(--aurora-purple-rgb), 0.42) 48%);
+  --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 66%, rgba(214, 224, 244, 0.28) 34%);
+  --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.6) 68%, rgba(214, 224, 244, 0.36) 32%);
+  --control-ring: rgba(var(--voyage-blue-rgb), 0.58);
 }
 
 

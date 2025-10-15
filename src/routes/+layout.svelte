@@ -2,6 +2,7 @@
   import '$lib/styles/theme.css';
   import '$lib/styles/global.css';
   import '$lib/styles/typography.css';
+  import '$lib/styles/forms.css';
   import '$lib/styles/animations.css';
   import '$lib/styles/layout-grid.css';
   import Navigation from '$components/Navigation.svelte';
@@ -11,16 +12,14 @@
   import ParticleNetwork from '$components/ParticleNetwork.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import en from '$lib/i18n/en.json';
-  import { morphGradient } from '$lib/animations';
   import { theme, availableThemes } from '$stores/theme';
   import { browser } from '$app/environment';
 
   export let data;
 
-  let cleanupMorphGradient: { destroy: () => void; };
 
   const isTheme = (value: string): value is (typeof availableThemes)[number] =>
     availableThemes.includes(value as (typeof availableThemes)[number]);
@@ -30,16 +29,6 @@
     if (savedTheme && isTheme(savedTheme)) {
       theme.set(savedTheme);
     }
-
-    cleanupMorphGradient = morphGradient(document.documentElement, {
-      speed: 20000 // A longer duration for a subtle, calm shift
-    });
-  });
-
-  onDestroy(() => {
-    if (cleanupMorphGradient) {
-      cleanupMorphGradient.destroy();
-    }
   });
 
   $: routeKey = $page.url.pathname;
@@ -47,10 +36,15 @@
   const accentClassForPath = (pathname: string): string => {
     if (pathname === '/') return 'page-home';
     if (pathname.startsWith('/products')) return 'page-products';
+    if (pathname.startsWith('/services') || pathname.startsWith('/solutions')) return 'page-services';
     if (pathname.startsWith('/consulting')) return 'page-consulting';
+    if (pathname.startsWith('/educational-outreach')) return 'page-outreach';
     if (pathname.startsWith('/education')) return 'page-education';
     if (pathname.startsWith('/about')) return 'page-about';
     if (pathname.startsWith('/education-hub') || pathname.startsWith('/resources')) return 'page-education-hub';
+    if (pathname.startsWith('/help-center')) return 'page-support';
+    if (pathname.startsWith('/nodevoyage')) return 'page-nodevoyage';
+    if (pathname.startsWith('/ideonautix')) return 'page-ideonautix';
     if (pathname.startsWith('/contact')) return 'page-contact';
     return 'page-generic';
   };
@@ -68,6 +62,9 @@
       'page-about',
       'page-education-hub',
       'page-contact',
+      'page-support',
+      'page-nodevoyage',
+      'page-ideonautix',
       'page-generic'
     );
     document.body.classList.add(currentAccentClass);
@@ -157,6 +154,9 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: var(--z-base, 0);
+    isolation: isolate;
   }
 
   .skip-link {

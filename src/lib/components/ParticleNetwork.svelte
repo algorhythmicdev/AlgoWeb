@@ -1,11 +1,12 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { onMount, onDestroy } from 'svelte';
+  import { page } from '$app/stores';
+  import { onMount, onDestroy, tick } from 'svelte';
   import { theme } from '$stores/theme';
 
   const MAX_PARTICLES = 96;
-  const BASE_SPEED = 0.22;
-  const POINTER_PULL = 110;
+  const BASE_SPEED = 0.18;
+  const POINTER_PULL = 120;
 
   let canvas: HTMLCanvasElement | null = null;
   let ctx: CanvasRenderingContext2D | null = null;
@@ -17,11 +18,27 @@
   let lastTimestamp = 0;
   let dpr = 1;
 
+  type RGB = { r: number; g: number; b: number };
+
   type Palette = {
     node: string;
     nodeAlt: string;
     link: string;
     glow: string;
+  };
+
+  const DEFAULT_LIGHT_PALETTE: Palette = {
+    node: 'rgba(30, 92, 255, 0.85)',
+    nodeAlt: 'rgba(30, 92, 255, 0)',
+    link: 'rgba(30, 92, 255, 0.18)',
+    glow: 'rgba(120, 170, 255, 0.26)'
+  };
+
+  const DEFAULT_DARK_PALETTE: Palette = {
+    node: 'rgba(124, 90, 255, 0.85)',
+    nodeAlt: 'rgba(124, 90, 255, 0)',
+    link: 'rgba(124, 90, 255, 0.22)',
+    glow: 'rgba(110, 134, 255, 0.28)'
   };
 
   class Particle {
@@ -60,7 +77,7 @@
         const dy = mouse.y - this.y;
         const dist = Math.hypot(dx, dy) || 1;
         if (dist < POINTER_PULL) {
-          const force = (1 - dist / POINTER_PULL) * 0.6;
+          const force = (1 - dist / POINTER_PULL) * 0.65;
           this.vx -= (dx / dist) * force * 0.05;
           this.vy -= (dy / dist) * force * 0.05;
         }
@@ -79,34 +96,143 @@
       gradient.addColorStop(0, palette.node);
       gradient.addColorStop(1, palette.nodeAlt);
 
+      context.save();
       context.fillStyle = gradient;
+      context.globalAlpha = 0.85;
+      context.shadowColor = palette.glow;
+      context.shadowBlur = this.radius * 6;
+      context.shadowOffsetX = 0;
+      context.shadowOffsetY = 0;
       context.beginPath();
-      context.globalAlpha = 0.8;
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       context.fill();
+      context.restore();
     }
   }
 
-  function paletteForTheme(): Palette {
-    const isDark = $theme === 'dark';
-    return isDark
-      ? {
-          node: 'rgba(124, 90, 255, 0.85)',
-          nodeAlt: 'rgba(124, 90, 255, 0)',
-          link: 'rgba(124, 90, 255, 0.18)',
-          glow: 'rgba(110, 134, 255, 0.12)'
-        }
-      : {
-          node: 'rgba(30, 92, 255, 0.85)',
-          nodeAlt: 'rgba(30, 92, 255, 0)',
-          link: 'rgba(30, 92, 255, 0.14)',
-          glow: 'rgba(120, 170, 255, 0.18)'
-        };
+  let palette: Palette = DEFAULT_LIGHT_PALETTE;
+  let paletteSignature = '';
+
+  function parseHex(value: string): RGB | null {
+    const hex = value.replace('#', '').trim();
+    if (![3, 6].includes(hex.length)) return null;
+    const expanded = hex.length === 3 ? hex.split('').map((char) => `${char}${char}`).join('') : hex;
+    const int = Number.parseInt(expanded, 16);
+    if (Number.isNaN(int)) return null;
+    return {
+      r: (int >> 16) & 255,
+      g: (int >> 8) & 255,
+      b: int & 255
+    };
+  }
+
+  function parseRgb(value: string): RGB | null {
+    const match = value.match(/\d+(?:\.\d+)?/g);
+    if (!match || match.length < 3) return null;
+    const [r, g, b] = match;
+    return {
+      r: Number.parseFloat(r),
+      g: Number.parseFloat(g),
+      b: Number.parseFloat(b)
+    };
+  }
+
+  function parseColor(value: string): RGB | null {
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    if (trimmed.startsWith('#')) return parseHex(trimmed);
+    if (trimmed.startsWith('rgb')) return parseRgb(trimmed);
+    return null;
+  }
+
+  function withAlpha(color: RGB, alpha: number) {
+    return `rgba(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(color.b)}, ${alpha})`;
+  }
+
+  function mixRgb(a: RGB, b: RGB, ratio: number): RGB {
+    const amount = Math.min(Math.max(ratio, 0), 1);
+    const mix = (x: number, y: number) => x * (1 - amount) + y * amount;
+    return {
+      r: mix(a.r, b.r),
+      g: mix(a.g, b.g),
+      b: mix(a.b, b.b)
+    };
+  }
+
+  function resolveColorValue(
+    value: string,
+    bodyStyles: CSSStyleDeclaration,
+    rootStyles: CSSStyleDeclaration,
+    depth = 0
+  ): string | null {
+    if (!value) return null;
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    if (!trimmed.startsWith('var(')) return trimmed;
+    if (depth > 6) return null;
+
+    const match = trimmed.match(/var\((--[A-Za-z0-9-_]+)(?:,\s*(.*))?\)/);
+    if (!match) return null;
+
+    const [, token, fallback] = match;
+    const nextValue =
+      bodyStyles.getPropertyValue(token)?.trim() ||
+      rootStyles.getPropertyValue(token)?.trim() ||
+      (fallback ? fallback.trim() : '');
+    return resolveColorValue(nextValue, bodyStyles, rootStyles, depth + 1);
+  }
+
+  function readAccentPalette(): { primary: RGB | null; secondary: RGB | null } | null {
+    if (!browser || !document.body) return null;
+    const bodyStyles = getComputedStyle(document.body);
+    const rootStyles = getComputedStyle(document.documentElement);
+    const primaryValue = resolveColorValue(bodyStyles.getPropertyValue('--accent-primary'), bodyStyles, rootStyles);
+    const secondaryValue = resolveColorValue(bodyStyles.getPropertyValue('--accent-secondary'), bodyStyles, rootStyles);
+    const primary = primaryValue ? parseColor(primaryValue) : null;
+    const secondary = secondaryValue ? parseColor(secondaryValue) : null;
+    if (!primary && !secondary) return null;
+    return { primary, secondary };
+  }
+
+  function fallbackPalette(): Palette {
+    return $theme === 'dark' ? DEFAULT_DARK_PALETTE : DEFAULT_LIGHT_PALETTE;
+  }
+
+  function buildPalette(): Palette {
+    const accentPalette = readAccentPalette();
+    if (!accentPalette) {
+      return fallbackPalette();
+    }
+
+    const themeName = $theme;
+    const primary = accentPalette.primary ?? { r: 30, g: 92, b: 255 };
+    const secondary = accentPalette.secondary ?? primary;
+    const isDark = themeName === 'dark';
+
+    const altBase = mixRgb(primary, { r: 255, g: 255, b: 255 }, isDark ? 0.22 : 0.3);
+
+    return {
+      node: withAlpha(primary, isDark ? 0.88 : 0.84),
+      nodeAlt: withAlpha(altBase, 0),
+      link: withAlpha(secondary, isDark ? 0.28 : 0.22),
+      glow: withAlpha(primary, isDark ? 0.36 : 0.3)
+    };
+  }
+
+  function updatePalette(force = false) {
+    if (!browser) return;
+    const next = buildPalette();
+    const nextSignature = JSON.stringify(next);
+    if (!force && nextSignature === paletteSignature) {
+      return;
+    }
+    palette = next;
+    paletteSignature = nextSignature;
   }
 
   function targetParticleCount(width: number, height: number) {
     const area = width * height;
-    const density = 24000;
+    const density = 28000;
     return Math.min(MAX_PARTICLES, Math.max(36, Math.round(area / density)));
   }
 
@@ -149,16 +275,16 @@
     lastTimestamp = timestamp;
 
     clear();
-    const palette = paletteForTheme();
+    const paletteRef = palette;
 
     particles.forEach((particle) => {
       particle.update(width, height, delta);
-      particle.draw(ctx!, palette);
+      particle.draw(ctx!, paletteRef);
     });
 
     ctx.globalAlpha = 1;
-    drawConnections(ctx, palette);
-    drawPointerGlow(ctx, palette);
+    drawConnections(ctx, paletteRef);
+    drawPointerGlow(ctx, paletteRef);
 
     animationId = requestAnimationFrame(renderFrame);
   }
@@ -172,13 +298,13 @@
         const dx = a.x - b.x;
         const dy = a.y - b.y;
         const dist = Math.hypot(dx, dy);
-        const maxDistance = 150 * (a.depth + b.depth) * 0.55;
+        const maxDistance = 160 * (a.depth + b.depth) * 0.55;
 
         if (dist < maxDistance) {
           const alpha = 1 - dist / maxDistance;
           context.strokeStyle = palette.link;
-          context.globalAlpha = alpha;
-          context.lineWidth = 0.9;
+          context.globalAlpha = alpha * 0.9;
+          context.lineWidth = 1;
           context.beginPath();
           context.moveTo(a.x, a.y);
           context.lineTo(b.x, b.y);
@@ -230,6 +356,25 @@
     removeListener?: (listener: (event: MediaQueryListEvent) => void) => void;
   };
 
+  let lastPathname = '';
+  let lastThemeName: string | undefined;
+
+  $: if (browser) {
+    const pathname = $page.url.pathname;
+    if (pathname !== lastPathname) {
+      lastPathname = pathname;
+      tick().then(() => updatePalette());
+    }
+  }
+
+  $: if (browser) {
+    const themeName = $theme;
+    if (themeName !== lastThemeName) {
+      lastThemeName = themeName;
+      tick().then(() => updatePalette());
+    }
+  }
+
   onMount(() => {
     if (!browser) return;
 
@@ -254,7 +399,10 @@
       legacyMotionQuery.addListener(onMotionChange);
     }
 
-    configureCanvas();
+    tick().then(() => {
+      configureCanvas();
+      updatePalette(true);
+    });
 
     updateMotionPreference(motionQuery.matches);
 
@@ -295,9 +443,11 @@
   .particle-network {
     position: fixed;
     inset: 0;
-    z-index: var(--z-background);
+    z-index: var(--z-behind, -10);
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.52;
+    mix-blend-mode: screen;
+    transition: opacity var(--duration-smooth) var(--ease-smooth);
   }
 
   :global([data-theme='hc']) .particle-network {

@@ -309,135 +309,213 @@
 <style>
   .language-switcher {
     position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    isolation: isolate;
   }
 
   .current-lang {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
-    min-width: 120px;
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
-    border-radius: 24px;
+    padding: calc(var(--space-sm) + 0.15rem) clamp(1rem, 4vw, 1.45rem);
+    min-width: clamp(6.5rem, 10vw, 7.75rem);
+    border-radius: var(--radius-pill, 999px);
+    border: 1.5px solid var(--surface-pill-border);
+    background: color-mix(in srgb, var(--surface-pill-bg) 88%, transparent 12%);
+    color: color-mix(in srgb, var(--surface-chip-color) 92%, var(--voyage-blue) 8%);
     font-weight: var(--weight-semibold);
-    font-size: var(--text-body);
-    color: var(--text);
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    letter-spacing: 0.02em;
     cursor: pointer;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--surface-pill-shadow);
+    backdrop-filter: blur(calc(var(--glass-blur) * 0.65)) saturate(1.06);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.65)) saturate(1.06);
     transition:
       transform var(--duration-normal) var(--ease-spring),
       box-shadow var(--duration-normal) var(--ease-smooth),
-      border-color var(--duration-fast) ease;
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .current-lang svg {
+    width: 14px;
+    height: 9px;
+    opacity: 0.72;
+    pointer-events: none;
   }
 
   .current-lang:hover {
-    transform: var(--transform-hover-lift);
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--surface-pill-border) 70%, rgba(var(--voyage-blue-rgb), 0.45) 30%);
+    box-shadow: 0 18px 36px rgba(var(--ink-rgb), 0.18);
+    color: var(--text);
   }
 
   .current-lang:focus-visible {
     outline: none;
-    transform: var(--transform-hover-lift);
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-xl), var(--focus-ring-shadow);
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--surface-pill-border) 70%, rgba(var(--voyage-blue-rgb), 0.5) 30%);
+    box-shadow: 0 22px 40px rgba(var(--ink-rgb), 0.22), var(--focus-ring-shadow);
   }
 
   .dropdown {
     position: absolute;
-    top: calc(100% + var(--space-md));
+    top: calc(100% + clamp(0.4rem, 1.8vw, 0.85rem));
     right: 0;
-    min-width: 220px;
-    background: var(--bg-elev-1);
-    border: 2px solid var(--border);
-    border-radius: 24px;
-    box-shadow: var(--shadow-2xl);
-    padding: var(--space-md);
+    min-width: clamp(13rem, 32vw, 16rem);
+    padding: clamp(0.75rem, 2vw, 1rem);
+    border-radius: clamp(1.25rem, 3vw, 1.75rem);
+    border: 1.5px solid var(--surface-panel-border);
+    background: color-mix(in srgb, var(--surface-panel-bg) 92%, transparent 8%);
+    box-shadow: var(--surface-panel-shadow);
+    backdrop-filter: blur(calc(var(--glass-blur) * 0.75)) saturate(1.05);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.75)) saturate(1.05);
     z-index: var(--z-overlay);
+    display: grid;
+    gap: clamp(0.35rem, 1.8vw, 0.6rem);
   }
 
   .lang-option {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    gap: var(--space-md);
+    gap: clamp(0.45rem, 2vw, 0.75rem);
     width: 100%;
-    padding: var(--space-md) var(--space-lg);
-    background: transparent;
-    border: none;
-    border-radius: 16px;
+    padding: clamp(0.6rem, 2.2vw, 0.9rem) clamp(0.8rem, 2.6vw, 1.15rem);
+    border-radius: clamp(0.85rem, 2.4vw, 1.15rem);
+    border: 1px solid color-mix(in srgb, var(--surface-chip-border) 70%, transparent 30%);
+    background: color-mix(in srgb, var(--surface-chip-bg) 75%, transparent 25%);
+    color: var(--text);
     text-align: left;
     cursor: pointer;
     transition:
       transform var(--duration-fast) var(--ease-spring),
+      border-color var(--duration-fast) ease,
+      box-shadow var(--duration-fast) ease,
       background var(--duration-fast) ease;
   }
 
   .lang-option:hover {
-    background: var(--bg-elev-2);
-    transform: var(--transform-hover-card);
+    background: color-mix(in srgb, var(--surface-chip-bg) 82%, transparent 18%);
+    border-color: color-mix(in srgb, var(--surface-chip-border) 60%, rgba(var(--voyage-blue-rgb), 0.4) 40%);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(var(--ink-rgb), 0.16);
   }
 
   .lang-option:focus-visible {
-    background: var(--bg-elev-2);
-    outline: 2px solid var(--focus-ring-color);
-    outline-offset: 2px;
+    outline: none;
+    background: color-mix(in srgb, var(--surface-chip-bg) 88%, transparent 12%);
+    border-color: color-mix(in srgb, var(--surface-chip-border) 55%, rgba(var(--voyage-blue-rgb), 0.5) 45%);
+    box-shadow: 0 16px 34px rgba(var(--ink-rgb), 0.2), var(--focus-ring-shadow);
   }
 
   .lang-option.active {
-    background: color-mix(in srgb, var(--voyage-blue) 10%, var(--bg-elev-2) 90%);
-    color: var(--voyage-blue);
-    font-weight: var(--weight-bold);
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.24) 55%, var(--surface-chip-bg) 45%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 60%, rgba(255, 255, 255, 0.48) 40%);
+    box-shadow: 0 16px 36px rgba(var(--voyage-blue-rgb), 0.22);
+    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--text) 30%);
+    font-weight: var(--weight-semibold);
+  }
+
+  .lang-option.active .label {
+    color: currentColor;
   }
 
   .label {
     font-weight: var(--weight-semibold);
-    font-size: var(--text-body);
-    color: var(--text);
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    color: color-mix(in srgb, var(--text) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
     white-space: nowrap;
   }
 
   .name {
-    font-size: var(--text-small);
-    color: var(--text-secondary);
+    font-size: clamp(0.82rem, 1vw, 0.92rem);
+    color: color-mix(in srgb, var(--text-secondary) 88%, rgba(var(--voyage-blue-rgb), 0.08) 12%);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  svg { pointer-events: none; }
+  :global(html[data-theme='dark']) .current-lang {
+    color: color-mix(in srgb, rgba(255, 255, 255, 0.92) 76%, rgba(var(--voyage-blue-rgb), 0.4) 24%);
+    border-color: color-mix(in srgb, rgba(255, 255, 255, 0.16) 55%, rgba(var(--voyage-blue-rgb), 0.4) 45%);
+    box-shadow: 0 18px 40px rgba(4, 10, 26, 0.48);
+  }
 
-  @keyframes switcherFocusPulse {
-    0%,
-    100% {
-      box-shadow:
-        var(--focus-ring-shadow),
-        0 0 0 5px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
-        0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
+  :global(html[data-theme='dark']) .dropdown {
+    background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.82) 68%, rgba(var(--voyage-blue-rgb), 0.28) 32%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 60%, rgba(255, 255, 255, 0.16) 40%);
+    box-shadow: 0 26px 56px rgba(2, 6, 18, 0.6);
+  }
+
+  :global(html[data-theme='dark']) .lang-option {
+    background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.78) 62%, rgba(var(--voyage-blue-rgb), 0.22) 38%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 55%, rgba(255, 255, 255, 0.12) 45%);
+    color: color-mix(in srgb, rgba(255, 255, 255, 0.86) 70%, rgba(var(--voyage-blue-rgb), 0.3) 30%);
+  }
+
+  :global(html[data-theme='dark']) .lang-option:hover {
+    background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.8) 58%, rgba(var(--voyage-blue-rgb), 0.32) 42%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 60%, rgba(255, 255, 255, 0.16) 40%);
+  }
+
+  :global(html[data-theme='dark']) .lang-option.active {
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.42) 60%, rgba(var(--graphite-rgb), 0.76) 40%);
+    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.52) 65%, rgba(255, 255, 255, 0.24) 35%);
+    box-shadow: 0 18px 42px rgba(var(--voyage-blue-rgb), 0.35);
+    color: color-mix(in srgb, rgba(255, 255, 255, 0.92) 72%, rgba(var(--voyage-blue-rgb), 0.46) 28%);
+  }
+
+  :global(html[data-theme='hc']) .current-lang {
+    background: var(--surface-pill-hc-bg);
+    border-color: var(--surface-pill-hc-border);
+    box-shadow: var(--surface-pill-hc-shadow);
+    color: var(--surface-pill-hc-color);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  :global(html[data-theme='hc']) .dropdown {
+    background: var(--surface-panel-hc-bg);
+    border-color: var(--surface-panel-hc-border);
+    box-shadow: var(--surface-panel-hc-shadow);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  :global(html[data-theme='hc']) .lang-option,
+  :global(html[data-theme='hc']) .lang-option:hover,
+  :global(html[data-theme='hc']) .lang-option:focus-visible,
+  :global(html[data-theme='hc']) .lang-option.active {
+    background: transparent;
+    border-color: currentColor;
+    box-shadow: none;
+    color: currentColor;
+  }
+
+  :global(html[data-theme='hc']) .lang-option:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 720px) {
+    .current-lang {
+      padding-inline: clamp(0.85rem, 4vw, 1.05rem);
+      min-width: 0;
     }
 
-    50% {
-      box-shadow:
-        0 0 0 4px color-mix(in srgb, var(--focus-ring-color, var(--voyage-blue)) 75%, transparent 25%),
-        0 0 0 8px color-mix(in srgb, var(--control-ring) 70%, transparent 30%),
-        0 18px 36px rgba(var(--voyage-blue-rgb), 0.18);
+    .dropdown {
+      inset-inline: auto 0;
+      min-width: clamp(12rem, 60vw, 15rem);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .current-lang:focus-visible {
-      animation: none;
+    .current-lang,
+    .lang-option {
+      transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease;
     }
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .current-lang:focus-visible {
-    box-shadow: var(--focus-ring-contrast);
-    animation: none;
-  }
-
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .lang-option:focus-visible {
-    outline: 2px solid currentColor;
   }
 </style>

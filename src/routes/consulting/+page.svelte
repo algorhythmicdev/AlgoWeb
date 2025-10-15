@@ -380,7 +380,7 @@
   </svelte:fragment>
 </Hero>
 
-<section class="quick-facts" use:revealOnScroll>
+<section class="section quick-facts" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="quick-facts__card" halo>
       <span class="section-eyebrow">{t('consulting.page.quick_facts_eyebrow', 'At a glance')}</span>
@@ -399,7 +399,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="packages" id="packages" aria-labelledby="packages-heading" use:revealOnScroll>
+<section class="section packages" data-surface="glow" id="packages" aria-labelledby="packages-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
       <span class="section-eyebrow">{t('consulting.packages_title', 'How we help')}</span>
@@ -433,7 +433,7 @@
   </div>
 </section>
 
-<section class="approach" use:revealOnScroll>
+<section class="section approach" data-surface="glow" use:revealOnScroll>
   <div class="container approach__grid">
     <div class="approach__summary">
       <span class="section-eyebrow">{t('consulting.page.approach_eyebrow', 'Our philosophy')}</span>
@@ -458,7 +458,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="process" use:revealOnScroll>
+<section class="section process" data-surface="glow" use:revealOnScroll>
   <div class="container process__grid">
     <div>
       <span class="section-eyebrow">{t('consulting.page.process_eyebrow', 'Pilot flow')}</span>
@@ -493,7 +493,7 @@
   </div>
 </section>
 
-<section class="requirements" use:revealOnScroll>
+<section class="section requirements" data-surface="glow" use:revealOnScroll>
   <div class="container requirements__grid">
     <GlassCard class="requirements-card" halo>
       <h2>{t(requirements.titleKey, requirements.titleFallback)}</h2>
@@ -524,7 +524,7 @@
 
 <SectionDivider tone="aurora" />
 
-<section class="examples" use:revealOnScroll>
+<section class="section examples" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
       <span class="section-eyebrow">{t('consulting.page.examples_eyebrow', 'Sample impact')}</span>
@@ -552,7 +552,7 @@
 
 <SectionDivider tone="neutral" />
 
-<section class="application" id="apply" use:revealOnScroll>
+<section class="section application" data-surface="glow" id="apply" use:revealOnScroll>
   <div class="container">
     <GlassCard class="application-card" halo>
       <span class="section-eyebrow">{t('consulting.form_title', 'Apply for the pilot')}</span>
@@ -566,7 +566,7 @@
       {/if}
 
       <form class="form" on:submit={handleSubmit}>
-        <label>
+        <label class="form-field">
           <span>{t('consulting.form_company', 'Company')}</span>
           <input
             type="text"
@@ -579,7 +579,7 @@
           {/if}
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('consulting.form_name', 'Contact name')}</span>
           <input
             type="text"
@@ -592,7 +592,7 @@
           {/if}
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('consulting.form_email', 'Email')}</span>
           <input
             type="email"
@@ -605,12 +605,12 @@
           {/if}
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('consulting.form_phone', 'Phone (optional)')}</span>
           <input type="tel" bind:value={formData.phone} on:input={resetStatus} />
         </label>
 
-        <label>
+        <label class="form-field">
           <span>{t('consulting.form_industry', 'Industry')}</span>
           <select bind:value={formData.industry} on:change={resetStatus} aria-invalid={errors.industry ? 'true' : 'false'}>
             <option value="">{t('consulting.select_industry', 'Select industry...')}</option>
@@ -623,7 +623,7 @@
           {/if}
         </label>
 
-        <label class="form--full">
+        <label class="form-field form--full">
           <span>{t('consulting.form_description', 'Describe your AI needs')}</span>
           <textarea
             rows="5"
@@ -642,7 +642,7 @@
   </div>
 </section>
 
-<section class="cta" use:revealOnScroll>
+<section class="section cta" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo interactive>
       <span class="section-eyebrow">{t('consulting.page.cta_eyebrow', 'Next steps')}</span>
@@ -697,6 +697,65 @@
 
   .hero-highlights :global(.icon) {
     color: var(--accent-secondary, var(--voyage-blue));
+  }
+
+  .section.quick-facts,
+  .section.packages,
+  .section.approach,
+  .section.process,
+  .section.requirements,
+  .section.examples,
+  .section.application,
+  .section.cta {
+    isolation: isolate;
+  }
+
+  .section.quick-facts {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.1);
+  }
+
+  .section.packages {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.approach {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.process {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .section.requirements {
+    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.18);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.16);
+    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.12);
+  }
+
+  .section.examples {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  .section.application {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
+  }
+
+  .section.cta {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.18);
   }
 
   .hero-spots {
@@ -951,57 +1010,48 @@
     gap: 1.5rem;
   }
 
-  .form {
-    display: grid;
-    gap: 1.2rem;
+  .application .form {
+    --form-gap: clamp(1rem, 3vw, 1.5rem);
+    --form-field-radius: 14px;
+    --form-field-padding-y: 0.8rem;
+    --form-field-padding-x: 1rem;
+    --form-label-color: color-mix(in srgb, var(--text) 86%, transparent 14%);
+    --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
+    --form-field-border: color-mix(
+      in srgb,
+      var(--surface-field-border, color-mix(in srgb, var(--border) 78%, transparent 22%)) 84%,
+      transparent 16%
+    );
+    --form-field-border-focus: color-mix(
+      in srgb,
+      var(--aurora-purple) 56%,
+      rgba(var(--voyage-blue-rgb), 0.42) 44%
+    );
+    --form-focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
+    --form-field-shadow: 0 16px 32px rgba(var(--ink-rgb), 0.12), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
+    --form-textarea-min-height: 200px;
+    --form-actions-gap: 0.75rem;
+    --form-note-color: color-mix(in srgb, var(--text) 62%, transparent 38%);
+    --form-status-padding: 0.75rem 1rem;
+    --form-status-bg: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
+    --form-status-success-color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text) 32%);
+    --form-status-success-bg: color-mix(in srgb, var(--glass-bg-lightest) 62%, transparent 38%);
+    --form-status-error-bg: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
+    --form-status-error-color: var(--cherry-pop);
   }
 
-  .form label {
-    display: grid;
-    gap: 0.4rem;
+  .application .form-status {
+    text-wrap: balance;
   }
 
-  .form input,
-  .form select,
-  .form textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 14px;
-    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent 20%);
-    background: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
-    color: var(--text);
-    font-size: 1rem;
-  }
+  @media (min-width: 860px) {
+    .application .form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-  .form textarea {
-    resize: vertical;
-    min-height: 160px;
-  }
-
-  .form--full {
-    grid-column: 1 / -1;
-  }
-
-  .field-error {
-    color: var(--cherry-pop);
-    font-size: 0.9rem;
-  }
-
-  .form-status {
-    margin: 0;
-    padding: 0.75rem 1rem;
-    border-radius: 14px;
-    font-weight: 600;
-  }
-
-  .form-status--success {
-    background: color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%);
-    color: var(--accent-primary, var(--aurora-purple));
-  }
-
-  .form-status--error {
-    background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
-    color: var(--cherry-pop);
+    .application .form .form--full {
+      grid-column: 1 / -1;
+    }
   }
 
   :global(.cta-card) {
