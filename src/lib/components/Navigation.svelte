@@ -274,7 +274,7 @@
         role="navigation"
         aria-label={$_('nav.primary_label')}
         data-open={$navigation.isMenuOpen}
-        aria-hidden={isCompactViewport && !$navigation.isMenuOpen ? 'true' : undefined}
+        inert={isCompactViewport && !$navigation.isMenuOpen ? true : undefined}
         padding="sm"
       >
         <div class="nav-mobile-header">
@@ -927,59 +927,68 @@
   }
 
   @media (max-width: 960px) {
+    .nav-surface {
+      padding: var(--space-xs) 0;
+    }
+
+    .nav-window-controls {
+      display: none;
+    }
+
+    .nav-brand img {
+      width: 130px;
+    }
+
     .nav-groups {
-      gap: 0.75rem;
+      gap: var(--space-xs);
     }
 
     .nav-mobile-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: clamp(0.75rem, 4vw, 1.25rem);
-      padding-bottom: clamp(0.35rem, 2vw, 0.6rem);
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
       border-bottom: 1px solid color-mix(in srgb, var(--surface-field-border) 78%, transparent 22%);
     }
 
     .nav-list {
-      margin-top: clamp(0.6rem, 3vw, 0.9rem);
+      margin-top: var(--space-sm);
     }
 
     .nav-links {
       position: fixed;
-      top: clamp(4.25rem, 12vw, 5.5rem);
-      right: clamp(1.25rem, 5vw, 2rem);
-      left: clamp(1.25rem, 5vw, 2rem);
-      width: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       max-width: none;
-      padding: clamp(1rem, 4vw, 1.5rem);
-      border-radius: clamp(1.9rem, 6vw, 2.8rem);
+      max-height: none;
+      padding: var(--space-xl);
+      border-radius: 0;
       flex-direction: column;
       align-items: stretch;
-      gap: clamp(1rem, 4vw, 1.5rem);
-      --card-gap: clamp(0.75rem, 3vw, 1.1rem);
-      --glass-card-radius: clamp(1.9rem, 6vw, 2.8rem);
-      --glass-card-surface: color-mix(in srgb, var(--glass-bg-lighter) 88%, rgba(var(--voyage-blue-rgb), 0.08) 12%);
-      --glass-card-border: color-mix(in srgb, var(--glass-border-strong) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
-      --glass-card-shadow: var(--shadow-3xl);
-      --glass-card-veil-opacity: 0.44;
-      --glass-card-halo-opacity: 0.28;
-      --glass-card-halo: rgba(var(--aurora-purple-rgb), 0.32);
-      backdrop-filter: blur(26px) saturate(1.12);
-      -webkit-backdrop-filter: blur(26px) saturate(1.12);
-      transform: translateY(-20px);
-      opacity: 0;
+      gap: var(--space-lg);
+      --card-gap: var(--space-md);
+      --glass-card-radius: 0;
+      --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 98%, rgba(var(--voyage-blue-rgb), 0.04) 2%);
+      --glass-card-border: transparent;
+      --glass-card-shadow: none;
+      --glass-card-veil-opacity: 0;
+      --glass-card-halo-opacity: 0;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      transform: translateX(100%);
+      opacity: 1;
       visibility: hidden;
       pointer-events: none;
-      max-height: calc(100vh - clamp(5.25rem, 14vw, 7rem));
       overflow-y: auto;
+      overscroll-behavior: contain;
       transition:
-        opacity var(--duration-normal) var(--ease-out),
         transform var(--duration-normal) var(--ease-out),
         visibility var(--duration-normal) var(--ease-out);
-    }
-
-    .nav-shell:not(.menu-open) .nav-links {
-      display: none;
     }
 
     .nav-shell.menu-open .nav-links {
@@ -1002,10 +1011,9 @@
     }
 
     :global(.nav-links[data-open='true']) {
-      opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      transform: translateY(0);
+      transform: translateX(0);
     }
 
     :global(.nav-links[data-open='true'])::-webkit-scrollbar {
@@ -1031,7 +1039,9 @@
     .nav-link {
       width: 100%;
       justify-content: space-between;
-      padding: clamp(0.75rem, 3vw, 1rem) clamp(0.9rem, 4vw, 1.25rem);
+      padding: var(--space-md) var(--space-lg);
+      min-height: 48px;
+      font-size: var(--text-body);
     }
 
     :global(.nav-item--group .nav-submenu) {
@@ -1072,12 +1082,12 @@
 
     .nav-mobile-controls {
       display: grid;
-      gap: clamp(0.75rem, 4vw, 1.1rem);
-      margin-top: clamp(0.75rem, 4vw, 1.25rem);
-      padding-top: clamp(0.75rem, 4vw, 1.1rem);
-      border-top: 1px solid color-mix(in srgb, var(--surface-field-border) 80%, transparent 20%);
-      grid-template-columns: minmax(0, 1fr);
-      align-items: center;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 2px solid color-mix(in srgb, var(--surface-field-border) 80%, transparent 20%);
+      grid-template-columns: 1fr;
+      align-items: stretch;
     }
 
     .nav-mobile-controls :global(.language-switcher),
@@ -1253,14 +1263,16 @@
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .nav-links {
-    background: transparent;
+    background: var(--bg);
     border: 2px solid currentColor;
     box-shadow: none;
-    --glass-card-surface: transparent;
+    --glass-card-surface: var(--bg);
     --glass-card-border: currentColor;
     --glass-card-shadow: none;
     --glass-card-veil-opacity: 0;
     --glass-card-halo-opacity: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast']) .nav-links::before),

@@ -335,10 +335,31 @@
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         box-shadow: none;
+        border: 2px solid currentColor;
+    }
+
+    :global(html[data-theme="hc"] .glass-card::before),
+    :global(html[data-theme="hc"] .glass-card::after) {
+        display: none;
     }
 
     :global(html[data-theme="hc"] .glass-card:focus-within) {
-        outline: 2px solid currentColor;
+        outline: 3px solid currentColor;
+        outline-offset: var(--space-xs);
+    }
+
+    @media (max-width: 640px) {
+        :global(html[data-theme="hc"] .glass-card) {
+            background: var(--bg);
+            border-width: 3px;
+        }
+
+        :global(html[data-theme="hc"] .glass-card p),
+        :global(html[data-theme="hc"] .glass-card h1),
+        :global(html[data-theme="hc"] .glass-card h2),
+        :global(html[data-theme="hc"] .glass-card h3) {
+            color: var(--text);
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {

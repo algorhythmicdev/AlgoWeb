@@ -122,6 +122,22 @@ html.nav-menu-open {
     overflow: hidden;
 }
 
+@media (max-width: 960px) {
+    html.nav-menu-open {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        touch-action: none;
+    }
+
+    html.nav-menu-open body {
+        position: fixed;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
 .section {
     position: relative;
     padding-block: var(--section-padding,
