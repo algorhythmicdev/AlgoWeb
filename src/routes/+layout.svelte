@@ -16,6 +16,7 @@
   import { page } from '$app/stores';
   import en from '$lib/i18n/en.json';
   import { theme, availableThemes } from '$stores/theme';
+  import { navigation } from '$stores/navigation';
   import { browser } from '$app/environment';
 
   export let data;
@@ -127,7 +128,7 @@
 <LoadingOverlay />
 
 <svelte:window on:keydown={(e)=>{ 
-  if (e.key === 't' && !document.body.classList.contains('modal-open') && !e.target.closest('input, textarea, [contenteditable]')) {
+  if (e.key === 't' && !document.body.classList.contains('modal-open') && !$navigation.isMenuOpen && !e.target.closest('input, textarea, [contenteditable]')) {
     theme.toggle();
   }
 }} />
