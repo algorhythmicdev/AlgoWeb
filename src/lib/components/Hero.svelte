@@ -587,6 +587,21 @@
             max-width: 100%;
             text-align: center;
         }
+
+        :global(html[data-theme="hc"] .hero) {
+            border-width: 3px;
+            padding-inline: var(--space-md);
+        }
+
+        :global(html[data-theme="hc"] .hero__content),
+        :global(html[data-theme="hc"] .hero__highlights) {
+            border-width: 3px;
+            padding: var(--space-lg);
+        }
+
+        :global(html[data-theme="hc"] .hero__content::before) {
+            display: none;
+        }
     }
 
     @media (max-width: 600px) {

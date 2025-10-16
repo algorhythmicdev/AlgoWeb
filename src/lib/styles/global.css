@@ -291,11 +291,18 @@ html[data-theme='dark'] .section[data-surface='glow']::after {
     border-radius: var(--radius-full);
     background: color-mix(in srgb, var(--surface-chip-bg) 82%, transparent 18%);
     border: 1px solid var(--surface-chip-border);
-    color: color-mix(in srgb, var(--text) 78%, rgba(var(--voyage-blue-rgb), 0.26) 22%);
+    color: var(--text);
     font-size: clamp(0.82rem, 1.35vw, 0.95rem);
     font-weight: var(--weight-semibold);
     letter-spacing: 0.14em;
     text-transform: uppercase;
+}
+
+html[data-theme='hc'] .section-eyebrow,
+html[data-theme='hc'] .section-heading__eyebrow {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--text);
 }
 
 .section-heading[data-align='center'] .section-eyebrow,
@@ -344,7 +351,7 @@ html[data-theme='dark'] .section[data-surface='glow']::after {
 .media-card__caption {
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
-    color: color-mix(in srgb, var(--text) 82%, transparent 18%);
+    color: var(--text-secondary);
 }
 
 @media (max-width: 960px) {
@@ -538,6 +545,35 @@ html[data-theme='hc'] .surface-panel {
     color: var(--surface-panel-hc-color, var(--text));
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+}
+
+html[data-theme='hc'] .media-card {
+    background: var(--bg);
+    border: 2px solid currentColor;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+html[data-theme='hc'] .media-card__image {
+    border: 2px solid currentColor;
+    box-shadow: none;
+    background: var(--bg);
+}
+
+html[data-theme='hc'] .media-card__caption {
+    color: var(--text);
+}
+
+@media (max-width: 640px) {
+    html[data-theme='hc'] .media-card {
+        border-width: 3px;
+        padding: var(--space-lg);
+    }
+
+    html[data-theme='hc'] .media-card__image {
+        border-width: 3px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

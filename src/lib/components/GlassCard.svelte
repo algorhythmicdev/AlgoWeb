@@ -301,11 +301,7 @@
         margin: 0;
         max-width: var(--measure-lg);
         line-height: var(--leading-relaxed, 1.65);
-        color: color-mix(
-            in srgb,
-            var(--text) 88%,
-            rgba(var(--voyage-blue-rgb), 0.18) 12%
-        );
+        color: var(--text);
         text-wrap: pretty;
         overflow-wrap: break-word;
     }
@@ -352,6 +348,15 @@
         :global(html[data-theme="hc"] .glass-card) {
             background: var(--bg);
             border-width: 3px;
+            padding: var(--space-lg);
+        }
+
+        :global(html[data-theme="hc"] .glass-card--pad-sm) {
+            padding: var(--space-md);
+        }
+
+        :global(html[data-theme="hc"] .glass-card--pad-lg) {
+            padding: var(--space-xl);
         }
 
         :global(html[data-theme="hc"] .glass-card p),
@@ -360,6 +365,17 @@
         :global(html[data-theme="hc"] .glass-card h3) {
             color: var(--text);
         }
+    }
+
+    :global(html[data-theme="hc"] .glass-card--interactive:hover) {
+        background: var(--bg);
+        border-color: currentColor;
+        box-shadow: none;
+        transform: none;
+    }
+
+    :global(html[data-theme="hc"] .glass-card--interactive:active) {
+        transform: scale(0.98);
     }
 
     @media (prefers-reduced-motion: reduce) {
