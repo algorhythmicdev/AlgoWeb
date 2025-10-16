@@ -26,40 +26,46 @@
   .section-divider {
     position: relative;
     width: min(100%, var(--section-divider-width, 1040px));
-    margin: clamp(2.5rem, 7vw, 4rem) auto;
+    margin: var(--space-4xl) auto;
     display: grid;
     place-items: center;
-    padding: clamp(0.65rem, 2.5vw, 1.25rem) clamp(1.25rem, 4vw, 2rem);
-    --divider-accent: rgba(var(--voyage-blue-rgb), 0.32);
-    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.24);
-    --divider-highlight: rgba(var(--signal-yellow-rgb), 0.2);
-    --divider-base: rgba(255, 255, 255, 0.08);
+    padding: var(--space-lg) var(--space-xl);
+    --divider-accent: rgba(var(--voyage-blue-rgb), 0.68);
+    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.58);
+    --divider-highlight: rgba(var(--signal-yellow-rgb), 0.48);
+    --divider-base: rgba(255, 255, 255, 0.22);
     isolation: isolate;
   }
 
   .section-divider__blur {
     position: absolute;
-    inset: 0;
-    border-radius: max(0px, calc(var(--glass-card-radius, 0) + 1.25rem));
-    background: color-mix(in srgb, var(--glass-bg-lightest) 46%, transparent 54%);
-    box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.08);
-    filter: blur(10px);
-    opacity: 0.38;
+    inset: calc(var(--space-md) * -1);
+    border-radius: var(--radius-2xl);
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--divider-accent) 28%, transparent 72%) 0%,
+      color-mix(in srgb, var(--divider-secondary) 22%, transparent 78%) 45%,
+      transparent 85%
+    );
+    box-shadow: var(--shadow-glass-lg);
+    filter: blur(32px);
+    opacity: 0.72;
   }
 
   .section-divider__line {
     position: absolute;
-    inset-inline: clamp(1.25rem, 6vw, 4.5rem);
-    height: 1px;
+    inset-inline: 0;
+    height: 2px;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      color-mix(in srgb, var(--divider-accent) 65%, var(--divider-base) 35%) 24%,
-      color-mix(in srgb, var(--divider-secondary) 60%, var(--divider-base) 40%) 50%,
-      color-mix(in srgb, var(--divider-highlight) 55%, var(--divider-base) 45%) 76%,
+      color-mix(in srgb, var(--divider-accent) 85%, var(--divider-base) 15%) 18%,
+      color-mix(in srgb, var(--divider-secondary) 82%, var(--divider-highlight) 18%) 50%,
+      color-mix(in srgb, var(--divider-highlight) 78%, var(--divider-base) 22%) 82%,
       transparent 100%
     );
-    box-shadow: 0 10px 20px rgba(var(--ink-rgb), 0.06);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--divider-accent) 45%, transparent 55%),
+                0 8px 16px rgba(var(--ink-rgb), 0.12);
   }
 
   .section-divider__label {
@@ -80,33 +86,33 @@
   }
 
   .section-divider--aurora {
-    --divider-accent: rgba(var(--aurora-purple-rgb), 0.58);
-    --divider-secondary: rgba(var(--voyage-blue-rgb), 0.45);
-    --divider-highlight: rgba(190, 210, 255, 0.36);
+    --divider-accent: rgba(var(--aurora-purple-rgb), 0.75);
+    --divider-secondary: rgba(var(--voyage-blue-rgb), 0.65);
+    --divider-highlight: rgba(190, 210, 255, 0.58);
   }
 
   .section-divider--citrus {
-    --divider-accent: rgba(var(--signal-yellow-rgb), 0.58);
-    --divider-secondary: rgba(var(--voyage-blue-rgb), 0.42);
-    --divider-highlight: rgba(255, 233, 185, 0.42);
+    --divider-accent: rgba(var(--signal-yellow-rgb), 0.78);
+    --divider-secondary: rgba(var(--voyage-blue-rgb), 0.62);
+    --divider-highlight: rgba(255, 233, 185, 0.62);
   }
 
   .section-divider--voyage {
-    --divider-accent: rgba(var(--voyage-blue-rgb), 0.6);
-    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.38);
-    --divider-highlight: rgba(140, 196, 255, 0.32);
+    --divider-accent: rgba(var(--voyage-blue-rgb), 0.78);
+    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.62);
+    --divider-highlight: rgba(140, 196, 255, 0.56);
   }
 
   .section-divider--cherry {
-    --divider-accent: rgba(var(--cherry-pop-rgb), 0.6);
-    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.4);
-    --divider-highlight: rgba(255, 202, 209, 0.38);
+    --divider-accent: rgba(var(--cherry-pop-rgb), 0.78);
+    --divider-secondary: rgba(var(--aurora-purple-rgb), 0.64);
+    --divider-highlight: rgba(255, 202, 209, 0.62);
   }
 
   .section-divider--neutral {
-    --divider-accent: rgba(140, 160, 200, 0.4);
-    --divider-secondary: rgba(180, 196, 226, 0.32);
-    --divider-highlight: rgba(255, 255, 255, 0.25);
+    --divider-accent: rgba(140, 160, 200, 0.62);
+    --divider-secondary: rgba(180, 196, 226, 0.52);
+    --divider-highlight: rgba(255, 255, 255, 0.48);
   }
 
   :global([data-base-theme='dark']) .section-divider__label {
@@ -132,11 +138,11 @@
 
   @media (max-width: 768px) {
     .section-divider {
-      margin-block: clamp(2.5rem, 10vw, 3.5rem);
+      margin-block: var(--space-3xl);
     }
 
     .section-divider__line {
-      inset-inline: clamp(1rem, 8vw, 3rem);
+      inset-inline: var(--space-lg);
     }
   }
 

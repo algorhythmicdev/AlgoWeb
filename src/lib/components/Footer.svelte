@@ -379,7 +379,7 @@
     }
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
     .footer-partners__actions {
       flex-direction: column;
       align-items: stretch;
@@ -390,7 +390,7 @@
     }
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 640px) {
     .footer-bottom {
       flex-direction: column;
       align-items: flex-start;

@@ -243,7 +243,7 @@
 <nav
   class="nav-shell os-window"
   class:nav-condensed={isScrolled}
-  class:hidden={$navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
+  class:hidden={!isCompactViewport && $navigation.scrollDirection === 'down' && $navigation.lastScrollY > 200}
   class:menu-open={$navigation.isMenuOpen}
   aria-label={$_('nav.primary_label')}
   use:focusTrap
@@ -393,20 +393,20 @@
   }
 
   .nav-shell > .container {
-    width: min(100%, var(--container-xl, 1200px));
+    width: min(100%, var(--container-xl));
     margin-inline: auto;
-    padding-inline: clamp(1.75rem, 5vw, 2.75rem);
+    padding-inline: var(--space-xl);
   }
 
   @media (max-width: 960px) {
     .nav-shell > .container {
-      padding-inline: clamp(1.25rem, 6vw, 2rem);
+      padding-inline: var(--space-lg);
     }
   }
 
   @media (max-width: 600px) {
     .nav-shell > .container {
-      padding-inline: clamp(0.85rem, 5vw, 1.4rem);
+      padding-inline: var(--space-md);
     }
   }
 
@@ -499,14 +499,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(1.5rem, 3vw, 2.75rem);
-    padding: clamp(1rem, 2.5vw, 1.5rem) 0;
+    gap: var(--space-xl);
+    padding: var(--space-lg) 0;
   }
 
   .nav-leading {
     display: flex;
     align-items: center;
-    gap: clamp(0.75rem, 2vw, 1.1rem);
+    gap: var(--space-md);
   }
 
   .nav-leading,
@@ -518,17 +518,17 @@
   .nav-window-controls {
     display: flex;
     align-items: center;
-    gap: clamp(0.4rem, 1vw, 0.65rem);
-    padding: clamp(0.3rem, 1vw, 0.45rem) clamp(0.4rem, 1.2vw, 0.55rem);
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-full);
     background: color-mix(in srgb, var(--surface-chip-bg) 70%, transparent 30%);
     border: 1px solid color-mix(in srgb, var(--surface-chip-border) 60%, transparent 40%);
-    box-shadow: 0 12px 28px rgba(var(--ink-rgb), 0.08);
+    box-shadow: var(--shadow-sm);
   }
 
   .nav-window-control {
-    width: clamp(0.6rem, 1.1vw, 0.75rem);
-    height: clamp(0.6rem, 1.1vw, 0.75rem);
+    width: 0.75rem;
+    height: 0.75rem;
     position: relative;
     border-radius: var(--radius-full);
     border: 1px solid transparent;
@@ -568,7 +568,7 @@
 
   .nav-brand img {
     display: block;
-    width: clamp(7rem, 20vw, 10rem);
+    width: 148px;
     height: auto;
     max-width: 100%;
   }
@@ -576,7 +576,7 @@
   .nav-groups {
     display: flex;
     align-items: center;
-    gap: clamp(1.25rem, 2.6vw, 2.25rem);
+    gap: var(--space-xl);
     flex: 1;
     justify-content: flex-end;
   }
@@ -1126,28 +1126,33 @@
 
   @media (max-width: 640px) {
     .nav-shell > .container {
-      padding-inline: clamp(0.75rem, 5.5vw, 1.15rem);
+      padding-inline: var(--space-md);
     }
 
     .nav-surface {
-      justify-content: flex-start;
-      gap: clamp(0.75rem, 5vw, 1.1rem);
-      padding-block: clamp(0.75rem, 5vw, 1rem);
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
     }
 
     .nav-leading {
-      display: none;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nav-brand img {
+      width: 120px;
     }
 
     .nav-groups {
-      width: 100%;
-      justify-content: flex-start;
+      width: auto;
+      justify-content: flex-end;
     }
 
     .nav-actions {
-      width: 100%;
-      justify-content: flex-start;
-      gap: clamp(0.4rem, 4vw, 0.65rem);
+      width: auto;
+      justify-content: flex-end;
+      gap: var(--space-xs);
     }
 
     .nav-actions :global(.language-switcher),
@@ -1157,35 +1162,40 @@
 
     .nav-trigger {
       display: inline-flex;
-      width: clamp(48px, 14vw, 56px);
-      height: clamp(48px, 14vw, 56px);
+      width: 44px;
+      height: 44px;
+    }
+
+    .nav-trigger span {
+      width: 18px;
+      height: 2px;
     }
   }
 
   @media (max-width: 600px) {
     .nav-surface {
-      padding: clamp(0.8rem, 3.5vw, 1rem) 0;
+      padding: var(--space-xs) 0;
       align-items: center;
     }
 
     .nav-brand img {
-      width: clamp(6.5rem, 36vw, 8.5rem);
+      width: 100px;
     }
 
     .nav-links {
-      top: clamp(4.5rem, 14vw, 5.5rem);
-      right: clamp(0.85rem, 5vw, 1.4rem);
-      left: clamp(0.85rem, 5vw, 1.4rem);
-      max-height: calc(100vh - clamp(5rem, 16vw, 7rem));
+      top: var(--space-4xl);
+      right: var(--space-md);
+      left: var(--space-md);
+      max-height: calc(100vh - var(--space-5xl));
     }
   }
 
   @media (max-width: 520px) {
     .nav-links {
-      top: clamp(4.25rem, 16vw, 5.25rem);
-      left: clamp(0.75rem, 5vw, 1.2rem);
-      right: clamp(0.75rem, 5vw, 1.2rem);
-      max-height: calc(100vh - clamp(4.75rem, 18vw, 6.75rem));
+      top: var(--space-3xl);
+      left: var(--space-sm);
+      right: var(--space-sm);
+      max-height: calc(100vh - var(--space-4xl));
     }
 
     .nav-actions :global(.language-switcher),
@@ -1194,26 +1204,36 @@
     }
 
     .nav-mobile-controls {
-      gap: clamp(0.6rem, 4.5vw, 0.95rem);
+      gap: var(--space-md);
     }
   }
 
   @media (max-width: 440px) {
     .nav-surface {
-      gap: clamp(0.85rem, 6vw, 1.15rem);
+      gap: var(--space-xs);
     }
 
     .nav-brand img {
-      width: clamp(5.5rem, 40vw, 8rem);
+      width: 90px;
     }
 
     .nav-actions {
-      gap: clamp(0.35rem, 2.5vw, 0.6rem);
+      gap: var(--space-xs);
       flex-wrap: nowrap;
     }
 
     .nav-mobile-controls {
-      gap: clamp(0.55rem, 4vw, 0.9rem);
+      gap: var(--space-sm);
+    }
+
+    .nav-trigger {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-trigger span {
+      width: 16px;
+      height: 2px;
     }
   }
 
@@ -1228,7 +1248,7 @@
     }
 
     .nav-brand img {
-      width: clamp(5rem, 32vw, 6.5rem);
+      width: 85px;
     }
   }
 
