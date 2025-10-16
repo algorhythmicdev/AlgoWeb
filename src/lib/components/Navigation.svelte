@@ -1077,6 +1077,18 @@
         z-index: calc(var(--z-sticky) - 1);
     }
 
+    @media (max-width: 600px) {
+        .nav-overlay {
+            top: var(--space-4xl);
+        }
+    }
+
+    @media (max-width: 520px) {
+        .nav-overlay {
+            top: var(--space-3xl);
+        }
+    }
+
     .nav-overlay[data-visible="true"] {
         opacity: 1;
         pointer-events: auto;
