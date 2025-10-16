@@ -36,6 +36,10 @@
 
         if (browser) {
             isCompactViewport = window.innerWidth <= 960;
+            // Ensure menu is closed on mount
+            if (isCompactViewport) {
+                navigation.closeMenu();
+            }
         }
     });
 
@@ -97,9 +101,16 @@
     }
 
     function handleResize() {
+        const wasCompact = isCompactViewport;
         isCompactViewport = window.innerWidth <= 960;
 
+        // Close menu when resizing from compact to desktop or vice versa
         if (window.innerWidth > 960 && $navigation.isMenuOpen) {
+            navigation.closeMenu();
+        }
+
+        // Also close if switching from desktop to mobile
+        if (!wasCompact && isCompactViewport && $navigation.isMenuOpen) {
             navigation.closeMenu();
         }
     }
