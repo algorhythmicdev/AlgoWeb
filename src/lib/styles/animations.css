@@ -26,7 +26,7 @@
 
 .os-window > * {
   position: relative;
-  z-index: 2;
+  z-index: var(--z-text);
 }
 
 html[data-theme='hc'] .os-window {
@@ -56,7 +56,7 @@ html[data-theme='hc'] .os-window {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: var(--z-behind);
   pointer-events: none;
   background-image:
     radial-gradient(circle at var(--grid-spot-x, 58%) var(--grid-spot-y, 42%), color-mix(in srgb, var(--grad-a) 24%, transparent) 0%, transparent 55%),
@@ -71,7 +71,7 @@ html[data-theme='hc'] .os-window {
   content: '';
   position: absolute;
   inset: -28%;
-  z-index: 0;
+  z-index: var(--z-behind);
   pointer-events: none;
   background: conic-gradient(
     from var(--line-angle, 42deg),

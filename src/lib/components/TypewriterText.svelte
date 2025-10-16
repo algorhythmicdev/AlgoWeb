@@ -192,7 +192,7 @@
       rgba(var(--voyage-blue-rgb), 0.82) 68%,
       rgba(var(--signal-yellow-rgb), 0.32) 32%
     );
-    border-radius: 2px;
+    border-radius: var(--radius-xs, 0.125rem);
     display: inline-block;
     opacity: 0.72;
     animation: cursorBlink 1s steps(2, start) infinite;

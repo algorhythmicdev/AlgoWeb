@@ -606,58 +606,58 @@
   }
 
   .highlight-icon {
-    width: 3rem;
-    height: 3rem;
+    width: clamp(2.75rem, 8vw, 3.25rem);
+    height: clamp(2.75rem, 8vw, 3.25rem);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
     background: color-mix(in srgb, var(--glass-bg-lightest) 38%, transparent 62%);
     color: var(--voyage-blue);
     box-shadow: 0 8px 18px rgba(16, 41, 95, 0.12);
-    animation: floaty 18s ease-in-out infinite;
+    animation: floaty 32s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   }
 
   .offering-title {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: clamp(0.65rem, 2vw, 0.85rem);
     margin: 0;
   }
 
   .offering-icon {
-    inline-size: 2.75rem;
-    block-size: 2.75rem;
+    inline-size: clamp(2.5rem, 7vw, 3rem);
+    block-size: clamp(2.5rem, 7vw, 3rem);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
     background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--aurora-purple);
     box-shadow: 0 8px 18px rgba(58, 28, 120, 0.2);
-    animation: floaty 22s ease-in-out infinite reverse;
+    animation: floaty 38s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
   }
 
   :global(.offering-card) ul,
   :global(.resource-card) ul {
     margin: 0;
-    padding-left: 1.2rem;
+    padding-left: clamp(1.1rem, 3vw, 1.4rem);
     display: grid;
-    gap: 0.4rem;
+    gap: clamp(0.35rem, 1.5vw, 0.5rem);
     color: var(--text-secondary);
     font-size: var(--text-small);
   }
 
   .resource-icon {
-    width: 3rem;
-    height: 3rem;
+    width: clamp(2.75rem, 8vw, 3.25rem);
+    height: clamp(2.75rem, 8vw, 3.25rem);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
     background:
-      radial-gradient(circle at 28% 28%, rgba(var(--signal-yellow-rgb), 0.32), transparent 72%),
-      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.18) 18%);
+      radial-gradient(circle at 28% 28%, rgba(var(--signal-yellow-rgb), 0.22), transparent 72%),
+      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.12) 18%);
     color: var(--signal-yellow);
     box-shadow: 0 8px 20px rgba(148, 110, 10, 0.24);
-    animation: floaty 24s ease-in-out infinite;
+    animation: floaty 42s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   }
 
   .resource-eyebrow {
@@ -742,19 +742,25 @@
 
   @keyframes floaty {
     0% {
-      transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0) scale(1);
     }
 
     50% {
-      transform: translate3d(0, -6px, 0);
+      transform: translate3d(0, -3px, 0) scale(1.01);
     }
 
     100% {
-      transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0) scale(1);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .highlight-icon,
+    .offering-icon,
+    .resource-icon {
+      animation: none;
+    }
+
     .section-heading::after {
       display: none;
     }

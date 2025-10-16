@@ -43,14 +43,14 @@
       );
     --glass-card-border-default: color-mix(in srgb, var(--glass-border-strong) 65%, transparent 35%);
     --glass-card-shadow-default: 0 24px 68px rgba(var(--ink-rgb), 0.14), 0 8px 24px rgba(var(--ink-rgb), 0.08);
-    --glass-card-spot-a-default: rgba(var(--voyage-blue-rgb), 0.12);
-    --glass-card-spot-b-default: rgba(var(--aurora-purple-rgb), 0.1);
-    --glass-card-veil-default: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 36%, transparent 64%);
-    --glass-card-highlight-default: rgba(var(--snow-rgb, 244, 246, 255), 0.18);
-    --glass-card-halo-default: rgba(var(--signal-yellow-rgb), 0.24);
-    --glass-card-halo-blur-default: 28px;
-    --glass-card-veil-opacity-default: 0.55;
-    --glass-card-halo-opacity-default: 0.25;
+    --glass-card-spot-a-default: rgba(var(--voyage-blue-rgb), 0.08);
+    --glass-card-spot-b-default: rgba(var(--aurora-purple-rgb), 0.06);
+    --glass-card-veil-default: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.12) 36%, transparent 64%);
+    --glass-card-highlight-default: rgba(var(--snow-rgb, 244, 246, 255), 0.12);
+    --glass-card-halo-default: rgba(var(--signal-yellow-rgb), 0.16);
+    --glass-card-halo-blur-default: 32px;
+    --glass-card-veil-opacity-default: 0.38;
+    --glass-card-halo-opacity-default: 0.18;
     border: 1px solid
       var(
         --glass-card-border,

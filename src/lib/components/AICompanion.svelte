@@ -348,8 +348,8 @@
 
   .orb {
     position: relative;
-    width: 84px;
-    height: 84px;
+    width: clamp(4.5rem, 18vw, 5.5rem);
+    height: clamp(4.5rem, 18vw, 5.5rem);
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -359,8 +359,8 @@
   }
 
   .orb:focus-visible {
-    outline: 3px solid rgba(var(--voyage-blue-rgb), 0.45);
-    outline-offset: 4px;
+    outline: 2px solid rgba(var(--voyage-blue-rgb), 0.45);
+    outline-offset: var(--space-xs, 0.25rem);
   }
 
   .orb__halo {
@@ -399,9 +399,9 @@
 
   .orb__core::after {
     content: '';
-    width: 18px;
-    height: 18px;
-    border-radius: 999px;
+    width: clamp(1rem, 4vw, 1.25rem);
+    height: clamp(1rem, 4vw, 1.25rem);
+    border-radius: var(--radius-full);
     background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(var(--voyage-blue-rgb), 0.24));
     box-shadow:
       0 8px 18px rgba(var(--voyage-blue-rgb), 0.32),
@@ -477,9 +477,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
+    width: clamp(2.25rem, 8vw, 2.75rem);
+    height: clamp(2.25rem, 8vw, 2.75rem);
+    border-radius: var(--radius-full);
     border: 1px solid color-mix(in srgb, var(--surface-glass-border) 75%, transparent 25%);
     background: color-mix(in srgb, var(--surface-glass-bg) 90%, transparent 10%);
     color: color-mix(in srgb, var(--text) 82%, rgba(var(--voyage-blue-rgb), 0.24) 18%);
@@ -594,8 +594,8 @@
 
   .suggestions button {
     border: 1px solid color-mix(in srgb, var(--surface-chip-border) 80%, transparent 20%);
-    border-radius: 999px;
-    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    padding: clamp(0.45rem, 2vw, 0.6rem) clamp(0.9rem, 3vw, 1.2rem);
     background: var(--surface-chip-bg);
     color: var(--surface-chip-color);
     font-size: clamp(0.85rem, 2vw, 0.95rem);

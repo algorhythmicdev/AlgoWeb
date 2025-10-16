@@ -5,9 +5,9 @@
   import { theme } from '$stores/theme';
 
   const MAX_PARTICLES = 96;
-  const BASE_SPEED = 0.18;
-  const BASE_POINTER_PULL = 120;
-  const MIN_POINTER_PULL = 82;
+  const BASE_SPEED = 0.1;
+  const BASE_POINTER_PULL = 140;
+  const MIN_POINTER_PULL = 100;
   let pointerPull = BASE_POINTER_PULL;
   let coarsePointer = false;
 
@@ -59,9 +59,9 @@
       this.y = Math.random() * height;
       this.vx = (Math.random() - 0.5) * BASE_SPEED;
       this.vy = (Math.random() - 0.5) * BASE_SPEED;
-      this.radius = Math.random() * 2.4 + 1.2 + this.depth * 0.8;
+      this.radius = Math.random() * 2 + 1 + this.depth * 0.6;
       this.phase = Math.random();
-      this.phaseSpeed = Math.random() * 0.004 + 0.0015;
+      this.phaseSpeed = Math.random() * 0.002 + 0.0008;
     }
 
     update(width: number, height: number, delta: number) {
@@ -83,9 +83,9 @@
         const dy = mouse.y - this.y;
         const dist = Math.hypot(dx, dy) || 1;
         if (dist < pointerPull) {
-          const force = (1 - dist / pointerPull) * 0.65;
-          this.vx -= (dx / dist) * force * 0.05;
-          this.vy -= (dy / dist) * force * 0.05;
+          const force = (1 - dist / pointerPull) * 0.4;
+          this.vx -= (dx / dist) * force * 0.03;
+          this.vy -= (dy / dist) * force * 0.03;
         }
       }
 
@@ -109,22 +109,22 @@
         this.y,
         this.radius * 3.4
       );
-      gradient.addColorStop(0, withAlpha(coreColor, palette.isDark ? 0.96 : 0.94));
-      gradient.addColorStop(0.6, withAlpha(midColor, palette.isDark ? 0.84 : 0.86));
-      gradient.addColorStop(0.88, withAlpha(rimColor, palette.isDark ? 0.64 : 0.72));
+      gradient.addColorStop(0, withAlpha(coreColor, palette.isDark ? 0.68 : 0.7));
+      gradient.addColorStop(0.6, withAlpha(midColor, palette.isDark ? 0.56 : 0.6));
+      gradient.addColorStop(0.88, withAlpha(rimColor, palette.isDark ? 0.38 : 0.44));
       gradient.addColorStop(1, withAlpha(rimColor, 0));
 
       context.save();
       context.fillStyle = gradient;
-      context.shadowColor = withAlpha(haloTint, palette.isDark ? 0.46 : 0.52);
-      context.shadowBlur = this.radius * (palette.isDark ? 9.5 : 10.5);
+      context.shadowColor = withAlpha(haloTint, palette.isDark ? 0.28 : 0.32);
+      context.shadowBlur = this.radius * (palette.isDark ? 7 : 8);
       context.shadowOffsetX = 0;
       context.shadowOffsetY = 0;
       context.beginPath();
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       context.fill();
-      context.lineWidth = palette.isDark ? Math.max(1.1, this.radius * 0.42) : Math.max(1.2, this.radius * 0.58);
-      context.strokeStyle = withAlpha(rimColor, palette.isDark ? 0.88 : 0.95);
+      context.lineWidth = palette.isDark ? Math.max(0.8, this.radius * 0.3) : Math.max(0.9, this.radius * 0.4);
+      context.strokeStyle = withAlpha(rimColor, palette.isDark ? 0.6 : 0.7);
       context.stroke();
       context.restore();
     }
@@ -408,13 +408,13 @@
 
         if (dist < maxDistance) {
           const strength = 1 - dist / maxDistance;
-          const phase = ((a.phase + b.phase) * 0.5 + lastTimestamp / 5400) % 1;
+          const phase = ((a.phase + b.phase) * 0.5 + lastTimestamp / 7200) % 1;
           const cycleColor = brandCycleColor(palette, phase);
           const linkColor = mixRgb(cycleColor, palette.link, 0.32 + strength * 0.18);
           const tinted = palette.isDark ? linkColor : shadeRgb(linkColor, 0.24);
-          context.strokeStyle = withAlpha(tinted, palette.isDark ? 0.56 : 0.64);
-          context.globalAlpha = Math.pow(strength, 0.62) * (palette.isDark ? 0.96 : 0.98);
-          context.lineWidth = palette.isDark ? 0.85 + strength * 0.95 : 1 + strength * 1.2;
+          context.strokeStyle = withAlpha(tinted, palette.isDark ? 0.32 : 0.38);
+          context.globalAlpha = Math.pow(strength, 0.7) * (palette.isDark ? 0.7 : 0.75);
+          context.lineWidth = palette.isDark ? 0.6 + strength * 0.6 : 0.7 + strength * 0.8;
           context.beginPath();
           context.moveTo(a.x, a.y);
           context.lineTo(b.x, b.y);
@@ -429,15 +429,15 @@
     if (!mouse.active) return;
     context.save();
     context.globalAlpha = 1;
-    const pointerColor = brandCycleColor(palette, (lastTimestamp / 3200 + 0.25) % 1);
+    const pointerColor = brandCycleColor(palette, (lastTimestamp / 4800 + 0.25) % 1);
     const pointerBlend = mixRgb(pointerColor, palette.tertiary, 0.42);
     const pointerTint = palette.isDark ? pointerBlend : shadeRgb(pointerBlend, 0.22);
-    const haloScale = coarsePointer ? 0.85 : 1;
+    const haloScale = coarsePointer ? 0.7 : 0.85;
     const gradient = context.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, pointerPull * 1.05);
-    gradient.addColorStop(0, withAlpha(pointerTint, (palette.isDark ? 0.36 : 0.34) * haloScale));
+    gradient.addColorStop(0, withAlpha(pointerTint, (palette.isDark ? 0.22 : 0.2) * haloScale));
     gradient.addColorStop(
       0.45,
-      withAlpha(mixRgb(pointerTint, palette.primary, 0.38), (palette.isDark ? 0.26 : 0.28) * haloScale)
+      withAlpha(mixRgb(pointerTint, palette.primary, 0.38), (palette.isDark ? 0.16 : 0.18) * haloScale)
     );
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     context.fillStyle = gradient;
@@ -706,23 +706,23 @@
     inset: 0;
     z-index: var(--z-behind, -10);
     pointer-events: none;
-    opacity: 0.65;
+    opacity: 0.42;
     mix-blend-mode: screen;
-    filter: saturate(1.18) contrast(1.08) brightness(1.05);
+    filter: saturate(1.08) contrast(1.04) brightness(1.02);
     transition:
-      opacity var(--duration-smooth) var(--ease-smooth),
-      filter var(--duration-smooth) var(--ease-smooth);
+      opacity 2s cubic-bezier(0.4, 0, 0.2, 1),
+      filter 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .particle-network[data-theme='dark'] {
-    opacity: 0.72;
-    filter: saturate(1.26) contrast(1.12) brightness(1.06);
+    opacity: 0.48;
+    filter: saturate(1.14) contrast(1.06) brightness(1.03);
   }
 
   .particle-network[data-theme='light'] {
-    opacity: 0.82;
+    opacity: 0.55;
     mix-blend-mode: multiply;
-    filter: saturate(1.35) contrast(1.22) brightness(0.94);
+    filter: saturate(1.18) contrast(1.12) brightness(0.96);
   }
 
   :global([data-theme='hc']) .particle-network {

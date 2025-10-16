@@ -519,8 +519,8 @@
     display: flex;
     align-items: center;
     gap: clamp(0.4rem, 1vw, 0.65rem);
-    padding: 0.35rem 0.45rem;
-    border-radius: var(--radius-full, 999px);
+    padding: clamp(0.3rem, 1vw, 0.45rem) clamp(0.4rem, 1.2vw, 0.55rem);
+    border-radius: var(--radius-full);
     background: color-mix(in srgb, var(--surface-chip-bg) 70%, transparent 30%);
     border: 1px solid color-mix(in srgb, var(--surface-chip-border) 60%, transparent 40%);
     box-shadow: 0 12px 28px rgba(var(--ink-rgb), 0.08);
@@ -530,7 +530,7 @@
     width: clamp(0.6rem, 1.1vw, 0.75rem);
     height: clamp(0.6rem, 1.1vw, 0.75rem);
     position: relative;
-    border-radius: 999px;
+    border-radius: var(--radius-full);
     border: 1px solid transparent;
     box-shadow: inset 0 1px 2px rgba(var(--snow-rgb), 0.35), 0 1px 2px rgba(var(--ink-rgb), 0.18);
   }
@@ -634,14 +634,15 @@
   .nav-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
-    padding: 0.65rem 1.05rem;
+    gap: clamp(0.4rem, 1.5vw, 0.6rem);
+    padding: clamp(0.55rem, 1.8vw, 0.75rem) clamp(0.9rem, 2.5vw, 1.2rem);
     border-radius: var(--radius-full);
-    font-size: var(--text-body);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
     font-weight: var(--weight-medium);
     color: var(--text-secondary);
     border: 1px solid transparent;
     outline: none;
+    white-space: nowrap;
     transition:
       color var(--duration-fast) var(--ease-out),
       background var(--duration-fast) var(--ease-out),
@@ -1013,7 +1014,7 @@
 
     :global(.nav-links[data-open='true'])::-webkit-scrollbar-thumb {
       background: color-mix(in srgb, rgba(var(--ink-rgb), 0.25) 70%, transparent 30%);
-      border-radius: 999px;
+      border-radius: var(--radius-full);
     }
 
     .nav-list {

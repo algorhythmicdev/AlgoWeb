@@ -176,11 +176,12 @@
     position: absolute;
     inset: -35%;
     background:
-      radial-gradient(120% 120% at 12% 20%, rgba(var(--voyage-blue-rgb), 0.12), transparent 72%),
-      radial-gradient(140% 140% at 88% 22%, rgba(var(--aurora-purple-rgb), 0.1), transparent 74%);
-    opacity: 0.55;
+      radial-gradient(120% 120% at 12% 20%, rgba(var(--voyage-blue-rgb), 0.08), transparent 72%),
+      radial-gradient(140% 140% at 88% 22%, rgba(var(--aurora-purple-rgb), 0.06), transparent 74%);
+    opacity: 0.38;
     pointer-events: none;
     transform: translate3d(0, 0, 0);
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
 
@@ -278,22 +279,23 @@
     border-radius: 50%;
     background: radial-gradient(
       120% 120% at 16% 24%,
-      color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.28) 52%, transparent 48%) 0%,
+      color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.18) 52%, transparent 48%) 0%,
       transparent 72%
     );
-    opacity: 0.55;
+    opacity: 0.35;
     pointer-events: none;
     transform: translate3d(0, 0, 0);
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hero__highlights::after {
     inset: auto -22% -28% -22%;
     background: radial-gradient(
       140% 140% at 78% 68%,
-      color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.26) 46%, transparent 54%) 0%,
+      color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.16) 46%, transparent 54%) 0%,
       transparent 74%
     );
-    opacity: 0.45;
+    opacity: 0.28;
   }
 
   .hero__highlights :global(h2),
