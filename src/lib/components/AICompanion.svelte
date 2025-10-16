@@ -742,17 +742,7 @@
 
   @media (max-width: 600px) {
     .companion {
-      right: var(--space-1);
-      bottom: var(--space-1);
-    }
-
-    .orb {
-      width: 68px;
-      height: 68px;
-    }
-
-    .panel-shell {
-      width: min(360px, 94vw);
+      display: none;
     }
   }
 </style>
