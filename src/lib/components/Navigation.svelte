@@ -1082,12 +1082,6 @@
         pointer-events: auto;
     }
 
-    @media (max-width: 960px) {
-        .nav-overlay {
-            display: none;
-        }
-    }
-
     :global(
             :is(
                     [data-theme="hc"],
@@ -1109,6 +1103,12 @@
         )
         .nav-overlay[data-visible="true"] {
         opacity: 1;
+    }
+
+    @media (max-width: 960px) {
+        .nav-overlay {
+            display: none;
+        }
     }
 
     .sr-only {
