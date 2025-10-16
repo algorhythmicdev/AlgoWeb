@@ -30,7 +30,7 @@
     display: grid;
     gap: var(--card-gap, clamp(1.35rem, 3vw, 2.15rem));
     padding: var(--card-padding-lg);
-    border-radius: var(--glass-card-radius, 0);
+    border-radius: var(--radius-lg);
     --glass-card-surface-default:
       color-mix(
         in srgb,
@@ -227,11 +227,23 @@
     z-index: var(--z-text);
   }
 
+  .glass-card :global(h1),
+  .glass-card :global(h2),
+  .glass-card :global(h3),
+  .glass-card :global(h4),
+  .glass-card :global(h5),
+  .glass-card :global(h6) {
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
   .glass-card :global(p) {
     margin: 0;
     max-width: var(--measure-lg);
     line-height: var(--leading-relaxed, 1.65);
     color: color-mix(in srgb, var(--text) 88%, rgba(var(--voyage-blue-rgb), 0.18) 12%);
+    text-wrap: pretty;
+    overflow-wrap: break-word;
   }
 
   .glass-card :global(ul),

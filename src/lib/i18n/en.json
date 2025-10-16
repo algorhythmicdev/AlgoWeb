@@ -23,8 +23,10 @@
   "settings": {
     "theme": {
       "group": "Choose a theme",
-      "light": "Keep it light",
-      "dark": "Go dark",
+      "trigger_label": "Choose theme",
+      "menu_label": "Available themes",
+      "light": "Light",
+      "dark": "Dark",
       "contrast": "High contrast",
       "selected": "Theme changed to {theme}."
     }

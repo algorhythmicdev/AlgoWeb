@@ -554,6 +554,13 @@
   .platform-showcase__grid {
     display: grid;
     gap: clamp(1.75rem, 4vw, 3rem);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .platform-showcase__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   :global(.platform-card) {

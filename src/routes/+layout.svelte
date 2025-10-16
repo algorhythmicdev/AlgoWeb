@@ -126,7 +126,11 @@
 
 <LoadingOverlay />
 
-<svelte:window on:keydown={(e)=>{ if (e.key === 't') theme.toggle(); }} />
+<svelte:window on:keydown={(e)=>{ 
+  if (e.key === 't' && !document.body.classList.contains('modal-open') && !e.target.closest('input, textarea, [contenteditable]')) {
+    theme.toggle();
+  }
+}} />
 
 <ParticleNetwork />
 

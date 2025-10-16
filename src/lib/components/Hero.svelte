@@ -96,7 +96,7 @@
     --hero-text: var(--text);
     --hero-grad-start: var(--aurora-purple);
     --hero-grad-stop: var(--voyage-blue);
-    --hero-overlay: color-mix(in srgb, var(--bg-elev-1) 54%, transparent 46%);
+    --hero-overlay: color-mix(in srgb, var(--bg) 95%, transparent 5%);
     --hero-padding-block: var(--section-padding-desktop);
     --hero-padding-inline: var(--space-4xl);
     position: relative;
@@ -457,6 +457,8 @@
     .hero__content {
       padding: clamp(1.85rem, 6.5vw, 2.6rem);
       gap: var(--space-lg);
+      max-width: 90%;
+      margin: 0 auto;
     }
 
     .hero__highlights {
@@ -471,6 +473,13 @@
 
     .hero__highlights :global(li::before) {
       margin-top: 0.15rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero--align-center .hero__aside {
+      justify-self: center;
+      text-align: center;
     }
   }
 

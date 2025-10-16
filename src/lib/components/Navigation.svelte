@@ -9,7 +9,7 @@
   import { Button } from '$lib/components';
   import GlassCard from './GlassCard.svelte';
   import LanguageSwitcher from './language-switcher.svelte';
-  import ThemeToggle from './theme-toggle.svelte';
+  import ThemeToggle from './theme-toggle-dropdown.svelte';
   import { mainNavigation } from '$config/navigation';
 
   let isScrolled = false;
@@ -1208,6 +1208,17 @@
 
     .nav-mobile-controls {
       gap: clamp(0.55rem, 6vw, 0.85rem);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .nav-actions :global(.theme-toggle .nav-toggle-text),
+    .nav-actions :global(.language-switcher .nav-toggle-text) {
+      display: none;
+    }
+    
+    .nav-menu {
+      flex-direction: column;
     }
   }
 

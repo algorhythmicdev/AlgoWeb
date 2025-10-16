@@ -238,6 +238,8 @@ html[data-theme='dark'] .section[data-surface='glow']::after {
   font-weight: var(--weight-semibold);
   letter-spacing: -0.012em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .section-heading h2 {
@@ -261,12 +263,14 @@ html[data-theme='dark'] .section[data-surface='glow']::after {
 
 .section-heading[data-align='center'] {
   --section-heading-align: center;
+  text-align: center;
 }
 
 .section-eyebrow,
 .section-heading__eyebrow {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
@@ -279,11 +283,21 @@ html[data-theme='dark'] .section[data-surface='glow']::after {
   text-transform: uppercase;
 }
 
+.section-heading[data-align='center'] .section-eyebrow,
+.section-heading[data-align='center'] .section-heading__eyebrow {
+  margin-inline: auto;
+}
+
 .card-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: clamp(0.75rem, 2vw, 1.4rem);
+  justify-content: var(--card-actions-justify, flex-start);
+}
+
+.section-heading[data-align='center'] ~ * .card-actions {
+  --card-actions-justify: center;
 }
 
 .media-card {

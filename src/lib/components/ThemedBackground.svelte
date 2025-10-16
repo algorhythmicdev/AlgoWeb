@@ -1,5 +1,4 @@
-<script>
-  // @ts-nocheck
+<script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { spring } from 'svelte/motion';
   import { page } from '$app/stores';
@@ -467,6 +466,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .background, .background * {
+      animation: none !important;
+    }
+    
     .dot {
       animation: none;
     }
