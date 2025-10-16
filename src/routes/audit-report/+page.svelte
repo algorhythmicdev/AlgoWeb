@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -38,7 +38,7 @@
       titleFallback: 'Hero Overlay Opacity Too Low',
       descKey: 'audit_report.visual.hero_overlay.desc',
       descFallback:
-        'The semi‑transparent overlay behind hero text is too weak, making text hard to read.',
+        'The semi-transparent overlay behind hero text is too weak, making text hard to read.',
       fixKey: 'audit_report.visual.hero_overlay.fix',
       fixFallback:
         'In Hero.svelte, replace the 54% mix with a heavier overlay. For example:',
@@ -57,7 +57,7 @@
       titleFallback: 'Missing Glass-Card Corner Radius',
       descKey: 'audit_report.visual.glass_card.desc',
       descFallback:
-        'The <GlassCard> default has no corner rounding (border-radius: 0). According to the design system, cards should have ~24px–40px radius.',
+        'The <GlassCard> default has no corner rounding (border-radius: 0). According to the design system, cards should have ~24px-40px radius.',
       fixKey: 'audit_report.visual.glass_card.fix',
       fixFallback: 'In GlassCard.svelte, change the CSS rule:',
       codeSnippet: `.glass-card {
@@ -123,7 +123,7 @@
       titleFallback: 'Low-Contrast Text/Buttons',
       descKey: 'audit_report.theming.low_contrast.desc',
       descFallback:
-        'Verify all text meets WCAG AAA. In particular, buttons and links must have ≥7:1 contrast. Use theme tokens instead of hard-coded color.',
+        'Verify all text meets WCAG AAA. In particular, buttons and links must have >=7:1 contrast. Use theme tokens instead of hard-coded color.',
       fixKey: 'audit_report.theming.low_contrast.fix',
       fixFallback:
         'Replace any fixed color like color: #000 with color: var(--text) or var(--cta-primary-text) (white on primary).',
