@@ -742,36 +742,43 @@
         justify-content: flex-end;
     }
 
-    .nav-links {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: clamp(0.9rem, 2vw, 1.35rem);
-        padding: clamp(0.55rem, 1.8vw, 0.85rem) clamp(0.9rem, 3vw, 1.6rem);
-        margin: 0 0 0 auto;
-        max-width: min(100%, 860px);
-        background: none;
-        --card-gap: clamp(0.5rem, 1.4vw, 0.9rem);
-        --glass-card-radius: clamp(1.65rem, 4vw, 2.6rem);
-        --glass-card-veil-opacity: 0.32;
-        --glass-card-highlight: rgba(var(--snow-rgb, 244, 246, 255), 0.24);
-        --glass-card-halo-opacity: 0.18;
-        --glass-card-halo-blur: 32px;
-        --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.26);
-        --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.14);
-        --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.12);
-        --glass-card-border: color-mix(
-            in srgb,
-            var(--glass-border-strong) 70%,
-            transparent 30%
-        );
-        --glass-card-shadow: 0 22px 60px rgba(var(--ink-rgb), 0.12);
-        --glass-card-surface: color-mix(
-            in srgb,
-            var(--glass-bg-lighter) 90%,
-            transparent 10%
-        );
+    @media (min-width: 961px) {
+        .nav-links {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: clamp(0.9rem, 2vw, 1.35rem);
+            padding: clamp(0.55rem, 1.8vw, 0.85rem) clamp(0.9rem, 3vw, 1.6rem);
+            margin: 0 0 0 auto;
+            max-width: min(100%, 860px);
+            background: none;
+            --card-gap: clamp(0.5rem, 1.4vw, 0.9rem);
+            --glass-card-radius: clamp(1.65rem, 4vw, 2.6rem);
+            --glass-card-veil-opacity: 0.32;
+            --glass-card-highlight: rgba(var(--snow-rgb, 244, 246, 255), 0.24);
+            --glass-card-halo-opacity: 0.18;
+            --glass-card-halo-blur: 32px;
+            --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.26);
+            --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.14);
+            --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.12);
+            --glass-card-border: color-mix(
+                in srgb,
+                var(--glass-border-strong) 70%,
+                transparent 30%
+            );
+            --glass-card-shadow: 0 22px 60px rgba(var(--ink-rgb), 0.12);
+            --glass-card-surface: color-mix(
+                in srgb,
+                var(--glass-bg-lighter) 90%,
+                transparent 10%
+            );
+            position: relative;
+            visibility: visible;
+            pointer-events: auto;
+            transform: none;
+            opacity: 1;
+        }
     }
 
     :global([data-base-theme="dark"]) .nav-links {
@@ -1280,20 +1287,27 @@
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
             transform: translateX(100%);
-            opacity: 1;
+            opacity: 0;
             visibility: hidden;
             pointer-events: none;
             overflow-y: auto;
             overflow-x: hidden;
             overscroll-behavior: contain;
             -webkit-overflow-scrolling: touch;
+            z-index: calc(var(--z-sticky) + 1);
             transition:
                 transform var(--duration-normal) var(--ease-out),
-                visibility var(--duration-normal) var(--ease-out);
+                visibility var(--duration-normal) var(--ease-out),
+                opacity var(--duration-normal) var(--ease-out);
         }
 
-        .nav-shell.menu-open .nav-links {
-            display: flex;
+        .nav-links:not([data-open="true"]) {
+            display: none !important;
+        }
+
+        .nav-shell.menu-open .nav-links,
+        .nav-links[data-open="true"] {
+            display: flex !important;
         }
 
         :global([data-base-theme="dark"]) .nav-links {
@@ -1315,6 +1329,7 @@
             visibility: visible;
             pointer-events: auto;
             transform: translateX(0);
+            opacity: 1;
         }
 
         :global(.nav-links[data-open="true"])::-webkit-scrollbar {
