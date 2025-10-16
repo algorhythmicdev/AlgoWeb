@@ -1418,8 +1418,8 @@
             gap: clamp(0.6rem, 3vw, 0.9rem);
         }
 
-        .nav-button {
-            display: none;
+        :global(.nav-button) {
+            display: none !important;
         }
 
         .nav-trigger {
