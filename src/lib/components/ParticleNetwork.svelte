@@ -704,6 +704,8 @@
   .particle-network {
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: var(--z-behind, -10);
     pointer-events: none;
     opacity: 0.42;

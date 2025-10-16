@@ -528,21 +528,21 @@
   }
 
   .section-heading {
-    margin-block-end: clamp(2rem, 5vw, 3rem);
+    margin-block-end: var(--space-3xl);
   }
 
   .knowledge-grid {
     display: grid;
-    gap: clamp(1.6rem, 3vw, 2.4rem);
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
   :global(.knowledge-card) {
     display: grid;
-    gap: clamp(1rem, 2.4vw, 1.6rem);
+    gap: var(--space-lg);
     align-content: start;
     height: 100%;
-    transition: box-shadow var(--duration-fast, 240ms) ease;
+    transition: box-shadow var(--duration-fast) ease;
   }
 
   :global(.knowledge-card--media) {
@@ -550,7 +550,7 @@
   }
 
   :global(.help-hero-media) {
-    margin-top: clamp(1rem, 3vw, 1.6rem);
+    margin-top: var(--space-lg);
   }
 
   :global(.knowledge-card[data-tone='aurora']) {
@@ -592,9 +592,9 @@
 
   :global(.knowledge-card) ul {
     margin: 0;
-    padding: 0 0 0 1.1rem;
+    padding: 0 0 0 var(--space-md);
     display: grid;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     list-style: disc;
     color: var(--text-secondary);
     font-size: var(--text-small);
@@ -603,7 +603,7 @@
   .card-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: var(--space-sm);
     font-size: var(--text-small);
     text-transform: uppercase;
     letter-spacing: 0.16em;
@@ -612,11 +612,11 @@
 
   .faq-grid {
     display: grid;
-    gap: clamp(1rem, 2.4vw, 1.6rem);
+    gap: var(--space-lg);
   }
 
   :global(.faq-card) {
-    padding: clamp(1.2rem, 2.4vw, 1.6rem);
+    padding: var(--space-lg);
     --glass-card-surface: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
     --glass-card-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 50%, transparent 50%);
     --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.22);
@@ -626,15 +626,15 @@
 
   details {
     display: grid;
-    gap: 0.75rem;
-    transition: color var(--duration-ui, 240ms) ease;
+    gap: var(--space-md);
+    transition: color var(--duration-ui) ease;
   }
 
   summary {
     font-weight: var(--weight-semibold);
     cursor: pointer;
     position: relative;
-    padding-right: 1.5rem;
+    padding-right: var(--space-xl);
     list-style: none;
   }
 
@@ -646,23 +646,23 @@
     content: '';
     position: absolute;
     inset-inline-end: 0;
-    top: 0.4rem;
+    top: var(--space-xs);
     width: 0.75rem;
     height: 0.75rem;
     border: 2px solid currentColor;
     border-left: 0;
     border-top: 0;
     transform: rotate(45deg);
-    transition: transform var(--duration-ui, 240ms) ease;
+    transition: transform var(--duration-ui) ease;
   }
 
   details[open] summary::after {
-    transform: translateY(0.2rem) rotate(225deg);
+    transform: translateY(var(--space-xs)) rotate(225deg);
   }
 
   summary:focus-visible {
     outline: 2px solid var(--focus-ring-color);
-    outline-offset: 4px;
+    outline-offset: var(--space-xs);
   }
 
   details:focus-within summary {
@@ -677,12 +677,12 @@
 
   .status-grid {
     display: grid;
-    gap: clamp(1.2rem, 2.8vw, 2rem);
+    gap: var(--space-xl);
   }
 
   :global(.status-card) {
     display: grid;
-    gap: clamp(0.8rem, 2vw, 1.2rem);
+    gap: var(--space-md);
     --glass-card-surface: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
     --glass-card-border: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.26) 48%, transparent 52%);
     --glass-card-spot-a: rgba(var(--aurora-purple-rgb), 0.28);
@@ -699,8 +699,8 @@
   .status-pill {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.75rem;
-    border-radius: var(--radius-pill, 999px);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-pill);
     background: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
     color: var(--aurora-purple);
     font-size: var(--text-small);
@@ -714,13 +714,13 @@
 
   .escalation-grid {
     display: grid;
-    gap: clamp(1.6rem, 3vw, 2.4rem);
+    gap: var(--space-2xl);
   }
 
   :global(.escalation-card),
   :global(.resources-card) {
     display: grid;
-    gap: clamp(1rem, 2.6vw, 1.6rem);
+    gap: var(--space-lg);
   }
 
   :global(.escalation-card[data-tone='escalation']) {
@@ -742,12 +742,12 @@
 
   .channel-list {
     display: grid;
-    gap: clamp(1rem, 2.4vw, 1.5rem);
+    gap: var(--space-lg);
   }
 
   .channel {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--space-md);
     grid-template-columns: auto 1fr;
     align-items: start;
   }
@@ -764,11 +764,11 @@
 
   .channel-copy h3 {
     margin: 0;
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-size: var(--text-lg);
   }
 
   .channel-copy p {
-    margin: 0 0 0.5rem;
+    margin: 0 0 var(--space-sm);
     color: var(--text-secondary);
   }
 
@@ -777,13 +777,13 @@
     margin: 0;
     padding: 0;
     display: grid;
-    gap: clamp(1rem, 2.4vw, 1.6rem);
+    gap: var(--space-lg);
   }
 
   .resource-meta {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: var(--space-xs);
   }
 
   .resource-title {
@@ -802,19 +802,19 @@
 
   @media (min-width: 880px) {
     .knowledge-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .faq-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .status-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .escalation-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
       align-items: stretch;
     }
   }

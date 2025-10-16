@@ -1,4 +1,4 @@
-﻿<script>
+<script>
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
   import { footerLinks } from '$config/navigation';
@@ -174,8 +174,8 @@
     --footer-strong: var(--text-strong);
     --footer-muted: var(--text-tertiary);
     --footer-border: var(--border);
-    margin-top: clamp(3rem, 8vw, 5rem);
-    padding: clamp(3rem, 8vw, 4.5rem) 0 clamp(2rem, 6vw, 3rem);
+    margin-top: var(--space-4xl);
+    padding: var(--space-3xl) 0 var(--space-xl);
     position: relative;
     background: color-mix(in srgb, var(--bg) 88%, transparent 12%);
     color: var(--footer-text);
@@ -183,16 +183,16 @@
   }
 
   .footer > .container {
-    width: min(100%, var(--container-xl, 1200px));
+    width: min(100%, var(--container-xl));
     margin-inline: auto;
-    padding-inline: clamp(1.5rem, 5vw, 3rem);
+    padding-inline: var(--space-xl);
     display: grid;
-    gap: clamp(2rem, 6vw, 3.5rem);
+    gap: var(--space-3xl);
   }
 
   .footer-grid {
     display: grid;
-    gap: clamp(1.75rem, 5vw, 3rem);
+    gap: var(--space-2xl);
   }
 
   @media (min-width: 960px) {
@@ -204,17 +204,17 @@
 
   :global(.footer-card) {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.6rem);
+    gap: var(--space-lg);
     color: var(--footer-text);
   }
 
   :global(.footer-card--brand) {
     align-content: start;
-    gap: clamp(0.85rem, 2vw, 1.35rem);
+    gap: var(--space-md);
   }
 
   :global(.footer-card--brand) img {
-    max-width: clamp(150px, 18vw, 200px);
+    max-width: 200px;
     transition: opacity var(--duration-fast) var(--ease-out);
   }
 
@@ -246,7 +246,7 @@
   }
 
   :global(.footer-card--links) {
-    gap: clamp(1.5rem, 4vw, 2.25rem);
+    gap: var(--space-xl);
   }
 
   .footer-links-section h4,
@@ -258,7 +258,7 @@
 
   .footer-links-section ul {
     display: grid;
-    gap: 0.65rem;
+    gap: var(--space-sm);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -278,12 +278,12 @@
 
   .footer-partners {
     display: grid;
-    gap: clamp(0.85rem, 2vw, 1.2rem);
-    padding: clamp(0.75rem, 2vw, 1.15rem);
-    border-radius: calc(var(--glass-card-radius) * 0.9);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--glass-bg-light) 52%, transparent 48%);
     border: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
-    box-shadow: 0 18px 42px rgba(var(--ink-rgb), 0.12);
+    box-shadow: var(--shadow-glass-md);
   }
 
   .footer-partners__summary {
@@ -296,14 +296,14 @@
   .footer-partners__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: var(--space-sm);
   }
 
   .footer-partners__cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1rem;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-full);
     border: 1px solid color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
     font-size: var(--text-small);
@@ -312,9 +312,9 @@
     text-transform: uppercase;
     text-decoration: none;
     color: var(--footer-text);
-    transition: color var(--duration-ui, 240ms) var(--ease-out),
-      border-color var(--duration-ui, 240ms) var(--ease-out),
-      background-color var(--duration-ui, 240ms) var(--ease-out);
+    transition: color var(--duration-ui) var(--ease-out),
+      border-color var(--duration-ui) var(--ease-out),
+      background-color var(--duration-ui) var(--ease-out);
   }
 
   .footer-partners__cta svg {
@@ -339,13 +339,13 @@
   }
 
   :global(.footer-card--bottom) {
-    padding-block: clamp(1.2rem, 3vw, 1.75rem);
+    padding-block: var(--space-lg);
   }
 
   .footer-bottom {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(1rem, 2.5vw, 1.5rem);
+    gap: var(--space-lg);
     align-items: center;
     justify-content: space-between;
   }
@@ -354,7 +354,7 @@
     color: var(--footer-text);
     text-decoration: none;
     font-size: var(--text-small);
-    transition: color var(--duration-ui, 240ms) var(--ease-out);
+    transition: color var(--duration-ui) var(--ease-out);
   }
 
   .footer-bottom a:hover,
@@ -364,7 +364,7 @@
 
   .social-links {
     display: flex;
-    gap: clamp(0.75rem, 2vw, 1.25rem);
+    gap: var(--space-md);
     flex-wrap: wrap;
   }
 
