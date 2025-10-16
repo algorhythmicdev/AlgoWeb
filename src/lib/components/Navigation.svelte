@@ -1082,6 +1082,12 @@
         pointer-events: auto;
     }
 
+    @media (max-width: 960px) {
+        .nav-overlay {
+            display: none;
+        }
+    }
+
     :global(
             :is(
                     [data-theme="hc"],
