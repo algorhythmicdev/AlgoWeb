@@ -23,6 +23,8 @@
   "settings": {
     "theme": {
       "group": "Thème de couleur",
+      "trigger_label": "Choisir le thème",
+      "menu_label": "Thèmes disponibles",
       "light": "Mode clair",
       "dark": "Mode sombre",
       "contrast": "Mode à contraste élevé",
