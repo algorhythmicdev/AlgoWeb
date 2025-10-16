@@ -1317,6 +1317,13 @@
             --glass-card-halo: rgba(var(--voyage-blue-rgb), 0.36);
         }
 
+        :global(.nav-links[data-open="false"]) {
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
         :global(.nav-links[data-open="true"]) {
             visibility: visible;
             pointer-events: auto;
