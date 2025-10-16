@@ -1418,7 +1418,7 @@
             gap: clamp(0.6rem, 3vw, 0.9rem);
         }
 
-        .nav-button {
+        :global(.nav-actions .nav-button) {
             display: none;
         }
 
