@@ -1226,7 +1226,7 @@
 
     @media (max-width: 960px) {
         .nav-surface {
-            padding: var(--space-xs) 0;
+            padding: 0.5rem 0;
         }
 
         .nav-window-controls {
@@ -1234,11 +1234,11 @@
         }
 
         .nav-brand img {
-            width: 130px;
+            width: 110px;
         }
 
         .nav-groups {
-            gap: var(--space-xs);
+            gap: 0.5rem;
         }
 
         .nav-mobile-header {
@@ -1523,8 +1523,8 @@
 
         .nav-surface {
             justify-content: space-between;
-            gap: var(--space-sm);
-            padding: var(--space-sm) 0;
+            gap: 0.5rem;
+            padding: 0.4rem 0;
         }
 
         .nav-leading {
@@ -1533,7 +1533,7 @@
         }
 
         .nav-brand img {
-            width: 120px;
+            width: 100px;
         }
 
         .nav-groups {
@@ -1544,7 +1544,7 @@
         .nav-actions {
             width: auto;
             justify-content: flex-end;
-            gap: var(--space-xs);
+            gap: 0.4rem;
         }
 
         .nav-actions :global(.language-switcher),
@@ -1554,24 +1554,24 @@
 
         .nav-trigger {
             display: inline-flex;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
         }
 
         .nav-trigger span {
-            width: 18px;
+            width: 16px;
             height: 2px;
         }
     }
 
     @media (max-width: 600px) {
         .nav-surface {
-            padding: var(--space-xs) 0;
+            padding: 0.35rem 0;
             align-items: center;
         }
 
         .nav-brand img {
-            width: 100px;
+            width: 90px;
         }
 
         .nav-links {
@@ -1602,15 +1602,16 @@
 
     @media (max-width: 440px) {
         .nav-surface {
-            gap: var(--space-xs);
+            gap: 0.4rem;
+            padding: 0.3rem 0;
         }
 
         .nav-brand img {
-            width: 90px;
+            width: 85px;
         }
 
         .nav-actions {
-            gap: var(--space-xs);
+            gap: 0.4rem;
             flex-wrap: nowrap;
         }
 
@@ -1619,12 +1620,12 @@
         }
 
         .nav-trigger {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
         }
 
         .nav-trigger span {
-            width: 16px;
+            width: 15px;
             height: 2px;
         }
     }
@@ -1639,8 +1640,12 @@
             flex-direction: column;
         }
 
+        .nav-surface {
+            padding: 0.3rem 0;
+        }
+
         .nav-brand img {
-            width: 85px;
+            width: 80px;
         }
     }
 
