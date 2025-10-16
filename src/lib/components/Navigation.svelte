@@ -1257,6 +1257,7 @@
         }
 
         .nav-links {
+            display: flex;
             position: fixed;
             top: 0;
             right: 0;
@@ -1299,15 +1300,6 @@
                 transform var(--duration-normal) var(--ease-out),
                 visibility var(--duration-normal) var(--ease-out),
                 opacity var(--duration-normal) var(--ease-out);
-        }
-
-        .nav-links:not([data-open="true"]) {
-            display: none !important;
-        }
-
-        .nav-shell.menu-open .nav-links,
-        .nav-links[data-open="true"] {
-            display: flex !important;
         }
 
         :global([data-base-theme="dark"]) .nav-links {
