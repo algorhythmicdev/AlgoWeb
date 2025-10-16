@@ -1642,6 +1642,11 @@
         .nav-brand img {
             width: 85px;
         }
+
+        /* Hide toggle text on tiny screens to prevent overlap */
+        .nav-toggle-text {
+            display: none;
+        }
     }
 
     @media (max-width: 960px) {
