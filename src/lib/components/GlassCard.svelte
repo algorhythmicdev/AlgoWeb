@@ -177,19 +177,21 @@
   }
 
   .glass-card--halo::after {
-    opacity: var(--glass-card-halo-boost, 0.45);
+    opacity: var(--glass-card-halo-boost, 0.22);
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card--halo:hover::after,
   .glass-card--halo:focus-visible::after,
   .glass-card--halo.glass-card--interactive:hover::after,
   .glass-card--halo.glass-card--interactive:focus-visible::after {
-    opacity: var(--glass-card-halo-boost-hover, 0.55);
-    transform: scale(1.02);
+    opacity: var(--glass-card-halo-boost-hover, 0.32);
+    transform: scale(1.01);
   }
 
   .glass-card--particles::before {
-    opacity: var(--glass-card-particles-opacity, 0.65);
+    opacity: var(--glass-card-particles-opacity, 0.38);
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media (max-width: 640px) {

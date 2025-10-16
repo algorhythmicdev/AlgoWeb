@@ -18,8 +18,8 @@
     'radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.92%, rgba(var(--voyage-blue-rgb), 0.006) 0.08%) 0%, color-mix(in srgb, var(--bg-elev-1, var(--bg)) 99.92%, rgba(var(--aurora-purple-rgb), 0.006) 0.08%) 42%, var(--bg) 100%)';
   const fallbackFilmOpacity = 0.045;
 
-  const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.12, damping: 0.35, precision: 0.001 });
-  const scrollSpring = spring(0, { stiffness: 0.08, damping: 0.4, precision: 0.0001 });
+  const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.06, damping: 0.5, precision: 0.001 });
+  const scrollSpring = spring(0, { stiffness: 0.04, damping: 0.55, precision: 0.0001 });
 
   let pointerCoords = { x: 0.5, y: 0.35 };
   let scrollDepth = 0;
@@ -189,14 +189,14 @@
           id: `${shapeConfig.type}-${index}-${i}`,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          dx: (Math.random() - 0.5) * 0.05,
-          dy: (Math.random() - 0.5) * 0.04,
+          dx: (Math.random() - 0.5) * 0.025,
+          dy: (Math.random() - 0.5) * 0.02,
           size: Math.max(4, size - 2),
           color: colorVar(shapeConfig.color),
-          duration: 18 + Math.random() * 6,
-          delay: -Math.random() * 8,
-          blur: 0.4 + Math.random() * 0.3,
-          opacity: 0.0015 + Math.random() * 0.0015
+          duration: 28 + Math.random() * 12,
+          delay: -Math.random() * 14,
+          blur: 0.6 + Math.random() * 0.5,
+          opacity: 0.0008 + Math.random() * 0.0008
         });
       }
     });
@@ -288,26 +288,26 @@
     overflow: hidden;
     display: grid;
     background: transparent;
-    --gradient-filter: saturate(0.1) brightness(0.998);
-    --gradient-opacity: 0.24;
-    --wash-min: 0.0012;
-    --wash-base: 0.0024;
-    --wash-span: 0.0075;
-    --wash-max: 0.0048;
+    --gradient-filter: saturate(0.08) brightness(0.999);
+    --gradient-opacity: 0.16;
+    --wash-min: 0.0006;
+    --wash-base: 0.0012;
+    --wash-span: 0.004;
+    --wash-max: 0.0024;
     --wash-blend: normal;
-    --wash-filter: blur(12px) saturate(0.24);
-    --flare-min: 0.001;
-    --flare-base: 0.0021;
-    --flare-span: 0.0075;
-    --flare-max: 0.0048;
+    --wash-filter: blur(18px) saturate(0.18);
+    --flare-min: 0.0005;
+    --flare-base: 0.001;
+    --flare-span: 0.004;
+    --flare-max: 0.0024;
     --flare-blend: screen;
-    --flare-filter: blur(9px) saturate(0.24);
-    --veil-color: rgba(12, 18, 30, 0.006);
+    --flare-filter: blur(14px) saturate(0.18);
+    --veil-color: rgba(12, 18, 30, 0.003);
     --veil-mix-mode: multiply;
-    --veil-opacity-min: 0.002;
-    --veil-opacity-max: 0.009;
-    --veil-opacity-span: 0.012;
-    --film-opacity-max: 0.0045;
+    --veil-opacity-min: 0.001;
+    --veil-opacity-max: 0.005;
+    --veil-opacity-span: 0.008;
+    --film-opacity-max: 0.003;
   }
 
   .gradient,
@@ -321,7 +321,7 @@
   .gradient {
     background: var(--route-gradient);
     opacity: var(--gradient-opacity, 1);
-    transition: background 1.6s ease, opacity 1s ease;
+    transition: background 2.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
     filter: var(--gradient-filter, saturate(0.72) brightness(0.92));
   }
 
@@ -329,11 +329,11 @@
     background:
       radial-gradient(
         36% 38% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
-        color-mix(in srgb, var(--theme-primary) 0.6%, transparent),
+        color-mix(in srgb, var(--theme-primary) 0.35%, transparent),
         transparent 74%
       ),
-      radial-gradient(48% 48% at 18% 18%, color-mix(in srgb, var(--theme-secondary) 0.6%, transparent) 0%, transparent 78%),
-      linear-gradient(180deg, color-mix(in srgb, var(--bg) 99.75%, transparent) 0%, color-mix(in srgb, var(--bg) 99.75%, transparent) 100%);
+      radial-gradient(48% 48% at 18% 18%, color-mix(in srgb, var(--theme-secondary) 0.3%, transparent) 0%, transparent 78%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 99.85%, transparent) 0%, color-mix(in srgb, var(--bg) 99.85%, transparent) 100%);
     opacity: clamp(
       var(--wash-min, 0.0012),
       var(--wash-base, 0.0024) + var(--scroll-depth) * var(--wash-span, 0.0075),
@@ -341,13 +341,13 @@
     );
     filter: var(--wash-filter, blur(12px) saturate(0.24));
     mix-blend-mode: var(--wash-blend, normal);
-    transition: opacity 1.2s ease, transform 1.2s ease;
+    transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), transform 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .flare {
     background:
-      radial-gradient(32% 32% at 78% 22%, color-mix(in srgb, var(--theme-accent) 0.6%, transparent) 0%, transparent 78%),
-      radial-gradient(38% 38% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 0.55%, transparent) 0%, transparent 78%);
+      radial-gradient(32% 32% at 78% 22%, color-mix(in srgb, var(--theme-accent) 0.3%, transparent) 0%, transparent 78%),
+      radial-gradient(38% 38% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 0.25%, transparent) 0%, transparent 78%);
     opacity: clamp(
       var(--flare-min, 0.001),
       var(--flare-base, 0.0021) + var(--scroll-depth) * var(--flare-span, 0.0075),
@@ -355,6 +355,7 @@
     );
     mix-blend-mode: var(--flare-blend, screen);
     filter: var(--flare-filter, blur(12px) saturate(0.46));
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .veil {
@@ -365,53 +366,55 @@
       var(--veil-opacity-min) + var(--scroll-depth) * var(--veil-opacity-span, 0.1),
       var(--veil-opacity-max)
     );
+    transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .film {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--glass-bg-lightest) 65%, transparent 35%) 0%,
+      color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%) 0%,
       transparent 100%
     );
-    opacity: clamp(0.02, var(--route-film, 0.045), var(--film-opacity-max, 0.08));
+    opacity: clamp(0.015, var(--route-film, 0.03), var(--film-opacity-max, 0.05));
     mix-blend-mode: normal;
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   :global([data-base-theme='dark']) .background {
-    --gradient-filter: saturate(0.14) brightness(0.66);
-    --gradient-opacity: 0.22;
-    --wash-min: 0.0025;
-    --wash-base: 0.0045;
-    --wash-span: 0.011;
-    --wash-max: 0.0075;
+    --gradient-filter: saturate(0.1) brightness(0.7);
+    --gradient-opacity: 0.14;
+    --wash-min: 0.0012;
+    --wash-base: 0.0022;
+    --wash-span: 0.006;
+    --wash-max: 0.004;
     --wash-blend: screen;
-    --flare-min: 0.0026;
-    --flare-base: 0.0048;
-    --flare-span: 0.011;
-    --flare-max: 0.0078;
-    --veil-color: rgba(2, 4, 9, 0.026);
+    --flare-min: 0.0013;
+    --flare-base: 0.0024;
+    --flare-span: 0.006;
+    --flare-max: 0.004;
+    --veil-color: rgba(2, 4, 9, 0.015);
     --veil-mix-mode: lighten;
-    --veil-opacity-min: 0.0055;
-    --veil-opacity-max: 0.016;
-    --veil-opacity-span: 0.014;
-    --film-opacity-max: 0.065;
+    --veil-opacity-min: 0.003;
+    --veil-opacity-max: 0.009;
+    --veil-opacity-span: 0.008;
+    --film-opacity-max: 0.04;
   }
 
   :global([data-base-theme='dark']) .background .wash {
     background:
       radial-gradient(
         38% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
-        color-mix(in srgb, var(--theme-primary) 0.8%, transparent),
+        color-mix(in srgb, var(--theme-primary) 0.4%, transparent),
         transparent 76%
       ),
-      radial-gradient(50% 46% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 0.7%, transparent) 0%, transparent 80%),
-      linear-gradient(180deg, color-mix(in srgb, var(--bg) 99.2%, transparent) 0%, color-mix(in srgb, var(--bg) 99.2%, transparent) 100%);
+      radial-gradient(50% 46% at 18% 16%, color-mix(in srgb, var(--theme-secondary) 0.35%, transparent) 0%, transparent 80%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 99.6%, transparent) 0%, color-mix(in srgb, var(--bg) 99.6%, transparent) 100%);
   }
 
   :global([data-base-theme='dark']) .background .flare {
     background:
-      radial-gradient(34% 34% at 78% 22%, color-mix(in srgb, var(--theme-accent) 0.65%, transparent) 0%, transparent 76%),
-      radial-gradient(40% 40% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 0.6%, transparent) 0%, transparent 78%);
+      radial-gradient(34% 34% at 78% 22%, color-mix(in srgb, var(--theme-accent) 0.32%, transparent) 0%, transparent 76%),
+      radial-gradient(40% 40% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 0.3%, transparent) 0%, transparent 78%);
   }
 
   :global(html[data-theme='hc']) .background,
@@ -426,13 +429,13 @@
     transform: translateZ(0);
     will-change: transform;
     mix-blend-mode: screen;
-    animation: floaty var(--duration) ease-in-out infinite alternate;
+    animation: floaty var(--duration) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
     animation-delay: var(--delay);
   }
 
   :global([data-base-theme='dark']) .dot {
     mix-blend-mode: screen;
-    opacity: 0.2;
+    opacity: 0.12;
   }
 
   :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .wash {
@@ -479,13 +482,13 @@
 
   @keyframes floaty {
     0% {
-      transform: translate3d(-2px, -3px, 0) scale(0.97);
+      transform: translate3d(-1px, -1.5px, 0) scale(0.98);
     }
     50% {
-      transform: translate3d(3px, 4px, 0) scale(1.02);
+      transform: translate3d(1.5px, 2px, 0) scale(1.01);
     }
     100% {
-      transform: translate3d(-3px, 2px, 0) scale(0.99);
+      transform: translate3d(-1.5px, 1px, 0) scale(0.99);
     }
   }
 

@@ -568,8 +568,9 @@
 
   .nav-brand img {
     display: block;
-    width: clamp(128px, 22vw, 152px);
+    width: clamp(7rem, 20vw, 10rem);
     height: auto;
+    max-width: 100%;
   }
 
   .nav-groups {
@@ -766,9 +767,10 @@
   .nav-actions {
     display: inline-flex;
     align-items: center;
-    gap: clamp(0.65rem, 2vw, 1.2rem);
-    flex-shrink: 1;
+    gap: clamp(0.6rem, 2vw, 1.15rem);
+    flex-shrink: 0;
     min-width: 0;
+    flex-wrap: nowrap;
   }
 
   .nav-mobile-controls {
@@ -787,8 +789,9 @@
 
   .nav-mobile-brand img {
     display: block;
-    width: clamp(128px, 45vw, 164px);
+    width: clamp(7.5rem, 38vw, 11rem);
     height: auto;
+    max-width: 100%;
   }
 
   .nav-mobile-controls__label {
@@ -801,10 +804,11 @@
   }
 
   .nav-button {
-    --btn-padding-y: 0.7rem;
-    --btn-padding-x: 1.55rem;
+    --btn-padding-y: clamp(0.6rem, 1.8vw, 0.85rem);
+    --btn-padding-x: clamp(1.2rem, 3vw, 1.75rem);
     --btn-hover-translate: -3px;
-    font-size: clamp(0.95rem, 1vw, 1rem);
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    white-space: nowrap;
   }
 
   .nav-trigger {
@@ -813,23 +817,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 44px;
-    height: 44px;
+    width: clamp(2.75rem, 12vw, 3.25rem);
+    height: clamp(2.75rem, 12vw, 3.25rem);
     border-radius: var(--radius-full);
     background: var(--surface-pill-bg);
     border: 1px solid var(--surface-pill-border);
     box-shadow: var(--surface-pill-shadow);
     backdrop-filter: blur(18px) saturate(1.05);
     -webkit-backdrop-filter: blur(18px) saturate(1.05);
-    gap: 6px;
+    gap: clamp(0.3rem, 2vw, 0.4rem);
     transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
   }
 
   .nav-trigger span {
     display: block;
-    width: 18px;
-    height: 2px;
-    border-radius: 999px;
+    width: clamp(1rem, 4.5vw, 1.25rem);
+    height: clamp(0.125rem, 0.5vw, 0.15rem);
+    border-radius: var(--radius-full);
     background: currentColor;
     transition: transform var(--duration-fast) var(--ease-out);
   }
@@ -842,11 +846,11 @@
   }
 
   .nav-shell.menu-open .nav-trigger span:nth-child(1) {
-    transform: translateY(4px) rotate(45deg);
+    transform: translateY(clamp(0.225rem, 1vw, 0.3rem)) rotate(45deg);
   }
 
   .nav-shell.menu-open .nav-trigger span:nth-child(2) {
-    transform: translateY(-4px) rotate(-45deg);
+    transform: translateY(clamp(-0.225rem, -1vw, -0.3rem)) rotate(-45deg);
   }
 
   .nav-overlay {
@@ -1159,28 +1163,28 @@
 
   @media (max-width: 600px) {
     .nav-surface {
-      padding: clamp(0.85rem, 4vw, 1rem) 0;
+      padding: clamp(0.8rem, 3.5vw, 1rem) 0;
       align-items: center;
     }
 
     .nav-brand img {
-      width: clamp(116px, 40vw, 140px);
+      width: clamp(6.5rem, 36vw, 8.5rem);
     }
 
     .nav-links {
-      top: clamp(4.75rem, 16vw, 5.85rem);
-      right: clamp(1rem, 6vw, 1.6rem);
-      left: clamp(1rem, 6vw, 1.6rem);
-      max-height: calc(100vh - clamp(5.25rem, 18vw, 7.5rem));
+      top: clamp(4.5rem, 14vw, 5.5rem);
+      right: clamp(0.85rem, 5vw, 1.4rem);
+      left: clamp(0.85rem, 5vw, 1.4rem);
+      max-height: calc(100vh - clamp(5rem, 16vw, 7rem));
     }
   }
 
   @media (max-width: 520px) {
     .nav-links {
-      top: clamp(4.6rem, 18vw, 5.5rem);
-      left: clamp(0.85rem, 6vw, 1.3rem);
-      right: clamp(0.85rem, 6vw, 1.3rem);
-      max-height: calc(100vh - clamp(5rem, 20vw, 7.25rem));
+      top: clamp(4.25rem, 16vw, 5.25rem);
+      left: clamp(0.75rem, 5vw, 1.2rem);
+      right: clamp(0.75rem, 5vw, 1.2rem);
+      max-height: calc(100vh - clamp(4.75rem, 18vw, 6.75rem));
     }
 
     .nav-actions :global(.language-switcher),
@@ -1189,7 +1193,7 @@
     }
 
     .nav-mobile-controls {
-      gap: clamp(0.65rem, 5vw, 1rem);
+      gap: clamp(0.6rem, 4.5vw, 0.95rem);
     }
   }
 
@@ -1199,15 +1203,16 @@
     }
 
     .nav-brand img {
-      width: clamp(96px, 46vw, 128px);
+      width: clamp(5.5rem, 40vw, 8rem);
     }
 
     .nav-actions {
-      gap: clamp(0.32rem, 5vw, 0.5rem);
+      gap: clamp(0.35rem, 2.5vw, 0.6rem);
+      flex-wrap: nowrap;
     }
 
     .nav-mobile-controls {
-      gap: clamp(0.55rem, 6vw, 0.85rem);
+      gap: clamp(0.55rem, 4vw, 0.9rem);
     }
   }
 
@@ -1219,6 +1224,10 @@
     
     .nav-menu {
       flex-direction: column;
+    }
+
+    .nav-brand img {
+      width: clamp(5rem, 32vw, 6.5rem);
     }
   }
 
