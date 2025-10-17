@@ -439,6 +439,21 @@
             "cta": "Смотреть календарь событий"
           }
         }
+      },
+      "platform_showcase": {
+        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
+        "eyebrow": "Product snapshots",
+        "items": {
+          "ideonautix": {
+            "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion.",
+            "title": "Ideonautix creative cockpit"
+          },
+          "nodevoyage": {
+            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller.",
+            "title": "NodeVoyage travel timeline"
+          }
+        },
+        "title": "Experience our flagship platforms"
       }
     }
   },
@@ -1149,7 +1164,8 @@
         "modules_value": "Pitch · Intelligence · Focus · Library",
         "promise_label": "Promise",
         "promise_value": "Explainable AI for builders"
-      }
+      },
+      "demo_cta": "Launch the live demo"
     },
     "modules": {
       "title": "Tools that keep ideas moving",
@@ -1251,7 +1267,8 @@
         "focus_value": "Collaborative, sustainable travel",
         "milestone_label": "Next milestone",
         "milestone_value": "Public beta · June 2026"
-      }
+      },
+      "demo_cta": "Launch the live demo"
     },
     "features": {
       "title": "What makes NodeVoyage different?",
@@ -1888,6 +1905,22 @@
             "title": "Сообщество и сотрудничество",
             "copy": "Партнёрства с родителями, культурными институтами и наставниками отрасли превращают ИИ в общий танец, а не сольное выступление."
           }
+        },
+        "community": {
+          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.",
+          "title": "Community & collaboration"
+        },
+        "education_first": {
+          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner.",
+          "title": "Education first"
+        },
+        "empowerment": {
+          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred.",
+          "title": "Empowerment through technology"
+        },
+        "integrity": {
+          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact.",
+          "title": "Innovation with integrity"
         }
       },
       "team": {
