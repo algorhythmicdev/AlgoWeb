@@ -43,6 +43,7 @@ export const endpoints = {
   },
   posts: '/posts',
   modules: '/educational-modules',
+  platforms: '/platform-articles',
   categories: '/categories',
   tags: '/tags',
   authors: '/authors',
