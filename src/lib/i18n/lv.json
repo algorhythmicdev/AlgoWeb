@@ -23,6 +23,8 @@
   "settings": {
     "theme": {
       "group": "Krāsu režīms",
+      "trigger_label": "Izvēlieties tēmu",
+      "menu_label": "Pieejamās tēmas",
       "light": "Gaišais režīms",
       "dark": "Tumšais režīms",
       "contrast": "Augsta kontrasta režīms",
