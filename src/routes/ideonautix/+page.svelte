@@ -470,7 +470,7 @@
 
   .section > .container {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-content);
   }
 
   .section::before,
@@ -481,7 +481,7 @@
     border-radius: clamp(36px, 7vw, 64px);
     pointer-events: none;
     opacity: 0.24;
-    z-index: 0;
+    z-index: var(--z-base);
   }
 
   .section::after {
