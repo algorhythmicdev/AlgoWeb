@@ -68,14 +68,27 @@ This guide covers the implementation of all 8 phases from the README for integra
    - publishDate (DateTime, required)
    - status (Enumeration: draft, published)
 
-3. **Category** (`categories`)
+3. **Platform Article** (`platform-articles`)
+   - title (Text, required)
+   - slug (UID from title, required)
+   - excerpt (Text)
+   - content (Rich Text, required)
+   - featuredImage (Media, single)
+   - publishDate (DateTime, required)
+   - status (Enumeration: draft, published)
+   - categories (Relation, many-to-many)
+   - tags (Relation, many-to-many)
+   - author (Relation, many-to-one)
+   - platformType (Enumeration: NodeVoyage, Ideonautix, General)
+
+4. **Category** (`categories`)
    - name (Text, required, unique)
    - slug (UID from name, required)
 
-4. **Tag** (`tags`)
+5. **Tag** (`tags`)
    - name (Text, required, unique)
 
-5. **Author** (`authors`)
+6. **Author** (`authors`)
    - name (Text, required)
    - bio (Text)
    - avatar (Media, single)
@@ -87,6 +100,7 @@ In Strapi Admin → Settings → Users & Permissions:
 1. **Public Role**: Read access to published content
    - posts: find, findOne (with published filter)
    - educational-modules: find, findOne (with published filter)
+   - platform-articles: find, findOne (with published filter)
    - categories: find, findOne
    - tags: find, findOne
    - authors: find, findOne
@@ -123,23 +137,28 @@ JWT_SECRET=your_jwt_secret_here
 
 Content automatically loads from Strapi when available. If Strapi is not configured, pages show helpful error messages.
 
-## Phase 5: Educational Hub Redesign
+## Phase 5: Educational Hub & Platform Integration
 
-The existing `/education-hub` page can be enhanced with dynamic content by:
+✅ **Implemented**:
+- `/education-hub` - Dynamic module listing with CMS integration
+- `/education-hub/[slug]` - Individual educational module pages
+- `/platform` - Platform articles listing with CMS integration
+- `/platform/[slug]` - Individual platform article pages
+- SSR support for all dynamic routes
+- Automatic SEO meta tags from CMS content
+- Media attachments support for educational modules
 
-1. Creating educational modules in Strapi
-2. Updating `src/routes/education-hub/+page.server.js` to fetch from CMS
-3. Replacing static content arrays with dynamic data
+### Usage
 
-Example:
-```javascript
-export async function load({ fetch }) {
-  const response = await fetchCollection('educational-modules', {
-    populate: ['category', 'tags', 'mediaAttachments'],
-    filters: { '[status][$eq]': 'published' }
-  });
-  return { modules: response.data };
-}
+Educational modules and platform articles automatically load from Strapi when available. If Strapi is not configured, pages show helpful error messages.
+
+### Dynamic Routes Created
+
+```
+/education-hub              - List all educational modules
+/education-hub/[slug]       - Individual module detail pages
+/platform                   - List all platform articles
+/platform/[slug]            - Individual platform article pages
 ```
 
 ## Phase 6: Admin Dashboard Wireframe & UI Structure
@@ -217,23 +236,35 @@ src/
 
 ### CI/CD Integration
 
-Add to your deployment pipeline:
+✅ **Implemented**:
 
 1. **Environment Variables**: Configure in hosting platform
-   - `PUBLIC_STRAPI_URL`
-   - `JWT_SECRET`
-   - `STRAPI_API_TOKEN`
+   - `PUBLIC_STRAPI_URL` - Strapi API URL (public)
+   - `JWT_SECRET` - JWT secret for authentication
+   - `STRAPI_API_TOKEN` - API token for server-side requests
 
 2. **Build Command**: `npm run build`
 
-3. **Webhooks**: Configure Strapi to trigger rebuild on content publish
+3. **Vercel Configuration**: 
+   - `vercel.json` configured with security headers
+   - Automatic deployment on push to main
+   - Preview deployments for PRs
+   - Environment variable management
+
+4. **Webhooks**: Configure Strapi to trigger rebuild on content publish
    - Settings → Webhooks → Create new webhook
-   - URL: Your deployment webhook URL (e.g., Vercel)
+   - URL: Your Vercel deployment webhook URL
    - Events: Entry publish, Entry unpublish
 
-4. **Dual Deployment**:
+5. **Dual Deployment**:
    - Deploy Strapi backend (Docker/Cloud Run/VPS)
-   - Deploy SvelteKit frontend (Vercel/Cloudflare Pages)
+   - Deploy SvelteKit frontend (Vercel)
+   - See DEPLOYMENT.md for detailed instructions
+
+6. **SEO & Sitemap**:
+   - Dynamic sitemap.xml at `/sitemap.xml` (via `/api/sitemap`)
+   - robots.txt in static directory
+   - Automatic meta tags from CMS content
 
 ## Getting Started
 

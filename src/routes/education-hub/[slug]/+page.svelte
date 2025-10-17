@@ -1,0 +1,140 @@
+<script>
+  import { sanitizeHtml } from '$lib/utils/sanitize';
+  import Button from '$lib/components/Button.svelte';
+  import GlassCard from '$lib/components/GlassCard.svelte';
+
+  /** @type {import('./$types').PageData} */
+  export let data;
+
+  $: module = data.module;
+  $: attributes = module?.attributes || {};
+  $: content = attributes.content || '';
+  $: safeContent = sanitizeHtml(content);
+</script>
+
+<svelte:head>
+  <title>{attributes.title || 'Educational Module'} - AlgoRhythmics Education Hub</title>
+  <meta name="description" content={attributes.description || attributes.excerpt || ''} />
+</svelte:head>
+
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+  <nav class="mb-8">
+    <Button href="/education-hub" variant="subtle">← Back to Education Hub</Button>
+  </nav>
+
+  <article>
+    <GlassCard padding="lg">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{attributes.title}</h1>
+        
+        {#if attributes.description}
+          <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
+            {attributes.description}
+          </p>
+        {/if}
+
+        <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+          {#if attributes.publishDate}
+            <time datetime={attributes.publishDate}>
+              {new Date(attributes.publishDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          {/if}
+
+          {#if attributes.category?.data}
+            <span>
+              Category: {attributes.category.data.attributes?.name || 'Uncategorized'}
+            </span>
+          {/if}
+        </div>
+
+        {#if attributes.tags?.data && attributes.tags.data.length > 0}
+          <div class="mt-4 flex flex-wrap gap-2">
+            {#each attributes.tags.data as tag}
+              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm">
+                {tag.attributes?.name || ''}
+              </span>
+            {/each}
+          </div>
+        {/if}
+      </header>
+
+      {#if safeContent}
+        <div class="prose dark:prose-invert max-w-none">
+          {@html safeContent}
+        </div>
+      {/if}
+
+      {#if attributes.mediaAttachments?.data && attributes.mediaAttachments.data.length > 0}
+        <div class="mt-8">
+          <h2 class="text-2xl font-bold mb-4">Media & Resources</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {#each attributes.mediaAttachments.data as media}
+              {#if media.attributes}
+                <div class="border rounded-lg p-4">
+                  {#if media.attributes.mime?.startsWith('image/')}
+                    <img
+                      src={media.attributes.url}
+                      alt={media.attributes.alternativeText || media.attributes.name}
+                      class="w-full h-auto rounded"
+                      loading="lazy"
+                    />
+                  {:else}
+                    <a
+                      href={media.attributes.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-blue-600 hover:text-blue-800"
+                    >
+                      {media.attributes.name}
+                    </a>
+                  {/if}
+                </div>
+              {/if}
+            {/each}
+          </div>
+        </div>
+      {/if}
+    </GlassCard>
+  </article>
+
+  <nav class="mt-8">
+    <Button href="/education-hub" variant="secondary">← Back to Education Hub</Button>
+  </nav>
+</div>
+
+<style>
+  .prose {
+    line-height: 1.75;
+  }
+
+  .prose :global(h1),
+  .prose :global(h2),
+  .prose :global(h3) {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1em;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .prose :global(a) {
+    color: var(--voyage-blue);
+    text-decoration: underline;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--aurora-purple);
+  }
+</style>
