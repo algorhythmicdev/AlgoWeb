@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { describe, it, expect } from 'vitest';
 import { readFile } from 'node:fs/promises';
-import { parse } from 'svelte/compiler';
 
 /**
  * Verify that Footer and Navigation components use translation keys properly
@@ -10,7 +9,6 @@ import { parse } from 'svelte/compiler';
 describe('Footer and Navigation i18n', () => {
   it('Footer.svelte uses translation keys for all visible text', async () => {
     const source = await readFile('src/lib/components/Footer.svelte', 'utf8');
-    const ast = parse(source);
     
     // Check that the component imports svelte-i18n
     expect(source).toContain("import { _ } from 'svelte-i18n'");
@@ -24,13 +22,12 @@ describe('Footer and Navigation i18n', () => {
 
   it('Navigation.svelte uses translation keys for all visible text', async () => {
     const source = await readFile('src/lib/components/Navigation.svelte', 'utf8');
-    const ast = parse(source);
     
     // Check that the component imports svelte-i18n (with either single or double quotes)
     expect(source).toMatch(/import\s+{\s*_\s*}\s+from\s+["']svelte-i18n["']/);
     
     // Check for translation key usage patterns
-    expect(source).toMatch(/\$_\(["']nav\./); // Uses nav.* keys
+    expect(source).toMatch(/\$_\(['"]nav\./); // Uses nav.* keys
     
     // Verify aria-labels are also translated
     expect(source).toContain('aria-label=');
