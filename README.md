@@ -1,212 +1,190 @@
-Audit Report: AlgoRhythmics Website
-Phase 1: Visual / Layout Issues
+Phase 1: Headless CMS Evaluation and Selection
 
-Hero Aside Not Centered on Mobile (file: Hero.svelte) – On narrow screens the hero’s aside content (e.g. founder image or highlights) remains left-aligned. The fix is to center the hero aside in mobile view. For example, in Hero.svelte’s <style>, add a media rule:
+kernelics.com
+kernelics.com
+ Evaluate CMS Options: We reviewed Strapi, Sanity, and Directus. Strapi is a mature, open-source Node.js CMS (with REST/GraphQL APIs and built-in RBAC) that auto-generates content endpoints
+kernelics.com
+. Sanity is a cloud-first, real-time CMS with a React Studio (great for collaboration, no ops burden)
+kernelics.com
+. Directus is a database-first CMS that wraps an existing SQL schema with auto APIs
+kernelics.com
+. All three support rich text, media uploads, tagging and scheduling. For ease of self-hosting, strong SvelteKit integration, and community support, we choose Strapi
+kernelics.com
+. (Sanity is noted for live editing and scaling but is proprietary; Directus offers DB control but requires a SQL setup.)
 
-/* Hero.svelte: center aside content on small screens */
-@media (max-width: 600px) {
-  .hero--align-center .hero__aside {
-    justify-self: center;
-    text-align: center;
+Phase 2: CMS Setup and Content Modeling
+
+CMS Backend: Install Strapi (v5) on our server/Cloud (e.g. Google Cloud or Vercel) with a PostgreSQL database. Configure CORS to allow requests from our site (e.g. localhost:5173 in dev)
+strapi.io
+. Secure the Strapi instance (SSL, firewall).
+
+Authentication & Roles: Use Strapi’s Users & Permissions plugin to create roles (Admin, Editor, Author, Viewer). Configure secure login (JWT) and email verification. Strapi will manage user authentication for content creators; we will also use these credentials in our SvelteKit app to gate the /admin area
+strapi.io
+.
+
+Content Types (Schemas): Define Strapi content-types for:
+
+Blog Post: Fields: title (string), slug (UID), excerpt (text), content (rich text/Markdown), featured image (media), publishDate (date-time), status (enum: draft/published), categories (relation), tags (relation), author (relation).
+
+Educational Module: Fields: title, slug, description, content (rich text), media attachments (media, multiple images/PDFs/videos), category (e.g. “Core”, “Lab”, etc.), tags, publishDate, status.
+
+Category: Fields: name, slug. (Used to organize posts/modules.)
+
+Tag: Fields: name. (For filtering and SEO.)
+
+Author: Fields: name, bio, avatar (media). (Relates to posts.)
+
+(Optionally, Platform Article: if separate from blog, similar schema.)
+
+Each content-type should have a “published” boolean or status and a “publishAt” field for scheduling. Strapi plugins or lifecycle hooks can enforce publish timing.
+
+Permissions & Workflow: In Strapi settings, allow Editors/Authors to create and schedule content but require Admin approval for publishing. Enable draft/publish workflow. Ensure media library is set up for uploads (e.g. AWS S3 or Cloudinary provider) and configure file size/type limits.
+
+Phase 3: Admin Authentication & Dashboard Route
+
+Secure Admin Route (/admin): Create a protected SvelteKit route at src/routes/admin/. In +page.server.ts, check for a valid session token; if absent, redirect to /login. For example:
+
+// src/routes/admin/+page.server.ts
+import { redirect } from '@sveltejs/kit';
+export async function load({ cookies }) {
+  if (!cookies.get('jwt')) throw redirect(302, '/login');
+  // Optionally verify token with Strapi
+}
+
+
+Login Page: Build src/routes/login/+page.svelte with a form for email/password. On submit, POST to Strapi’s auth endpoint (/api/auth/local). E.g.:
+
+const login = async (email, password) => {
+  const res = await fetch(`${STRAPI_URL}/api/auth/local`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ identifier: email, password })
+  });
+  const data = await res.json();
+  if (data.jwt) {
+    document.cookie = `jwt=${data.jwt}; Path=/; HttpOnly`;
+    // Redirect to /admin
   }
+};
+
+
+(Storing JWT in HttpOnly cookie for security; SvelteKit can then send it on server requests.)
+
+Admin Dashboard UI: In src/routes/admin/+page.svelte, display links/forms to manage content. For example: “Manage Blog Posts” and “Manage Modules” sections. Provide an “Add New” button that opens a form. Use Svelte components (e.g. <AdminNav>, <ContentList>, <ContentForm>) to reuse styling. The dashboard should allow listing existing items (with Edit/Delete actions) and opening a modal or new page to create/edit content via Strapi’s REST API.
+
+API Integration: In the admin pages, use fetch (server-side in SvelteKit) to GET/POST to Strapi. For example, to fetch all posts:
+
+export const load = async ({ fetch, cookies }) => {
+  const jwt = cookies.get('jwt');
+  const res = await fetch(`${STRAPI_URL}/api/posts?populate=author,tags,categories`, {
+    headers: { Authorization: `Bearer ${jwt}` }
+  });
+  const { data } = await res.json();
+  return { posts: data };
+};
+
+
+Use similar calls for creating/updating via fetch(strapiUrl, { method: 'POST', headers: {...}, body: formData }). Ensure only authenticated requests (with JWT).
+
+Phase 4: Frontend Integration & Content Pages
+
+Routes & Data Fetching: Implement SvelteKit pages for the public site: e.g. src/routes/education-hub/+page.svelte (hub index), src/routes/education-hub/[slug]/+page.svelte (module detail), src/routes/blog/+page.svelte, and src/routes/blog/[slug]/+page.svelte. In each +page.js or +page.server.ts, use load to fetch data from Strapi. Example for list pages:
+
+export const load = async ({ fetch }) => {
+  const res = await fetch(`${STRAPI_URL}/api/posts?populate=author,tags,categories`);
+  const { data } = await res.json();
+  return { posts: data };
+};
+
+
+For detail pages, filter by slug:
+
+export async function load({ params, fetch }) {
+  const res = await fetch(`${STRAPI_URL}/api/posts?filters[slug][$eq]=${params.slug}&populate=author,tags`);
+  const { data } = await res.json();
+  return { post: data[0] };
 }
 
 
-This ensures the .hero__aside grid cell is centered under the hero on mobile
-GitHub
-.
+This leverages Strapi’s REST API queries. Use populate to include relations (author, media, etc.). The content (rich text) can be rendered with a Svelte component, sanitizing it first if necessary (see Phase 7).
 
-Hero Overlay Too Light (file: Hero.svelte) – The semi-transparent overlay behind hero text is too weak, making text hard to read. Increase its opacity or color mix. For example, replace the existing overlay in Hero.svelte with a stronger mix:
+Rendering Logic (SSR/ISR): Enable SvelteKit’s SSR (default) for SEO
+svelte.dev
+. For pages with static content (published posts/modules), use export const prerender = true to statically generate at build time. Example:
 
-/* Hero.svelte: stronger overlay for text legibility */
-.hero {
-  /* Use ~95% solid background for higher contrast */
-  --hero-overlay: color-mix(in srgb, var(--bg) 95%, transparent 5%);
-}
-.hero__background {
-  background: var(--hero-overlay);
-  opacity: 0.82; /* thicker overlay than before */
-}
+// In blog/[slug]/+page.js
+export const csr = false;
+export const prerender = true;
 
 
-This change (using about 95% of the background color) ensures text meets contrast recommendations
-GitHub
-.
+This satisfies SEO and performance
+strapi.io
+svelte.dev
+. For frequently changing content, rely on incremental rebuilds (e.g. a webhook to redeploy on Strapi publish).
 
-Missing Card Corner Rounding (file: GlassCard.svelte) – The GlassCard component has square corners by default. According to the design, cards should be rounded. In GlassCard.svelte, change the CSS rule to use the theme’s large radius token:
+UI Components: Update or create components (e.g. <PostCard>, <ModuleCard>, <HeroBanner>) to display dynamic content. Reuse the existing design system classes (colors, fonts, etc.) from src/lib/styles or Tailwind config to maintain consistency. For example, use the same <Header> and <Footer> layouts as the rest of the site.
 
-/* GlassCard.svelte: apply design token for rounded corners */
-.glass-card {
-  /* use theme token for border radius (e.g., ~1.6rem ≈ 25.6px) */
-  border-radius: var(--radius-lg);
-}
+Styling & Animations: Use Svelte transitions or CSS animations consistent with the theme (glassmorphism, subtle fades) for content loading. Ensure hover/focus states match the established design. (E.g. use svelte:transition for list item reveal.)
 
+Phase 5: Educational Hub Redesign
 
-Using var(--radius-lg) (≈24px) on all cards adds smooth rounded corners
-GitHub
-.
+Dynamic Content: The Education Hub (at /education-hub) should list modules (with filters by category/tag). Fetch these from Strapi as above. Support sorting or category tabs (e.g. “Core Courses”, “Labs”, “Community”).
 
-Phase 2: Mobile Responsiveness
+Interactive Features: If needed, allow authors to schedule modules, set visibility (public vs partner-only). Implement UI controls for these (e.g. “Publish on” date picker). Use Strapi’s API to save scheduling.
 
-Toolbar Items Overlap on Small Screens (file: Navigation.svelte or global CSS) – The top toolbar (“Keep it light/Go dark/Contrast” toggles and language switcher) can wrap awkwardly. Hide or abbreviate text on very small screens. For example:
+Media Handling: Enable content creators to upload images, PDFs, or videos in the editor. In Strapi, configure the Media Library and any upload providers. In SvelteKit, ensure images use <img alt={...} src={...}> with responsive sizes. Store caption/alt text in the CMS and apply it in the template for accessibility.
 
-/* Navigation.svelte or global CSS: prevent overlap on tiny viewports */
-@media (max-width: 500px) {
-  .nav-toggle-text { display: none; } /* hide "Keep it light"/"Go dark" labels */
-  .nav-menu { flex-direction: column; }
-}
+Phase 6: Admin Dashboard Wireframe & UI Structure
 
+Dashboard Layout: Design the /admin interface with a sidebar (navigation links: “All Posts”, “Add Post”, “All Modules”, “Add Module”, “Media Library”, “Settings”) and a main panel. Use existing spacing/grid (e.g. Tailwind CSS classes) for consistency. For example:
 
-This stacks or hides extra labels on mobile, preventing overlap
-GitHub
-.
-
-Hero Content Overflow (file: Hero.svelte) – Some hero headings or buttons may overflow on mobile. Constrain them with a max-width and center alignment. For instance, in Hero.svelte add:
-
-/* Hero.svelte: contain hero text on small screens */
-.hero__content {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-
-This confines the hero text and buttons to the viewport width
-GitHub
-.
-
-Platform Cards Not Stacking (relevant page CSS or component) – In the “Platform lineup” section (NodeVoyage and Ideonautix), ensure cards stack vertically under 640px. For example, wrap the card components in a responsive grid:
-
-<!-- e.g. in src/routes/... -->
-<div class="grid gap-6 md:grid-cols-2">
-  <!-- NodeVoyage card -->
-  <!-- Ideonautix card -->
+<div class="flex h-full">
+  <nav class="w-64 bg-white shadow-lg">
+    <!-- links -->
+  </nav>
+  <main class="flex-1 p-6 overflow-auto">
+    <!-- dynamic content (lists/forms) -->
+  </main>
 </div>
 
 
-This Tailwind-style grid gives two columns on medium+ screens and one column on mobile, so cards stack on small viewports
-GitHub
+Content Lists: Each list view (Posts, Modules) shows a table or grid of items with columns: Title, Status, Publish Date, Actions (Edit/Delete). Include a button “+ New” at top right.
+
+Editor Forms: The create/edit form includes fields matching the CMS schema (title input, slug, rich text editor for content, image upload, tag/category selects, publish date picker, status toggle). Use the same form styles as public site (inputs with standard classes). For rich text, use a WYSIWYG editor (Strapi’s default or a Svelte wrapper).
+
+Styling: Apply the corporate design system (colors, fonts) to all admin components. Reuse utility classes (bg-gray-50, text-primary, etc.) so the admin panel visually aligns with the main site.
+
+Phase 7: SEO, Accessibility & Security
+
+svelte.dev
+svelte.dev
+ SEO: Ensure every page has unique <title> and <meta name="description"> based on content (fetch and inject via <svelte:head>). Use SvelteKit’s SSR to render content for crawlers
+svelte.dev
+. Generate a dynamic sitemap.xml endpoint (e.g. src/routes/sitemap.xml/+server.js) that lists all blog and module URLs
+svelte.dev
 .
 
-Phase 3: Theming & Accessibility
+Accessibility: Follow WCAG 2.2 guidelines (as company policy). Every image must have descriptive alt text from the CMS. Use semantic HTML (e.g. headings in order, <button> for actions). Ensure keyboard navigation works (e.g. focus states visible). Use ARIA roles if needed (e.g. role="dialog" for modals). The design system already targets accessibility, so reuse its components (e.g. color contrast).
 
-Low-Contrast Text/Buttons – Verify all text and buttons meet WCAG contrast. Avoid hard-coded colors like #000 on dark backgrounds. Use theme tokens such as var(--text) or var(--cta-primary-text) for button labels. For example, ensure button text is var(--cta-primary-text) on dark backgrounds
-GitHub
+wisp.blog
+ User Content Safety: Sanitize all HTML/content from the CMS before injecting it into the page to prevent XSS
+wisp.blog
+. For example, use a library like sanitize-html on the server:
+
+import sanitizeHtml from 'sanitize-html';
+const clean = sanitizeHtml(post.content, { allowedTags: [...], allowedAttributes: {...} });
+
+
+Only allow safe tags (e.g. <p>,<h1>,<a>,<ul>,<li>, etc.). Strapi’s rich text can be sanitized in load() or a helper before rendering with {@html}. Implement a Content Security Policy (CSP) header in hooks.server.js to restrict scripts and frames
+dev.to
 .
 
-Replace Hard-Coded Colors – If any CSS uses fixed colors (e.g. background: #eef1f7;), replace them with theme tokens. For instance:
+Animations & Performance: Use SvelteKit’s automatic code-splitting and image optimization. Mark interactive scripts to defer when possible. Limit animations to CSS transforms (no layout thrashing). Test Core Web Vitals and adjust (e.g. lazy-load below-the-fold images).
 
-/* Instead of fixed gray, use the token */
-background-color: var(--mist);
+Phase 8: File Structure & CI/CD
 
+Project Structure: Create new directories/components under src/lib (e.g. components/Admin*, utils/api.js). In src/routes, add admin/, login/, blog/, and education-hub/ folders as above. Update the main +layout.svelte to include the <slot /> and shared header/footer. Optionally create src/routes/(protected)/+layout.ts to handle auth redirection.
 
-All colors (backgrounds, text, borders) should use the design system tokens (--bg, --text, --aurora, etc.) for consistency
-GitHub
-.
+Styling Config: Ensure Tailwind or CSS variables include any new styles from the design system (check tailwind.config.js and src/lib/styles.css). Import any new fonts or icons needed.
 
-Missing ARIA/Alt Text and Focus Styles – Ensure every interactive element (links, icons, images) has an accessible name or alt text. For example, social icon <button>s should have aria-label="Visit LinkedIn", or <img>s should include alt. Also, do not remove focus outlines. If needed, add a visible focus style such as:
-
-.btn:focus-visible {
-  outline: 2px solid var(--border);
-  outline-offset: 4px;
-}
-
-
-This ensures keyboard users can see which element is focused
-GitHub
-.
-
-High-Contrast/Dark Theme Color Corrections – In high-contrast mode, ensure backgrounds and text invert appropriately. For example, GlassCard already switches to solid var(--bg) in HC mode. Check any component where gray-on-gray might happen; force such icons/text to currentColor or a high-contrast token. For instance, images or SVGs could use CSS color: var(--text) in dark mode. The goal is no element should have insufficient contrast in any theme
-GitHub
-.
-
-Phase 4: Code Quality & Structure
-
-Use Hero/GlassCard Components Uniformly (various pages) – Some pages manually code top sections instead of using the reusable <Hero> and <GlassCard> components. For consistency, wrap page headers in <Hero> and content in <GlassCard>. For example, in src/routes/consulting/+page.svelte:
-
-<script>
-  import Hero from '$lib/components/Hero.svelte';
-  import GlassCard from '$lib/components/GlassCard.svelte';
-  import { $_ } from '$lib/i18n';
-</script>
-
-<Hero title="{$_('consulting.title')}" subtitle="{$_('consulting.subtitle')}" align="center">
-  <div slot="actions">
-    <a href="/contact" class="btn btn-primary">{$_('consulting.cta')}</a>
-  </div>
-</Hero>
-
-<GlassCard as="section">
-  <h2>{$_('consulting.section1.heading')}</h2>
-  <p>{$_('consulting.section1.text')}</p>
-</GlassCard>
-
-
-This enforces consistent styling (rounded glass background, padding) across pages
-GitHub
-GitHub
-. Update any page using plain <section> to use these components.
-
-Avoid Fixed Spacing (various CSS) – Replace remaining hard-coded px values with spacing tokens. E.g., instead of padding: 24px;, use padding: var(--space-2xl);. Similarly use tokens like var(--text-small) for font sizes. This keeps the design scalable and aligned with the theme
-GitHub
-.
-
-Remove Inline Type Suppressions (e.g. @ts-nocheck) – Some files (e.g. ThemedBackground.svelte) use @ts-nocheck. Refactor these to proper TypeScript or add interfaces so linting passes. For example, annotate any stores or props with correct types instead of disabling checks
-GitHub
-.
-
-Theme Toggle Keyboard Fix – The theme toggle shortcut (“t” key) should not fire when a modal or menu is open. Update the keydown handler (in theme-toggle or root layout) to check:
-
-document.body.classList.contains('modal-open')
-
-
-and ignore the “t” key if a modal is active. This prevents accidental theme changes when focus is in a dialog
-GitHub
-.
-
-Phase 5: Animation & Background Fixes
-
-Background Layers Behind Content (file: ThemedBackground.svelte, HaloFX.svelte) – Ensure decorative background layers do not intercept clicks and stay behind all UI. The .background div in ThemedBackground.svelte already has pointer-events: none; z-index: var(--z-background, -20). Do the same for any halo effects. For example, in HaloFX.svelte’s <style> add:
-
-:global(.halo-fx) {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: var(--z-background, -20);
-}
-
-
-This guarantees all animated backgrounds sit behind interactive content
-GitHub
-.
-
-Remove Distracting Animations – As per design, disable any continuous background or gradient animations. In ThemedBackground.svelte and Hero.svelte, remove CSS animation: rules on gradients. Use static backgrounds instead. Also audit CSS for any infinite @keyframes loops and remove them. This stops unnecessarily looping animations
-GitHub
-.
-
-Prefer-Reduced-Motion Compliance – Ensure any remaining animations respect the user’s reduced-motion preference. For example, add a global rule:
-
-@media (prefers-reduced-motion: reduce) {
-  .background, .background * { animation: none !important; }
-}
-
-
-Many animations (hero scroll, card transforms, etc.) should already be disabled under prefers-reduced-motion. Confirm no rogue animations persist
-GitHub
-.
-
-Z-Index Consistency – Use the design’s z-index tokens instead of magic numbers. For instance, navigation bars and drop-downs should use z-index: var(--z-sticky) (100) or var(--z-overlay) (400). If any component (like a modal or menu) has an inline z-index, change it. For example:
-
-.nav-bar    { z-index: var(--z-sticky); }
-.dropdown   { z-index: var(--z-overlay); }
-
-
-This ensures --z-background (e.g. –20) stays behind everything, main content is around 0, and overlays sit above as intended
-GitHub
-.
-
-Each issue above includes the component file to edit and a code snippet fix. All fixes follow the project’s design tokens and meet WCAG guidelines. After implementing, rebuild and test in all themes (light, dark, high-contrast) and viewports.
-
-Sources: Audit and fix suggestions are drawn from the project’s internal documentation and codebase, as summarized in the repository
-GitHub
-GitHub
-. Each cited fix corresponds to the relevant component or stylesheet.
+Deployment: Add environment variables (STRAPI_URL, JWT secrets) to the deployment pipeline. Set up two deployments: one for Strapi (Docker or Node process) and one for the SvelteKit site (Vercel/Cloudflare). On Strapi content publish, trigger a rebuild of the site (webhook integration). Implement a CI step to run linting, build and test before deploy.
