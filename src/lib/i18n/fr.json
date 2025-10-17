@@ -34,15 +34,15 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
-    "services": "Services",
-    "educational_outreach": "Educational Outreach",
-    "resources": "Resources",
-    "resources_blog": "Blog",
-    "resources_blog_desc": "Insights, news, and creative stories",
-    "resources_cases": "Case Studies",
-    "resources_cases_desc": "See AlgoRhythmics solutions in action",
-    "resources_events": "Events",
-    "resources_events_desc": "Join upcoming webinars and community meetups",
+    "solutions": "Solutions",
+    "solutions_panel_label": "Solutions menu",
+    "solutions_nodevoyage": "NodeVoyage Travel OS",
+    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
+    "solutions_ideonautix": "Ideonautix Startup OS",
+    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
+    "solutions_consulting": "AI Consulting Services",
+    "solutions_consulting_desc": "Tailored integration, training, and strategy",
+    "help_center": "Help Center",
     "contact": "Contact",
     "brand_aria": "Accueil AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
@@ -52,15 +52,15 @@
     "quick_controls": "Commandes rapides",
     "toggle_menu": "Ouvrir ou fermer le menu",
     "skip_to_content": "Skip to content",
-    "solutions": "Solutions",
-    "solutions_panel_label": "Solutions menu",
-    "solutions_nodevoyage": "NodeVoyage Travel OS",
-    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
-    "solutions_ideonautix": "Ideonautix Startup OS",
-    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
-    "solutions_consulting": "AI Consulting Services",
-    "solutions_consulting_desc": "Tailored integration, training, and strategy",
-    "help_center": "Help Center"
+    "services": "Services",
+    "educational_outreach": "Educational Outreach",
+    "resources": "Resources",
+    "resources_blog": "Blog",
+    "resources_blog_desc": "Insights, news, and creative stories",
+    "resources_cases": "Case Studies",
+    "resources_cases_desc": "See AlgoRhythmics solutions in action",
+    "resources_events": "Events",
+    "resources_events_desc": "Join upcoming webinars and community meetups"
   },
   "language_switcher": {
     "group_label": "Sélecteur de langue",
@@ -441,19 +441,19 @@
         }
       },
       "platform_showcase": {
-        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
         "eyebrow": "Product snapshots",
+        "title": "Experience our flagship platforms",
+        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
         "items": {
           "ideonautix": {
-            "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion.",
-            "title": "Ideonautix creative cockpit"
+            "title": "Ideonautix creative cockpit",
+            "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion."
           },
           "nodevoyage": {
-            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller.",
-            "title": "NodeVoyage travel timeline"
+            "title": "NodeVoyage travel timeline",
+            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller."
           }
-        },
-        "title": "Experience our flagship platforms"
+        }
       }
     }
   },
@@ -492,7 +492,6 @@
     "what_1": "Concevoir des parcours IA accessibles et centrés sur l’humain.",
     "what_2": "Prototyper, intégrer et lancer en toute confiance.",
     "what_3": "Accompagner votre équipe avec formation et boucles d’itération.",
-    "packages_title": "Comment nous aidons",
     "packages": [
       {
         "name": "Stratégie",
@@ -625,7 +624,8 @@
       "description_required": "Partagez quelques détails sur vos objectifs."
     },
     "form_mailto_subject": "Candidature au pilote de conseil – {company}",
-    "form_mailto_body": "Entreprise : {company}\nContact : {name}\nE-mail : {email}\nTéléphone : {phone}\nSecteur : {industry}\n\nObjectifs :\n{description}"
+    "form_mailto_body": "Entreprise : {company}\nContact : {name}\nE-mail : {email}\nTéléphone : {phone}\nSecteur : {industry}\n\nObjectifs :\n{description}",
+    "packages_title": "Comment nous aidons"
   },
   "contact": {
     "meta_title": "Contacter AlgoRhythmics",
@@ -1888,21 +1888,21 @@
         "eyebrow": "Mission & valeurs",
         "title": "Là où la logique danse avec la créativité",
         "copy": "Notre mission est simple : rendre l’IA avancée accessible, agréable et digne de confiance. Nous la poursuivons grâce à des valeurs qui placent les personnes au centre.",
-        "community": {
-          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.",
-          "title": "Community & collaboration"
-        },
         "education_first": {
-          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner.",
-          "title": "Education first"
+          "title": "Education first",
+          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner."
         },
         "empowerment": {
-          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred.",
-          "title": "Empowerment through technology"
+          "title": "Empowerment through technology",
+          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred."
         },
         "integrity": {
-          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact.",
-          "title": "Innovation with integrity"
+          "title": "Innovation with integrity",
+          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact."
+        },
+        "community": {
+          "title": "Community & collaboration",
+          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act."
         }
       },
       "team": {
@@ -1912,24 +1912,24 @@
         "focus_label": "Focus : {focus}",
         "members": {
           "nikita": {
+            "name": "Nikita Jurtaevs",
             "role": "Cofondateur et CEO",
             "focus": "Design signalétique, storytelling et accompagnement des partenaires",
             "bio": "Nikita aligne direction produit, accessibilité et partenariats. Il apporte le réalisme des sols de signalétique à chaque interface et programme.",
             "links": {
               "email": "E-mail",
               "linkedin": "LinkedIn"
-            },
-            "name": "Nikita Jurtaevs"
+            }
           },
           "slaff": {
+            "name": "Vjaceslavs \"Slaff\" Trosins",
             "role": "Cofondateur et CTO",
             "focus": "Architecture cloud, IA explicable et opérations",
             "bio": "Slaff orchestre l’ingénierie, les flux de données et les intégrations d’IA. Il relie une discipline digne du hardware à des expériences logicielles transparentes.",
             "links": {
               "email": "E-mail",
               "linkedin": "LinkedIn"
-            },
-            "name": "Vjaceslavs \"Slaff\" Trosins"
+            }
           }
         }
       },

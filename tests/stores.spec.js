@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const localeSetMock = vi.fn();
 
-vi.mock('$app/environment', () => ({ browser: true }), { virtual: true });
+vi.mock('$app/environment', () => ({ browser: true, dev: true }), { virtual: true });
 vi.mock('svelte-i18n', () => ({
   locale: {
     set: localeSetMock

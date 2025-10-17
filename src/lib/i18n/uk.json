@@ -34,15 +34,15 @@
   "nav": {
     "home": "Головна",
     "about": "Про нас",
-    "services": "Services",
-    "educational_outreach": "Educational Outreach",
-    "resources": "Resources",
-    "resources_blog": "Blog",
-    "resources_blog_desc": "Insights, news, and creative stories",
-    "resources_cases": "Case Studies",
-    "resources_cases_desc": "See AlgoRhythmics solutions in action",
-    "resources_events": "Events",
-    "resources_events_desc": "Join upcoming webinars and community meetups",
+    "solutions": "Solutions",
+    "solutions_panel_label": "Solutions menu",
+    "solutions_nodevoyage": "NodeVoyage Travel OS",
+    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
+    "solutions_ideonautix": "Ideonautix Startup OS",
+    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
+    "solutions_consulting": "AI Consulting Services",
+    "solutions_consulting_desc": "Tailored integration, training, and strategy",
+    "help_center": "Help Center",
     "contact": "Контакти",
     "brand_aria": "Головна AlgoRhythmics",
     "brand_name": "AlgoRhythmics",
@@ -52,15 +52,15 @@
     "quick_controls": "Швидкі налаштування",
     "toggle_menu": "Відкрити або закрити меню",
     "skip_to_content": "Skip to content",
-    "solutions": "Solutions",
-    "solutions_panel_label": "Solutions menu",
-    "solutions_nodevoyage": "NodeVoyage Travel OS",
-    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
-    "solutions_ideonautix": "Ideonautix Startup OS",
-    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
-    "solutions_consulting": "AI Consulting Services",
-    "solutions_consulting_desc": "Tailored integration, training, and strategy",
-    "help_center": "Help Center"
+    "services": "Services",
+    "educational_outreach": "Educational Outreach",
+    "resources": "Resources",
+    "resources_blog": "Blog",
+    "resources_blog_desc": "Insights, news, and creative stories",
+    "resources_cases": "Case Studies",
+    "resources_cases_desc": "See AlgoRhythmics solutions in action",
+    "resources_events": "Events",
+    "resources_events_desc": "Join upcoming webinars and community meetups"
   },
   "language_switcher": {
     "group_label": "Вибір мови",
@@ -441,19 +441,19 @@
         }
       },
       "platform_showcase": {
-        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
         "eyebrow": "Product snapshots",
+        "title": "Experience our flagship platforms",
+        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
         "items": {
           "ideonautix": {
-            "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion.",
-            "title": "Ideonautix creative cockpit"
+            "title": "Ideonautix creative cockpit",
+            "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion."
           },
           "nodevoyage": {
-            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller.",
-            "title": "NodeVoyage travel timeline"
+            "title": "NodeVoyage travel timeline",
+            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller."
           }
-        },
-        "title": "Experience our flagship platforms"
+        }
       }
     }
   },
@@ -492,7 +492,6 @@
     "what_1": "Створювати доступні, людяні AI-потоки.",
     "what_2": "Прототипувати, інтегрувати та запускати з упевненістю.",
     "what_3": "Підтримувати команду навчанням та ітераціями.",
-    "packages_title": "Як ми допомагаємо",
     "packages": [
       {
         "name": "Стратегія",
@@ -625,7 +624,8 @@
       "description_required": "Поділіться кількома деталями про свої цілі."
     },
     "form_mailto_subject": "Заявка на консалтинговий пілот від {company}",
-    "form_mailto_body": "Компанія: {company}\nКонтакт: {name}\nE-mail: {email}\nТелефон: {phone}\nГалузь: {industry}\n\nЦілі:\n{description}"
+    "form_mailto_body": "Компанія: {company}\nКонтакт: {name}\nE-mail: {email}\nТелефон: {phone}\nГалузь: {industry}\n\nЦілі:\n{description}",
+    "packages_title": "Як ми допомагаємо"
   },
   "contact": {
     "meta_title": "Зв’яжіться з AlgoRhythmics",
@@ -1888,21 +1888,21 @@
         "eyebrow": "Місія та цінності",
         "title": "Де логіка танцює з креативністю",
         "copy": "Наша місія проста: зробити просунутий ШІ доступним, приємним і таким, що заслуговує довіри. Ми втілюємо її через цінності, які ставлять людей у центр.",
-        "community": {
-          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.",
-          "title": "Community & collaboration"
-        },
         "education_first": {
-          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner.",
-          "title": "Education first"
+          "title": "Education first",
+          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner."
         },
         "empowerment": {
-          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred.",
-          "title": "Empowerment through technology"
+          "title": "Empowerment through technology",
+          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred."
         },
         "integrity": {
-          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact.",
-          "title": "Innovation with integrity"
+          "title": "Innovation with integrity",
+          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact."
+        },
+        "community": {
+          "title": "Community & collaboration",
+          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act."
         }
       },
       "team": {
@@ -1912,24 +1912,24 @@
         "focus_label": "Фокус: {focus}",
         "members": {
           "nikita": {
+            "name": "Nikita Jurtaevs",
             "role": "Співзасновник і CEO",
             "focus": "Дизайн навігацій, сторітелінг і партнерські впровадження",
             "bio": "Нікіта узгоджує продуктовий напрям, доступність і партнерства. Він приносить реалізм навігаційних просторів у кожен інтерфейс і програму.",
             "links": {
               "email": "Ел. пошта",
               "linkedin": "LinkedIn"
-            },
-            "name": "Nikita Jurtaevs"
+            }
           },
           "slaff": {
+            "name": "Vjaceslavs \"Slaff\" Trosins",
             "role": "Співзасновник і CTO",
             "focus": "Хмарна архітектура, пояснюваний ШІ та операції",
             "bio": "Слафф координує інженерію, потоки даних і інтеграції ШІ. Він поєднує дисципліну рівня апаратного забезпечення з прозорим програмним досвідом.",
             "links": {
               "email": "Ел. пошта",
               "linkedin": "LinkedIn"
-            },
-            "name": "Vjaceslavs \"Slaff\" Trosins"
+            }
           }
         }
       },
