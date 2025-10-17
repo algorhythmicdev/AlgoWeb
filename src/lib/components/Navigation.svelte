@@ -1422,6 +1422,12 @@
             display: none;
         }
 
+        .nav-actions :global(.language-switcher),
+        .nav-actions :global(.theme-switcher),
+        .nav-actions :global(.theme-toggle) {
+            display: none;
+        }
+
         .nav-trigger {
             display: inline-flex;
         }
@@ -1547,10 +1553,6 @@
             gap: var(--space-xs);
         }
 
-        .nav-actions :global(.language-switcher),
-        .nav-actions :global(.theme-switcher) {
-            display: none;
-        }
 
         .nav-trigger {
             display: inline-flex;
