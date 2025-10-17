@@ -9,11 +9,11 @@
   "trailingSlash": false,
   "regions": ["iad1"],
   "env": {
-    "PUBLIC_STRAPI_URL": "@public_strapi_url"
+    "PUBLIC_STRAPI_URL": "SEE README_CMS.md"
   },
   "build": {
     "env": {
-      "PUBLIC_STRAPI_URL": "@public_strapi_url",
+      "PUBLIC_STRAPI_URL": "SEE README_CMS.md",
       "STRAPI_API_TOKEN": "@strapi_api_token",
       "JWT_SECRET": "@jwt_secret"
     }
