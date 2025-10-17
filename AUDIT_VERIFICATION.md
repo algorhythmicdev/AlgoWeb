@@ -268,7 +268,7 @@ import GlassCard from '$lib/components/GlassCard.svelte';
 **Result**: ✅ "All locale files are in sync with en.json"
 
 **Locale Files** (6 total):
-1. ✅ `en.json` (1980 lines) - Golden standard
+1. ✅ `en.json` (1980 lines) - Gold standard
 2. ✅ `es.json` (2018 lines) - Spanish
 3. ✅ `fr.json` (2018 lines) - French
 4. ✅ `lv.json` (2009 lines) - Latvian
