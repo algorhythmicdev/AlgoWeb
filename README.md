@@ -1,9 +1,9 @@
-Comprehensive Bug and UI/UX Audit of AlgoRhythmics Website
+Audit Report: AlgoRhythmics Website
+Phase 1: Visual / Layout Issues
 
-Visual/Layout Issues
+Hero Aside Not Centered on Mobile (file: Hero.svelte) – On narrow screens the hero’s aside content (e.g. founder image or highlights) remains left-aligned. The fix is to center the hero aside in mobile view. For example, in Hero.svelte’s <style>, add a media rule:
 
-Hero Aside Not Centered on Mobile: On narrow viewports, the <Hero> component’s aside content (e.g. founder image or “highlights”) remains left-aligned. For example, on the founders section the photo and text aren’t centered under the hero on mobile. Fix: Add responsive centering in Hero.svelte. For instance, inside <style>:
-
+/* Hero.svelte: center aside content on small screens */
 @media (max-width: 600px) {
   .hero--align-center .hero__aside {
     justify-self: center;
@@ -12,133 +12,160 @@ Hero Aside Not Centered on Mobile: On narrow viewports, the <Hero> component’s
 }
 
 
-This ensures the .hero__aside grid cell is centered in “center” alignment mode.
-
-Hero Overlay Opacity Too Low: The semi‑transparent overlay behind hero text is too weak, making text hard to read
+This ensures the .hero__aside grid cell is centered under the hero on mobile
 GitHub
-. In Hero.svelte, replace the 54% mix with a heavier overlay. For example:
+.
 
+Hero Overlay Too Light (file: Hero.svelte) – The semi-transparent overlay behind hero text is too weak, making text hard to read. Increase its opacity or color mix. For example, replace the existing overlay in Hero.svelte with a stronger mix:
+
+/* Hero.svelte: stronger overlay for text legibility */
 .hero {
-  /* Strong overlay for text legibility */
+  /* Use ~95% solid background for higher contrast */
   --hero-overlay: color-mix(in srgb, var(--bg) 95%, transparent 5%);
 }
 .hero__background {
   background: var(--hero-overlay);
-  opacity: 0.82;
+  opacity: 0.82; /* thicker overlay than before */
 }
 
 
-This change (from ~54% to ~95% solid color) matches the recommended contrast fix
+This change (using about 95% of the background color) ensures text meets contrast recommendations
 GitHub
 .
 
-Missing Glass-Card Corner Radius: The <GlassCard> default has no corner rounding (border-radius: 0). According to the design system, cards should have ~24px–40px radius
-GitHub
-. In GlassCard.svelte, change the CSS rule:
+Missing Card Corner Rounding (file: GlassCard.svelte) – The GlassCard component has square corners by default. According to the design, cards should be rounded. In GlassCard.svelte, change the CSS rule to use the theme’s large radius token:
 
+/* GlassCard.svelte: apply design token for rounded corners */
 .glass-card {
-  /* OLD: border-radius: var(--glass-card-radius, 0); */
-  /* NEW: use design token radius */
+  /* use theme token for border radius (e.g., ~1.6rem ≈ 25.6px) */
   border-radius: var(--radius-lg);
-  /* e.g., ~1.6rem (≈25.6px) for smooth rounded corners */
 }
 
 
-This applies the theme’s --radius-lg token (24px) to all cards.
+Using var(--radius-lg) (≈24px) on all cards adds smooth rounded corners
+GitHub
+.
 
-Mobile Responsiveness Bugs
+Phase 2: Mobile Responsiveness
 
-Navigation Items Overlap on Small Screens: The top toolbar (“Keep it light / Go dark / High contrast” toggles and language switcher) can wrap oddly on very narrow screens. Ensure the toolbar stacks vertically or hides extra text. For example, in Navigation.svelte or global CSS:
+Toolbar Items Overlap on Small Screens (file: Navigation.svelte or global CSS) – The top toolbar (“Keep it light/Go dark/Contrast” toggles and language switcher) can wrap awkwardly. Hide or abbreviate text on very small screens. For example:
 
+/* Navigation.svelte or global CSS: prevent overlap on tiny viewports */
 @media (max-width: 500px) {
-  .nav-toggle-text { display: none; } /* hide “Keep it light”/“Go dark” text on tiny screens */
+  .nav-toggle-text { display: none; } /* hide "Keep it light"/"Go dark" labels */
   .nav-menu { flex-direction: column; }
 }
 
 
-This prevents overlap by hiding or rearranging elements on mobile. (Alternatively use icons or shorter labels.)
+This stacks or hides extra labels on mobile, preventing overlap
+GitHub
+.
 
-Hero Content Overflows on Mobile: Some hero headings or action buttons may extend beyond the viewport. For example, if <Hero align="center"> is used, add max-width and center alignment. In Hero.svelte:
+Hero Content Overflow (file: Hero.svelte) – Some hero headings or buttons may overflow on mobile. Constrain them with a max-width and center alignment. For instance, in Hero.svelte add:
 
+/* Hero.svelte: contain hero text on small screens */
 .hero__content {
   max-width: 90%;
   margin: 0 auto;
 }
 
 
-This confines the hero text and buttons to fit on small screens.
+This confines the hero text and buttons to the viewport width
+GitHub
+.
 
-Platform Cards Not Stacking Properly: In the “Platform lineup” section, NodeVoyage and Ideonautix cards should stack under 640px. Ensure their container uses a responsive grid or flex. For example, in the page CSS:
+Platform Cards Not Stacking (relevant page CSS or component) – In the “Platform lineup” section (NodeVoyage and Ideonautix), ensure cards stack vertically under 640px. For example, wrap the card components in a responsive grid:
 
+<!-- e.g. in src/routes/... -->
 <div class="grid gap-6 md:grid-cols-2">
   <!-- NodeVoyage card -->
   <!-- Ideonautix card -->
 </div>
 
 
-This Tailwind-style grid ensures two columns on medium+ widths and one column on mobile.
-
-Theming & Accessibility Issues
-
-Low-Contrast Text/Buttons: Verify all text meets WCAG AAA. In particular, buttons and links must have ≥7:1 contrast. Use theme tokens instead of hard-coded color. For example, replace any fixed color like color: #000 with color: var(--text) or var(--cta-primary-text) (white on primary). The UI redesign report shows contrast ratios after fixes. Ensure e.g. .btn text uses var(--cta-primary-text) on dark backgrounds.
-
-Hard-Coded Color Values: Some CSS still uses fixed color values instead of tokens. For example, if any component sets background: #eef1f7; (light-gray “mist”), replace it with a token:
-
-/* Instead of fixed mist color, use theme token */
-background-color: var(--mist);
-
-
-Confirm all colors come from theme.css tokens (e.g. --bg, --text, --aurora, --voyage, etc) as intended
-GitHub
+This Tailwind-style grid gives two columns on medium+ screens and one column on mobile, so cards stack on small viewports
 GitHub
 .
 
-Missing ARIA/Focus Hints: Ensure every interactive icon or image has appropriate aria-label or alt. For example, social icons (LinkedIn/GitHub) should have aria-label="Visit LinkedIn" if they are <button>, or alt text if <img>. Also ensure focus outlines are visible: no element should use outline: none without replacement. The design system requires visible focus (3:1 contrast)
+Phase 3: Theming & Accessibility
+
+Low-Contrast Text/Buttons – Verify all text and buttons meet WCAG contrast. Avoid hard-coded colors like #000 on dark backgrounds. Use theme tokens such as var(--text) or var(--cta-primary-text) for button labels. For example, ensure button text is var(--cta-primary-text) on dark backgrounds
 GitHub
-. If needed, add focus styles:
+.
 
-.btn:focus-visible { outline: 2px solid var(--border); outline-offset: 4px; }
+Replace Hard-Coded Colors – If any CSS uses fixed colors (e.g. background: #eef1f7;), replace them with theme tokens. For instance:
+
+/* Instead of fixed gray, use the token */
+background-color: var(--mist);
 
 
-Color Contrast in Dark/HC Themes: In high-contrast mode, backgrounds and text invert. Verify elements like cards revert to solid backgrounds without blur (GlassCard already does this). E.g. ensure glass cards use pure var(--bg) with no transparency in HC mode (as done in GlassCard.svelte
+All colors (backgrounds, text, borders) should use the design system tokens (--bg, --text, --aurora, etc.) for consistency
 GitHub
-). If any text/icons become gray on gray, switch to currentColor or high-contrast token.
+.
 
-Code Quality & Structure Problems
+Missing ARIA/Alt Text and Focus Styles – Ensure every interactive element (links, icons, images) has an accessible name or alt text. For example, social icon <button>s should have aria-label="Visit LinkedIn", or <img>s should include alt. Also, do not remove focus outlines. If needed, add a visible focus style such as:
 
-Missing Hero/GlassCard Wrappers: Some pages still hard-code layouts instead of using the reusable components. For consistency, wrap top sections in <Hero> and content blocks in <GlassCard>. For example, in src/routes/consulting/+page.svelte:
+.btn:focus-visible {
+  outline: 2px solid var(--border);
+  outline-offset: 4px;
+}
+
+
+This ensures keyboard users can see which element is focused
+GitHub
+.
+
+High-Contrast/Dark Theme Color Corrections – In high-contrast mode, ensure backgrounds and text invert appropriately. For example, GlassCard already switches to solid var(--bg) in HC mode. Check any component where gray-on-gray might happen; force such icons/text to currentColor or a high-contrast token. For instance, images or SVGs could use CSS color: var(--text) in dark mode. The goal is no element should have insufficient contrast in any theme
+GitHub
+.
+
+Phase 4: Code Quality & Structure
+
+Use Hero/GlassCard Components Uniformly (various pages) – Some pages manually code top sections instead of using the reusable <Hero> and <GlassCard> components. For consistency, wrap page headers in <Hero> and content in <GlassCard>. For example, in src/routes/consulting/+page.svelte:
 
 <script>
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import { $_ } from '$lib/i18n';
 </script>
+
 <Hero title="{$_('consulting.title')}" subtitle="{$_('consulting.subtitle')}" align="center">
   <div slot="actions">
     <a href="/contact" class="btn btn-primary">{$_('consulting.cta')}</a>
   </div>
 </Hero>
+
 <GlassCard as="section">
   <h2>{$_('consulting.section1.heading')}</h2>
   <p>{$_('consulting.section1.text')}</p>
 </GlassCard>
 
 
-This ensures uniform styling (rounded glass background, padding) across pages. Update any pages that currently use plain <section> or custom CSS to use these components.
+This enforces consistent styling (rounded glass background, padding) across pages
+GitHub
+GitHub
+. Update any page using plain <section> to use these components.
 
-Hard-Coded Measurements: Replace any remaining fixed px values with spacing tokens. For example, if a component has padding: 24px;, use padding: var(--space-2xl);. Similarly, font sizes should use var(--text-small), var(--text-caption), etc
+Avoid Fixed Spacing (various CSS) – Replace remaining hard-coded px values with spacing tokens. E.g., instead of padding: 24px;, use padding: var(--space-2xl);. Similarly use tokens like var(--text-small) for font sizes. This keeps the design scalable and aligned with the theme
 GitHub
 .
 
-Inline Styles/Animations: Remove any inline @ts-nocheck or JavaScript that bypasses safety. For instance, the ThemedBackground.svelte uses @ts-nocheck; convert to proper TypeScript or annotate interfaces so linting passes.
-
-Theme Toggle Accessibility: The keyboard shortcut for toggling theme (“t” key) should respect modal state. If a menu is open, pressing “t” should not inadvertently change theme. Ensure the event handler for keydown: t checks !document.body.classList.contains('modal-open') before cycling themes.
-
-Animation & Background Layering Bugs
-
-Background Layers Behind UI: Ensure all decorative layers are non-interactive and behind content. In ThemedBackground.svelte, the root <div class="background"> correctly has pointer-events: none; z-index: var(--z-background, -20);
+Remove Inline Type Suppressions (e.g. @ts-nocheck) – Some files (e.g. ThemedBackground.svelte) use @ts-nocheck. Refactor these to proper TypeScript or add interfaces so linting passes. For example, annotate any stores or props with correct types instead of disabling checks
 GitHub
-. Verify similar for <HaloFX> if used. For example, in HaloFX.svelte add at top of its <style>:
+.
+
+Theme Toggle Keyboard Fix – The theme toggle shortcut (“t” key) should not fire when a modal or menu is open. Update the keydown handler (in theme-toggle or root layout) to check:
+
+document.body.classList.contains('modal-open')
+
+
+and ignore the “t” key if a modal is active. This prevents accidental theme changes when focus is in a dialog
+GitHub
+.
+
+Phase 5: Animation & Background Fixes
+
+Background Layers Behind Content (file: ThemedBackground.svelte, HaloFX.svelte) – Ensure decorative background layers do not intercept clicks and stay behind all UI. The .background div in ThemedBackground.svelte already has pointer-events: none; z-index: var(--z-background, -20). Do the same for any halo effects. For example, in HaloFX.svelte’s <style> add:
 
 :global(.halo-fx) {
   position: fixed;
@@ -148,37 +175,38 @@ GitHub
 }
 
 
-so that any halo animation sits behind all content.
+This guarantees all animated backgrounds sit behind interactive content
+GitHub
+.
 
-Remove Distracting Animations: Following the redesign recommendation
+Remove Distracting Animations – As per design, disable any continuous background or gradient animations. In ThemedBackground.svelte and Hero.svelte, remove CSS animation: rules on gradients. Use static backgrounds instead. Also audit CSS for any infinite @keyframes loops and remove them. This stops unnecessarily looping animations
 GitHub
-, ensure gradient and hero-pan animations are disabled. For example, in ThemedBackground.svelte and Hero.svelte remove any animation: on gradients. Use static gradients instead. Confirm CSS has no infinite keyframe loops.
+.
 
-prefers-reduced-motion Compliance: Check all interactive animations respect prefers-reduced-motion. The code already disables hero animations and card transforms under that media query
-GitHub
-GitHub
-. Ensure no rogue animations remain. For any particle or background effect, add:
+Prefer-Reduced-Motion Compliance – Ensure any remaining animations respect the user’s reduced-motion preference. For example, add a global rule:
 
 @media (prefers-reduced-motion: reduce) {
   .background, .background * { animation: none !important; }
 }
 
 
-Z-Index Consistency: Use the design’s Z-index scale
+Many animations (hero scroll, card transforms, etc.) should already be disabled under prefers-reduced-motion. Confirm no rogue animations persist
 GitHub
-. For example, navigation and dropdowns should use --z-sticky: 100 and --z-overlay: 400 from theme.css. If any element (like a modal or menu) currently has inline z-index, replace with these tokens. Example fix in CSS:
+.
 
-.nav-bar { z-index: var(--z-sticky); }
-.dropdown { z-index: var(--z-overlay); }
+Z-Index Consistency – Use the design’s z-index tokens instead of magic numbers. For instance, navigation bars and drop-downs should use z-index: var(--z-sticky) (100) or var(--z-overlay) (400). If any component (like a modal or menu) has an inline z-index, change it. For example:
+
+.nav-bar    { z-index: var(--z-sticky); }
+.dropdown   { z-index: var(--z-overlay); }
 
 
-This guarantees the background (--z-background: -20) stays at the back, content at 0–10, and overlays above (and so on) as per design system.
+This ensures --z-background (e.g. –20) stays behind everything, main content is around 0, and overlays sit above as intended
+GitHub
+.
 
-Each fix above uses the 2026 design tokens and accessibility guidelines. Be sure to rebuild and test in all themes (light, dark, high-contrast) and both desktop/mobile viewports. The snippets given can be copy-pasted into the respective component files to address the issues systematically.
+Each issue above includes the component file to edit and a code snippet fix. All fixes follow the project’s design tokens and meet WCAG guidelines. After implementing, rebuild and test in all themes (light, dark, high-contrast) and viewports.
 
- 
-
-Sources: Audit and design requirements drawn from the internal design documentation
+Sources: Audit and fix suggestions are drawn from the project’s internal documentation and codebase, as summarized in the repository
 GitHub
 GitHub
- and the existing codebase (e.g. GlassCard.svelte, Hero.svelte). All fixes conform to the 2026 design tokens (--bg, --text, --space-*, etc.) and WCAG/UX guidelines.
+. Each cited fix corresponds to the relevant component or stylesheet.
