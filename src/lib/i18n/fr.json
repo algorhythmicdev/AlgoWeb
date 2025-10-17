@@ -1888,24 +1888,6 @@
         "eyebrow": "Mission & valeurs",
         "title": "Là où la logique danse avec la créativité",
         "copy": "Notre mission est simple : rendre l’IA avancée accessible, agréable et digne de confiance. Nous la poursuivons grâce à des valeurs qui placent les personnes au centre.",
-        "items": {
-          "education_first": {
-            "title": "L’éducation d’abord",
-            "copy": "Nous cultivons la culture de l’IA dans les salles de classe et les centres communautaires. Ressources gratuites et mentorat respectueux entretiennent la curiosité de chaque apprenant."
-          },
-          "empowerment": {
-            "title": "Autonomisation par la technologie",
-            "copy": "Que vous soyez fondateur, enseignant ou étudiant, nos outils sont pensés pour être accueillants, intuitifs et centrés sur l’humain."
-          },
-          "integrity": {
-            "title": "Innovation intègre",
-            "copy": "Des garde-fous éthiques, la confidentialité et la transparence guident chaque lancement. Nous documentons les décisions d’automatisation dans un langage clair afin de préserver la confiance."
-          },
-          "community": {
-            "title": "Communauté & collaboration",
-            "copy": "Des partenariats avec familles, institutions culturelles et mentors industriels font de l’IA une danse partagée plutôt qu’un solo."
-          }
-        },
         "community": {
           "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.",
           "title": "Community & collaboration"

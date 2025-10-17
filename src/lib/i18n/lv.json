@@ -1879,24 +1879,6 @@
         "eyebrow": "Misija un vērtības",
         "title": "Kur loģika dejo ar radošumu",
         "copy": "Mūsu misija ir vienkārša: padarīt progresīvo MI pieejamu, patīkamu un uzticamu. To īstenojam ar vērtībām, kas cilvēkus tur centrā.",
-        "items": {
-          "education_first": {
-            "title": "Izglītība pirmajā vietā",
-            "copy": "Veicinām MI pratību klasēs un kopienu centros. Bezmaksas resursi un cieņpilna mentorēšana uztur zinātkāri katram mācīties gribētājam."
-          },
-          "empowerment": {
-            "title": "Iespēju paplašināšana ar tehnoloģiju",
-            "copy": "Neatkarīgi no tā, vai esi dibinātājs, skolotājs vai students, mūsu rīki ir veidoti, lai justos viesmīlīgi, intuitīvi un cilvēkcentriski."
-          },
-          "integrity": {
-            "title": "Inovācija ar integritāti",
-            "copy": "Ētiskie drošības pasākumi, privātums un caurspīdīgums vada katru laidienu. Automatizācijas lēmumus dokumentējam saprotamā valodā, lai uzticēšanās saglabātos."
-          },
-          "community": {
-            "title": "Kopiena un sadarbība",
-            "copy": "Sadarbība ar vecākiem, kultūras institūcijām un nozares mentoriem pārvērš MI kopīgā dejā, nevis solo priekšnesumā."
-          }
-        },
         "community": {
           "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.",
           "title": "Community & collaboration"

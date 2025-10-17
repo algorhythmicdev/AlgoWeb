@@ -1888,24 +1888,6 @@
         "eyebrow": "Misión y valores",
         "title": "Donde la lógica baila con la creatividad",
         "copy": "Nuestra misión es sencilla: hacer que la IA avanzada sea accesible, disfrutable y confiable. La perseguimos con valores que mantienen a las personas en el centro.",
-        "items": {
-          "education_first": {
-            "title": "Primero la educación",
-            "copy": "Fomentamos la alfabetización en IA en aulas y centros comunitarios. Los recursos gratuitos y la mentoría respetuosa mantienen viva la curiosidad de cada aprendiz."
-          },
-          "empowerment": {
-            "title": "Empoderamiento mediante la tecnología",
-            "copy": "Ya seas fundador, docente o estudiante, nuestras herramientas están diseñadas para sentirse acogedoras, intuitivas y centradas en las personas."
-          },
-          "integrity": {
-            "title": "Innovación con integridad",
-            "copy": "Barreras éticas, privacidad y transparencia guían cada lanzamiento. Documentamos las decisiones de automatización en lenguaje claro para que la confianza se mantenga."
-          },
-          "community": {
-            "title": "Comunidad y colaboración",
-            "copy": "Las alianzas con familias, instituciones culturales y mentores del sector convierten la IA en un baile compartido y no en un acto en solitario."
-          }
-        },
         "community": {
           "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act.",
           "title": "Community & collaboration"
