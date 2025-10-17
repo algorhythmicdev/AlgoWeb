@@ -609,6 +609,11 @@
             justify-self: center;
             text-align: center;
         }
+        
+        .hero__content {
+            max-width: 90%;
+            margin: 0 auto;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {

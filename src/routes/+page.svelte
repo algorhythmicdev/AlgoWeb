@@ -483,7 +483,7 @@
 
   .section-heading {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-content);
   }
 
   .section-heading::after {
@@ -586,7 +586,7 @@
   .resources > .container,
   .finale > .container {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-content);
   }
 
 
