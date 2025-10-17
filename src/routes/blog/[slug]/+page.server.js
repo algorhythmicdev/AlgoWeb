@@ -7,7 +7,7 @@ import { error } from '@sveltejs/kit';
 import { fetchBySlug } from '$lib/utils/api';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params, fetch }) {
+export async function load({ params }) {
   try {
     const post = await fetchBySlug('posts', params.slug, {
       populate: ['author', 'tags', 'categories', 'featuredImage']

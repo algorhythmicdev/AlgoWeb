@@ -5,24 +5,26 @@
 
 /**
  * List of allowed HTML tags for rich content
+ * Used for future sanitization implementation
  */
-const ALLOWED_TAGS = [
-  'p', 'br', 'strong', 'em', 'u', 's', 'del',
-  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-  'ul', 'ol', 'li',
-  'a', 'img',
-  'blockquote', 'code', 'pre',
-  'table', 'thead', 'tbody', 'tr', 'th', 'td'
-];
+// const ALLOWED_TAGS = [
+//   'p', 'br', 'strong', 'em', 'u', 's', 'del',
+//   'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+//   'ul', 'ol', 'li',
+//   'a', 'img',
+//   'blockquote', 'code', 'pre',
+//   'table', 'thead', 'tbody', 'tr', 'th', 'td'
+// ];
 
 /**
  * Allowed attributes per tag
+ * Used for future sanitization implementation
  */
-const ALLOWED_ATTRIBUTES = {
-  a: ['href', 'title', 'target', 'rel'],
-  img: ['src', 'alt', 'title', 'width', 'height'],
-  '*': ['class', 'id']
-};
+// const ALLOWED_ATTRIBUTES = {
+//   a: ['href', 'title', 'target', 'rel'],
+//   img: ['src', 'alt', 'title', 'width', 'height'],
+//   '*': ['class', 'id']
+// };
 
 /**
  * Basic HTML sanitization
