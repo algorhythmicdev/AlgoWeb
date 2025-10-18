@@ -15,7 +15,12 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['https://algorhythmics.dev', 'https://*.vercel.app', 'http://localhost:5173'],
+      origin: [
+        'https://algorhythmics.dev',
+        'https://cms.algorhythmics.dev',
+        'https://*.vercel.app',
+        'http://localhost:5173',
+      ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       credentials: true,
     },

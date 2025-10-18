@@ -4,16 +4,15 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "outputDirectory": ".svelte-kit/output",
   "cleanUrls": true,
   "trailingSlash": false,
   "regions": ["iad1"],
   "env": {
-    "PUBLIC_STRAPI_URL": "SEE README_CMS.md"
+    "PUBLIC_STRAPI_URL": "https://cms.algorhythmics.dev"
   },
   "build": {
     "env": {
-      "PUBLIC_STRAPI_URL": "SEE README_CMS.md",
+      "PUBLIC_STRAPI_URL": "https://cms.algorhythmics.dev",
       "STRAPI_API_TOKEN": "@strapi_api_token",
       "JWT_SECRET": "@jwt_secret"
     }
