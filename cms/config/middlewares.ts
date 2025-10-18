@@ -1,5 +1,6 @@
 export default ({ env }) => [
   'strapi::errors',
+  { name: 'global::https-proxy' },
   {
     name: 'strapi::security',
     config: {
@@ -25,18 +26,20 @@ export default ({ env }) => [
       credentials: true,
     },
   },
-  'strapi::logger',
-  'strapi::query',
-  'strapi::body',
   {
     name: 'strapi::session',
     config: {
-      cookie: {
-        secure: env.bool('SESSION_COOKIE_SECURE', true),
-        sameSite: 'lax',
-      },
+      key: 'koa.sess',
+      rolling: false,
+      renew: false,
+      secure: env.bool('SESSION_COOKIE_SECURE', true),
+      secureProxy: true,
+      sameSite: 'lax',
     },
   },
+  'strapi::logger',
+  'strapi::query',
+  'strapi::body',
   'strapi::favicon',
   'strapi::public',
 ];
