@@ -2,6 +2,7 @@
   import GlassCard from '$lib/components/GlassCard.svelte';
   import Button from '$lib/components/Button.svelte';
   import Hero from '$lib/components/Hero.svelte';
+  import { _ } from '$lib/i18n';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -11,37 +12,26 @@
 </script>
 
 <svelte:head>
-  <title>Platform Articles - AlgoRhythmics</title>
-  <meta
-    name="description"
-    content="Explore platform articles, case studies, and insights about our technology platforms."
-  />
+  <title>{$_('platform.meta.title')}</title>
+  <meta name="description" content={$_('platform.meta.description')} />
 </svelte:head>
 
-<Hero class="hero--platform" variant="grid" title="Platform Articles">
+<Hero class="hero--platform" variant="grid" title={$_('platform.hero.title')}>
   <svelte:fragment slot="description">
-    <p class="hero-description">
-      Explore in-depth articles about our platforms: NodeVoyage and Ideonautix.
-      Learn about the technology, use cases, and real-world implementations.
-    </p>
+    <p class="hero-description">{$_('platform.hero.description')}</p>
   </svelte:fragment>
 </Hero>
 
 <div class="container mx-auto px-4 py-12">
   {#if error}
     <GlassCard padding="lg" class="max-w-2xl mx-auto text-center">
-      <h2 class="text-2xl font-bold mb-4">Content Temporarily Unavailable</h2>
-      <p class="text-gray-600 dark:text-gray-300">
-        The platform articles are managed through our CMS. Please ensure the Strapi
-        backend is configured and running.
-      </p>
+      <h2 class="text-2xl font-bold mb-4">{$_('platform.error.title')}</h2>
+      <p class="text-gray-600 dark:text-gray-300">{$_('platform.error.help')}</p>
     </GlassCard>
   {:else if articles.length === 0}
     <GlassCard padding="lg" class="max-w-2xl mx-auto text-center">
-      <h2 class="text-2xl font-bold mb-4">No Articles Yet</h2>
-      <p class="text-gray-600 dark:text-gray-300">
-        Check back soon for platform articles and case studies.
-      </p>
+      <h2 class="text-2xl font-bold mb-4">{$_('platform.empty.title')}</h2>
+      <p class="text-gray-600 dark:text-gray-300">{$_('platform.empty.description')}</p>
     </GlassCard>
   {:else}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -63,7 +53,7 @@
             <div class="mb-4">
               {#if attributes.category?.data}
                 <span class="text-xs uppercase tracking-wide text-blue-600 dark:text-blue-400">
-                  {attributes.category.data.attributes?.name || 'Platform'}
+                  {attributes.category.data.attributes?.name || $_('platform.card.category_fallback')}
                 </span>
               {/if}
             </div>
@@ -88,13 +78,17 @@
               {/if}
               
               {#if attributes.author?.data}
-                <span>By {attributes.author.data.attributes?.name || 'Anonymous'}</span>
+                <span>
+                  {$_('platform.card.by', {
+                    name: attributes.author.data.attributes?.name || $_('platform.card.author_fallback')
+                  })}
+                </span>
               {/if}
             </div>
 
             <div class="mt-4">
               <Button href="/platform/{attributes.slug}" variant="subtle" size="sm">
-                Read Article →
+                {$_('platform.card.cta')}
               </Button>
             </div>
           </div>

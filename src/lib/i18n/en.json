@@ -1991,5 +1991,131 @@
         "secondary_cta": "Read Success Stories"
       }
     }
+  },
+  "admin": {
+    "nav": {
+      "title": "AlgoRhythmics CMS",
+      "items": {
+        "dashboard": "Dashboard",
+        "posts": "Blog Posts",
+        "modules": "Education Modules",
+        "back": "Back to Site"
+      }
+    },
+    "layout": {
+      "title": "Admin Dashboard - AlgoRhythmics"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Welcome to the AlgoRhythmics CMS",
+      "quick_actions": {
+        "title": "Quick Actions",
+        "items": {
+          "new_post": {
+            "title": "New Blog Post",
+            "description": "Create a new blog article"
+          },
+          "new_module": {
+            "title": "New Module",
+            "description": "Add an educational module"
+          },
+          "view_posts": {
+            "title": "View Posts",
+            "description": "Manage blog posts"
+          },
+          "view_modules": {
+            "title": "View Modules",
+            "description": "Manage learning content"
+          }
+        }
+      },
+      "getting_started": {
+        "title": "Getting Started",
+        "headline": "Content Management System",
+        "description": "This admin dashboard allows you to create and manage content for the AlgoRhythmics website. Before you can see live content, you need to:",
+        "steps": {
+          "setup_strapi": "Set up Strapi CMS backend (see README.md Phase 1 & 2)",
+          "configure_env": "Configure environment variables in .env file",
+          "define_content": "Define content types in Strapi admin panel",
+          "start_creating": "Start creating content!"
+        },
+        "cta": "View Public Site"
+      }
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog - AlgoRhythmics",
+      "description": "Insights, stories, and updates from the AlgoRhythmics team on calm AI, educational technology, and responsible innovation."
+    },
+    "hero": {
+      "title": "Blog & Insights",
+      "subtitle": "Stories, research, and perspectives on calm AI",
+      "description": "Explore our latest thinking on responsible AI, educational technology, and building inclusive digital experiences."
+    },
+    "sections": {
+      "latest": "Latest Articles"
+    },
+    "error": {
+      "title": "Content Temporarily Unavailable",
+      "help": "The blog content is managed through our CMS. Please ensure the Strapi backend is configured and running."
+    },
+    "empty": {
+      "title": "No Posts Yet",
+      "description": "Check back soon for insightful articles about calm AI and educational innovation."
+    },
+    "card": {
+      "by": "By {name}",
+      "cta": "Read More →"
+    },
+    "buttons": {
+      "back_to_blog": "← Back to Blog"
+    },
+    "slug": {
+      "title_suffix": "AlgoRhythmics Blog",
+      "tags_label": "Tags:"
+    }
+  },
+  "platform": {
+    "meta": {
+      "title": "Platform Articles - AlgoRhythmics",
+      "description": "Explore platform articles, case studies, and insights about our technology platforms."
+    },
+    "hero": {
+      "title": "Platform Articles",
+      "description": "Explore in-depth articles about our platforms: NodeVoyage and Ideonautix. Learn about the technology, use cases, and real-world implementations."
+    },
+    "error": {
+      "title": "Content Temporarily Unavailable",
+      "help": "The platform articles are managed through our CMS. Please ensure the Strapi backend is configured and running."
+    },
+    "empty": {
+      "title": "No Articles Yet",
+      "description": "Check back soon for platform articles and case studies."
+    },
+    "card": {
+      "by": "By {name}",
+      "cta": "Read Article →",
+      "category_fallback": "Platform",
+      "author_fallback": "Anonymous",
+      "tags_label": "Tags:"
+    },
+    "buttons": {
+      "back_to_list": "← Back to Platform Articles"
+    },
+    "slug": {
+      "default_title": "Platform Article",
+      "title_suffix": "AlgoRhythmics"
+    }
+  },
+  "education_hub": {
+    "slug": {
+      "default_title": "Educational Module",
+      "title_suffix": "AlgoRhythmics Education Hub",
+      "back": "← Back to Education Hub",
+      "category": "Category: {name}",
+      "category_fallback": "Uncategorized",
+      "resources_title": "Media & Resources"
+    }
   }
 }

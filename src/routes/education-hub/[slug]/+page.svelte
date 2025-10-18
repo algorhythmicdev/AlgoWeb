@@ -2,6 +2,7 @@
   import { sanitizeHtml } from '$lib/utils/sanitize';
   import Button from '$lib/components/Button.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
+  import { _ } from '$lib/i18n';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -13,13 +14,17 @@
 </script>
 
 <svelte:head>
-  <title>{attributes.title || 'Educational Module'} - AlgoRhythmics Education Hub</title>
+  <title>
+    {(attributes.title || $_('education_hub.slug.default_title')) + ' - ' + $_('education_hub.slug.title_suffix')}
+  </title>
   <meta name="description" content={attributes.description || attributes.excerpt || ''} />
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8 max-w-4xl">
   <nav class="mb-8">
-    <Button href="/education-hub" variant="subtle">← Back to Education Hub</Button>
+    <Button href="/education-hub" variant="subtle">
+      {$_('education_hub.slug.back')}
+    </Button>
   </nav>
 
   <article>
@@ -46,7 +51,9 @@
 
           {#if attributes.category?.data}
             <span>
-              Category: {attributes.category.data.attributes?.name || 'Uncategorized'}
+              {$_('education_hub.slug.category', {
+                name: attributes.category.data.attributes?.name || $_('education_hub.slug.category_fallback')
+              })}
             </span>
           {/if}
         </div>
@@ -70,7 +77,7 @@
 
       {#if attributes.mediaAttachments?.data && attributes.mediaAttachments.data.length > 0}
         <div class="mt-8">
-          <h2 class="text-2xl font-bold mb-4">Media & Resources</h2>
+          <h2 class="text-2xl font-bold mb-4">{$_('education_hub.slug.resources_title')}</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {#each attributes.mediaAttachments.data as media}
               {#if media.attributes}
@@ -102,7 +109,9 @@
   </article>
 
   <nav class="mt-8">
-    <Button href="/education-hub" variant="secondary">← Back to Education Hub</Button>
+    <Button href="/education-hub" variant="secondary">
+      {$_('education_hub.slug.back')}
+    </Button>
   </nav>
 </div>
 

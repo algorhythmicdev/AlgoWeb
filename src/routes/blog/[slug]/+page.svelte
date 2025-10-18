@@ -6,6 +6,7 @@
   import GlassCard from '$lib/components/GlassCard.svelte';
   import Button from '$lib/components/Button.svelte';
   import { sanitizeHtml } from '$lib/utils/sanitize';
+  import { _ } from '$lib/i18n';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -29,7 +30,7 @@
 </script>
 
 <svelte:head>
-  <title>{post.title} - AlgoRhythmics Blog</title>
+  <title>{post.title} - {$_('blog.slug.title_suffix')}</title>
   <meta name="description" content={post.excerpt || post.title} />
   {#if post.author}
     <meta name="author" content={post.author.name} />
@@ -40,7 +41,7 @@
   <div class="container">
     <div class="post-header">
       <div class="breadcrumbs">
-        <a href="/blog">← Back to Blog</a>
+        <a href="/blog">{$_('blog.buttons.back_to_blog')}</a>
       </div>
       
       {#if post.featuredImage}
@@ -97,7 +98,7 @@
     
     {#if post.tags?.length}
       <div class="post-tags">
-        <span class="tags-label">Tags:</span>
+        <span class="tags-label">{$_('blog.slug.tags_label')}</span>
         {#each post.tags as tag}
           <span class="tag-badge">{tag.name}</span>
         {/each}
@@ -105,7 +106,9 @@
     {/if}
     
     <div class="post-footer">
-      <Button href="/blog" variant="secondary">← Back to Blog</Button>
+      <Button href="/blog" variant="secondary">
+        {$_('blog.buttons.back_to_blog')}
+      </Button>
     </div>
   </div>
 </article>

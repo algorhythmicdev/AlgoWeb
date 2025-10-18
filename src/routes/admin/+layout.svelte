@@ -4,10 +4,11 @@
    * Main layout for admin pages with navigation
    */
   import AdminNav from '$lib/components/AdminNav.svelte';
+  import { _ } from '$lib/i18n';
 </script>
 
 <svelte:head>
-  <title>Admin Dashboard - AlgoRhythmics</title>
+  <title>{$_('admin.layout.title')}</title>
   <meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 

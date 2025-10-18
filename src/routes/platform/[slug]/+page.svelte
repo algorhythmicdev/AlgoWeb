@@ -2,6 +2,7 @@
   import { sanitizeHtml } from '$lib/utils/sanitize';
   import Button from '$lib/components/Button.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
+  import { _ } from '$lib/i18n';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -14,13 +15,17 @@
 </script>
 
 <svelte:head>
-  <title>{attributes.title || 'Platform Article'} - AlgoRhythmics</title>
+  <title>
+    {(attributes.title || $_('platform.slug.default_title')) + ' - ' + $_('platform.slug.title_suffix')}
+  </title>
   <meta name="description" content={attributes.excerpt || attributes.description || ''} />
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8 max-w-4xl">
   <nav class="mb-8">
-    <Button href="/platform" variant="subtle">← Back to Platform Articles</Button>
+    <Button href="/platform" variant="subtle">
+      {$_('platform.buttons.back_to_list')}
+    </Button>
   </nav>
 
   <article>
@@ -56,20 +61,24 @@
 
           {#if attributes.author?.data}
             <span>
-              By {attributes.author.data.attributes?.name || 'Anonymous'}
+              {$_('platform.card.by', {
+                name: attributes.author.data.attributes?.name || $_('platform.card.author_fallback')
+              })}
             </span>
           {/if}
 
           {#if attributes.category?.data}
             <span>
-              {attributes.category.data.attributes?.name || 'Platform'}
+              {attributes.category.data.attributes?.name || $_('platform.card.category_fallback')}
             </span>
           {/if}
         </div>
 
         {#if attributes.tags?.data && attributes.tags.data.length > 0}
           <div class="mt-4 flex flex-wrap gap-2">
-            <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">Tags:</span>
+            <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">
+              {$_('platform.card.tags_label')}
+            </span>
             {#each attributes.tags.data as tag}
               <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm">
                 {tag.attributes?.name || ''}
@@ -88,7 +97,9 @@
   </article>
 
   <nav class="mt-8">
-    <Button href="/platform" variant="secondary">← Back to Platform Articles</Button>
+    <Button href="/platform" variant="secondary">
+      {$_('platform.buttons.back_to_list')}
+    </Button>
   </nav>
 </div>
 

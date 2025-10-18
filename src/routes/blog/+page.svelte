@@ -8,6 +8,7 @@
   import Button from '$lib/components/Button.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import { staggerReveal } from '$lib/animations';
+  import { _ } from '$lib/i18n';
 
   /** @type {import('./$types').PageData} */
   export let data;
@@ -28,44 +29,38 @@
 </script>
 
 <svelte:head>
-  <title>Blog - AlgoRhythmics</title>
-  <meta name="description" content="Insights, stories, and updates from the AlgoRhythmics team on calm AI, educational technology, and responsible innovation." />
+  <title>{$_('blog.meta.title')}</title>
+  <meta name="description" content={$_('blog.meta.description')} />
 </svelte:head>
 
 <Hero
   class="hero--blog"
   variant="grid"
-  title="Blog & Insights"
-  subtitle="Stories, research, and perspectives on calm AI"
+  title={$_('blog.hero.title')}
+  subtitle={$_('blog.hero.subtitle')}
 >
   <svelte:fragment slot="description">
-    <p class="hero-description">
-      Explore our latest thinking on responsible AI, educational technology, 
-      and building inclusive digital experiences.
-    </p>
+    <p class="hero-description">{$_('blog.hero.description')}</p>
   </svelte:fragment>
 </Hero>
 
-<SectionDivider label="Latest Articles" tone="aurora" />
+<SectionDivider label={$_('blog.sections.latest')} tone="aurora" />
 
 <section class="section blog-posts" data-surface="glow">
   <div class="container">
     {#if error}
       <GlassCard padding="lg" class="error-card">
         <div class="error-message">
-          <h2>Content Temporarily Unavailable</h2>
+          <h2>{$_('blog.error.title')}</h2>
           <p>{error}</p>
-          <p class="help-text">
-            The blog content is managed through our CMS. Please ensure the Strapi 
-            backend is configured and running.
-          </p>
+          <p class="help-text">{$_('blog.error.help')}</p>
         </div>
       </GlassCard>
     {:else if posts.length === 0}
       <GlassCard padding="lg" class="empty-state">
         <div class="empty-message">
-          <h2>No Posts Yet</h2>
-          <p>Check back soon for insightful articles about calm AI and educational innovation.</p>
+          <h2>{$_('blog.empty.title')}</h2>
+          <p>{$_('blog.empty.description')}</p>
         </div>
       </GlassCard>
     {:else}
@@ -100,12 +95,14 @@
                 
                 {#if post.author}
                   <div class="post-author">
-                    By {post.author.name}
+                    {$_('blog.card.by', { name: post.author.name ?? '' })}
                   </div>
                 {/if}
                 
                 <div class="post-action">
-                  <Button variant="subtle" size="sm">Read More →</Button>
+                  <Button variant="subtle" size="sm">
+                    {$_('blog.card.cta')}
+                  </Button>
                 </div>
               </div>
             </a>

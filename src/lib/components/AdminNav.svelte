@@ -4,12 +4,13 @@
    * Sidebar navigation for admin dashboard
    */
   import { page } from '$app/stores';
+  import { _ } from '$lib/i18n';
 
   const navItems = [
-    { href: '/admin', label: 'Dashboard', icon: '📊' },
-    { href: '/admin/posts', label: 'Blog Posts', icon: '📝' },
-    { href: '/admin/modules', label: 'Education Modules', icon: '📚' },
-    { href: '/', label: 'Back to Site', icon: '🏠' }
+    { href: '/admin', labelKey: 'admin.nav.items.dashboard', icon: '📊' },
+    { href: '/admin/posts', labelKey: 'admin.nav.items.posts', icon: '📝' },
+    { href: '/admin/modules', labelKey: 'admin.nav.items.modules', icon: '📚' },
+    { href: '/', labelKey: 'admin.nav.items.back', icon: '🏠' }
   ];
 
   function isActive(href) {
@@ -22,7 +23,7 @@
 
 <nav class="admin-nav" aria-label="Admin navigation">
   <div class="admin-nav__header">
-    <h2 class="admin-nav__title">AlgoRhythmics CMS</h2>
+    <h2 class="admin-nav__title">{$_('admin.nav.title')}</h2>
   </div>
   
   <ul class="admin-nav__list">
@@ -35,7 +36,7 @@
           aria-current={isActive(item.href) ? 'page' : undefined}
         >
           <span class="admin-nav__icon" aria-hidden="true">{item.icon}</span>
-          <span class="admin-nav__label">{item.label}</span>
+          <span class="admin-nav__label">{$_(item.labelKey)}</span>
         </a>
       </li>
     {/each}
