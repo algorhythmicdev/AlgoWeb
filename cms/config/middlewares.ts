@@ -1,5 +1,7 @@
 export default ({ env }) => [
   'strapi::errors',
+
+  // 👇 Add this early so all downstream middlewares see a secure request
   { name: 'global::https-proxy' },
   {
     name: 'strapi::security',
@@ -32,7 +34,8 @@ export default ({ env }) => [
       key: 'koa.sess',
       rolling: false,
       renew: false,
-      secure: env.bool('SESSION_COOKIE_SECURE', true),
+      // We keep your toggle but also allow secure via proxy
+      secure: env('SESSION_COOKIE_SECURE') === 'true',
       secureProxy: true,
       sameSite: 'lax',
     },
