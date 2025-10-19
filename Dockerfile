@@ -1,17 +1,19 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
-COPY cms/package*.json ./
+COPY package*.json ./
 RUN npm ci
 
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY cms .
-RUN NODE_ENV=production npm run build
+COPY . .
+RUN npm run build
 
-FROM node:20-alpine
+FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=build /app ./
-EXPOSE 8080
-CMD ["npm", "run", "start"]
+COPY --from=build /app/build ./build
+COPY package*.json ./
+RUN npm ci --omit=dev
+EXPOSE 3000
+CMD ["node", "build"]

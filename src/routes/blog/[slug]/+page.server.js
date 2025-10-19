@@ -4,21 +4,32 @@
  */
 
 import { error } from '@sveltejs/kit';
-import { fetchBySlug } from '$lib/utils/api';
+import { get } from '$lib/api/strapi';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export async function load({ params, fetch }) {
   try {
-    const post = await fetchBySlug('posts', params.slug, {
-      populate: ['author', 'tags', 'categories', 'featuredImage']
-    });
+    const response = await get(
+      'posts',
+      {
+        filters: {
+          slug: { $eq: params.slug },
+          status: { $eq: 'published' }
+        },
+        populate: {
+          author: true,
+          tags: true,
+          categories: true,
+          featuredImage: true
+        }
+      },
+      fetch,
+      true
+    );
 
-    if (!post) {
-      throw error(404, 'Blog post not found');
-    }
+    const post = response.data?.[0];
 
-    // Only show published posts
-    if (post.status !== 'published') {
+    if (!post || post.attributes?.status !== 'published') {
       throw error(404, 'Blog post not found');
     }
 

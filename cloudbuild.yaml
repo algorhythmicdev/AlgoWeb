@@ -1,0 +1,24 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-north1-docker.pkg.dev/$PROJECT_ID/web/frontend:$SHORT_SHA', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-north1-docker.pkg.dev/$PROJECT_ID/web/frontend:$SHORT_SHA']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - >
+        gcloud run deploy algorhythmics-web
+        --image europe-north1-docker.pkg.dev/$PROJECT_ID/web/frontend:$SHORT_SHA
+        --region europe-north1
+        --platform managed
+        --allow-unauthenticated
+        --service-account web-runner@$PROJECT_ID.iam.gserviceaccount.com
+        --set-env-vars PUBLIC_STRAPI_URL='https://cms.algorhythmics.dev',NODE_ENV='production'
+        --update-secrets CMS_WEBHOOK_SECRET=CMS_WEBHOOK_SECRET:latest
+        --update-secrets STRAPI_API_TOKEN=STRAPI_API_TOKEN:latest
+
+images:
+  - 'europe-north1-docker.pkg.dev/$PROJECT_ID/web/frontend:$SHORT_SHA'

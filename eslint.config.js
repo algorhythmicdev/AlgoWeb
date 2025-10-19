@@ -46,7 +46,16 @@ const sveltePrettier = pluginSvelte.configs['flat/prettier'].map((config) => ({
 
 export default [
   {
-    ignores: ['build/', '.svelte-kit/', '.vercel/', 'static/_app/', 'dist/', 'package/', 'node_modules/']
+    ignores: [
+      'build/',
+      '.svelte-kit/',
+      '.vercel/',
+      'static/_app/',
+      'dist/',
+      'cms/dist/',
+      'package/',
+      'node_modules/'
+    ]
   },
   jsConfig,
   ...svelteRecommended,

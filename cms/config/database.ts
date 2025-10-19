@@ -1,10 +1,37 @@
+import fs from 'fs';
+import path from 'path';
+
 export default ({ env }) => {
   const connectionName = env('CLOUDSQL_CONNECTION_NAME');
   const socketHost = connectionName ? `/cloudsql/${connectionName}` : null;
 
+  const hasPostgresConfig =
+    Boolean(connectionName) ||
+    Boolean(env('DATABASE_HOST')) ||
+    Boolean(env('DATABASE_URL')) ||
+    Boolean(env('DATABASE_USERNAME'));
+
+  if (!hasPostgresConfig) {
+    const sqliteDir = path.join(process.cwd(), 'data');
+    if (!fs.existsSync(sqliteDir)) {
+      fs.mkdirSync(sqliteDir, { recursive: true });
+    }
+    const sqliteFilename = path.join(sqliteDir, 'sqlite.db');
+
+    return {
+      connection: {
+        client: 'sqlite',
+        connection: {
+          filename: sqliteFilename,
+        },
+        useNullAsDefault: true,
+      },
+    };
+  }
+
   const connection = socketHost
     ? {
-        host: socketHost, // Cloud Run mounts the Cloud SQL Unix socket here
+        host: socketHost,
         database: env('DATABASE_NAME', 'strapidb'),
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD'),

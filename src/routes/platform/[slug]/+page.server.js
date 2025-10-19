@@ -3,15 +3,31 @@
  * Fetches a single platform article by slug from Strapi
  */
 
-import { fetchBySlug } from '$lib/utils/api';
 import { error } from '@sveltejs/kit';
+import { get } from '$lib/api/strapi';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export async function load({ params, fetch }) {
   try {
-    const article = await fetchBySlug('platform-articles', params.slug, {
-      populate: ['author', 'tags', 'categories', 'featuredImage']
-    });
+    const response = await get(
+      'platform-articles',
+      {
+        filters: {
+          slug: { $eq: params.slug },
+          status: { $eq: 'published' }
+        },
+        populate: {
+          author: true,
+          tags: true,
+          categories: true,
+          featuredImage: true
+        }
+      },
+      fetch,
+      true
+    );
+
+    const article = response.data?.[0];
 
     if (!article) {
       throw error(404, 'Platform article not found');

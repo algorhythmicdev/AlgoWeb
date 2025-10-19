@@ -8,7 +8,6 @@
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import AICompanion from '$components/AICompanion.svelte';
-  import LoadingOverlay from '$components/LoadingOverlay.svelte';
   import ParticleNetwork from '$components/ParticleNetwork.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
@@ -124,8 +123,6 @@
   <meta name="twitter:image" content="/og-image.svg" />
 </svelte:head>
 
-<LoadingOverlay />
-
 <svelte:window on:keydown={(e)=>{ 
   if (e.key === 't' && !document.body.classList.contains('modal-open') && !e.target.closest('input, textarea, [contenteditable]')) {
     theme.toggle();
@@ -194,4 +191,3 @@
     }
   }
 </style>
-

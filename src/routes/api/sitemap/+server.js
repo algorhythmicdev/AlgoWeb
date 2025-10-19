@@ -3,7 +3,7 @@
  * Generates sitemap.xml from CMS content
  */
 
-import { fetchCollection } from '$lib/utils/api';
+import { get } from '$lib/api/strapi';
 
 const SITE_URL = 'https://algorhythmics.dev'; // Update with actual domain
 
@@ -11,25 +11,39 @@ const SITE_URL = 'https://algorhythmics.dev'; // Update with actual domain
  * Generate sitemap XML
  * @type {import('./$types').RequestHandler}
  */
-export async function GET() {
+export async function GET({ fetch }) {
   try {
-    // Fetch all published content
     const [posts, modules, platforms] = await Promise.all([
-      fetchCollection('posts', {
-        filters: { '[status][$eq]': 'published' },
-        fields: ['slug', 'updatedAt'],
-        pageSize: 100
-      }).catch(() => ({ data: [] })),
-      fetchCollection('educational-modules', {
-        filters: { '[status][$eq]': 'published' },
-        fields: ['slug', 'updatedAt'],
-        pageSize: 100
-      }).catch(() => ({ data: [] })),
-      fetchCollection('platform-articles', {
-        filters: { '[status][$eq]': 'published' },
-        fields: ['slug', 'updatedAt'],
-        pageSize: 100
-      }).catch(() => ({ data: [] }))
+      get(
+        'posts',
+        {
+          filters: { status: { $eq: 'published' } },
+          fields: ['slug', 'updatedAt'],
+          pagination: { pageSize: 100 }
+        },
+        fetch,
+        true
+      ).catch(() => ({ data: [] })),
+      get(
+        'educational-modules',
+        {
+          filters: { status: { $eq: 'published' } },
+          fields: ['slug', 'updatedAt'],
+          pagination: { pageSize: 100 }
+        },
+        fetch,
+        true
+      ).catch(() => ({ data: [] })),
+      get(
+        'platform-articles',
+        {
+          filters: { status: { $eq: 'published' } },
+          fields: ['slug', 'updatedAt'],
+          pagination: { pageSize: 100 }
+        },
+        fetch,
+        true
+      ).catch(() => ({ data: [] }))
     ]);
 
     // Static pages

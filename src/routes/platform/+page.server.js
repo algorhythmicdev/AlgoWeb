@@ -3,20 +3,29 @@
  * Fetches and displays all platform articles from Strapi
  */
 
-import { fetchCollection } from '$lib/utils/api';
+import { get } from '$lib/api/strapi';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load() {
+export async function load({ fetch }) {
   try {
-    // Fetch published platform articles from Strapi
-    const response = await fetchCollection('platform-articles', {
-      populate: ['author', 'tags', 'categories', 'featuredImage'],
-      filters: {
-        '[status][$eq]': 'published'
+    const response = await get(
+      'platform-articles',
+      {
+        populate: {
+          author: true,
+          tags: true,
+          categories: true,
+          featuredImage: true
+        },
+        filters: {
+          status: { $eq: 'published' }
+        },
+        sort: { publishDate: 'desc' },
+        pagination: { pageSize: 20 }
       },
-      sort: 'publishDate:desc',
-      pageSize: 20
-    });
+      fetch,
+      true
+    );
 
     return {
       articles: response.data || [],

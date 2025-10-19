@@ -3,20 +3,28 @@
  * Fetches and displays all educational modules from Strapi
  */
 
-import { fetchCollection } from '$lib/utils/api';
+import { get } from '$lib/api/strapi';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load() {
+export async function load({ fetch }) {
   try {
-    // Fetch published educational modules from Strapi
-    const response = await fetchCollection('educational-modules', {
-      populate: ['category', 'tags', 'mediaAttachments'],
-      filters: {
-        '[status][$eq]': 'published'
+    const response = await get(
+      'educational-modules',
+      {
+        populate: {
+          category: true,
+          tags: true,
+          mediaAttachments: true
+        },
+        filters: {
+          status: { $eq: 'published' }
+        },
+        sort: { publishDate: 'desc' },
+        pagination: { pageSize: 50 }
       },
-      sort: 'publishDate:desc',
-      pageSize: 50
-    });
+      fetch,
+      true
+    );
 
     return {
       modules: response.data || [],

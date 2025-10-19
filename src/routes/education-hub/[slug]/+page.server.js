@@ -3,15 +3,31 @@
  * Fetches a single educational module by slug from Strapi
  */
 
-import { fetchBySlug } from '$lib/utils/api';
 import { error } from '@sveltejs/kit';
+import { get } from '$lib/api/strapi';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export async function load({ params, fetch }) {
   try {
-    const module = await fetchBySlug('educational-modules', params.slug, {
-      populate: ['category', 'tags', 'mediaAttachments', 'author']
-    });
+    const response = await get(
+      'educational-modules',
+      {
+        filters: {
+          slug: { $eq: params.slug },
+          status: { $eq: 'published' }
+        },
+        populate: {
+          category: true,
+          tags: true,
+          mediaAttachments: true,
+          author: true
+        }
+      },
+      fetch,
+      true
+    );
+
+    const module = response.data?.[0];
 
     if (!module) {
       throw error(404, 'Educational module not found');

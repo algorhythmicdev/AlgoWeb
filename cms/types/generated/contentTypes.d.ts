@@ -467,6 +467,294 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
+  collectionName: "authors";
+  info: {
+    displayName: "Author";
+    pluralName: "authors";
+    singularName: "author";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    "content-manager": {
+      visible: true;
+    };
+  };
+  attributes: {
+    avatar: Schema.Attribute.Media<"images" | "files">;
+    bio: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    educationalModules: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::educational-module.educational-module"
+    >;
+    email: Schema.Attribute.Email & Schema.Attribute.Unique;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::author.author"
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    platformArticles: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::platform-article.platform-article"
+    >;
+    posts: Schema.Attribute.Relation<"oneToMany", "api::post.post">;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: "categories";
+  info: {
+    displayName: "Category";
+    pluralName: "categories";
+    singularName: "category";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    "content-manager": {
+      visible: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    educationalModules: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::educational-module.educational-module"
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::category.category"
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    platformArticles: Schema.Attribute.Relation<
+      "manyToMany",
+      "api::platform-article.platform-article"
+    >;
+    posts: Schema.Attribute.Relation<"manyToMany", "api::post.post">;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<"name"> &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEducationalModuleEducationalModule
+  extends Struct.CollectionTypeSchema {
+  collectionName: "educational_modules";
+  info: {
+    description: "Learning resources and courses";
+    displayName: "Educational Module";
+    pluralName: "educational-modules";
+    singularName: "educational-module";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    "content-manager": {
+      visible: true;
+    };
+  };
+  attributes: {
+    author: Schema.Attribute.Relation<"manyToOne", "api::author.author">;
+    category: Schema.Attribute.Relation<"manyToOne", "api::category.category">;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::educational-module.educational-module"
+    > &
+      Schema.Attribute.Private;
+    mediaAttachments: Schema.Attribute.Media<
+      "images" | "files" | "videos",
+      true
+    >;
+    publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<"title"> &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    status: Schema.Attribute.Enumeration<["draft", "published"]> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"draft">;
+    tags: Schema.Attribute.Relation<"manyToMany", "api::tag.tag">;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPlatformArticlePlatformArticle
+  extends Struct.CollectionTypeSchema {
+  collectionName: "platform_articles";
+  info: {
+    description: "Platform-specific content (NodeVoyage, Ideonautix)";
+    displayName: "Platform Article";
+    pluralName: "platform-articles";
+    singularName: "platform-article";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    "content-manager": {
+      visible: true;
+    };
+  };
+  attributes: {
+    author: Schema.Attribute.Relation<"manyToOne", "api::author.author">;
+    categories: Schema.Attribute.Relation<
+      "manyToMany",
+      "api::category.category"
+    >;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.Text;
+    featuredImage: Schema.Attribute.Media<"images" | "files" | "videos">;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::platform-article.platform-article"
+    > &
+      Schema.Attribute.Private;
+    platformType: Schema.Attribute.Enumeration<
+      ["NodeVoyage", "Ideonautix", "General"]
+    > &
+      Schema.Attribute.DefaultTo<"General">;
+    publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<"title"> &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    status: Schema.Attribute.Enumeration<["draft", "published"]> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"draft">;
+    tags: Schema.Attribute.Relation<"manyToMany", "api::tag.tag">;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Struct.CollectionTypeSchema {
+  collectionName: "posts";
+  info: {
+    description: "Blog articles and insights";
+    displayName: "Post";
+    pluralName: "posts";
+    singularName: "post";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    "content-manager": {
+      visible: true;
+    };
+  };
+  attributes: {
+    author: Schema.Attribute.Relation<"manyToOne", "api::author.author">;
+    categories: Schema.Attribute.Relation<
+      "manyToMany",
+      "api::category.category"
+    >;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.Text;
+    featuredImage: Schema.Attribute.Media<"images" | "files" | "videos">;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<"oneToMany", "api::post.post"> &
+      Schema.Attribute.Private;
+    publishDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<"title"> &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    status: Schema.Attribute.Enumeration<["draft", "published"]> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<"draft">;
+    tags: Schema.Attribute.Relation<"manyToMany", "api::tag.tag">;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Struct.CollectionTypeSchema {
+  collectionName: "tags";
+  info: {
+    displayName: "Tag";
+    pluralName: "tags";
+    singularName: "tag";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    "content-manager": {
+      visible: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+    educationalModules: Schema.Attribute.Relation<
+      "manyToMany",
+      "api::educational-module.educational-module"
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<"oneToMany", "api::tag.tag"> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    platformArticles: Schema.Attribute.Relation<
+      "manyToMany",
+      "api::platform-article.platform-article"
+    >;
+    posts: Schema.Attribute.Relation<"manyToMany", "api::post.post">;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: "strapi_releases";
@@ -978,6 +1266,12 @@ declare module "@strapi/strapi" {
       "admin::transfer-token": AdminTransferToken;
       "admin::transfer-token-permission": AdminTransferTokenPermission;
       "admin::user": AdminUser;
+      "api::author.author": ApiAuthorAuthor;
+      "api::category.category": ApiCategoryCategory;
+      "api::educational-module.educational-module": ApiEducationalModuleEducationalModule;
+      "api::platform-article.platform-article": ApiPlatformArticlePlatformArticle;
+      "api::post.post": ApiPostPost;
+      "api::tag.tag": ApiTagTag;
       "plugin::content-releases.release": PluginContentReleasesRelease;
       "plugin::content-releases.release-action": PluginContentReleasesReleaseAction;
       "plugin::i18n.locale": PluginI18NLocale;
