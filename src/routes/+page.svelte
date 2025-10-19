@@ -464,8 +464,8 @@
     max-width: 70ch;
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(1.05rem, 2.6vw, 1.3rem);
-    line-height: 1.6;
+    font-size: var(--text-lead);
+    line-height: var(--leading-relaxed);
   }
 
   .hero-actions {

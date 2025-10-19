@@ -60,7 +60,7 @@
   }
 
   .admin-nav__title {
-    font-size: 1.25rem;
+    font-size: var(--text-card-title);
     font-weight: 600;
     background: linear-gradient(
       135deg,
@@ -90,7 +90,7 @@
     color: var(--text);
     text-decoration: none;
     transition: all 0.2s ease;
-    font-size: 0.95rem;
+    font-size: var(--text-meta);
   }
 
   .admin-nav__link:hover {
@@ -107,7 +107,7 @@
   }
 
   .admin-nav__icon {
-    font-size: 1.25rem;
+    font-size: var(--text-card-title);
   }
 
   .admin-nav__label {

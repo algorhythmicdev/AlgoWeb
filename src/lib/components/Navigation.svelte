@@ -267,8 +267,9 @@
     z-index: 100;
     backdrop-filter: blur(14px) saturate(1.05);
     -webkit-backdrop-filter: blur(14px) saturate(1.05);
-    background: color-mix(in srgb, var(--bg-elev-1) 88%, transparent 12%);
-    border-bottom: 1px solid color-mix(in srgb, var(--border-strong) 40%, transparent 60%);
+    background: color-mix(in srgb, var(--bg-elev-1) 66%, transparent 34%);
+    border-bottom: 1px solid color-mix(in srgb, var(--border-strong) 28%, transparent 72%);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--border) 22%, transparent 78%);
   }
 
   .site-header__inner {
@@ -276,7 +277,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-lg);
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-md) clamp(var(--space-lg), 5vw, var(--space-2xl));
     width: min(100%, var(--container-xxl));
     margin-inline: auto;
   }
@@ -297,7 +298,7 @@
     font-weight: var(--weight-semibold);
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: var(--text-label);
   }
 
   .desktop-nav {
@@ -317,7 +318,7 @@
   .desktop-nav__trigger {
     border-radius: var(--radius-full, 999px);
     padding: 0.6rem 1rem;
-    font-size: 0.95rem;
+    font-size: var(--text-meta);
     font-weight: var(--weight-medium);
     border: 1px solid transparent;
     background: transparent;
@@ -333,8 +334,8 @@
   .desktop-nav__trigger:hover,
   .desktop-nav__trigger:focus-visible {
     color: var(--text-primary);
-    background: color-mix(in srgb, var(--surface-chip-bg) 70%, transparent 30%);
-    border-color: color-mix(in srgb, var(--surface-chip-border) 60%, transparent 40%);
+    background: color-mix(in srgb, var(--surface-chip-bg) 52%, transparent 48%);
+    border-color: color-mix(in srgb, var(--surface-chip-border) 48%, transparent 52%);
     box-shadow: var(--surface-chip-shadow);
     outline: none;
   }
@@ -359,8 +360,8 @@
     position: absolute;
     margin-top: 0.75rem;
     inset-inline-start: 0;
-    background: color-mix(in srgb, var(--surface-glass-bg) 96%, transparent 4%);
-    border: 1px solid color-mix(in srgb, var(--surface-glass-border) 70%, transparent 30%);
+    background: color-mix(in srgb, var(--surface-glass-bg) 82%, transparent 18%);
+    border: 1px solid color-mix(in srgb, var(--surface-glass-border) 54%, transparent 46%);
     border-radius: var(--radius-xl, 20px);
     box-shadow: var(--shadow-lg);
     padding: var(--space-md);
@@ -389,7 +390,7 @@
 
   .desktop-nav__dropdown-link:hover,
   .desktop-nav__dropdown-link:focus-visible {
-    background: color-mix(in srgb, var(--surface-chip-bg) 70%, transparent 30%);
+    background: color-mix(in srgb, var(--surface-chip-bg) 56%, transparent 44%);
     color: var(--text-primary);
     outline: none;
   }
@@ -399,7 +400,7 @@
   }
 
   .desktop-nav__dropdown-description {
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     color: var(--text-tertiary);
   }
 
@@ -428,8 +429,8 @@
     width: 44px;
     height: 44px;
     border-radius: var(--radius-full);
-    border: 1px solid color-mix(in srgb, var(--surface-pill-border) 70%, transparent 30%);
-    background: color-mix(in srgb, var(--surface-pill-bg) 82%, transparent 18%);
+    border: 1px solid color-mix(in srgb, var(--surface-pill-border) 52%, transparent 48%);
+    background: color-mix(in srgb, var(--surface-pill-bg) 58%, transparent 42%);
     box-shadow: var(--surface-pill-shadow);
     display: inline-flex;
     align-items: center;
@@ -544,8 +545,8 @@
     border-radius: var(--radius-lg);
     text-decoration: none;
     color: var(--text-secondary);
-    border: 1px solid color-mix(in srgb, var(--border) 60%, transparent 40%);
-    background: color-mix(in srgb, var(--bg-elev-1) 85%, transparent 15%);
+    border: 1px solid color-mix(in srgb, var(--border) 48%, transparent 52%);
+    background: color-mix(in srgb, var(--bg-elev-1) 62%, transparent 38%);
   }
 
   .mobile-menu__nav a.active {
@@ -566,8 +567,8 @@
     gap: var(--space-md);
     padding: 0.75rem 0.9rem;
     border-radius: var(--radius-lg);
-    border: 1px solid color-mix(in srgb, var(--border) 60%, transparent 40%);
-    background: color-mix(in srgb, var(--bg-elev-1) 75%, transparent 25%);
+    border: 1px solid color-mix(in srgb, var(--border) 48%, transparent 52%);
+    background: color-mix(in srgb, var(--bg-elev-1) 58%, transparent 42%);
     font: inherit;
     color: var(--text-secondary);
     cursor: pointer;
@@ -605,8 +606,8 @@
     display: grid;
     gap: var(--space-xs);
     border-radius: var(--radius-md);
-    border: 1px solid color-mix(in srgb, var(--border) 55%, transparent 45%);
-    background: color-mix(in srgb, var(--bg-elev-1) 82%, transparent 18%);
+    border: 1px solid color-mix(in srgb, var(--border) 44%, transparent 56%);
+    background: color-mix(in srgb, var(--bg-elev-1) 56%, transparent 44%);
   }
 
   .mobile-menu__group ul a {
@@ -620,7 +621,7 @@
 
   .mobile-menu__link-description {
     display: block;
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     color: var(--text-tertiary);
     margin-top: 0.25rem;
   }

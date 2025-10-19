@@ -463,8 +463,8 @@
 
 <style>
   .hero-description {
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
-    line-height: 1.7;
+    font-size: var(--text-lead);
+    line-height: var(--leading-relaxed);
     color: color-mix(in srgb, var(--text) 88%, rgba(var(--ink-rgb), 0.8) 12%);
   }
 
@@ -547,20 +547,20 @@
   }
 
   .featured__eyebrow {
-    font-size: var(--text-small);
+    font-size: var(--text-eyebrow);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--voyage-blue) 70%, rgba(var(--ink-rgb), 0.64) 30%);
   }
 
   .featured__meta {
-    font-size: var(--text-small);
+    font-size: var(--text-meta);
     color: color-mix(in srgb, var(--text) 75%, rgba(var(--ink-rgb), 0.6) 25%);
   }
 
   .featured__summary {
-    font-size: clamp(1.05rem, 2.3vw, 1.25rem);
-    line-height: 1.7;
+    font-size: var(--text-lead);
+    line-height: var(--leading-relaxed);
     color: color-mix(in srgb, var(--text) 88%, rgba(var(--ink-rgb), 0.76) 12%);
   }
 
@@ -583,7 +583,7 @@
   }
 
   .section-heading__copy {
-    font-size: clamp(1.08rem, 2vw, 1.26rem);
+    font-size: var(--text-lead);
     color: color-mix(in srgb, var(--text) 84%, rgba(var(--ink-rgb), 0.65) 16%);
   }
 
@@ -602,7 +602,7 @@
 
   .insights__meta,
   .spotlights__meta {
-    font-size: 0.85rem;
+    font-size: var(--text-label);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--voyage-blue) 68%, rgba(var(--ink-rgb), 0.54) 32%);
@@ -611,15 +611,16 @@
   .insights__title,
   .spotlights__title,
   .toolkits__title {
-    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
-    line-height: 1.4;
+    font-size: var(--text-card-title);
+    line-height: var(--leading-snug);
   }
 
   .insights__summary,
   .spotlights__copy,
   .toolkits__copy {
     color: color-mix(in srgb, var(--text) 84%, rgba(var(--ink-rgb), 0.72) 16%);
-    line-height: 1.6;
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
   }
 
   :global(.toolkits__card) {
@@ -628,7 +629,7 @@
   }
 
   .toolkits__eyebrow {
-    font-size: 0.85rem;
+    font-size: var(--text-eyebrow);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--aurora-purple) 68%, rgba(var(--ink-rgb), 0.58) 32%);
@@ -655,7 +656,7 @@
   }
 
   .events__eyebrow {
-    font-size: 0.85rem;
+    font-size: var(--text-eyebrow);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--aurora-purple) 68%, rgba(var(--ink-rgb), 0.54) 32%);
@@ -663,7 +664,8 @@
 
   .events__copy {
     color: color-mix(in srgb, var(--text) 86%, rgba(var(--ink-rgb), 0.72) 14%);
-    line-height: 1.7;
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
   }
 
   .events__list {
@@ -694,16 +696,16 @@
   }
 
   .newsletter__eyebrow {
-    font-size: 0.85rem;
+    font-size: var(--text-eyebrow);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: color-mix(in srgb, var(--voyage-blue) 70%, rgba(var(--ink-rgb), 0.6) 30%);
   }
 
   .newsletter__copy {
-    font-size: 1.05rem;
+    font-size: var(--text-lead);
     color: color-mix(in srgb, var(--text) 86%, rgba(var(--ink-rgb), 0.72) 14%);
-    line-height: 1.7;
+    line-height: var(--leading-relaxed);
   }
 
   @media (min-width: 720px) {

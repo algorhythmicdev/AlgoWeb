@@ -5,6 +5,7 @@
   import '$lib/styles/forms.css';
   import '$lib/styles/animations.css';
   import '$lib/styles/layout-grid.css';
+  import '$lib/styles/reading.css';
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import AICompanion from '$components/AICompanion.svelte';

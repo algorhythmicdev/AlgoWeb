@@ -704,8 +704,11 @@
   .particle-network {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
     z-index: var(--z-behind, -10);
     pointer-events: none;
     opacity: 0.42;

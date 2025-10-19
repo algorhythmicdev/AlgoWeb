@@ -86,37 +86,45 @@
 
 <style>
   .admin-dashboard {
-    max-width: 80rem;
-    margin: 0 auto;
+    width: min(100%, var(--container-xl));
+    margin-inline: auto;
+    padding-inline: clamp(var(--space-xl), 6vw, var(--space-4xl));
+    padding-block: clamp(var(--space-2xl), 7vw, var(--space-5xl));
+    display: grid;
+    gap: var(--space-4xl);
   }
 
   .dashboard-header {
-    margin-bottom: 2rem;
+    display: grid;
+    gap: var(--space-md);
   }
 
   .dashboard-header h1 {
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    margin-bottom: 0.5rem;
+    margin: 0;
+    font-size: var(--text-headline);
+    line-height: var(--leading-tight);
   }
 
   .dashboard-subtitle {
-    color: color-mix(in srgb, var(--text) 70%, transparent);
-    font-size: 1.1rem;
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 72%, transparent 28%));
+    font-size: var(--text-body);
+    margin: 0;
   }
 
   .dashboard-section {
-    margin-bottom: 3rem;
+    display: grid;
+    gap: var(--space-2xl);
   }
 
   .dashboard-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 0;
+    font-size: var(--text-title);
   }
 
   .quick-actions {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1.5rem;
+    gap: var(--space-xl);
   }
 
   :global(.action-card) {
@@ -126,52 +134,56 @@
   .action-link {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: var(--space-md);
     text-decoration: none;
     color: inherit;
     height: 100%;
-    padding: 1.5rem;
+    padding: var(--component-padding-lg);
   }
 
   .action-icon {
-    font-size: 2.5rem;
+    font-size: var(--text-headline);
   }
 
   .action-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: var(--text-headline);
+    font-weight: var(--weight-semibold);
     margin: 0;
   }
 
   .action-description {
-    color: color-mix(in srgb, var(--text) 70%, transparent);
-    font-size: 0.95rem;
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 72%, transparent 28%));
+    font-size: var(--text-meta);
     margin: 0;
+    line-height: var(--leading-relaxed);
   }
 
   .getting-started {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-lg);
   }
 
   .getting-started h3 {
-    font-size: 1.25rem;
     margin: 0;
+    font-size: var(--text-title);
   }
 
   .getting-started p {
-    line-height: 1.6;
-    color: color-mix(in srgb, var(--text) 85%, transparent);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
+    margin: 0;
   }
 
   .setup-steps {
-    padding-left: 1.5rem;
-    line-height: 1.8;
-    color: color-mix(in srgb, var(--text) 85%, transparent);
+    padding-inline-start: var(--space-xl);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
+    display: grid;
+    gap: var(--space-sm);
   }
 
   .actions {
-    margin-top: 1rem;
+    margin-top: var(--space-md);
   }
 
   @media (max-width: 768px) {
