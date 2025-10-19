@@ -320,13 +320,10 @@
 <section class="section highlights" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('home.page.highlights.eyebrow', 'Key highlights')}</span>
-      <h2>{t('home.page.highlights.title', 'Innovation that feels welcoming')}</h2>
+      <span class="section-eyebrow">{t('home.page.highlights.eyebrow')}</span>
+      <h2>{t('home.page.highlights.title')}</h2>
       <p>
-        {t(
-          'home.page.highlights.description',
-          'Every AlgoRhythmics experience blends rigorous logic with imaginative play. These highlights show how our rhythm supports travellers, founders, students, and lifelong learners.'
-        )}
+        {t('home.page.highlights.description')}
       </p>
     </header>
 
@@ -349,13 +346,10 @@
 <section class="section offerings" data-surface="glow" aria-labelledby="offerings-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('home.page.offerings.eyebrow', 'What we offer')}</span>
-      <h2 id="offerings-heading">{t('home.page.offerings.title', 'Services, platforms, and programmes in one rhythm')}</h2>
+      <span class="section-eyebrow">{t('home.page.offerings.eyebrow')}</span>
+      <h2 id="offerings-heading">{t('home.page.offerings.title')}</h2>
       <p>
-        {t(
-          'home.page.offerings.description',
-          'Choose the path that fits your journey. We keep transitions effortless—partnerships often blend consulting, products, and outreach to meet evolving goals.'
-        )}
+        {t('home.page.offerings.description')}
       </p>
     </header>
 

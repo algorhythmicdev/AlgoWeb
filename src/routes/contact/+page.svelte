@@ -198,29 +198,19 @@
     const validate = () => {
         const next: Record<string, string> = {};
         if (!formData.name.trim())
-            next.name = t(
-                "contact.page.form.errors.name_required",
-                "Please add your name.",
+            next.name = t("contact.page.form.errors.name_required",
             );
         if (!formData.email.trim())
-            next.email = t(
-                "contact.page.form.errors.email_required",
-                "We use this to reply.",
+            next.email = t("contact.page.form.errors.email_required",
             );
         else if (!/^\S+@\S+\.\S+$/.test(formData.email))
-            next.email = t(
-                "contact.page.form.errors.email_invalid",
-                "Add a valid email address.",
+            next.email = t("contact.page.form.errors.email_invalid",
             );
         if (!formData.reason.trim())
-            next.reason = t(
-                "contact.page.form.errors.reason_required",
-                "Select a reason.",
+            next.reason = t("contact.page.form.errors.reason_required",
             );
         if (!formData.message.trim())
-            next.message = t(
-                "contact.page.form.errors.message_required",
-                "Tell us how we can help.",
+            next.message = t("contact.page.form.errors.message_required",
             );
         errors = next;
         return Object.keys(next).length === 0;
@@ -234,16 +224,12 @@
         }
 
         const subject = encodeURIComponent(
-            t(
-                "contact.page.form.mailto_subject",
-                "Website enquiry from {name} ({reason})",
+            t("contact.page.form.mailto_subject",
             )
                 .replace("{name}", formData.name)
                 .replace("{reason}", formData.reason),
         );
-        const bodyTemplate = t(
-            "contact.page.form.mailto_body",
-            "Name: {name}\nEmail: {email}\nReason: {reason}\n\n{message}",
+        const bodyTemplate = t("contact.page.form.mailto_body",
         );
         const body = encodeURIComponent(
             bodyTemplate
@@ -300,13 +286,11 @@
     <div class="container">
         <header class="section-heading" data-align="center">
             <span class="section-eyebrow"
-                >{t("contact.page.cards.eyebrow", "Ways to connect")}</span
+                >{t("contact.page.cards.eyebrow")}</span
             >
-            <h2>{t("contact.page.cards.heading", "How to reach the team")}</h2>
+            <h2>{t("contact.page.cards.heading")}</h2>
             <p>
-                {t(
-                    "contact.page.cards.supporting_copy",
-                    "Pick the option that fits best—every path connects you with a calm, friendly specialist ready to help.",
+                {t("contact.page.cards.supporting_copy",
                 )}
             </p>
         </header>
@@ -340,27 +324,21 @@
     <div class="container">
         <GlassCard class="form-card" padding="lg" halo>
             <span class="section-eyebrow"
-                >{t("contact.page.form.eyebrow", "Send a message")}</span
+                >{t("contact.page.form.eyebrow")}</span
             >
             <h2>
-                {t(
-                    "contact.page.form.title",
-                    "We reply within two business days",
+                {t("contact.page.form.title",
                 )}
             </h2>
             <p>
-                {t(
-                    "contact.page.form.description",
-                    "Please share your name, email, and what you would like to explore. We respect your privacy and handle all messages with care.",
+                {t("contact.page.form.description",
                 )}
             </p>
 
             <form class="form" on:submit={handleSubmit}>
                 <label class="form-field">
                     <span
-                        >{t(
-                            "contact.page.form.fields.name.label",
-                            "Name",
+                        >{t("contact.page.form.fields.name.label",
                         )}</span
                     >
                     <input
@@ -376,9 +354,7 @@
 
                 <label class="form-field">
                     <span
-                        >{t(
-                            "contact.page.form.fields.email.label",
-                            "Email",
+                        >{t("contact.page.form.fields.email.label",
                         )}</span
                     >
                     <input
@@ -394,9 +370,7 @@
 
                 <label class="form-field">
                     <span
-                        >{t(
-                            "contact.page.form.fields.reason.label",
-                            "Reason for contacting",
+                        >{t("contact.page.form.fields.reason.label",
                         )}</span
                     >
                     <select
@@ -405,27 +379,19 @@
                         aria-invalid={errors.reason ? "true" : "false"}
                     >
                         <option value="general"
-                            >{t(
-                                "contact.page.form.fields.reason.options.general",
-                                "General question",
+                            >{t("contact.page.form.fields.reason.options.general",
                             )}</option
                         >
                         <option value="consulting"
-                            >{t(
-                                "contact.page.form.fields.reason.options.consulting",
-                                "Consulting or pilot",
+                            >{t("contact.page.form.fields.reason.options.consulting",
                             )}</option
                         >
                         <option value="education"
-                            >{t(
-                                "contact.page.form.fields.reason.options.education",
-                                "Education & community",
+                            >{t("contact.page.form.fields.reason.options.education",
                             )}</option
                         >
                         <option value="media"
-                            >{t(
-                                "contact.page.form.fields.reason.options.media",
-                                "Media or partnership",
+                            >{t("contact.page.form.fields.reason.options.media",
                             )}</option
                         >
                     </select>
@@ -436,9 +402,7 @@
 
                 <label class="form-field">
                     <span
-                        >{t(
-                            "contact.page.form.fields.message.label",
-                            "Message",
+                        >{t("contact.page.form.fields.message.label",
                         )}</span
                     >
                     <textarea
@@ -454,28 +418,22 @@
 
                 <div class="form-actions">
                     <Button type="submit" variant="gradient" size="lg"
-                        >{t("contact.page.form.submit", "Send message")}</Button
+                        >{t("contact.page.form.submit")}</Button
                     >
                     <span class="form-note"
-                        >{t(
-                            "contact.page.form.note",
-                            "By emailing us you agree to our respectful data handling.",
+                        >{t("contact.page.form.note",
                         )}</span
                     >
                 </div>
 
                 {#if status === "success"}
                     <p class="form-status" role="status">
-                        {t(
-                            "contact.page.form.success",
-                            "Thank you! Your email client is opening with a pre-filled message.",
+                        {t("contact.page.form.success",
                         )}
                     </p>
                 {:else if status === "error" && Object.keys(errors).length}
                     <p class="form-status" role="alert">
-                        {t(
-                            "contact.page.form.error",
-                            "Please fix the highlighted fields.",
+                        {t("contact.page.form.error",
                         )}
                     </p>
                 {/if}
@@ -490,21 +448,15 @@
     <div class="container contact-support__container">
         <header class="section-heading">
             <span class="section-eyebrow"
-                >{t(
-                    "contact.page.support.section_eyebrow",
-                    "Support & follow-up",
+                >{t("contact.page.support.section_eyebrow",
                 )}</span
             >
             <h2>
-                {t(
-                    "contact.page.support.section_title",
-                    "Always-on guidance for every partnership",
+                {t("contact.page.support.section_title",
                 )}
             </h2>
             <p>
-                {t(
-                    "contact.page.support.section_copy",
-                    "Reach out for tailored assistance, browse self-serve resources, or follow our studio channels for calm AI updates.",
+                {t("contact.page.support.section_copy",
                 )}
             </p>
         </header>
@@ -580,18 +532,14 @@
 
             <GlassCard class="support-card" padding="lg" halo>
                 <span class="section-eyebrow"
-                    >{t("contact.page.social.eyebrow", "Stay connected")}</span
+                    >{t("contact.page.social.eyebrow")}</span
                 >
                 <h2>
-                    {t(
-                        "contact.page.social.title",
-                        "Follow the AlgoRhythmics journey",
+                    {t("contact.page.social.title",
                     )}
                 </h2>
                 <p>
-                    {t(
-                        "contact.page.social.copy",
-                        "Join our channels for calm AI experiments, hiring notes, and event invites.",
+                    {t("contact.page.social.copy",
                     )}
                 </p>
                 <div class="social-links">
@@ -632,40 +580,30 @@
     <div class="container">
         <GlassCard class="newsletter-card" padding="lg">
             <span class="section-eyebrow"
-                >{t("contact.page.newsletter.eyebrow", "Studio updates")}</span
+                >{t("contact.page.newsletter.eyebrow")}</span
             >
             <h2>
-                {t(
-                    "contact.page.newsletter.title",
-                    "Subscribe for launch updates",
+                {t("contact.page.newsletter.title",
                 )}
             </h2>
             <p>
-                {t(
-                    "contact.page.newsletter.copy",
-                    "Get a quarterly roundup on NodeVoyage, Ideonautix, and our consulting stories. No spam—just honest progress.",
+                {t("contact.page.newsletter.copy",
                 )}
             </p>
             <div class="newsletter-actions">
                 <Button
                     href="mailto:newsletter@algorhythmics.com"
                     variant="gradient"
-                    >{t(
-                        "contact.page.newsletter.cta",
-                        "Email newsletter@algorhythmics.com",
+                    >{t("contact.page.newsletter.cta",
                     )}</Button
                 >
                 <Button href="/solutions" variant="secondary"
-                    >{t(
-                        "contact.page.newsletter.secondary",
-                        "Read about our solutions",
+                    >{t("contact.page.newsletter.secondary",
                     )}</Button
                 >
             </div>
             <p class="newsletter-note">
-                {t(
-                    "contact.page.newsletter.note",
-                    "Prefer a form? Mention “Newsletter” in the message above and we will add you manually.",
+                {t("contact.page.newsletter.note",
                 )}
             </p>
         </GlassCard>

@@ -177,21 +177,21 @@
 <section class="section who-we-are" data-surface="glow" use:revealOnScroll>
   <div class="container who-we-are__grid">
     <GlassCard class="about-card" padding="lg">
-      <h2>{t('about.page.story.heading', 'Who we are')}</h2>
+      <h2>{t('about.page.story.heading')}</h2>
       <p>{t(story.introKey, story.introFallback)}</p>
       <p>
         {t(story.cultureKey, story.cultureFallback)}
       </p>
     </GlassCard>
     <GlassCard class="about-card" padding="lg" halo>
-      <h2>{t('about.page.story.milestones_heading', 'Our story')}</h2>
+      <h2>{t('about.page.story.milestones_heading')}</h2>
       <ul>
         {#each story.milestones as milestone (milestone.key)}
           <li>{t(milestone.key, milestone.fallback)}</li>
         {/each}
       </ul>
       <div class="card-actions">
-        <Button href="/education-hub#case-studies" variant="secondary" size="md">{t('about.page.story.cta', 'Read success stories')}</Button>
+        <Button href="/education-hub#case-studies" variant="secondary" size="md">{t('about.page.story.cta')}</Button>
       </div>
     </GlassCard>
   </div>
@@ -202,13 +202,10 @@
 <section class="section values" data-surface="glow" aria-labelledby="values-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('about.page.values.eyebrow', 'Mission & values')}</span>
-      <h2 id="values-heading">{t('about.page.values.title', 'Where logic dances with creativity')}</h2>
+      <span class="section-eyebrow">{t('about.page.values.eyebrow')}</span>
+      <h2 id="values-heading">{t('about.page.values.title')}</h2>
       <p>
-        {t(
-          'about.page.values.copy',
-          'Our mission is simple: make advanced AI accessible, enjoyable, and trustworthy. We pursue this mission through values that keep people at the centre.'
-        )}
+        {t('about.page.values.copy')}
       </p>
     </header>
 
@@ -231,13 +228,10 @@
 <section class="section team" data-surface="glow" id="team" use:revealOnScroll>
   <div class="container">
     <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('about.page.team.eyebrow', 'Founders & stewards')}</span>
-      <h2>{t('about.page.team.title', 'The people behind the rhythm')}</h2>
+      <span class="section-eyebrow">{t('about.page.team.eyebrow')}</span>
+      <h2>{t('about.page.team.title')}</h2>
       <p>
-        {t(
-          'about.page.team.copy',
-          'Our team spans AI researchers, designers, educators, and community builders. Meet the founders who set the tone for collaboration and craft.'
-        )}
+        {t('about.page.team.copy')}
       </p>
     </header>
 
@@ -255,7 +249,7 @@
           <h3>{t(member.nameKey, member.nameFallback)}</h3>
           <span class="team-role">{t(member.roleKey, member.roleFallback)}</span>
           <p class="team-focus">
-            {t('about.page.team.focus_label', 'Focus: {focus}').replace('{focus}', t(member.focusKey, member.focusFallback))}
+            {t('about.page.team.focus_label').replace('{focus}', t(member.focusKey, member.focusFallback))}
           </p>
           <p>{t(member.bioKey, member.bioFallback)}</p>
           <div class="team-links">

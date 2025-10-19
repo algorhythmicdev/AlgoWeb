@@ -311,7 +311,7 @@
         loading="lazy"
       />
       <div class="snapshot-card__body">
-        <h2>{t('ideonautix.snapshot.title', 'Your launch cockpit')}</h2>
+        <h2>{t('ideonautix.snapshot.title')}</h2>
         <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
         <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
           {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}

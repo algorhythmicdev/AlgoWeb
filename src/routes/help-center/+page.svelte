@@ -388,18 +388,14 @@
     <div class="container">
         <header class="section-heading" data-align="center">
             <span class="section-eyebrow"
-                >{t("help.page.knowledge.eyebrow", "Browse by focus")}</span
+                >{t("help.page.knowledge.eyebrow")}</span
             >
             <h2>
-                {t(
-                    "help.page.knowledge.title",
-                    "Curated paths for every collaborator",
+                {t("help.page.knowledge.title",
                 )}
             </h2>
             <p>
-                {t(
-                    "help.page.knowledge.copy",
-                    "Pick the guide that matches your role to see recommended rituals, checklists, and downloads.",
+                {t("help.page.knowledge.copy",
                 )}
             </p>
         </header>
@@ -475,13 +471,11 @@
     <div class="container">
         <header class="section-heading" data-align="center">
             <span class="section-eyebrow"
-                >{t("help.page.faq.eyebrow", "Quick answers")}</span
+                >{t("help.page.faq.eyebrow")}</span
             >
-            <h2>{t("help.page.faq.title", "Frequently asked questions")}</h2>
+            <h2>{t("help.page.faq.title")}</h2>
             <p>
-                {t(
-                    "help.page.faq.copy",
-                    "Short reads that cover the topics we hear about most from teams and families alike.",
+                {t("help.page.faq.copy",
                 )}
             </p>
         </header>
@@ -514,18 +508,14 @@
     <div class="container">
         <header class="section-heading" data-align="center">
             <span class="section-eyebrow"
-                >{t("help.page.status.eyebrow", "Live status & history")}</span
+                >{t("help.page.status.eyebrow")}</span
             >
             <h2>
-                {t(
-                    "help.page.status.title",
-                    "Transparent updates for every product",
+                {t("help.page.status.title",
                 )}
             </h2>
             <p>
-                {t(
-                    "help.page.status.copy",
-                    "Follow current uptime, upcoming maintenance, and resolved incidents. Each update links to its full report when available.",
+                {t("help.page.status.copy",
                 )}
             </p>
         </header>
@@ -586,9 +576,7 @@
                                     {t(channel.copyKey, channel.copyFallback)}
                                 </p>
                                 <Button href={channel.href} variant="subtle"
-                                    >{t(
-                                        "help.page.escalation.cta",
-                                        "Open channel",
+                                    >{t("help.page.escalation.cta",
                                     )}</Button
                                 >
                             </div>
@@ -640,9 +628,7 @@
                                 )}
                             </p>
                             <Button href={resource.href} variant="secondary"
-                                >{t(
-                                    "help.page.resources.cta",
-                                    "Open resource",
+                                >{t("help.page.resources.cta",
                                 )}</Button
                             >
                         </li>
@@ -650,9 +636,7 @@
                 </ul>
                 <div class="resources-footer">
                     <Button href="/education-hub#insights" variant="subtle"
-                        >{t(
-                            "help.page.resources.secondary",
-                            "View all insights",
+                        >{t("help.page.resources.secondary",
                         )}</Button
                     >
                 </div>

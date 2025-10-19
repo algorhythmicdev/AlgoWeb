@@ -265,13 +265,10 @@
 >
   <div class="container">
       <header class="section-heading" data-align="center">
-        <span class="section-eyebrow">{t('services.page.consulting.eyebrow', 'Consulting & support')}</span>
-        <h2 id="service-heading">{t('services.page.consulting.title', 'Strategy that keeps pace with your team')}</h2>
+        <span class="section-eyebrow">{t('services.page.consulting.eyebrow')}</span>
+        <h2 id="service-heading">{t('services.page.consulting.title')}</h2>
         <p>
-          {t(
-            'services.page.consulting.copy',
-            'Every engagement starts with signage-inspired clarity and ends with teams who understand their tools. These services pair calm rituals with measurable outcomes.'
-          )}
+          {t('services.page.consulting.copy')}
         </p>
       </header>
 
@@ -308,13 +305,10 @@
 >
   <div class="container">
       <header class="section-heading" data-align="center">
-        <span class="section-eyebrow">{t('services.page.platforms.eyebrow', 'Flagship platforms')}</span>
-        <h2 id="platform-heading">{t('services.page.platforms.title', 'Products where logic dances with creativity')}</h2>
+        <span class="section-eyebrow">{t('services.page.platforms.eyebrow')}</span>
+        <h2 id="platform-heading">{t('services.page.platforms.title')}</h2>
         <p>
-          {t(
-            'services.page.platforms.copy',
-            'Our studio platforms are living proof of the methodologies we teach. They inherit the same frosted-glass calm, multilingual access, and rhythm you will feel in every engagement.'
-          )}
+          {t('services.page.platforms.copy')}
         </p>
       </header>
 

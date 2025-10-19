@@ -272,16 +272,16 @@
   const validate = () => {
     const next: Record<string, string> = {};
     if (!formData.company.trim())
-      next.company = t('consulting.form_errors.company_required', 'Please add your company or initiative name.');
+      next.company = t('consulting.form_errors.company_required');
     if (!formData.name.trim())
-      next.name = t('consulting.form_errors.name_required', 'Let us know who we will be speaking with.');
-    if (!formData.email.trim()) next.email = t('consulting.form_errors.email_required', 'Email helps us reply.');
+      next.name = t('consulting.form_errors.name_required');
+    if (!formData.email.trim()) next.email = t('consulting.form_errors.email_required');
     else if (!/^\S+@\S+\.\S+$/.test(formData.email))
-      next.email = t('consulting.form_errors.email_invalid', 'Add a valid email address.');
+      next.email = t('consulting.form_errors.email_invalid');
     if (!formData.industry.trim())
-      next.industry = t('consulting.form_errors.industry_required', 'Select the industry closest to your work.');
+      next.industry = t('consulting.form_errors.industry_required');
     if (!formData.description.trim())
-      next.description = t('consulting.form_errors.description_required', 'Share a little about your goals.');
+      next.description = t('consulting.form_errors.description_required');
 
     errors = next;
     return Object.keys(next).length === 0;
@@ -295,12 +295,9 @@
     }
 
     const subject = encodeURIComponent(
-      t('consulting.form_mailto_subject', 'Consulting pilot application from {company}', { company: formData.company })
+      t('consulting.form_mailto_subject', { company: formData.company })
     );
-    const bodyTemplate = t(
-      'consulting.form_mailto_body',
-      'Company: {company}\nContact: {name}\nEmail: {email}\nPhone: {phone}\nIndustry: {industry}\n\nGoals:\n{description}'
-    );
+    const bodyTemplate = t('consulting.form_mailto_body');
     const body = encodeURIComponent(
       bodyTemplate
         .replace('{company}', formData.company)
@@ -349,7 +346,7 @@
       {/each}
     </ul>
     <p class="hero-spots">
-      {t('consulting.spots_remaining', '{count} pilot spots remaining', { count: 3 })}
+      {t('consulting.spots_remaining', { count: 3 })}
     </p>
   </svelte:fragment>
   <svelte:fragment slot="aside">
@@ -383,7 +380,7 @@
 <section class="section quick-facts" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="quick-facts__card" halo>
-      <span class="section-eyebrow">{t('consulting.page.quick_facts_eyebrow', 'At a glance')}</span>
+      <span class="section-eyebrow">{t('consulting.page.quick_facts_eyebrow')}</span>
       <h2>{t(quickFacts.titleKey, quickFacts.titleFallback)}</h2>
       <ul>
         {#each quickFacts.items as item (item.key)}
@@ -402,13 +399,10 @@
 <section class="section packages" data-surface="glow" id="packages" aria-labelledby="packages-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">{t('consulting.packages_title', 'How we help')}</span>
-      <h2 id="packages-heading">{t('consulting.page.packages_title', 'Strategy, build, and care in one rhythm')}</h2>
+      <span class="section-eyebrow">{t('consulting.packages_title')}</span>
+      <h2 id="packages-heading">{t('consulting.page.packages_title')}</h2>
       <p>
-        {t(
-          'consulting.page.packages_description',
-          'Choose the mix that fits your roadmap. Most partnerships weave all three phases together for continuity.'
-        )}
+        {t('consulting.page.packages_description')}
       </p>
     </header>
 
@@ -436,7 +430,7 @@
 <section class="section approach" data-surface="glow" use:revealOnScroll>
   <div class="container approach__grid">
     <div class="approach__summary">
-      <span class="section-eyebrow">{t('consulting.page.approach_eyebrow', 'Our philosophy')}</span>
+      <span class="section-eyebrow">{t('consulting.page.approach_eyebrow')}</span>
       <h2>{t(approach.titleKey, approach.titleFallback)}</h2>
       <p>{t(approach.introKey, approach.introFallback)}</p>
     </div>
@@ -461,7 +455,7 @@
 <section class="section process" data-surface="glow" use:revealOnScroll>
   <div class="container process__grid">
     <div>
-      <span class="section-eyebrow">{t('consulting.page.process_eyebrow', 'Pilot flow')}</span>
+      <span class="section-eyebrow">{t('consulting.page.process_eyebrow')}</span>
       <h2>{t(process.titleKey, process.titleFallback)}</h2>
       <ol class="process-steps">
         {#each process.steps as step (step.titleKey)}
@@ -507,16 +501,13 @@
       </ul>
     </GlassCard>
     <GlassCard class="contact-card" halo>
-      <span class="section-eyebrow">{t('consulting.page.supporting_info_eyebrow', 'Need something else?')}</span>
-      <h2>{t('consulting.page.supporting_info_title', 'We adapt to complex environments')}</h2>
+      <span class="section-eyebrow">{t('consulting.page.supporting_info_eyebrow')}</span>
+      <h2>{t('consulting.page.supporting_info_title')}</h2>
       <p>
-        {t(
-          'consulting.page.supporting_info_copy',
-          'Regulated industries, multilingual teams, and hybrid infrastructures are welcome. We document every decision for smooth audits.'
-        )}
+        {t('consulting.page.supporting_info_copy')}
       </p>
       <Button href="mailto:consulting@algorhythmics.com" variant="secondary" size="md">
-        {t('consulting.page.supporting_info_cta', 'Email the consulting crew')}
+        {t('consulting.page.supporting_info_cta')}
       </Button>
     </GlassCard>
   </div>
@@ -527,7 +518,7 @@
 <section class="section examples" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <header class="section-heading">
-      <span class="section-eyebrow">{t('consulting.page.examples_eyebrow', 'Sample impact')}</span>
+      <span class="section-eyebrow">{t('consulting.page.examples_eyebrow')}</span>
       <h2>{t(examples.titleKey, examples.titleFallback)}</h2>
       <p>{t(examples.introKey, examples.introFallback)}</p>
     </header>
@@ -555,19 +546,19 @@
 <section class="section application" data-surface="glow" id="apply" use:revealOnScroll>
   <div class="container">
     <GlassCard class="application-card" halo>
-      <span class="section-eyebrow">{t('consulting.form_title', 'Apply for the pilot')}</span>
-      <h2>{t('consulting.page.application_title', 'Tell us about your team')}</h2>
-      <p>{t('consulting.form_intro', 'Tell us a little about your team so we can tailor the session.')}</p>
+      <span class="section-eyebrow">{t('consulting.form_title')}</span>
+      <h2>{t('consulting.page.application_title')}</h2>
+      <p>{t('consulting.form_intro')}</p>
 
       {#if status === 'success'}
-        <p role="status" class="form-status form-status--success">{t('consulting.form_success', 'Application received! We\'ll reach out within 48 hours.')}</p>
+        <p role="status" class="form-status form-status--success">{t('consulting.form_success')}</p>
       {:else if status === 'error'}
-        <p role="alert" class="form-status form-status--error">{t('consulting.form_error', 'Something went wrong. Please try again.')}</p>
+        <p role="alert" class="form-status form-status--error">{t('consulting.form_error')}</p>
       {/if}
 
       <form class="form" on:submit={handleSubmit}>
         <label class="form-field">
-          <span>{t('consulting.form_company', 'Company')}</span>
+          <span>{t('consulting.form_company')}</span>
           <input
             type="text"
             bind:value={formData.company}
@@ -580,7 +571,7 @@
         </label>
 
         <label class="form-field">
-          <span>{t('consulting.form_name', 'Contact name')}</span>
+          <span>{t('consulting.form_name')}</span>
           <input
             type="text"
             bind:value={formData.name}
@@ -593,7 +584,7 @@
         </label>
 
         <label class="form-field">
-          <span>{t('consulting.form_email', 'Email')}</span>
+          <span>{t('consulting.form_email')}</span>
           <input
             type="email"
             bind:value={formData.email}
@@ -606,14 +597,14 @@
         </label>
 
         <label class="form-field">
-          <span>{t('consulting.form_phone', 'Phone (optional)')}</span>
+          <span>{t('consulting.form_phone')}</span>
           <input type="tel" bind:value={formData.phone} on:input={resetStatus} />
         </label>
 
         <label class="form-field">
-          <span>{t('consulting.form_industry', 'Industry')}</span>
+          <span>{t('consulting.form_industry')}</span>
           <select bind:value={formData.industry} on:change={resetStatus} aria-invalid={errors.industry ? 'true' : 'false'}>
-            <option value="">{t('consulting.select_industry', 'Select industry...')}</option>
+            <option value="">{t('consulting.select_industry')}</option>
             {#each industries as industry (industry.value)}
               <option value={industry.value}>{t(industry.labelKey, industry.labelFallback)}</option>
             {/each}
@@ -624,7 +615,7 @@
         </label>
 
         <label class="form-field form--full">
-          <span>{t('consulting.form_description', 'Describe your AI needs')}</span>
+          <span>{t('consulting.form_description')}</span>
           <textarea
             rows="5"
             bind:value={formData.description}
@@ -636,7 +627,7 @@
           {/if}
         </label>
 
-        <Button type="submit" variant="gradient" size="lg">{t('consulting.form_submit', 'Submit application')}</Button>
+        <Button type="submit" variant="gradient" size="lg">{t('consulting.form_submit')}</Button>
       </form>
     </GlassCard>
   </div>
@@ -645,7 +636,7 @@
 <section class="section cta" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="cta-card" padding="lg" halo interactive>
-      <span class="section-eyebrow">{t('consulting.page.cta_eyebrow', 'Next steps')}</span>
+      <span class="section-eyebrow">{t('consulting.page.cta_eyebrow')}</span>
       <h2>{t(finalCta.titleKey, finalCta.titleFallback)}</h2>
       <p>{t(finalCta.copyKey, finalCta.copyFallback)}</p>
       <div class="cta-actions">

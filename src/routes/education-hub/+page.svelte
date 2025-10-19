@@ -356,14 +356,14 @@
   </div>
 </section>
 
-<SectionDivider label={t('educationHub.page.sections.insights.label', 'Latest insights')} tone="aurora" />
+<SectionDivider label={t('educationHub.page.sections.insights.label')} tone="aurora" />
 
 <section id="insights" class="section insights" data-surface="glow" aria-labelledby="insights-heading" use:revealOnScroll>
   <div class="container">
     <div class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('educationHub.page.sections.insights.eyebrow', 'Insights')}</span>
-      <h2 id="insights-heading">{t('educationHub.page.sections.insights.title', 'Fresh perspectives on calm AI')}</h2>
-      <p class="section-heading__copy">{t('educationHub.page.sections.insights.copy', 'Articles crafted with educators, founders, and families to keep AI human and hopeful.')}</p>
+      <span class="section-eyebrow">{t('educationHub.page.sections.insights.eyebrow')}</span>
+      <h2 id="insights-heading">{t('educationHub.page.sections.insights.title')}</h2>
+      <p class="section-heading__copy">{t('educationHub.page.sections.insights.copy')}</p>
     </div>
     <div class="insights__grid" use:staggerReveal>
       {#each latestArticles as article}
@@ -371,21 +371,21 @@
           <p class="insights__meta">{t(article.metaKey, article.metaFallback)}</p>
           <h3 class="insights__title">{t(article.titleKey, article.titleFallback)}</h3>
           <p class="insights__summary">{t(article.summaryKey, article.summaryFallback)}</p>
-          <Button href={t(article.hrefKey, article.hrefFallback)} variant="subtle">{t('educationHub.page.insights.read', 'Read article')}</Button>
+          <Button href={t(article.hrefKey, article.hrefFallback)} variant="subtle">{t('educationHub.page.insights.read')}</Button>
         </GlassCard>
       {/each}
     </div>
   </div>
 </section>
 
-<SectionDivider label={t('educationHub.page.sections.toolkits.label', 'Learning toolkits')} tone="voyage" />
+<SectionDivider label={t('educationHub.page.sections.toolkits.label')} tone="voyage" />
 
 <section id="toolkits" class="section toolkits" data-surface="glow" aria-labelledby="toolkits-heading" use:revealOnScroll>
   <div class="container">
     <div class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('educationHub.page.sections.toolkits.eyebrow', 'Toolkits')}</span>
-      <h2 id="toolkits-heading">{t('educationHub.page.sections.toolkits.title', 'Ready-to-use calm AI resources')}</h2>
-      <p class="section-heading__copy">{t('educationHub.page.sections.toolkits.copy', 'Downloadable lesson arcs, operating guides, and family activities designed with accessibility at the core.')}</p>
+      <span class="section-eyebrow">{t('educationHub.page.sections.toolkits.eyebrow')}</span>
+      <h2 id="toolkits-heading">{t('educationHub.page.sections.toolkits.title')}</h2>
+      <p class="section-heading__copy">{t('educationHub.page.sections.toolkits.copy')}</p>
     </div>
     <div class="toolkits__grid" use:staggerReveal>
       {#each learningLibrary as item}
@@ -405,14 +405,14 @@
   </div>
 </section>
 
-<SectionDivider label={t('educationHub.page.sections.spotlights.label', 'Community spotlights')} tone="citrus" />
+<SectionDivider label={t('educationHub.page.sections.spotlights.label')} tone="citrus" />
 
 <section id="case-studies" class="section spotlights" data-surface="glow" aria-labelledby="spotlights-heading" use:revealOnScroll>
   <div class="container">
     <div class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('educationHub.page.sections.spotlights.eyebrow', 'Spotlights')}</span>
-      <h2 id="spotlights-heading">{t('educationHub.page.sections.spotlights.title', 'Impact stories & collaborations')}</h2>
-      <p class="section-heading__copy">{t('educationHub.page.sections.spotlights.copy', 'Follow pilots, residencies, and community experiments that show calm AI in action.')}</p>
+      <span class="section-eyebrow">{t('educationHub.page.sections.spotlights.eyebrow')}</span>
+      <h2 id="spotlights-heading">{t('educationHub.page.sections.spotlights.title')}</h2>
+      <p class="section-heading__copy">{t('educationHub.page.sections.spotlights.copy')}</p>
     </div>
     <div class="spotlights__grid" use:staggerReveal>
       {#each communitySpotlights as spotlight}
@@ -420,14 +420,14 @@
           <p class="spotlights__meta">{t(spotlight.metaKey, spotlight.metaFallback)}</p>
           <h3 class="spotlights__title">{t(spotlight.titleKey, spotlight.titleFallback)}</h3>
           <p class="spotlights__copy">{t(spotlight.copyKey, spotlight.copyFallback)}</p>
-          <Button href={t(spotlight.hrefKey, spotlight.hrefFallback)} variant="subtle">{t('educationHub.page.spotlights.read', 'Open story')}</Button>
+          <Button href={t(spotlight.hrefKey, spotlight.hrefFallback)} variant="subtle">{t('educationHub.page.spotlights.read')}</Button>
         </GlassCard>
       {/each}
     </div>
   </div>
 </section>
 
-<SectionDivider label={t('educationHub.page.sections.events.label', 'Upcoming events')} tone="aurora" />
+<SectionDivider label={t('educationHub.page.sections.events.label')} tone="aurora" />
 
 <section id="events" class="section events" data-surface="glow" aria-labelledby="events-heading" use:revealOnScroll>
   <div class="container">
@@ -448,7 +448,7 @@
   </div>
 </section>
 
-<SectionDivider label={t('educationHub.page.sections.newsletter.label', 'Stay connected')} tone="voyage" />
+<SectionDivider label={t('educationHub.page.sections.newsletter.label')} tone="voyage" />
 
 <section id="newsletter" class="section newsletter" data-surface="glow" aria-labelledby="newsletter-heading" use:revealOnScroll>
   <div class="container">
