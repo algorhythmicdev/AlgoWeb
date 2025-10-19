@@ -295,9 +295,16 @@
     --text-headline: clamp(2.2rem, 5vw, 3rem);
     --text-title: clamp(1.8rem, 3.8vw, 2.6rem);
     --text-subtitle: clamp(1.5rem, 3vw, 2.1rem);
-    --text-body: clamp(1.12rem, 2vw, 1.3rem);
+    --text-base: clamp(1.12rem, 2vw, 1.3rem);
+    --text-lg: clamp(1.2rem, 2.6vw, 1.48rem);
+    --text-lead: clamp(1.24rem, 2.8vw, 1.55rem);
+    --text-card-title: clamp(1.32rem, 2.8vw, 1.68rem);
+    --text-body: var(--text-base);
     --text-small: clamp(1rem, 1.7vw, 1.12rem);
     --text-caption: clamp(0.9rem, 1.35vw, 1rem);
+    --text-meta: clamp(0.95rem, 1.8vw, 1.08rem);
+    --text-label: clamp(0.82rem, 1.5vw, 0.95rem);
+    --text-eyebrow: clamp(0.78rem, 1.4vw, 0.9rem);
     --text: var(--text-body);
     --small: var(--text-small);
 
@@ -349,6 +356,7 @@
     --measure-md: 48ch;
     --measure-lg: 60ch;
     --measure-xl: 72ch;
+    --measure-prose: 68ch;
 
     --section-padding-mobile: clamp(4.25rem, 10vw, 5.5rem);
     --section-padding-tablet: clamp(5.5rem, 12vw, 7.25rem);

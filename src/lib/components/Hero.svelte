@@ -115,21 +115,27 @@
     .hero {
         --hero-surface: color-mix(
             in srgb,
-            var(--bg-elev-1) 82%,
-            transparent 18%
+            var(--bg-elev-1) 58%,
+            transparent 42%
         );
         --hero-surface-elev: var(--bg-elev-1);
         --hero-text: var(--text);
         --hero-grad-start: var(--aurora-purple);
         --hero-grad-stop: var(--voyage-blue);
-        --hero-overlay: color-mix(in srgb, var(--bg) 95%, transparent 5%);
+        --hero-overlay: color-mix(in srgb, var(--bg) 62%, transparent 38%);
         --hero-padding-block: var(--section-padding-desktop);
-        --hero-padding-inline: var(--space-4xl);
+        --hero-padding-inline: clamp(var(--space-lg), 7vw, var(--space-4xl));
+        --hero-content-padding: clamp(
+            var(--space-2xl),
+            6vw,
+            var(--space-5xl)
+        );
         position: relative;
         isolation: isolate;
         overflow: visible;
         padding-block: var(--hero-padding-block);
         padding-inline: var(--hero-padding-inline);
+        margin-inline: auto;
         color: var(--text);
         background: var(--hero-surface);
         border-radius: max(0px, var(--glass-card-radius, 0));
@@ -154,7 +160,7 @@
     .hero__background-layer--overlay {
         background: var(--hero-overlay);
         mix-blend-mode: normal;
-        opacity: 0.82;
+        opacity: 0.4;
     }
 
     .hero__layout {
@@ -185,14 +191,18 @@
         z-index: var(--z-content);
         display: grid;
         gap: var(--space-xl);
-        padding: var(--space-4xl);
+        padding: var(--hero-content-padding);
         border-radius: calc(var(--glass-card-radius) * 1.2);
         background: color-mix(
             in srgb,
-            var(--surface-glass-bg) 92%,
-            transparent 8%
+            var(--surface-glass-bg) 68%,
+            transparent 32%
         );
-        border: 1px solid var(--surface-glass-border);
+        border: 1px solid color-mix(
+            in srgb,
+            var(--surface-glass-border) 52%,
+            transparent 48%
+        );
         box-shadow: var(--surface-glass-shadow);
         backdrop-filter: blur(var(--glass-blur-lg)) saturate(1.08);
         -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(1.08);
@@ -215,7 +225,7 @@
                 rgba(var(--aurora-purple-rgb), 0.06),
                 transparent 74%
             );
-        opacity: 0.38;
+        opacity: 0.24;
         pointer-events: none;
         transform: translate3d(0, 0, 0);
         transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -282,13 +292,13 @@
     .hero__highlights {
         --hero-highlight-border: color-mix(
             in srgb,
-            var(--surface-glass-border) 82%,
-            transparent 18%
+            var(--surface-glass-border) 46%,
+            transparent 54%
         );
         --hero-highlight-bg: color-mix(
             in srgb,
-            var(--surface-glass-bg) 92%,
-            transparent 8%
+            var(--surface-glass-bg) 60%,
+            transparent 40%
         );
         --hero-highlight-shadow: var(--surface-glass-shadow);
         position: relative;
@@ -321,13 +331,13 @@
             120% 120% at 16% 24%,
             color-mix(
                     in srgb,
-                    rgba(var(--voyage-blue-rgb), 0.18) 52%,
+                    rgba(var(--voyage-blue-rgb), 0.14) 52%,
                     transparent 48%
                 )
                 0%,
             transparent 72%
         );
-        opacity: 0.35;
+        opacity: 0.22;
         pointer-events: none;
         transform: translate3d(0, 0, 0);
         transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -339,13 +349,13 @@
             140% 140% at 78% 68%,
             color-mix(
                     in srgb,
-                    rgba(var(--aurora-purple-rgb), 0.16) 46%,
+                    rgba(var(--aurora-purple-rgb), 0.12) 46%,
                     transparent 54%
                 )
                 0%,
             transparent 74%
         );
-        opacity: 0.28;
+        opacity: 0.18;
     }
 
     .hero__highlights :global(h2),

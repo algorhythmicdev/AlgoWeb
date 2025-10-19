@@ -38,21 +38,21 @@
 </svelte:head>
 
 <article class="blog-post">
-  <div class="container">
+  <div class="reading-shell">
     <div class="post-header">
       <div class="breadcrumbs">
         <a href="/blog">{$_('blog.buttons.back_to_blog')}</a>
       </div>
       
       {#if post.featuredImage}
-        <img 
-          src={post.featuredImage.url} 
+        <img
+          src={post.featuredImage.url}
           alt={post.featuredImage.alternativeText || post.title}
-          class="featured-image"
+          class="featured-image reading-shell__image reading-shell__image--tall"
         />
       {/if}
-      
-      <div class="post-meta">
+
+      <div class="post-meta reading-shell__meta">
         <time datetime={post.publishDate} class="post-date">
           {formatDate(post.publishDate)}
         </time>
@@ -65,12 +65,12 @@
         {/if}
       </div>
       
-      <h1 class="post-title">{post.title}</h1>
-      
+      <h1 class="reading-shell__title">{post.title}</h1>
+
       {#if post.excerpt}
-        <p class="post-excerpt">{post.excerpt}</p>
+        <p class="reading-shell__lead">{post.excerpt}</p>
       {/if}
-      
+
       {#if post.author}
         <div class="post-author">
           {#if post.author.avatar}
@@ -90,22 +90,22 @@
       {/if}
     </div>
     
-    <GlassCard class="post-content-card" padding="lg">
-      <div class="post-content prose">
+    <GlassCard class="post-content-card reading-shell__card" padding="lg">
+      <div class="post-content reading-prose">
         {@html safeContent}
       </div>
     </GlassCard>
-    
+
     {#if post.tags?.length}
-      <div class="post-tags">
-        <span class="tags-label">{$_('blog.slug.tags_label')}</span>
+      <div class="post-tags reading-shell__tags">
+        <span class="tags-label text-eyebrow">{$_('blog.slug.tags_label')}</span>
         {#each post.tags as tag}
-          <span class="tag-badge">{tag.name}</span>
+          <span class="tag-chip">{tag.name}</span>
         {/each}
       </div>
     {/if}
-    
-    <div class="post-footer">
+
+    <div class="post-footer reading-shell__footer">
       <Button href="/blog" variant="secondary">
         {$_('blog.buttons.back_to_blog')}
       </Button>
@@ -115,27 +115,23 @@
 
 <style>
   .blog-post {
-    padding: 2rem 0 4rem;
-  }
-
-  .container {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 0 1rem;
+    padding-block: clamp(var(--space-2xl), 8vw, var(--space-5xl));
   }
 
   .post-header {
-    margin-bottom: 2rem;
+    display: grid;
+    gap: var(--space-xl);
   }
 
   .breadcrumbs {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
   }
 
   .breadcrumbs a {
     color: var(--voyage-blue);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: var(--text-meta);
+    font-weight: var(--weight-medium);
   }
 
   .breadcrumbs a:hover {
@@ -143,172 +139,106 @@
   }
 
   .featured-image {
-    width: 100%;
-    height: auto;
-    max-height: 28rem;
-    object-fit: cover;
-    border-radius: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
 
   .post-meta {
-    display: flex;
-    gap: 1rem;
+    gap: var(--space-lg);
     align-items: center;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--text) 70%, transparent);
   }
 
   .post-categories {
     display: flex;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
   }
 
   .category-badge {
-    padding: 0.25rem 0.75rem;
-    background: rgba(var(--voyage-blue-rgb), 0.15);
-    border-radius: 0.25rem;
-    font-size: 0.85rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 60%, transparent 40%);
+    font-size: var(--text-label);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .post-title {
-    font-size: clamp(2rem, 5vw, 2.75rem);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-
-  .post-excerpt {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: color-mix(in srgb, var(--text) 85%, transparent);
-    margin-bottom: 2rem;
   }
 
   .post-author {
-    display: flex;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-lg);
     align-items: center;
-    padding: 1rem;
-    background: color-mix(in srgb, var(--surface) 50%, transparent);
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
+    padding: var(--component-padding-md);
+    background: color-mix(in srgb, var(--surface-field-bg) 55%, transparent 45%);
+    border-radius: var(--radius-lg);
   }
 
   .author-avatar {
-    width: 3rem;
-    height: 3rem;
+    width: clamp(3rem, 6vw, 3.5rem);
+    height: clamp(3rem, 6vw, 3.5rem);
     border-radius: 50%;
     object-fit: cover;
   }
 
   .author-info {
-    flex: 1;
+    display: grid;
+    gap: var(--space-xs);
   }
 
   .author-name {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-meta);
   }
 
   .author-bio {
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--text) 75%, transparent);
+    font-size: var(--text-meta);
+    color: color-mix(in srgb, var(--text) 72%, transparent 28%);
   }
 
   :global(.post-content-card) {
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-3xl);
   }
 
-  .post-content {
-    line-height: 1.8;
+  .reading-prose {
+    gap: var(--space-lg);
   }
 
-  /* Prose styling for rich content (Phase 7) */
-  .prose :global(h2) {
-    font-size: 1.75rem;
-    margin: 2rem 0 1rem;
-  }
-
-  .prose :global(h3) {
-    font-size: 1.4rem;
-    margin: 1.75rem 0 0.75rem;
-  }
-
-  .prose :global(p) {
-    margin-bottom: 1.25rem;
-  }
-
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin-bottom: 1.25rem;
-    padding-left: 2rem;
-  }
-
-  .prose :global(li) {
-    margin-bottom: 0.5rem;
-  }
-
-  .prose :global(a) {
-    color: var(--voyage-blue);
-    text-decoration: underline;
-  }
-
-  .prose :global(img) {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    margin: 1.5rem 0;
-  }
-
-  .prose :global(blockquote) {
-    border-left: 4px solid var(--voyage-blue);
-    padding-left: 1.5rem;
-    margin: 1.5rem 0;
+  .reading-prose :global(blockquote) {
+    border-inline-start: 4px solid var(--voyage-blue);
+    padding-inline-start: var(--space-xl);
+    margin-block: var(--space-2xl);
     font-style: italic;
-    color: color-mix(in srgb, var(--text) 85%, transparent);
+    color: color-mix(in srgb, var(--text) 85%, transparent 15%);
   }
 
-  .prose :global(code) {
+  .reading-prose :global(code) {
     background: color-mix(in srgb, var(--text) 8%, transparent);
     padding: 0.2rem 0.4rem;
-    border-radius: 0.25rem;
-    font-size: 0.9em;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-caption);
   }
 
-  .prose :global(pre) {
+  .reading-prose :global(pre) {
     background: color-mix(in srgb, var(--text) 8%, transparent);
-    padding: 1rem;
-    border-radius: 0.5rem;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
     overflow-x: auto;
-    margin: 1.5rem 0;
+    margin-block: var(--space-2xl);
   }
 
-  .prose :global(pre code) {
+  .reading-prose :global(pre code) {
     background: none;
     padding: 0;
   }
 
   .post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    margin-bottom: 2rem;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
   }
 
   .tags-label {
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .tag-badge {
-    padding: 0.25rem 0.75rem;
-    background: rgba(var(--aurora-purple-rgb), 0.15);
-    border-radius: 0.25rem;
-    font-size: 0.85rem;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-meta);
   }
 
   .post-footer {

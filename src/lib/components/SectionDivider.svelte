@@ -79,7 +79,7 @@
     border: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
     backdrop-filter: blur(calc(var(--glass-blur) * 0.6)) saturate(1.02);
     -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.6)) saturate(1.02);
-    font-size: var(--text-label, 0.75rem);
+    font-size: var(--text-label);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: color-mix(in srgb, rgb(var(--voyage-blue-rgb)) 58%, rgba(255, 255, 255, 0.88) 42%);

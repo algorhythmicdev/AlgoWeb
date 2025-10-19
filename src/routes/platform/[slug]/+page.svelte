@@ -21,34 +21,34 @@
   <meta name="description" content={attributes.excerpt || attributes.description || ''} />
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 max-w-4xl">
-  <nav class="mb-8">
+<div class="reading-shell reading-shell--narrow">
+  <nav class="reading-shell__nav">
     <Button href="/platform" variant="subtle">
       {$_('platform.buttons.back_to_list')}
     </Button>
   </nav>
 
-  <article>
-    <GlassCard padding="lg">
+  <article class="reading-shell__content">
+    <GlassCard padding="lg" class="reading-shell__card">
       {#if featuredImage}
-        <img
-          src={featuredImage.url}
-          alt={featuredImage.alternativeText || attributes.title}
-          class="w-full h-auto rounded-lg mb-8"
-          loading="lazy"
-        />
+        <figure class="reading-shell__media">
+          <img
+            src={featuredImage.url}
+            alt={featuredImage.alternativeText || attributes.title}
+            class="reading-shell__image reading-shell__image--tall"
+            loading="lazy"
+          />
+        </figure>
       {/if}
 
-      <header class="mb-8">
-        <h1 class="text-4xl font-bold mb-4">{attributes.title}</h1>
-        
+      <header class="reading-shell__header">
+        <h1 class="reading-shell__title">{attributes.title}</h1>
+
         {#if attributes.excerpt}
-          <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
-            {attributes.excerpt}
-          </p>
+          <p class="reading-shell__lead">{attributes.excerpt}</p>
         {/if}
 
-        <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+        <div class="reading-shell__meta">
           {#if attributes.publishDate}
             <time datetime={attributes.publishDate}>
               {new Date(attributes.publishDate).toLocaleDateString('en-US', {
@@ -62,7 +62,11 @@
           {#if attributes.author?.data}
             <span>
               {$_('platform.card.by', {
-                name: attributes.author.data.attributes?.name || $_('platform.card.author_fallback')
+                values: {
+                  name:
+                    attributes.author.data.attributes?.name ||
+                    $_('platform.card.author_fallback')
+                }
               })}
             </span>
           {/if}
@@ -75,68 +79,28 @@
         </div>
 
         {#if attributes.tags?.data && attributes.tags.data.length > 0}
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">
+          <div class="reading-shell__tags">
+            <span class="reading-shell__tags-label text-eyebrow">
               {$_('platform.card.tags_label')}
             </span>
             {#each attributes.tags.data as tag}
-              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm">
-                {tag.attributes?.name || ''}
-              </span>
+              <span class="tag-chip">{tag.attributes?.name || ''}</span>
             {/each}
           </div>
         {/if}
       </header>
 
       {#if safeContent}
-        <div class="prose dark:prose-invert max-w-none">
+        <div class="reading-prose">
           {@html safeContent}
         </div>
       {/if}
     </GlassCard>
   </article>
 
-  <nav class="mt-8">
+  <nav class="reading-shell__footer">
     <Button href="/platform" variant="secondary">
       {$_('platform.buttons.back_to_list')}
     </Button>
   </nav>
 </div>
-
-<style>
-  .prose {
-    line-height: 1.75;
-  }
-
-  .prose :global(h1),
-  .prose :global(h2),
-  .prose :global(h3) {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    font-weight: 600;
-  }
-
-  .prose :global(p) {
-    margin-bottom: 1em;
-  }
-
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin-left: 1.5em;
-    margin-bottom: 1em;
-  }
-
-  .prose :global(a) {
-    color: var(--voyage-blue);
-    text-decoration: underline;
-  }
-
-  .prose :global(a:hover) {
-    color: var(--aurora-purple);
-  }
-
-  .prose :global(img) {
-    border-radius: 0.5rem;
-    margin: 2rem auto;
-  }
-</style>

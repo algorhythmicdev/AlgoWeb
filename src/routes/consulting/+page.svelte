@@ -660,8 +660,8 @@
   .hero-description {
     max-width: 68ch;
     margin: 0;
-    font-size: clamp(1.05rem, 2.6vw, 1.3rem);
-    line-height: 1.6;
+    font-size: var(--text-lead);
+    line-height: var(--leading-relaxed);
     color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, rgba(var(--ink-rgb), 0.4) 18%));
   }
 
@@ -769,8 +769,8 @@
 
   :global(.testimonial) blockquote {
     margin: 0;
-    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-    line-height: 1.6;
+    font-size: var(--text-lead);
+    line-height: var(--leading-relaxed);
     font-style: italic;
   }
 
@@ -799,7 +799,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1rem;
+    font-size: var(--text-body);
   }
 
   .packages__grid {
@@ -990,7 +990,7 @@
 
   .example-meta {
     display: block;
-    font-size: 0.85rem;
+    font-size: var(--text-label);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted, color-mix(in srgb, var(--text) 60%, rgba(var(--ink-rgb), 0.3) 40%));

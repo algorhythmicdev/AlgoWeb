@@ -115,9 +115,9 @@
 
 <style>
   .hero-description {
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
-    line-height: 1.7;
-    color: color-mix(in srgb, var(--text) 88%, rgba(var(--ink-rgb), 0.8) 12%);
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
   }
 
   .section.blog-posts {
@@ -128,33 +128,36 @@
 
   :global(.error-card),
   :global(.empty-state) {
-    max-width: 42rem;
-    margin: 0 auto;
+    max-width: var(--container-md);
+    margin-inline: auto;
     text-align: center;
+    display: grid;
+    gap: var(--space-lg);
   }
 
   .error-message h2,
   .empty-message h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: var(--text-title);
+    margin: 0;
   }
 
   .error-message p,
   .empty-message p {
-    color: color-mix(in srgb, var(--text) 80%, transparent);
-    line-height: 1.6;
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    line-height: var(--leading-relaxed);
+    margin: 0;
   }
 
   .help-text {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--text) 70%, transparent);
+    margin: 0;
+    font-size: var(--text-meta);
+    color: color-mix(in srgb, var(--text) 68%, transparent 32%);
   }
 
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: 2rem;
+    gap: var(--space-2xl);
   }
 
   :global(.post-card) {
@@ -172,46 +175,47 @@
 
   .post-image {
     width: 100%;
-    height: 12rem;
+    height: clamp(11rem, 24vw, 14rem);
     object-fit: cover;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
 
   .post-content {
-    padding: 1.5rem;
+    padding: var(--component-padding-lg);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: var(--space-md);
     flex: 1;
   }
 
   .post-meta {
     display: flex;
-    gap: 1rem;
-    font-size: 0.85rem;
-    color: color-mix(in srgb, var(--voyage-blue) 70%, transparent);
+    gap: var(--space-lg);
+    font-size: var(--text-meta);
+    color: color-mix(in srgb, var(--voyage-blue) 70%, transparent 30%);
   }
 
   .post-category {
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.12em;
   }
 
   .post-title {
-    font-size: 1.25rem;
-    line-height: 1.4;
+    font-size: var(--text-title);
+    line-height: var(--leading-snug);
     margin: 0;
   }
 
   .post-excerpt {
-    color: color-mix(in srgb, var(--text) 80%, transparent);
-    line-height: 1.6;
+    color: var(--text-secondary, color-mix(in srgb, var(--text) 80%, transparent 20%));
+    line-height: var(--leading-relaxed);
     flex: 1;
+    margin: 0;
   }
 
   .post-author {
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--text) 70%, transparent);
+    font-size: var(--text-meta);
+    color: color-mix(in srgb, var(--text) 70%, transparent 30%);
   }
 
   .post-action {

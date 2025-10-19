@@ -47,7 +47,7 @@
   line-height: var(--font-body-line, 1.7);
   margin-block: 0 clamp(1.1rem, 2.6vw, 1.8rem);
   color: var(--text-primary, var(--text));
-  max-width: var(--measure-xl);
+  max-width: var(--measure-prose, var(--measure-xl));
 }
 
 
@@ -94,8 +94,23 @@
   line-height: var(--leading-normal);
 }
 
+.text-card-title {
+  font-size: var(--text-card-title);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.006em;
+}
+
 .text-body {
   font-size: var(--text-body);
+  font-family: var(--font-body);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-relaxed);
+}
+
+.text-lead {
+  font-size: var(--text-lead);
   font-family: var(--font-body);
   font-weight: var(--weight-normal);
   line-height: var(--leading-relaxed);
@@ -111,6 +126,32 @@
   font-size: var(--text-caption);
   font-family: var(--font-body);
   line-height: var(--leading-normal);
+}
+
+.text-meta {
+  font-size: var(--text-meta);
+  font-family: var(--font-body);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+}
+
+.text-label {
+  font-size: var(--text-label);
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.text-eyebrow {
+  font-size: var(--text-eyebrow);
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary, color-mix(in srgb, var(--text) 72%, transparent 28%));
 }
 
 /* ==================== WEIGHT UTILITIES ==================== */

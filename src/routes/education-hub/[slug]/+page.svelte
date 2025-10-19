@@ -20,25 +20,23 @@
   <meta name="description" content={attributes.description || attributes.excerpt || ''} />
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 max-w-4xl">
-  <nav class="mb-8">
+<div class="reading-shell reading-shell--narrow">
+  <nav class="reading-shell__nav">
     <Button href="/education-hub" variant="subtle">
       {$_('education_hub.slug.back')}
     </Button>
   </nav>
 
-  <article>
-    <GlassCard padding="lg">
-      <header class="mb-8">
-        <h1 class="text-4xl font-bold mb-4">{attributes.title}</h1>
+  <article class="reading-shell__content">
+    <GlassCard padding="lg" class="reading-shell__card">
+      <header class="reading-shell__header">
+        <h1 class="reading-shell__title">{attributes.title}</h1>
         
         {#if attributes.description}
-          <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
-            {attributes.description}
-          </p>
+          <p class="reading-shell__lead">{attributes.description}</p>
         {/if}
 
-        <div class="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+        <div class="reading-shell__meta">
           {#if attributes.publishDate}
             <time datetime={attributes.publishDate}>
               {new Date(attributes.publishDate).toLocaleDateString('en-US', {
@@ -59,34 +57,32 @@
         </div>
 
         {#if attributes.tags?.data && attributes.tags.data.length > 0}
-          <div class="mt-4 flex flex-wrap gap-2">
+          <div class="reading-shell__tags">
             {#each attributes.tags.data as tag}
-              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full text-sm">
-                {tag.attributes?.name || ''}
-              </span>
+              <span class="tag-chip">{tag.attributes?.name || ''}</span>
             {/each}
           </div>
         {/if}
       </header>
 
       {#if safeContent}
-        <div class="prose dark:prose-invert max-w-none">
+        <div class="reading-prose">
           {@html safeContent}
         </div>
       {/if}
 
       {#if attributes.mediaAttachments?.data && attributes.mediaAttachments.data.length > 0}
-        <div class="mt-8">
-          <h2 class="text-2xl font-bold mb-4">{$_('education_hub.slug.resources_title')}</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="resource-stack">
+          <h2>{$_('education_hub.slug.resources_title')}</h2>
+          <div class="resource-grid">
             {#each attributes.mediaAttachments.data as media}
               {#if media.attributes}
-                <div class="border rounded-lg p-4">
+                <div class="resource-card">
                   {#if media.attributes.mime?.startsWith('image/')}
                     <img
                       src={media.attributes.url}
                       alt={media.attributes.alternativeText || media.attributes.name}
-                      class="w-full h-auto rounded"
+                      class="resource-card__image"
                       loading="lazy"
                     />
                   {:else}
@@ -94,7 +90,7 @@
                       href={media.attributes.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-blue-600 hover:text-blue-800"
+                      class="resource-card__link"
                     >
                       {media.attributes.name}
                     </a>
@@ -108,7 +104,7 @@
     </GlassCard>
   </article>
 
-  <nav class="mt-8">
+  <nav class="reading-shell__footer">
     <Button href="/education-hub" variant="secondary">
       {$_('education_hub.slug.back')}
     </Button>
@@ -116,34 +112,45 @@
 </div>
 
 <style>
-  .prose {
-    line-height: 1.75;
+  .resource-stack {
+    display: grid;
+    gap: var(--space-xl);
+    margin-top: var(--space-3xl);
   }
 
-  .prose :global(h1),
-  .prose :global(h2),
-  .prose :global(h3) {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    font-weight: 600;
+  .resource-stack h2 {
+    margin: 0;
   }
 
-  .prose :global(p) {
-    margin-bottom: 1em;
+  .resource-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin-left: 1.5em;
-    margin-bottom: 1em;
+  .resource-card {
+    display: grid;
+    gap: var(--space-sm);
+    padding: var(--component-padding-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--surface-field-border);
+    background: color-mix(in srgb, var(--surface-field-bg) 65%, transparent 35%);
   }
 
-  .prose :global(a) {
+  .resource-card__image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .resource-card__link {
     color: var(--voyage-blue);
-    text-decoration: underline;
+    font-size: var(--text-meta);
+    font-weight: var(--weight-medium);
   }
 
-  .prose :global(a:hover) {
+  .resource-card__link:hover {
     color: var(--aurora-purple);
   }
 </style>

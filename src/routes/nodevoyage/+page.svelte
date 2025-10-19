@@ -544,7 +544,7 @@
 
   .section-title {
     font-family: var(--font-heading, 'Montserrat', sans-serif);
-    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    font-size: var(--text-headline);
     margin-bottom: clamp(1rem, 3vw, 1.5rem);
   }
 
@@ -552,6 +552,8 @@
     max-width: 48ch;
     margin-bottom: clamp(2rem, 6vw, 3rem);
     color: var(--text-secondary, color-mix(in srgb, var(--text) 80%, transparent 20%));
+    font-size: var(--text-lead);
+    line-height: var(--leading-relaxed);
   }
 
   .hero-actions {
@@ -566,13 +568,15 @@
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     text-align: left;
+    font-size: var(--text-small);
+    line-height: var(--leading-normal);
   }
 
   .hero-eyebrow {
     display: block;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    font-size: 0.75rem;
+    font-size: var(--text-eyebrow);
     color: var(--text-tertiary, color-mix(in srgb, var(--text) 65%, transparent 35%));
     margin-bottom: 0.25rem;
   }
@@ -590,12 +594,15 @@
   }
 
   :global(.feature-card) h3 {
-    font-size: 1.25rem;
+    font-size: var(--text-card-title);
+    line-height: var(--leading-snug);
     margin-bottom: 0.75rem;
   }
 
   :global(.feature-card) p {
     color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
   }
 
   .feature-icon {
@@ -633,14 +640,14 @@
 
   .roadmap-phase {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: var(--text-body);
   }
 
   .roadmap-timing {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.95rem;
+    font-size: var(--text-meta);
     color: var(--text-tertiary, color-mix(in srgb, var(--text) 62%, transparent 38%));
     margin-bottom: 0.5rem;
   }
@@ -729,7 +736,7 @@
   }
 
   .privacy-note {
-    font-size: 0.95rem;
+    font-size: var(--text-meta);
     color: var(--text-tertiary, color-mix(in srgb, var(--text) 60%, transparent 40%));
   }
 
