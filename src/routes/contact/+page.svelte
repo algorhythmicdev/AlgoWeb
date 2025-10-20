@@ -9,8 +9,51 @@
     import { _ } from "svelte-i18n";
     import { translateOrFallback } from "$lib/utils/i18n";
 
-    const t = (key: string, fallback: string) =>
-        translateOrFallback($_, key, fallback);
+    const FALLBACKS = {
+        "contact.page.cards.eyebrow": "Connection options",
+        "contact.page.cards.heading": "Ways to connect",
+        "contact.page.cards.supporting_copy": "Pick the channel that fits your pace and we will reply quickly.",
+        "contact.page.form.eyebrow": "Send a message",
+        "contact.page.form.title": "We reply within one business day.",
+        "contact.page.form.description": "Please share your name, email, and what you would like to explore.",
+        "contact.page.form.fields.name.label": "Name",
+        "contact.page.form.fields.email.label": "Email",
+        "contact.page.form.fields.reason.label": "Reason for contacting",
+        "contact.page.form.fields.reason.options.general": "General question",
+        "contact.page.form.fields.reason.options.consulting": "Consulting or pilot",
+        "contact.page.form.fields.reason.options.education": "Education & community",
+        "contact.page.form.fields.reason.options.media": "Media or partnership",
+        "contact.page.form.fields.message.label": "Message",
+        "contact.page.form.submit": "Send message",
+        "contact.page.form.note": "We respond within one business day.",
+        "contact.page.form.success": "Thank you! Your email client is opening with a pre-filled message.",
+        "contact.page.form.error": "Please fix the highlighted fields.",
+        "contact.page.form.errors.name_required": "Please add your name.",
+        "contact.page.form.errors.email_required": "We use this to reply.",
+        "contact.page.form.errors.email_invalid": "Add a valid email address.",
+        "contact.page.form.errors.reason_required": "Select a reason.",
+        "contact.page.form.errors.message_required": "Tell us how we can help.",
+        "contact.page.form.mailto_subject": "Website enquiry from {name} ({reason}).",
+        "contact.page.form.mailto_body": "Name: {name}\nEmail: {email}\nReason: {reason}\n\n{message}.",
+        "contact.page.support.section_eyebrow": "Support promise",
+        "contact.page.support.section_title": "Responsive, human support every step of the way.",
+        "contact.page.support.section_copy": "We pair every pilot, consulting sprint, and classroom programme with clear expectations so you always know when to expect a reply.",
+        "contact.page.social.eyebrow": "Stay connected",
+        "contact.page.social.title": "Follow along with the studio",
+        "contact.page.social.copy": "Pick the network where you want to keep in touch.",
+        "contact.page.newsletter.eyebrow": "Team updates",
+        "contact.page.newsletter.title": "Subscribe for launch updates.",
+        "contact.page.newsletter.copy": "Get a quarterly roundup on NodeVoyage, Ideonautix, and our consulting stories.",
+        "contact.page.newsletter.cta": "Email newsletter@algorhythmics.com.",
+        "contact.page.newsletter.secondary": "Read about our solutions.",
+        "contact.page.newsletter.note": "Prefer a form? Mention \"Newsletter\" in the message above and we will add you manually.",
+    } as const;
+
+    const resolveFallback = (key: string, fallback?: string) =>
+        typeof fallback === "string" ? fallback : FALLBACKS[key as keyof typeof FALLBACKS] ?? "";
+
+    const t = (key: string, fallback?: string) =>
+        translateOrFallback($_, key, resolveFallback(key, fallback));
 
     const hero = {
         titleKey: "contact.page.hero.title",
