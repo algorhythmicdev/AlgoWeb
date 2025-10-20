@@ -126,7 +126,19 @@
           <p class="footer-partners__summary">{partnerSummary}</p>
 
           <div class="footer-partners__actions">
-            <a class="footer-partners__cta" href="/about#team">{partnerLinkLabel}</a>
+            {#if featuredPartner?.logo && featuredPartner?.website}
+              <a
+                class="footer-partners__logo"
+                href={featuredPartner.website}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${partnerVisitLabel}: ${featuredPartner.name}`}
+              >
+                <img src={featuredPartner.logo} alt="" loading="lazy" aria-hidden="true" />
+              </a>
+            {:else}
+              <a class="footer-partners__cta" href="/about#team">{partnerLinkLabel}</a>
+            {/if}
 
             {#if featuredPartner?.website}
               <a
@@ -297,6 +309,33 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+  }
+
+  .footer-partners__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-border) 30%, transparent 70%);
+    transition: transform var(--duration-ui) var(--ease-out),
+      border-color var(--duration-ui) var(--ease-out),
+      background-color var(--duration-ui) var(--ease-out);
+  }
+
+  .footer-partners__logo:hover,
+  .footer-partners__logo:focus-visible {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--footer-border) 40%, var(--accent-primary) 60%);
+    background: color-mix(in srgb, var(--glass-bg-lightest) 82%, transparent 18%);
+  }
+
+  .footer-partners__logo img {
+    display: block;
+    width: min(164px, 100%);
+    height: auto;
   }
 
   .footer-partners__cta {

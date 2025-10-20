@@ -145,7 +145,7 @@
     } as const;
 
     const supportShowcase = {
-        image: "/images/placeholders/solutions-suite.svg",
+        image: "/images/placeholders/help-center-desk.png",
         altKey: "contact.page.support.visual.alt",
         altFallback:
             "Support specialists reviewing calm AI dashboards together",
