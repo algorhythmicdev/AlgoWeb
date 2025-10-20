@@ -1,20 +1,20 @@
 {
   "site": {
-    "title": "AlgoRhythmics",
+    "title": "Algorhythmics",
     "tagline": "Kur loģika dejo ar radošumu",
     "description": "MI inovāciju laboratorija, kas veido ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix"
   },
   "seo": {
-    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
-    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
-    "default_og_title": "AlgoRhythmics",
-    "default_og_description": "Ideas tuned to human rhythm.",
+    "default_title": "Algorhythmics — Saprotams MI īstiem cilvēkiem.",
+    "default_description": "MI studija, kas veido NodeVoyage ceļojumu kopilotu un Ideonautix dibinātāju kabīni.",
+    "default_og_title": "Algorhythmics",
+    "default_og_description": "MI ceļojumu komandām un dibinātājiem.",
     "default_url": "https://algorhythmics.com",
     "home": {
-      "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
-      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
-      "og_title": "AlgoRhythmics — Calm OS rituals",
-      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+      "title": "Algorhythmics — Saprotami MI rīki, kas izskaidro paši sevi",
+      "description": "Atklāj NodeVoyage, Ideonautix un konsultācijas vienā zīmju disciplīnā balstītā MI studijā.",
+      "og_title": "Algorhythmics — MI, kas izskaidro sevi.",
+      "og_description": "MI produkti un pakalpojumi, kas paliek pieejami, caurspīdīgi un atbalstoši."
     }
   },
   "app": {
@@ -34,33 +34,24 @@
   "nav": {
     "home": "Sākums",
     "about": "Par mums",
-    "solutions": "Solutions",
-    "solutions_panel_label": "Solutions menu",
+    "solutions": "Risinājumi",
+    "solutions_panel_label": "Risinājumu izvēlne",
     "solutions_nodevoyage": "NodeVoyage Travel OS",
-    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
+    "solutions_nodevoyage_desc": "Plāno piedzīvojumus ar mūsu MI ceļojumu lietotni.",
     "solutions_ideonautix": "Ideonautix Startup OS",
-    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
-    "solutions_consulting": "AI Consulting Services",
-    "solutions_consulting_desc": "Tailored integration, training, and strategy",
-    "help_center": "Help Center",
+    "solutions_ideonautix_desc": "Ievies idejas ar modulāriem produktivitātes palīgiem.",
+    "solutions_consulting": "MI konsultāciju pakalpojumi",
+    "solutions_consulting_desc": "Pielāgota integrācija, apmācība un stratēģija.",
+    "help_center": "Palīdzības centrs",
     "contact": "Kontakti",
     "brand_aria": "AlgoRhythmics sākumlapa",
-    "brand_name": "AlgoRhythmics",
+    "brand_name": "Algorhythmics",
     "primary_label": "Galvenā navigācija",
-    "resources_panel_label": "Quick access to highlights",
+    "resources_panel_label": "Ātra piekļuve svarīgākajam",
     "talk_to_us": "Sazinies ar mums",
     "quick_controls": "Ātrie iestatījumi",
     "toggle_menu": "Atvērt vai aizvērt izvēlni",
-    "skip_to_content": "Pāriet uz saturu",
-    "services": "Services",
-    "educational_outreach": "Educational Outreach",
-    "resources": "Resources",
-    "resources_blog": "Blog",
-    "resources_blog_desc": "Insights, news, and creative stories",
-    "resources_cases": "Case Studies",
-    "resources_cases_desc": "See AlgoRhythmics solutions in action",
-    "resources_events": "Events",
-    "resources_events_desc": "Join upcoming webinars and community meetups"
+    "skip_to_content": "Pāriet uz saturu"
   },
   "language_switcher": {
     "group_label": "Valodu izvēle",
@@ -69,7 +60,7 @@
     "languages": {
       "en": {
         "short": "EN",
-        "name": "English"
+        "name": "Angļu"
       },
       "lv": {
         "short": "LV",
@@ -113,230 +104,230 @@
   },
   "home": {
     "hero": {
-      "status": "Independent AI studio · Riga ↔ Rotterdam",
+      "status": "Neatkarīga MI studija · Rīga ↔ Roterdama",
       "title": {
         "lead": "AlgoRhythmics",
-        "brand": "shapes calm AI workflows",
-        "trail": "with signage discipline."
+        "brand": "veido mierīgas MI darba plūsmas",
+        "trail": "ar zīmju disciplīnu."
       },
-      "tagline": "Calm AI for travel crews and founder teams.",
-      "subtitle": "NodeVoyage, Ideonautix, and our consulting practice run on the same deliberate rituals.",
-      "description": "We pair tactile signage craft with transparent automation notes so every screen stays readable, explainable, and inclusive.",
-      "cta_products": "Explore our platforms",
-      "cta_consulting": "Book a calm strategy chat",
-      "actions_label": "Primary hero actions",
-      "next_milestone": "Upcoming milestone",
-      "pillars_title": "How we keep momentum steady",
+      "tagline": "Mierīgs MI ceļojumu komandām un dibinātājiem.",
+      "subtitle": "NodeVoyage, Ideonautix un mūsu konsultācijas balstās uz tiem pašiem apzinātajiem rituāliem.",
+      "description": "Apvienojam taustāmu zīmju amatniecību ar caurspīdīgām automatizācijas piezīmēm, lai katrs ekrāns paliktu salasāms, saprotams un iekļaujošs.",
+      "cta_products": "Iepazīsti mūsu platformas",
+      "cta_consulting": "Rezervē mierīgu stratēģijas sarunu",
+      "actions_label": "Galvenās hero darbības",
+      "next_milestone": "Nākamais atskaites punkts",
+      "pillars_title": "Kā uzturam vienmērīgu tempu.",
       "pillars": [
-        "Shared rituals link product sprints, consulting engagements, and education programmes.",
-        "Accessibility, localisation, and inclusive writing shape every interface.",
-        "Every automation ships with plain-language documentation and opt-out controls."
+        "Kopīgi rituāli apvieno produktu sprintus, konsultāciju projektus un izglītības programmas.",
+        "Pieejamība, lokalizācija un iekļaujoša rakstība veido katru saskarni.",
+        "Katras automatizācijas komplektā ir skaidrā valodā rakstīta dokumentācija un atteikšanās iespējas."
       ],
       "signals": {
-        "studio_phase": "Studio snapshot",
-        "studio_phase_value": "Founder-led studio • Est. 2023",
-        "focus_tracks": "Focus tracks",
-        "focus_tracks_value": "NodeVoyage · Ideonautix · Consulting",
-        "research": "Research roots",
-        "research_value": "Signage R&D + Cloud AI"
+        "studio_phase": "Studijas momentuzņēmums",
+        "studio_phase_value": "Dibinātāju vadīta studija • Kopš 2023.",
+        "focus_tracks": "Fokusa virzieni",
+        "focus_tracks_value": "NodeVoyage · Ideonautix · Konsultācijas",
+        "research": "Pētniecības saknes",
+        "research_value": "Zīmju pētniecība + mākoņa MI"
       },
       "moments": {
         "nodevoyage": {
-          "kicker": "Platform spotlight",
+          "kicker": "Platformas gaismā",
           "status": "NodeVoyage",
-          "copy": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
-          "meta": "Beta invites open",
-          "cta": "Preview NodeVoyage"
+          "copy": "Tavs MI ceļojumu pavadonis — plāno, pēti un saglabā ceļojuma stāstus bez piepūles.",
+          "meta": "Beta ielūgumi ir atvērti",
+          "cta": "Apskati NodeVoyage"
         },
         "ideonautix": {
-          "kicker": "Platform spotlight",
+          "kicker": "Platformas gaismā",
           "status": "Ideonautix",
-          "copy": "The productivity suite for modern creators — where every idea gets momentum.",
-          "meta": "Research sprint underway",
-          "cta": "Preview Ideonautix"
+          "copy": "Produktivitātes komplekts mūsdienu radītājiem — vieta, kur katra ideja iegūst tempu.",
+          "meta": "Pētniecības sprints norit",
+          "cta": "Apskati Ideonautix"
         }
       },
       "focus": {
-        "kicker": "Studio focus",
-        "title": "Respect for the humans using AI",
-        "description": "We slow down to explain the why, map the hand-offs, and keep every control easy to discover.",
+        "kicker": "Studijas fokuss",
+        "title": "Cieņa pret cilvēkiem, kas izmanto MI.",
+        "description": "Mēs apstājamies, lai izskaidrotu, kāpēc, kartējam nodošanas posmus un padarām katru vadību viegli atrodamu.",
         "points": [
-          "Light, dark, and contrast themes stay readable and consistent.",
-          "Reduced-motion preferences are honoured across interactions.",
-          "Clear audit trails keep AI decisions transparent."
+          "Gaišais, tumšais un kontrasta režīmi paliek salasāmi un konsekventi.",
+          "Samazinātas kustības izvēles tiek ievērotas visās mijiedarbībās.",
+          "Skaidri audita ceļi saglabā MI lēmumus caurspīdīgus."
         ],
-        "cta": "Visit the community"
+        "cta": "Apmeklē kopienu"
       },
-      "milestone_cta": "See the roadmap",
-      "brand_aria": "AlgoRhythmics logomark highlighted in the hero heading"
+      "milestone_cta": "Skatīt ceļa karti",
+      "brand_aria": "Algorhythmics logotips izcelts hero virsrakstā"
     },
     "story": {
-      "title": "Our story",
-      "reality_title": "What keeps us grounded",
-      "reality_text": "We stay close to signage floors and partner operations to keep prototypes practical.",
-      "mission_title": "Mission",
-      "mission_text": "Ship approachable AI tools and consulting loops that explain themselves and invite collaboration.",
-      "vision_title": "Vision",
-      "vision_text": "By 2026 every AlgoRhythmics launch will share one trusted workflow so partners can switch contexts without friction."
+      "title": "Mūsu stāsts",
+      "reality_title": "Kas mūs notur pie zemes",
+      "reality_text": "Paliekam tuvumā zīmju darbnīcām un partneru procesiem, lai prototipi paliktu praktiski.",
+      "mission_title": "Misija",
+      "mission_text": "Piegādājam saprotamus MI rīkus un konsultāciju ciklus, kas izskaidro paši sevi un aicina sadarboties.",
+      "vision_title": "Vīzija",
+      "vision_text": "Līdz 2026. gadam katrs Algorhythmics laidiens dalīsies vienā uzticamā darba plūsmā, lai partneri varētu brīvi mainīt kontekstu."
     },
     "timeline": {
-      "title": "Our path",
-      "subtitle": "Milestones keeping us honest",
-      "filters_label": "Filter milestones by status",
-      "filters_reset": "Show all statuses",
-      "filters_empty": "No milestones match the selected status yet.",
-      "upcoming_badge": "Upcoming",
+      "title": "Mūsu ceļš",
+      "subtitle": "Atskaites punkti, kas mūs tur godīgus",
+      "filters_label": "Filtrēt atskaites punktus pēc statusa",
+      "filters_reset": "Rādīt visus statusus",
+      "filters_empty": "Pagaidām nav atbilstošu atskaites punktu.",
+      "upcoming_badge": "Drīzumā",
       "statuses": {
-        "active": "Active now",
-        "development": "In development",
-        "planned": "Planned",
-        "vision": "Long-term vision",
-        "current": "In motion",
-        "completed": "Completed"
+        "active": "Aktīvi tagad",
+        "development": "Izstrādē",
+        "planned": "Plānots",
+        "vision": "Ilgtermiņa redzējums",
+        "current": "Procesā",
+        "completed": "Pabeigts"
       },
       "milestones": {
         "ideju-kauss": {
-          "title": "Ideju Kauss pitch",
-          "description": "Pitch NodeVoyage inside Latvia's flagship startup arena.",
+          "title": "Ideju Kauss prezentācija",
+          "description": "Piedāvāt NodeVoyage Latvijas galvenajā jaunuzņēmumu arēnā.",
           "note": ""
         },
         "company-formation": {
-          "title": "Company formation",
-          "description": "Complete registration, legal setup, and founder agreements.",
+          "title": "Uzņēmuma dibināšana",
+          "description": "Pabeigt reģistrāciju, juridisko uzstādīšanu un dibinātāju vienošanās.",
           "note": ""
         },
         "liaa-application": {
-          "title": "LIAA partnership",
-          "description": "Apply for collaboration with Latvia's Investment and Development Agency to co-run education programmes.",
-          "note": "Pending approval"
+          "title": "LIAA partnerība",
+          "description": "Piesakāmies sadarbībai ar Latvijas Investīciju un attīstības aģentūru, lai kopā vadītu izglītības programmas.",
+          "note": "Gaida apstiprinājumu"
         },
         "mvp-ideonautix": {
-          "title": "Ideonautix MVP",
-          "description": "Release the first public version of the Ideonautix productivity platform.",
+          "title": "Ideonautix MVP versija",
+          "description": "Laist klajā pirmo publisko Ideonautix produktivitātes platformas versiju.",
           "note": ""
         },
         "pilot-consulting": {
-          "title": "AI consulting pilot",
-          "description": "Offer a no-cost pilot to three partners exploring calm AI integration.",
+          "title": "MI konsultāciju pilots",
+          "description": "Piedāvāt bezmaksas pilotu trim partneriem, kas izmēģina mierīgu MI integrāciju.",
           "note": ""
         },
         "mvp-nodevoyage": {
-          "title": "NodeVoyage beta",
-          "description": "Open the NodeVoyage travel platform to public beta with Nodi on board.",
+          "title": "NodeVoyage beta versija",
+          "description": "Atvērt NodeVoyage ceļojumu platformu publiskai betai kopā ar Nodi.",
           "note": ""
         },
         "education-program": {
-          "title": "Education programme rollout",
-          "description": "Bring our AI education sessions to secondary schools across Latvia.",
-          "note": "Goal: 75+ institutes"
+          "title": "Izglītības programmas ieviešana",
+          "description": "Nesam mūsu MI izglītības sesijas Latvijas vidusskolām.",
+          "note": "Mērķis: 75+ iestādes"
         }
       },
-      "filters_announcement": "Showing {count} milestones"
+      "filters_announcement": "Rāda {count} atskaites punktus"
     },
     "cta": {
-      "eyebrow": "Keep exploring",
-      "title": "Stay in our orbit",
-      "text": "Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.",
-      "primary": "Join the community",
-      "secondary": "Book a calm strategy chat",
+      "eyebrow": "Turpini izzināt",
+      "title": "Paliec mūsu orbītā",
+      "text": "Saņem ceļa kartes piezīmes, pieejamības padomus un agrīnās piekļuves ielūgumus visiem NodeVoyage un Ideonautix jaunumiem.",
+      "primary": "Izpēti resursus",
+      "secondary": "Rezervē mierīgu stratēģijas sarunu",
       "points": [
-        "Roadmap walkthroughs before they reach the blog.",
-        "Pilot invitations go to subscribers first.",
-        "Accessibility checklists and signage-inspired playbooks."
+        "Ceļa kartes apskati pirms tie nonāk blogā.",
+        "Pilotprojektu ielūgumi vispirms nonāk pie abonentiem.",
+        "Pieejamības kontrolsaraksti un no zīmju pasaules iedvesmotas rokasgrāmatas."
       ],
-      "consulting": "Prefer a guided walkthrough? Book a calm strategy chat and we will map your next steps together."
+      "consulting": "Vēlies vadītu pastaigu? Rezervē mierīgu stratēģijas sarunu, un kopā iezīmēsim nākamos soļus."
     },
     "founders": {
-      "title": "Meet the founders",
-      "subtitle": "Two makers blending signage craft with calm AI",
-      "email_cta": "Email",
+      "title": "Iepazīsti dibinātājus",
+      "subtitle": "Divi veidotāji, kas apvieno zīmju amatniecību ar mierīgu MI",
+      "email_cta": "E-pasts",
       "linkedin_cta": "LinkedIn",
       "nikita": {
         "name": "Nikita Jurtaevs",
-        "role": "Co-Founder & CEO",
-        "bio": "Nikita keeps product direction, story, and partnerships aligned so every release feels tactile and honest.",
-        "current_title": "Current focus",
-        "current_position": "Reclame Fabriek — shaping lighting, coating, and fabrication trials that inform our interfaces.",
+        "role": "Līdzdibinātājs un izpilddirektors",
+        "bio": "Nikita saskaņo produktu virzienu, stāstu un partnerības, lai katrs laidiens būtu taustāms un godīgs.",
+        "current_title": "Pašreizējais fokuss",
+        "current_position": "Reclame Fabriek — veido apgaismojuma, pārklājumu un ražošanas testus, kas iedvesmo mūsu saskarnes.",
         "expertise": [
-          "Narrative-led product strategy",
-          "Experience design and quality assurance",
-          "Partnership and education outreach"
+          "Stāstos balstīta produktu stratēģija",
+          "Pieredzes dizains un kvalitātes nodrošināšana",
+          "Partnerību un izglītības virzība"
         ]
       },
       "slaff": {
         "name": "Vjaceslavs \"Slaff\" Trosins",
-        "role": "Co-Founder & CTO",
-        "current_title": "Current focus",
-        "bio": "Slaff leads the engineering stack, data flows, and AI integrations powering our platforms.",
-        "position": "Reclame Fabriek — refining controllers, LED systems, and tooling that steer our software choices.",
-        "philosophy": "Systems thinking across hardware and software keeps solutions honest and dependable.",
+        "role": "Līdzdibinātājs un CTO",
+        "current_title": "Pašreizējais fokuss",
+        "bio": "Slaff vada inženierijas slāni, datu plūsmas un MI integrācijas, kas darbina mūsu platformas.",
+        "position": "Reclame Fabriek — pilnveido kontrollerus, LED sistēmas un instrumentus, kas virza mūsu programmatūras izvēles.",
+        "philosophy": "Domāšana sistēmās pāri aparatūrai un programmatūrai uztur risinājumus godīgus un uzticamus.",
         "achievements": [
-          "Runs a Google Cloud–first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
-          "Bridges signage-grade controllers with transparent AI experiences.",
-          "Leads fundraising and multidisciplinary teams across both flagships."
+          "Vada Google Cloud centrētu steku ar SvelteKit, Flutter, Fastify, Prisma/PostgreSQL un reāllaika ziņapmaiņu.",
+          "Savieno zīmju klases kontrollerus ar caurspīdīgām MI pieredzēm.",
+          "Vada piesaisti un starpdisciplināras komandas abās flagmaņplatformās."
         ],
-        "brand_title": "Brand experience",
-        "brand_intro": "We honed our craft while partnering with global brands on premium signage systems:",
-        "brand_context": "Projects delivered with Reclame Fabriek (Daugavpils, LV) by both founders",
-        "algorhythmics_title": "Vision for AlgoRhythmics",
-        "algorhythmics_vision": "Blend signage precision with cloud agility so AlgoRhythmics ships trustworthy, ready-to-use AI experiences."
+        "brand_title": "Zīmola pieredze",
+        "brand_intro": "Mūsu meistarība tapusi, sadarbojoties ar globāliem zīmoliem premium zīmju sistēmās:",
+        "brand_context": "Projektus īstenojām kopā ar Reclame Fabriek (Daugavpils, LV), abiem dibinātājiem piedaloties",
+        "algorhythmics_title": "Vīzija Algorhythmics",
+        "algorhythmics_vision": "Apvienot zīmju precizitāti ar mākoņa veiklību, lai Algorhythmics piegādātu uzticamas, gatavas MI pieredzes."
       },
       "labels": {
-        "expertise": "Core strengths",
-        "achievements": "Recent wins",
-        "contact": "Direct lines"
+        "expertise": "Galvenās stiprās puses",
+        "achievements": "Nesenie sasniegumi",
+        "contact": "Tiešie kontakti"
       }
     },
     "partners": {
-      "eyebrow": "Collaborators",
-      "title": "Partners who keep us sharp",
-      "description": "Signage specialists and educators help us keep prototypes grounded in real production.",
-      "location": "Location",
-      "founded": "Founded",
-      "website": "Website",
-      "clients_label": "Clients",
-      "clients_title": "Brands we have supported",
-      "clients_description": "Years of signage delivery for retail, finance, and aviation means our AI work stands on proven operations.",
+      "eyebrow": "Sadarbības partneri",
+      "title": "Partneri, kas mūs tur formā",
+      "description": "Zīmju speciālisti un pedagogi palīdz mums saglabāt prototipus piesaistītus reālai ražošanai.",
+      "location": "Atrašanās vieta",
+      "founded": "Dibināts",
+      "website": "Vietne",
+      "clients_label": "Klienti",
+      "clients_title": "Zīmoli, kurus esam atbalstījuši",
+      "clients_description": "Gadu pieredze zīmju piegādē mazumtirdzniecībai, finanšu un aviācijas nozarei nozīmē, ka mūsu MI darbs balstās pārbaudītās operācijās.",
       "labels": {
-        "current": "Active partnership",
-        "aspirational": "Future partnership",
-        "scale": "Scale",
-        "reach": "Reach",
-        "innovation": "Innovation focus",
-        "programs": "Programmes"
+        "current": "Aktīva partnerība",
+        "aspirational": "Nākotnes partnerība",
+        "scale": "Mērogs",
+        "reach": "Sasniedzamība",
+        "innovation": "Inovāciju fokuss",
+        "programs": "Programmas"
       },
-      "note": "Note",
+      "note": "Piezīme",
       "featured": {
-        "summary": "We prototype signage-grade experiences with trusted partners.",
-        "relationship_label": "Relationship",
-        "location_label": "Based in",
-        "highlights_label": "Why it matters",
+        "summary": "Veidojam zīmju klases pieredzes kopā ar uzticamiem partneriem.",
+        "relationship_label": "Sadarbības forma",
+        "location_label": "Bāzēts",
+        "highlights_label": "Kāpēc tas svarīgi",
         "highlights": [
-          "Signage R&D keeps our material tests honest.",
-          "Controller engineering informs realtime UX choices.",
-          "Education partners shape inclusive playbooks."
+          "Zīmju pētniecība uztur mūsu materiālu testus godīgus.",
+          "Kontrolleru inženierija informē reāllaika UX izvēles.",
+          "Izglītības partneri veido iekļaujošas rokasgrāmatas."
         ],
-        "cta": "Visit site",
-        "aria": "Visit {name}",
+        "cta": "Apmeklē vietni",
+        "aria": "Apmeklēt {name} vietni",
         "items": {
           "reclameFabriek": {
-            "summary": "Reclame Fabriek runs the signage R&D floor where we test materials, controllers, and fabrication-ready automation.",
+            "summary": "Reclame Fabriek vada zīmju pētniecības telpu, kur testējam materiālus, kontrollerus un ražošanai gatavas automatizācijas.",
             "highlights": [
-              "300+ LED neon colours engineered and certified in-house.",
-              "Custom controllers inform our realtime product design.",
-              "Export-first installs keep accessibility requirements front of mind."
+              "300+ LED neona krāsas, kas izstrādātas un sertificētas uz vietas.",
+              "Pielāgoti kontrolleri veido mūsu reāllaika produktu dizainu.",
+              "Eksporta instalācijas palīdz neatstāt novārtā pieejamības prasības."
             ]
           }
         }
       }
     },
     "products": {
-      "title": "Platform lineup",
-      "subtitle": "NodeVoyage and Ideonautix share one calm studio.",
-      "cta_title": "Stay close",
-      "cta_text": "Join the community for release news, pilot invites, and accessibility updates.",
-      "cta_join": "Join the community",
-      "cta_contact": "Book a chat"
+      "title": "Platformu klāsts",
+      "subtitle": "NodeVoyage un Ideonautix dalās vienā mierīgā studijā.",
+      "cta_title": "Paliec tuvumā",
+      "cta_text": "Pievienojies kopienai, lai saņemtu jaunumus par laidieniem, pilotu ielūgumus un pieejamības atjauninājumus.",
+      "cta_join": "Pievienojies kopienai",
+      "cta_contact": "Rezervē sarunu"
     },
     "page": {
       "hero": {
@@ -418,7 +409,7 @@
       "education_hub": {
         "eyebrow": "Sekojiet līdzi",
         "title": "Saglabā mierīgā AI ritmu",
-        "description": "Mūsu Education Hub dalās mierīgas AI stāstos, klašu rīkos un kopienas notikumos – visā, kas vajadzīgs, lai īstenotu iekļaujošu inovāciju.",
+      "description": "Mūsu Izglītības centrs dalās mierīgas AI stāstos, klašu rīkos un kopienas notikumos – visā, kas vajadzīgs, lai īstenotu iekļaujošu inovāciju.",
         "items": {
           "insights": {
             "eyebrow": "Idejas",
@@ -441,17 +432,17 @@
         }
       },
       "platform_showcase": {
-        "eyebrow": "Product snapshots",
-        "title": "Experience our flagship platforms",
-        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
+        "eyebrow": "Produktu mirkļi",
+        "title": "Iepazīsti mūsu flagmaņa platformas",
+        "description": "Ielūkojies mierīgajos, matētā stikla interfeisos, ko mūsu komandas spodrina Ideonautix un NodeVoyage platformām. Katra saskarne balstās uz to pašu pieejamo dizaina sistēmu, ko piedzīvo šajā vietnē.",
         "items": {
           "ideonautix": {
-            "title": "Ideonautix creative cockpit",
-            "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion."
+            "title": "Ideonautix radošā kabīne",
+            "copy": "Fokuss uz rakstīšanu un prezentācijām, kas uztur komandas sinhronas, kamēr mūsu MI kopilots izskaidro katru ieteikumu."
           },
           "nodevoyage": {
-            "title": "NodeVoyage travel timeline",
-            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller."
+            "title": "NodeVoyage ceļojumu laika līnija",
+            "copy": "Kopīgi maršruti ar iekļaujošiem noklusējumiem, tiešajiem uzdevumiem un caurspīdīgu MI pamatojumu katram ceļotājam."
           }
         }
       }
@@ -608,7 +599,7 @@
     "select_industry": "Izvēlies nozari...",
     "industries": {
       "technology": "Tehnoloģijas",
-      "fintech": "FinTech",
+      "fintech": "Finanšu tehnoloģijas",
       "ecommerce": "E-komercija",
       "healthcare": "Veselība",
       "education": "Izglītība",
@@ -943,32 +934,32 @@
     }
   },
   "footer": {
-    "brand_alt": "AlgoRhythmics wordmark",
-    "tagline": "Calm AI tools grounded in signage craft.",
-    "status": "Pre-company • Ideju Kauss October 2025",
-    "location": "Daugavpils, Latvia",
+    "brand_alt": "Algorhythmics logotips",
+    "tagline": "Mierīgi MI rīki ar saknēm zīmju amatniecībā.",
+    "status": "Pirmsinkorporācijas posms • Ideju Kauss 2025. gada oktobris",
+    "location": "Daugavpils, Latvija",
     "company": "Uzņēmums",
-    "support": "Solutions & tools",
-    "resources": "Education Hub",
+    "support": "Risinājumi un rīki",
+    "resources": "Izglītības centrs",
     "about": "Par mums",
-    "services": "Services",
-    "educational_outreach": "Educational outreach",
+    "services": "Pakalpojumi",
+    "educational_outreach": "Izglītības iesaiste",
     "contact": "Kontakti",
     "blog": "Blogs",
-    "case_studies": "Case studies",
-    "documentation": "Documentation",
-    "events": "Events",
+    "case_studies": "Gadījumu izpētes",
+    "documentation": "Dokumentācija",
+    "events": "Pasākumi",
     "nodevoyage": "NodeVoyage",
     "ideonautix": "Ideonautix",
     "consulting": "Konsultācijas",
-    "help_center": "Help Center",
-    "newsletter": "Newsletter",
-    "partners_title": "Partners",
-    "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",
-    "partners_relationship": "Relationship",
-    "partners_location": "Location",
-    "partners_visit": "Visit site",
-    "partners_link": "Meet our collaborators",
+    "help_center": "Palīdzības centrs",
+    "newsletter": "Jaunumu vēstule",
+    "partners_title": "Partneri",
+    "partners_summary": "Reclame Fabriek pētniecības laboratorija palīdz mums saglabāt prototipus godīgus.",
+    "partners_relationship": "Sadarbības veids",
+    "partners_location": "Atrašanās vieta",
+    "partners_visit": "Apmeklēt vietni",
+    "partners_link": "Iepazīsti mūsu sadarbības partnerus",
     "social": {
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
@@ -976,8 +967,8 @@
       "email": "E-pasts"
     },
     "copyright": "© 2025 AlgoRhythmics",
-    "education_hub": "Education Hub",
-    "toolkits": "Learning toolkits"
+    "education_hub": "Izglītības centrs",
+    "toolkits": "Mācību komplekti"
   },
   "ai_companion": {
     "name": "Lumen",
@@ -1017,11 +1008,11 @@
       {
         "keywords": [
           "atšķir",
-          "unik",
+          "unikāls",
           "laboratorija",
           "aģentūra",
           "algorhythmics",
-          "culture"
+          "kultūra"
         ],
         "answer": "AlgoRhythmics apvieno inženieriju ar kustību iedvesmotu radošumu. Strādājam kā inovāciju laboratorija, palīdzot partneriem ieviest eksperimentēšanas kultūru Baltijas tirgū."
       },
@@ -1041,7 +1032,7 @@
           "produktivitāte",
           "komanda",
           "sadarbība",
-          "collaboration"
+          "koprade"
         ],
         "answer": "Ideonautix piedāvā AI līdzbraucējus komandām, kas veic attālinātu darbu. Tas palīdz strukturēt sapulces, lēmumus un zīmolu izstrādi latviešu un starptautiskos projektos."
       },
@@ -1051,7 +1042,7 @@
           "kontakts",
           "konsultācija",
           "projekts",
-          "partnership"
+          "partnerība"
         ],
         "answer": "Droši rakstiet hello@algorhythmics.com vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību."
       },
@@ -1061,7 +1052,7 @@
           "pilnveidot",
           "stratēģija",
           "idejas",
-          "strategy"
+          "plānošana"
         ],
         "answer": "Iesakām kopīgu darbnīcu: kartējam jūsu biznesa mērķus, izvērtējam datu kvalitāti un izveidojam izmēģinājuma risinājumu, ko var testēt ar vietējo auditoriju."
       }
@@ -1069,82 +1060,82 @@
     "fallback": "Vēl mācos, bet varu jūs savienot ar komandu vai dalīties ar informāciju par mūsu produktiem un pakalpojumiem."
   },
   "products": {
-    "meta_title": "AlgoRhythmics platforms",
-    "meta_description": "Discover NodeVoyage and Ideonautix, the calm AI platforms from AlgoRhythmics.",
+    "meta_title": "Algorhythmics platformas",
+    "meta_description": "Iepazīsti NodeVoyage un Ideonautix — mierīgās MI platformas no Algorhythmics.",
     "hero": {
-      "label": "Platforms",
-      "title": "Platform lineup",
-      "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed studio.",
-      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
-      "primary": "Test-drive our previews",
-      "secondary": "Book a chat"
+      "label": "Platformas",
+      "title": "Platformu klāsts",
+      "subtitle": "NodeVoyage un Ideonautix darbojas vienā mierīgā studijā.",
+      "description": "Ienāc Ideonautix un NodeVoyage demonstrācijās vietnē algorhythmics.dev.",
+      "primary": "Izmēģini mūsu demonstrācijas",
+      "secondary": "Rezervē sarunu"
     },
     "cta": {
-      "title": "Stay close",
-      "text": "Join the community for release news, pilot invites, and accessibility updates.",
-      "primary": "Join the community",
-      "secondary": "Book a chat"
+      "title": "Paliec tuvumā",
+      "text": "Pievienojies kopienai, lai saņemtu jaunumus par laidieniem, pilotu ielūgumus un pieejamības atjauninājumus.",
+      "primary": "Pievienojies kopienai",
+      "secondary": "Rezervē sarunu"
     },
     "demos": {
-      "title": "Test-drive our previews",
-      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
-      "nodevoyage": "Launch the NodeVoyage demo",
-      "ideonautix": "Open the Ideonautix studio",
+      "title": "Izmēģini mūsu demonstrācijas",
+      "description": "Ienāc Ideonautix un NodeVoyage demonstrāciju vidēs vietnē algorhythmics.dev.",
+      "nodevoyage": "Palaist NodeVoyage demonstrāciju",
+      "ideonautix": "Atvērt Ideonautix studiju",
       "nodevoyage_host": "nodevoyage.algorhythmics.dev",
       "ideonautix_host": "ideonautix.algorhythmics.dev",
-      "nodevoyage_description": "Build itineraries with AI-assisted routing, offline maps, and collaborative planning.",
-      "ideonautix_description": "Prototype venture rituals and pitch narratives inside a glassy, tactile workspace."
+      "nodevoyage_description": "Veido maršrutus ar MI palīgu, bezsaistes kartēm un kopīgu plānošanu.",
+      "ideonautix_description": "Prototipē uzņēmumu rituālus un prezentāciju stāstus gaišā, taustāmā darbtelpā."
     },
     "catalog": {
       "nodevoyage": {
         "name": "NodeVoyage",
-        "tagline": "Travel co-pilot for confident journeys",
-        "description": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
-        "status": "Beta invites",
-        "mvp": "Preview: nodevoyage.algorhythmics.dev",
-        "cta": "Discover NodeVoyage",
+        "tagline": "MI pavadonis drošiem ceļojumiem",
+        "description": "Tavs MI ceļojumu pavadonis — plāno, pēti un atceries savus ceļojumus bez piepūles.",
+        "status": "Beta ielūgumi",
+        "mvp": "Priekšskatījums: nodevoyage.algorhythmics.dev",
+        "cta": "Iepazīsti NodeVoyage",
         "features": {
           "nodi-ai": {
-            "title": "Nodi, your guide",
-            "description": "A friendly assistant that learns your style and shapes routes in moments."
+            "title": "Nodi, tavs gids",
+            "description": "Draudzīgs asistents, kas apgūst tavu stilu un dažu mirkļu laikā pielāgo maršrutus."
           },
           "smart-builder": {
-            "title": "Visual trip builder",
-            "description": "Drag, drop, and remix plans with vibe presets and real-time updates."
+            "title": "Vizualais maršrutu veidotājs",
+            "description": "Velc, nomet un pārvārē plānus ar noskaņu iestatījumiem un reāllaika atjauninājumiem."
           },
           "mobile-suite": {
-            "title": "Mobile capture kit",
-            "description": "AR translation, live interpretation, photo recognition, and full offline mode."
+            "title": "Mobilais fiksēšanas komplekts",
+            "description": "AR tulkošana, tiešā interpretācija, foto atpazīšana un pilns bezsaistes režīms."
           },
           "community": {
-            "title": "Community sharing",
-            "description": "Swap routes with fellow explorers and plan group trips together."
+            "title": "Kopienas koplietošana",
+            "description": "Dalies maršrutos ar citiem ceļotājiem un plāno kopīgus braucienus."
           }
         }
       },
       "ideonautix": {
         "name": "Ideonautix",
-        "tagline": "Founder cockpit for steady growth",
-        "description": "The productivity suite for modern creators — where every idea gets momentum.",
-        "status": "Research sprint",
-        "mvp": "Preview: ideonautix.algorhythmics.dev",
-        "cta": "Discover Ideonautix",
+        "tagline": "Dibinātāju kabīne stabilai izaugsmei",
+        "description": "Produktivitātes komplekts mūsdienu radītājiem — vieta, kur katra ideja iegūst tempu.",
+        "status": "Pētniecības sprints",
+        "mvp": "Priekšskatījums: ideonautix.algorhythmics.dev",
+        "cta": "Iepazīsti Ideonautix",
         "features": {
           "pitch": {
-            "title": "Pitch assistant",
-            "description": "Get AI-backed feedback on your deck with investor-style pointers."
+            "title": "Prezentāciju asistents",
+            "description": "Saņem MI atbalstītas atsauksmes par prezentāciju ar investoru stila norādēm."
           },
           "revenue": {
-            "title": "Revenue boards",
-            "description": "Track KPIs, forecasts, and cash flow in one glance."
+            "title": "Ieņēmumu paneļi",
+            "description": "Pārskati KPI, prognozes un naudas plūsmu vienā skatā."
           },
           "team": {
-            "title": "Team dynamics",
-            "description": "Spot collaboration patterns and celebrate team wins with AI insights."
+            "title": "Komandas dinamika",
+            "description": "Atklāj sadarbības paradumus un svini komandas uzvaras ar MI ieskatiem."
           },
           "market": {
-            "title": "Market intelligence",
-            "description": "Watch competitors, market shifts, and fresh opportunities with digestible alerts."
+            "title": "Tirgus izlūkošana",
+            "description": "Vēro konkurentus, tirgus izmaiņas un jaunas iespējas viegli uztveramos brīdinājumos."
           }
         }
       }
@@ -1153,316 +1144,316 @@
   "ideonautix": {
     "hero": {
       "title": "Ideonautix",
-      "subtitle": "Explore. Invent. Launch. Your modular AI workspace for founders, students, and creative teams.",
-      "description": "Ideonautix keeps momentum steady with copilots for pitching, research, and focus. Build presentations, run experiments, and manage rituals with explainable AI nudges that honour your process.",
-      "primary_cta": "Request pilot access",
-      "secondary_cta": "Back to solutions overview",
+      "subtitle": "Pēti. Izgudro. Startē. Moduļu MI darba vide dibinātājiem, studentiem un radošām komandām.",
+      "description": "Ideonautix uztur tempu ar līdzbraucējiem prezentācijām, pētniecībai un fokusam. Veido prezentācijas, vadi eksperimentus un pārvaldi rituālus ar izskaidrojamiem MI ieteikumiem, kas respektē tavu procesu.",
+      "primary_cta": "Pieprasi piekļuvi pilotam",
+      "secondary_cta": "Atpakaļ uz risinājumu pārskatu",
       "highlights": {
-        "status_label": "Status",
-        "status_value": "Pilot onboarding · Q1 2026",
-        "modules_label": "Modules",
-        "modules_value": "Pitch · Intelligence · Focus · Library",
-        "promise_label": "Promise",
-        "promise_value": "Explainable AI for builders"
+        "status_label": "Statuss",
+        "status_value": "Pilota uzņemšana · 2026. gada 1. cet.",
+        "modules_label": "Moduļi",
+        "modules_value": "Pitch (Prezentācijas) · Intelligence (Ieskati) · Focus (Fokuss) · Library (Bibliotēka)",
+        "promise_label": "Solījums",
+        "promise_value": "Paskaidrojošs MI veidotājiem"
       },
-      "demo_cta": "Launch the live demo"
+      "demo_cta": "Atvērt tiešraides demonstrāciju"
     },
     "modules": {
-      "title": "Tools that keep ideas moving",
-      "lead": "Ideonautix pairs playful visuals with serious operations. Every module lives inside a windowed workspace so you can drag, resize, and focus without losing the bigger picture.",
+      "title": "Rīki, kas uztur ideju kustību",
+      "lead": "Ideonautix apvieno rotaļīgu vizuālo valodu ar nopietnu operatīvo disciplīnu. Katrs modulis dzīvo logotā darbtelpā, ko vari vilkt, mērogot un sakārtot, nezaudējot kopainu.",
       "cards": [
         {
           "icon": "idea",
-          "title": "Pitch Deck Assistant",
-          "copy": "Answer a short creative brief and Ideonautix drafts slides, speaker notes, and evidence to fit your audience—with transparent citations and edit history."
+          "title": "Pitch klāja asistents",
+          "copy": "Atbildi uz īsu radošo uzdevumu, un Ideonautix sagatavos slaidus, runas piezīmes un pierādījumus tavai auditorijai — ar caurspīdīgām atsaucēm un rediģēšanas vēsturi."
         },
         {
           "icon": "chart",
-          "title": "Competitive Dashboard",
-          "copy": "Track market shifts, competitor releases, and trend digests curated for your vertical. Summaries stay human-readable and exportable."
+          "title": "Konkurentu panelis",
+          "copy": "Seko tirgus izmaiņām, konkurentu laidieniem un tendenču kopsavilkumiem, kas sagatavoti tavai nozarei. Kopsavilkumi paliek cilvēkiem draudzīgi un eksportējami."
         },
         {
           "icon": "bolt",
-          "title": "Pomodoro Coach",
-          "copy": "Keep your rhythm with adaptive focus sessions, break prompts, and gentle accountability nudges based on your schedule."
+          "title": "Pomodoro treneris",
+          "copy": "Uzturi ritmu ar pielāgojamām fokusa sesijām, atgādinājumiem par pauzēm un maigiem atbildības grūdieniem pēc tavas dienas kārtības."
         },
         {
           "icon": "package",
-          "title": "Workflow Library",
-          "copy": "Mix-and-match canvases for OKRs, research sprints, and retrospectives. Each template includes guidance drawn from our consulting rituals."
+          "title": "Procesu bibliotēka",
+          "copy": "Kombinē kanvas OKR, pētījumu sprintiem un retrospekcijām. Katrā veidnē iekļauti mūsu konsultāciju rituālu padomi."
         },
         {
           "icon": "ai",
-          "title": "AI Brainstorm",
-          "copy": "Bounce ideas with a multilingual AI co-founder trained on ethical innovation playbooks. Every suggestion ships with rationale and references."
+          "title": "MI ideju vētra",
+          "copy": "Apmaiņas idejas ar daudzvalodu MI līdzdibinātāju, kas apmācīts ētiskās inovācijas rokasgrāmatās. Katram ieteikumam ir pamatojums un atsauces."
         }
       ]
     },
     "status": {
-      "eyebrow": "Status & invitation",
-      "title": "Pilot in early 2026",
-      "copy": "We are inviting a small circle of founders, educators, and student teams to shape Ideonautix. Pilot members test modules, share feedback in live sessions, and receive lifetime discounts when we launch publicly in spring 2026.",
+      "eyebrow": "Statuss un ielūgums",
+      "title": "Pilots 2026. gada sākumā",
+      "copy": "Aicinām nelielu dibinātāju, pedagogu un studentu komandu loku veidot Ideonautix. Pilota dalībnieki testē moduļus, dalās atsauksmēs tiešsaistes sesijās un saņem mūža atlaides, kad 2026. gada pavasarī startējam publiski.",
       "bullets": [
-        "Multilingual interface: English & Latvian at pilot, Russian in beta.",
-        "AAA contrast themes and reduced-motion support mirror our design system.",
-        "All AI suggestions include citations and exportable audit trails."
+        "Daudzvalodu saskarne: latviešu un angļu pilota laikā, krievu beta versijā.",
+        "AAA kontrasta tēmas un samazinātas kustības atbalsts atspoguļo mūsu dizaina sistēmu.",
+        "Katram MI ieteikumam pievienotas atsauces un eksportējami audita žurnāli."
       ],
-      "cta": "Join the pilot waitlist"
+      "cta": "Pievienojies pilota gaidītāju sarakstam"
     },
     "use_cases": {
-      "eyebrow": "Use cases",
-      "title": "Stories from the lab",
-      "copy": "Ideonautix was born from our consulting rituals. Each pilot builds on real problems founders and educators face when they lack clear documentation or accessible AI support.",
+      "eyebrow": "Lietošanas gadījumi",
+      "title": "Stāsti no laboratorijas",
+      "copy": "Ideonautix dzimis mūsu konsultāciju rituālos. Katrs pilots balstās uz reālām problēmām, ar kurām saskaras dibinātāji un pedagogi, kad trūkst skaidras dokumentācijas vai pieejama MI atbalsta.",
       "items": [
         {
-          "name": "Anna · Student entrepreneur",
-          "story": "Anna used Ideonautix to map a sustainable fashion concept. The pitch assistant built a grant-ready deck, while Pomodoro Coach kept her team on track for demo day."
+          "name": "Anna · Studentu uzņēmēja",
+          "story": "Anna izmantoja Ideonautix, lai izstrādātu ilgtspējīgas modes koncepciju. Prezentāciju asistents sagatavoja grantam gatavu klāju, bet Pomodoro Coach noturēja komandu ritmā līdz demo dienai."
         },
         {
-          "name": "SafeRide · Mobility startup",
-          "story": "SafeRide analysed competitors and regulatory news through the dashboard, rapidly iterated prototypes, and walked into investor meetings with confidence."
+          "name": "SafeRide · Mobilitātes jaunuzņēmums",
+          "story": "SafeRide analizēja konkurentus un regulējumu ziņas panelī, ātri iterēja prototipus un devās uz investoru tikšanām ar pārliecību."
         }
       ]
     },
     "pilot": {
-      "eyebrow": "Pilot access",
-      "title": "Request an invite",
-      "copy": "Share a few details and we will follow up with onboarding options. We reply within one business day and respect your privacy—data is only used to coordinate pilot participation.",
+      "eyebrow": "Pilota piekļuve",
+      "title": "Pieprasi ielūgumu",
+      "copy": "Padalies ar dažām detaļām, un mēs piedāvāsim uzsākšanas iespējas. Atbildam vienas darbdienas laikā un cienām tavu privātumu — dati tiek izmantoti tikai pilota koordinācijai.",
       "form": {
-        "name_label": "Name",
-        "email_label": "Email",
-        "role_label": "Role",
+        "name_label": "Vārds",
+        "email_label": "E-pasts",
+        "role_label": "Loma",
         "role_options": {
-          "founder": "Founder / startup team",
-          "student": "Student team",
-          "educator": "Educator / mentor",
-          "other": "Other collaborator"
+          "founder": "Dibinātājs / jaunuzņēmuma komanda",
+          "student": "Studentu komanda",
+          "educator": "Pedagogs / mentors",
+          "other": "Cits sadarbības partneris"
         },
-        "message_label": "What would you like to explore?",
-        "submit": "Submit request",
-        "success": "Thank you! We just opened an email draft—send it to confirm your spot.",
-        "error": "Share your name and a valid email so we can reach out.",
-        "privacy": "We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.com.",
-        "subject": "Ideonautix pilot request"
+        "message_label": "Ko vēlies izpētīt?",
+        "submit": "Iesniegt pieprasījumu",
+        "success": "Paldies! Tikko atvērām e-pasta melnrakstu — nosūti, lai apstiprinātu vietu.",
+        "error": "Norādi vārdu un derīgu e-pastu, lai varam sazināties.",
+        "privacy": "Sniedzamo informāciju izmantojam tikai pilota koordinēšanai. Jebkurā brīdī vari atteikties, rakstot uz help@algorhythmics.com.",
+        "subject": "Ideonautix pilota pieprasījums"
       }
     },
     "cta": {
-      "title": "Need hands-on support?",
-      "copy": "Our consulting team helps adapt Ideonautix modules for enterprise or education partners. We can tailor workflows, build governance, and train your crews.",
-      "primary": "Consulting services",
-      "secondary": "Chat with us"
+      "title": "Vajag praktisku atbalstu?",
+      "copy": "Mūsu konsultāciju komanda palīdz pielāgot Ideonautix moduļus uzņēmumiem un izglītības partneriem. Pielāgojam darba plūsmas, veidojam pārvaldību un apmācām tavas komandas.",
+      "primary": "Konsultāciju pakalpojumi",
+      "secondary": "Sazinies ar mums"
     }
   },
   "nodevoyage": {
     "hero": {
       "title": "NodeVoyage",
-      "subtitle": "Fun. Travel. Memories. Community. Your AI travel companion that keeps every explorer in the loop.",
-      "description": "Describe your dream journey and Nodi orchestrates an itinerary with accessibility, sustainability, and surprise in mind. Plan with friends in real time, translate signs on the go, and capture stories that outlast the flight home.",
-      "primary_cta": "Join the Explorers Club",
-      "secondary_cta": "Back to solutions overview",
+      "subtitle": "Prieks. Ceļojumi. Atmiņas. Kopiena. Tavs MI ceļojumu pavadonis, kas notur visus cilpā.",
+      "description": "Pastāsti Nodi par savu sapņu ceļojumu, un viņš izveidos maršrutu ar pieejamību, ilgtspēju un pārsteigumiem prātā. Plāno ar draugiem reāllaikā, tulko zīmes ceļā un saglabā stāstus, kas pārdzīvo atgriešanos mājās.",
+      "primary_cta": "Pievienojies Exploreru klubam",
+      "secondary_cta": "Atpakaļ uz risinājumu pārskatu",
       "highlights": {
-        "status_label": "Status",
-        "status_value": "Alpha in progress",
-        "focus_label": "Focus",
-        "focus_value": "Collaborative, sustainable travel",
-        "milestone_label": "Next milestone",
-        "milestone_value": "Public beta · June 2026"
+        "status_label": "Statuss",
+        "status_value": "Alfa izstrādē",
+        "focus_label": "Fokuss",
+        "focus_value": "Sadarbības un ilgtspējīgi ceļojumi",
+        "milestone_label": "Nākamais atskaites punkts",
+        "milestone_value": "Publiskā beta · 2026. gada jūnijs"
       },
-      "demo_cta": "Launch the live demo"
+      "demo_cta": "Atvērt tiešraides demonstrāciju"
     },
     "features": {
-      "title": "What makes NodeVoyage different?",
-      "lead": "NodeVoyage feels like a playful travel OS: windowed layouts, frosted panels, and an AI buddy who keeps plans tidy while celebrating spontaneity.",
+      "title": "Kas izceļ NodeVoyage?",
+      "lead": "NodeVoyage jūtas kā rotaļīgs ceļojumu OS: logu izkārtojumi, matēti paneļi un MI draugs, kas uztur plānus kārtībā, svinot spontanitāti.",
       "cards": [
         {
           "icon": "map",
-          "title": "Smart Trip Planner",
-          "copy": "Tell Nodi how you want to feel on your next adventure. NodeVoyage balances hidden gems with essentials, optimises routes, and adjusts for mobility or sensory needs automatically."
+          "title": "Vieds ceļojuma plānotājs",
+          "copy": "Pastāsti Nodi, kā vēlies justies nākamajā piedzīvojumā. NodeVoyage līdzsvaro slēptos dārgumus ar nepieciešamo, optimizē maršrutus un automātiski pielāgojas mobilitātes vai maņu vajadzībām."
         },
         {
           "icon": "people",
-          "title": "Collaborative Crews",
-          "copy": "Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with calm notifications."
+          "title": "Sadarbības komandas",
+          "copy": "Uzaicini ģimeni, draugus vai klasesbiedrus kopīgā ceļojumu kanvā. Balso par idejām, seko līdzi rediģētājiem un uzturi visus saskaņotus ar mierīgiem paziņojumiem."
         },
         {
           "icon": "device",
-          "title": "AR Translation & Capture",
-          "copy": "Use the mobile app to translate menus, capture audio notes, or pin AR “memory anchors” to revisit favourite spots later."
+          "title": "AR tulkošana un fiksēšana",
+          "copy": "Izmanto mobilo lietotni, lai tulkotu ēdienkartes, ierakstītu audio piezīmes vai pievienotu AR “atmiņas enkurus”, ko apmeklēt vēlreiz."
         },
         {
           "icon": "target",
-          "title": "Eco & Community Missions",
-          "copy": "Earn badges for low-impact choices, community storytelling, and cultural challenges curated with local partners."
+          "title": "Eko un kopienas misijas",
+          "copy": "Pelni nozīmītes par mazāk ietekmīgām izvēlēm, kopienas stāstiem un kultūras izaicinājumiem, ko veido vietējie partneri."
         },
         {
           "icon": "idea",
-          "title": "Travel Journal & Reel",
-          "copy": "After the trip, NodeVoyage weaves your photos, notes, and check-ins into a shareable story or highlight reel—always with edit controls and privacy toggles."
+          "title": "Ceļojumu žurnāls un rullītis",
+          "copy": "Pēc ceļojuma NodeVoyage savij tavas fotogrāfijas, piezīmes un atzīmes vienā dalāmā stāstā vai izcelto rullītī — vienmēr ar rediģēšanas un privātuma slēdžiem."
         }
       ]
     },
     "roadmap": {
-      "eyebrow": "Roadmap",
-      "title": "2026 journey",
-      "lead": "We are building NodeVoyage out in the open. Each phase brings more collaborative magic while reinforcing accessibility, localisation, and transparent AI coaching.",
+      "eyebrow": "Ceļa karte",
+      "title": "Ceļojums 2026. gadā",
+      "lead": "NodeVoyage veidojam atklāti. Katrs posms nes vairāk kopīgas burvības un nostiprina pieejamību, lokalizāciju un caurspīdīgu MI koučingu.",
       "items": [
         {
-          "phase": "Alpha launch",
-          "timing": "April 2026",
-          "details": "First wave of explorers test collaborative itineraries, AR translation, and sustainability missions alongside our team."
+          "phase": "Alfa palaišana",
+          "timing": "2026. gada aprīlis",
+          "details": "Pirmie ceļotāji kopā ar komandu testē kopīgus maršrutus, AR tulkošanu un ilgtspējas misijas."
         },
         {
-          "phase": "Public beta",
-          "timing": "June 2026",
-          "details": "Expanded language support, travel journal exports, and integrations with accessibility partners land for summer adventures."
+          "phase": "Publiskā beta",
+          "timing": "2026. gada jūnijs",
+          "details": "Paplašināta valodu atbalsts, ceļojumu žurnālu eksports un integrācijas ar pieejamības partneriem vasaras piedzīvojumiem."
         },
         {
-          "phase": "Community rollout",
-          "timing": "Late 2026",
-          "details": "Goal of 10,000 travellers across Latvia and neighbouring regions, with classroom pilots and tourism collaborations."
+          "phase": "Kopienas paplašinājums",
+          "timing": "2026. gada nogale",
+          "details": "Mērķis — 10 000 ceļotāju Latvijā un kaimiņreģionos, ieskaitot klašu pilotus un tūrisma sadarbības."
         }
       ]
     },
     "differentiators": {
-      "eyebrow": "Why explorers stay",
-      "title": "Calm, trustworthy travel intelligence",
-      "lead": "NodeVoyage blends signage-inspired clarity with travel storytelling. It is approachable for first-time travellers and powerful for adventure planners who want deeper context.",
-      "cta": "Partner with us",
+      "eyebrow": "Kāpēc ceļotāji paliek",
+      "title": "Mierīga, uzticama ceļojumu izlūkošana",
+      "lead": "NodeVoyage apvieno zīmju iedvesmotu skaidrību ar ceļojumu stāstniecību. Tas ir saprotams pirmajiem ceļotājiem un spēcīgs piedzīvojumu plānotājiem, kuri vēlas dziļāku kontekstu.",
+      "cta": "Sadarbojies ar mums",
       "cards": [
         {
           "icon": "bolt",
-          "title": "AI that explains itself",
-          "copy": "Every itinerary comes with plain-language reasoning, accessible alternatives, and opt-out controls."
+          "title": "MI, kas izskaidro sevi.",
+          "copy": "Katrai maršruta versijai ir skaidrs pamatojums, pieejamas alternatīvas un atteikšanās kontroles."
         },
         {
           "icon": "chart",
-          "title": "Inclusive by default",
-          "copy": "AAA contrast themes, reduced-motion support, and multi-language content are core—not add-ons."
+          "title": "Iekļaujošs pēc noklusējuma",
+          "copy": "AAA kontrasta tēmas, samazinātas kustības atbalsts un daudzvalodu saturs nav piedevas, bet pamatā."
         },
         {
           "icon": "package",
-          "title": "Built with partners",
-          "copy": "Co-designed with travel educators, accessibility advocates, and signage specialists from Ideju Kauss programmes."
+          "title": "Veidots kopā ar partneriem",
+          "copy": "Radīts kopā ar ceļojumu pedagogiem, pieejamības aizstāvjiem un zīmju speciālistiem no Ideju Kauss programmām."
         }
       ]
     },
     "explorers": {
       "eyebrow": "NodeVoyage Explorers Club",
-      "title": "Be first aboard the beta",
-      "copy": "Leave your details to receive early access invites, mission briefs, and behind-the-scenes updates as we prepare the public beta. We keep emails minimal and never share your contact.",
+      "title": "Esi pirmais beta versijā",
+      "copy": "Atstāj savus datus, lai saņemtu agrīnus ielūgumus, misiju aprakstus un aizkulišu jaunumus, gatavojot publisko betu. Mēs sūtām tikai būtiskos e-pastus un nedalāmies ar kontaktu.",
       "form": {
-        "name_label": "Name (optional)",
-        "email_label": "Email",
-        "submit": "Request invite",
-        "success": "Thanks! We just opened your email client so you can confirm the request.",
-        "privacy": "By joining, you agree to receive NodeVoyage development updates. You can unsubscribe anytime and we will only use your email for these messages.",
-        "error": "Add a valid email so we can send your invite.",
-        "subject": "NodeVoyage Explorers Club signup"
+        "name_label": "Vārds (nav obligāti)",
+        "email_label": "E-pasts",
+        "submit": "Pieprasīt ielūgumu",
+        "success": "Paldies! Tikko atvērām tavu e-pasta klientu, lai varētu apstiprināt pieprasījumu.",
+        "privacy": "Pievienojoties piekrīti saņemt NodeVoyage izstrādes jaunumu. Varēsi atteikties jebkurā brīdī, un e-pastu izmantosim tikai šiem ziņojumiem.",
+        "error": "Norādi derīgu e-pastu, lai varam nosūtīt ielūgumu.",
+        "subject": "NodeVoyage Explorers Club pieteikums"
       }
     },
     "cta": {
-      "title": "Curious about Ideonautix too?",
-      "copy": "If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our startup OS that keeps creative projects on track. Both platforms share the same inclusive design system.",
-      "primary": "Explore Ideonautix",
-      "secondary": "Talk to our team"
+      "title": "Interesē arī Ideonautix?",
+      "copy": "Ja NodeVoyage izmanto komandas retrītiem vai studentu programmām, ieskaties arī Ideonautix — mūsu platformā, kas tur radošos projektus ritmā. Abas platformas koplieto vienu iekļaujošu dizaina sistēmu.",
+      "primary": "Iepazīsti Ideonautix",
+      "secondary": "Runā ar mūsu komandu"
     }
   },
   "education": {
     "hero": {
-      "eyebrow": "Education partnership",
-      "title": "Calm AI education",
-      "subtitle": "Programmes for schools and partners",
-      "description": "Bilingual workshops and toolkits.",
-      "primary": "Plan a pilot",
-      "secondary": "Download syllabus"
+      "eyebrow": "Izglītības partnerība",
+      "title": "Mierīga MI izglītība",
+      "subtitle": "Programmas skolām un partneriem",
+      "description": "Divvalodu darbnīcas un rīkkopas.",
+      "primary": "Plāno pilotu",
+      "secondary": "Lejupielādē mācību programmu"
     },
-    "valuePropsHeading": "What students experience",
+    "valuePropsHeading": "Ko piedzīvo skolēni",
     "valueProps": [
       {
         "icon": "idea",
-        "title": "Practical workshops",
-        "body": "Hands-on lessons that scale."
+        "title": "Praktiskas darbnīcas",
+        "body": "Praktiskas nodarbības, kas mērojas."
       },
       {
         "icon": "people",
-        "title": "Inclusive design",
-        "body": "Accessible in EN · LV · RU."
+        "title": "Iekļaujošs dizains",
+        "body": "Pieejams EN · LV · RU."
       },
       {
-        "icon": "ai",
-        "title": "Safe AI sandboxes",
-        "body": "Transparent automation toggles."
+        "icon": "MI",
+        "title": "Drošas MI smilškastes",
+        "body": "Caurspīdīgi automatizācijas slēdži."
       }
     ],
     "programmes": {
-      "title": "Programmes in motion",
-      "subtitle": "Choose the track that fits.",
+      "title": "Programmas kustībā",
+      "subtitle": "Izvēlies sev piemērotāko ceļu.",
       "items": [
         {
           "icon": "target",
-          "title": "LIAA pilot",
-          "body": "Sixteen-week co-creation sprint.",
-          "meta": "60 students",
-          "cta": "Review pilot plan",
+          "title": "LIAA pilots",
+          "body": "Sešpadsmit nedēļu koprades sprints.",
+          "meta": "60 skolēni",
+          "cta": "Apskati pilota plānu",
           "href": "#"
         },
         {
           "icon": "package",
-          "title": "School kit",
-          "body": "Lesson decks and facilitator support.",
-          "meta": "Launching 2025",
-          "cta": "Request access",
+          "title": "Skolas komplekts",
+          "body": "Stundu komplekti un atbalsts vadītājiem.",
+          "meta": "Starts 2025",
+          "cta": "Pieprasīt piekļuvi",
           "href": "#"
         }
       ]
     },
     "partners": {
-      "title": "Trusted partners",
-      "body": "Built with signage specialists and educators.",
+      "title": "Uzticami partneri",
+      "body": "Radīts kopā ar zīmju nozares speciālistiem un pedagogiem.",
       "highlights": [
         {
-          "label": "Pilot schools",
+          "label": "Pilotskolas",
           "value": "4"
         },
         {
-          "label": "Languages",
+          "label": "Valodas",
           "value": "EN · LV · RU"
         },
         {
-          "label": "Instructor rating",
+          "label": "Instruktoru vērtējums",
           "value": "4.9 / 5"
         }
       ]
     },
     "benefits": {
-      "title": "What teams take away",
+      "title": "Ko komandas iegūst",
       "items": [
-        "Governance checklists.",
-        "Accessibility playbooks.",
-        "Sandbox access.",
-        "Teacher community."
+        "Pārvaldības kontrolsaraksti.",
+        "Pieejamības rokasgrāmatas.",
+        "Piekļuve smilškastei.",
+        "Skolotāju kopiena."
       ]
     },
     "cta": {
-      "eyebrow": "Next steps",
-      "title": "Bring calm AI to your classroom",
-      "body": "Share your goals and we will tailor the pilot.",
-      "primary": "Book a discovery call",
-      "secondary": "Request programme deck"
+      "eyebrow": "Nākamie soļi",
+      "title": "Ienes mierīgu MI savā klasē",
+      "body": "Padalies ar saviem mērķiem, un mēs pielāgosim pilotu.",
+      "primary": "Rezervē iepazīšanās zvanu",
+      "secondary": "Pieprasi programmas prezentāciju"
     },
-    "faqTitle": "Questions we hear the most",
+    "faqTitle": "Biežāk uzdotie jautājumi",
     "faq": [
       {
-        "question": "Who can join the pilot?",
-        "answer": "Latvian schools, vocational programmes, and LIAA partners."
+        "question": "Kas var pievienoties pilotam?",
+        "answer": "Latvijas skolas, profesionālās izglītības programmas un LIAA partneri."
       },
       {
-        "question": "Preparation required?",
-        "answer": "We onboard facilitators and stay on-call during first runs."
+        "question": "Vai nepieciešama iepriekšēja sagatavošanās?",
+        "answer": "Mēs apmācām vadītājus un pirmajos norīkojumos esam sasniedzami pēc pieprasījuma."
       },
       {
-        "question": "Do students need AI experience?",
-        "answer": "No. We start with fundamentals and build steadily."
+        "question": "Vai skolēniem vajag MI pieredzi?",
+        "answer": "Nē. Mēs sākam ar pamatiem un soli pa solim turpinām."
       }
     ],
     "page": {
@@ -1509,7 +1500,7 @@
             "Darbnīcas, kur skolēni trenē mini MI, veido ģeneratīvus stāstus vai izstrādā ētikas vadlīnijas",
             "Bezmaksas vai līdzfinansēta piekļuve Ideonautix, lai turpinātu darbu pēc stundām"
           ],
-          "cta": "Pieteikt pilotkomplektu"
+          "cta": "Pieprasīt pilota komplektu"
         },
         "community": {
           "eyebrow": "Pāri klases durvīm",
@@ -1592,8 +1583,8 @@
       "featured": {
         "eyebrow": "Izceltais stāsts",
         "title": "Kā Rīgas klase izveidoja mierīgas MI redakciju",
-        "summary": "Skolēni kopā ar Ideonautix radīja atbildīgas ziņošanu darba plūsmas, apvienojot signāldizaina rituālus ar izskaidrojamu automatizāciju.",
-        "meta": "16 nedēļu pilots • Žurnālistika un civic tech",
+        "summary": "Skolēni kopā ar Ideonautix radīja atbildīgas ziņošanas soļus, apvienojot signāldizaina rituālus ar izskaidrojamu automatizāciju.",
+        "meta": "16 nedēļu pilots • Žurnālistika un pilsoniskās tehnoloģijas",
         "primary_cta": "Lasīt pilotprojekta kopsavilkumu",
         "secondary_cta": "Lejupielādēt klases komplektu"
       },
@@ -1619,8 +1610,8 @@
         "events": {
           "label": "Tuvākie notikumi",
           "eyebrow": "Notikumi",
-          "title": "Darbnīcas, vebināri un kopienas jam sesijas",
-          "copy": "Pievienojies sesijām, kur kopīgi veidojam prototipus, runājam par ētiku un svinam skolēnu darbus. Lielākā daļa notikumu ietver tiešraides titrus un ierakstus."
+          "title": "Tuvākās darbnīcas, vebināri un kopienas džemi",
+          "copy": "Pievienojies sesijām, kur kopīgi skicējam prototipus, izpētām ētikas vadlīnijas un svinam skolēnu panākumus. Lielākā daļa notikumu piedāvā tiešraides titrus un ierakstu atkārtojumus."
         },
         "newsletter": {
           "label": "Paliec saiknē",
@@ -1668,27 +1659,27 @@
           },
           {
             "eyebrow": "Dibinātājiem un komandām",
-            "title": "Mierīgas izaugsmes operētājsistēma",
-            "copy": "Veidnes ceļa kartēm, OKR un dizaina sprintiem ar izskaidrojamas automatizācijas padomiem.",
+            "title": "MI darbības ceļvedis jaunizveidotiem uzņēmumiem",
+            "copy": "Darbnīcu prezentācijas un pakalpojumu shēmas komandām, kas ievieš izskaidrojamu automatizāciju.",
             "bullets": [
-              "Sprintu vadlīnijas un asinhronie sadarbības rituāli",
-              "MI līdzbraucēji ar pamatojumiem, riska signāliem un cilvēka līdzdalības atgādinājumiem",
-              "Pēc palaišanas retrospekcijas un partneriem gatavi kopsavilkumi"
+              "Iknedēļas sprinta grafiks ar iekļaujošas moderēšanas padomiem",
+              "Datu ievades veidnes ar piekrišanu priekšplānā un pārvaldības kontrolsaraksti",
+              "Gadījumu izpētes darba burtnīca ietekmes stāstu kartēšanai"
             ],
             "href": "#",
-            "cta": "Atvērt playbook"
+            "cta": "Lejupielādēt ceļvedi"
           },
           {
-            "eyebrow": "Ģimenēm un bibliotēkām",
-            "title": "Kopienas ziņkāres komplekti",
-            "copy": "Stāstu vadītas aktivitātes, kas apvieno bezekrāna eksperimentus ar saudzīgām MI demonstrācijām.",
+            "eyebrow": "Ģimenēm",
+            "title": "Mājas ziņkārīgajiem veidotājiem",
+            "copy": "Stāstu kartītes, bezekrāna aktivitātes un sarunu ierosinātāji daudzpaaudžu mācībām.",
             "bullets": [
-              "Izdrukājamas stāstu kartītes ar iekļaujošiem varoņiem",
-              "Praktiski eksperimenti ar ikdienas priekšmetiem",
-              "Pārdomu dienasgrāmatas, kas iedrošina sarunas par ētiku"
+              "Izdrukājami žurnāli, kas skaidro algoritmus bez žargona",
+              "Audio ceļveži ar ierunām vairākās valodās",
+              "Ikmēneša izaicinājumi, kas apvieno mākslu, datus un stāstniecību"
             ],
             "href": "#",
-            "cta": "Lejupielādēt aktivitāšu paketi"
+            "cta": "Sākt ģimenes izaicinājumu"
           }
         ]
       },
@@ -1696,32 +1687,29 @@
         "read": "Atvērt stāstu",
         "items": [
           {
-            "eyebrow": "Skolas",
-            "title": "Rīgas Tehniskais ģimnāzija",
-            "meta": "Latvija • Vidējā izglītība",
-            "href": "#",
-            "copy": "Skolēni vadīja astoņu nedēļu mierīgas MI redakciju, publicējot bilingvālus skaidrojumus un audio kopsavilkumus."
+            "title": "Skolotāju apaļie galdi ar Latvijas Mentoru tīklu",
+            "copy": "Ikmēneša sarunās pedagogi izceļ nākamos soļus — no tulkošanas atbalsta līdz reflektējošu dienasgrāmatu uzdevumiem.",
+            "meta": "Hibrīds • Rīko LIAA",
+            "href": "#"
           },
           {
-            "eyebrow": "Bibliotēkas",
-            "title": "Latgales stāstu laboratorijas",
-            "meta": "Latvija • Kopiena",
-            "href": "#",
-            "copy": "Ģimenes prototipēja MI stāstu biedrus ar caurspīdības norādēm."
+            "title": "MI rezidences kultūras institūcijās",
+            "copy": "Muzeji un teātri apvieno māksliniekus ar tehnoloģiem, lai kopradītu maņu stāstniecības instalācijas.",
+            "meta": "Klātbūtnē • Rīga un Liepāja",
+            "href": "#"
           },
           {
-            "eyebrow": "Universitātes",
-            "title": "Viļņas kooperatīvā rezidence",
-            "meta": "Lietuva • Augstākā izglītība",
-            "href": "#",
-            "copy": "Dizaina, ētikas un biznesa studenti kopīgi veidoja signāldizaina komplektus MI pētījumu izstādēm."
+            "title": "Vecāku vēstnieku loki iekļaujošiem tehnoloģiju vakariem",
+            "copy": "Ģimenes kopīgi rīko saudzīgas demonstrācijas, aizdošanas bibliotēkas un sarunu ierosinātājus, lai demistificētu MI mājās.",
+            "meta": "Tiešsaistē • Katru mēnesi",
+            "href": "#"
           }
         ]
       },
       "events": {
         "eyebrow": "Notikumi",
-        "title": "Darbnīcas un tikšanās",
-        "copy": "Pievienojies mūsu hibrīdajiem notikumiem, kas no pirmās dienas balstīti piekļūstamībā.",
+        "title": "Tuvākās darbnīcas, vebināri un kopienas džemi",
+        "copy": "Pievienojies sesijām, kur kopīgi skicējam prototipus, izpētām ētikas principus un svinam skolēnu prezentācijas. Lielākā daļa notikumu nodrošina tiešraides titrus un ierakstu atkārtojumus.",
         "bullets": [
           "Darbnīca: Mierīgas MI stāstniecība bibliotēkās (18. aprīlis, hibrīda)",
           "Vebinārs: Ideonautix fokusa rituāli attālinātām komandām (9. maijs, tiešsaistē)",
@@ -1730,138 +1718,112 @@
         "primary_cta": "Atvērt pasākumu kalendāru",
         "primary_cta_href": "https://lu.ma/algorhythmics",
         "secondary_cta": "Rīkot sesiju kopā ar mums",
-        "secondary_cta_href": "/contact",
-        "items": [
-          {
-            "title": "Iekļaujošu MI stundu jams",
-            "meta": "12. marts · Rīga un tiešsaistē",
-            "description": "Kopā ar skolotājiem un skolēniem izstrādā stundu plūsmas, plus piekļūstamības audits ar signāldizaina ekspertiem.",
-            "cta": "Rezervēt vietu"
-          },
-          {
-            "title": "Mierīga automatizācija bibliotēkām",
-            "meta": "26. marts · Tiešsaistē",
-            "description": "Bibliotēku partnerības fokuss ar bezekrāna MI eksperimentiem jauktām vecuma grupām.",
-            "cta": "Pieteikties"
-          },
-          {
-            "title": "Kopienas ietekmes vitrīna",
-            "meta": "4. aprīlis · Rīga",
-            "description": "Skolēnu, vecāku un mentoru paneļi dalās ar mierīgas MI pieredzi Latvijā un ārpus tās.",
-            "cta": "Pievienoties vitrīnai"
-          }
-        ]
+        "secondary_cta_href": "/contact"
       },
       "newsletter": {
         "eyebrow": "Biļetens",
         "title": "Paliec mierīgajā ritmā",
-        "copy": "Pieraksties, lai katru mēnesi saņemtu jaunos komplektus, ietekmes stāstus un agrīnus ielūgumus pilotos.",
+        "copy": "Pieraksties, lai katru mēnesi saņemtu jaunos komplektus, ietekmes stāstus un agrīnus ielūgumus pilotos. Īsi, draudzīgi un vērsti uz rīcību.",
         "primary_cta": "Pierakstīties biļetenam",
-        "primary_cta_href": "https://algorhythmics.substack.com",
-        "form": {
-          "placeholder": "E-pasts",
-          "submit": "Pierakstīties",
-          "success": "Paldies par pievienošanos! Pārbaudi savu e-pastu, lai apstiprinātu.",
-          "error": "Lūdzu, ievadi derīgu e-pasta adresi."
-        }
+        "primary_cta_href": "https://algorhythmics.substack.com"
       }
     }
   },
   "about": {
     "hero": {
-      "eyebrow": "Inside AlgoRhythmics",
-      "title": "Calm AI from Riga and Rotterdam",
-      "subtitle": "One operating rhythm across products, consulting, and education.",
-      "description": "Signage craft, accessible design, and transparent automation.",
+      "eyebrow": "Iekšpusē Algorhythmics",
+      "title": "Mierīgs MI no Rīgas un Roterdamas",
+      "subtitle": "Viena darba plūsma produktiem, konsultācijām un izglītībai.",
+      "description": "Zīmju amatniecība, pieejamības dizains un caurspīdīga automatizācija.",
       "signals": [
         {
-          "label": "Founded",
+          "label": "Dibināts",
           "value": "2023"
         },
         {
-          "label": "Focus",
-          "value": "NodeVoyage · Ideonautix · Consulting"
+          "label": "Fokuss",
+          "value": "NodeVoyage · Ideonautix · Konsultācijas"
         },
         {
-          "label": "Partners",
-          "value": "LIAA + collaborators"
+          "label": "Partneri",
+          "value": "LIAA + sadarbības partneri"
         }
       ],
-      "primary": "Explore products",
-      "secondary": "Talk with the founders"
+      "primary": "Iepazīsti produktus",
+      "secondary": "Runā ar dibinātājiem"
     },
     "story": {
-      "title": "Our story",
+      "title": "Mūsu stāsts",
       "paragraphs": [
-        "We grew from signage research into calm AI delivery.",
-        "NodeVoyage and Ideonautix share one accessible rhythm.",
-        "Every engagement honours transparency, inclusion, and momentum."
+        "Izaugām no zīmju pētniecības līdz mierīga MI piegādei.",
+        "NodeVoyage un Ideonautix dzīvo vienā pieejamā ritmā.",
+        "Katra sadarbība godā caurspīdību, iekļaušanu un tempu."
       ]
     },
-    "valuesTitle": "The values we hold onto",
+    "valuesTitle": "Vērtības, pie kurām turamies",
     "values": [
       {
         "icon": "idea",
-        "title": "Explain the why",
-        "body": "Automation notes ship with every release."
+        "title": "Izskaidro iemeslu",
+        "body": "Katrai versijai līdzi nāk automatizācijas piezīmes."
       },
       {
         "icon": "people",
-        "title": "Design for access",
-        "body": "AAA contrast and localisation are default."
+        "title": "Dizains pieejamībai",
+        "body": "AAA kontrasts un lokalizācija pēc noklusējuma."
       },
       {
         "icon": "check",
-        "title": "Protect calm momentum",
-        "body": "Shared rituals keep teams steady."
+        "title": "Sargā mierīgu tempu",
+        "body": "Kopīgi rituāli uztur komandas vienmērīgas."
       }
     ],
     "timeline": {
-      "title": "Milestones shaping us",
+      "title": "Atskaites punkti, kas mūs veido",
       "items": [
         {
           "year": "2023",
-          "title": "Studio founded",
-          "description": "Signage craft meets explainable AI."
+          "title": "Studija dibināta",
+          "description": "Zīmju amatniecība satiekas ar paskaidrojamu MI."
         },
         {
           "year": "2024",
-          "title": "NodeVoyage beta",
-          "description": "Accessibility-first travel companion pilots."
+          "title": "NodeVoyage beta versija",
+          "description": "Pieejamību pirmajā vietā liekoša ceļojumu pavadoņa piloti."
         },
         {
           "year": "2025",
-          "title": "Education pilots",
-          "description": "Bilingual AI literacy with Latvian partners."
+          "title": "Izglītības piloti",
+          "description": "Divvalodu MI pratība ar Latvijas partneriem."
         }
       ]
     },
     "team": {
-      "title": "Founders & stewards",
-      "subtitle": "Guided by signage systems and cloud AI.",
+      "title": "Dibinātāji un kuratori",
+      "subtitle": "Vada zīmju sistēmas un mākoņos balstīts MI.",
       "members": [
         {
           "name": "Nikita Jurtaevs",
-          "role": "Co-founder & CEO",
-          "location": "Riga",
-          "bio": "Leads storytelling, accessibility, and partner delivery.",
-          "focus": "Signage craft & product rituals"
+          "role": "Līdzdibinātājs un izpilddirektors",
+          "location": "Rīga",
+          "bio": "Vada stāstniecību, pieejamību un partneru piegādi.",
+          "focus": "Zīmju amatniecība un produktu rituāli"
         },
         {
           "name": "Vjaceslavs \"Slaff\" Trosins",
-          "role": "Co-founder & CTO",
-          "location": "Rotterdam",
-          "bio": "Owns infrastructure, automation transparency, and reliability.",
-          "focus": "Cloud architecture & explainable AI"
+          "role": "Līdzdibinātājs un CTO",
+          "location": "Roterdama",
+          "bio": "Rūpējas par infrastruktūru, automatizācijas caurspīdību un uzticamību.",
+          "focus": "Mākoņarhitektūra un paskaidrojams MI"
         }
       ]
     },
     "cta": {
-      "eyebrow": "Collaborate with us",
-      "title": "Let’s build calm AI together",
-      "body": "Bring your roadmap and we will map the rituals.",
-      "primary": "Schedule a strategy session",
-      "secondary": "Explore our products"
+      "eyebrow": "Sadarbosimies",
+      "title": "Veidosim mierīgu MI kopā",
+      "body": "Atnes savu ceļa karti, un mēs salāgosim atbilstošos rituālus.",
+      "primary": "Rezervē stratēģijas sesiju",
+      "secondary": "Iepazīsti mūsu produktus"
     },
     "page": {
       "hero": {
@@ -1889,20 +1851,20 @@
         "title": "Kur loģika dejo ar radošumu",
         "copy": "Mūsu misija ir vienkārša: padarīt progresīvo MI pieejamu, patīkamu un uzticamu. To īstenojam ar vērtībām, kas cilvēkus tur centrā.",
         "education_first": {
-          "title": "Education first",
-          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner."
+          "title": "Vispirms izglītība",
+          "copy": "Mēs stiprinām MI pratību klasēs un kopienu centros. Bezmaksas resursi un cieņpilns mentorings uztur zinātkāri katram mācīt gribētājam."
         },
         "empowerment": {
-          "title": "Empowerment through technology",
-          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred."
+          "title": "Pilnvarojums caur tehnoloģijām",
+          "copy": "Neatkarīgi no tā, vai esi dibinātājs, skolotājs vai skolēns, mūsu rīki ir veidoti, lai būtu viesmīlīgi, intuitīvi un cilvēkcentriski."
         },
         "integrity": {
-          "title": "Innovation with integrity",
-          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact."
+          "title": "Inovācija ar integritāti",
+          "copy": "Ētiski ceļi, privātums un caurspīdība vada katru laidienu. Automatizācijas lēmumus dokumentējam saprotamā valodā, lai uzticība saglabātos."
         },
         "community": {
-          "title": "Community & collaboration",
-          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act."
+          "title": "Kopiena un sadarbība",
+          "copy": "Partnerības ar vecākiem, kultūras institūcijām un nozares mentoriem pārvērš MI kopīgā dejā, nevis solo priekšnesumā."
         }
       },
       "team": {
@@ -1937,7 +1899,7 @@
         "eyebrow": "Pievienojies mums",
         "title": "Ienāc ritmā",
         "copy": "Mēs gaidām līdzgaitniekus, kuri rūpējas par pieejamām tehnoloģijām, priecīgu mācīšanos un atbildīgu automatizāciju. Neatkarīgi no tā, vai interesējies par karjeru, partnerībām vai sponsorēšanu — veidosim kopā.",
-        "primary_cta": "Sazinies ar AlgoRhythmics",
+        "primary_cta": "Sazinies ar Algorhythmics",
         "secondary_cta": "Abonē jaunumus"
       }
     }
@@ -1993,7 +1955,7 @@
             "Kopdarba kanvas, kas līdzsvaro fokusa paneļus ar rotaļīgām norādēm",
             "Iekļaujoša lokalizācija un balss iespējas daudzvalodu kopienām"
           ],
-          "primary_cta": "Explore Ideonautix",
+          "primary_cta": "Iepazīsti Ideonautix",
           "secondary_cta": "Skatīt Ideonautix izcēlumus"
         },
         "nodevoyage": {
@@ -2032,128 +1994,128 @@
   },
   "admin": {
     "nav": {
-      "title": "AlgoRhythmics CMS",
+      "title": "Algorhythmics CMS",
       "items": {
-        "dashboard": "Dashboard",
-        "posts": "Blog Posts",
-        "modules": "Education Modules",
-        "back": "Back to Site"
+        "dashboard": "Informācijas panelis",
+        "posts": "Bloga ieraksti",
+        "modules": "Izglītības moduļi",
+        "back": "Atpakaļ uz vietni"
       }
     },
     "layout": {
-      "title": "Admin Dashboard - AlgoRhythmics"
+      "title": "Administrācijas panelis — Algorhythmics"
     },
     "dashboard": {
-      "title": "Dashboard",
-      "subtitle": "Welcome to the AlgoRhythmics CMS",
+      "title": "Informācijas panelis",
+      "subtitle": "Laipni lūdzam Algorhythmics CMS.",
       "quick_actions": {
-        "title": "Quick Actions",
+        "title": "Ātrās darbības",
         "items": {
           "new_post": {
-            "title": "New Blog Post",
-            "description": "Create a new blog article"
+            "title": "Jauns bloga ieraksts",
+            "description": "Izveido jaunu bloga rakstu."
           },
           "new_module": {
-            "title": "New Module",
-            "description": "Add an educational module"
+            "title": "Jauns modulis",
+            "description": "Pievieno izglītības moduli."
           },
           "view_posts": {
-            "title": "View Posts",
-            "description": "Manage blog posts"
+            "title": "Skatīt ierakstus",
+            "description": "Pārvaldi bloga ierakstus"
           },
           "view_modules": {
-            "title": "View Modules",
-            "description": "Manage learning content"
+            "title": "Skatīt moduļus",
+            "description": "Pārvaldi mācību saturu."
           }
         }
       },
       "getting_started": {
-        "title": "Getting Started",
-        "headline": "Content Management System",
-        "description": "This admin dashboard allows you to create and manage content for the AlgoRhythmics website. Before you can see live content, you need to:",
+        "title": "Darba sākšana",
+        "headline": "Satura pārvaldības sistēma",
+        "description": "Šis administrācijas panelis ļauj veidot un pārvaldīt saturu Algorhythmics vietnē. Pirms redzi dzīvu saturu, nepieciešams:",
         "steps": {
-          "setup_strapi": "Set up Strapi CMS backend (see README.md Phase 1 & 2)",
-          "configure_env": "Configure environment variables in .env file",
-          "define_content": "Define content types in Strapi admin panel",
-          "start_creating": "Start creating content!"
+          "setup_strapi": "Iestatīt Strapi CMS aizmuguri (skat. README.md 1. un 2. posmu).",
+          "configure_env": "Konfigurēt vides mainīgos .env failā.",
+          "define_content": "Definēt satura tipus Strapi administrācijas panelī.",
+          "start_creating": "Sāc veidot saturu!"
         },
-        "cta": "View Public Site"
+        "cta": "Apskatīt publisko vietni"
       }
     }
   },
   "blog": {
     "meta": {
-      "title": "Blog - AlgoRhythmics",
-      "description": "Insights, stories, and updates from the AlgoRhythmics team on calm AI, educational technology, and responsible innovation."
+      "title": "Blogs — Algorhythmics",
+      "description": "Iedvesmas, stāsti un jaunumi no Algorhythmics komandas par mierīgu MI, izglītības tehnoloģijām un atbildīgu inovāciju."
     },
     "hero": {
-      "title": "Blog & Insights",
-      "subtitle": "Stories, research, and perspectives on calm AI",
-      "description": "Explore our latest thinking on responsible AI, educational technology, and building inclusive digital experiences."
+      "title": "Blogs un atziņas",
+      "subtitle": "Stāsti, pētījumi un skatījumi uz mierīgu MI",
+      "description": "Iepazīsti mūsu jaunākās pārdomas par atbildīgu MI, izglītības tehnoloģijām un iekļaujošas digitālās pieredzes veidošanu."
     },
     "sections": {
-      "latest": "Latest Articles"
+      "latest": "Jaunākie raksti"
     },
     "error": {
-      "title": "Content Temporarily Unavailable",
-      "help": "The blog content is managed through our CMS. Please ensure the Strapi backend is configured and running."
+      "title": "Saturs uz laiku nav pieejams",
+      "help": "Bloga saturu pārvalda mūsu CMS. Lūdzu, pārliecinieties, ka Strapi aizmugure ir nokonfigurēta un darbojas."
     },
     "empty": {
-      "title": "No Posts Yet",
-      "description": "Check back soon for insightful articles about calm AI and educational innovation."
+      "title": "Pagaidām nav rakstu",
+      "description": "Pavisam drīz dalīsimies ar iedvesmojošiem rakstiem par mierīgu MI un izglītības inovāciju."
     },
     "card": {
-      "by": "By {name}",
-      "cta": "Read More →"
+      "by": "Autors: {name}",
+      "cta": "Lasīt vairāk →"
     },
     "buttons": {
-      "back_to_blog": "← Back to Blog"
+      "back_to_blog": "← Atpakaļ uz blogu"
     },
     "slug": {
-      "title_suffix": "AlgoRhythmics Blog",
-      "tags_label": "Tags:"
+      "title_suffix": "Algorhythmics blogs",
+      "tags_label": "Birkas:"
     }
   },
   "platform": {
     "meta": {
-      "title": "Platform Articles - AlgoRhythmics",
-      "description": "Explore platform articles, case studies, and insights about our technology platforms."
+      "title": "Platformu raksti — Algorhythmics",
+      "description": "Iepazīsti platformu rakstus, gadījumu izpētes un ieskatus par mūsu tehnoloģiju risinājumiem."
     },
     "hero": {
-      "title": "Platform Articles",
-      "description": "Explore in-depth articles about our platforms: NodeVoyage and Ideonautix. Learn about the technology, use cases, and real-world implementations."
+      "title": "Platformu raksti",
+      "description": "Iepazīsti padziļinātus rakstus par mūsu platformām NodeVoyage un Ideonautix. Uzzini par tehnoloģiju, lietošanas gadījumiem un īstiem ieviešanas stāstiem."
     },
     "error": {
-      "title": "Content Temporarily Unavailable",
-      "help": "The platform articles are managed through our CMS. Please ensure the Strapi backend is configured and running."
+      "title": "Saturs uz laiku nav pieejams",
+      "help": "Platformu rakstus pārvalda mūsu CMS. Lūdzu, pārliecinieties, ka Strapi aizmugure ir nokonfigurēta un darbojas."
     },
     "empty": {
-      "title": "No Articles Yet",
-      "description": "Check back soon for platform articles and case studies."
+      "title": "Rakstu vēl nav",
+      "description": "Drīzumā pievienosim platformu rakstus un gadījumu izpētes."
     },
     "card": {
-      "by": "By {name}",
-      "cta": "Read Article →",
-      "category_fallback": "Platform",
-      "author_fallback": "Anonymous",
-      "tags_label": "Tags:"
+      "by": "Autors: {name}",
+      "cta": "Lasīt rakstu →",
+      "category_fallback": "Platforma",
+      "author_fallback": "Anonīms",
+      "tags_label": "Birkas:"
     },
     "buttons": {
-      "back_to_list": "← Back to Platform Articles"
+      "back_to_list": "← Atpakaļ uz platformu rakstiem"
     },
     "slug": {
-      "default_title": "Platform Article",
-      "title_suffix": "AlgoRhythmics"
+      "default_title": "Platformas raksts",
+      "title_suffix": "Algorhythmics"
     }
   },
   "education_hub": {
     "slug": {
-      "default_title": "Educational Module",
-      "title_suffix": "AlgoRhythmics Education Hub",
-      "back": "← Back to Education Hub",
-      "category": "Category: {name}",
-      "category_fallback": "Uncategorized",
-      "resources_title": "Media & Resources"
+      "default_title": "Izglītības modulis",
+      "title_suffix": "Algorhythmics izglītības centrs",
+      "back": "← Atpakaļ uz Izglītības centru",
+      "category": "Kategorija: {name}",
+      "category_fallback": "Bez kategorijas",
+      "resources_title": "Mediji un resursi"
     }
   }
 }
