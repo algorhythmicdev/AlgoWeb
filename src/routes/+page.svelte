@@ -277,7 +277,7 @@
         ctaHref: '/ideonautix',
         ctaKey: 'home.page.platform_showcase.items.ideonautix.cta',
         ctaFallback: 'Explore Ideonautix',
-        image: '/images/placeholders/platform-ideonautix.svg',
+        image: '/images/products/ideonautix-icon.png',
         altKey: 'home.page.platform_showcase.items.ideonautix.alt',
         altFallback: 'Mockup of the Ideonautix creative cockpit interface'
       },
@@ -291,7 +291,7 @@
         ctaHref: '/nodevoyage',
         ctaKey: 'home.page.platform_showcase.items.nodevoyage.cta',
         ctaFallback: 'Tour NodeVoyage',
-        image: '/images/placeholders/platform-nodevoyage.svg',
+        image: '/images/products/nodevoyage-icon.png',
         altKey: 'home.page.platform_showcase.items.nodevoyage.alt',
         altFallback: 'Mockup of the NodeVoyage planning board'
       }

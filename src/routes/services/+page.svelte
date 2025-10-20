@@ -142,7 +142,7 @@
         labelKey: 'services.page.platforms.ideonautix.secondary_cta',
         labelFallback: 'View Ideonautix Highlights'
       },
-      image: '/images/placeholders/dashboard-overview.svg',
+      image: '/images/products/ideonautix-icon.png',
       imageAlt: 'Placeholder of the Ideonautix workspace overview'
     },
     {
@@ -178,7 +178,7 @@
         labelKey: 'services.page.platforms.nodevoyage.secondary_cta',
         labelFallback: 'See Travel Case Studies'
       },
-      image: '/images/placeholders/mobile-preview.svg',
+      image: '/images/products/nodevoyage-icon.png',
       imageAlt: 'Placeholder of the NodeVoyage mobile planning view'
     }
   ] as const;

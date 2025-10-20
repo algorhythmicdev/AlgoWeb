@@ -58,7 +58,7 @@
   } as const;
 
   const snapshot = {
-    image: '/images/placeholders/platform-nodevoyage.svg',
+    image: '/images/products/nodevoyage-icon.png',
     altKey: 'nodevoyage.snapshot.alt',
     altFallback: 'Preview of the NodeVoyage travel timeline layout',
     captionKey: 'nodevoyage.snapshot.caption',

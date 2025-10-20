@@ -113,7 +113,7 @@
           href: 'https://www.linkedin.com/in/nikitajurtaevs/'
         }
       ],
-      photo: '/images/placeholders/team-nikita.svg'
+      photo: '/images/founders/founder-nikita.png'
     },
     {
       nameKey: 'about.page.team.members.slaff.name',
@@ -129,7 +129,7 @@
         { labelKey: 'about.page.team.members.slaff.links.email', labelFallback: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
         { labelKey: 'about.page.team.members.slaff.links.linkedin', labelFallback: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
       ],
-      photo: '/images/placeholders/team-slaff.svg'
+      photo: '/images/founders/founder-slaff.png'
     }
   ] as const;
 

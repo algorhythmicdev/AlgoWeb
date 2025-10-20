@@ -57,7 +57,7 @@
   } as const;
 
   const snapshot = {
-    image: '/images/placeholders/platform-ideonautix.svg',
+    image: '/images/products/ideonautix-icon.png',
     altKey: 'ideonautix.snapshot.alt',
     altFallback: 'Preview of the Ideonautix creative cockpit layout',
     captionKey: 'ideonautix.snapshot.caption',
