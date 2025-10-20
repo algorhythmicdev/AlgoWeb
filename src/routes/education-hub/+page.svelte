@@ -44,7 +44,7 @@
   } as const;
 
   const heroMedia = {
-    image: '/images/placeholders/education-gallery.svg',
+    image: '/images/placeholders/education-gallery.png',
     altKey: 'educationHub.page.hero.media.alt',
     altFallback: 'A calm gallery of interactive tables, signage-inspired posters, and soft lighting for workshops',
     captionKey: 'educationHub.page.hero.media.caption',
@@ -75,7 +75,7 @@
   } as const;
 
   const featuredMedia = {
-    image: '/images/placeholders/education-lab.svg',
+    image: '/images/placeholders/education-lab.png',
     altKey: 'educationHub.page.featured.media.alt',
     altFallback: 'Students co-creating in a calm AI lab with collaborative displays and tactile props',
     captionKey: 'educationHub.page.featured.media.caption',

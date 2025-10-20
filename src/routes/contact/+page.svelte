@@ -35,7 +35,7 @@
     } as const;
 
     const heroMedia = {
-        image: "/images/placeholders/contact-lobby.svg",
+        image: "/images/placeholders/contact-lobby.png",
         altKey: "contact.page.hero.media.alt",
         altFallback:
             "Lounge area with glass walls, calm lighting, and collaborative screens",
