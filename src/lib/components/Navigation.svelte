@@ -191,7 +191,7 @@
         <img src="/images/brand/logo-main.svg" alt={$_('nav.brand_name')} width="120" height="32" />
       </a>
       <button type="button" class="mobile-menu__close" on:click={closeMenu}>
-        <span class="sr-only">Close menu</span>
+        <span class="sr-only">{$_('nav.close_menu') ?? 'Close menu'}</span>
         <svg viewBox="0 0 18 18" aria-hidden="true">
           <path d="m4 4 10 10M14 4 4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
             stroke-linejoin="round" />
