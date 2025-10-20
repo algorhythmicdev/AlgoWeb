@@ -19,12 +19,13 @@ static/
     ├── partners/
     │   └── reclame-fabriek-logo.svg
     ├── placeholders/
-    │   ├── consulting-studio.svg
-    │   ├── contact-lobby.svg
+    │   ├── ChatGPT Image Oct 20, 2025, 11_05_12 AM.png
+    │   ├── consulting-studio.png
+    │   ├── contact-lobby.png
     │   ├── dashboard-overview.svg
-    │   ├── education-gallery.svg
-    │   ├── education-lab.svg
-    │   ├── help-center-desk.svg
+    │   ├── education-gallery.png
+    │   ├── education-lab.png
+    │   ├── help-center-desk.png
     │   ├── mobile-preview.svg
     │   ├── platform-ideonautix.svg
     │   ├── platform-nodevoyage.svg
@@ -79,12 +80,12 @@ static/
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `consulting-studio.svg` | Consulting hero imagery | Vector lounge scene for consulting hero. |
-| `contact-lobby.svg` | Contact page media | Vector lobby vignette supporting contact CTAs. |
+| `consulting-studio.png` | Consulting hero imagery | High-fidelity PNG render used across production surfaces. |
+| `contact-lobby.png` | Contact page media | Raster artwork powering the contact hero and feature tiles. |
 | `dashboard-overview.svg` | Services portfolio card | Dashboard summary tile for service packages. |
-| `education-gallery.svg` | Education hub hero | Gallery layout for education landing hero. |
-| `education-lab.svg` | Help center and education cards | Lab scene reused across help and learning surfaces. |
-| `help-center-desk.svg` | Help center hero | Support desk scene for self-serve hub. |
+| `education-gallery.png` | Education hub hero | Production PNG with richer lighting for the landing hero. |
+| `education-lab.png` | Help center and education cards | Raster lab scene optimised for translucent card treatments. |
+| `help-center-desk.png` | Help center hero | PNG illustration shipping in the help centre hero. |
 | `mobile-preview.svg` | Mobile preview card | Phone shell for responsive product highlights. |
 | `platform-ideonautix.svg` | Ideonautix preview | Orbit rings representing Ideonautix modules. |
 | `platform-nodevoyage.svg` | NodeVoyage preview | Route wave representing travel automation. |

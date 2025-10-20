@@ -35,7 +35,7 @@
   } as const;
 
   const heroMedia = {
-    image: '/images/placeholders/consulting-studio.svg',
+    image: '/images/placeholders/consulting-studio.png',
     altKey: 'consulting.hero.media.alt',
     altFallback: 'Consulting studio with glass panels, planning walls, and a calm collaboration table',
     captionKey: 'consulting.hero.media.caption',

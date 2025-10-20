@@ -35,7 +35,7 @@
     } as const;
 
     const heroMedia = {
-        image: "/images/placeholders/help-center-desk.svg",
+        image: "/images/placeholders/help-center-desk.png",
         altKey: "help.page.hero.media.alt",
         altFallback:
             "Support desk with glowing nodes connected across calm displays",
@@ -180,7 +180,7 @@
     ] as const;
 
     const knowledgeMedia = {
-        image: "/images/placeholders/education-lab.svg",
+        image: "/images/placeholders/education-lab.png",
         altKey: "help.page.knowledge.media.alt",
         altFallback:
             "Calm AI lab with touchscreen displays and inclusive learning stations",
