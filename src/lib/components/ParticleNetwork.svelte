@@ -709,7 +709,7 @@
     max-width: 100%;
     max-height: 100%;
     display: block;
-    z-index: var(--z-behind, -10);
+    z-index: var(--z-behind);
     pointer-events: none;
     opacity: 0.42;
     mix-blend-mode: screen;

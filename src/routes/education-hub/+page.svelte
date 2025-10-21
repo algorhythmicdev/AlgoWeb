@@ -471,13 +471,13 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: var(--cluster-gap-sm);
     justify-content: center;
   }
 
   .hero-highlights {
     display: grid;
-    gap: 0.6rem;
+    gap: var(--cluster-gap-sm);
     font-size: var(--text-small);
     text-align: left;
     list-style: none;
@@ -487,7 +487,7 @@
 
   .hero-highlights li::before {
     content: '✶';
-    margin-right: 0.5rem;
+    margin-right: var(--space-sm);
     color: var(--signal-yellow);
   }
 
@@ -538,12 +538,12 @@
 
   :global(.featured__card) {
     display: grid;
-    gap: clamp(1.25rem, 3vw, 2rem);
+    gap: var(--grid-gap-lg);
   }
 
   .featured__header {
     display: grid;
-    gap: 0.65rem;
+    gap: calc(var(--space-sm) + var(--space-3xs));
   }
 
   .featured__eyebrow {
@@ -567,19 +567,19 @@
   .featured__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: var(--cluster-gap-sm);
   }
 
   .featured__media {
-    margin-bottom: clamp(1rem, 3vw, 1.8rem);
+    margin-bottom: clamp(var(--space-xl), 3vw, calc(var(--space-2xl) + var(--space-sm)));
   }
 
   :global(.education-hero-media) {
-    margin-top: clamp(1rem, 3vw, 1.6rem);
+    margin-top: clamp(var(--space-xl), 3vw, calc(var(--space-2xl) + var(--space-xs)));
   }
 
   .section-heading {
-    margin-block-end: clamp(2rem, 4vw, 3rem);
+    margin-block-end: clamp(var(--space-2xl), 4vw, calc(var(--space-3xl) + var(--space-sm)));
   }
 
   .section-heading__copy {
@@ -591,13 +591,13 @@
   .toolkits__grid,
   .spotlights__grid {
     display: grid;
-    gap: clamp(1.2rem, 3vw, 1.8rem);
+    gap: var(--grid-gap-lg);
   }
 
   :global(.insights__card),
   :global(.spotlights__card) {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--cluster-gap-sm);
   }
 
   .insights__meta,
@@ -625,7 +625,7 @@
 
   :global(.toolkits__card) {
     display: grid;
-    gap: 0.9rem;
+    gap: calc(var(--space-sm) + var(--space-3xs));
   }
 
   .toolkits__eyebrow {
@@ -637,7 +637,7 @@
 
   .toolkits__list {
     display: grid;
-    gap: 0.45rem;
+    gap: calc(var(--space-xs) + var(--space-3xs));
     padding: 0;
     margin: 0;
     list-style: none;
@@ -645,13 +645,13 @@
 
   .toolkits__list li::before {
     content: '•';
-    margin-right: 0.5rem;
+    margin-right: var(--space-sm);
     color: var(--signal-yellow);
   }
 
   :global(.events__card) {
     display: grid;
-    gap: 1rem;
+    gap: var(--cluster-gap-md);
     text-align: center;
   }
 
@@ -670,7 +670,7 @@
 
   .events__list {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--cluster-gap-sm);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -678,7 +678,7 @@
 
   .events__list li::before {
     content: '▹';
-    margin-right: 0.4rem;
+    margin-right: calc(var(--space-xs) + var(--space-3xs));
     color: var(--voyage-blue);
   }
 
@@ -686,12 +686,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
+    gap: var(--cluster-gap-sm);
   }
 
   :global(.newsletter__card) {
     display: grid;
-    gap: 1rem;
+    gap: var(--cluster-gap-md);
     text-align: center;
   }
 

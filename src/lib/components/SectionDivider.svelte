@@ -25,7 +25,8 @@
 <style>
   .section-divider {
     position: relative;
-    width: min(100%, var(--section-divider-width, 1040px));
+    --section-divider-width: 1040px;
+    width: min(100%, var(--section-divider-width));
     margin: var(--space-4xl) auto;
     display: grid;
     place-items: center;

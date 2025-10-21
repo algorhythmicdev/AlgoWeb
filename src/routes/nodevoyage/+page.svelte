@@ -326,7 +326,7 @@
       {#each features.cards as card (card.titleKey)}
         <GlassCard class="feature-card" halo padding="lg" interactive>
           <div class="feature-icon" aria-hidden="true">
-            <Icon name={card.icon} size={28} />
+            <Icon name={card.icon} size="var(--icon-glyph-lg)" />
           </div>
           <h3>{t(card.titleKey, card.titleFallback)}</h3>
           <p>{t(card.copyKey, card.copyFallback)}</p>
@@ -375,7 +375,7 @@
       {#each differentiators.cards as item (item.titleKey)}
         <GlassCard padding="md" class="differentiator-card" halo>
           <div class="feature-icon" aria-hidden="true">
-            <Icon name={item.icon} size={26} />
+            <Icon name={item.icon} size="var(--icon-glyph-md)" />
           </div>
           <h3>{t(item.titleKey, item.titleFallback)}</h3>
           <p>{t(item.copyKey, item.copyFallback)}</p>
@@ -460,28 +460,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding: clamp(3rem, 8vw, 5rem) 0;
-  }
-
-  .section > .container {
-    position: relative;
-    z-index: var(--z-content);
-  }
-
-  .section::before,
-  .section::after {
-    content: '';
-    position: absolute;
-    inset: -18% -18% -24% -18%;
-    border-radius: clamp(36px, 7vw, 64px);
-    pointer-events: none;
-    opacity: 0.24;
-    z-index: var(--z-base);
-  }
-
-  .section::after {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%) 0%, transparent 100%);
-    opacity: 0.18;
+    --section-padding: clamp(var(--section-padding-tablet), 8vw, var(--section-padding-desktop));
   }
 
   .section.section--snapshot {
@@ -526,32 +505,32 @@
 
   :global(.snapshot-card) {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.25rem);
+    gap: calc(var(--grid-gap-lg) + var(--space-xs));
   }
 
   :global(.snapshot-card img) {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--glass-border);
+    border: var(--border-width-hairline) solid var(--glass-border);
     box-shadow: var(--shadow-xl);
   }
 
   :global(.snapshot-card__body) {
     display: grid;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
+    gap: var(--cluster-gap-md);
   }
 
   .section-title {
-    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-family: var(--font-heading);
     font-size: var(--text-headline);
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: var(--space-lg);
   }
 
   .section-lead {
-    max-width: 48ch;
-    margin-bottom: clamp(2rem, 6vw, 3rem);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 80%, transparent 20%));
+    max-width: var(--measure-md);
+    margin-bottom: var(--space-3xl);
+    color: var(--text-secondary);
     font-size: var(--text-lead);
     line-height: var(--leading-relaxed);
   }
@@ -559,14 +538,14 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-lg);
     justify-content: center;
   }
 
   .hero-highlights {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--grid-gap-md);
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
     text-align: left;
     font-size: var(--text-small);
     line-height: var(--leading-normal);
@@ -575,16 +554,16 @@
   .hero-eyebrow {
     display: block;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-meta);
     font-size: var(--text-eyebrow);
-    color: var(--text-tertiary, color-mix(in srgb, var(--text) 65%, transparent 35%));
-    margin-bottom: 0.25rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-2xs);
   }
 
   .feature-grid {
     display: grid;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--grid-gap-xl);
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
   }
 
   :global(.feature-card) {
@@ -596,24 +575,24 @@
   :global(.feature-card) h3 {
     font-size: var(--text-card-title);
     line-height: var(--leading-snug);
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--space-md);
   }
 
   :global(.feature-card) p {
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    color: var(--text-secondary);
     font-size: var(--text-body);
     line-height: var(--leading-relaxed);
   }
 
   .feature-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 16px;
+    inline-size: var(--size-icon-md);
+    block-size: var(--size-icon-md);
+    border-radius: var(--radius-md);
     background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.12) 60%, transparent 40%);
     display: grid;
     place-items: center;
-    margin-bottom: 1rem;
-    color: var(--nodevoyage-highlight, var(--signal-yellow));
+    margin-bottom: var(--space-lg);
+    color: var(--nodevoyage-highlight);
   }
 
   .feature-icon :global(svg) {
@@ -622,7 +601,7 @@
 
   .roadmap {
     display: grid;
-    gap: clamp(2rem, 6vw, 3rem);
+    gap: var(--grid-gap-xl);
     align-items: start;
   }
 
@@ -631,7 +610,7 @@
     padding: 0;
     margin: 0;
     display: grid;
-    gap: 1.5rem;
+    gap: var(--grid-gap-md);
   }
 
   .roadmap-item::marker {
@@ -646,26 +625,26 @@
   .roadmap-timing {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     font-size: var(--text-meta);
-    color: var(--text-tertiary, color-mix(in srgb, var(--text) 62%, transparent 38%));
-    margin-bottom: 0.5rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-sm);
   }
 
   .differentiators {
     display: grid;
-    gap: clamp(2rem, 6vw, 3.5rem);
+    gap: var(--grid-gap-xl);
     align-items: start;
   }
 
   .differentiators-copy {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-lg);
   }
 
   .differentiators-grid {
     display: grid;
-    gap: clamp(1.5rem, 4vw, 2.4rem);
+    gap: var(--grid-gap-lg);
   }
 
   :global(.differentiator-card) {
@@ -675,56 +654,52 @@
   }
 
   :global(.differentiator-card) h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-sm);
   }
 
   :global(.explorers-card) {
     display: grid;
-    gap: 1.5rem;
+    gap: var(--cluster-gap-lg);
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 30%, transparent 70%);
-    --surface-glass-shadow: 0 20px 50px rgba(14, 28, 54, 0.18);
+    --surface-glass-shadow: var(--shadow-xl);
     --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 56%, var(--voyage-blue) 44%);
   }
 
   .explorers-form {
     display: grid;
-    gap: 1.25rem;
-    max-width: 520px;
-    --form-gap: 1.25rem;
-    --form-field-radius: 12px;
-    --form-field-padding-y: 0.75rem;
-    --form-field-padding-x: 1rem;
+    gap: var(--grid-gap-md);
+    max-width: min(100%, var(--card-max-width-wide));
+    --form-gap: var(--grid-gap-md);
+    --form-field-radius: var(--radius-md);
+    --form-field-padding-y: var(--space-md);
+    --form-field-padding-x: var(--space-lg);
     --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
     --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
-    --form-field-border: color-mix(
-      in srgb,
-      var(--surface-field-border, color-mix(in srgb, var(--border) 80%, transparent 20%)) 85%,
-      transparent 15%
-    );
+    --form-field-border: color-mix(in srgb, var(--surface-field-border) 85%, transparent 15%);
     --form-field-border-focus: color-mix(
       in srgb,
-      var(--nodevoyage-highlight, var(--signal-yellow)) 52%,
+      var(--nodevoyage-highlight) 52%,
       rgba(var(--voyage-blue-rgb), 0.42) 48%
     );
     --form-focus-ring-color: color-mix(
       in srgb,
-      var(--nodevoyage-highlight, var(--signal-yellow)) 60%,
+      var(--nodevoyage-highlight) 60%,
       var(--voyage-blue) 40%
     );
-    --form-field-shadow: 0 16px 34px rgba(12, 24, 48, 0.18), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
+    --form-field-shadow: var(--shadow-lg);
     --form-error-color: color-mix(in srgb, var(--cherry-pop) 82%, var(--text) 18%);
     --form-status-success-bg: color-mix(in srgb, var(--glass-bg-lightest) 62%, transparent 38%);
     --form-status-success-color: color-mix(
       in srgb,
-      var(--nodevoyage-highlight, var(--signal-yellow)) 64%,
+      var(--nodevoyage-highlight) 64%,
       var(--text) 36%
     );
   }
 
   .form-field {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--space-sm);
   }
 
   .form-field label {
@@ -732,17 +707,17 @@
   }
 
   .explorers-form .form-status {
-    max-width: 32ch;
+    max-width: var(--measure-sm);
   }
 
   .privacy-note {
     font-size: var(--text-meta);
-    color: var(--text-tertiary, color-mix(in srgb, var(--text) 60%, transparent 40%));
+    color: var(--text-tertiary);
   }
 
   :global(.cta-card) {
     display: grid;
-    gap: 1.2rem;
+    gap: calc(var(--space-lg) + var(--space-xs));
     text-align: center;
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
@@ -752,7 +727,7 @@
   .cta-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-lg);
     justify-content: center;
   }
 
@@ -772,10 +747,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .section::before {
-      animation: none;
-    }
-
     :global(.feature-card),
     :global(.differentiator-card),
     :global(.explorers-card),

@@ -435,7 +435,7 @@
                     data-tone={category.accent}
                 >
                     <div class="card-eyebrow">
-                        <Icon name={category.icon} size={26} />
+                        <Icon name={category.icon} size="var(--icon-glyph-md)" />
                         <span
                             >{t(
                                 category.eyebrowKey,
@@ -566,7 +566,7 @@
                     {#each escalation.channels as channel (channel.titleKey)}
                         <div class="channel">
                             <div class="channel-icon">
-                                <Icon name={channel.icon} size={24} />
+                                <Icon name={channel.icon} size="var(--icon-glyph-md)" />
                             </div>
                             <div class="channel-copy">
                                 <h3>
@@ -649,7 +649,7 @@
     .hero-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-md, 1rem);
+        gap: var(--cluster-gap-md);
         align-items: center;
     }
 
@@ -695,13 +695,14 @@
 
     .knowledge-grid {
         display: grid;
-        gap: var(--space-2xl);
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--grid-gap-xl);
+        grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-card), 1fr));
+        justify-content: center;
     }
 
     :global(.knowledge-card) {
         display: grid;
-        gap: var(--space-lg);
+        gap: var(--cluster-gap-md);
         align-content: start;
         height: 100%;
         transition: box-shadow var(--duration-fast) ease;
@@ -822,7 +823,7 @@
 
     .faq-grid {
         display: grid;
-        gap: var(--space-lg);
+        gap: var(--grid-gap-lg);
     }
 
     :global(.faq-card) {
@@ -844,7 +845,7 @@
 
     details {
         display: grid;
-        gap: var(--space-md);
+        gap: var(--cluster-gap-md);
         transition: color var(--duration-ui) ease;
     }
 
@@ -865,9 +866,9 @@
         position: absolute;
         inset-inline-end: 0;
         top: var(--space-xs);
-        width: 0.75rem;
-        height: 0.75rem;
-        border: 2px solid currentColor;
+        width: var(--indicator-size-xs);
+        height: var(--indicator-size-xs);
+        border: var(--border-width-thin) solid currentColor;
         border-left: 0;
         border-top: 0;
         transform: rotate(45deg);
@@ -879,7 +880,7 @@
     }
 
     summary:focus-visible {
-        outline: 2px solid var(--focus-ring-color);
+        outline: var(--focus-ring);
         outline-offset: var(--space-xs);
     }
 
@@ -895,12 +896,12 @@
 
     .status-grid {
         display: grid;
-        gap: var(--space-xl);
+        gap: var(--grid-gap-xl);
     }
 
     :global(.status-card) {
         display: grid;
-        gap: var(--space-md);
+        gap: var(--cluster-gap-md);
         --glass-card-surface: color-mix(
             in srgb,
             var(--glass-bg-lightest) 66%,
@@ -952,13 +953,13 @@
 
     .escalation-grid {
         display: grid;
-        gap: var(--space-2xl);
+        gap: var(--grid-gap-xl);
     }
 
     :global(.escalation-card),
     :global(.resources-card) {
         display: grid;
-        gap: var(--space-lg);
+        gap: var(--cluster-gap-md);
     }
 
     :global(.escalation-card[data-tone="escalation"]) {
@@ -1000,19 +1001,19 @@
 
     .channel-list {
         display: grid;
-        gap: var(--space-lg);
+        gap: var(--grid-gap-lg);
     }
 
     .channel {
         display: grid;
-        gap: var(--space-md);
+        gap: var(--cluster-gap-md);
         grid-template-columns: auto 1fr;
         align-items: start;
     }
 
     .channel-icon {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: var(--size-icon-sm);
+        height: var(--size-icon-sm);
         border-radius: var(--radius-full);
         display: inline-grid;
         place-items: center;
@@ -1039,7 +1040,7 @@
         margin: 0;
         padding: 0;
         display: grid;
-        gap: var(--space-lg);
+        gap: var(--cluster-gap-md);
     }
 
     .resource-meta {

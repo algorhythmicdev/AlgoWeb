@@ -154,7 +154,8 @@
   }
 
   .category-badge {
-    padding: 0.35rem 0.9rem;
+    padding-block: var(--chip-padding-block);
+    padding-inline: calc(var(--chip-padding-inline) + var(--space-3xs));
     border-radius: var(--radius-full);
     background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.22) 60%, transparent 40%);
     font-size: var(--text-label);
@@ -174,8 +175,8 @@
   }
 
   .author-avatar {
-    width: clamp(3rem, 6vw, 3.5rem);
-    height: clamp(3rem, 6vw, 3.5rem);
+    width: var(--avatar-size-sm);
+    height: var(--avatar-size-sm);
     border-radius: 50%;
     object-fit: cover;
   }
@@ -200,11 +201,11 @@
   }
 
   .reading-prose {
-    gap: var(--space-lg);
+    gap: var(--cluster-gap-md);
   }
 
   .reading-prose :global(blockquote) {
-    border-inline-start: 4px solid var(--voyage-blue);
+    border-inline-start: var(--border-width-thick) solid var(--voyage-blue);
     padding-inline-start: var(--space-xl);
     margin-block: var(--space-2xl);
     font-style: italic;
@@ -213,7 +214,8 @@
 
   .reading-prose :global(code) {
     background: color-mix(in srgb, var(--text) 8%, transparent);
-    padding: 0.2rem 0.4rem;
+    padding-block: var(--space-2xs);
+    padding-inline: calc(var(--space-xs) + var(--space-3xs));
     border-radius: var(--radius-sm);
     font-size: var(--text-caption);
   }

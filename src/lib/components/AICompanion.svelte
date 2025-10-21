@@ -360,7 +360,7 @@
 
   .orb:focus-visible {
     outline: 2px solid rgba(var(--voyage-blue-rgb), 0.45);
-    outline-offset: var(--space-xs, 0.25rem);
+    outline-offset: var(--space-xs);
   }
 
   .orb__halo {
@@ -530,7 +530,7 @@
     box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.14);
     max-width: 100%;
     white-space: pre-wrap;
-    line-height: var(--leading-relaxed, 1.65);
+    line-height: var(--leading-relaxed);
   }
 
   .messages li.from-user {

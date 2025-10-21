@@ -213,7 +213,7 @@
       {#each values as value (value.titleKey)}
         <GlassCard class="value-card" padding="lg">
           <div class="value-icon">
-            <Icon name={value.icon} size={26} />
+            <Icon name={value.icon} size="var(--icon-glyph-md)" />
           </div>
           <h3>{t(value.titleKey, value.titleFallback)}</h3>
           <p>{t(value.copyKey, value.copyFallback)}</p>
@@ -281,7 +281,8 @@
   .hero-kicker {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.8rem;
+    padding-block: var(--chip-padding-block);
+    padding-inline: calc(var(--chip-padding-inline) + var(--space-3xs));
     font-size: var(--text-small);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -298,7 +299,7 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md, 1rem);
+    gap: var(--cluster-gap-md);
     align-items: center;
   }
 
@@ -337,14 +338,14 @@
   .values__grid,
   .team__grid {
     display: grid;
-    gap: clamp(1.6rem, 3vw, 2.4rem);
+    gap: var(--grid-gap-lg);
   }
 
   .team-photo {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--glass-border);
+    border: var(--border-width-hairline) solid var(--glass-border);
     box-shadow: var(--shadow-lg);
   }
 
@@ -353,25 +354,25 @@
   :global(.team-card),
   :global(.finale-card) {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.6rem);
+    gap: var(--cluster-gap-md);
   }
 
   :global(.about-card) ul {
     margin: 0;
-    padding-left: 1.2rem;
+    padding-left: calc(var(--space-lg) + var(--space-xs));
     display: grid;
-    gap: 0.45rem;
+    gap: var(--space-sm);
     color: var(--text-secondary);
     font-size: var(--text-small);
   }
 
   .section-heading {
-    margin-block-end: clamp(2rem, 6vw, 3rem);
+    margin-block-end: var(--space-3xl);
   }
 
   .value-icon {
-    width: 3rem;
-    height: 3rem;
+    inline-size: var(--size-icon-lg);
+    block-size: var(--size-icon-lg);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
@@ -394,7 +395,7 @@
   .team-links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
+    gap: var(--cluster-gap-sm);
   }
 
   .team-links a {
@@ -405,7 +406,7 @@
   .card-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
+    gap: var(--cluster-gap-sm);
     align-items: center;
   }
 

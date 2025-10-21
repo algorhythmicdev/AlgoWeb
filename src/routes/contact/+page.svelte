@@ -342,7 +342,7 @@
             {#each contactCards as card (card.titleKey)}
                 <GlassCard class="contact-card" padding="lg" halo>
                     <div class="card-icon">
-                        <Icon name={card.icon} size={28} />
+                        <Icon name={card.icon} size="var(--icon-glyph-lg)" />
                     </div>
                     <h3>{t(card.titleKey, card.titleFallback)}</h3>
                     <p>{t(card.copyKey, card.copyFallback)}</p>
@@ -594,7 +594,7 @@
                             rel="noreferrer noopener"
                             ariaLabel={t(link.labelKey, link.labelFallback)}
                         >
-                            <Icon name={link.icon} size={22} />
+                            <Icon name={link.icon} size="var(--icon-glyph-sm)" />
                             <span class="social-text">
                                 <span class="social-label"
                                     >{t(
@@ -657,26 +657,29 @@
     .hero-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-md, 1rem);
+        gap: var(--space-md);
         align-items: center;
     }
 
     .support-grid {
         display: grid;
-        gap: clamp(1.6rem, 3vw, 2.4rem);
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: var(--grid-gap-lg);
+        grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+        justify-content: center;
     }
 
     :global(.support-card) {
         display: grid;
-        gap: clamp(0.8rem, 2.2vw, 1.4rem);
+        gap: var(--cluster-gap-md);
         align-content: start;
         height: 100%;
+        width: min(100%, var(--card-max-width));
+        margin-inline: auto;
     }
 
     .support-list {
         margin: 0;
-        padding: 0 0 0 var(--space-md);
+        padding: 0 0 0 calc(var(--space-lg) + var(--space-xs));
         display: grid;
         gap: var(--space-xs);
         list-style: disc;
@@ -700,7 +703,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.15rem;
+        gap: calc(var(--space-xs) * 0.6);
     }
 
     .social-label {
@@ -715,31 +718,35 @@
     .social-links :global(.btn) {
         justify-content: flex-start;
         align-items: center;
-        gap: 0.75rem;
+        gap: var(--space-md);
     }
 
     .social-links :global(.btn__content) {
         align-items: center;
-        gap: 0.75rem;
+        gap: var(--space-md);
     }
 
     .contact-support__container {
-        gap: clamp(2.5rem, 6vw, 3.5rem);
+        gap: var(--grid-gap-xl);
     }
 
     .contact-options__grid {
         display: grid;
-        gap: clamp(1.6rem, 3vw, 2.4rem);
+        gap: var(--grid-gap-lg);
+        grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+        justify-content: center;
     }
 
     :global(.contact-card) {
         display: grid;
-        gap: clamp(1rem, 3vw, 1.6rem);
+        gap: var(--cluster-gap-md);
+        width: min(100%, var(--card-max-width));
+        margin-inline: auto;
     }
 
     .card-icon {
-        width: 3rem;
-        height: 3rem;
+        inline-size: var(--size-icon-md);
+        block-size: var(--size-icon-md);
         border-radius: var(--radius-full);
         display: inline-grid;
         place-items: center;
@@ -760,16 +767,16 @@
 
     :global(.form-card) {
         display: grid;
-        gap: clamp(1rem, 3vw, 1.6rem);
-        max-width: 680px;
+        gap: var(--cluster-gap-md);
+        max-inline-size: var(--content-width-standard);
         margin: 0 auto;
     }
 
     .form {
-        --form-gap: clamp(1rem, 3vw, 1.4rem);
+        --form-gap: var(--grid-gap-md);
         --form-field-radius: var(--radius-lg);
-        --form-field-padding-y: 0.85rem;
-        --form-field-padding-x: 1rem;
+        --form-field-padding-y: var(--space-md);
+        --form-field-padding-x: var(--space-lg);
         --form-label-color: color-mix(
             in srgb,
             var(--text) 88%,
@@ -799,11 +806,10 @@
             var(--voyage-blue) 78%,
             var(--aurora-purple) 22%
         );
-        --form-field-shadow: 0 12px 24px rgba(var(--ink-rgb), 0.08),
-            inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
-        --form-textarea-min-height: 180px;
+        --form-field-shadow: var(--shadow-md);
+        --form-textarea-min-height: calc(var(--space-5xl) + var(--space-lg));
         --form-note-color: color-mix(in srgb, var(--text) 60%, transparent 40%);
-        --form-actions-gap: 0.5rem;
+        --form-actions-gap: var(--space-sm);
         --form-status-success-color: color-mix(
             in srgb,
             var(--voyage-blue) 68%,
@@ -821,8 +827,8 @@
 
     .contact-newsletter :global(.newsletter-card) {
         display: grid;
-        gap: clamp(1rem, 3vw, 1.6rem);
-        max-width: 720px;
+        gap: var(--cluster-gap-md);
+        max-inline-size: var(--content-width-standard);
         margin: 0 auto;
         text-align: center;
     }
@@ -830,7 +836,7 @@
     .newsletter-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-md, 1rem);
+        gap: var(--space-md);
         justify-content: center;
     }
 
@@ -840,8 +846,18 @@
     }
 
     @media (min-width: 960px) {
+        .contact-support__container {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+        }
+
+        .contact-support__container > .section-heading {
+            grid-column: 1 / -1;
+            max-width: var(--measure-lg);
+        }
+
         .contact-options__grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .form-actions {

@@ -103,13 +103,13 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: var(--btn-gap, 0.65rem);
-        padding: var(--btn-padding-y, 0.85rem) var(--btn-padding-x, 1.7rem);
-        border-radius: var(--radius-pill, 999px);
+        gap: var(--btn-gap);
+        padding: var(--btn-padding-y) var(--btn-padding-x);
+        border-radius: var(--radius-pill);
         border: 1.5px solid var(--btn-border);
         background: var(--btn-bg);
         color: var(--btn-color);
-        font-weight: var(--weight-semibold, 600);
+        font-weight: var(--weight-semibold);
         font-size: clamp(0.95rem, 1vw, 1.05rem);
         line-height: 1.1;
         text-decoration: none;
@@ -176,7 +176,7 @@
         --btn-bg: color-mix(
             in srgb,
             var(--bg-elev-1) 94%,
-            rgba(var(--mist-rgb, 235, 240, 252), 0.24) 6%
+            rgba(var(--mist-rgb), 0.24) 6%
         );
         --btn-border: color-mix(
             in srgb,

@@ -6,8 +6,8 @@
 
 .os-window {
   position: relative;
-  padding: var(--card-padding-lg, 2rem);
-  border-radius: var(--radius-md, 1rem);
+  padding: var(--card-padding-lg);
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--surface-glass-bg) 86%, transparent 14%);
   border: 1px solid color-mix(in srgb, var(--surface-glass-border) 82%, transparent 18%);
   box-shadow: var(--shadow-lg);
@@ -22,6 +22,9 @@
   --os-window-hc-bg: var(--bg-elev-1);
   --os-window-hc-border: var(--border);
   --os-window-hc-shadow: none;
+  --grid-spot-x: 58%;
+  --grid-spot-y: 42%;
+  --line-angle: 42deg;
 }
 
 .os-window > * {
@@ -30,11 +33,11 @@
 }
 
 html[data-theme='hc'] .os-window {
-  background: var(--os-window-hc-bg, var(--bg-elev-1));
+  background: var(--os-window-hc-bg);
   background-image: none;
   background-blend-mode: normal;
-  border: 2px solid var(--os-window-hc-border, var(--border));
-  box-shadow: var(--os-window-hc-shadow, none);
+  border: 2px solid var(--os-window-hc-border);
+  box-shadow: var(--os-window-hc-shadow);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   --grain-opacity: 0;
@@ -59,12 +62,17 @@ html[data-theme='hc'] .os-window {
   z-index: var(--z-behind);
   pointer-events: none;
   background-image:
-    radial-gradient(circle at var(--grid-spot-x, 58%) var(--grid-spot-y, 42%), color-mix(in srgb, var(--grad-a) 24%, transparent) 0%, transparent 55%),
+    radial-gradient(circle at var(--grid-spot-x) var(--grid-spot-y), color-mix(in srgb, var(--grad-a) 24%, transparent) 0%, transparent 55%),
     linear-gradient(to right, color-mix(in srgb, var(--grad-a) 10%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--grad-b) 10%, transparent) 1px, transparent 1px);
   background-size: auto, 34px 34px, 34px 34px;
   opacity: 0.18;
   mix-blend-mode: screen;
+}
+
+.os-window[data-variant='grid'] {
+  --grid-spot-x: 58%;
+  --grid-spot-y: 42%;
 }
 
 .os-window[data-variant='line']::before {
@@ -74,7 +82,7 @@ html[data-theme='hc'] .os-window {
   z-index: var(--z-behind);
   pointer-events: none;
   background: conic-gradient(
-    from var(--line-angle, 42deg),
+    from var(--line-angle),
     transparent 0 32%,
     color-mix(in srgb, var(--grad-a) 24%, transparent) 48%,
     transparent 72%
@@ -83,11 +91,15 @@ html[data-theme='hc'] .os-window {
   mix-blend-mode: screen;
 }
 
+.os-window[data-variant='line'] {
+  --line-angle: 42deg;
+}
+
 .os-window[data-variant='halo']::before,
 .os-window[data-variant='grid']::before,
 .os-window[data-variant='line']::before {
-  transition: opacity var(--duration-hero, 520ms) var(--ease-out, ease),
-    filter var(--duration-hero, 520ms) var(--ease-out, ease);
+  transition: opacity var(--duration-hero) var(--ease-out),
+    filter var(--duration-hero) var(--ease-out);
 }
 
 html[data-theme='hc'] .os-window[data-variant='halo']::before,

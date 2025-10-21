@@ -59,7 +59,7 @@
     background: color-mix(in srgb, var(--bg) 92%, rgba(var(--voyage-blue-rgb), 0.08) 8%);
     color: var(--text);
     isolation: isolate;
-    z-index: var(--z-modal, 500);
+    z-index: var(--z-modal);
   }
 
   .loading-overlay::before {

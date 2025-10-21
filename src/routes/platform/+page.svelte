@@ -103,12 +103,6 @@
 </div>
 
 <style>
-  .hero-description {
-    font-size: var(--text-body);
-    line-height: var(--leading-relaxed);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
-  }
-
   .platform-catalog {
     width: min(100%, var(--container-xl));
     margin-inline: auto;
@@ -132,13 +126,14 @@
 
   :global(.platform-catalog__status p) {
     margin: 0;
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 76%, transparent 24%));
+    color: var(--text-secondary);
   }
 
   .platform-catalog__grid {
     display: grid;
-    gap: var(--space-2xl);
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: var(--grid-gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-card), 1fr));
+    justify-content: center;
   }
 
   :global(.platform-card) {
@@ -149,14 +144,14 @@
 
   .platform-card__image {
     width: 100%;
-    height: clamp(12rem, 28vw, 14rem);
+    height: var(--media-thumb-height);
     object-fit: cover;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
 
   .platform-card__body {
     display: grid;
-    gap: var(--space-lg);
+    gap: var(--cluster-gap-md);
     padding: var(--component-padding-lg);
   }
 
@@ -177,7 +172,7 @@
   .platform-card__title a {
     color: inherit;
     text-decoration: none;
-    transition: color var(--duration-fast, 220ms) ease;
+    transition: color var(--duration-fast) ease;
   }
 
   .platform-card__title a:hover {
@@ -186,7 +181,7 @@
 
   .platform-card__excerpt {
     margin: 0;
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    color: var(--text-secondary);
     line-height: var(--leading-relaxed);
   }
 
@@ -218,3 +213,9 @@
     }
   }
 </style>
+  .hero-description {
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+

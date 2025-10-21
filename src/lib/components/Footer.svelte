@@ -249,7 +249,7 @@
 
   .contact-info a {
     text-decoration: none;
-    transition: color var(--duration-ui, 240ms) var(--ease-out);
+    transition: color var(--duration-ui) var(--ease-out);
   }
 
   .contact-info a:hover,
@@ -280,7 +280,7 @@
     color: inherit;
     text-decoration: none;
     font-size: var(--text-small);
-    transition: color var(--duration-ui, 240ms) var(--ease-out);
+    transition: color var(--duration-ui) var(--ease-out);
   }
 
   .footer-links-section a:hover,
@@ -357,7 +357,7 @@
   }
 
   .footer-partners__cta svg {
-    transition: transform var(--duration-ui, 240ms) var(--ease-out);
+    transition: transform var(--duration-ui) var(--ease-out);
   }
 
   .footer-partners__cta:hover,

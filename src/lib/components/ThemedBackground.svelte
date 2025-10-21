@@ -15,7 +15,7 @@
   let particles = [];
   const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
   const fallbackGradient =
-    'radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.92%, rgba(var(--voyage-blue-rgb), 0.006) 0.08%) 0%, color-mix(in srgb, var(--bg-elev-1, var(--bg)) 99.92%, rgba(var(--aurora-purple-rgb), 0.006) 0.08%) 42%, var(--bg) 100%)';
+    'radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.92%, rgba(var(--voyage-blue-rgb), 0.006) 0.08%) 0%, color-mix(in srgb, var(--bg-elev-1) 99.92%, rgba(var(--aurora-purple-rgb), 0.006) 0.08%) 42%, var(--bg) 100%)';
   const fallbackFilmOpacity = 0.045;
 
   const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.06, damping: 0.5, precision: 0.001 });
@@ -284,7 +284,7 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: var(--z-background, -20);
+    z-index: var(--z-background);
     overflow: hidden;
     display: grid;
     background: transparent;
@@ -320,9 +320,9 @@
 
   .gradient {
     background: var(--route-gradient);
-    opacity: var(--gradient-opacity, 1);
+    opacity: var(--gradient-opacity);
     transition: background 2.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: var(--gradient-filter, saturate(0.72) brightness(0.92));
+    filter: var(--gradient-filter);
   }
 
   .wash {
@@ -335,12 +335,12 @@
       radial-gradient(48% 48% at 18% 18%, color-mix(in srgb, var(--theme-secondary) 0.3%, transparent) 0%, transparent 78%),
       linear-gradient(180deg, color-mix(in srgb, var(--bg) 99.85%, transparent) 0%, color-mix(in srgb, var(--bg) 99.85%, transparent) 100%);
     opacity: clamp(
-      var(--wash-min, 0.0012),
-      var(--wash-base, 0.0024) + var(--scroll-depth) * var(--wash-span, 0.0075),
-      var(--wash-max, 0.0048)
+      var(--wash-min),
+      var(--wash-base) + var(--scroll-depth) * var(--wash-span),
+      var(--wash-max)
     );
-    filter: var(--wash-filter, blur(12px) saturate(0.24));
-    mix-blend-mode: var(--wash-blend, normal);
+    filter: var(--wash-filter);
+    mix-blend-mode: var(--wash-blend);
     transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), transform 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -349,12 +349,12 @@
       radial-gradient(32% 32% at 78% 22%, color-mix(in srgb, var(--theme-accent) 0.3%, transparent) 0%, transparent 78%),
       radial-gradient(38% 38% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 0.25%, transparent) 0%, transparent 78%);
     opacity: clamp(
-      var(--flare-min, 0.001),
-      var(--flare-base, 0.0021) + var(--scroll-depth) * var(--flare-span, 0.0075),
-      var(--flare-max, 0.0048)
+      var(--flare-min),
+      var(--flare-base) + var(--scroll-depth) * var(--flare-span),
+      var(--flare-max)
     );
-    mix-blend-mode: var(--flare-blend, screen);
-    filter: var(--flare-filter, blur(12px) saturate(0.46));
+    mix-blend-mode: var(--flare-blend);
+    filter: var(--flare-filter);
     transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -363,7 +363,7 @@
     mix-blend-mode: var(--veil-mix-mode);
     opacity: clamp(
       var(--veil-opacity-min),
-      var(--veil-opacity-min) + var(--scroll-depth) * var(--veil-opacity-span, 0.1),
+      var(--veil-opacity-min) + var(--scroll-depth) * var(--veil-opacity-span),
       var(--veil-opacity-max)
     );
     transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -375,7 +375,7 @@
       color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%) 0%,
       transparent 100%
     );
-    opacity: clamp(0.015, var(--route-film, 0.03), var(--film-opacity-max, 0.05));
+    opacity: clamp(0.015, var(--route-film), var(--film-opacity-max));
     mix-blend-mode: normal;
     transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }

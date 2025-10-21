@@ -106,14 +106,14 @@
   }
 
   .dashboard-subtitle {
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 72%, transparent 28%));
+    color: var(--text-secondary);
     font-size: var(--text-body);
     margin: 0;
   }
 
   .dashboard-section {
     display: grid;
-    gap: var(--space-2xl);
+    gap: var(--grid-gap-xl);
   }
 
   .dashboard-section h2 {
@@ -123,8 +123,8 @@
 
   .quick-actions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: var(--space-xl);
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-card), 1fr));
+    gap: var(--grid-gap-lg);
   }
 
   :global(.action-card) {
@@ -134,7 +134,7 @@
   .action-link {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--cluster-gap-md);
     text-decoration: none;
     color: inherit;
     height: 100%;
@@ -152,7 +152,7 @@
   }
 
   .action-description {
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 72%, transparent 28%));
+    color: var(--text-secondary);
     font-size: var(--text-meta);
     margin: 0;
     line-height: var(--leading-relaxed);
@@ -160,7 +160,7 @@
 
   .getting-started {
     display: grid;
-    gap: var(--space-lg);
+    gap: var(--grid-gap-lg);
   }
 
   .getting-started h3 {
@@ -170,16 +170,16 @@
 
   .getting-started p {
     line-height: var(--leading-relaxed);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
+    color: var(--text-secondary);
     margin: 0;
   }
 
   .setup-steps {
     padding-inline-start: var(--space-xl);
     line-height: var(--leading-relaxed);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
+    color: var(--text-secondary);
     display: grid;
-    gap: var(--space-sm);
+    gap: var(--cluster-gap-sm);
   }
 
   .actions {

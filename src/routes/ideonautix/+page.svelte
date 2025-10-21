@@ -330,7 +330,7 @@
       {#each modules.cards as module (module.titleKey)}
         <GlassCard class="module-card" halo padding="lg" interactive>
           <div class="module-icon" aria-hidden="true">
-            <Icon name={module.icon} size={28} />
+            <Icon name={module.icon} size="var(--icon-glyph-lg)" />
           </div>
           <h3>{t(module.titleKey, module.titleFallback)}</h3>
           <p>{t(module.copyKey, module.copyFallback)}</p>
@@ -465,7 +465,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding: clamp(3rem, 8vw, 5rem) 0;
+    --section-padding: clamp(var(--section-padding-tablet), 8vw, var(--section-padding-desktop));
+    --section-padding-inline: 0;
   }
 
   .section > .container {
@@ -478,14 +479,14 @@
     content: '';
     position: absolute;
     inset: -18% -18% -26% -18%;
-    border-radius: clamp(36px, 7vw, 64px);
+    border-radius: var(--radius-bubble-lg);
     pointer-events: none;
     opacity: 0.24;
     z-index: var(--z-base);
   }
 
   .section::after {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%) 0%, transparent 100%);
+    background: linear-gradient(180deg, var(--surface-glow-overlay-fill) 0%, transparent 100%);
     opacity: 0.18;
   }
 
@@ -531,32 +532,32 @@
 
   :global(.snapshot-card) {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.25rem);
+    gap: var(--cluster-gap-lg);
   }
 
   :global(.snapshot-card img) {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--glass-border);
+    border: var(--border-width-hairline) solid var(--glass-border);
     box-shadow: var(--shadow-xl);
   }
 
   :global(.snapshot-card__body) {
     display: grid;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
+    gap: var(--cluster-gap-md);
   }
 
   .section-title {
-    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-family: var(--font-heading);
     font-size: var(--text-headline);
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: var(--space-xl);
   }
 
   .section-lead {
-    max-width: 52ch;
-    margin-bottom: clamp(2rem, 6vw, 3rem);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 80%, transparent 20%));
+    max-width: var(--measure-lg);
+    margin-bottom: var(--space-3xl);
+    color: var(--text-secondary);
     font-size: var(--text-lead);
     line-height: var(--leading-relaxed);
   }
@@ -564,14 +565,14 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-lg);
     justify-content: center;
   }
 
   .hero-highlights {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--grid-gap-md);
+    grid-template-columns: repeat(auto-fit, minmax(var(--tile-min-width-sm), 1fr));
     text-align: left;
     font-size: var(--text-small);
     line-height: var(--leading-normal);
@@ -580,16 +581,16 @@
   .hero-eyebrow {
     display: block;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-meta);
     font-size: var(--text-eyebrow);
-    color: var(--text-tertiary, color-mix(in srgb, var(--text) 65%, transparent 35%));
-    margin-bottom: 0.25rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-2xs);
   }
 
   .module-grid {
     display: grid;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--grid-gap-xl);
+    grid-template-columns: repeat(auto-fit, minmax(var(--tile-min-width-md), 1fr));
   }
 
   :global(.module-card) {
@@ -601,34 +602,34 @@
   :global(.module-card) h3 {
     font-size: var(--text-card-title);
     line-height: var(--leading-snug);
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--space-md);
   }
 
   :global(.module-card) p {
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    color: var(--text-secondary);
     font-size: var(--text-body);
     line-height: var(--leading-relaxed);
   }
 
   .module-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 16px;
+    inline-size: var(--size-icon-lg);
+    block-size: var(--size-icon-lg);
+    border-radius: var(--radius-lg);
     background: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.12) 60%, transparent 40%);
     display: grid;
     place-items: center;
-    margin-bottom: 1rem;
-    color: var(--ideonautix-accent, var(--aurora-purple));
+    margin-bottom: var(--space-lg);
+    color: var(--ideonautix-accent);
   }
 
   .status {
     display: grid;
-    gap: 2rem;
+    gap: var(--grid-gap-xl);
   }
 
   :global(.status-card) {
     display: grid;
-    gap: 1.25rem;
+    gap: var(--cluster-gap-md);
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
     --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 26%, transparent 74%);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 62%, var(--cherry-pop) 38%);
@@ -636,21 +637,21 @@
 
   .status-list {
     margin: 0;
-    padding-left: 1.5rem;
+    padding-left: calc(var(--space-lg) + var(--space-sm));
     display: grid;
-    gap: 0.5rem;
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 75%, transparent 25%));
+    gap: var(--space-sm);
+    color: var(--text-secondary);
   }
 
   .use-cases {
     display: grid;
-    gap: clamp(2rem, 6vw, 3.5rem);
+    gap: var(--grid-gap-2xl);
     align-items: start;
   }
 
   .use-cases-grid {
     display: grid;
-    gap: clamp(1.5rem, 4vw, 2.4rem);
+    gap: var(--grid-gap-lg);
   }
 
   :global(.use-case-card) {
@@ -661,58 +662,50 @@
 
   :global(.pilot-card) {
     display: grid;
-    gap: 1.5rem;
+    gap: var(--grid-gap-lg);
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--cherry-pop) 28%, transparent 72%);
-    --surface-glass-shadow: 0 20px 50px rgba(24, 18, 38, 0.18);
+    --surface-glass-shadow: var(--shadow-card-cherry);
     --focus-ring-color: color-mix(in srgb, var(--cherry-pop) 58%, var(--aurora-purple) 42%);
   }
 
   .pilot-form {
     display: grid;
-    gap: 1.5rem;
-    max-width: 620px;
-    --form-gap: 1.4rem;
-    --form-field-radius: 12px;
-    --form-field-padding-y: 0.75rem;
-    --form-field-padding-x: 1rem;
+    gap: var(--grid-gap-lg);
+    max-width: var(--content-width-standard);
+    --form-gap: var(--grid-gap-md);
+    --form-field-radius: var(--radius-md);
+    --form-field-padding-y: var(--space-md);
+    --form-field-padding-x: var(--space-lg);
     --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
     --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
-    --form-field-border: color-mix(
-      in srgb,
-      var(--surface-field-border, color-mix(in srgb, var(--border) 78%, transparent 22%)) 84%,
-      transparent 16%
-    );
+    --form-field-border: color-mix(in srgb, var(--surface-field-border) 84%, transparent 16%);
     --form-field-border-focus: color-mix(
       in srgb,
-      var(--ideonautix-accent, var(--aurora-purple)) 58%,
+      var(--ideonautix-accent) 58%,
       rgba(var(--cherry-pop-rgb), 0.42) 42%
     );
-    --form-focus-ring-color: color-mix(
-      in srgb,
-      var(--ideonautix-accent, var(--aurora-purple)) 70%,
-      var(--cherry-pop) 30%
-    );
-    --form-field-shadow: 0 16px 36px rgba(22, 12, 32, 0.16), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
-    --form-textarea-min-height: 160px;
+    --form-focus-ring-color: color-mix(in srgb, var(--ideonautix-accent) 70%, var(--cherry-pop) 30%);
+    --form-field-shadow: var(--shadow-card-neutral-soft), var(--shadow-inset-light);
+    --form-textarea-min-height: var(--space-5xl);
     --form-error-color: color-mix(in srgb, var(--cherry-pop) 85%, var(--text) 15%);
     --form-status-success-bg: color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%);
     --form-status-success-color: color-mix(
       in srgb,
-      var(--ideonautix-accent, var(--aurora-purple)) 66%,
+      var(--ideonautix-accent) 66%,
       var(--text) 34%
     );
   }
 
   .form-grid {
     display: grid;
-    gap: 1rem;
+    gap: var(--grid-gap-md);
   }
 
   .form-grid .form-field,
   .pilot-form .form-field {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     font-weight: 600;
   }
 
@@ -722,12 +715,12 @@
 
   .privacy-note {
     font-size: var(--text-meta);
-    color: var(--text-tertiary, color-mix(in srgb, var(--text) 60%, transparent 40%));
+    color: var(--text-tertiary);
   }
 
   :global(.cta-card) {
     display: grid;
-    gap: 1.2rem;
+    gap: calc(var(--space-lg) + var(--space-xs));
     text-align: center;
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%);
@@ -737,7 +730,7 @@
   .cta-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-lg);
     justify-content: center;
   }
 
