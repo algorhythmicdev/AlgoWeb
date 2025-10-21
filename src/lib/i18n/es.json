@@ -1,72 +1,63 @@
 {
   "site": {
-    "title": "AlgoRhythmics",
-    "tagline": "Donde la lógica baila con la creatividad",
-    "description": "Laboratorio de innovación en IA que da vida a la plataforma de viajes NodeVoyage y a la suite de productividad Ideonautix"
+    "title": "Algorhythmics",
+    "tagline": "Clear AI tools for everyone.",
+    "description": "We help people and teams use AI at work. We teach, plan, and build simple apps that save time. No fluff."
   },
   "seo": {
-    "default_title": "AlgoRhythmics — Ideas tuned to human rhythm.",
-    "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
-    "default_og_title": "AlgoRhythmics",
-    "default_og_description": "Ideas tuned to human rhythm.",
+    "default_title": "Algorhythmics — Clear AI for real people.",
+    "default_description": "We make AI clear and useful. We consult on AI setup, build helpful apps, and teach teams how to use them.",
+    "default_og_title": "Algorhythmics",
+    "default_og_description": "AI for travel crews and founders.",
     "default_url": "https://algorhythmics.com",
     "home": {
-      "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
-      "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
-      "og_title": "AlgoRhythmics — Calm OS rituals",
-      "og_description": "Calm OS rituals for travel crews, founders, and partners."
+      "title": "Algorhythmics — Clear AI tools that explain themselves",
+      "description": "Straightforward tools and training. NodeVoyage, Ideonautix, and hands‑on help for your work.",
+      "og_title": "Algorhythmics â€” AI that explains itself.",
+      "og_description": "AI products and services that stay approachable, transparent. supportive."
     }
   },
   "app": {
-    "loading": "Cargando..."
+    "loading": "Setting up your use..."
   },
   "settings": {
     "theme": {
-      "group": "Tema de color",
-      "trigger_label": "Elegir tema",
-      "menu_label": "Temas disponibles",
-      "light": "Modo claro",
-      "dark": "Modo oscuro",
-      "contrast": "Modo de alto contraste",
-      "selected": "Tema establecido en {theme}"
+      "group": "Choose a theme",
+      "trigger_label": "Choose theme",
+      "menu_label": "Available themes",
+      "light": "Light",
+      "dark": "Dark",
+      "contrast": "High contrast",
+      "selected": "Theme changed to {theme}."
     }
   },
   "nav": {
-    "home": "Inicio",
-    "about": "Acerca de",
+    "home": "Home",
+    "about": "About",
     "solutions": "Solutions",
     "solutions_panel_label": "Solutions menu",
-    "solutions_nodevoyage": "NodeVoyage Travel OS",
-    "solutions_nodevoyage_desc": "Plan adventures with our AI travel companion",
-    "solutions_ideonautix": "Ideonautix Startup OS",
-    "solutions_ideonautix_desc": "Launch ideas with modular productivity copilots",
-    "solutions_consulting": "AI Consulting Services",
-    "solutions_consulting_desc": "Tailored integration, training, and strategy",
+    "solutions_nodevoyage": "NodeVoyage Travel Tools.",
+    "solutions_nodevoyage_desc": "Plan adventures with our AI travel app.",
+    "solutions_ideonautix": "Ideonautix Startup Tools.",
+    "solutions_ideonautix_desc": "Launch ideas with modular productivity helpers.",
+    "solutions_consulting": "AI Consulting Services.",
+    "solutions_consulting_desc": "Tailored integration, training. strategy.",
     "help_center": "Help Center",
-    "contact": "Contacto",
-    "brand_aria": "Inicio de AlgoRhythmics",
-    "brand_name": "AlgoRhythmics",
-    "primary_label": "Navegación principal",
-    "resources_panel_label": "Quick access to highlights",
-    "talk_to_us": "Habla con nosotros",
-    "quick_controls": "Controles rápidos",
-    "toggle_menu": "Abrir o cerrar menú",
-    "close_menu": "Cerrar menú",
-    "skip_to_content": "Skip to content",
-    "services": "Services",
-    "educational_outreach": "Educational Outreach",
-    "resources": "Resources",
-    "resources_blog": "Blog",
-    "resources_blog_desc": "Insights, news, and creative stories",
-    "resources_cases": "Case Studies",
-    "resources_cases_desc": "See AlgoRhythmics solutions in action",
-    "resources_events": "Events",
-    "resources_events_desc": "Join upcoming webinars and community meetups"
+    "contact": "Contact",
+    "brand_aria": "Go to the Algorhythmics homepage.",
+    "brand_name": "Algorhythmics",
+    "primary_label": "Primary navigation",
+    "resources_panel_label": "Quick access to highlights.",
+    "talk_to_us": "Talk with us",
+    "quick_controls": "Quick controls",
+    "toggle_menu": "Toggle the menu",
+    "close_menu": "Close the menu",
+    "skip_to_content": "Skip to content"
   },
   "language_switcher": {
-    "group_label": "Selector de idioma",
-    "trigger_label": "Elegir idioma",
-    "menu_label": "Idiomas disponibles",
+    "group_label": "Language selector",
+    "trigger_label": "Choose language",
+    "menu_label": "Available languages",
     "languages": {
       "en": {
         "short": "EN",
@@ -74,116 +65,116 @@
       },
       "lv": {
         "short": "LV",
-        "name": "Latviešu"
+        "name": "LatvieÅ¡u"
       },
       "ru": {
         "short": "RU",
-        "name": "Русский"
+        "name": "Ð ÑƒÑ Ñ ÐºÐ¸Ð¹"
       },
       "uk": {
         "short": "UK",
-        "name": "Українська"
+        "name": "Ð£ÐºÑ€Ð°Ñ—Ð½Ñ ÑŒÐºÐ°"
       },
       "fr": {
         "short": "FR",
-        "name": "Français"
+        "name": "FranÃ§ais"
       },
       "es": {
         "short": "ES",
-        "name": "Español"
+        "name": "EspaÃ±ol"
       }
     }
   },
   "common": {
-    "submitting": "Enviando..."
+    "submitting": "Sending..."
   },
   "form": {
-    "error_required": "Este campo es obligatorio",
-    "error_email": "Correo electrónico no válido",
-    "error_phone": "Número de teléfono no válido",
-    "error_validation": "Revisa los errores en el formulario",
-    "required_note": "* Campos obligatorios",
-    "helper_company": "Indica el equipo o iniciativa que solicita el piloto.",
-    "helper_name": "Cuéntanos quién liderará la colaboración día a día.",
-    "helper_email": "Aquí enviaremos la presentación inicial y los enlaces de agenda.",
-    "helper_phone": "Opcional, pero útil si debemos coordinarnos con rapidez.",
-    "helper_industry": "Elige la línea para compartir casos de uso relevantes.",
-    "helper_description": "Describe los resultados que esperas de los paquetes Strategy, Build o Care.",
-    "helper_subject": "Añade un título para que podamos dirigir tu mensaje sin demora.",
-    "helper_message": "Comparte contexto, enlaces o archivos que debamos revisar por adelantado."
+    "error_required": "This field is required.",
+    "error_email": "Enter a valid email address.",
+    "error_phone": "Add a phone number with country code.",
+    "error_validation": "Fix the highlighted fields.",
+    "required_note": "All fields marked with * are required.",
+    "helper_company": "Who should invoices or agreements reference?",
+    "helper_name": "Share the main point of contact.",
+    "helper_email": "We use this to send confirmations.",
+    "helper_phone": "Include a direct line with country code.",
+    "helper_industry": "Pick the space you operate in.",
+    "helper_description": "Describe the challenge or opportunity.",
+    "helper_subject": "Summarise your request in a sentence.",
+    "helper_message": "Add details, timelines, or questions."
   },
   "home": {
     "hero": {
-      "status": "Independent AI studio · Riga ↔ Rotterdam",
+      "status": "Independent AI team Â· Riga â†” Rotterdam.",
       "title": {
-        "lead": "AlgoRhythmics",
-        "brand": "shapes calm AI workflows",
-        "trail": "with signage discipline."
+        "lead": "Algorhythmics",
+        "brand": "shapes AI steps",
+        "trail": "with projects discipline."
       },
-      "tagline": "Calm AI for travel crews and founder teams.",
-      "subtitle": "NodeVoyage, Ideonautix, and our consulting practice run on the same deliberate rituals.",
-      "description": "We pair tactile signage craft with transparent automation notes so every screen stays readable, explainable, and inclusive.",
-      "cta_products": "Explore our platforms",
-      "cta_consulting": "Book a calm strategy chat",
+      "tagline": "AI for travel crews and founder teams.",
+      "subtitle": "NodeVoyage, Ideonautix. our consulting practice run on the same deliberate.",
+      "description": "We pair tactile projects build with transparent automation notes so every screen stays readable, explainable. inclusive.",
+      "cta_products": "Explore our tool",
+      "cta_consulting": "Book a strategy chat",
       "actions_label": "Primary hero actions",
       "next_milestone": "Upcoming milestone",
-      "pillars_title": "How we keep momentum steady",
+      "pillars_title": "How we keep momentum steady.",
       "pillars": [
-        "Shared rituals link product sprints, consulting engagements, and education programmes.",
-        "Accessibility, localisation, and inclusive writing shape every interface.",
+        "Shared link product sprints, consulting engagements. education programmes.",
+        "Accessibility, localisation. inclusive writing shape every interface.",
         "Every automation ships with plain-language documentation and opt-out controls."
       ],
       "signals": {
-        "studio_phase": "Studio snapshot",
-        "studio_phase_value": "Founder-led studio • Est. 2023",
+        "studio_phase": "team snapshot",
+        "studio_phase_value": "Founder-led team â€¢ Est. 2023.",
         "focus_tracks": "Focus tracks",
-        "focus_tracks_value": "NodeVoyage · Ideonautix · Consulting",
+        "focus_tracks_value": "NodeVoyage Â· Ideonautix Â· Consulting.",
         "research": "Research roots",
-        "research_value": "Signage R&D + Cloud AI"
+        "research_value": "R&D + Cloud AI"
       },
       "moments": {
         "nodevoyage": {
-          "kicker": "Platform spotlight",
+          "kicker": "tool spotlight",
           "status": "NodeVoyage",
-          "copy": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
+          "copy": "Your AI-powered travel app â€” plan, explore. remember your journeys effortlessly.",
           "meta": "Beta invites open",
           "cta": "Preview NodeVoyage"
         },
         "ideonautix": {
-          "kicker": "Platform spotlight",
+          "kicker": "tool spotlight",
           "status": "Ideonautix",
-          "copy": "The productivity suite for modern creators — where every idea gets momentum.",
-          "meta": "Research sprint underway",
+          "copy": "The productivity suite for modern creators â€” where every idea gets momentum.",
+          "meta": "Research sprint underway.",
           "cta": "Preview Ideonautix"
         }
       },
       "focus": {
-        "kicker": "Studio focus",
-        "title": "Respect for the humans using AI",
-        "description": "We slow down to explain the why, map the hand-offs, and keep every control easy to discover.",
+        "kicker": "team focus",
+        "title": "Respect for the humans using AI.",
+        "description": "We slow down to explain the why, map the hand-offs. keep every control easy to discover.",
         "points": [
-          "Light, dark, and contrast themes stay readable and consistent.",
+          "Light, dark. contrast themes stay readable and consistent.",
           "Reduced-motion preferences are honoured across interactions.",
           "Clear audit trails keep AI decisions transparent."
         ],
         "cta": "Visit the community"
       },
       "milestone_cta": "See the roadmap",
-      "brand_aria": "AlgoRhythmics logomark highlighted in the hero heading"
+      "brand_aria": "Algorhythmics logomark highlighted in the hero heading."
     },
     "story": {
       "title": "Our story",
-      "reality_title": "What keeps us grounded",
-      "reality_text": "We stay close to signage floors and partner operations to keep prototypes practical.",
+      "reality_title": "What keeps us grounded.",
+      "reality_text": "We stay close to projects floors and partner work to keep prototypes practical.",
       "mission_title": "Mission",
       "mission_text": "Ship approachable AI tools and consulting loops that explain themselves and invite collaboration.",
       "vision_title": "Vision",
-      "vision_text": "By 2026 every AlgoRhythmics launch will share one trusted workflow so partners can switch contexts without friction."
+      "vision_text": "By 2026 every Algorhythmics launch will share one trusted steps so partners can switch contexts without friction."
     },
     "timeline": {
       "title": "Our path",
-      "subtitle": "Milestones keeping us honest",
-      "filters_label": "Filter milestones by status",
+      "subtitle": "Milestones keeping us honest.",
+      "filters_label": "Filter milestones by status.",
       "filters_reset": "Show all statuses",
       "filters_empty": "No milestones match the selected status yet.",
       "upcoming_badge": "Upcoming",
@@ -203,7 +194,7 @@
         },
         "company-formation": {
           "title": "Company formation",
-          "description": "Complete registration, legal setup, and founder agreements.",
+          "description": "Complete registration, legal setup. founder agreements.",
           "note": ""
         },
         "liaa-application": {
@@ -213,74 +204,74 @@
         },
         "mvp-ideonautix": {
           "title": "Ideonautix MVP",
-          "description": "Release the first public version of the Ideonautix productivity platform.",
+          "description": "Release the first public version of the Ideonautix productivity tool.",
           "note": ""
         },
         "pilot-consulting": {
           "title": "AI consulting pilot",
-          "description": "Offer a no-cost pilot to three partners exploring calm AI integration.",
+          "description": "Offer a no-cost pilot to three partners exploring AI integration.",
           "note": ""
         },
         "mvp-nodevoyage": {
           "title": "NodeVoyage beta",
-          "description": "Open the NodeVoyage travel platform to public beta with Nodi on board.",
+          "description": "Open the NodeVoyage travel tool to public beta with Nodi on board.",
           "note": ""
         },
         "education-program": {
-          "title": "Education programme rollout",
+          "title": "Education programme rollout.",
           "description": "Bring our AI education sessions to secondary schools across Latvia.",
           "note": "Goal: 75+ institutes"
         }
       },
-      "filters_announcement": "Showing {count} milestones"
+      "filters_announcement": "Showing {count} milestones."
     },
     "cta": {
       "eyebrow": "Keep exploring",
       "title": "Stay in our orbit",
-      "text": "Get monthly roadmap notes, accessibility tips, and early access invites across NodeVoyage and Ideonautix.",
-      "primary": "Join the community",
-      "secondary": "Book a calm strategy chat",
+      "text": "Get monthly roadmap notes, accessibility tips. early access invites across NodeVoyage and Ideonautix.",
+      "primary": "Explore resources",
+      "secondary": "Book a strategy chat",
       "points": [
         "Roadmap walkthroughs before they reach the blog.",
         "Pilot invitations go to subscribers first.",
-        "Accessibility checklists and signage-inspired playbooks."
+        "Accessibility checklists and projects-inspired playbooks."
       ],
-      "consulting": "Prefer a guided walkthrough? Book a calm strategy chat and we will map your next steps together."
+      "consulting": "Prefer a guided walkthrough? Book a strategy chat and we will map your next steps together."
     },
     "founders": {
       "title": "Meet the founders",
-      "subtitle": "Two makers blending signage craft with calm AI",
+      "subtitle": "Two makers blending projects build with AI.",
       "email_cta": "Email",
       "linkedin_cta": "LinkedIn",
       "nikita": {
         "name": "Nikita Jurtaevs",
         "role": "Co-Founder & CEO",
-        "bio": "Nikita keeps product direction, story, and partnerships aligned so every release feels tactile and honest.",
+        "bio": "Nikita keeps product direction, story. partnerships aligned so every release feels tactile and honest.",
         "current_title": "Current focus",
-        "current_position": "Reclame Fabriek — shaping lighting, coating, and fabrication trials that inform our interfaces.",
+        "current_position": "Reclame Fabriek â€” shaping lighting, coating. fabrication trials that inform our interfaces.",
         "expertise": [
-          "Narrative-led product strategy",
-          "Experience design and quality assurance",
-          "Partnership and education outreach"
+          "Narrative-led product strategy.",
+          "use design and quality assurance.",
+          "Partnership and education outreach."
         ]
       },
       "slaff": {
-        "name": "Vjaceslavs \"Slaff\" Trosins",
+        "name": "Vjaceslavs \"Slaff\" Trosins.",
         "role": "Co-Founder & CTO",
         "current_title": "Current focus",
-        "bio": "Slaff leads the engineering stack, data flows, and AI integrations powering our platforms.",
-        "position": "Reclame Fabriek — refining controllers, LED systems, and tooling that steer our software choices.",
+        "bio": "Slaff leads the engineering stack, data flows. AI integrations powering our tool.",
+        "position": "Reclame Fabriek â€” refining controllers, LED systems. tooling that steer our software choices.",
         "philosophy": "Systems thinking across hardware and software keeps solutions honest and dependable.",
         "achievements": [
-          "Runs a Google Cloud–first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL, and realtime messaging.",
-          "Bridges signage-grade controllers with transparent AI experiences.",
+          "Runs a Google Cloudâ€“first stack with SvelteKit, Flutter, Fastify, Prisma/PostgreSQL. realtime messaging.",
+          "Bridges projects-grade controllers with transparent AI experiences.",
           "Leads fundraising and multidisciplinary teams across both flagships."
         ],
-        "brand_title": "Brand experience",
-        "brand_intro": "We honed our craft while partnering with global brands on premium signage systems:",
-        "brand_context": "Projects delivered with Reclame Fabriek (Daugavpils, LV) by both founders",
-        "algorhythmics_title": "Vision for AlgoRhythmics",
-        "algorhythmics_vision": "Blend signage precision with cloud agility so AlgoRhythmics ships trustworthy, ready-to-use AI experiences."
+        "brand_title": "Brand use",
+        "brand_intro": "We honed our build while partnering with global brands on premium projects systems:.",
+        "brand_context": "Projects delivered with Reclame Fabriek (Daugavpils, LV) by both founders.",
+        "algorhythmics_title": "Vision for Algorhythmics.",
+        "algorhythmics_vision": "Blend projects precision with cloud agility so Algorhythmics ships trustworthy, ready-to-use AI experiences."
       },
       "labels": {
         "expertise": "Core strengths",
@@ -290,20 +281,20 @@
     },
     "partners": {
       "eyebrow": "Collaborators",
-      "title": "Partners who keep us sharp",
+      "title": "Partners who keep us sharp.",
       "description": "Signage specialists and educators help us keep prototypes grounded in real production.",
       "location": "Location",
       "founded": "Founded",
       "website": "Website",
       "clients_label": "Clients",
-      "clients_title": "Brands we have supported",
-      "clients_description": "Years of signage delivery for retail, finance, and aviation means our AI work stands on proven operations.",
+      "clients_title": "Brands we have supported.",
+      "clients_description": "Years of signage delivery for retail, finance. aviation keep our AI work anchored in proven work.",
       "labels": {
         "current": "Active partnership",
         "aspirational": "Future partnership",
         "scale": "Scale",
         "reach": "Reach",
-        "innovation": "Innovation focus",
+        "innovation": "new focus",
         "programs": "Programmes"
       },
       "note": "Note",
@@ -321,7 +312,7 @@
         "aria": "Visit {name}",
         "items": {
           "reclameFabriek": {
-            "summary": "Reclame Fabriek runs the signage R&D floor where we test materials, controllers, and fabrication-ready automation.",
+            "summary": "Reclame Fabriek runs the signage R&D floor where we test materials, controllers. fabrication-ready automation.",
             "highlights": [
               "300+ LED neon colours engineered and certified in-house.",
               "Custom controllers inform our realtime product design.",
@@ -332,790 +323,790 @@
       }
     },
     "products": {
-      "title": "Platform lineup",
-      "subtitle": "NodeVoyage and Ideonautix share one calm studio.",
+      "title": "tool lineup",
+      "subtitle": "NodeVoyage and Ideonautix share one team.",
       "cta_title": "Stay close",
-      "cta_text": "Join the community for release news, pilot invites, and accessibility updates.",
+      "cta_text": "Join the community for release news, pilot invites. accessibility updates.",
       "cta_join": "Join the community",
       "cta_contact": "Book a chat"
     },
     "page": {
       "hero": {
-        "title": "Donde la lógica baila con la creatividad.",
-        "subtitle": "AlgoRhythmics crea plataformas de IA, rituales de consultoría y programas educativos que mantienen la innovación al alcance de todos, desde estudiantes hasta empresas.",
-        "description": "Coreografiamos la tecnología con señalización accesible, localización inclusiva y notas de automatización transparentes. El resultado es una IA tranquila, clara y colaborativa.",
-        "primary_cta": "Explora nuestros servicios",
-        "secondary_cta": "Conoce nuestra misión"
+        "title": "Where logic dances with creativity.",
+        "subtitle": "Algorhythmics builds AI tool, consulting. educational programmes that keep new approachable for everyone—from students to enterprises.",
+        "description": "We choreograph technology with human-friendly projects build, inclusive localisation. transparent automation notes. The result is AI that feels, clear. collaborative.",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Learn About Our Mission."
       },
       "highlights": {
-        "eyebrow": "Aspectos clave",
-        "title": "Innovación que se siente acogedora",
-        "description": "Cada experiencia de AlgoRhythmics mezcla lógica rigurosa con juego imaginativo. Estos destacados muestran cómo nuestro ritmo acompaña a viajeros, fundadores, estudiantes y aprendices de por vida.",
+        "eyebrow": "Key highlights",
+        "title": "new that feels welcoming.",
+        "description": "Every Algorhythmics use blends rigorous logic with imaginative play. These highlights show how our rhythm supports travellers, founders, students. lifelong learners.",
         "items": {
           "innovative_ai": {
-            "title": "Soluciones de IA innovadoras",
-            "copy": "NodeVoyage e Ideonautix se adaptan a tus viajes y flujos de trabajo con precisión lúdica."
+            "title": "new AI Solutions",
+            "copy": "NodeVoyage and Ideonautix adapt to your journeys and steps with playful precision."
           },
           "educational_impact": {
-            "title": "Impacto educativo",
-            "copy": "Pilotos curriculares, laboratorios para docentes y hackatones estudiantiles fomentan creadores seguros."
+            "title": "Educational Impact",
+            "copy": "Curriculum pilots, teacher labs. student hackathons nurture confident creators."
           },
           "consulting_excellence": {
-            "title": "Excelencia en consultoría",
-            "copy": "Sprints de integración prácticos combinan automatización transparente con cambios duraderos."
+            "title": "Consulting Excellence.",
+            "copy": "Hands-on integration sprints pair transparent automation with lasting change."
           },
           "community_creativity": {
-            "title": "Comunidad y creatividad",
-            "copy": "Blogs, eventos y foros permiten que familias, fundadores y estudiantes aprendan juntos."
+            "title": "Community & Creativity.",
+            "copy": "Blogs, events. community forums let families, founders. students learn together."
           }
         }
       },
       "offerings": {
-        "eyebrow": "Lo que ofrecemos",
-        "title": "Servicios, plataformas y programas en un mismo ritmo",
-        "description": "Elige el camino que mejor se adapte a tu viaje. Mantenemos las transiciones sin esfuerzo: las alianzas suelen mezclar consultoría, productos y divulgación para alcanzar objetivos cambiantes.",
+        "eyebrow": "What we offer",
+        "title": "Services, tool. programmes in one rhythm.",
+        "description": "Choose the path that fits your journey. We keep transitions effortless—partnerships often blend consulting, products. outreach to meet evolving goals.",
         "items": {
           "consulting": {
-            "title": "Consultoría e integración de IA",
-            "summary": "Mapa oportunidades, ejecuta sprints piloto y lanza automatización explicable con la guía de los fundadores.",
+            "title": "AI Consulting & Integration.",
+            "summary": "Map opportunities, run pilot sprints. launch explainable automation with founder-led guidance.",
             "bullets": [
-              "Talleres de descubrimiento basados en la claridad de la señalética",
-              "Hojas de ruta piloto con controles de exclusión y documentación transparente",
-              "Formación y acompañamiento del cambio para mantener equipos seguros"
+              "Discovery workshops grounded in projects-inspired clarity.",
+              "Pilot roadmaps with opt-out controls and transparent documentation.",
+              "Training and change support to keep teams confident."
             ],
-            "primary_cta": "Solicita una consulta"
+            "primary_cta": "Request a Consultation."
           },
           "platforms": {
-            "title": "Plataformas insignia",
-            "summary": "NodeVoyage reimagina la planificación de viajes mientras Ideonautix acelera la productividad creativa; ambos comparten el mismo ritmo accesible.",
+            "title": "Flagship tool",
+            "summary": "NodeVoyage reimagines travel planning while Ideonautix accelerates creative productivity—both share the same accessible rhythm.",
             "bullets": [
-              "Itinerarios personalizados y espacios de trabajo colaborativos para viajes",
-              "Lienzos creativos, asistentes de pitch y flujos de trabajo multilingües",
-              "Modos con contraste AAA, soporte para movimiento reducido y localización integrada"
+              "Personalised itineraries and collaborative travel workspaces.",
+              "Creative canvases, pitch assistants. multilingual steps.",
+              "AAA contrast modes, reduced-motion support. localisation baked in."
             ],
-            "primary_cta": "Explora las plataformas",
-            "secondary_cta": "Ver casos de estudio"
+            "primary_cta": "Explore tool",
+            "secondary_cta": "View Case Studies"
           },
           "education": {
-            "title": "Divulgación educativa",
-            "summary": "En alianza con LIAA, escuelas e instituciones culturales, llevamos alfabetización en IA a aulas, bibliotecas y centros comunitarios.",
+            "title": "Educational Outreach",
+            "summary": "In partnership with LIAA, schools. cultural institutions, we bring AI literacy to classrooms, libraries. community hubs.",
             "bullets": [
-              "Planes de lecciones listos para usar y kits bilingües para el aula",
-              "Red de embajadores familiares y canales de mentoría",
-              "Eventos comunitarios que mezclan lógica, arte y narrativa"
+              "Ready-to-run lesson plans and bilingual classroom kits.",
+              "Parent ambassador network and mentorship pipelines.",
+              "Community events that blend logic, art. storytelling."
             ],
-            "primary_cta": "Únete al programa",
-            "secondary_cta": "Accede a la biblioteca de recursos"
+            "primary_cta": "Join the Programme",
+            "secondary_cta": "Access Resource Library."
           }
         }
       },
       "finale": {
-        "eyebrow": "Colaboremos",
-        "title": "¿Listo para coreografiar tu próxima idea?",
-        "copy": "Trae tu hoja de ruta, objetivos educativos o visión comunitaria. Te ayudaremos a orquestar la combinación adecuada de consultoría, productos y divulgación para que la IA se sienta amable y enfocada.",
-        "primary_cta": "Explora nuestros servicios",
-        "secondary_cta": "Conecta con el equipo"
+        "eyebrow": "Let’s collaborate",
+        "title": "Ready to choreograph your next idea?",
+        "copy": "Bring your roadmap, classroom goals, or community vision. We will help run the right mix of consulting, products. outreach to make AI feel friendly and focused.",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Connect with the Team."
       },
       "education_hub": {
-        "eyebrow": "Mantente al tanto",
-        "title": "Sigue el ritmo de la IA tranquila",
-        "description": "Nuestro Education Hub comparte historias de IA tranquila, herramientas para el aula y momentos de la comunidad: todo lo necesario para llevar la innovación inclusiva a la vida real.",
+        "eyebrow": "Stay in the loop",
+        "title": "Keep up with the AI rhythm.",
+        "description": "Our Education Hub shares AI stories, classroom toolkits. community highlights—everything you need to bring inclusive new to life.",
         "items": {
           "insights": {
-            "eyebrow": "Ideas",
-            "title": "Los artículos más recientes sobre IA tranquila",
-            "copy": "Historias legibles y multilingües coescritas con educadores, fundadores y familias.",
-            "cta": "Explorar ideas"
+            "eyebrow": "Insights",
+            "title": "Latest AI articles",
+            "copy": "Readable, multilingual stories co-written with educators, founders. families.",
+            "cta": "Browse insights"
           },
           "case_studies": {
-            "eyebrow": "Casos de estudio",
-            "title": "Historias de impacto y pilotos",
-            "copy": "Conoce aulas, startups y aliados culturales que practican IA tranquila.",
-            "cta": "Explorar destacados"
+            "eyebrow": "Case studies",
+            "title": "Impact stories & pilots.",
+            "copy": "See classrooms, startups. cultural partners practicing AI.",
+            "cta": "Explore spotlights"
           },
           "events": {
-            "eyebrow": "Eventos",
-            "title": "Talleres y encuentros comunitarios",
-            "copy": "Únete a reuniones mensuales con transcripciones, subtítulos y notas compartidas.",
-            "cta": "Ver próximos eventos"
+            "eyebrow": "Events",
+            "title": "Workshops & community jams.",
+            "copy": "Join monthly gatherings with transcripts, captions. shared notes.",
+            "cta": "See upcoming events"
           }
         }
       },
       "platform_showcase": {
         "eyebrow": "Product snapshots",
-        "title": "Experience our flagship platforms",
-        "description": "Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.",
+        "title": "use our flagship tool.",
+        "description": "Peek at the, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you use on this site.",
         "items": {
           "ideonautix": {
-            "title": "Ideonautix creative cockpit",
+            "title": "Ideonautix creative app.",
             "copy": "A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion."
           },
           "nodevoyage": {
-            "title": "NodeVoyage travel timeline",
-            "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller."
+            "title": "NodeVoyage travel timeline.",
+            "copy": "Collaborative itineraries with inclusive defaults, live missions. transparent AI reasoning ready for every traveller."
           }
         }
       }
     }
   },
   "consulting": {
-    "meta_title": "Consultoría de AlgoRhythmics",
-    "meta_description": "Únete al piloto de consultoría en IA tranquila: talleres, soporte de implementación y acompañamiento continuo.",
-    "hero_title": "Consultoría de IA cercana para equipos reales",
-    "hero_subtitle": "De la estrategia al código: ayudamos a las organizaciones a incorporar IA de forma responsable, ética y efectiva.",
-    "hero_description": "Colaboramos con tu equipo para diseñar flujos de IA que respeten a las personas, los procesos y la gestión del cambio. Espera claridad inspirada en la señalética, automatización transparente y rituales que perduran.",
-    "hero_cta_primary": "Solicitar el piloto",
-    "hero_cta_secondary": "Ver menú de servicios",
-    "hero_badge": "Piloto abierto",
+    "meta_title": "Algorhythmics consulting.",
+    "meta_description": "Join the AI consulting pilot for workshops, set up support. ongoing advisory care.",
+    "hero_title": "Friendly AI consulting for real teams.",
+    "hero_subtitle": "From strategy to code — helping organizations embed AI responsibly, ethically. effectively.",
+    "hero_description": "We partner with your team to design AI steps that respect people, processes. change management. Expect projects-inspired clarity, transparent automation. that stick.",
+    "hero_cta_primary": "Apply for the pilot",
+    "hero_cta_secondary": "Review service menu",
+    "hero_badge": "Pilot open",
     "hero_rotating": [
-      "Sesiones de diseño que traducen ideas en planes claros.",
-      "Lanzamos asistentes de IA que los equipos disfrutan usar.",
-      "Combinamos la artesanía de la señalética con la experiencia en la nube."
+      "Design sessions that translate ideas into clear plans.",
+      "Launch AI assistants that teams actually enjoy using.",
+      "Pair projects craftsmanship with cloud know-how."
     ],
-    "hero_testimonial_label": "Reflexión de cliente",
-    "hero_testimonial_quote": "AlgoRhythmics convirtió un encargo complejo de IA en un flujo amable y repetible para nuestro equipo.",
+    "hero_testimonial_label": "Client reflection",
+    "hero_testimonial_quote": "Algorhythmics turned a complex AI brief into a friendly, repeatable steps for our team.",
     "hero_testimonial_name": "Marta Ozoliņa",
-    "hero_testimonial_role": "Líder de innovación, Reclame Fabriek",
-    "spots_remaining": "Quedan {count} plazas en el piloto",
+    "hero_testimonial_role": "new Lead, Reclame Fabriek.",
+    "spots_remaining": "{count} pilot spots remaining.",
     "page": {
-      "quick_facts_eyebrow": "De un vistazo",
-      "packages_title": "Estrategia, construcción y cuidado en un mismo ritmo",
-      "packages_description": "Elige la mezcla que mejor se adapte a tu hoja de ruta. La mayoría de las alianzas combinan las tres fases para mantener la continuidad.",
-      "approach_eyebrow": "Nuestra filosofía",
-      "process_eyebrow": "Flujo del piloto",
-      "supporting_info_eyebrow": "¿Necesitas otra cosa?",
-      "supporting_info_title": "Nos adaptamos a entornos complejos",
-      "supporting_info_copy": "Industrias reguladas, equipos multilingües e infraestructuras híbridas son bienvenidos. Documentamos cada decisión para auditorías fluidas.",
-      "supporting_info_cta": "Escribe al equipo de consultoría",
-      "examples_eyebrow": "Impacto de muestra"
+      "quick_facts_eyebrow": "At a glance",
+      "packages_title": "Strategy, build. care in one rhythm.",
+      "packages_description": "Choose the mix that fits your roadmap. Most partnerships weave all three phases together for continuity.",
+      "approach_eyebrow": "Our philosophy",
+      "process_eyebrow": "Pilot flow",
+      "supporting_info_eyebrow": "Need something else?",
+      "supporting_info_title": "We adapt to complex environments.",
+      "supporting_info_copy": "Regulated industries, multilingual teams. hybrid infrastructures are welcome. We document every decision for smooth audits.",
+      "supporting_info_cta": "Email the consulting crew.",
+      "examples_eyebrow": "Sample impact"
     },
-    "what_title": "Lo que te ayudamos a hacer",
-    "what_1": "Diseñar flujos de IA accesibles y centrados en las personas.",
-    "what_2": "Prototipar, integrar y lanzar con confianza.",
-    "what_3": "Acompañar a tu equipo con formación y ciclos de iteración.",
+    "what_title": "What we help you do",
+    "what_1": "Design accessible, human-friendly AI steps.",
+    "what_2": "Prototype, integrate. launch with confidence.",
+    "what_3": "Support your team with training and iteration loops.",
     "packages": [
       {
-        "name": "Estrategia",
-        "description": "Mapeamos oportunidades, alineamos equipos y definimos un plan medible.",
+        "name": "Strategy",
+        "description": "Map opportunities, align teams. define a measurable plan.",
         "benefits": [
-          "Talleres de descubrimiento",
-          "Cuadro de preparación para la IA",
-          "Hoja de ruta con próximos pasos"
+          "Discovery workshops",
+          "AI readiness scorecard.",
+          "Roadmap with next best moves."
         ]
       },
       {
-        "name": "Implementación",
-        "description": "Prototipamos, integramos y lanzamos experiencias de IA tranquila.",
+        "name": "Build",
+        "description": "Prototype, integrate. launch AI experiences.",
         "benefits": [
-          "Prueba de concepto rápida",
-          "Integración con tu stack",
-          "Sesiones de formación para tu equipo"
+          "Rapid proof of concept.",
+          "Integration with your stack.",
+          "Training sessions for your team."
         ]
       },
       {
-        "name": "Acompañamiento",
-        "description": "Mantenemos todo en marcha con gobernanza, mejoras y soporte.",
+        "name": "Care",
+        "description": "Keep the lights on with governance, improvements. support.",
         "benefits": [
-          "Revisiones de salud mensuales",
-          "Backlog de iteraciones",
-          "Equipo de soporte bajo demanda"
+          "Monthly health reviews.",
+          "Iteration backlog",
+          "On-call support crew"
         ]
       }
     ],
     "approach": {
-      "title": "Cómo trabajamos",
-      "intro": "Cada colaboración combina la disciplina de la señalética con rituales colaborativos. Reducimos el ruido, documentamos decisiones y co-creamos bucles de entrega serena.",
+      "title": "How we work",
+      "intro": "Every engagement blends projects discipline with collaborative. We reduce noise, document decisions. co-create delivery loops.",
       "points": [
         {
-          "title": "Descubrimiento colaborativo",
-          "description": "Escuchamos primero, mapeando oportunidades, restricciones y actores para que cada movimiento respete tu contexto."
+          "title": "Collaborative discovery.",
+          "description": "We listen first, mapping opportunities, constraints. stakeholders so every move respects your context."
         },
         {
-          "title": "Entrega responsable",
-          "description": "El diseño accesible, la privacidad y la gestión del cambio guían cada prototipo antes de llegar a producción."
+          "title": "Responsible delivery",
+          "description": "Accessible design, privacy. change management guide each prototype before it reaches production."
         },
         {
-          "title": "Habilitación continua",
-          "description": "Formación, documentación y mentoría mantienen a los equipos con confianza mucho después del lanzamiento."
+          "title": "Ongoing enablement",
+          "description": "Training, documentation. mentorship keep teams confident long after launch."
         }
       ]
     },
-    "process_title": "Flujo del piloto",
+    "process_title": "Pilot flow",
     "process_steps": [
       {
-        "title": "Llamada inicial",
-        "description": "Comprender objetivos, restricciones y resultados deseados."
+        "title": "Kickoff call",
+        "description": "Understand goals, constraints. desired outcomes."
       },
       {
-        "title": "Sprint de diseño",
-        "description": "Prototipar la experiencia y confirmar el enfoque técnico."
+        "title": "Design sprint",
+        "description": "Prototype the use and confirm technical approach."
       },
       {
-        "title": "Soporte de lanzamiento",
-        "description": "Implementar, medir y ajustar juntos."
+        "title": "Launch support",
+        "description": "Ship, measure. adjust together."
       }
     ],
-    "timeline_title": "Cronograma del proceso",
-    "week_1": "Semana 1: Conversación de descubrimiento",
-    "week_2": "Semana 2: Plano estratégico",
-    "week_3_12": "Semanas 3-12: Soporte de implementación",
-    "benefits_title": "Lo que recibes",
-    "benefit_1": "Taller estratégico de IA sin costo",
-    "benefit_2": "Plan de implementación práctico",
-    "benefit_3": "Tres meses de asesoría continua",
-    "benefit_4": "Acceso prioritario a nuestros productos",
-    "requirements_title": "Requisitos",
-    "req_1": "Con base en Europa o cómodo con horario CET",
-    "req_2": "Compromiso con la transformación de IA",
-    "req_3": "Apertura a la colaboración y al feedback",
+    "timeline_title": "Process timeline",
+    "week_1": "Week 1: Discovery conversation.",
+    "week_2": "Week 2: Strategy blueprint.",
+    "week_3_12": "Week 3-12: set up support.",
+    "benefits_title": "What you get",
+    "benefit_1": "Complimentary AI strategy workshop.",
+    "benefit_2": "Hands-on set up plan",
+    "benefit_3": "Three months of advisory support.",
+    "benefit_4": "Priority access to our products.",
+    "requirements_title": "Requirements",
+    "req_1": "Based in Europe or comfortable with CET hours.",
+    "req_2": "Committed to AI transformation.",
+    "req_3": "Open to collaboration and feedback.",
     "examples": {
-      "title": "Compromisos de ejemplo",
-      "intro": "Imaginar cómo la IA tranquila puede apoyar tu sector ayuda a visualizar el impacto antes de empezar.",
+      "title": "Example engagements",
+      "intro": "Imagining how AI can support your sector helps teams visualise the impact before we start.",
       "items": [
         {
-          "title": "Asistente de feedback para redes escolares",
-          "description": "Co-diseñamos un asistente multilingüe para que los docentes capturen reflexiones de estudiantes más rápido sin perder el cumplimiento GDPR.",
-          "meta": "Educación • Sprint de 8 semanas"
+          "title": "School network feedback helper.",
+          "description": "Co-designed a multilingual helper so teachers capture student reflections faster while staying GDPR-aligned.",
+          "meta": "Education • 8-week sprint."
         },
         {
-          "title": "Copiloto de salida al mercado para startups",
-          "description": "Guiamos a un equipo de marketing de tres personas con rituales de ideación, briefs automatizados y tableros de analítica inclusivos.",
-          "meta": "Industria creativa • Piloto de 6 semanas"
+          "title": "Startup go-to-market co-pilot.",
+          "description": "Guided a three-person marketing crew with ideation, automated briefs. inclusive analytics dashboards.",
+          "meta": "Creative industry • 6-week pilot."
         }
       ]
     },
     "cta": {
-      "title": "¿Listo para unirte al piloto?",
-      "copy": "Comparte tus metas y coreografiaremos la mezcla de estrategia, construcción y cuidado que mantiene la IA amable para tus equipos.",
-      "primary": "Reserva una consulta",
-      "secondary": "Descargar dossier de capacidades"
+      "title": "Ready to join the pilot?",
+      "copy": "Share your goals and we will choreograph the mix of strategy, build. care that keeps AI friendly for your teams.",
+      "primary": "Book a consultation",
+      "secondary": "Download capabilities overview."
     },
-    "form_title": "Postúlate al piloto",
-    "form_intro": "Cuéntanos un poco sobre tu equipo para personalizar la sesión.",
-    "form_company": "Empresa",
-    "form_company_placeholder": "Nombre de la empresa o iniciativa",
-    "form_name": "Nombre de contacto",
-    "form_name_placeholder": "¿Con quién hablaremos?",
-    "form_email": "Correo electrónico",
-    "form_email_placeholder": "tu@ejemplo.com",
-    "form_phone": "Teléfono (opcional)",
+    "form_title": "Apply for the pilot",
+    "form_intro": "Tell us a little about your team so we can tailor the session.",
+    "form_company": "Company",
+    "form_company_placeholder": "Company or plan name",
+    "form_name": "Contact name",
+    "form_name_placeholder": "Who should we speak with?",
+    "form_email": "Email",
+    "form_email_placeholder": "you@example.com",
+    "form_phone": "Phone (optional)",
     "form_phone_placeholder": "+371 0000 0000",
-    "form_industry": "Industria",
-    "form_description": "Describe tus necesidades de IA",
-    "form_description_placeholder": "Comparte tus objetivos, los retos actuales y los resultados que buscas...",
-    "form_submit": "Enviar solicitud",
-    "form_success": "¡Solicitud recibida! Nos pondremos en contacto en 48 horas.",
-    "form_error": "Algo salió mal. Inténtalo de nuevo.",
-    "select_industry": "Selecciona industria...",
+    "form_industry": "Industry",
+    "form_description": "Describe your AI needs.",
+    "form_description_placeholder": "Share your AI goals, current hurdles. the outcomes you're chasing...",
+    "form_submit": "Submit application",
+    "form_success": "Application received! We'll reach out within 48 hours.",
+    "form_error": "Something went wrong. Please try again.",
+    "select_industry": "Select industry...",
     "industries": {
-      "technology": "Tecnología",
+      "technology": "Technology",
       "fintech": "FinTech",
-      "ecommerce": "Comercio electrónico",
-      "healthcare": "Salud",
-      "education": "Educación",
-      "manufacturing": "Manufactura",
-      "other": "Otra"
+      "ecommerce": "E-commerce",
+      "healthcare": "Healthcare",
+      "education": "Education",
+      "manufacturing": "Manufacturing",
+      "other": "Other"
     },
     "form_errors": {
-      "company_required": "Añade el nombre de tu empresa o iniciativa.",
-      "name_required": "Cuéntanos con quién hablaremos.",
-      "email_required": "El correo nos ayuda a responder.",
-      "email_invalid": "Añade una dirección de correo válida.",
-      "industry_required": "Selecciona la industria más cercana a tu trabajo.",
-      "description_required": "Comparte un poco sobre tus objetivos."
+      "company_required": "Please add your company or plan name.",
+      "name_required": "Let us know who we will be speaking with.",
+      "email_required": "Email helps us reply.",
+      "email_invalid": "Add a valid email address.",
+      "industry_required": "Select the industry closest to your work.",
+      "description_required": "Share a little about your goals."
     },
-    "form_mailto_subject": "Solicitud de piloto de consultoría de {company}",
-    "form_mailto_body": "Empresa: {company}\nContacto: {name}\nCorreo: {email}\nTeléfono: {phone}\nIndustria: {industry}\n\nObjetivos:\n{description}",
-    "packages_title": "Cómo te ayudamos"
+    "form_mailto_subject": "Consulting pilot application from {company}.",
+    "form_mailto_body": "Company: {company}\nContact: {name}\nEmail: {email}\nPhone: {phone}\nIndustry: {industry} Goals:\n{description}.",
+    "packages_title": "How we help"
   },
   "contact": {
-    "meta_title": "Contacta con AlgoRhythmics",
-    "meta_description": "Habla con los fundadores para pilotos, alianzas, prensa o colaboraciones comunitarias.",
-    "hero_title": "Iniciemos la conversación",
-    "hero_subtitle": "Ponte en contacto para pilotos, alianzas, prensa o colaboraciones comunitarias.",
+    "meta_title": "Contact Algorhythmics.",
+    "meta_description": "Reach the founders for pilots, partnerships, press, or community collaborations.",
+    "hero_title": "Let’s start a conversation.",
+    "hero_subtitle": "Reach out for pilots, partnerships, press, or community collaborations.",
     "hero_rotating": [
-      "Bandeja de fundadores, calendario y comunidad en un mismo lugar.",
-      "Elige el ritmo que se adapta a tu hoja de ruta.",
-      "Trae tu plan y sal con un impulso sereno."
+      "Founder inbox, calendar. community in one place.",
+      "Choose the pace that fits your runway.",
+      "Bring your roadmap—leave with momentum."
     ],
-    "form_title": "Envíanos un mensaje",
-    "form_name": "Nombre",
-    "form_name_placeholder": "¿Cómo deberíamos llamarte?",
-    "form_email": "Correo electrónico",
-    "form_email_placeholder": "tu@example.com",
-    "form_subject": "Asunto",
-    "form_subject_placeholder": "Oportunidad de colaboración",
-    "form_message": "Mensaje",
-    "form_message_placeholder": "Comparte algunos detalles para que podamos prepararnos.",
-    "form_submit": "Enviar mensaje",
-    "form_sending": "Enviando...",
-    "form_success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
-    "form_error": "Algo salió mal. Vuelve a intentarlo.",
-    "calendar_title": "Reserva una reunión",
-    "calendar_subtitle": "Agenda una llamada con nuestro equipo",
-    "calendar_button": "Ver calendario",
-    "info_title": "Información de contacto",
-    "info_email": "Correo",
-    "info_location": "Ubicación",
-    "info_email_value": "help@algorhythmics.com",
-    "info_location_value": "Letonia · Equipo remoto",
-    "social_title": "Síguenos",
+    "form_title": "Send us a note",
+    "form_name": "Name",
+    "form_name_placeholder": "How should we address you?",
+    "form_email": "Email",
+    "form_email_placeholder": "you@example.com",
+    "form_subject": "Subject",
+    "form_subject_placeholder": "Partnership opportunity.",
+    "form_message": "Message",
+    "form_message_placeholder": "Share a few details so we can prepare.",
+    "form_submit": "Send message",
+    "form_sending": "Sending...",
+    "form_success": "Message sent! We'll be in touch soon.",
+    "form_error": "Something went wrong. Please try again.",
+    "calendar_title": "Book a meeting",
+    "calendar_subtitle": "Schedule a call with our team.",
+    "calendar_button": "View calendar",
+    "info_title": "Contact information",
+    "info_email": "Email",
+    "info_location": "Location",
+    "info_email_value": "help@Algorhythmics.com.",
+    "info_location_value": "Latvia · Remote-first.",
+    "social_title": "Follow us",
     "social_linkedin": "LinkedIn",
     "social_github": "GitHub",
     "social_twitter": "Twitter",
-    "location_value": "Letonia · Equipo remoto",
+    "location_value": "Latvia · Remote-first.",
     "hero_ctas": [
       {
-        "label": "Escribe al estudio",
-        "description": "Contacta con la bandeja de entrada de los fundadores para alianzas, pilotos y prensa.",
-        "cta": "Escribir un correo",
-        "action": "mailto:help@algorhythmics.com"
+        "label": "Email the team",
+        "description": "Reach the founder inbox for partnerships, pilots. press.",
+        "cta": "Write an email",
+        "action": "mailto:help@Algorhythmics.com"
       },
       {
-        "label": "Reserva una llamada estratégica",
-        "description": "Reserva un taller de 30 minutos con nuestros fundadores.",
-        "cta": "Abrir calendario",
+        "label": "Book a strategy call",
+        "description": "Reserve a 30-minute workshop with our founders.",
+        "cta": "Open calendar",
         "action": "calendly"
       },
       {
-        "label": "Únete a la comunidad",
-        "description": "Vota funciones, revisa métricas y co-crea lanzamientos.",
-        "cta": "Entrar en Discord",
+        "label": "Join the community",
+        "description": "Vote on features, review metrics. co-create releases.",
+        "cta": "Enter Discord",
         "action": "https://discord.gg/algorhythmics"
       }
     ],
-    "form_topic": "Tema",
-    "form_topic_placeholder": "¿Qué te gustaría tratar?",
-    "success_title": "Mensaje recibido",
-    "success_subtitle": "Gracias por escribirnos. Respondemos en dos días laborables.",
+    "form_topic": "Topic",
+    "form_topic_placeholder": "What would you like to discuss?",
+    "success_title": "Message received",
+    "success_subtitle": "Thanks for reaching out. We reply within two working days.",
     "page": {
       "hero": {
-        "title": "Construyamos IA serena juntos",
-        "subtitle": "AlgoRhythmics trabaja en remoto desde Letonia y acompaña a socios de todo el mundo. Escríbenos para pilotos de productos, consultoría o colaboraciones comunitarias.",
-        "cta_email": "Escribe a help@algorhythmics.com",
-        "cta_events": "Explora nuestras soluciones"
+        "title": "Let’s build AI together.",
+        "subtitle": "Algorhythmics operates remotely from Latvia, serving partners worldwide. Reach out for product pilots, consulting, or community collaborations.",
+        "cta_email": "Email help@Algorhythmics.com.",
+        "cta_events": "Explore our solutions."
       },
       "cards": {
         "general": {
-          "title": "Consultas generales",
-          "copy": "¿Preguntas sobre AlgoRhythmics o nuestra hoja de ruta? Escríbenos y responderemos en un día laborable.",
-          "cta": "Escribe a help@algorhythmics.com"
+          "title": "General enquiries",
+          "copy": "Questions about Algorhythmics or our roadmap? Drop us a line and we will reply within one business day.",
+          "cta": "Email help@Algorhythmics.com."
         },
         "support": {
-          "title": "Pilotos de producto y consultoría",
-          "copy": "Colabora con nosotros en NodeVoyage, Ideonautix o proyectos de consultoría a medida. Diseñamos juntos pilotos y despliegues de largo plazo.",
-          "cta": "Ver resumen de soluciones"
+          "title": "Product pilots & consulting.",
+          "copy": "Partner with us on NodeVoyage, Ideonautix, or bespoke consulting engagements. We co-design pilots and long-term rollouts.",
+          "cta": "View solutions overview."
         },
         "education": {
-          "title": "Educación y comunidad",
-          "copy": "Escuelas, bibliotecas y organizaciones comunitarias pueden escribir a nuestros coordinadores en education@algorhythmics.com.",
-          "cta": "Escribe al equipo de divulgación"
+          "title": "Education & community.",
+          "copy": "Schools, libraries. community organisations can reach our outreach coordinators at education@Algorhythmics.com.",
+          "cta": "Email the outreach team."
         },
         "visit": {
-          "title": "Alianzas y prensa",
-          "copy": "Para colaboraciones, consultas de prensa o invitaciones, escribe a hello@algorhythmics.com y coordinaremos una sesión.",
-          "cta": "Escribe a hello@algorhythmics.com"
+          "title": "Partnerships & media",
+          "copy": "For collaborations, press enquiries, or speaking invitations, contact hello@Algorhythmics.com and we will coordinate a session.",
+          "cta": "Email hello@Algorhythmics.com."
         },
-        "heading": "Formas de conectar"
+        "heading": "Ways to connect"
       },
       "form": {
-        "eyebrow": "Envía un mensaje",
-        "title": "Respondemos en un día laborable",
-        "description": "Cuéntanos tu nombre, correo y qué te gustaría explorar. Respetamos tu privacidad y tratamos cada mensaje con cuidado.",
+        "eyebrow": "Send a message",
+        "title": "We reply within one business day.",
+        "description": "Please share your name, email. what you would like to explore. We respect your privacy and handle all messages with care.",
         "fields": {
           "name": {
-            "label": "Nombre"
+            "label": "Name"
           },
           "email": {
-            "label": "Correo electrónico"
+            "label": "Email"
           },
           "reason": {
-            "label": "Motivo del contacto",
+            "label": "Reason for contacting.",
             "options": {
-              "general": "Pregunta general",
-              "consulting": "Consultoría o piloto",
-              "education": "Educación y comunidad",
-              "media": "Medios o alianza"
+              "general": "General question",
+              "consulting": "Consulting or pilot",
+              "education": "Education & community.",
+              "media": "Media or partnership"
             }
           },
           "message": {
-            "label": "Mensaje"
+            "label": "Message"
           }
         },
-        "submit": "Enviar mensaje",
-        "note": "Al escribirnos aceptas nuestro trato respetuoso de los datos.",
-        "success": "¡Gracias! Tu cliente de correo se está abriendo con un mensaje prellenado.",
-        "error": "Corrige los campos resaltados.",
+        "submit": "Send message",
+        "note": "By emailing us you agree to our respectful data handling.",
+        "success": "Thank you! Your email client is opening with a pre-filled message.",
+        "error": "Please fix the highlighted fields.",
         "errors": {
-          "name_required": "Añade tu nombre, por favor.",
-          "email_required": "Usamos tu correo para responder.",
-          "email_invalid": "Introduce un correo válido.",
-          "reason_required": "Elige un motivo.",
-          "message_required": "Cuéntanos cómo podemos ayudar."
+          "name_required": "Please add your name.",
+          "email_required": "We use this to reply.",
+          "email_invalid": "Add a valid email address.",
+          "reason_required": "Select a reason.",
+          "message_required": "Tell us how we can help."
         },
-        "mailto_subject": "Consulta web de {name} ({reason})",
-        "mailto_body": "Nombre: {name}\nCorreo: {email}\nMotivo: {reason}\n\n{message}"
+        "mailto_subject": "Website enquiry from {name} ({reason}).",
+        "mailto_body": "Name: {name}\\nEmail: {email}\\nReason: {reason}\\n\\n{message}."
       },
       "newsletter": {
-        "title": "Suscríbete para novedades de lanzamiento",
-        "copy": "Recibe un resumen trimestral sobre NodeVoyage, Ideonautix y nuestras historias de consultoría. Nada de spam: solo progreso sincero.",
-        "cta": "Escribe a newsletter@algorhythmics.com",
-        "secondary": "Lee sobre nuestras soluciones",
-        "note": "¿Prefieres un formulario? Indica “Newsletter” en el mensaje anterior y te añadiremos manualmente.",
-        "eyebrow": "Actualizaciones del estudio"
+        "title": "Subscribe for launch updates.",
+        "copy": "Get a quarterly roundup on NodeVoyage, Ideonautix. our consulting stories. No spam—just honest progress.",
+        "cta": "Email newsletter@Algorhythmics.com.",
+        "secondary": "Read about our solutions.",
+        "note": "Prefer a form? Mention “Newsletter” in the message above and we will add you manually.",
+        "eyebrow": "team updates"
       },
       "support": {
-        "eyebrow": "Promesa de soporte",
-        "title": "Soporte humano y ágil en cada paso",
-        "copy": "Acompañamos cada piloto, sprint de consultoría y programa educativo con expectativas claras para que siempre sepas cuándo esperar respuesta.",
+        "eyebrow": "Support promise",
+        "title": "Responsive, human support every step of the way.",
+        "copy": "We pair every pilot, consulting sprint. classroom programme with clear expectations so you always know when to expect a reply.",
         "bullets": [
-          "La mayoría de las consultas reciben respuesta personal en un día laborable.",
-          "Los socios de pilotos y consultoría tienen un canal de escalación con respuesta en 24 horas para asuntos críticos.",
-          "Documentamos cada conversación con transparencia para que tu equipo retome el hilo al instante."
+          "Most enquiries receive a personal response within one business day.",
+          "Pilot partners and consulting clients get a dedicated escalation channel with 24-hour turnaround on critical issues.",
+          "We document every conversation transparently so teams can pick up where they left off."
         ]
       },
       "help": {
-        "eyebrow": "Guías y autoservicio",
-        "title": "El Centro de Ayuda ya ofrece guías de IA serena",
-        "copy": "Explora paquetes de onboarding, listas de solución de problemas y recursos multilingües en nuestra base de conocimiento.",
-        "cta": "Visita el Centro de Ayuda",
-        "note": "¿Necesitas algo ahora mismo? Escribe a help@algorhythmics.com para recibir orientación personalizada o escalar."
+        "eyebrow": "Guides & self-serve",
+        "title": "Help Center now live with AI guides.",
+        "copy": "Dive into onboarding packs, troubleshooting checklists. multilingual resources inside our Help Center knowledge base.",
+        "cta": "Visit the Help Center.",
+        "note": "Need something now? Email help@Algorhythmics.com for personalised guidance or escalation."
       },
       "social": {
-        "linkedin": "Sigue nuestro LinkedIn",
-        "linkedin_description": "Novedades del estudio y notas sobre contrataciones",
-        "twitter": "Únete a la conversación en X/Twitter",
-        "twitter_description": "Resúmenes de eventos y progreso de los pilotos",
-        "github": "Descubre nuestras herramientas abiertas en GitHub",
-        "github_description": "Kits iniciales y experimentos de IA serena"
+        "linkedin": "Follow on LinkedIn",
+        "linkedin_description": "team updates & hiring notes.",
+        "twitter": "Join the conversation on X/Twitter.",
+        "twitter_description": "Event recaps & pilot progress.",
+        "github": "Explore our open tooling on GitHub.",
+        "github_description": "Starter kits & AI experiments."
       }
     }
   },
   "help": {
     "page": {
       "hero": {
-        "eyebrow": "Soporte y base de conocimiento",
-        "title": "Bienvenido al Centro de Ayuda de AlgoRhythmics",
-        "subtitle": "Guías, rituales de IA serena y actualizaciones en vivo para que tu equipo se sienta seguro con nuestros productos y programas.",
-        "description": "Explora tutoriales de NodeVoyage e Ideonautix, descarga paquetes de onboarding o conecta con una persona en cuestión de clics. Cada artículo es AAA accesible y está localizado en nuestros idiomas principales.",
-        "primary": "Escribir a soporte",
-        "secondary": "Ir a respuestas rápidas"
+        "eyebrow": "Support & knowledge base.",
+        "title": "Welcome to the Algorhythmics Help Center.",
+        "subtitle": "Guides, AI. live status updates to help your team feel confident with our products and programmes.",
+        "description": "Explore walkthroughs for NodeVoyage and Ideonautix, download onboarding packs, or connect with a human in just a few clicks. We keep every article AAA accessible and localised for our core languages.",
+        "primary": "Message support",
+        "secondary": "Jump to quick answers."
       },
       "knowledge": {
-        "eyebrow": "Explora por enfoque",
-        "title": "Rutas seleccionadas para cada colaborador",
-        "copy": "Elige la guía que coincide con tu rol para ver rituales recomendados, listas de verificación y descargas.",
+        "eyebrow": "Browse by focus",
+        "title": "Curated paths for every collaborator.",
+        "copy": "Pick the guide that matches your role to see recommended, checklists. downloads.",
         "items": {
           "onboarding": {
-            "eyebrow": "Comienza aquí",
-            "title": "Rituales de onboarding y planes de despliegue",
-            "copy": "Planes paso a paso para viajes con NodeVoyage, pilotos de Ideonautix y compromisos de consultoría, con tarjetas de ritmo imprimibles.",
+            "eyebrow": "Start here",
+            "title": "Onboarding & rollout plans.",
+            "copy": "Step-by-step launch plans for NodeVoyage journeys, Ideonautix pilots. consulting engagements—complete with printable pacing cards.",
             "bullets": [
-              "Listas de comprobación para facilitadores de equipos de viaje y pods de startups",
-              "Presentaciones y guiones de orientación en EN · LV · RU",
-              "Plantillas de correo y avisos de privacidad listos para enviar"
+              "Facilitator checklists for travel crews and startup pods.",
+              "Orientation slides and talking points in EN · LV · RU.",
+              "Opt-in email templates and privacy notices ready to send."
             ],
-            "cta": "Descargar paquetes iniciales"
+            "cta": "Download starter packs."
           },
           "nodevoyage": {
             "eyebrow": "NodeVoyage",
-            "title": "Viajes, misiones y diarios",
-            "copy": "Comprende la cocreación de itinerarios, la puntuación de misiones y los controles de accesibilidad del sistema de viajes.",
+            "title": "Trips, missions. travel journaling.",
+            "copy": "Understand itinerary co-creation, mission scoring. accessibility controls for the Travel Tools.",
             "bullets": [
-              "Configura tableros compartidos para viajes familiares y escolares",
-              "Cómo funcionan los anclajes de memoria, la traducción AR y el modo sin conexión",
-              "Niveles de servicio y tiempos de respuesta para pilotos premium"
+              "Configure shared boards for family and classroom trips.",
+              "How memory anchors, AR translation. offline mode work.",
+              "Service levels & response windows for premium pilots."
             ],
-            "cta": "Visitar resumen de NodeVoyage"
+            "cta": "Visit NodeVoyage overview."
           },
           "ideonautix": {
             "eyebrow": "Ideonautix",
-            "title": "Copilotos modulares y productividad serena",
-            "copy": "Explora tutoriales módulo a módulo, consejos de gobernanza del espacio de trabajo y prompts de IA explicable para compartir con tu equipo.",
+            "title": "Modular helpers & productivity.",
+            "copy": "Explore module-by-module tutorials, workspace governance tips. explainable AI prompts to share with your team.",
             "bullets": [
-              "Biblioteca de guiones del Pitch Assistant con notas de ensayo",
-              "Entrenador Pomodoro y rituales de enfoque para equipos híbridos",
-              "Informes de seguridad y alcances de API para líderes técnicos"
+              "Pitch helper script library with rehearsal notes.",
+              "Pomodoro Coach and focus for hybrid teams.",
+              "Security briefings and API scopes for technical leads."
             ],
-            "cta": "Revisar módulos de Ideonautix"
+            "cta": "Review Ideonautix modules."
           },
           "policies": {
-            "eyebrow": "Políticas",
-            "title": "Confianza, accesibilidad y cumplimiento",
-            "copy": "Políticas en lenguaje claro sobre privacidad, retención de datos, diseño de alto contraste y escalado de soporte de emergencia.",
+            "eyebrow": "Policies",
+            "title": "Trust, accessibility. compliance.",
+            "copy": "Plain-language policies for privacy, data retention, high-contrast design. emergency support escalation.",
             "bullets": [
-              "Plantillas de privacidad listas para GDPR y notas sobre tratamiento de datos",
-              "Compromisos de accesibilidad AAA y circuito de reporte",
-              "Flujo de comunicación de estado para incidencias y eventos"
+              "GDPR-ready privacy templates and data processing notes.",
+              "AAA accessibility commitments and reporting loop.",
+              "Status communication steps for outages and incidents."
             ],
-            "cta": "Leer manual de estado"
+            "cta": "Read status playbook"
           }
         }
       },
       "faq": {
-        "eyebrow": "Respuestas rápidas",
-        "title": "Preguntas frecuentes",
-        "copy": "Lecturas breves que cubren los temas más consultados por familias y equipos.",
+        "eyebrow": "Quick answers",
+        "title": "Frequently asked questions.",
+        "copy": "Short reads that cover the topics we hear about most from teams and families alike.",
         "items": [
           {
-            "question": "¿Qué tan rápido responderá soporte a mi ticket?",
-            "answer": "Respondemos a la mayoría de las consultas en un día laborable. Los socios de pilotos y consultoría tienen un buzón de escalación dedicado con una ventana de respuesta de cuatro horas en horario laboral."
+            "question": "How fast will support reply to my ticket?",
+            "answer": "We respond to most enquiries within one business day. Pilot partners and consulting teams have a dedicated escalation inbox with a four-hour response window during business hours."
           },
           {
-            "question": "¿Dónde puedo encontrar formación para mi aula o equipo?",
-            "answer": "Descarga los paquetes para facilitadores en la sección de recursos de abajo o únete a nuestros círculos mensuales de onboarding en vivo. Cada sesión incluye grabaciones, transcripciones y materiales bilingües."
+            "question": "Where can I find training for my classroom or team?",
+            "answer": "Download facilitator packs in the resources section below or join our monthly live onboarding circles. Each session includes recordings, transcripts. bilingual worksheets."
           },
           {
-            "question": "¿Ofrecen soporte con SLA para empresas?",
-            "answer": "Sí. Los contratos de consultoría incluyen un manual de operaciones de IA serena, revisiones arquitectónicas trimestrales y respuesta prioritaria para incidencias críticas. Contáctanos para adaptar el SLA al tamaño y región de tu equipo."
+            "question": "Do you offer SLA-backed support for enterprises?",
+            "answer": "Yes. Consulting retainers include a AI work handbook, quarterly architecture reviews. priority response for critical issues. Contact us to tailor the SLA to your team size and region."
           },
           {
-            "question": "¿El contenido está disponible en varios idiomas?",
-            "answer": "Los artículos principales están disponibles hoy en inglés, letón y ruso; el francés, español y ucraniano llegarán a lo largo de 2026. Cada artículo indica su estado de traducción y ofrece enlaces para solicitar idiomas adicionales."
+            "question": "Is content available in multiple languages?",
+            "answer": "Core help articles ship in English, Latvian. Russian today, with French, Spanish. Ukrainian arriving through 2026. Articles note their translation status and provide request links for additional languages."
           }
         ]
       },
       "status": {
-        "eyebrow": "Estado en vivo e historial",
-        "title": "Actualizaciones transparentes para cada producto",
-        "copy": "Sigue el estado actual, el mantenimiento programado y los incidentes resueltos. Cada actualización enlaza a su informe completo cuando está disponible.",
+        "eyebrow": "Live status & history.",
+        "title": "Transparent updates for every product.",
+        "copy": "Follow current uptime, upcoming maintenance. resolved incidents. Each update links to its full report when available.",
         "items": [
           {
-            "status": "Todos los sistemas en funcionamiento",
-            "meta": "Última actualización 12 de abril de 2026 · 09:00 EEST",
-            "description": "Las API de NodeVoyage, los módulos de Ideonautix y los canales de contacto funcionan con normalidad. Próxima ventana de mantenimiento: 20 de abril de 2026 (reinicio gradual, < 10 minutos)."
+            "status": "All systems work",
+            "meta": "Last updated 12 April 2026 · 09:00 EEST.",
+            "description": "NodeVoyage APIs, Ideonautix modules. contact channels are running smoothly. Next maintenance window: 20 April 2026 (rolling restart, < 10 minutes)."
           },
           {
-            "status": "Actualización de la base de conocimiento en progreso",
-            "meta": "Ventana de edición: 8–15 de abril de 2026",
-            "description": "Estamos traduciendo el playbook de consultoría y la guía de Ideonautix Pomodoro Coach al francés y al español. Los artículos siguen disponibles; espera actualizaciones incrementales cada día."
+            "status": "Knowledge base refresh in progress.",
+            "meta": "Editing window: 8–15 April 2026.",
+            "description": "We are translating the consulting playbook and Ideonautix Pomodoro Coach docs into French and Spanish. Articles remain available. expect incremental updates daily."
           },
           {
-            "status": "Incidente anterior: retraso de sincronización en Ideonautix",
-            "meta": "Resuelto el 2 de abril de 2026",
-            "description": "Una actualización de infraestructura retrasó brevemente la sincronización entre dispositivos en los espacios de Ideonautix. Añadimos comprobaciones automáticas de integridad y publicamos el informe de causa raíz en el archivo de recursos."
+            "status": "Previous incident: Ideonautix sync delay.",
+            "meta": "Resolved 2 April 2026.",
+            "description": "An infrastructure upgrade briefly delayed cross-device sync for Ideonautix workspaces. We added automated integrity checks and published the root-cause report in the resources archive."
           }
         ]
       },
       "escalation": {
-        "eyebrow": "¿Necesitas ayuda?",
-        "title": "Contacta con nuestro equipo de soporte sereno",
-        "copy": "Si no encuentras lo que necesitas, nuestros especialistas están listos. Elige el canal que se adapte a tu urgencia y te guiaremos en cada paso.",
-        "cta": "Abrir canal",
+        "eyebrow": "Need a hand?",
+        "title": "Reach our support crew.",
+        "copy": "If you cannot find what you need, our humans are ready. Choose a channel that matches your urgency and we will guide you every step.",
+        "cta": "Open channel",
         "channels": [
           {
-            "title": "Soporte por correo electrónico",
-            "copy": "help@algorhythmics.com responde en un día laborable con próximos pasos transparentes."
+            "title": "Email support",
+            "copy": "help@Algorhythmics.com replies within one business day with transparent next steps."
           },
           {
-            "title": "Línea directa para pilotos prioritarios",
-            "copy": "Los socios de pilotos y consultoría cuentan con un canal dedicado en Signal con cobertura de 24 horas."
+            "title": "Priority pilot hotline.",
+            "copy": "Pilot and consulting partners get a dedicated Signal channel with 24-hour coverage."
           },
           {
-            "title": "Sesiones abiertas mensuales",
-            "copy": "Únete a nuestras clínicas de IA serena para demostraciones en vivo, preguntas y respuestas y aprendizaje entre pares."
+            "title": "Monthly office hours",
+            "copy": "Join our AI clinics for live demos, Q&A. peer learning stories."
           }
         ]
       },
       "resources": {
-        "eyebrow": "Archivo de recursos",
-        "title": "Últimas publicaciones del Centro de Ayuda",
-        "copy": "Explora artículos recién publicados, grabaciones y plantillas. Cada entrada indica la disponibilidad de traducciones para tu equipo.",
-        "cta": "Abrir recurso",
-        "secondary": "Ver todas las ideas",
+        "eyebrow": "Resource archive",
+        "title": "Latest help center releases.",
+        "copy": "Browse freshly published articles, recordings. templates. Each entry lists translation availability so your teams know what to expect.",
+        "cta": "Open resource",
+        "secondary": "View all insights",
         "items": [
           {
-            "title": "Manual de onboarding de IA serena — actualización abril 2026",
-            "meta": "EN · LV · RU • PDF y diapositivas",
-            "description": "Prompts actualizados para facilitadores, dinámicas inspiradas en señalética y un briefing de transparencia de datos para nuevos cohortes."
+            "title": "AI onboarding playbook — April 2026 update.",
+            "meta": "EN · LV · RU • PDF & slides.",
+            "description": "Updated facilitator prompts, projects-inspired icebreakers. data transparency briefing for new cohorts."
           },
           {
-            "title": "Ideonautix Pomodoro Coach — lista de solución de problemas",
-            "meta": "EN • Guía interactiva",
-            "description": "Diagnostica problemas de sincronización, calibra modos de enfoque y comparte buenas prácticas para equipos neurodiversos."
+            "title": "Ideonautix Pomodoro Coach — troubleshooting checklist.",
+            "meta": "EN • Interactive guide.",
+            "description": "Diagnose sync issues, calibrate focus modes. share best practices for neurodiverse teams."
           },
           {
-            "title": "NodeVoyage Mission Studio — consejos para docentes",
-            "meta": "EN · LV • Paquete de hojas de trabajo",
-            "description": "Crea desafíos de viaje con estudiantes, integra objetivos de sostenibilidad y recopila historias de reflexión de forma responsable."
+            "title": "NodeVoyage Mission team — educator tips.",
+            "meta": "EN · LV • Worksheet bundle.",
+            "description": "Co-create travel challenges with students, embed sustainability goals. collect reflection stories responsibly."
           }
         ]
       }
     }
   },
   "footer": {
-    "brand_alt": "AlgoRhythmics wordmark",
-    "tagline": "Calm AI tools grounded in signage craft.",
-    "status": "Pre-company • Ideju Kauss October 2025",
-    "location": "Daugavpils, Latvia",
-    "company": "Compañía",
+    "brand_alt": "Algorhythmics wordmark.",
+    "tagline": "AI tools grounded in projects build.",
+    "status": "Pre-incorporation — Ideju Kauss October 2025.",
+    "location": "Based in Latvia · remote-first team.",
+    "company": "Company",
     "support": "Solutions & tools",
     "resources": "Education Hub",
-    "about": "Acerca de",
+    "about": "About us",
     "services": "Services",
     "educational_outreach": "Educational outreach",
-    "contact": "Contacto",
+    "contact": "Contact",
     "blog": "Blog",
     "case_studies": "Case studies",
     "documentation": "Documentation",
     "events": "Events",
     "nodevoyage": "NodeVoyage",
     "ideonautix": "Ideonautix",
-    "consulting": "Consultoría",
+    "consulting": "AI consulting",
     "help_center": "Help Center",
     "newsletter": "Newsletter",
     "partners_title": "Partners",
     "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",
-    "partners_relationship": "Relación",
-    "partners_location": "Ubicación",
+    "partners_relationship": "Relationship",
+    "partners_location": "Location",
     "partners_visit": "Visit site",
-    "partners_link": "Meet our collaborators",
+    "partners_link": "Meet our collaborators.",
     "social": {
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
       "facebook": "Facebook",
-      "email": "Correo"
+      "email": "Email"
     },
-    "copyright": "© 2025 AlgoRhythmics",
+    "copyright": "© 2026 Algorhythmics — Where logic dances with creativity.",
     "education_hub": "Education Hub",
     "toolkits": "Learning toolkits"
   },
   "ai_companion": {
     "name": "Lumen",
-    "role": "Tu guía de AlgoRhythmics",
-    "dialogLabel": "Compañero IA de AlgoRhythmics",
-    "greeting": "¡Hola! Soy Lumen, el compañero de AlgoRhythmics. Pregunta sobre nuestro laboratorio, productos o cómo colaborar para proyectos en España y Latinoamérica.",
-    "languageSwitch": "Continuamos en español. ¿En qué puedo ayudarte ahora?",
-    "placeholder": "Pregunta por el laboratorio, un producto o la colaboración...",
+    "role": "Your guide to Algorhythmics.",
+    "dialogLabel": "Algorhythmics AI app",
+    "greeting": "Hi! I'm Lumen. Ask me about our team, products, or ways we can team up.",
+    "languageSwitch": "Back in Englishâ€”let me know what you're curious about next.",
+    "placeholder": "Ask about the team, a product, or how we collaborate...",
     "actions": {
-      "open": "Abrir asistente IA",
-      "hide": "Ocultar asistente IA",
-      "closePanel": "Cerrar asistente",
-      "send": "Enviar",
-      "suggestionLabel": "Sugerencias",
-      "formLabel": "Enviar mensaje"
+      "open": "Open AI app",
+      "hide": "Hide AI app",
+      "closePanel": "Close app",
+      "send": "Send",
+      "suggestionLabel": "Suggestions",
+      "formLabel": "Send a message"
     },
     "latency": 520,
     "suggestions": [
       {
-        "title": "Conocer nuestro laboratorio",
-        "prompt": "¿Qué hace diferente a AlgoRhythmics frente a otras agencias de IA?"
+        "title": "Explore our AI lab",
+        "prompt": "What makes Algorhythmics different from other AI studios?"
       },
       {
-        "title": "Plataforma NodeVoyage",
-        "prompt": "Háblame de la plataforma de viajes NodeVoyage."
+        "title": "NodeVoyage tool",
+        "prompt": "Give me the highlights of the NodeVoyage travel tool."
       },
       {
-        "title": "Suite Ideonautix",
-        "prompt": "¿Cómo ayuda Ideonautix a los equipos distribuidos?"
+        "title": "Ideonautix suite",
+        "prompt": "How does the Ideonautix productivity suite support teams?"
       },
       {
-        "title": "Mejorar mi estrategia IA",
-        "prompt": "¿Cómo podemos mejorar nuestra iniciativa de IA con AlgoRhythmics?"
+        "title": "Improve my AI strategy.",
+        "prompt": "How could Algorhythmics level up our AI plan?"
       }
     ],
     "knowledgeBase": [
       {
         "keywords": [
-          "diferente",
-          "únic",
-          "laboratorio",
-          "agencia",
-          "algorhythmics",
+          "different",
+          "unique",
+          "lab",
+          "agency",
+          "Algorhythmics",
           "culture"
         ],
-        "answer": "AlgoRhythmics combina ingeniería rigurosa con una estética inspirada en el movimiento. Compartimos metodologías de laboratorio para que tus equipos aprendan a iterar con confianza."
+        "answer": "Algorhythmics pairs workshop-grade engineering with a relaxed communication style. We ship our own flagships while coaching partners through the same R&D."
       },
       {
         "keywords": [
-          "nodevoyage",
-          "viaje",
-          "itinerario",
-          "turismo",
+          "NodeVoyage",
+          "travel",
+          "tool",
+          "journey",
           "trip"
         ],
-        "answer": "NodeVoyage es nuestra plataforma inteligente de viajes. Construye itinerarios narrativos y recomendaciones culturales adaptadas a cada viajero."
+        "answer": "NodeVoyage is our intelligent travel guide. Graph-powered itineraries, contextual storytelling. adaptive agents help every trip feel personal and stress-free."
       },
       {
         "keywords": [
-          "ideonautix",
-          "productividad",
-          "equipo",
-          "colaboración",
+          "Ideonautix",
+          "productivity",
+          "suite",
+          "team",
           "collaboration"
         ],
-        "answer": "Ideonautix ofrece copilotos de IA para startups y estudios creativos. Facilita la planificación, los informes y el lanzamiento de servicios en mercados hispanohablantes."
+        "answer": "Ideonautix is a suite of collaborative AI helpers for knowledge teams. It supports ideation sessions, decision intelligence. automation while keeping humans in control."
       },
       {
         "keywords": [
-          "contacto",
-          "colaborar",
-          "consultoría",
-          "alianza",
+          "contact",
+          "consulting",
+          "engage",
+          "work with",
           "partnership"
         ],
-        "answer": "Escríbenos a hello@algorhythmics.com o completa el formulario. Podemos organizar talleres remotos o sesiones presenciales según tu huso horario."
+        "answer": "Reach our consulting crew through the contact page or email hello@Algorhythmics.com. We love shaping proofs of concept and long-term partnerships alike."
       },
       {
         "keywords": [
-          "mejorar",
-          "optimizar",
-          "estrategia",
-          "crecer",
+          "improve",
+          "improvement",
+          "make better",
+          "growth",
           "strategy"
         ],
-        "answer": "Para mejorar, comenzamos con un sprint diagnóstico: revisamos objetivos, fuentes de datos y cultura de innovación, y construimos un plan de experimentos medibles."
+        "answer": "Start with a discovery sprint: we map your goals, audit current data flows. co-design a focused AI helper. Together we plan iteration loops so momentum lasts."
       }
     ],
-    "fallback": "Aún estoy aprendiendo, pero puedo ponerte en contacto con nuestro equipo o compartir más recursos sobre nuestros servicios."
+    "fallback": "I'm still learning, yet I can connect you with the team or share highlights about our products, team culture. services."
   },
   "products": {
-    "meta_title": "AlgoRhythmics platforms",
-    "meta_description": "Discover NodeVoyage and Ideonautix, the calm AI platforms from AlgoRhythmics.",
+    "meta_title": "Algorhythmics tool",
+    "meta_description": "Discover NodeVoyage and Ideonautix, the AI tool from Algorhythmics.",
     "hero": {
-      "label": "Platforms",
-      "title": "Platform lineup",
-      "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed studio.",
-      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
-      "primary": "Test-drive our previews",
+      "label": "tool",
+      "title": "tool lineup",
+      "subtitle": "NodeVoyage and Ideonautix live inside the same relaxed team.",
+      "description": "Step into the Ideonautix and NodeVoyage shells hosted on Algorhythmics.dev.",
+      "primary": "Test-drive our previews.",
       "secondary": "Book a chat"
     },
     "cta": {
       "title": "Stay close",
-      "text": "Join the community for release news, pilot invites, and accessibility updates.",
+      "text": "Join the community for release news, pilot invites. accessibility updates.",
       "primary": "Join the community",
       "secondary": "Book a chat"
     },
     "demos": {
-      "title": "Test-drive our previews",
-      "description": "Step into the Ideonautix and NodeVoyage shells hosted on algorhythmics.dev.",
-      "nodevoyage": "Launch the NodeVoyage demo",
-      "ideonautix": "Open the Ideonautix studio",
-      "nodevoyage_host": "nodevoyage.algorhythmics.dev",
-      "ideonautix_host": "ideonautix.algorhythmics.dev",
-      "nodevoyage_description": "Build itineraries with AI-assisted routing, offline maps, and collaborative planning.",
-      "ideonautix_description": "Prototype venture rituals and pitch narratives inside a glassy, tactile workspace."
+      "title": "Test-drive our previews.",
+      "description": "Step into the Ideonautix and NodeVoyage shells hosted on Algorhythmics.dev.",
+      "nodevoyage": "Launch the NodeVoyage demo.",
+      "ideonautix": "Open the Ideonautix team.",
+      "nodevoyage_host": "NodeVoyage.Algorhythmics.dev.",
+      "ideonautix_host": "Ideonautix.Algorhythmics.dev.",
+      "nodevoyage_description": "Build itineraries with AI-assisted routing, offline maps. collaborative planning.",
+      "ideonautix_description": "Prototype venture and pitch narratives inside a glassy, tactile workspace."
     },
     "catalog": {
       "nodevoyage": {
         "name": "NodeVoyage",
-        "tagline": "Travel co-pilot for confident journeys",
-        "description": "Your AI-powered travel companion — plan, explore, and remember your journeys effortlessly.",
+        "tagline": "Travel co-pilot for confident journeys.",
+        "description": "Your AI-powered travel app â€” plan, explore. remember your journeys effortlessly.",
         "status": "Beta invites",
-        "mvp": "Preview: nodevoyage.algorhythmics.dev",
+        "mvp": "Preview: NodeVoyage.Algorhythmics.dev.",
         "cta": "Discover NodeVoyage",
         "features": {
           "nodi-ai": {
             "title": "Nodi, your guide",
-            "description": "A friendly assistant that learns your style and shapes routes in moments."
+            "description": "A friendly helper that learns your style and shapes routes in moments."
           },
           "smart-builder": {
             "title": "Visual trip builder",
-            "description": "Drag, drop, and remix plans with vibe presets and real-time updates."
+            "description": "Drag, drop. remix plans with vibe presets and real-time updates."
           },
           "mobile-suite": {
             "title": "Mobile capture kit",
-            "description": "AR translation, live interpretation, photo recognition, and full offline mode."
+            "description": "AR translation, live interpretation, photo recognition. full offline mode."
           },
           "community": {
             "title": "Community sharing",
@@ -1125,19 +1116,19 @@
       },
       "ideonautix": {
         "name": "Ideonautix",
-        "tagline": "Founder cockpit for steady growth",
-        "description": "The productivity suite for modern creators — where every idea gets momentum.",
+        "tagline": "Founder app for steady growth.",
+        "description": "The productivity suite for modern creators â€” where every idea gets momentum.",
         "status": "Research sprint",
-        "mvp": "Preview: ideonautix.algorhythmics.dev",
+        "mvp": "Preview: Ideonautix.Algorhythmics.dev.",
         "cta": "Discover Ideonautix",
         "features": {
           "pitch": {
-            "title": "Pitch assistant",
+            "title": "Pitch helper",
             "description": "Get AI-backed feedback on your deck with investor-style pointers."
           },
           "revenue": {
             "title": "Revenue boards",
-            "description": "Track KPIs, forecasts, and cash flow in one glance."
+            "description": "Track KPIs, forecasts. cash flow in one glance."
           },
           "team": {
             "title": "Team dynamics",
@@ -1145,7 +1136,7 @@
           },
           "market": {
             "title": "Market intelligence",
-            "description": "Watch competitors, market shifts, and fresh opportunities with digestible alerts."
+            "description": "Watch competitors, market shifts. fresh opportunities with digestible alerts."
           }
         }
       }
@@ -1154,74 +1145,74 @@
   "ideonautix": {
     "hero": {
       "title": "Ideonautix",
-      "subtitle": "Explore. Invent. Launch. Your modular AI workspace for founders, students, and creative teams.",
-      "description": "Ideonautix keeps momentum steady with copilots for pitching, research, and focus. Build presentations, run experiments, and manage rituals with explainable AI nudges that honour your process.",
+      "subtitle": "Explore. Invent. Launch. Your modular AI workspace for founders, students. creative teams.",
+      "description": "Ideonautix keeps momentum steady with helpers for pitching, research. focus. Build presentations, run experiments. manage with explainable AI nudges that honour your process.",
       "primary_cta": "Request pilot access",
-      "secondary_cta": "Back to solutions overview",
+      "secondary_cta": "Back to solutions overview.",
       "highlights": {
         "status_label": "Status",
-        "status_value": "Pilot onboarding · Q1 2026",
+        "status_value": "Pilot onboarding · Q1 2026.",
         "modules_label": "Modules",
-        "modules_value": "Pitch · Intelligence · Focus · Library",
+        "modules_value": "Pitch · Intelligence · Focus · Library.",
         "promise_label": "Promise",
-        "promise_value": "Explainable AI for builders"
+        "promise_value": "Explainable AI for builders."
       },
       "demo_cta": "Launch the live demo"
     },
     "modules": {
-      "title": "Tools that keep ideas moving",
-      "lead": "Ideonautix pairs playful visuals with serious operations. Every module lives inside a windowed workspace so you can drag, resize, and focus without losing the bigger picture.",
+      "title": "Tools that keep ideas moving.",
+      "lead": "Ideonautix pairs playful visuals with serious work. Every module lives inside a windowed workspace so you can drag, resize. focus without losing the bigger picture.",
       "cards": [
         {
           "icon": "idea",
-          "title": "Pitch Deck Assistant",
-          "copy": "Answer a short creative brief and Ideonautix drafts slides, speaker notes, and evidence to fit your audience—with transparent citations and edit history."
+          "title": "Pitch Deck helper",
+          "copy": "Answer a short creative brief and Ideonautix drafts slides, speaker notes. evidence to fit your audience—with transparent citations and edit history."
         },
         {
           "icon": "chart",
-          "title": "Competitive Dashboard",
-          "copy": "Track market shifts, competitor releases, and trend digests curated for your vertical. Summaries stay human-readable and exportable."
+          "title": "Competitive Dashboard.",
+          "copy": "Track market shifts, competitor releases. trend digests curated for your vertical. Summaries stay human-readable and exportable."
         },
         {
           "icon": "bolt",
           "title": "Pomodoro Coach",
-          "copy": "Keep your rhythm with adaptive focus sessions, break prompts, and gentle accountability nudges based on your schedule."
+          "copy": "Keep your rhythm with adaptive focus sessions, break prompts. gentle accountability nudges based on your schedule."
         },
         {
           "icon": "package",
-          "title": "Workflow Library",
-          "copy": "Mix-and-match canvases for OKRs, research sprints, and retrospectives. Each template includes guidance drawn from our consulting rituals."
+          "title": "steps Library",
+          "copy": "Mix-and-match canvases for OKRs, research sprints. retrospectives. Each template includes guidance drawn from our consulting."
         },
         {
-          "icon": "ai",
+          "icon": "AI",
           "title": "AI Brainstorm",
-          "copy": "Bounce ideas with a multilingual AI co-founder trained on ethical innovation playbooks. Every suggestion ships with rationale and references."
+          "copy": "Bounce ideas with a multilingual AI co-founder trained on ethical new playbooks. Every suggestion ships with rationale and references."
         }
       ]
     },
     "status": {
       "eyebrow": "Status & invitation",
       "title": "Pilot in early 2026",
-      "copy": "We are inviting a small circle of founders, educators, and student teams to shape Ideonautix. Pilot members test modules, share feedback in live sessions, and receive lifetime discounts when we launch publicly in spring 2026.",
+      "copy": "We are inviting a small circle of founders, educators. student teams to shape Ideonautix. Pilot members test modules, share feedback in live sessions. receive lifetime discounts when we launch publicly in spring 2026.",
       "bullets": [
         "Multilingual interface: English & Latvian at pilot, Russian in beta.",
         "AAA contrast themes and reduced-motion support mirror our design system.",
         "All AI suggestions include citations and exportable audit trails."
       ],
-      "cta": "Join the pilot waitlist"
+      "cta": "Join the pilot waitlist."
     },
     "use_cases": {
       "eyebrow": "Use cases",
       "title": "Stories from the lab",
-      "copy": "Ideonautix was born from our consulting rituals. Each pilot builds on real problems founders and educators face when they lack clear documentation or accessible AI support.",
+      "copy": "Ideonautix was born from our consulting. Each pilot builds on real problems founders and educators face when they lack clear documentation or accessible AI support.",
       "items": [
         {
-          "name": "Anna · Student entrepreneur",
-          "story": "Anna used Ideonautix to map a sustainable fashion concept. The pitch assistant built a grant-ready deck, while Pomodoro Coach kept her team on track for demo day."
+          "name": "Anna · Student entrepreneur.",
+          "story": "Anna used Ideonautix to map a sustainable fashion concept. The pitch helper built a grant-ready deck, while Pomodoro Coach kept her team on track for demo day."
         },
         {
-          "name": "SafeRide · Mobility startup",
-          "story": "SafeRide analysed competitors and regulatory news through the dashboard, rapidly iterated prototypes, and walked into investor meetings with confidence."
+          "name": "SafeRide · Mobility startup.",
+          "story": "SafeRide analysed competitors and regulatory news through the dashboard, rapidly iterated prototypes. walked into investor meetings with confidence."
         }
       ]
     },
@@ -1234,7 +1225,7 @@
         "email_label": "Email",
         "role_label": "Role",
         "role_options": {
-          "founder": "Founder / startup team",
+          "founder": "Founder / startup team.",
           "student": "Student team",
           "educator": "Educator / mentor",
           "other": "Other collaborator"
@@ -1243,13 +1234,13 @@
         "submit": "Submit request",
         "success": "Thank you! We just opened an email draft—send it to confirm your spot.",
         "error": "Share your name and a valid email so we can reach out.",
-        "privacy": "We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.com.",
-        "subject": "Ideonautix pilot request"
+        "privacy": "We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@Algorhythmics.com.",
+        "subject": "Ideonautix pilot request."
       }
     },
     "cta": {
       "title": "Need hands-on support?",
-      "copy": "Our consulting team helps adapt Ideonautix modules for enterprise or education partners. We can tailor workflows, build governance, and train your crews.",
+      "copy": "Our consulting team helps adapt Ideonautix modules for enterprise or education partners. We can tailor steps, build governance. train your crews.",
       "primary": "Consulting services",
       "secondary": "Chat with us"
     }
@@ -1257,65 +1248,65 @@
   "nodevoyage": {
     "hero": {
       "title": "NodeVoyage",
-      "subtitle": "Fun. Travel. Memories. Community. Your AI travel companion that keeps every explorer in the loop.",
-      "description": "Describe your dream journey and Nodi orchestrates an itinerary with accessibility, sustainability, and surprise in mind. Plan with friends in real time, translate signs on the go, and capture stories that outlast the flight home.",
-      "primary_cta": "Join the Explorers Club",
-      "secondary_cta": "Back to solutions overview",
+      "subtitle": "Fun. Travel. Memories. Community. Your AI travel app that keeps every explorer in the loop.",
+      "description": "Describe your dream journey and Nodi run an itinerary with accessibility, sustainability. surprise in mind. Plan with friends in real time, translate signs on the go. capture stories that outlast the flight home.",
+      "primary_cta": "Join the Explorers Club.",
+      "secondary_cta": "Back to solutions overview.",
       "highlights": {
         "status_label": "Status",
         "status_value": "Alpha in progress",
         "focus_label": "Focus",
-        "focus_value": "Collaborative, sustainable travel",
+        "focus_value": "Collaborative, sustainable travel.",
         "milestone_label": "Next milestone",
-        "milestone_value": "Public beta · June 2026"
+        "milestone_value": "Public beta · June 2026."
       },
       "demo_cta": "Launch the live demo"
     },
     "features": {
       "title": "What makes NodeVoyage different?",
-      "lead": "NodeVoyage feels like a playful travel OS: windowed layouts, frosted panels, and an AI buddy who keeps plans tidy while celebrating spontaneity.",
+      "lead": "NodeVoyage feels like a playful Travel Tools: windowed layouts, frosted panels. an AI buddy who keeps plans tidy while celebrating spontaneity.",
       "cards": [
         {
           "icon": "map",
           "title": "Smart Trip Planner",
-          "copy": "Tell Nodi how you want to feel on your next adventure. NodeVoyage balances hidden gems with essentials, optimises routes, and adjusts for mobility or sensory needs automatically."
+          "copy": "Tell Nodi how you want to feel on your next adventure. NodeVoyage balances hidden gems with essentials, make better routes. adjusts for mobility or sensory needs automatically."
         },
         {
           "icon": "people",
           "title": "Collaborative Crews",
-          "copy": "Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with calm notifications."
+          "copy": "Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing. keep everyone aligned with notifications."
         },
         {
           "icon": "device",
-          "title": "AR Translation & Capture",
+          "title": "AR Translation & Capture.",
           "copy": "Use the mobile app to translate menus, capture audio notes, or pin AR “memory anchors” to revisit favourite spots later."
         },
         {
           "icon": "target",
-          "title": "Eco & Community Missions",
-          "copy": "Earn badges for low-impact choices, community storytelling, and cultural challenges curated with local partners."
+          "title": "Eco & Community Missions.",
+          "copy": "Earn badges for low-impact choices, community storytelling. cultural challenges curated with local partners."
         },
         {
           "icon": "idea",
-          "title": "Travel Journal & Reel",
-          "copy": "After the trip, NodeVoyage weaves your photos, notes, and check-ins into a shareable story or highlight reel—always with edit controls and privacy toggles."
+          "title": "Travel Journal & Reel.",
+          "copy": "After the trip, NodeVoyage weaves your photos, notes. check-ins into a shareable story or highlight reel—always with edit controls and privacy toggles."
         }
       ]
     },
     "roadmap": {
       "eyebrow": "Roadmap",
       "title": "2026 journey",
-      "lead": "We are building NodeVoyage out in the open. Each phase brings more collaborative magic while reinforcing accessibility, localisation, and transparent AI coaching.",
+      "lead": "We are building NodeVoyage out in the open. Each phase brings more collaborative magic while reinforcing accessibility, localisation. transparent AI coaching.",
       "items": [
         {
           "phase": "Alpha launch",
           "timing": "April 2026",
-          "details": "First wave of explorers test collaborative itineraries, AR translation, and sustainability missions alongside our team."
+          "details": "First wave of explorers test collaborative itineraries, AR translation. sustainability missions alongside our team."
         },
         {
           "phase": "Public beta",
           "timing": "June 2026",
-          "details": "Expanded language support, travel journal exports, and integrations with accessibility partners land for summer adventures."
+          "details": "Expanded language support, travel journal exports. integrations with accessibility partners land for summer adventures."
         },
         {
           "phase": "Community rollout",
@@ -1326,31 +1317,31 @@
     },
     "differentiators": {
       "eyebrow": "Why explorers stay",
-      "title": "Calm, trustworthy travel intelligence",
-      "lead": "NodeVoyage blends signage-inspired clarity with travel storytelling. It is approachable for first-time travellers and powerful for adventure planners who want deeper context.",
+      "title": ", trustworthy travel intelligence.",
+      "lead": "NodeVoyage blends projects-inspired clarity with travel storytelling. It is approachable for first-time travellers and powerful for adventure planners who want deeper context.",
       "cta": "Partner with us",
       "cards": [
         {
           "icon": "bolt",
-          "title": "AI that explains itself",
-          "copy": "Every itinerary comes with plain-language reasoning, accessible alternatives, and opt-out controls."
+          "title": "AI that explains itself.",
+          "copy": "Every itinerary comes with plain-language reasoning, accessible alternatives. opt-out controls."
         },
         {
           "icon": "chart",
           "title": "Inclusive by default",
-          "copy": "AAA contrast themes, reduced-motion support, and multi-language content are core—not add-ons."
+          "copy": "AAA contrast themes, reduced-motion support. multi-language content are core—not add-ons."
         },
         {
           "icon": "package",
           "title": "Built with partners",
-          "copy": "Co-designed with travel educators, accessibility advocates, and signage specialists from Ideju Kauss programmes."
+          "copy": "Co-designed with travel educators, accessibility advocates. projects specialists from Ideju Kauss programmes."
         }
       ]
     },
     "explorers": {
-      "eyebrow": "NodeVoyage Explorers Club",
-      "title": "Be first aboard the beta",
-      "copy": "Leave your details to receive early access invites, mission briefs, and behind-the-scenes updates as we prepare the public beta. We keep emails minimal and never share your contact.",
+      "eyebrow": "NodeVoyage Explorers Club.",
+      "title": "Be first aboard the beta.",
+      "copy": "Leave your details to receive early access invites, mission briefs. behind-the-scenes updates as we prepare the public beta. We keep emails minimal and never share your contact.",
       "form": {
         "name_label": "Name (optional)",
         "email_label": "Email",
@@ -1358,26 +1349,26 @@
         "success": "Thanks! We just opened your email client so you can confirm the request.",
         "privacy": "By joining, you agree to receive NodeVoyage development updates. You can unsubscribe anytime and we will only use your email for these messages.",
         "error": "Add a valid email so we can send your invite.",
-        "subject": "NodeVoyage Explorers Club signup"
+        "subject": "NodeVoyage Explorers Club signup."
       }
     },
     "cta": {
       "title": "Curious about Ideonautix too?",
-      "copy": "If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our startup OS that keeps creative projects on track. Both platforms share the same inclusive design system.",
+      "copy": "If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our Startup Tools that keeps creative projects on track. Both tool share the same inclusive design system.",
       "primary": "Explore Ideonautix",
       "secondary": "Talk to our team"
     }
   },
   "education": {
     "hero": {
-      "eyebrow": "Education partnership",
-      "title": "Calm AI education",
-      "subtitle": "Programmes for schools and partners",
+      "eyebrow": "Education partnership.",
+      "title": "AI education",
+      "subtitle": "Programmes for schools and partners.",
       "description": "Bilingual workshops and toolkits.",
       "primary": "Plan a pilot",
       "secondary": "Download syllabus"
     },
-    "valuePropsHeading": "What students experience",
+    "valuePropsHeading": "What students use",
     "valueProps": [
       {
         "icon": "idea",
@@ -1387,10 +1378,10 @@
       {
         "icon": "people",
         "title": "Inclusive design",
-        "body": "Accessible in EN · LV · RU."
+        "body": "Accessible in EN Â· LV Â· RU."
       },
       {
-        "icon": "ai",
+        "icon": "AI",
         "title": "Safe AI sandboxes",
         "body": "Transparent automation toggles."
       }
@@ -1427,7 +1418,7 @@
         },
         {
           "label": "Languages",
-          "value": "EN · LV · RU"
+          "value": "En â· lv â· ru"
         },
         {
           "label": "Instructor rating",
@@ -1446,209 +1437,209 @@
     },
     "cta": {
       "eyebrow": "Next steps",
-      "title": "Bring calm AI to your classroom",
+      "title": "Bring AI to your classroom.",
       "body": "Share your goals and we will tailor the pilot.",
-      "primary": "Book a discovery call",
-      "secondary": "Request programme deck"
+      "primary": "Book a discovery call.",
+      "secondary": "Request programme deck."
     },
-    "faqTitle": "Questions we hear the most",
+    "faqTitle": "Questions we hear the most.",
     "faq": [
       {
         "question": "Who can join the pilot?",
-        "answer": "Latvian schools, vocational programmes, and LIAA partners."
+        "answer": "Latvian schools, vocational programmes. LIAA partners."
       },
       {
         "question": "Preparation required?",
         "answer": "We onboard facilitators and stay on-call during first runs."
       },
       {
-        "question": "Do students need AI experience?",
+        "question": "Do students need AI use?",
         "answer": "No. We start with fundamentals and build steadily."
       }
     ],
     "page": {
       "hero": {
-        "title": "Divulgación educativa y construcción comunitaria",
-        "subtitle": "Empoderamos a estudiantes, docentes y comunidades mediante la IA.",
-        "description": "AlgoRhythmics es tanto un movimiento educativo como un estudio tecnológico. Fomentamos la alfabetización en IA en aulas, bibliotecas y centros comunitarios con programas que reciben a todas las edades.",
-        "primary_cta": "Únete al programa",
-        "secondary_cta": "Accede a los recursos"
+        "title": "Educational Outreach & Community Building.",
+        "subtitle": "Empowering learners, educators. communities through AI.",
+        "description": "Algorhythmics is as much an educational movement as it is a tech team. We nurture AI literacy across classrooms, libraries. community hubs with programs that welcome every age.",
+        "primary_cta": "Join the Program",
+        "secondary_cta": "Access Resources"
       },
       "intro": {
-        "why_title": "Por qué importa la divulgación",
-        "why_copy": "La exposición temprana a los conceptos de IA nutre la curiosidad, la confianza y la conciencia ética. Nuestros programas de divulgación se diseñan con claridad señalética, experimentación lúdica y rigurosas salvaguardas para que cada aprendiz pueda participar.",
-        "partners_copy": "Tendemos puentes entre escuelas, familias, mentores del sector y socias culturales. El resultado es un ecosistema de apoyo donde la lógica y la creatividad colaboran en tiempo real.",
-        "how_title": "Cómo colaboramos",
+        "why_title": "Why outreach matters",
+        "why_copy": "Early exposure to AI concepts nurtures curiosity, confidence. ethical awareness. Our outreach programmes are designed with projects clarity, playful experimentation. rigorous safeguards so every learner can participate.",
+        "partners_copy": "We build bridges between schools, parents, industry mentors. cultural partners. The result is a supportive set of tools where logic and creativity collaborate in real time.",
+        "how_title": "How we collaborate",
         "how_items": [
-          "Cocreamos pilotos con docentes y los alineamos con los planes nacionales.",
-          "Acompañamos cada taller con materiales inclusivos y apoyo multilingüe.",
-          "Documentamos resultados para que las comunidades continúen el ritmo de forma independiente."
+          "Co-create pilots with educators and align them with national curricula.",
+          "Pair every workshop with inclusive materials and multilingual support.",
+          "Document outcomes so communities can continue the rhythm independently."
         ],
-        "how_cta": "Escríbenos a coordinación de divulgación"
+        "how_cta": "Email our Outreach Coordinators."
       },
       "partnerships": {
-        "eyebrow": "Programas en marcha",
-        "title": "Anclas para estudiantes, familias y mentoras",
-        "copy": "Desde iniciativas nacionales hasta laboratorios extracurriculares, cada alianza invita a las comunidades a vivir la IA como algo acogedor y responsable.",
+        "eyebrow": "Programmes in motion",
+        "title": "Anchors for learners, families. mentors.",
+        "copy": "From nationwide initiatives to after-school labs, each partnership invites communities to use AI as something welcoming and responsible.",
         "liaa": {
-          "eyebrow": "Colaboración nacional",
-          "title": "Alianza con LIAA",
-          "copy": "Como representantes del sector educativo ante la Agencia de Inversión y Desarrollo de Letonia (LIAA), cocreamos pilotos listos para políticas que incorporan la alfabetización en IA en los planes oficiales.",
+          "eyebrow": "National collaboration.",
+          "title": "LIAA Partnership",
+          "copy": "As the education sector ambassador with Latvia's Investment and Development Agency (LIAA), we co-create policy-ready pilots that bring AI literacy into formal curricula.",
           "bullets": [
-            "Integración curricular con kits bilingües e interpretaciones inspiradas en la señalética",
-            "Cohortes de acompañamiento docente y vías de certificación que desmitifican la IA",
-            "Bucles de investigación compartida para publicar hallazgos y afinar estándares nacionales"
+            "Curriculum integration with bilingual lesson kits and signage-inspired visuals.",
+            "Teacher coaching cohorts and certification pathways that demystify AI.",
+            "Shared research loops to publish findings and refine national standards."
           ],
-          "cta": "Habla con el equipo de divulgación"
+          "cta": "Talk with the Outreach Team."
         },
         "schools": {
-          "eyebrow": "Descubrimiento práctico",
-          "title": "Programas escolares",
-          "copy": "Activamos las aulas con IA experiencial: clubes de código, laboratorios de innovación y sprints creativos donde el estudiantado ve bailar a la lógica con la imaginación.",
+          "eyebrow": "Hands-on discovery",
+          "title": "School Programs",
+          "copy": "We turn on classrooms with experiential AI—coding clubs, new labs. creative sprints where students see logic dance with imagination.",
           "bullets": [
-            "Módulos listos para usar en matemáticas, ciencias, arte y humanidades",
-            "Talleres donde el alumnado entrena mini IAs, compone arte generativo o diseña guías éticas",
-            "Acceso gratuito o subvencionado a Ideonautix para seguir practicando después de clase"
+            "Plug-and-play project modules for math, science, arts. humanities.",
+            "Workshops where students train mini AIs, compose generative art, or design ethical guidelines.",
+            "Free or subsidised Ideonautix access so practice continues beyond the bell."
           ],
-          "cta": "Solicita un paquete piloto"
+          "cta": "Request a Pilot Pack"
         },
         "community": {
-          "eyebrow": "Más allá del aula",
-          "title": "Eventos comunitarios",
-          "copy": "Talleres mensuales, seminarios web y hackatones vecinales hacen que la IA sea cercana para familias, profesionales y futuras creadoras.",
+          "eyebrow": "Beyond the classroom",
+          "title": "Community Events",
+          "copy": "Monthly workshops, webinars. neighbourhood hackathons make AI approachable for parents, professionals. the next wave of makers.",
           "bullets": [
-            "Sesiones abiertas que explican el aprendizaje automático con analogías tangibles",
-            "Red de Embajadoras Familiares donde las familias coorganizan círculos de aprendizaje en bibliotecas",
-            "Mentorías invitadas desde la industria y la cultura para unir proyectos reales con narrativas"
+            "Open-to-all sessions that explain machine learning with tangible analogies.",
+            "Parent Ambassador Network where families co-host learning circles at libraries.",
+            "Guest mentors from industry and culture bridging real projects with storytelling."
           ],
-          "cta": "Ver próximos eventos"
+          "cta": "See Upcoming Events"
         },
         "cultural": {
-          "eyebrow": "La lógica se encuentra con el arte",
-          "title": "Alianzas culturales",
-          "copy": "Museos, bibliotecas y laboratorios creativos colaboran con AlgoRhythmics para mezclar tecnología y patrimonio, despertando la curiosidad en todas las generaciones.",
+          "eyebrow": "Logic meets art",
+          "title": "Cultural Partnerships.",
+          "copy": "Museums, libraries. creative labs collaborate with Algorhythmics to blend technology with heritage—sparking curiosity across generations.",
           "bullets": [
-            "Exposiciones de IA + Arte que traducen algoritmos en sonido, movimiento y luz",
-            "Instalaciones narrativas donde mayores y peques exploran juntas la IA",
-            "Archivos compartidos de actividades y guías accesibles para exposiciones"
+            "AI + Art exhibits that translate algorithms into sound, movement. light.",
+            "Story-driven installations where elders and kids explore AI together.",
+            "Shared archives of lesson prompts and accessible exhibition guides."
           ],
-          "cta": "Proponer una colaboración"
+          "cta": "Propose a Collaboration."
         }
       },
       "impact": {
         "items": {
           "teachers": {
-            "label": "Docentes formados",
+            "label": "Teachers trained",
             "value": "200+",
-            "description": "Certificados mediante nuestros laboratorios de pedagogía de IA en calma."
+            "description": "Certified through our AI pedagogy labs."
           },
           "students": {
-            "label": "Estudiantes implicados",
-            "value": "5.000+",
-            "description": "En clubes, campamentos y pilotos dentro del aula."
+            "label": "Students engaged",
+            "value": "5,000+",
+            "description": "Across clubs, camps. classroom pilots."
           },
           "goal": {
-            "label": "Objetivo 2026",
-            "value": "80% de las escuelas letonas",
-            "description": "Con módulos de alfabetización en IA listos para implementar."
+            "label": "Goal for 2026",
+            "value": "80% of Latvian schools.",
+            "description": "Onboarded with ready-to-run AI literacy modules."
           },
           "feedback": {
-            "label": "Valoraciones positivas",
+            "label": "Positive feedback",
             "value": "90%",
-            "description": "Docentes que ahora se sienten con más confianza para enseñar IA."
+            "description": "Educators reporting higher confidence in teaching AI topics."
           }
         },
-        "note": "Las métricas guían nuestra iteración, pero las historias importan más: como la estudiante que eligió una carrera tecnológica tras un campamento de AlgoRhythmics o la docente que ahora dirige clubes de IA con seguridad."
+        "note": "Metrics guide our iteration, but the stories matter most—like the student who chose a tech career after an Algorhythmics camp or the teacher who now leads AI clubs with confidence."
       },
       "global": {
-        "eyebrow": "Compartimos el ritmo en todo el mundo",
-        "title": "Un ritmo global de aprendizaje compartido",
-        "copy": "Nuestra divulgación se extiende más allá de Letonia mediante redes educativas europeas, programas de intercambio e investigación compartida. El alumnado colabora sin fronteras, intercambiando ideas y construyendo empatía a través de proyectos de IA responsable.",
-        "primary_cta": "Únete a nuestro foro comunitario",
-        "secondary_cta": "Colabora con nosotras"
+        "eyebrow": "Sharing the rhythm worldwide.",
+        "title": "A global rhythm of shared learning.",
+        "copy": "Our outreach stretches beyond Latvia through European education networks, exchange programs. shared research. Students collaborate across borders, trading ideas and building empathy through responsible AI projects.",
+        "primary_cta": "Join Our Community Forum.",
+        "secondary_cta": "Partner with Us"
       },
       "finale": {
-        "eyebrow": "Invitación abierta",
-        "title": "Involúcrate en la divulgación de AlgoRhythmics",
-        "copy": "Estudiantes, docentes, familias y patrocinadoras son bienvenidas. Te ayudaremos a orquestar talleres, integrar currículo o encender eventos comunitarios que unan lógica y creatividad.",
-        "primary_cta": "Iniciemos la conversación",
-        "secondary_cta": "Descargar la guía del programa"
+        "eyebrow": "Open invitation",
+        "title": "Get involved with Algorhythmics outreach.",
+        "copy": "Students, educators, parents. sponsors are welcome. We will help you run workshops, integrate curriculum, or spark community events that pair logic with creativity.",
+        "primary_cta": "Start the Conversation.",
+        "secondary_cta": "Download Program Overview."
       }
     }
   },
   "educationHub": {
     "page": {
       "hero": {
-        "title": "Centro Educativo: historias de IA en calma y rutas de aprendizaje",
-        "subtitle": "Descubre recursos de IA inclusivos, kits listos para el aula y destacados comunitarios del equipo de AlgoRhythmics.",
-        "description": "Explora cómo cobra vida la IA en calma en aulas, estudios y ciudades. Nuestro Centro Educativo selecciona historias, herramientas y eventos para que cada persona pueda unirse al ritmo.",
-        "primary_cta": "Explorar las últimas ideas",
-        "secondary_cta": "Suscribirse para recibir novedades",
+        "title": "Education Hub: AI stories & learning paths.",
+        "subtitle": "Discover inclusive AI resources, classroom-ready toolkits. community highlights from the Algorhythmics crew.",
+        "description": "Explore how AI comes to life across classrooms, studios. cities. Our Education Hub curates stories, toolkits. events so every learner can join the rhythm.",
+        "primary_cta": "Browse latest insights.",
+        "secondary_cta": "Subscribe for updates.",
         "highlights": [
-          "Artículos con accesibilidad AAA traducidos a seis idiomas",
-          "Kits listos para el aula codiseñados con docentes y familias",
-          "Eventos comunitarios mensuales con grabaciones y transcripciones"
+          "AAA-accessible articles translated across six languages.",
+          "Classroom-ready toolkits shaped with teachers and families.",
+          "Monthly community events with recordings & transcripts."
         ]
       },
       "featured": {
-        "eyebrow": "Historia destacada",
-        "title": "Cómo un aula de Riga construyó una redacción de IA en calma",
-        "summary": "El alumnado co-creó flujos de trabajo periodísticos responsables con Ideonautix, combinando rituales inspirados en la señalética con automatización explicable.",
-        "meta": "Piloto de 16 semanas • Periodismo y civic tech",
-        "primary_cta": "Leer el resumen del piloto",
-        "secondary_cta": "Descargar el kit para el aula"
+        "eyebrow": "Featured story",
+        "title": "How a Riga classroom built a AI newsroom.",
+        "summary": "Students co-created responsible reporting steps with Ideonautix, pairing projects-inspired with explainable automation.",
+        "meta": "16-week pilot • Journalism & civic tech.",
+        "primary_cta": "Read the pilot recap",
+        "secondary_cta": "Download classroom toolkit."
       },
       "sections": {
         "insights": {
-          "label": "Últimas ideas",
-          "eyebrow": "Ideas",
-          "title": "Perspectivas frescas sobre la IA en calma",
-          "copy": "Artículos creados con docentes, fundadores y familias para mantener la IA humana y esperanzadora."
+          "label": "Latest insights",
+          "eyebrow": "Insights",
+          "title": "Fresh perspectives on AI.",
+          "copy": "Articles build with educators, founders. families to keep AI human and hopeful."
         },
         "toolkits": {
-          "label": "Kits de aprendizaje",
-          "eyebrow": "Kits",
-          "title": "Recursos de IA en calma listos para usar",
-          "copy": "Guías descargables, rutas de lecciones y actividades familiares diseñadas con la accesibilidad como base."
+          "label": "Learning toolkits",
+          "eyebrow": "Toolkits",
+          "title": "Ready-to-use AI resources.",
+          "copy": "Downloadable lesson arcs, operating guides. family activities designed with accessibility at the core."
         },
         "spotlights": {
-          "label": "Historias de la comunidad",
-          "eyebrow": "Destacados",
-          "title": "Historias de impacto y colaboraciones",
-          "copy": "Sigue pilotos, residencias y experimentos comunitarios que muestran la IA en calma en acción."
+          "label": "Community spotlights",
+          "eyebrow": "Spotlights",
+          "title": "Impact stories & collaborations.",
+          "copy": "Follow pilots, residencies. community experiments that show AI in action."
         },
         "events": {
-          "label": "Próximos eventos",
-          "eyebrow": "Eventos",
-          "title": "Talleres, seminarios web y jams comunitarios",
-          "copy": "Únete a sesiones donde prototipamos juntas, exploramos la ética y celebramos muestras estudiantiles. Casi todos los eventos incluyen subtítulos en vivo y grabaciones."
+          "label": "Upcoming events",
+          "eyebrow": "Events",
+          "title": "Upcoming workshops, webinars & community jams.",
+          "copy": "Join sessions where we sketch prototypes together, explore ethical rules. celebrate student showcases. Most events include live captioning and recorded replays."
         },
         "newsletter": {
-          "label": "Mantente conectada",
-          "eyebrow": "Boletín",
-          "title": "Permanece en el ritmo sereno",
-          "copy": "Resaltamos cada mes nuevos kits, historias de impacto e invitaciones tempranas a pilotos. Corto, cercano y orientado a la inspiración accionable."
+          "label": "Stay connected",
+          "eyebrow": "Newsletter",
+          "title": "Stay in the loop",
+          "copy": "Monthly highlights with new toolkits, impact stories. early invites to pilots. Short, friendly. focused on actionable inspiration."
         }
       },
       "insights": {
-        "read": "Leer artículo",
+        "read": "Read article",
         "items": [
           {
-            "title": "Diseñar rituales de IA inclusivos para las asambleas matutinas",
-            "summary": "Una guía paso a paso para docentes que organizan “noticieros” de IA en calma con estudiantes más jóvenes.",
-            "meta": "Marzo de 2026 • Accesibilidad",
+            "title": "Designing inclusive AI for morning assemblies.",
+            "summary": "A step-by-step guide for teachers hosting AI “news shows” with younger students.",
+            "meta": "March 2026 • Accessibility.",
             "href": "#"
           },
           {
-            "title": "De la idea al lanzamiento: documentar un sprint fundador con Ideonautix",
-            "summary": "Descubre cómo un equipo de tres personas usó chequeos serenos, copilotos de IA y rituales táctiles para lanzar más rápido.",
-            "meta": "Febrero de 2026 • Práctica de producto",
+            "title": "From idea to launch: documenting an Ideonautix founder sprint.",
+            "summary": "See how a three-person team used check-ins, AI helpers. tactile to ship faster.",
+            "meta": "February 2026 • Product practice.",
             "href": "#"
           },
           {
-            "title": "Embajadoras familiares que mantienen alegres las conversaciones sobre IA en casa",
-            "summary": "Lecciones de los círculos mensuales en bibliotecas que combinan cuentos, manualidades y demostraciones de automatización en calma.",
-            "meta": "Enero de 2026 • Comunidad",
+            "title": "Parent ambassadors keeping AI conversations joyful at home.",
+            "summary": "Lessons from monthly library circles that mix storytelling, crafts. automation demos.",
+            "meta": "January 2026 • Community.",
             "href": "#"
           }
         ]
@@ -1656,124 +1647,98 @@
       "toolkits": {
         "items": [
           {
-            "eyebrow": "Docentes",
-            "title": "Arcos de lecciones de IA con visuales inspirados en la señalética",
-            "copy": "Módulos listos para usar con diapositivas bilingües, indicaciones táctiles y cartas de ritmo imprimibles.",
+            "eyebrow": "Teachers",
+            "title": "AI lesson arcs with projects-inspired visuals.",
+            "copy": "Plug-and-play modules with bilingual slides, tactile prompts. printable pacing cards.",
             "bullets": [
-              "Rutas diferenciadas para 4.º–12.º curso con notas de accesibilidad",
-              "Rúbricas de evaluación que honran la creatividad y la colaboración",
-              "Mini rituales de reflexión para mantener transparente el uso de la IA"
+              "Grades 4–12 differentiation paths with accessibility notes.",
+              "Assessment rubrics that honour creativity and collaboration.",
+              "Mini reflection to keep AI use transparent."
             ],
             "href": "#",
-            "cta": "Previsualizar un módulo"
+            "cta": "Preview a module"
           },
           {
-            "eyebrow": "Fundadoras y equipos",
-            "title": "Sistema operativo de crecimiento sereno",
-            "copy": "Plantillas para hojas de ruta, OKR y sprints de diseño con consejos de automatización explicable.",
+            "eyebrow": "Founders & teams",
+            "title": "AI operating guide for startups.",
+            "copy": "Workshop decks and service blueprints for teams adopting explainable automation.",
             "bullets": [
-              "Agendas guiadas de sprint y rituales de colaboración asíncrona",
-              "Copilotos de IA con razonamientos, alertas de riesgo y avisos para mantener a las personas al mando",
-              "Retrospectivas de lanzamiento y resúmenes listos para compartir con aliados"
+              "Weekly sprint with inclusive facilitation tips.",
+              "Consent-forward data intake templates and governance checklists.",
+              "Case study workbook for mapping impact stories."
             ],
             "href": "#",
-            "cta": "Acceder al playbook"
+            "cta": "Download the guide"
           },
           {
-            "eyebrow": "Familias y bibliotecas",
-            "title": "Kits de curiosidad comunitaria",
-            "copy": "Actividades guiadas por historias que combinan experimentos sin pantallas con demostraciones suaves de IA.",
+            "eyebrow": "Families",
+            "title": "Home for curious makers.",
+            "copy": "Story cards, unplugged activities. conversation starters for multi-generational learning.",
             "bullets": [
-              "Cartas de historias imprimibles con personajes inclusivos",
-              "Experimentos prácticos con objetos cotidianos",
-              "Diarios de reflexión que provocan conversaciones éticas"
+              "Printable zines that explain algorithms without jargon.",
+              "Audio guides with narration in multiple languages.",
+              "Monthly challenges that mix art, data. storytelling."
             ],
             "href": "#",
-            "cta": "Descargar el paquete de actividades"
+            "cta": "Start a family challenge."
           }
         ]
       },
       "spotlights": {
-        "read": "Abrir historia",
+        "read": "Open story",
         "items": [
           {
-            "eyebrow": "Escuelas",
-            "title": "Gymnasium Técnico de Riga",
-            "meta": "Letonia • Educación secundaria",
-            "href": "#",
-            "copy": "El alumnado dirigió una redacción de IA en calma durante ocho semanas, publicando explicadores bilingües y resúmenes de audio."
+            "eyebrow": "Schools",
+            "title": "Teacher roundtables with Latvia’s Mentor Network.",
+            "copy": "Monthly conversations surface what educators need next—from translation support to reflective journaling prompts.",
+            "meta": "Hybrid • Hosted with LIAA.",
+            "href": "#"
           },
           {
-            "eyebrow": "Bibliotecas",
-            "title": "Laboratorios de Historias de Latgale",
-            "meta": "Letonia • Comunidad",
-            "href": "#",
-            "copy": "Las familias prototiparon acompañantes de cuentacuentos con IA con indicaciones de transparencia."
+            "eyebrow": "Libraries",
+            "title": "AI residencies inside cultural institutions.",
+            "copy": "Museums and theatres pair artists with technologists to co-create sensory storytelling installations.",
+            "meta": "On-site • Riga & Liepāja.",
+            "href": "#"
           },
           {
-            "eyebrow": "Universidades",
-            "title": "Residencia cooperativa de Vilna",
-            "meta": "Lituania • Educación superior",
-            "href": "#",
-            "copy": "Estudiantes de diseño, ética y negocios co-crearon kits de señalética para exposiciones de investigación en IA."
+            "eyebrow": "Universities",
+            "title": "Parent ambassador circles for inclusive tech nights.",
+            "copy": "Families co-host gentle demos, lending libraries. discussion prompts to demystify AI at home.",
+            "meta": "Virtual • Monthly",
+            "href": "#"
           }
         ]
       },
       "events": {
-        "eyebrow": "Eventos",
-        "title": "Talleres y encuentros",
-        "copy": "Participa en nuestros eventos híbridos diseñados con principios de accesibilidad desde el inicio.",
+        "eyebrow": "Events",
+        "title": "Upcoming workshops, webinars & community jams.",
+        "copy": "Join sessions where we sketch prototypes together, explore ethical rules. celebrate student showcases. Most events include live captioning and recorded replays.",
         "bullets": [
-          "Taller: Narrativas de IA en calma para bibliotecas (18 de abril, híbrido)",
-          "Seminario web: Rituales de enfoque Ideonautix para equipos remotos (9 de mayo, virtual)",
-          "Jam comunitario: Misiones climáticas de NodeVoyage (1 de junio, Riga y en línea)"
+          "Workshop: AI storytelling for libraries (Apr 18, hybrid).",
+          "Webinar: Ideonautix focus for remote teams (May 9, virtual).",
+          "Community jam: NodeVoyage climate missions (Jun 1, Riga & online)."
         ],
-        "primary_cta": "Abrir calendario de eventos",
+        "primary_cta": "Open the event calendar.",
         "primary_cta_href": "https://lu.ma/algorhythmics",
-        "secondary_cta": "Organiza una sesión con nosotras",
-        "secondary_cta_href": "/contact",
-        "items": [
-          {
-            "title": "Jam de lecciones de IA inclusiva",
-            "meta": "12 de marzo · Riga y en línea",
-            "description": "Co-crea flujos de lecciones con docentes y estudiantes, además de auditorías de accesibilidad guiadas por especialistas en señalética.",
-            "cta": "Reservar una plaza"
-          },
-          {
-            "title": "Automatización serena para bibliotecas",
-            "meta": "26 de marzo · Virtual",
-            "description": "Un destacado de alianzas bibliotecarias con experimentos de IA sin pantallas para grupos de edades mixtas.",
-            "cta": "Guardar tu lugar"
-          },
-          {
-            "title": "Exhibición de impacto comunitario",
-            "meta": "4 de abril · Riga",
-            "description": "Paneles de estudiantes, familias y mentoras compartiendo cómo se vive la IA en calma en Letonia y más allá.",
-            "cta": "Unirse a la exhibición"
-          }
-        ]
+        "secondary_cta": "Host a session with us.",
+        "secondary_cta_href": "/contact"
       },
       "newsletter": {
-        "eyebrow": "Boletín",
-        "title": "Permanece en el ritmo sereno",
-        "copy": "Suscríbete para recibir cada mes nuevos kits, historias de impacto e invitaciones anticipadas a pilotos.",
-        "primary_cta": "Suscribirse al boletín",
-        "primary_cta_href": "https://algorhythmics.substack.com",
-        "form": {
-          "placeholder": "Correo electrónico",
-          "submit": "Suscribirse",
-          "success": "¡Gracias por unirte! Revisa tu bandeja de entrada para confirmar el registro.",
-          "error": "Añade una dirección de correo válida."
-        }
+        "eyebrow": "Newsletter",
+        "title": "Stay in the loop",
+        "copy": "Monthly highlights with new toolkits, impact stories. early invites to pilots. Short, friendly. focused on actionable inspiration.",
+        "primary_cta": "Subscribe to newsletter.",
+        "primary_cta_href": "https://algorhythmics.substack.com"
       }
     }
   },
   "about": {
     "hero": {
-      "eyebrow": "Inside AlgoRhythmics",
-      "title": "Calm AI from Riga and Rotterdam",
-      "subtitle": "One operating rhythm across products, consulting, and education.",
-      "description": "Signage craft, accessible design, and transparent automation.",
+      "eyebrow": "Inside Algorhythmics",
+      "title": "AI from Riga and Rotterdam.",
+      "subtitle": "One operating rhythm across products, consulting. education.",
+      "description": "projects build, accessible design. transparent automation.",
       "signals": [
         {
           "label": "Founded",
@@ -1781,7 +1746,7 @@
         },
         {
           "label": "Focus",
-          "value": "NodeVoyage · Ideonautix · Consulting"
+          "value": "NodeVoyage Â· Ideonautix Â· Consulting."
         },
         {
           "label": "Partners",
@@ -1789,17 +1754,17 @@
         }
       ],
       "primary": "Explore products",
-      "secondary": "Talk with the founders"
+      "secondary": "Talk with the founders."
     },
     "story": {
       "title": "Our story",
       "paragraphs": [
-        "We grew from signage research into calm AI delivery.",
+        "We grew from projects research into AI delivery.",
         "NodeVoyage and Ideonautix share one accessible rhythm.",
-        "Every engagement honours transparency, inclusion, and momentum."
+        "Every engagement honours transparency, inclusion. momentum."
       ]
     },
-    "valuesTitle": "The values we hold onto",
+    "valuesTitle": "The values we hold onto.",
     "values": [
       {
         "icon": "idea",
@@ -1813,22 +1778,22 @@
       },
       {
         "icon": "check",
-        "title": "Protect calm momentum",
-        "body": "Shared rituals keep teams steady."
+        "title": "Protect momentum",
+        "body": "Shared keep teams steady."
       }
     ],
     "timeline": {
-      "title": "Milestones shaping us",
+      "title": "Milestones shaping us.",
       "items": [
         {
           "year": "2023",
-          "title": "Studio founded",
-          "description": "Signage craft meets explainable AI."
+          "title": "team founded",
+          "description": "projects build meets explainable AI."
         },
         {
           "year": "2024",
           "title": "NodeVoyage beta",
-          "description": "Accessibility-first travel companion pilots."
+          "description": "Accessibility-first travel app pilots."
         },
         {
           "year": "2025",
@@ -1845,189 +1810,189 @@
           "name": "Nikita Jurtaevs",
           "role": "Co-founder & CEO",
           "location": "Riga",
-          "bio": "Leads storytelling, accessibility, and partner delivery.",
-          "focus": "Signage craft & product rituals"
+          "bio": "Leads storytelling, accessibility. partner delivery.",
+          "focus": "Signage build & product."
         },
         {
-          "name": "Vjaceslavs \"Slaff\" Trosins",
+          "name": "Vjaceslavs \"Slaff\" Trosins.",
           "role": "Co-founder & CTO",
           "location": "Rotterdam",
-          "bio": "Owns infrastructure, automation transparency, and reliability.",
-          "focus": "Cloud architecture & explainable AI"
+          "bio": "Owns infrastructure, automation transparency. reliability.",
+          "focus": "Cloud architecture & explainable AI."
         }
       ]
     },
     "cta": {
       "eyebrow": "Collaborate with us",
-      "title": "Let’s build calm AI together",
-      "body": "Bring your roadmap and we will map the rituals.",
-      "primary": "Schedule a strategy session",
+      "title": "Letâ€™s build AI together.",
+      "body": "Bring your roadmap and we will map the.",
+      "primary": "Schedule a strategy session.",
       "secondary": "Explore our products"
     },
     "page": {
       "hero": {
-        "eyebrow": "Dentro de AlgoRhythmics",
-        "title": "IA serena, creada en Riga y Róterdam",
-        "subtitle": "Somos un estudio nacido en Letonia donde los algoritmos y el arte comparten el mismo ritmo. Nuestro trabajo combina la precisión de la señalética, el diseño inclusivo y la experimentación lúdica.",
-        "description": "Fundada en 2025 por tecnólogos y educadores, AlgoRhythmics cree que la lógica y la creatividad van de la mano. Desde plataformas de IA hasta pilotos en el aula, coreografiamos soluciones que se explican solas e invitan a colaborar.",
-        "primary_cta": "Explora nuestros servicios",
-        "secondary_cta": "Conoce al equipo"
+        "eyebrow": "Inside Algorhythmics",
+        "title": "AI, build in Riga and Rotterdam.",
+        "subtitle": "We are a Latvian-born team where algorithms and artistry share the same rhythm. Our work blends projects precision, inclusive design. playful experimentation.",
+        "description": "Founded in 2025 by technologists and educators, Algorhythmics believes logic and creativity belong together. From AI tool to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Meet the Team"
       },
       "story": {
-        "heading": "Quiénes somos",
-        "intro": "Lo que comenzó como una pequeña startup en Riga se ha convertido en un puente entre la educación, la cultura y la industria. Las primeras colaboraciones con la Agencia de Inversión y Desarrollo de Letonia (LIAA) nos ayudaron a impulsar la educación en IA en todo el país.",
-        "culture": "Dentro del estudio organizamos sesiones Logic/Dance: un día un hackatón de ciencia de datos, al siguiente un taller de improvisación en diseño. Esta fusión de juego y rigor da forma a las experiencias que lanzamos.",
-        "milestones_heading": "Nuestra historia",
+        "heading": "Who we are",
+        "intro": "What began as a small startup in Riga has grown into a bridge between education, culture. industry. Early collaborations with Latvia's Investment and Development Agency (LIAA) helped us champion AI education nationwide.",
+        "culture": "Inside the team we host Logic/Dance sessions—one day a data science hackathon, the next an improv design workshop. This fusion of play and rigor shapes the experiences we ship.",
+        "milestones_heading": "Our story",
         "milestones": [
-          "Lanzamos programas piloto en escuelas locales donde el alumnado construyó proyectos con nuestras herramientas y vio cobrar vida sus ideas.",
-          "Adaptamos Ideonautix para startups tras escuchar a fundadores que necesitaban una productividad creativa y serena.",
-          "Ampliamos las alianzas con museos, bibliotecas y conferencias internacionales, demostrando que la lógica y el arte prosperan juntos."
+          "Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.",
+          "Tailored Ideonautix for startups after listening to founders who needed, creative productivity support.",
+          "Expanded partnerships with museums, libraries. international conferences—proving that logic and art thrive together."
         ],
-        "cta": "Leer historias de éxito"
+        "cta": "Read success stories"
       },
       "values": {
-        "eyebrow": "Misión y valores",
-        "title": "Donde la lógica baila con la creatividad",
-        "copy": "Nuestra misión es sencilla: hacer que la IA avanzada sea accesible, disfrutable y confiable. La perseguimos con valores que mantienen a las personas en el centro.",
+        "eyebrow": "Mission & values",
+        "title": "Where logic dances with creativity.",
+        "copy": "Our mission is simple: make advanced AI accessible, enjoyable. trustworthy. We pursue this mission through values that keep people at the centre.",
         "education_first": {
           "title": "Education first",
           "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner."
         },
         "empowerment": {
-          "title": "Empowerment through technology",
-          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred."
+          "title": "Empowerment through technology.",
+          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive. human-centred."
         },
         "integrity": {
-          "title": "Innovation with integrity",
-          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact."
+          "title": "new with integrity",
+          "copy": "Ethical rules, privacy. transparency guide every release. We document automation decisions in plain language so trust stays intact."
         },
         "community": {
-          "title": "Community & collaboration",
-          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act."
+          "title": "Community & collaboration.",
+          "copy": "Partnerships with parents, cultural institutions. industry mentors turn AI into a shared dance rather than a solo act."
         }
       },
       "team": {
-        "eyebrow": "Fundadores y guardianes",
-        "title": "Las personas detrás del ritmo",
-        "copy": "Nuestro equipo abarca investigadores de IA, diseñadores, educadores y creadores de comunidad. Conoce a los fundadores que marcan el tono de la colaboración y el oficio.",
-        "focus_label": "Enfoque: {focus}",
+        "eyebrow": "Founders & stewards",
+        "title": "The people behind the rhythm.",
+        "copy": "Our team spans AI researchers, designers, educators. community builders. Meet the founders who set the tone for collaboration and build.",
+        "focus_label": "Focus: {focus}",
         "members": {
           "nikita": {
             "name": "Nikita Jurtaevs",
-            "role": "Cofundador y CEO",
-            "focus": "Diseño de señalética, narrativas y entrega con socios",
-            "bio": "Nikita alinea la dirección del producto, la accesibilidad y las alianzas. Aporta realismo de planta de señalética a cada interfaz y programa.",
+            "role": "Co-founder & CEO",
+            "focus": "Signage build, storytelling. partner delivery.",
+            "bio": "Nikita keeps product direction, accessibility. partnerships aligned. He brings signage-floor realism to every interface and programme.",
             "links": {
-              "email": "Correo",
+              "email": "Email",
               "linkedin": "LinkedIn"
             }
           },
           "slaff": {
-            "name": "Vjaceslavs \"Slaff\" Trosins",
-            "role": "Cofundador y CTO",
-            "focus": "Arquitectura en la nube, IA explicable y operaciones",
-            "bio": "Slaff orquesta la ingeniería, los flujos de datos y las integraciones de IA. Une la disciplina de nivel hardware con experiencias de software transparentes.",
+            "name": "Vjaceslavs \"Slaff\" Trosins.",
+            "role": "Co-founder & CTO",
+            "focus": "Cloud architecture, explainable AI. work.",
+            "bio": "Slaff run engineering, data flows. AI integrations. He connects hardware-grade discipline with transparent software experiences.",
             "links": {
-              "email": "Correo",
+              "email": "Email",
               "linkedin": "LinkedIn"
             }
           }
         }
       },
       "finale": {
-        "eyebrow": "Únete a nosotros",
-        "title": "Súmate al ritmo",
-        "copy": "Damos la bienvenida a colaboradores que se preocupan por la tecnología accesible, el aprendizaje alegre y la automatización responsable. Ya sea que explores carreras, alianzas o patrocinios, construyamos juntos.",
-        "primary_cta": "Contacta con AlgoRhythmics",
-        "secondary_cta": "Suscríbete a las novedades"
+        "eyebrow": "Join us",
+        "title": "Join the rhythm",
+        "copy": "We welcome collaborators who care about accessible technology, joyful learning. responsible automation. Whether you are exploring careers, partnerships, or sponsorships, let’s build together.",
+        "primary_cta": "Connect with Algorhythmics.",
+        "secondary_cta": "Subscribe to Updates"
       }
     }
   },
   "services": {
     "page": {
       "hero": {
-        "title": "Servicios y soluciones para una IA serena y creativa",
-        "subtitle": "Descubre cómo AlgoRhythmics combina consultoría, plataformas insignia y educación para llevar las ideas del chispazo al lanzamiento.",
-        "description": "Ya sea que integres IA en tus operaciones, equipes aulas o pilotes un nuevo producto, nuestro equipo coreografía el ritmo desde la estrategia hasta el soporte.",
-        "primary_cta": "Solicita una demo o consultoría",
-        "secondary_cta": "Explorar plataformas"
+        "title": "Services & Solutions for, Creative AI.",
+        "subtitle": "Discover how Algorhythmics blends consulting, flagship tool. education to move ideas from spark to launch.",
+        "description": "Whether you are integrating AI into work, equipping classrooms, or piloting a new product, our team choreographs the rhythm from strategy to support.",
+        "primary_cta": "Request a Demo / Consultation.",
+        "secondary_cta": "Explore tool"
       },
       "consulting": {
-        "eyebrow": "Consultoría y acompañamiento",
-        "title": "Estrategia que avanza al ritmo de tu equipo",
-        "copy": "Cada colaboración nace con claridad inspirada en la señalética y termina con equipos que comprenden sus herramientas. Estos servicios combinan rituales tranquilos con resultados medibles.",
+        "eyebrow": "Consulting & support",
+        "title": "Strategy that keeps pace with your team.",
+        "copy": "Every engagement starts with projects-inspired clarity and ends with teams who understand their tools. These services pair with measurable outcomes.",
         "cards": {
           "consulting": {
-            "eyebrow": "Guiado por disciplina de señalética",
-            "title": "Consultoría e integración de IA",
-            "summary": "Aprovecha la consultoría liderada por las fundadoras para mapear oportunidades, traducirlas en automatización transparente y entregar una IA en la que los equipos confían de verdad.",
+            "eyebrow": "Guided by projects discipline.",
+            "title": "AI Consulting & Integration.",
+            "summary": "use our founder-led consulting to map opportunities, translate them into transparent automation. deliver AI that teams actually trust.",
             "bullets": [
-              "Talleres de descubrimiento que descifran flujos de trabajo y recorridos de usuarios",
-              "Sprints piloto con notas de automatización explicable y vías de exclusión",
-              "Manual de gestión del cambio y formación para que la tripulación gane confianza"
+              "Discovery workshops that decode steps and user journeys.",
+              "Pilot sprints with explainable automation notes and opt-out paths.",
+              "Change-management playbooks and training to keep crews confident."
             ],
-            "primary_cta": "Contacta para consultoría en IA"
+            "primary_cta": "Contact for AI Consulting."
           },
           "implementation": {
-            "eyebrow": "Del piloto al día a día",
-            "title": "Implementación técnica y formación",
-            "summary": "Nos quedamos a bordo después de definir la estrategia. El equipo despliega, documenta y capacita para que la IA tranquila e inclusiva se vuelva rutina.",
+            "eyebrow": "From pilot to steady state.",
+            "title": "Technical set up & Training.",
+            "summary": "We stay on deck after the strategy is signed off. Our team deploys, documents. trains your people so, inclusive AI becomes routine.",
             "bullets": [
-              "Configuración práctica en la nube, los datos y los puntos de gobernanza",
-              "Documentación AAA accesible, guías de onboarding y sesiones de oficina",
-              "Métricas de éxito continuas y hojas de ruta de iteración ajustadas a tu ritmo"
+              "Hands-on configuration across cloud, data. governance checkpoints.",
+              "AAA-accessible documentation, onboarding guides. office hours.",
+              "Ongoing success metrics and iteration roadmaps tuned to your rhythm."
             ],
-            "primary_cta": "Planifica tu despliegue"
+            "primary_cta": "Plan Your Rollout"
           }
         }
       },
       "platforms": {
-        "eyebrow": "Plataformas insignia",
-        "title": "Productos donde la lógica baila con la creatividad",
-        "copy": "Nuestras plataformas son la prueba viva de los métodos que enseñamos. Comparten la calma de vidrio esmerilado, el acceso multilingüe y el ritmo que sentirás en cada colaboración.",
+        "eyebrow": "Flagship tool",
+        "title": "Products where logic dances with creativity.",
+        "copy": "Our team tool are living proof of the methodologies we teach. They inherit the same frosted-glass, multilingual access. rhythm you will feel in every engagement.",
         "ideonautix": {
-          "eyebrow": "Suite de productividad creativa",
+          "eyebrow": "Creative productivity suite.",
           "title": "Ideonautix",
-          "summary": "Un aliado de IA para fundadores, docentes y equipos que necesitan impulso. Haz brainstorming, crea guiones gráficos y orquesta proyectos con claridad y alegría.",
+          "summary": "An AI partner for founders, educators. teams who need momentum. Brainstorm, storyboard. run projects with clarity and delight.",
           "bullets": [
-            "Asistente de pitch en IA para presentaciones, subvenciones y actualizaciones a stakeholders",
-            "Lienzos colaborativos que equilibran tableros de foco con indicaciones lúdicas",
-            "Localización inclusiva y opciones de voz para comunidades multilingües"
+            "AI Pitch helper for decks, grants. stakeholder updates.",
+            "Collaborative canvases that balance focus dashboards with playful prompts.",
+            "Inclusive localisation and voice options for multilingual communities."
           ],
           "primary_cta": "Explore Ideonautix",
-          "secondary_cta": "Ver destacados de Ideonautix"
+          "secondary_cta": "View Ideonautix Highlights."
         },
         "nodevoyage": {
-          "eyebrow": "Compañero de viaje con IA",
+          "eyebrow": "AI travel app",
           "title": "NodeVoyage",
-          "summary": "Planifica viajes con un compañero que coreografía logística y asombro. Desde escapadas familiares hasta itinerarios nómadas, NodeVoyage se adapta a cada explorador.",
+          "summary": "Plan journeys with a app that choreographs logistics and wonder. From family trips to nomad itineraries, NodeVoyage adapts to every explorer.",
           "bullets": [
-            "Itinerarios personalizados con contexto en vivo, accesibilidad y opciones de idioma",
-            "Optimización de rutas y espacios de trabajo colaborativos para equipos o aulas",
-            "Previsualizaciones listas para hospitalidad para socios y agencias"
+            "Personalised itineraries with live context, accessibility. language options.",
+            "Route optimisation and collaborative trip workspaces for teams or classrooms.",
+            "Hospitality-ready previews for partners and agencies."
           ],
-          "primary_cta": "Descubrir NodeVoyage",
-          "secondary_cta": "Ver casos de viaje"
+          "primary_cta": "Discover NodeVoyage",
+          "secondary_cta": "See Travel Case Studies."
         }
       },
       "education": {
-        "eyebrow": "Creado con LIAA y escuelas bálticas",
-        "title": "Programas educativos y alianzas",
-        "summary": "Lleva alfabetización en IA a aulas, bibliotecas y centros comunitarios. Codiseñamos talleres, módulos curriculares y sprints de mentoría que reciben a cada aprendiz.",
+        "eyebrow": "Built with LIAA and Baltic schools.",
+        "title": "Educational Programs & Partnerships.",
+        "summary": "Bring AI literacy into classrooms, libraries. community hubs. We co-design workshops, curriculum modules. mentorship sprints that welcome every learner.",
         "bullets": [
-          "Planos curriculares, formación docente y lecciones listas para usar",
-          "Hackatones comunitarios, red de embajadores familiares y rutas de prácticas",
-          "Paneles de impacto ajustados a la confianza estudiantil y a las metas de alcance"
+          "Curriculum blueprints, teacher training. ready-to-run lesson plans.",
+          "Community hackathons, parent ambassador network. internship pathways.",
+          "Impact tracking dashboards tuned to student confidence and reach goals."
         ],
-        "primary_cta": "Únete al programa",
-        "secondary_cta": "Acceder a recursos docentes"
+        "primary_cta": "Join the Program",
+        "secondary_cta": "Access Educator Resources."
       },
       "finale": {
-        "eyebrow": "Próximo paso",
-        "title": "Coreografiemos tu próximo hito",
-        "copy": "Comparte tu hoja de ruta, tus retos o tus aulas y reuniremos la mezcla adecuada de consultoría, plataformas y apoyo educativo. La IA tranquila y humana está a un correo de distancia.",
-        "primary_cta": "Contactar con AlgoRhythmics",
-        "secondary_cta": "Leer historias de éxito"
+        "eyebrow": "Next step",
+        "title": "Let’s choreograph your next milestone.",
+        "copy": "Share your roadmap, pain points, or classrooms and we will assemble the right mix of consulting, tool. education support., human-centred AI is a conversation away.",
+        "primary_cta": "Contact Algorhythmics.",
+        "secondary_cta": "Read Success Stories"
       }
     }
   },
@@ -2042,21 +2007,21 @@
       }
     },
     "layout": {
-      "title": "Admin Dashboard - AlgoRhythmics"
+      "title": "Admin Dashboard - Algorhythmics."
     },
     "dashboard": {
       "title": "Dashboard",
-      "subtitle": "Welcome to the AlgoRhythmics CMS",
+      "subtitle": "Welcome to the Algorhythmics CMS.",
       "quick_actions": {
         "title": "Quick Actions",
         "items": {
           "new_post": {
             "title": "New Blog Post",
-            "description": "Create a new blog article"
+            "description": "Create a new blog article."
           },
           "new_module": {
             "title": "New Module",
-            "description": "Add an educational module"
+            "description": "Add an educational module."
           },
           "view_posts": {
             "title": "View Posts",
@@ -2064,18 +2029,18 @@
           },
           "view_modules": {
             "title": "View Modules",
-            "description": "Manage learning content"
+            "description": "Manage learning content."
           }
         }
       },
       "getting_started": {
         "title": "Getting Started",
-        "headline": "Content Management System",
-        "description": "This admin dashboard allows you to create and manage content for the AlgoRhythmics website. Before you can see live content, you need to:",
+        "headline": "Content Management System.",
+        "description": "This admin dashboard allows you to create and manage content for the Algorhythmics website. Before you can see live content, you need to:.",
         "steps": {
-          "setup_strapi": "Set up Strapi CMS backend (see README.md Phase 1 & 2)",
-          "configure_env": "Configure environment variables in .env file",
-          "define_content": "Define content types in Strapi admin panel",
+          "setup_strapi": "Set up Strapi CMS backend (see README.md Phase 1 & 2).",
+          "configure_env": "Configure environment variables in.env file.",
+          "define_content": "Define content types in Strapi admin panel.",
           "start_creating": "Start creating content!"
         },
         "cta": "View Public Site"
@@ -2084,74 +2049,74 @@
   },
   "blog": {
     "meta": {
-      "title": "Blog - AlgoRhythmics",
-      "description": "Insights, stories, and updates from the AlgoRhythmics team on calm AI, educational technology, and responsible innovation."
+      "title": "Blog - Algorhythmics",
+      "description": "Insights, stories. updates from the Algorhythmics team on AI, educational technology. responsible new."
     },
     "hero": {
       "title": "Blog & Insights",
-      "subtitle": "Stories, research, and perspectives on calm AI",
-      "description": "Explore our latest thinking on responsible AI, educational technology, and building inclusive digital experiences."
+      "subtitle": "Stories, research. perspectives on AI.",
+      "description": "Explore our latest thinking on responsible AI, educational technology. building inclusive digital experiences."
     },
     "sections": {
       "latest": "Latest Articles"
     },
     "error": {
-      "title": "Content Temporarily Unavailable",
+      "title": "Content Temporarily Unavailable.",
       "help": "The blog content is managed through our CMS. Please ensure the Strapi backend is configured and running."
     },
     "empty": {
       "title": "No Posts Yet",
-      "description": "Check back soon for insightful articles about calm AI and educational innovation."
+      "description": "Check back soon for insightful articles about AI and educational new."
     },
     "card": {
       "by": "By {name}",
-      "cta": "Read More →"
+      "cta": "see details →"
     },
     "buttons": {
       "back_to_blog": "← Back to Blog"
     },
     "slug": {
-      "title_suffix": "AlgoRhythmics Blog",
+      "title_suffix": "Algorhythmics Blog",
       "tags_label": "Tags:"
     }
   },
   "platform": {
     "meta": {
-      "title": "Platform Articles - AlgoRhythmics",
-      "description": "Explore platform articles, case studies, and insights about our technology platforms."
+      "title": "tool Articles - Algorhythmics.",
+      "description": "Explore tool articles, case studies. insights about our technology tool."
     },
     "hero": {
-      "title": "Platform Articles",
-      "description": "Explore in-depth articles about our platforms: NodeVoyage and Ideonautix. Learn about the technology, use cases, and real-world implementations."
+      "title": "tool Articles",
+      "description": "Explore in-depth articles about our tool: NodeVoyage and Ideonautix. Learn about the technology, use cases. real-world implementations."
     },
     "error": {
-      "title": "Content Temporarily Unavailable",
-      "help": "The platform articles are managed through our CMS. Please ensure the Strapi backend is configured and running."
+      "title": "Content Temporarily Unavailable.",
+      "help": "The tool articles are managed through our CMS. Please ensure the Strapi backend is configured and running."
     },
     "empty": {
       "title": "No Articles Yet",
-      "description": "Check back soon for platform articles and case studies."
+      "description": "Check back soon for tool articles and case studies."
     },
     "card": {
       "by": "By {name}",
       "cta": "Read Article →",
-      "category_fallback": "Platform",
+      "category_fallback": "tool",
       "author_fallback": "Anonymous",
       "tags_label": "Tags:"
     },
     "buttons": {
-      "back_to_list": "← Back to Platform Articles"
+      "back_to_list": "← Back to tool Articles."
     },
     "slug": {
-      "default_title": "Platform Article",
-      "title_suffix": "AlgoRhythmics"
+      "default_title": "tool Article",
+      "title_suffix": "Algorhythmics"
     }
   },
   "education_hub": {
     "slug": {
       "default_title": "Educational Module",
-      "title_suffix": "AlgoRhythmics Education Hub",
-      "back": "← Back to Education Hub",
+      "title_suffix": "Algorhythmics Education Hub.",
+      "back": "← Back to Education Hub.",
       "category": "Category: {name}",
       "category_fallback": "Uncategorized",
       "resources_title": "Media & Resources"

@@ -1,8 +1,8 @@
 {
   "site": {
-    "title": "Algorhythmics",
-    "tagline": "Kur loģika dejo ar radošumu",
-    "description": "MI inovāciju laboratorija, kas veido ceļojumu platformu NodeVoyage un produktivitātes komplektu Ideonautix"
+    "description": "We help people and teams use AI at work. We teach, plan, and build simple apps that save time. No fluff.",
+    "tagline": "Clear AI tools for everyone.",
+    "title": "Algorhythmics"
   },
   "seo": {
     "default_title": "Algorhythmics — Saprotams MI īstiem cilvēkiem.",
@@ -31,6 +31,9 @@
       "selected": "Tēma iestatīta uz {theme}"
     }
   },
+  "app": {
+    "loading": "Setting up your use..."
+  },
   "nav": {
     "home": "Sākums",
     "about": "Par mums",
@@ -53,6 +56,180 @@
     "toggle_menu": "Atvērt vai aizvērt izvēlni",
     "close_menu": "Aizvērt izvēlni",
     "skip_to_content": "Pāriet uz saturu"
+  },
+  "about": {
+    "cta": {
+      "body": "Bring your roadmap and we will map the.",
+      "eyebrow": "Collaborate with us",
+      "primary": "Schedule a strategy session.",
+      "secondary": "Explore our products",
+      "title": "Let’s build AI together."
+    },
+    "hero": {
+      "description": "projects build, accessible design. transparent automation.",
+      "eyebrow": "Inside Algorhythmics",
+      "primary": "Explore products",
+      "secondary": "Talk with the founders.",
+      "signals": [
+        {
+          "label": "Founded",
+          "value": "2023"
+        },
+        {
+          "label": "Focus",
+          "value": "NodeVoyage Â· Ideonautix Â· Consulting."
+        },
+        {
+          "label": "Partners",
+          "value": "LIAA + collaborators"
+        }
+      ],
+      "subtitle": "One operating rhythm across products, consulting. education.",
+      "title": "AI from Riga and Rotterdam."
+    },
+    "page": {
+      "finale": {
+        "copy": "We welcome collaborators who care about accessible technology, joyful learning. responsible automation. Whether you are exploring careers, partnerships, or sponsorships, let’s build together.",
+        "eyebrow": "Join us",
+        "primary_cta": "Connect with Algorhythmics.",
+        "secondary_cta": "Subscribe to Updates",
+        "title": "Join the rhythm"
+      },
+      "hero": {
+        "description": "Founded in 2025 by technologists and educators, Algorhythmics believes logic and creativity belong together. From AI tool to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.",
+        "eyebrow": "Inside Algorhythmics",
+        "primary_cta": "Explore Our Services",
+        "secondary_cta": "Meet the Team",
+        "subtitle": "We are a Latvian-born team where algorithms and artistry share the same rhythm. Our work blends projects precision, inclusive design. playful experimentation.",
+        "title": "AI, build in Riga and Rotterdam."
+      },
+      "story": {
+        "cta": "Read success stories",
+        "culture": "Inside the team we host Logic/Dance sessions—one day a data science hackathon, the next an improv design workshop. This fusion of play and rigor shapes the experiences we ship.",
+        "heading": "Who we are",
+        "intro": "What began as a small startup in Riga has grown into a bridge between education, culture. industry. Early collaborations with Latvia's Investment and Development Agency (LIAA) helped us champion AI education nationwide.",
+        "milestones": [
+          "Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.",
+          "Tailored Ideonautix for startups after listening to founders who needed, creative productivity support.",
+          "Expanded partnerships with museums, libraries. international conferences—proving that logic and art thrive together."
+        ],
+        "milestones_heading": "Our story"
+      },
+      "team": {
+        "copy": "Our team spans AI researchers, designers, educators. community builders. Meet the founders who set the tone for collaboration and build.",
+        "eyebrow": "Founders & stewards",
+        "focus_label": "Focus: {focus}",
+        "members": {
+          "nikita": {
+            "bio": "Nikita keeps product direction, accessibility. partnerships aligned. He brings signage-floor realism to every interface and programme.",
+            "focus": "Signage build, storytelling. partner delivery.",
+            "links": {
+              "email": "Email",
+              "linkedin": "LinkedIn"
+            },
+            "name": "Nikita Jurtaevs",
+            "role": "Co-founder & CEO"
+          },
+          "slaff": {
+            "bio": "Slaff run engineering, data flows. AI integrations. He connects hardware-grade discipline with transparent software experiences.",
+            "focus": "Cloud architecture, explainable AI. work.",
+            "links": {
+              "email": "Email",
+              "linkedin": "LinkedIn"
+            },
+            "name": "Vjaceslavs \"Slaff\" Trosins.",
+            "role": "Co-founder & CTO"
+          }
+        },
+        "title": "The people behind the rhythm."
+      },
+      "values": {
+        "community": {
+          "copy": "Partnerships with parents, cultural institutions. industry mentors turn AI into a shared dance rather than a solo act.",
+          "title": "Community & collaboration."
+        },
+        "copy": "Our mission is simple: make advanced AI accessible, enjoyable. trustworthy. We pursue this mission through values that keep people at the centre.",
+        "education_first": {
+          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner.",
+          "title": "Education first"
+        },
+        "empowerment": {
+          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive. human-centred.",
+          "title": "Empowerment through technology."
+        },
+        "eyebrow": "Mission & values",
+        "integrity": {
+          "copy": "Ethical rules, privacy. transparency guide every release. We document automation decisions in plain language so trust stays intact.",
+          "title": "new with integrity"
+        },
+        "title": "Where logic dances with creativity."
+      }
+    },
+    "story": {
+      "paragraphs": [
+        "We grew from projects research into AI delivery.",
+        "NodeVoyage and Ideonautix share one accessible rhythm.",
+        "Every engagement honours transparency, inclusion. momentum."
+      ],
+      "title": "Our story"
+    },
+    "team": {
+      "members": [
+        {
+          "bio": "Leads storytelling, accessibility. partner delivery.",
+          "focus": "Signage build & product.",
+          "location": "Riga",
+          "name": "Nikita Jurtaevs",
+          "role": "Co-founder & CEO"
+        },
+        {
+          "bio": "Owns infrastructure, automation transparency. reliability.",
+          "focus": "Cloud architecture & explainable AI.",
+          "location": "Rotterdam",
+          "name": "Vjaceslavs \"Slaff\" Trosins.",
+          "role": "Co-founder & CTO"
+        }
+      ],
+      "subtitle": "Guided by signage systems and cloud AI.",
+      "title": "Founders & stewards"
+    },
+    "timeline": {
+      "items": [
+        {
+          "description": "projects build meets explainable AI.",
+          "title": "team founded",
+          "year": "2023"
+        },
+        {
+          "description": "Accessibility-first travel app pilots.",
+          "title": "NodeVoyage beta",
+          "year": "2024"
+        },
+        {
+          "description": "Bilingual AI literacy with Latvian partners.",
+          "title": "Education pilots",
+          "year": "2025"
+        }
+      ],
+      "title": "Milestones shaping us."
+    },
+    "values": [
+      {
+        "body": "Automation notes ship with every release.",
+        "icon": "idea",
+        "title": "Explain the why"
+      },
+      {
+        "body": "AAA contrast and localisation are default.",
+        "icon": "people",
+        "title": "Design for access"
+      },
+      {
+        "body": "Shared keep teams steady.",
+        "icon": "check",
+        "title": "Protect momentum"
+      }
+    ]
   },
   "language_switcher": {
     "group_label": "Valodu izvēle",
@@ -161,6 +338,146 @@
       },
       "milestone_cta": "Skatīt ceļa karti",
       "brand_aria": "Algorhythmics logotips izcelts hero virsrakstā"
+    },
+    "admin": {
+      "dashboard": {
+        "getting_started": {
+          "cta": "View Public Site",
+          "description": "This admin dashboard allows you to create and manage content for the Algorhythmics website. Before you can see live content, you need to:.",
+          "headline": "Content Management System.",
+          "steps": {
+            "configure_env": "Configure environment variables in.env file.",
+            "define_content": "Define content types in Strapi admin panel.",
+            "setup_strapi": "Set up Strapi CMS backend (see README.md Phase 1 & 2).",
+            "start_creating": "Start creating content!"
+          },
+          "title": "Getting Started"
+        },
+        "quick_actions": {
+          "items": {
+            "new_module": {
+              "description": "Add an educational module.",
+              "title": "New Module"
+            },
+            "new_post": {
+              "description": "Create a new blog article.",
+              "title": "New Blog Post"
+            },
+            "view_modules": {
+              "description": "Manage learning content.",
+              "title": "View Modules"
+            },
+            "view_posts": {
+              "description": "Manage blog posts",
+              "title": "View Posts"
+            }
+          },
+          "title": "Quick Actions"
+        },
+        "subtitle": "Welcome to the Algorhythmics CMS.",
+        "title": "Dashboard"
+      },
+      "layout": {
+        "title": "Admin Dashboard - Algorhythmics."
+      },
+      "nav": {
+        "items": {
+          "back": "Back to Site",
+          "dashboard": "Dashboard",
+          "modules": "Education Modules",
+          "posts": "Blog Posts"
+        },
+        "title": "Algorhythmics CMS"
+      }
+    },
+    "ai_companion": {
+      "actions": {
+        "closePanel": "Close app",
+        "formLabel": "Send a message",
+        "hide": "Hide AI app",
+        "open": "Open AI app",
+        "send": "Send",
+        "suggestionLabel": "Suggestions"
+      },
+      "dialogLabel": "Algorhythmics AI app",
+      "fallback": "I'm still learning, yet I can connect you with the team or share highlights about our products, team culture. services.",
+      "greeting": "Hi! I'm Lumen. Ask me about our team, products, or ways we can team up.",
+      "knowledgeBase": [
+        {
+          "answer": "Algorhythmics pairs workshop-grade engineering with a relaxed communication style. We ship our own flagships while coaching partners through the same R&D.",
+          "keywords": [
+            "different",
+            "unique",
+            "lab",
+            "agency",
+            "Algorhythmics",
+            "culture"
+          ]
+        },
+        {
+          "answer": "NodeVoyage is our intelligent travel guide. Graph-powered itineraries, contextual storytelling. adaptive agents help every trip feel personal and stress-free.",
+          "keywords": [
+            "NodeVoyage",
+            "travel",
+            "tool",
+            "journey",
+            "trip"
+          ]
+        },
+        {
+          "answer": "Ideonautix is a suite of collaborative AI helpers for knowledge teams. It supports ideation sessions, decision intelligence. automation while keeping humans in control.",
+          "keywords": [
+            "Ideonautix",
+            "productivity",
+            "suite",
+            "team",
+            "collaboration"
+          ]
+        },
+        {
+          "answer": "Reach our consulting crew through the contact page or email hello@Algorhythmics.com. We love shaping proofs of concept and long-term partnerships alike.",
+          "keywords": [
+            "contact",
+            "consulting",
+            "engage",
+            "work with",
+            "partnership"
+          ]
+        },
+        {
+          "answer": "Start with a discovery sprint: we map your goals, audit current data flows. co-design a focused AI helper. Together we plan iteration loops so momentum lasts.",
+          "keywords": [
+            "improve",
+            "improvement",
+            "make better",
+            "growth",
+            "strategy"
+          ]
+        }
+      ],
+      "languageSwitch": "Back in Englishâ€”let me know what you're curious about next.",
+      "latency": 520,
+      "name": "Lumen",
+      "placeholder": "Ask about the team, a product, or how we collaborate...",
+      "role": "Your guide to Algorhythmics.",
+      "suggestions": [
+        {
+          "prompt": "What makes Algorhythmics different from other AI studios?",
+          "title": "Explore our AI lab"
+        },
+        {
+          "prompt": "Give me the highlights of the NodeVoyage travel tool.",
+          "title": "NodeVoyage tool"
+        },
+        {
+          "prompt": "How does the Ideonautix productivity suite support teams?",
+          "title": "Ideonautix suite"
+        },
+        {
+          "prompt": "How could Algorhythmics level up our AI plan?",
+          "title": "Improve my AI strategy."
+        }
+      ]
     },
     "story": {
       "title": "Mūsu stāsts",
@@ -450,174 +767,174 @@
     }
   },
   "consulting": {
-    "meta_title": "AlgoRhythmics konsultācijas",
-    "meta_description": "Pievienojies mierīgās MI konsultāciju pilotam: darbnīcas, ieviešanas atbalsts un nepārtraukta aprūpe.",
-    "hero_title": "Draudzīgas MI konsultācijas īstām komandām",
-    "hero_subtitle": "No stratēģijas līdz kodam — palīdzam organizācijām ieviest MI atbildīgi, ētiski un efektīvi.",
-    "hero_description": "Strādājam līdzās jūsu komandai, lai veidotu MI plūsmas, kas respektē cilvēkus, procesus un pārmaiņu vadību. Sagaidi zīmju dizaina skaidrību, caurspīdīgu automatizāciju un rituālus, kas paliek.",
-    "hero_cta_primary": "Pieteikties pilotam",
-    "hero_cta_secondary": "Apskatīt pakalpojumus",
-    "hero_badge": "Pilots atvērts",
-    "hero_rotating": [
-      "Dizaina sesijas, kas pārvērš idejas skaidros plānos.",
-      "Palaižam MI palīgus, kurus komandas patiešām izbauda.",
-      "Apvienojam zīmju meistarību ar mākoņa zināšanām."
-    ],
-    "hero_testimonial_label": "Klienta atsauksme",
-    "hero_testimonial_quote": "AlgoRhythmics sarežģītu MI uzdevumu pārvērta draudzīgā, atkārtojamā plūsmā mūsu komandai.",
-    "hero_testimonial_name": "Marta Ozoliņa",
-    "hero_testimonial_role": "Inovāciju vadītāja, Reclame Fabriek",
-    "spots_remaining": "Atlikuši {count} pilota vietu",
-    "page": {
-      "quick_facts_eyebrow": "Īsumā",
-      "packages_title": "Stratēģija, īstenošana un aprūpe vienā ritmā",
-      "packages_description": "Izvēlies kombināciju, kas atbilst tavai ceļa kartei. Vairums sadarbību apvieno visas trīs fāzes nepārtrauktībai.",
-      "approach_eyebrow": "Mūsu pieeja",
-      "process_eyebrow": "Pilota gaita",
-      "supporting_info_eyebrow": "Vajag ko citu?",
-      "supporting_info_title": "Pielāgojamies sarežģītām vidēm",
-      "supporting_info_copy": "Regulētas nozares, daudzvalodu komandas un hibrīdas infrastruktūras ir gaidītas. Dokumentējam katru lēmumu, lai audits būtu mierīgs.",
-      "supporting_info_cta": "Raksti konsultāciju komandai",
-      "examples_eyebrow": "Paraugi"
-    },
-    "what_title": "Ar ko palīdzam",
-    "what_1": "Veidot pieejamus, cilvēkiem draudzīgus MI plūsmas.",
-    "what_2": "Prototipēt, integrēt un palaist ar pārliecību.",
-    "what_3": "Atbalstīt komandu ar apmācībām un iterācijām.",
-    "packages": [
-      {
-        "name": "Stratēģija",
-        "description": "Kartējam iespējas, saskaņojam komandas un definējam izmērāmu plānu.",
-        "benefits": [
-          "Iepazīšanās darbnīcas",
-          "MI gatavības novērtējums",
-          "Ceļvedis ar nākamajiem soļiem"
-        ]
-      },
-      {
-        "name": "Īstenošana",
-        "description": "Prototipējam, integrējam un palaižam mierīgas MI pieredzes.",
-        "benefits": [
-          "Ātra koncepcijas pārbaude",
-          "Integrācija ar jūsu sistēmām",
-          "Apmācību sesijas jūsu komandai"
-        ]
-      },
-      {
-        "name": "Aprūpe",
-        "description": "Uzturam darbu ar pārvaldību, uzlabojumiem un atbalstu.",
-        "benefits": [
-          "Mēneša veselības pārskati",
-          "Iterāciju rezerves saraksts",
-          "Atbalsta komanda pēc pieprasījuma"
-        ]
-      }
-    ],
     "approach": {
-      "title": "Kā strādājam",
-      "intro": "Katra sadarbība apvieno zīmju disciplīnu un koprades rituālus. Mēs mazinām troksni, dokumentējam lēmumus un kopīgi veidojam mierīgus piegādes ciklus.",
+      "intro": "Every engagement blends projects discipline with collaborative. We reduce noise, document decisions. co-create delivery loops.",
       "points": [
         {
-          "title": "Kopīgs atklājums",
-          "description": "Vispirms klausāmies, kartējot iespējas, ierobežojumus un iesaistītos, lai katrs solis cienītu jūsu kontekstu."
+          "description": "We listen first, mapping opportunities, constraints. stakeholders so every move respects your context.",
+          "title": "Collaborative discovery."
         },
         {
-          "title": "Atbildīga ieviešana",
-          "description": "Pieejamība, privātums un pārmaiņu vadība vada katru prototipu pirms nonākšanas ražošanā."
+          "description": "Accessible design, privacy. change management guide each prototype before it reaches production.",
+          "title": "Responsible delivery"
         },
         {
-          "title": "Nepārtraukta iesaiste",
-          "description": "Apmācības, dokumentācija un mentori uztur komandas pārliecību arī pēc palaišanas."
+          "description": "Training, documentation. mentorship keep teams confident long after launch.",
+          "title": "Ongoing enablement"
         }
-      ]
+      ],
+      "title": "How we work"
     },
-    "process_title": "Pilota gaita",
-    "process_steps": [
-      {
-        "title": "Iepazīšanās zvans",
-        "description": "Izprast mērķus, ierobežojumus un gaidītos rezultātus."
-      },
-      {
-        "title": "Dizaina sprints",
-        "description": "Prototipēt pieredzi un apstiprināt tehnisko pieeju."
-      },
-      {
-        "title": "Palaišanas atbalsts",
-        "description": "Kopā ieviest, mērīt un pielāgot."
-      }
-    ],
-    "timeline_title": "Procesa grafiks",
-    "week_1": "1. nedēļa: Iepazīšanās saruna",
-    "week_2": "2. nedēļa: Stratēģijas plāns",
-    "week_3_12": "3.–12. nedēļa: Ieviešanas atbalsts",
-    "benefits_title": "Ko saņemat",
-    "benefit_1": "Bez maksas MI stratēģijas darbnīca",
-    "benefit_2": "Praktisks ieviešanas plāns",
-    "benefit_3": "Trīs mēneši konsultatīva atbalsta",
-    "benefit_4": "Prioritāra piekļuve mūsu produktiem",
-    "requirements_title": "Prasības",
-    "req_1": "Bāzēts Eiropā vai ērti strādā CET laikā",
-    "req_2": "Apņēmība MI transformācijai",
-    "req_3": "Atvērtība sadarbībai un atgriezeniskajai saitei",
+    "benefit_1": "Complimentary AI strategy workshop.",
+    "benefit_2": "Hands-on set up plan",
+    "benefit_3": "Three months of advisory support.",
+    "benefit_4": "Priority access to our products.",
+    "benefits_title": "What you get",
+    "cta": {
+      "copy": "Share your goals and we will choreograph the mix of strategy, build. care that keeps AI friendly for your teams.",
+      "primary": "Book a consultation",
+      "secondary": "Download capabilities overview.",
+      "title": "Ready to join the pilot?"
+    },
     "examples": {
-      "title": "Piemēru projekti",
-      "intro": "Iztēlojoties, kā mierīgs MI palīdz jūsu nozarei, komandas vieglāk ierauga iespējamo ietekmi pirms starta.",
+      "intro": "Imagining how AI can support your sector helps teams visualise the impact before we start.",
       "items": [
         {
-          "title": "Skolu tīkla atgriezeniskās saites asistents",
-          "description": "Kopā izstrādājām daudzvalodu asistentu, lai skolotāji ātrāk fiksētu skolēnu pārdomas un saglabātu GDPR atbilstību.",
-          "meta": "Izglītība • 8 nedēļu sprints"
+          "description": "Co-designed a multilingual helper so teachers capture student reflections faster while staying GDPR-aligned.",
+          "meta": "Education • 8-week sprint.",
+          "title": "School network feedback helper."
         },
         {
-          "title": "Jaunuzņēmuma go-to-market kopilots",
-          "description": "Vadījām trīs cilvēku mārketinga komandu ar ideju rituāliem, automatizētiem uzdevumiem un iekļaujošiem analītikas paneļiem.",
-          "meta": "Radošā industrija • 6 nedēļu pilots"
+          "description": "Guided a three-person marketing crew with ideation, automated briefs. inclusive analytics dashboards.",
+          "meta": "Creative industry • 6-week pilot.",
+          "title": "Startup go-to-market co-pilot."
         }
-      ]
+      ],
+      "title": "Example engagements"
     },
-    "cta": {
-      "title": "Gatavs pievienoties pilotam?",
-      "copy": "Padalies ar saviem mērķiem un mēs saskaņosim stratēģiju, izstrādi un aprūpi, lai MI paliktu draudzīgs jūsu komandām.",
-      "primary": "Rezervē konsultāciju",
-      "secondary": "Lejupielādē spēju pārskatu"
-    },
-    "form_title": "Piesakies pilotam",
-    "form_intro": "Pastāsti nedaudz par savu komandu, lai varam pielāgot sesiju.",
-    "form_company": "Uzņēmums",
-    "form_company_placeholder": "Uzņēmuma vai iniciatīvas nosaukums",
-    "form_name": "Kontaktpersona",
-    "form_name_placeholder": "Ar ko runāsim?",
-    "form_email": "E-pasts",
-    "form_email_placeholder": "tu@example.com",
-    "form_phone": "Tālrunis (nav obligāti)",
-    "form_phone_placeholder": "+371 0000 0000",
-    "form_industry": "Nozare",
-    "form_description": "Apraksti savas MI vajadzības",
-    "form_description_placeholder": "Padalies ar mērķiem, pašreizējiem izaicinājumiem un gaidītajiem rezultātiem...",
-    "form_submit": "Nosūtīt pieteikumu",
-    "form_success": "Pieteikums saņemts! Sazināsimies 48 stundu laikā.",
-    "form_error": "Radās kļūda. Lūdzu, mēģini vēlreiz.",
-    "select_industry": "Izvēlies nozari...",
-    "industries": {
-      "technology": "Tehnoloģijas",
-      "fintech": "Finanšu tehnoloģijas",
-      "ecommerce": "E-komercija",
-      "healthcare": "Veselība",
-      "education": "Izglītība",
-      "manufacturing": "Ražošana",
-      "other": "Cita"
-    },
+    "form_company": "Company",
+    "form_company_placeholder": "Company or plan name",
+    "form_description": "Describe your AI needs.",
+    "form_description_placeholder": "Share your AI goals, current hurdles. the outcomes you're chasing...",
+    "form_email": "Email",
+    "form_email_placeholder": "you@example.com",
+    "form_error": "Something went wrong. Please try again.",
     "form_errors": {
-      "company_required": "Lūdzu, pievieno uzņēmuma vai iniciatīvas nosaukumu.",
-      "name_required": "Pastāsti, ar ko runāsim.",
-      "email_required": "E-pasts palīdz mums atbildēt.",
-      "email_invalid": "Ievadi derīgu e-pasta adresi.",
-      "industry_required": "Izvēlies nozari, kas vislabāk atbilst tavai darbībai.",
-      "description_required": "Padalies nedaudz par saviem mērķiem."
+      "company_required": "Please add your company or plan name.",
+      "description_required": "Share a little about your goals.",
+      "email_invalid": "Add a valid email address.",
+      "email_required": "Email helps us reply.",
+      "industry_required": "Select the industry closest to your work.",
+      "name_required": "Let us know who we will be speaking with."
     },
-    "form_mailto_subject": "Konsultāciju pilota pieteikums no {company}",
-    "form_mailto_body": "Uzņēmums: {company}\nKontakts: {name}\nE-pasts: {email}\nTālrunis: {phone}\nNozare: {industry}\n\nMērķi:\n{description}",
-    "packages_title": "Kā palīdzam"
+    "form_industry": "Industry",
+    "form_intro": "Tell us a little about your team so we can tailor the session.",
+    "form_mailto_body": "Company: {company}\nContact: {name}\nEmail: {email}\nPhone: {phone}\nIndustry: {industry} Goals:\n{description}.",
+    "form_mailto_subject": "Consulting pilot application from {company}.",
+    "form_name": "Contact name",
+    "form_name_placeholder": "Who should we speak with?",
+    "form_phone": "Phone (optional)",
+    "form_phone_placeholder": "+371 0000 0000",
+    "form_submit": "Submit application",
+    "form_success": "Application received! We'll reach out within 48 hours.",
+    "form_title": "Apply for the pilot",
+    "hero_badge": "Pilot open",
+    "hero_cta_primary": "Apply for the pilot",
+    "hero_cta_secondary": "Review service menu",
+    "hero_description": "We partner with your team to design AI steps that respect people, processes. change management. Expect projects-inspired clarity, transparent automation. that stick.",
+    "hero_rotating": [
+      "Design sessions that translate ideas into clear plans.",
+      "Launch AI assistants that teams actually enjoy using.",
+      "Pair projects craftsmanship with cloud know-how."
+    ],
+    "hero_subtitle": "From strategy to code — helping organizations embed AI responsibly, ethically. effectively.",
+    "hero_testimonial_label": "Client reflection",
+    "hero_testimonial_name": "Marta Ozoliņa",
+    "hero_testimonial_quote": "Algorhythmics turned a complex AI brief into a friendly, repeatable steps for our team.",
+    "hero_testimonial_role": "new Lead, Reclame Fabriek.",
+    "hero_title": "Friendly AI consulting for real teams.",
+    "industries": {
+      "ecommerce": "E-commerce",
+      "education": "Education",
+      "fintech": "FinTech",
+      "healthcare": "Healthcare",
+      "manufacturing": "Manufacturing",
+      "other": "Other",
+      "technology": "Technology"
+    },
+    "meta_description": "Join the AI consulting pilot for workshops, set up support. ongoing advisory care.",
+    "meta_title": "Algorhythmics consulting.",
+    "packages": [
+      {
+        "benefits": [
+          "Discovery workshops",
+          "AI readiness scorecard.",
+          "Roadmap with next best moves."
+        ],
+        "description": "Map opportunities, align teams. define a measurable plan.",
+        "name": "Strategy"
+      },
+      {
+        "benefits": [
+          "Rapid proof of concept.",
+          "Integration with your stack.",
+          "Training sessions for your team."
+        ],
+        "description": "Prototype, integrate. launch AI experiences.",
+        "name": "Build"
+      },
+      {
+        "benefits": [
+          "Monthly health reviews.",
+          "Iteration backlog",
+          "On-call support crew"
+        ],
+        "description": "Keep the lights on with governance, improvements. support.",
+        "name": "Care"
+      }
+    ],
+    "packages_title": "How we help",
+    "page": {
+      "approach_eyebrow": "Our philosophy",
+      "examples_eyebrow": "Sample impact",
+      "packages_description": "Choose the mix that fits your roadmap. Most partnerships weave all three phases together for continuity.",
+      "packages_title": "Strategy, build. care in one rhythm.",
+      "process_eyebrow": "Pilot flow",
+      "quick_facts_eyebrow": "At a glance",
+      "supporting_info_copy": "Regulated industries, multilingual teams. hybrid infrastructures are welcome. We document every decision for smooth audits.",
+      "supporting_info_cta": "Email the consulting crew.",
+      "supporting_info_eyebrow": "Need something else?",
+      "supporting_info_title": "We adapt to complex environments."
+    },
+    "process_steps": [
+      {
+        "description": "Understand goals, constraints. desired outcomes.",
+        "title": "Kickoff call"
+      },
+      {
+        "description": "Prototype the use and confirm technical approach.",
+        "title": "Design sprint"
+      },
+      {
+        "description": "Ship, measure. adjust together.",
+        "title": "Launch support"
+      }
+    ],
+    "process_title": "Pilot flow",
+    "req_1": "Based in Europe or comfortable with CET hours.",
+    "req_2": "Committed to AI transformation.",
+    "req_3": "Open to collaboration and feedback.",
+    "requirements_title": "Requirements",
+    "select_industry": "Select industry...",
+    "spots_remaining": "{count} pilot spots remaining.",
+    "timeline_title": "Process timeline",
+    "week_1": "Week 1: Discovery conversation.",
+    "week_2": "Week 2: Strategy blueprint.",
+    "week_3_12": "Week 3-12: set up support.",
+    "what_1": "Design accessible, human-friendly AI steps.",
+    "what_2": "Prototype, integrate. launch with confidence.",
+    "what_3": "Support your team with training and iteration loops.",
+    "what_title": "What we help you do"
   },
   "contact": {
     "meta_title": "Sazinieties ar AlgoRhythmics",
@@ -1567,6 +1884,214 @@
       }
     }
   },
+  "education": {
+    "benefits": {
+      "items": [
+        "Governance checklists.",
+        "Accessibility playbooks.",
+        "Sandbox access.",
+        "Teacher community."
+      ],
+      "title": "What teams take away"
+    },
+    "cta": {
+      "body": "Share your goals and we will tailor the pilot.",
+      "eyebrow": "Next steps",
+      "primary": "Book a discovery call.",
+      "secondary": "Request programme deck.",
+      "title": "Bring AI to your classroom."
+    },
+    "faq": [
+      {
+        "answer": "Latvian schools, vocational programmes. LIAA partners.",
+        "question": "Who can join the pilot?"
+      },
+      {
+        "answer": "We onboard facilitators and stay on-call during first runs.",
+        "question": "Preparation required?"
+      },
+      {
+        "answer": "No. We start with fundamentals and build steadily.",
+        "question": "Do students need AI use?"
+      }
+    ],
+    "faqTitle": "Questions we hear the most.",
+    "hero": {
+      "description": "Bilingual workshops and toolkits.",
+      "eyebrow": "Education partnership.",
+      "primary": "Plan a pilot",
+      "secondary": "Download syllabus",
+      "subtitle": "Programmes for schools and partners.",
+      "title": "AI education"
+    },
+    "page": {
+      "finale": {
+        "copy": "Students, educators, parents. sponsors are welcome. We will help you run workshops, integrate curriculum, or spark community events that pair logic with creativity.",
+        "eyebrow": "Open invitation",
+        "primary_cta": "Start the Conversation.",
+        "secondary_cta": "Download Program Overview.",
+        "title": "Get involved with Algorhythmics outreach."
+      },
+      "global": {
+        "copy": "Our outreach stretches beyond Latvia through European education networks, exchange programs. shared research. Students collaborate across borders, trading ideas and building empathy through responsible AI projects.",
+        "eyebrow": "Sharing the rhythm worldwide.",
+        "primary_cta": "Join Our Community Forum.",
+        "secondary_cta": "Partner with Us",
+        "title": "A global rhythm of shared learning."
+      },
+      "hero": {
+        "description": "Algorhythmics is as much an educational movement as it is a tech team. We nurture AI literacy across classrooms, libraries. community hubs with programs that welcome every age.",
+        "primary_cta": "Join the Program",
+        "secondary_cta": "Access Resources",
+        "subtitle": "Empowering learners, educators. communities through AI.",
+        "title": "Educational Outreach & Community Building."
+      },
+      "impact": {
+        "items": {
+          "feedback": {
+            "description": "Educators reporting higher confidence in teaching AI topics.",
+            "label": "Positive feedback",
+            "value": "90%"
+          },
+          "goal": {
+            "description": "Onboarded with ready-to-run AI literacy modules.",
+            "label": "Goal for 2026",
+            "value": "80% of Latvian schools."
+          },
+          "students": {
+            "description": "Across clubs, camps. classroom pilots.",
+            "label": "Students engaged",
+            "value": "5,000+"
+          },
+          "teachers": {
+            "description": "Certified through our AI pedagogy labs.",
+            "label": "Teachers trained",
+            "value": "200+"
+          }
+        },
+        "note": "Metrics guide our iteration, but the stories matter most—like the student who chose a tech career after an Algorhythmics camp or the teacher who now leads AI clubs with confidence."
+      },
+      "intro": {
+        "how_cta": "Email our Outreach Coordinators.",
+        "how_items": [
+          "Co-create pilots with educators and align them with national curricula.",
+          "Pair every workshop with inclusive materials and multilingual support.",
+          "Document outcomes so communities can continue the rhythm independently."
+        ],
+        "how_title": "How we collaborate",
+        "partners_copy": "We build bridges between schools, parents, industry mentors. cultural partners. The result is a supportive set of tools where logic and creativity collaborate in real time.",
+        "why_copy": "Early exposure to AI concepts nurtures curiosity, confidence. ethical awareness. Our outreach programmes are designed with projects clarity, playful experimentation. rigorous safeguards so every learner can participate.",
+        "why_title": "Why outreach matters"
+      },
+      "partnerships": {
+        "community": {
+          "bullets": [
+            "Open-to-all sessions that explain machine learning with tangible analogies.",
+            "Parent Ambassador Network where families co-host learning circles at libraries.",
+            "Guest mentors from industry and culture bridging real projects with storytelling."
+          ],
+          "copy": "Monthly workshops, webinars. neighbourhood hackathons make AI approachable for parents, professionals. the next wave of makers.",
+          "cta": "See Upcoming Events",
+          "eyebrow": "Beyond the classroom",
+          "title": "Community Events"
+        },
+        "copy": "From nationwide initiatives to after-school labs, each partnership invites communities to use AI as something welcoming and responsible.",
+        "cultural": {
+          "bullets": [
+            "AI + Art exhibits that translate algorithms into sound, movement. light.",
+            "Story-driven installations where elders and kids explore AI together.",
+            "Shared archives of lesson prompts and accessible exhibition guides."
+          ],
+          "copy": "Museums, libraries. creative labs collaborate with Algorhythmics to blend technology with heritage—sparking curiosity across generations.",
+          "cta": "Propose a Collaboration.",
+          "eyebrow": "Logic meets art",
+          "title": "Cultural Partnerships."
+        },
+        "eyebrow": "Programmes in motion",
+        "liaa": {
+          "bullets": [
+            "Curriculum integration with bilingual lesson kits and signage-inspired visuals.",
+            "Teacher coaching cohorts and certification pathways that demystify AI.",
+            "Shared research loops to publish findings and refine national standards."
+          ],
+          "copy": "As the education sector ambassador with Latvia's Investment and Development Agency (LIAA), we co-create policy-ready pilots that bring AI literacy into formal curricula.",
+          "cta": "Talk with the Outreach Team.",
+          "eyebrow": "National collaboration.",
+          "title": "LIAA Partnership"
+        },
+        "schools": {
+          "bullets": [
+            "Plug-and-play project modules for math, science, arts. humanities.",
+            "Workshops where students train mini AIs, compose generative art, or design ethical guidelines.",
+            "Free or subsidised Ideonautix access so practice continues beyond the bell."
+          ],
+          "copy": "We turn on classrooms with experiential AI—coding clubs, new labs. creative sprints where students see logic dance with imagination.",
+          "cta": "Request a Pilot Pack",
+          "eyebrow": "Hands-on discovery",
+          "title": "School Programs"
+        },
+        "title": "Anchors for learners, families. mentors."
+      }
+    },
+    "partners": {
+      "body": "Built with signage specialists and educators.",
+      "highlights": [
+        {
+          "label": "Pilot schools",
+          "value": "4"
+        },
+        {
+          "label": "Languages",
+          "value": "En â· lv â· ru"
+        },
+        {
+          "label": "Instructor rating",
+          "value": "4.9 / 5"
+        }
+      ],
+      "title": "Trusted partners"
+    },
+    "programmes": {
+      "items": [
+        {
+          "body": "Sixteen-week co-creation sprint.",
+          "cta": "Review pilot plan",
+          "href": "#",
+          "icon": "target",
+          "meta": "60 students",
+          "title": "LIAA pilot"
+        },
+        {
+          "body": "Lesson decks and facilitator support.",
+          "cta": "Request access",
+          "href": "#",
+          "icon": "package",
+          "meta": "Launching 2025",
+          "title": "School kit"
+        }
+      ],
+      "subtitle": "Choose the track that fits.",
+      "title": "Programmes in motion"
+    },
+    "valueProps": [
+      {
+        "body": "Hands-on lessons that scale.",
+        "icon": "idea",
+        "title": "Practical workshops"
+      },
+      {
+        "body": "Accessible in EN Â· LV Â· RU.",
+        "icon": "people",
+        "title": "Inclusive design"
+      },
+      {
+        "body": "Transparent automation toggles.",
+        "icon": "AI",
+        "title": "Safe AI sandboxes"
+      }
+    ],
+    "valuePropsHeading": "What students use"
+  },
   "educationHub": {
     "page": {
       "hero": {
@@ -1907,6 +2432,54 @@
   },
   "services": {
     "page": {
+      "consulting": {
+        "cards": {
+          "consulting": {
+            "bullets": [
+              "Discovery workshops that decode steps and user journeys.",
+              "Pilot sprints with explainable automation notes and opt-out paths.",
+              "Change-management playbooks and training to keep crews confident."
+            ],
+            "eyebrow": "Guided by projects discipline.",
+            "primary_cta": "Contact for AI Consulting.",
+            "summary": "use our founder-led consulting to map opportunities, translate them into transparent automation. deliver AI that teams actually trust.",
+            "title": "AI Consulting & Integration."
+          },
+          "implementation": {
+            "bullets": [
+              "Hands-on configuration across cloud, data. governance checkpoints.",
+              "AAA-accessible documentation, onboarding guides. office hours.",
+              "Ongoing success metrics and iteration roadmaps tuned to your rhythm."
+            ],
+            "eyebrow": "From pilot to steady state.",
+            "primary_cta": "Plan Your Rollout",
+            "summary": "We stay on deck after the strategy is signed off. Our team deploys, documents. trains your people so, inclusive AI becomes routine.",
+            "title": "Technical set up & Training."
+          }
+        },
+        "copy": "Every engagement starts with projects-inspired clarity and ends with teams who understand their tools. These services pair with measurable outcomes.",
+        "eyebrow": "Consulting & support",
+        "title": "Strategy that keeps pace with your team."
+      },
+      "education": {
+        "bullets": [
+          "Curriculum blueprints, teacher training. ready-to-run lesson plans.",
+          "Community hackathons, parent ambassador network. internship pathways.",
+          "Impact tracking dashboards tuned to student confidence and reach goals."
+        ],
+        "eyebrow": "Built with LIAA and Baltic schools.",
+        "primary_cta": "Join the Program",
+        "secondary_cta": "Access Educator Resources.",
+        "summary": "Bring AI literacy into classrooms, libraries. community hubs. We co-design workshops, curriculum modules. mentorship sprints that welcome every learner.",
+        "title": "Educational Programs & Partnerships."
+      },
+      "finale": {
+        "copy": "Share your roadmap, pain points, or classrooms and we will assemble the right mix of consulting, tool. education support., human-centred AI is a conversation away.",
+        "eyebrow": "Next step",
+        "primary_cta": "Contact Algorhythmics.",
+        "secondary_cta": "Read Success Stories",
+        "title": "Let’s choreograph your next milestone."
+      },
       "hero": {
         "title": "Pakalpojumi un risinājumi mierīgai, radošai AI",
         "subtitle": "Uzzini, kā AlgoRhythmics apvieno konsultācijas, vadošās platformas un izglītību, lai idejas no dzirksts nonāktu līdz startam.",
