@@ -417,29 +417,29 @@
         "secondary_cta": "Связаться с командой"
       },
       "education_hub": {
-        "eyebrow": "Будьте в курсе",
-        "title": "Держите ритм спокойного ИИ",
-        "description": "Наш Education Hub делится историями спокойного ИИ, инструментами для классов и событиями сообщества — всем, что нужно, чтобы воплотить инклюзивные инновации.",
+        "description": "Our Education Hub shares AI stories, classroom toolkits. community highlights—everything you need to bring inclusive new to life.",
+        "eyebrow": "Stay in the loop",
         "items": {
-          "insights": {
-            "eyebrow": "Идеи",
-            "title": "Свежие статьи о спокойном ИИ",
-            "copy": "Читаемые многоязычные истории, созданные вместе с педагогами, основателями и семьями.",
-            "cta": "Просмотреть идеи"
-          },
           "case_studies": {
-            "eyebrow": "Кейсы",
-            "title": "Истории влияния и пилоты",
-            "copy": "Узнайте о классах, стартапах и культурных партнёрах, которые практикуют спокойный ИИ.",
-            "cta": "Посмотреть подборку"
+            "copy": "See classrooms, startups. cultural partners practicing AI.",
+            "cta": "Explore spotlights",
+            "eyebrow": "Case studies",
+            "title": "Impact stories & pilots."
           },
           "events": {
-            "eyebrow": "События",
-            "title": "Мастерские и встречи сообщества",
-            "copy": "Присоединяйтесь к ежемесячным встречам с расшифровками, субтитрами и общими заметками.",
-            "cta": "Смотреть календарь событий"
+            "copy": "Join monthly gatherings with transcripts, captions. shared notes.",
+            "cta": "See upcoming events",
+            "eyebrow": "Events",
+            "title": "Workshops & community jams."
+          },
+          "insights": {
+            "copy": "Readable, multilingual stories co-written with educators, founders. families.",
+            "cta": "Browse insights",
+            "eyebrow": "Insights",
+            "title": "Latest AI articles"
           }
-        }
+        },
+        "title": "Keep up with the AI rhythm."
       },
       "platform_showcase": {
         "eyebrow": "Product snapshots",
@@ -455,6 +455,31 @@
             "copy": "Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller."
           }
         }
+      },
+      "education_hub": {
+        "description": "Our Education Hub shares AI stories, classroom toolkits. community highlights—everything you need to bring inclusive new to life.",
+        "eyebrow": "Stay in the loop",
+        "items": {
+          "case_studies": {
+            "copy": "See classrooms, startups. cultural partners practicing AI.",
+            "cta": "Explore spotlights",
+            "eyebrow": "Case studies",
+            "title": "Impact stories & pilots."
+          },
+          "events": {
+            "copy": "Join monthly gatherings with transcripts, captions. shared notes.",
+            "cta": "See upcoming events",
+            "eyebrow": "Events",
+            "title": "Workshops & community jams."
+          },
+          "insights": {
+            "copy": "Readable, multilingual stories co-written with educators, founders. families.",
+            "cta": "Browse insights",
+            "eyebrow": "Insights",
+            "title": "Latest AI articles"
+          }
+        },
+        "title": "Keep up with the AI rhythm."
       }
     }
   },
@@ -944,40 +969,40 @@
     }
   },
   "footer": {
-    "brand_alt": "AlgoRhythmics wordmark",
-    "tagline": "Calm AI tools grounded in signage craft.",
-    "status": "Pre-company • Ideju Kauss October 2025",
-    "location": "Daugavpils, Latvia",
-    "company": "Компания",
-    "support": "Solutions & tools",
-    "resources": "Education Hub",
     "about": "О нас",
-    "services": "Services",
-    "educational_outreach": "Educational outreach",
-    "contact": "Контакты",
     "blog": "Блог",
+    "brand_alt": "AlgoRhythmics wordmark.",
     "case_studies": "Case studies",
-    "documentation": "Documentation",
-    "events": "Events",
-    "nodevoyage": "NodeVoyage",
-    "ideonautix": "Ideonautix",
+    "company": "Компания",
     "consulting": "Консалтинг",
-    "help_center": "Help Center",
-    "newsletter": "Newsletter",
-    "partners_title": "Partners",
-    "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",
-    "partners_relationship": "Отношения",
-    "partners_location": "Локация",
-    "partners_visit": "Visit site",
-    "partners_link": "Meet our collaborators",
-    "social": {
-      "linkedin": "LinkedIn",
-      "twitter": "Twitter",
-      "facebook": "Facebook",
-      "email": "E-mail"
-    },
-    "copyright": "© 2025 AlgoRhythmics",
+    "contact": "Контакты",
+    "copyright": "© 2026 AlgoRhythmics — Where logic dances with creativity.",
+    "documentation": "Documentation",
     "education_hub": "Education Hub",
+    "educational_outreach": "Educational outreach",
+    "events": "Events",
+    "help_center": "Help Center",
+    "ideonautix": "Ideonautix",
+    "location": "Based in Latvia · remote-first team.",
+    "newsletter": "Newsletter",
+    "nodevoyage": "NodeVoyage",
+    "partners_link": "Meet our collaborators.",
+    "partners_location": "Локация",
+    "partners_relationship": "Отношения",
+    "partners_summary": "Reclame Fabriek’s R&D lab keeps our prototypes honest.",
+    "partners_title": "Partners",
+    "partners_visit": "Visit site",
+    "resources": "Education Hub",
+    "services": "Services",
+    "social": {
+      "email": "E-mail",
+      "facebook": "Facebook",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    },
+    "status": "Pre-incorporation — Ideju Kauss October 2025.",
+    "support": "Solutions & tools",
+    "tagline": "AI tools grounded in projects build.",
     "toolkits": "Learning toolkits"
   },
   "ai_companion": {
@@ -1948,6 +1973,122 @@
       "hero": {
         "title": "Сервисы и решения для спокойного, творческого ИИ",
         "subtitle": "Узнайте, как AlgoRhythmics объединяет консалтинг, флагманские платформы и образование, чтобы провести идею от искры до запуска.",
+    "admin": {
+        "dashboard": {
+            "getting_started": {
+                "cta": "View Public Site",
+                "description": "This admin dashboard allows you to create and manage content for the Algorhythmics website. Before you can see live content, you need to:.",
+                "headline": "Content Management System.",
+                "steps": {
+                    "configure_env": "Configure environment variables in.env file.",
+                    "define_content": "Define content types in Strapi admin panel.",
+                    "setup_strapi": "Set up Strapi CMS backend (see README.md Phase 1 & 2).",
+                    "start_creating": "Start creating content!"
+                },
+                "title": "Getting Started"
+            },
+            "quick_actions": {
+                "items": {
+                    "new_module": {
+                        "description": "Add an educational module.",
+                        "title": "New Module"
+                    },
+                    "new_post": {
+                        "description": "Create a new blog article.",
+                        "title": "New Blog Post"
+                    },
+                    "view_modules": {
+                        "description": "Manage learning content.",
+                        "title": "View Modules"
+                    },
+                    "view_posts": {
+                        "description": "Manage blog posts",
+                        "title": "View Posts"
+                    }
+                },
+                "title": "Quick Actions"
+            },
+            "subtitle": "Welcome to the Algorhythmics CMS.",
+            "title": "Dashboard"
+        },
+        "layout": {
+            "title": "Admin Dashboard - Algorhythmics."
+        },
+        "nav": {
+            "items": {
+                "back": "Back to Site",
+                "dashboard": "Dashboard",
+                "modules": "Education Modules",
+                "posts": "Blog Posts"
+            },
+            "title": "Algorhythmics CMS"
+        }
+    },
+    "blog": {
+        "meta": {
+            "title": "Blog - AlgoRhythmics",
+            "description": "Insights, stories, and updates from the AlgoRhythmics team on calm AI, educational technology, and responsible innovation."
+        },
+        "hero": {
+            "title": "Blog & Insights",
+            "subtitle": "Stories, research, and perspectives on calm AI",
+            "description": "Explore our latest thinking on responsible AI, educational technology, and building inclusive digital experiences."
+        },
+        "sections": {
+            "latest": "Latest Articles"
+        },
+        "error": {
+            "title": "Content Temporarily Unavailable",
+            "help": "The blog content is managed through our CMS. Please ensure the Strapi backend is configured and running."
+        },
+        "empty": {
+            "title": "No Posts Yet",
+            "description": "Check back soon for insightful articles about calm AI and educational innovation."
+        },
+        "card": {
+            "by": "By {name}",
+            "cta": "Read More →"
+        },
+        "buttons": {
+            "back_to_blog": "← Back to Blog"
+        },
+        "slug": {
+            "title_suffix": "AlgoRhythmics Blog",
+            "tags_label": "Tags:"
+        }
+    },
+    "platform": {
+        "meta": {
+            "title": "Platform Articles - AlgoRhythmics",
+            "description": "Explore platform articles, case studies, and insights about our technology platforms."
+        },
+        "hero": {
+            "title": "Platform Articles",
+            "description": "Explore in-depth articles about our platforms: NodeVoyage and Ideonautix. Learn about the technology, use cases, and real-world implementations."
+        },
+        "error": {
+            "title": "Content Temporarily Unavailable",
+            "help": "The platform articles are managed through our CMS. Please ensure the Strapi backend is configured and running."
+        },
+        "empty": {
+            "title": "No Articles Yet",
+            "description": "Check back soon for platform articles and case studies."
+        },
+        "card": {
+            "by": "By {name}",
+            "cta": "Read Article →",
+            "category_fallback": "Platform",
+            "author_fallback": "Anonymous",
+            "tags_label": "Tags:"
+        },
+        "buttons": {
+            "back_to_list": "← Back to Platform Articles"
+        },
+        "slug": {
+            "default_title": "Platform Article",
+            "title_suffix": "AlgoRhythmics"
+        }
+    },
         "description": "Внедряете ли вы ИИ в процессы, оснащаете классы или тестируете новый продукт — наша команда дирижирует ритмом от стратегии до поддержки.",
         "primary_cta": "Запросить демонстрацию или консультацию",
         "secondary_cta": "Посмотреть платформы"
@@ -2155,6 +2296,269 @@
       "category": "Category: {name}",
       "category_fallback": "Uncategorized",
       "resources_title": "Media & Resources"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Inside AlgoRhythmics",
+      "title": "Calm AI from Riga and Rotterdam",
+      "subtitle": "One operating rhythm across products, consulting, and education.",
+      "description": "Signage craft, accessible design, and transparent automation.",
+      "signals": [
+        {
+          "label": "Founded",
+          "value": "2023"
+        },
+        {
+          "label": "Focus",
+          "value": "NodeVoyage · Ideonautix · Consulting"
+        },
+        {
+          "label": "Partners",
+          "value": "LIAA + collaborators"
+        }
+      ],
+      "primary": "Explore products",
+      "secondary": "Talk with the founders"
+    },
+    "story": {
+      "title": "Our story",
+      "paragraphs": [
+        "We grew from signage research into calm AI delivery.",
+        "NodeVoyage and Ideonautix share one accessible rhythm.",
+        "Every engagement honours transparency, inclusion, and momentum."
+      ]
+    },
+    "valuesTitle": "The values we hold onto",
+    "values": [
+      {
+        "icon": "idea",
+        "title": "Explain the why",
+        "body": "Automation notes ship with every release."
+      },
+      {
+        "icon": "people",
+        "title": "Design for access",
+        "body": "AAA contrast and localisation are default."
+      },
+      {
+        "icon": "check",
+        "title": "Protect calm momentum",
+        "body": "Shared rituals keep teams steady."
+      }
+    ],
+    "timeline": {
+      "title": "Milestones shaping us",
+      "items": [
+        {
+          "year": "2023",
+          "title": "Studio founded",
+          "description": "Signage craft meets explainable AI."
+        },
+        {
+          "year": "2024",
+          "title": "NodeVoyage beta",
+          "description": "Accessibility-first travel companion pilots."
+        },
+        {
+          "year": "2025",
+          "title": "Education pilots",
+          "description": "Bilingual AI literacy with Latvian partners."
+        }
+      ]
+    },
+    "team": {
+      "title": "Founders & stewards",
+      "subtitle": "Guided by signage systems and cloud AI.",
+      "members": [
+        {
+          "name": "Nikita Jurtaevs",
+          "role": "Co-founder & CEO",
+          "location": "Riga",
+          "bio": "Leads storytelling, accessibility, and partner delivery.",
+          "focus": "Signage craft & product rituals"
+        },
+        {
+          "name": "Vjaceslavs \"Slaff\" Trosins",
+          "role": "Co-founder & CTO",
+          "location": "Rotterdam",
+          "bio": "Owns infrastructure, automation transparency, and reliability.",
+          "focus": "Cloud architecture & explainable AI"
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Collaborate with us",
+      "title": "Let’s build calm AI together",
+      "body": "Bring your roadmap and we will map the rituals.",
+      "primary": "Schedule a strategy session",
+      "secondary": "Explore our products"
+    },
+    "page": {
+      "hero": {
+        "eyebrow": "Внутри AlgoRhythmics",
+        "title": "Спокойный ИИ, созданный в Риге и Роттердаме",
+        "subtitle": "Мы — студия родом из Латвии, где алгоритмы и искусство движутся в одном ритме. Наша работа соединяет точность навигационной графики, инклюзивный дизайн и игривые эксперименты.",
+        "description": "Основанная в 2025 году технологами и педагогами, AlgoRhythmics убеждена, что логика и творчество должны идти вместе. От платформ ИИ до пилотов в классах мы ставим решения, которые объясняют себя сами и приглашают к сотрудничеству.",
+        "primary_cta": "Изучить наши услуги",
+        "secondary_cta": "Познакомиться с командой"
+      },
+      "story": {
+        "heading": "Кто мы",
+        "intro": "То, что начиналось как небольшой стартап в Риге, превратилось в мост между образованием, культурой и индустрией. Раннее сотрудничество с Латвийским агентством инвестиций и развития (LIAA) помогло нам продвигать образование в сфере ИИ по всей стране.",
+        "culture": "В студии мы проводим сессии Logic/Dance: один день — хакатон по анализу данных, на следующий — импровизационная дизайн-мастерская. Это сочетание игры и строгости формирует опыт, который мы создаём.",
+        "milestones_heading": "Наша история",
+        "milestones": [
+          "Запустили пилотные программы в местных школах, где ученики создавали проекты с нашими инструментами и видели, как их идеи оживают.",
+          "Адаптировали Ideonautix для стартапов после того, как услышали основателей, нуждавшихся в спокойной и творческой продуктивности.",
+          "Расширили партнёрства с музеями, библиотеками и международными конференциями — доказав, что логика и искусство процветают вместе."
+        ],
+        "cta": "Читать истории успеха"
+      },
+      "values": {
+        "eyebrow": "Миссия и ценности",
+        "title": "Где логика танцует с творчеством",
+        "copy": "Наша миссия проста: сделать продвинутый ИИ доступным, приятным и заслуживающим доверия. Мы реализуем её через ценности, которые ставят людей в центр.",
+        "education_first": {
+          "title": "Education first",
+          "copy": "We nurture AI literacy in classrooms and community hubs. Free resources and respectful mentorship keep curiosity alive for every learner."
+        },
+        "empowerment": {
+          "title": "Empowerment through technology",
+          "copy": "Whether you are a founder, teacher, or student, our tools are designed to feel welcoming, intuitive, and human-centred."
+        },
+        "integrity": {
+          "title": "Innovation with integrity",
+          "copy": "Ethical guardrails, privacy, and transparency guide every release. We document automation decisions in plain language so trust stays intact."
+        },
+        "community": {
+          "title": "Community & collaboration",
+          "copy": "Partnerships with parents, cultural institutions, and industry mentors turn AI into a shared dance rather than a solo act."
+        }
+      },
+      "team": {
+        "eyebrow": "Основатели и хранители",
+        "title": "Люди, задающие ритм",
+        "copy": "В нашей команде — исследователи ИИ, дизайнеры, педагоги и строители сообществ. Познакомьтесь с основателями, которые задают тон сотрудничеству и мастерству.",
+        "focus_label": "Фокус: {focus}",
+        "members": {
+          "nikita": {
+            "name": "Nikita Jurtaevs",
+            "role": "Сооснователь и CEO",
+            "focus": "Дизайн навигации, сторителлинг и работа с партнёрами",
+            "bio": "Никита выстраивает единство продуктовой стратегии, доступности и партнёрств. Он приносит реализм навигационных пространств в каждый интерфейс и программу.",
+            "links": {
+              "email": "Эл. почта",
+              "linkedin": "LinkedIn"
+            }
+          },
+          "slaff": {
+            "name": "Vjaceslavs \"Slaff\" Trosins",
+            "role": "Сооснователь и CTO",
+            "focus": "Облачная архитектура, объяснимый ИИ и операции",
+            "bio": "Слафф управляет инженерией, потоками данных и интеграциями ИИ. Он соединяет дисциплину уровня «железа» с прозрачным пользовательским опытом программного обеспечения.",
+            "links": {
+              "email": "Эл. почта",
+              "linkedin": "LinkedIn"
+            }
+          }
+        }
+      },
+      "finale": {
+        "eyebrow": "Присоединяйтесь",
+        "title": "Войдите в ритм",
+        "copy": "Мы рады сотрудничать с теми, кто заботится о доступных технологиях, радостном обучении и ответственной автоматизации. Независимо от того, рассматриваете ли вы карьеру, партнёрство или спонсорство — давайте строить будущее вместе.",
+        "primary_cta": "Связаться с AlgoRhythmics",
+        "secondary_cta": "Подписаться на обновления"
+      }
+    }
+  },
+  "services": {
+    "page": {
+      "hero": {
+        "title": "Сервисы и решения для спокойного, творческого ИИ",
+        "subtitle": "Узнайте, как AlgoRhythmics объединяет консалтинг, флагманские платформы и образование, чтобы провести идею от искры до запуска.",
+        "description": "Внедряете ли вы ИИ в процессы, оснащаете классы или тестируете новый продукт — наша команда дирижирует ритмом от стратегии до поддержки.",
+        "primary_cta": "Запросить демонстрацию или консультацию",
+        "secondary_cta": "Посмотреть платформы"
+      },
+      "consulting": {
+        "eyebrow": "Консалтинг и сопровождение",
+        "title": "Стратегия, идущая в ногу с вашей командой",
+        "copy": "Каждый проект начинается с ясности, вдохновлённой навигационной графикой, и завершается командами, которые понимают свои инструменты. Эти услуги объединяют спокойные ритуалы с измеримыми результатами.",
+        "cards": {
+          "consulting": {
+            "eyebrow": "Вдохновлено дисциплиной навигационной графики",
+            "title": "Консалтинг и интеграция ИИ",
+            "summary": "Используйте консультации основателей, чтобы увидеть возможности, превратить их в прозрачную автоматизацию и передать ИИ, которому команды действительно доверяют.",
+            "bullets": [
+              "Стратегические воркшопы, раскрывающие процессы и пользовательские маршруты",
+              "Пилотные спринты с пояснениями к автоматизации и возможностью отказа",
+              "Планы управления изменениями и обучение, поддерживающие уверенность команд"
+            ],
+            "primary_cta": "Связаться по вопросам ИИ-консалтинга"
+          },
+          "implementation": {
+            "eyebrow": "От пилота к устойчивой работе",
+            "title": "Техническое внедрение и обучение",
+            "summary": "Мы остаёмся рядом и после утверждения стратегии. Команда разворачивает решения, документирует и обучает, чтобы спокойный, инклюзивный ИИ стал частью рутины.",
+            "bullets": [
+              "Практическая настройка облака, данных и контрольных точек управления",
+              "Документация уровня AAA, гиды по запуску и офисные часы",
+              "Постоянные метрики успеха и дорожные карты итераций под ваш ритм"
+            ],
+            "primary_cta": "Спланировать внедрение"
+          }
+        }
+      },
+      "platforms": {
+        "eyebrow": "Флагманские платформы",
+        "title": "Продукты, где логика танцует с креативом",
+        "copy": "Платформы студии — живое подтверждение наших методик. В них тот же матовый покой, многоязычный доступ и ритм, который вы почувствуете в каждой совместной работе.",
+        "ideonautix": {
+          "eyebrow": "Набор для творческой продуктивности",
+          "title": "Ideonautix",
+          "summary": "ИИ-партнёр для основателей, педагогов и команд, которым нужен импульс. Мозговые штурмы, сториборды и оркестровка проектов с ясностью и радостью.",
+          "bullets": [
+            "ИИ-ассистент для презентаций, грантов и обновлений для стейкхолдеров",
+            "Совместные холсты, уравновешивающие панели фокуса и игровые подсказки",
+            "Инклюзивная локализация и голосовые опции для многоязычных сообществ"
+          ],
+          "primary_cta": "Explore Ideonautix",
+          "secondary_cta": "Посмотреть ключевые моменты Ideonautix"
+        },
+        "nodevoyage": {
+          "eyebrow": "Путевой спутник на ИИ",
+          "title": "NodeVoyage",
+          "summary": "Планируйте поездки с компаньоном, который сочетает логистику и удивление. От семейных каникул до маршрутов цифровых кочевников — NodeVoyage адаптируется к каждому путешественнику.",
+          "bullets": [
+            "Персональные маршруты с живым контекстом, доступностью и языковыми опциями",
+            "Оптимизация маршрутов и общие рабочие пространства для команд или классов",
+            "Превью, готовые для индустрии гостеприимства, для партнёров и агентств"
+          ],
+          "primary_cta": "Открыть NodeVoyage",
+          "secondary_cta": "Посмотреть кейсы по путешествиям"
+        }
+      },
+      "education": {
+        "eyebrow": "Создано вместе с LIAA и школами Балтии",
+        "title": "Образовательные программы и партнёрства",
+        "summary": "Привнесите ИИ-грамотность в классы, библиотеки и центры сообществ. Мы совместно проектируем воркшопы, учебные модули и менторские спринты, которые приветствуют каждого ученика.",
+        "bullets": [
+          "Шаблоны учебных планов, обучение преподавателей и готовые уроки",
+          "Хакатоны для сообществ, сеть родительских амбассадоров и маршруты стажировок",
+          "Панели отслеживания влияния, настроенные на уверенность студентов и целевые показатели охвата"
+        ],
+        "primary_cta": "Присоединиться к программе",
+        "secondary_cta": "Перейти к ресурсам для педагогов"
+      },
+      "finale": {
+        "eyebrow": "Следующий шаг",
+        "title": "Срежиссируем ваш следующий рубеж",
+        "copy": "Поделитесь дорожной картой, вызовами или аудиторией, и мы соберём подходящее сочетание консалтинга, платформ и образовательной поддержки. Спокойный человекоцентричный ИИ — всего лишь разговор.",
+        "primary_cta": "Связаться с AlgoRhythmics",
+        "secondary_cta": "Читать истории успеха"
+      }
     }
   }
 }
