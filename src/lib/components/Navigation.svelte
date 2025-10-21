@@ -316,7 +316,7 @@
 
   .desktop-nav__link,
   .desktop-nav__trigger {
-    border-radius: var(--radius-full, 999px);
+    border-radius: var(--radius-full);
     padding: 0.6rem 1rem;
     font-size: var(--text-meta);
     font-weight: var(--weight-medium);
@@ -362,7 +362,7 @@
     inset-inline-start: 0;
     background: color-mix(in srgb, var(--surface-glass-bg) 82%, transparent 18%);
     border: 1px solid color-mix(in srgb, var(--surface-glass-border) 54%, transparent 46%);
-    border-radius: var(--radius-xl, 20px);
+    border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
     padding: var(--space-md);
     min-width: 16rem;
@@ -551,7 +551,7 @@
 
   .mobile-menu__nav a.active {
     color: var(--text);
-    border-color: var(--accent-primary, var(--voyage-blue));
+    border-color: var(--accent-primary);
   }
 
   .mobile-menu__group {

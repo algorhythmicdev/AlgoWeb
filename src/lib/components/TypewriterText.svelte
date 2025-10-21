@@ -171,9 +171,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4ch;
+    --typewriter-font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+    --typewriter-gradient: var(--gradient-heading);
+    --typewriter-cursor-radius: var(--radius-xs);
     font-weight: var(--weight-semibold);
-    font-size: var(--typewriter-font-size, clamp(1.8rem, 5.5vw, 2.8rem));
-    background: var(--typewriter-gradient, var(--gradient-heading));
+    font-size: var(--typewriter-font-size);
+    background: var(--typewriter-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -192,7 +195,7 @@
       rgba(var(--voyage-blue-rgb), 0.82) 68%,
       rgba(var(--signal-yellow-rgb), 0.32) 32%
     );
-    border-radius: var(--radius-xs, 0.125rem);
+    border-radius: var(--typewriter-cursor-radius);
     display: inline-block;
     opacity: 0.72;
     animation: cursorBlink 1s steps(2, start) infinite;

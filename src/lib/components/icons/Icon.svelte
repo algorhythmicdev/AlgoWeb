@@ -11,19 +11,39 @@
   $: classes = ['icon', className, forwardedClass].filter(Boolean).join(' ');
 
   /**
+   * Normalises the requested icon size so that callers can either pass a raw
+   * number (interpreted as pixels) or a token/string value (e.g. `var(...)`,
+   * `1.5rem`). Width/height attributes do not understand CSS variables, so we
+   * rely on inline CSS when a non-numeric value is provided.
    * @param {unknown} value
-   * @returns {number}
+   * @returns {{ width: number | null; css: string }}
    */
-  const toNumber = (value) => {
-    if (typeof value === 'number') return value;
-    if (typeof value === 'string') {
-      const parsed = parseFloat(value);
-      return Number.isFinite(parsed) ? parsed : 24;
+  const resolveSize = (value) => {
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return { width: value, css: `${value}px` };
     }
-    return 24;
+
+    if (typeof value === 'string') {
+      const trimmed = value.trim();
+      const parsed = Number.parseFloat(trimmed);
+      const hasUnit = /[a-zA-Z%]/.test(trimmed);
+
+      if (!Number.isNaN(parsed) && !hasUnit) {
+        return { width: parsed, css: `${parsed}px` };
+      }
+
+      if (trimmed.length > 0) {
+        return { width: null, css: trimmed };
+      }
+    }
+
+    const fallback = 24;
+    return { width: fallback, css: `${fallback}px` };
   };
 
-  $: dimension = toNumber(size);
+  $: sizeInfo = resolveSize(size);
+  $: svgStyle = `inline-size: ${sizeInfo.css}; block-size: ${sizeInfo.css};`;
+  $: svgWidth = sizeInfo.width ?? undefined;
   const commonProps = {
     xmlns: 'http://www.w3.org/2000/svg',
     viewBox: '0 0 24 24'
@@ -33,8 +53,9 @@
 {#if name === 'ai'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -47,8 +68,9 @@
 {:else if name === 'map'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -59,8 +81,9 @@
 {:else if name === 'device'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -72,8 +95,9 @@
 {:else if name === 'people'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -86,8 +110,9 @@
 {:else if name === 'target'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -100,8 +125,9 @@
 {:else if name === 'chart'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -114,8 +140,9 @@
 {:else if name === 'market'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -130,8 +157,9 @@
 {:else if name === 'idea'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -143,8 +171,9 @@
 {:else if name === 'bolt'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -154,8 +183,9 @@
 {:else if name === 'package'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -169,8 +199,9 @@
 {:else if name === 'close'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -181,8 +212,9 @@
 {:else if name === 'check'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -193,8 +225,9 @@
 {:else if name === 'calendar'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -207,8 +240,9 @@
 {:else if name === 'mail'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -219,8 +253,9 @@
 {:else if name === 'location'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -231,8 +266,9 @@
 {:else if name === 'info'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -244,8 +280,9 @@
 {:else if name === 'alert'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"
@@ -257,8 +294,9 @@
 {:else if name === 'linkedin'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={`${classes} icon-badge`}
     aria-hidden="true"
     focusable="false"
@@ -272,8 +310,9 @@
 {:else if name === 'github'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={`${classes} icon-badge`}
     aria-hidden="true"
     focusable="false"
@@ -287,8 +326,9 @@
 {:else if name === 'twitter'}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={`${classes} icon-badge`}
     aria-hidden="true"
     focusable="false"
@@ -302,8 +342,9 @@
 {:else}
   <svg
     {...commonProps}
-    width={dimension}
-    height={dimension}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
     class={classes}
     aria-hidden="true"
     focusable="false"

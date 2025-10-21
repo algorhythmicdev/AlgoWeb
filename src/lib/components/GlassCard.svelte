@@ -33,60 +33,42 @@
     .glass-card {
         position: relative;
         display: grid;
-        gap: var(--card-gap, clamp(var(--space-lg), 3vw, var(--space-2xl)));
+        gap: var(--card-gap);
         padding: var(--card-padding-lg);
         border-radius: var(--radius-lg);
-        --glass-card-surface-default: color-mix(
+        --glass-card-surface: color-mix(
             in srgb,
-            var(
-                    --surface-glass-bg,
-                    color-mix(
-                        in srgb,
-                        var(--glass-bg-lighter) 52%,
-                        transparent 48%
-                    )
-                )
-                88%,
+            var(--surface-glass-bg) 88%,
             transparent 12%
         );
-        --glass-card-border-default: color-mix(
-            in srgb,
-            var(--glass-border-strong) 65%,
-            transparent 35%
-        );
-        --glass-card-shadow-default: 0 24px 68px rgba(var(--ink-rgb), 0.14),
-            0 8px 24px rgba(var(--ink-rgb), 0.08);
-        --glass-card-spot-a-default: rgba(var(--voyage-blue-rgb), 0.08);
-        --glass-card-spot-b-default: rgba(var(--aurora-purple-rgb), 0.06);
-        --glass-card-veil-default: color-mix(
+        --glass-card-border: var(--surface-glass-border);
+        --glass-card-shadow: var(--surface-glass-shadow);
+        --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.08);
+        --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.06);
+        --glass-card-veil: color-mix(
             in srgb,
             rgba(var(--voyage-blue-rgb), 0.12) 36%,
             transparent 64%
         );
-        --glass-card-highlight-default: rgba(
-            var(--snow-rgb, 244, 246, 255),
-            0.12
-        );
-        --glass-card-halo-default: rgba(var(--signal-yellow-rgb), 0.16);
-        --glass-card-halo-blur-default: 32px;
-        --glass-card-veil-opacity-default: 0.38;
-        --glass-card-halo-opacity-default: 0.18;
-        border: 1px solid
-            var(
-                --glass-card-border,
-                var(--surface-glass-border, var(--glass-card-border-default))
-            );
-        background: var(
-            --glass-card-surface,
-            var(--surface-glass-fill, var(--glass-card-surface-default))
-        );
+        --glass-card-highlight: rgba(var(--snow-rgb), 0.12);
+        --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.16);
+        --glass-card-halo-blur: 32px;
+        --glass-card-veil-opacity: 0.38;
+        --glass-card-halo-opacity: 0.18;
+        --glass-card-halo-boost: 0.22;
+        --glass-card-halo-boost-hover: 0.32;
+        --glass-card-particles-opacity: 0.38;
+        --glass-card-gap-mobile: var(--space-lg);
+        --glass-card-padding-mobile: var(--space-lg);
+        --glass-card-padding-sm-mobile: var(--space-md);
+        --glass-card-padding-lg-mobile: var(--space-xl);
+        --glass-card-border-hover: var(--glass-card-border);
+        border: 1px solid var(--glass-card-border);
+        background: var(--glass-card-surface);
         color: var(--text);
         overflow: visible;
         isolation: isolate;
-        box-shadow: var(
-            --glass-card-shadow,
-            var(--surface-glass-shadow, var(--glass-card-shadow-default))
-        );
+        box-shadow: var(--glass-card-shadow);
         backdrop-filter: blur(var(--glass-blur-lg)) saturate(1.12);
         -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(1.12);
         transition:
@@ -121,29 +103,26 @@
     .glass-card::before {
         background: radial-gradient(
                 120% 120% at 14% 20%,
-                var(--glass-card-spot-a, var(--glass-card-spot-a-default)) 0%,
+                var(--glass-card-spot-a) 0%,
                 transparent 62%
             ),
             radial-gradient(
                 120% 140% at 80% 16%,
-                var(--glass-card-spot-b, var(--glass-card-spot-b-default)) 0%,
+                var(--glass-card-spot-b) 0%,
                 transparent 68%
             ),
             linear-gradient(
                 180deg,
-                var(--glass-card-veil, var(--glass-card-veil-default)) 0%,
+                var(--glass-card-veil) 0%,
                 transparent 45%
             ),
             linear-gradient(
                 180deg,
-                var(--glass-card-highlight, var(--glass-card-highlight-default))
+                var(--glass-card-highlight)
                     0%,
                 transparent 72%
             );
-        opacity: var(
-            --glass-card-veil-opacity,
-            var(--glass-card-veil-opacity-default)
-        );
+        opacity: var(--glass-card-veil-opacity);
     }
 
     .glass-card::after {
@@ -152,19 +131,14 @@
             120% 120% at 50% 45%,
             color-mix(
                     in srgb,
-                    var(--glass-card-halo, var(--glass-card-halo-default)) 28%,
+                    var(--glass-card-halo) 28%,
                     transparent 72%
                 )
                 0%,
             transparent 70%
         );
-        filter: blur(
-            var(--glass-card-halo-blur, var(--glass-card-halo-blur-default))
-        );
-        opacity: var(
-            --glass-card-halo-opacity,
-            var(--glass-card-halo-opacity-default)
-        );
+        filter: blur(var(--glass-card-halo-blur));
+        opacity: var(--glass-card-halo-opacity);
     }
 
     .glass-card--interactive {
@@ -210,22 +184,14 @@
         outline: 2px solid
             color-mix(
                 in srgb,
-                var(
-                        --focus-ring-color,
-                        color-mix(
-                            in srgb,
-                            var(--voyage-blue) 70%,
-                            var(--aurora-purple) 30%
-                        )
-                    )
-                    80%,
-                rgba(var(--signal-yellow-rgb, 255, 211, 57), 0.24) 20%
+                var(--focus-ring-color) 80%,
+                rgba(var(--signal-yellow-rgb), 0.24) 20%
             );
         outline-offset: 4px;
     }
 
     .glass-card--halo::after {
-        opacity: var(--glass-card-halo-boost, 0.22);
+        opacity: var(--glass-card-halo-boost);
         transition:
             opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
             transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -235,12 +201,12 @@
     .glass-card--halo:focus-visible::after,
     .glass-card--halo.glass-card--interactive:hover::after,
     .glass-card--halo.glass-card--interactive:focus-visible::after {
-        opacity: var(--glass-card-halo-boost-hover, 0.32);
+        opacity: var(--glass-card-halo-boost-hover);
         transform: scale(1.01);
     }
 
     .glass-card--particles::before {
-        opacity: var(--glass-card-particles-opacity, 0.38);
+        opacity: var(--glass-card-particles-opacity);
         transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -253,18 +219,18 @@
 
     @media (max-width: 640px) {
         .glass-card {
-            gap: var(--glass-card-gap-mobile, var(--space-lg));
-            padding: var(--glass-card-padding-mobile, var(--space-lg));
+            gap: var(--glass-card-gap-mobile);
+            padding: var(--glass-card-padding-mobile);
             border-radius: var(--radius-xl);
             width: 100%;
         }
 
         .glass-card--pad-sm {
-            padding: var(--glass-card-padding-sm-mobile, var(--space-md));
+            padding: var(--glass-card-padding-sm-mobile);
         }
 
         .glass-card--pad-lg {
-            padding: var(--glass-card-padding-lg-mobile, var(--space-xl));
+            padding: var(--glass-card-padding-lg-mobile);
         }
     }
 
@@ -300,7 +266,7 @@
     .glass-card :global(p) {
         margin: 0;
         max-width: var(--measure-lg);
-        line-height: var(--leading-relaxed, 1.65);
+        line-height: var(--leading-relaxed);
         color: var(--text);
         text-wrap: pretty;
         overflow-wrap: break-word;
@@ -312,7 +278,7 @@
         padding-left: clamp(var(--space-md), 2.8vw, var(--space-lg));
         display: grid;
         gap: clamp(var(--space-xs), 1.4vw, var(--space-sm));
-        line-height: var(--leading-normal, 1.5);
+        line-height: var(--leading-normal);
     }
 
     .glass-card :global(li) {

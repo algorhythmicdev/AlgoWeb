@@ -157,7 +157,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    z-index: var(--z-base, 0);
+    z-index: var(--z-base);
     isolation: isolate;
   }
 
@@ -166,18 +166,18 @@
     top: 0.75rem;
     left: 0.75rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--radius-md, 12px);
+    border-radius: var(--radius-md);
     background: var(--bg-elev-1);
     color: var(--text);
     border: 1px solid var(--border);
     transform: translateY(-200%);
     transition: transform 0.2s ease;
-    z-index: var(--z-overlay, 400);
+    z-index: var(--z-overlay);
   }
 
   .skip-link:focus {
     transform: translateY(0);
-    outline: 3px solid var(--focus-ring-color, var(--voyage-blue));
+    outline: 3px solid var(--focus-ring-color);
     outline-offset: 4px;
   }
 

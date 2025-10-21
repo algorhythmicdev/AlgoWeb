@@ -94,7 +94,7 @@
     align-items: center;
     gap: clamp(0.35rem, 1vw, 0.65rem);
     padding: clamp(0.3rem, 1vw, 0.55rem);
-    border-radius: var(--radius-pill, 999px);
+    border-radius: var(--radius-pill);
     border: 1.5px solid var(--surface-pill-border);
     background: color-mix(in srgb, var(--surface-pill-bg) 90%, transparent 10%);
     box-shadow: var(--surface-pill-shadow);

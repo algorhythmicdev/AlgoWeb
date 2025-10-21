@@ -313,7 +313,7 @@
     gap: var(--space-sm);
     padding: calc(var(--space-sm) + 0.15rem) clamp(1rem, 4vw, 1.45rem);
     min-width: clamp(6.5rem, 10vw, 7.75rem);
-    border-radius: var(--radius-pill, 999px);
+      border-radius: var(--radius-pill);
     border: 1.5px solid var(--surface-pill-border);
     background: color-mix(in srgb, var(--surface-pill-bg) 88%, transparent 12%);
     color: color-mix(in srgb, var(--surface-chip-color) 92%, var(--voyage-blue) 8%);

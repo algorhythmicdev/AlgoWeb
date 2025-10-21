@@ -51,7 +51,7 @@
 .reading-shell__lead {
     font-size: var(--text-subtitle);
     line-height: var(--leading-relaxed);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    color: var(--text-secondary);
     max-width: var(--measure-lg);
     margin: 0;
 }
@@ -93,7 +93,8 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
-    padding: 0.35rem 0.85rem;
+    padding-block: calc(var(--chip-padding-block));
+    padding-inline: calc(var(--chip-padding-inline));
     border-radius: var(--radius-full);
     font-size: var(--text-label);
     font-weight: var(--weight-semibold);
@@ -121,7 +122,7 @@
 }
 
 .reading-shell__image--tall {
-    max-height: clamp(22rem, 45vw, 32rem);
+    max-height: var(--media-feature-height);
     object-fit: cover;
 }
 
@@ -130,7 +131,7 @@
     gap: var(--space-xl);
     line-height: var(--leading-relaxed);
     font-size: var(--text-body);
-    color: var(--text-primary, var(--text));
+    color: var(--text-primary);
 }
 
 .reading-prose :global(h2) {

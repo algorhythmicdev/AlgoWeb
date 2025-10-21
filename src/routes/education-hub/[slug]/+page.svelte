@@ -114,7 +114,7 @@
 <style>
   .resource-stack {
     display: grid;
-    gap: var(--space-xl);
+    gap: var(--grid-gap-lg);
     margin-top: var(--space-3xl);
   }
 
@@ -124,13 +124,13 @@
 
   .resource-grid {
     display: grid;
-    gap: var(--space-lg);
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--grid-gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-card), 1fr));
   }
 
   .resource-card {
     display: grid;
-    gap: var(--space-sm);
+    gap: var(--cluster-gap-sm);
     padding: var(--component-padding-md);
     border-radius: var(--radius-lg);
     border: 1px solid var(--surface-field-border);

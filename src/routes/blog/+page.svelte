@@ -117,7 +117,7 @@
   .hero-description {
     font-size: var(--text-body);
     line-height: var(--leading-relaxed);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, transparent 18%));
+    color: var(--text-secondary);
   }
 
   .section.blog-posts {
@@ -143,7 +143,7 @@
 
   .error-message p,
   .empty-message p {
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 78%, transparent 22%));
+    color: var(--text-secondary);
     line-height: var(--leading-relaxed);
     margin: 0;
   }
@@ -156,8 +156,9 @@
 
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: var(--space-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-article), 1fr));
+    gap: var(--grid-gap-xl);
+    justify-content: center;
   }
 
   :global(.post-card) {
@@ -175,7 +176,7 @@
 
   .post-image {
     width: 100%;
-    height: clamp(11rem, 24vw, 14rem);
+    height: var(--media-thumb-height);
     object-fit: cover;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
@@ -184,7 +185,7 @@
     padding: var(--component-padding-lg);
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--cluster-gap-md);
     flex: 1;
   }
 
@@ -207,7 +208,7 @@
   }
 
   .post-excerpt {
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 80%, transparent 20%));
+    color: var(--text-secondary);
     line-height: var(--leading-relaxed);
     flex: 1;
     margin: 0;

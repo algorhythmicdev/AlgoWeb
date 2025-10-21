@@ -340,7 +340,7 @@
     <ul class="hero-highlights">
       {#each heroHighlights as highlight (highlight.key)}
         <li>
-          <Icon name="idea" size={22} />
+          <Icon name="idea" size="var(--icon-glyph-sm)" />
           <span>{t(highlight.key, highlight.fallback)}</span>
         </li>
       {/each}
@@ -385,7 +385,7 @@
       <ul>
         {#each quickFacts.items as item (item.key)}
           <li>
-            <Icon name="target" size={22} />
+            <Icon name="target" size="var(--icon-glyph-sm)" />
             <span>{t(item.key, item.fallback)}</span>
           </li>
         {/each}
@@ -411,7 +411,7 @@
         <GlassCard class="package-card" padding="lg" halo interactive>
           <div class="package-card__header">
             <span class="package-icon" aria-hidden="true">
-              <Icon name={pkg.icon} size={28} />
+              <Icon name={pkg.icon} size="var(--icon-glyph-lg)" />
             </span>
             <h3>{t(pkg.nameKey, pkg.nameFallback)}</h3>
           </div>
@@ -439,7 +439,7 @@
         <GlassCard class="approach-card" halo>
           <div class="approach-card__header">
             <span class="approach-icon" aria-hidden="true">
-              <Icon name={point.icon} size={24} />
+              <Icon name={point.icon} size="var(--icon-glyph-md)" />
             </span>
             <h3>{t(point.titleKey, point.titleFallback)}</h3>
           </div>
@@ -494,7 +494,7 @@
       <ul>
         {#each requirements.items as item (item.key)}
           <li>
-            <Icon name="info" size={20} />
+            <Icon name="info" size="var(--icon-glyph-xs)" />
             <span>{t(item.key, item.fallback)}</span>
           </li>
         {/each}
@@ -527,7 +527,7 @@
         <GlassCard class="example-card" padding="lg" halo interactive>
           <div class="example-card__header">
             <span class="example-icon" aria-hidden="true">
-              <Icon name={item.icon} size={26} />
+              <Icon name={item.icon} size="var(--icon-glyph-md)" />
             </span>
             <div>
               <span class="example-meta">{t(item.metaKey, item.metaFallback)}</span>
@@ -651,9 +651,9 @@
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: calc(var(--space-xs) + var(--space-3xs));
     font-size: var(--text-small);
-    letter-spacing: 0.04em;
+    letter-spacing: var(--tracking-tight);
     text-transform: uppercase;
   }
 
@@ -662,18 +662,18 @@
     margin: 0;
     font-size: var(--text-lead);
     line-height: var(--leading-relaxed);
-    color: var(--text-secondary, color-mix(in srgb, var(--text) 82%, rgba(var(--ink-rgb), 0.4) 18%));
+    color: var(--text-secondary);
   }
 
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--cluster-gap-md);
   }
 
   .hero-highlights {
     display: grid;
-    gap: 0.6rem;
+    gap: calc(var(--space-sm) - var(--space-xs) / 2);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -683,11 +683,11 @@
   .hero-highlights li {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: calc(var(--space-sm) - var(--space-xs) / 2);
   }
 
   .hero-highlights :global(.icon) {
-    color: var(--accent-secondary, var(--voyage-blue));
+    color: var(--accent-secondary);
   }
 
   .section.quick-facts,
@@ -750,21 +750,21 @@
   }
 
   .hero-spots {
-    margin-top: 1.4rem;
+    margin-top: calc(var(--space-xl) - var(--space-2xs));
     font-weight: 600;
-    color: var(--accent-secondary, var(--voyage-blue));
+    color: var(--accent-secondary);
   }
 
   :global(.testimonial) {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-lg);
   }
 
   .testimonial__label {
     font-size: var(--text-caption);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-meta);
     text-transform: uppercase;
-    color: var(--muted, color-mix(in srgb, var(--text) 60%, rgba(var(--ink-rgb), 0.3) 40%));
+    color: var(--muted);
   }
 
   :global(.testimonial) blockquote {
@@ -780,31 +780,31 @@
 
   .testimonial__meta {
     display: grid;
-    gap: 0.1rem;
+    gap: var(--space-3xs);
   }
 
   .testimonial__meta span {
-    color: var(--muted, color-mix(in srgb, var(--text) 60%, rgba(var(--ink-rgb), 0.3) 40%));
+    color: var(--muted);
   }
 
   :global(.quick-facts__card) ul {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--space-md);
     padding: 0;
-    margin: 1.5rem 0 0;
+    margin: var(--space-xl) 0 0;
     list-style: none;
   }
 
   :global(.quick-facts__card) li {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-md);
     font-size: var(--text-body);
   }
 
   .packages__grid {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.4rem);
+    gap: var(--grid-gap-xl);
   }
 
   @media (min-width: 900px) {
@@ -815,32 +815,32 @@
 
   :global(.package-card) {
     display: grid;
-    gap: 1.1rem;
+    gap: calc(var(--space-lg) + var(--space-2xs));
   }
 
   .package-card__header {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: var(--space-md);
   }
 
   .package-icon {
     display: inline-flex;
-    padding: 0.75rem;
-    border-radius: 50%;
+    padding: var(--space-md);
+    border-radius: var(--radius-full);
     background: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
-    color: var(--accent-secondary, var(--voyage-blue));
+    color: var(--accent-secondary);
   }
 
   :global(.package-card) ul {
-    padding-left: 1.2rem;
+    padding-left: calc(var(--space-lg) + var(--space-xs));
     display: grid;
-    gap: 0.5rem;
+    gap: var(--space-sm);
   }
 
   .approach__grid {
     display: grid;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: var(--grid-gap-2xl);
   }
 
   @media (min-width: 960px) {
@@ -852,31 +852,31 @@
 
   .approach__points {
     display: grid;
-    gap: 1.4rem;
+    gap: var(--grid-gap-lg);
   }
 
   :global(.approach-card) {
     display: grid;
-    gap: 0.8rem;
+    gap: var(--space-md);
   }
 
   .approach-card__header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-md);
   }
 
   .approach-icon {
     display: inline-flex;
-    padding: 0.65rem;
-    border-radius: 50%;
+    padding: calc(var(--space-md) - var(--space-3xs));
+    border-radius: var(--radius-full);
     background: color-mix(in srgb, var(--glass-bg-lightest) 54%, transparent 46%);
-    color: var(--accent-primary, var(--aurora-purple));
+    color: var(--accent-primary);
   }
 
   .process__grid {
     display: grid;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: var(--grid-gap-2xl);
   }
 
   @media (min-width: 1024px) {
@@ -888,15 +888,15 @@
   .process-steps {
     counter-reset: step;
     display: grid;
-    gap: 1.4rem;
+    gap: var(--grid-gap-lg);
     padding: 0;
-    margin: 2rem 0 0;
+    margin: var(--space-2xl) 0 0;
     list-style: none;
   }
 
   .process-steps li {
     position: relative;
-    padding-left: 3.2rem;
+    padding-left: calc(var(--space-3xl) + var(--space-sm));
   }
 
   .process-steps li::before {
@@ -904,33 +904,33 @@
     content: counter(step);
     position: absolute;
     left: 0;
-    top: 0.1rem;
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: 50%;
+    top: var(--space-3xs);
+    inline-size: var(--size-icon-sm);
+    block-size: var(--size-icon-sm);
+    border-radius: var(--radius-full);
     display: grid;
     place-items: center;
     font-weight: 600;
     background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
-    color: var(--accent-primary, var(--aurora-purple));
+    color: var(--accent-primary);
   }
 
   .process__aside {
     display: grid;
-    gap: 1.4rem;
+    gap: var(--grid-gap-lg);
   }
 
   :global(.timeline-card) ul,
   :global(.benefits-card) ul {
     display: grid;
-    gap: 0.8rem;
-    padding-left: 1.2rem;
-    margin: 1.2rem 0 0;
+    gap: var(--space-md);
+    padding-left: calc(var(--space-lg) + var(--space-xs));
+    margin: calc(var(--space-lg) + var(--space-xs)) 0 0;
   }
 
   .requirements__grid {
     display: grid;
-    gap: clamp(1.6rem, 4vw, 2.4rem);
+    gap: var(--grid-gap-xl);
   }
 
   @media (min-width: 860px) {
@@ -941,89 +941,83 @@
 
   :global(.requirements-card) ul {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--space-md);
     padding: 0;
-    margin: 1.4rem 0 0;
+    margin: calc(var(--space-xl) - var(--space-xs)) 0 0;
     list-style: none;
   }
 
   :global(.requirements-card) li {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: var(--space-md);
   }
 
   :global(.requirements-card) :global(.icon) {
-    margin-top: 0.2rem;
-    color: var(--accent-primary, var(--aurora-purple));
+    margin-top: var(--space-3xs);
+    color: var(--accent-primary);
   }
 
   .examples__grid {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.4rem);
-  }
-
-  @media (min-width: 900px) {
-    .examples__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    gap: var(--grid-gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    justify-content: center;
   }
 
   :global(.example-card) {
     display: grid;
-    gap: 1rem;
+    gap: var(--cluster-gap-md);
+    width: min(100%, var(--card-max-width));
+    margin-inline: auto;
   }
 
   .example-card__header {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-lg);
     align-items: flex-start;
   }
 
   .example-icon {
     display: inline-flex;
-    padding: 0.75rem;
-    border-radius: 18px;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
     background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
-    color: var(--accent-tertiary, var(--signal-yellow));
+    color: var(--accent-tertiary);
   }
 
   .example-meta {
     display: block;
     font-size: var(--text-label);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-meta);
     text-transform: uppercase;
-    color: var(--muted, color-mix(in srgb, var(--text) 60%, rgba(var(--ink-rgb), 0.3) 40%));
+    color: var(--muted);
   }
 
   :global(.application-card) {
     display: grid;
-    gap: 1.5rem;
+    gap: var(--cluster-gap-lg);
   }
 
   .application .form {
-    --form-gap: clamp(1rem, 3vw, 1.5rem);
-    --form-field-radius: 14px;
-    --form-field-padding-y: 0.8rem;
-    --form-field-padding-x: 1rem;
+    --form-gap: var(--grid-gap-md);
+    --form-field-radius: var(--radius-md);
+    --form-field-padding-y: var(--space-md);
+    --form-field-padding-x: var(--space-lg);
     --form-label-color: color-mix(in srgb, var(--text) 86%, transparent 14%);
     --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
-    --form-field-border: color-mix(
-      in srgb,
-      var(--surface-field-border, color-mix(in srgb, var(--border) 78%, transparent 22%)) 84%,
-      transparent 16%
-    );
+    --form-field-border: color-mix(in srgb, var(--surface-field-border) 84%, transparent 16%);
     --form-field-border-focus: color-mix(
       in srgb,
       var(--aurora-purple) 56%,
       rgba(var(--voyage-blue-rgb), 0.42) 44%
     );
     --form-focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
-    --form-field-shadow: 0 16px 32px rgba(var(--ink-rgb), 0.12), inset 0 1px 0 rgba(var(--snow-rgb), 0.4);
-    --form-textarea-min-height: 200px;
-    --form-actions-gap: 0.75rem;
+    --form-field-shadow: var(--shadow-lg);
+    --form-textarea-min-height: calc(var(--space-6xl) - var(--space-md));
+    --form-actions-gap: var(--space-sm);
     --form-note-color: color-mix(in srgb, var(--text) 62%, transparent 38%);
-    --form-status-padding: 0.75rem 1rem;
+    --form-status-padding: var(--space-md) var(--space-lg);
     --form-status-bg: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     --form-status-success-color: color-mix(in srgb, var(--aurora-purple) 68%, var(--text) 32%);
     --form-status-success-bg: color-mix(in srgb, var(--glass-bg-lightest) 62%, transparent 38%);
@@ -1047,14 +1041,14 @@
 
   :global(.cta-card) {
     display: grid;
-    gap: 1.4rem;
+    gap: calc(var(--space-xl) - var(--space-xs));
     text-align: left;
   }
 
   .cta-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-lg);
   }
 
   @media (prefers-reduced-motion: reduce) {

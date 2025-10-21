@@ -5,7 +5,7 @@
  */
 
 const neutralGradient = (primary, accent) =>
-  `radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.9%, rgba(${primary}, 0.01) 0.1%) 0%, color-mix(in srgb, var(--bg-elev-1, var(--bg)) 99.9%, rgba(${accent}, 0.01) 0.1%) 44%, var(--bg) 100%)`;
+  `radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.9%, rgba(${primary}, 0.01) 0.1%) 0%, color-mix(in srgb, var(--bg-elev-1) 99.9%, rgba(${accent}, 0.01) 0.1%) 44%, var(--bg) 100%)`;
 
 export const backgroundThemes = {
   home: {

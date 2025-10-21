@@ -138,7 +138,7 @@
         margin-inline: auto;
         color: var(--text);
         background: var(--hero-surface);
-        border-radius: max(0px, var(--glass-card-radius, 0));
+        border-radius: max(0px, var(--glass-card-radius));
         border: none;
         box-shadow: none;
     }

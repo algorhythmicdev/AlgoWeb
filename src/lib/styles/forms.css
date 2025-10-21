@@ -1,12 +1,12 @@
 /* Shared form surface and control styling */
 :root {
-  --form-gap-default: clamp(1rem, 3vw, 1.4rem);
-  --form-field-gap-default: 0.5rem;
-  --form-field-radius-default: clamp(0.85rem, 2.2vw, 1.15rem);
-  --form-field-padding-y-default: 0.85rem;
-  --form-field-padding-x-default: 1rem;
-  --form-focus-ring-color-default: var(--focus-ring-color, var(--voyage-blue));
-  --form-focus-ring-shadow-default: 0 0 0 3px
+  --form-gap-default: var(--grid-gap-md);
+  --form-field-gap-default: var(--space-sm);
+  --form-field-radius-default: var(--radius-md);
+  --form-field-padding-y-default: calc(var(--space-sm) + var(--space-3xs));
+  --form-field-padding-x-default: calc(var(--space-md) + var(--space-2xs));
+  --form-focus-ring-color-default: var(--focus-ring-color);
+  --form-focus-ring-shadow-default: 0 0 0 calc(var(--border-width-thin) + var(--border-width-hairline))
     color-mix(in srgb, var(--form-focus-ring-color-default) 24%, transparent 76%);
   --form-field-border-default: color-mix(in srgb, var(--border) 82%, transparent 18%);
   --form-field-border-focus-default: color-mix(
@@ -16,14 +16,18 @@
   );
   --form-field-bg-default: color-mix(in srgb, var(--glass-bg-lightest) 64%, transparent 36%);
   --form-field-color-default: var(--text);
-  --form-field-shadow-default: inset 0 1px 0 rgba(var(--snow-rgb, 255, 255, 255), 0.45);
+  --form-field-shadow-default: inset 0 var(--border-width-hairline) 0 rgba(var(--snow-rgb, 255, 255, 255), 0.45);
   --form-placeholder-color-default: color-mix(in srgb, var(--text) 52%, transparent 48%);
+  --form-transition-duration-default: 180ms;
+  --form-transition-ease-default: var(--ease-out);
   --form-error-border-default: color-mix(in srgb, var(--cherry-pop) 72%, transparent 28%);
-  --form-error-shadow-default: 0 0 0 3px color-mix(in srgb, var(--cherry-pop) 22%, transparent 78%);
+  --form-error-shadow-default: 0 0 0 calc(var(--border-width-thin) + var(--border-width-hairline))
+    color-mix(in srgb, var(--cherry-pop) 22%, transparent 78%);
   --form-error-color-default: var(--cherry-pop);
-  --form-note-color-default: var(--text-tertiary, color-mix(in srgb, var(--text) 64%, transparent 36%));
-  --form-status-padding-default: 0.85rem 1rem;
-  --form-status-radius-default: var(--form-field-radius, var(--form-field-radius-default));
+  --form-note-color-default: var(--text-tertiary);
+  --form-status-padding-default: calc(var(--space-sm) + var(--space-3xs))
+    calc(var(--space-md) + var(--space-2xs));
+  --form-status-radius-default: var(--form-field-radius);
   --form-status-bg-default: color-mix(in srgb, var(--glass-bg-lightest) 54%, transparent 46%);
   --form-status-color-default: color-mix(in srgb, var(--text) 72%, transparent 28%);
   --form-status-success-bg-default: color-mix(in srgb, var(--glass-bg-lightest) 60%, transparent 40%);
@@ -33,45 +37,82 @@
 
 .form {
   display: grid;
-  gap: var(--form-gap, var(--form-gap-default));
   width: 100%;
+  --form-gap: var(--form-gap-default);
+  --form-field-gap: var(--form-field-gap-default);
+  --form-label-weight: var(--weight-semibold);
+  --form-label-size: var(--text-small);
+  --form-label-color: var(--form-label-color-default);
+  --form-field-padding-y: var(--form-field-padding-y-default);
+  --form-field-padding-x: var(--form-field-padding-x-default);
+  --form-field-radius: var(--form-field-radius-default);
+  --form-field-border: var(--form-field-border-default);
+  --form-field-bg: var(--form-field-bg-default);
+  --form-field-color: var(--form-field-color-default);
+  --form-field-shadow: var(--form-field-shadow-default);
+  --form-placeholder-color: var(--form-placeholder-color-default);
+  --form-field-border-focus: var(--form-field-border-focus-default);
+  --form-focus-ring-color: var(--form-focus-ring-color-default);
+  --form-focus-ring-shadow: var(--form-focus-ring-shadow-default);
+  --form-transition-duration: var(--form-transition-duration-default);
+  --form-transition-ease: var(--form-transition-ease-default);
+  --form-error-border: var(--form-error-border-default);
+  --form-error-shadow: var(--form-error-shadow-default);
+  --form-error-color: var(--form-error-color-default);
+  --form-note-color: var(--form-note-color-default);
+  --form-feedback-size: var(--text-small);
+  --form-note-size: var(--text-small);
+  --form-actions-gap: var(--space-md);
+  --form-actions-inline-gap: var(--space-lg);
+  --form-status-padding: var(--form-status-padding-default);
+  --form-status-radius: var(--form-status-radius-default);
+  --form-status-bg: var(--form-status-bg-default);
+  --form-status-color: var(--form-status-color-default);
+  --form-status-size: var(--text-small);
+  --form-status-weight: var(--weight-semibold);
+  --form-status-success-bg: var(--form-status-success-bg-default);
+  --form-status-success-color: var(--form-status-success-color-default);
+  --form-status-error-bg: var(--form-status-error-bg-default);
+  --form-status-error-color: var(--form-error-color-default);
+  --form-textarea-min-height: calc(var(--space-6xl) + var(--space-2xl));
+  gap: var(--form-gap);
 }
 
 .form-field,
 .form > label {
   display: grid;
-  gap: var(--form-field-gap, var(--form-field-gap-default));
+  gap: var(--form-field-gap);
 }
 
 .form label,
 .form-field label {
-  font-weight: var(--form-label-weight, var(--weight-semibold, 600));
-  font-size: var(--form-label-size, clamp(0.95rem, 0.95vw, 1.05rem));
-  color: var(--form-label-color, color-mix(in srgb, var(--text) 86%, transparent 14%));
+  font-weight: var(--form-label-weight);
+  font-size: var(--form-label-size);
+  color: var(--form-label-color);
 }
 
 .form :where(input, select, textarea),
 .form-field :where(input, select, textarea) {
   width: 100%;
   font: inherit;
-  padding-block: var(--form-field-padding-y, var(--form-field-padding-y-default));
-  padding-inline: var(--form-field-padding-x, var(--form-field-padding-x-default));
-  border-radius: var(--form-field-radius, var(--form-field-radius-default));
-  border: 1px solid var(--form-field-border, var(--form-field-border-default));
-  background: var(--form-field-bg, var(--form-field-bg-default));
-  color: var(--form-field-color, var(--form-field-color-default));
-  box-shadow: var(--form-field-shadow, var(--form-field-shadow-default));
+  padding-block: var(--form-field-padding-y);
+  padding-inline: var(--form-field-padding-x);
+  border-radius: var(--form-field-radius);
+  border: 1px solid var(--form-field-border);
+  background: var(--form-field-bg);
+  color: var(--form-field-color);
+  box-shadow: var(--form-field-shadow);
   transition:
-    background 180ms var(--ease-out, ease),
-    border-color 180ms var(--ease-out, ease),
-    box-shadow 180ms var(--ease-out, ease),
-    transform 180ms var(--ease-out, ease);
+    background var(--form-transition-duration) var(--form-transition-ease),
+    border-color var(--form-transition-duration) var(--form-transition-ease),
+    box-shadow var(--form-transition-duration) var(--form-transition-ease),
+    transform var(--form-transition-duration) var(--form-transition-ease);
   appearance: none;
 }
 
 .form :where(input, select, textarea)::placeholder,
 .form-field :where(input, select, textarea)::placeholder {
-  color: var(--form-placeholder-color, var(--form-placeholder-color-default));
+  color: var(--form-placeholder-color);
 }
 
 .form select,
@@ -80,17 +121,17 @@
     linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position:
-    calc(100% - 1.4rem) calc(50% - 0.35rem),
-    calc(100% - 1rem) calc(50% - 0.35rem);
-  background-size: 8px 8px;
+    calc(100% - (var(--space-xl) + var(--space-sm))) calc(50% - var(--space-2xs)),
+    calc(100% - (var(--space-lg) + var(--space-xs))) calc(50% - var(--space-2xs));
+  background-size: var(--space-sm) var(--space-sm);
   background-repeat: no-repeat;
-  padding-right: calc(var(--form-field-padding-x, var(--form-field-padding-x-default)) + 1.8rem);
+  padding-right: calc(var(--form-field-padding-x) + calc(var(--space-lg) + var(--space-sm)));
 }
 
 .form textarea,
 .form-field textarea {
   resize: vertical;
-  min-height: var(--form-textarea-min-height, 160px);
+  min-height: var(--form-textarea-min-height);
 }
 
 .form :where(input, select, textarea):focus,
@@ -100,24 +141,24 @@
   outline: none;
   border-color: var(
     --form-field-border-focus,
-    color-mix(in srgb, var(--form-focus-ring-color, var(--form-focus-ring-color-default)) 60%, transparent 40%)
+    color-mix(in srgb, var(--form-focus-ring-color) 60%, transparent 40%)
   );
   box-shadow:
     var(
       --form-focus-ring-shadow,
-      0 0 0 3px color-mix(
+      0 0 0 calc(var(--border-width-thin) + var(--border-width-hairline)) color-mix(
         in srgb,
-        var(--form-focus-ring-color, var(--form-focus-ring-color-default)) 24%,
+        var(--form-focus-ring-color) 24%,
         transparent 76%
       )
     ),
-    var(--form-field-shadow, var(--form-field-shadow-default));
+    var(--form-field-shadow);
 }
 
 .form :where(input, select, textarea)[aria-invalid='true'],
 .form-field :where(input, select, textarea)[aria-invalid='true'] {
-  border-color: var(--form-error-border, var(--form-error-border-default));
-  box-shadow: var(--form-error-shadow, var(--form-error-shadow-default));
+  border-color: var(--form-error-border);
+  box-shadow: var(--form-error-shadow);
 }
 
 .form :where(input, select, textarea):disabled,
@@ -127,21 +168,21 @@
 }
 
 .field-error {
-  font-size: var(--form-feedback-size, var(--text-small));
-  color: var(--form-error-color, var(--form-error-color-default));
+  font-size: var(--form-feedback-size);
+  color: var(--form-error-color);
   margin: 0;
 }
 
 .form-note {
-  font-size: var(--form-note-size, var(--text-small));
-  color: var(--form-note-color, var(--form-note-color-default));
+  font-size: var(--form-note-size);
+  color: var(--form-note-color);
   margin: 0;
 }
 
 .form-actions {
   display: flex;
   flex-direction: column;
-  gap: var(--form-actions-gap, 0.75rem);
+  gap: var(--form-actions-gap);
   align-items: flex-start;
 }
 
@@ -149,27 +190,27 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--form-actions-inline-gap, 1rem);
+  gap: var(--form-actions-inline-gap);
 }
 
 .form-status {
   margin: 0;
-  padding: var(--form-status-padding, var(--form-status-padding-default));
-  border-radius: var(--form-status-radius, var(--form-status-radius-default));
-  background: var(--form-status-bg, var(--form-status-bg-default));
-  color: var(--form-status-color, var(--form-status-color-default));
-  font-size: var(--form-status-size, var(--text-small));
-  font-weight: var(--form-status-weight, var(--weight-semibold, 600));
+  padding: var(--form-status-padding);
+  border-radius: var(--form-status-radius);
+  background: var(--form-status-bg);
+  color: var(--form-status-color);
+  font-size: var(--form-status-size);
+  font-weight: var(--form-status-weight);
 }
 
 .form-status--success {
-  background: var(--form-status-success-bg, var(--form-status-success-bg-default));
-  color: var(--form-status-success-color, var(--form-status-success-color-default));
+  background: var(--form-status-success-bg);
+  color: var(--form-status-success-color);
 }
 
 .form-status--error {
-  background: var(--form-status-error-bg, var(--form-status-error-bg-default));
-  color: var(--form-status-error-color, var(--form-error-color-default));
+  background: var(--form-status-error-bg);
+  color: var(--form-status-error-color);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -188,8 +229,8 @@ html[data-theme='hc'] .form-field :where(input, select, textarea) {
 
 html[data-theme='hc'] .form :where(input, select, textarea):focus-visible,
 html[data-theme='hc'] .form-field :where(input, select, textarea):focus-visible {
-  outline: 3px solid currentColor;
-  outline-offset: 3px;
+  outline: calc(var(--border-width-thin) + var(--border-width-hairline)) solid currentColor;
+  outline-offset: calc(var(--border-width-hairline) * 3);
   box-shadow: none;
 }
 
@@ -197,7 +238,7 @@ html[data-theme='hc'] .form-status,
 html[data-theme='hc'] .form-status--success,
 html[data-theme='hc'] .form-status--error {
   background: transparent;
-  border: 2px solid currentColor;
+  border: var(--border-width-thin) solid currentColor;
   color: currentColor;
 }
 

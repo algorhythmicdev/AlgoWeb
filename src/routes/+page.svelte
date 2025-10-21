@@ -331,7 +331,7 @@
       {#each highlights as item (item.titleKey)}
         <GlassCard class="highlight-card" padding="lg" halo interactive>
           <div class="highlight-icon">
-            <Icon name={item.icon} size={28} />
+            <Icon name={item.icon} size="var(--icon-glyph-lg)" />
           </div>
           <h3>{t(item.titleKey, item.titleFallback)}</h3>
           <p>{t(item.copyKey, item.copyFallback)}</p>
@@ -358,7 +358,7 @@
         <GlassCard class="offering-card" padding="lg" id={item.id} interactive>
           <h3 class="offering-title">
             <span class="offering-icon">
-              <Icon name={item.icon} size={26} />
+              <Icon name={item.icon} size="var(--icon-glyph-md)" />
             </span>
             {t(item.titleKey, item.titleFallback)}
           </h3>
@@ -427,7 +427,7 @@
       {#each educationShowcase.items as item (item.titleKey)}
         <GlassCard class="resource-card" padding="lg" halo interactive>
           <div class="resource-icon">
-            <Icon name={item.icon} size={28} />
+            <Icon name={item.icon} size="var(--icon-glyph-lg)" />
           </div>
           <span class="resource-eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
           <h3>{t(item.titleKey, item.titleFallback)}</h3>
@@ -461,7 +461,7 @@
 
 <style>
   .hero-description {
-    max-width: 70ch;
+    max-width: var(--measure-xl);
     margin: 0;
     color: var(--text-secondary);
     font-size: var(--text-lead);
@@ -471,28 +471,32 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md, 1rem);
+    gap: var(--space-md);
     align-items: center;
   }
 
   .section-heading {
     position: relative;
     z-index: var(--z-content);
+    --section-heading-underline-offset-inline: calc(-1 * var(--space-xl));
+    --section-heading-underline-offset-block: calc(-1 * var(--space-md));
+    --section-heading-underline-thickness: var(--border-width-thin);
+    --section-heading-underline-opacity: 0.55;
   }
 
   .section-heading::after {
     content: '';
     position: absolute;
-    inset-inline: clamp(-1.5rem, -4vw, -1rem);
-    inset-block-end: -1.25rem;
-    height: 2px;
+    inset-inline: var(--section-heading-underline-offset-inline);
+    inset-block-end: var(--section-heading-underline-offset-block);
+    height: var(--section-heading-underline-thickness);
     border-radius: var(--radius-full);
     background: linear-gradient(
       90deg,
       color-mix(in srgb, var(--aurora-purple) 82%, transparent 18%),
       color-mix(in srgb, var(--voyage-blue) 70%, var(--signal-yellow) 30%)
     );
-    opacity: 0.55;
+    opacity: var(--section-heading-underline-opacity);
     pointer-events: none;
   }
 
@@ -509,6 +513,7 @@
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+    --highlight-animation-duration: 14s;
   }
 
   .section.offerings {
@@ -538,7 +543,7 @@
   .platform-showcase__header {
     max-width: var(--measure-lg);
     display: grid;
-    gap: clamp(0.75rem, 2vw, 1.4rem);
+    gap: var(--cluster-gap-md);
   }
 
   .platform-showcase__intro {
@@ -547,32 +552,32 @@
 
   .platform-showcase__grid {
     display: grid;
-    gap: clamp(1.75rem, 4vw, 3rem);
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 640px) {
-    .platform-showcase__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    gap: var(--grid-gap-xl);
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--card-max-width-wide)), 1fr)
+    );
+    justify-content: center;
   }
 
   :global(.platform-card) {
     display: grid;
-    gap: clamp(1.25rem, 3vw, 2rem);
+    gap: var(--card-gap);
+    width: min(100%, var(--card-max-width-wide));
+    margin-inline: auto;
   }
 
   :global(.platform-card img) {
     width: 100%;
     height: auto;
-    border-radius: max(0px, calc(var(--glass-card-radius, 0) + 0.75rem));
-    border: 1px solid color-mix(in srgb, var(--glass-border) 54%, transparent 46%);
-    box-shadow: 0 18px 44px rgba(var(--ink-rgb), 0.12);
+    border-radius: max(0px, calc(var(--glass-card-radius) + (var(--space-lg) * 0.5)));
+    border: var(--border-width-hairline) solid color-mix(in srgb, var(--glass-border) 54%, transparent 46%);
+    box-shadow: var(--shadow-card-neutral-soft);
   }
 
   :global(.platform-card__body) {
     display: grid;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
+    gap: var(--cluster-gap-md);
   }
 
   .highlights > .container,
@@ -588,7 +593,9 @@
   .offerings__grid,
   .resources__grid {
     display: grid;
-    gap: clamp(1.6rem, 3vw, 2.4rem);
+    gap: var(--grid-gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    justify-content: center;
   }
 
   :global(.highlight-card),
@@ -596,53 +603,58 @@
   :global(.resource-card),
   :global(.finale-card) {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.6rem);
+    gap: var(--cluster-gap-md);
+    width: min(100%, var(--card-max-width));
+    margin-inline: auto;
   }
 
   .highlight-icon {
-    width: clamp(2.75rem, 8vw, 3.25rem);
-    height: clamp(2.75rem, 8vw, 3.25rem);
+    inline-size: var(--size-icon-md);
+    block-size: var(--size-icon-md);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
     background: color-mix(in srgb, var(--glass-bg-lightest) 38%, transparent 62%);
     color: var(--voyage-blue);
-    box-shadow: 0 8px 18px rgba(16, 41, 95, 0.12);
-    animation: floaty 32s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    box-shadow: var(--shadow-card-voyage-soft);
+    --icon-float-duration: 32s;
+    --icon-float-ease: var(--resource-float-ease);
+    animation: floaty var(--icon-float-duration) var(--icon-float-ease) infinite;
   }
 
   .offering-title {
     display: flex;
     align-items: center;
-    gap: clamp(0.65rem, 2vw, 0.85rem);
+    gap: calc(var(--space-sm) + var(--space-xs));
     margin: 0;
   }
 
   .offering-icon {
-    inline-size: clamp(2.5rem, 7vw, 3rem);
-    block-size: clamp(2.5rem, 7vw, 3rem);
+    inline-size: var(--size-icon-md);
+    block-size: var(--size-icon-md);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
     background: color-mix(in srgb, var(--glass-bg-lightest) 58%, transparent 42%);
     color: var(--aurora-purple);
-    box-shadow: 0 8px 18px rgba(58, 28, 120, 0.2);
-    animation: floaty 38s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
+    box-shadow: var(--shadow-card-aurora);
+    --offering-float-duration: 38s;
+    animation: floaty var(--offering-float-duration) var(--resource-float-ease) infinite reverse;
   }
 
   :global(.offering-card) ul,
   :global(.resource-card) ul {
     margin: 0;
-    padding-left: clamp(1.1rem, 3vw, 1.4rem);
+    padding-inline-start: calc(var(--space-lg) + var(--space-xs));
     display: grid;
-    gap: clamp(0.35rem, 1.5vw, 0.5rem);
+    gap: var(--space-xs);
     color: var(--text-secondary);
     font-size: var(--text-small);
   }
 
   .resource-icon {
-    width: clamp(2.75rem, 8vw, 3.25rem);
-    height: clamp(2.75rem, 8vw, 3.25rem);
+    inline-size: var(--size-icon-md);
+    block-size: var(--size-icon-md);
     border-radius: var(--radius-full);
     display: inline-grid;
     place-items: center;
@@ -650,13 +662,15 @@
       radial-gradient(circle at 28% 28%, rgba(var(--signal-yellow-rgb), 0.22), transparent 72%),
       color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.12) 18%);
     color: var(--signal-yellow);
-    box-shadow: 0 8px 20px rgba(148, 110, 10, 0.24);
-    animation: floaty 42s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    box-shadow: var(--shadow-card-signal-soft);
+    --resource-float-duration: 42s;
+    --resource-float-ease: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    animation: floaty var(--resource-float-duration) var(--resource-float-ease) infinite;
   }
 
   .resource-eyebrow {
     font-size: var(--text-small);
-    letter-spacing: 0.12em;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--text-tertiary);
   }
@@ -664,45 +678,45 @@
   .card-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
+    gap: var(--space-sm);
     align-items: center;
   }
 
   .highlights :global(.highlight-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%);
     --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 35%, transparent 65%);
-    --surface-glass-shadow: 0 22px 48px rgba(9, 21, 58, 0.18);
+    --surface-glass-shadow: var(--shadow-card-voyage);
     --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
   }
 
   .highlights :global(.highlight-card:hover .highlight-icon),
   .highlights :global(.highlight-card:focus-visible .highlight-icon) {
-    animation-duration: 14s;
+    animation-duration: var(--highlight-animation-duration);
   }
 
   .offerings :global(.offering-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.14) 10%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
-    --surface-glass-shadow: 0 26px 60px rgba(20, 8, 62, 0.22);
+    --surface-glass-shadow: var(--shadow-card-aurora);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
   .resources :global(.resource-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 93%, rgba(var(--signal-yellow-rgb), 0.12) 7%);
     --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 30%, transparent 70%);
-    --surface-glass-shadow: 0 22px 46px rgba(95, 68, 4, 0.22);
+    --surface-glass-shadow: var(--shadow-card-signal);
     --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 70%, var(--aurora-purple) 30%);
   }
 
   .finale :global(.finale-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 42%, transparent 58%);
-    --surface-glass-shadow: 0 32px 72px rgba(24, 12, 58, 0.28);
+    --surface-glass-shadow: var(--shadow-card-aurora-strong);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
   }
 
   .finale :global(.finale-card)::after {
-    border: 1px solid rgba(var(--signal-yellow-rgb), 0.25);
+    border: var(--border-width-hairline) solid rgba(var(--signal-yellow-rgb), 0.25);
     mix-blend-mode: screen;
   }
 
@@ -740,7 +754,7 @@
     }
 
     50% {
-      transform: translate3d(0, -3px, 0) scale(1.01);
+      transform: translate3d(0, calc(-1 * var(--space-3xs)), 0) scale(1.01);
     }
 
     100% {

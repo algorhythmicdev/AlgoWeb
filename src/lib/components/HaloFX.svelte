@@ -78,24 +78,25 @@
     --halo-opacity-max: 0.0026;
     --halo-filter: blur(84px) saturate(0.22) brightness(0.78);
     --halo-blend: screen;
+    --scroll-depth: 0;
     --halo-duration: 42s;
     position: fixed;
     inset: -12vh 0 0 0;
     pointer-events: none;
-    z-index: calc(var(--z-background, -20) + 2);
+    z-index: calc(var(--z-background) + 2);
     background:
       radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--halo-color) 0.6%, transparent) 0%, transparent 62%),
       radial-gradient(circle at 22% 48%, color-mix(in srgb, var(--halo-color) 0.5%, transparent) 0%, transparent 68%),
       radial-gradient(circle at 78% 60%, color-mix(in srgb, var(--signal-yellow) 0.35%, transparent) 0%, transparent 72%);
     opacity: clamp(
       var(--halo-opacity-min),
-      var(--halo-opacity-base) + var(--scroll-depth, 0) * var(--halo-opacity-span),
+      var(--halo-opacity-base) + var(--scroll-depth) * var(--halo-opacity-span),
       var(--halo-opacity-max)
     );
     filter: var(--halo-filter);
-    mix-blend-mode: var(--halo-blend, screen);
+    mix-blend-mode: var(--halo-blend);
     transform: translate3d(0, 0, 0);
-    animation: halo-drift var(--halo-duration, 42s) ease-in-out infinite alternate;
+    animation: halo-drift var(--halo-duration) ease-in-out infinite alternate;
   }
 
   .halo--primary,

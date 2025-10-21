@@ -407,7 +407,7 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md, 1rem);
+    gap: var(--cluster-gap-md);
     align-items: center;
   }
 
@@ -446,8 +446,8 @@
   .service-eyebrow {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.9rem;
-    border-radius: 999px;
+    padding: var(--space-2xs) calc(var(--space-md) + var(--space-3xs));
+    border-radius: var(--radius-full);
     font-size: var(--text-small);
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -458,14 +458,14 @@
   :global(.services-block--consulting .service-card) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 28%, transparent 72%);
-    --surface-glass-shadow: 0 18px 50px rgba(var(--aurora-purple-rgb), 0.16);
+    --surface-glass-shadow: var(--shadow-card-aurora);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
   :global(.services-block--platforms .service-card) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 32%, transparent 68%);
-    --surface-glass-shadow: 0 20px 54px rgba(var(--voyage-blue-rgb), 0.16);
+    --surface-glass-shadow: var(--shadow-card-voyage);
     --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
   }
 
@@ -482,41 +482,41 @@
   :global(.services-block--education .education-card) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
     --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 28%, transparent 72%);
-    --surface-glass-shadow: 0 18px 48px rgba(var(--signal-yellow-rgb), 0.16);
+    --surface-glass-shadow: var(--shadow-card-signal);
     --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 68%, var(--aurora-purple) 32%);
   }
 
   :global(.services-block--finale .service-card--finale) {
     --surface-glass-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 32%, transparent 68%);
-    --surface-glass-shadow: 0 22px 58px rgba(var(--aurora-purple-rgb), 0.18);
+    --surface-glass-shadow: var(--shadow-card-aurora-strong);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
   }
 
   .cards {
     display: grid;
-    gap: clamp(1.6rem, 3vw, 2.4rem);
+    gap: var(--grid-gap-xl);
   }
 
   .service-card__image {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--glass-border);
+    border: var(--border-width-hairline) solid var(--glass-border);
     box-shadow: var(--shadow-xl);
   }
 
   :global(.service-card) {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.6rem);
+    gap: var(--cluster-gap-md);
   }
 
   :global(.service-card) ul,
   :global(.education-card) ul {
     margin: 0;
-    padding-left: 1.2rem;
+    padding-left: calc(var(--space-lg) + var(--space-xs));
     display: grid;
-    gap: 0.4rem;
+    gap: var(--space-sm);
     color: var(--text-secondary);
     font-size: var(--text-small);
   }
@@ -524,24 +524,24 @@
   .card-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm, 0.75rem);
+    gap: var(--cluster-gap-sm);
     align-items: center;
   }
 
   :global(.education-card) {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.6rem);
+    gap: var(--cluster-gap-md);
   }
 
   .education-grid {
     display: grid;
-    gap: clamp(1rem, 3vw, 1.8rem);
+    gap: var(--cluster-gap-lg);
   }
 
   :global(.finale-card) {
     text-align: center;
     display: grid;
-    gap: 1rem;
+    gap: var(--cluster-gap-md);
   }
 
   @media (min-width: 900px) {
