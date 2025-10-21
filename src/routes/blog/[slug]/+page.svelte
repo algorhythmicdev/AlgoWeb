@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Blog Detail Page (Phase 4 - Frontend Integration)
    * Displays individual blog post with rich content
@@ -8,17 +8,22 @@
   import { sanitizeHtml } from '$lib/utils/sanitize';
   import { _ } from '$lib/i18n';
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  
-  const { post } = data;
-  
+  import type { NormalisedPost } from '$lib/utils/strapi';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  const post: NormalisedPost = data.post;
+
   /**
    * Format date for display
    * @param {string} dateString
    */
-  function formatDate(dateString) {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  function formatDate(dateString: string | undefined) {
+    if (!dateString) return '';
+    const parsed = new Date(dateString);
+    if (Number.isNaN(parsed.getTime())) return '';
+    return parsed.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -26,7 +31,12 @@
   }
   
   // Sanitize content for safe rendering (Phase 7 - Security)
-  const safeContent = sanitizeHtml(post.content);
+  const safeContent = sanitizeHtml(post.content ?? '');
+
+  const featuredImage = post.featuredImage;
+  const authorAvatar = post.author?.avatar;
+  const categories = post.categories;
+  const tags = post.tags;
 </script>
 
 <svelte:head>
@@ -44,10 +54,10 @@
         <a href="/blog">{$_('blog.buttons.back_to_blog')}</a>
       </div>
       
-      {#if post.featuredImage}
+      {#if featuredImage}
         <img
-          src={post.featuredImage.url}
-          alt={post.featuredImage.alternativeText || post.title}
+          src={featuredImage.url}
+          alt={featuredImage.alt}
           class="featured-image reading-shell__image reading-shell__image--tall"
         />
       {/if}
@@ -56,10 +66,10 @@
         <time datetime={post.publishDate} class="post-date">
           {formatDate(post.publishDate)}
         </time>
-        {#if post.categories?.length}
+        {#if categories.length}
           <div class="post-categories">
-            {#each post.categories as category}
-              <span class="category-badge">{category.name}</span>
+            {#each categories as category}
+              <span class="category-badge">{category}</span>
             {/each}
           </div>
         {/if}
@@ -73,12 +83,8 @@
 
       {#if post.author}
         <div class="post-author">
-          {#if post.author.avatar}
-            <img 
-              src={post.author.avatar.url} 
-              alt={post.author.name}
-              class="author-avatar"
-            />
+          {#if authorAvatar}
+            <img src={authorAvatar.url} alt={authorAvatar.alt} class="author-avatar" />
           {/if}
           <div class="author-info">
             <div class="author-name">{post.author.name}</div>
@@ -96,14 +102,14 @@
       </div>
     </GlassCard>
 
-    {#if post.tags?.length}
-      <div class="post-tags reading-shell__tags">
-        <span class="tags-label text-eyebrow">{$_('blog.slug.tags_label')}</span>
-        {#each post.tags as tag}
-          <span class="tag-chip">{tag.name}</span>
-        {/each}
-      </div>
-    {/if}
+      {#if tags.length}
+        <div class="post-tags reading-shell__tags">
+          <span class="tags-label text-eyebrow">{$_('blog.slug.tags_label')}</span>
+          {#each tags as tag}
+            <span class="tag-chip">{tag}</span>
+          {/each}
+        </div>
+      {/if}
 
     <div class="post-footer reading-shell__footer">
       <Button href="/blog" variant="secondary">

@@ -1,4 +1,5 @@
 <script>
+  import { resolveMediaUrl, normaliseRelation } from '$lib/utils';
   import { sanitizeHtml } from '$lib/utils/sanitize';
   import Button from '$lib/components/Button.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
@@ -11,6 +12,7 @@
   $: attributes = module?.attributes || {};
   $: content = attributes.content || '';
   $: safeContent = sanitizeHtml(content);
+  $: tags = normaliseRelation(attributes.tags);
 </script>
 
 <svelte:head>
@@ -60,9 +62,9 @@
           {/if}
         </div>
 
-        {#if attributes.tags?.data && attributes.tags.data.length > 0}
+        {#if tags.length}
           <div class="reading-shell__tags">
-            {#each attributes.tags.data as tag}
+            {#each tags as tag (tag.id)}
               <span class="tag-chip">{tag.attributes?.name || ''}</span>
             {/each}
           </div>
@@ -81,17 +83,18 @@
           <div class="resource-grid">
             {#each attributes.mediaAttachments.data as media}
               {#if media.attributes}
+                {@const assetUrl = resolveMediaUrl(media.attributes.url)}
                 <div class="resource-card">
-                  {#if media.attributes.mime?.startsWith('image/')}
+                  {#if media.attributes.mime?.startsWith('image/') && assetUrl}
                     <img
-                      src={media.attributes.url}
+                      src={assetUrl}
                       alt={media.attributes.alternativeText || media.attributes.name}
                       class="resource-card__image"
                       loading="lazy"
                     />
-                  {:else}
+                  {:else if assetUrl}
                     <a
-                      href={media.attributes.url}
+                      href={assetUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       class="resource-card__link"

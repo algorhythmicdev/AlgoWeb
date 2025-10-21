@@ -1,4 +1,5 @@
 <script>
+  import { resolveMediaUrl, normaliseRelation } from '$lib/utils';
   import { sanitizeHtml } from '$lib/utils/sanitize';
   import Button from '$lib/components/Button.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
@@ -12,6 +13,9 @@
   $: content = attributes.content || '';
   $: safeContent = sanitizeHtml(content);
   $: featuredImage = attributes.featuredImage?.data?.attributes;
+  $: featuredImageUrl = resolveMediaUrl(featuredImage?.url);
+  $: categories = normaliseRelation(attributes.categories);
+  $: tags = normaliseRelation(attributes.tags);
 </script>
 
 <svelte:head>
@@ -30,10 +34,10 @@
 
   <article class="reading-shell__content">
     <GlassCard padding="lg" class="reading-shell__card">
-      {#if featuredImage}
+      {#if featuredImageUrl}
         <figure class="reading-shell__media">
           <img
-            src={featuredImage.url}
+            src={featuredImageUrl}
             alt={featuredImage.alternativeText || attributes.title}
             class="reading-shell__image reading-shell__image--tall"
             loading="lazy"
@@ -71,19 +75,21 @@
             </span>
           {/if}
 
-          {#if attributes.category?.data}
-            <span>
-              {attributes.category.data.attributes?.name || $_('platform.card.category_fallback')}
-            </span>
+          {#if categories.length}
+            <ul class="reading-shell__categories" aria-label={$_('platform.card.categories_label')}>
+              {#each categories as category (category.id)}
+                <li>{category.attributes?.name || $_('platform.card.category_fallback')}</li>
+              {/each}
+            </ul>
           {/if}
         </div>
 
-        {#if attributes.tags?.data && attributes.tags.data.length > 0}
+        {#if tags.length}
           <div class="reading-shell__tags">
             <span class="reading-shell__tags-label text-eyebrow">
               {$_('platform.card.tags_label')}
             </span>
-            {#each attributes.tags.data as tag}
+            {#each tags as tag (tag.id)}
               <span class="tag-chip">{tag.attributes?.name || ''}</span>
             {/each}
           </div>
@@ -104,3 +110,18 @@
     </Button>
   </nav>
 </div>
+
+<style>
+  .reading-shell__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--voyage-blue) 75%, transparent 25%);
+  }
+</style>

@@ -4,8 +4,9 @@
  */
 
 import { get } from '$lib/api/strapi';
+import { siteConfig } from '$config/seo';
 
-const SITE_URL = 'https://algorhythmics.dev'; // Update with actual domain
+const SITE_URL = siteConfig.url.replace(/\/$/, '');
 
 /**
  * Generate sitemap XML

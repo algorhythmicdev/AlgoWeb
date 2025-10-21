@@ -7,7 +7,7 @@ export const load = () => {
       ogTitle: 'About AlgoRhythmics | Story & Team',
       ogDescription:
         'Meet the AlgoRhythmics founders, values, and rituals aligning NodeVoyage, Ideonautix, and our consulting practice.',
-      url: 'https://algorhythmics.com/about',
+      url: 'https://algorhythmics.dev/about',
       keywords: ['AlgoRhythmics team', 'AI studio values', 'Riga founders']
     }
   };

@@ -94,7 +94,7 @@
     description: en.seo?.default_description ?? en.site.description,
     ogTitle: en.seo?.default_og_title ?? en.site.title,
     ogDescription: en.seo?.default_og_description ?? en.site.tagline,
-    url: en.seo?.default_url ?? 'https://algorhythmics.com'
+    url: en.seo?.default_url ?? 'https://algorhythmics.dev'
   };
 
   let defaultMetaTitle = fallbackMeta.title;

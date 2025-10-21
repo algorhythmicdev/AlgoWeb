@@ -2,6 +2,7 @@
   import GlassCard from '$lib/components/GlassCard.svelte';
   import Button from '$lib/components/Button.svelte';
   import Hero from '$lib/components/Hero.svelte';
+  import { resolveMediaUrl, normaliseRelation } from '$lib/utils';
   import { _ } from '$lib/i18n';
 
   /** @type {import('./$types').PageData} */
@@ -38,11 +39,13 @@
       {#each articles as article}
         {@const attributes = article.attributes || {}}
         {@const featuredImage = attributes.featuredImage?.data?.attributes}
+        {@const coverUrl = resolveMediaUrl(featuredImage?.url)}
+        {@const categories = normaliseRelation(attributes.categories)}
 
         <GlassCard interactive class="platform-card">
-          {#if featuredImage}
+          {#if coverUrl}
             <img
-              src={featuredImage.url}
+              src={coverUrl}
               alt={featuredImage.alternativeText || attributes.title}
               class="platform-card__image"
               loading="lazy"
@@ -51,10 +54,12 @@
 
           <div class="platform-card__body">
             <div class="platform-card__eyebrow">
-              {#if attributes.category?.data}
-                <span class="platform-card__category text-eyebrow">
-                  {attributes.category.data.attributes?.name || $_('platform.card.category_fallback')}
-                </span>
+              {#if categories.length}
+                <ul class="platform-card__categories" aria-label={$_('platform.card.categories_label')}>
+                  {#each categories as category (category.id)}
+                    <li>{category.attributes?.name || $_('platform.card.category_fallback')}</li>
+                  {/each}
+                </ul>
               {/if}
             </div>
 
@@ -159,7 +164,19 @@
     min-height: var(--space-md);
   }
 
-  .platform-card__category {
+  .platform-card__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .platform-card__categories li {
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: color-mix(in srgb, var(--voyage-blue) 78%, transparent 22%);
   }
 

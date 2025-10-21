@@ -6,7 +6,7 @@ export const load = () => ({
     ogTitle: 'NodeVoyage Travel OS | AlgoRhythmics',
     ogDescription:
       'Plan adventures with Nodi, collaborate with crews, and capture memories with the calm NodeVoyage travel operating system.',
-    url: 'https://algorhythmics.com/nodevoyage',
+    url: 'https://algorhythmics.dev/nodevoyage',
     keywords: [
       'NodeVoyage',
       'AI travel planner',

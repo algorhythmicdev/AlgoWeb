@@ -10,7 +10,7 @@ export const load = () => {
         ...result.meta,
         title: 'Solutions | AlgoRhythmics',
         ogTitle: 'Solutions | AlgoRhythmics',
-        url: 'https://algorhythmics.com/solutions'
+        url: 'https://algorhythmics.dev/solutions'
       }
     };
   }

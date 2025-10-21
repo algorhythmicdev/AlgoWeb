@@ -8,11 +8,13 @@
   "trailingSlash": false,
   "regions": ["iad1"],
   "env": {
-    "PUBLIC_STRAPI_URL": "https://cms.algorhythmics.dev"
+    "PUBLIC_STRAPI_URL": "https://cms.algorhythmics.dev",
+    "PUBLIC_SITE_URL": "https://algorhythmics.dev"
   },
   "build": {
     "env": {
       "PUBLIC_STRAPI_URL": "https://cms.algorhythmics.dev",
+      "PUBLIC_SITE_URL": "https://algorhythmics.dev",
       "STRAPI_API_TOKEN": "@strapi_api_token",
       "JWT_SECRET": "@jwt_secret"
     }

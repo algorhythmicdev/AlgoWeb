@@ -9,7 +9,7 @@
     "default_description": "An AI craft studio sculpting the NodeVoyage travel co-pilot and the Ideonautix founder cockpit.",
     "default_og_title": "AlgoRhythmics",
     "default_og_description": "Ideas tuned to human rhythm.",
-    "default_url": "https://algorhythmics.com",
+    "default_url": "https://algorhythmics.dev",
     "home": {
       "title": "AlgoRhythmics — Calm OS rituals for travel and founders",
       "description": "Discover NodeVoyage, Ideonautix, and consulting in one signage-informed AI studio.",
@@ -682,7 +682,7 @@
     "info_title": "Контакты",
     "info_email": "E-mail",
     "info_location": "Локация",
-    "info_email_value": "help@algorhythmics.com",
+    "info_email_value": "help@algorhythmics.dev",
     "info_location_value": "Латвия · Удалённая команда",
     "social_title": "Мы в сети",
     "social_linkedin": "LinkedIn",
@@ -694,7 +694,7 @@
         "label": "Написать студии",
         "description": "Свяжитесь с почтой основателей по партнёрствам, пилотам и прессе.",
         "cta": "Написать письмо",
-        "action": "mailto:help@algorhythmics.com"
+        "action": "mailto:help@algorhythmics.dev"
       },
       {
         "label": "Записаться на стратегический звонок",
@@ -717,14 +717,14 @@
       "hero": {
         "title": "Давайте создавать спокойный ИИ вместе",
         "subtitle": "AlgoRhythmics работает удалённо из Латвии и помогает партнёрам по всему миру. Пишите по вопросам пилотов, консалтинга или сотрудничества с сообществом.",
-        "cta_email": "Написать на help@algorhythmics.com",
+        "cta_email": "Написать на help@algorhythmics.dev",
         "cta_events": "Посмотреть наши решения"
       },
       "cards": {
         "general": {
           "title": "Общие вопросы",
           "copy": "Есть вопросы об AlgoRhythmics или нашей дорожной карте? Напишите, и мы ответим в течение одного рабочего дня.",
-          "cta": "Написать на help@algorhythmics.com"
+          "cta": "Написать на help@algorhythmics.dev"
         },
         "support": {
           "title": "Продуктовые пилоты и консалтинг",
@@ -733,13 +733,13 @@
         },
         "education": {
           "title": "Образование и сообщество",
-          "copy": "Школы, библиотеки и общественные организации могут писать нашим координаторам на education@algorhythmics.com.",
+          "copy": "Школы, библиотеки и общественные организации могут писать нашим координаторам на education@algorhythmics.dev.",
           "cta": "Написать команде по просвещению"
         },
         "visit": {
           "title": "Партнёрства и пресса",
-          "copy": "По вопросам сотрудничества, прессы или приглашений пишите на hello@algorhythmics.com — договоримся о встрече.",
-          "cta": "Написать на hello@algorhythmics.com"
+          "copy": "По вопросам сотрудничества, прессы или приглашений пишите на hello@algorhythmics.dev — договоримся о встрече.",
+          "cta": "Написать на hello@algorhythmics.dev"
         },
         "heading": "Как с нами связаться"
       },
@@ -784,7 +784,7 @@
       "newsletter": {
         "title": "Подпишитесь на новости о запуске",
         "copy": "Получайте ежеквартальный дайджест о NodeVoyage, Ideonautix и наших консалтинговых историях. Никакого спама — только честный прогресс.",
-        "cta": "Написать на newsletter@algorhythmics.com",
+        "cta": "Написать на newsletter@algorhythmics.dev",
         "secondary": "Узнать о наших решениях",
         "note": "Предпочитаете форму? Упомяните «Newsletter» в сообщении выше, и мы добавим вас вручную.",
         "eyebrow": "Новости студии"
@@ -804,7 +804,7 @@
         "title": "Центр поддержки уже открыт с руководствами по спокойному ИИ",
         "copy": "Изучайте пакеты онбординга, чек-листы по устранению неполадок и многоязычные материалы в нашей базе знаний.",
         "cta": "Перейти в Центр поддержки",
-        "note": "Нужна помощь прямо сейчас? Напишите на help@algorhythmics.com для персональной поддержки или эскалации."
+        "note": "Нужна помощь прямо сейчас? Напишите на help@algorhythmics.dev для персональной поддержки или эскалации."
       },
       "social": {
         "linkedin": "Следите за нами в LinkedIn",
@@ -930,7 +930,7 @@
         "channels": [
           {
             "title": "Поддержка по электронной почте",
-            "copy": "help@algorhythmics.com отвечает в течение одного рабочего дня и делится следующими шагами."
+            "copy": "help@algorhythmics.dev отвечает в течение одного рабочего дня и делится следующими шагами."
           },
           {
             "title": "Приоритетная линия для пилотов",
@@ -1079,7 +1079,7 @@
           "связаться",
           "partnership"
         ],
-        "answer": "Пишите на hello@algorhythmics.com или оставьте заявку через форму. Мы предлагаем пилотные проекты, воркшопы и долгосрочные партнёрства."
+        "answer": "Пишите на hello@algorhythmics.dev или оставьте заявку через форму. Мы предлагаем пилотные проекты, воркшопы и долгосрочные партнёрства."
       },
       {
         "keywords": [
@@ -1268,7 +1268,7 @@
         "submit": "Submit request",
         "success": "Thank you! We just opened an email draft—send it to confirm your spot.",
         "error": "Share your name and a valid email so we can reach out.",
-        "privacy": "We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.com.",
+        "privacy": "We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.dev.",
         "subject": "Ideonautix pilot request"
       }
     },
@@ -1676,7 +1676,15 @@
             "meta": "Январь 2026 • Сообщество",
             "href": "#"
           }
-        ]
+        ],
+        "empty": {
+          "description": "Check back soon for new educational resources.",
+          "title": "No modules published yet"
+        },
+        "error": {
+          "description": "Our CMS might be offline. Please try again soon.",
+          "title": "Unable to load modules"
+        }
       },
       "toolkits": {
         "items": [
@@ -2277,6 +2285,7 @@
       "by": "By {name}",
       "cta": "Read Article →",
       "category_fallback": "Platform",
+      "categories_label": "Categories:",
       "author_fallback": "Anonymous",
       "tags_label": "Tags:"
     },

@@ -6,7 +6,7 @@ export const load = () => ({
     ogTitle: 'Ideonautix Startup OS | AlgoRhythmics',
     ogDescription:
       'Brainstorm, plan, and launch with AI copilots like the Pitch Deck Assistant, Competitive Dashboard, and Pomodoro Coach.',
-    url: 'https://algorhythmics.com/ideonautix',
+    url: 'https://algorhythmics.dev/ideonautix',
     keywords: [
       'Ideonautix',
       'AI productivity suite',

@@ -45,7 +45,7 @@ const buildSystemPrompt = (locale: SupportedLocale) => {
     `You are ${profile.name}, ${profile.role}.`,
     "You represent AlgoRhythmics, an AI consultancy. Provide helpful, culturally aware answers in the user's language.",
     "Keep replies under 120 words unless asked for more detail, and suggest practical next steps when appropriate.",
-    "If unsure, invite the user to continue the conversation with a human at hello@algorhythmics.com.",
+    "If unsure, invite the user to continue the conversation with a human at hello@algorhythmics.dev.",
   ].join(" ");
 };
 

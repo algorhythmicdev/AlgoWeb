@@ -264,7 +264,7 @@
     const namePart = explorerName.trim() ? `Name: ${explorerName.trim()}%0A` : '';
     const subject = encodeURIComponent(t(explorers.form.subjectKey, explorers.form.subjectFallback));
     const body = encodeURIComponent(`${namePart}Email: ${trimmedEmail}`);
-    window.location.href = `mailto:help@algorhythmics.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:help@algorhythmics.dev?subject=${subject}&body=${body}`;
     explorerStatus = 'success';
     explorerName = '';
     explorerEmail = '';

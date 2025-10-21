@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Blog Index Page (Phase 4 - Frontend Integration)
    * Lists all blog posts with dynamic content from CMS
@@ -10,22 +10,32 @@
   import { staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  
-  const { posts = [], error } = data;
+  import type { NormalisedPost } from '$lib/utils/strapi';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  type BlogPagePost = NormalisedPost;
+
+  const posts: BlogPagePost[] = Array.isArray(data.posts) ? data.posts : [];
+  const error = data.error;
   
   /**
    * Format date for display
    * @param {string} dateString
    */
-  function formatDate(dateString) {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  function formatDate(dateString: string | undefined) {
+    if (!dateString) return '';
+    const parsed = new Date(dateString);
+    if (Number.isNaN(parsed.getTime())) return '';
+    return parsed.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
   }
+
+  const getPrimaryCategory = (post: BlogPagePost) => post.categories[0];
 </script>
 
 <svelte:head>
@@ -65,40 +75,42 @@
       </GlassCard>
     {:else}
       <div class="posts-grid" use:staggerReveal>
-        {#each posts as post}
+        {#each posts as post (post.id)}
+          {@const image = post.featuredImage}
+          {@const slug = post.slug}
+          {@const publishDate = post.publishDate}
+          {@const primaryCategory = getPrimaryCategory(post)}
           <GlassCard as="article" class="post-card" interactive>
-            <a href="/blog/{post.slug}" class="post-link">
-              {#if post.featuredImage}
-                <img 
-                  src={post.featuredImage.url} 
-                  alt={post.featuredImage.alternativeText || post.title}
-                  class="post-image"
-                  loading="lazy"
-                />
+            <a href={`/blog/${slug}`} class="post-link">
+              {#if image}
+                <img src={image.url} alt={image.alt} class="post-image" loading="lazy" />
               {/if}
-              
+
               <div class="post-content">
                 <div class="post-meta">
-                  <time datetime={post.publishDate}>
-                    {formatDate(post.publishDate)}
-                  </time>
-                  {#if post.categories?.length}
-                    <span class="post-category">{post.categories[0].name}</span>
+                  {#if publishDate}
+                    <time datetime={publishDate}>
+                      {formatDate(publishDate)}
+                    </time>
+                  {/if}
+                  {#if primaryCategory}
+                    <span class="post-category">{primaryCategory}</span>
                   {/if}
                 </div>
-                
+
                 <h2 class="post-title">{post.title}</h2>
-                
+
                 {#if post.excerpt}
                   <p class="post-excerpt">{post.excerpt}</p>
                 {/if}
-                
-                {#if post.author}
+
+                {#if post.author?.name}
+                  {@const authorName = post.author.name}
                   <div class="post-author">
-                    {$_('blog.card.by', { values: { name: post.author.name ?? '' } })}
+                    {$_('blog.card.by', { values: { name: authorName } })}
                   </div>
                 {/if}
-                
+
                 <div class="post-action">
                   <Button variant="subtle">
                     {$_('blog.card.cta')}

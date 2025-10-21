@@ -244,7 +244,7 @@
     copyFallback:
       'Share your goals and we will choreograph the mix of strategy, build, and care that keeps AI friendly for your teams.',
     primary: {
-      href: 'mailto:consulting@algorhythmics.com',
+      href: 'mailto:consulting@algorhythmics.dev',
       labelKey: 'consulting.cta.primary',
       labelFallback: 'Book a consultation'
     },
@@ -320,7 +320,7 @@
         .replace('{description}', formData.description)
     );
 
-    window.location.href = `mailto:consulting@algorhythmics.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:consulting@algorhythmics.dev?subject=${subject}&body=${body}`;
     status = 'success';
     formData = { company: '', name: '', email: '', phone: '', industry: '', description: '' };
   };
@@ -516,7 +516,7 @@
       <p>
         {t('consulting.page.supporting_info_copy')}
       </p>
-      <Button href="mailto:consulting@algorhythmics.com" variant="secondary" size="md">
+      <Button href="mailto:consulting@algorhythmics.dev" variant="secondary" size="md">
         {t('consulting.page.supporting_info_cta')}
       </Button>
     </GlassCard>

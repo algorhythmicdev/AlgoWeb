@@ -6,7 +6,7 @@ export const load = () => ({
     ogTitle: 'AlgoRhythmics Help Center',
     ogDescription:
       'Find onboarding packs, troubleshooting tips, and support escalation paths for every AlgoRhythmics experience.',
-    url: 'https://algorhythmics.com/help-center',
+    url: 'https://algorhythmics.dev/help-center',
     keywords: ['Algorhythmics help center', 'NodeVoyage support', 'Ideonautix knowledge base']
   }
 });

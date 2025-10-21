@@ -14,7 +14,7 @@ The application consists of two primary components:
 - Node.js 18+ and npm 9+
 - PostgreSQL database (for Strapi production)
 - Google Cloud project with Cloud Build, Artifact Registry, and Cloud Run enabled
-- Domain name configured
+- Domain `algorhythmics.dev` configured in DNS
 
 ## Part 1: Strapi CMS Backend Deployment
 
@@ -134,7 +134,7 @@ pm2 startup
 ```nginx
 server {
     listen 80;
-    server_name cms.yourdomain.com;
+    server_name cms.algorhythmics.dev;
 
     location / {
         proxy_pass http://localhost:1337;
@@ -170,7 +170,7 @@ DATABASE_PASSWORD=<your-secure-password>
 DATABASE_SSL=false
 
 # CORS (adjust for your domain)
-CORS_ORIGIN=https://yourdomain.com,https://www.yourdomain.com
+CORS_ORIGIN=https://algorhythmics.dev,https://www.algorhythmics.dev
 
 # File Upload (optional - AWS S3)
 AWS_ACCESS_KEY_ID=<your-key>
@@ -207,6 +207,7 @@ docker build -t europe-west1-docker.pkg.dev/PROJECT_ID/web/frontend:local .
 # Run locally on port 3000
 docker run -p 3000:3000 \
   -e PUBLIC_STRAPI_URL=https://cms.algorhythmics.dev \
+  -e PUBLIC_SITE_URL=https://algorhythmics.dev \
   europe-west1-docker.pkg.dev/PROJECT_ID/web/frontend:local
 ```
 
@@ -215,6 +216,7 @@ Key runtime environment variables:
 | Variable | Description |
 | --- | --- |
 | `PUBLIC_STRAPI_URL` | Public URL for the Strapi CMS (exposed to the browser) |
+| `PUBLIC_SITE_URL` | Canonical site URL used in SEO metadata and sitemap generation |
 | `STRAPI_API_TOKEN` | Server-only API token for authenticated Strapi requests |
 | `CMS_WEBHOOK_SECRET` | Secret used to validate incoming webhook calls |
 
@@ -257,7 +259,7 @@ gcloud run deploy algorhythmics-web \
   --platform managed \
   --allow-unauthenticated \
   --service-account web-runner@$PROJECT_ID.iam.gserviceaccount.com \
-  --set-env-vars PUBLIC_STRAPI_URL=https://cms.algorhythmics.dev,NODE_ENV=production
+  --set-env-vars PUBLIC_STRAPI_URL=https://cms.algorhythmics.dev,PUBLIC_SITE_URL=https://algorhythmics.dev,NODE_ENV=production
 ```
 
 ### 4. Domain & HTTPS
@@ -346,7 +348,7 @@ SvelteKit doesn't have built-in ISR, but we use:
 
 **Strapi health endpoint:**
 ```bash
-curl https://cms.yourdomain.com/_health
+curl https://cms.algorhythmics.dev/_health
 ```
 
 **SvelteKit health endpoint:**
@@ -442,10 +444,10 @@ CREATE INDEX idx_posts_publish_date ON posts(publish_date);
 **CMS connection error:**
 ```bash
 # Check Strapi is running
-curl https://cms.yourdomain.com/api/posts
+curl https://cms.algorhythmics.dev/api/posts
 
 # Check CORS configuration
-# Verify PUBLIC_STRAPI_URL environment variable
+# Verify PUBLIC_STRAPI_URL and PUBLIC_SITE_URL environment variables
 ```
 
 **Build failures:**

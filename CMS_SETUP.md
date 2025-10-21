@@ -37,7 +37,7 @@ This guide covers the implementation of all 8 phases from the README for integra
      name: 'strapi::cors',
      config: {
        enabled: true,
-       origin: ['http://localhost:5173', 'https://yourdomain.com'],
+      origin: ['http://localhost:5173', 'https://algorhythmics.dev'],
        credentials: true
      }
    }

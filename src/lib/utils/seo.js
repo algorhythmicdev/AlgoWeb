@@ -8,7 +8,7 @@ export function generateMetaTags({
   title = 'AlgoRhythmics - Where Logic Dances with Creativity',
   description = 'AI innovation lab creating NodeVoyage travel platform and Ideonautix productivity suite.',
   image = '/og-image.svg',
-  url = 'https://algorhythmics.com',
+  url = 'https://algorhythmics.dev',
   type = 'website',
   locale = 'en_US'
 }) {
@@ -43,8 +43,8 @@ export function generateStructuredData({
   type = 'Organization',
   name = 'AlgoRhythmics',
   description,
-  url = 'https://algorhythmics.com',
-  logo = 'https://algorhythmics.com/logo.svg',
+  url = 'https://algorhythmics.dev',
+  logo = 'https://algorhythmics.dev/logo.svg',
   foundingDate = '2025',
   founders = [],
   sameAs = []
