@@ -8,8 +8,20 @@
     import { _ } from "svelte-i18n";
     import { translateOrFallback } from "$lib/utils/i18n";
 
-    const t = (key: string, fallback: string) =>
-        translateOrFallback($_, key, fallback);
+    type TranslationParams = Record<string, unknown>;
+
+    const t = (
+        key: string,
+        fallbackOrParams?: string | TranslationParams,
+        params?: TranslationParams
+    ) => {
+        const fallback = typeof fallbackOrParams === "string" ? fallbackOrParams : "";
+        const finalParams =
+            typeof fallbackOrParams === "string" || fallbackOrParams === undefined
+                ? params
+                : fallbackOrParams;
+        return translateOrFallback($_, key, fallback, finalParams);
+    };
 
     const hero = {
         eyebrowKey: "help.page.hero.eyebrow",
@@ -353,17 +365,15 @@
         </p>
     </svelte:fragment>
     <svelte:fragment slot="actions">
-        <div class="hero-actions">
-            <Button variant="gradient" size="lg" href={hero.primary.href}
-                >{t(hero.primary.labelKey, hero.primary.labelFallback)}</Button
-            >
-            <Button variant="secondary" size="lg" href={hero.secondary.href}
-                >{t(
-                    hero.secondary.labelKey,
-                    hero.secondary.labelFallback,
-                )}</Button
-            >
-        </div>
+        <Button variant="gradient" size="lg" href={hero.primary.href}
+            >{t(hero.primary.labelKey, hero.primary.labelFallback)}</Button
+        >
+        <Button variant="secondary" size="lg" href={hero.secondary.href}
+            >{t(
+                hero.secondary.labelKey,
+                hero.secondary.labelFallback,
+            )}</Button
+        >
     </svelte:fragment>
     <svelte:fragment slot="aside">
         <GlassCard class="hero-media help-hero-media" padding="lg" particles>
@@ -646,13 +656,6 @@
 </section>
 
 <style>
-    .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--cluster-gap-md);
-        align-items: center;
-    }
-
     .hero-description {
         max-width: 60ch;
         margin-inline: auto;

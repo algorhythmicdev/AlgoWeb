@@ -9,8 +9,20 @@
   import { _ } from 'svelte-i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
-  const t = (key: string, fallback: string, params?: Record<string, unknown>) =>
-    translateOrFallback($_, key, fallback, params);
+  type TranslationParams = Record<string, unknown>;
+
+  const t = (
+    key: string,
+    fallbackOrParams?: string | TranslationParams,
+    params?: TranslationParams
+  ) => {
+    const fallback = typeof fallbackOrParams === 'string' ? fallbackOrParams : '';
+    const finalParams =
+      typeof fallbackOrParams === 'string' || fallbackOrParams === undefined
+        ? params
+        : fallbackOrParams;
+    return translateOrFallback($_, key, fallback, finalParams);
+  };
 
   const hero = {
     titleKey: 'consulting.hero_title',
@@ -331,10 +343,8 @@
     <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      <Button href={hero.primaryCta.href} variant="gradient" size="lg">{t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}</Button>
-      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}</Button>
-    </div>
+    <Button href={hero.primaryCta.href} variant="gradient" size="lg">{t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}</Button>
+    <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}</Button>
   </svelte:fragment>
   <svelte:fragment slot="highlights">
     <ul class="hero-highlights">
@@ -406,7 +416,7 @@
       </p>
     </header>
 
-    <div class="packages__grid" use:staggerReveal>
+    <div class="packages__grid auto-grid" use:staggerReveal>
       {#each servicePackages as pkg (pkg.nameKey)}
         <GlassCard class="package-card" padding="lg" halo interactive>
           <div class="package-card__header">
@@ -488,7 +498,7 @@
 </section>
 
 <section class="section requirements" data-surface="glow" use:revealOnScroll>
-  <div class="container requirements__grid">
+  <div class="container requirements__grid auto-grid">
     <GlassCard class="requirements-card" halo>
       <h2>{t(requirements.titleKey, requirements.titleFallback)}</h2>
       <ul>
@@ -522,7 +532,7 @@
       <h2>{t(examples.titleKey, examples.titleFallback)}</h2>
       <p>{t(examples.introKey, examples.introFallback)}</p>
     </header>
-    <div class="examples__grid" use:staggerReveal>
+    <div class="examples__grid auto-grid" use:staggerReveal>
       {#each examples.items as item (item.titleKey)}
         <GlassCard class="example-card" padding="lg" halo interactive>
           <div class="example-card__header">
@@ -665,12 +675,6 @@
     color: var(--text-secondary);
   }
 
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--cluster-gap-md);
-  }
-
   .hero-highlights {
     display: grid;
     gap: calc(var(--space-sm) - var(--space-xs) / 2);
@@ -803,14 +807,9 @@
   }
 
   .packages__grid {
-    display: grid;
-    gap: var(--grid-gap-xl);
-  }
-
-  @media (min-width: 900px) {
-    .packages__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    --auto-grid-gap: var(--grid-gap-xl);
+    --auto-grid-min: min(100%, var(--card-min-width));
+    --auto-grid-max: min(100%, var(--card-max-width-wide));
   }
 
   :global(.package-card) {
@@ -841,13 +840,11 @@
   .approach__grid {
     display: grid;
     gap: var(--grid-gap-2xl);
-  }
-
-  @media (min-width: 960px) {
-    .approach__grid {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      align-items: start;
-    }
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, calc(var(--card-max-width) + var(--space-lg))), 1fr)
+    );
+    align-items: start;
   }
 
   .approach__points {
@@ -877,12 +874,11 @@
   .process__grid {
     display: grid;
     gap: var(--grid-gap-2xl);
-  }
-
-  @media (min-width: 1024px) {
-    .process__grid {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    }
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, calc(var(--card-max-width-wide) + var(--space-lg))), 1fr)
+    );
+    align-items: start;
   }
 
   .process-steps {
@@ -929,14 +925,9 @@
   }
 
   .requirements__grid {
-    display: grid;
-    gap: var(--grid-gap-xl);
-  }
-
-  @media (min-width: 860px) {
-    .requirements__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    --auto-grid-gap: var(--grid-gap-xl);
+    --auto-grid-min: min(100%, var(--card-max-width));
+    --auto-grid-max: min(100%, var(--card-max-width-wide));
   }
 
   :global(.requirements-card) ul {
@@ -959,10 +950,9 @@
   }
 
   .examples__grid {
-    display: grid;
-    gap: var(--grid-gap-lg);
-    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
-    justify-content: center;
+    --auto-grid-gap: var(--grid-gap-lg);
+    --auto-grid-min: min(100%, var(--card-min-width));
+    --auto-grid-max: min(100%, var(--card-max-width));
   }
 
   :global(.example-card) {
@@ -1004,6 +994,9 @@
     --form-field-radius: var(--radius-md);
     --form-field-padding-y: var(--space-md);
     --form-field-padding-x: var(--space-lg);
+    --form-max-width: min(100%, var(--card-max-width-wide));
+    --form-field-min-width: min(100%, calc(var(--card-min-width) + var(--space-sm)));
+    --form-field-max-width: min(100%, var(--card-max-width-wide));
     --form-label-color: color-mix(in srgb, var(--text) 86%, transparent 14%);
     --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 66%, transparent 34%);
     --form-field-border: color-mix(in srgb, var(--surface-field-border) 84%, transparent 16%);
@@ -1027,16 +1020,6 @@
 
   .application .form-status {
     text-wrap: balance;
-  }
-
-  @media (min-width: 860px) {
-    .application .form {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .application .form .form--full {
-      grid-column: 1 / -1;
-    }
   }
 
   :global(.cta-card) {

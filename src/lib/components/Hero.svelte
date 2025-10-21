@@ -123,18 +123,41 @@
         --hero-grad-start: var(--aurora-purple);
         --hero-grad-stop: var(--voyage-blue);
         --hero-overlay: color-mix(in srgb, var(--bg) 62%, transparent 38%);
-        --hero-padding-block: var(--section-padding-desktop);
-        --hero-padding-inline: clamp(var(--space-lg), 7vw, var(--space-4xl));
-        --hero-content-padding: clamp(
-            var(--space-2xl),
-            6vw,
-            var(--space-5xl)
+        --hero-padding-block: clamp(
+            var(--hero-padding-block-mobile),
+            var(--hero-padding-block-fluid),
+            var(--hero-padding-block-desktop)
         );
+        --hero-padding-inline: clamp(
+            var(--hero-padding-inline-min),
+            var(--hero-padding-inline-fluid),
+            var(--hero-padding-inline-max)
+        );
+        --hero-content-padding: clamp(
+            var(--hero-content-padding-min),
+            var(--hero-content-padding-fluid),
+            var(--hero-content-padding-max)
+        );
+        --hero-gap: clamp(
+            var(--hero-gap-min),
+            var(--hero-gap-fluid),
+            var(--hero-gap-max)
+        );
+        --hero-actions-gap: clamp(
+            var(--space-md),
+            calc(var(--hero-gap) * 0.6),
+            var(--space-2xl)
+        );
+        --hero-max-width: var(--hero-max-width-default);
+        --hero-layout-width: var(--hero-layout-width-default);
+        --hero-content-max-width: var(--hero-content-max-width-default);
         position: relative;
         isolation: isolate;
         overflow: visible;
         padding-block: var(--hero-padding-block);
         padding-inline: var(--hero-padding-inline);
+        width: min(100%, var(--hero-max-width));
+        max-inline-size: var(--hero-max-width);
         margin-inline: auto;
         color: var(--text);
         background: var(--hero-surface);
@@ -166,32 +189,38 @@
     .hero__layout {
         position: relative;
         display: grid;
-        gap: var(--space-2xl);
+        gap: var(--hero-gap);
         align-items: start;
+        justify-items: stretch;
+        width: min(100%, var(--hero-layout-width));
+        max-inline-size: var(--hero-layout-width);
+        margin-inline: auto;
         z-index: var(--z-content);
     }
 
     .hero--with-aside .hero__layout {
-        gap: var(--space-3xl);
+        gap: var(--hero-gap);
     }
 
     @media (min-width: 960px) {
         .hero--with-aside .hero__layout {
-            grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
         }
     }
 
     .hero__main {
         display: grid;
-        gap: var(--space-xl);
+        gap: var(--hero-gap);
     }
 
     .hero__content {
         position: relative;
         z-index: var(--z-content);
         display: grid;
-        gap: var(--space-xl);
+        gap: clamp(var(--grid-gap-md), calc(var(--hero-gap) * 0.75), var(--grid-gap-xl));
+        justify-items: start;
         padding: var(--hero-content-padding);
+        max-inline-size: var(--hero-content-max-width);
         border-radius: calc(var(--glass-card-radius) * 1.2);
         background: color-mix(
             in srgb,
@@ -281,12 +310,18 @@
         z-index: var(--z-interactive);
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-md);
-        margin-top: var(--space-xl);
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--hero-actions-gap);
+        margin-top: clamp(var(--space-lg), calc(var(--hero-gap) * 0.8), var(--space-2xl));
     }
 
     .hero__actions :global(*) {
         flex-shrink: 0;
+    }
+
+    .hero--align-center .hero__actions {
+        justify-content: center;
     }
 
     .hero__highlights {
@@ -412,7 +447,9 @@
 
     .hero__aside {
         display: grid;
-        gap: var(--space-lg);
+        gap: clamp(var(--grid-gap-md), calc(var(--hero-gap) * 0.6), var(--grid-gap-lg));
+        align-content: start;
+        justify-items: stretch;
         animation: hero-entrance 880ms cubic-bezier(0.23, 1, 0.32, 1) both;
         animation-delay: 160ms;
     }
@@ -422,8 +459,14 @@
         align-items: center;
     }
 
-    .hero--align-center .hero__actions {
-        justify-content: center;
+    .hero--align-center .hero__content {
+        text-align: center;
+        justify-items: center;
+    }
+
+    .hero--align-center .hero__description,
+    .hero--align-center .hero__lead {
+        margin-inline: auto;
     }
 
     .hero--align-center .hero__highlights {
@@ -539,11 +582,19 @@
 
     @media (max-width: 960px) {
         .hero {
-            --hero-padding-inline: var(--space-xl);
+            --hero-padding-inline: clamp(
+                var(--hero-padding-inline-min),
+                6vw,
+                var(--hero-padding-inline-max)
+            );
         }
 
         .hero__content {
-            padding: var(--space-2xl);
+            padding: clamp(
+                var(--hero-content-padding-min),
+                6vw,
+                var(--hero-content-padding-max)
+            );
         }
 
         .hero__aside {
@@ -554,8 +605,16 @@
 
     @media (max-width: 640px) {
         .hero {
-            --hero-padding-block: var(--section-padding-mobile);
-            --hero-padding-inline: var(--space-lg);
+            --hero-padding-block: clamp(
+                var(--hero-padding-block-mobile),
+                12vw,
+                var(--hero-padding-block-desktop)
+            );
+            --hero-padding-inline: clamp(
+                var(--hero-padding-inline-min),
+                8vw,
+                var(--hero-padding-inline-max)
+            );
         }
 
         .hero__actions {
@@ -565,8 +624,16 @@
         }
 
         .hero__content {
-            padding: var(--space-xl);
-            gap: var(--space-lg);
+            padding: clamp(
+                var(--hero-content-padding-min),
+                9vw,
+                var(--hero-content-padding-max)
+            );
+            gap: clamp(
+                var(--grid-gap-md),
+                calc(var(--hero-gap) * 0.7),
+                var(--grid-gap-lg)
+            );
             width: 100%;
             max-width: 100%;
             margin: 0;
@@ -574,7 +641,11 @@
 
         .hero__highlights {
             margin-top: var(--space-xl);
-            padding: var(--space-xl);
+            padding: clamp(
+                var(--component-padding-md),
+                9vw,
+                var(--component-padding-lg)
+            );
         }
 
         .hero__highlights :global(li) {

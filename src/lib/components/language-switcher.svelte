@@ -6,16 +6,22 @@
   import { language } from '$stores/language';
 
   let isOpen = false;
-  let trigger;
-  let optionRefs = [];
-  let listbox;
+  let trigger: HTMLButtonElement | null = null;
+  let optionRefs: Array<HTMLButtonElement | undefined> = [];
+  let listbox: HTMLDivElement | null = null;
   let focusedIndex = -1;
   let typeaheadTerm = '';
-  let typeaheadTimeout;
+  let typeaheadTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const TYPEAHEAD_RESET_MS = 500;
 
-  const languages = [
+  type LanguageOption = {
+    code: string;
+    label: string;
+    name: string;
+  };
+
+  const languages: LanguageOption[] = [
     { code: 'en', label: 'language_switcher.languages.en.short', name: 'language_switcher.languages.en.name' },
     { code: 'lv', label: 'language_switcher.languages.lv.short', name: 'language_switcher.languages.lv.name' },
     { code: 'ru', label: 'language_switcher.languages.ru.short', name: 'language_switcher.languages.ru.name' },
@@ -27,15 +33,15 @@
   $: currentLanguage = languages.find((lang) => lang.code === $language) || languages[0];
   $: activeIndex = languages.findIndex((lang) => lang.code === $language);
 
-  function clampIndex(index) {
+  function clampIndex(index: number): number {
     if (index < 0) return languages.length - 1;
     if (index >= languages.length) return 0;
     return index;
   }
 
-  const getOptionId = (code) => `language-option-${code}`;
+  const getOptionId = (code: string) => `language-option-${code}`;
 
-  function updateActiveDescendant(index) {
+  function updateActiveDescendant(index: number): void {
     if (!listbox) return;
     const languageEntry = languages[index];
     if (languageEntry) {
@@ -45,7 +51,7 @@
     }
   }
 
-  function focusOption(index) {
+  function focusOption(index: number): void {
     focusedIndex = clampIndex(index);
     updateActiveDescendant(focusedIndex);
     optionRefs[focusedIndex]?.focus();
@@ -57,12 +63,12 @@
     typeaheadTimeout = undefined;
   }
 
-  function queueTypeaheadReset() {
+  function queueTypeaheadReset(): void {
     clearTimeout(typeaheadTimeout);
     typeaheadTimeout = setTimeout(resetTypeahead, TYPEAHEAD_RESET_MS);
   }
 
-  function findTypeaheadMatch(term, startIndex = 0) {
+  function findTypeaheadMatch(term: string, startIndex = 0): number {
     if (!term) return -1;
 
     const normalizedTerm = term.toLowerCase();
@@ -82,7 +88,7 @@
     return -1;
   }
 
-  function handleTypeahead(key, startIndex = 0) {
+  function handleTypeahead(key: string, startIndex = 0): void {
     typeaheadTerm += key.toLowerCase();
     queueTypeaheadReset();
 
@@ -98,7 +104,7 @@
     }
   }
 
-  async function openMenu(startIndex = 0) {
+  async function openMenu(startIndex = 0): Promise<void> {
     optionRefs = [];
     isOpen = true;
     focusedIndex = clampIndex(startIndex);
@@ -108,14 +114,14 @@
     updateActiveDescendant(focusedIndex);
   }
 
-  function trackOption(node, index) {
+  function trackOption(node: HTMLButtonElement, index: number) {
     optionRefs[index] = node;
 
     return {
       destroy() {
         optionRefs[index] = undefined;
       },
-      update(newIndex) {
+      update(newIndex: number) {
         if (newIndex !== index) {
           optionRefs[index] = undefined;
           index = newIndex;
@@ -125,7 +131,7 @@
     };
   }
 
-  async function closeMenu(restoreFocus = true) {
+  async function closeMenu(restoreFocus = true): Promise<void> {
     isOpen = false;
     focusedIndex = -1;
     resetTypeahead();
@@ -136,12 +142,12 @@
     }
   }
 
-  async function selectLanguage(code) {
+  async function selectLanguage(code: string): Promise<void> {
     language.set(code);
     await closeMenu();
   }
 
-  async function handleTriggerKeydown(event) {
+  async function handleTriggerKeydown(event: KeyboardEvent): Promise<void> {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault();
       const start = event.key === 'ArrowDown'
@@ -181,7 +187,7 @@
     }
   }
 
-  function handleOptionKeydown(event, index) {
+  function handleOptionKeydown(event: KeyboardEvent, index: number): void {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       focusOption(index + 1);
@@ -235,7 +241,7 @@
     }
   }
 
-  async function toggleMenu() {
+  async function toggleMenu(): Promise<void> {
     if (isOpen) {
       await closeMenu();
     } else {
@@ -244,8 +250,10 @@
     }
   }
 
-  function handleFocusOut(event) {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
+  function handleFocusOut(event: FocusEvent): void {
+    const target = event.currentTarget as HTMLElement | null;
+    const related = event.relatedTarget as Node | null;
+    if (target && !target.contains(related)) {
       isOpen = false;
       focusedIndex = -1;
       resetTypeahead();

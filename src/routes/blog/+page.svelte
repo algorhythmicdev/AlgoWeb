@@ -95,12 +95,12 @@
                 
                 {#if post.author}
                   <div class="post-author">
-                    {$_('blog.card.by', { name: post.author.name ?? '' })}
+                    {$_('blog.card.by', { values: { name: post.author.name ?? '' } })}
                   </div>
                 {/if}
                 
                 <div class="post-action">
-                  <Button variant="subtle" size="sm">
+                  <Button variant="subtle">
                     {$_('blog.card.cta')}
                   </Button>
                 </div>

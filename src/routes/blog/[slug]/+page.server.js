@@ -37,7 +37,12 @@ export async function load({ params, fetch }) {
       post
     };
   } catch (err) {
-    if (err.status === 404) {
+    if (
+      err &&
+      typeof err === 'object' &&
+      'status' in err &&
+      /** @type {{ status?: number }} */ (err).status === 404
+    ) {
       throw err;
     }
     console.error('Error fetching post:', err);

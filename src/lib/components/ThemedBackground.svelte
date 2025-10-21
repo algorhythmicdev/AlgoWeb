@@ -5,37 +5,107 @@
   import { getThemeForPath } from '$config/backgroundThemes';
   import { theme as themeStore } from '$stores/theme';
 
+  type LayerGradient = { filter?: string; opacity?: number };
+  type LayerWash = {
+    min?: number;
+    base?: number;
+    span?: number;
+    max?: number;
+    blend?: string;
+    filter?: string;
+  };
+  type LayerFlare = {
+    min?: number;
+    base?: number;
+    span?: number;
+    max?: number;
+    blend?: string;
+    filter?: string;
+  };
+  type LayerVeil = {
+    color?: string;
+    mixMode?: string;
+    min?: number;
+    max?: number;
+    span?: number;
+  };
+  type LayerFilm = { max?: number };
+  type LayerOverrides = {
+    gradient?: LayerGradient;
+    wash?: LayerWash;
+    flare?: LayerFlare;
+    veil?: LayerVeil;
+    film?: LayerFilm;
+  };
+  type ShapeConfig = {
+    type: string;
+    count: number;
+    color: string;
+    size: 'small' | 'medium' | 'large' | string;
+  };
+  type ThemeConfig = {
+    name: string;
+    palette?: string[];
+    gradient?: string;
+    grainOpacity?: number;
+    layers?: LayerOverrides;
+    shapes: ShapeConfig[];
+    animation?: string;
+    density?: string;
+    interactivity?: string;
+  };
+  type ParticleOptions = {
+    flatten?: boolean;
+    reduced?: boolean;
+  };
+  type Particle = {
+    id: string;
+    x: number;
+    y: number;
+    dx: number;
+    dy: number;
+    size: number;
+    color: string;
+    duration: number;
+    delay: number;
+    blur: number;
+    opacity: number;
+  };
+  type PointerCoords = { x: number; y: number };
+
   let prefersReducedMotion = false;
   let prefersHighContrast = false;
   let prefersLessTransparency = false;
   let flattenAmbient = false;
   let mounted = false;
   let pointerTracking = false;
+  let raf: number | undefined;
 
-  let particles = [];
+  let particles: Particle[] = [];
+  let theme: ThemeConfig | undefined;
   const basePalette = ['voyage-blue', 'aurora-purple', 'signal-yellow'];
   const fallbackGradient =
     'radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--bg) 99.92%, rgba(var(--voyage-blue-rgb), 0.006) 0.08%) 0%, color-mix(in srgb, var(--bg-elev-1) 99.92%, rgba(var(--aurora-purple-rgb), 0.006) 0.08%) 42%, var(--bg) 100%)';
   const fallbackFilmOpacity = 0.045;
 
-  const pointerSpring = spring({ x: 0.5, y: 0.35 }, { stiffness: 0.06, damping: 0.5, precision: 0.001 });
-  const scrollSpring = spring(0, { stiffness: 0.04, damping: 0.55, precision: 0.0001 });
+  const pointerSpring = spring<PointerCoords>({ x: 0.5, y: 0.35 }, { stiffness: 0.06, damping: 0.5, precision: 0.001 });
+  const scrollSpring = spring<number>(0, { stiffness: 0.04, damping: 0.55, precision: 0.0001 });
 
-  let pointerCoords = { x: 0.5, y: 0.35 };
+  let pointerCoords: PointerCoords = { x: 0.5, y: 0.35 };
   let scrollDepth = 0;
 
   const unsubscribePointer = pointerSpring.subscribe((value) => (pointerCoords = value));
   const unsubscribeScroll = scrollSpring.subscribe((value) => (scrollDepth = value));
 
-  function observePreference(query, setter) {
+  function observePreference(query: string, setter: (value: boolean) => void): () => void {
     if (typeof window === 'undefined' || !window.matchMedia) {
       setter(false);
       return () => {};
     }
 
     const mediaQuery = window.matchMedia(query);
-    const apply = (value) => setter(Boolean(value));
-    const handleChange = (event) => apply(event.matches);
+    const apply = (value: boolean) => setter(Boolean(value));
+    const handleChange = (event: MediaQueryListEvent) => apply(event.matches);
 
     apply(mediaQuery.matches);
 
@@ -52,7 +122,7 @@
     return () => {};
   }
 
-  function enablePointerTracking() {
+  function enablePointerTracking(): void {
     if (!mounted || pointerTracking || typeof window === 'undefined' || prefersReducedMotion || flattenAmbient) {
       return;
     }
@@ -64,7 +134,7 @@
     raf = requestAnimationFrame(animate);
   }
 
-  function disablePointerTracking() {
+  function disablePointerTracking(): void {
     if (!pointerTracking || typeof window === 'undefined') {
       return;
     }
@@ -93,9 +163,9 @@
 
   $: routeGradient = theme?.gradient ?? fallbackGradient;
   $: routeFilmOpacity = typeof theme?.grainOpacity === 'number' ? theme.grainOpacity * 12 : fallbackFilmOpacity;
-  function buildLayerVars(layerOverrides = {}) {
-    const list = [];
-    const add = (key, value) => {
+  function buildLayerVars(layerOverrides: LayerOverrides = {}): string[] {
+    const list: string[] = [];
+    const add = (key: string, value: string | number | null | undefined) => {
       if (value === undefined || value === null) return;
       list.push(`--${key}:${value}`);
     };
@@ -132,7 +202,7 @@
 
   $: layerVars = buildLayerVars(theme?.layers);
 
-  function joinVars(values) {
+  function joinVars(values: string[]): string {
     return values.filter(Boolean).join('; ');
   }
 
@@ -161,7 +231,7 @@
     }
   }
 
-  function colorVar(name, index = 0) {
+  function colorVar(name: string, index = 0): string {
     if (name === 'voyage-blue') return 'var(--voyage-blue)';
     if (name === 'aurora-purple') return 'var(--aurora-purple)';
     if (name === 'signal-yellow') return 'var(--signal-yellow)';
@@ -171,20 +241,31 @@
     return fallback[index % fallback.length];
   }
 
-  function initParticles(themeConfig, options = {}) {
+  function initParticles(themeConfig: ThemeConfig | undefined, options: ParticleOptions = {}): void {
+    if (!themeConfig) {
+      particles = [];
+      return;
+    }
     const { flatten = flattenAmbient, reduced = prefersReducedMotion } = options;
 
     if (flatten) {
       particles = [];
       return;
     }
-    const total = themeConfig.shapes.reduce((sum, s) => sum + s.count, 0);
+    const total = themeConfig.shapes.reduce<number>((sum, shape) => sum + shape.count, 0);
     const limit = Math.min(total, reduced ? 6 : 12);
-    const list = [];
+    const list: Particle[] = [];
     themeConfig.shapes.forEach((shapeConfig, index) => {
       const count = Math.min(shapeConfig.count, Math.ceil(limit / themeConfig.shapes.length));
       for (let i = 0; i < count; i++) {
-        const size = shapeConfig.size === 'small' ? 5 : shapeConfig.size === 'medium' ? 8 : 12;
+        const size =
+          shapeConfig.size === 'small'
+            ? 5
+            : shapeConfig.size === 'medium'
+              ? 8
+              : shapeConfig.size === 'large'
+                ? 12
+                : 10;
         list.push({
           id: `${shapeConfig.type}-${index}-${i}`,
           x: Math.random() * 100,
@@ -203,31 +284,37 @@
     particles = list;
   }
 
-  let raf;
-  function animate() {
+  function animate(): void {
     if (!pointerTracking || prefersReducedMotion) return;
-    particles = particles.map((p) => {
-      let nx = p.x + p.dx;
-      let ny = p.y + p.dy;
-      if (nx < -4 || nx > 104) p.dx = -p.dx, nx = Math.max(-4, Math.min(104, nx));
-      if (ny < -4 || ny > 104) p.dy = -p.dy, ny = Math.max(-4, Math.min(104, ny));
-      return { ...p, x: nx, y: ny };
+    particles = particles.map((p): Particle => {
+      let { dx, dy } = p;
+      let nx = p.x + dx;
+      let ny = p.y + dy;
+      if (nx < -4 || nx > 104) {
+        dx = -dx;
+        nx = Math.max(-4, Math.min(104, nx));
+      }
+      if (ny < -4 || ny > 104) {
+        dy = -dy;
+        ny = Math.max(-4, Math.min(104, ny));
+      }
+      return { ...p, x: nx, y: ny, dx, dy };
     });
     raf = requestAnimationFrame(animate);
   }
 
-  function handlePointer(event) {
+  function handlePointer(event: PointerEvent): void {
     if (!pointerTracking || typeof window === 'undefined') return;
     const x = event.clientX / window.innerWidth;
     const y = event.clientY / window.innerHeight;
     pointerSpring.set({ x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) });
   }
 
-  function handleLeave() {
+  function handleLeave(): void {
     pointerSpring.set({ x: 0.5, y: 0.35 });
   }
 
-  function syncScrollDepth() {
+  function syncScrollDepth(): void {
     if (typeof window === 'undefined') return;
     const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
     scrollSpring.set(Math.max(0, Math.min(1, window.scrollY / max)));

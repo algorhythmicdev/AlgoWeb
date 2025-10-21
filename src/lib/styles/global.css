@@ -33,6 +33,15 @@
     --surface-panel-hc-shadow: none;
     --surface-panel-hc-color: var(--text);
     --surface-glass-blur: blur(var(--glass-blur));
+    --auto-grid-gap-default: var(--grid-gap-lg);
+    --auto-grid-min-default: var(--card-min-width);
+    --auto-grid-max-default: var(--card-max-width);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 body {
@@ -43,6 +52,13 @@ body {
         color var(--theme-dur) var(--theme-ease);
     position: relative;
     min-height: 100vh;
+    overflow-x: hidden;
+}
+
+@supports (overflow-x: clip) {
+    body {
+        overflow-x: clip;
+    }
 }
 
 html[data-theme='hc'] body,
@@ -123,7 +139,8 @@ body,
     position: relative;
     --section-padding: clamp(var(--section-padding-tablet), 7vw, var(--section-padding-desktop));
     padding-block: var(--section-padding);
-    background: transparent;
+    background: none;
+    background-color: var(--section-background, transparent);
     color: var(--text);
     isolation: isolate;
     overflow: visible;
@@ -178,6 +195,45 @@ body,
 .section[data-surface='glow']::after {
     background: linear-gradient(180deg, var(--section-glow-overlay) 0%, transparent 100%);
     opacity: var(--section-glow-overlay-opacity);
+}
+
+.auto-grid {
+    --auto-grid-gap: var(--auto-grid-gap-default);
+    --auto-grid-min: var(--auto-grid-min-default);
+    --auto-grid-max: var(--auto-grid-max-default);
+    display: grid;
+    gap: var(--auto-grid-gap);
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(var(--auto-grid-min), min(100%, var(--auto-grid-max)))
+    );
+    justify-content: center;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.auto-grid > * {
+    width: min(100%, var(--auto-grid-max));
+    max-width: min(100%, var(--auto-grid-max));
+    justify-self: center;
+}
+
+.auto-grid[data-align='start'] {
+    justify-content: flex-start;
+    justify-items: flex-start;
+}
+
+.auto-grid[data-width='wide'] {
+    --auto-grid-min: min(100%, var(--card-max-width-wide));
+    --auto-grid-max: min(100%, var(--card-max-width-wide));
+}
+
+.auto-grid[data-gap='tight'] {
+    --auto-grid-gap: var(--grid-gap-md);
+}
+
+.auto-grid[data-gap='loose'] {
+    --auto-grid-gap: var(--grid-gap-xl);
 }
 
 html[data-theme='dark'] .section[data-surface='glow'] {

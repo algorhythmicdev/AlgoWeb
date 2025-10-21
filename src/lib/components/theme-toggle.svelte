@@ -51,8 +51,8 @@
       <span class="theme-option__body">
         <span class="theme-option__icon" aria-hidden="true">
           {#if option.icon === 'sun'}
-            <svg viewBox="0 0 20 20">
-              <circle cx="10" cy="10" r="4.5" stroke-width="1.8" />
+            <svg data-icon="sun" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="4.5" />
               <line x1="10" y1="1" x2="10" y2="4" />
               <line x1="10" y1="16" x2="10" y2="19" />
               <line x1="1" y1="10" x2="4" y2="10" />
@@ -63,16 +63,15 @@
               <line x1="13.6" y1="6.4" x2="15.9" y2="4.1" />
             </svg>
           {:else if option.icon === 'moon'}
-            <svg viewBox="0 0 20 20">
+            <svg data-icon="moon" viewBox="0 0 20 20">
               <path
                 d="M15.8 13.6c-1.4 2.4-4 3.9-6.8 3.9c-4.4 0-8-3.6-8-8c0-3 1.7-5.6 4.2-7c-.3.7-.4 1.5-.4 2.3c0 3.7 3 6.7 6.7 6.7c.8 0 1.6-.2 2.3-.4z"
-                stroke-width="1.6"
                 fill="none"
               />
             </svg>
           {:else}
-            <svg viewBox="0 0 20 20">
-              <rect x="3" y="3" width="14" height="14" rx="3" ry="3" stroke-width="1.8" fill="none" />
+            <svg data-icon="contrast" viewBox="0 0 20 20">
+              <rect x="3" y="3" width="14" height="14" rx="3" ry="3" fill="none" />
               <line x1="6" y1="3" x2="6" y2="17" />
               <line x1="14" y1="3" x2="14" y2="17" />
             </svg>
@@ -92,14 +91,15 @@
   .theme-switcher {
     display: inline-flex;
     align-items: center;
-    gap: clamp(0.35rem, 1vw, 0.65rem);
-    padding: clamp(0.3rem, 1vw, 0.55rem);
+    gap: var(--control-cluster-gap);
+    padding-block: var(--control-cluster-padding-block);
+    padding-inline: var(--control-cluster-padding-inline);
     border-radius: var(--radius-pill);
-    border: 1.5px solid var(--surface-pill-border);
-    background: color-mix(in srgb, var(--surface-pill-bg) 90%, transparent 10%);
-    box-shadow: var(--surface-pill-shadow);
-    backdrop-filter: blur(calc(var(--glass-blur) * 0.65)) saturate(1.04);
-    -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.65)) saturate(1.04);
+    border: var(--control-cluster-border-width) solid var(--control-cluster-border);
+    background: var(--control-cluster-bg);
+    box-shadow: var(--control-cluster-shadow);
+    backdrop-filter: var(--control-cluster-backdrop);
+    -webkit-backdrop-filter: var(--control-cluster-backdrop);
     flex-shrink: 1;
     min-width: 0;
   }
@@ -122,14 +122,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-xs);
-    min-width: clamp(3.75rem, 9vw, 4.6rem);
-    min-height: clamp(2.65rem, 7vw, 3.4rem);
-    padding: clamp(0.35rem, 1vw, 0.55rem) clamp(0.6rem, 1.2vw, 0.85rem);
-    border-radius: clamp(0.8rem, 2vw, 1rem);
-    border: 1px solid color-mix(in srgb, var(--surface-chip-border) 70%, transparent 30%);
-    background: color-mix(in srgb, var(--surface-chip-bg) 78%, transparent 22%);
-    color: color-mix(in srgb, var(--text-secondary) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
+    gap: var(--control-tile-gap);
+    min-width: var(--control-tile-min-width);
+    min-height: var(--control-tile-min-height);
+    padding-block: var(--control-tile-padding-block);
+    padding-inline: var(--control-tile-padding-inline);
+    border-radius: var(--control-tile-radius);
+    border: var(--control-tile-border-width) solid var(--control-tile-border);
+    background: var(--control-tile-bg);
+    color: var(--control-tile-color);
     cursor: pointer;
     transition:
       transform var(--duration-normal) var(--ease-spring),
@@ -146,26 +147,26 @@
   }
 
   .theme-option__label {
-    font-size: clamp(0.75rem, 1vw, 0.82rem);
+    font-size: var(--control-tile-label-size);
     font-weight: var(--weight-semibold);
-    letter-spacing: 0.04em;
+    letter-spacing: var(--control-tile-label-tracking);
     text-transform: uppercase;
     white-space: nowrap;
   }
 
   .theme-option__body:hover {
     transform: translateY(-1px);
-    background: color-mix(in srgb, var(--surface-chip-bg) 86%, transparent 14%);
-    border-color: color-mix(in srgb, var(--surface-chip-border) 65%, rgba(var(--voyage-blue-rgb), 0.42) 35%);
-    color: var(--text);
-    box-shadow: 0 14px 26px rgba(var(--ink-rgb), 0.16);
+    background: var(--control-tile-hover-bg);
+    border-color: var(--control-tile-hover-border);
+    color: var(--control-tile-hover-color);
+    box-shadow: var(--control-tile-hover-shadow);
   }
 
   .theme-option.active .theme-option__body {
-    background: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 55%, var(--surface-chip-bg) 45%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 60%, rgba(255, 255, 255, 0.5) 40%);
-    color: color-mix(in srgb, var(--voyage-blue) 70%, var(--text) 30%);
-    box-shadow: 0 16px 34px rgba(var(--voyage-blue-rgb), 0.24);
+    background: var(--control-tile-active-bg);
+    border-color: var(--control-tile-active-border);
+    color: var(--control-tile-active-color);
+    box-shadow: var(--control-tile-active-shadow);
     font-weight: var(--weight-semibold);
   }
 
@@ -175,17 +176,22 @@
 
   .theme-option input:focus-visible + .theme-option__body {
     outline: none;
-    border-color: color-mix(in srgb, var(--surface-chip-border) 55%, rgba(var(--voyage-blue-rgb), 0.55) 45%);
-    box-shadow: 0 18px 40px rgba(var(--ink-rgb), 0.22), var(--focus-ring-shadow);
+    border-color: var(--control-tile-focus-border);
+    box-shadow: var(--control-tile-focus-shadow), var(--focus-ring-shadow);
   }
 
   svg {
-    width: clamp(1.1rem, 2.4vw, 1.35rem);
-    height: clamp(1.1rem, 2.4vw, 1.35rem);
+    width: var(--control-tile-icon-size);
+    height: var(--control-tile-icon-size);
     stroke: currentColor;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
+    stroke-width: var(--control-icon-stroke-width);
+  }
+
+  svg[data-icon='moon'] {
+    stroke-width: var(--control-icon-stroke-width-alt);
   }
 
   .sr-only {
@@ -200,85 +206,52 @@
     border: 0;
   }
 
-  :global(html[data-theme='dark']) .theme-switcher {
-    background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.78) 64%, rgba(var(--voyage-blue-rgb), 0.28) 36%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 60%, rgba(255, 255, 255, 0.14) 40%);
-    box-shadow: 0 22px 58px rgba(2, 6, 18, 0.58);
-  }
-
-  :global(html[data-theme='dark']) .theme-option__body {
-    background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.82) 60%, rgba(var(--voyage-blue-rgb), 0.24) 40%);
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 60%, rgba(255, 255, 255, 0.16) 40%);
-    color: color-mix(in srgb, rgba(255, 255, 255, 0.78) 72%, rgba(var(--voyage-blue-rgb), 0.36) 28%);
-  }
-
-  :global(html[data-theme='dark']) .theme-option__body:hover {
-    border-color: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 65%, rgba(255, 255, 255, 0.2) 35%);
-    color: rgba(255, 255, 255, 0.92);
-  }
-
-  :global(html[data-theme='dark']) .theme-option.active .theme-option__body {
-    color: color-mix(in srgb, rgba(255, 255, 255, 0.9) 72%, rgba(var(--voyage-blue-rgb), 0.5) 28%);
-    box-shadow: 0 20px 44px rgba(var(--voyage-blue-rgb), 0.36);
-  }
-
-  :global(html[data-theme='hc']) .theme-switcher {
-    background: var(--surface-pill-hc-bg);
-    border-color: var(--surface-pill-hc-border);
-    box-shadow: var(--surface-pill-hc-shadow);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  :global(html[data-theme='hc']) .theme-option__body,
-  :global(html[data-theme='hc']) .theme-option__body:hover,
-  :global(html[data-theme='hc']) .theme-option.active .theme-option__body {
-    background: transparent;
-    border-color: currentColor;
-    box-shadow: none;
-    color: currentColor;
-  }
+  /* High contrast styles derive from control tokens */
 
   :global(html[data-theme='hc']) .theme-option input:focus-visible + .theme-option__body {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
   }
 
   @media (max-width: 768px) {
     .theme-switcher {
-      gap: clamp(0.25rem, 1.5vw, 0.4rem);
-      padding: clamp(0.25rem, 1.2vw, 0.4rem) clamp(0.3rem, 2vw, 0.5rem);
+      gap: var(--control-cluster-gap-md);
+      padding-block: var(--control-cluster-padding-block-md);
+      padding-inline: var(--control-cluster-padding-inline-md);
     }
 
     .theme-option__body {
-      min-width: clamp(3.1rem, 16vw, 3.7rem);
-      min-height: clamp(2.2rem, 10vw, 2.6rem);
-      padding: clamp(0.3rem, 1.5vw, 0.5rem) clamp(0.45rem, 2.4vw, 0.7rem);
+      min-width: var(--control-tile-min-width-md);
+      min-height: var(--control-tile-min-height-md);
+      padding-block: var(--control-tile-padding-block-md);
+      padding-inline: var(--control-tile-padding-inline-md);
     }
 
     .theme-option__label {
-      font-size: clamp(0.7rem, 2.2vw, 0.78rem);
-      letter-spacing: 0.05em;
+      font-size: var(--control-tile-label-size-md);
+      letter-spacing: var(--control-tile-label-tracking-md);
     }
 
     svg {
-      width: clamp(1rem, 3vw, 1.2rem);
-      height: clamp(1rem, 3vw, 1.2rem);
+      width: var(--control-tile-icon-size-md);
+      height: var(--control-tile-icon-size-md);
     }
   }
 
   @media (max-width: 560px) {
     .theme-switcher {
-      gap: clamp(0.2rem, 1.6vw, 0.35rem);
-      padding: 0.25rem clamp(0.25rem, 1.8vw, 0.4rem);
+      gap: var(--control-cluster-gap-sm);
+      padding-block: var(--control-cluster-padding-block-sm);
+      padding-inline: var(--control-cluster-padding-inline-sm);
     }
 
     .theme-option__body {
-      min-width: clamp(2.6rem, 22vw, 3.1rem);
-      min-height: clamp(1.9rem, 9vw, 2.2rem);
-      padding: clamp(0.25rem, 1vw, 0.35rem) clamp(0.35rem, 4vw, 0.55rem);
-      gap: 0.2rem;
-      border-radius: clamp(0.65rem, 3vw, 0.85rem);
+      min-width: var(--control-tile-min-width-sm);
+      min-height: var(--control-tile-min-height-sm);
+      padding-block: var(--control-tile-padding-block-sm);
+      padding-inline: var(--control-tile-padding-inline-sm);
+      gap: var(--control-tile-gap-sm);
+      border-radius: var(--control-tile-radius-sm);
     }
 
     .theme-option__label {
@@ -294,25 +267,27 @@
     }
 
     svg {
-      width: clamp(0.95rem, 4vw, 1.05rem);
-      height: clamp(0.95rem, 4vw, 1.05rem);
+      width: var(--control-tile-icon-size-sm);
+      height: var(--control-tile-icon-size-sm);
     }
   }
 
   @media (max-width: 480px) {
     .theme-switcher {
-      gap: 0.18rem;
-      padding: 0.22rem 0.3rem;
+      gap: var(--control-cluster-gap-xs);
+      padding-block: var(--control-cluster-padding-block-xs);
+      padding-inline: var(--control-cluster-padding-inline-xs);
     }
 
     .theme-option__body {
-      min-width: clamp(2.45rem, 24vw, 2.9rem);
-      min-height: clamp(1.85rem, 10vw, 2.15rem);
-      padding: 0.26rem clamp(0.3rem, 5vw, 0.5rem);
+      min-width: var(--control-tile-min-width-xs);
+      min-height: var(--control-tile-min-height-xs);
+      padding-block: var(--control-tile-padding-block-xs);
+      padding-inline: var(--control-tile-padding-inline-xs);
     }
 
     .theme-option__label {
-      letter-spacing: 0.045em;
+      letter-spacing: var(--control-tile-label-tracking-xs);
     }
   }
 

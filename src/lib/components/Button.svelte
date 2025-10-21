@@ -66,73 +66,59 @@
 
 <style>
     .btn {
-        --btn-bg: color-mix(
-            in srgb,
-            var(--bg-elev-1) 94%,
-            rgba(var(--voyage-blue-rgb), 0.06) 6%
-        );
-        --btn-border: color-mix(
-            in srgb,
-            rgba(var(--voyage-blue-rgb), 0.4) 65%,
-            rgba(255, 255, 255, 0.4) 35%
-        );
-        --btn-color: var(--text);
-        --btn-shadow: 0 12px 32px rgba(10, 18, 32, 0.14),
-            0 4px 12px rgba(10, 18, 32, 0.08);
-        --btn-hover-bg: color-mix(
-            in srgb,
-            var(--bg-elev-1) 90%,
-            rgba(var(--voyage-blue-rgb), 0.12) 10%
-        );
-        --btn-hover-border: color-mix(
-            in srgb,
-            rgba(var(--voyage-blue-rgb), 0.55) 70%,
-            rgba(255, 255, 255, 0.5) 30%
-        );
-        --btn-padding-y: 0.85rem;
-        --btn-padding-x: 1.7rem;
-        --btn-gap: 0.65rem;
-        --btn-focus-ring: 0 0 0 3px
-            color-mix(
-                in srgb,
-                rgba(var(--voyage-blue-rgb), 0.4) 70%,
-                transparent 30%
-            );
+        --btn-bg: var(--button-primary-bg);
+        --btn-border: var(--button-primary-border);
+        --btn-color: var(--button-primary-color);
+        --btn-hover-bg: var(--button-primary-hover-bg);
+        --btn-hover-border: var(--button-primary-hover-border);
+        --btn-shadow: var(--button-shadow);
+        --btn-hover-shadow: var(--button-shadow-hover);
+        --btn-focus-ring: var(--button-focus-ring);
+        --btn-padding-block: var(--button-padding-block-md);
+        --btn-padding-inline: var(--button-padding-inline-md);
+        --btn-gap: var(--button-gap);
+        --btn-font-size: var(--button-font-size-md);
+        --btn-line-height: var(--button-line-height);
+        --btn-font-weight: var(--button-font-weight);
+        --btn-radius: var(--button-radius);
+        --btn-border-width: var(--button-border-width);
 
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: var(--btn-gap);
-        padding: var(--btn-padding-y) var(--btn-padding-x);
-        border-radius: var(--radius-pill);
-        border: 1.5px solid var(--btn-border);
+        padding-block: var(--btn-padding-block);
+        padding-inline: var(--btn-padding-inline);
+        border-radius: var(--btn-radius);
+        border: var(--btn-border-width) solid var(--btn-border);
         background: var(--btn-bg);
         color: var(--btn-color);
-        font-weight: var(--weight-semibold);
-        font-size: clamp(0.95rem, 1vw, 1.05rem);
-        line-height: 1.1;
+        font-weight: var(--btn-font-weight);
+        font-size: var(--btn-font-size);
+        line-height: var(--btn-line-height);
         text-decoration: none;
         cursor: pointer;
         box-shadow: var(--btn-shadow);
-        transform: translateY(0);
+        transform: var(--button-transform-rest);
         transition:
-            transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
-            box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
-            background 240ms ease,
-            border-color 240ms ease;
+            transform var(--button-transition-duration) var(--button-transition-ease),
+            box-shadow var(--button-transition-duration) var(--button-shadow-ease),
+            background var(--button-surface-duration) var(--button-surface-ease),
+            border-color var(--button-surface-duration) var(--button-surface-ease),
+            color var(--button-surface-duration) var(--button-surface-ease);
     }
 
     .btn__content {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-sm);
     }
 
     .btn--lg {
-        --btn-padding-y: 1rem;
-        --btn-padding-x: 2.25rem;
-        font-size: clamp(1rem, 1.2vw, 1.15rem);
+        --btn-padding-block: var(--button-padding-block-lg);
+        --btn-padding-inline: var(--button-padding-inline-lg);
+        --btn-font-size: var(--button-font-size-lg);
     }
 
     .btn--block {
@@ -140,150 +126,94 @@
     }
 
     .btn--elevate {
-        --btn-shadow: 0 16px 40px rgba(10, 18, 32, 0.18),
-            0 6px 16px rgba(10, 18, 32, 0.1);
+        --btn-shadow: var(--button-shadow-elevate);
+        --btn-hover-shadow: var(--button-shadow-elevate);
     }
 
     .btn:hover,
     .btn:focus-visible {
         background: var(--btn-hover-bg);
         border-color: var(--btn-hover-border);
-        transform: translateY(-4px) scale(1.02);
-        box-shadow:
-            0 20px 48px rgba(10, 18, 32, 0.2),
-            0 8px 20px rgba(10, 18, 32, 0.12);
+        color: var(--btn-color);
     }
 
-    .btn:active {
-        transform: translateY(-1px) scale(0.98);
-        transition-duration: 120ms;
+    .btn:hover {
+        transform: var(--button-transform-hover);
+        box-shadow: var(--btn-hover-shadow);
     }
 
     .btn:focus-visible {
         outline: none;
-        box-shadow: var(--shadow-button-hover), var(--btn-focus-ring);
+        transform: var(--button-transform-hover);
+        box-shadow: var(--btn-hover-shadow), var(--btn-focus-ring);
+    }
+
+    .btn:active {
+        transform: var(--button-transform-active);
+        transition-duration: var(--button-active-duration);
     }
 
     .btn:disabled,
     .btn[aria-disabled="true"] {
-        opacity: 0.6;
+        opacity: var(--button-disabled-opacity);
         pointer-events: none;
         box-shadow: none;
-        transform: none;
+        transform: var(--button-transform-rest);
     }
 
     .btn--secondary {
-        --btn-bg: color-mix(
-            in srgb,
-            var(--bg-elev-1) 94%,
-            rgba(var(--mist-rgb), 0.24) 6%
-        );
-        --btn-border: color-mix(
-            in srgb,
-            var(--border) 70%,
-            rgba(var(--voyage-blue-rgb), 0.18) 30%
-        );
-        --btn-color: color-mix(
-            in srgb,
-            var(--text) 88%,
-            rgba(var(--voyage-blue-rgb), 0.15) 12%
-        );
-        --btn-hover-bg: color-mix(
-            in srgb,
-            var(--bg-elev-1) 88%,
-            rgba(var(--voyage-blue-rgb), 0.14) 12%
-        );
+        --btn-bg: var(--button-secondary-bg);
+        --btn-border: var(--button-secondary-border);
+        --btn-color: var(--button-secondary-color);
+        --btn-hover-bg: var(--button-secondary-hover-bg);
+        --btn-hover-border: var(--button-secondary-hover-border);
     }
 
     .btn--subtle {
-        --btn-bg: color-mix(
-            in srgb,
-            var(--bg) 96%,
-            rgba(var(--voyage-blue-rgb), 0.08) 4%
-        );
-        --btn-border: color-mix(in srgb, var(--border) 55%, transparent 45%);
-        --btn-color: color-mix(
-            in srgb,
-            var(--text) 92%,
-            rgba(var(--voyage-blue-rgb), 0.08) 8%
-        );
-        --btn-shadow: 0 12px 20px rgba(10, 18, 39, 0.1);
+        --btn-bg: var(--button-subtle-bg);
+        --btn-border: var(--button-subtle-border);
+        --btn-color: var(--button-subtle-color);
+        --btn-hover-bg: var(--button-subtle-hover-bg);
+        --btn-hover-border: var(--button-subtle-border);
+        --btn-shadow: var(--button-shadow-subtle);
+        --btn-hover-shadow: var(--button-shadow);
     }
 
     .btn--gradient {
-        --btn-bg: linear-gradient(
-            135deg,
-            color-mix(
-                in srgb,
-                var(--aurora-purple) 72%,
-                rgba(255, 255, 255, 0.12) 28%
-            ),
-            color-mix(
-                in srgb,
-                var(--voyage-blue) 78%,
-                rgba(255, 255, 255, 0.14) 22%
-            )
-        );
-        --btn-border: color-mix(
-            in srgb,
-            rgba(var(--aurora-purple-rgb), 0.5) 70%,
-            rgba(255, 255, 255, 0.5) 30%
-        );
-        --btn-color: var(--cta-primary-text);
-        --btn-hover-bg: linear-gradient(
-            135deg,
-            color-mix(
-                in srgb,
-                var(--aurora-purple) 78%,
-                rgba(255, 255, 255, 0.08) 22%
-            ),
-            color-mix(
-                in srgb,
-                var(--voyage-blue) 82%,
-                rgba(255, 255, 255, 0.1) 18%
-            )
-        );
+        --btn-bg: var(--button-gradient-bg);
+        --btn-border: var(--button-gradient-border);
+        --btn-color: var(--button-gradient-color);
+        --btn-hover-bg: var(--button-gradient-hover-bg);
+        --btn-hover-border: var(--button-gradient-hover-border);
     }
 
     .btn--loading {
-        cursor: wait;
-    }
-
-    :global(html[data-theme="hc"] .btn),
-    :global(html[data-theme="hc"] .btn--gradient),
-    :global(html[data-theme="hc"] .btn--secondary),
-    :global(html[data-theme="hc"] .btn--subtle) {
-        --btn-bg: var(--bg);
-        --btn-color: var(--text);
-        --btn-border: var(--border-strong);
-        box-shadow: none;
+        cursor: var(--button-loading-cursor);
     }
 
     :global(html[data-theme="hc"] .btn:focus-visible) {
         box-shadow: none;
-        outline: 3px solid currentColor;
-        outline-offset: 3px;
+        outline: var(--button-border-width) solid currentColor;
+        outline-offset: calc(var(--border-width-hairline) * 3);
     }
 
     :global(html[data-theme="hc"] .btn:hover) {
-        background: var(--bg);
-        border-color: var(--text);
-        transform: none;
+        transform: var(--button-transform-rest);
     }
 
     :global(html[data-theme="hc"] .btn:active) {
-        transform: scale(0.95);
+        transform: var(--button-transform-active);
     }
 
     @media (max-width: 640px) {
         .btn {
-            min-height: 48px;
+            min-height: var(--button-touch-target);
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
 
         :global(html[data-theme="hc"] .btn) {
-            border-width: 2px;
+            border-width: var(--border-width-thin);
         }
     }
 

@@ -8,7 +8,20 @@
   import { _ } from 'svelte-i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
-  const t = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
+  type TranslationParams = Record<string, unknown>;
+
+  const t = (
+    key: string,
+    fallbackOrParams?: string | TranslationParams,
+    params?: TranslationParams
+  ) => {
+    const fallback = typeof fallbackOrParams === 'string' ? fallbackOrParams : '';
+    const finalParams =
+      typeof fallbackOrParams === 'string' || fallbackOrParams === undefined
+        ? params
+        : fallbackOrParams;
+    return translateOrFallback($_, key, fallback, finalParams);
+  };
 
   const hero = {
     titleKey: 'services.page.hero.title',
@@ -249,11 +262,9 @@
     <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      {#each hero.actions as action (action.href)}
-        <Button href={action.href} variant={action.variant} size="lg">{t(action.labelKey, action.labelFallback)}</Button>
-      {/each}
-    </div>
+    {#each hero.actions as action (action.href)}
+      <Button href={action.href} variant={action.variant} size="lg">{t(action.labelKey, action.labelFallback)}</Button>
+    {/each}
   </svelte:fragment>
 </Hero>
 
@@ -402,13 +413,6 @@
     color: var(--text-secondary);
     font-size: var(--text-lead);
     line-height: var(--leading-relaxed);
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--cluster-gap-md);
-    align-items: center;
   }
 
   .section-heading {

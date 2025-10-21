@@ -70,6 +70,7 @@ export async function GET({ fetch }) {
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 ${staticPages
   .map(
+    /** @param {{ url: string; changefreq: string; priority: string }} page */
     (page) => `  <url>
     <loc>${SITE_URL}${page.url}</loc>
     <changefreq>${page.changefreq}</changefreq>
@@ -79,6 +80,7 @@ ${staticPages
   .join('\n')}
 ${(posts.data || [])
   .map(
+    /** @param {{ attributes?: { slug?: string; updatedAt?: string } }} post */
     (post) => `  <url>
     <loc>${SITE_URL}/blog/${post.attributes?.slug}</loc>
     <lastmod>${post.attributes?.updatedAt || new Date().toISOString()}</lastmod>
@@ -89,6 +91,7 @@ ${(posts.data || [])
   .join('\n')}
 ${(modules.data || [])
   .map(
+    /** @param {{ attributes?: { slug?: string; updatedAt?: string } }} module */
     (module) => `  <url>
     <loc>${SITE_URL}/education-hub/${module.attributes?.slug}</loc>
     <lastmod>${module.attributes?.updatedAt || new Date().toISOString()}</lastmod>
@@ -99,6 +102,7 @@ ${(modules.data || [])
   .join('\n')}
 ${(platforms.data || [])
   .map(
+    /** @param {{ attributes?: { slug?: string; updatedAt?: string } }} article */
     (article) => `  <url>
     <loc>${SITE_URL}/platform/${article.attributes?.slug}</loc>
     <lastmod>${article.attributes?.updatedAt || new Date().toISOString()}</lastmod>

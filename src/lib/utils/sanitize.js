@@ -59,15 +59,15 @@ export function sanitizeHtml(html) {
 export function escapeHtml(text) {
   if (!text) return '';
   
-  const map = {
+  const map = /** @type {Record<string, string>} */ ({
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
     "'": '&#039;'
-  };
-  
-  return text.replace(/[&<>"']/g, (char) => map[char]);
+  });
+
+  return text.replace(/[&<>"']/g, (char) => map[char] ?? char);
 }
 
 /**

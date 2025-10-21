@@ -7,13 +7,13 @@ This guide provides comprehensive instructions for deploying the AlgoRhythmics w
 The application consists of two primary components:
 
 1. **Strapi CMS Backend** - Content management system (self-hosted or cloud)
-2. **SvelteKit Frontend** - Static site with SSR capabilities (Vercel)
+2. **SvelteKit Frontend** - Containerized Node adapter service (Google Cloud Run)
 
 ## Prerequisites
 
 - Node.js 18+ and npm 9+
 - PostgreSQL database (for Strapi production)
-- Vercel account (or alternative hosting)
+- Google Cloud project with Cloud Build, Artifact Registry, and Cloud Run enabled
 - Domain name configured
 
 ## Part 1: Strapi CMS Backend Deployment
@@ -184,83 +184,96 @@ AWS_BUCKET=<your-bucket>
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 ```
 
-## Part 2: SvelteKit Frontend Deployment (Vercel)
+## Part 2: SvelteKit Frontend Deployment (Google Cloud Run)
 
-### Initial Setup
+The frontend ships as a container image so it can run consistently in Cloud Run, Cloud Run Jobs, or any OCI-compatible platform.
 
-1. **Install Vercel CLI:**
-```bash
-npm i -g vercel
-```
-
-2. **Link project:**
-```bash
-vercel link
-```
-
-### Environment Variables
-
-Configure in Vercel dashboard or via CLI:
+### 1. Build locally (optional)
 
 ```bash
-# Public variables (exposed to client)
-vercel env add PUBLIC_STRAPI_URL production
-# Value: https://cms.yourdomain.com
-
-# Private variables (server-side only)
-vercel env add STRAPI_API_TOKEN production
-# Generate API token in Strapi: Settings > API Tokens
-
-vercel env add JWT_SECRET production
-# Use same JWT_SECRET as Strapi for token validation
+# Build production assets and start the Node adapter server locally
+npm run build
+node build
 ```
 
-### Vercel Configuration
+### 2. Container image
 
-The `vercel.json` file is already configured with:
+The provided `Dockerfile` produces a slim Node 20 image:
 
-- **Framework detection**: Automatic SvelteKit detection
-- **Build optimization**: Custom output directory
-- **Security headers**: CSP, XSS protection, etc.
-- **Caching strategy**: Immutable assets, no-cache for API
-- **GitHub integration**: Auto-deployments on push
-
-### Preview and Production Deployment
-
-**Preview deployment (automatic on PR):**
 ```bash
-git push origin feature-branch
-# Vercel automatically deploys preview
+# Build and tag the container
+docker build -t europe-west1-docker.pkg.dev/PROJECT_ID/web/frontend:local .
+
+# Run locally on port 3000
+docker run -p 3000:3000 \
+  -e PUBLIC_STRAPI_URL=https://cms.algorhythmics.dev \
+  europe-west1-docker.pkg.dev/PROJECT_ID/web/frontend:local
 ```
 
-**Production deployment:**
+Key runtime environment variables:
+
+| Variable | Description |
+| --- | --- |
+| `PUBLIC_STRAPI_URL` | Public URL for the Strapi CMS (exposed to the browser) |
+| `STRAPI_API_TOKEN` | Server-only API token for authenticated Strapi requests |
+| `CMS_WEBHOOK_SECRET` | Secret used to validate incoming webhook calls |
+
+### 3. Cloud Build pipeline
+
+The root `cloudbuild.yaml` automates container builds and Cloud Run deployments. Before running the pipeline, create the required Secret Manager entries and service account:
+
 ```bash
-# Option 1: Deploy via CLI
-vercel --prod
+# Example secrets (store plain values in Secret Manager)
+echo 'super-secret-token' | gcloud secrets create STRAPI_API_TOKEN --data-file=-
+echo 'cms-webhook-secret' | gcloud secrets create CMS_WEBHOOK_SECRET --data-file=-
 
-# Option 2: Deploy via Git
-git push origin main
-# Vercel automatically deploys to production
+# Service account used by Cloud Build to deploy to Cloud Run
+gcloud iam service-accounts create web-runner --display-name="Web Runner"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:web-runner@$PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/run.admin"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:web-runner@$PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
 ```
 
-### Custom Domain Configuration
+Trigger a build:
 
-1. **Add domain in Vercel dashboard:**
-   - Go to Project Settings > Domains
-   - Add your domain (e.g., algorhythmics.dev)
+```bash
+gcloud builds submit --config cloudbuild.yaml --substitutions _REGION=europe-west1
+```
 
-2. **Configure DNS records:**
+Cloud Build will:
+
+1. Build and push `europe-west1-docker.pkg.dev/$PROJECT_ID/web/frontend:$SHORT_SHA`
+2. Deploy the image to Cloud Run (`algorhythmics-web`) with required environment variables and secrets
+
+If you prefer to deploy manually after the image is built:
+
+```bash
+gcloud run deploy algorhythmics-web \
+  --image europe-west1-docker.pkg.dev/$PROJECT_ID/web/frontend:$SHORT_SHA \
+  --region europe-west1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --service-account web-runner@$PROJECT_ID.iam.gserviceaccount.com \
+  --set-env-vars PUBLIC_STRAPI_URL=https://cms.algorhythmics.dev,NODE_ENV=production
+```
+
+### 4. Domain & HTTPS
+
+1. Map your custom domain to the Cloud Run service:
+   ```bash
+   gcloud run domain-mappings create --service algorhythmics-web --domain www.algorhythmics.dev --region europe-west1
    ```
-   Type: A
-   Name: @
-   Value: 76.76.21.21
-   
-   Type: CNAME
-   Name: www
-   Value: cname.vercel-dns.com
-   ```
+2. Update DNS records with the A/AAAA and TXT values returned by the command above.
+3. Cloud Run automatically provisions TLS certificates after DNS is verified.
 
-3. **SSL/TLS:** Automatically provisioned by Vercel
+### 5. CI/CD recommendations
+
+- Configure a Cloud Build trigger on the `main` branch to run `cloudbuild.yaml` on every push.
+- Use additional substitutions (e.g., `_REGION`) if you need multiple environments.
+- Grant `run.invoker` role to the identities that need to access the deployed service privately.
 
 ## Part 3: Webhook Integration
 
@@ -274,24 +287,31 @@ Configure Strapi to trigger deployments when content is published:
 
 2. **Configure webhook:**
    ```
-   Name: Vercel Deploy
-   URL: https://api.vercel.com/v1/integrations/deploy/PROJECT_ID/HOOK_ID
-   Events: 
+   Name: Cloud Build Deploy
+   URL: https://cloudbuild.googleapis.com/v1/projects/$PROJECT_ID/triggers/$TRIGGER_ID:run
+   Events:
      - entry.publish
      - entry.unpublish
      - entry.update (published entries only)
+   Headers:
+     - X-CloudBuild-Token: <TRIGGER_SECRET>
    ```
 
-3. **Get Vercel deploy hook:**
-   - Vercel Dashboard > Project > Settings > Git
-   - Create Deploy Hook
-   - Copy URL
+3. **Create Cloud Build webhook trigger:**
+   ```bash
+   gcloud builds triggers create webhook \
+     --name strapi-content \
+     --region europe-west1 \
+     --build-config cloudbuild.yaml \
+     --substitutions _REGION=europe-west1
+   ```
+   The command prints the trigger URL and secret token. Paste both into the Strapi webhook configuration.
 
 ### Test Webhook
 
 1. Publish a blog post in Strapi
-2. Check Vercel deployments for triggered build
-3. Verify content appears on live site
+2. Check Cloud Build history for a triggered build
+3. Verify content appears on the live Cloud Run site
 
 ## Part 4: Content Deployment Strategy
 
@@ -345,9 +365,13 @@ export async function GET() {
 - Check PM2: `pm2 logs strapi`
 - Check Docker: `docker logs strapi`
 
-**Vercel logs:**
-- View in Vercel dashboard
-- Real-time: `vercel logs --follow`
+**Cloud Run logs:**
+- View in Cloud console (Operations > Logging)
+- Real-time: `gcloud logs tail --project $PROJECT_ID --service algorhythmics-web`
+
+**Cloud Build logs:**
+- View builds in Cloud Build history
+- CLI: `gcloud builds log --stream $BUILD_ID`
 
 ### Backup Strategy
 
@@ -393,11 +417,11 @@ CREATE INDEX idx_posts_status ON posts(status);
 CREATE INDEX idx_posts_publish_date ON posts(publish_date);
 ```
 
-### Vercel Optimizations
+### Cloud Run Optimizations
 
 1. **Image optimization:** Already handled by SvelteKit
-2. **Code splitting:** Automatic
-3. **Edge caching:** Configured in vercel.json
+2. **Code splitting:** Automatic via Vite and SvelteKit
+3. **Edge caching:** Front the service with Cloud CDN or Cloud Armor caching rules as needed
 
 ## Part 7: Security Checklist
 
@@ -406,7 +430,7 @@ CREATE INDEX idx_posts_publish_date ON posts(publish_date);
 - [ ] API tokens rotated regularly
 - [ ] Database credentials secured
 - [ ] CORS properly configured
-- [ ] CSP headers enabled (vercel.json)
+- [ ] CSP headers enabled (see `src/hooks.server.js`)
 - [ ] Rate limiting enabled on Strapi
 - [ ] Regular security updates applied
 - [ ] Backups tested and verified
@@ -426,20 +450,20 @@ curl https://cms.yourdomain.com/api/posts
 
 **Build failures:**
 ```bash
-# Clear build cache
-vercel --force
+# Rebuild locally to surface errors
+docker build -t frontend-test .
 
-# Check build logs
-vercel logs
+# Stream Cloud Build logs from the last run
+gcloud builds log --stream $(gcloud builds list --limit=1 --format='value(ID)')
 ```
 
 **Content not updating:**
 ```bash
 # Trigger manual deployment
-vercel --prod
+gcloud builds submit --config cloudbuild.yaml --substitutions _REGION=europe-west1
 
 # Check webhook is firing
-# Verify Strapi webhook URL is correct
+gcloud builds list --filter="triggerId=strapi-content" --region europe-west1
 ```
 
 ## Support
@@ -447,7 +471,8 @@ vercel --prod
 For issues or questions:
 - **Strapi Documentation:** https://docs.strapi.io
 - **SvelteKit Documentation:** https://kit.svelte.dev
-- **Vercel Documentation:** https://vercel.com/docs
+- **Cloud Run Documentation:** https://cloud.google.com/run/docs
+- **Cloud Build Documentation:** https://cloud.google.com/build/docs
 
 ## Deployment Checklist
 
@@ -455,7 +480,7 @@ Before going live:
 
 - [ ] Strapi backend deployed and accessible
 - [ ] Database configured and secured
-- [ ] Environment variables set in Vercel
+- [ ] Environment variables and secrets configured in Cloud Run / Cloud Build
 - [ ] Custom domain configured
 - [ ] SSL certificates active
 - [ ] Webhooks configured and tested

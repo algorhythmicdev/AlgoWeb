@@ -6,7 +6,7 @@
 import { getApiUrl } from '$lib/config/cms';
 
 /**
- * @typedef {import('$lib/types/cms').StrapiResponse} StrapiResponse
+ * @typedef {import('$lib/types/cms').StrapiResponse<unknown>} StrapiResponse
  * @typedef {import('$lib/types/cms').APIError} APIError
  */
 
@@ -20,13 +20,11 @@ export async function apiRequest(endpoint, options = {}) {
   const { jwt, ...fetchOptions } = options;
   const url = getApiUrl(endpoint);
 
-  const headers = {
-    'Content-Type': 'application/json',
-    ...fetchOptions.headers
-  };
+  const headers = new Headers(fetchOptions.headers ?? {});
+  headers.set('Content-Type', 'application/json');
 
   if (jwt) {
-    headers.Authorization = `Bearer ${jwt}`;
+    headers.set('Authorization', `Bearer ${jwt}`);
   }
 
   try {
@@ -96,7 +94,7 @@ export async function fetchCollection(collection, options = {}) {
   const queryString = params.toString();
   const endpoint = `/${collection}${queryString ? `?${queryString}` : ''}`;
 
-  return apiRequest(endpoint, { jwt });
+  return /** @type {Promise<StrapiResponse>} */ (apiRequest(endpoint, { jwt }));
 }
 
 /**

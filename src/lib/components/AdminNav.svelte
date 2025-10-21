@@ -13,6 +13,9 @@
     { href: '/', labelKey: 'admin.nav.items.back', icon: '🏠' }
   ];
 
+  /**
+   * @param {string} href
+   */
   function isActive(href) {
     if (href === '/admin') {
       return $page.url.pathname === '/admin';
