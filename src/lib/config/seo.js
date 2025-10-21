@@ -2,11 +2,13 @@
  * SEO Configuration
  */
 
+const SITE_URL = (import.meta.env?.PUBLIC_SITE_URL || 'https://algorhythmics.dev').replace(/\/$/, '');
+
 export const siteConfig = {
   name: 'AlgoRhythmics',
   title: 'AlgoRhythmics - Where Logic Dances with Creativity',
   description: 'AI innovation lab creating NodeVoyage travel platform and Ideonautix productivity suite. Pre-company phase, building Latvia\'s AI future from Daugavpils.',
-  url: 'https://algorhythmics.com',
+  url: SITE_URL,
   ogImage: '/og-image.svg',
   keywords: [
     'AI Latvia',
@@ -29,7 +31,7 @@ export const siteConfig = {
     }
   ],
   contact: {
-    email: 'help@algorhythmics.com',
+    email: 'help@algorhythmics.dev',
     location: 'Latvia · Remote-first'
   },
   social: {

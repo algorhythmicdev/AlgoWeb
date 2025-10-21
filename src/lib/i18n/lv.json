@@ -9,7 +9,7 @@
     "default_description": "MI studija, kas veido NodeVoyage ceļojumu kopilotu un Ideonautix dibinātāju kabīni.",
     "default_og_title": "Algorhythmics",
     "default_og_description": "MI ceļojumu komandām un dibinātājiem.",
-    "default_url": "https://algorhythmics.com",
+    "default_url": "https://algorhythmics.dev",
     "home": {
       "title": "Algorhythmics — Saprotami MI rīki, kas izskaidro paši sevi",
       "description": "Atklāj NodeVoyage, Ideonautix un konsultācijas vienā zīmju disciplīnā balstītā MI studijā.",
@@ -965,7 +965,7 @@
     "info_title": "Kontaktinformācija",
     "info_email": "E-pasts",
     "info_location": "Atrašanās vieta",
-    "info_email_value": "help@algorhythmics.com",
+    "info_email_value": "help@algorhythmics.dev",
     "info_location_value": "Latvija · Attālināta komanda",
     "social_title": "Sekojiet mums",
     "social_linkedin": "LinkedIn",
@@ -977,7 +977,7 @@
         "label": "Rakstīt studijai",
         "description": "Sasniedziet dibinātāju pastkasti par partnerībām, pilotiem un presi.",
         "cta": "Rakstīt e-pastu",
-        "action": "mailto:help@algorhythmics.com"
+        "action": "mailto:help@algorhythmics.dev"
       },
       {
         "label": "Rezervēt stratēģijas zvanu",
@@ -1000,14 +1000,14 @@
       "hero": {
         "title": "Veidosim mierīgu mākslīgo intelektu kopā",
         "subtitle": "AlgoRhythmics strādā attālināti no Latvijas un atbalsta partnerus visā pasaulē. Rakstiet par pilotprojektiem, konsultācijām vai kopienas sadarbībām.",
-        "cta_email": "Rakstīt uz help@algorhythmics.com",
+        "cta_email": "Rakstīt uz help@algorhythmics.dev",
         "cta_events": "Izpētiet mūsu risinājumus"
       },
       "cards": {
         "general": {
           "title": "Vispārīgi jautājumi",
           "copy": "Jautājumi par AlgoRhythmics vai mūsu plānu? Rakstiet, un atbildēsim vienas darba dienas laikā.",
-          "cta": "Rakstīt uz help@algorhythmics.com"
+          "cta": "Rakstīt uz help@algorhythmics.dev"
         },
         "support": {
           "title": "Produktu piloti un konsultācijas",
@@ -1016,13 +1016,13 @@
         },
         "education": {
           "title": "Izglītība un kopiena",
-          "copy": "Skolas, bibliotēkas un kopienu organizācijas var rakstīt mūsu koordinatoriēm uz education@algorhythmics.com.",
+          "copy": "Skolas, bibliotēkas un kopienu organizācijas var rakstīt mūsu koordinatoriēm uz education@algorhythmics.dev.",
           "cta": "Rakstīt izglītības komandai"
         },
         "visit": {
           "title": "Partnerības un mediji",
-          "copy": "Par sadarbībām, preses jautājumiem vai ielūgumiem rakstiet uz hello@algorhythmics.com, un mēs sarunāsim tikšanos.",
-          "cta": "Rakstīt uz hello@algorhythmics.com"
+          "copy": "Par sadarbībām, preses jautājumiem vai ielūgumiem rakstiet uz hello@algorhythmics.dev, un mēs sarunāsim tikšanos.",
+          "cta": "Rakstīt uz hello@algorhythmics.dev"
         },
         "heading": "Kā ar mums sazināties"
       },
@@ -1067,7 +1067,7 @@
       "newsletter": {
         "title": "Pierakstieties jaunumiem par palaišanu",
         "copy": "Saņemiet ceturkšņa kopsavilkumu par NodeVoyage, Ideonautix un mūsu konsultāciju stāstiem. Bez spama – tikai godīgs progress.",
-        "cta": "Rakstīt uz newsletter@algorhythmics.com",
+        "cta": "Rakstīt uz newsletter@algorhythmics.dev",
         "secondary": "Lasīt par mūsu risinājumiem",
         "note": "Vēlaties veidlapu? Norādiet “Newsletter” iepriekšējā ziņā, un mēs pievienosim jūs manuāli.",
         "eyebrow": "Studijas jaunumi"
@@ -1087,7 +1087,7 @@
         "title": "Palīdzības centrs piedāvā mierīga AI ceļvežus",
         "copy": "Izpētiet ievadpakas, problēmu risināšanas sarakstus un daudzvalodu resursus mūsu zināšanu bāzē.",
         "cta": "Apmeklēt Palīdzības centru",
-        "note": "Nepieciešama tūlītēja palīdzība? Rakstiet uz help@algorhythmics.com personīgai palīdzībai vai eskalācijai."
+        "note": "Nepieciešama tūlītēja palīdzība? Rakstiet uz help@algorhythmics.dev personīgai palīdzībai vai eskalācijai."
       },
       "social": {
         "linkedin": "Seko mums LinkedIn",
@@ -1213,7 +1213,7 @@
         "channels": [
           {
             "title": "Atbalsts e-pastā",
-            "copy": "help@algorhythmics.com atbild vienas darba dienas laikā ar skaidriem nākamajiem soļiem."
+            "copy": "help@algorhythmics.dev atbild vienas darba dienas laikā ar skaidriem nākamajiem soļiem."
           },
           {
             "title": "Prioritārais pilotu kanāls",
@@ -1362,7 +1362,7 @@
           "projekts",
           "partnerība"
         ],
-        "answer": "Droši rakstiet hello@algorhythmics.com vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību."
+        "answer": "Droši rakstiet hello@algorhythmics.dev vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību."
       },
       {
         "keywords": [
@@ -1551,7 +1551,7 @@
         "submit": "Iesniegt pieprasījumu",
         "success": "Paldies! Tikko atvērām e-pasta melnrakstu — nosūti, lai apstiprinātu vietu.",
         "error": "Norādi vārdu un derīgu e-pastu, lai varam sazināties.",
-        "privacy": "Sniedzamo informāciju izmantojam tikai pilota koordinēšanai. Jebkurā brīdī vari atteikties, rakstot uz help@algorhythmics.com.",
+        "privacy": "Sniedzamo informāciju izmantojam tikai pilota koordinēšanai. Jebkurā brīdī vari atteikties, rakstot uz help@algorhythmics.dev.",
         "subject": "Ideonautix pilota pieprasījums"
       }
     },
@@ -2167,7 +2167,15 @@
             "meta": "2026. gada janvāris • Kopiena",
             "href": "#"
           }
-        ]
+        ],
+        "empty": {
+          "description": "Check back soon for new educational resources.",
+          "title": "No modules published yet"
+        },
+        "error": {
+          "description": "Our CMS might be offline. Please try again soon.",
+          "title": "Unable to load modules"
+        }
       },
       "toolkits": {
         "items": [
@@ -2671,6 +2679,7 @@
       "by": "Autors: {name}",
       "cta": "Lasīt rakstu →",
       "category_fallback": "Platforma",
+      "categories_label": "Categories:",
       "author_fallback": "Anonīms",
       "tags_label": "Birkas:"
     },

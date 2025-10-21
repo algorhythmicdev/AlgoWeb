@@ -44,7 +44,7 @@
         "contact.page.newsletter.eyebrow": "Team updates",
         "contact.page.newsletter.title": "Subscribe for launch updates.",
         "contact.page.newsletter.copy": "Get a quarterly roundup on NodeVoyage, Ideonautix, and our consulting stories.",
-        "contact.page.newsletter.cta": "Email newsletter@algorhythmics.com.",
+        "contact.page.newsletter.cta": "Email newsletter@algorhythmics.dev.",
         "contact.page.newsletter.secondary": "Read about our solutions.",
         "contact.page.newsletter.note": "Prefer a form? Mention \"Newsletter\" in the message above and we will add you manually.",
     } as const;
@@ -63,10 +63,10 @@
             "AlgoRhythmics operates remotely from Latvia, serving partners worldwide. Reach out for product pilots, consulting, or community collaborations.",
         actions: [
             {
-                href: "mailto:help@algorhythmics.com",
+                href: "mailto:help@algorhythmics.dev",
                 variant: "gradient" as const,
                 labelKey: "contact.page.hero.cta_email",
-                labelFallback: "Email help@algorhythmics.com",
+                labelFallback: "Email help@algorhythmics.dev",
             },
             {
                 href: "/solutions",
@@ -96,9 +96,9 @@
             copyFallback:
                 "Questions about AlgoRhythmics or our roadmap? Drop us a line and we will reply within one business day.",
             action: {
-                href: "mailto:help@algorhythmics.com",
+                href: "mailto:help@algorhythmics.dev",
                 labelKey: "contact.page.cards.general.cta",
-                labelFallback: "Email help@algorhythmics.com",
+                labelFallback: "Email help@algorhythmics.dev",
             },
         },
         {
@@ -120,9 +120,9 @@
             titleFallback: "Education & community",
             copyKey: "contact.page.cards.education.copy",
             copyFallback:
-                "Schools, libraries, and community organisations can reach our outreach coordinators at education@algorhythmics.com.",
+                "Schools, libraries, and community organisations can reach our outreach coordinators at education@algorhythmics.dev.",
             action: {
-                href: "mailto:education@algorhythmics.com",
+                href: "mailto:education@algorhythmics.dev",
                 labelKey: "contact.page.cards.education.cta",
                 labelFallback: "Email the outreach team",
             },
@@ -133,11 +133,11 @@
             titleFallback: "Partnerships & media",
             copyKey: "contact.page.cards.visit.copy",
             copyFallback:
-                "For collaborations, press enquiries, or speaking invitations, contact hello@algorhythmics.com and we will coordinate a session.",
+                "For collaborations, press enquiries, or speaking invitations, contact hello@algorhythmics.dev and we will coordinate a session.",
             action: {
-                href: "mailto:hello@algorhythmics.com",
+                href: "mailto:hello@algorhythmics.dev",
                 labelKey: "contact.page.cards.visit.cta",
-                labelFallback: "Email hello@algorhythmics.com",
+                labelFallback: "Email hello@algorhythmics.dev",
             },
         },
     ] as const;
@@ -184,7 +184,7 @@
         },
         noteKey: "contact.page.help.note",
         noteFallback:
-            "Need something now? Email help@algorhythmics.com for personalised guidance or escalation.",
+            "Need something now? Email help@algorhythmics.dev for personalised guidance or escalation.",
     } as const;
 
     const supportShowcase = {
@@ -281,7 +281,7 @@
                 .replace("{reason}", formData.reason)
                 .replace("{message}", formData.message),
         );
-        window.location.href = `mailto:help@algorhythmics.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:help@algorhythmics.dev?subject=${subject}&body=${body}`;
         status = "success";
         formData = { name: "", email: "", reason: "general", message: "" };
     };
@@ -633,7 +633,7 @@
             </p>
             <div class="newsletter-actions">
                 <Button
-                    href="mailto:newsletter@algorhythmics.com"
+                    href="mailto:newsletter@algorhythmics.dev"
                     variant="gradient"
                     >{t("contact.page.newsletter.cta",
                     )}</Button

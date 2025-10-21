@@ -48,3 +48,7 @@ export {
 
 // i18n utilities
 export { translateOrFallback } from './i18n.js';
+
+// CMS helpers
+export { resolveMediaUrl, normaliseRelation } from './media.js';
+export { normalisePost } from './strapi';

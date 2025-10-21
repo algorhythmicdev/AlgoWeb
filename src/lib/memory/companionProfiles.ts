@@ -114,7 +114,7 @@ export const companionProfiles = {
           "partnership",
         ],
         answer:
-          "You can reach our consulting team through the contact page or by emailing hello@algorhythmics.com. We love scoping proofs of concept and long-term partnerships alike.",
+          "You can reach our consulting team through the contact page or by emailing hello@algorhythmics.dev. We love scoping proofs of concept and long-term partnerships alike.",
       },
       {
         keywords: ["improve", "improvement", "optimize", "growth", "strategy"],
@@ -193,7 +193,7 @@ export const companionProfiles = {
       {
         keywords: ["sadarbība", "kontakts", "konsultācija", "projekts"],
         answer:
-          "Droši rakstiet hello@algorhythmics.com vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību.",
+          "Droši rakstiet hello@algorhythmics.dev vai izmantojiet kontaktformu. Var organizēt darbnīcu Rīgā vai tiešsaistē, lai ātri uzsāktu sadarbību.",
       },
       {
         keywords: ["uzlabot", "pilnveidot", "stratēģija", "idejas"],
@@ -266,7 +266,7 @@ export const companionProfiles = {
       {
         keywords: ["контакт", "сотрудничество", "консалтинг", "связаться"],
         answer:
-          "Пишите на hello@algorhythmics.com или оставьте заявку через форму. Мы предлагаем пилотные проекты, воркшопы и долгосрочные партнёрства.",
+          "Пишите на hello@algorhythmics.dev или оставьте заявку через форму. Мы предлагаем пилотные проекты, воркшопы и долгосрочные партнёрства.",
       },
       {
         keywords: ["улучшить", "оптимизировать", "стратегия", "рост"],
@@ -339,7 +339,7 @@ export const companionProfiles = {
       {
         keywords: ["контакт", "співпраця", "консалтинг", "звʼязок"],
         answer:
-          "Напишіть на hello@algorhythmics.com або залиште заявку на сайті. Організуємо воркшоп чи discovery-спринт для старту спільної роботи.",
+          "Напишіть на hello@algorhythmics.dev або залиште заявку на сайті. Організуємо воркшоп чи discovery-спринт для старту спільної роботи.",
       },
       {
         keywords: ["покращити", "оптимізувати", "стратегія", "розвиток"],
@@ -412,7 +412,7 @@ export const companionProfiles = {
       {
         keywords: ["contact", "partenariat", "consulting", "collaborer"],
         answer:
-          "Contactez hello@algorhythmics.com ou utilisez notre formulaire. Nous proposons des ateliers discovery, des pilotes rapides et des programmes d'accompagnement.",
+          "Contactez hello@algorhythmics.dev ou utilisez notre formulaire. Nous proposons des ateliers discovery, des pilotes rapides et des programmes d'accompagnement.",
       },
       {
         keywords: ["améliorer", "optimiser", "stratégie", "croissance"],
@@ -487,7 +487,7 @@ export const companionProfiles = {
       {
         keywords: ["contacto", "colaborar", "consultoría", "alianza"],
         answer:
-          "Escríbenos a hello@algorhythmics.com o completa el formulario. Podemos organizar talleres remotos o sesiones presenciales según tu huso horario.",
+          "Escríbenos a hello@algorhythmics.dev o completa el formulario. Podemos organizar talleres remotos o sesiones presenciales según tu huso horario.",
       },
       {
         keywords: ["mejorar", "optimizar", "estrategia", "crecer"],

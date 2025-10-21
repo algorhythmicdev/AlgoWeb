@@ -6,7 +6,7 @@
     ogTitle: 'Services & Solutions | AlgoRhythmics',
     ogDescription:
       'Explore consulting, flagship platforms, and education programs designed to make AI approachable for every team.',
-    url: 'https://algorhythmics.com/services',
+    url: 'https://algorhythmics.dev/services',
     keywords: [
       'AlgoRhythmics services',
       'AI consulting',

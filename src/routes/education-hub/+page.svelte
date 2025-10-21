@@ -6,8 +6,69 @@
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from 'svelte-i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
+  import { resolveMediaUrl, normaliseRelation } from '$lib/utils';
+  import { stripHtml, truncate } from '$lib/utils/sanitize';
 
   type TranslationParams = Record<string, unknown>;
+
+  type ModuleEntry = {
+    id?: number | string;
+    attributes?: {
+      title?: string;
+      slug?: string;
+      description?: string;
+      content?: string;
+      publishDate?: string;
+      category?: {
+        data?: {
+          attributes?: {
+            name?: string;
+          } | null;
+        } | null;
+      } | null;
+      tags?: {
+        data?: Array<{
+          id?: number | string;
+          attributes?: {
+            name?: string | null;
+          } | null;
+        } | null>;
+      } | null;
+      mediaAttachments?: {
+        data?: Array<{
+          id?: number | string;
+          attributes?: {
+            url?: string | null;
+            alternativeText?: string | null;
+            name?: string | null;
+            mime?: string | null;
+          } | null;
+        } | null>;
+      } | null;
+    } | null;
+  };
+
+  type PageLoadData = {
+    modules?: ModuleEntry[];
+    meta?: Record<string, unknown>;
+    error?: string;
+  };
+
+  export let data: PageLoadData;
+
+  type NormalisedModule = {
+    id: string | number;
+    slug: string;
+    title: string;
+    summary: string;
+    category?: string;
+    publishDate?: string;
+    coverImage?: {
+      url: string;
+      alt: string;
+    };
+    tags: string[];
+  };
 
   const t = (
     key: string,
@@ -20,6 +81,95 @@
         ? params
         : fallbackOrParams;
     return translateOrFallback($_, key, fallback, finalParams);
+  };
+
+  const modules: ModuleEntry[] = Array.isArray(data.modules) ? data.modules : [];
+  const modulesError = data.error;
+
+  type MediaEntry = {
+    attributes?: {
+      url?: string | null;
+      alternativeText?: string | null;
+      name?: string | null;
+      mime?: string | null;
+    } | null;
+  } | null | undefined;
+
+  const getFirstImage = (entry: MediaEntry) => {
+    if (!entry?.attributes) return undefined;
+    if (!entry.attributes.mime?.startsWith?.('image/')) return undefined;
+    const resolved = resolveMediaUrl(entry.attributes.url ?? undefined);
+    if (!resolved) return undefined;
+    return {
+      url: resolved,
+      alt: entry.attributes.alternativeText || entry.attributes.name || ''
+    };
+  };
+
+  function toModuleCard(entry: ModuleEntry | undefined | null): NormalisedModule | null {
+    if (!entry) return null;
+    const attributes = entry.attributes;
+    if (!attributes) return null;
+
+    const slug = typeof attributes.slug === 'string' ? attributes.slug : undefined;
+    const title = typeof attributes.title === 'string' ? attributes.title : undefined;
+    if (!slug || !title) return null;
+
+    const description = typeof attributes.description === 'string' ? attributes.description.trim() : '';
+    const content = typeof attributes.content === 'string' ? attributes.content : '';
+
+    const mediaAttachments = Array.isArray(attributes.mediaAttachments?.data)
+      ? attributes.mediaAttachments?.data
+      : [];
+    const primaryImage = mediaAttachments.find((item) => item?.attributes?.mime?.startsWith?.('image/'));
+
+    const coverImage = getFirstImage(primaryImage);
+
+    const categoryName = attributes.category?.data?.attributes?.name;
+
+    const publishDate = typeof attributes.publishDate === 'string' ? attributes.publishDate : undefined;
+
+    const tagEntries = normaliseRelation(attributes.tags);
+    const tags = tagEntries
+      .map((tag) => tag.attributes?.name)
+      .filter((name): name is string => Boolean(name && name.trim()))
+      .map((name) => name.trim());
+
+    const summarySource = description || truncate(stripHtml(content), 220);
+
+    return {
+      id: entry.id ?? slug,
+      slug,
+      title,
+      summary: summarySource,
+      category: typeof categoryName === 'string' ? categoryName : undefined,
+      publishDate,
+      coverImage,
+      tags
+    } satisfies NormalisedModule;
+  }
+
+  const moduleCards: NormalisedModule[] = modules
+    .map((module) => toModuleCard(module))
+    .filter((module): module is NormalisedModule => module !== null);
+
+  const formatDate = (value?: string) => {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const formatMeta = (module: NormalisedModule) => {
+    const parts = [] as string[];
+    if (module.category) parts.push(module.category);
+    const formattedDate = formatDate(module.publishDate);
+    if (formattedDate) parts.push(formattedDate);
+    return parts.join(' • ');
   };
 
   const hero = {
@@ -96,38 +246,18 @@
       'Every pilot documents rituals, translations, and accessibility tweaks so other schools can remix them quickly.'
   } as const;
 
-  const latestArticles = [
-    {
-      titleKey: 'educationHub.page.insights.items.0.title',
-      titleFallback: 'Designing inclusive AI rituals for morning assemblies',
-      summaryKey: 'educationHub.page.insights.items.0.summary',
-      summaryFallback: 'A step-by-step guide for teachers hosting calm AI “news shows” with younger students.',
-      metaKey: 'educationHub.page.insights.items.0.meta',
-      metaFallback: 'March 2026 • Accessibility',
-      hrefKey: 'educationHub.page.insights.items.0.href',
-      hrefFallback: '#'
-    },
-    {
-      titleKey: 'educationHub.page.insights.items.1.title',
-      titleFallback: 'From idea to launch: documenting an Ideonautix founder sprint',
-      summaryKey: 'educationHub.page.insights.items.1.summary',
-      summaryFallback: 'See how a three-person team used calm check-ins, AI copilots, and tactile rituals to ship faster.',
-      metaKey: 'educationHub.page.insights.items.1.meta',
-      metaFallback: 'February 2026 • Product practice',
-      hrefKey: 'educationHub.page.insights.items.1.href',
-      hrefFallback: '#'
-    },
-    {
-      titleKey: 'educationHub.page.insights.items.2.title',
-      titleFallback: 'Parent ambassadors keeping AI conversations joyful at home',
-      summaryKey: 'educationHub.page.insights.items.2.summary',
-      summaryFallback: 'Lessons from monthly library circles that mix storytelling, crafts, and calm automation demos.',
-      metaKey: 'educationHub.page.insights.items.2.meta',
-      metaFallback: 'January 2026 • Community',
-      hrefKey: 'educationHub.page.insights.items.2.href',
-      hrefFallback: '#'
-    }
-  ] as const;
+  const featuredModule = moduleCards[0];
+  const supportingModules = moduleCards.slice(featuredModule ? 1 : 0);
+  const insightsModules = (featuredModule ? supportingModules : moduleCards).slice(0, 6);
+  const displayedModules = insightsModules.length > 0 ? insightsModules : featuredModule ? [featuredModule] : [];
+  const featuredMeta = featuredModule ? formatMeta(featuredModule) : '';
+  const featuredImageSrc = featuredModule?.coverImage?.url ?? heroMedia.image;
+  const featuredImageAlt = featuredModule?.coverImage?.alt || t(heroMedia.altKey, heroMedia.altFallback);
+  const featuredTitle = featuredModule?.title ?? t(featuredStory.titleKey, featuredStory.titleFallback);
+  const featuredSummary = featuredModule?.summary ?? t(featuredStory.summaryKey, featuredStory.summaryFallback);
+  const featuredMetaDisplay = featuredModule ? featuredMeta : t(featuredStory.metaKey, featuredStory.metaFallback);
+  const featuredPrimaryHref = featuredModule ? `/education-hub/${featuredModule.slug}` : featuredStory.primaryCta.href;
+  const featuredSecondaryHref = featuredModule ? `/education-hub/${featuredModule.slug}` : featuredStory.secondaryCta.href;
 
   const learningLibrary = [
     {
@@ -345,8 +475,8 @@
       <figure class="media-card featured__media">
         <img
           class="media-card__image"
-          src={featuredMedia.image}
-          alt={t(featuredMedia.altKey, featuredMedia.altFallback)}
+          src={featuredImageSrc}
+          alt={featuredImageAlt}
           loading="lazy"
           width="960"
           height="520"
@@ -355,13 +485,13 @@
       </figure>
       <header class="featured__header">
         <p class="featured__eyebrow">{t(featuredStory.eyebrowKey, featuredStory.eyebrowFallback)}</p>
-        <h2 id="featured-heading">{t(featuredStory.titleKey, featuredStory.titleFallback)}</h2>
-        <p class="featured__meta">{t(featuredStory.metaKey, featuredStory.metaFallback)}</p>
+        <h2 id="featured-heading">{featuredTitle}</h2>
+        <p class="featured__meta">{featuredMetaDisplay}</p>
       </header>
-      <p class="featured__summary">{t(featuredStory.summaryKey, featuredStory.summaryFallback)}</p>
+      <p class="featured__summary">{featuredSummary}</p>
       <div class="featured__actions">
-        <Button href={featuredStory.primaryCta.href} variant="gradient">{t(featuredStory.primaryCta.labelKey, featuredStory.primaryCta.labelFallback)}</Button>
-        <Button href={featuredStory.secondaryCta.href} variant="subtle">{t(featuredStory.secondaryCta.labelKey, featuredStory.secondaryCta.labelFallback)}</Button>
+        <Button href={featuredPrimaryHref} variant="gradient">{t(featuredStory.primaryCta.labelKey, featuredStory.primaryCta.labelFallback)}</Button>
+        <Button href={featuredSecondaryHref} variant="subtle">{t(featuredStory.secondaryCta.labelKey, featuredStory.secondaryCta.labelFallback)}</Button>
       </div>
     </GlassCard>
   </div>
@@ -376,16 +506,45 @@
       <h2 id="insights-heading">{t('educationHub.page.sections.insights.title')}</h2>
       <p class="section-heading__copy">{t('educationHub.page.sections.insights.copy')}</p>
     </div>
-    <div class="insights__grid" use:staggerReveal>
-      {#each latestArticles as article}
-        <GlassCard as="article" class="insights__card" interactive>
-          <p class="insights__meta">{t(article.metaKey, article.metaFallback)}</p>
-          <h3 class="insights__title">{t(article.titleKey, article.titleFallback)}</h3>
-          <p class="insights__summary">{t(article.summaryKey, article.summaryFallback)}</p>
-          <Button href={t(article.hrefKey, article.hrefFallback)} variant="subtle">{t('educationHub.page.insights.read')}</Button>
-        </GlassCard>
-      {/each}
-    </div>
+    {#if modulesError}
+      <GlassCard padding="lg" class="insights__status">
+        <h3>{t('educationHub.page.insights.error.title', 'Unable to load modules')}</h3>
+        <p>{modulesError}</p>
+        <p class="insights__status-copy">{t('educationHub.page.insights.error.description', 'Our CMS might be offline. Please try again soon.')}</p>
+      </GlassCard>
+    {:else if displayedModules.length === 0}
+      <GlassCard padding="lg" class="insights__status">
+        <h3>{t('educationHub.page.insights.empty.title', 'No modules published yet')}</h3>
+        <p class="insights__status-copy">{t('educationHub.page.insights.empty.description', 'Check back soon for new educational resources.')}</p>
+      </GlassCard>
+    {:else}
+      <div class="insights__grid" use:staggerReveal>
+        {#each displayedModules as module (module.id)}
+          <GlassCard as="article" class="insights__card" interactive>
+            {#if formatMeta(module)}
+              <p class="insights__meta">{formatMeta(module)}</p>
+            {/if}
+            <h3 class="insights__title">
+              <a href={`/education-hub/${module.slug}`}>{module.title}</a>
+            </h3>
+            {#if module.summary}
+              <p class="insights__summary">{module.summary}</p>
+            {/if}
+
+            {#if module.tags.length}
+              {@const topTags = module.tags.slice(0, 3)}
+              <ul class="insights__tags">
+                {#each topTags as tag, index}
+                  <li>{tag}{index < topTags.length - 1 ? ' ·' : ''}</li>
+                {/each}
+              </ul>
+            {/if}
+
+            <Button href={`/education-hub/${module.slug}`} variant="subtle">{t('educationHub.page.insights.read')}</Button>
+          </GlassCard>
+        {/each}
+      </div>
+    {/if}
   </div>
 </section>
 
@@ -625,6 +784,37 @@
     color: color-mix(in srgb, var(--text) 84%, rgba(var(--ink-rgb), 0.72) 16%);
     font-size: var(--text-body);
     line-height: var(--leading-relaxed);
+  }
+
+  :global(.insights__status) {
+    max-width: var(--container-md);
+    margin-inline: auto;
+    text-align: center;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  :global(.insights__status h3) {
+    margin: 0;
+  }
+
+  :global(.insights__status p) {
+    margin: 0;
+  }
+
+  .insights__status-copy {
+    color: color-mix(in srgb, var(--text) 70%, rgba(var(--ink-rgb), 0.6) 30%);
+  }
+
+  .insights__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: var(--text-meta);
+    color: color-mix(in srgb, var(--voyage-blue) 70%, transparent 30%);
   }
 
   :global(.toolkits__card) {

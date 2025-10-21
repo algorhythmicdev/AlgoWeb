@@ -279,8 +279,8 @@
                 titleFallback: "Email support",
                 copyKey: "help.page.escalation.channels.0.copy",
                 copyFallback:
-                    "help@algorhythmics.com replies within one business day with transparent next steps.",
-                href: "mailto:help@algorhythmics.com",
+                    "help@algorhythmics.dev replies within one business day with transparent next steps.",
+                href: "mailto:help@algorhythmics.dev",
             },
             {
                 icon: "target",

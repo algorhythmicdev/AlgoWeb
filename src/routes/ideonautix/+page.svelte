@@ -222,7 +222,7 @@
       errorFallback: 'Share your name and a valid email so we can reach out.',
       privacyKey: 'ideonautix.pilot.form.privacy',
       privacyFallback:
-        'We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.com.',
+        'We only use the information you provide to coordinate pilot access. You can opt out at any time by emailing help@algorhythmics.dev.',
       subjectKey: 'ideonautix.pilot.form.subject',
       subjectFallback: 'Ideonautix pilot request'
     }
@@ -266,7 +266,7 @@
     const body = encodeURIComponent(
       `Name: ${trimmedName}\nEmail: ${trimmedEmail}\nRole: ${pilotRole}\nMessage: ${pilotMessage.trim()}`
     );
-    window.location.href = `mailto:help@algorhythmics.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:help@algorhythmics.dev?subject=${subject}&body=${body}`;
     pilotStatus = 'success';
     pilotName = '';
     pilotEmail = '';

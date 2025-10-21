@@ -6,7 +6,7 @@
     ogTitle: 'Contact AlgoRhythmics | Let’s Talk',
     ogDescription:
       'Email the studio, reach support, collaborate on educational programmes, or plan a visit to our Riga headquarters.',
-    url: 'https://algorhythmics.com/contact',
+    url: 'https://algorhythmics.dev/contact',
     keywords: ['contact AlgoRhythmics', 'AI consulting contact', 'AI education partnership']
   }
 });

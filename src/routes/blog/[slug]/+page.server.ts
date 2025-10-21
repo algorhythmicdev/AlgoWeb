@@ -5,9 +5,11 @@
 
 import { error } from '@sveltejs/kit';
 import { get } from '$lib/api/strapi';
+import { normalisePost } from '$lib/utils/strapi';
+import type { PageServerLoad } from './$types';
+import type { HttpError } from '@sveltejs/kit';
 
-/** @type {import('./$types').PageServerLoad} */
-export async function load({ params, fetch }) {
+export const load: PageServerLoad = async ({ params, fetch }) => {
   try {
     const response = await get(
       'posts',
@@ -27,9 +29,15 @@ export async function load({ params, fetch }) {
       true
     );
 
-    const post = response.data?.[0];
+    const rawPost = response.data?.[0];
 
-    if (!post || post.attributes?.status !== 'published') {
+    if (!rawPost || rawPost?.attributes?.status !== 'published') {
+      throw error(404, 'Blog post not found');
+    }
+
+    const post = normalisePost(rawPost);
+
+    if (!post) {
       throw error(404, 'Blog post not found');
     }
 
@@ -37,15 +45,10 @@ export async function load({ params, fetch }) {
       post
     };
   } catch (err) {
-    if (
-      err &&
-      typeof err === 'object' &&
-      'status' in err &&
-      /** @type {{ status?: number }} */ (err).status === 404
-    ) {
+    if ((err as HttpError)?.status === 404) {
       throw err;
     }
     console.error('Error fetching post:', err);
     throw error(500, 'Unable to load blog post. CMS may not be configured.');
   }
-}
+};

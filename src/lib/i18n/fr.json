@@ -9,7 +9,7 @@
 		"default_description": "We make AI clear and useful. We consult on AI setup, build helpful apps, and teach teams how to use them.",
 		"default_og_title": "AlgoRhythmics",
 		"default_og_description": "AI for travel crews and founders.",
-		"default_url": "https://algorhythmics.com",
+		"default_url": "https://algorhythmics.dev",
 		"home": {
 			"title": "AlgoRhythmics — Clear AI tools that explain themselves",
 			"description": "Straightforward tools and training. NodeVoyage, Ideonautix, and hands‑on help for your work.",
@@ -660,7 +660,7 @@
 				"label": "Email the team",
 				"description": "Reach the founder inbox for partnerships, pilots. press.",
 				"cta": "Write an email",
-				"action": "mailto:help@algorhythmics.com"
+				"action": "mailto:help@algorhythmics.dev"
 			},
 			{
 				"label": "Book a strategy call",
@@ -1621,29 +1621,37 @@
 					"copy": "Monthly highlights with new toolkits, impact stories. early invites to pilots. Short, friendly. focused on actionable inspiration."
 				}
 			},
-			"insights": {
-				"read": "Read article",
-				"items": [
-					{
-						"title": "Designing inclusive AI for morning assemblies.",
-						"summary": "A step-by-step guide for teachers hosting AI “news shows” with younger students.",
-						"meta": "March 2026 • Accessibility.",
-						"href": "#"
-					},
-					{
-						"title": "From idea to launch: documenting an Ideonautix founder sprint.",
-						"summary": "See how a three-person team used check-ins, AI helpers. tactile to ship faster.",
-						"meta": "February 2026 • Product practice.",
-						"href": "#"
-					},
-					{
-						"title": "Parent ambassadors keeping AI conversations joyful at home.",
-						"summary": "Lessons from monthly library circles that mix storytelling, crafts. automation demos.",
-						"meta": "January 2026 • Community.",
-						"href": "#"
-					}
-				]
-			},
+      "insights": {
+        "read": "Read article",
+        "items": [
+          {
+            "title": "Designing inclusive AI for morning assemblies.",
+            "summary": "A step-by-step guide for teachers hosting AI “news shows” with younger students.",
+            "meta": "March 2026 • Accessibility.",
+            "href": "#"
+          },
+          {
+            "title": "From idea to launch: documenting an Ideonautix founder sprint.",
+            "summary": "See how a three-person team used check-ins, AI helpers. tactile to ship faster.",
+            "meta": "February 2026 • Product practice.",
+            "href": "#"
+          },
+          {
+            "title": "Parent ambassadors keeping AI conversations joyful at home.",
+            "summary": "Lessons from monthly library circles that mix storytelling, crafts. automation demos.",
+            "meta": "January 2026 • Community.",
+            "href": "#"
+          }
+        ],
+        "empty": {
+          "description": "Check back soon for new educational resources.",
+          "title": "No modules published yet"
+        },
+        "error": {
+          "description": "Our CMS might be offline. Please try again soon.",
+          "title": "Unable to load modules"
+        }
+      },
 			"toolkits": {
 				"items": [
 					{
@@ -2097,13 +2105,14 @@
 			"title": "No Articles Yet",
 			"description": "Check back soon for tool articles and case studies."
 		},
-		"card": {
-			"by": "By {name}",
-			"cta": "Read Article →",
-			"category_fallback": "tool",
-			"author_fallback": "Anonymous",
-			"tags_label": "Tags:"
-		},
+    "card": {
+      "by": "By {name}",
+      "cta": "Read Article →",
+      "category_fallback": "tool",
+      "categories_label": "Categories:",
+      "author_fallback": "Anonymous",
+      "tags_label": "Tags:"
+    },
 		"buttons": {
 			"back_to_list": "← Back to tool Articles."
 		},

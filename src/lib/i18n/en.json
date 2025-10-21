@@ -544,7 +544,7 @@
         "form_topic_placeholder": "What would you like to discuss?",
         "hero_ctas": [
             {
-                "action": "mailto:help@algorhythmics.com",
+                "action": "mailto:help@algorhythmics.dev",
                 "cta": "Write an email",
                 "description": "Reach the founder inbox for partnerships, pilots. press.",
                 "label": "Email the team"
@@ -951,6 +951,14 @@
                         "title": "Parent ambassadors keeping AI conversations joyful at home."
                     }
                 ],
+                "empty": {
+                    "description": "Check back soon for new educational resources.",
+                    "title": "No modules published yet"
+                },
+                "error": {
+                    "description": "Our CMS might be offline. Please try again soon.",
+                    "title": "Unable to load modules"
+                },
                 "read": "Read article"
             },
             "newsletter": {
@@ -1896,6 +1904,7 @@
             "author_fallback": "Anonymous",
             "by": "By {name}",
             "category_fallback": "tool",
+            "categories_label": "Categories:",
             "cta": "Read Article →",
             "tags_label": "Tags:"
         },
@@ -2007,7 +2016,7 @@
         "default_og_description": "AI for travel crews and founders.",
         "default_og_title": "Algorhythmics",
         "default_title": "Algorhythmics — Clear AI for real people.",
-        "default_url": "https://algorhythmics.com",
+        "default_url": "https://algorhythmics.dev",
         "home": {
             "description": "Straightforward tools and training. NodeVoyage, Ideonautix, and hands‑on help for your work.",
             "og_description": "AI products and services that stay approachable, transparent. supportive.",

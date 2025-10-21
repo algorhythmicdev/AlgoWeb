@@ -10,6 +10,7 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "types": ["node"]
+    "types": ["node", "dompurify", "isomorphic-dompurify"],
+    "typeRoots": ["./types", "./node_modules/@types"]
   }
 }

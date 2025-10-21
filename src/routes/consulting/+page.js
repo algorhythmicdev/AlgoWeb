@@ -6,7 +6,7 @@ export const load = () => ({
     ogTitle: 'AI Consulting Services & Pilot Program | AlgoRhythmics',
     ogDescription:
       'Join the AlgoRhythmics consulting pilot for strategy workshops, implementation support, and advisory care built on accessible, transparent AI.',
-    url: 'https://algorhythmics.com/consulting',
+    url: 'https://algorhythmics.dev/consulting',
     keywords: [
       'AlgoRhythmics consulting',
       'AI consulting Latvia',

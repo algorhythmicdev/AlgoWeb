@@ -4,9 +4,10 @@
  */
 
 import { get } from '$lib/api/strapi';
+import { normalisePost, type NormalisedPost } from '$lib/utils/strapi';
+import type { PageServerLoad } from './$types';
 
-/** @type {import('./$types').PageServerLoad} */
-export async function load({ fetch }) {
+export const load: PageServerLoad = async ({ fetch }) => {
   try {
     const response = await get(
       'posts',
@@ -27,8 +28,13 @@ export async function load({ fetch }) {
       true
     );
 
+    const rawPosts: unknown[] = Array.isArray(response.data) ? response.data : [];
+    const posts = rawPosts
+      .map((entry) => normalisePost(entry))
+      .filter((post): post is NormalisedPost => post !== null);
+
     return {
-      posts: response.data || [],
+      posts,
       meta: response.meta || {}
     };
   } catch (error) {
@@ -40,4 +46,4 @@ export async function load({ fetch }) {
       error: 'Unable to load blog posts. CMS may not be configured.'
     };
   }
-}
+};

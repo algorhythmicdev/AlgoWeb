@@ -6,7 +6,7 @@ export const load = () => ({
     ogTitle: 'Education Hub & Calm AI Blog | AlgoRhythmics',
     ogDescription:
       'Dive into inclusive AI insights, learning tracks, and community events curated by AlgoRhythmics for educators, founders, and families.',
-    url: 'https://algorhythmics.com/education-hub',
+    url: 'https://algorhythmics.dev/education-hub',
     keywords: [
       'AlgoRhythmics Education Hub',
       'calm AI blog',
