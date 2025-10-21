@@ -38,7 +38,12 @@ export async function load({ params, fetch }) {
     };
   } catch (err) {
     console.error('Error fetching platform article:', err);
-    if (err.status === 404) {
+    if (
+      err &&
+      typeof err === 'object' &&
+      'status' in err &&
+      /** @type {{ status?: number }} */ (err).status === 404
+    ) {
       throw err;
     }
     throw error(500, 'Unable to load platform article. CMS may not be configured.');

@@ -31,6 +31,21 @@
     }
   });
 
+  function handleThemeToggleShortcut(event: KeyboardEvent) {
+    const target = event.target;
+    const isEditable =
+      target instanceof Element &&
+      target.closest('input, textarea, [contenteditable]');
+
+    if (
+      event.key === 't' &&
+      !document.body.classList.contains('modal-open') &&
+      !isEditable
+    ) {
+      theme.toggle();
+    }
+  }
+
   $: routeKey = $page.url.pathname;
 
   const accentClassForPath = (pathname: string): string => {
@@ -124,11 +139,7 @@
   <meta name="twitter:image" content="/og-image.svg" />
 </svelte:head>
 
-<svelte:window on:keydown={(e)=>{ 
-  if (e.key === 't' && !document.body.classList.contains('modal-open') && !e.target.closest('input, textarea, [contenteditable]')) {
-    theme.toggle();
-  }
-}} />
+<svelte:window on:keydown={handleThemeToggleShortcut} />
 
 <ParticleNetwork />
 
@@ -163,9 +174,10 @@
 
   .skip-link {
     position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    padding: 0.5rem 1rem;
+    top: var(--skip-link-inset);
+    left: var(--skip-link-inset);
+    padding-block: var(--skip-link-padding-block);
+    padding-inline: var(--skip-link-padding-inline);
     border-radius: var(--radius-md);
     background: var(--bg-elev-1);
     color: var(--text);
@@ -183,7 +195,7 @@
 
   main {
     flex: 1;
-    padding-top: 80px;
+    padding-block-start: var(--layout-main-padding-top);
   }
   
   @keyframes spin {

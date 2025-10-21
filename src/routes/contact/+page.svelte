@@ -298,13 +298,11 @@
     subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
 >
     <svelte:fragment slot="actions">
-        <div class="hero-actions">
-            {#each hero.actions as action (action.href)}
-                <Button href={action.href} variant={action.variant} size="lg"
-                    >{t(action.labelKey, action.labelFallback)}</Button
-                >
-            {/each}
-        </div>
+        {#each hero.actions as action (action.href)}
+            <Button href={action.href} variant={action.variant} size="lg"
+                >{t(action.labelKey, action.labelFallback)}</Button
+            >
+        {/each}
     </svelte:fragment>
     <svelte:fragment slot="aside">
         <GlassCard class="hero-media" padding="lg" particles>
@@ -338,7 +336,7 @@
             </p>
         </header>
 
-        <div class="contact-options__grid" use:staggerReveal>
+        <div class="contact-options__grid auto-grid" use:staggerReveal>
             {#each contactCards as card (card.titleKey)}
                 <GlassCard class="contact-card" padding="lg" halo>
                     <div class="card-icon">
@@ -504,7 +502,7 @@
             </p>
         </header>
 
-        <div class="support-grid" use:staggerReveal>
+        <div class="support-grid auto-grid" use:staggerReveal>
             <GlassCard class="support-card" padding="lg" halo>
                 <span class="section-eyebrow"
                     >{t(
@@ -654,18 +652,10 @@
 </section>
 
 <style>
-    .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-md);
-        align-items: center;
-    }
-
     .support-grid {
-        display: grid;
-        gap: var(--grid-gap-lg);
-        grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
-        justify-content: center;
+        --auto-grid-gap: var(--grid-gap-lg);
+        --auto-grid-min: min(100%, var(--card-max-width));
+        --auto-grid-max: min(100%, var(--card-max-width-wide));
     }
 
     :global(.support-card) {
@@ -727,14 +717,21 @@
     }
 
     .contact-support__container {
+        display: grid;
         gap: var(--grid-gap-xl);
+        justify-items: stretch;
+    }
+
+    .contact-support__container > .section-heading {
+        max-inline-size: var(--measure-lg);
+        justify-self: center;
+        text-align: center;
     }
 
     .contact-options__grid {
-        display: grid;
-        gap: var(--grid-gap-lg);
-        grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
-        justify-content: center;
+        --auto-grid-gap: var(--grid-gap-lg);
+        --auto-grid-min: min(100%, var(--card-min-width));
+        --auto-grid-max: min(100%, var(--card-max-width));
     }
 
     :global(.contact-card) {
@@ -768,8 +765,10 @@
     :global(.form-card) {
         display: grid;
         gap: var(--cluster-gap-md);
-        max-inline-size: var(--content-width-standard);
         margin: 0 auto;
+        --form-max-width: min(100%, var(--content-width-standard));
+        --form-field-min-width: min(100%, calc(var(--card-min-width) + var(--space-sm)));
+        --form-field-max-width: min(100%, var(--card-max-width));
     }
 
     .form {
@@ -845,23 +844,4 @@
         color: var(--text-tertiary);
     }
 
-    @media (min-width: 960px) {
-        .contact-support__container {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            align-items: start;
-        }
-
-        .contact-support__container > .section-heading {
-            grid-column: 1 / -1;
-            max-width: var(--measure-lg);
-        }
-
-        .contact-options__grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .form-actions {
-            align-items: center;
-        }
-    }
 </style>

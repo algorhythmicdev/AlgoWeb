@@ -8,8 +8,20 @@
   import { _ } from 'svelte-i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
-  const t = (key: string, fallback: string, params?: Record<string, unknown>) =>
-    translateOrFallback($_, key, fallback, params);
+  type TranslationParams = Record<string, unknown>;
+
+  const t = (
+    key: string,
+    fallbackOrParams?: string | TranslationParams,
+    params?: TranslationParams
+  ) => {
+    const fallback = typeof fallbackOrParams === 'string' ? fallbackOrParams : '';
+    const finalParams =
+      typeof fallbackOrParams === 'string' || fallbackOrParams === undefined
+        ? params
+        : fallbackOrParams;
+    return translateOrFallback($_, key, fallback, finalParams);
+  };
 
   const hero = {
     titleKey: 'nodevoyage.hero.title',
@@ -271,17 +283,15 @@
   </svelte:fragment>
 
   <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      <Button href={hero.primaryCta.href} variant="gradient" size="lg">
-        {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
-      </Button>
-      <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
-        {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
-      </Button>
-      <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
-        {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
-      </Button>
-    </div>
+    <Button href={hero.primaryCta.href} variant="gradient" size="lg">
+      {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
+    </Button>
+    <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
+      {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+    </Button>
+    <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
+      {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+    </Button>
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
@@ -371,7 +381,7 @@
         {t(differentiators.ctaKey, differentiators.ctaFallback)}
       </Button>
     </div>
-    <div class="differentiators-grid" use:staggerReveal>
+    <div class="differentiators-grid auto-grid" use:staggerReveal>
       {#each differentiators.cards as item (item.titleKey)}
         <GlassCard padding="md" class="differentiator-card" halo>
           <div class="feature-icon" aria-hidden="true">
@@ -535,13 +545,6 @@
     line-height: var(--leading-relaxed);
   }
 
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-lg);
-    justify-content: center;
-  }
-
   .hero-highlights {
     display: grid;
     gap: var(--grid-gap-md);
@@ -635,6 +638,10 @@
     display: grid;
     gap: var(--grid-gap-xl);
     align-items: start;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, calc(var(--card-max-width) + var(--space-lg))), 1fr)
+    );
   }
 
   .differentiators-copy {
@@ -643,8 +650,9 @@
   }
 
   .differentiators-grid {
-    display: grid;
-    gap: var(--grid-gap-lg);
+    --auto-grid-gap: var(--grid-gap-lg);
+    --auto-grid-min: min(100%, var(--card-min-width));
+    --auto-grid-max: min(100%, var(--card-max-width));
   }
 
   :global(.differentiator-card) {
@@ -667,13 +675,13 @@
   }
 
   .explorers-form {
-    display: grid;
-    gap: var(--grid-gap-md);
-    max-width: min(100%, var(--card-max-width-wide));
     --form-gap: var(--grid-gap-md);
     --form-field-radius: var(--radius-md);
     --form-field-padding-y: var(--space-md);
     --form-field-padding-x: var(--space-lg);
+    --form-max-width: min(100%, var(--card-max-width-wide));
+    --form-field-min-width: min(100%, calc(var(--card-min-width) + var(--space-sm)));
+    --form-field-max-width: min(100%, var(--card-max-width-wide));
     --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
     --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --form-field-border: color-mix(in srgb, var(--surface-field-border) 85%, transparent 15%);
@@ -695,11 +703,6 @@
       var(--nodevoyage-highlight) 64%,
       var(--text) 36%
     );
-  }
-
-  .form-field {
-    display: grid;
-    gap: var(--space-sm);
   }
 
   .form-field label {
@@ -735,14 +738,6 @@
   @media (min-width: 960px) {
     .roadmap {
       grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-    }
-
-    .differentiators {
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-    }
-
-    .differentiators-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 

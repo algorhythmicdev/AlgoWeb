@@ -212,10 +212,10 @@
       align-items: flex-start;
     }
   }
-</style>
   .hero-description {
     font-size: var(--text-body);
     line-height: var(--leading-relaxed);
     color: var(--text-secondary);
   }
+</style>
 

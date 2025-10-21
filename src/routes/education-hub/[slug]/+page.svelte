@@ -50,7 +50,11 @@
           {#if attributes.category?.data}
             <span>
               {$_('education_hub.slug.category', {
-                name: attributes.category.data.attributes?.name || $_('education_hub.slug.category_fallback')
+                values: {
+                  name:
+                    attributes.category.data.attributes?.name ||
+                    $_('education_hub.slug.category_fallback')
+                }
               })}
             </span>
           {/if}

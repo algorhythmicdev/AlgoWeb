@@ -7,7 +7,20 @@
   import { _ } from 'svelte-i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
-  const t = (key: string, fallback: string) => translateOrFallback($_, key, fallback);
+  type TranslationParams = Record<string, unknown>;
+
+  const t = (
+    key: string,
+    fallbackOrParams?: string | TranslationParams,
+    params?: TranslationParams
+  ) => {
+    const fallback = typeof fallbackOrParams === 'string' ? fallbackOrParams : '';
+    const finalParams =
+      typeof fallbackOrParams === 'string' || fallbackOrParams === undefined
+        ? params
+        : fallbackOrParams;
+    return translateOrFallback($_, key, fallback, finalParams);
+  };
 
   const hero = {
     titleKey: 'educationHub.page.hero.title',
@@ -299,10 +312,8 @@
     <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      <Button href={hero.primaryCta.href} variant="gradient" size="lg">{t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}</Button>
-      <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}</Button>
-    </div>
+    <Button href={hero.primaryCta.href} variant="gradient" size="lg">{t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}</Button>
+    <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}</Button>
   </svelte:fragment>
   <svelte:fragment slot="highlights">
     <ul class="hero-highlights">
@@ -466,13 +477,6 @@
     font-size: var(--text-lead);
     line-height: var(--leading-relaxed);
     color: color-mix(in srgb, var(--text) 88%, rgba(var(--ink-rgb), 0.8) 12%);
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--cluster-gap-sm);
-    justify-content: center;
   }
 
   .hero-highlights {
@@ -719,19 +723,7 @@
     }
   }
 
-  @media (max-width: 719px) {
-    .hero-actions {
-      justify-content: stretch;
-    }
-
-    .hero-actions :global(a),
-    .hero-actions :global(button) {
-      flex: 1 1 100%;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .hero-actions,
     :global(.featured__card),
     .insights__grid,
     .toolkits__grid,

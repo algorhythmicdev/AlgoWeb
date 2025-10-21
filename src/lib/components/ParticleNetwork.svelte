@@ -295,8 +295,11 @@
 
   function configureCanvas(preserveParticles = false) {
     if (!canvas) return;
-    const width = canvas.clientWidth || window.innerWidth;
-    const height = canvas.clientHeight || window.innerHeight;
+    const viewport = typeof document !== 'undefined' ? document.documentElement : null;
+    const viewportWidth = viewport?.clientWidth ?? 0;
+    const viewportHeight = viewport?.clientHeight ?? 0;
+    const width = viewportWidth || canvas.clientWidth || window.innerWidth;
+    const height = viewportHeight || canvas.clientHeight || window.innerHeight;
     const previousWidth = lastCanvasWidth || width;
     const previousHeight = lastCanvasHeight || height;
     updateInteractionSettings(width, height);
@@ -704,8 +707,12 @@
   .particle-network {
     position: fixed;
     inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
     width: 100%;
     height: 100%;
+    max-inline-size: 100%;
+    max-block-size: 100%;
     max-width: 100%;
     max-height: 100%;
     display: block;

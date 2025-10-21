@@ -288,6 +288,67 @@
     --control-border: color-mix(in srgb, rgba(var(--ink-rgb), 0.18) 70%, rgba(var(--voyage-blue-rgb), 0.22) 30%);
     --control-border-strong: color-mix(in srgb, rgba(var(--ink-rgb), 0.28) 65%, rgba(var(--aurora-purple-rgb), 0.26) 35%);
     --control-ring: rgba(var(--voyage-blue-rgb), 0.38);
+    --control-cluster-gap: clamp(0.35rem, 1vw, 0.65rem);
+    --control-cluster-padding-block: clamp(0.3rem, 1vw, 0.55rem);
+    --control-cluster-padding-inline: clamp(0.3rem, 1vw, 0.55rem);
+    --control-cluster-border-width: var(--border-width-medium);
+    --control-cluster-border: var(--surface-pill-border);
+    --control-cluster-bg: color-mix(in srgb, var(--surface-pill-bg) 90%, transparent 10%);
+    --control-cluster-shadow: var(--surface-pill-shadow);
+    --control-cluster-backdrop: blur(calc(var(--glass-blur) * 0.65)) saturate(1.04);
+    --control-tile-gap: var(--space-xs);
+    --control-tile-min-width: clamp(3.75rem, 9vw, 4.6rem);
+    --control-tile-min-height: clamp(2.65rem, 7vw, 3.4rem);
+    --control-tile-padding-block: clamp(0.35rem, 1vw, 0.55rem);
+    --control-tile-padding-inline: clamp(0.6rem, 1.2vw, 0.85rem);
+    --control-tile-radius: clamp(0.8rem, 2vw, 1rem);
+    --control-tile-border-width: var(--border-width-hairline);
+    --control-tile-border: color-mix(in srgb, var(--surface-chip-border) 70%, transparent 30%);
+    --control-tile-bg: color-mix(in srgb, var(--surface-chip-bg) 78%, transparent 22%);
+    --control-tile-color: color-mix(in srgb, var(--text-secondary) 88%, rgba(var(--voyage-blue-rgb), 0.12) 12%);
+    --control-tile-hover-bg: color-mix(in srgb, var(--surface-chip-bg) 86%, transparent 14%);
+    --control-tile-hover-border: color-mix(in srgb, var(--surface-chip-border) 65%, rgba(var(--voyage-blue-rgb), 0.42) 35%);
+    --control-tile-hover-color: var(--text);
+    --control-tile-hover-shadow: 0 14px 26px rgba(var(--ink-rgb), 0.16);
+    --control-tile-active-bg: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.32) 55%, var(--surface-chip-bg) 45%);
+    --control-tile-active-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 60%, rgba(255, 255, 255, 0.5) 40%);
+    --control-tile-active-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--text) 30%);
+    --control-tile-active-shadow: 0 16px 34px rgba(var(--voyage-blue-rgb), 0.24);
+    --control-tile-focus-border: color-mix(in srgb, var(--surface-chip-border) 55%, rgba(var(--voyage-blue-rgb), 0.55) 45%);
+    --control-tile-focus-shadow: 0 18px 40px rgba(var(--ink-rgb), 0.22);
+    --control-tile-label-size: clamp(0.75rem, 1vw, 0.82rem);
+    --control-tile-label-tracking: 0.04em;
+    --control-tile-icon-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    --control-icon-stroke-width: 1.8;
+    --control-icon-stroke-width-alt: 1.6;
+    --control-cluster-gap-md: clamp(0.25rem, 1.5vw, 0.4rem);
+    --control-cluster-padding-block-md: clamp(0.25rem, 1.2vw, 0.4rem);
+    --control-cluster-padding-inline-md: clamp(0.3rem, 2vw, 0.5rem);
+    --control-tile-min-width-md: clamp(3.1rem, 16vw, 3.7rem);
+    --control-tile-min-height-md: clamp(2.2rem, 10vw, 2.6rem);
+    --control-tile-padding-block-md: clamp(0.3rem, 1.5vw, 0.5rem);
+    --control-tile-padding-inline-md: clamp(0.45rem, 2.4vw, 0.7rem);
+    --control-tile-label-size-md: clamp(0.7rem, 2.2vw, 0.78rem);
+    --control-tile-label-tracking-md: 0.05em;
+    --control-tile-icon-size-md: clamp(1rem, 3vw, 1.2rem);
+    --control-cluster-gap-sm: clamp(0.2rem, 1.6vw, 0.35rem);
+    --control-cluster-padding-block-sm: 0.25rem;
+    --control-cluster-padding-inline-sm: clamp(0.25rem, 1.8vw, 0.4rem);
+    --control-tile-min-width-sm: clamp(2.6rem, 22vw, 3.1rem);
+    --control-tile-min-height-sm: clamp(1.9rem, 9vw, 2.2rem);
+    --control-tile-padding-block-sm: clamp(0.25rem, 1vw, 0.35rem);
+    --control-tile-padding-inline-sm: clamp(0.35rem, 4vw, 0.55rem);
+    --control-tile-gap-sm: 0.2rem;
+    --control-tile-radius-sm: clamp(0.65rem, 3vw, 0.85rem);
+    --control-tile-icon-size-sm: clamp(0.95rem, 4vw, 1.05rem);
+    --control-cluster-gap-xs: 0.18rem;
+    --control-cluster-padding-block-xs: 0.22rem;
+    --control-cluster-padding-inline-xs: 0.3rem;
+    --control-tile-min-width-xs: clamp(2.45rem, 24vw, 2.9rem);
+    --control-tile-min-height-xs: clamp(1.85rem, 10vw, 2.15rem);
+    --control-tile-padding-block-xs: 0.26rem;
+    --control-tile-padding-inline-xs: clamp(0.3rem, 5vw, 0.5rem);
+    --control-tile-label-tracking-xs: 0.045em;
 
     /* ==================== TYPOGRAPHY ==================== */
     --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -374,6 +435,21 @@
     --section-padding-tablet: var(--space-5xl);
     --section-padding-desktop: var(--space-6xl);
     --section-padding-xl: calc(var(--space-6xl) + var(--space-2xl));
+    --hero-max-width-default: min(100%, var(--container-xl));
+    --hero-layout-width-default: min(100%, var(--container-lg));
+    --hero-content-max-width-default: min(100%, var(--content-width-standard));
+    --hero-padding-block-mobile: var(--section-padding-mobile);
+    --hero-padding-block-fluid: 9vw;
+    --hero-padding-block-desktop: var(--section-padding-desktop);
+    --hero-padding-inline-min: var(--space-lg);
+    --hero-padding-inline-fluid: 6vw;
+    --hero-padding-inline-max: var(--space-4xl);
+    --hero-content-padding-min: var(--component-padding-lg);
+    --hero-content-padding-fluid: 6vw;
+    --hero-content-padding-max: var(--component-padding-xl);
+    --hero-gap-min: var(--grid-gap-lg);
+    --hero-gap-fluid: 5vw;
+    --hero-gap-max: var(--grid-gap-2xl);
 
     --component-padding-sm: var(--space-lg);
     --component-padding-md: var(--space-xl);
@@ -396,9 +472,59 @@
     --card-padding-xl: var(--space-3xl);
     --card-gap: var(--grid-gap-lg);
 
+    --card-glass-surface: color-mix(
+        in srgb,
+        var(--surface-glass-bg) 88%,
+        transparent 12%
+    );
+    --card-glass-surface-hover: color-mix(
+        in srgb,
+        var(--glass-bg-lightest) 48%,
+        transparent 52%
+    );
+    --card-glass-border: color-mix(
+        in srgb,
+        var(--surface-glass-border) 92%,
+        transparent 8%
+    );
+    --card-glass-border-hover: color-mix(
+        in srgb,
+        var(--card-glass-border) 84%,
+        transparent 16%
+    );
+    --card-glass-shadow: var(--surface-glass-shadow);
+    --card-glass-shadow-hover: var(--shadow-xl);
+    --card-glass-spot-a: rgba(var(--voyage-blue-rgb), 0.08);
+    --card-glass-spot-b: rgba(var(--aurora-purple-rgb), 0.06);
+    --card-glass-veil: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.12) 36%,
+        transparent 64%
+    );
+    --card-glass-highlight: rgba(var(--snow-rgb), 0.12);
+    --card-glass-halo: rgba(var(--signal-yellow-rgb), 0.16);
+    --card-glass-halo-blur: 32px;
+    --card-glass-veil-opacity: 0.38;
+    --card-glass-halo-opacity: 0.18;
+    --card-glass-halo-boost: 0.22;
+    --card-glass-halo-boost-hover: 0.32;
+    --card-glass-particles-opacity: 0.38;
+    --card-glass-gap-mobile: var(--space-lg);
+    --card-glass-padding-mobile: var(--space-lg);
+    --card-glass-padding-sm-mobile: var(--space-md);
+    --card-glass-padding-lg-mobile: var(--space-xl);
+    --card-glass-focus-ring: color-mix(
+        in srgb,
+        var(--focus-ring-color) 80%,
+        rgba(var(--signal-yellow-rgb), 0.24) 20%
+    );
+
     --card-min-width: clamp(16.5rem, 26vw, 20rem);
     --card-max-width: clamp(23rem, 32vw, 26.5rem);
     --card-max-width-wide: clamp(25rem, 38vw, 32rem);
+    --form-field-min-width: min(100%, calc(var(--card-min-width) + var(--space-sm)));
+    --form-field-max-width: min(100%, var(--card-max-width));
+    --form-max-width: var(--content-width-standard);
     --tile-min-width-sm: clamp(11rem, 24vw, 15rem);
     --tile-min-width-md: clamp(15rem, 28vw, 19rem);
     --grid-min-card: var(--card-min-width);
@@ -423,6 +549,159 @@
     --chip-gap: var(--space-sm);
     --pill-gap: calc(var(--space-sm) + var(--space-3xs));
 
+    /* ==================== BUTTONS ==================== */
+    --button-gap: calc(var(--space-sm) + var(--space-2xs));
+    --button-padding-block-md: clamp(
+        calc((var(--space-sm) + var(--space-md)) / 2),
+        2.6vw,
+        var(--space-md)
+    );
+    --button-padding-inline-md: clamp(
+        calc(var(--space-lg) + var(--space-md)),
+        7vw,
+        calc(var(--space-2xl) - var(--space-sm))
+    );
+    --button-padding-block-lg: clamp(
+        calc((var(--space-md) + var(--space-lg)) / 2),
+        3vw,
+        var(--space-lg)
+    );
+    --button-padding-inline-lg: clamp(
+        calc((var(--space-xl) + var(--space-2xl)) / 2),
+        8vw,
+        var(--space-3xl)
+    );
+    --button-font-size-md: clamp(0.95rem, 1vw, 1.05rem);
+    --button-font-size-lg: clamp(1rem, 1.2vw, 1.15rem);
+    --button-line-height: 1.1;
+    --button-font-weight: var(--weight-semibold);
+    --button-radius: var(--radius-pill);
+    --button-border-width: var(--border-width-thin);
+    --button-shadow: var(--shadow-button);
+    --button-shadow-hover: var(--shadow-button-hover);
+    --button-shadow-elevate: var(--shadow-button-elevate);
+    --button-shadow-subtle: 0 12px 20px rgba(10, 18, 39, 0.1);
+    --button-touch-target: calc(var(--space-2xl) + var(--space-sm));
+    --button-disabled-opacity: 0.6;
+    --button-loading-cursor: wait;
+    --button-transition-duration: var(--duration-smooth);
+    --button-transition-ease: var(--ease-spring);
+    --button-surface-duration: var(--duration-normal);
+    --button-surface-ease: var(--ease-smooth);
+    --button-shadow-ease: var(--ease-smooth);
+    --button-active-duration: var(--duration-micro);
+    --button-transform-rest: translateY(0);
+    --button-transform-hover: var(--transform-hover-lift);
+    --button-transform-active: var(--transform-active-squash);
+    --button-focus-ring: 0 0 0 calc(var(--border-width-thin) + var(--border-width-hairline))
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.4) 70%, transparent 30%);
+    --button-primary-bg: color-mix(
+        in srgb,
+        var(--bg-elev-1) 94%,
+        rgba(var(--voyage-blue-rgb), 0.06) 6%
+    );
+    --button-primary-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.4) 65%,
+        rgba(255, 255, 255, 0.4) 35%
+    );
+    --button-primary-color: var(--text);
+    --button-primary-hover-bg: color-mix(
+        in srgb,
+        var(--bg-elev-1) 90%,
+        rgba(var(--voyage-blue-rgb), 0.12) 10%
+    );
+    --button-primary-hover-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.55) 70%,
+        rgba(255, 255, 255, 0.5) 30%
+    );
+    --button-secondary-bg: color-mix(
+        in srgb,
+        var(--bg-elev-1) 94%,
+        rgba(var(--mist-rgb), 0.24) 6%
+    );
+    --button-secondary-border: color-mix(
+        in srgb,
+        var(--border) 70%,
+        rgba(var(--voyage-blue-rgb), 0.18) 30%
+    );
+    --button-secondary-color: color-mix(
+        in srgb,
+        var(--text) 88%,
+        rgba(var(--voyage-blue-rgb), 0.15) 12%
+    );
+    --button-secondary-hover-bg: color-mix(
+        in srgb,
+        var(--bg-elev-1) 88%,
+        rgba(var(--voyage-blue-rgb), 0.14) 12%
+    );
+    --button-secondary-hover-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.48) 72%,
+        rgba(255, 255, 255, 0.45) 28%
+    );
+    --button-subtle-bg: color-mix(
+        in srgb,
+        var(--bg) 96%,
+        rgba(var(--voyage-blue-rgb), 0.08) 4%
+    );
+    --button-subtle-border: color-mix(
+        in srgb,
+        var(--border) 55%,
+        transparent 45%
+    );
+    --button-subtle-color: color-mix(
+        in srgb,
+        var(--text) 92%,
+        rgba(var(--voyage-blue-rgb), 0.08) 8%
+    );
+    --button-subtle-hover-bg: color-mix(
+        in srgb,
+        var(--bg) 92%,
+        rgba(var(--voyage-blue-rgb), 0.12) 8%
+    );
+    --button-gradient-bg: linear-gradient(
+        135deg,
+        color-mix(
+            in srgb,
+            var(--aurora-purple) 72%,
+            rgba(255, 255, 255, 0.12) 28%
+        ),
+        color-mix(
+            in srgb,
+            var(--voyage-blue) 78%,
+            rgba(255, 255, 255, 0.14) 22%
+        )
+    );
+    --button-gradient-border: color-mix(
+        in srgb,
+        rgba(var(--aurora-purple-rgb), 0.5) 70%,
+        rgba(255, 255, 255, 0.5) 30%
+    );
+    --button-gradient-color: var(--cta-primary-text);
+    --button-gradient-hover-bg: linear-gradient(
+        135deg,
+        color-mix(
+            in srgb,
+            var(--aurora-purple) 78%,
+            rgba(255, 255, 255, 0.08) 22%
+        ),
+        color-mix(
+            in srgb,
+            var(--voyage-blue) 82%,
+            rgba(255, 255, 255, 0.1) 18%
+        )
+    );
+    --button-gradient-hover-border: color-mix(
+        in srgb,
+        rgba(var(--aurora-purple-rgb), 0.6) 74%,
+        rgba(255, 255, 255, 0.55) 26%
+    );
+    --button-hc-bg: var(--bg);
+    --button-hc-border: var(--border-strong);
+    --button-hc-color: var(--text);
+
     --chip-backdrop-blur: calc(var(--glass-blur-sm) * 0.64);
     --chip-backdrop-saturate: calc((var(--glass-saturate) + 1) / 2);
     --pill-backdrop-blur: calc(var(--glass-blur-md) * 0.52);
@@ -437,6 +716,16 @@
         6vw,
         calc(var(--space-4xl) - var(--space-sm))
     );
+
+    --layout-main-padding-top: clamp(
+        var(--space-4xl),
+        8vw,
+        calc(var(--space-5xl) + var(--space-md))
+    );
+    --skip-link-inset: var(--space-sm);
+    --skip-link-padding-block: calc(var(--space-xs) + var(--space-3xs));
+    --skip-link-padding-inline: calc(var(--space-md) + var(--space-xs));
+    --section-background: transparent;
 
     --container-sm: 640px;
     --container-md: 760px;
@@ -476,6 +765,7 @@
 
     --border-width-hairline: 1px;
     --border-width-thin: 2px;
+    --border-width-medium: 1.5px;
     --border-width-thick: 3px;
 
     --tracking-eyebrow: 0.12em;
@@ -623,6 +913,47 @@
     --surface-glass-strong: color-mix(in srgb, rgba(18, 28, 48, 0.94) 54%, rgba(var(--aurora-purple-rgb), 0.42) 46%);
     --surface-tint: rgba(var(--voyage-blue-rgb), 0.28);
 
+    --card-glass-surface: color-mix(
+        in srgb,
+        var(--surface-glass) 74%,
+        rgba(var(--voyage-blue-rgb), 0.22) 26%
+    );
+    --card-glass-surface-hover: color-mix(
+        in srgb,
+        var(--surface-glass) 70%,
+        rgba(var(--aurora-purple-rgb), 0.3) 30%
+    );
+    --card-glass-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.58) 70%,
+        rgba(6, 10, 24, 0.62) 30%
+    );
+    --card-glass-border-hover: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.66) 74%,
+        rgba(6, 10, 24, 0.5) 26%
+    );
+    --card-glass-shadow: var(--shadow-card-voyage-soft);
+    --card-glass-shadow-hover: var(--shadow-card-aurora-strong);
+    --card-glass-spot-a: rgba(var(--voyage-blue-rgb), 0.18);
+    --card-glass-spot-b: rgba(var(--aurora-purple-rgb), 0.16);
+    --card-glass-veil: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.3) 52%,
+        rgba(6, 10, 24, 0.76) 48%
+    );
+    --card-glass-highlight: rgba(var(--snow-rgb), 0.08);
+    --card-glass-halo: rgba(var(--signal-yellow-rgb), 0.22);
+    --card-glass-halo-opacity: 0.24;
+    --card-glass-halo-boost: 0.28;
+    --card-glass-halo-boost-hover: 0.38;
+    --card-glass-particles-opacity: 0.46;
+    --card-glass-focus-ring: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.62) 72%,
+        rgba(214, 224, 248, 0.38) 28%
+    );
+
     --border-subtle: rgba(214, 224, 248, 0.32);
     --border-strong: rgba(214, 224, 248, 0.5);
     --border-glass: rgba(214, 224, 248, 0.58);
@@ -642,6 +973,8 @@
     --hero-overlay-opacity: 0.68;
     --hero-phrase-bg-strong: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.5) 54%, rgba(10, 16, 32, 0.92) 46%);
     --hero-phrase-bg-soft: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 52%, rgba(10, 16, 32, 0.92) 48%);
+
+    --section-background: transparent;
     --hero-phrase-shadow: 0 32px 72px rgba(4, 8, 20, 0.56);
     --hero-ring-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.46) 66%, rgba(6, 10, 24, 0.82) 34%);
     --hero-ring-dash: color-mix(in srgb, rgba(var(--aurora-purple-rgb), 0.42) 62%, rgba(6, 10, 24, 0.82) 38%);
@@ -674,6 +1007,85 @@
     --control-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 66%, rgba(214, 224, 244, 0.28) 34%);
     --control-border-strong: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.6) 68%, rgba(214, 224, 244, 0.36) 32%);
     --control-ring: rgba(var(--voyage-blue-rgb), 0.58);
+    --control-cluster-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.38) 60%, rgba(255, 255, 255, 0.14) 40%);
+    --control-cluster-bg: color-mix(in srgb, rgba(var(--graphite-rgb), 0.78) 64%, rgba(var(--voyage-blue-rgb), 0.28) 36%);
+    --control-cluster-shadow: 0 22px 58px rgba(2, 6, 18, 0.58);
+    --control-tile-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.34) 60%, rgba(255, 255, 255, 0.16) 40%);
+    --control-tile-bg: color-mix(in srgb, rgba(var(--graphite-rgb), 0.82) 60%, rgba(var(--voyage-blue-rgb), 0.24) 40%);
+    --control-tile-color: color-mix(in srgb, rgba(255, 255, 255, 0.78) 72%, rgba(var(--voyage-blue-rgb), 0.36) 28%);
+    --control-tile-hover-border: color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.48) 65%, rgba(255, 255, 255, 0.2) 35%);
+    --control-tile-hover-color: rgba(255, 255, 255, 0.92);
+    --control-tile-active-color: color-mix(in srgb, rgba(255, 255, 255, 0.9) 72%, rgba(var(--voyage-blue-rgb), 0.5) 28%);
+    --control-tile-active-shadow: 0 20px 44px rgba(var(--voyage-blue-rgb), 0.36);
+
+    --button-focus-ring: 0 0 0 calc(var(--border-width-thin) + var(--border-width-hairline))
+        color-mix(in srgb, rgba(var(--voyage-blue-rgb), 0.62) 72%, rgba(214, 224, 248, 0.38) 28%);
+    --button-primary-bg: color-mix(
+        in srgb,
+        var(--card) 70%,
+        rgba(var(--voyage-blue-rgb), 0.32) 30%
+    );
+    --button-primary-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.58) 72%,
+        rgba(214, 224, 248, 0.32) 28%
+    );
+    --button-primary-hover-bg: color-mix(
+        in srgb,
+        var(--card) 66%,
+        rgba(var(--voyage-blue-rgb), 0.42) 34%
+    );
+    --button-primary-hover-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.68) 74%,
+        rgba(214, 224, 248, 0.42) 26%
+    );
+    --button-secondary-bg: color-mix(
+        in srgb,
+        var(--card) 78%,
+        rgba(var(--voyage-blue-rgb), 0.26) 22%
+    );
+    --button-secondary-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.5) 68%,
+        rgba(214, 224, 248, 0.36) 32%
+    );
+    --button-secondary-color: color-mix(
+        in srgb,
+        var(--text) 88%,
+        rgba(var(--voyage-blue-rgb), 0.22) 12%
+    );
+    --button-secondary-hover-bg: color-mix(
+        in srgb,
+        var(--card) 72%,
+        rgba(var(--voyage-blue-rgb), 0.34) 28%
+    );
+    --button-secondary-hover-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.62) 72%,
+        rgba(214, 224, 248, 0.42) 28%
+    );
+    --button-subtle-bg: color-mix(
+        in srgb,
+        var(--bg) 86%,
+        rgba(var(--voyage-blue-rgb), 0.28) 14%
+    );
+    --button-subtle-border: color-mix(
+        in srgb,
+        rgba(var(--voyage-blue-rgb), 0.45) 68%,
+        rgba(6, 10, 24, 0.6) 32%
+    );
+    --button-subtle-color: color-mix(
+        in srgb,
+        var(--text) 92%,
+        rgba(var(--voyage-blue-rgb), 0.2) 8%
+    );
+    --button-subtle-hover-bg: color-mix(
+        in srgb,
+        var(--bg) 82%,
+        rgba(var(--voyage-blue-rgb), 0.34) 18%
+    );
+    --button-shadow-subtle: 0 16px 38px rgba(4, 12, 30, 0.46);
 }
 
 
@@ -737,6 +1149,25 @@
     --glass-bg: transparent;
     --glass-border: currentColor;
 
+    --card-glass-surface: var(--bg);
+    --card-glass-surface-hover: var(--bg);
+    --card-glass-border: currentColor;
+    --card-glass-border-hover: currentColor;
+    --card-glass-shadow: none;
+    --card-glass-shadow-hover: none;
+    --card-glass-spot-a: transparent;
+    --card-glass-spot-b: transparent;
+    --card-glass-veil: transparent;
+    --card-glass-highlight: transparent;
+    --card-glass-halo: transparent;
+    --card-glass-halo-blur: 0px;
+    --card-glass-veil-opacity: 0;
+    --card-glass-halo-opacity: 0;
+    --card-glass-halo-boost: 0;
+    --card-glass-halo-boost-hover: 0;
+    --card-glass-particles-opacity: 0;
+    --card-glass-focus-ring: currentColor;
+
     --border-subtle: #000000;
     --border-strong: #000000;
     --border-glass: #000000;
@@ -785,6 +1216,52 @@
     --control-border: #000000;
     --control-border-strong: #000000;
     --control-ring: rgba(0, 0, 0, 0.9);
+    --control-cluster-border: currentColor;
+    --control-cluster-border-width: var(--border-width-thin);
+    --control-cluster-bg: var(--surface-pill-hc-bg);
+    --control-cluster-shadow: var(--surface-pill-hc-shadow);
+    --control-cluster-backdrop: none;
+    --control-tile-border-width: var(--border-width-thin);
+    --control-tile-border: currentColor;
+    --control-tile-bg: transparent;
+    --control-tile-color: currentColor;
+    --control-tile-hover-bg: transparent;
+    --control-tile-hover-border: currentColor;
+    --control-tile-hover-color: currentColor;
+    --control-tile-hover-shadow: none;
+    --control-tile-active-bg: transparent;
+    --control-tile-active-border: currentColor;
+    --control-tile-active-color: currentColor;
+    --control-tile-active-shadow: none;
+    --control-tile-focus-border: currentColor;
+    --control-tile-focus-shadow: none;
+
+    --button-gap: var(--space-md);
+    --button-shadow: none;
+    --button-shadow-hover: none;
+    --button-shadow-elevate: none;
+    --button-shadow-subtle: none;
+    --button-focus-ring: 0 0 0 calc(var(--border-width-thin) + var(--border-width-hairline))
+        currentColor;
+    --button-primary-bg: var(--button-hc-bg);
+    --button-primary-border: var(--button-hc-border);
+    --button-primary-color: var(--button-hc-color);
+    --button-primary-hover-bg: var(--button-hc-bg);
+    --button-primary-hover-border: currentColor;
+    --button-secondary-bg: var(--button-hc-bg);
+    --button-secondary-border: currentColor;
+    --button-secondary-color: var(--button-hc-color);
+    --button-secondary-hover-bg: var(--button-hc-bg);
+    --button-secondary-hover-border: currentColor;
+    --button-subtle-bg: var(--button-hc-bg);
+    --button-subtle-border: currentColor;
+    --button-subtle-color: var(--button-hc-color);
+    --button-subtle-hover-bg: var(--button-hc-bg);
+    --button-gradient-bg: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+    --button-gradient-border: currentColor;
+    --button-gradient-color: var(--button-hc-color);
+    --button-gradient-hover-bg: linear-gradient(0deg, currentColor 0%, currentColor 100%);
+    --button-gradient-hover-border: currentColor;
 }
 
 

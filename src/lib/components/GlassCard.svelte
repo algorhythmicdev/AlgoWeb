@@ -36,33 +36,99 @@
         gap: var(--card-gap);
         padding: var(--card-padding-lg);
         border-radius: var(--radius-lg);
-        --glass-card-surface: color-mix(
-            in srgb,
-            var(--surface-glass-bg) 88%,
-            transparent 12%
+        --glass-card-surface: var(
+            --card-glass-surface,
+            color-mix(
+                in srgb,
+                var(--surface-glass-bg) 88%,
+                transparent 12%
+            )
         );
-        --glass-card-border: var(--surface-glass-border);
-        --glass-card-shadow: var(--surface-glass-shadow);
-        --glass-card-spot-a: rgba(var(--voyage-blue-rgb), 0.08);
-        --glass-card-spot-b: rgba(var(--aurora-purple-rgb), 0.06);
-        --glass-card-veil: color-mix(
-            in srgb,
-            rgba(var(--voyage-blue-rgb), 0.12) 36%,
-            transparent 64%
+        --glass-card-surface-hover: var(
+            --card-glass-surface-hover,
+            color-mix(
+                in srgb,
+                var(--glass-bg-lightest) 48%,
+                transparent 52%
+            )
         );
-        --glass-card-highlight: rgba(var(--snow-rgb), 0.12);
-        --glass-card-halo: rgba(var(--signal-yellow-rgb), 0.16);
-        --glass-card-halo-blur: 32px;
-        --glass-card-veil-opacity: 0.38;
-        --glass-card-halo-opacity: 0.18;
-        --glass-card-halo-boost: 0.22;
-        --glass-card-halo-boost-hover: 0.32;
-        --glass-card-particles-opacity: 0.38;
-        --glass-card-gap-mobile: var(--space-lg);
-        --glass-card-padding-mobile: var(--space-lg);
-        --glass-card-padding-sm-mobile: var(--space-md);
-        --glass-card-padding-lg-mobile: var(--space-xl);
-        --glass-card-border-hover: var(--glass-card-border);
+        --glass-card-border: var(
+            --card-glass-border,
+            var(--surface-glass-border)
+        );
+        --glass-card-border-hover: var(
+            --card-glass-border-hover,
+            color-mix(
+                in srgb,
+                var(--glass-card-border) 78%,
+                transparent 22%
+            )
+        );
+        --glass-card-shadow: var(
+            --card-glass-shadow,
+            var(--surface-glass-shadow)
+        );
+        --glass-card-shadow-hover: var(
+            --card-glass-shadow-hover,
+            var(--shadow-xl)
+        );
+        --glass-card-spot-a: var(
+            --card-glass-spot-a,
+            rgba(var(--voyage-blue-rgb), 0.08)
+        );
+        --glass-card-spot-b: var(
+            --card-glass-spot-b,
+            rgba(var(--aurora-purple-rgb), 0.06)
+        );
+        --glass-card-veil: var(
+            --card-glass-veil,
+            color-mix(
+                in srgb,
+                rgba(var(--voyage-blue-rgb), 0.12) 36%,
+                transparent 64%
+            )
+        );
+        --glass-card-highlight: var(
+            --card-glass-highlight,
+            rgba(var(--snow-rgb), 0.12)
+        );
+        --glass-card-halo: var(
+            --card-glass-halo,
+            rgba(var(--signal-yellow-rgb), 0.16)
+        );
+        --glass-card-halo-blur: var(--card-glass-halo-blur, 32px);
+        --glass-card-veil-opacity: var(--card-glass-veil-opacity, 0.38);
+        --glass-card-halo-opacity: var(--card-glass-halo-opacity, 0.18);
+        --glass-card-halo-boost: var(--card-glass-halo-boost, 0.22);
+        --glass-card-halo-boost-hover: var(
+            --card-glass-halo-boost-hover,
+            0.32
+        );
+        --glass-card-particles-opacity: var(
+            --card-glass-particles-opacity,
+            0.38
+        );
+        --glass-card-gap-mobile: var(--card-glass-gap-mobile, var(--space-lg));
+        --glass-card-padding-mobile: var(
+            --card-glass-padding-mobile,
+            var(--space-lg)
+        );
+        --glass-card-padding-sm-mobile: var(
+            --card-glass-padding-sm-mobile,
+            var(--space-md)
+        );
+        --glass-card-padding-lg-mobile: var(
+            --card-glass-padding-lg-mobile,
+            var(--space-xl)
+        );
+        --glass-card-focus-ring: var(
+            --card-glass-focus-ring,
+            color-mix(
+                in srgb,
+                var(--focus-ring-color) 80%,
+                rgba(var(--signal-yellow-rgb), 0.24) 20%
+            )
+        );
         border: 1px solid var(--glass-card-border);
         background: var(--glass-card-surface);
         color: var(--text);
@@ -152,27 +218,9 @@
 
     .glass-card--interactive:hover {
         transform: var(--transform-hover-card);
-        border-color: color-mix(
-            in srgb,
-            var(
-                    --glass-card-border-hover,
-                    var(
-                        --glass-card-border,
-                        var(
-                            --surface-glass-border,
-                            var(--glass-card-border-default)
-                        )
-                    )
-                )
-                78%,
-            transparent 22%
-        );
-        box-shadow: var(--shadow-xl);
-        background: color-mix(
-            in srgb,
-            var(--glass-bg-lightest) 48%,
-            transparent 52%
-        );
+        border-color: var(--glass-card-border-hover);
+        box-shadow: var(--glass-card-shadow-hover);
+        background: var(--glass-card-surface-hover);
     }
 
     .glass-card--interactive:active {
@@ -181,12 +229,7 @@
     }
 
     .glass-card:focus-within {
-        outline: 2px solid
-            color-mix(
-                in srgb,
-                var(--focus-ring-color) 80%,
-                rgba(var(--signal-yellow-rgb), 0.24) 20%
-            );
+        outline: 2px solid var(--glass-card-focus-ring);
         outline-offset: 4px;
     }
 

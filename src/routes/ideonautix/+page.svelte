@@ -8,8 +8,20 @@
   import { _ } from 'svelte-i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
-  const t = (key: string, fallback: string, params?: Record<string, unknown>) =>
-    translateOrFallback($_, key, fallback, params);
+  type TranslationParams = Record<string, unknown>;
+
+  const t = (
+    key: string,
+    fallbackOrParams?: string | TranslationParams,
+    params?: TranslationParams
+  ) => {
+    const fallback = typeof fallbackOrParams === 'string' ? fallbackOrParams : '';
+    const finalParams =
+      typeof fallbackOrParams === 'string' || fallbackOrParams === undefined
+        ? params
+        : fallbackOrParams;
+    return translateOrFallback($_, key, fallback, finalParams);
+  };
 
   const hero = {
     titleKey: 'ideonautix.hero.title',
@@ -275,17 +287,15 @@
   </svelte:fragment>
 
   <svelte:fragment slot="actions">
-    <div class="hero-actions">
-      <Button href={hero.primaryCta.href} variant="gradient" size="lg">
-        {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
-      </Button>
-      <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
-        {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
-      </Button>
-      <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
-        {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
-      </Button>
-    </div>
+    <Button href={hero.primaryCta.href} variant="gradient" size="lg">
+      {t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}
+    </Button>
+    <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
+      {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+    </Button>
+    <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
+      {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+    </Button>
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
@@ -390,35 +400,33 @@
       <p>{t(pilot.copyKey, pilot.copyFallback)}</p>
 
       <form class="pilot-form form" on:submit={handlePilotSubmit}>
-        <div class="form-grid">
-          <label class="form-field">
-            <span>{t(pilot.form.nameLabelKey, pilot.form.nameLabelFallback)}</span>
-            <input type="text" bind:value={pilotName} required on:input={resetPilotStatus} />
-          </label>
-
-          <label class="form-field">
-            <span>{t(pilot.form.emailLabelKey, pilot.form.emailLabelFallback)}</span>
-            <input
-              type="email"
-              bind:value={pilotEmail}
-              required
-              aria-invalid={pilotStatus === 'error' ? 'true' : 'false'}
-              on:input={resetPilotStatus}
-            />
-          </label>
-
-          <label class="form-field">
-            <span>{t(pilot.form.roleLabelKey, pilot.form.roleLabelFallback)}</span>
-            <select bind:value={pilotRole} on:change={resetPilotStatus}>
-              <option value="founder">{t(pilot.form.roleOptions.founder.key, pilot.form.roleOptions.founder.fallback)}</option>
-              <option value="student">{t(pilot.form.roleOptions.student.key, pilot.form.roleOptions.student.fallback)}</option>
-              <option value="educator">{t(pilot.form.roleOptions.educator.key, pilot.form.roleOptions.educator.fallback)}</option>
-              <option value="other">{t(pilot.form.roleOptions.other.key, pilot.form.roleOptions.other.fallback)}</option>
-            </select>
-          </label>
-        </div>
+        <label class="form-field">
+          <span>{t(pilot.form.nameLabelKey, pilot.form.nameLabelFallback)}</span>
+          <input type="text" bind:value={pilotName} required on:input={resetPilotStatus} />
+        </label>
 
         <label class="form-field">
+          <span>{t(pilot.form.emailLabelKey, pilot.form.emailLabelFallback)}</span>
+          <input
+            type="email"
+            bind:value={pilotEmail}
+            required
+            aria-invalid={pilotStatus === 'error' ? 'true' : 'false'}
+            on:input={resetPilotStatus}
+          />
+        </label>
+
+        <label class="form-field">
+          <span>{t(pilot.form.roleLabelKey, pilot.form.roleLabelFallback)}</span>
+          <select bind:value={pilotRole} on:change={resetPilotStatus}>
+            <option value="founder">{t(pilot.form.roleOptions.founder.key, pilot.form.roleOptions.founder.fallback)}</option>
+            <option value="student">{t(pilot.form.roleOptions.student.key, pilot.form.roleOptions.student.fallback)}</option>
+            <option value="educator">{t(pilot.form.roleOptions.educator.key, pilot.form.roleOptions.educator.fallback)}</option>
+            <option value="other">{t(pilot.form.roleOptions.other.key, pilot.form.roleOptions.other.fallback)}</option>
+          </select>
+        </label>
+
+        <label class="form-field form--full">
           <span>{t(pilot.form.messageLabelKey, pilot.form.messageLabelFallback)}</span>
           <textarea rows="4" bind:value={pilotMessage} on:input={resetPilotStatus}></textarea>
         </label>
@@ -562,13 +570,6 @@
     line-height: var(--leading-relaxed);
   }
 
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-lg);
-    justify-content: center;
-  }
-
   .hero-highlights {
     display: grid;
     gap: var(--grid-gap-md);
@@ -670,13 +671,13 @@
   }
 
   .pilot-form {
-    display: grid;
-    gap: var(--grid-gap-lg);
-    max-width: var(--content-width-standard);
     --form-gap: var(--grid-gap-md);
     --form-field-radius: var(--radius-md);
     --form-field-padding-y: var(--space-md);
     --form-field-padding-x: var(--space-lg);
+    --form-max-width: min(100%, var(--card-max-width-wide));
+    --form-field-min-width: min(100%, calc(var(--card-min-width) + var(--space-sm)));
+    --form-field-max-width: min(100%, var(--card-max-width-wide));
     --form-label-color: color-mix(in srgb, var(--text) 88%, transparent 12%);
     --form-field-bg: color-mix(in srgb, var(--glass-bg-lightest) 68%, transparent 32%);
     --form-field-border: color-mix(in srgb, var(--surface-field-border) 84%, transparent 16%);
@@ -697,15 +698,7 @@
     );
   }
 
-  .form-grid {
-    display: grid;
-    gap: var(--grid-gap-md);
-  }
-
-  .form-grid .form-field,
   .pilot-form .form-field {
-    display: grid;
-    gap: var(--space-sm);
     font-weight: 600;
   }
 
@@ -733,14 +726,6 @@
     gap: var(--space-lg);
     justify-content: center;
   }
-
-
-  @media (min-width: 720px) {
-    .form-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
   @media (min-width: 960px) {
     .use-cases {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
