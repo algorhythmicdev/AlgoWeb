@@ -1,0 +1,19 @@
+name: Tokens Guard
+on: { pull_request: {} }
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Block hard-coded colors/sizes
+        run: |
+          set -e
+          offenders=$(grep -RInE "#[0-9A-Fa-f]{3,6}|[^a-zA-Z]-?\d+px" src \
+            | grep -v "src/lib/styles/theme.css" || true)
+          if [ -n "$offenders" ]; then
+            echo "Found hard-coded values (use tokens):"
+            echo "$offenders"
+            exit 1
+          fi
+          echo "OK: no hard-coded colors/sizes outside tokens."

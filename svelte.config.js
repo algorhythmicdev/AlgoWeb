@@ -1,6 +1,9 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
+const repo = 'AlgoWeb';
+const isGhPages = process.env.GITHUB_PAGES === 'true';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: vitePreprocess(),
@@ -9,9 +12,13 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: '404.html',   // static 404 fallback
+      fallback: '404.html',
       precompress: true
     }),
+
+    paths: {
+      base: isGhPages ? `/${repo}` : ''
+    },
 
     alias: {
       '$lib': 'src/lib',
