@@ -5,6 +5,7 @@
   import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
+  import { base } from '$app/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -73,7 +74,7 @@
   } as const;
 
   const snapshot = {
-    image: '/images/products/ideonautix-icon.png',
+    image: `${base}/images/products/ideonautix-icon.png`,
     altKey: 'ideonautix.snapshot.alt',
     altFallback: 'Preview of the Ideonautix creative cockpit layout',
     captionKey: 'ideonautix.snapshot.caption',
