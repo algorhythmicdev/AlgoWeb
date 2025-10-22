@@ -1,5 +1,6 @@
 <script>
   import { _ } from '$lib/i18n';
+  import { assets } from '$app/paths';
   import { onMount } from 'svelte';
   import { footerLinks } from '$config/navigation';
   import { siteConfig } from '$config/seo';
@@ -8,6 +9,7 @@
   import { translateOrFallback } from '$lib/utils';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import Container from '$lib/components/Container.svelte';
+  import { withBase } from '$utils/paths';
 
   /**
    * @param {unknown} value
@@ -18,9 +20,21 @@
     typeof value === 'string' && value.trim().length ? value.trim() : fallback;
 
   let isMounted = false;
+
+  /**
+   * @param {string} path
+   */
+  const assetPath = (path) => `${assets}${path}`;
+
   $: footerLogo = (!isMounted || $theme === 'light')
-    ? { svg: '/images/brand/logo-main.svg', png: '/images/brand/logo-main.png' }
-    : { svg: '/images/brand/logo-white.svg', png: '/images/brand/logo-white.png' };
+    ? {
+        svg: assetPath('/images/brand/logo-main.svg'),
+        png: assetPath('/images/brand/logo-main.png')
+      }
+    : {
+        svg: assetPath('/images/brand/logo-white.svg'),
+        png: assetPath('/images/brand/logo-white.png')
+      };
 
   onMount(() => {
     isMounted = true;
@@ -92,22 +106,22 @@
         <nav class="footer-links-section" aria-labelledby="footer-company-heading">
           <h4 id="footer-company-heading">{$_('footer.company')}</h4>
           <ul>
-            {#each footerLinks.company as link}
-              <li>
-                <a href={link.href}>{$_(link.label)}</a>
-              </li>
-            {/each}
+              {#each footerLinks.company as link}
+                <li>
+                  <a href={withBase(link.href)}>{$_(link.label)}</a>
+                </li>
+              {/each}
           </ul>
         </nav>
 
         <nav class="footer-links-section" aria-labelledby="footer-solutions-heading">
           <h4 id="footer-solutions-heading">{$_('footer.solutions')}</h4>
           <ul>
-            {#each footerLinks.solutions as link}
-              <li>
-                <a href={link.href}>{$_(link.label)}</a>
-              </li>
-            {/each}
+              {#each footerLinks.solutions as link}
+                <li>
+                  <a href={withBase(link.href)}>{$_(link.label)}</a>
+                </li>
+              {/each}
           </ul>
         </nav>
 
@@ -117,7 +131,7 @@
             {#each footerLinks.legal as link}
               <li>
                 {#if link.href}
-                  <a href={link.href}>{$_(link.label)}</a>
+                  <a href={withBase(link.href)}>{$_(link.label)}</a>
                 {:else}
                   <span class="footer-link footer-link--disabled" aria-disabled="true">
                     {$_(link.label)}
@@ -144,7 +158,7 @@
                 <img src={featuredPartner.logo} alt="" loading="lazy" aria-hidden="true" />
               </a>
             {:else}
-              <a class="footer-partners__cta" href="/about#team">{partnerLinkLabel}</a>
+              <a class="footer-partners__cta" href={withBase('/about#team')}>{partnerLinkLabel}</a>
             {/if}
 
             {#if featuredPartner?.website}

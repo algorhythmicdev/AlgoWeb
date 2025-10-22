@@ -94,10 +94,10 @@
   $: metaData = /** @type {Record<string, any>} */ (data?.meta ?? {});
 
   const fallbackMeta = {
-    title: en.seo?.default_title ?? `${en.site.title} â€” ${en.site.tagline}`,
-    description: en.seo?.default_description ?? en.site.description,
-    ogTitle: en.seo?.default_og_title ?? en.site.title,
-    ogDescription: en.seo?.default_og_description ?? en.site.tagline,
+    title: en.seo?.default_title ?? siteConfig.title,
+    description: en.seo?.default_description ?? siteConfig.description,
+    ogTitle: en.seo?.default_og_title ?? siteConfig.title,
+    ogDescription: en.seo?.default_og_description ?? siteConfig.description,
     url: en.seo?.default_url ?? siteConfig.url
   };
 

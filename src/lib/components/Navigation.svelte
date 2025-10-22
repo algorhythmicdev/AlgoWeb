@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import { assets } from '$app/paths';
   import { page } from '$app/stores';
   import { onDestroy, onMount, tick } from 'svelte';
   import { _ } from '$lib/i18n';
@@ -7,6 +8,7 @@
   import LanguageSwitcher from './language-switcher.svelte';
   import ThemeToggle from './theme-toggle-dropdown.svelte';
   import { mainNavigation } from '$config/navigation';
+  import { stripBase, withBase } from '$utils/paths';
 
   let menuOpen = false;
   let activeDropdown: number | null = null;
@@ -14,7 +16,7 @@
   let mobileMenu: HTMLElement | null = null;
   let menuControl: HTMLButtonElement | null = null;
 
-  $: currentPath = $page.url.pathname;
+  $: currentPath = stripBase($page.url.pathname);
 
   const isRouteActive = (item: (typeof mainNavigation)[number]) => {
     if (!item) return false;
@@ -102,11 +104,11 @@
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
+    <a href={withBase('/')} class="brand" aria-label={$_('nav.brand_aria')}>
       <picture>
-        <source srcset="/images/brand/logo-main.svg" type="image/svg+xml" />
+        <source srcset={`${assets}/images/brand/logo-main.svg`} type="image/svg+xml" />
         <img
-          src="/images/brand/logo-main.png"
+          src={`${assets}/images/brand/logo-main.png`}
           alt={$_('nav.brand_name')}
           width="148"
           height="40"
@@ -138,7 +140,7 @@
                   <ul>
                     {#each item.children as child}
                       <li>
-                        <a href={child.href} on:click={handleLinkFollow} class="desktop-nav__dropdown-link">
+                        <a href={withBase(child.href)} on:click={handleLinkFollow} class="desktop-nav__dropdown-link">
                           <span class="desktop-nav__dropdown-title">{$_(child.label)}</span>
                           {#if child.description}
                             <span class="desktop-nav__dropdown-description">{$_(child.description)}</span>
@@ -150,7 +152,7 @@
                 </div>
               {/if}
             {:else}
-              <a href={item.href} class="desktop-nav__link" class:active={isRouteActive(item)}>{$_(item.label)}</a>
+              <a href={withBase(item.href)} class="desktop-nav__link" class:active={isRouteActive(item)}>{$_(item.label)}</a>
             {/if}
           </li>
         {/each}
@@ -195,10 +197,10 @@
     bind:this={mobileMenu}
   >
       <div class="mobile-menu__header">
-        <a href="/" class="brand" on:click={handleLinkFollow}>
+        <a href={withBase('/')} class="brand" on:click={handleLinkFollow}>
           <picture>
-            <source srcset="/images/brand/logo-main.svg" type="image/svg+xml" />
-            <img src="/images/brand/logo-main.png" alt={$_('nav.brand_name')} width="120" height="32" />
+            <source srcset={`${assets}/images/brand/logo-main.svg`} type="image/svg+xml" />
+            <img src={`${assets}/images/brand/logo-main.png`} alt={$_('nav.brand_name')} width="120" height="32" />
           </picture>
         </a>
       <button type="button" class="mobile-menu__close" on:click={closeMenu}>
@@ -238,7 +240,7 @@
                   <ul>
                     {#each item.children as child}
                       <li>
-                        <a href={child.href} on:click={handleLinkFollow}>
+                        <a href={withBase(child.href)} on:click={handleLinkFollow}>
                           <span class="mobile-menu__link-title">{$_(child.label)}</span>
                           {#if child.description}
                             <span class="mobile-menu__link-description">{$_(child.description)}</span>
@@ -250,7 +252,7 @@
                 {/if}
               </div>
             {:else}
-              <a href={item.href} on:click={handleLinkFollow} class:active={isRouteActive(item)}>
+              <a href={withBase(item.href)} on:click={handleLinkFollow} class:active={isRouteActive(item)}>
                 {$_(item.label)}
               </a>
             {/if}
