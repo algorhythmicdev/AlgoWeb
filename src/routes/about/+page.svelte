@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -35,7 +35,7 @@
     descriptionFallback:
       'Founded in 2025 by technologists and educators, AlgoRhythmics believes logic and creativity belong together. From AI platforms to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.',
     primary: {
-      href: '/services',
+      href: '/consulting',
       labelKey: 'about.page.hero.primary_cta',
       labelFallback: 'Explore Our Services'
     },
@@ -160,7 +160,7 @@
       labelFallback: 'Connect with AlgoRhythmics'
     },
     secondary: {
-      href: '/education-hub#newsletter',
+      href: '/contact',
       labelKey: 'about.page.finale.secondary_cta',
       labelFallback: 'Subscribe to Updates'
     }
@@ -202,7 +202,7 @@
         {/each}
       </ul>
       <div class="card-actions">
-        <Button href="/education-hub#case-studies" variant="secondary" size="md">{t('about.page.story.cta')}</Button>
+        <Button href="/" variant="secondary" size="md">{t('about.page.story.cta')}</Button>
       </div>
     </GlassCard>
   </div>
@@ -437,5 +437,3 @@
     }
   }
 </style>
-
-

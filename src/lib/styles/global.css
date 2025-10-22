@@ -257,6 +257,10 @@ html[data-theme='dark'] .section[data-surface='glow']::before {
     }
 }
 
+@media (max-width: 640px) {
+  .container, .hero__content, .section { margin-left:auto; margin-right:auto; text-align:center; }
+}
+
 @media (max-width: 720px) {
     .section>.container {
         padding-inline: var(--space-lg);

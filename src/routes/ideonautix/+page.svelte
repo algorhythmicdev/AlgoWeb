@@ -37,7 +37,7 @@
       labelFallback: 'Request pilot access'
     },
     secondaryCta: {
-      href: '/solutions',
+      href: '/consulting',
       labelKey: 'ideonautix.hero.secondary_cta',
       labelFallback: 'Back to solutions overview'
     },
