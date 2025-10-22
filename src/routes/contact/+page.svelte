@@ -694,7 +694,7 @@
 
     .section-eyebrow {
         font-size: var(--text-small);
-        letter-spacing: 0.12em;
+        letter-spacing: var(--tracking-eyebrow);
         text-transform: uppercase;
         color: var(--text-tertiary);
     }

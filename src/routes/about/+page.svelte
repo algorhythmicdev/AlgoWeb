@@ -340,7 +340,7 @@
     padding-block: var(--chip-padding-block);
     padding-inline: calc(var(--chip-padding-inline) + var(--space-3xs));
     font-size: var(--text-small);
-    letter-spacing: 0.14em;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
   }
 

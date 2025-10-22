@@ -5,6 +5,7 @@
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
+  import { base } from '$app/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -440,7 +441,7 @@
         ctaHref: '/ideonautix',
         ctaKey: 'snapshots.ideo_cta',
         ctaFallback: 'Ideonautix',
-        image: '/images/products/ideonautix-icon.png',
+        image: `${base}/images/products/ideonautix-icon.png`,
         altKey: 'home.page.platform_showcase.items.ideonautix.alt',
         altFallback: 'Mockup of the Ideonautix creative cockpit interface'
       },
