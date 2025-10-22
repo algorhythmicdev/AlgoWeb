@@ -1,0 +1,15 @@
+name: Link Check
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule: [ { cron: "0 5 * * 1" } ]
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress --exclude-mail --timeout 20s ./build ./README.md ./src
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

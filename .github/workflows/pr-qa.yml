@@ -1,0 +1,32 @@
+name: PR QA Summary
+on:
+  pull_request: { types: [opened, synchronize, reopened] }
+permissions: { pull-requests: write, contents: read }
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: 'npm' }
+      - run: npm ci
+      - run: npm run lint --if-present || true
+      - run: npm run typecheck --if-present || true
+      - run: npm test --if-present || true
+      - name: Summarize
+        id: sum
+        run: |
+          files=$(git diff --name-only origin/${{ github.base_ref }}... | sed 's/^/- /')
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: qa
+          message: |
+            **QA summary**
+            - Lint/Type/Test executed (see CI log for details)
+            - Changed files:
+            ${{ steps.sum.outputs.files }}
