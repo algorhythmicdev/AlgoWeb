@@ -42,28 +42,25 @@
   };
 
   const hero = {
-    titleKey: 'home.page.hero.title',
-    titleFallback: 'Where logic dances with creativity.',
-    subtitleKey: 'home.page.hero.subtitle',
+    titleKey: 'hero.title',
+    titleFallback: 'Clear tools and consulting for AI.',
+    subtitleKey: 'hero.subtitle',
     subtitleFallback:
-      'AlgoRhythmics builds AI platforms, consulting rituals, and educational programmes that keep innovation approachable for everyone—from students to enterprises.',
-    descriptionKey: 'home.page.hero.description',
-    descriptionFallback:
-      'We choreograph technology with human-friendly signage craft, inclusive localisation, and transparent automation notes. The result is AI that feels calm, clear, and collaborative.',
+      'We design simple, accessible tools and offer pilot consulting starting in 2026. Products are in development.',
     actions: [
       {
         href: '/consulting',
         variant: 'gradient' as const,
         size: 'lg' as const,
-        labelKey: 'home.page.hero.primary_cta',
-        labelFallback: 'Explore Our Services'
+        labelKey: 'hero.cta_primary',
+        labelFallback: 'Explore services'
       },
       {
         href: '/about',
         variant: 'secondary' as const,
         size: 'lg' as const,
-        labelKey: 'home.page.hero.secondary_cta',
-        labelFallback: 'Learn About Our Mission'
+        labelKey: 'hero.cta_secondary',
+        labelFallback: 'About us'
       }
     ]
   } as const;
@@ -71,31 +68,31 @@
   const highlights = [
     {
       icon: 'idea',
-      titleKey: 'home.page.highlights.items.innovative_ai.title',
-      titleFallback: 'Innovative AI Solutions',
-      copyKey: 'home.page.highlights.items.innovative_ai.copy',
-      copyFallback: 'NodeVoyage and Ideonautix adapt to your journeys and workflows with playful precision.'
+      titleKey: 'highlights.item_1_title',
+      titleFallback: 'Practical AI tools',
+      copyKey: 'highlights.item_1_body',
+      copyFallback: 'NodeVoyage and Ideonautix are in development to help with travel and creative work.'
     },
     {
       icon: 'education',
-      titleKey: 'home.page.highlights.items.educational_impact.title',
-      titleFallback: 'Educational Impact',
-      copyKey: 'home.page.highlights.items.educational_impact.copy',
-      copyFallback: 'Curriculum pilots, teacher labs, and student hackathons nurture confident creators.'
+      titleKey: 'highlights.item_2_title',
+      titleFallback: 'Education',
+      copyKey: 'highlights.item_2_body',
+      copyFallback: 'Lesson plans and workshops that are easy to use and share.'
     },
     {
       icon: 'target',
-      titleKey: 'home.page.highlights.items.consulting_excellence.title',
-      titleFallback: 'Consulting Excellence',
-      copyKey: 'home.page.highlights.items.consulting_excellence.copy',
-      copyFallback: 'Hands-on integration sprints pair transparent automation with lasting change.'
+      titleKey: 'highlights.item_3_title',
+      titleFallback: 'Consulting',
+      copyKey: 'highlights.item_3_body',
+      copyFallback: 'Pilot sprints with clear documentation and opt-out controls.'
     },
     {
       icon: 'people',
-      titleKey: 'home.page.highlights.items.community_creativity.title',
-      titleFallback: 'Community & Creativity',
-      copyKey: 'home.page.highlights.items.community_creativity.copy',
-      copyFallback: 'Blogs, events, and community forums let families, founders, and students learn together.'
+      titleKey: 'highlights.item_4_title',
+      titleFallback: 'Community',
+      copyKey: 'highlights.item_4_body',
+      copyFallback: 'Simple guides and events for families, students, and founders.'
     }
   ] as const;
 
@@ -103,95 +100,43 @@
     {
       id: 'consulting',
       icon: 'target',
-      titleKey: 'home.page.offerings.items.consulting.title',
-      titleFallback: 'AI Consulting & Integration',
-      summaryKey: 'home.page.offerings.items.consulting.summary',
-      summaryFallback:
-        'Map opportunities, run pilot sprints, and launch explainable automation with founder-led guidance.',
-      bullets: [
-        {
-          key: 'home.page.offerings.items.consulting.bullets.0',
-          fallback: 'Discovery workshops grounded in signage-inspired clarity'
-        },
-        {
-          key: 'home.page.offerings.items.consulting.bullets.1',
-          fallback: 'Pilot roadmaps with opt-out controls and transparent documentation'
-        },
-        {
-          key: 'home.page.offerings.items.consulting.bullets.2',
-          fallback: 'Training and change support to keep teams confident'
-        }
-      ],
+      titleKey: 'offer.consulting_title',
+      titleFallback: 'Consulting',
+      summaryKey: 'offer.consulting_body',
+      summaryFallback: 'We map use cases, run pilot sprints, and train your team.',
+      bullets: [],
       primary: {
         href: '/consulting',
-        labelKey: 'home.page.offerings.items.consulting.primary_cta',
-        labelFallback: 'Request a Consultation'
+        labelKey: 'offer.consulting_cta',
+        labelFallback: 'Request a consultation'
       }
     },
     {
       id: 'platforms',
       icon: 'ai',
-      titleKey: 'home.page.offerings.items.platforms.title',
-      titleFallback: 'Flagship Platforms',
-      summaryKey: 'home.page.offerings.items.platforms.summary',
-      summaryFallback:
-        'NodeVoyage reimagines travel planning while Ideonautix accelerates creative productivity—both share the same accessible rhythm.',
-      bullets: [
-        {
-          key: 'home.page.offerings.items.platforms.bullets.0',
-          fallback: 'Personalised itineraries and collaborative travel workspaces'
-        },
-        {
-          key: 'home.page.offerings.items.platforms.bullets.1',
-          fallback: 'Creative canvases, pitch assistants, and multilingual workflows'
-        },
-        {
-          key: 'home.page.offerings.items.platforms.bullets.2',
-          fallback: 'AAA contrast modes, reduced-motion support, and localisation baked in'
-        }
-      ],
+      titleKey: 'offer.products_title',
+      titleFallback: 'Products (in development)',
+      summaryKey: 'offer.products_body',
+      summaryFallback: 'NodeVoyage and Ideonautix share the same accessible design system.',
+      bullets: [],
       primary: {
         href: '/nodevoyage',
-        labelKey: 'home.page.offerings.items.platforms.primary_cta',
-        labelFallback: 'Explore Platforms'
-      },
-      secondary: {
-        href: '/',
-        labelKey: 'home.page.offerings.items.platforms.secondary_cta',
-        labelFallback: 'View Case Studies'
+        labelKey: 'offer.products_cta',
+        labelFallback: 'Explore tools'
       }
     },
     {
       id: 'education',
       icon: 'people',
-      titleKey: 'home.page.offerings.items.education.title',
-      titleFallback: 'Educational Outreach',
-      summaryKey: 'home.page.offerings.items.education.summary',
-      summaryFallback:
-        'In partnership with LIAA, schools, and cultural institutions, we bring AI literacy to classrooms, libraries, and community hubs.',
-      bullets: [
-        {
-          key: 'home.page.offerings.items.education.bullets.0',
-          fallback: 'Ready-to-run lesson plans and bilingual classroom kits'
-        },
-        {
-          key: 'home.page.offerings.items.education.bullets.1',
-          fallback: 'Parent ambassador network and mentorship pipelines'
-        },
-        {
-          key: 'home.page.offerings.items.education.bullets.2',
-          fallback: 'Community events that blend logic, art, and storytelling'
-        }
-      ],
+      titleKey: 'offer.education_title',
+      titleFallback: 'Education',
+      summaryKey: 'offer.education_body',
+      summaryFallback: 'Classroom kits and workshops. Simple to adapt and localize.',
+      bullets: [],
       primary: {
         href: '/',
-        labelKey: 'home.page.offerings.items.education.primary_cta',
-        labelFallback: 'Join the Programme'
-      },
-      secondary: {
-        href: '/',
-        labelKey: 'home.page.offerings.items.education.secondary_cta',
-        labelFallback: 'Access Resource Library'
+        labelKey: 'offer.education_cta',
+        labelFallback: 'Talk to us'
       }
     }
   ] satisfies ReadonlyArray<Offering>;
@@ -252,58 +197,50 @@
   } as const;
 
   const finale = {
-    eyebrowKey: 'home.page.finale.eyebrow',
-    eyebrowFallback: 'Let’s collaborate',
-    titleKey: 'home.page.finale.title',
-    titleFallback: 'Ready to choreograph your next idea?',
-    copyKey: 'home.page.finale.copy',
-    copyFallback:
-      'Bring your roadmap, classroom goals, or community vision. We will help orchestrate the right mix of consulting, products, and outreach to make AI feel friendly and focused.',
+    titleKey: 'cta_block.title',
+    titleFallback: 'Ready to start?',
+    copyKey: 'cta_block.body',
+    copyFallback: 'Tell us your goals. We will help you choose the simple next step.',
     primary: {
       href: '/consulting',
-      labelKey: 'home.page.finale.primary_cta',
-      labelFallback: 'Explore Our Services'
+      labelKey: 'cta_block.cta_primary',
+      labelFallback: 'Explore services'
     },
     secondary: {
       href: '/contact',
-      labelKey: 'home.page.finale.secondary_cta',
-      labelFallback: 'Connect with the Team'
+      labelKey: 'cta_block.cta_secondary',
+      labelFallback: 'Talk to us'
     }
   } as const;
 
   const platformShowcase = {
-    eyebrowKey: 'home.page.platform_showcase.eyebrow',
-    eyebrowFallback: 'Product snapshots',
-    titleKey: 'home.page.platform_showcase.title',
-    titleFallback: 'Experience our flagship platforms',
-    descriptionKey: 'home.page.platform_showcase.description',
-    descriptionFallback:
-      'Peek at the calm, glassy interfaces our teams are polishing across Ideonautix and NodeVoyage. Every screen leans on the same accessible design system you experience on this site.',
+    titleKey: 'snapshots.title',
+    titleFallback: 'Product snapshots',
+    descriptionKey: 'snapshots.intro',
+    descriptionFallback: 'See work-in-progress screens from Ideonautix and NodeVoyage.',
     items: [
       {
         id: 'ideonautix',
-        titleKey: 'home.page.platform_showcase.items.ideonautix.title',
-        titleFallback: 'Ideonautix creative cockpit',
-        copyKey: 'home.page.platform_showcase.items.ideonautix.copy',
-        copyFallback:
-          'A focused writing and pitching workspace that keeps teams synchronised while our AI co-pilot explains every suggestion.',
+        titleKey: 'snapshots.ideo_title',
+        titleFallback: 'Ideonautix',
+        copyKey: 'snapshots.ideo_body',
+        copyFallback: 'A focused workspace for writing and pitching, with clear AI guidance.',
         ctaHref: '/ideonautix',
-        ctaKey: 'home.page.platform_showcase.items.ideonautix.cta',
-        ctaFallback: 'Explore Ideonautix',
+        ctaKey: 'snapshots.ideo_cta',
+        ctaFallback: 'Ideonautix',
         image: '/images/products/ideonautix-icon.png',
         altKey: 'home.page.platform_showcase.items.ideonautix.alt',
         altFallback: 'Mockup of the Ideonautix creative cockpit interface'
       },
       {
         id: 'nodevoyage',
-        titleKey: 'home.page.platform_showcase.items.nodevoyage.title',
-        titleFallback: 'NodeVoyage travel timeline',
-        copyKey: 'home.page.platform_showcase.items.nodevoyage.copy',
-        copyFallback:
-          'Collaborative itineraries with inclusive defaults, live missions, and transparent AI reasoning ready for every traveller.',
+        titleKey: 'snapshots.nv_title',
+        titleFallback: 'NodeVoyage',
+        copyKey: 'snapshots.nv_body',
+        copyFallback: 'Travel planning with collaborative timelines and transparent AI steps.',
         ctaHref: '/nodevoyage',
-        ctaKey: 'home.page.platform_showcase.items.nodevoyage.cta',
-        ctaFallback: 'Tour NodeVoyage',
+        ctaKey: 'snapshots.nv_cta',
+        ctaFallback: 'NodeVoyage',
         image: '/images/products/nodevoyage-icon.png',
         altKey: 'home.page.platform_showcase.items.nodevoyage.alt',
         altFallback: 'Mockup of the NodeVoyage planning board'
@@ -318,9 +255,6 @@
   title={t(hero.titleKey, hero.titleFallback)}
   subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
 >
-  <svelte:fragment slot="description">
-    <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
-  </svelte:fragment>
   <svelte:fragment slot="actions">
     {#each hero.actions as action (action.href)}
       <Button href={action.href} variant={action.variant} size={action.size}>{t(action.labelKey, action.labelFallback)}</Button>
@@ -331,11 +265,7 @@
 <section class="section highlights" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('home.page.highlights.eyebrow')}</span>
-      <h2>{t('home.page.highlights.title')}</h2>
-      <p>
-        {t('home.page.highlights.description')}
-      </p>
+      <h2>{t('highlights.title')}</h2>
     </header>
 
     <div class="highlights__grid" use:staggerReveal>
@@ -357,11 +287,7 @@
 <section class="section offerings" data-surface="glow" aria-labelledby="offerings-heading" use:revealOnScroll>
   <div class="container">
     <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t('home.page.offerings.eyebrow')}</span>
-      <h2 id="offerings-heading">{t('home.page.offerings.title')}</h2>
-      <p>
-        {t('home.page.offerings.description')}
-      </p>
+      <h2 id="offerings-heading">{t('offer.title')}</h2>
     </header>
 
     <div class="offerings__grid" use:staggerReveal>
@@ -400,7 +326,6 @@
 <section class="section platform-showcase" data-surface="glow" aria-labelledby="platform-showcase-heading" use:revealOnScroll>
   <div class="container">
     <div class="platform-showcase__header">
-      <span class="section-eyebrow">{t(platformShowcase.eyebrowKey, platformShowcase.eyebrowFallback)}</span>
       <h2 id="platform-showcase-heading">{t(platformShowcase.titleKey, platformShowcase.titleFallback)}</h2>
       <p class="platform-showcase__intro">{t(platformShowcase.descriptionKey, platformShowcase.descriptionFallback)}</p>
     </div>
@@ -426,36 +351,10 @@
   </div>
 </section>
 
-<section class="section resources" data-surface="glow" use:revealOnScroll>
-  <div class="container">
-    <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
-      <h2>{t(educationShowcase.titleKey, educationShowcase.titleFallback)}</h2>
-      <p>{t(educationShowcase.descriptionKey, educationShowcase.descriptionFallback)}</p>
-    </header>
-
-    <div class="resources__grid" use:staggerReveal>
-      {#each educationShowcase.items as item (item.titleKey)}
-        <GlassCard class="resource-card" padding="lg" halo interactive>
-          <div class="resource-icon">
-            <Icon name={item.icon} size="var(--icon-glyph-lg)" />
-          </div>
-          <span class="resource-eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
-          <h3>{t(item.titleKey, item.titleFallback)}</h3>
-          <p>{t(item.copyKey, item.copyFallback)}</p>
-          <div class="card-actions">
-            <Button href={item.cta.href} variant="secondary" size="md">{t(item.cta.labelKey, item.cta.labelFallback)}</Button>
-          </div>
-        </GlassCard>
-      {/each}
-    </div>
-  </div>
-</section>
 
 <section class="section finale" data-surface="glow" use:revealOnScroll>
   <div class="container">
     <GlassCard class="finale-card" halo padding="lg" interactive>
-      <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
       <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
       <p>{t(finale.copyKey, finale.copyFallback)}</p>
       <div class="card-actions">
@@ -471,14 +370,6 @@
 </section>
 
 <style>
-  .hero-description {
-    max-width: var(--measure-xl);
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: var(--text-lead);
-    line-height: var(--leading-relaxed);
-  }
-
   .section-heading {
     position: relative;
     z-index: var(--z-content);
@@ -507,7 +398,6 @@
   .section.highlights,
   .section.offerings,
   .section.platform-showcase,
-  .section.resources,
   .section.finale {
     isolation: isolate;
     overflow: hidden;
@@ -532,11 +422,6 @@
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.resources {
-    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.2);
-    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
-    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.14);
-  }
 
   .section.finale {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
@@ -586,7 +471,6 @@
 
   .highlights > .container,
   .offerings > .container,
-  .resources > .container,
   .finale > .container {
     position: relative;
     z-index: var(--z-content);
@@ -594,8 +478,7 @@
 
 
   .highlights__grid,
-  .offerings__grid,
-  .resources__grid {
+  .offerings__grid {
     display: grid;
     gap: var(--grid-gap-lg);
     grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
@@ -604,7 +487,6 @@
 
   :global(.highlight-card),
   :global(.offering-card),
-  :global(.resource-card),
   :global(.finale-card) {
     display: grid;
     gap: var(--cluster-gap-md);
@@ -646,8 +528,7 @@
     animation: floaty var(--offering-float-duration) var(--resource-float-ease) infinite reverse;
   }
 
-  :global(.offering-card) ul,
-  :global(.resource-card) ul {
+  :global(.offering-card) ul {
     margin: 0;
     padding-inline-start: calc(var(--space-lg) + var(--space-xs));
     display: grid;
@@ -656,28 +537,6 @@
     font-size: var(--text-small);
   }
 
-  .resource-icon {
-    inline-size: var(--size-icon-md);
-    block-size: var(--size-icon-md);
-    border-radius: var(--radius-full);
-    display: inline-grid;
-    place-items: center;
-    background:
-      radial-gradient(circle at 28% 28%, rgba(var(--signal-yellow-rgb), 0.22), transparent 72%),
-      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.12) 18%);
-    color: var(--signal-yellow);
-    box-shadow: var(--shadow-card-signal-soft);
-    --resource-float-duration: 42s;
-    --resource-float-ease: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    animation: floaty var(--resource-float-duration) var(--resource-float-ease) infinite;
-  }
-
-  .resource-eyebrow {
-    font-size: var(--text-small);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
 
   .card-actions {
     display: flex;
@@ -705,12 +564,6 @@
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
-  .resources :global(.resource-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 93%, rgba(var(--signal-yellow-rgb), 0.12) 7%);
-    --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 30%, transparent 70%);
-    --surface-glass-shadow: var(--shadow-card-signal);
-    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 70%, var(--aurora-purple) 30%);
-  }
 
   .finale :global(.finale-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
@@ -734,7 +587,6 @@
     }
 
     .offerings__grid,
-    .resources__grid,
     .platform-showcase__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -746,7 +598,6 @@
     }
 
     .offerings__grid,
-    .resources__grid,
     .platform-showcase__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -768,8 +619,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .highlight-icon,
-    .offering-icon,
-    .resource-icon {
+    .offering-icon {
       animation: none;
     }
 
@@ -779,18 +629,15 @@
 
     .highlights,
     .offerings,
-    .resources,
     .finale {
       animation: none;
     }
 
     .highlights::before,
     .offerings::before,
-    .resources::before,
     .finale::before,
     .highlight-icon,
-    .offering-icon,
-    .resource-icon {
+    .offering-icon {
       animation: none;
     }
   }

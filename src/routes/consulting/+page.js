@@ -1,9 +1,9 @@
 export const load = () => ({
   meta: {
-    title: 'AI Consulting Services & Pilot Program | AlgoRhythmics',
+    title: 'Consulting | AlgoRhythmics',
     description:
       'Partner with AlgoRhythmics for calm AI consulting across strategy, build, and care with inclusive design and explainable automation.',
-    ogTitle: 'AI Consulting Services & Pilot Program | AlgoRhythmics',
+    ogTitle: 'Consulting | AlgoRhythmics',
     ogDescription:
       'Join the AlgoRhythmics consulting pilot for strategy workshops, implementation support, and advisory care built on accessible, transparent AI.',
     url: 'https://algorhythmics.dev/consulting',

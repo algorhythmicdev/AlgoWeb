@@ -2,7 +2,7 @@
 
 /**
  * AlgoRhythmics i18n Configuration
- * Internationalization setup for 6 languages
+ * Internationalization setup for English
  */
 
 import { register, init, getLocaleFromNavigator, locale, t, time, date, number, addMessages } from 'svelte-i18n';
@@ -10,11 +10,6 @@ import enMessages from './en.json';
 
 // Register all translation files
 register('en', () => import('./en.json'));
-register('lv', () => import('./lv.json'));
-register('ru', () => import('./ru.json'));
-register('uk', () => import('./uk.json'));
-register('fr', () => import('./fr.json'));
-register('es', () => import('./es.json'));
 
 addMessages('en', enMessages);
 
@@ -26,7 +21,7 @@ function getInitialLocale() {
   
   // Check localStorage first
   const stored = localStorage.getItem('language');
-  if (stored && ['en', 'lv', 'ru', 'uk', 'fr', 'es'].includes(stored)) {
+  if (stored && ['en'].includes(stored)) {
     return stored;
   }
   
@@ -38,16 +33,6 @@ function getInitialLocale() {
     'en': 'en',
     'en-US': 'en',
     'en-GB': 'en',
-    'lv': 'lv',
-    'lv-LV': 'lv',
-    'ru': 'ru',
-    'ru-RU': 'ru',
-    'uk': 'uk',
-    'uk-UA': 'uk',
-    'fr': 'fr',
-    'fr-FR': 'fr',
-    'es': 'es',
-    'es-ES': 'es'
   };
   
   return langMap[browserLang] || 'en';
@@ -112,36 +97,6 @@ export const languages = [
     name: 'English',
     nativeName: 'English',
     isDefault: true
-  },
-  {
-    code: 'lv',
-    name: 'Latvian',
-    nativeName: 'Latviešu',
-    isDefault: false
-  },
-  {
-    code: 'ru',
-    name: 'Russian',
-    nativeName: 'Русский',
-    isDefault: false
-  },
-  {
-    code: 'uk',
-    name: 'Ukrainian',
-    nativeName: 'Українська',
-    isDefault: false
-  },
-  {
-    code: 'fr',
-    name: 'French',
-    nativeName: 'Français',
-    isDefault: false
-  },
-  {
-    code: 'es',
-    name: 'Spanish',
-    nativeName: 'Español',
-    isDefault: false
   }
 ];
 
