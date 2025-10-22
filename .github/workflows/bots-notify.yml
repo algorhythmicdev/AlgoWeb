@@ -1,0 +1,29 @@
+name: Notify Bots (Codex & Jules)
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+  issues:
+    types: [opened, edited, closed, reopened]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build payload
+        id: payload
+        run: |
+          ev='${{ toJson(github.event) }}'
+          echo "json=$ev" >> $GITHUB_OUTPUT
+      - name: Codex webhook
+        if: ${{ secrets.CODEX_WEBHOOK_URL }}
+        run: |
+          printf '%s' '${{ steps.payload.outputs.json }}' | \
+          curl -sS -X POST -H "Content-Type: application/json" \
+               -H "X-Bots-Secret: ${{ secrets.BOTS_SHARED_SECRET }}" \
+               -d @- '${{ secrets.CODEX_WEBHOOK_URL }}'
+      - name: Jules webhook
+        if: ${{ secrets.JULES_WEBHOOK_URL }}
+        run: |
+          printf '%s' '${{ steps.payload.outputs.json }}' | \
+          curl -sS -X POST -H "Content-Type: application/json" \
+               -H "X-Bots-Secret: ${{ secrets.BOTS_SHARED_SECRET }}" \
+               -d @- '${{ secrets.JULES_WEBHOOK_URL }}'

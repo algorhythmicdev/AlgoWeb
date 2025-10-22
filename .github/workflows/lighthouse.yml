@@ -1,0 +1,28 @@
+name: Lighthouse
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"   # Mon 06:00 UTC
+jobs:
+  lhci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npm run build
+      - run: npx serve -s build -l 4173 &
+      - uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            http://localhost:4173/
+            http://localhost:4173/about/
+            http://localhost:4173/consulting/
+            http://localhost:4173/nodevoyage/
+            http://localhost:4173/ideonautix/
+            http://localhost:4173/contact/
+          uploadArtifacts: true
+          configPath: .lighthouserc.json
+          runs: 2
