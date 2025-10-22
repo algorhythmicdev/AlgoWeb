@@ -63,8 +63,8 @@ export const footerLinks = {
     { label: 'footer.ideonautix', href: '/ideonautix' }
   ],
   legal: [
-    { label: 'footer.about', href: '/about' },
-    { label: 'footer.contact', href: '/contact' }
+    { label: 'footer.privacy', href: null },
+    { label: 'footer.terms', href: null }
   ],
   social: [
     { label: 'footer.social.linkedin', href: 'https://linkedin.com/company/algorhythmics', icon: 'linkedin' },

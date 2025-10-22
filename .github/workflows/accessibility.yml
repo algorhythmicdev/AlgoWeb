@@ -13,8 +13,17 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx serve -s build -l 4173 &
+      - name: Install matching ChromeDriver
+        run: npx browser-driver-manager install chrome
       - name: Run axe
         run: |
+          set -euo pipefail
+          CHROMEDRIVER_PATH="$(npx browser-driver-manager which | awk -F': ' '/chromedriver/ {print $2; exit}')"
+          if [ -z "$CHROMEDRIVER_PATH" ]; then
+            echo "Unable to locate Chromedriver from browser-driver-manager" >&2
+            exit 1
+          fi
+          export CHROMEDRIVER_PATH
           npx @axe-core/cli http://localhost:4173/            --exit 0
           npx @axe-core/cli http://localhost:4173/about/      --exit 0
           npx @axe-core/cli http://localhost:4173/consulting/ --exit 0

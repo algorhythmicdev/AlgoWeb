@@ -2,7 +2,7 @@
 import { afterEach, beforeAll, expect } from 'vitest';
 import { cleanup } from '@testing-library/svelte/svelte5';
 import { addMessages, init } from 'svelte-i18n';
-import en from '$lib/i18n/en.json';
+import en from '$lib/translations/en.json';
 
 if (typeof window !== 'undefined' && !window.matchMedia) {
   window.matchMedia = (query) => ({

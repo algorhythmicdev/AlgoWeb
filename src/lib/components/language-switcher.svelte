@@ -2,7 +2,7 @@
   import { get } from 'svelte/store';
   import { onDestroy } from 'svelte';
   import { tick } from 'svelte';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { language } from '$stores/language';
 
   let isOpen = false;
@@ -22,12 +22,7 @@
   };
 
   const languages: LanguageOption[] = [
-    { code: 'en', label: 'language_switcher.languages.en.short', name: 'language_switcher.languages.en.name' },
-    { code: 'lv', label: 'language_switcher.languages.lv.short', name: 'language_switcher.languages.lv.name' },
-    { code: 'ru', label: 'language_switcher.languages.ru.short', name: 'language_switcher.languages.ru.name' },
-    { code: 'uk', label: 'language_switcher.languages.uk.short', name: 'language_switcher.languages.uk.name' },
-    { code: 'fr', label: 'language_switcher.languages.fr.short', name: 'language_switcher.languages.fr.name' },
-    { code: 'es', label: 'language_switcher.languages.es.short', name: 'language_switcher.languages.es.name' }
+    { code: 'en', label: 'language_switcher.languages.en.short', name: 'language_switcher.languages.en.name' }
   ];
 
   $: currentLanguage = languages.find((lang) => lang.code === $language) || languages[0];

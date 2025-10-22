@@ -2,7 +2,7 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import { onDestroy, onMount, tick } from 'svelte';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { Button } from '$lib/components';
   import LanguageSwitcher from './language-switcher.svelte';
   import ThemeToggle from './theme-toggle-dropdown.svelte';
@@ -103,7 +103,15 @@
 <header class="site-header">
   <div class="site-header__inner">
     <a href="/" class="brand" aria-label={$_('nav.brand_aria')}>
-      <img src="/images/brand/logo-main.svg" alt={$_('nav.brand_name')} width="148" height="40" />
+      <picture>
+        <source srcset="/images/brand/logo-main.svg" type="image/svg+xml" />
+        <img
+          src="/images/brand/logo-main.png"
+          alt={$_('nav.brand_name')}
+          width="148"
+          height="40"
+        />
+      </picture>
       <span class="brand__text">{$_('nav.brand_name')}</span>
     </a>
 
@@ -186,10 +194,13 @@
     tabindex="-1"
     bind:this={mobileMenu}
   >
-    <div class="mobile-menu__header">
-      <a href="/" class="brand" on:click={handleLinkFollow}>
-        <img src="/images/brand/logo-main.svg" alt={$_('nav.brand_name')} width="120" height="32" />
-      </a>
+      <div class="mobile-menu__header">
+        <a href="/" class="brand" on:click={handleLinkFollow}>
+          <picture>
+            <source srcset="/images/brand/logo-main.svg" type="image/svg+xml" />
+            <img src="/images/brand/logo-main.png" alt={$_('nav.brand_name')} width="120" height="32" />
+          </picture>
+        </a>
       <button type="button" class="mobile-menu__close" on:click={closeMenu}>
         <span class="sr-only">{$_('nav.close_menu') ?? 'Close menu'}</span>
         <svg viewBox="0 0 18 18" aria-hidden="true">

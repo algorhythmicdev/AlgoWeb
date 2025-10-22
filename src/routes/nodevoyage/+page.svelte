@@ -2,10 +2,11 @@
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
   type TranslationParams = Record<string, unknown>;
@@ -43,9 +44,12 @@
       labelFallback: 'Back to solutions overview'
     },
     demoCta: {
-      href: 'https://nodevoyage.algorhythmics.dev',
+      href: null,
       labelKey: 'nodevoyage.hero.demo_cta',
-      labelFallback: 'Launch the live demo'
+      labelFallback: 'Live demo (coming soon)',
+      statusKey: 'nodevoyage.hero.demo_status',
+      statusFallback: 'Coming soon',
+      isAvailable: false
     },
     highlights: [
       {
@@ -289,9 +293,23 @@
     <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
       {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
     </Button>
-    <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
-      {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
-    </Button>
+    {#if hero.demoCta.isAvailable && hero.demoCta.href}
+      <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
+        {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+      </Button>
+    {:else}
+      <div class="cta-disabled-wrapper">
+        <Button
+          variant="secondary"
+          size="lg"
+          aria-disabled="true"
+          class="cta-disabled"
+        >
+          {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+        </Button>
+        <span class="cta-note">{t(hero.demoCta.statusKey, hero.demoCta.statusFallback)}</span>
+      </div>
+    {/if}
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
@@ -306,8 +324,8 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section section--snapshot" data-surface="glow" use:revealOnScroll>
-  <div class="container snapshot">
+<Section class="section--snapshot" data-surface="glow">
+  <div class="snapshot" use:revealOnScroll>
     <GlassCard class="snapshot-card" padding="lg" halo>
       <img
         src={snapshot.image}
@@ -319,37 +337,50 @@
       <div class="snapshot-card__body">
         <h2>{t('nodevoyage.snapshot.title')}</h2>
         <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
-        <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
-          {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
-        </Button>
+        {#if hero.demoCta.isAvailable && hero.demoCta.href}
+          <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
+            {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+          </Button>
+        {:else}
+          <div class="cta-disabled-wrapper">
+            <Button
+              variant="secondary"
+              aria-disabled="true"
+              class="cta-disabled"
+            >
+              {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+            </Button>
+            <span class="cta-note">{t(hero.demoCta.statusKey, hero.demoCta.statusFallback)}</span>
+          </div>
+        {/if}
       </div>
     </GlassCard>
   </div>
-</section>
+</Section>
 
-<section class="section section--features" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="section--features" data-surface="glow">
+  <div class="features__content" use:revealOnScroll>
     <h2 class="section-title">{t(features.titleKey, features.titleFallback)}</h2>
     <p class="section-lead">{t(features.leadKey, features.leadFallback)}</p>
 
     <div class="feature-grid" use:staggerReveal>
       {#each features.cards as card (card.titleKey)}
         <GlassCard class="feature-card" halo padding="lg" interactive>
-          <div class="feature-icon" aria-hidden="true">
-            <Icon name={card.icon} size="var(--icon-glyph-lg)" />
-          </div>
-          <h3>{t(card.titleKey, card.titleFallback)}</h3>
-          <p>{t(card.copyKey, card.copyFallback)}</p>
-        </GlassCard>
-      {/each}
+        <div class="feature-icon" aria-hidden="true">
+          <Icon name={card.icon} size="var(--icon-glyph-lg)" />
+        </div>
+        <h3>{t(card.titleKey, card.titleFallback)}</h3>
+        <p>{t(card.copyKey, card.copyFallback)}</p>
+      </GlassCard>
+    {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section class="section section--roadmap" data-surface="glow" use:revealOnScroll>
-  <div class="container roadmap">
+<Section class="section--roadmap" data-surface="glow">
+  <div class="roadmap" use:revealOnScroll>
     <div>
       <span class="section-eyebrow">{t(roadmap.eyebrowKey, roadmap.eyebrowFallback)}</span>
       <h2>{t(roadmap.titleKey, roadmap.titleFallback)}</h2>
@@ -367,12 +398,12 @@
       {/each}
     </ol>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section section--differentiators" data-surface="glow" use:revealOnScroll>
-  <div class="container differentiators">
+<Section class="section--differentiators" data-surface="glow">
+  <div class="differentiators" use:revealOnScroll>
     <div class="differentiators-copy">
       <span class="section-eyebrow">{t(differentiators.eyebrowKey, differentiators.eyebrowFallback)}</span>
       <h2>{t(differentiators.titleKey, differentiators.titleFallback)}</h2>
@@ -393,12 +424,12 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="voyage" />
 
-<section id="explorers-club" class="section explorers section--explorers" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section id="explorers-club" class="explorers section--explorers" data-surface="glow">
+  <div class="explorers-section" use:revealOnScroll>
     <GlassCard class="explorers-card" padding="lg" particles>
       <span class="section-eyebrow">{t(explorers.eyebrowKey, explorers.eyebrowFallback)}</span>
       <h2>{t(explorers.titleKey, explorers.titleFallback)}</h2>
@@ -444,66 +475,66 @@
       <p class="privacy-note">{t(explorers.form.privacyKey, explorers.form.privacyFallback)}</p>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section cta section--cta" data-surface="glow" use:revealOnScroll>
-  <div class="container">
-    <GlassCard class="cta-card" padding="lg" halo>
-      <h2>{t(related.titleKey, related.titleFallback)}</h2>
-      <p>{t(related.copyKey, related.copyFallback)}</p>
-      <div class="cta-actions">
-        <Button href="/ideonautix" variant="secondary">
-          {t(related.primaryCtaKey, related.primaryCtaFallback)}
-        </Button>
-        <Button href="/contact" variant="gradient">
-          {t(related.secondaryCtaKey, related.secondaryCtaFallback)}
-        </Button>
-      </div>
-    </GlassCard>
+<Section class="cta section--cta" data-surface="glow">
+  <div class="cta-container" use:revealOnScroll>
+  <GlassCard class="cta-card" padding="lg" halo>
+    <h2>{t(related.titleKey, related.titleFallback)}</h2>
+    <p>{t(related.copyKey, related.copyFallback)}</p>
+    <div class="cta-actions">
+      <Button href="/ideonautix" variant="secondary">
+        {t(related.primaryCtaKey, related.primaryCtaFallback)}
+      </Button>
+      <Button href="/contact" variant="gradient">
+        {t(related.secondaryCtaKey, related.secondaryCtaFallback)}
+      </Button>
+    </div>
+  </GlassCard>
   </div>
-</section>
+</Section>
 
 <style>
-  .section {
+  :global(.section) {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     --section-padding: clamp(var(--section-padding-tablet), 8vw, var(--section-padding-desktop));
   }
 
-  .section.section--snapshot {
+  :global(.section.section--snapshot) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.section--features {
+  :global(.section.section--features) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.section--roadmap {
+  :global(.section.section--roadmap) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.section--differentiators {
+  :global(.section.section--differentiators) {
     --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.2);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
     --section-glow-accent: rgba(var(--aurora-purple-rgb), 0.14);
   }
 
-  .section.section--explorers {
+  :global(.section.section--explorers) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
     --section-glow-secondary: rgba(var(--signal-yellow-rgb), 0.16);
     --section-glow-accent: rgba(var(--aurora-purple-rgb), 0.18);
   }
 
-  .section.section--cta {
+  :global(.section.section--cta) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.24);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.18);
@@ -561,6 +592,11 @@
     font-size: var(--text-eyebrow);
     color: var(--text-tertiary);
     margin-bottom: var(--space-2xs);
+  }
+
+  .features__content {
+    display: grid;
+    gap: var(--space-2xl);
   }
 
   .feature-grid {
@@ -674,6 +710,11 @@
     --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 56%, var(--voyage-blue) 44%);
   }
 
+  .explorers-section {
+    display: grid;
+    justify-items: center;
+  }
+
   .explorers-form {
     --form-gap: var(--grid-gap-md);
     --form-field-radius: var(--radius-md);
@@ -727,11 +768,32 @@
     --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 64%, var(--aurora-purple) 36%);
   }
 
+  .cta-container {
+    display: grid;
+    justify-items: center;
+  }
+
   .cta-actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-lg);
     justify-content: center;
+  }
+
+  .cta-disabled-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .cta-note {
+    font-size: var(--text-meta);
+    color: color-mix(in oklab, var(--text) 70%, transparent 30%);
+  }
+
+  :global(.cta-disabled) {
+    cursor: not-allowed;
   }
 
 

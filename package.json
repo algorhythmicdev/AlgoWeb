@@ -57,6 +57,9 @@
     "npm": ">=9.0.0"
   },
   "size-limit": [
-    { "path": "build/assets/*.js", "limit": "250 KB" }
+    {
+      "path": "build/_app/immutable/**/*.js",
+      "limit": "250 KB"
+    }
   ]
 }

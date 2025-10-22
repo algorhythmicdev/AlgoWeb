@@ -1,11 +1,12 @@
 <script lang="ts">
   import Hero from '$lib/components/Hero.svelte';
+  import Section from '$lib/components/Section.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
   type TranslationParams = Record<string, unknown>;
@@ -104,7 +105,20 @@
       titleFallback: 'Consulting',
       summaryKey: 'offer.consulting_body',
       summaryFallback: 'We map use cases, run pilot sprints, and train your team.',
-      bullets: [],
+      bullets: [
+        {
+          key: 'offer.consulting_bullet_1',
+          fallback: 'Automation roadmaps and workflow design tuned to your daily operations.'
+        },
+        {
+          key: 'offer.consulting_bullet_2',
+          fallback: 'Pilot sprints with measurable outcomes, documentation, and opt-out controls.'
+        },
+        {
+          key: 'offer.consulting_bullet_3',
+          fallback: 'Training that hands ownership back to your team once the sprint completes.'
+        }
+      ],
       primary: {
         href: '/consulting',
         labelKey: 'offer.consulting_cta',
@@ -118,7 +132,20 @@
       titleFallback: 'Products (in development)',
       summaryKey: 'offer.products_body',
       summaryFallback: 'NodeVoyage and Ideonautix share the same accessible design system.',
-      bullets: [],
+      bullets: [
+        {
+          key: 'offer.products_bullet_1',
+          fallback: 'NodeVoyage: an AI-assisted travel planner with collaborative tools and sustainability tracking.'
+        },
+        {
+          key: 'offer.products_bullet_2',
+          fallback: 'Ideonautix: Pomodoro Coach, Pitch Assistant, and Competitive Intelligence modules for founders.'
+        },
+        {
+          key: 'offer.products_bullet_3',
+          fallback: 'Shared AI orchestration, accessibility tokens, and localisation for six languages from day one.'
+        }
+      ],
       primary: {
         href: '/nodevoyage',
         labelKey: 'offer.products_cta',
@@ -132,7 +159,20 @@
       titleFallback: 'Education',
       summaryKey: 'offer.education_body',
       summaryFallback: 'Classroom kits and workshops. Simple to adapt and localize.',
-      bullets: [],
+      bullets: [
+        {
+          key: 'offer.education_bullet_1',
+          fallback: 'Teacher programmes spanning basics to leadership, with resources in plain language.'
+        },
+        {
+          key: 'offer.education_bullet_2',
+          fallback: 'Targets: 80% of Latvian institutions reached, 25k+ students yearly, 500+ trained teachers.'
+        },
+        {
+          key: 'offer.education_bullet_3',
+          fallback: 'Partnership model with LIAA for events, curriculum input, and long-term measurement.'
+        }
+      ],
       primary: {
         href: '/',
         labelKey: 'offer.education_cta',
@@ -213,6 +253,178 @@
     }
   } as const;
 
+  const brandOverviewCards = [
+    {
+      id: 'who-we-are',
+      icon: 'people',
+      titleKey: 'home.brand.overview.title',
+      titleFallback: 'Who we are',
+      copyKey: 'home.brand.overview.copy',
+      copyFallback:
+        'AlgoRhythmics is a Latvia-based, pre-company stage initiative building accessible AI tools and practical consulting. We speak plainly about our in-development status and work with partners who value real execution.',
+      bullets: [
+        {
+          key: 'home.brand.overview.bullet_1',
+          fallback: 'Mission: unlock useful AI for everyday people, schools, startups, and small businesses.'
+        },
+        {
+          key: 'home.brand.overview.bullet_2',
+          fallback: 'Operating from Daugavpils and Riga with a remote-first mindset and a co-leadership model.'
+        },
+        {
+          key: 'home.brand.overview.bullet_3',
+          fallback: 'Rooted in Reclame Fabriek’s Signage Research Department for real-world R&D discipline.'
+        }
+      ]
+    },
+    {
+      id: 'pillars',
+      icon: 'target',
+      titleKey: 'home.brand.pillars.title',
+      titleFallback: 'Three pillars, one rhythm',
+      copyKey: 'home.brand.pillars.copy',
+      copyFallback: 'Products, consulting, and education move together so partners see impact fast.',
+      bullets: [
+        {
+          key: 'home.brand.pillars.bullet_1',
+          fallback: 'NodeVoyage travel OS and Ideonautix founder toolkit are in active build.'
+        },
+        {
+          key: 'home.brand.pillars.bullet_2',
+          fallback: 'Consulting sprints map automation, integrate AI safely, and train teams to own the outputs.'
+        },
+        {
+          key: 'home.brand.pillars.bullet_3',
+          fallback: 'Education programmes with LIAA align classroom pilots, teacher training, and community events.'
+        }
+      ]
+    },
+    {
+      id: 'why-it-matters',
+      icon: 'idea',
+      titleKey: 'home.brand.impact.title',
+      titleFallback: 'Why this matters',
+      copyKey: 'home.brand.impact.copy',
+      copyFallback: 'Accessible AI only works if it stays calm, inclusive, and measurable. That is our baseline.',
+      bullets: [
+        {
+          key: 'home.brand.impact.bullet_1',
+          fallback: 'Useful AI tools that explain themselves and respect autonomy.'
+        },
+        {
+          key: 'home.brand.impact.bullet_2',
+          fallback: 'Structured programmes with measurable outcomes for schools and cultural partners.'
+        },
+        {
+          key: 'home.brand.impact.bullet_3',
+          fallback: 'Focused startup support that removes noise and protects time.'
+        },
+        {
+          key: 'home.brand.impact.bullet_4',
+          fallback: 'Fair, local-friendly pricing that scales outward with proof.'
+        }
+      ]
+    }
+  ] as const;
+
+  const buildBlueprint = {
+    titleKey: 'home.brand.blueprint.title',
+    titleFallback: 'How we build',
+    leadKey: 'home.brand.blueprint.lead',
+    leadFallback:
+      'Our stack combines signage-grade reliability with modern product cadence. Every layer tracks accessibility, privacy, and documentation.',
+    categories: [
+      {
+        titleKey: 'home.brand.blueprint.frontend.title',
+        titleFallback: 'Frontend',
+        items: [
+          {
+            key: 'home.brand.blueprint.frontend.item_1',
+            fallback: 'SvelteKit + TypeScript with WCAG 2.2 AA/AAA coverage, responsive layouts, and light/dark modes.'
+          },
+          {
+            key: 'home.brand.blueprint.frontend.item_2',
+            fallback: 'Multilingual interface (EN/LV/RU/UK/FR/ES) using shared tokens and calm motion defaults.'
+          }
+        ]
+      },
+      {
+        titleKey: 'home.brand.blueprint.backend.title',
+        titleFallback: 'Backend & Cloud',
+        items: [
+          {
+            key: 'home.brand.blueprint.backend.item_1',
+            fallback: 'Google Cloud stack (Cloud Run, Cloud SQL/Postgres, Firestore, Storage, Redis) with Fastify APIs and Prisma.'
+          },
+          {
+            key: 'home.brand.blueprint.backend.item_2',
+            fallback: 'OpenAPI-first contracts, CI/CD pipelines, and observability baked in.'
+          }
+        ]
+      },
+      {
+        titleKey: 'home.brand.blueprint.ai.title',
+        titleFallback: 'AI Layer',
+        items: [
+          {
+            key: 'home.brand.blueprint.ai.item_1',
+            fallback: 'Vertex AI as primary, OpenAI as fallback, with on-device models when privacy matters.'
+          },
+          {
+            key: 'home.brand.blueprint.ai.item_2',
+            fallback: 'Explainable prompts, opt-out controls, and clear audit trails for every decision.'
+          }
+        ]
+      },
+      {
+        titleKey: 'home.brand.blueprint.realtime.title',
+        titleFallback: 'Realtime & Quality',
+        items: [
+          {
+            key: 'home.brand.blueprint.realtime.item_1',
+            fallback: 'WebSockets and SSE for collaboration, plus testing from unit to accessibility checks.'
+          },
+          {
+            key: 'home.brand.blueprint.realtime.item_2',
+            fallback: 'CI pipelines mirror signage QA discipline with scenario scripts and visual diffing.'
+          }
+        ]
+      },
+      {
+        titleKey: 'home.brand.blueprint.security.title',
+        titleFallback: 'Security & privacy',
+        items: [
+          {
+            key: 'home.brand.blueprint.security.item_1',
+            fallback: 'GDPR-first, encryption everywhere, role-based access, and monitoring for every release.'
+          }
+        ]
+      }
+    ]
+  } as const;
+
+  const pricingOutlook = {
+    titleKey: 'home.brand.pricing.title',
+    titleFallback: 'Pricing & growth',
+    leadKey: 'home.brand.pricing.lead',
+    leadFallback:
+      'Latvia-first pricing keeps entry points between one and three euros. Education discounts stay non-negotiable.',
+    bullets: [
+      {
+        key: 'home.brand.pricing.bullet_1',
+        fallback: 'NodeVoyage and Ideonautix launch with free tiers and €2.99/month premium, plus family and student options.'
+      },
+      {
+        key: 'home.brand.pricing.bullet_2',
+        fallback: 'Marketing focuses on schools, students, and startup communities with transparent KPIs.'
+      },
+      {
+        key: 'home.brand.pricing.bullet_3',
+        fallback: 'Risk scenarios include pricing flexibility, education partnerships, and staged expansion to the wider EU.'
+      }
+    ]
+  } as const;
+
   const platformShowcase = {
     titleKey: 'snapshots.title',
     titleFallback: 'Product snapshots',
@@ -249,23 +461,27 @@
   } as const;
 </script>
 
-<Hero
-  class="hero-landing"
-  variant="grid"
-  title={t(hero.titleKey, hero.titleFallback)}
-  subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
->
-  <svelte:fragment slot="actions">
-    {#each hero.actions as action (action.href)}
-      <Button href={action.href} variant={action.variant} size={action.size}>{t(action.labelKey, action.labelFallback)}</Button>
-    {/each}
-  </svelte:fragment>
-</Hero>
+<Section class="landing-hero" background="plain">
+  <Hero
+    class="hero-landing"
+    variant="grid"
+    title={t(hero.titleKey, hero.titleFallback)}
+    subtitle={t(hero.subtitleKey, hero.subtitleFallback)}
+  >
+    <svelte:fragment slot="actions">
+      {#each hero.actions as action (action.href)}
+        <Button href={action.href} variant={action.variant} size={action.size}>
+          {t(action.labelKey, action.labelFallback)}
+        </Button>
+      {/each}
+    </svelte:fragment>
+  </Hero>
+</Section>
 
-<section class="section highlights" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="highlights" background="plain" data-surface="glow">
+  <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
-      <h2>{t('highlights.title')}</h2>
+      <h2>{t('highlights.title', 'What you get')}</h2>
     </header>
 
     <div class="highlights__grid" use:staggerReveal>
@@ -280,14 +496,19 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section class="section offerings" data-surface="glow" aria-labelledby="offerings-heading" use:revealOnScroll>
-  <div class="container">
+<Section
+  class="offerings"
+  background="plain"
+  data-surface="glow"
+  aria-labelledby="offerings-heading"
+>
+  <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
-      <h2 id="offerings-heading">{t('offer.title')}</h2>
+      <h2 id="offerings-heading">{t('offer.title', 'What we offer')}</h2>
     </header>
 
     <div class="offerings__grid" use:staggerReveal>
@@ -319,12 +540,115 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section platform-showcase" data-surface="glow" aria-labelledby="platform-showcase-heading" use:revealOnScroll>
-  <div class="container">
+<Section class="brand-overview" background="plain" data-surface="glow" aria-labelledby="brand-overview-heading">
+  <div class="section-content" use:revealOnScroll>
+    <header class="section-heading" data-align="center">
+      <h2 id="brand-overview-heading">{t('home.brand.section_title', 'Our brand story')}</h2>
+      <p>{t('home.brand.section_copy', 'Everything starts with honest execution and calm communication.')}</p>
+    </header>
+
+    <div class="brand-overview__grid" use:staggerReveal>
+      {#each brandOverviewCards as card (card.id)}
+        <GlassCard class="brand-card" padding="lg" halo>
+          <div class="brand-card__icon">
+            <Icon name={card.icon} size="var(--icon-glyph-lg)" />
+          </div>
+          <h3>{t(card.titleKey, card.titleFallback)}</h3>
+          <p>{t(card.copyKey, card.copyFallback)}</p>
+          {#if card.bullets?.length}
+            <ul>
+              {#each card.bullets as bullet (bullet.key)}
+                <li>{t(bullet.key, bullet.fallback)}</li>
+              {/each}
+            </ul>
+          {/if}
+        </GlassCard>
+      {/each}
+    </div>
+  </div>
+</Section>
+
+<SectionDivider tone="aurora" />
+
+<Section class="blueprint" background="plain" data-surface="glow" aria-labelledby="blueprint-heading">
+  <div class="section-content" use:revealOnScroll>
+    <header class="section-heading" data-align="center">
+      <h2 id="blueprint-heading">{t(buildBlueprint.titleKey, buildBlueprint.titleFallback)}</h2>
+      <p>{t(buildBlueprint.leadKey, buildBlueprint.leadFallback)}</p>
+    </header>
+
+    <div class="blueprint__grid" use:staggerReveal>
+      {#each buildBlueprint.categories as category (category.titleKey)}
+        <GlassCard class="blueprint-card" padding="lg">
+          <h3>{t(category.titleKey, category.titleFallback)}</h3>
+          <ul>
+            {#each category.items as item (item.key)}
+              <li>{t(item.key, item.fallback)}</li>
+            {/each}
+          </ul>
+        </GlassCard>
+      {/each}
+    </div>
+  </div>
+</Section>
+
+<SectionDivider tone="neutral" />
+
+<Section class="education-hub" background="plain" data-surface="glow" aria-labelledby="education-hub-heading">
+  <div class="section-content" use:revealOnScroll>
+    <header class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
+      <h2 id="education-hub-heading">{t(educationShowcase.titleKey, educationShowcase.titleFallback)}</h2>
+      <p>{t(educationShowcase.descriptionKey, educationShowcase.descriptionFallback)}</p>
+    </header>
+
+    <div class="education-hub__grid" use:staggerReveal>
+      {#each educationShowcase.items as item (item.icon)}
+        <GlassCard class="education-card" padding="lg" halo>
+          <div class="education-card__icon">
+            <Icon name={item.icon} size="var(--icon-glyph-md)" />
+          </div>
+          <span class="education-card__eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
+          <h3>{t(item.titleKey, item.titleFallback)}</h3>
+          <p>{t(item.copyKey, item.copyFallback)}</p>
+          <Button href={item.cta.href} variant="secondary" size="md" class="education-card__cta">
+            {t(item.cta.labelKey, item.cta.labelFallback)}
+          </Button>
+        </GlassCard>
+      {/each}
+    </div>
+  </div>
+</Section>
+
+<SectionDivider tone="aurora" />
+
+<Section class="pricing" background="plain" data-surface="glow" aria-labelledby="pricing-heading">
+  <div class="section-content" use:revealOnScroll>
+    <GlassCard class="pricing-card" padding="lg" halo>
+      <h2 id="pricing-heading">{t(pricingOutlook.titleKey, pricingOutlook.titleFallback)}</h2>
+      <p>{t(pricingOutlook.leadKey, pricingOutlook.leadFallback)}</p>
+      <ul>
+        {#each pricingOutlook.bullets as bullet (bullet.key)}
+          <li>{t(bullet.key, bullet.fallback)}</li>
+        {/each}
+      </ul>
+    </GlassCard>
+  </div>
+</Section>
+
+<SectionDivider tone="neutral" />
+
+<Section
+  class="platform-showcase"
+  background="plain"
+  data-surface="glow"
+  aria-labelledby="platform-showcase-heading"
+>
+  <div class="section-content" use:revealOnScroll>
     <div class="platform-showcase__header">
       <h2 id="platform-showcase-heading">{t(platformShowcase.titleKey, platformShowcase.titleFallback)}</h2>
       <p class="platform-showcase__intro">{t(platformShowcase.descriptionKey, platformShowcase.descriptionFallback)}</p>
@@ -349,11 +673,11 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 
-<section class="section finale" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="finale" background="plain" data-surface="glow">
+  <div class="section-content" use:revealOnScroll>
     <GlassCard class="finale-card" halo padding="lg" interactive>
       <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
       <p>{t(finale.copyKey, finale.copyFallback)}</p>
@@ -367,7 +691,7 @@
       </div>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <style>
   .section-heading {
@@ -395,38 +719,61 @@
     pointer-events: none;
   }
 
-  .section.highlights,
-  .section.offerings,
-  .section.platform-showcase,
-  .section.finale {
+  :global(.section.highlights),
+  :global(.section.offerings),
+  :global(.section.platform-showcase),
+  :global(.section.finale) {
     isolation: isolate;
     overflow: hidden;
   }
 
-  .section.highlights {
+  :global(.section.highlights) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
     --highlight-animation-duration: 14s;
   }
 
-  .section.offerings {
+  :global(.section.offerings) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.platform-showcase {
+  :global(.section.platform-showcase) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-
-  .section.finale {
+  :global(.section.finale) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.22);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
+  }
+
+  :global(.section.brand-overview) {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.18);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  :global(.section.blueprint) {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.1);
+  }
+
+  :global(.section.education-hub) {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.2);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  :global(.section.pricing) {
+    --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
   .platform-showcase__header {
@@ -469,9 +816,9 @@
     gap: var(--cluster-gap-md);
   }
 
-  .highlights > .container,
-  .offerings > .container,
-  .finale > .container {
+  :global(.highlights > .section__inner),
+  :global(.offerings > .section__inner),
+  :global(.finale > .section__inner) {
     position: relative;
     z-index: var(--z-content);
   }
@@ -545,34 +892,94 @@
     align-items: center;
   }
 
-  .highlights :global(.highlight-card) {
+  :global(.highlights .highlight-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.12) 8%);
     --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 35%, transparent 65%);
     --surface-glass-shadow: var(--shadow-card-voyage);
     --focus-ring-color: color-mix(in srgb, var(--voyage-blue) 70%, var(--aurora-purple) 30%);
   }
 
-  .highlights :global(.highlight-card:hover .highlight-icon),
-  .highlights :global(.highlight-card:focus-visible .highlight-icon) {
+  :global(.highlights .highlight-card:hover .highlight-icon),
+  :global(.highlights .highlight-card:focus-visible .highlight-icon) {
     animation-duration: var(--highlight-animation-duration);
   }
 
-  .offerings :global(.offering-card) {
+  :global(.offerings .offering-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.14) 10%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 38%, transparent 62%);
     --surface-glass-shadow: var(--shadow-card-aurora);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
-
-  .finale :global(.finale-card) {
+  :global(.finale .finale-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
     --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 42%, transparent 58%);
     --surface-glass-shadow: var(--shadow-card-aurora-strong);
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 70%, var(--voyage-blue) 30%);
   }
 
-  .finale :global(.finale-card)::after {
+  .brand-overview__grid,
+  .blueprint__grid,
+  .education-hub__grid {
+    display: grid;
+    gap: var(--grid-gap-lg);
+  }
+
+  :global(.brand-card),
+  :global(.blueprint-card),
+  :global(.education-card),
+  :global(.pricing-card) {
+    display: grid;
+    gap: var(--cluster-gap-md);
+    width: min(100%, var(--card-max-width));
+    margin-inline: auto;
+  }
+
+  .brand-card__icon,
+  .education-card__icon {
+    inline-size: var(--size-icon-md);
+    block-size: var(--size-icon-md);
+    border-radius: var(--radius-full);
+    display: inline-grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--glass-bg-lightest) 52%, transparent 48%);
+    color: var(--aurora-purple);
+    box-shadow: var(--shadow-card-aurora);
+  }
+
+  :global(.brand-card) ul,
+  :global(.blueprint-card) ul,
+  :global(.pricing-card) ul {
+    margin: 0;
+    padding-inline-start: calc(var(--space-lg) + var(--space-xs));
+    display: grid;
+    gap: var(--space-xs);
+    color: var(--text-secondary);
+    font-size: var(--text-small);
+  }
+
+  :global(.education-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 92%, rgba(var(--voyage-blue-rgb), 0.14) 8%);
+    --surface-glass-border: color-mix(in srgb, var(--voyage-blue) 36%, transparent 64%);
+    --surface-glass-shadow: var(--shadow-card-voyage);
+    text-align: left;
+  }
+
+  .education-card__eyebrow {
+    font-size: var(--text-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  :global(.education-card__cta) {
+    justify-self: start;
+    --btn-padding-block: calc(var(--button-padding-block-md) - var(--space-2));
+    --btn-padding-inline: calc(var(--button-padding-inline-md) - var(--space-2));
+    --btn-font-size: var(--text-small);
+  }
+
+  :global(.finale .finale-card)::after {
     border: var(--border-width-hairline) solid rgba(var(--signal-yellow-rgb), 0.25);
     mix-blend-mode: screen;
   }
@@ -587,7 +994,13 @@
     }
 
     .offerings__grid,
-    .platform-showcase__grid {
+    .platform-showcase__grid,
+    .brand-overview__grid,
+    .education-hub__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .blueprint__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
@@ -598,7 +1011,13 @@
     }
 
     .offerings__grid,
-    .platform-showcase__grid {
+    .platform-showcase__grid,
+    .brand-overview__grid,
+    .education-hub__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .blueprint__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
@@ -627,15 +1046,15 @@
       display: none;
     }
 
-    .highlights,
-    .offerings,
-    .finale {
+    :global(.highlights),
+    :global(.offerings),
+    :global(.finale) {
       animation: none;
     }
 
-    .highlights::before,
-    .offerings::before,
-    .finale::before,
+    :global(.highlights)::before,
+    :global(.offerings)::before,
+    :global(.finale)::before,
     .highlight-icon,
     .offering-icon {
       animation: none;

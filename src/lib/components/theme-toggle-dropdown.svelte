@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { tick } from 'svelte';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { theme } from '$stores/theme';
 
   let isOpen = false;

@@ -9,7 +9,7 @@
    - Run `npm run build` (or `npx svelte-kit sync`) before `npm test` so `.svelte-kit/tsconfig.json` exists.
 2. **Localize literal text**
    - Replace the copied strings in the components below with i18n keys using `import { _ } from '$lib/i18n';` and `{$_('key.path')}`.
-   - Add the keys (with English copy) to `src/lib/i18n/en.json` and run `npm run i18n:check` to spot missing translations in other locales.
+   - Add the keys (with English copy) to `src/lib/translations/en.json` and run `npm run i18n:check` to spot missing translations in other locales.
    - For non-translatable terms (product names, etc.), convert them into translation entries marked as identical across locales; the hygiene tests require every visible string to pass through the i18n layer.
    - Files to update:
      - `src/lib/components/AdminNav.svelte`

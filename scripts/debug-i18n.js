@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const I18N_DIR = 'src/lib/i18n';
+const I18N_DIR = 'src/lib/translations';
 const EN_FILE = path.join(I18N_DIR, 'en.json');
 const ES_FILE = path.join(I18N_DIR, 'es.json');
 

@@ -2,6 +2,7 @@
     import Hero from "$lib/components/Hero.svelte";
     import GlassCard from "$lib/components/GlassCard.svelte";
     import SectionDivider from "$lib/components/SectionDivider.svelte";
+    import Section from "$lib/components/Section.svelte";
     import Button from "$lib/components/Button.svelte";
     import Icon from "$lib/components/icons/Icon.svelte";
     import { revealOnScroll, staggerReveal } from "$lib/animations";
@@ -141,33 +142,6 @@
             },
         },
     ] as const;
-
-    const supportCommitment = {
-        eyebrowKey: "contact.page.support.eyebrow",
-        eyebrowFallback: "Support promise",
-        titleKey: "contact.page.support.title",
-        titleFallback: "Responsive, human support every step of the way",
-        copyKey: "contact.page.support.copy",
-        copyFallback:
-            "We pair every pilot, consulting sprint, and classroom programme with clear expectations so you always know when to expect a reply.",
-        bullets: [
-            {
-                key: "contact.page.support.bullets.0",
-                fallback:
-                    "Most enquiries receive a personal response within one business day.",
-            },
-            {
-                key: "contact.page.support.bullets.1",
-                fallback:
-                    "Pilot partners and consulting clients get a dedicated escalation channel with 24-hour turnaround on critical issues.",
-            },
-            {
-                key: "contact.page.support.bullets.2",
-                fallback:
-                    "We document every conversation transparently so teams can pick up where they left off.",
-            },
-        ],
-    } as const;
 
     const helpCenter = {
         eyebrowKey: "contact.page.help.eyebrow",
@@ -323,46 +297,46 @@
     </svelte:fragment>
 </Hero>
 
-<section id="options" class="section contact-options" use:revealOnScroll>
-    <div class="container">
-        <header class="section-heading" data-align="center">
-            <span class="section-eyebrow"
-                >{t("contact.page.cards.eyebrow")}</span
-            >
-            <h2>{t("contact.page.cards.heading")}</h2>
-            <p>
-                {t("contact.page.cards.supporting_copy",
-                )}
-            </p>
-        </header>
+<Section id="options" class="contact-options">
+    <div class="contact-options__content" use:revealOnScroll>
+    <header class="section-heading" data-align="center">
+        <span class="section-eyebrow"
+            >{t("contact.page.cards.eyebrow")}</span
+        >
+        <h2>{t("contact.page.cards.heading")}</h2>
+        <p>
+            {t("contact.page.cards.supporting_copy",
+            )}
+        </p>
+    </header>
 
-        <div class="contact-options__grid auto-grid" use:staggerReveal>
-            {#each contactCards as card (card.titleKey)}
-                <GlassCard class="contact-card" padding="lg" halo>
-                    <div class="card-icon">
-                        <Icon name={card.icon} size="var(--icon-glyph-lg)" />
-                    </div>
-                    <h3>{t(card.titleKey, card.titleFallback)}</h3>
-                    <p>{t(card.copyKey, card.copyFallback)}</p>
-                    <Button
-                        href={card.action.href}
-                        variant="secondary"
-                        size="md"
-                        >{t(
-                            card.action.labelKey,
-                            card.action.labelFallback,
-                        )}</Button
-                    >
-                </GlassCard>
-            {/each}
-        </div>
+    <div class="contact-options__grid auto-grid" use:staggerReveal>
+        {#each contactCards as card (card.titleKey)}
+            <GlassCard class="contact-card" padding="lg" halo>
+                <div class="card-icon">
+                    <Icon name={card.icon} size="var(--icon-glyph-lg)" />
+                </div>
+                <h3>{t(card.titleKey, card.titleFallback)}</h3>
+                <p>{t(card.copyKey, card.copyFallback)}</p>
+                <Button
+                    href={card.action.href}
+                    variant="secondary"
+                    size="md"
+                    >{t(
+                        card.action.labelKey,
+                        card.action.labelFallback,
+                    )}</Button
+                >
+            </GlassCard>
+        {/each}
     </div>
-</section>
+    </div>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section id="form" class="section contact-form" use:revealOnScroll>
-    <div class="container">
+<Section id="form" class="contact-form">
+    <div class="contact-form__content" use:revealOnScroll>
         <GlassCard class="form-card" padding="lg" halo>
             <span class="section-eyebrow"
                 >{t("contact.page.form.eyebrow")}</span
@@ -481,12 +455,12 @@
             </form>
         </GlassCard>
     </div>
-</section>
+</Section>
 
 <SectionDivider tone="citrus" />
 
-<section id="support" class="section contact-support" use:revealOnScroll>
-    <div class="container contact-support__container">
+<Section id="support" class="contact-support">
+    <div class="contact-support__container" use:revealOnScroll>
         <header class="section-heading">
             <span class="section-eyebrow"
                 >{t("contact.page.support.section_eyebrow",
@@ -503,32 +477,6 @@
         </header>
 
         <div class="support-grid auto-grid" use:staggerReveal>
-            <GlassCard class="support-card" padding="lg" halo>
-                <span class="section-eyebrow"
-                    >{t(
-                        supportCommitment.eyebrowKey,
-                        supportCommitment.eyebrowFallback,
-                    )}</span
-                >
-                <h2>
-                    {t(
-                        supportCommitment.titleKey,
-                        supportCommitment.titleFallback,
-                    )}
-                </h2>
-                <p>
-                    {t(
-                        supportCommitment.copyKey,
-                        supportCommitment.copyFallback,
-                    )}
-                </p>
-                <ul class="support-list">
-                    {#each supportCommitment.bullets as bullet (bullet.key)}
-                        <li>{t(bullet.key, bullet.fallback)}</li>
-                    {/each}
-                </ul>
-            </GlassCard>
-
             <GlassCard class="support-card" padding="lg" particles>
                 <figure class="media-card">
                     <img
@@ -613,43 +561,43 @@
             </GlassCard>
         </div>
     </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section id="newsletter" class="section contact-newsletter" use:revealOnScroll>
-    <div class="container">
-        <GlassCard class="newsletter-card" padding="lg">
-            <span class="section-eyebrow"
-                >{t("contact.page.newsletter.eyebrow")}</span
+<Section id="newsletter" class="contact-newsletter">
+    <div class="contact-newsletter__content" use:revealOnScroll>
+    <GlassCard class="newsletter-card" padding="lg">
+        <span class="section-eyebrow"
+            >{t("contact.page.newsletter.eyebrow")}</span
+        >
+        <h2>
+            {t("contact.page.newsletter.title",
+            )}
+        </h2>
+        <p>
+            {t("contact.page.newsletter.copy",
+            )}
+        </p>
+        <div class="newsletter-actions">
+            <Button
+                href="mailto:newsletter@algorhythmics.dev"
+                variant="gradient"
+                >{t("contact.page.newsletter.cta",
+                )}</Button
             >
-            <h2>
-                {t("contact.page.newsletter.title",
-                )}
-            </h2>
-            <p>
-                {t("contact.page.newsletter.copy",
-                )}
-            </p>
-            <div class="newsletter-actions">
-                <Button
-                    href="mailto:newsletter@algorhythmics.dev"
-                    variant="gradient"
-                    >{t("contact.page.newsletter.cta",
-                    )}</Button
-                >
-                <Button href="/consulting" variant="secondary"
-                    >{t("contact.page.newsletter.secondary",
-                    )}</Button
-                >
-            </div>
-            <p class="newsletter-note">
-                {t("contact.page.newsletter.note",
-                )}
-            </p>
-        </GlassCard>
+            <Button href="/consulting" variant="secondary"
+                >{t("contact.page.newsletter.secondary",
+                )}</Button
+            >
+        </div>
+        <p class="newsletter-note">
+            {t("contact.page.newsletter.note",
+            )}
+        </p>
+    </GlassCard>
     </div>
-</section>
+</Section>
 
 <style>
     .support-grid {
@@ -665,17 +613,6 @@
         height: 100%;
         width: min(100%, var(--card-max-width));
         margin-inline: auto;
-    }
-
-    .support-list {
-        margin: 0;
-        padding: 0 0 0 calc(var(--space-lg) + var(--space-xs));
-        display: grid;
-        gap: var(--space-xs);
-        list-style: disc;
-        list-style-position: outside;
-        color: var(--text-secondary);
-        font-size: var(--text-small);
     }
 
     .support-note {
@@ -824,7 +761,7 @@
         text-wrap: balance;
     }
 
-    .contact-newsletter :global(.newsletter-card) {
+    .contact-newsletter__content :global(.newsletter-card) {
         display: grid;
         gap: var(--cluster-gap-md);
         max-inline-size: var(--content-width-standard);

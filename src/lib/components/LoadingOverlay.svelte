@@ -1,10 +1,9 @@
 <script>
-  import '$lib/i18n';
-  import { _, waitLocale } from 'svelte-i18n';
+  import { _, waitLocale } from '$lib/i18n';
   import { get } from 'svelte/store';
   import { onMount } from 'svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
-  import en from '$lib/i18n/en.json';
+  import en from '$lib/translations/en.json';
 
   let visible = true;
   const fallbackLoadingText = en.site.title;

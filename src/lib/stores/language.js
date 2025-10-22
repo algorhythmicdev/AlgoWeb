@@ -1,12 +1,12 @@
 // @ts-check
 import { writable } from 'svelte/store';
 import { browser, dev } from '$app/environment';
-import { locale } from 'svelte-i18n';
+import { locale } from '$lib/i18n';
 
-/** @typedef {'en' | 'lv' | 'ru' | 'uk' | 'fr' | 'es'} SupportedLanguage */
+/** @typedef {'en'} SupportedLanguage */
 
 /** @type {readonly SupportedLanguage[]} */
-const SUPPORTED_LANGUAGES = ['en', 'lv', 'ru', 'uk', 'fr', 'es'];
+const SUPPORTED_LANGUAGES = ['en'];
 
 const createLanguageStore = () => {
   /**

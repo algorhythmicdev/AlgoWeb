@@ -1,12 +1,22 @@
-﻿// @ts-nocheck
+import type { LayoutLoad } from './$types';
 import { pageConfigs, siteConfig } from '$config/seo';
-import { waitLocale } from 'svelte-i18n';
+import { initI18n } from '$lib/i18n';
 
 export const prerender = true;
 
-const ROUTE_MAPPINGS = [
+type RouteKey = keyof typeof pageConfigs;
+
+type RouteMapping = {
+  key: RouteKey;
+  patterns: RegExp[];
+};
+
+const ROUTE_MAPPINGS: RouteMapping[] = [
   { key: 'home', patterns: [/^\/$/] },
-  { key: 'products', patterns: [/^\/products(\/?|$)/, /^\/platform(\/?|$)/, /^\/nodevoyage(\/?|$)/, /^\/ideonautix(\/?|$)/] },
+  {
+    key: 'products',
+    patterns: [/^\/products(\/?|$)/, /^\/platform(\/?|$)/, /^\/nodevoyage(\/?|$)/, /^\/ideonautix(\/?|$)/]
+  },
   { key: 'consulting', patterns: [/^\/consulting(\/?|$)/] },
   { key: 'education', patterns: [/^\/education(\/?|$)/] },
   { key: 'educationalOutreach', patterns: [/^\/educational-outreach(\/?|$)/] },
@@ -19,19 +29,21 @@ const ROUTE_MAPPINGS = [
   { key: 'services', patterns: [/^\/services(\/?|$)/, /^\/solutions(\/?|$)/] }
 ];
 
-function resolvePageKey(pathname) {
+function resolvePageKey(pathname: string): RouteKey {
   const normalised = pathname.replace(/\/+$/, '') || '/';
   const entry = ROUTE_MAPPINGS.find(({ patterns }) => patterns.some((pattern) => pattern.test(normalised)));
   return entry?.key ?? 'home';
 }
 
-export async function load({ url }) {
-  await waitLocale();
+export const load: LayoutLoad = async ({ url, data }) => {
+  await initI18n('en');
 
   const pageKey = resolvePageKey(url.pathname);
   const pageConfig = pageConfigs[pageKey] ?? pageConfigs.home;
 
   return {
+    ...data,
+    locale: 'en',
     meta: {
       title: pageConfig.title,
       description: pageConfig.description,
@@ -39,5 +51,4 @@ export async function load({ url }) {
       keywords: siteConfig.keywords
     }
   };
-}
-
+};

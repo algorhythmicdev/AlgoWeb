@@ -1,5 +1,5 @@
 <script>
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { onMount } from 'svelte';
   import { footerLinks } from '$config/navigation';
   import { siteConfig } from '$config/seo';
@@ -7,6 +7,7 @@
   import brands from '$lib/data/brands.json';
   import { translateOrFallback } from '$lib/utils';
   import GlassCard from '$lib/components/GlassCard.svelte';
+  import Container from '$lib/components/Container.svelte';
 
   /**
    * @param {unknown} value
@@ -17,7 +18,9 @@
     typeof value === 'string' && value.trim().length ? value.trim() : fallback;
 
   let isMounted = false;
-  $: footerLogoSrc = !isMounted || $theme === 'light' ? '/images/brand/logo-main.svg' : '/images/brand/logo-white.svg';
+  $: footerLogo = (!isMounted || $theme === 'light')
+    ? { svg: '/images/brand/logo-main.svg', png: '/images/brand/logo-main.png' }
+    : { svg: '/images/brand/logo-white.svg', png: '/images/brand/logo-white.png' };
 
   onMount(() => {
     isMounted = true;
@@ -70,15 +73,18 @@
 </script>
 
 <footer class="footer">
-  <div class="container">
+  <Container class="footer__inner">
     <div class="footer-grid">
       <GlassCard as="section" class="footer-card footer-card--brand" particles padding="lg">
-        <img
-          src={footerLogoSrc}
-          alt={$_('footer.brand_alt')}
-          width="180"
-          height="48"
-        />
+        <picture>
+          <source srcset={footerLogo.svg} type="image/svg+xml" />
+          <img
+            src={footerLogo.png}
+            alt={$_('footer.brand_alt')}
+            width="180"
+            height="48"
+          />
+        </picture>
         <p class="note">{$_('footer.note')}</p>
       </GlassCard>
 
@@ -110,7 +116,13 @@
           <ul>
             {#each footerLinks.legal as link}
               <li>
-                <a href={link.href}>{$_(link.label)}</a>
+                {#if link.href}
+                  <a href={link.href}>{$_(link.label)}</a>
+                {:else}
+                  <span class="footer-link footer-link--disabled" aria-disabled="true">
+                    {$_(link.label)}
+                  </span>
+                {/if}
               </li>
             {/each}
           </ul>
@@ -172,7 +184,7 @@
         </div>
       </div>
     </GlassCard>
-  </div>
+  </Container>
 </footer>
 
 <style>
@@ -189,7 +201,7 @@
     border-top: 1px solid color-mix(in srgb, var(--glass-border) 56%, transparent 44%);
   }
 
-  .footer > .container {
+  :global(.footer__inner) {
     width: min(100%, var(--container-xl));
     margin-inline: auto;
     padding-inline: var(--space-xl);
@@ -263,6 +275,15 @@
   .footer-links-section a:hover,
   .footer-links-section a:focus-visible {
     color: var(--link);
+  }
+
+  .footer-link--disabled {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-small);
+    color: var(--footer-muted);
+    cursor: default;
+    text-decoration: none;
   }
 
   .footer-partners {

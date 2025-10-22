@@ -2,7 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import fg from 'fast-glob';
 
-const localesDir = join(process.cwd(), 'src', 'lib', 'i18n');
+const localesDir = join(process.cwd(), 'src', 'lib', 'translations');
 const baselineLocale = 'en.json';
 
 /**

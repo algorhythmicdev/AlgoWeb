@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 const localeSetMock = vi.fn();
 
 vi.mock('$app/environment', () => ({ browser: true, dev: true }), { virtual: true });
-vi.mock('svelte-i18n', () => ({
+vi.mock('$lib/i18n', () => ({
   locale: {
     set: localeSetMock
   }
@@ -140,13 +140,13 @@ describe('theme store', () => {
 
 describe('language store', () => {
   it('initializes from stored language', async () => {
-    window.localStorage.setItem('language', 'fr');
+    window.localStorage.setItem('language', 'en');
     const { language } = await loadLanguageStore();
 
     let current;
     const unsubscribe = language.subscribe((value) => (current = value));
 
-    expect(current).toBe('fr');
+    expect(current).toBe('en');
     unsubscribe();
   });
 
@@ -157,7 +157,7 @@ describe('language store', () => {
     let current;
     const unsubscribe = language.subscribe((value) => (current = value));
 
-    expect(current).toBe('lv');
+    expect(current).toBe('en');
     unsubscribe();
   });
 
@@ -165,10 +165,10 @@ describe('language store', () => {
     const { language } = await loadLanguageStore();
     localeSetMock.mockClear();
 
-    language.set('es');
+    language.set('en');
 
-    expect(localeSetMock).toHaveBeenCalledWith('es');
-    expect(window.localStorage.getItem('language')).toBe('es');
+    expect(localeSetMock).toHaveBeenCalledWith('en');
+    expect(window.localStorage.getItem('language')).toBe('en');
   });
 
   it('warns and ignores unsupported languages', async () => {
