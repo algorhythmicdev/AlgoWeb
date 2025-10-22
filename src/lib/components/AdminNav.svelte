@@ -6,6 +6,11 @@
   import { page } from '$app/stores';
   import { _ } from '$lib/i18n';
 
+  /**
+   * @typedef {{ href: string; labelKey: string; icon: string }} NavItem
+   */
+
+  /** @type {NavItem[]} */
   const navItems = [
     { href: '/admin', labelKey: 'admin.nav.items.dashboard', icon: '📊' },
     { href: '/admin/posts', labelKey: 'admin.nav.items.posts', icon: '📝' },
@@ -17,9 +22,6 @@
    * @param {string} href
    */
   function isActive(href) {
-    if (href === '/admin') {
-      return $page.url.pathname === '/admin';
-    }
     return $page.url.pathname.startsWith(href);
   }
 </script>

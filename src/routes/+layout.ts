@@ -18,11 +18,16 @@ const ROUTE_MAPPINGS: RouteMapping[] = [
     patterns: [/^\/products(\/?|$)/, /^\/platform(\/?|$)/, /^\/nodevoyage(\/?|$)/, /^\/ideonautix(\/?|$)/]
   },
   { key: 'consulting', patterns: [/^\/consulting(\/?|$)/] },
-  { key: 'education', patterns: [/^\/education(\/?|$)/] },
-  { key: 'educationalOutreach', patterns: [/^\/educational-outreach(\/?|$)/] },
   {
     key: 'resources',
-    patterns: [/^\/education-hub(\/?|$)/, /^\/blog(\/?|$)/, /^\/help-center(\/?|$)/]
+    patterns: [
+      /^\/education-hub(\/?|$)/,
+      /^\/resources(\/?|$)/,
+      /^\/education(\/?|$)/,
+      /^\/educational-outreach(\/?|$)/,
+      /^\/blog(\/?|$)/,
+      /^\/help-center(\/?|$)/
+    ]
   },
   { key: 'about', patterns: [/^\/about(\/?|$)/] },
   { key: 'contact', patterns: [/^\/contact(\/?|$)/] },
@@ -41,8 +46,10 @@ export const load: LayoutLoad = async ({ url, data }) => {
   const pageKey = resolvePageKey(url.pathname);
   const pageConfig = pageConfigs[pageKey] ?? pageConfigs.home;
 
+  const parentData: Record<string, unknown> = data ?? {};
+
   return {
-    ...data,
+    ...parentData,
     locale: 'en',
     meta: {
       title: pageConfig.title,

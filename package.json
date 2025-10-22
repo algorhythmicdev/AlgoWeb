@@ -13,7 +13,8 @@
     "lint": "npm run i18n:check && eslint .",
     "test": "vitest run",
     "i18n:check": "node scripts/check-translations.mjs",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "ci:local": "node ./scripts/run-ci.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

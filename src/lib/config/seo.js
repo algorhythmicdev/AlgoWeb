@@ -4,7 +4,14 @@ import { assets, base } from '$app/paths';
  * SEO Configuration
  */
 
+/**
+ * @param {string} value
+ */
 const stripTrailingSlash = (value) => value.replace(/\/$/, '');
+
+/**
+ * @param {string} value
+ */
 const ensureLeadingSlash = (value) => (value.startsWith('/') ? value : `/${value}`);
 
 const rawSiteUrl = stripTrailingSlash(import.meta.env?.PUBLIC_SITE_URL || 'https://algorhythmics.dev');
@@ -25,7 +32,7 @@ try {
   siteOrigin = siteUrlIncludesBase;
 }
 
-const normalizedAssetsBase = assets && assets !== '/' ? stripTrailingSlash(assets) : '';
+const normalizedAssetsBase = assets ? stripTrailingSlash(assets) : '';
 const assetBase = normalizedAssetsBase || normalizedBase;
 const isExternalAssetBase = /^(?:[a-z]+:)?\/\//i.test(assetBase);
 

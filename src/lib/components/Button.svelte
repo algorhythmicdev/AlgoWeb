@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { withBase } from "$utils/paths";
+
     type ButtonVariant = "primary" | "secondary" | "subtle" | "gradient";
     type ButtonSize = "md" | "lg";
 
@@ -22,6 +24,7 @@
     $: ariaPressed = pressed === undefined ? undefined : !!pressed;
     $: ariaLabelValue = ariaLabel ?? undefined;
     $: busy = loading ? true : undefined;
+    $: resolvedHref = isLink ? withBase(href) ?? undefined : undefined;
 
     $: classes = [
         "btn",
@@ -40,7 +43,7 @@
     <a
         {...$$restProps}
         class={classes}
-        {href}
+        href={resolvedHref}
         {target}
         rel={computedRel}
         aria-label={ariaLabelValue}

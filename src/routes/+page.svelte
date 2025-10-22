@@ -97,7 +97,7 @@
     }
   ] as const;
 
-  const offerings = [
+  const offerings: ReadonlyArray<Offering> = [
     {
       id: 'consulting',
       icon: 'target',

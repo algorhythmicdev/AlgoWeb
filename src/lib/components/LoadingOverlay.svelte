@@ -4,9 +4,10 @@
   import { onMount } from 'svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import en from '$lib/translations/en.json';
+  import { siteConfig } from '$lib/config/seo';
 
   let visible = true;
-  const fallbackLoadingText = en.site.title;
+  const fallbackLoadingText = en.seo?.default_title ?? siteConfig.title;
   let loadingText = fallbackLoadingText;
   
   onMount(() => {
