@@ -52,7 +52,7 @@
       'We choreograph technology with human-friendly signage craft, inclusive localisation, and transparent automation notes. The result is AI that feels calm, clear, and collaborative.',
     actions: [
       {
-        href: '/services',
+        href: '/consulting',
         variant: 'gradient' as const,
         size: 'lg' as const,
         labelKey: 'home.page.hero.primary_cta',
@@ -123,7 +123,7 @@
         }
       ],
       primary: {
-        href: '/services#consulting',
+        href: '/consulting',
         labelKey: 'home.page.offerings.items.consulting.primary_cta',
         labelFallback: 'Request a Consultation'
       }
@@ -151,12 +151,12 @@
         }
       ],
       primary: {
-        href: '/services#platforms',
+        href: '/nodevoyage',
         labelKey: 'home.page.offerings.items.platforms.primary_cta',
         labelFallback: 'Explore Platforms'
       },
       secondary: {
-        href: '/education-hub#case-studies',
+        href: '/',
         labelKey: 'home.page.offerings.items.platforms.secondary_cta',
         labelFallback: 'View Case Studies'
       }
@@ -184,12 +184,12 @@
         }
       ],
       primary: {
-        href: '/educational-outreach',
+        href: '/',
         labelKey: 'home.page.offerings.items.education.primary_cta',
         labelFallback: 'Join the Programme'
       },
       secondary: {
-        href: '/education-hub#toolkits',
+        href: '/',
         labelKey: 'home.page.offerings.items.education.secondary_cta',
         labelFallback: 'Access Resource Library'
       }
@@ -215,7 +215,7 @@
         copyFallback:
           'Readable, multilingual stories co-written with educators, founders, and families.',
         cta: {
-          href: '/education-hub#insights',
+          href: '/',
           labelKey: 'home.page.education_hub.items.insights.cta',
           labelFallback: 'Browse insights'
         }
@@ -229,7 +229,7 @@
         copyKey: 'home.page.education_hub.items.case_studies.copy',
         copyFallback: 'See classrooms, startups, and cultural partners practicing calm AI.',
         cta: {
-          href: '/education-hub#case-studies',
+          href: '/',
           labelKey: 'home.page.education_hub.items.case_studies.cta',
           labelFallback: 'Explore spotlights'
         }
@@ -243,7 +243,7 @@
         copyKey: 'home.page.education_hub.items.events.copy',
         copyFallback: 'Join monthly gatherings with transcripts, captions, and shared notes.',
         cta: {
-          href: '/education-hub#events',
+          href: '/',
           labelKey: 'home.page.education_hub.items.events.cta',
           labelFallback: 'See upcoming events'
         }
@@ -260,7 +260,7 @@
     copyFallback:
       'Bring your roadmap, classroom goals, or community vision. We will help orchestrate the right mix of consulting, products, and outreach to make AI feel friendly and focused.',
     primary: {
-      href: '/services',
+      href: '/consulting',
       labelKey: 'home.page.finale.primary_cta',
       labelFallback: 'Explore Our Services'
     },
@@ -795,7 +795,3 @@
     }
   }
 </style>
-
-
-
-

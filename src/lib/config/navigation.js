@@ -31,31 +31,23 @@ export const mainNavigation = [
     icon: 'about'
   },
   {
-    label: 'nav.solutions',
-    href: '/solutions',
-    icon: 'services',
-    panelLabel: 'nav.solutions_panel_label',
-    children: [
-      {
-        label: 'nav.solutions_nodevoyage',
-        href: '/nodevoyage',
-        description: 'nav.solutions_nodevoyage_desc'
-      },
-      {
-        label: 'nav.solutions_ideonautix',
-        href: '/ideonautix',
-        description: 'nav.solutions_ideonautix_desc'
-      },
-      {
-        label: 'nav.solutions_consulting',
-        href: '/consulting',
-        description: 'nav.solutions_consulting_desc'
-      }
-    ]
+    label: 'nav.solutions_consulting',
+    href: '/consulting',
+    icon: 'services'
   },
   {
-    label: 'nav.help_center',
-    href: '/help-center',
+    label: 'nav.solutions_nodevoyage',
+    href: '/nodevoyage',
+    icon: 'services'
+  },
+  {
+    label: 'nav.solutions_ideonautix',
+    href: '/ideonautix',
+    icon: 'services'
+  },
+  {
+    label: 'nav.contact',
+    href: '/contact',
     icon: 'info'
   }
 ];
@@ -64,17 +56,13 @@ export const footerLinks = {
   company: [
     { label: 'footer.about', href: '/about' },
     { label: 'footer.contact', href: '/contact' },
-    { label: 'footer.educational_outreach', href: '/educational-outreach' }
   ],
   resources: [
-    { label: 'footer.education_hub', href: '/education-hub' },
-    { label: 'footer.blog', href: '/education-hub#insights' },
-    { label: 'footer.case_studies', href: '/education-hub#case-studies' },
-    { label: 'footer.toolkits', href: '/education-hub#toolkits' },
-    { label: 'footer.events', href: '/education-hub#events' }
+    { label: 'nav.solutions_nodevoyage', href: '/nodevoyage'},
+    { label: 'nav.solutions_ideonautix', href: '/ideonautix'},
+    { label: 'nav.solutions_consulting', href: '/consulting'},
   ],
   support: [
-    { label: 'footer.help_center', href: '/help-center' },
     { label: 'footer.nodevoyage', href: '/nodevoyage' },
     { label: 'footer.ideonautix', href: '/ideonautix' },
     { label: 'footer.consulting', href: '/consulting' },

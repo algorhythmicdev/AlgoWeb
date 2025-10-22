@@ -249,7 +249,7 @@
       labelFallback: 'Book a consultation'
     },
     secondary: {
-      href: '/services#consulting',
+      href: '/consulting',
       labelKey: 'consulting.cta.secondary',
       labelFallback: 'Download capabilities overview'
     }

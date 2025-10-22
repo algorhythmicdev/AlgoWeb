@@ -38,7 +38,7 @@
       labelFallback: 'Join the Explorers Club'
     },
     secondaryCta: {
-      href: '/solutions',
+      href: '/consulting',
       labelKey: 'nodevoyage.hero.secondary_cta',
       labelFallback: 'Back to solutions overview'
     },

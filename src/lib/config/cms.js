@@ -15,7 +15,8 @@ import { env } from '$env/dynamic/public';
 
 /** @type {CMSConfig} */
 export const cmsConfig = {
-  apiUrl: env.PUBLIC_STRAPI_URL || 'http://localhost:1337',
+  // apiUrl: env.PUBLIC_STRAPI_URL || 'http://localhost:1337',
+  apiUrl: 'http://localhost:1337',
   apiVersion: '/api',
   defaultPageSize: 10,
   requestTimeout: 10000

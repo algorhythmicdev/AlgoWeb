@@ -26,10 +26,10 @@ function normalizePath(path = '') {
  */
 function resolveBase(baseOverride) {
   if (baseOverride) return normalizeBase(baseOverride);
-  const configured = import.meta.env.PUBLIC_STRAPI_URL;
-  if (typeof configured === 'string' && configured.length > 0) {
-    return normalizeBase(configured);
-  }
+  // const configured = import.meta.env.PUBLIC_STRAPI_URL;
+  // if (typeof configured === 'string' && configured.length > 0) {
+  //   return normalizeBase(configured);
+  // }
   return 'http://localhost:1337';
 }
 

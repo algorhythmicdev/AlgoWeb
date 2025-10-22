@@ -69,7 +69,7 @@
                 labelFallback: "Email help@algorhythmics.dev",
             },
             {
-                href: "/solutions",
+                href: "/consulting",
                 variant: "secondary" as const,
                 labelKey: "contact.page.hero.cta_events",
                 labelFallback: "Explore our solutions",
@@ -109,7 +109,7 @@
             copyFallback:
                 "Partner with us on NodeVoyage, Ideonautix, or bespoke consulting engagements. We co-design pilots and long-term rollouts.",
             action: {
-                href: "/solutions",
+                href: "/consulting",
                 labelKey: "contact.page.cards.support.cta",
                 labelFallback: "View solutions overview",
             },
@@ -178,7 +178,7 @@
         copyFallback:
             "Dive into onboarding packs, troubleshooting checklists, and multilingual resources inside our Help Center knowledge base.",
         cta: {
-            href: "/help-center",
+            href: "/",
             labelKey: "contact.page.help.cta",
             labelFallback: "Visit the Help Center",
         },
@@ -638,7 +638,7 @@
                     >{t("contact.page.newsletter.cta",
                     )}</Button
                 >
-                <Button href="/solutions" variant="secondary"
+                <Button href="/consulting" variant="secondary"
                     >{t("contact.page.newsletter.secondary",
                     )}</Button
                 >
