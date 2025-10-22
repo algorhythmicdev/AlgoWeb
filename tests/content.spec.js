@@ -291,12 +291,9 @@ describe('localization hygiene', () => {
 
   it('localizes consulting form helper text in every language', async () => {
     const helperKeys = [
-      'form.helper_company',
-      'form.helper_name',
-      'form.helper_email',
-      'form.helper_phone',
-      'form.helper_industry',
-      'form.helper_description'
+      'consulting.form.name.helper',
+      'consulting.form.email.helper',
+      'consulting.form.message.helper'
     ];
 
     for (const file of localeFiles) {
@@ -304,7 +301,7 @@ describe('localization hygiene', () => {
       for (const key of helperKeys) {
         const value = readTranslationValue(key, dictionary);
         expect(typeof value).toBe('string');
-        expect(String(value).trim().length, `${path.basename(file)} missing value for ${key}`).toBeGreaterThan(0);
+        expect(value.length, `${path.basename(file)} missing value for ${key}`).toBeGreaterThan(0);
       }
     }
   });

@@ -79,12 +79,7 @@
           width="180"
           height="48"
         />
-        <p class="tagline">{$_('footer.tagline')}</p>
-        <p class="status">{$_('footer.status')}</p>
-        <div class="contact-info">
-          <p>{$_('footer.location')}</p>
-          <a href="mailto:{siteConfig.contact.email}">{siteConfig.contact.email}</a>
-        </div>
+        <p class="note">{$_('footer.note')}</p>
       </GlassCard>
 
       <GlassCard as="section" class="footer-card footer-card--links" halo padding="lg">
@@ -99,10 +94,10 @@
           </ul>
         </nav>
 
-        <nav class="footer-links-section" aria-labelledby="footer-support-heading">
-          <h4 id="footer-support-heading">{$_('footer.support')}</h4>
+        <nav class="footer-links-section" aria-labelledby="footer-solutions-heading">
+          <h4 id="footer-solutions-heading">{$_('footer.solutions')}</h4>
           <ul>
-            {#each footerLinks.support as link}
+            {#each footerLinks.solutions as link}
               <li>
                 <a href={link.href}>{$_(link.label)}</a>
               </li>
@@ -110,10 +105,10 @@
           </ul>
         </nav>
 
-        <nav class="footer-links-section" aria-labelledby="footer-resources-heading">
-          <h4 id="footer-resources-heading">{$_('footer.resources')}</h4>
+        <nav class="footer-links-section" aria-labelledby="footer-legal-heading">
+          <h4 id="footer-legal-heading">{$_('footer.legal')}</h4>
           <ul>
-            {#each footerLinks.resources as link}
+            {#each footerLinks.legal as link}
               <li>
                 <a href={link.href}>{$_(link.label)}</a>
               </li>

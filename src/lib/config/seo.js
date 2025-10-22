@@ -54,22 +54,10 @@ export const pageConfigs = {
     path: '/services'
   },
   consulting: {
-    title: 'AI Consulting Services & Pilot Program | AlgoRhythmics',
+    title: 'Consulting | AlgoRhythmics',
     description:
       'Explore the AlgoRhythmics consulting pilot with strategy workshops, implementation support, and advisory care for responsible AI delivery.',
     path: '/consulting'
-  },
-  educationalOutreach: {
-    title: 'Educational Outreach & Community | AlgoRhythmics',
-    description:
-      'Explore LIAA partnerships, school programs, community events, and impact stories advancing AI literacy.',
-    path: '/educational-outreach'
-  },
-  education: {
-    title: 'Education Programs | AlgoRhythmics',
-    description:
-      'Discover how AlgoRhythmics supports AI literacy across schools, libraries, and community partners.',
-    path: '/education'
   },
   about: {
     title: 'About AlgoRhythmics - Story, Team & Values',
