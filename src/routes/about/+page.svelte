@@ -2,10 +2,11 @@
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
   type TranslationParams = Record<string, unknown>;
@@ -27,13 +28,13 @@
     eyebrowKey: 'about.page.hero.eyebrow',
     eyebrowFallback: 'Inside AlgoRhythmics',
     titleKey: 'about.page.hero.title',
-    titleFallback: 'Calm AI, crafted in Riga and Rotterdam',
+    titleFallback: 'Calm AI with signage-grade discipline',
     subtitleKey: 'about.page.hero.subtitle',
     subtitleFallback:
-      'We are a Latvian-born studio where algorithms and artistry share the same rhythm. Our work blends signage precision, inclusive design, and playful experimentation.',
+      'AlgoRhythmics is a Latvia-born studio co-led by founders who split their time between our products and Reclame Fabriek’s Signage Research Department.',
     descriptionKey: 'about.page.hero.description',
     descriptionFallback:
-      'Founded in 2025 by technologists and educators, AlgoRhythmics believes logic and creativity belong together. From AI platforms to classroom pilots, we choreograph solutions that explain themselves and invite collaboration.',
+      'We blend signage R&D, accessible design, and honest communication. NodeVoyage and Ideonautix are in development, backed by real fabrication work on next-gen LED neon, in-house controllers, custom coatings, and 3D printed components in Daugavpils.',
     primary: {
       href: '/consulting',
       labelKey: 'about.page.hero.primary_cta',
@@ -84,27 +85,27 @@
   const story = {
     introKey: 'about.page.story.intro',
     introFallback:
-      "What began as a small startup in Riga has grown into a bridge between education, culture, and industry. Early collaborations with Latvia's Investment and Development Agency (LIAA) helped us champion AI education nationwide.",
+      'AlgoRhythmics began as a Riga side project and now bridges signage innovation, education pilots, and accessible AI tools. We stay transparent about the in-development stage while serving real partners.',
     milestones: [
       {
         key: 'about.page.story.milestones.0',
         fallback:
-          'Launched pilot programmes in local schools where students built projects with our tools and saw their ideas come alive.'
+          'Shaped the NodeVoyage and Ideonautix roadmaps around Latvian schools, founders, and families using feedback loops from the Education, Product, and Consulting pillars.'
       },
       {
         key: 'about.page.story.milestones.1',
         fallback:
-          'Tailored Ideonautix for startups after listening to founders who needed calm, creative productivity support.'
+          'Tested calm AI rituals with Reclame Fabriek colleagues, ensuring signage-floor precision and safety translate into consumer software.'
       },
       {
         key: 'about.page.story.milestones.2',
         fallback:
-          'Expanded partnerships with museums, libraries, and international conferences—proving that logic and art thrive together.'
+          'Outlined funding sprints that keep pricing inclusive (EUR 1–3 entries) and education-first metrics at the centre of every release.'
       }
     ],
     cultureKey: 'about.page.story.culture',
     cultureFallback:
-      'Inside the studio we host Logic/Dance sessions—one day a data science hackathon, the next an improv design workshop. This fusion of play and rigor shapes the experiences we ship.'
+      'Our internal rhythm alternates between fabrication labs, usability sessions, and quiet research sprints. We document everything in plain language so collaborators, schools, and investors stay in sync.'
   } as const;
 
   const team = [
@@ -114,10 +115,27 @@
       roleKey: 'about.page.team.members.nikita.role',
       roleFallback: 'Co-founder & CEO',
       focusKey: 'about.page.team.members.nikita.focus',
-      focusFallback: 'Signage craft, storytelling, and partner delivery',
+      focusFallback: 'Strategy, product direction, and partner delivery',
       bioKey: 'about.page.team.members.nikita.bio',
       bioFallback:
-        'Nikita keeps product direction, accessibility, and partnerships aligned. He brings signage-floor realism to every interface and programme.',
+        'Nikita Jurtaevs serves as CEO in a 50/50 co-leadership model, guiding brand, partnerships, and product UX/QA across NodeVoyage and Ideonautix while contributing to Reclame Fabriek’s Signage Research Department.',
+      highlights: [
+        {
+          key: 'about.page.team.members.nikita.highlight_1',
+          fallback:
+            'Leads accessible, multilingual delivery plans with LIAA-aligned pilots and a 2025–2026 go-to-market timeline for both platforms.'
+        },
+        {
+          key: 'about.page.team.members.nikita.highlight_2',
+          fallback:
+            'Works on next-gen LED neon systems, in-house LED controllers, custom coatings, and full-scale 3D printed components inside Reclame Fabriek R&D.'
+        },
+        {
+          key: 'about.page.team.members.nikita.highlight_3',
+          fallback:
+            'Keeps messaging honest: AlgoRhythmics is in development while the founders remain hands-on in Reclame Fabriek’s innovation arm.'
+        }
+      ],
       links: [
         { labelKey: 'about.page.team.members.nikita.links.email', labelFallback: 'Email', href: 'mailto:nikita@algorhythmics.ai' },
         {
@@ -134,10 +152,27 @@
       roleKey: 'about.page.team.members.slaff.role',
       roleFallback: 'Co-founder & CTO',
       focusKey: 'about.page.team.members.slaff.focus',
-      focusFallback: 'Cloud architecture, explainable AI, and operations',
+      focusFallback: 'Technical vision, AI platforms, and delivery',
       bioKey: 'about.page.team.members.slaff.bio',
       bioFallback:
-        'Slaff orchestrates engineering, data flows, and AI integrations. He connects hardware-grade discipline with transparent software experiences.',
+        'Vjaceslavs “Slaff” Trosins co-leads AlgoRhythmics as CTO, owning the technical roadmap across web, mobile, APIs, and AI while engineering signage controllers at Reclame Fabriek’s Signage Research Department.',
+      highlights: [
+        {
+          key: 'about.page.team.members.slaff.highlight_1',
+          fallback:
+            'Designs Google Cloud-first architecture with SvelteKit/TypeScript, Fastify, Prisma, PostgreSQL, Redis/BullMQ, and Vertex AI or Gemini integrations.'
+        },
+        {
+          key: 'about.page.team.members.slaff.highlight_2',
+          fallback:
+            'Pairs Reclame Fabriek R&D experience on LED controllers and fabrication pipelines with explainable AI and real-time UX patterns in consumer software.'
+        },
+        {
+          key: 'about.page.team.members.slaff.highlight_3',
+          fallback:
+            'Oversees near-term funding sprints—Pomodoro Coach, Startup Pitch Assistant, and Competitive Intelligence Dashboard—to finance broader product build-out and hiring.'
+        }
+      ],
       links: [
         { labelKey: 'about.page.team.members.slaff.links.email', labelFallback: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
         { labelKey: 'about.page.team.members.slaff.links.linkedin', labelFallback: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
@@ -185,8 +220,8 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section who-we-are" data-surface="glow" use:revealOnScroll>
-  <div class="container who-we-are__grid">
+<Section class="who-we-are" data-surface="glow">
+  <div class="who-we-are__grid" use:revealOnScroll>
     <GlassCard class="about-card" padding="lg">
       <h2>{t('about.page.story.heading')}</h2>
       <p>{t(story.introKey, story.introFallback)}</p>
@@ -206,12 +241,12 @@
       </div>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section values" data-surface="glow" aria-labelledby="values-heading" use:revealOnScroll>
-  <div class="container">
+<Section class="values" data-surface="glow" aria-labelledby="values-heading">
+  <div class="values__content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.values.eyebrow')}</span>
       <h2 id="values-heading">{t('about.page.values.title')}</h2>
@@ -232,12 +267,12 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section class="section team" data-surface="glow" id="team" use:revealOnScroll>
-  <div class="container">
+<Section class="team" data-surface="glow" id="team">
+  <div class="team__content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.team.eyebrow')}</span>
       <h2>{t('about.page.team.title')}</h2>
@@ -249,44 +284,54 @@
     <div class="team__grid" use:staggerReveal>
       {#each team as member (member.nameKey)}
         <GlassCard class="team-card" padding="lg">
-          <img
-            class="team-photo"
-            src={member.photo}
-            alt={`${t(member.nameKey, member.nameFallback)} portrait`}
-            width="480"
-            height="360"
-            loading="lazy"
-          />
-          <h3>{t(member.nameKey, member.nameFallback)}</h3>
-          <span class="team-role">{t(member.roleKey, member.roleFallback)}</span>
-          <p class="team-focus">
-            {t('about.page.team.focus_label').replace('{focus}', t(member.focusKey, member.focusFallback))}
-          </p>
-          <p>{t(member.bioKey, member.bioFallback)}</p>
-          <div class="team-links">
-            {#each member.links as link (link.href)}
-              <a href={link.href}>{t(link.labelKey, link.labelFallback)}</a>
+        <img
+          class="team-photo"
+          src={member.photo}
+          alt={`${t(member.nameKey, member.nameFallback)} portrait`}
+          width="480"
+          height="360"
+          loading="lazy"
+        />
+        <h3>{t(member.nameKey, member.nameFallback)}</h3>
+        <span class="team-role">{t(member.roleKey, member.roleFallback)}</span>
+        <p class="team-focus">
+          {t('about.page.team.focus_label', 'Focus: {focus}').replace(
+            '{focus}',
+            t(member.focusKey, member.focusFallback)
+          )}
+        </p>
+        <p>{t(member.bioKey, member.bioFallback)}</p>
+        {#if member.highlights?.length}
+          <ul class="team-highlights">
+            {#each member.highlights as highlight (highlight.key)}
+              <li>{t(highlight.key, highlight.fallback)}</li>
             {/each}
-          </div>
-        </GlassCard>
-      {/each}
-    </div>
+          </ul>
+        {/if}
+        <div class="team-links">
+          {#each member.links as link (link.href)}
+            <a href={link.href}>{t(link.labelKey, link.labelFallback)}</a>
+          {/each}
+        </div>
+      </GlassCard>
+    {/each}
   </div>
-</section>
+  </div>
+</Section>
 
-<section class="section finale" data-surface="glow" use:revealOnScroll>
-  <div class="container">
-    <GlassCard class="finale-card" halo padding="lg">
-      <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
-      <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
-      <p>{t(finale.copyKey, finale.copyFallback)}</p>
-      <div class="card-actions">
-        <Button href={finale.primary.href} variant="gradient" size="lg">{t(finale.primary.labelKey, finale.primary.labelFallback)}</Button>
-        <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
-      </div>
-    </GlassCard>
+<Section class="finale" data-surface="glow">
+  <div class="finale__content" use:revealOnScroll>
+  <GlassCard class="finale-card" halo padding="lg">
+    <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
+    <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
+    <p>{t(finale.copyKey, finale.copyFallback)}</p>
+    <div class="card-actions">
+      <Button href={finale.primary.href} variant="gradient" size="lg">{t(finale.primary.labelKey, finale.primary.labelFallback)}</Button>
+      <Button href={finale.secondary.href} variant="secondary" size="lg">{t(finale.secondary.labelKey, finale.secondary.labelFallback)}</Button>
+    </div>
+  </GlassCard>
   </div>
-</section>
+</Section>
 
 <style>
   .hero-kicker {
@@ -307,32 +352,32 @@
     line-height: var(--leading-relaxed);
   }
 
-  .section.who-we-are,
-  .section.values,
-  .section.team,
-  .section.finale {
+  :global(.section.who-we-are),
+  :global(.section.values),
+  :global(.section.team),
+  :global(.section.finale) {
     isolation: isolate;
   }
 
-  .section.who-we-are {
+  :global(.section.who-we-are) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.values {
+  :global(.section.values) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.2);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.team {
+  :global(.section.team) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.finale {
+  :global(.section.finale) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.22);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.16);
@@ -343,6 +388,13 @@
   .team__grid {
     display: grid;
     gap: var(--grid-gap-lg);
+  }
+
+  .values__content,
+  .team__content,
+  .finale__content {
+    display: grid;
+    gap: var(--grid-gap-xl);
   }
 
   .team-photo {
@@ -396,6 +448,19 @@
     color: var(--text-secondary);
   }
 
+  .team-highlights {
+    margin: 0;
+    padding-left: calc(var(--space-lg) + var(--space-xs));
+    display: grid;
+    gap: var(--space-sm);
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+  }
+
+  .team-highlights li::marker {
+    color: var(--voyage-blue);
+  }
+
   .team-links {
     display: flex;
     flex-wrap: wrap;
@@ -429,10 +494,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .who-we-are,
-    .values,
-    .team,
-    .finale {
+    :global(.who-we-are),
+    :global(.values),
+    :global(.team),
+    :global(.finale) {
       animation: none;
     }
   }

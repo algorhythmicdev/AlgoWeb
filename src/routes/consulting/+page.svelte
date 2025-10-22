@@ -2,11 +2,12 @@
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { onMount } from 'svelte';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
   type TranslationParams = Record<string, unknown>;
@@ -249,9 +250,11 @@
       labelFallback: 'Book a consultation'
     },
     secondary: {
-      href: '/consulting',
+      href: null,
       labelKey: 'consulting.cta.secondary',
-      labelFallback: 'Download capabilities overview'
+      labelFallback: 'Download capabilities overview',
+      statusKey: 'consulting.cta.secondary_status',
+      statusFallback: 'Coming soon'
     }
   } as const;
 
@@ -387,8 +390,8 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section quick-facts" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="quick-facts" data-surface="glow">
+  <div class="quick-facts__content" use:revealOnScroll>
     <GlassCard class="quick-facts__card" halo>
       <span class="section-eyebrow">{t('consulting.page.quick_facts_eyebrow')}</span>
       <h2>{t(quickFacts.titleKey, quickFacts.titleFallback)}</h2>
@@ -402,12 +405,17 @@
       </ul>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section class="section packages" data-surface="glow" id="packages" aria-labelledby="packages-heading" use:revealOnScroll>
-  <div class="container">
+<Section
+  class="packages"
+  data-surface="glow"
+  id="packages"
+  aria-labelledby="packages-heading"
+>
+  <div class="packages__content" use:revealOnScroll>
     <header class="section-heading">
       <span class="section-eyebrow">{t('consulting.packages_title')}</span>
       <h2 id="packages-heading">{t('consulting.page.packages_title')}</h2>
@@ -435,10 +443,10 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
-<section class="section approach" data-surface="glow" use:revealOnScroll>
-  <div class="container approach__grid">
+<Section class="approach" data-surface="glow">
+  <div class="approach__grid" use:revealOnScroll>
     <div class="approach__summary">
       <span class="section-eyebrow">{t('consulting.page.approach_eyebrow')}</span>
       <h2>{t(approach.titleKey, approach.titleFallback)}</h2>
@@ -458,12 +466,12 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section process" data-surface="glow" use:revealOnScroll>
-  <div class="container process__grid">
+<Section class="process" data-surface="glow">
+  <div class="process__grid" use:revealOnScroll>
     <div>
       <span class="section-eyebrow">{t('consulting.page.process_eyebrow')}</span>
       <h2>{t(process.titleKey, process.titleFallback)}</h2>
@@ -495,10 +503,10 @@
       </GlassCard>
     </div>
   </div>
-</section>
+</Section>
 
-<section class="section requirements" data-surface="glow" use:revealOnScroll>
-  <div class="container requirements__grid auto-grid">
+<Section class="requirements" data-surface="glow">
+  <div class="requirements__grid auto-grid" use:revealOnScroll>
     <GlassCard class="requirements-card" halo>
       <h2>{t(requirements.titleKey, requirements.titleFallback)}</h2>
       <ul>
@@ -521,12 +529,12 @@
       </Button>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section class="section examples" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="examples" data-surface="glow">
+  <div class="examples__content" use:revealOnScroll>
     <header class="section-heading">
       <span class="section-eyebrow">{t('consulting.page.examples_eyebrow')}</span>
       <h2>{t(examples.titleKey, examples.titleFallback)}</h2>
@@ -549,12 +557,12 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section application" data-surface="glow" id="apply" use:revealOnScroll>
-  <div class="container">
+<Section class="application" data-surface="glow" id="apply">
+  <div class="application__content" use:revealOnScroll>
     <GlassCard class="application-card" halo>
       <span class="section-eyebrow">{t('consulting.form_title')}</span>
       <h2>{t('consulting.page.application_title')}</h2>
@@ -641,21 +649,34 @@
       </form>
     </GlassCard>
   </div>
-</section>
+</Section>
 
-<section class="section cta" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="cta" data-surface="glow">
+  <div class="cta__content" use:revealOnScroll>
     <GlassCard class="cta-card" padding="lg" halo interactive>
       <span class="section-eyebrow">{t('consulting.page.cta_eyebrow')}</span>
       <h2>{t(finalCta.titleKey, finalCta.titleFallback)}</h2>
       <p>{t(finalCta.copyKey, finalCta.copyFallback)}</p>
       <div class="cta-actions">
-        <Button href={finalCta.primary.href} variant="gradient" size="lg">{t(finalCta.primary.labelKey, finalCta.primary.labelFallback)}</Button>
-        <Button href={finalCta.secondary.href} variant="secondary" size="lg">{t(finalCta.secondary.labelKey, finalCta.secondary.labelFallback)}</Button>
+        <Button href={finalCta.primary.href} variant="gradient" size="lg">
+          {t(finalCta.primary.labelKey, finalCta.primary.labelFallback)}
+        </Button>
+        {#if finalCta.secondary.href}
+          <Button href={finalCta.secondary.href} variant="secondary" size="lg">
+            {t(finalCta.secondary.labelKey, finalCta.secondary.labelFallback)}
+          </Button>
+        {:else}
+          <div class="cta-disabled-wrapper">
+            <Button variant="secondary" size="lg" aria-disabled="true" class="cta-disabled">
+              {t(finalCta.secondary.labelKey, finalCta.secondary.labelFallback)}
+            </Button>
+            <span class="cta-note">{t(finalCta.secondary.statusKey, finalCta.secondary.statusFallback)}</span>
+          </div>
+        {/if}
       </div>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <style>
   .hero-badge {
@@ -694,60 +715,60 @@
     color: var(--accent-secondary);
   }
 
-  .section.quick-facts,
-  .section.packages,
-  .section.approach,
-  .section.process,
-  .section.requirements,
-  .section.examples,
-  .section.application,
-  .section.cta {
+  :global(.section.quick-facts),
+  :global(.section.packages),
+  :global(.section.approach),
+  :global(.section.process),
+  :global(.section.requirements),
+  :global(.section.examples),
+  :global(.section.application),
+  :global(.section.cta) {
     isolation: isolate;
   }
 
-  .section.quick-facts {
+  :global(.section.quick-facts) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.1);
   }
 
-  .section.packages {
+  :global(.section.packages) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.24);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.22);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.approach {
+  :global(.section.approach) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.process {
+  :global(.section.process) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.requirements {
+  :global(.section.requirements) {
     --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.18);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.16);
     --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.12);
   }
 
-  .section.examples {
+  :global(.section.examples) {
     --section-glow-primary: rgba(var(--voyage-blue-rgb), 0.22);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.application {
+  :global(.section.application) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.14);
   }
 
-  .section.cta {
+  :global(.section.cta) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.3);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.24);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.18);
@@ -989,7 +1010,7 @@
     gap: var(--cluster-gap-lg);
   }
 
-  .application .form {
+  .application__content .form {
     --form-gap: var(--grid-gap-md);
     --form-field-radius: var(--radius-md);
     --form-field-padding-y: var(--space-md);
@@ -1018,7 +1039,7 @@
     --form-status-error-color: var(--cherry-pop);
   }
 
-  .application .form-status {
+  .application__content .form-status {
     text-wrap: balance;
   }
 
@@ -1032,6 +1053,22 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-lg);
+  }
+
+  .cta-disabled-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .cta-note {
+    font-size: var(--text-meta);
+    color: color-mix(in oklab, var(--text) 70%, transparent 30%);
+  }
+
+  :global(.cta-disabled) {
+    cursor: not-allowed;
   }
 
   @media (prefers-reduced-motion: reduce) {

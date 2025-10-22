@@ -11,7 +11,13 @@ describe('Footer and Navigation i18n', () => {
     const source = await readFile('src/lib/components/Footer.svelte', 'utf8');
     
     // Check that the component imports svelte-i18n
-    expect(source).toContain("import { _ } from 'svelte-i18n'");
+    const usesI18nHelper =
+      source.includes("import { _ } from '$lib/i18n'") ||
+      source.includes('import { _ } from "$lib/i18n"') ||
+      source.includes("import { _ } from 'svelte-i18n'") ||
+      source.includes('import { _ } from "svelte-i18n"');
+
+    expect(usesI18nHelper).toBe(true);
     
     // Check for translation key usage patterns
     expect(source).toMatch(/\$_\(['"]footer\./); // Uses footer.* keys
@@ -24,7 +30,13 @@ describe('Footer and Navigation i18n', () => {
     const source = await readFile('src/lib/components/Navigation.svelte', 'utf8');
     
     // Check that the component imports svelte-i18n (with either single or double quotes)
-    expect(source).toMatch(/import\s+{\s*_\s*}\s+from\s+["']svelte-i18n["']/);
+    const usesI18nImport =
+      source.includes("import { _ } from '$lib/i18n'") ||
+      source.includes('import { _ } from "$lib/i18n"') ||
+      source.includes("import { _ } from 'svelte-i18n'") ||
+      source.includes('import { _ } from "svelte-i18n"');
+
+    expect(usesI18nImport).toBe(true);
     
     // Check for translation key usage patterns
     expect(source).toMatch(/\$_\(['"]nav\./); // Uses nav.* keys
@@ -50,7 +62,7 @@ describe('Footer and Navigation i18n', () => {
   });
 
   it('all Footer translation keys exist in en.json', async () => {
-    const enJson = JSON.parse(await readFile('src/lib/i18n/en.json', 'utf8'));
+    const enJson = JSON.parse(await readFile('src/lib/translations/en.json', 'utf8'));
     
     // Required footer keys
     const requiredFooterKeys = [
@@ -97,7 +109,7 @@ describe('Footer and Navigation i18n', () => {
   });
 
   it('all Navigation translation keys exist in en.json', async () => {
-    const enJson = JSON.parse(await readFile('src/lib/i18n/en.json', 'utf8'));
+    const enJson = JSON.parse(await readFile('src/lib/translations/en.json', 'utf8'));
     
     // Required nav keys
     const requiredNavKeys = [

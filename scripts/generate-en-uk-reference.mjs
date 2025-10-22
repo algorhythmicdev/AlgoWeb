@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 
-const en = JSON.parse(readFileSync('src/lib/i18n/en.json', 'utf8'));
-const uk = JSON.parse(readFileSync('src/lib/i18n/uk.json', 'utf8'));
+const en = JSON.parse(readFileSync('src/lib/translations/en.json', 'utf8'));
+const uk = JSON.parse(readFileSync('src/lib/translations/uk.json', 'utf8'));
 
 const rows = [];
 

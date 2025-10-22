@@ -20,4 +20,4 @@ export * from './config/index.js';
 // Data
 
 // i18n
-export { _, locale, setLocale, languages } from './i18n/index.js';
+export { _, locale, setLocale, getSupportedLocales, initI18n } from './i18n';

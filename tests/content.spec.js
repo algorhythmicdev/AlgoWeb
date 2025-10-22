@@ -7,7 +7,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const projectRoot = path.resolve('.');
-const localeDir = path.join(projectRoot, 'src', 'lib', 'i18n');
+const localeDir = path.join(projectRoot, 'src', 'lib', 'translations');
 
 let localeFiles = [];
 let baseDictionary = {};
@@ -73,18 +73,6 @@ function hasTranslation(key, dictionary) {
     dictionary = undefined;
     return false;
   });
-}
-
-function readTranslationValue(key, dictionary) {
-  return key.split('.').reduce((current, segment) => {
-    if (!segment || current == null) return undefined;
-    if (Array.isArray(current)) {
-      const index = Number(segment);
-      if (Number.isNaN(index)) return undefined;
-      return current[index];
-    }
-    return current?.[segment];
-  }, dictionary);
 }
 
 function extractLiteralKey(argument) {

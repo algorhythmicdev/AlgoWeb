@@ -1,5 +1,11 @@
 // @ts-nocheck
 
+import { buildAssetUrl, siteConfig } from '$lib/config/seo';
+
+const DEFAULT_IMAGE = siteConfig.ogImage;
+const DEFAULT_URL = siteConfig.url;
+const DEFAULT_LOGO = buildAssetUrl('/logo.svg');
+
 /**
  * SEO Utilities
  */
@@ -7,8 +13,8 @@
 export function generateMetaTags({
   title = 'AlgoRhythmics - Where Logic Dances with Creativity',
   description = 'AI innovation lab creating NodeVoyage travel platform and Ideonautix productivity suite.',
-  image = '/og-image.svg',
-  url = 'https://algorhythmics.dev',
+  image = DEFAULT_IMAGE,
+  url = DEFAULT_URL,
   type = 'website',
   locale = 'en_US'
 }) {
@@ -43,8 +49,8 @@ export function generateStructuredData({
   type = 'Organization',
   name = 'AlgoRhythmics',
   description,
-  url = 'https://algorhythmics.dev',
-  logo = 'https://algorhythmics.dev/logo.svg',
+  url = DEFAULT_URL,
+  logo = DEFAULT_LOGO,
   foundingDate = '2025',
   founders = [],
   sameAs = []

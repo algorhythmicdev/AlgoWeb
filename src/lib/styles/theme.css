@@ -11,22 +11,43 @@
     color-scheme: light;
 
     /* ==================== CORE SURFACES ==================== */
-    --bg: #f5f7fb;
-    --bg-elev-1: #ffffff;
-    --bg-elev-2: #eef1f7;
+    --purple-au: #6a38ff;
+    --blue-vo: #1351ff;
+    --yellow-si: #ffd339;
+    --red-ch: #e0322c;
+    --cloud: #f5f7fb;
+    --surface: #ffffff;
+    --mist: #eef1f7;
+    --night: #0b0e13;
+    --graphite: #121722;
+    --ash: #f2f5f9;
+
+    --bg: var(--cloud);
+    --bg-elev-1: var(--mist);
+    --bg-elev-2: var(--surface);
     --text: #0a0d14;
-    --primary: #6a38ff;
-    --secondary: #1351ff;
-    --accent: #ffd339;
-    --border: rgba(10, 13, 20, 0.08);
-    --radius: 16px;
+    --primary: var(--blue-vo);
+    --secondary: var(--purple-au);
+    --accent: var(--yellow-si);
+    --border: color-mix(in oklab, var(--text) 12%, transparent);
+    --radius: 0.75rem;
     --cta-primary-text: #ffffff;
 
+    --font-head: "Montserrat", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+
     /* ==================== BRAND PRIMARIES ==================== */
-    --aurora: var(--primary);
-    --voyage: var(--secondary);
-    --signal: var(--accent);
-    --cherry: #e0322c;
+    --aurora: var(--purple-au);
+    --voyage: var(--blue-vo);
+    --signal: var(--yellow-si);
+    --cherry: var(--red-ch);
     --critical: var(--cherry);
     --critical-text: var(--critical);
 
@@ -1094,6 +1115,8 @@
 [data-theme-legacy='contrast'] {
     color-scheme: light;
 
+    --border: currentColor;
+
     --primary-rgb: 68, 0, 255;
     --accent-1-rgb: 0, 122, 115;
     --accent-2-rgb: 183, 131, 0;
@@ -1262,6 +1285,16 @@
     --button-gradient-color: var(--button-hc-color);
     --button-gradient-hover-bg: linear-gradient(0deg, currentColor 0%, currentColor 100%);
     --button-gradient-hover-border: currentColor;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: var(--night);
+        --bg-elev-1: color-mix(in oklab, var(--night) 85%, white);
+        --bg-elev-2: var(--graphite);
+        --text: var(--ash);
+        --border: color-mix(in oklab, var(--ash) 16%, transparent);
+    }
 }
 
 

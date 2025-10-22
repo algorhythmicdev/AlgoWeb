@@ -2,10 +2,11 @@
   import Hero from '$lib/components/Hero.svelte';
   import GlassCard from '$lib/components/GlassCard.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
-  import { _ } from 'svelte-i18n';
+  import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
   type TranslationParams = Record<string, unknown>;
@@ -42,9 +43,12 @@
       labelFallback: 'Back to solutions overview'
     },
     demoCta: {
-      href: 'https://ideonautix.algorhythmics.dev',
+      href: null,
       labelKey: 'ideonautix.hero.demo_cta',
-      labelFallback: 'Launch the live demo'
+      labelFallback: 'Live demo (coming soon)',
+      statusKey: 'ideonautix.hero.demo_status',
+      statusFallback: 'Coming soon',
+      isAvailable: false
     },
     highlights: [
       {
@@ -293,9 +297,23 @@
     <Button href={hero.secondaryCta.href} variant="subtle" size="lg">
       {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
     </Button>
-    <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
-      {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
-    </Button>
+    {#if hero.demoCta.isAvailable && hero.demoCta.href}
+      <Button href={hero.demoCta.href} variant="secondary" size="lg" target="_blank" rel="noreferrer">
+        {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+      </Button>
+    {:else}
+      <div class="cta-disabled-wrapper">
+        <Button
+          variant="secondary"
+          size="lg"
+          aria-disabled="true"
+          class="cta-disabled"
+        >
+          {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+        </Button>
+        <span class="cta-note">{t(hero.demoCta.statusKey, hero.demoCta.statusFallback)}</span>
+      </div>
+    {/if}
   </svelte:fragment>
 
   <svelte:fragment slot="highlights">
@@ -310,8 +328,8 @@
   </svelte:fragment>
 </Hero>
 
-<section class="section section--snapshot" data-surface="glow" use:revealOnScroll>
-  <div class="container snapshot">
+<Section class="section--snapshot" data-surface="glow">
+  <div class="snapshot" use:revealOnScroll>
     <GlassCard class="snapshot-card" padding="lg" halo>
       <img
         src={snapshot.image}
@@ -323,37 +341,50 @@
       <div class="snapshot-card__body">
         <h2>{t('ideonautix.snapshot.title')}</h2>
         <p>{t(snapshot.captionKey, snapshot.captionFallback)}</p>
-        <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
-          {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
-        </Button>
+        {#if hero.demoCta.isAvailable && hero.demoCta.href}
+          <Button href={hero.demoCta.href} variant="secondary" target="_blank" rel="noreferrer">
+            {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+          </Button>
+        {:else}
+          <div class="cta-disabled-wrapper">
+            <Button
+              variant="secondary"
+              aria-disabled="true"
+              class="cta-disabled"
+            >
+              {t(hero.demoCta.labelKey, hero.demoCta.labelFallback)}
+            </Button>
+            <span class="cta-note">{t(hero.demoCta.statusKey, hero.demoCta.statusFallback)}</span>
+          </div>
+        {/if}
       </div>
     </GlassCard>
   </div>
-</section>
+</Section>
 
-<section class="section section--modules" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="section--modules" data-surface="glow">
+  <div class="modules__content" use:revealOnScroll>
     <h2 class="section-title">{t(modules.titleKey, modules.titleFallback)}</h2>
     <p class="section-lead">{t(modules.leadKey, modules.leadFallback)}</p>
 
     <div class="module-grid" use:staggerReveal>
       {#each modules.cards as module (module.titleKey)}
         <GlassCard class="module-card" halo padding="lg" interactive>
-          <div class="module-icon" aria-hidden="true">
-            <Icon name={module.icon} size="var(--icon-glyph-lg)" />
-          </div>
-          <h3>{t(module.titleKey, module.titleFallback)}</h3>
-          <p>{t(module.copyKey, module.copyFallback)}</p>
-        </GlassCard>
-      {/each}
+        <div class="module-icon" aria-hidden="true">
+          <Icon name={module.icon} size="var(--icon-glyph-lg)" />
+        </div>
+        <h3>{t(module.titleKey, module.titleFallback)}</h3>
+        <p>{t(module.copyKey, module.copyFallback)}</p>
+      </GlassCard>
+    {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="aurora" />
 
-<section class="section section--status" data-surface="glow" use:revealOnScroll>
-  <div class="container status">
+<Section class="section--status" data-surface="glow">
+  <div class="status" use:revealOnScroll>
     <GlassCard class="status-card" padding="lg">
       <span class="section-eyebrow">{t(statusSection.eyebrowKey, statusSection.eyebrowFallback)}</span>
       <h2>{t(statusSection.titleKey, statusSection.titleFallback)}</h2>
@@ -368,12 +399,12 @@
       </Button>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section section--use-cases" data-surface="glow" use:revealOnScroll>
-  <div class="container use-cases">
+<Section class="section--use-cases" data-surface="glow">
+  <div class="use-cases" use:revealOnScroll>
     <div class="use-cases-copy">
       <span class="section-eyebrow">{t(useCases.eyebrowKey, useCases.eyebrowFallback)}</span>
       <h2>{t(useCases.titleKey, useCases.titleFallback)}</h2>
@@ -388,71 +419,71 @@
       {/each}
     </div>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="cherry" />
 
-<section id="pilot-request" class="section pilot section--pilot" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section id="pilot-request" class="pilot section--pilot" data-surface="glow">
+  <div class="pilot-section" use:revealOnScroll>
     <GlassCard class="pilot-card" padding="lg" particles>
-      <span class="section-eyebrow">{t(pilot.eyebrowKey, pilot.eyebrowFallback)}</span>
-      <h2>{t(pilot.titleKey, pilot.titleFallback)}</h2>
-      <p>{t(pilot.copyKey, pilot.copyFallback)}</p>
+    <span class="section-eyebrow">{t(pilot.eyebrowKey, pilot.eyebrowFallback)}</span>
+    <h2>{t(pilot.titleKey, pilot.titleFallback)}</h2>
+    <p>{t(pilot.copyKey, pilot.copyFallback)}</p>
 
-      <form class="pilot-form form" on:submit={handlePilotSubmit}>
-        <label class="form-field">
-          <span>{t(pilot.form.nameLabelKey, pilot.form.nameLabelFallback)}</span>
-          <input type="text" bind:value={pilotName} required on:input={resetPilotStatus} />
-        </label>
+    <form class="pilot-form form" on:submit={handlePilotSubmit}>
+      <label class="form-field">
+        <span>{t(pilot.form.nameLabelKey, pilot.form.nameLabelFallback)}</span>
+        <input type="text" bind:value={pilotName} required on:input={resetPilotStatus} />
+      </label>
 
-        <label class="form-field">
-          <span>{t(pilot.form.emailLabelKey, pilot.form.emailLabelFallback)}</span>
-          <input
-            type="email"
-            bind:value={pilotEmail}
-            required
-            aria-invalid={pilotStatus === 'error' ? 'true' : 'false'}
-            on:input={resetPilotStatus}
-          />
-        </label>
+      <label class="form-field">
+        <span>{t(pilot.form.emailLabelKey, pilot.form.emailLabelFallback)}</span>
+        <input
+          type="email"
+          bind:value={pilotEmail}
+          required
+          aria-invalid={pilotStatus === 'error' ? 'true' : 'false'}
+          on:input={resetPilotStatus}
+        />
+      </label>
 
-        <label class="form-field">
-          <span>{t(pilot.form.roleLabelKey, pilot.form.roleLabelFallback)}</span>
-          <select bind:value={pilotRole} on:change={resetPilotStatus}>
-            <option value="founder">{t(pilot.form.roleOptions.founder.key, pilot.form.roleOptions.founder.fallback)}</option>
-            <option value="student">{t(pilot.form.roleOptions.student.key, pilot.form.roleOptions.student.fallback)}</option>
-            <option value="educator">{t(pilot.form.roleOptions.educator.key, pilot.form.roleOptions.educator.fallback)}</option>
-            <option value="other">{t(pilot.form.roleOptions.other.key, pilot.form.roleOptions.other.fallback)}</option>
-          </select>
-        </label>
+      <label class="form-field">
+        <span>{t(pilot.form.roleLabelKey, pilot.form.roleLabelFallback)}</span>
+        <select bind:value={pilotRole} on:change={resetPilotStatus}>
+          <option value="founder">{t(pilot.form.roleOptions.founder.key, pilot.form.roleOptions.founder.fallback)}</option>
+          <option value="student">{t(pilot.form.roleOptions.student.key, pilot.form.roleOptions.student.fallback)}</option>
+          <option value="educator">{t(pilot.form.roleOptions.educator.key, pilot.form.roleOptions.educator.fallback)}</option>
+          <option value="other">{t(pilot.form.roleOptions.other.key, pilot.form.roleOptions.other.fallback)}</option>
+        </select>
+      </label>
 
-        <label class="form-field form--full">
-          <span>{t(pilot.form.messageLabelKey, pilot.form.messageLabelFallback)}</span>
-          <textarea rows="4" bind:value={pilotMessage} on:input={resetPilotStatus}></textarea>
-        </label>
+      <label class="form-field form--full">
+        <span>{t(pilot.form.messageLabelKey, pilot.form.messageLabelFallback)}</span>
+        <textarea rows="4" bind:value={pilotMessage} on:input={resetPilotStatus}></textarea>
+      </label>
 
-        {#if pilotStatus === 'error' && pilotError}
-          <p class="field-error">{pilotError}</p>
-        {/if}
+      {#if pilotStatus === 'error' && pilotError}
+        <p class="field-error">{pilotError}</p>
+      {/if}
 
-        <Button type="submit" variant="gradient" size="lg">
-          {t(pilot.form.submitKey, pilot.form.submitFallback)}
-        </Button>
+      <Button type="submit" variant="gradient" size="lg">
+        {t(pilot.form.submitKey, pilot.form.submitFallback)}
+      </Button>
 
-        {#if pilotStatus === 'success'}
-          <p class="form-status form-status--success">{t(pilot.form.successKey, pilot.form.successFallback)}</p>
-        {/if}
-      </form>
+      {#if pilotStatus === 'success'}
+        <p class="form-status form-status--success">{t(pilot.form.successKey, pilot.form.successFallback)}</p>
+      {/if}
+    </form>
 
       <p class="privacy-note">{t(pilot.form.privacyKey, pilot.form.privacyFallback)}</p>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <SectionDivider tone="neutral" />
 
-<section class="section cta section--cta" data-surface="glow" use:revealOnScroll>
-  <div class="container">
+<Section class="cta section--cta" data-surface="glow">
+  <div class="cta-container" use:revealOnScroll>
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>{t(cta.titleKey, cta.titleFallback)}</h2>
       <p>{t(cta.copyKey, cta.copyFallback)}</p>
@@ -466,10 +497,10 @@
       </div>
     </GlassCard>
   </div>
-</section>
+</Section>
 
 <style>
-  .section {
+  :global(.section) {
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -477,13 +508,13 @@
     --section-padding-inline: 0;
   }
 
-  .section > .container {
+  :global(.section > .section__inner) {
     position: relative;
     z-index: var(--z-content);
   }
 
-  .section::before,
-  .section::after {
+  :global(.section::before),
+  :global(.section::after) {
     content: '';
     position: absolute;
     inset: -18% -18% -26% -18%;
@@ -493,42 +524,42 @@
     z-index: var(--z-base);
   }
 
-  .section::after {
+  :global(.section::after) {
     background: linear-gradient(180deg, var(--surface-glow-overlay-fill) 0%, transparent 100%);
     opacity: 0.18;
   }
 
-  .section.section--snapshot {
+  :global(.section.section--snapshot) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
     --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.16);
     --section-glow-accent: rgba(var(--ink-rgb), 0.12);
   }
 
-  .section.section--modules {
+  :global(.section.section--modules) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.26);
     --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.18);
     --section-glow-accent: rgba(var(--ink-rgb), 0.1);
   }
 
-  .section.section--status {
+  :global(.section.section--status) {
     --section-glow-primary: rgba(var(--cherry-pop-rgb), 0.2);
     --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
     --section-glow-accent: rgba(var(--ink-rgb), 0.12);
   }
 
-  .section.section--use-cases {
+  :global(.section.section--use-cases) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
     --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.18);
     --section-glow-accent: rgba(var(--ink-rgb), 0.1);
   }
 
-  .section.section--pilot {
+  :global(.section.section--pilot) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
     --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.2);
     --section-glow-accent: rgba(var(--ink-rgb), 0.12);
   }
 
-  .section.section--cta {
+  :global(.section.section--cta) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.32);
     --section-glow-secondary: rgba(var(--cherry-pop-rgb), 0.22);
     --section-glow-accent: rgba(var(--ink-rgb), 0.16);
@@ -592,6 +623,11 @@
     display: grid;
     gap: var(--grid-gap-xl);
     grid-template-columns: repeat(auto-fit, minmax(var(--tile-min-width-md), 1fr));
+  }
+
+  .modules__content {
+    display: grid;
+    gap: var(--grid-gap-xl);
   }
 
   :global(.module-card) {
@@ -706,6 +742,12 @@
     text-wrap: balance;
   }
 
+  .pilot-section,
+  .cta-container {
+    display: grid;
+    justify-items: center;
+  }
+
   .privacy-note {
     font-size: var(--text-meta);
     color: var(--text-tertiary);
@@ -726,6 +768,22 @@
     gap: var(--space-lg);
     justify-content: center;
   }
+
+  .cta-disabled-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .cta-note {
+    font-size: var(--text-meta);
+    color: color-mix(in oklab, var(--text) 70%, transparent 30%);
+  }
+
+  :global(.cta-disabled) {
+    cursor: not-allowed;
+  }
   @media (min-width: 960px) {
     .use-cases {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
@@ -737,7 +795,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .section::before {
+    :global(.section::before) {
       animation: none;
     }
 

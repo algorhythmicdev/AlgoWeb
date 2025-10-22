@@ -15,5 +15,7 @@ export { default as LoadingOverlay } from './LoadingOverlay.svelte';
 export { default as Icon } from './icons/Icon.svelte';
 export { default as Button } from './Button.svelte';
 export { default as GlassCard } from './GlassCard.svelte';
+export { default as Container } from './Container.svelte';
+export { default as Section } from './Section.svelte';
 
 

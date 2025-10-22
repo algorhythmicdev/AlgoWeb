@@ -9,21 +9,26 @@
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
   import ParticleNetwork from '$components/ParticleNetwork.svelte';
-  import '$lib/i18n';
-  import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
+  import { _, initI18n } from '$lib/i18n';
   import { page } from '$app/stores';
-  import en from '$lib/i18n/en.json';
+  import en from '$lib/translations/en.json';
   import { theme, availableThemes } from '$stores/theme';
   import { browser } from '$app/environment';
+  import { siteConfig } from '$lib/config/seo';
 
   export let data;
+
+  const startLocale = data?.locale ?? 'en';
+  let i18nReady = !browser;
 
 
   const isTheme = (value: string): value is (typeof availableThemes)[number] =>
     availableThemes.includes(value as (typeof availableThemes)[number]);
 
-  onMount(() => {
+  onMount(async () => {
+    await initI18n(startLocale);
+    i18nReady = true;
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme && isTheme(savedTheme)) {
       theme.set(savedTheme);
@@ -93,7 +98,7 @@
     description: en.seo?.default_description ?? en.site.description,
     ogTitle: en.seo?.default_og_title ?? en.site.title,
     ogDescription: en.seo?.default_og_description ?? en.site.tagline,
-    url: en.seo?.default_url ?? 'https://algorhythmics.dev'
+    url: en.seo?.default_url ?? siteConfig.url
   };
 
   let defaultMetaTitle = fallbackMeta.title;
@@ -115,6 +120,7 @@
   $: ogDescription =
     metaData.ogDescription ?? (metaData.ogDescriptionKey ? $_(metaData.ogDescriptionKey) : defaultOgDescription);
   $: metaUrl = typeof metaData.url === 'string' && metaData.url.trim() ? metaData.url : defaultMetaUrl;
+  const ogImageUrl = siteConfig.ogImage;
 </script>
 
 <svelte:head>
@@ -129,13 +135,13 @@
   <meta property="og:description" content={ogDescription} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={metaUrl} />
-  <meta property="og:image" content="/og-image.svg" />
-  
+  <meta property="og:image" content={ogImageUrl} />
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={metaTitle} />
   <meta name="twitter:description" content={ogDescription} />
-  <meta name="twitter:image" content="/og-image.svg" />
+  <meta name="twitter:image" content={ogImageUrl} />
 </svelte:head>
 
 <svelte:window on:keydown={handleThemeToggleShortcut} />
@@ -144,15 +150,17 @@
 
 <div class="app">
   <a class="skip-link" href="#main-content">{$_('nav.skip_to_content') || 'Skip to content'}</a>
-  <Navigation />
-  
-  <main id="main-content">
-    {#key routeKey}
-      <slot />
-    {/key}
-  </main>
-  
-  <Footer />
+  {#if i18nReady}
+    <Navigation />
+
+    <main id="main-content">
+      {#key routeKey}
+        <slot />
+      {/key}
+    </main>
+
+    <Footer />
+  {/if}
 </div>
 
 <style>

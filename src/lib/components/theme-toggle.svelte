@@ -1,5 +1,5 @@
 <script>
-  import { _, waitLocale } from 'svelte-i18n';
+  import { _, waitLocale } from '$lib/i18n';
   import { onMount } from 'svelte';
   import { theme } from '$stores/theme';
 
