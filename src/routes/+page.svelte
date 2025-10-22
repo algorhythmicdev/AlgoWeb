@@ -351,31 +351,6 @@
   </div>
 </section>
 
-<section class="section resources" data-surface="glow" use:revealOnScroll>
-  <div class="container">
-    <header class="section-heading" data-align="center">
-      <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
-      <h2>{t(educationShowcase.titleKey, educationShowcase.titleFallback)}</h2>
-      <p>{t(educationShowcase.descriptionKey, educationShowcase.descriptionFallback)}</p>
-    </header>
-
-    <div class="resources__grid" use:staggerReveal>
-      {#each educationShowcase.items as item (item.titleKey)}
-        <GlassCard class="resource-card" padding="lg" halo interactive>
-          <div class="resource-icon">
-            <Icon name={item.icon} size="var(--icon-glyph-lg)" />
-          </div>
-          <span class="resource-eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
-          <h3>{t(item.titleKey, item.titleFallback)}</h3>
-          <p>{t(item.copyKey, item.copyFallback)}</p>
-          <div class="card-actions">
-            <Button href="/contact" variant="secondary" size="md">{t(item.cta.labelKey, item.cta.labelFallback)}</Button>
-          </div>
-        </GlassCard>
-      {/each}
-    </div>
-  </div>
-</section>
 
 <section class="section finale" data-surface="glow" use:revealOnScroll>
   <div class="container">
@@ -395,14 +370,6 @@
 </section>
 
 <style>
-  .hero-description {
-    max-width: var(--measure-xl);
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: var(--text-lead);
-    line-height: var(--leading-relaxed);
-  }
-
   .section-heading {
     position: relative;
     z-index: var(--z-content);
@@ -431,7 +398,6 @@
   .section.highlights,
   .section.offerings,
   .section.platform-showcase,
-  .section.resources,
   .section.finale {
     isolation: isolate;
     overflow: hidden;
@@ -456,11 +422,6 @@
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
-  .section.resources {
-    --section-glow-primary: rgba(var(--signal-yellow-rgb), 0.2);
-    --section-glow-secondary: rgba(var(--aurora-purple-rgb), 0.18);
-    --section-glow-accent: rgba(var(--voyage-blue-rgb), 0.14);
-  }
 
   .section.finale {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.28);
@@ -510,7 +471,6 @@
 
   .highlights > .container,
   .offerings > .container,
-  .resources > .container,
   .finale > .container {
     position: relative;
     z-index: var(--z-content);
@@ -518,8 +478,7 @@
 
 
   .highlights__grid,
-  .offerings__grid,
-  .resources__grid {
+  .offerings__grid {
     display: grid;
     gap: var(--grid-gap-lg);
     grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
@@ -528,7 +487,6 @@
 
   :global(.highlight-card),
   :global(.offering-card),
-  :global(.resource-card),
   :global(.finale-card) {
     display: grid;
     gap: var(--cluster-gap-md);
@@ -570,8 +528,7 @@
     animation: floaty var(--offering-float-duration) var(--resource-float-ease) infinite reverse;
   }
 
-  :global(.offering-card) ul,
-  :global(.resource-card) ul {
+  :global(.offering-card) ul {
     margin: 0;
     padding-inline-start: calc(var(--space-lg) + var(--space-xs));
     display: grid;
@@ -580,28 +537,6 @@
     font-size: var(--text-small);
   }
 
-  .resource-icon {
-    inline-size: var(--size-icon-md);
-    block-size: var(--size-icon-md);
-    border-radius: var(--radius-full);
-    display: inline-grid;
-    place-items: center;
-    background:
-      radial-gradient(circle at 28% 28%, rgba(var(--signal-yellow-rgb), 0.22), transparent 72%),
-      color-mix(in srgb, var(--bg-elev-2) 82%, rgba(var(--signal-yellow-rgb), 0.12) 18%);
-    color: var(--signal-yellow);
-    box-shadow: var(--shadow-card-signal-soft);
-    --resource-float-duration: 42s;
-    --resource-float-ease: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    animation: floaty var(--resource-float-duration) var(--resource-float-ease) infinite;
-  }
-
-  .resource-eyebrow {
-    font-size: var(--text-small);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
 
   .card-actions {
     display: flex;
@@ -629,12 +564,6 @@
     --focus-ring-color: color-mix(in srgb, var(--aurora-purple) 72%, var(--signal-yellow) 28%);
   }
 
-  .resources :global(.resource-card) {
-    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 93%, rgba(var(--signal-yellow-rgb), 0.12) 7%);
-    --surface-glass-border: color-mix(in srgb, var(--signal-yellow) 30%, transparent 70%);
-    --surface-glass-shadow: var(--shadow-card-signal);
-    --focus-ring-color: color-mix(in srgb, var(--signal-yellow) 70%, var(--aurora-purple) 30%);
-  }
 
   .finale :global(.finale-card) {
     --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 88%, rgba(var(--aurora-purple-rgb), 0.2) 12%);
@@ -658,7 +587,6 @@
     }
 
     .offerings__grid,
-    .resources__grid,
     .platform-showcase__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -670,7 +598,6 @@
     }
 
     .offerings__grid,
-    .resources__grid,
     .platform-showcase__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -692,8 +619,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .highlight-icon,
-    .offering-icon,
-    .resource-icon {
+    .offering-icon {
       animation: none;
     }
 
@@ -703,18 +629,15 @@
 
     .highlights,
     .offerings,
-    .resources,
     .finale {
       animation: none;
     }
 
     .highlights::before,
     .offerings::before,
-    .resources::before,
     .finale::before,
     .highlight-icon,
-    .offering-icon,
-    .resource-icon {
+    .offering-icon {
       animation: none;
     }
   }

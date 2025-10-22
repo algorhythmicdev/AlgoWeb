@@ -229,27 +229,9 @@
     opacity: 0.9;
   }
 
-  .tagline,
-  .status,
-  .contact-info,
-  .contact-info a {
+  .note {
     color: var(--footer-text);
     font-size: var(--text-small);
-  }
-
-  .status {
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.02em;
-  }
-
-  .contact-info a {
-    text-decoration: none;
-    transition: color var(--duration-ui) var(--ease-out);
-  }
-
-  .contact-info a:hover,
-  .contact-info a:focus-visible {
-    color: var(--link);
   }
 
   :global(.footer-card--links) {

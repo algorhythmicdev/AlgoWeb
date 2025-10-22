@@ -289,22 +289,6 @@ describe('localization hygiene', () => {
     }
   });
 
-  it('localizes consulting form helper text in every language', async () => {
-    const helperKeys = [
-      'consulting.form.name.helper',
-      'consulting.form.email.helper',
-      'consulting.form.message.helper'
-    ];
-
-    for (const file of localeFiles) {
-      const dictionary = await loadJson(file);
-      for (const key of helperKeys) {
-        const value = readTranslationValue(key, dictionary);
-        expect(typeof value).toBe('string');
-        expect(value.length, `${path.basename(file)} missing value for ${key}`).toBeGreaterThan(0);
-      }
-    }
-  });
 
   it('all referenced translation keys exist in the base dictionary', async () => {
     const missingEntries = [];

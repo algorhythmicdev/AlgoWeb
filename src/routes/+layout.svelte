@@ -8,7 +8,6 @@
   import '$lib/styles/reading.css';
   import Navigation from '$components/Navigation.svelte';
   import Footer from '$components/Footer.svelte';
-  import AICompanion from '$components/AICompanion.svelte';
   import ParticleNetwork from '$components/ParticleNetwork.svelte';
   import '$lib/i18n';
   import { _ } from 'svelte-i18n';
@@ -155,7 +154,6 @@
   
   <Footer />
 </div>
-<AICompanion />
 
 <style>
   :global(body) {
