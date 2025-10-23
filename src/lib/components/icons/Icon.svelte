@@ -196,6 +196,70 @@
     <path d="M12 7 7 4.5" class="stroke" />
     <path d="M12 7l5-2.5" class="stroke" />
   </svg>
+{:else if name === 'globe'}
+  <svg
+    {...commonProps}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
+    class={classes}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="12" cy="12" r="9" class="stroke" fill="none" />
+    <path d="M3 12h18" class="stroke" />
+    <path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9Z" class="stroke" fill="none" />
+  </svg>
+{:else if name === 'sun'}
+  <svg
+    {...commonProps}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
+    class={classes}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="12" cy="12" r="4.2" class="stroke" />
+    <line x1="12" y1="2.8" x2="12" y2="5.8" class="stroke" />
+    <line x1="12" y1="18.2" x2="12" y2="21.2" class="stroke" />
+    <line x1="2.8" y1="12" x2="5.8" y2="12" class="stroke" />
+    <line x1="18.2" y1="12" x2="21.2" y2="12" class="stroke" />
+    <line x1="5.7" y1="5.7" x2="7.9" y2="7.9" class="stroke" />
+    <line x1="16.1" y1="16.1" x2="18.3" y2="18.3" class="stroke" />
+    <line x1="5.7" y1="18.3" x2="7.9" y2="16.1" class="stroke" />
+    <line x1="16.1" y1="7.9" x2="18.3" y2="5.7" class="stroke" />
+  </svg>
+{:else if name === 'moon'}
+  <svg
+    {...commonProps}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
+    class={classes}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M18 14.8c-1.7 2.8-4.9 4.7-8.3 4.7a8.5 8.5 0 0 1 0-17c.3 0 .5 0 .8 0.02a6.8 6.8 0 0 0 7.5 12.28Z"
+      class="stroke"
+      fill="none"
+    />
+  </svg>
+{:else if name === 'contrast'}
+  <svg
+    {...commonProps}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
+    class={classes}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <rect x="4" y="4" width="16" height="16" rx="4" class="stroke" />
+    <path d="M8 4v16" class="stroke" />
+    <path d="M16 4v16" class="stroke" />
+  </svg>
 {:else if name === 'close'}
   <svg
     {...commonProps}

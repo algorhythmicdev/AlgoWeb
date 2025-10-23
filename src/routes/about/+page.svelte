@@ -77,7 +77,7 @@
           },
           {
             key: 'about.page.vision.cards.products.bullet_3',
-            fallback: 'Launch pricing: under €3/month with student and family plans ready.'
+            fallback: 'Planned launch pricing: under €3/month with student and family plans ready.'
           }
         ]
       },
@@ -91,15 +91,15 @@
         bullets: [
           {
             key: 'about.page.vision.cards.education.bullet_1',
-            fallback: 'Reach 80% of institutions with adaptable curricula and recorded workshops.'
+            fallback: 'Planned reach includes up to 80% of institutions with adaptable curricula and recorded workshops.'
           },
           {
             key: 'about.page.vision.cards.education.bullet_2',
-            fallback: 'Serve 25k+ students annually via blended, bilingual programmes.'
+            fallback: 'Planned support for up to 25k+ students annually via blended, bilingual programmes.'
           },
           {
             key: 'about.page.vision.cards.education.bullet_3',
-            fallback: 'Mentor 500+ educators with follow-up assessments and community support.'
+            fallback: 'Planned mentorship for 500+ educators with follow-up assessments and community support.'
           }
         ]
       },
@@ -301,7 +301,7 @@
   </svelte:fragment>
 </Hero>
 
-<Section class="who-we-are" data-surface="glow">
+<Section class="who-we-are" bg="tint" data-surface="glow">
   <div class="who-we-are__grid" use:revealOnScroll>
     <GlassCard class="about-card" padding="lg">
       <h2>{t('about.page.story.heading')}</h2>
@@ -355,7 +355,7 @@
 
 <SectionDivider tone="aurora" />
 
-<Section class="values" data-surface="glow" aria-labelledby="values-heading">
+<Section class="values" bg="tint" data-surface="glow" aria-labelledby="values-heading">
   <div class="values__content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.values.eyebrow')}</span>
@@ -397,7 +397,7 @@
         <img
           class="team-photo"
           src={member.photo}
-          alt={`${t(member.nameKey, member.nameFallback)} portrait`}
+          alt={`Portrait of ${t(member.nameKey, member.nameFallback)}`}
           width="480"
           height="360"
           loading="lazy"
@@ -429,7 +429,7 @@
   </div>
 </Section>
 
-<Section class="finale" data-surface="glow">
+<Section class="finale" bg="elev" data-surface="glow">
   <div class="finale__content" use:revealOnScroll>
   <GlassCard class="finale-card" halo padding="lg">
     <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>

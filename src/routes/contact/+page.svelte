@@ -27,7 +27,7 @@
         "contact.page.form.fields.reason.options.media": "Media or partnership",
         "contact.page.form.fields.message.label": "Message",
         "contact.page.form.submit": "Send message",
-        "contact.page.form.note": "We respond within one business day.",
+        "contact.page.form.note": "We respond within one business day and only use your details to reply.",
         "contact.page.form.success": "Thank you! Your email client is opening with a pre-filled message.",
         "contact.page.form.error": "Please fix the highlighted fields.",
         "contact.page.form.errors.name_required": "Please add your name.",
@@ -49,6 +49,7 @@
         "contact.page.newsletter.cta": "Email newsletter@algorhythmics.dev.",
         "contact.page.newsletter.secondary": "Read about our solutions.",
         "contact.page.newsletter.note": "Prefer a form? Mention \"Newsletter\" in the message above and we will add you manually.",
+        "contact.page.help.status": "Help Center coming soon.",
     } as const;
 
     const resolveFallback = (key: string, fallback?: string) =>
@@ -146,6 +147,8 @@
         },
     ] as const;
 
+    const HELP_CENTER_URL = '';
+
     const helpCenter = {
         eyebrowKey: "contact.page.help.eyebrow",
         eyebrowFallback: "Guides & self-serve",
@@ -155,10 +158,12 @@
         copyFallback:
             "Dive into onboarding packs, troubleshooting checklists, and multilingual resources inside our Help Center knowledge base.",
         cta: {
-            href: "/",
+            href: HELP_CENTER_URL,
             labelKey: "contact.page.help.cta",
             labelFallback: "Visit the Help Center",
         },
+        statusKey: "contact.page.help.status",
+        statusFallback: "Help Center coming soon.",
         noteKey: "contact.page.help.note",
         noteFallback:
             "Need something now? Email help@algorhythmics.dev for personalised guidance or escalation.",
@@ -300,7 +305,7 @@
     </svelte:fragment>
 </Hero>
 
-<Section id="options" class="contact-options">
+<Section id="options" class="contact-options" bg="tint">
     <div class="contact-options__content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
         <span class="section-eyebrow"
@@ -462,7 +467,7 @@
 
 <SectionDivider tone="citrus" />
 
-<Section id="support" class="contact-support">
+<Section id="support" class="contact-support" bg="tint">
     <div class="contact-support__container" use:revealOnScroll>
         <header class="section-heading">
             <span class="section-eyebrow"
@@ -511,12 +516,18 @@
                 >
                 <h2>{t(helpCenter.titleKey, helpCenter.titleFallback)}</h2>
                 <p>{t(helpCenter.copyKey, helpCenter.copyFallback)}</p>
-                <Button href={helpCenter.cta.href} variant="secondary"
-                    >{t(
-                        helpCenter.cta.labelKey,
-                        helpCenter.cta.labelFallback,
-                    )}</Button
-                >
+                {#if helpCenter.cta.href}
+                    <Button href={helpCenter.cta.href} variant="secondary"
+                        >{t(
+                            helpCenter.cta.labelKey,
+                            helpCenter.cta.labelFallback,
+                        )}</Button
+                    >
+                {:else}
+                    <p class="support-note support-note--muted">
+                        {t(helpCenter.statusKey, helpCenter.statusFallback)}
+                    </p>
+                {/if}
                 <p class="support-note">
                     {t(helpCenter.noteKey, helpCenter.noteFallback)}
                 </p>
@@ -568,7 +579,7 @@
 
 <SectionDivider tone="aurora" />
 
-<Section id="newsletter" class="contact-newsletter">
+<Section id="newsletter" class="contact-newsletter" bg="elev">
     <div class="contact-newsletter__content" use:revealOnScroll>
     <GlassCard class="newsletter-card" padding="lg">
         <span class="section-eyebrow"
@@ -622,6 +633,11 @@
         margin-top: var(--space-sm);
         font-size: var(--text-small);
         color: var(--text-tertiary);
+    }
+
+    .support-note--muted {
+        color: color-mix(in srgb, var(--text) 45%, transparent 55%);
+        font-style: italic;
     }
 
     .social-links {

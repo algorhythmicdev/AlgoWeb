@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Container from "./Container.svelte";
+
     type HeroVariant = "aurora" | "grid" | "halo" | "line" | "particles";
     type HeroAlign = "start" | "center";
 
@@ -66,48 +68,54 @@
         ></div>
     </div>
 
-    <div class="hero__layout">
-        <div class="hero__main">
-            <div class="hero__content">
-                {#if $$slots.status}
-                    <div class="hero__status">
-                        <slot name="status" />
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <div class="hero__content-wrapper">
+        <Container>
+            <div class="hero__layout">
+                <div class="hero__main">
+                    <div class="hero__content">
+                        {#if $$slots.status}
+                            <div class="hero__status">
+                                <slot name="status" />
+                            </div>
+                        {/if}
+
+                        {#if titleId}
+                            <h1 id={titleId} class="hero__title">{title}</h1>
+                        {/if}
+
+                        {#if leadId}
+                            <p id={leadId} class="hero__lead">{subtitle}</p>
+                        {/if}
+
+                        {#if $$slots.description}
+                            <div id={descriptionId} class="hero__description">
+                                <slot name="description" />
+                            </div>
+                        {/if}
+
+                        {#if $$slots.actions}
+                            <div class="hero__actions">
+                                <slot name="actions" />
+                            </div>
+                        {/if}
                     </div>
-                {/if}
 
-                {#if titleId}
-                    <h1 id={titleId} class="hero__title">{title}</h1>
-                {/if}
-
-                {#if leadId}
-                    <p id={leadId} class="hero__lead">{subtitle}</p>
-                {/if}
-
-                {#if $$slots.description}
-                    <div id={descriptionId} class="hero__description">
-                        <slot name="description" />
-                    </div>
-                {/if}
-
-                {#if $$slots.actions}
-                    <div class="hero__actions">
-                        <slot name="actions" />
-                    </div>
-                {/if}
-            </div>
-
-            {#if $$slots.highlights}
-                <div id={highlightsId} class="hero__highlights">
-                    <slot name="highlights" />
+                    {#if $$slots.highlights}
+                        <div id={highlightsId} class="hero__highlights">
+                            <slot name="highlights" />
+                        </div>
+                    {/if}
                 </div>
-            {/if}
-        </div>
 
-        {#if hasAside}
-            <div class="hero__aside">
-                <slot name="aside" />
+                {#if hasAside}
+                    <div class="hero__aside">
+                        <slot name="aside" />
+                    </div>
+                {/if}
             </div>
-        {/if}
+        </Container>
     </div>
 </section>
 
@@ -123,16 +131,6 @@
         --hero-grad-start: var(--aurora-purple);
         --hero-grad-stop: var(--voyage-blue);
         --hero-overlay: color-mix(in srgb, var(--bg) 62%, transparent 38%);
-        --hero-padding-block: clamp(
-            var(--hero-padding-block-mobile),
-            var(--hero-padding-block-fluid),
-            var(--hero-padding-block-desktop)
-        );
-        --hero-padding-inline: clamp(
-            var(--hero-padding-inline-min),
-            var(--hero-padding-inline-fluid),
-            var(--hero-padding-inline-max)
-        );
         --hero-content-padding: clamp(
             var(--hero-content-padding-min),
             var(--hero-content-padding-fluid),
@@ -148,22 +146,32 @@
             calc(var(--hero-gap) * 0.6),
             var(--space-2xl)
         );
-        --hero-max-width: var(--hero-max-width-default);
         --hero-layout-width: var(--hero-layout-width-default);
         --hero-content-max-width: var(--hero-content-max-width-default);
         position: relative;
         isolation: isolate;
-        overflow: visible;
-        padding-block: var(--hero-padding-block);
-        padding-inline: var(--hero-padding-inline);
-        width: min(100%, var(--hero-max-width));
-        max-inline-size: var(--hero-max-width);
-        margin-inline: auto;
+        overflow: hidden;
         color: var(--text);
         background: var(--hero-surface);
-        border-radius: max(0px, var(--glass-card-radius));
         border: none;
-        box-shadow: none;
+    }
+
+    .hero__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: var(--z-base);
+        background: linear-gradient(
+            to bottom,
+            color-mix(in oklab, var(--bg) 85%, transparent),
+            var(--bg)
+        );
+        pointer-events: none;
+    }
+
+    .hero__content-wrapper {
+        position: relative;
+        z-index: var(--z-content);
+        padding-block: clamp(var(--space-8), 8vw, var(--space-5xl));
     }
 
     .hero__background {

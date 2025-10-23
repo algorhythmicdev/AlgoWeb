@@ -54,7 +54,7 @@
     "education_body": "Classroom kits and workshops co-created with Latvian educators, easy to adapt and localise.",
     "education_cta": "Talk to us",
     "education_bullet_1": "Teacher programmes spanning basics to leadership with practical, plain-language resources.",
-    "education_bullet_2": "Targets: 80% of Latvian institutions reached, 25k+ students yearly, and 500+ trained teachers.",
+    "education_bullet_2": "Planned reach: up to 80% of Latvian institutions, supporting 25k+ students yearly and 500+ trained teachers.",
     "education_bullet_3": "Partnership model with LIAA for events, curriculum input, and long-term measurement."
   },
   "home": {
@@ -121,14 +121,14 @@
             "copy": "NodeVoyage and Ideonautix release in stages: alpha with guided pilots, beta with multilingual rollouts, and general availability once the shared access platform is proven.",
             "bullet_1": "Alpha builds focus on collaborative planning, explainable AI, and mobile capture.",
             "bullet_2": "Public beta targets June 2026 with Latvian, English, and Russian support.",
-            "bullet_3": "Pricing stays under €3/month with family and student discounts from day one."
+            "bullet_3": "Planned pricing to stay under €3/month with family and student discounts from day one."
           },
           "education": {
             "title": "Education targets",
             "copy": "Together with LIAA partners we grow AI literacy across Latvia before expanding to the wider region.",
-            "bullet_1": "Reach 80% of institutions with adaptable lesson packs and teacher training.",
-            "bullet_2": "Support 25k+ students per year with project-based learning and bilingual resources.",
-            "bullet_3": "Train 500+ educators with mentorship cohorts and follow-up assessments."
+            "bullet_1": "Planned reach includes up to 80% of institutions with adaptable lesson packs and teacher training.",
+            "bullet_2": "Planned to support up to 25k+ students per year with project-based learning and bilingual resources.",
+            "bullet_3": "Planned mentorship for 500+ educators with cohorts and follow-up assessments."
           },
           "consulting": {
             "title": "Consulting outcomes",
@@ -142,7 +142,7 @@
       "pricing": {
         "title": "Pricing & growth",
         "lead": "Latvia-first pricing keeps entry points between one and three euros. Education discounts stay non-negotiable.",
-        "bullet_1": "NodeVoyage and Ideonautix launch with free tiers and €2.99/month premium, plus family and student options.",
+        "bullet_1": "NodeVoyage and Ideonautix plan to launch with free tiers and a €2.99/month premium option, plus family and student plans.",
         "bullet_2": "Marketing focuses on schools, students, and startup communities with transparent KPIs.",
         "bullet_3": "Risk scenarios include pricing flexibility, education partnerships, and staged expansion to the wider EU."
       }
@@ -398,6 +398,7 @@
       "selected": "Selected theme",
       "light": "Light",
       "dark": "Dark",
+      "contrast": "High contrast",
       "auto": "Auto"
     }
   },

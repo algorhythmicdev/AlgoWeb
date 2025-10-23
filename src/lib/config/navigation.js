@@ -67,9 +67,16 @@ export const footerLinks = {
     { label: 'footer.terms', href: null }
   ],
   social: [
-    { label: 'footer.social.linkedin', href: 'https://linkedin.com/company/algorhythmics', icon: 'linkedin' },
-    { label: 'footer.social.twitter', href: 'https://twitter.com/algorhythmics', icon: 'twitter' },
-    { label: 'footer.social.facebook', href: 'https://facebook.com/algorhythmics', icon: 'facebook' },
-    { label: 'footer.social.email', href: 'mailto:AlgoRhythmics.dev@gmail.com', icon: 'email' }
+    {
+      label: 'footer.social.linkedin',
+      href: 'https://www.linkedin.com/company/algorhythmics',
+      icon: 'linkedin'
+    },
+    {
+      label: 'footer.social.twitter',
+      href: 'https://twitter.com/AlgoRhythmics',
+      icon: 'twitter'
+    },
+    { label: 'footer.social.email', href: 'mailto:hello@algorhythmics.dev', icon: 'email' }
   ]
 };
