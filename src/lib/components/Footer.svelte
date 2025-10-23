@@ -1,9 +1,7 @@
 <script>
   import { _ } from '$lib/i18n';
-  import { assets } from '$app/paths';
   import { onMount } from 'svelte';
   import { footerLinks } from '$config/navigation';
-  import { siteConfig } from '$config/seo';
   import { theme } from '$stores/theme';
   import brands from '$lib/data/brands.json';
   import { translateOrFallback } from '$lib/utils';
@@ -24,7 +22,7 @@
   /**
    * @param {string} path
    */
-  const assetPath = (path) => `${assets}${path}`;
+  const assetPath = (path) => withBase(path) ?? path;
 
   $: footerLogo = (!isMounted || $theme === 'light')
     ? {
@@ -57,12 +55,15 @@
 
     const website = ensureString(record.website, '');
 
+    const logo = ensureString(record.logo, '');
+    const resolvedLogo = logo ? withBase(logo) ?? logo : '';
+
     return {
       name,
       description: ensureString(record.description, ''),
       relationship: ensureString(record.relationship ?? record.note, ''),
       location: ensureString(record.location, ''),
-      logo: ensureString(record.logo, ''),
+      logo: resolvedLogo,
       website,
       websiteLabel: website.replace(/^https?:\/\//, '')
     };

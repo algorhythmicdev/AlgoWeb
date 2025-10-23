@@ -1,6 +1,5 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { assets } from '$app/paths';
   import { page } from '$app/stores';
   import { onDestroy, onMount, tick } from 'svelte';
   import { _ } from '$lib/i18n';
@@ -9,6 +8,11 @@
   import ThemeToggle from './theme-toggle-dropdown.svelte';
   import { mainNavigation } from '$config/navigation';
   import { stripBase, withBase } from '$utils/paths';
+
+  const brandLogo = {
+    svg: withBase('/images/brand/logo-main.svg') ?? '/images/brand/logo-main.svg',
+    png: withBase('/images/brand/logo-main.png') ?? '/images/brand/logo-main.png'
+  };
 
   let menuOpen = false;
   let activeDropdown: number | null = null;
@@ -106,13 +110,8 @@
   <div class="site-header__inner">
     <a href={withBase('/')} class="brand" aria-label={$_('nav.brand_aria')}>
       <picture>
-        <source srcset={`${assets}/images/brand/logo-main.svg`} type="image/svg+xml" />
-        <img
-          src={`${assets}/images/brand/logo-main.png`}
-          alt={$_('nav.brand_name')}
-          width="148"
-          height="40"
-        />
+        <source srcset={brandLogo.svg} type="image/svg+xml" />
+        <img src={brandLogo.png} alt={$_('nav.brand_name')} width="148" height="40" />
       </picture>
       <span class="brand__text">{$_('nav.brand_name')}</span>
     </a>
@@ -199,8 +198,8 @@
       <div class="mobile-menu__header">
         <a href={withBase('/')} class="brand" on:click={handleLinkFollow}>
           <picture>
-            <source srcset={`${assets}/images/brand/logo-main.svg`} type="image/svg+xml" />
-            <img src={`${assets}/images/brand/logo-main.png`} alt={$_('nav.brand_name')} width="120" height="32" />
+            <source srcset={brandLogo.svg} type="image/svg+xml" />
+            <img src={brandLogo.png} alt={$_('nav.brand_name')} width="120" height="32" />
           </picture>
         </a>
       <button type="button" class="mobile-menu__close" on:click={closeMenu}>

@@ -105,7 +105,7 @@ In Strapi Admin Panel:
 
 1. Go to **Content Manager**
 2. Create a category: "AI Ethics"
-3. Create a tag: "Calm AI"
+3. Create a tag: "Accessible AI"
 4. Create an author with your name
 5. Create a blog post:
    - Fill in required fields

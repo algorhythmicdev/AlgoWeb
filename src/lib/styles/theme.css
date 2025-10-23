@@ -540,9 +540,9 @@
         rgba(var(--signal-yellow-rgb), 0.24) 20%
     );
 
-    --card-min-width: clamp(16.5rem, 26vw, 20rem);
-    --card-max-width: clamp(23rem, 32vw, 26.5rem);
-    --card-max-width-wide: clamp(25rem, 38vw, 32rem);
+    --card-min-width: clamp(18rem, 28vw, 24rem);
+    --card-max-width: clamp(26rem, 36vw, 32rem);
+    --card-max-width-wide: clamp(28rem, 42vw, 38rem);
     --form-field-min-width: min(100%, calc(var(--card-min-width) + var(--space-sm)));
     --form-field-max-width: min(100%, var(--card-max-width));
     --form-max-width: var(--content-width-standard);

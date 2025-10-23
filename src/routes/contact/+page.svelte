@@ -6,6 +6,7 @@
     import Button from "$lib/components/Button.svelte";
     import Icon from "$lib/components/icons/Icon.svelte";
     import { revealOnScroll, staggerReveal } from "$lib/animations";
+    import { withBase } from "$utils/paths";
     import { onMount } from "svelte";
     import { _ } from "svelte-i18n";
     import { translateOrFallback } from "$lib/utils/i18n";
@@ -56,9 +57,11 @@
     const t = (key: string, fallback?: string) =>
         translateOrFallback($_, key, resolveFallback(key, fallback));
 
+    const asset = (path: string) => withBase(path) ?? path;
+
     const hero = {
         titleKey: "contact.page.hero.title",
-        titleFallback: "Let’s build calm AI together",
+        titleFallback: "Let’s build accessible AI together",
         subtitleKey: "contact.page.hero.subtitle",
         subtitleFallback:
             "AlgoRhythmics operates remotely from Latvia, serving partners worldwide. Reach out for product pilots, consulting, or community collaborations.",
@@ -79,13 +82,13 @@
     } as const;
 
     const heroMedia = {
-        image: "/images/placeholders/contact-lobby.png",
+        image: asset("/images/placeholders/contact-lobby.png"),
         altKey: "contact.page.hero.media.alt",
         altFallback:
-            "Lounge area with glass walls, calm lighting, and collaborative screens",
+            "Lounge area with glass walls, warm lighting, and collaborative screens",
         captionKey: "contact.page.hero.media.caption",
         captionFallback:
-            "Our distributed studio keeps a calm “ops lounge” ready for founders, educators, and partners to drop in virtually.",
+            "Our distributed studio keeps an “ops lounge” ready for founders, educators, and partners to drop in virtually.",
     } as const;
 
     const contactCards = [
@@ -147,7 +150,7 @@
         eyebrowKey: "contact.page.help.eyebrow",
         eyebrowFallback: "Guides & self-serve",
         titleKey: "contact.page.help.title",
-        titleFallback: "Help Center now live with calm AI guides",
+        titleFallback: "Help Center now live with accessible AI guides",
         copyKey: "contact.page.help.copy",
         copyFallback:
             "Dive into onboarding packs, troubleshooting checklists, and multilingual resources inside our Help Center knowledge base.",
@@ -162,13 +165,13 @@
     } as const;
 
     const supportShowcase = {
-        image: "/images/placeholders/help-center-desk.png",
+        image: asset("/images/placeholders/help-center-desk.png"),
         altKey: "contact.page.support.visual.alt",
         altFallback:
-            "Support specialists reviewing calm AI dashboards together",
+            "Support specialists reviewing accessible AI dashboards together",
         captionKey: "contact.page.support.visual.caption",
         captionFallback:
-            "Dedicated calm AI specialists keep an eye on every pilot. Expect transparent status dashboards and documented replies.",
+            "Dedicated accessible AI specialists keep an eye on every pilot. Expect transparent status dashboards and documented replies.",
     } as const;
 
     const socialLinks = [
@@ -194,7 +197,7 @@
             labelFallback: "Explore our open tooling on GitHub",
             href: "https://github.com/AlgoRhythmics",
             descriptionKey: "contact.page.social.github_description",
-            descriptionFallback: "Starter kits & calm AI experiments",
+            descriptionFallback: "Starter kits & accessible AI experiments",
         },
     ] as const;
 

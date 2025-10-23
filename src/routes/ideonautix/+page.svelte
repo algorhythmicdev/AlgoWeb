@@ -5,7 +5,7 @@
   import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
-  import { base } from '$app/paths';
+  import { withBase } from '$utils/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -24,6 +24,8 @@
         : fallbackOrParams;
     return translateOrFallback($_, key, fallback, finalParams);
   };
+
+  const asset = (path: string) => withBase(path) ?? path;
 
   const hero = {
     titleKey: 'ideonautix.hero.title',
@@ -74,7 +76,7 @@
   } as const;
 
   const snapshot = {
-    image: `${base}/images/products/ideonautix-icon.png`,
+    image: asset('/images/products/ideonautix-icon.png'),
     altKey: 'ideonautix.snapshot.alt',
     altFallback: 'Preview of the Ideonautix creative cockpit layout',
     captionKey: 'ideonautix.snapshot.caption',

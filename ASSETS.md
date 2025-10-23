@@ -76,7 +76,7 @@ static/
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `nodevoyage-hero.svg` | Hero mockup on NodeVoyage page | Lightweight vector scene with calm gradients. |
+| `nodevoyage-hero.svg` | Hero mockup on NodeVoyage page | Lightweight vector scene with balanced gradients. |
 | `nodevoyage-icon.png` | NodeVoyage badge used on cards | Production PNG replacing earlier SVG placeholder across the site. |
 | `nodevoyage-icon.svg` | Legacy NodeVoyage badge | Kept for archival purposes and future vector exports. |
 | `ideonautix-hero.svg` | Hero mockup on Ideonautix page | Lightweight vector orbit scene. |

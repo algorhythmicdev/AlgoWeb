@@ -5,7 +5,7 @@
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
-  import { base } from '$app/paths';
+  import { withBase } from '$utils/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -45,10 +45,10 @@
 
   const hero = {
     titleKey: 'hero.title',
-    titleFallback: 'Clear tools and consulting for AI.',
+    titleFallback: 'Accessible AI for travel, startups, and schools.',
     subtitleKey: 'hero.subtitle',
     subtitleFallback:
-      'We design simple, accessible tools and offer pilot consulting starting in 2026. Products are in development.',
+      'We are a Latvia-based studio building NodeVoyage, Ideonautix, and education pilots while offering transparent consulting support.',
     actions: [
       {
         href: '/consulting',
@@ -73,28 +73,29 @@
       titleKey: 'highlights.item_1_title',
       titleFallback: 'Practical AI tools',
       copyKey: 'highlights.item_1_body',
-      copyFallback: 'NodeVoyage and Ideonautix are in development to help with travel and creative work.'
+      copyFallback:
+        'NodeVoyage and Ideonautix move from alpha to beta with a shared accessibility-first design system.'
     },
     {
       icon: 'education',
       titleKey: 'highlights.item_2_title',
       titleFallback: 'Education',
       copyKey: 'highlights.item_2_body',
-      copyFallback: 'Lesson plans and workshops that are easy to use and share.'
+      copyFallback: 'Lesson plans, toolkits, and teacher training with partners like LIAA.'
     },
     {
       icon: 'target',
       titleKey: 'highlights.item_3_title',
       titleFallback: 'Consulting',
       copyKey: 'highlights.item_3_body',
-      copyFallback: 'Pilot sprints with clear documentation and opt-out controls.'
+      copyFallback: 'Pilot sprints that pair strategy, build, and training so teams stay confident.'
     },
     {
       icon: 'people',
       titleKey: 'highlights.item_4_title',
       titleFallback: 'Community',
       copyKey: 'highlights.item_4_body',
-      copyFallback: 'Simple guides and events for families, students, and founders.'
+      copyFallback: 'Guides, newsletters, and meetups for families, founders, and educators.'
     }
   ] as const;
 
@@ -105,19 +106,20 @@
       titleKey: 'offer.consulting_title',
       titleFallback: 'Consulting',
       summaryKey: 'offer.consulting_body',
-      summaryFallback: 'We map use cases, run pilot sprints, and train your team.',
+      summaryFallback:
+        'We map use cases, co-design workflows, and stay through the launch so your team keeps ownership.',
       bullets: [
         {
           key: 'offer.consulting_bullet_1',
-          fallback: 'Automation roadmaps and workflow design tuned to your daily operations.'
+          fallback: 'Automation roadmaps that respect existing rituals and regulations.'
         },
         {
           key: 'offer.consulting_bullet_2',
-          fallback: 'Pilot sprints with measurable outcomes, documentation, and opt-out controls.'
+          fallback: 'Pilot sprints with measurable outcomes, clear documentation, and opt-out controls.'
         },
         {
           key: 'offer.consulting_bullet_3',
-          fallback: 'Training that hands ownership back to your team once the sprint completes.'
+          fallback: 'Training that hands ownership back to your team the moment the sprint completes.'
         }
       ],
       primary: {
@@ -132,19 +134,23 @@
       titleKey: 'offer.products_title',
       titleFallback: 'Products (in development)',
       summaryKey: 'offer.products_body',
-      summaryFallback: 'NodeVoyage and Ideonautix share the same accessible design system.',
+      summaryFallback:
+        'NodeVoyage and Ideonautix share one platform: multilingual UI, privacy-safe AI, and signage-grade reliability.',
       bullets: [
         {
           key: 'offer.products_bullet_1',
-          fallback: 'NodeVoyage: an AI-assisted travel planner with collaborative tools and sustainability tracking.'
+          fallback:
+            'NodeVoyage: an AI-assisted travel planner with collaborative tools, sustainability tracking, and AR translation.'
         },
         {
           key: 'offer.products_bullet_2',
-          fallback: 'Ideonautix: Pomodoro Coach, Pitch Assistant, and Competitive Intelligence modules for founders.'
+          fallback:
+            'Ideonautix: Pomodoro Coach, Pitch Assistant, and Competitive Intelligence modules tuned for founders and students.'
         },
         {
           key: 'offer.products_bullet_3',
-          fallback: 'Shared AI orchestration, accessibility tokens, and localisation for six languages from day one.'
+          fallback:
+            'Shared AI orchestration, accessibility tokens, and localisation for six languages from the first release.'
         }
       ],
       primary: {
@@ -159,15 +165,16 @@
       titleKey: 'offer.education_title',
       titleFallback: 'Education',
       summaryKey: 'offer.education_body',
-      summaryFallback: 'Classroom kits and workshops. Simple to adapt and localize.',
+      summaryFallback:
+        'Classroom kits and workshops co-created with Latvian educators, easy to adapt and localise.',
       bullets: [
         {
           key: 'offer.education_bullet_1',
-          fallback: 'Teacher programmes spanning basics to leadership, with resources in plain language.'
+          fallback: 'Teacher programmes spanning basics to leadership with practical, plain-language resources.'
         },
         {
           key: 'offer.education_bullet_2',
-          fallback: 'Targets: 80% of Latvian institutions reached, 25k+ students yearly, 500+ trained teachers.'
+          fallback: 'Targets: 80% of Latvian institutions reached, 25k+ students yearly, and 500+ trained teachers.'
         },
         {
           key: 'offer.education_bullet_3',
@@ -182,24 +189,102 @@
     }
   ] satisfies ReadonlyArray<Offering>;
 
+  const visionGoals = {
+    eyebrowKey: 'home.brand.vision.eyebrow',
+    eyebrowFallback: 'Vision & goals',
+    titleKey: 'home.brand.vision.title',
+    titleFallback: 'Where we are heading next',
+    copyKey: 'home.brand.vision.copy',
+    copyFallback:
+      'Our roadmap stays public so partners can see how products, education pilots, and consulting add up to one accessible AI platform.',
+    cards: [
+      {
+        icon: 'idea',
+        titleKey: 'home.brand.vision.cards.products.title',
+        titleFallback: 'Product milestones',
+        copyKey: 'home.brand.vision.cards.products.copy',
+        copyFallback:
+          'NodeVoyage and Ideonautix release in stages: alpha with guided pilots, beta with multilingual rollouts, and general availability once the shared access platform is proven.',
+        bullets: [
+          {
+            key: 'home.brand.vision.cards.products.bullet_1',
+            fallback: 'Alpha builds focus on collaborative planning, explainable AI, and mobile capture.'
+          },
+          {
+            key: 'home.brand.vision.cards.products.bullet_2',
+            fallback: 'Public beta targets June 2026 with Latvian, English, and Russian support.'
+          },
+          {
+            key: 'home.brand.vision.cards.products.bullet_3',
+            fallback: 'Pricing stays under €3/month with family and student discounts from day one.'
+          }
+        ]
+      },
+      {
+        icon: 'education',
+        titleKey: 'home.brand.vision.cards.education.title',
+        titleFallback: 'Education targets',
+        copyKey: 'home.brand.vision.cards.education.copy',
+        copyFallback:
+          'Together with LIAA partners we grow AI literacy across Latvia before expanding to the wider region.',
+        bullets: [
+          {
+            key: 'home.brand.vision.cards.education.bullet_1',
+            fallback: 'Reach 80% of institutions with adaptable lesson packs and teacher training.'
+          },
+          {
+            key: 'home.brand.vision.cards.education.bullet_2',
+            fallback: 'Support 25k+ students per year with project-based learning and bilingual resources.'
+          },
+          {
+            key: 'home.brand.vision.cards.education.bullet_3',
+            fallback: 'Train 500+ educators with mentorship cohorts and follow-up assessments.'
+          }
+        ]
+      },
+      {
+        icon: 'target',
+        titleKey: 'home.brand.vision.cards.consulting.title',
+        titleFallback: 'Consulting outcomes',
+        copyKey: 'home.brand.vision.cards.consulting.copy',
+        copyFallback:
+          'Consulting stays tightly scoped: we co-design, build, and hand over so in-house teams stay confident long after the engagement.',
+        bullets: [
+          {
+            key: 'home.brand.vision.cards.consulting.bullet_1',
+            fallback: 'Each pilot starts with a shared readiness scorecard and success metrics.'
+          },
+          {
+            key: 'home.brand.vision.cards.consulting.bullet_2',
+            fallback: 'Delivery includes documentation, governance rituals, and opt-out controls.'
+          },
+          {
+            key: 'home.brand.vision.cards.consulting.bullet_3',
+            fallback: 'We remain on-call for three months to mentor teams as they take full ownership.'
+          }
+        ]
+      }
+    ]
+  } as const;
+
   const educationShowcase = {
     eyebrowKey: 'home.page.education_hub.eyebrow',
     eyebrowFallback: 'Stay in the loop',
     titleKey: 'home.page.education_hub.title',
-    titleFallback: 'Keep up with the calm AI rhythm',
+    titleFallback: 'Keep up with the AlgoRhythmics build',
     descriptionKey: 'home.page.education_hub.description',
     descriptionFallback:
-      'Our Education Hub shares calm AI stories, classroom toolkits, and community highlights—everything you need to bring inclusive innovation to life.',
+      'The Education Hub collects rollout notes, classroom toolkits, and partner stories so communities can follow our progress without jargon.',
     items: [
       {
         icon: 'blog',
         eyebrowKey: 'home.page.education_hub.items.insights.eyebrow',
         eyebrowFallback: 'Insights',
         titleKey: 'home.page.education_hub.items.insights.title',
-        titleFallback: 'Latest calm AI articles',
+        titleFallback: 'Latest product and education notes',
         copyKey: 'home.page.education_hub.items.insights.copy',
         copyFallback:
-          'Readable, multilingual stories co-written with educators, founders, and families.',
+          'Readable, multilingual stories co-written with educators, founders, families, and our own R&D team.',
         cta: {
           href: '/',
           labelKey: 'home.page.education_hub.items.insights.cta',
@@ -213,7 +298,8 @@
         titleKey: 'home.page.education_hub.items.case_studies.title',
         titleFallback: 'Impact stories & pilots',
         copyKey: 'home.page.education_hub.items.case_studies.copy',
-        copyFallback: 'See classrooms, startups, and cultural partners practicing calm AI.',
+        copyFallback:
+          'See classrooms, startups, and cultural partners putting accessible AI pilots into daily use.',
         cta: {
           href: '/',
           labelKey: 'home.page.education_hub.items.case_studies.cta',
@@ -241,7 +327,8 @@
     titleKey: 'cta_block.title',
     titleFallback: 'Ready to start?',
     copyKey: 'cta_block.body',
-    copyFallback: 'Tell us your goals. We will help you choose the simple next step.',
+    copyFallback:
+      'Tell us your goals and we will suggest the next best move across consulting, pilots, or product betas.',
     primary: {
       href: '/consulting',
       labelKey: 'cta_block.cta_primary',
@@ -262,15 +349,17 @@
       titleFallback: 'Who we are',
       copyKey: 'home.brand.overview.copy',
       copyFallback:
-        'AlgoRhythmics is a Latvia-based, pre-company stage initiative building accessible AI tools and practical consulting. We speak plainly about our in-development status and work with partners who value real execution.',
+        'AlgoRhythmics is a Latvia-based, pre-company stage initiative building accessible AI tools, consulting pilots, and education programmes. We stay transparent about our build status and choose partners who value measurable progress.',
       bullets: [
         {
           key: 'home.brand.overview.bullet_1',
-          fallback: 'Mission: unlock useful AI for everyday people, schools, startups, and small businesses.'
+          fallback:
+            'Mission: unlock useful AI for everyday people, schools, startups, and small businesses across Latvia and beyond.'
         },
         {
           key: 'home.brand.overview.bullet_2',
-          fallback: 'Operating from Daugavpils and Riga with a remote-first mindset and a co-leadership model.'
+          fallback:
+            'Operating from Daugavpils and Riga with a remote-first mindset and a 50/50 co-leadership model.'
         },
         {
           key: 'home.brand.overview.bullet_3',
@@ -284,15 +373,18 @@
       titleKey: 'home.brand.pillars.title',
       titleFallback: 'Three pillars, one rhythm',
       copyKey: 'home.brand.pillars.copy',
-      copyFallback: 'Products, consulting, and education move together so partners see impact fast.',
+      copyFallback:
+        'Products, consulting, and education move together so partners see impact and skills growth quickly.',
       bullets: [
         {
           key: 'home.brand.pillars.bullet_1',
-          fallback: 'NodeVoyage travel OS and Ideonautix founder toolkit are in active build.'
+          fallback:
+            'NodeVoyage travel OS and Ideonautix founder toolkit are in active build with shared infrastructure.'
         },
         {
           key: 'home.brand.pillars.bullet_2',
-          fallback: 'Consulting sprints map automation, integrate AI safely, and train teams to own the outputs.'
+          fallback:
+            'Consulting sprints map automation, integrate AI safely, and train teams to own the outputs.'
         },
         {
           key: 'home.brand.pillars.bullet_3',
@@ -306,11 +398,12 @@
       titleKey: 'home.brand.impact.title',
       titleFallback: 'Why this matters',
       copyKey: 'home.brand.impact.copy',
-      copyFallback: 'Accessible AI only works if it stays calm, inclusive, and measurable. That is our baseline.',
+      copyFallback:
+        'Accessible AI only works when it stays transparent, inclusive, and measurable. That is our baseline.',
       bullets: [
         {
           key: 'home.brand.impact.bullet_1',
-          fallback: 'Useful AI tools that explain themselves and respect autonomy.'
+          fallback: 'Useful AI tools that explain themselves, respect autonomy, and support multiple languages.'
         },
         {
           key: 'home.brand.impact.bullet_2',
@@ -345,7 +438,7 @@
           },
           {
             key: 'home.brand.blueprint.frontend.item_2',
-            fallback: 'Multilingual interface (EN/LV/RU/UK/FR/ES) using shared tokens and calm motion defaults.'
+            fallback: 'Multilingual interface (EN/LV/RU/UK/FR/ES) using shared tokens and motion guidelines tuned for accessibility.'
           }
         ]
       },
@@ -426,6 +519,8 @@
     ]
   } as const;
 
+  const asset = (path: string) => withBase(path) ?? path;
+
   const platformShowcase = {
     titleKey: 'snapshots.title',
     titleFallback: 'Product snapshots',
@@ -441,7 +536,7 @@
         ctaHref: '/ideonautix',
         ctaKey: 'snapshots.ideo_cta',
         ctaFallback: 'Ideonautix',
-        image: `${base}/images/products/ideonautix-icon.png`,
+        image: asset('/images/products/ideonautix-icon.png'),
         altKey: 'home.page.platform_showcase.items.ideonautix.alt',
         altFallback: 'Mockup of the Ideonautix creative cockpit interface'
       },
@@ -454,7 +549,7 @@
         ctaHref: '/nodevoyage',
         ctaKey: 'snapshots.nv_cta',
         ctaFallback: 'NodeVoyage',
-        image: '/images/products/nodevoyage-icon.png',
+        image: asset('/images/products/nodevoyage-icon.png'),
         altKey: 'home.page.platform_showcase.items.nodevoyage.alt',
         altFallback: 'Mockup of the NodeVoyage planning board'
       }
@@ -549,7 +644,12 @@
   <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <h2 id="brand-overview-heading">{t('home.brand.section_title', 'Our brand story')}</h2>
-      <p>{t('home.brand.section_copy', 'Everything starts with honest execution and calm communication.')}</p>
+      <p>
+        {t(
+          'home.brand.section_copy',
+          'Everything starts with honest execution, transparent updates, and measurable impact.'
+        )}
+      </p>
     </header>
 
     <div class="brand-overview__grid" use:staggerReveal>
@@ -598,6 +698,35 @@
 </Section>
 
 <SectionDivider tone="neutral" />
+
+<Section class="vision" background="plain" data-surface="glow" aria-labelledby="vision-heading">
+  <div class="section-content" use:revealOnScroll>
+    <header class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t(visionGoals.eyebrowKey, visionGoals.eyebrowFallback)}</span>
+      <h2 id="vision-heading">{t(visionGoals.titleKey, visionGoals.titleFallback)}</h2>
+      <p>{t(visionGoals.copyKey, visionGoals.copyFallback)}</p>
+    </header>
+
+    <div class="vision__grid" use:staggerReveal>
+      {#each visionGoals.cards as card (card.titleKey)}
+        <GlassCard class="vision-card" padding="lg" halo>
+          <div class="vision-card__icon">
+            <Icon name={card.icon} size="var(--icon-glyph-md)" />
+          </div>
+          <h3>{t(card.titleKey, card.titleFallback)}</h3>
+          <p>{t(card.copyKey, card.copyFallback)}</p>
+          <ul>
+            {#each card.bullets as bullet (bullet.key)}
+              <li>{t(bullet.key, bullet.fallback)}</li>
+            {/each}
+          </ul>
+        </GlassCard>
+      {/each}
+    </div>
+  </div>
+</Section>
+
+<SectionDivider tone="aurora" />
 
 <Section class="education-hub" background="plain" data-surface="glow" aria-labelledby="education-hub-heading">
   <div class="section-content" use:revealOnScroll>
@@ -765,6 +894,12 @@
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.1);
   }
 
+  :global(.section.vision) {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
   :global(.section.education-hub) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.2);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.2);
@@ -921,6 +1056,7 @@
 
   .brand-overview__grid,
   .blueprint__grid,
+  .vision__grid,
   .education-hub__grid {
     display: grid;
     gap: var(--grid-gap-lg);
@@ -928,6 +1064,7 @@
 
   :global(.brand-card),
   :global(.blueprint-card),
+  :global(.vision-card),
   :global(.education-card),
   :global(.pricing-card) {
     display: grid;
@@ -937,6 +1074,7 @@
   }
 
   .brand-card__icon,
+  .vision-card__icon,
   .education-card__icon {
     inline-size: var(--size-icon-md);
     block-size: var(--size-icon-md);
@@ -948,8 +1086,15 @@
     box-shadow: var(--shadow-card-aurora);
   }
 
+  :global(.vision-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.12) 10%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 34%, transparent 66%);
+    --surface-glass-shadow: var(--shadow-card-aurora);
+  }
+
   :global(.brand-card) ul,
   :global(.blueprint-card) ul,
+  :global(.vision-card) ul,
   :global(.pricing-card) ul {
     margin: 0;
     padding-inline-start: calc(var(--space-lg) + var(--space-xs));

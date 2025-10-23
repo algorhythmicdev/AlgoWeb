@@ -5,6 +5,7 @@
   import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
+  import { withBase } from '$utils/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -24,15 +25,17 @@
     return translateOrFallback($_, key, fallback, finalParams);
   };
 
+  const asset = (path: string) => withBase(path) ?? path;
+
   const hero = {
     titleKey: 'nodevoyage.hero.title',
     titleFallback: 'NodeVoyage',
     subtitleKey: 'nodevoyage.hero.subtitle',
     subtitleFallback:
-      'Fun. Travel. Memories. Community. Your AI travel companion that keeps every explorer in the loop.',
+      'An accessible AI travel planner for families, students, and independent explorers.',
     descriptionKey: 'nodevoyage.hero.description',
     descriptionFallback:
-      'Describe your dream journey and Nodi orchestrates an itinerary with accessibility, sustainability, and surprise in mind. Plan with friends in real time, translate signs on the go, and capture stories that outlast the flight home.',
+      'Describe your next journey and Nodi builds an itinerary that respects budgets, mobility needs, and real-time changes. Plan together, capture memories, and keep everyone informed before, during, and after the trip.',
     primaryCta: {
       href: '#explorers-club',
       labelKey: 'nodevoyage.hero.primary_cta',
@@ -56,25 +59,25 @@
         labelKey: 'nodevoyage.hero.highlights.status_label',
         labelFallback: 'Status',
         valueKey: 'nodevoyage.hero.highlights.status_value',
-        valueFallback: 'Alpha in progress'
+        valueFallback: 'Alpha with partner families and classrooms'
       },
       {
         labelKey: 'nodevoyage.hero.highlights.focus_label',
         labelFallback: 'Focus',
         valueKey: 'nodevoyage.hero.highlights.focus_value',
-        valueFallback: 'Collaborative, sustainable travel'
+        valueFallback: 'Collaborative, sustainable travel workflows'
       },
       {
         labelKey: 'nodevoyage.hero.highlights.milestone_label',
         labelFallback: 'Next milestone',
         valueKey: 'nodevoyage.hero.highlights.milestone_value',
-        valueFallback: 'Public beta · June 2026'
+        valueFallback: 'Public beta • June 2026'
       }
     ]
   } as const;
 
   const snapshot = {
-    image: '/images/products/nodevoyage-icon.png',
+    image: asset('/images/products/nodevoyage-icon.png'),
     altKey: 'nodevoyage.snapshot.alt',
     altFallback: 'Preview of the NodeVoyage travel timeline layout',
     captionKey: 'nodevoyage.snapshot.caption',
@@ -87,7 +90,7 @@
     titleFallback: 'What makes NodeVoyage different?',
     leadKey: 'nodevoyage.features.lead',
     leadFallback:
-      'NodeVoyage feels like a playful travel OS: windowed layouts, frosted panels, and an AI buddy who keeps plans tidy while celebrating spontaneity.',
+      'NodeVoyage runs like a travel operating system: simple panels, accountable AI coaching, and controls that work for first-time travellers and power planners alike.',
     cards: [
       {
         icon: 'map',
@@ -103,7 +106,7 @@
         titleFallback: 'Collaborative Crews',
         copyKey: 'nodevoyage.features.cards.1.copy',
         copyFallback:
-          'Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with calm notifications.'
+          'Invite family, friends, or classmates into a shared travel canvas. Vote on ideas, track who is editing, and keep everyone aligned with considerate notifications.'
       },
       {
         icon: 'device',
@@ -175,7 +178,7 @@
     eyebrowKey: 'nodevoyage.differentiators.eyebrow',
     eyebrowFallback: 'Why explorers stay',
     titleKey: 'nodevoyage.differentiators.title',
-    titleFallback: 'Calm, trustworthy travel intelligence',
+    titleFallback: 'Trustworthy travel intelligence',
     leadKey: 'nodevoyage.differentiators.lead',
     leadFallback:
       'NodeVoyage blends signage-inspired clarity with travel storytelling. It is approachable for first-time travellers and powerful for adventure planners who want deeper context.',
