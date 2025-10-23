@@ -45,17 +45,17 @@ Blog articles, insights, and thought leadership content.
   "data": {
     "id": 1,
     "attributes": {
-      "title": "Introduction to Calm AI",
-      "slug": "introduction-to-calm-ai",
-      "excerpt": "Explore the principles of calm, ethical AI development.",
-      "content": "# Introduction\n\nCalm AI represents...",
+      "title": "Introduction to Accessible AI",
+      "slug": "introduction-to-accessible-ai",
+      "excerpt": "Explore the principles of accessible, ethical AI development.",
+      "content": "# Introduction\n\nAccessible AI represents...",
       "publishDate": "2026-01-15T10:00:00.000Z",
       "status": "published",
       "featuredImage": {
         "data": {
           "attributes": {
-            "url": "/uploads/calm_ai_hero.jpg",
-            "alternativeText": "Calm AI illustration"
+            "url": "/uploads/accessible_ai_hero.jpg",
+            "alternativeText": "Accessible AI illustration"
           }
         }
       },
@@ -72,7 +72,7 @@ Blog articles, insights, and thought leadership content.
         "data": [
           {
             "attributes": {
-              "name": "Calm AI"
+              "name": "Accessible AI"
             }
           }
         ]
@@ -100,7 +100,7 @@ const posts = await fetchCollection('posts', {
 });
 
 // Get single post by slug
-const post = await fetchBySlug('posts', 'introduction-to-calm-ai', {
+const post = await fetchBySlug('posts', 'introduction-to-accessible-ai', {
   populate: ['author', 'tags', 'categories', 'featuredImage']
 });
 ```
@@ -310,7 +310,7 @@ Flexible content tagging for filtering and discovery.
 
 ### Example Values
 
-- Calm AI
+- Accessible AI
 - Accessibility
 - Education Technology
 - Responsible Innovation
@@ -328,7 +328,7 @@ const tags = await fetchCollection('tags');
 // Filter content by tag
 const posts = await fetchCollection('posts', {
   filters: {
-    '[tags][name][$eq]': 'Calm AI'
+    '[tags][name][$eq]': 'Accessible AI'
   }
 });
 ```

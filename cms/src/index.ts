@@ -29,7 +29,7 @@ export default {
         data: {
           name: 'AI Ethics',
           slug: 'ai-ethics',
-          description: 'Articles exploring responsible and calm AI principles.'
+          description: 'Articles exploring responsible and accessible AI principles.'
         }
       },
       {
@@ -50,8 +50,8 @@ export default {
       }
     ]);
 
-    const [calmAiId, edTechId, innovationId] = await ensureMany('api::tag.tag', [
-      { uniqueField: 'name', data: { name: 'Calm AI' } },
+    const [accessibleAiId, edTechId, innovationId] = await ensureMany('api::tag.tag', [
+      { uniqueField: 'name', data: { name: 'Accessible AI' } },
       { uniqueField: 'name', data: { name: 'Education Technology' } },
       { uniqueField: 'name', data: { name: 'Responsible Innovation' } }
     ]);
@@ -78,22 +78,22 @@ export default {
     ]);
 
     await ensureSingle('api::post.post', 'slug', {
-      title: 'Introduction to Calm AI',
-      slug: 'introduction-to-calm-ai',
-      excerpt: 'Explore the principles of calm, ethical AI development.',
+      title: 'Introduction to Accessible AI',
+      slug: 'introduction-to-accessible-ai',
+      excerpt: 'Explore the principles of accessible, ethical AI development.',
       content:
-        '# Why Calm AI?\n\nCalm AI favours mindful, responsible choices that protect communities while delivering value.\n\n## Key Takeaways\n- Human-centred guardrails\n- Transparent data journeys\n- Empowering educators and teams',
+        '# Why Accessible AI?\n\nAccessible AI favours mindful, responsible choices that protect communities while delivering value.\n\n## Key Takeaways\n- Human-centred guardrails\n- Transparent data journeys\n- Empowering educators and teams',
       publishDate: new Date().toISOString(),
       status: 'published',
       categories: [aiEthicsId, platformUpdatesId],
-      tags: [calmAiId, innovationId],
+      tags: [accessibleAiId, innovationId],
       author: janeId
     });
 
     await ensureSingle('api::educational-module.educational-module', 'slug', {
       title: 'AI Ethics for Educators',
       slug: 'ai-ethics-for-educators',
-      description: 'Workshop toolkit for guiding calm AI conversations in the classroom.',
+      description: 'Workshop toolkit for guiding accessible AI conversations in the classroom.',
       content:
         '# Module Overview\n\nThis guided session introduces discussion prompts, case studies, and reflection exercises that help students articulate ethical AI boundaries.',
       publishDate: new Date().toISOString(),

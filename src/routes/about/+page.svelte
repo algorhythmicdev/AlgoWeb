@@ -5,6 +5,7 @@
   import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
+  import { withBase } from '$utils/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -24,17 +25,19 @@
     return translateOrFallback($_, key, fallback, finalParams);
   };
 
+  const asset = (path: string) => withBase(path) ?? path;
+
   const hero = {
     eyebrowKey: 'about.page.hero.eyebrow',
     eyebrowFallback: 'Inside AlgoRhythmics',
     titleKey: 'about.page.hero.title',
-    titleFallback: 'Calm AI with signage-grade discipline',
+    titleFallback: 'Accessible AI with signage-grade discipline',
     subtitleKey: 'about.page.hero.subtitle',
     subtitleFallback:
       'AlgoRhythmics is a Latvia-born studio co-led by founders who split their time between our products and Reclame Fabriek’s Signage Research Department.',
     descriptionKey: 'about.page.hero.description',
     descriptionFallback:
-      'We blend signage R&D, accessible design, and honest communication. NodeVoyage and Ideonautix are in development, backed by real fabrication work on next-gen LED neon, in-house controllers, custom coatings, and 3D printed components in Daugavpils.',
+      'We blend signage R&D, accessible design, and honest communication. NodeVoyage and Ideonautix are in development, backed by fabrication work on next-gen LED neon, in-house controllers, custom coatings, and 3D printed components in Daugavpils.',
     primary: {
       href: '/consulting',
       labelKey: 'about.page.hero.primary_cta',
@@ -45,6 +48,84 @@
       labelKey: 'about.page.hero.secondary_cta',
       labelFallback: 'Meet the Team'
     }
+  } as const;
+
+  const vision = {
+    eyebrowKey: 'about.page.vision.eyebrow',
+    eyebrowFallback: 'Vision & goals',
+    titleKey: 'about.page.vision.title',
+    titleFallback: 'A clear path to launch',
+    copyKey: 'about.page.vision.copy',
+    copyFallback:
+      'We publish our roadmap so collaborators know exactly how NodeVoyage, Ideonautix, and our education pilots come together.',
+    cards: [
+      {
+        icon: 'idea',
+        titleKey: 'about.page.vision.cards.products.title',
+        titleFallback: 'Product milestones',
+        copyKey: 'about.page.vision.cards.products.copy',
+        copyFallback:
+          'NodeVoyage and Ideonautix share one platform with staged releases from alpha pilots through community rollout.',
+        bullets: [
+          {
+            key: 'about.page.vision.cards.products.bullet_1',
+            fallback: 'Alpha pilots: collaborative planning, explainable AI rituals, and mobile capture.'
+          },
+          {
+            key: 'about.page.vision.cards.products.bullet_2',
+            fallback: 'Public beta: June 2026 with multilingual interface and accessibility tooling.'
+          },
+          {
+            key: 'about.page.vision.cards.products.bullet_3',
+            fallback: 'Launch pricing: under €3/month with student and family plans ready.'
+          }
+        ]
+      },
+      {
+        icon: 'education',
+        titleKey: 'about.page.vision.cards.education.title',
+        titleFallback: 'Education targets',
+        copyKey: 'about.page.vision.cards.education.copy',
+        copyFallback:
+          'Our LIAA partnership focuses on measurable AI literacy across Latvia before we scale outward.',
+        bullets: [
+          {
+            key: 'about.page.vision.cards.education.bullet_1',
+            fallback: 'Reach 80% of institutions with adaptable curricula and recorded workshops.'
+          },
+          {
+            key: 'about.page.vision.cards.education.bullet_2',
+            fallback: 'Serve 25k+ students annually via blended, bilingual programmes.'
+          },
+          {
+            key: 'about.page.vision.cards.education.bullet_3',
+            fallback: 'Mentor 500+ educators with follow-up assessments and community support.'
+          }
+        ]
+      },
+      {
+        icon: 'target',
+        titleKey: 'about.page.vision.cards.consulting.title',
+        titleFallback: 'Consulting outcomes',
+        copyKey: 'about.page.vision.cards.consulting.copy',
+        copyFallback:
+          'Every consulting engagement is scoped to transfer ownership back to the client team with clear rituals.',
+        bullets: [
+          {
+            key: 'about.page.vision.cards.consulting.bullet_1',
+            fallback: 'Scorecards define success metrics and opt-out rules before work begins.'
+          },
+          {
+            key: 'about.page.vision.cards.consulting.bullet_2',
+            fallback: 'Documentation and governance kits accompany every prototype or integration.'
+          },
+          {
+            key: 'about.page.vision.cards.consulting.bullet_3',
+            fallback: 'Three months of advisory support ensures teams can run independently.'
+          }
+        ]
+      }
+    ]
   } as const;
 
   const values = [
@@ -95,7 +176,7 @@
       {
         key: 'about.page.story.milestones.1',
         fallback:
-          'Tested calm AI rituals with Reclame Fabriek colleagues, ensuring signage-floor precision and safety translate into consumer software.'
+          'Tested responsible AI rituals with Reclame Fabriek colleagues so signage-floor precision and safety translate into consumer software.'
       },
       {
         key: 'about.page.story.milestones.2',
@@ -144,7 +225,7 @@
           href: 'https://www.linkedin.com/in/nikitajurtaevs/'
         }
       ],
-      photo: '/images/founders/founder-nikita.png'
+      photo: asset('/images/founders/founder-nikita.png')
     },
     {
       nameKey: 'about.page.team.members.slaff.name',
@@ -177,7 +258,7 @@
         { labelKey: 'about.page.team.members.slaff.links.email', labelFallback: 'Email', href: 'mailto:slaff@algorhythmics.ai' },
         { labelKey: 'about.page.team.members.slaff.links.linkedin', labelFallback: 'LinkedIn', href: 'https://www.linkedin.com/in/slaff/' }
       ],
-      photo: '/images/founders/founder-slaff.png'
+      photo: asset('/images/founders/founder-slaff.png')
     }
   ] as const;
 
@@ -244,6 +325,35 @@
 </Section>
 
 <SectionDivider tone="neutral" />
+
+<Section class="vision" data-surface="glow" aria-labelledby="vision-heading">
+  <div class="vision__content" use:revealOnScroll>
+    <header class="section-heading" data-align="center">
+      <span class="section-eyebrow">{t(vision.eyebrowKey, vision.eyebrowFallback)}</span>
+      <h2 id="vision-heading">{t(vision.titleKey, vision.titleFallback)}</h2>
+      <p>{t(vision.copyKey, vision.copyFallback)}</p>
+    </header>
+
+    <div class="vision__grid" use:staggerReveal>
+      {#each vision.cards as card (card.titleKey)}
+        <GlassCard class="vision-card" padding="lg" halo>
+          <div class="vision-card__icon">
+            <Icon name={card.icon} size="var(--icon-glyph-md)" />
+          </div>
+          <h3>{t(card.titleKey, card.titleFallback)}</h3>
+          <p>{t(card.copyKey, card.copyFallback)}</p>
+          <ul>
+            {#each card.bullets as bullet (bullet.key)}
+              <li>{t(bullet.key, bullet.fallback)}</li>
+            {/each}
+          </ul>
+        </GlassCard>
+      {/each}
+    </div>
+  </div>
+</Section>
+
+<SectionDivider tone="aurora" />
 
 <Section class="values" data-surface="glow" aria-labelledby="values-heading">
   <div class="values__content" use:revealOnScroll>
@@ -353,6 +463,7 @@
   }
 
   :global(.section.who-we-are),
+  :global(.section.vision),
   :global(.section.values),
   :global(.section.team),
   :global(.section.finale) {
@@ -362,6 +473,12 @@
   :global(.section.who-we-are) {
     --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.22);
     --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.16);
+    --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
+  }
+
+  :global(.section.vision) {
+    --section-glow-primary: rgba(var(--aurora-purple-rgb), 0.24);
+    --section-glow-secondary: rgba(var(--voyage-blue-rgb), 0.18);
     --section-glow-accent: rgba(var(--signal-yellow-rgb), 0.12);
   }
 
@@ -384,12 +501,14 @@
   }
 
   .who-we-are__grid,
+  .vision__grid,
   .values__grid,
   .team__grid {
     display: grid;
     gap: var(--grid-gap-lg);
   }
 
+  .vision__content,
   .values__content,
   .team__content,
   .finale__content {
@@ -406,6 +525,7 @@
   }
 
   :global(.about-card),
+  :global(.vision-card),
   :global(.value-card),
   :global(.team-card),
   :global(.finale-card) {
@@ -413,7 +533,14 @@
     gap: var(--cluster-gap-md);
   }
 
-  :global(.about-card) ul {
+  :global(.vision-card) {
+    --surface-glass-bg: color-mix(in srgb, var(--bg-elev-1) 90%, rgba(var(--aurora-purple-rgb), 0.14) 10%);
+    --surface-glass-border: color-mix(in srgb, var(--aurora-purple) 36%, transparent 64%);
+    --surface-glass-shadow: var(--shadow-card-aurora);
+  }
+
+  :global(.about-card) ul,
+  :global(.vision-card) ul {
     margin: 0;
     padding-left: calc(var(--space-lg) + var(--space-xs));
     display: grid;
@@ -426,6 +553,7 @@
     margin-block-end: var(--space-3xl);
   }
 
+  .vision-card__icon,
   .value-icon {
     inline-size: var(--size-icon-lg);
     block-size: var(--size-icon-lg);
@@ -433,6 +561,13 @@
     display: inline-grid;
     place-items: center;
     background: color-mix(in srgb, var(--glass-bg-lightest) 56%, transparent 44%);
+  }
+
+  .vision-card__icon {
+    color: var(--aurora-purple);
+  }
+
+  .value-icon {
     color: var(--voyage-blue);
   }
 
@@ -484,6 +619,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .vision__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .values__grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
@@ -495,6 +634,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     :global(.who-we-are),
+    :global(.vision),
     :global(.values),
     :global(.team),
     :global(.finale) {

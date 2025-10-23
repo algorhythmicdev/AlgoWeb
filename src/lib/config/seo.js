@@ -113,7 +113,7 @@ export const pageConfigs = {
   services: {
     title: 'Services - AI Consulting & Platforms | AlgoRhythmics',
     description:
-      'Discover AI consulting, NodeVoyage, Ideonautix, integration support, and educational partnerships inside one calm lineup.',
+      'Discover AI consulting, NodeVoyage, Ideonautix, integration support, and educational partnerships inside one accessible lineup.',
     path: '/services'
   },
   consulting: {
@@ -129,7 +129,7 @@ export const pageConfigs = {
     path: '/about'
   },
   resources: {
-    title: 'Education Hub & Calm AI Blog | AlgoRhythmics',
+    title: 'Education Hub & Accessible AI Blog | AlgoRhythmics',
     description:
       'Explore inclusive AI insights, classroom toolkits, community spotlights, and upcoming events from the AlgoRhythmics Education Hub.',
     path: '/education-hub'
@@ -143,7 +143,7 @@ export const pageConfigs = {
   products: {
     title: 'Products & Platforms | AlgoRhythmics',
     description:
-      'Explore NodeVoyage, Ideonautix, and the calm AI rituals powering our platforms.',
+      'Explore NodeVoyage, Ideonautix, and the accessible AI rituals powering our platforms.',
     path: '/products'
   }
 };

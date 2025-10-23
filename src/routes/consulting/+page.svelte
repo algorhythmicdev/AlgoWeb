@@ -5,6 +5,7 @@
   import Section from '$lib/components/Section.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
+  import { withBase } from '$utils/paths';
   import { revealOnScroll, staggerReveal } from '$lib/animations';
   import { onMount } from 'svelte';
   import { _ } from '$lib/i18n';
@@ -24,6 +25,8 @@
         : fallbackOrParams;
     return translateOrFallback($_, key, fallback, finalParams);
   };
+
+  const asset = (path: string) => withBase(path) ?? path;
 
   const hero = {
     titleKey: 'consulting.hero_title',
@@ -48,12 +51,12 @@
   } as const;
 
   const heroMedia = {
-    image: '/images/placeholders/consulting-studio.png',
+    image: asset('/images/placeholders/consulting-studio.png'),
     altKey: 'consulting.hero.media.alt',
-    altFallback: 'Consulting studio with glass panels, planning walls, and a calm collaboration table',
+    altFallback: 'Consulting studio with glass panels, planning walls, and a collaborative table setup',
     captionKey: 'consulting.hero.media.caption',
     captionFallback:
-      'Founder-led workshops run in a glassy studio so remote and in-person teams can see the same calm dashboards and rituals.'
+      'Founder-led workshops run in a glassy studio so remote and in-person teams can see the same dashboards, rituals, and progress markers.'
   } as const;
 
   const heroHighlights = [
@@ -101,7 +104,7 @@
       nameKey: 'consulting.packages.1.name',
       nameFallback: 'Build',
       descriptionKey: 'consulting.packages.1.description',
-      descriptionFallback: 'Prototype, integrate, and launch calm AI experiences.',
+      descriptionFallback: 'Prototype, integrate, and launch responsible AI experiences.',
       benefits: [
         { key: 'consulting.packages.1.benefits.0', fallback: 'Rapid proof of concept' },
         { key: 'consulting.packages.1.benefits.1', fallback: 'Integration with your stack' },
@@ -127,7 +130,7 @@
     titleFallback: 'How we work',
     introKey: 'consulting.approach.intro',
     introFallback:
-      'Every engagement blends signage discipline with collaborative rituals. We reduce noise, document decisions, and co-create calm delivery loops.',
+      'Every engagement blends signage discipline with collaborative rituals. We reduce noise, document decisions, and co-create delivery loops your team can sustain.',
     points: [
       {
         icon: 'education',
@@ -213,7 +216,8 @@
     titleKey: 'consulting.examples.title',
     titleFallback: 'Example engagements',
     introKey: 'consulting.examples.intro',
-    introFallback: 'Imagining how calm AI can support your sector helps teams visualise the impact before we start.',
+    introFallback:
+      'Imagining how responsible AI can support your sector helps teams visualise the impact before we start.',
     items: [
       {
         icon: 'education',
