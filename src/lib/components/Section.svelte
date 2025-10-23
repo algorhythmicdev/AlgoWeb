@@ -1,14 +1,28 @@
 <script lang="ts">
+  type SectionTone = 'plain' | 'tint' | 'elev';
+
+  const ALLOWED_TONES: readonly SectionTone[] = ['plain', 'tint', 'elev'];
+
   export let as: keyof HTMLElementTagNameMap = 'section';
-  export let background: 'plain' | 'tint' | 'elev' = 'plain';
+  export let bg: SectionTone = 'plain';
+  export let background: SectionTone | undefined = undefined;
 
   const resolveExtraClass = (): string => {
     const value = /** @type {unknown} */ ($$restProps.class);
     return typeof value === 'string' ? value : '';
   };
 
+  const resolveTone = (): SectionTone => {
+    if (background && ALLOWED_TONES.includes(background)) {
+      return background;
+    }
+
+    return bg;
+  };
+
   $: extraClass = resolveExtraClass();
-  $: classes = ['section', `section--${background}`, extraClass].filter(Boolean).join(' ');
+  $: tone = resolveTone();
+  $: classes = ['section', `section--${tone}`, extraClass].filter(Boolean).join(' ');
 </script>
 
 <svelte:element this={as} {...$$restProps} class={classes}>
@@ -20,6 +34,7 @@
 <style>
   .section {
     padding-block: var(--space-10);
+    background: transparent;
   }
 
   .section__inner {
@@ -28,16 +43,16 @@
     padding-inline: var(--space-4);
   }
 
-  .section--plain {
-    background: var(--bg);
-  }
-
   .section--tint {
     background: var(--bg-elev-1);
   }
 
   .section--elev {
     background: var(--bg-elev-2);
+  }
+
+  .section--plain {
+    background: transparent;
   }
 
   @media (min-width: 48rem) {

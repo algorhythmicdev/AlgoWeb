@@ -174,7 +174,7 @@
         },
         {
           key: 'offer.education_bullet_2',
-          fallback: 'Targets: 80% of Latvian institutions reached, 25k+ students yearly, and 500+ trained teachers.'
+          fallback: 'Planned reach: up to 80% of Latvian institutions, supporting 25k+ students yearly and 500+ trained teachers.'
         },
         {
           key: 'offer.education_bullet_3',
@@ -216,7 +216,7 @@
           },
           {
             key: 'home.brand.vision.cards.products.bullet_3',
-            fallback: 'Pricing stays under €3/month with family and student discounts from day one.'
+            fallback: 'Planned pricing to stay under €3/month with family and student discounts from day one.'
           }
         ]
       },
@@ -230,7 +230,7 @@
         bullets: [
           {
             key: 'home.brand.vision.cards.education.bullet_1',
-            fallback: 'Reach 80% of institutions with adaptable lesson packs and teacher training.'
+            fallback: 'Planned reach includes up to 80% of institutions with adaptable lesson packs and teacher training.'
           },
           {
             key: 'home.brand.vision.cards.education.bullet_2',
@@ -506,7 +506,7 @@
     bullets: [
       {
         key: 'home.brand.pricing.bullet_1',
-        fallback: 'NodeVoyage and Ideonautix launch with free tiers and €2.99/month premium, plus family and student options.'
+        fallback: 'NodeVoyage and Ideonautix plan to launch with free tiers and a €2.99/month premium option, plus family and student plans.'
       },
       {
         key: 'home.brand.pricing.bullet_2',
@@ -557,7 +557,7 @@
   } as const;
 </script>
 
-<Section class="landing-hero" background="plain">
+<Section class="landing-hero">
   <Hero
     class="hero-landing"
     variant="grid"
@@ -574,7 +574,7 @@
   </Hero>
 </Section>
 
-<Section class="highlights" background="plain" data-surface="glow">
+<Section class="highlights" bg="tint" data-surface="glow">
   <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <h2>{t('highlights.title', 'What you get')}</h2>
@@ -598,7 +598,6 @@
 
 <Section
   class="offerings"
-  background="plain"
   data-surface="glow"
   aria-labelledby="offerings-heading"
 >
@@ -640,7 +639,7 @@
 
 <SectionDivider tone="neutral" />
 
-<Section class="brand-overview" background="plain" data-surface="glow" aria-labelledby="brand-overview-heading">
+<Section class="brand-overview" bg="tint" data-surface="glow" aria-labelledby="brand-overview-heading">
   <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <h2 id="brand-overview-heading">{t('home.brand.section_title', 'Our brand story')}</h2>
@@ -675,7 +674,7 @@
 
 <SectionDivider tone="aurora" />
 
-<Section class="blueprint" background="plain" data-surface="glow" aria-labelledby="blueprint-heading">
+<Section class="blueprint" data-surface="glow" aria-labelledby="blueprint-heading">
   <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <h2 id="blueprint-heading">{t(buildBlueprint.titleKey, buildBlueprint.titleFallback)}</h2>
@@ -699,7 +698,7 @@
 
 <SectionDivider tone="neutral" />
 
-<Section class="vision" background="plain" data-surface="glow" aria-labelledby="vision-heading">
+<Section class="vision" bg="tint" data-surface="glow" aria-labelledby="vision-heading">
   <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t(visionGoals.eyebrowKey, visionGoals.eyebrowFallback)}</span>
@@ -728,7 +727,7 @@
 
 <SectionDivider tone="aurora" />
 
-<Section class="education-hub" background="plain" data-surface="glow" aria-labelledby="education-hub-heading">
+<Section class="education-hub" data-surface="glow" aria-labelledby="education-hub-heading">
   <div class="section-content" use:revealOnScroll>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
@@ -756,7 +755,7 @@
 
 <SectionDivider tone="aurora" />
 
-<Section class="pricing" background="plain" data-surface="glow" aria-labelledby="pricing-heading">
+<Section class="pricing" bg="tint" data-surface="glow" aria-labelledby="pricing-heading">
   <div class="section-content" use:revealOnScroll>
     <GlassCard class="pricing-card" padding="lg" halo>
       <h2 id="pricing-heading">{t(pricingOutlook.titleKey, pricingOutlook.titleFallback)}</h2>
@@ -774,7 +773,6 @@
 
 <Section
   class="platform-showcase"
-  background="plain"
   data-surface="glow"
   aria-labelledby="platform-showcase-heading"
 >
@@ -806,7 +804,7 @@
 </Section>
 
 
-<Section class="finale" background="plain" data-surface="glow">
+<Section class="finale" bg="elev" data-surface="glow">
   <div class="section-content" use:revealOnScroll>
     <GlassCard class="finale-card" halo padding="lg" interactive>
       <h2>{t(finale.titleKey, finale.titleFallback)}</h2>

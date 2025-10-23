@@ -350,8 +350,12 @@
     <p class="hero-description">{t(hero.descriptionKey, hero.descriptionFallback)}</p>
   </svelte:fragment>
   <svelte:fragment slot="actions">
-    <Button href={hero.primaryCta.href} variant="gradient" size="lg">{t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}</Button>
-    <Button href={hero.secondaryCta.href} variant="secondary" size="lg">{t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}</Button>
+    <div class="cta-row">
+      <Button href={hero.primaryCta.href} variant="gradient" size="lg">{t(hero.primaryCta.labelKey, hero.primaryCta.labelFallback)}</Button>
+      <a class="cta-link" href={hero.secondaryCta.href}>
+        {t(hero.secondaryCta.labelKey, hero.secondaryCta.labelFallback)}
+      </a>
+    </div>
   </svelte:fragment>
   <svelte:fragment slot="highlights">
     <ul class="hero-highlights">
@@ -394,7 +398,7 @@
   </svelte:fragment>
 </Hero>
 
-<Section class="quick-facts" data-surface="glow">
+<Section class="quick-facts" bg="tint" data-surface="glow">
   <div class="quick-facts__content" use:revealOnScroll>
     <GlassCard class="quick-facts__card" halo>
       <span class="section-eyebrow">{t('consulting.page.quick_facts_eyebrow')}</span>
@@ -449,7 +453,7 @@
   </div>
 </Section>
 
-<Section class="approach" data-surface="glow">
+<Section class="approach" bg="tint" data-surface="glow">
   <div class="approach__grid" use:revealOnScroll>
     <div class="approach__summary">
       <span class="section-eyebrow">{t('consulting.page.approach_eyebrow')}</span>
@@ -509,7 +513,7 @@
   </div>
 </Section>
 
-<Section class="requirements" data-surface="glow">
+<Section class="requirements" bg="tint" data-surface="glow">
   <div class="requirements__grid auto-grid" use:revealOnScroll>
     <GlassCard class="requirements-card" halo>
       <h2>{t(requirements.titleKey, requirements.titleFallback)}</h2>
@@ -565,7 +569,7 @@
 
 <SectionDivider tone="neutral" />
 
-<Section class="application" data-surface="glow" id="apply">
+<Section class="application" bg="tint" data-surface="glow" id="apply">
   <div class="application__content" use:revealOnScroll>
     <GlassCard class="application-card" halo>
       <span class="section-eyebrow">{t('consulting.form_title')}</span>
@@ -655,7 +659,7 @@
   </div>
 </Section>
 
-<Section class="cta" data-surface="glow">
+<Section class="cta" bg="elev" data-surface="glow">
   <div class="cta__content" use:revealOnScroll>
     <GlassCard class="cta-card" padding="lg" halo interactive>
       <span class="section-eyebrow">{t('consulting.page.cta_eyebrow')}</span>
@@ -671,9 +675,9 @@
           </Button>
         {:else}
           <div class="cta-disabled-wrapper">
-            <Button variant="secondary" size="lg" aria-disabled="true" class="cta-disabled">
+            <span class="cta-disabled-text" aria-disabled="true">
               {t(finalCta.secondary.labelKey, finalCta.secondary.labelFallback)}
-            </Button>
+            </span>
             <span class="cta-note">{t(finalCta.secondary.statusKey, finalCta.secondary.statusFallback)}</span>
           </div>
         {/if}
@@ -698,6 +702,27 @@
     font-size: var(--text-lead);
     line-height: var(--leading-relaxed);
     color: var(--text-secondary);
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: var(--weight-semibold);
+    color: var(--link);
+    text-decoration: underline;
+  }
+
+  .cta-link:hover,
+  .cta-link:focus-visible {
+    color: var(--accent-secondary);
   }
 
   .hero-highlights {
@@ -1066,13 +1091,17 @@
     gap: var(--space-2);
   }
 
+  .cta-disabled-text {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: var(--weight-semibold);
+    color: color-mix(in oklab, var(--text) 55%, transparent 45%);
+  }
+
   .cta-note {
     font-size: var(--text-meta);
     color: color-mix(in oklab, var(--text) 70%, transparent 30%);
-  }
-
-  :global(.cta-disabled) {
-    cursor: not-allowed;
   }
 
   @media (prefers-reduced-motion: reduce) {

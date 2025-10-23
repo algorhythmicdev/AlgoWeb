@@ -75,6 +75,11 @@
       : null
   );
 
+  const hasHref = (value) => typeof value === 'string' && value.trim().length > 0;
+  const isExternalLink = (href) => hasHref(href) && /^https?:/i.test(href ?? '');
+
+  $: socialLinks = footerLinks.social.filter((item) => hasHref(item.href));
+
   /**
    * @param {string} key
    * @param {string} fallback
@@ -191,8 +196,13 @@
       <div class="footer-bottom">
         <p class="copyright">{$_('footer.copyright')}</p>
         <div class="social-links">
-          {#each footerLinks.social as social}
-            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={$_(social.label)}>
+          {#each socialLinks as social (social.label)}
+            <a
+              href={social.href}
+              target={isExternalLink(social.href) ? '_blank' : undefined}
+              rel={isExternalLink(social.href) ? 'noopener noreferrer' : undefined}
+              aria-label={$_(social.label)}
+            >
               {$_(social.label)}
             </a>
           {/each}
@@ -208,12 +218,19 @@
     --footer-strong: var(--text-strong);
     --footer-muted: var(--text-tertiary);
     --footer-border: var(--border);
+    --footer-border-width: var(--border-width-hairline);
+    --footer-logo-max: calc(var(--space-4) * 12.5);
+    --footer-partner-logo-max: calc(var(--space-4) * 10.25);
+    --footer-card-min: calc(var(--space-4) * 12.5);
+    --footer-cta-tracking: var(--tracking-meta);
+    --footer-social-tracking: var(--control-tile-label-tracking-md);
     margin-top: var(--space-4xl);
     padding: var(--space-3xl) 0 var(--space-xl);
     position: relative;
     background: color-mix(in srgb, var(--bg) 88%, transparent 12%);
     color: var(--footer-text);
-    border-top: 1px solid color-mix(in srgb, var(--glass-border) 56%, transparent 44%);
+    border-top: var(--footer-border-width) solid
+      color-mix(in srgb, var(--glass-border) 56%, transparent 44%);
   }
 
   :global(.footer__inner) {
@@ -229,7 +246,7 @@
     gap: var(--space-2xl);
   }
 
-  @media (min-width: 960px) {
+  @media (min-width: 60rem) {
     .footer-grid {
       grid-template-columns: minmax(0, 1.6fr) minmax(0, 2fr);
       align-items: stretch;
@@ -248,7 +265,7 @@
   }
 
   :global(.footer-card--brand) img {
-    max-width: 200px;
+    max-width: var(--footer-logo-max);
     transition: opacity var(--duration-fast) var(--ease-out);
   }
 
@@ -307,7 +324,8 @@
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--glass-bg-light) 52%, transparent 48%);
-    border: 1px solid color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
+    border: var(--border-width-hairline) solid
+      color-mix(in srgb, var(--glass-border) 60%, transparent 40%);
     box-shadow: var(--shadow-glass-md);
   }
 
@@ -330,9 +348,11 @@
     justify-content: center;
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-lg);
-    border: 1px solid color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
+    border: var(--border-width-hairline) solid
+      color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
     background: color-mix(in srgb, var(--glass-bg-lightest) 70%, transparent 30%);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glass-border) 30%, transparent 70%);
+    box-shadow: inset 0 0 0 var(--border-width-hairline)
+      color-mix(in srgb, var(--glass-border) 30%, transparent 70%);
     transition: transform var(--duration-ui) var(--ease-out),
       border-color var(--duration-ui) var(--ease-out),
       background-color var(--duration-ui) var(--ease-out);
@@ -340,14 +360,14 @@
 
   .footer-partners__logo:hover,
   .footer-partners__logo:focus-visible {
-    transform: translateY(-2px);
+    transform: translateY(calc(-1 * var(--border-width-thin)));
     border-color: color-mix(in srgb, var(--footer-border) 40%, var(--accent-primary) 60%);
     background: color-mix(in srgb, var(--glass-bg-lightest) 82%, transparent 18%);
   }
 
   .footer-partners__logo img {
     display: block;
-    width: min(164px, 100%);
+    width: min(100%, var(--footer-partner-logo-max));
     height: auto;
   }
 
@@ -357,10 +377,11 @@
     gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-full);
-    border: 1px solid color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
+    border: var(--border-width-hairline) solid
+      color-mix(in srgb, var(--footer-border) 65%, transparent 35%);
     font-size: var(--text-small);
     font-weight: var(--weight-semibold);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--footer-cta-tracking);
     text-transform: uppercase;
     text-decoration: none;
     color: var(--footer-text);
@@ -382,12 +403,12 @@
 
   .footer-partners__cta:hover svg,
   .footer-partners__cta:focus-visible svg {
-    transform: translateX(4px);
+    transform: translateX(var(--space-3xs));
   }
 
   .footer-partners__cta--external svg {
-    width: 1rem;
-    height: 1rem;
+    inline-size: var(--space-4);
+    block-size: var(--space-4);
   }
 
   :global(.footer-card--bottom) {
@@ -421,17 +442,17 @@
   }
 
   .social-links a {
-    letter-spacing: 0.05em;
+    letter-spacing: var(--footer-social-tracking);
     text-transform: uppercase;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 60rem) {
     :global(.footer-card--links) {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(var(--footer-card-min), 1fr));
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     .footer-partners__actions {
       flex-direction: column;
       align-items: stretch;
@@ -442,7 +463,7 @@
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 40rem) {
     .footer-bottom {
       flex-direction: column;
       align-items: flex-start;
@@ -452,7 +473,7 @@
   :global([data-theme='hc']) .footer {
     background: var(--bg);
     color: var(--text);
-    border-top: 2px solid currentColor;
+    border-top: var(--border-width-thin) solid currentColor;
   }
 
   :global([data-theme='hc']) .footer-links-section a,
@@ -462,7 +483,7 @@
 
   :global([data-theme='hc']) .footer-partners {
     background: transparent;
-    border: 2px solid currentColor;
+    border: var(--border-width-thin) solid currentColor;
     box-shadow: none;
   }
 
@@ -472,7 +493,7 @@
   }
 
   :global([data-theme='hc']) .footer-bottom {
-    border-top: 2px solid currentColor;
+    border-top: var(--border-width-thin) solid currentColor;
   }
 
   :global([data-base-theme='dark']) .footer {
@@ -481,7 +502,7 @@
     --footer-muted: color-mix(in srgb, var(--text-secondary) 68%, rgba(var(--night-rgb), 0.5) 32%);
     --footer-border: color-mix(in srgb, var(--border-strong) 64%, transparent 36%);
     background: color-mix(in srgb, rgba(var(--night-rgb), 0.86) 70%, rgba(var(--voyage-blue-rgb), 0.12) 30%);
-    border-top: 1px solid var(--footer-border);
+    border-top: var(--footer-border-width) solid var(--footer-border);
   }
 
 </style>

@@ -331,7 +331,7 @@
   </svelte:fragment>
 </Hero>
 
-<Section class="section--snapshot" data-surface="glow">
+<Section class="section--snapshot" bg="tint" data-surface="glow">
   <div class="snapshot" use:revealOnScroll>
     <GlassCard class="snapshot-card" padding="lg" halo>
       <img
@@ -386,7 +386,7 @@
 
 <SectionDivider tone="aurora" />
 
-<Section class="section--status" data-surface="glow">
+<Section class="section--status" bg="tint" data-surface="glow">
   <div class="status" use:revealOnScroll>
     <GlassCard class="status-card" padding="lg">
       <span class="section-eyebrow">{t(statusSection.eyebrowKey, statusSection.eyebrowFallback)}</span>
@@ -426,7 +426,7 @@
 
 <SectionDivider tone="cherry" />
 
-<Section id="pilot-request" class="pilot section--pilot" data-surface="glow">
+<Section id="pilot-request" class="pilot section--pilot" bg="tint" data-surface="glow">
   <div class="pilot-section" use:revealOnScroll>
     <GlassCard class="pilot-card" padding="lg" particles>
     <span class="section-eyebrow">{t(pilot.eyebrowKey, pilot.eyebrowFallback)}</span>
@@ -485,7 +485,7 @@
 
 <SectionDivider tone="neutral" />
 
-<Section class="cta section--cta" data-surface="glow">
+<Section class="cta section--cta" bg="elev" data-surface="glow">
   <div class="cta-container" use:revealOnScroll>
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>{t(cta.titleKey, cta.titleFallback)}</h2>
