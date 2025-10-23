@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title id="title">AlgoRhythmics logomark</title>
+  <desc id="desc">Squared gradient tile with stylised AR monogram</desc>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5e60ce" />
+      <stop offset="50%" stop-color="#4895ef" />
+      <stop offset="100%" stop-color="#4cc9f0" />
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.75)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.3)" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="184" height="184" rx="44" fill="url(#tile)" stroke="url(#stroke)" stroke-width="6" />
+  <g fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="14">
+    <path d="M66 134V68h42c22 0 36 12 36 32s-14 34-36 34H66z" />
+    <path d="M98 134l44-66" />
+  </g>
+</svg>

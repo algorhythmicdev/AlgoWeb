@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/AlgoWeb/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Preconnect to font providers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts: Inter and Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+      (() => {
+        const STORAGE_KEY = 'theme';
+        const root = document.documentElement;
+
+        const getMediaPreference = (query) => {
+          if (typeof window.matchMedia === 'function') {
+            try {
+              return window.matchMedia(query).matches;
+            } catch {
+              return false;
+            }
+          }
+          return false;
+        };
+
+        const prefersDark = getMediaPreference('(prefers-color-scheme: dark)');
+        const prefersContrast = getMediaPreference('(prefers-contrast: more)');
+        const normalize = (value) => (value === 'contrast' ? 'hc' : value);
+        const stored = normalize(localStorage.getItem(STORAGE_KEY));
+        const candidates = ['light', 'dark', 'hc'];
+        const theme = candidates.includes(stored)
+          ? stored
+          : prefersContrast
+            ? 'hc'
+            : prefersDark
+              ? 'dark'
+              : 'light';
+        const base = theme === 'light' ? 'light' : 'dark';
+
+        const applyToBody = () => {
+          const body = document.body;
+          if (!body) {
+            document.addEventListener('DOMContentLoaded', applyToBody, { once: true });
+            return;
+          }
+          body.dataset.theme = theme;
+          body.dataset.baseTheme = base;
+        };
+
+        root.dataset.theme = theme;
+        root.dataset.baseTheme = base;
+        root.style.colorScheme = base;
+        applyToBody();
+      })();
+
+    </script>
+
+    
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/entry/start.CLhNIB7-.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/CFvaMLmO.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/BFTH_XlQ.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/DQPlFEHc.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/DjuO_Cou.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/entry/app.DSN4hdbG.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/CmsKOCeN.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/NZTpNUN0.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/tOmLv8Ee.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/CNhVGj62.js">
+  </head>
+  <body data-sveltekit-preload-data="hover" data-theme="light">
+    <div style="display: contents">
+			<script>
+				{
+					__sveltekit_ba96gk = {
+						base: "/AlgoWeb",
+						assets: "/AlgoWeb"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/AlgoWeb/_app/immutable/entry/start.CLhNIB7-.js"),
+						import("/AlgoWeb/_app/immutable/entry/app.DSN4hdbG.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
