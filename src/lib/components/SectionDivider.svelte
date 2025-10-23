@@ -116,22 +116,52 @@
     --divider-highlight: rgba(255, 255, 255, 0.48);
   }
 
-  :global([data-base-theme='dark']) .section-divider__label {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .section-divider__label {
     background: color-mix(in srgb, rgba(var(--graphite-rgb), 0.92) 70%, rgba(255, 255, 255, 0.08) 30%);
     border-color: color-mix(in srgb, rgba(255, 255, 255, 0.22) 55%, rgba(var(--graphite-rgb), 0.6) 45%);
     color: color-mix(in srgb, rgba(255, 255, 255, 0.9) 70%, rgb(var(--voyage-blue-rgb)) 30%);
   }
 
-  :global(html[data-theme='hc']) .section-divider__blur {
+  :global(
+      html:is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .section-divider__blur {
     display: none;
   }
 
-  :global(html[data-theme='hc']) .section-divider__line {
+  :global(
+      html:is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .section-divider__line {
     background: color-mix(in srgb, currentColor 65%, transparent 35%);
     box-shadow: none;
   }
 
-  :global(html[data-theme='hc']) .section-divider__label {
+  :global(
+      html:is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .section-divider__label {
     background: transparent;
     border-color: currentColor;
     color: currentColor;

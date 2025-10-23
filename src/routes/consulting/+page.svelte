@@ -707,22 +707,19 @@
   .cta-row {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-md);
+    gap: var(--space-4);
     align-items: center;
   }
 
   .cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-weight: var(--weight-semibold);
-    color: var(--link);
+    color: var(--accent);
     text-decoration: underline;
+    font-weight: var(--weight-semibold);
   }
 
   .cta-link:hover,
   .cta-link:focus-visible {
-    color: var(--accent-secondary);
+    color: var(--primary);
   }
 
   .hero-highlights {

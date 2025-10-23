@@ -75,8 +75,16 @@
       : null
   );
 
+  /**
+   * @param {unknown} value
+   * @returns {boolean}
+   */
   const hasHref = (value) => typeof value === 'string' && value.trim().length > 0;
-  const isExternalLink = (href) => hasHref(href) && /^https?:/i.test(href ?? '');
+  /**
+   * @param {unknown} href
+   * @returns {boolean}
+   */
+  const isExternalLink = (href) => hasHref(href) && /^https?:/i.test(String(href ?? ''));
 
   $: socialLinks = footerLinks.social.filter((item) => hasHref(item.href));
 
@@ -470,33 +478,84 @@
     }
   }
 
-  :global([data-theme='hc']) .footer {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .footer {
     background: var(--bg);
     color: var(--text);
     border-top: var(--border-width-thin) solid currentColor;
   }
 
-  :global([data-theme='hc']) .footer-links-section a,
-  :global([data-theme='hc']) .social-links a {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .footer-links-section a,
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .social-links a {
     color: var(--text);
   }
 
-  :global([data-theme='hc']) .footer-partners {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .footer-partners {
     background: transparent;
     border: var(--border-width-thin) solid currentColor;
     box-shadow: none;
   }
 
-  :global([data-theme='hc']) .footer-partners__cta {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .footer-partners__cta {
     color: var(--text);
     border-color: currentColor;
   }
 
-  :global([data-theme='hc']) .footer-bottom {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .footer-bottom {
     border-top: var(--border-width-thin) solid currentColor;
   }
 
-  :global([data-base-theme='dark']) .footer {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .footer {
     --footer-text: var(--text-secondary);
     --footer-strong: var(--text-strong);
     --footer-muted: color-mix(in srgb, var(--text-secondary) 68%, rgba(var(--night-rgb), 0.5) 32%);

@@ -92,7 +92,12 @@ describe('theme store', () => {
     expect(current).toBe('dark');
     expect(window.localStorage.getItem('theme')).toBe('dark');
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
-    expect(document.body.getAttribute('data-base-theme')).toBe('dark');
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('manual');
+    expect(document.documentElement.getAttribute('data-theme-resolved')).toBe('dark');
+    expect(document.body.getAttribute('data-theme')).toBe('dark');
+    expect(document.body.getAttribute('data-theme-mode')).toBe('manual');
+    expect(document.body.getAttribute('data-theme-resolved')).toBe('dark');
+    expect(document.documentElement.getAttribute('data-theme-legacy')).toBeNull();
 
     unsubscribe();
   }, 50000); // Increased timeout for this specific test
@@ -107,6 +112,8 @@ describe('theme store', () => {
     expect(current).toBe('hc');
     expect(window.localStorage.getItem('theme')).toBe('hc');
     expect(document.body.getAttribute('data-theme-legacy')).toBe('contrast');
+    expect(document.documentElement.getAttribute('data-theme-resolved')).toBe('hc');
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('manual');
 
     unsubscribe();
   });
@@ -122,6 +129,8 @@ describe('theme store', () => {
     expect(current).toBe('light');
     expect(window.localStorage.getItem('theme')).toBe('light');
     expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+    expect(document.documentElement.getAttribute('data-theme-resolved')).toBe('light');
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('manual');
 
     unsubscribe();
   });
@@ -135,6 +144,55 @@ describe('theme store', () => {
     theme.set('hc');
     expect(document.documentElement.style.colorScheme).toBe('dark');
     expect(document.body.getAttribute('data-theme-legacy')).toBe('contrast');
+  });
+
+  it('removes explicit theme attribute in auto mode and tracks the resolved theme', async () => {
+    window.localStorage.setItem('theme', 'auto');
+    const { theme } = await loadThemeStore();
+
+    let current;
+    const unsubscribe = theme.subscribe((value) => (current = value));
+
+    expect(current).toBe('auto');
+    expect(document.documentElement.getAttribute('data-theme')).toBeNull();
+    expect(document.body.getAttribute('data-theme')).toBeNull();
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('auto');
+    expect(document.body.getAttribute('data-theme-mode')).toBe('auto');
+    expect(document.documentElement.getAttribute('data-theme-resolved')).toBe('light');
+    expect(document.body.getAttribute('data-theme-resolved')).toBe('light');
+    expect(document.documentElement.style.colorScheme).toBe('light');
+
+    unsubscribe();
+  });
+
+  it('falls back gracefully when storage access fails during init', async () => {
+    window.localStorage.getItem = () => {
+      throw new Error('denied');
+    };
+
+    const { theme } = await loadThemeStore();
+
+    let current;
+    const unsubscribe = theme.subscribe((value) => (current = value));
+
+    expect(current).toBe('auto');
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('auto');
+    expect(document.documentElement.getAttribute('data-theme-resolved')).toBe('light');
+
+    unsubscribe();
+  });
+
+  it('still updates theme attributes when persisting fails', async () => {
+    const { theme } = await loadThemeStore();
+
+    window.localStorage.setItem = () => {
+      throw new Error('quota');
+    };
+
+    expect(() => theme.set('dark')).not.toThrow();
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('manual');
+    expect(document.documentElement.getAttribute('data-theme-resolved')).toBe('dark');
   });
 });
 

@@ -189,7 +189,14 @@
   }
 }
 
-:global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .text-gradient {
+:global(
+    :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+    )
+) .text-gradient {
   background: none !important;
   color: var(--text-primary) !important;
   -webkit-text-fill-color: currentColor !important;

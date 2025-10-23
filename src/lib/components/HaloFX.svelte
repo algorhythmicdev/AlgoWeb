@@ -151,7 +151,16 @@
     }
   }
 
-  :global([data-base-theme='dark']) .halo {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .halo {
     --halo-opacity-min: 0.0006;
     --halo-opacity-base: 0.0014;
     --halo-opacity-span: 0.0048;
@@ -160,7 +169,14 @@
     --halo-blend: lighten;
   }
 
-  :global(html[data-theme='hc']) .halo {
+  :global(
+      html:is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .halo {
     display: none;
   }
 

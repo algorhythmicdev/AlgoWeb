@@ -230,6 +230,25 @@
     <line x1="5.7" y1="18.3" x2="7.9" y2="16.1" class="stroke" />
     <line x1="16.1" y1="7.9" x2="18.3" y2="5.7" class="stroke" />
   </svg>
+{:else if name === 'sun-moon'}
+  <svg
+    {...commonProps}
+    width={svgWidth}
+    height={svgWidth}
+    style={svgStyle}
+    class={classes}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M7 5.5a6.5 6.5 0 1 0 12 6.5 6.5 6.5 0 0 1-12 0Z"
+      class="stroke"
+      fill="none"
+    />
+    <path d="M9 5c2.2 2.2 3.5 5 3.5 8s-1.3 5.8-3.5 8" class="stroke" />
+    <circle cx="7" cy="12" r="4.5" class="stroke" fill="none" />
+    <path d="M7 7.5a4.5 4.5 0 0 0 0 9" class="stroke" />
+  </svg>
 {:else if name === 'moon'}
   <svg
     {...commonProps}

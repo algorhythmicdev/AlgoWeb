@@ -126,6 +126,7 @@
 <svelte:head>
   <title>{metaTitle}</title>
   <meta name="description" content={metaDescription} />
+  <meta name="color-scheme" content="light dark" />
   {#if data?.meta?.keywords}
     <meta name="keywords" content={data.meta.keywords.join(', ')} />
   {/if}

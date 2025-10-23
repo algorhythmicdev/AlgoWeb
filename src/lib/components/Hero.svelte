@@ -573,7 +573,7 @@
         height: 0.5rem;
     }
 
-    :global([data-base-theme="dark"]) .hero__highlights {
+    :global(:is([data-theme="dark"], [data-theme="hc"])) .hero__highlights {
         --hero-highlight-bg: color-mix(
             in srgb,
             rgba(var(--graphite-rgb), 0.92) 68%,

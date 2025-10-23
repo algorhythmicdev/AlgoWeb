@@ -1,6 +1,7 @@
 export const STORAGE_KEY = 'theme';
-export const THEMES = ['light', 'dark', 'hc'] as const;
-export type ThemeName = (typeof THEMES)[number];
+
+export const THEME_SEQUENCE = ['auto', 'light', 'dark', 'hc'] as const;
+export type ThemeName = (typeof THEME_SEQUENCE)[number];
 
 export const LEGACY_ALIASES: Record<string, ThemeName> = {
   contrast: 'hc'
@@ -14,7 +15,9 @@ export function normalizeTheme(value: unknown, fallback: ThemeName = DEFAULT_THE
   if (!trimmed) return fallback;
   const alias = LEGACY_ALIASES[trimmed];
   const candidate = (alias ?? trimmed) as string;
-  return (THEMES as readonly string[]).includes(candidate) ? (candidate as ThemeName) : fallback;
+  return (THEME_SEQUENCE as readonly string[]).includes(candidate)
+    ? (candidate as ThemeName)
+    : fallback;
 }
 
 export function detectPreferredTheme(): ThemeName {
@@ -38,19 +41,47 @@ export function applyThemeAttributes(theme: ThemeName, doc?: Document): void {
   const root = targetDocument?.documentElement;
   if (!body || !root) return;
 
-  const baseTheme = theme === 'light' ? 'light' : 'dark';
+  const ensureColorScheme = (scheme: string) => {
+    root.style.colorScheme = scheme;
+    if (body.style) {
+      body.style.colorScheme = scheme;
+    }
+  };
+
+  const setResolvedTheme = (resolved: ThemeName) => {
+    body.setAttribute('data-theme-resolved', resolved);
+    root.setAttribute('data-theme-resolved', resolved);
+
+    if (resolved === 'hc') {
+      body.setAttribute('data-theme-legacy', 'contrast');
+      root.setAttribute('data-theme-legacy', 'contrast');
+    } else {
+      body.removeAttribute('data-theme-legacy');
+      root.removeAttribute('data-theme-legacy');
+    }
+  };
+
+  if (theme === 'auto') {
+    const resolved = detectPreferredTheme();
+    setResolvedTheme(resolved);
+
+    body.removeAttribute('data-theme');
+    root.removeAttribute('data-theme');
+
+    body.setAttribute('data-theme-mode', 'auto');
+    root.setAttribute('data-theme-mode', 'auto');
+
+    ensureColorScheme(resolved === 'dark' || resolved === 'hc' ? 'dark' : 'light');
+    return;
+  }
+
+  setResolvedTheme(theme);
 
   body.setAttribute('data-theme', theme);
-  body.setAttribute('data-base-theme', baseTheme);
   root.setAttribute('data-theme', theme);
-  root.setAttribute('data-base-theme', baseTheme);
-  root.style.colorScheme = baseTheme;
 
-  if (theme === 'hc') {
-    body.setAttribute('data-theme-legacy', 'contrast');
-    root.setAttribute('data-theme-legacy', 'contrast');
-  } else {
-    body.removeAttribute('data-theme-legacy');
-    root.removeAttribute('data-theme-legacy');
-  }
+  body.setAttribute('data-theme-mode', 'manual');
+  root.setAttribute('data-theme-mode', 'manual');
+
+  ensureColorScheme(theme === 'dark' || theme === 'hc' ? 'dark' : 'light');
 }

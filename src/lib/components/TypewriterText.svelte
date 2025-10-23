@@ -231,7 +231,15 @@
     border: 0;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .typewriter-text {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .typewriter-text {
     --typewriter-gradient: linear-gradient(
       120deg,
       color-mix(in srgb, var(--text) 92%, var(--bg) 8%) 0%,
