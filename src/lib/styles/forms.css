@@ -242,28 +242,36 @@
   }
 }
 
-html[data-theme='hc'] .form :where(input, select, textarea),
-html[data-theme='hc'] .form-field :where(input, select, textarea) {
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form :where(input, select, textarea),
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form-field :where(input, select, textarea) {
   background: var(--bg);
   border-color: currentColor;
   box-shadow: none;
 }
 
-html[data-theme='hc'] .form :where(input, select, textarea):focus-visible,
-html[data-theme='hc'] .form-field :where(input, select, textarea):focus-visible {
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form :where(input, select, textarea):focus-visible,
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form-field :where(input, select, textarea):focus-visible {
   outline: calc(var(--border-width-thin) + var(--border-width-hairline)) solid currentColor;
   outline-offset: calc(var(--border-width-hairline) * 3);
   box-shadow: none;
 }
 
-html[data-theme='hc'] .form-status,
-html[data-theme='hc'] .form-status--success,
-html[data-theme='hc'] .form-status--error {
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form-status,
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form-status--success,
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .form-status--error {
   background: transparent;
   border: var(--border-width-thin) solid currentColor;
   color: currentColor;
 }
 
-html[data-theme='hc'] .field-error {
+html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contrast'])
+  .field-error {
   color: currentColor;
 }

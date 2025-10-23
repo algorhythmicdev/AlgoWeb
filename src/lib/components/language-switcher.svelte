@@ -18,15 +18,13 @@
 
   $: currentCode = $language ?? 'en';
   $: fallbackCode = currentCode.toUpperCase();
-  $: shortKey = `language_switcher.languages.${currentCode}.short`;
   $: nameKey = `language_switcher.languages.${currentCode}.name`;
-  $: currentShort = translate(shortKey, fallbackCode);
   $: currentName = translate(nameKey, fallbackCode);
   $: triggerLabel = translate('language_switcher.trigger_label', 'Switch language');
   $: ariaLabel = `${triggerLabel} (${currentName})`;
   $: groupLabel = translate('language_switcher.group_label', 'Language');
   $: announcement = `${triggerLabel}. ${groupLabel}: ${currentName}.`;
-  $: classes = ['quick-control', className].filter(Boolean).join(' ');
+  $: classes = ['btn-icon', className].filter(Boolean).join(' ');
   $: hasAlternates = supportedLanguages.length > 1;
   $: currentIndex = supportedLanguages.indexOf(currentCode);
 
@@ -55,8 +53,5 @@
   aria-disabled={!hasAlternates}
 >
   <span class="sr-only" aria-live="polite">{announcement}</span>
-  <span class="quick-control__icon" aria-hidden="true">
-    <Icon name="globe" size="var(--space-4)" />
-  </span>
-  <span class="quick-control__badge" aria-hidden="true">{currentShort}</span>
+  <Icon name="globe" size="var(--space-4)" aria-hidden="true" />
 </button>

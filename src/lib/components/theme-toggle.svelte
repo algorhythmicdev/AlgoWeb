@@ -3,8 +3,13 @@
   import { onMount } from 'svelte';
   import { theme } from '$stores/theme';
 
-  /** @type {Array<{ value: 'light' | 'dark' | 'hc'; label: string; icon: 'sun' | 'moon' | 'contrast' }>} */
+  /** @type {Array<{ value: 'auto' | 'light' | 'dark' | 'hc'; label: string; icon: 'sun' | 'sun-moon' | 'moon' | 'contrast' }>} */
   const themeOptions = [
+    {
+      value: 'auto',
+      label: 'settings.theme.auto',
+      icon: 'sun-moon'
+    },
     {
       value: 'light',
       label: 'settings.theme.light',
@@ -29,7 +34,7 @@
   });
 
   /**
-   * @param {'light' | 'dark' | 'hc'} value
+   * @param {'auto' | 'light' | 'dark' | 'hc'} value
    */
   const selectTheme = (value) => {
     theme.set(value);
@@ -61,6 +66,13 @@
               <line x1="13.6" y1="13.6" x2="15.9" y2="15.9" />
               <line x1="4.1" y1="15.9" x2="6.4" y2="13.6" />
               <line x1="13.6" y1="6.4" x2="15.9" y2="4.1" />
+            </svg>
+          {:else if option.icon === 'sun-moon'}
+            <svg data-icon="sun-moon" viewBox="0 0 20 20">
+              <path d="M6 5.5a6.5 6.5 0 1 0 12 6.5 6.5 6.5 0 0 1-12 0Z" />
+              <path d="M8 5c2.2 2.2 3.5 5 3.5 8s-1.3 5.8-3.5 8" />
+              <circle cx="6" cy="12" r="4.5" />
+              <path d="M6 7.5a4.5 4.5 0 0 0 0 9" />
             </svg>
           {:else if option.icon === 'moon'}
             <svg data-icon="moon" viewBox="0 0 20 20">
@@ -208,7 +220,14 @@
 
   /* High contrast styles derive from control tokens */
 
-  :global(html[data-theme='hc']) .theme-option input:focus-visible + .theme-option__body {
+  :global(
+      html:is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .theme-option input:focus-visible + .theme-option__body {
     outline: var(--focus-ring);
     outline-offset: var(--focus-ring-offset);
   }

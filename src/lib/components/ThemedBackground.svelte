@@ -467,7 +467,16 @@
     transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  :global([data-base-theme='dark']) .background {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .background {
     --gradient-filter: saturate(0.1) brightness(0.7);
     --gradient-opacity: 0.14;
     --wash-min: 0.0012;
@@ -487,7 +496,16 @@
     --film-opacity-max: 0.04;
   }
 
-  :global([data-base-theme='dark']) .background .wash {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .background .wash {
     background:
       radial-gradient(
         38% 40% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
@@ -498,15 +516,30 @@
       linear-gradient(180deg, color-mix(in srgb, var(--bg) 99.6%, transparent) 0%, color-mix(in srgb, var(--bg) 99.6%, transparent) 100%);
   }
 
-  :global([data-base-theme='dark']) .background .flare {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .background .flare {
     background:
       radial-gradient(34% 34% at 78% 22%, color-mix(in srgb, var(--theme-accent) 0.32%, transparent) 0%, transparent 76%),
       radial-gradient(40% 40% at 24% 84%, color-mix(in srgb, var(--theme-secondary) 0.3%, transparent) 0%, transparent 78%);
   }
 
-  :global(html[data-theme='hc']) .background,
-  :global(html[data-theme='contrast']) .background,
-  :global(html[data-theme-legacy='contrast']) .background {
+  :global(
+      html:is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .background {
     display: none;
   }
 
@@ -520,12 +553,29 @@
     animation-delay: var(--delay);
   }
 
-  :global([data-base-theme='dark']) .dot {
+  :global(
+      :is(
+        [data-theme='dark'],
+        [data-theme-resolved='dark'],
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .dot {
     mix-blend-mode: screen;
     opacity: 0.12;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .wash {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .wash {
     background:
       radial-gradient(
         42% 42% at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),
@@ -537,7 +587,15 @@
     filter: none;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .flare {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .flare {
     background:
       radial-gradient(42% 42% at 78% 22%, color-mix(in srgb, var(--accent-2) 34%, transparent) 0%, transparent 72%),
       radial-gradient(48% 48% at 24% 82%, color-mix(in srgb, var(--accent-1) 28%, transparent) 0%, transparent 74%);
@@ -545,13 +603,29 @@
     mix-blend-mode: normal;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .dot {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .dot {
     background: color-mix(in srgb, var(--accent-2) 70%, transparent) !important;
     mix-blend-mode: normal;
     opacity: 0.38 !important;
   }
 
-  :global(:is([data-theme='hc'], [data-theme='contrast'], [data-theme-legacy='contrast'])) .veil {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme='contrast'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .veil {
     display: none;
   }
 

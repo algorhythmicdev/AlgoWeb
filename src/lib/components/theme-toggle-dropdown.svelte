@@ -10,34 +10,37 @@
     translateOrFallback($_, key, fallback, params);
 
   const themeLabels: Record<string, string> = {
+    auto: 'settings.theme.auto',
     light: 'settings.theme.light',
     dark: 'settings.theme.dark',
     hc: 'settings.theme.contrast'
   };
 
   const themeIcons: Record<string, string> = {
+    auto: 'sun-moon',
     light: 'sun',
     dark: 'moon',
     hc: 'contrast'
   };
 
-  const supportedThemes = availableThemes ?? ['light', 'dark', 'hc'];
+  const supportedThemes = availableThemes ?? ['auto', 'light', 'dark', 'hc'];
   const hasMultipleThemes = supportedThemes.length > 1;
 
-  let currentTheme: string = 'light';
+  let currentTheme: string = 'auto';
 
   $: currentTheme = $theme ?? 'light';
   $: labelKey = themeLabels[currentTheme] ?? 'settings.theme.light';
-  $: fallbackName =
-    currentTheme === 'hc'
-      ? 'High contrast'
-      : currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
+  $: fallbackName = (() => {
+    if (currentTheme === 'hc') return 'High contrast';
+    if (currentTheme === 'auto') return 'Auto';
+    return currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
+  })();
   $: themeName = translate(labelKey, fallbackName);
   $: triggerLabel = translate('settings.theme.trigger_label', 'Switch theme');
   $: ariaLabel = `${triggerLabel} (${themeName})`;
   $: announcement = `${translate('settings.theme.selected', 'Selected theme')}: ${themeName}.`;
   $: iconName = themeIcons[currentTheme] ?? 'sun';
-  $: classes = ['quick-control', className].filter(Boolean).join(' ');
+  $: classes = ['btn-icon', className].filter(Boolean).join(' ');
 
   const cycleThemes = () => {
     if (!hasMultipleThemes) return;
@@ -55,7 +58,5 @@
   aria-disabled={!hasMultipleThemes}
 >
   <span class="sr-only" aria-live="polite">{announcement}</span>
-  <span class="quick-control__icon" aria-hidden="true">
-    <Icon name={iconName} size="var(--space-4)" />
-  </span>
+  <Icon name={iconName} size="var(--space-4)" aria-hidden="true" />
 </button>

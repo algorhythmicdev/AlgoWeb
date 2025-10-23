@@ -31,6 +31,14 @@
     labelFallback: string;
   };
 
+  type ShowcaseCTA = {
+    href?: string | null;
+    labelKey: string;
+    labelFallback: string;
+    statusKey?: string;
+    statusFallback?: string;
+  };
+
   type Offering = {
     readonly id: string;
     readonly icon: string;
@@ -286,10 +294,12 @@
         copyFallback:
           'Readable, multilingual stories co-written with educators, founders, families, and our own R&D team.',
         cta: {
-          href: '/',
+          href: null,
           labelKey: 'home.page.education_hub.items.insights.cta',
-          labelFallback: 'Browse insights'
-        }
+          labelFallback: 'Browse insights',
+          statusKey: 'home.page.education_hub.items.insights.status',
+          statusFallback: 'Coming soon'
+        } satisfies ShowcaseCTA
       },
       {
         icon: 'cases',
@@ -301,10 +311,12 @@
         copyFallback:
           'See classrooms, startups, and cultural partners putting accessible AI pilots into daily use.',
         cta: {
-          href: '/',
+          href: null,
           labelKey: 'home.page.education_hub.items.case_studies.cta',
-          labelFallback: 'Explore spotlights'
-        }
+          labelFallback: 'Explore spotlights',
+          statusKey: 'home.page.education_hub.items.case_studies.status',
+          statusFallback: 'Coming soon'
+        } satisfies ShowcaseCTA
       },
       {
         icon: 'events',
@@ -315,12 +327,23 @@
         copyKey: 'home.page.education_hub.items.events.copy',
         copyFallback: 'Join monthly gatherings with transcripts, captions, and shared notes.',
         cta: {
-          href: '/',
+          href: null,
           labelKey: 'home.page.education_hub.items.events.cta',
-          labelFallback: 'See upcoming events'
-        }
+          labelFallback: 'See upcoming events',
+          statusKey: 'home.page.education_hub.items.events.status',
+          statusFallback: 'Coming soon'
+        } satisfies ShowcaseCTA
       }
-    ]
+    ] satisfies ReadonlyArray<{
+      icon: string;
+      eyebrowKey: string;
+      eyebrowFallback: string;
+      titleKey: string;
+      titleFallback: string;
+      copyKey: string;
+      copyFallback: string;
+      cta: ShowcaseCTA;
+    }>
   } as const;
 
   const finale = {
@@ -744,9 +767,18 @@
           <span class="education-card__eyebrow">{t(item.eyebrowKey, item.eyebrowFallback)}</span>
           <h3>{t(item.titleKey, item.titleFallback)}</h3>
           <p>{t(item.copyKey, item.copyFallback)}</p>
-          <Button href={item.cta.href} variant="secondary" size="md" class="education-card__cta">
-            {t(item.cta.labelKey, item.cta.labelFallback)}
-          </Button>
+          {#if item.cta.href}
+            <Button href={item.cta.href} variant="secondary" size="md" class="education-card__cta">
+              {t(item.cta.labelKey, item.cta.labelFallback)}
+            </Button>
+          {:else}
+            <span class="education-card__cta education-card__cta--disabled" aria-disabled="true">
+              <span>{t(item.cta.labelKey, item.cta.labelFallback)}</span>
+              <span class="education-card__status">
+                {t(item.cta.statusKey ?? '', item.cta.statusFallback ?? 'Coming soon')}
+              </span>
+            </span>
+          {/if}
         </GlassCard>
       {/each}
     </div>
@@ -1121,6 +1153,30 @@
     --btn-padding-block: calc(var(--button-padding-block-md) - var(--space-2));
     --btn-padding-inline: calc(var(--button-padding-inline-md) - var(--space-2));
     --btn-font-size: var(--text-small);
+  }
+
+  .education-card__cta--disabled {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-block: calc(var(--button-padding-block-md) - var(--space-2));
+    padding-inline: calc(var(--button-padding-inline-md) - var(--space-2));
+    border-radius: var(--radius-pill);
+    border: var(--border-width-hairline) dashed color-mix(in oklab, var(--border) 70%, transparent 30%);
+    background: color-mix(in oklab, var(--bg-elev-1) 88%, transparent 12%);
+    color: var(--text-tertiary);
+    font-size: var(--text-small);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .education-card__status {
+    font-size: var(--text-meta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
   }
 
   :global(.finale .finale-card)::after {

@@ -157,19 +157,22 @@
             "eyebrow": "Insights",
             "title": "Latest product and education notes",
             "copy": "Readable, multilingual stories co-written with educators, founders, families, and our own R&D team.",
-            "cta": "Browse insights"
+            "cta": "Browse insights",
+            "status": "Coming soon"
           },
           "case_studies": {
             "eyebrow": "Case studies",
             "title": "Impact stories & pilots",
             "copy": "See classrooms, startups, and cultural partners putting accessible AI pilots into daily use.",
-            "cta": "Explore spotlights"
+            "cta": "Explore spotlights",
+            "status": "Coming soon"
           },
           "events": {
             "eyebrow": "Events",
             "title": "Workshops & community jams",
             "copy": "Join monthly gatherings with transcripts, captions, and shared notes.",
-            "cta": "See upcoming events"
+            "cta": "See upcoming events",
+            "status": "Coming soon"
           }
         }
       }

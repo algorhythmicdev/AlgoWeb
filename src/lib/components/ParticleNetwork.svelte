@@ -726,18 +726,25 @@
       filter 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .particle-network[data-theme='dark'] {
+  :global(html:is([data-theme='dark'], [data-theme-resolved='dark'])) .particle-network {
     opacity: 0.48;
     filter: saturate(1.14) contrast(1.06) brightness(1.03);
   }
 
-  .particle-network[data-theme='light'] {
+  :global(html:is([data-theme='light'], [data-theme-resolved='light'])) .particle-network {
     opacity: 0.55;
     mix-blend-mode: multiply;
     filter: saturate(1.18) contrast(1.12) brightness(0.96);
   }
 
-  :global([data-theme='hc']) .particle-network {
+  :global(
+      :is(
+        [data-theme='hc'],
+        [data-theme-resolved='hc'],
+        [data-theme-legacy='contrast']
+      )
+    )
+    .particle-network {
     display: none;
   }
 
