@@ -10,12 +10,10 @@
   import Footer from '$components/Footer.svelte';
   import ParticleNetwork from '$components/ParticleNetwork.svelte';
   import { onMount } from 'svelte';
-  import { _, initI18n } from '$lib/i18n';
+  import { initI18n } from '$lib/i18n';
   import { page } from '$app/stores';
-  import en from '$lib/translations/en.json';
-  import { theme, availableThemes } from '$stores/theme';
+  import { applyTheme, cycleTheme, loadTheme, type Theme } from '$lib/theme';
   import { browser } from '$app/environment';
-  import { siteConfig } from '$lib/config/seo';
 
   export let data;
 
@@ -23,17 +21,14 @@
   let i18nReady = !browser;
 
 
-  const isTheme = (value: string): value is (typeof availableThemes)[number] =>
-    availableThemes.includes(value as (typeof availableThemes)[number]);
-
   onMount(async () => {
+    const savedTheme = loadTheme('light');
+    currentTheme = applyTheme(savedTheme);
     await initI18n(startLocale);
     i18nReady = true;
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme && isTheme(savedTheme)) {
-      theme.set(savedTheme);
-    }
   });
+
+  let currentTheme: Theme = 'light';
 
   function handleThemeToggleShortcut(event: KeyboardEvent) {
     const target = event.target;
@@ -46,7 +41,7 @@
       !document.body.classList.contains('modal-open') &&
       !isEditable
     ) {
-      theme.toggle();
+      currentTheme = cycleTheme(currentTheme);
     }
   }
 
@@ -89,72 +84,17 @@
     document.body.classList.add(currentAccentClass);
   }
 
-  /** @type {Record<string, any>} */
-  let metaData: { [key: string]: any } = {};
-  $: metaData = /** @type {Record<string, any>} */ (data?.meta ?? {});
-
-  const fallbackMeta = {
-    title: en.seo?.default_title ?? siteConfig.title,
-    description: en.seo?.default_description ?? siteConfig.description,
-    ogTitle: en.seo?.default_og_title ?? siteConfig.title,
-    ogDescription: en.seo?.default_og_description ?? siteConfig.description,
-    url: en.seo?.default_url ?? siteConfig.url
-  };
-
-  let defaultMetaTitle = fallbackMeta.title;
-  let defaultMetaDescription = fallbackMeta.description;
-  let defaultOgTitle = fallbackMeta.ogTitle;
-  let defaultOgDescription = fallbackMeta.ogDescription;
-  let defaultMetaUrl = fallbackMeta.url;
-
-  $: defaultMetaTitle = $_('seo.default_title') || fallbackMeta.title;
-  $: defaultMetaDescription = $_('seo.default_description') || fallbackMeta.description;
-  $: defaultOgTitle = $_('seo.default_og_title') || fallbackMeta.ogTitle;
-  $: defaultOgDescription = $_('seo.default_og_description') || fallbackMeta.ogDescription;
-  $: defaultMetaUrl = $_('seo.default_url') || fallbackMeta.url;
-
-  $: metaTitle = metaData.title ?? (metaData.titleKey ? $_(metaData.titleKey) : defaultMetaTitle);
-  $: metaDescription =
-    metaData.description ?? (metaData.descriptionKey ? $_(metaData.descriptionKey) : defaultMetaDescription);
-  $: ogTitle = metaData.ogTitle ?? (metaData.ogTitleKey ? $_(metaData.ogTitleKey) : metaTitle ?? defaultOgTitle);
-  $: ogDescription =
-    metaData.ogDescription ?? (metaData.ogDescriptionKey ? $_(metaData.ogDescriptionKey) : defaultOgDescription);
-  $: metaUrl = typeof metaData.url === 'string' && metaData.url.trim() ? metaData.url : defaultMetaUrl;
-  const ogImageUrl = siteConfig.ogImage;
 </script>
-
-<svelte:head>
-  <title>{metaTitle}</title>
-  <meta name="description" content={metaDescription} />
-  <meta name="color-scheme" content="light dark" />
-  {#if data?.meta?.keywords}
-    <meta name="keywords" content={data.meta.keywords.join(', ')} />
-  {/if}
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content={ogTitle} />
-  <meta property="og:description" content={ogDescription} />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={metaUrl} />
-  <meta property="og:image" content={ogImageUrl} />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={metaTitle} />
-  <meta name="twitter:description" content={ogDescription} />
-  <meta name="twitter:image" content={ogImageUrl} />
-</svelte:head>
 
 <svelte:window on:keydown={handleThemeToggleShortcut} />
 
 <ParticleNetwork />
 
 <div class="app">
-  <a class="skip-link" href="#main-content">{$_('nav.skip_to_content') || 'Skip to content'}</a>
   {#if i18nReady}
     <Navigation />
 
-    <main id="main-content">
+    <main id="main">
       {#key routeKey}
         <slot />
       {/key}
@@ -177,27 +117,6 @@
     position: relative;
     z-index: var(--z-base);
     isolation: isolate;
-  }
-
-  .skip-link {
-    position: absolute;
-    top: var(--skip-link-inset);
-    left: var(--skip-link-inset);
-    padding-block: var(--skip-link-padding-block);
-    padding-inline: var(--skip-link-padding-inline);
-    border-radius: var(--radius-md);
-    background: var(--bg-elev-1);
-    color: var(--text);
-    border: 1px solid var(--border);
-    transform: translateY(-200%);
-    transition: transform 0.2s ease;
-    z-index: var(--z-overlay);
-  }
-
-  .skip-link:focus {
-    transform: translateY(0);
-    outline: 3px solid var(--focus-ring-color);
-    outline-offset: 4px;
   }
 
   main {

@@ -1,0 +1,6 @@
+{
+  "nav": { "home": "Главная", "team": "Команда", "ideonautix": "Ideonautix", "nodevoyage": "NodeVoyage", "consulting": "Консалтинг", "education": "Обучение", "contact": "Контакты" },
+  "language": { "label": "Язык" },
+  "cta": { "primary": "Связаться", "secondary": "Узнать больше" },
+  "common": { "loading": "Загрузка...", "close": "Закрыть" }
+}

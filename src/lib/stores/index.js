@@ -3,6 +3,4 @@
  * Central export point for all Svelte stores
  */
 
-export { theme } from './theme';
-export { language } from './language.js';
 export { voting } from './voting.js';

@@ -5,7 +5,7 @@
     import Section from "$lib/components/Section.svelte";
     import Button from "$lib/components/Button.svelte";
     import Icon from "$lib/components/icons/Icon.svelte";
-    import { revealOnScroll, staggerReveal } from "$lib/animations";
+    import { slideY } from "$lib/animations";
     import { withBase } from "$utils/paths";
     import { onMount } from "svelte";
     import { _ } from "svelte-i18n";
@@ -306,7 +306,7 @@
 </Hero>
 
 <Section id="options" class="contact-options" bg="tint">
-    <div class="contact-options__content" use:revealOnScroll>
+    <div class="contact-options__content" transition:slideY>
     <header class="section-heading" data-align="center">
         <span class="section-eyebrow"
             >{t("contact.page.cards.eyebrow")}</span
@@ -318,7 +318,7 @@
         </p>
     </header>
 
-    <div class="contact-options__grid auto-grid" use:staggerReveal>
+    <div class="contact-options__grid auto-grid" transition:slideY>
         {#each contactCards as card (card.titleKey)}
             <GlassCard class="contact-card" padding="lg" halo>
                 <div class="card-icon">
@@ -344,7 +344,7 @@
 <SectionDivider tone="neutral" />
 
 <Section id="form" class="contact-form">
-    <div class="contact-form__content" use:revealOnScroll>
+    <div class="contact-form__content" transition:slideY>
         <GlassCard class="form-card" padding="lg" halo>
             <span class="section-eyebrow"
                 >{t("contact.page.form.eyebrow")}</span
@@ -468,7 +468,7 @@
 <SectionDivider tone="citrus" />
 
 <Section id="support" class="contact-support" bg="tint">
-    <div class="contact-support__container" use:revealOnScroll>
+    <div class="contact-support__container" transition:slideY>
         <header class="section-heading">
             <span class="section-eyebrow"
                 >{t("contact.page.support.section_eyebrow",
@@ -484,7 +484,7 @@
             </p>
         </header>
 
-        <div class="support-grid auto-grid" use:staggerReveal>
+        <div class="support-grid auto-grid" transition:slideY>
             <GlassCard class="support-card" padding="lg" particles>
                 <figure class="media-card">
                     <img
@@ -580,7 +580,7 @@
 <SectionDivider tone="aurora" />
 
 <Section id="newsletter" class="contact-newsletter" bg="elev">
-    <div class="contact-newsletter__content" use:revealOnScroll>
+    <div class="contact-newsletter__content" transition:slideY>
     <GlassCard class="newsletter-card" padding="lg">
         <span class="section-eyebrow"
             >{t("contact.page.newsletter.eyebrow")}</span

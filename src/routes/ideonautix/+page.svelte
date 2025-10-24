@@ -6,7 +6,7 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { withBase } from '$utils/paths';
-  import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { slideY } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
@@ -332,7 +332,7 @@
 </Hero>
 
 <Section class="section--snapshot" bg="tint" data-surface="glow">
-  <div class="snapshot" use:revealOnScroll>
+  <div class="snapshot" transition:slideY>
     <GlassCard class="snapshot-card" padding="lg" halo>
       <img
         src={snapshot.image}
@@ -366,11 +366,11 @@
 </Section>
 
 <Section class="section--modules" data-surface="glow">
-  <div class="modules__content" use:revealOnScroll>
+  <div class="modules__content" transition:slideY>
     <h2 class="section-title">{t(modules.titleKey, modules.titleFallback)}</h2>
     <p class="section-lead">{t(modules.leadKey, modules.leadFallback)}</p>
 
-    <div class="module-grid" use:staggerReveal>
+    <div class="module-grid" transition:slideY>
       {#each modules.cards as module (module.titleKey)}
         <GlassCard class="module-card" halo padding="lg" interactive>
         <div class="module-icon" aria-hidden="true">
@@ -387,7 +387,7 @@
 <SectionDivider tone="aurora" />
 
 <Section class="section--status" bg="tint" data-surface="glow">
-  <div class="status" use:revealOnScroll>
+  <div class="status" transition:slideY>
     <GlassCard class="status-card" padding="lg">
       <span class="section-eyebrow">{t(statusSection.eyebrowKey, statusSection.eyebrowFallback)}</span>
       <h2>{t(statusSection.titleKey, statusSection.titleFallback)}</h2>
@@ -407,13 +407,13 @@
 <SectionDivider tone="neutral" />
 
 <Section class="section--use-cases" data-surface="glow">
-  <div class="use-cases" use:revealOnScroll>
+  <div class="use-cases" transition:slideY>
     <div class="use-cases-copy">
       <span class="section-eyebrow">{t(useCases.eyebrowKey, useCases.eyebrowFallback)}</span>
       <h2>{t(useCases.titleKey, useCases.titleFallback)}</h2>
       <p>{t(useCases.copyKey, useCases.copyFallback)}</p>
     </div>
-    <div class="use-cases-grid" use:staggerReveal>
+    <div class="use-cases-grid" transition:slideY>
       {#each useCases.items as story (story.nameKey)}
         <GlassCard padding="md" class="use-case-card" halo>
           <h3>{t(story.nameKey, story.nameFallback)}</h3>
@@ -427,7 +427,7 @@
 <SectionDivider tone="cherry" />
 
 <Section id="pilot-request" class="pilot section--pilot" bg="tint" data-surface="glow">
-  <div class="pilot-section" use:revealOnScroll>
+  <div class="pilot-section" transition:slideY>
     <GlassCard class="pilot-card" padding="lg" particles>
     <span class="section-eyebrow">{t(pilot.eyebrowKey, pilot.eyebrowFallback)}</span>
     <h2>{t(pilot.titleKey, pilot.titleFallback)}</h2>
@@ -486,7 +486,7 @@
 <SectionDivider tone="neutral" />
 
 <Section class="cta section--cta" bg="elev" data-surface="glow">
-  <div class="cta-container" use:revealOnScroll>
+  <div class="cta-container" transition:slideY>
     <GlassCard class="cta-card" padding="lg" halo>
       <h2>{t(cta.titleKey, cta.titleFallback)}</h2>
       <p>{t(cta.copyKey, cta.copyFallback)}</p>

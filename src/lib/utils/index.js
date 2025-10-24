@@ -4,15 +4,7 @@
  */
 
 // Animation utilities
-export {
-  useReveal,
-  revealOnScroll,
-  useStaggerReveal,
-  staggerReveal,
-  tilt,
-  magnetic,
-  morphGradient
-} from '../animations.js';
+export { prefersReduced, fadeIn, slideY } from '../animations.js';
 
 // Validation utilities
 export {

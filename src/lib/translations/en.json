@@ -13,11 +13,15 @@
     "toggle_menu": "Toggle menu",
     "close_menu": "Close menu",
     "quick_controls": "Quick controls",
-    "skip_to_content": "Skip to content",
     "solutions": "Solutions",
     "solutions_panel_label": "Solutions",
     "help_center": "Help center",
     "resources_panel_label": "Resources"
+  },
+  "language": { "label": "Language" },
+  "education": {
+    "title": "Education",
+    "description": "We’re preparing practical, easy-to-run AI programs for schools and universities. This page grows with real content."
   },
   "hero": {
     "title": "Accessible AI for travel, startups, and schools.",

@@ -6,7 +6,7 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { withBase } from '$utils/paths';
-  import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { slideY } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
@@ -302,7 +302,7 @@
 </Hero>
 
 <Section class="who-we-are" bg="tint" data-surface="glow">
-  <div class="who-we-are__grid" use:revealOnScroll>
+  <div class="who-we-are__grid" transition:slideY>
     <GlassCard class="about-card" padding="lg">
       <h2>{t('about.page.story.heading')}</h2>
       <p>{t(story.introKey, story.introFallback)}</p>
@@ -327,14 +327,14 @@
 <SectionDivider tone="neutral" />
 
 <Section class="vision" data-surface="glow" aria-labelledby="vision-heading">
-  <div class="vision__content" use:revealOnScroll>
+  <div class="vision__content" transition:slideY>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t(vision.eyebrowKey, vision.eyebrowFallback)}</span>
       <h2 id="vision-heading">{t(vision.titleKey, vision.titleFallback)}</h2>
       <p>{t(vision.copyKey, vision.copyFallback)}</p>
     </header>
 
-    <div class="vision__grid" use:staggerReveal>
+    <div class="vision__grid" transition:slideY>
       {#each vision.cards as card (card.titleKey)}
         <GlassCard class="vision-card" padding="lg" halo>
           <div class="vision-card__icon">
@@ -356,7 +356,7 @@
 <SectionDivider tone="aurora" />
 
 <Section class="values" bg="tint" data-surface="glow" aria-labelledby="values-heading">
-  <div class="values__content" use:revealOnScroll>
+  <div class="values__content" transition:slideY>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.values.eyebrow')}</span>
       <h2 id="values-heading">{t('about.page.values.title')}</h2>
@@ -365,7 +365,7 @@
       </p>
     </header>
 
-    <div class="values__grid" use:staggerReveal>
+    <div class="values__grid" transition:slideY>
       {#each values as value (value.titleKey)}
         <GlassCard class="value-card" padding="lg">
           <div class="value-icon">
@@ -382,7 +382,7 @@
 <SectionDivider tone="aurora" />
 
 <Section class="team" data-surface="glow" id="team">
-  <div class="team__content" use:revealOnScroll>
+  <div class="team__content" transition:slideY>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t('about.page.team.eyebrow')}</span>
       <h2>{t('about.page.team.title')}</h2>
@@ -391,7 +391,7 @@
       </p>
     </header>
 
-    <div class="team__grid" use:staggerReveal>
+    <div class="team__grid" transition:slideY>
       {#each team as member (member.nameKey)}
         <GlassCard class="team-card" padding="lg">
         <img
@@ -430,7 +430,7 @@
 </Section>
 
 <Section class="finale" bg="elev" data-surface="glow">
-  <div class="finale__content" use:revealOnScroll>
+  <div class="finale__content" transition:slideY>
   <GlassCard class="finale-card" halo padding="lg">
     <span class="section-eyebrow">{t(finale.eyebrowKey, finale.eyebrowFallback)}</span>
     <h2>{t(finale.titleKey, finale.titleFallback)}</h2>

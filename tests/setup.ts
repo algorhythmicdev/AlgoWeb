@@ -58,6 +58,13 @@ if (typeof HTMLCanvasElement !== 'undefined') {
   });
 }
 
+if (typeof Element !== 'undefined' && !Element.prototype.animate) {
+  Element.prototype.animate = () => ({
+    cancel() {},
+    onfinish: null
+  });
+}
+
 beforeAll(() => {
   addMessages('en', en);
   init({ fallbackLocale: 'en', initialLocale: 'en' });

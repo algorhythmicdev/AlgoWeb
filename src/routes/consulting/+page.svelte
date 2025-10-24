@@ -6,7 +6,7 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { withBase } from '$utils/paths';
-  import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { slideY } from '$lib/animations';
   import { onMount } from 'svelte';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
@@ -399,7 +399,7 @@
 </Hero>
 
 <Section class="quick-facts" bg="tint" data-surface="glow">
-  <div class="quick-facts__content" use:revealOnScroll>
+  <div class="quick-facts__content" transition:slideY>
     <GlassCard class="quick-facts__card" halo>
       <span class="section-eyebrow">{t('consulting.page.quick_facts_eyebrow')}</span>
       <h2>{t(quickFacts.titleKey, quickFacts.titleFallback)}</h2>
@@ -423,7 +423,7 @@
   id="packages"
   aria-labelledby="packages-heading"
 >
-  <div class="packages__content" use:revealOnScroll>
+  <div class="packages__content" transition:slideY>
     <header class="section-heading">
       <span class="section-eyebrow">{t('consulting.packages_title')}</span>
       <h2 id="packages-heading">{t('consulting.page.packages_title')}</h2>
@@ -432,7 +432,7 @@
       </p>
     </header>
 
-    <div class="packages__grid auto-grid" use:staggerReveal>
+    <div class="packages__grid auto-grid" transition:slideY>
       {#each servicePackages as pkg (pkg.nameKey)}
         <GlassCard class="package-card" padding="lg" halo interactive>
           <div class="package-card__header">
@@ -454,13 +454,13 @@
 </Section>
 
 <Section class="approach" bg="tint" data-surface="glow">
-  <div class="approach__grid" use:revealOnScroll>
+  <div class="approach__grid" transition:slideY>
     <div class="approach__summary">
       <span class="section-eyebrow">{t('consulting.page.approach_eyebrow')}</span>
       <h2>{t(approach.titleKey, approach.titleFallback)}</h2>
       <p>{t(approach.introKey, approach.introFallback)}</p>
     </div>
-    <div class="approach__points" use:staggerReveal>
+    <div class="approach__points" transition:slideY>
       {#each approach.points as point (point.titleKey)}
         <GlassCard class="approach-card" halo>
           <div class="approach-card__header">
@@ -479,7 +479,7 @@
 <SectionDivider tone="neutral" />
 
 <Section class="process" data-surface="glow">
-  <div class="process__grid" use:revealOnScroll>
+  <div class="process__grid" transition:slideY>
     <div>
       <span class="section-eyebrow">{t('consulting.page.process_eyebrow')}</span>
       <h2>{t(process.titleKey, process.titleFallback)}</h2>
@@ -514,7 +514,7 @@
 </Section>
 
 <Section class="requirements" bg="tint" data-surface="glow">
-  <div class="requirements__grid auto-grid" use:revealOnScroll>
+  <div class="requirements__grid auto-grid" transition:slideY>
     <GlassCard class="requirements-card" halo>
       <h2>{t(requirements.titleKey, requirements.titleFallback)}</h2>
       <ul>
@@ -542,13 +542,13 @@
 <SectionDivider tone="aurora" />
 
 <Section class="examples" data-surface="glow">
-  <div class="examples__content" use:revealOnScroll>
+  <div class="examples__content" transition:slideY>
     <header class="section-heading">
       <span class="section-eyebrow">{t('consulting.page.examples_eyebrow')}</span>
       <h2>{t(examples.titleKey, examples.titleFallback)}</h2>
       <p>{t(examples.introKey, examples.introFallback)}</p>
     </header>
-    <div class="examples__grid auto-grid" use:staggerReveal>
+    <div class="examples__grid auto-grid" transition:slideY>
       {#each examples.items as item (item.titleKey)}
         <GlassCard class="example-card" padding="lg" halo interactive>
           <div class="example-card__header">
@@ -570,7 +570,7 @@
 <SectionDivider tone="neutral" />
 
 <Section class="application" bg="tint" data-surface="glow" id="apply">
-  <div class="application__content" use:revealOnScroll>
+  <div class="application__content" transition:slideY>
     <GlassCard class="application-card" halo>
       <span class="section-eyebrow">{t('consulting.form_title')}</span>
       <h2>{t('consulting.page.application_title')}</h2>
@@ -660,7 +660,7 @@
 </Section>
 
 <Section class="cta" bg="elev" data-surface="glow">
-  <div class="cta__content" use:revealOnScroll>
+  <div class="cta__content" transition:slideY>
     <GlassCard class="cta-card" padding="lg" halo interactive>
       <span class="section-eyebrow">{t('consulting.page.cta_eyebrow')}</span>
       <h2>{t(finalCta.titleKey, finalCta.titleFallback)}</h2>
