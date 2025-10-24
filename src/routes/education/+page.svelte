@@ -3,7 +3,8 @@
   import { _ } from '$lib/i18n';
   const head = Head({
     title: 'Education',
-    description: 'Programs for schools and universities in plain language.'
+    description: 'Programs for schools and universities in plain language.',
+    lang: typeof document !== 'undefined' ? document.documentElement.lang : 'en'
   });
 </script>
 
