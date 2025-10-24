@@ -1,6 +1,9 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { _ } from '$lib/i18n';
+  import { stripBase, withBase } from '$utils/paths';
+
+  const normalizePath = (path: string) => path.replace(/\/+$/, '') || '/';
 
   const items = [
     { href: '/', key: 'home', fallback: 'Home' },
@@ -12,14 +15,20 @@
     { href: '/contact', key: 'contact', fallback: 'Contact' }
   ] as const;
 
-  $: current = $page.url.pathname.replace(/\/+$/, '') || '/';
+  const navItems = items.map((item) => ({
+    ...item,
+    resolvedHref: withBase(item.href) ?? item.href,
+    match: normalizePath(item.href)
+  }));
+
+  $: current = normalizePath(stripBase($page.url.pathname));
 </script>
 
 <nav aria-label={$_('nav.primary_label') || 'Primary navigation'}>
   <ul role="list" class="nav">
-    {#each items as item}
+    {#each navItems as item}
       <li>
-        <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>
+        <a href={item.resolvedHref} aria-current={current === item.match ? 'page' : undefined}>
           {$_(`nav.${item.key}`) || item.fallback}
         </a>
       </li>

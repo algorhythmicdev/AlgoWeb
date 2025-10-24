@@ -4,3 +4,4 @@
  */
 
 export { voting } from './voting.js';
+export { theme } from './theme.js';
