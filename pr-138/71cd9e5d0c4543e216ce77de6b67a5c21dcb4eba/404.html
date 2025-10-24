@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/AlgoWeb/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Preconnect to font providers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts: Inter and Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+      (() => {
+        const STORAGE_KEY = 'theme';
+        const root = document.documentElement;
+
+        const storage = (() => {
+          try {
+            return window.localStorage;
+          } catch {
+            return null;
+          }
+        })();
+
+        const getMediaPreference = (query) => {
+          if (typeof window.matchMedia === 'function') {
+            try {
+              return window.matchMedia(query).matches;
+            } catch {
+              return false;
+            }
+          }
+          return false;
+        };
+
+        const prefersDark = getMediaPreference('(prefers-color-scheme: dark)');
+        const prefersContrast = getMediaPreference('(prefers-contrast: more)');
+
+        const normalizeStoredTheme = (value) => {
+          if (typeof value !== 'string') return null;
+          const normalized = value === 'contrast' ? 'hc' : value;
+          return ['auto', 'light', 'dark', 'hc'].includes(normalized) ? normalized : null;
+        };
+
+        const stored = (() => {
+          if (!storage) return null;
+          try {
+            return normalizeStoredTheme(storage.getItem(STORAGE_KEY));
+          } catch {
+            return null;
+          }
+        })();
+        const theme = stored ?? 'auto';
+
+        const resolved = (() => {
+          if (theme === 'auto') {
+            if (prefersContrast) return 'hc';
+            if (prefersDark) return 'dark';
+            return 'light';
+          }
+          return theme;
+        })();
+
+        const scheme = resolved === 'dark' || resolved === 'hc' ? 'dark' : 'light';
+
+        const applyAttributes = (element) => {
+          if (!element) return;
+
+          if (theme === 'auto') {
+            element.removeAttribute('data-theme');
+            element.setAttribute('data-theme-mode', 'auto');
+          } else {
+            element.setAttribute('data-theme', theme);
+            element.setAttribute('data-theme-mode', 'manual');
+          }
+
+          element.setAttribute('data-theme-resolved', resolved);
+
+          if (resolved === 'hc') {
+            element.setAttribute('data-theme-legacy', 'contrast');
+          } else {
+            element.removeAttribute('data-theme-legacy');
+          }
+
+          if (element.style) {
+            element.style.colorScheme = scheme;
+          }
+        };
+
+        applyAttributes(root);
+
+        const applyToBody = () => {
+          const body = document.body;
+          if (!body) {
+            document.addEventListener('DOMContentLoaded', applyToBody, { once: true });
+            return;
+          }
+          applyAttributes(body);
+        };
+
+        applyToBody();
+      })();
+
+    </script>
+
+    
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/entry/start.CRvBmfG7.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/CBGrEAZs.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/QTv4e4zi.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/C3ekXD3c.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/88j_uLdx.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/entry/app.CaXATmT0.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/CmsKOCeN.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/NZTpNUN0.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/TmrmsEfs.js">
+		<link rel="modulepreload" href="/AlgoWeb/_app/immutable/chunks/VKzyDxx-.js">
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">
+			<script>
+				{
+					__sveltekit_1yh136f = {
+						base: "/AlgoWeb",
+						assets: "/AlgoWeb"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/AlgoWeb/_app/immutable/entry/start.CRvBmfG7.js"),
+						import("/AlgoWeb/_app/immutable/entry/app.CaXATmT0.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
