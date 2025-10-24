@@ -1,0 +1,1 @@
+const a={home:"Sākums",team:"Komanda",ideonautix:"Ideonautix",nodevoyage:"NodeVoyage",consulting:"Konsultācijas",education:"Izglītība",contact:"Kontakti"},o={label:"Valoda"},n={primary:"Sazināties",secondary:"Uzzināt vairāk"},t={loading:"Ielādējas...",close:"Aizvērt"},e={nav:a,language:o,cta:n,common:t};export{t as common,n as cta,e as default,o as language,a as nav};

@@ -1,0 +1,1 @@
+const o={home:"Главная",team:"Команда",ideonautix:"Ideonautix",nodevoyage:"NodeVoyage",consulting:"Консалтинг",education:"Обучение",contact:"Контакты"},a={label:"Язык"},n={primary:"Связаться",secondary:"Узнать больше"},e={loading:"Загрузка...",close:"Закрыть"},t={nav:o,language:a,cta:n,common:e};export{e as common,n as cta,t as default,a as language,o as nav};
