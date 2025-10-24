@@ -19,6 +19,8 @@
   let activePointerId: number | null = null;
   let prefersReducedMotion = false;
   let resizeObserver: ResizeObserver | null = null;
+  let detachVisualViewport: (() => void) | null = null;
+  let teardown: (() => void) | null = null;
   let lastTimestamp = 0;
   let dpr = 1;
   let lastCanvasWidth = 0;
@@ -165,6 +167,27 @@
     return null;
   }
 
+  function readThemeTokenColor(
+    token: string,
+    bodyStyles: CSSStyleDeclaration,
+    rootStyles: CSSStyleDeclaration,
+    fallback: RGB
+  ): RGB {
+    const resolved = resolveColorValue(
+      bodyStyles.getPropertyValue(token),
+      bodyStyles,
+      rootStyles
+    );
+    const parsed = resolved ? parseColor(resolved) : null;
+    if (parsed) {
+      return parsed;
+    }
+
+    const rootResolved = resolveColorValue(rootStyles.getPropertyValue(token), bodyStyles, rootStyles);
+    const rootParsed = rootResolved ? parseColor(rootResolved) : null;
+    return rootParsed ?? { ...fallback };
+  }
+
   function withAlpha(color: RGB, alpha: number) {
     return `rgba(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(color.b)}, ${alpha})`;
   }
@@ -235,21 +258,29 @@
 
   function fallbackPalette(): Palette {
     const isDark = $theme === 'dark';
-    if (isDark) {
-      return createPalette(
-        { ...FALLBACK_DARK_PRIMARY },
-        { ...FALLBACK_DARK_SECONDARY },
-        { ...FALLBACK_DARK_TERTIARY },
-        true
-      );
+    const defaults = isDark
+      ? {
+          primary: FALLBACK_DARK_PRIMARY,
+          secondary: FALLBACK_DARK_SECONDARY,
+          tertiary: FALLBACK_DARK_TERTIARY
+        }
+      : {
+          primary: FALLBACK_LIGHT_PRIMARY,
+          secondary: FALLBACK_LIGHT_SECONDARY,
+          tertiary: FALLBACK_LIGHT_TERTIARY
+        };
+
+    if (!browser || !document.body || !document.documentElement) {
+      return createPalette({ ...defaults.primary }, { ...defaults.secondary }, { ...defaults.tertiary }, isDark);
     }
 
-    return createPalette(
-      { ...FALLBACK_LIGHT_PRIMARY },
-      { ...FALLBACK_LIGHT_SECONDARY },
-      { ...FALLBACK_LIGHT_TERTIARY },
-      false
-    );
+    const bodyStyles = getComputedStyle(document.body);
+    const rootStyles = getComputedStyle(document.documentElement);
+    const primary = readThemeTokenColor('--accent-primary', bodyStyles, rootStyles, defaults.primary);
+    const secondary = readThemeTokenColor('--accent-secondary', bodyStyles, rootStyles, defaults.secondary);
+    const tertiary = readThemeTokenColor('--accent-tertiary', bodyStyles, rootStyles, defaults.tertiary);
+
+    return createPalette({ ...primary }, { ...secondary }, { ...tertiary }, isDark);
   }
 
   function buildPalette(): Palette {
@@ -293,11 +324,35 @@
     pointerPull = Math.max(MIN_POINTER_PULL, base);
   }
 
+  function getViewportSize() {
+    if (!browser) {
+      return { width: 0, height: 0 };
+    }
+
+    const { documentElement } = document;
+    const viewport = window.visualViewport;
+
+    const widthCandidates = [
+      viewport?.width ?? 0,
+      documentElement?.clientWidth ?? 0,
+      window.innerWidth || 0
+    ].filter((value) => value > 0);
+
+    const heightCandidates = [
+      viewport?.height ?? 0,
+      documentElement?.clientHeight ?? 0,
+      window.innerHeight || 0
+    ].filter((value) => value > 0);
+
+    const width = widthCandidates.length ? Math.min(...widthCandidates) : 0;
+    const height = heightCandidates.length ? Math.min(...heightCandidates) : 0;
+
+    return { width, height };
+  }
+
   function configureCanvas(preserveParticles = false) {
     if (!canvas) return;
-    const viewport = typeof document !== 'undefined' ? document.documentElement : null;
-    const viewportWidth = viewport?.clientWidth ?? 0;
-    const viewportHeight = viewport?.clientHeight ?? 0;
+    const { width: viewportWidth, height: viewportHeight } = getViewportSize();
     const width = viewportWidth || canvas.clientWidth || window.innerWidth;
     const height = viewportHeight || canvas.clientHeight || window.innerHeight;
     const previousWidth = lastCanvasWidth || width;
@@ -323,8 +378,12 @@
 
     canvas.width = nextWidth;
     canvas.height = nextHeight;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
+    if (canvas.style.width || canvas.style.height || canvas.style.maxWidth || canvas.style.maxHeight) {
+      canvas.style.removeProperty('width');
+      canvas.style.removeProperty('height');
+      canvas.style.removeProperty('max-width');
+      canvas.style.removeProperty('max-height');
+    }
 
     ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -632,7 +691,41 @@
     });
     resizeObserver.observe(resizeTarget);
 
+    if (window.visualViewport) {
+      const handleViewportChange = () => {
+        configureCanvas(true);
+        if (!prefersReducedMotion) {
+          start();
+        }
+      };
+
+      window.visualViewport.addEventListener('resize', handleViewportChange);
+      window.visualViewport.addEventListener('scroll', handleViewportChange);
+
+      detachVisualViewport = () => {
+        window.visualViewport?.removeEventListener('resize', handleViewportChange);
+        window.visualViewport?.removeEventListener('scroll', handleViewportChange);
+      };
+    }
+
     const pointerSupported = typeof window.PointerEvent !== 'undefined';
+
+    const detachPointerListeners = pointerSupported
+      ? () => {
+          window.removeEventListener('pointermove', handlePointerMove);
+          window.removeEventListener('pointerdown', handlePointerDown);
+          window.removeEventListener('pointerup', handlePointerEnd);
+          window.removeEventListener('pointercancel', handlePointerEnd);
+          window.removeEventListener('pointerleave', handlePointerEnd);
+        }
+      : () => {
+          window.removeEventListener('mousemove', handleMouseMove);
+          window.removeEventListener('mouseleave', handleMouseLeave);
+          window.removeEventListener('touchmove', handleTouchMove);
+          window.removeEventListener('touchstart', handleTouchMove);
+          window.removeEventListener('touchend', handleTouchEnd);
+          window.removeEventListener('touchcancel', handleTouchEnd);
+        };
 
     if (pointerSupported) {
       window.addEventListener('pointermove', handlePointerMove, { passive: true });
@@ -651,8 +744,7 @@
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    return () => {
-      stop();
+    const detachMediaListeners = () => {
       if (typeof motionQuery.removeEventListener === 'function') {
         motionQuery.removeEventListener('change', onMotionChange);
       } else if (legacyMotionQuery.removeListener) {
@@ -663,37 +755,36 @@
       } else if (legacyPointerQuery.removeListener) {
         legacyPointerQuery.removeListener(onPointerChange);
       }
-
       if (typeof hoverQuery.removeEventListener === 'function') {
         hoverQuery.removeEventListener('change', onPointerChange);
       } else if (legacyHoverQuery.removeListener) {
         legacyHoverQuery.removeListener(onPointerChange);
       }
-      if (pointerSupported) {
-        window.removeEventListener('pointermove', handlePointerMove);
-        window.removeEventListener('pointerdown', handlePointerDown);
-        window.removeEventListener('pointerup', handlePointerEnd);
-        window.removeEventListener('pointercancel', handlePointerEnd);
-        window.removeEventListener('pointerleave', handlePointerEnd);
-      } else {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mouseleave', handleMouseLeave);
-        window.removeEventListener('touchmove', handleTouchMove);
-        window.removeEventListener('touchstart', handleTouchMove);
-        window.removeEventListener('touchend', handleTouchEnd);
-        window.removeEventListener('touchcancel', handleTouchEnd);
-      }
-      resizeObserver?.disconnect();
+    };
+
+    const detachVisibilityListener = () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+
+    teardown = () => {
+      stop();
+      detachMediaListeners();
+      detachPointerListeners();
+      resizeObserver?.disconnect();
+      detachVisualViewport?.();
+      detachVisualViewport = null;
+      detachVisibilityListener();
+    };
+
+    return () => {
+      teardown?.();
+      teardown = null;
     };
   });
 
   onDestroy(() => {
-    stop();
-    resizeObserver?.disconnect();
-    if (browser) {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    }
+    teardown?.();
+    teardown = null;
   });
 </script>
 
@@ -709,32 +800,24 @@
     inset: 0;
     inline-size: 100%;
     block-size: 100%;
-    width: 100%;
-    height: 100%;
-    max-inline-size: 100%;
-    max-block-size: 100%;
-    max-width: 100%;
-    max-height: 100%;
     display: block;
     z-index: var(--z-behind);
     pointer-events: none;
-    opacity: 0.42;
-    mix-blend-mode: screen;
-    filter: saturate(1.08) contrast(1.04) brightness(1.02);
+    opacity: var(--hero-orb-opacity);
+    mix-blend-mode: var(--hero-overlay-blend);
+    filter: saturate(var(--panel-backdrop-saturate)) brightness(var(--glass-brightness));
     transition:
-      opacity 2s cubic-bezier(0.4, 0, 0.2, 1),
-      filter 2s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity var(--duration-epic) var(--ease-smooth),
+      filter var(--duration-epic) var(--ease-smooth);
   }
 
   :global(html:is([data-theme='dark'], [data-theme-resolved='dark'])) .particle-network {
-    opacity: 0.48;
-    filter: saturate(1.14) contrast(1.06) brightness(1.03);
+    filter: saturate(var(--glass-saturate)) brightness(var(--glass-brightness-hover));
   }
 
   :global(html:is([data-theme='light'], [data-theme-resolved='light'])) .particle-network {
-    opacity: 0.55;
-    mix-blend-mode: multiply;
-    filter: saturate(1.18) contrast(1.12) brightness(0.96);
+    opacity: calc(var(--hero-orb-opacity) + var(--surface-glow-opacity));
+    filter: saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
   }
 
   :global(
