@@ -1216,6 +1216,10 @@
     --button-gradient-hover-border: currentColor;
 }
 
+:is([data-theme='light'], [data-theme-resolved='light']) {
+    --hero-overlay-blend: multiply;
+}
+
 /* LIGHT THEME */
 :root,
 [data-theme='light'] {

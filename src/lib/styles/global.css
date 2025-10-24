@@ -44,6 +44,7 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     background-color: var(--bg);
     color: var(--text);
@@ -109,6 +110,7 @@ body {
 }
 
 @supports (overflow-x: clip) {
+    html,
     body {
         overflow-x: clip;
     }
@@ -186,6 +188,16 @@ body,
         border-color var(--theme-dur) var(--theme-ease),
         outline-color var(--theme-dur) var(--theme-ease),
         box-shadow var(--theme-dur) var(--theme-ease);
+}
+
+html {
+    overflow-x: hidden;
+}
+
+@supports (overflow-x: clip) {
+    html {
+        overflow-x: clip;
+    }
 }
 
 .section {
