@@ -5,10 +5,13 @@
    */
   import { page } from '$app/stores';
   import { _ } from '$lib/i18n';
+  import { stripBase, withBase } from '$utils/paths';
 
   /**
    * @typedef {{ href: string; labelKey: string; icon: string }} NavItem
    */
+
+  const normalize = (path) => path.replace(/\/+$/, '') || '/';
 
   /** @type {NavItem[]} */
   const navItems = [
@@ -18,11 +21,20 @@
     { href: '/', labelKey: 'admin.nav.items.back', icon: '🏠' }
   ];
 
-  /**
-   * @param {string} href
-   */
-  function isActive(href) {
-    return $page.url.pathname.startsWith(href);
+  const resolvedNavItems = navItems.map((item) => ({
+    ...item,
+    resolvedHref: withBase(item.href) ?? item.href,
+    match: normalize(item.href)
+  }));
+
+  $: currentPath = normalize(stripBase($page.url.pathname));
+
+  function isActive(match) {
+    if (match === '/') {
+      return currentPath === '/';
+    }
+
+    return currentPath === match || currentPath.startsWith(`${match}/`);
   }
 </script>
 
@@ -32,13 +44,13 @@
   </div>
   
   <ul class="admin-nav__list">
-    {#each navItems as item}
+    {#each resolvedNavItems as item}
       <li>
-        <a 
-          href={item.href} 
+        <a
+          href={item.resolvedHref}
           class="admin-nav__link"
-          class:active={isActive(item.href)}
-          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:active={isActive(item.match)}
+          aria-current={isActive(item.match) ? 'page' : undefined}
         >
           <span class="admin-nav__icon" aria-hidden="true">{item.icon}</span>
           <span class="admin-nav__label">{$_(item.labelKey)}</span>

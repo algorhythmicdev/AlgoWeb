@@ -1099,6 +1099,7 @@
         rgba(var(--voyage-blue-rgb), 0.34) 18%
     );
     --button-shadow-subtle: 0 16px 38px rgba(4, 12, 30, 0.46);
+}
 :is([data-theme='hc'], [data-theme-resolved='hc']),
 [data-theme='contrast'],
 [data-theme-legacy='contrast'] {
