@@ -6,9 +6,10 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { withBase } from '$utils/paths';
-  import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { slideY } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
+  import { Head } from '$lib/seo';
 
   type TranslationParams = Record<string, unknown>;
 
@@ -24,6 +25,12 @@
         : fallbackOrParams;
     return translateOrFallback($_, key, fallback, finalParams);
   };
+
+  const head = Head({
+    title: 'Home',
+    description: 'AI consulting + practical tools: NodeVoyage and Ideonautix.',
+    lang: typeof document !== 'undefined' ? document.documentElement.lang : 'en'
+  });
 
   type CTA = {
     href: string;
@@ -580,6 +587,8 @@
   } as const;
 </script>
 
+<svelte:head>{@html head}</svelte:head>
+
 <Section class="landing-hero">
   <Hero
     class="hero-landing"
@@ -598,12 +607,12 @@
 </Section>
 
 <Section class="highlights" bg="tint" data-surface="glow">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <header class="section-heading" data-align="center">
       <h2>{t('highlights.title', 'What you get')}</h2>
     </header>
 
-    <div class="highlights__grid" use:staggerReveal>
+    <div class="highlights__grid" transition:slideY>
       {#each highlights as item (item.titleKey)}
         <GlassCard class="highlight-card" padding="lg" halo interactive>
           <div class="highlight-icon">
@@ -624,12 +633,12 @@
   data-surface="glow"
   aria-labelledby="offerings-heading"
 >
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <header class="section-heading" data-align="center">
       <h2 id="offerings-heading">{t('offer.title', 'What we offer')}</h2>
     </header>
 
-    <div class="offerings__grid" use:staggerReveal>
+    <div class="offerings__grid" transition:slideY>
       {#each offerings as item (item.id)}
         <GlassCard class="offering-card" padding="lg" id={item.id} interactive>
           <h3 class="offering-title">
@@ -663,7 +672,7 @@
 <SectionDivider tone="neutral" />
 
 <Section class="brand-overview" bg="tint" data-surface="glow" aria-labelledby="brand-overview-heading">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <header class="section-heading" data-align="center">
       <h2 id="brand-overview-heading">{t('home.brand.section_title', 'Our brand story')}</h2>
       <p>
@@ -674,7 +683,7 @@
       </p>
     </header>
 
-    <div class="brand-overview__grid" use:staggerReveal>
+    <div class="brand-overview__grid" transition:slideY>
       {#each brandOverviewCards as card (card.id)}
         <GlassCard class="brand-card" padding="lg" halo>
           <div class="brand-card__icon">
@@ -698,13 +707,13 @@
 <SectionDivider tone="aurora" />
 
 <Section class="blueprint" data-surface="glow" aria-labelledby="blueprint-heading">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <header class="section-heading" data-align="center">
       <h2 id="blueprint-heading">{t(buildBlueprint.titleKey, buildBlueprint.titleFallback)}</h2>
       <p>{t(buildBlueprint.leadKey, buildBlueprint.leadFallback)}</p>
     </header>
 
-    <div class="blueprint__grid" use:staggerReveal>
+    <div class="blueprint__grid" transition:slideY>
       {#each buildBlueprint.categories as category (category.titleKey)}
         <GlassCard class="blueprint-card" padding="lg">
           <h3>{t(category.titleKey, category.titleFallback)}</h3>
@@ -722,14 +731,14 @@
 <SectionDivider tone="neutral" />
 
 <Section class="vision" bg="tint" data-surface="glow" aria-labelledby="vision-heading">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t(visionGoals.eyebrowKey, visionGoals.eyebrowFallback)}</span>
       <h2 id="vision-heading">{t(visionGoals.titleKey, visionGoals.titleFallback)}</h2>
       <p>{t(visionGoals.copyKey, visionGoals.copyFallback)}</p>
     </header>
 
-    <div class="vision__grid" use:staggerReveal>
+    <div class="vision__grid" transition:slideY>
       {#each visionGoals.cards as card (card.titleKey)}
         <GlassCard class="vision-card" padding="lg" halo>
           <div class="vision-card__icon">
@@ -751,14 +760,14 @@
 <SectionDivider tone="aurora" />
 
 <Section class="education-hub" data-surface="glow" aria-labelledby="education-hub-heading">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <header class="section-heading" data-align="center">
       <span class="section-eyebrow">{t(educationShowcase.eyebrowKey, educationShowcase.eyebrowFallback)}</span>
       <h2 id="education-hub-heading">{t(educationShowcase.titleKey, educationShowcase.titleFallback)}</h2>
       <p>{t(educationShowcase.descriptionKey, educationShowcase.descriptionFallback)}</p>
     </header>
 
-    <div class="education-hub__grid" use:staggerReveal>
+    <div class="education-hub__grid" transition:slideY>
       {#each educationShowcase.items as item (item.icon)}
         <GlassCard class="education-card" padding="lg" halo>
           <div class="education-card__icon">
@@ -788,7 +797,7 @@
 <SectionDivider tone="aurora" />
 
 <Section class="pricing" bg="tint" data-surface="glow" aria-labelledby="pricing-heading">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <GlassCard class="pricing-card" padding="lg" halo>
       <h2 id="pricing-heading">{t(pricingOutlook.titleKey, pricingOutlook.titleFallback)}</h2>
       <p>{t(pricingOutlook.leadKey, pricingOutlook.leadFallback)}</p>
@@ -808,13 +817,13 @@
   data-surface="glow"
   aria-labelledby="platform-showcase-heading"
 >
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <div class="platform-showcase__header">
       <h2 id="platform-showcase-heading">{t(platformShowcase.titleKey, platformShowcase.titleFallback)}</h2>
       <p class="platform-showcase__intro">{t(platformShowcase.descriptionKey, platformShowcase.descriptionFallback)}</p>
     </div>
 
-    <div class="platform-showcase__grid" use:staggerReveal>
+    <div class="platform-showcase__grid" transition:slideY>
       {#each platformShowcase.items as item (item.id)}
         <GlassCard as="article" class="platform-card" padding="lg" halo>
           <img
@@ -837,7 +846,7 @@
 
 
 <Section class="finale" bg="elev" data-surface="glow">
-  <div class="section-content" use:revealOnScroll>
+  <div class="section-content" transition:slideY>
     <GlassCard class="finale-card" halo padding="lg" interactive>
       <h2>{t(finale.titleKey, finale.titleFallback)}</h2>
       <p>{t(finale.copyKey, finale.copyFallback)}</p>

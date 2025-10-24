@@ -497,21 +497,6 @@ html:is([data-theme='dark'], [data-theme-resolved='dark']) .section[data-surface
     margin-bottom: 0;
 }
 
-:where(a, button, input, textarea, select, summary, [role='button'], [role='link']) {
-    outline: none;
-    transition:
-        outline-color var(--duration-ui) var(--ease-out),
-        outline-offset var(--duration-ui) var(--ease-out),
-        box-shadow var(--duration-ui) var(--ease-out);
-}
-
-:where(a, button, input, textarea, select, summary, [role='button'], [role='link']):focus,
-:where(a, button, input, textarea, select, summary, [role='button'], [role='link']):focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
-    border-radius: var(--radius);
-}
-
 /* Accessibility: reduce non-essential animations */
 @media (prefers-reduced-motion: reduce) {
     * {

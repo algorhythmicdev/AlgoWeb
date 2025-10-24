@@ -1,0 +1,6 @@
+{
+  "nav": { "home": "Sākums", "team": "Komanda", "ideonautix": "Ideonautix", "nodevoyage": "NodeVoyage", "consulting": "Konsultācijas", "education": "Izglītība", "contact": "Kontakti" },
+  "language": { "label": "Valoda" },
+  "cta": { "primary": "Sazināties", "secondary": "Uzzināt vairāk" },
+  "common": { "loading": "Ielādējas...", "close": "Aizvērt" }
+}

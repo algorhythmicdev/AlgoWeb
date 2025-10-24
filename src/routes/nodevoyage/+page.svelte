@@ -6,7 +6,7 @@
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/icons/Icon.svelte';
   import { withBase } from '$utils/paths';
-  import { revealOnScroll, staggerReveal } from '$lib/animations';
+  import { slideY } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
 
@@ -328,7 +328,7 @@
 </Hero>
 
 <Section class="section--snapshot" bg="tint" data-surface="glow">
-  <div class="snapshot" use:revealOnScroll>
+  <div class="snapshot" transition:slideY>
     <GlassCard class="snapshot-card" padding="lg" halo>
       <img
         src={snapshot.image}
@@ -362,11 +362,11 @@
 </Section>
 
 <Section class="section--features" data-surface="glow">
-  <div class="features__content" use:revealOnScroll>
+  <div class="features__content" transition:slideY>
     <h2 class="section-title">{t(features.titleKey, features.titleFallback)}</h2>
     <p class="section-lead">{t(features.leadKey, features.leadFallback)}</p>
 
-    <div class="feature-grid" use:staggerReveal>
+    <div class="feature-grid" transition:slideY>
       {#each features.cards as card (card.titleKey)}
         <GlassCard class="feature-card" halo padding="lg" interactive>
         <div class="feature-icon" aria-hidden="true">
@@ -383,7 +383,7 @@
 <SectionDivider tone="aurora" />
 
 <Section class="section--roadmap" bg="tint" data-surface="glow">
-  <div class="roadmap" use:revealOnScroll>
+  <div class="roadmap" transition:slideY>
     <div>
       <span class="section-eyebrow">{t(roadmap.eyebrowKey, roadmap.eyebrowFallback)}</span>
       <h2>{t(roadmap.titleKey, roadmap.titleFallback)}</h2>
@@ -406,7 +406,7 @@
 <SectionDivider tone="neutral" />
 
 <Section class="section--differentiators" data-surface="glow">
-  <div class="differentiators" use:revealOnScroll>
+  <div class="differentiators" transition:slideY>
     <div class="differentiators-copy">
       <span class="section-eyebrow">{t(differentiators.eyebrowKey, differentiators.eyebrowFallback)}</span>
       <h2>{t(differentiators.titleKey, differentiators.titleFallback)}</h2>
@@ -415,7 +415,7 @@
         {t(differentiators.ctaKey, differentiators.ctaFallback)}
       </Button>
     </div>
-    <div class="differentiators-grid auto-grid" use:staggerReveal>
+    <div class="differentiators-grid auto-grid" transition:slideY>
       {#each differentiators.cards as item (item.titleKey)}
         <GlassCard padding="md" class="differentiator-card" halo>
           <div class="feature-icon" aria-hidden="true">
@@ -432,7 +432,7 @@
 <SectionDivider tone="voyage" />
 
 <Section id="explorers-club" class="explorers section--explorers" bg="tint" data-surface="glow">
-  <div class="explorers-section" use:revealOnScroll>
+  <div class="explorers-section" transition:slideY>
     <GlassCard class="explorers-card" padding="lg" particles>
       <span class="section-eyebrow">{t(explorers.eyebrowKey, explorers.eyebrowFallback)}</span>
       <h2>{t(explorers.titleKey, explorers.titleFallback)}</h2>
@@ -483,7 +483,7 @@
 <SectionDivider tone="neutral" />
 
 <Section class="cta section--cta" bg="elev" data-surface="glow">
-  <div class="cta-container" use:revealOnScroll>
+  <div class="cta-container" transition:slideY>
   <GlassCard class="cta-card" padding="lg" halo>
     <h2>{t(related.titleKey, related.titleFallback)}</h2>
     <p>{t(related.copyKey, related.copyFallback)}</p>

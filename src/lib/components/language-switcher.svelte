@@ -1,57 +1,55 @@
 <script lang="ts">
-  import { translateOrFallback } from '$lib/utils/i18n';
-  import { _ } from '$lib/i18n';
-  import Icon from './icons/Icon.svelte';
-  import { language } from '$stores/language';
+  import { onMount } from 'svelte';
+  import { _, setLocale } from '$lib/i18n';
 
-  export let className = '';
+  const LOCALES = ['en', 'lv', 'ru'] as const;
+  type Locale = (typeof LOCALES)[number];
 
-  const translate = (key: string, fallback: string, params?: Record<string, unknown>) =>
-    translateOrFallback($_, key, fallback, params);
+  function setCookie(name: string, value: string, days = 365) {
+    if (typeof document === 'undefined') return;
 
-  const supportedLanguages: readonly string[] =
-    typeof language.getSupportedLanguages === 'function'
-      ? language.getSupportedLanguages()
-      : ['en'];
+    const d = new Date();
+    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
+  }
 
-  let currentCode = 'en';
+  function getCookie(name: string): string | null {
+    if (typeof document === 'undefined') return null;
 
-  $: currentCode = $language ?? 'en';
-  $: fallbackCode = currentCode.toUpperCase();
-  $: nameKey = `language_switcher.languages.${currentCode}.name`;
-  $: currentName = translate(nameKey, fallbackCode);
-  $: triggerLabel = translate('language_switcher.trigger_label', 'Switch language');
-  $: ariaLabel = `${triggerLabel} (${currentName})`;
-  $: groupLabel = translate('language_switcher.group_label', 'Language');
-  $: announcement = `${triggerLabel}. ${groupLabel}: ${currentName}.`;
-  $: classes = ['btn-icon', className].filter(Boolean).join(' ');
-  $: hasAlternates = supportedLanguages.length > 1;
-  $: currentIndex = supportedLanguages.indexOf(currentCode);
+    return document.cookie.split('; ').find((x) => x.startsWith(name + '='))?.split('=')[1] ?? null;
+  }
 
-  const resolveNext = () => {
-    if (supportedLanguages.length === 0) return currentCode;
-    const safeIndex = currentIndex >= 0 ? currentIndex : 0;
-    const nextIndex = (safeIndex + 1) % supportedLanguages.length;
-    return supportedLanguages[nextIndex] ?? currentCode;
-  };
+  let locale: Locale = 'en';
 
-  const cycleLanguage = () => {
-    if (!hasAlternates) return;
-    const next = resolveNext();
-    if (next && next !== currentCode) {
-      language.set(next);
+  function apply(l: Locale) {
+    locale = l;
+    setLocale(l);
+
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = l;
     }
-  };
+
+    setCookie('locale', l);
+  }
+
+  onMount(() => {
+    const saved = getCookie('locale');
+    if (saved && LOCALES.includes(saved as Locale)) {
+      apply(saved as Locale);
+    } else {
+      apply('en');
+    }
+  });
+
+  function handleChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value as Locale;
+    apply(value);
+  }
 </script>
 
-<button
-  type="button"
-  class={classes}
-  on:click={cycleLanguage}
-  aria-label={ariaLabel}
-  title={ariaLabel}
-  aria-disabled={!hasAlternates}
->
-  <span class="sr-only" aria-live="polite">{announcement}</span>
-  <Icon name="globe" size="var(--space-4)" aria-hidden="true" />
-</button>
+<label class="visually-hidden" for="locale">{$_('language.label') || 'Language'}</label>
+<select id="locale" bind:value={locale} on:change={handleChange}>
+  {#each LOCALES as l}
+    <option value={l}>{l.toUpperCase()}</option>
+  {/each}
+</select>

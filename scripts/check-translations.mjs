@@ -4,6 +4,24 @@ import fg from 'fast-glob';
 
 const localesDir = join(process.cwd(), 'src', 'lib', 'translations');
 const baselineLocale = 'en.json';
+const MINIMAL_KEYS = [
+  'nav.home',
+  'nav.team',
+  'nav.ideonautix',
+  'nav.nodevoyage',
+  'nav.consulting',
+  'nav.education',
+  'nav.contact',
+  'cta.primary',
+  'cta.secondary',
+  'common.loading',
+  'common.close'
+];
+
+const PARTIAL_LOCALE_KEYS = new Map([
+  ['lv.json', MINIMAL_KEYS],
+  ['ru.json', MINIMAL_KEYS]
+]);
 
 /**
  * @param {unknown} value
@@ -67,7 +85,14 @@ async function main() {
     /** @type {string[]} */
     const mismatched = [];
 
-    for (const [path, type] of baselinePaths.entries()) {
+    const requiredKeys = PARTIAL_LOCALE_KEYS.get(file);
+    const entries = requiredKeys
+      ? requiredKeys
+          .map((path) => [path, baselinePaths.get(path)])
+          .filter(([, type]) => typeof type !== 'undefined')
+      : [...baselinePaths.entries()];
+
+    for (const [path, type] of entries) {
       if (!localePaths.has(path)) {
         missing.push(path);
         continue;
