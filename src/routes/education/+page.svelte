@@ -1,19 +1,12 @@
-<script>
+<script lang="ts">
   import { Head } from '$lib/seo';
-  import { _ } from '$lib/i18n';
-  const head = Head({
-    title: 'Education',
-    description: 'Programs for schools and universities in plain language.',
-    lang: typeof document !== 'undefined' ? document.documentElement.lang : 'en'
-  });
+  const head = Head({ title: 'Education', description: 'Practical AI programs for schools and universities.' });
 </script>
 
 <svelte:head>{@html head}</svelte:head>
 
 <main id="main">
-  <h1>{$_('education.title') || 'Education'}</h1>
-  <p>
-    {$_('education.description') ||
-      'We’re preparing practical, easy-to-run AI programs for schools and universities. This page grows with real content.'}
-  </p>
+  <h1>Education</h1>
+  <p>We’re preparing plain-language, easy-to-run AI programs for schools and universities in Latvia. Built with real, hands-on outcomes.</p>
+  <p>This page will expand as programs roll out.</p>
 </main>

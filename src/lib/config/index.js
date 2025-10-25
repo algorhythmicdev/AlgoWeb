@@ -4,5 +4,4 @@
  */
 
 export { backgroundThemes, getThemeForPath } from './backgroundThemes.js';
-export { siteConfig, pageConfigs } from './seo.js';
-export { footerLinks } from './navigation.js';
+export { siteConfig } from './seo.js';
