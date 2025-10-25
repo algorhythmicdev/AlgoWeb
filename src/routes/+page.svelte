@@ -10,6 +10,8 @@
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
   import { Head } from '$lib/seo';
+  import { orgJsonLd, breadcrumbJsonLd } from '$lib/jsonld';
+  import { PUBLIC_SITE_URL } from '$env/static/public';
 
   type TranslationParams = Record<string, unknown>;
 
@@ -26,11 +28,18 @@
     return translateOrFallback($_, key, fallback, finalParams);
   };
 
+  const base = (PUBLIC_SITE_URL || '').replace(/\/$/, '');
+
   const head = Head({
     title: 'Home',
     description: 'AI consulting + practical tools: NodeVoyage and Ideonautix.',
     lang: typeof document !== 'undefined' ? document.documentElement.lang : 'en'
   });
+
+  const org = orgJsonLd({ name: 'Algorhythmics', url: base || '' });
+  const crumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${base}/` }
+  ]);
 
   type CTA = {
     href: string;
@@ -587,7 +596,11 @@
   } as const;
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  {@html org}
+  {@html crumbs}
+</svelte:head>
 
 <Section class="landing-hero">
   <Hero

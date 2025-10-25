@@ -9,6 +9,9 @@
   import { slideY } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
+  import { Head } from '$lib/seo';
+  import { productJsonLd, breadcrumbJsonLd } from '$lib/jsonld';
+  import { PUBLIC_SITE_URL } from '$env/static/public';
 
   type TranslationParams = Record<string, unknown>;
 
@@ -26,6 +29,17 @@
   };
 
   const asset = (path: string) => withBase(path) ?? path;
+
+  const base = (PUBLIC_SITE_URL || '').replace(/\/$/, '');
+  const head = Head({
+    title: 'Ideonautix',
+    description: 'Startup education & productivity toolkit.'
+  });
+  const product = productJsonLd({ name: 'Ideonautix', url: `${base}/ideonautix` });
+  const crumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${base}/` },
+    { name: 'Ideonautix', url: `${base}/ideonautix` }
+  ]);
 
   const hero = {
     titleKey: 'ideonautix.hero.title',
@@ -281,6 +295,12 @@
     pilotRole = 'founder';
   };
 </script>
+
+<svelte:head>
+  {@html head}
+  {@html product}
+  {@html crumbs}
+</svelte:head>
 
 <Hero
   class="hero--ideonautix"

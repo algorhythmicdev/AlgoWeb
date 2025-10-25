@@ -9,6 +9,9 @@
   import { slideY } from '$lib/animations';
   import { _ } from '$lib/i18n';
   import { translateOrFallback } from '$lib/utils/i18n';
+  import { Head } from '$lib/seo';
+  import { productJsonLd, breadcrumbJsonLd } from '$lib/jsonld';
+  import { PUBLIC_SITE_URL } from '$env/static/public';
 
   type TranslationParams = Record<string, unknown>;
 
@@ -26,6 +29,17 @@
   };
 
   const asset = (path: string) => withBase(path) ?? path;
+
+  const base = (PUBLIC_SITE_URL || '').replace(/\/$/, '');
+  const head = Head({
+    title: 'NodeVoyage',
+    description: 'AI-assisted trip planning with Nodi.'
+  });
+  const product = productJsonLd({ name: 'NodeVoyage', url: `${base}/nodevoyage` });
+  const crumbs = breadcrumbJsonLd([
+    { name: 'Home', url: `${base}/` },
+    { name: 'NodeVoyage', url: `${base}/nodevoyage` }
+  ]);
 
   const hero = {
     titleKey: 'nodevoyage.hero.title',
@@ -277,6 +291,12 @@
     explorerEmail = '';
   };
 </script>
+
+<svelte:head>
+  {@html head}
+  {@html product}
+  {@html crumbs}
+</svelte:head>
 
 <Hero
   class="hero--nodevoyage"

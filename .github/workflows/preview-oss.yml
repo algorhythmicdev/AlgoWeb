@@ -12,9 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: 'npm' }
-      - run: npm ci
-      - run: npm run build
+        with: { node-version: 20, cache: 'pnpm' }
+      - name: Install deps
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+      - name: Contrast check
+        run: node scripts/contrast-check.mjs
+      - name: Build
+        env:
+          PUBLIC_CONTACT_ENDPOINT: ''
+          PUBLIC_NOINDEX: true
+        run: pnpm build
       - name: Get ossutil
         run: |
           curl -L http://gosspublic.alicdn.com/ossutil/1.7.17/ossutil64 -o ossutil64
