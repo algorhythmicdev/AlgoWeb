@@ -72,6 +72,9 @@ importers:
       eslint-plugin-svelte:
         specifier: ^2.44.0
         version: 2.46.1(eslint@9.37.0)(svelte@5.39.11)
+      estree-walker:
+        specifier: ^3.0.3
+        version: 3.0.3
       fast-glob:
         specifier: ^3.3.3
         version: 3.3.3

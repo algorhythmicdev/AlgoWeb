@@ -1,0 +1,7 @@
+{
+  "threshold": 7.0,
+  "pairs": [
+    { "name": "text on background", "fg": "__FILL_HEX__", "bg": "__FILL_HEX__" },
+    { "name": "primary-text on primary", "fg": "__FILL_HEX__", "bg": "__FILL_HEX__" }
+  ]
+}
