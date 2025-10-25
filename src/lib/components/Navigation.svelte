@@ -1,35 +1,31 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { _ } from '$lib/i18n';
-  import { stripBase, withBase } from '$utils/paths';
-
-  const normalizePath = (path: string) => path.replace(/\/+$/, '') || '/';
+  import { withBase, stripBase } from '$utils/paths';
 
   const items = [
-    { href: '/', key: 'home', fallback: 'Home' },
-    { href: '/about', key: 'team', fallback: 'Team' },
-    { href: '/ideonautix', key: 'ideonautix', fallback: 'Ideonautix' },
-    { href: '/nodevoyage', key: 'nodevoyage', fallback: 'NodeVoyage' },
-    { href: '/consulting', key: 'consulting', fallback: 'Consulting' },
-    { href: '/education', key: 'education', fallback: 'Education' },
-    { href: '/contact', key: 'contact', fallback: 'Contact' }
-  ] as const;
+    { href: '/',            label: 'Home' },
+    { href: '/team',        label: 'Team' },
+    { href: '/ideonautix',  label: 'Ideonautix' },
+    { href: '/nodevoyage',  label: 'NodeVoyage' },
+    { href: '/consulting',  label: 'Consulting' },
+    { href: '/contact',     label: 'Contact' },
+    { href: '/education',   label: 'Education' }
+  ];
 
-  const navItems = items.map((item) => ({
+  const nav = items.map((item) => ({
     ...item,
-    resolvedHref: withBase(item.href) ?? item.href,
-    match: normalizePath(item.href)
+    resolved: withBase(item.href) ?? item.href
   }));
 
-  $: current = normalizePath(stripBase($page.url.pathname));
+  $: current = (stripBase($page.url.pathname) || '/').replace(/\/+$/, '') || '/';
 </script>
 
-<nav aria-label={$_('nav.primary_label') || 'Primary navigation'}>
+<nav aria-label="Primary">
   <ul role="list" class="nav">
-    {#each navItems as item}
+    {#each nav as item}
       <li>
-        <a href={item.resolvedHref} aria-current={current === item.match ? 'page' : undefined}>
-          {$_(`nav.${item.key}`) || item.fallback}
+        <a href={item.resolved} aria-current={current === item.href ? 'page' : undefined}>
+          {item.label}
         </a>
       </li>
     {/each}
