@@ -24,18 +24,8 @@ static/
     │   ├── founder-slaff.png
     │   └── founder-slaff.svg
     ├── placeholders/
-    │   ├── ChatGPT Image Oct 20, 2025, 11_05_12 AM.png
-    │   ├── consulting-studio.png
-    │   ├── contact-lobby.png
-    │   ├── dashboard-overview.svg
-    │   ├── education-gallery.png
-    │   ├── education-lab.png
-    │   ├── help-center-desk.png
-    │   ├── mobile-preview.svg
     │   ├── platform-ideonautix.svg
-    │   ├── platform-nodevoyage.svg
-    │   ├── solutions-suite.png
-    │   └── solutions-suite.svg
+    │   └── platform-nodevoyage.svg
     └── products/
         ├── ideonautix-hero.svg
         ├── ideonautix-icon.png
@@ -89,22 +79,12 @@ static/
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
-| `ChatGPT Image Oct 20, 2025, 11_05_12 AM.png` | Legacy AI-generated placeholder | Retained for archival context during design explorations. |
-| `consulting-studio.png` | Consulting hero imagery | High-fidelity PNG render used across production surfaces. |
-| `contact-lobby.png` | Contact page media | Raster artwork powering the contact hero and feature tiles. |
-| `dashboard-overview.svg` | Legacy services portfolio card | Archived SVG tile kept for reference; replaced by product-specific previews. |
-| `education-gallery.png` | Education hub hero | Production PNG with richer lighting for the landing hero. |
-| `education-lab.png` | Help center and education cards | Raster lab scene optimised for translucent card treatments. |
-| `help-center-desk.png` | Help center hero | PNG illustration shipping in the help centre hero. |
-| `mobile-preview.svg` | Legacy mobile preview card | Retired SVG shell kept for archival purposes. |
-| `platform-ideonautix.svg` | Legacy Ideonautix preview | Placeholder orbit scene replaced by production gallery captures. |
-| `platform-nodevoyage.svg` | Legacy NodeVoyage preview | Placeholder route wave replaced by production gallery captures. |
-| `solutions-suite.png` | Contact CTA artwork | PNG render powering the services CTA module. |
-| `solutions-suite.svg` | Legacy contact solutions panel | Archived vector version retained for design reference. |
+| `platform-ideonautix.svg` | Ideonautix gallery placeholder | Text-based illustration used until production captures ship. |
+| `platform-nodevoyage.svg` | NodeVoyage gallery placeholder | Companion illustration covering the travel dashboard preview. |
 
 ## Maintenance Notes
 
-- Gallery previews reuse existing SVG hero artwork until binary uploads can resume; update the entries in `GalleryPreview` when new renders are available.
+- Gallery previews reuse existing SVG hero artwork until binary uploads can resume; update the entries in `GalleryPreview` when new renders are available. The component accepts either paired WebP/PNG bases or a direct `src` path for future exports.
 - Footer partner chips are text-based to avoid binary assets—revise copy or swap to inline SVG if dedicated logos become available upstream.
 - Static robots and sitemap files must remain updated whenever routes change so GitHub Pages serves the correct metadata.
 - Preserve transparent backgrounds for logos so they render correctly on glass surfaces in both themes.

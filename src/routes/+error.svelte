@@ -1,13 +1,9 @@
 <script lang="ts">
-  export let error: Error & { message?: string };
+  import { base } from '$app/paths';
   export let status: number;
-
-  const isNotFound = status === 404;
-  const detail = isNotFound ? 'The page you requested does not exist.' : error?.message ?? 'Please try again.';
+  const homeHref = base || '/';
 </script>
-
-<main id="main">
-  <h1>{isNotFound ? 'Page not found' : 'Something went wrong'}</h1>
-  <p>{detail}</p>
-  <p><a href="/">Go home</a></p>
+<main id="main" class="prose section">
+  <h1>{status===404?'Page not found':'Something went wrong'}</h1>
+  <p><a class="btn" href={homeHref}>Go home</a></p>
 </main>

@@ -1,34 +1,19 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { base } from '$app/paths';
   import { Head } from '$lib/seo';
-  import { canonicalFor } from '$lib/canonical';
-  import { hreflangLinks } from '$lib/hreflang';
-  import { withBase } from '$utils/paths';
-  const head = Head({ title: 'Consulting', description: 'Practical automation, data workflows, and training.' });
-  const services = ['Automation & workflow design','Data integration and reporting','Team training and playbooks'];
-  const process = ['Kickoff & scope in a single working session','Prototype together in days, not months','Review with stakeholders and document next steps'];
+  const head = Head({ title:'Consulting', description:'Practical automation, data workflows, training.' });
+  const services=['Automation & workflow design','Data integration and reporting','Team training and playbooks'];
+  const process=['Kickoff & scope','Prototype in days','Iterate with feedback','Handover & training'];
+  let pilotSpots=3;
+  const contactHref = `${base}/contact`;
 </script>
+<svelte:head>{@html head}</svelte:head>
 
-<svelte:head>
-  {@html head}
-  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
-  {@html hreflangLinks($page.url.pathname)}
-</svelte:head>
-
-<main id="main">
-  <h1>Consulting</h1>
-  <p>We partner with teams who need clear outcomes quickly. Every engagement ships tangible assets.</p>
-  <p>Our focus is on simple automation, reliable data visibility, and internal training that sticks.</p>
-
-  <section>
-    <h2>Services</h2>
-    <ul>{#each services as item}<li>{item}</li>{/each}</ul>
-  </section>
-
-  <section>
-    <h2>Process</h2>
-    <ul>{#each process as step}<li>{step}</li>{/each}</ul>
-  </section>
-
-  <p><a class="btn btn-primary" href={withBase('/contact') ?? '/contact'}>Start a project</a></p>
+<main id="main" class="prose section">
+  <h1>Consulting</h1><p>We keep it practical and fast. Clear outcomes, shipped quickly.</p>
+  <h2>Services</h2><ul>{#each services as s}<li>{s}</li>{/each}</ul>
+  <h2>Process</h2><ol>{#each process as p}<li>{p}</li>{/each}</ol>
+  <aside class="glass" style="padding:1rem;border-radius:12px">
+    <strong>Pilot applications open.</strong><p>Spots left: {pilotSpots}</p><p><a class="btn btn-primary" href={contactHref}>Apply for a pilot</a></p>
+  </aside>
 </main>

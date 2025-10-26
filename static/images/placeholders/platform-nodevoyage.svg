@@ -1,21 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="480" height="320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">NodeVoyage product placeholder</title>
+  <desc id="desc">Minimal travel dashboard illustration used until production captures are available.</desc>
   <defs>
-    <linearGradient id="pn-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f1828" />
-      <stop offset="100%" stop-color="#1c2d49" />
+    <linearGradient id="sky" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#022a3a" />
+      <stop offset="100%" stop-color="#09111e" />
     </linearGradient>
-    <linearGradient id="pn-wave" x1="0%" x2="100%">
-      <stop offset="0%" stop-color="#63e0ff" />
-      <stop offset="100%" stop-color="#8cfff1" />
+    <linearGradient id="path" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.8" />
     </linearGradient>
   </defs>
-  <rect width="480" height="320" rx="28" fill="url(#pn-bg)" />
-  <path d="M80 220 C150 140 190 260 260 180 C330 100 370 220 440 140" fill="none" stroke="url(#pn-wave)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" />
-  <g opacity="0.7">
-    <circle cx="80" cy="220" r="12" fill="#63e0ff" />
-    <circle cx="260" cy="180" r="16" fill="#8cfff1" />
-    <circle cx="440" cy="140" r="12" fill="#63e0ff" />
-    <circle cx="170" cy="200" r="10" fill="#8cfff1" opacity="0.7" />
-    <circle cx="350" cy="160" r="10" fill="#8cfff1" opacity="0.7" />
+  <rect width="960" height="540" rx="32" fill="url(#sky)" />
+  <g transform="translate(120 120)" fill="none" stroke="#8ed8f7" stroke-width="3" stroke-linejoin="round">
+    <rect width="340" height="200" rx="28" opacity="0.65" />
+    <rect x="360" width="240" height="120" rx="24" opacity="0.45" />
+    <polyline points="40,160 140,120 220,180 320,90" stroke="url(#path)" stroke-width="8" stroke-linecap="round" fill="none" />
+    <circle cx="40" cy="160" r="14" fill="#06b6d4" />
+    <circle cx="140" cy="120" r="14" fill="#0ea5e9" />
+    <circle cx="220" cy="180" r="14" fill="#14b8a6" />
+    <circle cx="320" cy="90" r="14" fill="#22c55e" />
+    <rect x="360" y="140" width="180" height="120" rx="24" opacity="0.35" />
   </g>
 </svg>

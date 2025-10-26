@@ -1,19 +1,13 @@
 <script lang="ts">
-  export let items = [
-    { date: '2024–2025', text: 'Built and aligned the Algorhythmics core vision.' },
-    { date: '2025 Q3–Q4', text: 'Public website + early product previews.' }
+  export let items=[
+    {date:'2025-10-13',text:'First public commits for the Algorhythmics site.'},
+    {date:'2025-10-25',text:'Replaced preview assets with text-first placeholders ahead of design pass.'},
+    {date:'2025-10-26',text:'Locked static build setup and marketing asset stubs for Pages deploy.'}
   ];
 </script>
-
-<section aria-label="Timeline">
-  <h2 class="visually-hidden">Timeline</h2>
-  <ol class="timeline">
-    {#each items as i}
-      <li><strong>{i.date}</strong> — {i.text}</li>
-    {/each}
+<section class="section">
+  <h2>Timeline</h2>
+  <ol style="list-style:none;padding:0;display:grid;gap:.5rem">
+    {#each items as i}<li class="card" style="padding:.75rem"><strong>{i.date}</strong> — {i.text}</li>{/each}
   </ol>
 </section>
-
-<style>
-  .timeline { list-style: none; padding: 0; display: grid; gap: .5rem; }
-</style>
