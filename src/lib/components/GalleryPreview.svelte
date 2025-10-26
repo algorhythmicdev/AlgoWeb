@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { withBase } from '$utils/paths';
+  import { base } from '$app/paths';
 
+  type GallerySource = { srcset: string; type?: string };
   type GalleryItem = {
-    base?: string | null;
+    src?: string | null;
+    sources?: GallerySource[];
     alt: string;
     width?: number;
     height?: number;
@@ -13,45 +15,53 @@
 
   let missing = new Set<string>();
 
-  const canonicalPath = (item: GalleryItem): string => item.base?.replace(/^\/+/, '') ?? 'asset';
-
-  const srcWithBase = (basePath: string, extension: 'png' | 'webp'): string => {
-    const path = `${basePath}.${extension}`;
-    return withBase(path) ?? path;
+  const withBasePath = (path: string | null | undefined): string | null => {
+    if (!path) return null;
+    if (/^https?:\/\//i.test(path)) return path;
+    const normalized = path.startsWith('/') ? path : `/${path}`;
+    return `${base}${normalized}`;
   };
 
-  const markMissing = (basePath: string | null | undefined) => {
-    if (!basePath || missing.has(basePath)) return;
-    const next = new Set(missing);
-    next.add(basePath);
-    missing = next;
+  const markMissing = (path: string | null | undefined) => {
+    if (!path || missing.has(path)) return;
+    missing = new Set([...missing, path]);
   };
 
-  const shouldRenderAsset = (item: GalleryItem): item is GalleryItem & { base: string } => {
-    if (!item.base || item.pending) return false;
-    return !missing.has(item.base);
+  const isReady = (item: GalleryItem): item is GalleryItem & { src: string } => {
+    if (!item.src || item.pending) return false;
+    return !missing.has(item.src);
   };
+
+  const resolvedSources = (item: GalleryItem) =>
+    item.sources?.map((source) => ({
+      ...source,
+      srcset: withBasePath(source.srcset) ?? source.srcset
+    }));
 </script>
 
 <div class="gallery grid">
-  {#each items as item (item.base ?? item.alt)}
+  {#each items as item (item.src ?? item.alt)}
     <figure class="card glass">
-      {#if shouldRenderAsset(item)}
+      {#if isReady(item)}
         <picture>
-          <source srcset={srcWithBase(item.base, 'webp')} type="image/webp" />
+          {#if item.sources}
+            {#each resolvedSources(item) as source}
+              <source srcset={source.srcset} type={source.type} />
+            {/each}
+          {/if}
           <img
-            src={srcWithBase(item.base, 'png')}
+            src={withBasePath(item.src) ?? item.src}
             alt={item.alt}
             loading="lazy"
             width={item.width || 800}
             height={item.height || 500}
-            on:error={() => markMissing(item.base)}
+            on:error={() => markMissing(item.src)}
           />
         </picture>
       {:else}
         <div class="fallback" role="img" aria-label={item.alt}>
           <span>{item.alt}</span>
-          <small>{canonicalPath(item)} • {item.width || 800}×{item.height || 500} asset pending</small>
+          <small>{item.width || 800}×{item.height || 500} preview unavailable</small>
         </div>
       {/if}
     </figure>

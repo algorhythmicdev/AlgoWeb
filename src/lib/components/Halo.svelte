@@ -1,23 +1,36 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  export let intensity = 1; // 0.5..1.5
+  export let intensity = 1;
   let el: HTMLElement;
 
   onMount(() => {
-    el.style.setProperty('--halo-scale', String(intensity));
     const prefersReduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return; // static halo only
+    if (prefersReduced) return;
 
-    function move(e: PointerEvent) {
+    let raf = 0, mx = 50, my = 50, dirty = false;
+
+    const onMove = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();
-      const mx = ((e.clientX - rect.left) / rect.width) * 100;
-      const my = ((e.clientY - rect.top) / rect.height) * 100;
+      mx = ((e.clientX - rect.left) / rect.width) * 100;
+      my = ((e.clientY - rect.top) / rect.height) * 100;
+      if (!dirty) {
+        dirty = true;
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    const tick = () => {
       el.style.setProperty('--mx', `${mx}%`);
       el.style.setProperty('--my', `${my}%`);
       el.style.setProperty('--halo-scale', String(intensity));
-    }
-    el.addEventListener('pointermove', move);
-    return () => el.removeEventListener('pointermove', move);
+      dirty = false;
+    };
+
+    el.addEventListener('pointermove', onMove, { passive: true });
+    return () => {
+      el.removeEventListener('pointermove', onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
   });
 </script>
 

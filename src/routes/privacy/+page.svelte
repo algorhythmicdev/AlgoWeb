@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   const head = Head({ title: 'Privacy', description: 'How we handle your data in plain language.' });
   const points = [
     'We collect analytics-only traffic insights with no personal data.',
@@ -8,7 +11,11 @@
   ];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
+  {@html hreflangLinks($page.url.pathname)}
+</svelte:head>
 
 <main id="main">
   <h1>Privacy</h1>

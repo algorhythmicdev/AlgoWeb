@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://algorhythmicdev.github.io/AlgoWeb/sitemap.xml

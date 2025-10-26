@@ -30,14 +30,6 @@ export {
   formatRelativeTime
 } from './formatters.js';
 
-// SEO utilities
-export {
-  generateMetaTags,
-  generateStructuredData,
-  generateBreadcrumbs,
-  sanitizeForMeta
-} from './seo.js';
-
 // i18n utilities
 export { translateOrFallback } from './i18n.js';
 
