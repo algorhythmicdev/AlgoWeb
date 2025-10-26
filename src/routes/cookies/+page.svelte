@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   const head = Head({ title: 'Cookies', description: 'Cookie usage policy for the AlgoWeb static site.' });
   const details = [
     'Essential cookies: none. The site runs entirely static on GitHub Pages.',
@@ -8,7 +11,11 @@
   ];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
+  {@html hreflangLinks($page.url.pathname)}
+</svelte:head>
 
 <main id="main">
   <h1>Cookies</h1>

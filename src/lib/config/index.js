@@ -4,4 +4,3 @@
  */
 
 export { backgroundThemes, getThemeForPath } from './backgroundThemes.js';
-export { siteConfig } from './seo.js';

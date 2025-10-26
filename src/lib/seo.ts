@@ -1,12 +1,6 @@
-export type MetaInput = {
-  title: string;
-  description?: string;
-  image?: string;
-  lang?: string;
-};
+export type MetaInput = { title: string; description?: string; image?: string; lang?: string };
 
 export function Head({ title, description, image, lang }: MetaInput) {
-  const noindex = false;
   return `
     <title>${escape(title)} — Algorhythmics</title>
     ${description ? `<meta name="description" content="${escape(description)}" />` : ''}
@@ -15,15 +9,8 @@ export function Head({ title, description, image, lang }: MetaInput) {
     ${image ? `<meta property="og:image" content="${escape(image)}" />` : ''}
     ${lang ? `<meta property="og:locale" content="${escape(lang)}" />` : ''}
     <meta name="twitter:card" content="summary_large_image" />
-    ${noindex ? '<meta name="robots" content="noindex,nofollow" />' : ''}
   `;
 }
-
 function escape(s: string) {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 }

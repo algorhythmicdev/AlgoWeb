@@ -1,16 +1,29 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   import GalleryPreview from '$lib/components/GalleryPreview.svelte';
   const head = Head({ title: 'NodeVoyage', description: 'AI-assisted trip planning with Nodi.' });
 
-  const features = ['Nodi-aided planning','Live map & timeline feel','Collaboration','Sustainability notes','Mobile capture ideas'];
+  const features = [
+    'Nodi-aided planning',
+    'Live map & timeline feel',
+    'Collaboration',
+    'Sustainability notes',
+    'Mobile capture ideas'
+  ];
   const gallery = [
-    { base: '/images/nodevoyage/preview-1', alt: 'NodeVoyage preview 1', pending: true },
-    { base: '/images/nodevoyage/preview-2', alt: 'NodeVoyage preview 2', pending: true }
+    { src: '/images/products/nodevoyage-hero.svg', alt: 'NodeVoyage hero illustration' },
+    { src: '/images/placeholders/platform-nodevoyage.svg', alt: 'NodeVoyage platform preview illustration' }
   ];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
+  {@html hreflangLinks($page.url.pathname)}
+</svelte:head>
 
 <main id="main">
   <h1>NodeVoyage</h1>

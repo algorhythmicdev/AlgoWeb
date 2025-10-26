@@ -8,6 +8,8 @@ This catalogue mirrors the current contents of the `static/` directory so design
 static/
 ├── favicon.svg
 ├── og-image.svg
+├── robots.txt
+├── sitemap.xml
 └── images/
     ├── brand/
     │   ├── logo-icon.png
@@ -21,9 +23,6 @@ static/
     │   ├── founder-nikita.svg
     │   ├── founder-slaff.png
     │   └── founder-slaff.svg
-    ├── partners/
-    │   ├── Reclame-Fabriek-Cube.png
-    │   └── reclame-fabriek-logo.svg
     ├── placeholders/
     │   ├── ChatGPT Image Oct 20, 2025, 11_05_12 AM.png
     │   ├── consulting-studio.png
@@ -35,6 +34,7 @@ static/
     │   ├── mobile-preview.svg
     │   ├── platform-ideonautix.svg
     │   ├── platform-nodevoyage.svg
+    │   ├── solutions-suite.png
     │   └── solutions-suite.svg
     └── products/
         ├── ideonautix-hero.svg
@@ -51,6 +51,8 @@ static/
 | ---- | ------- | ----- |
 | `static/favicon.svg` | Browser favicon | Responsive vector icon derived from the logomark. |
 | `static/og-image.svg` | Social preview | 1200 × 630 responsive Open Graph illustration. |
+| `static/robots.txt` | Robots policy | Static crawl instructions for GitHub Pages hosting. |
+| `static/sitemap.xml` | Sitemap | Hand-curated list of prerendered pages for the static deploy. |
 
 ## Brand Assets (`static/images/brand/`)
 
@@ -83,32 +85,28 @@ static/
 | `ideonautix-icon.png` | Ideonautix badge used on cards | Production PNG now powering platform showcases and services. |
 | `ideonautix-icon.svg` | Legacy Ideonautix badge | Archived vector version of the badge artwork. |
 
-## Partner and Program Logos (`static/images/partners/`)
-
-| File | Purpose | Notes |
-| ---- | ------- | ----- |
-| `Reclame-Fabriek-Cube.png` | Reclame Fabriek partner badge | Production cube lockup displayed in the site footer. |
-| `reclame-fabriek-logo.svg` | Legacy Reclame Fabriek logotype | Vector placeholder retained for reference. |
-
 ## Experience Placeholders (`static/images/placeholders/`)
 
 | File | Purpose | Notes |
 | ---- | ------- | ----- |
+| `ChatGPT Image Oct 20, 2025, 11_05_12 AM.png` | Legacy AI-generated placeholder | Retained for archival context during design explorations. |
 | `consulting-studio.png` | Consulting hero imagery | High-fidelity PNG render used across production surfaces. |
 | `contact-lobby.png` | Contact page media | Raster artwork powering the contact hero and feature tiles. |
-| `dashboard-overview.svg` | Legacy services portfolio card | Archived SVG tile kept for reference; replaced by NodeVoyage/Ideonautix PNG badges. |
+| `dashboard-overview.svg` | Legacy services portfolio card | Archived SVG tile kept for reference; replaced by product-specific previews. |
 | `education-gallery.png` | Education hub hero | Production PNG with richer lighting for the landing hero. |
 | `education-lab.png` | Help center and education cards | Raster lab scene optimised for translucent card treatments. |
 | `help-center-desk.png` | Help center hero | PNG illustration shipping in the help centre hero. |
 | `mobile-preview.svg` | Legacy mobile preview card | Retired SVG shell kept for archival purposes. |
-| `platform-ideonautix.svg` | Legacy Ideonautix preview | Placeholder orbit scene replaced by production PNG badge. |
-| `platform-nodevoyage.svg` | Legacy NodeVoyage preview | Placeholder route wave replaced by production PNG badge. |
-| `solutions-suite.svg` | Legacy contact solutions panel | Archived cluster tile retained for design reference. |
+| `platform-ideonautix.svg` | Legacy Ideonautix preview | Placeholder orbit scene replaced by production gallery captures. |
+| `platform-nodevoyage.svg` | Legacy NodeVoyage preview | Placeholder route wave replaced by production gallery captures. |
+| `solutions-suite.png` | Contact CTA artwork | PNG render powering the services CTA module. |
+| `solutions-suite.svg` | Legacy contact solutions panel | Archived vector version retained for design reference. |
 
 ## Maintenance Notes
 
-- Production PNG artwork now replaces earlier SVG placeholders for founders, partners, and product badges. Retain the SVG files for archival use only.
-- Legacy team card SVGs have been removed from `static/images/placeholders/` now that the production portraits live under `static/images/founders/`.
+- Gallery previews reuse existing SVG hero artwork until binary uploads can resume; update the entries in `GalleryPreview` when new renders are available.
+- Footer partner chips are text-based to avoid binary assets—revise copy or swap to inline SVG if dedicated logos become available upstream.
+- Static robots and sitemap files must remain updated whenever routes change so GitHub Pages serves the correct metadata.
 - Preserve transparent backgrounds for logos so they render correctly on glass surfaces in both themes.
 - When replacing any file, keep the filename stable or update import paths throughout the codebase to avoid broken references.
 - Maintain the Open Graph image at 1200 × 630 pixels to satisfy major social media platforms.

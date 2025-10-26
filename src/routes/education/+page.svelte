@@ -1,12 +1,19 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   import { withBase } from '$utils/paths';
   const head = Head({ title: 'Education', description: 'Practical AI programs for schools and universities.' });
   const programs = ['AI literacy workshops for classrooms','Teacher coaching with ready-to-run lesson kits','Student project labs with community mentors'];
   const outcomes = ['Confident faculty who can run sessions without extra prep','Reusable materials updated each term','Documented results for grant and accreditation reports'];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
+  {@html hreflangLinks($page.url.pathname)}
+</svelte:head>
 
 <main id="main">
   <h1>Education</h1>

@@ -1,12 +1,19 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   import { withBase } from '$utils/paths';
   const head = Head({ title: 'Team', description: 'Latvia-based team focused on practical AI.' });
   const strengths = ['Product strategy + facilitation','Applied AI prototyping','Curriculum design for schools & incubators'];
   const ways = ['Co-create with founders and educators','Document every experiment for reuse','Ship in static-friendly stacks'];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
+  {@html hreflangLinks($page.url.pathname)}
+</svelte:head>
 
 <main id="main">
   <h1>Team</h1>

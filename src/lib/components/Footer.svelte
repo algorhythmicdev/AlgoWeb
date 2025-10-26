@@ -2,7 +2,7 @@
   import { withBase } from '$utils/paths';
 
   type Link = { href: string; label: string; resolved: string };
-  type PartnerLogo = { src: string; alt: string; pending?: boolean };
+  type Partner = { name: string; description?: string };
 
   const withResolved = (items: { href: string; label: string }[]): Link[] =>
     items.map((item) => ({ ...item, resolved: withBase(item.href) ?? item.href }));
@@ -23,21 +23,10 @@
     { href: '/cookies', label: 'Cookies' }
   ]);
 
-  const partners: PartnerLogo[] = [
-    { src: '/images/partners/liaa.png', alt: 'LIAA', pending: true },
-    { src: '/images/partners/reclamefabriek.png', alt: 'Reclame Fabriek', pending: true }
+  const partners: Partner[] = [
+    { name: 'LIAA', description: 'Latvian Investment and Development Agency' },
+    { name: 'Reclame Fabriek', description: 'Brand storytelling partners' }
   ];
-
-  const partnerSrc = (path: string) => withBase(path) ?? path;
-
-  let missingPartners = new Set<string>();
-
-  const markMissing = (path: string | null | undefined) => {
-    if (!path || missingPartners.has(path)) return;
-    const next = new Set(missingPartners);
-    next.add(path);
-    missingPartners = next;
-  };
 </script>
 
 <footer class="glass" aria-label="Site footer" style="margin-top:2rem;padding:1.25rem">
@@ -48,17 +37,10 @@
   </nav>
   <div class="partners" aria-label="Partners">
     {#each partners as partner}
-      {#if partner.pending || missingPartners.has(partner.src)}
-        <span class="partner-fallback" role="img" aria-label={partner.alt}>{partner.alt}</span>
-      {:else}
-        <img
-          src={partnerSrc(partner.src)}
-          alt={partner.alt}
-          loading="lazy"
-          height="28"
-          on:error={() => markMissing(partner.src)}
-        />
-      {/if}
+      <span class="partner-chip" aria-label={`${partner.name} — ${partner.description ?? 'Partner'}`}>
+        <strong>{partner.name}</strong>
+        {#if partner.description}<small>{partner.description}</small>{/if}
+      </span>
     {/each}
   </div>
   <ul role="list" class="nav">
@@ -75,18 +57,31 @@
     margin: 1rem 0;
   }
 
-  .partner-fallback {
+  .partner-chip {
     display: inline-flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    padding: 0.25rem 0.75rem;
-    border: 1px dashed var(--border);
-    border-radius: 999px;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    color: var(--text-subtle);
+    min-width: 8.5rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 0.85rem;
+    border: 1px dashed color-mix(in oklab, var(--border) 80%, transparent);
     background: color-mix(in oklab, var(--surface) 88%, transparent);
+    color: var(--text-subtle);
+    text-align: center;
+    line-height: 1.15;
+    gap: 0.25rem;
+  }
+
+  .partner-chip strong {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.01em;
     text-transform: uppercase;
+  }
+
+  .partner-chip small {
+    font-size: 0.75rem;
+    letter-spacing: 0.01em;
   }
 </style>

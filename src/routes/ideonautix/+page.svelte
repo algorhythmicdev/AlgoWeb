@@ -1,16 +1,29 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   import GalleryPreview from '$lib/components/GalleryPreview.svelte';
   const head = Head({ title: 'Ideonautix', description: 'Startup education & productivity toolkit.' });
 
-  const features = ['Pitch Assistant','Competitive Intelligence','Pomodoro Coach','Smart Standups','Revenue Dashboard'];
+  const features = [
+    'Pitch Assistant',
+    'Competitive Intelligence',
+    'Pomodoro Coach',
+    'Smart Standups',
+    'Revenue Dashboard'
+  ];
   const gallery = [
-    { base: '/images/ideonautix/preview-1', alt: 'Ideonautix preview 1', pending: true },
-    { base: '/images/ideonautix/preview-2', alt: 'Ideonautix preview 2', pending: true }
+    { src: '/images/products/ideonautix-hero.svg', alt: 'Ideonautix hero illustration' },
+    { src: '/images/placeholders/platform-ideonautix.svg', alt: 'Ideonautix platform preview illustration' }
   ];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor($page.url.pathname)}>
+  {@html hreflangLinks($page.url.pathname)}
+</svelte:head>
 
 <main id="main">
   <h1>Ideonautix</h1>
