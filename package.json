@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Official website for AlgoRhythmics - Where Logic Dances with Creativity",
   "private": true,
+  "packageManager": "pnpm@9.12.1",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
