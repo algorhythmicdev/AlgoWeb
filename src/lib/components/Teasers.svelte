@@ -1,23 +1,15 @@
 <script lang="ts">
-  import { withBase } from '$utils/paths';
-
-  const teasers = [
-    { title: 'Consulting', body: 'Practical automation, data workflows, team training.', href: '/consulting' },
-    { title: 'Education',  body: 'Programs for schools and universities in Latvia.', href: '/education' }
-  ].map((t) => ({ ...t, resolved: withBase(t.href) ?? t.href }));
+  import { base } from '$app/paths';
+  const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
+  const resolve = (href: string) => isExternal(href)
+    ? href
+    : href === '/'
+      ? base || '/'
+      : `${base}${href}`;
 </script>
-
-<section aria-label="Teasers" class="teasers">
-  <h2 class="visually-hidden">Focus areas</h2>
-  {#each teasers as t}
-    <a class="teaser" href={t.resolved}>
-      <h3>{t.title}</h3>
-      <p>{t.body}</p>
-    </a>
-  {/each}
+<section class="section">
+  <div class="grid">
+    <a class="card" href={resolve('/consulting')}><h3>Consulting</h3><p>Practical automation, data workflows, training.</p></a>
+    <a class="card" href={resolve('/education')}><h3>Education</h3><p>Programs for Latvian schools and universities.</p></a>
+  </div>
 </section>
-
-<style>
-  .teasers { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
-  .teaser { border: 1px dashed currentColor; padding: 1rem; border-radius: .5rem; }
-</style>

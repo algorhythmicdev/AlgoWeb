@@ -1,22 +1,23 @@
 <script lang="ts">
-  import { withBase } from '$utils/paths';
-
-  const products = [
-    { name: 'Ideonautix', href: '/ideonautix', summary: 'Startup education & productivity toolkit.' },
-    { name: 'NodeVoyage', href: '/nodevoyage', summary: 'AI-assisted trip planning with Nodi.' }
-  ].map((p) => ({ ...p, resolved: withBase(p.href) ?? p.href }));
+  import { base } from '$app/paths';
+  const products=[
+    {name:'Ideonautix',href:'/ideonautix',summary:'Startup education & productivity toolkit.'},
+    {name:'NodeVoyage',href:'/nodevoyage',summary:'AI-assisted trip planning with Nodi.'}
+  ];
+  const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
+  const resolve = (href: string) => isExternal(href)
+    ? href
+    : href === '/'
+      ? base || '/'
+      : `${base}${href}`;
 </script>
-
-<section aria-label="Products" class="grid">
-  {#each products as p}
-    <a class="card glass product" href={p.resolved}>
-      <h3>{p.name}</h3>
-      <p>{p.summary}</p>
-    </a>
-  {/each}
+<section class="section">
+  <h2>Products</h2>
+  <div class="grid">
+    {#each products as p}
+      <a class="card glass" href={resolve(p.href)} style="transform-style:preserve-3d">
+        <h3>{p.name}</h3><p>{p.summary}</p>
+      </a>
+    {/each}
+  </div>
 </section>
-
-<style>
-  .product { transform-style: preserve-3d; will-change: transform; }
-  .product:hover { transform: translateY(-3px) perspective(800px) rotateX(1.2deg); }
-</style>
