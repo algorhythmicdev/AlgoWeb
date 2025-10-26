@@ -1,47 +1,16 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
   import GalleryPreview from '$lib/components/GalleryPreview.svelte';
-  import { canonicalFor } from '$lib/canonical';
-  import { hreflangLinks } from '$lib/hreflang';
-  import { _, locale as localeStore } from '$lib/i18n';
-  import { buildMeta } from '$lib/meta';
+  const head = Head({ title: 'Ideonautix', description: 'Startup education & productivity toolkit.' });
 
-  export let data: { pathname?: string; locale?: string } = {};
-
-  const FALLBACK = {
-    title: 'Ideonautix',
-    description: 'Startup education & productivity toolkit.'
-  };
-
-  $: translate = $_;
-  $: activeLocale = data.locale ?? $localeStore ?? 'en';
-  $: meta = buildMeta(translate, 'ideonautix', FALLBACK, activeLocale);
-  $: head = Head(meta);
-
-  const features = [
-    'Pitch Assistant',
-    'Competitive Intelligence',
-    'Pomodoro Coach',
-    'Smart Standups',
-    'Revenue Dashboard'
-  ];
+  const features = ['Pitch Assistant','Competitive Intelligence','Pomodoro Coach','Smart Standups','Revenue Dashboard'];
   const gallery = [
-    {
-      title: 'Workspace dashboard',
-      description: 'Daily focus tiles with smart reminders for student founders.'
-    },
-    {
-      title: 'Pitch assistant outline',
-      description: 'Step-by-step prompts that adapt to team progress checkpoints.'
-    }
+    { base: '/images/ideonautix/preview-1', alt: 'Ideonautix preview 1', pending: true },
+    { base: '/images/ideonautix/preview-2', alt: 'Ideonautix preview 2', pending: true }
   ];
 </script>
 
-<svelte:head>
-  {@html head}
-  <link rel="canonical" href={canonicalFor(data.pathname ?? '/ideonautix')}>
-  {@html hreflangLinks(data.pathname ?? '/ideonautix')}
-</svelte:head>
+<svelte:head>{@html head}</svelte:head>
 
 <main id="main">
   <h1>Ideonautix</h1>

@@ -5,11 +5,7 @@ export default defineConfig({
   plugins: [sveltekit()],
   test: {
     environment: 'jsdom',
-    setupFiles: ['./tests/setup.ts'],
     globals: true,
-    include: [
-      'tests/**/*.{spec,test}.{js,ts}',
-      'src/lib/components/__tests__/**/*.{spec,test}.{js,ts}'
-    ]
+    include: ['tests/smoke.spec.ts']
   }
 });

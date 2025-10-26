@@ -1,58 +1,27 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
-  import { canonicalFor } from '$lib/canonical';
-  import { hreflangLinks } from '$lib/hreflang';
   import { withBase } from '$utils/paths';
-  import { _, locale as localeStore } from '$lib/i18n';
-  import { buildMeta } from '$lib/meta';
-
-  export let data: { pathname?: string; locale?: string } = {};
-
-  const FALLBACK = {
-    title: 'Consulting',
-    description: 'Practical automation, data workflows, and training.'
-  };
-
-  $: translate = $_;
-  $: activeLocale = data.locale ?? $localeStore ?? 'en';
-  $: meta = buildMeta(translate, 'consulting', FALLBACK, activeLocale);
-  $: head = Head(meta);
-
-  const services = [
-    'Automation & workflow design',
-    'Data integration and reporting',
-    'Team training and playbooks'
-  ];
-
-  const process = [
-    'Kickoff & scope (1–2 calls)',
-    'Prototype in days (not months)',
-    'Iterate with real feedback',
-    'Handover & training'
-  ];
-
-  let pilotSpots = 3; // placeholder counter for UI signal; real backend would drive this
+  const head = Head({ title: 'Consulting', description: 'Practical automation, data workflows, and training.' });
+  const services = ['Automation & workflow design','Data integration and reporting','Team training and playbooks'];
+  const process = ['Kickoff & scope in a single working session','Prototype together in days, not months','Review with stakeholders and document next steps'];
 </script>
 
-<svelte:head>
-  {@html head}
-  <link rel="canonical" href={canonicalFor(data.pathname ?? '/consulting')}>
-  {@html hreflangLinks(data.pathname ?? '/consulting')}
-</svelte:head>
+<svelte:head>{@html head}</svelte:head>
 
 <main id="main">
   <h1>Consulting</h1>
-  <p>We keep it practical and fast. Clear outcomes, shipped quickly.</p>
+  <p>We partner with teams who need clear outcomes quickly. Every engagement ships tangible assets.</p>
+  <p>Our focus is on simple automation, reliable data visibility, and internal training that sticks.</p>
 
-  <h2>Services</h2>
-  <ul>{#each services as s}<li>{s}</li>{/each}</ul>
+  <section>
+    <h2>Services</h2>
+    <ul>{#each services as item}<li>{item}</li>{/each}</ul>
+  </section>
 
-  <h2>Process</h2>
-  <ol>{#each process as p}<li>{p}</li>{/each}</ol>
+  <section>
+    <h2>Process</h2>
+    <ul>{#each process as step}<li>{step}</li>{/each}</ul>
+  </section>
 
-  <aside aria-label="Pilot program" style="border:1px solid currentColor;padding:1rem;border-radius:.5rem">
-    <strong>Pilot applications open.</strong>
-    <p>Spots left: {pilotSpots}</p>
-    <p><a class="btn" href={withBase('/contact') ?? '/contact'}>Apply for a pilot</a></p>
-  </aside>
+  <p><a class="btn btn-primary" href={withBase('/contact') ?? '/contact'}>Start a project</a></p>
 </main>

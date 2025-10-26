@@ -1,101 +1,92 @@
 <script lang="ts">
   import { withBase } from '$utils/paths';
-  import { _ } from '$lib/i18n';
 
-  type LinkItem = {
-    href: string;
-    key: string;
-    fallback: string;
+  type Link = { href: string; label: string; resolved: string };
+  type PartnerLogo = { src: string; alt: string; pending?: boolean };
+
+  const withResolved = (items: { href: string; label: string }[]): Link[] =>
+    items.map((item) => ({ ...item, resolved: withBase(item.href) ?? item.href }));
+
+  const nav = withResolved([
+    { href: '/', label: 'Home' },
+    { href: '/team', label: 'Team' },
+    { href: '/ideonautix', label: 'Ideonautix' },
+    { href: '/nodevoyage', label: 'NodeVoyage' },
+    { href: '/consulting', label: 'Consulting' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/education', label: 'Education' }
+  ]);
+
+  const legal = withResolved([
+    { href: '/privacy', label: 'Privacy' },
+    { href: '/terms', label: 'Terms' },
+    { href: '/cookies', label: 'Cookies' }
+  ]);
+
+  const partners: PartnerLogo[] = [
+    { src: '/images/partners/liaa.png', alt: 'LIAA', pending: true },
+    { src: '/images/partners/reclamefabriek.png', alt: 'Reclame Fabriek', pending: true }
+  ];
+
+  const partnerSrc = (path: string) => withBase(path) ?? path;
+
+  let missingPartners = new Set<string>();
+
+  const markMissing = (path: string | null | undefined) => {
+    if (!path || missingPartners.has(path)) return;
+    const next = new Set(missingPartners);
+    next.add(path);
+    missingPartners = next;
   };
-
-  const navItems: LinkItem[] = [
-    { href: '/', key: 'nav.home', fallback: 'Home' },
-    { href: '/team', key: 'nav.team', fallback: 'Team' },
-    { href: '/ideonautix', key: 'nav.ideonautix', fallback: 'Ideonautix' },
-    { href: '/nodevoyage', key: 'nav.nodevoyage', fallback: 'NodeVoyage' },
-    { href: '/consulting', key: 'nav.consulting', fallback: 'Consulting' },
-    { href: '/contact', key: 'nav.contact', fallback: 'Contact' },
-    { href: '/education', key: 'nav.education', fallback: 'Education' }
-  ];
-
-  const legalItems: LinkItem[] = [
-    { href: '/privacy', key: 'legal.privacy', fallback: 'Privacy' },
-    { href: '/terms', key: 'legal.terms', fallback: 'Terms' },
-    { href: '/cookies', key: 'legal.cookies', fallback: 'Cookies' }
-  ];
-
-  const partners = [
-    {
-      name: 'LIAA',
-      description: 'Latvian Investment and Development Agency'
-    },
-    {
-      name: 'Reclame Fabriek',
-      description: 'Creative partner reference'
-    }
-  ];
-
-  $: translate = $_;
-
-  function translateOrFallback(key: string, fallback: string): string {
-    if (translate) {
-      const value = translate(key);
-      if (value && value !== key) {
-        return value;
-      }
-    }
-
-    return fallback;
-  }
-
-  function translateLabel(item: LinkItem): string {
-    return translateOrFallback(item.key, item.fallback);
-  }
-
-  const nav = navItems.map((item) => ({
-    ...item,
-    resolved: withBase(item.href) ?? item.href
-  }));
-
-  const legal = legalItems.map((item) => ({
-    ...item,
-    resolved: withBase(item.href) ?? item.href
-  }));
-
-  $: navLabel = translateOrFallback('footer.nav_label', 'Site navigation');
-  $: partnersLabel = translateOrFallback('footer.partners_label', 'Partners');
-  $: legalLabel = translateOrFallback('footer.legal_label', 'Legal');
 </script>
 
-<footer aria-label="Site footer">
-  <nav aria-label={navLabel}>
+<footer class="glass" aria-label="Site footer" style="margin-top:2rem;padding:1.25rem">
+  <nav aria-label="Footer">
     <ul role="list" class="nav">
-      {#each nav as item}
-        <li><a href={item.resolved}>{translateLabel(item)}</a></li>
-      {/each}
+      {#each nav as item}<li><a href={item.resolved}>{item.label}</a></li>{/each}
     </ul>
   </nav>
-
-  <ul role="list" class="partners" aria-label={partnersLabel}>
-    {#each partners as p}
-      <li>
-        <span class="partner-chip" aria-label={`${p.name} — ${p.description}`}>
-          <span aria-hidden="true">{p.name}</span>
-        </span>
-      </li>
+  <div class="partners" aria-label="Partners">
+    {#each partners as partner}
+      {#if partner.pending || missingPartners.has(partner.src)}
+        <span class="partner-fallback" role="img" aria-label={partner.alt}>{partner.alt}</span>
+      {:else}
+        <img
+          src={partnerSrc(partner.src)}
+          alt={partner.alt}
+          loading="lazy"
+          height="28"
+          on:error={() => markMissing(partner.src)}
+        />
+      {/if}
     {/each}
-  </ul>
-
-  <ul role="list" class="legal" aria-label={legalLabel}>
-    {#each legal as item}
-      <li><a href={item.resolved}>{translateLabel(item)}</a></li>
-    {/each}
+  </div>
+  <ul role="list" class="nav">
+    {#each legal as item}<li><a href={item.resolved}>{item.label}</a></li>{/each}
   </ul>
 </footer>
 
 <style>
-  footer { padding: 2rem 0; border-top: 1px solid currentColor; opacity: .9 }
-  .nav, .legal { display: flex; flex-wrap: wrap; gap: 1rem; }
-  .partners { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1rem 0; padding: 0; }
-  .partner-chip { display: inline-flex; align-items: center; justify-content: center; padding: .5rem 1rem; border: 1px solid currentColor; border-radius: 999px; font-size: .875rem; letter-spacing: .02em; }
+  .partners {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  .partner-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.75rem;
+    border: 1px dashed var(--border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text-subtle);
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+    text-transform: uppercase;
+  }
 </style>
