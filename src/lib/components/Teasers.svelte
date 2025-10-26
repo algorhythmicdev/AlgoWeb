@@ -8,7 +8,7 @@
 </script>
 
 <section aria-label="Teasers" class="teasers">
-  <h2 class="sr-only">Focus areas</h2>
+  <h2 class="visually-hidden">Focus areas</h2>
   {#each teasers as t}
     <a class="teaser" href={t.resolved}>
       <h3>{t.title}</h3>

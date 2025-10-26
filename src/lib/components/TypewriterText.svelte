@@ -161,7 +161,7 @@
 
 <span class={`typewriter-text ${className}`} aria-live="polite">
   <span class="typewriter-text__visible" aria-hidden="true">{displayText}</span>
-  <span class="sr-only">{liveAnnouncement}</span>
+  <span class="visually-hidden">{liveAnnouncement}</span>
   <span class="typewriter-text__cursor" aria-hidden="true"></span>
 </span>
 
@@ -219,17 +219,6 @@
     }
   }
 
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
 
   :global(
       :is(

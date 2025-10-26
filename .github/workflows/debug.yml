@@ -1,9 +1,0 @@
-name: Debug Runner
-on: { workflow_dispatch: {} }
-jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: mxschmitt/action-tmate@v3
-        with: { limit-access-to-actor: true }

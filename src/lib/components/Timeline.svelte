@@ -6,7 +6,7 @@
 </script>
 
 <section aria-label="Timeline">
-  <h2 class="sr-only">Timeline</h2>
+  <h2 class="visually-hidden">Timeline</h2>
   <ol class="timeline">
     {#each items as i}
       <li><strong>{i.date}</strong> — {i.text}</li>

@@ -1,30 +1,23 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
-  import { canonicalFor } from '$lib/canonical';
-  import { hreflangLinks } from '$lib/hreflang';
-  import { _, locale as localeStore } from '$lib/i18n';
-  import { buildMeta } from '$lib/meta';
-
-  export let data: { pathname?: string; locale?: string } = {};
-
-  const FALLBACK = {
-    title: 'Privacy',
-    description: 'How we handle your data in plain language.'
-  };
-
-  $: translate = $_;
-  $: activeLocale = data.locale ?? $localeStore ?? 'en';
-  $: meta = buildMeta(translate, 'privacy', FALLBACK, activeLocale);
-  $: head = Head(meta);
+  const head = Head({ title: 'Privacy', description: 'How we handle your data in plain language.' });
+  const points = [
+    'We collect analytics-only traffic insights with no personal data.',
+    'Emails you send are stored in a secure, access-controlled inbox.',
+    'You can request data removal at any time by emailing privacy@algoweb.studio.'
+  ];
 </script>
 
-<svelte:head>
-  {@html head}
-  <link rel="canonical" href={canonicalFor(data.pathname ?? '/privacy')}>
-  {@html hreflangLinks(data.pathname ?? '/privacy')}
-</svelte:head>
+<svelte:head>{@html head}</svelte:head>
 
 <main id="main">
   <h1>Privacy</h1>
-  <p>Plain-language privacy policy placeholder.</p>
+  <p>We keep things simple. The site runs statically with no tracking pixels or third-party scripts.</p>
+
+  <section>
+    <h2>Key points</h2>
+    <ul>{#each points as point}<li>{point}</li>{/each}</ul>
+  </section>
+
+  <p>Questions? Email <a href="mailto:privacy@algoweb.studio">privacy@algoweb.studio</a>.</p>
 </main>

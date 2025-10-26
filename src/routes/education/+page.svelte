@@ -1,35 +1,27 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
-  import { canonicalFor } from '$lib/canonical';
-  import { hreflangLinks } from '$lib/hreflang';
-  import { _, locale as localeStore } from '$lib/i18n';
-  import { buildMeta } from '$lib/meta';
-
-  export let data: { pathname?: string; locale?: string } = {};
-
-  const FALLBACK = {
-    title: 'Education',
-    description: 'Practical AI programs for schools and universities.'
-  };
-
-  $: translate = $_;
-  $: activeLocale = data.locale ?? $localeStore ?? 'en';
-  $: meta = buildMeta(translate, 'education', FALLBACK, activeLocale);
-  $: head = Head(meta);
+  import { withBase } from '$utils/paths';
+  const head = Head({ title: 'Education', description: 'Practical AI programs for schools and universities.' });
+  const programs = ['AI literacy workshops for classrooms','Teacher coaching with ready-to-run lesson kits','Student project labs with community mentors'];
+  const outcomes = ['Confident faculty who can run sessions without extra prep','Reusable materials updated each term','Documented results for grant and accreditation reports'];
 </script>
 
-<svelte:head>
-  {@html head}
-  <link rel="canonical" href={canonicalFor(data.pathname ?? '/education')}>
-  {@html hreflangLinks(data.pathname ?? '/education')}
-</svelte:head>
+<svelte:head>{@html head}</svelte:head>
 
 <main id="main">
   <h1>Education</h1>
-  <p>We’re preparing plain-language, easy-to-run AI programs for schools and universities in Latvia. Built with real, hands-on outcomes.</p>
+  <p>We build plain-language AI programs for schools and universities in Latvia.</p>
+  <p>Everything is built to run offline-first with optional companion videos and worksheets.</p>
 
   <section>
-    <h2>Focus</h2>
-    <p>Lesson kits, teacher training, and community meetups.</p>
+    <h2>Programs</h2>
+    <ul>{#each programs as item}<li>{item}</li>{/each}</ul>
   </section>
+
+  <section>
+    <h2>Outcomes</h2>
+    <ul>{#each outcomes as item}<li>{item}</li>{/each}</ul>
+  </section>
+
+  <p><a class="btn btn-primary" href={withBase('/contact') ?? '/contact'}>Schedule a workshop</a></p>
 </main>
