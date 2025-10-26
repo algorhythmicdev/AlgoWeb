@@ -1,7 +1,21 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
+  import { _, locale as localeStore } from '$lib/i18n';
+  import { buildMeta } from '$lib/meta';
 
-  const head = Head({ title: 'Contact', description: 'Get in touch about consulting or products.' });
+  export let data: { pathname?: string; locale?: string } = {};
+
+  const FALLBACK = {
+    title: 'Contact',
+    description: 'Get in touch about consulting or products.'
+  };
+
+  $: translate = $_;
+  $: activeLocale = data.locale ?? $localeStore ?? 'en';
+  $: meta = buildMeta(translate, 'contact', FALLBACK, activeLocale);
+  $: head = Head(meta);
 
   let intent = 'consulting';
   let name = '';
@@ -72,7 +86,11 @@
   }
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor(data.pathname ?? '/contact')}>
+  {@html hreflangLinks(data.pathname ?? '/contact')}
+</svelte:head>
 
 <main id="main">
   <h1>Contact</h1>

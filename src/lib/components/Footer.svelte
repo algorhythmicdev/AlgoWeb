@@ -1,21 +1,28 @@
 <script lang="ts">
   import { withBase } from '$utils/paths';
+  import { _ } from '$lib/i18n';
 
-  const nav = [
-    { href: '/', label: 'Home' },
-    { href: '/team', label: 'Team' },
-    { href: '/ideonautix', label: 'Ideonautix' },
-    { href: '/nodevoyage', label: 'NodeVoyage' },
-    { href: '/consulting', label: 'Consulting' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/education', label: 'Education' }
-  ].map((i) => ({ ...i, resolved: withBase(i.href) ?? i.href }));
+  type LinkItem = {
+    href: string;
+    key: string;
+    fallback: string;
+  };
 
-  const legal = [
-    { href: '/privacy', label: 'Privacy' },
-    { href: '/terms',   label: 'Terms' },
-    { href: '/cookies', label: 'Cookies' }
-  ].map((i) => ({ ...i, resolved: withBase(i.href) ?? i.href }));
+  const navItems: LinkItem[] = [
+    { href: '/', key: 'nav.home', fallback: 'Home' },
+    { href: '/team', key: 'nav.team', fallback: 'Team' },
+    { href: '/ideonautix', key: 'nav.ideonautix', fallback: 'Ideonautix' },
+    { href: '/nodevoyage', key: 'nav.nodevoyage', fallback: 'NodeVoyage' },
+    { href: '/consulting', key: 'nav.consulting', fallback: 'Consulting' },
+    { href: '/contact', key: 'nav.contact', fallback: 'Contact' },
+    { href: '/education', key: 'nav.education', fallback: 'Education' }
+  ];
+
+  const legalItems: LinkItem[] = [
+    { href: '/privacy', key: 'legal.privacy', fallback: 'Privacy' },
+    { href: '/terms', key: 'legal.terms', fallback: 'Terms' },
+    { href: '/cookies', key: 'legal.cookies', fallback: 'Cookies' }
+  ];
 
   const partners = [
     {
@@ -27,16 +34,49 @@
       description: 'Creative partner reference'
     }
   ];
+
+  $: translate = $_;
+
+  function translateOrFallback(key: string, fallback: string): string {
+    if (translate) {
+      const value = translate(key);
+      if (value && value !== key) {
+        return value;
+      }
+    }
+
+    return fallback;
+  }
+
+  function translateLabel(item: LinkItem): string {
+    return translateOrFallback(item.key, item.fallback);
+  }
+
+  const nav = navItems.map((item) => ({
+    ...item,
+    resolved: withBase(item.href) ?? item.href
+  }));
+
+  const legal = legalItems.map((item) => ({
+    ...item,
+    resolved: withBase(item.href) ?? item.href
+  }));
+
+  $: navLabel = translateOrFallback('footer.nav_label', 'Site navigation');
+  $: partnersLabel = translateOrFallback('footer.partners_label', 'Partners');
+  $: legalLabel = translateOrFallback('footer.legal_label', 'Legal');
 </script>
 
 <footer aria-label="Site footer">
-  <nav aria-label="Footer">
+  <nav aria-label={navLabel}>
     <ul role="list" class="nav">
-      {#each nav as i}<li><a href={i.resolved}>{i.label}</a></li>{/each}
+      {#each nav as item}
+        <li><a href={item.resolved}>{translateLabel(item)}</a></li>
+      {/each}
     </ul>
   </nav>
 
-  <ul role="list" class="partners" aria-label="Partners">
+  <ul role="list" class="partners" aria-label={partnersLabel}>
     {#each partners as p}
       <li>
         <span class="partner-chip" aria-label={`${p.name} — ${p.description}`}>
@@ -46,8 +86,10 @@
     {/each}
   </ul>
 
-  <ul role="list" class="legal">
-    {#each legal as i}<li><a href={i.resolved}>{i.label}</a></li>{/each}
+  <ul role="list" class="legal" aria-label={legalLabel}>
+    {#each legal as item}
+      <li><a href={item.resolved}>{translateLabel(item)}</a></li>
+    {/each}
   </ul>
 </footer>
 
