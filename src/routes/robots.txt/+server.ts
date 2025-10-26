@@ -1,4 +1,5 @@
 import { base } from '$app/paths';
+import { PUBLIC_NOINDEX } from '$env/static/public';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const prerender = true;
@@ -7,7 +8,8 @@ export const GET: RequestHandler = async ({ url }) => {
   const derivedOrigin = url.origin && url.origin !== 'null' ? url.origin : '';
   const origin = derivedOrigin.replace(/\/$/, '');
   const basePath = base === '/' ? '' : base ?? '';
-  const noindex = false;
+  const normalised = (PUBLIC_NOINDEX ?? '').trim().toLowerCase();
+  const noindex = normalised === 'true' || normalised === '1';
 
   const lines = [
     'User-agent: *',

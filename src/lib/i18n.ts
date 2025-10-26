@@ -23,6 +23,15 @@ register('en', () => import('$lib/translations/en.json'));
 register('lv', () => import('$lib/translations/lv.json'));
 register('ru', () => import('$lib/translations/ru.json'));
 
+i18nInit({
+  fallbackLocale: 'en',
+  initialLocale: 'en'
+});
+
+if (!browser) {
+  locale.set('en');
+}
+
 function readLocaleCookie(): string | null {
   if (!browser || typeof document === 'undefined') {
     return null;
@@ -58,17 +67,6 @@ function resolveStartLocale(defaultLocale?: SupportedLocale | string): Supported
   const cookieLocale = readLocaleCookie();
   if (cookieLocale && SUPPORTED_LOCALES.includes(cookieLocale as SupportedLocale)) {
     return cookieLocale as SupportedLocale;
-  }
-
-  if (browser) {
-    try {
-      const stored = localStorage.getItem('language');
-      if (stored && SUPPORTED_LOCALES.includes(stored as SupportedLocale)) {
-        return stored as SupportedLocale;
-      }
-    } catch {
-      // ignore storage errors
-    }
   }
 
   const navigatorLocale = getLocaleFromNavigator();

@@ -24,6 +24,14 @@ jobs:
           PUBLIC_CONTACT_ENDPOINT: ''
           PUBLIC_NOINDEX: true
         run: pnpm build
+      - name: Start preview server
+        run: pnpm preview -- --host 127.0.0.1 --port 4173 --base /AlgoWeb &
+      - name: Run Playwright tests
+        env:
+          PREVIEW_URL: http://127.0.0.1:4173/AlgoWeb
+        run: |
+          npx playwright install --with-deps
+          npx playwright test
       - name: Get ossutil
         run: |
           curl -L http://gosspublic.alicdn.com/ossutil/1.7.17/ossutil64 -o ossutil64

@@ -1,7 +1,22 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   import { withBase } from '$utils/paths';
-  const head = Head({ title: 'Consulting', description: 'Practical automation, data workflows, and training.' });
+  import { _, locale as localeStore } from '$lib/i18n';
+  import { buildMeta } from '$lib/meta';
+
+  export let data: { pathname?: string; locale?: string } = {};
+
+  const FALLBACK = {
+    title: 'Consulting',
+    description: 'Practical automation, data workflows, and training.'
+  };
+
+  $: translate = $_;
+  $: activeLocale = data.locale ?? $localeStore ?? 'en';
+  $: meta = buildMeta(translate, 'consulting', FALLBACK, activeLocale);
+  $: head = Head(meta);
 
   const services = [
     'Automation & workflow design',
@@ -19,7 +34,11 @@
   let pilotSpots = 3; // placeholder counter for UI signal; real backend would drive this
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor(data.pathname ?? '/consulting')}>
+  {@html hreflangLinks(data.pathname ?? '/consulting')}
+</svelte:head>
 
 <main id="main">
   <h1>Consulting</h1>

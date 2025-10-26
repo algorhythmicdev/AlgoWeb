@@ -1,7 +1,22 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
   import GalleryPreview from '$lib/components/GalleryPreview.svelte';
-  const head = Head({ title: 'NodeVoyage', description: 'AI-assisted trip planning with Nodi.' });
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
+  import { _, locale as localeStore } from '$lib/i18n';
+  import { buildMeta } from '$lib/meta';
+
+  export let data: { pathname?: string; locale?: string } = {};
+
+  const FALLBACK = {
+    title: 'NodeVoyage',
+    description: 'AI-assisted trip planning with Nodi.'
+  };
+
+  $: translate = $_;
+  $: activeLocale = data.locale ?? $localeStore ?? 'en';
+  $: meta = buildMeta(translate, 'nodevoyage', FALLBACK, activeLocale);
+  $: head = Head(meta);
 
   const features = [
     'Nodi-aided planning',
@@ -23,7 +38,11 @@
   ];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor(data.pathname ?? '/nodevoyage')}>
+  {@html hreflangLinks(data.pathname ?? '/nodevoyage')}
+</svelte:head>
 
 <main id="main">
   <h1>NodeVoyage</h1>

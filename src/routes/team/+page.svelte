@@ -1,9 +1,29 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
   import { withBase } from '$utils/paths';
-  const head = Head({ title: 'Team', description: 'Latvia-based team focused on practical AI.' });
+  import { _, locale as localeStore } from '$lib/i18n';
+  import { buildMeta } from '$lib/meta';
+
+  export let data: { pathname?: string; locale?: string } = {};
+
+  const FALLBACK = {
+    title: 'Team',
+    description: 'Latvia-based team focused on practical AI.'
+  };
+
+  $: translate = $_;
+  $: activeLocale = data.locale ?? $localeStore ?? 'en';
+  $: meta = buildMeta(translate, 'team', FALLBACK, activeLocale);
+  $: head = Head(meta);
 </script>
-<svelte:head>{@html head}</svelte:head>
+
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor(data.pathname ?? '/team')}>
+  {@html hreflangLinks(data.pathname ?? '/team')}
+</svelte:head>
 
 <main id="main">
   <h1>Team</h1>

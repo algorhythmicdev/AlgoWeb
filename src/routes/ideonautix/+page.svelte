@@ -1,7 +1,22 @@
 <script lang="ts">
   import { Head } from '$lib/seo';
   import GalleryPreview from '$lib/components/GalleryPreview.svelte';
-  const head = Head({ title: 'Ideonautix', description: 'Startup education & productivity toolkit.' });
+  import { canonicalFor } from '$lib/canonical';
+  import { hreflangLinks } from '$lib/hreflang';
+  import { _, locale as localeStore } from '$lib/i18n';
+  import { buildMeta } from '$lib/meta';
+
+  export let data: { pathname?: string; locale?: string } = {};
+
+  const FALLBACK = {
+    title: 'Ideonautix',
+    description: 'Startup education & productivity toolkit.'
+  };
+
+  $: translate = $_;
+  $: activeLocale = data.locale ?? $localeStore ?? 'en';
+  $: meta = buildMeta(translate, 'ideonautix', FALLBACK, activeLocale);
+  $: head = Head(meta);
 
   const features = [
     'Pitch Assistant',
@@ -22,7 +37,11 @@
   ];
 </script>
 
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  {@html head}
+  <link rel="canonical" href={canonicalFor(data.pathname ?? '/ideonautix')}>
+  {@html hreflangLinks(data.pathname ?? '/ideonautix')}
+</svelte:head>
 
 <main id="main">
   <h1>Ideonautix</h1>
