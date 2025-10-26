@@ -36,8 +36,8 @@ p{line-height:1.6;max-width:70ch}
 .header{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--surface) 85%, transparent);
   backdrop-filter: blur(12px);-webkit-backdrop-filter: blur(12px);border-bottom:1px solid var(--border)}
 .nav{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-.nav a{text-decoration:none;color:var(--text-sub);padding:.65rem .25rem;border-bottom:2px solid transparent}
-.nav a[aria-current="page"]{color:var(--text);border-color: color-mix(in oklab,var(--brand) 65%, transparent)}
+.nav a{text-decoration:none;color:var(--text-sub);padding:.65rem .25rem;display:inline-flex;align-items:center;gap:.35rem;position:relative}
+.nav a[aria-current="page"]{color:var(--text)}
 
 /* GLASS & HALO */
 .glass{background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));
@@ -63,6 +63,32 @@ p{line-height:1.6;max-width:70ch}
 .btn-primary:hover{box-shadow:0 10px 40px -10px color-mix(in oklab,var(--brand) 50%, transparent)}
 
 /* CHIPS */
-.partner-list{display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0}
-.chip{display:inline-flex;align-items:center;padding:.35rem .75rem;border-radius:999px;border:1px solid var(--border);
-  background:color-mix(in oklab,var(--surface) 80%, transparent);color:var(--text-sub);font-size:.85rem;font-weight:500;letter-spacing:.01em}
+
+.ripple { position:absolute; border-radius:50%; transform:scale(0);
+  background: color-mix(in oklab, var(--brand) 60%, white 10%);
+  opacity:.35; animation: ripple 450ms var(--ease) forwards; pointer-events:none; }
+@keyframes ripple { to { transform:scale(2.5); opacity:0; } }
+
+.card.glossy { position: relative; overflow: hidden; }
+.card.glossy::after {
+  content:""; position:absolute; inset:-20% -60%; transform: rotate(18deg) translateX(-120%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  animation: shine 2600ms linear infinite;
+}
+@keyframes shine { to { transform: rotate(18deg) translateX(120%); } }
+
+/* Animated underline on hover */
+.nav a::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: .35rem;
+  height: 2px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+  opacity: .9;
+}
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .ripple { animation: none; opacity: .2; }
+  .card.glossy::after { animation: none; }
+  .nav a::after { transition: none; }
+}
