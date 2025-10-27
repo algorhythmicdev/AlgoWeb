@@ -2,8 +2,15 @@
   import { Head } from '$lib/seo';
   import GalleryPreview from '$lib/components/GalleryPreview.svelte';
   import { ideonautixPreviews } from '$lib/assets';
-  const head = Head({ title:'Ideonautix', description:'Startup education & productivity toolkit.' });
-  const features = ['Pitch Assistant','Competitive Intelligence','Pomodoro Coach','Smart Standups','Revenue Dashboard'];
+
+  const head = Head({ title: 'Ideonautix', description: 'Startup education & productivity toolkit.' });
+  const features = ['Pitch Assistant', 'Competitive Intelligence', 'Pomodoro Coach', 'Smart Standups', 'Revenue Dashboard'];
+
+  const present = ideonautixPreviews().map((i) => ({ base: i.base, alt: i.base.split('/').pop() ?? 'Preview' }));
+  const gallery = present.length ? present : [
+    { base: null, alt: 'Preview 1' },
+    { base: null, alt: 'Preview 2' }
+  ];
 </script>
 
 <svelte:head>{@html head}</svelte:head>
@@ -12,7 +19,11 @@
   <h1>Ideonautix</h1>
   <p>Overview and mission in plain language. Built for students, founders, and teams.</p>
   <h2>Features</h2>
-  <ul>{#each features as f}<li>{f}</li>{/each}</ul>
+  <ul>
+    {#each features as f}
+      <li>{f}</li>
+    {/each}
+  </ul>
   <h2>Preview</h2>
-  <GalleryPreview items={ideonautixPreviews} />
+  <GalleryPreview items={gallery} />
 </main>
