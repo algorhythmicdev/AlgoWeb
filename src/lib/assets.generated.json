@@ -1,44 +1,66 @@
-[
-  {
-    "base": "/static/images/brand/logo-icon",
-    "files": [
-      "/static/images/brand/logo-icon.png"
-    ]
-  },
-  {
-    "base": "/static/images/brand/logo-main",
-    "files": [
-      "/static/images/brand/logo-main.png"
-    ]
-  },
-  {
-    "base": "/static/images/brand/logo-white",
-    "files": [
-      "/static/images/brand/logo-white.png"
-    ]
-  },
-  {
-    "base": "/static/images/founders/founder-nikita",
-    "files": [
-      "/static/images/founders/founder-nikita.png"
-    ]
-  },
-  {
-    "base": "/static/images/founders/founder-slaff",
-    "files": [
-      "/static/images/founders/founder-slaff.png"
-    ]
-  },
-  {
-    "base": "/static/images/products/ideonautix-icon",
-    "files": [
-      "/static/images/products/ideonautix-icon.png"
-    ]
-  },
-  {
-    "base": "/static/images/products/nodevoyage-icon",
-    "files": [
-      "/static/images/products/nodevoyage-icon.png"
-    ]
-  }
-]
+{
+  "images": [
+    {
+      "base": "/static/images/brand/logo-icon",
+      "files": [
+        "/static/images/brand/logo-icon.png"
+      ]
+    },
+    {
+      "base": "/static/images/brand/logo-main",
+      "files": [
+        "/static/images/brand/logo-main.png"
+      ]
+    },
+    {
+      "base": "/static/images/brand/logo-white",
+      "files": [
+        "/static/images/brand/logo-white.png"
+      ]
+    },
+    {
+      "base": "/static/images/founders/founder-nikita",
+      "files": [
+        "/static/images/founders/founder-nikita.png"
+      ]
+    },
+    {
+      "base": "/static/images/founders/founder-slaff",
+      "files": [
+        "/static/images/founders/founder-slaff.png"
+      ]
+    },
+    {
+      "base": "/static/images/products/ideonautix-icon",
+      "files": [
+        "/static/images/products/ideonautix-icon.png"
+      ]
+    },
+    {
+      "base": "/static/images/products/nodevoyage-icon",
+      "files": [
+        "/static/images/products/nodevoyage-icon.png"
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "base": "/static/videos/algorhythmics-promo",
+      "files": [
+        "/static/videos/algorhythmics-promo.webm"
+      ]
+    },
+    {
+      "base": "/static/videos/ideonautix-promo",
+      "files": [
+        "/static/videos/ideonautix-promo.webm"
+      ]
+    },
+    {
+      "base": "/static/videos/nodevoyage-promo",
+      "files": [
+        "/static/videos/nodevoyage-promo.webm"
+      ]
+    }
+  ]
+}

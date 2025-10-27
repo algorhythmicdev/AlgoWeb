@@ -8,5 +8,5 @@ export { default as Testimonials } from './Testimonials.svelte';
 export { default as Timeline } from './Timeline.svelte';
 export { default as GalleryPreview } from './GalleryPreview.svelte';
 export { default as FAQ } from './FAQ.svelte';
-export { default as VideoLightbox } from './VideoLightbox.svelte';
 export { default as CodeBlock } from './CodeBlock.svelte';
+export { default as VideoPlayer } from './VideoPlayer.svelte';
