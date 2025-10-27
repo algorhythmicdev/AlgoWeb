@@ -2,20 +2,29 @@ import gen from './assets.generated.json';
 
 type Item = { base: string; files: string[] };
 type Manifest = { images: Item[]; videos: Item[] };
-const m = gen as Manifest;
+const manifest = gen as Manifest;
+
+const stripStatic = (path: string) => path.replace(/^\/static/, '');
+const sanitizeItem = (item: Item): Item => ({
+  base: stripStatic(item.base),
+  files: item.files.map(stripStatic)
+});
+
+const images = manifest.images.map(sanitizeItem);
+const videos = manifest.videos.map(sanitizeItem);
 
 const byPrefix = (arr: Item[], prefix: string) => arr.filter(i => i.base.startsWith(prefix));
 
-export const partners = () => byPrefix(m.images, '/static/images/partners/');
-export const ideonautixPreviews = () => byPrefix(m.images, '/static/images/ideonautix/');
-export const nodevoyagePreviews = () => byPrefix(m.images, '/static/images/nodevoyage/');
+export const partners = () => byPrefix(images, '/images/partners/');
+export const ideonautixPreviews = () => byPrefix(images, '/images/ideonautix/');
+export const nodevoyagePreviews = () => byPrefix(images, '/images/nodevoyage/');
 
-function has(substr: string) {
+function videoBaseMatching(substr: string) {
   const s = substr.toLowerCase();
-  return m.videos.find(v => v.base.toLowerCase().includes(s)) ?? null;
+  return videos.find(v => v.base.toLowerCase().includes(s))?.base ?? null;
 }
 
 // Promo videos by fuzzy name match
-export const promoAlgorhythmics = () => has('algor');     // algorhythmics / algorithmics
-export const promoIdeonautix   = () => has('ideonaut');
-export const promoNodeVoyage   = () => has('nodevoy');
+export const promoAlgorhythmics = () => videoBaseMatching('algor');     // algorhythmics / algorithmics
+export const promoIdeonautix   = () => videoBaseMatching('ideonaut');
+export const promoNodeVoyage   = () => videoBaseMatching('nodevoy');
