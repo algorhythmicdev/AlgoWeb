@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
-  import { base } from '$app/paths';
-  const teamHref = base ? `${base}/team` : '/team';
+  import { base as appBase } from '$app/paths';
+  const teamHref = appBase ? `${appBase}/team` : '/team';
   onMount(() => goto(teamHref, { replaceState: true }));
 </script>
 <noscript>

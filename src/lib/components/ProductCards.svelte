@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   import { tilt } from '$lib/directives/tilt';
   import { reveal } from '$lib/directives/reveal';
   import { ripple } from '$lib/directives/ripple';
@@ -11,15 +11,15 @@
   const resolve = (href: string) => isExternal(href)
     ? href
     : href === '/'
-      ? base || '/'
-      : `${base}${href}`;
+      ? appBase || '/'
+      : `${appBase}${href}`;
 </script>
 
 <section class="section">
   <h2>Products</h2>
   <div class="grid">
     {#each products as p}
-      <a class="card glass glossy" href={resolve(p.href)} use:tilt use:reveal use:ripple>
+      <a class="card surface-2 control glass glossy" href={resolve(p.href)} use:tilt use:reveal use:ripple>
         <h3>{p.name}</h3>
         <p>{p.summary}</p>
       </a>

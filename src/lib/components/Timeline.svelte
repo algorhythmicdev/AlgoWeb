@@ -8,6 +8,6 @@
 <section class="section">
   <h2>Timeline</h2>
   <ol style="list-style:none;padding:0;display:grid;gap:.5rem">
-    {#each items as i}<li class="card" style="padding:.75rem"><strong>{i.date}</strong> — {i.text}</li>{/each}
+    {#each items as i}<li class="card surface-2 control" style="padding:.75rem"><strong>{i.date}</strong> — {i.text}</li>{/each}
   </ol>
 </section>

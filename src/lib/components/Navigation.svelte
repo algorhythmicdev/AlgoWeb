@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   import { page } from '$app/stores';
   const items = [
     { href: '/',            label: 'Home' },
@@ -14,9 +14,9 @@
   const resolve = (href: string) => isExternal(href)
     ? href
     : href === '/'
-      ? base || '/'
-      : `${base}${href}`;
-  const stripBase = (path: string) => base && path.startsWith(base) ? path.slice(base.length) || '/' : path || '/';
+      ? appBase || '/'
+      : `${appBase}${href}`;
+  const stripBase = (path: string) => appBase && path.startsWith(appBase) ? path.slice(appBase.length) || '/' : path || '/';
   $: current = stripBase($page.url.pathname).replace(/\/+$/,'') || '/';
 </script>
 

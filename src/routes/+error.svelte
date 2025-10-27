@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   export let status: number;
-  const homeHref = base || '/';
+  const homeHref = appBase || '/';
 </script>
 <main id="main" class="prose section">
   <h1>{status===404?'Page not found':'Something went wrong'}</h1>

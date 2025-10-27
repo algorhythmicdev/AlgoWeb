@@ -1,21 +1,161 @@
-/* TOKENS */
-:root {
-  --bg: #0a0a0c; --surface: #101116; --text: #e7e7ee; --text-sub: #b9b9c6; --border: rgba(255,255,255,.12);
-  --brand: #8b5cf6; --brand-2: #06b6d4; --brand-3: #22c55e;
-  --glass-bg: color-mix(in oklab, var(--surface) 92%, transparent); --glass-blur: 10px;
-  --dur-fast: 140ms; --dur: 200ms; --dur-slow: 360ms; --ease: cubic-bezier(.2,.7,.2,1);
-  --ring: 2px solid color-mix(in oklab, var(--brand) 85%, white 15%);
-  --hero-gradient: conic-gradient(from 120deg,
-      color-mix(in oklab, var(--brand) 35%, transparent),
-      color-mix(in oklab, var(--brand-2) 25%, transparent),
-      color-mix(in oklab, var(--brand-3) 20%, transparent));
+/* =========================================================
+   MODES, TOKENS & ELEVATIONS (AAA text, ≥3:1 non-text)
+   ---------------------------------------------------------
+   Elevations:
+   - --bg          : page background
+   - --bg-elev-1   : cards / shell panels
+   - --bg-elev-2   : sub-panels / alt sections
+   Typography:
+   - --text        : body text (AAA)
+   - --text-strong : headings / emphasis (AAA)
+   - --text-secondary : muted (still AAA in Dark; AA+ in Light)
+   Non-text:
+   - --divider     : hairline separators (can be <3:1)
+   - --control-border : interactive borders (≥3:1)
+   Focus:
+   - --focus-ring  : 3px high-contrast ring in HC modes
+   ========================================================= */
+
+/* ---------- LIGHT (default) ---------- */
+:root,
+html[data-theme="light"] {
+  /* Surfaces */
+  --bg:            #F5F7FB; /* Cloud */
+  --bg-elev-1:     #FFFFFF; /* Surface */
+  --bg-elev-2:     #E7EBF3; /* Mist */
+
+  /* Text */
+  --text:          #0A0D14; /* Ink (AAA on Cloud/Surface/Mist) */
+  --text-strong:   #1B2230; /* Slate (AAA) */
+  --text-secondary:#2C3446; /* Muted; darker than Slate to keep ≥AA/AAA */
+
+  /* Non-text (≥3:1 for controls) */
+  --divider:       #E7EBF3; /* hairline separators */
+  /* On white (#fff), 3:1 needs roughly <=#A7B1C0.
+     We'll split: control borders stronger; dividers can stay lighter */
+  --control-border:#9AA6B6; /* ≥3:1 vs #fff and #F5F7FB */
+
+  /* Brand (for beams / accents) */
+  --brand:   #8B5CF6;
+  --brand-2: #06B6D4;
+  --brand-3: #22C55E;
+
+  /* Effects */
+  --glass-tint: rgba(255,255,255,0.65);    /* Apple-style translucency */
+  --glass-stroke: color-mix(in lab, #000 10%, transparent);
+  --glass-blur: 12px;
+
+  /* Motion & focus */
+  --dur-fast: 140ms;
+  --dur:      200ms;
+  --dur-slow: 360ms;
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --focus-ring: 2px solid color-mix(in lab, var(--brand) 70%, black 10%);
 }
-html[data-theme="light"]{
-  --bg:#fbfbfc; --surface:#ffffff; --text:#0f1116; --text-sub:#353b48; --border: rgba(0,0,0,.12);
+
+/* ---------- DARK ---------- */
+html[data-theme="dark"] {
+  /* Surfaces */
+  --bg:            #0B0E13; /* Night */
+  --bg-elev-1:     #1A1D23; /* Graphite */
+  --bg-elev-2:     #161C28; /* sub-panel */
+
+  /* Text */
+  --text:          #F2F5F9; /* Snow (AAA) */
+  --text-strong:   #F2F5F9; /* strong = body in dark */
+  --text-secondary:#8B9299; /* Ash (target AAA on Night / AA+ on elev) */
+
+  /* Non-text (≥3:1 for controls) */
+  /* Light borders mixed from Snow so they clear 3:1 on Graphite */
+  --divider:       color-mix(in lab, #F2F5F9 16%, transparent);
+  --control-border:color-mix(in lab, #F2F5F9 35%, transparent);
+
+  /* Brand */
+  --brand:   #8B5CF6;
+  --brand-2: #06B6D4;
+  --brand-3: #22C55E;
+
+  /* Effects */
+  --glass-tint: rgba(20,22,28,0.55);
+  --glass-stroke: color-mix(in lab, #fff 12%, transparent);
+  --glass-blur: 14px;
+
+  /* Focus */
+  --focus-ring: 2px solid color-mix(in lab, #F2F5F9 80%, var(--brand) 20%);
 }
-html[data-theme="high-contrast"]{
-  --bg:#000; --surface:#000; --text:#fff; --text-sub:#eee; --border:#fff;
+
+/* ---------- HIGH-CONTRAST (two explicit variants) ---------- */
+/* High-contrast DARK (white on black) */
+html[data-theme="high-contrast-dark"] {
+  --bg:            #000000;
+  --bg-elev-1:     #000000; /* flatten depth */
+  --bg-elev-2:     #0F0F0F; /* slight separation */
+  --text:          #FFFFFF;
+  --text-strong:   #FFFFFF;
+  --text-secondary:#FFFFFF;
+  --divider:       #FFFFFF;
+  --control-border:#FFFFFF;
+
+  --glass-tint: transparent; /* disable translucency */
+  --glass-stroke: #FFFFFF;
+  --glass-blur: 0px;
+
+  --brand: #FFFFFF; --brand-2: #FFFFFF; --brand-3: #FFFFFF;
+  --focus-ring: 3px solid #FFFFFF;
 }
+
+/* High-contrast LIGHT (black on white) */
+html[data-theme="high-contrast-light"] {
+  --bg:            #FFFFFF;
+  --bg-elev-1:     #FFFFFF;
+  --bg-elev-2:     #F2F2F2;
+  --text:          #000000;
+  --text-strong:   #000000;
+  --text-secondary:#000000;
+  --divider:       #000000;
+  --control-border:#000000;
+
+  --glass-tint: transparent;
+  --glass-stroke: #000000;
+  --glass-blur: 0px;
+
+  --brand: #000000; --brand-2:#000000; --brand-3:#000000;
+  --focus-ring: 3px solid #000000;
+}
+
+/* ===== Elevation utilities (apply everywhere) ===== */
+body { background: var(--bg); color: var(--text); }
+
+.surface-0 { background: var(--bg); }
+.surface-1 { background: var(--bg-elev-1); }
+.surface-2 { background: var(--bg-elev-2); }
+
+/* Apple-style glass panels (respect mode) */
+.glass {
+  background: var(--glass-tint);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-stroke);
+  border-radius: 12px;
+}
+
+/* Text helpers */
+.text-strong   { color: var(--text-strong); }
+.text-secondary{ color: var(--text-secondary); }
+
+/* Non-text contrast: use control-border on interactive shells */
+.control {
+  border: 1px solid var(--control-border);
+  border-radius: 12px;
+}
+
+/* Dividers (hairline; can be lighter than 3:1) */
+.divider { height:1px; background: var(--divider); }
+
+/* Focus ring */
+:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+/* Keep your existing layout/nav/button rules below this line… */
 
 /* RESET + A11Y */
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}
@@ -122,21 +262,23 @@ html[data-theme="high-contrast"] .beam { opacity: .2; filter: none; }
 
 /* Scrim to guarantee AA/AAA contrast on text over beams */
 .scrim {
-  background: linear-gradient(to bottom,
-    color-mix(in oklab, #000 55%, transparent) 0%,
-    color-mix(in oklab, #000 35%, transparent) 40%,
-    transparent 100%);
-  padding: clamp(1rem, 2.5vw, 2rem);
-  border-radius: 12px;
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in lab, #000 55%, transparent) 0%,
+      color-mix(in lab, #000 35%, transparent) 40%,
+      transparent 100%
+    );
 }
 html[data-theme="light"] .scrim {
-  background: linear-gradient(to bottom,
-    color-mix(in oklab, #fff 75%, transparent) 0%,
-    color-mix(in oklab, #fff 55%, transparent) 40%,
-    transparent 100%);
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in lab, #fff 75%, transparent) 0%,
+      color-mix(in lab, #fff 55%, transparent) 40%,
+      transparent 100%
+    );
 }
-html[data-theme="high-contrast"] .scrim {
-  background: #000;
-  color: #fff;
-  outline: 2px solid currentColor;
-}
+/* In HC, scrim becomes solid for guaranteed contrast */
+html[data-theme="high-contrast-dark"] .scrim { background:#000; color:#fff; }
+html[data-theme="high-contrast-light"] .scrim { background:#fff; color:#000; }
