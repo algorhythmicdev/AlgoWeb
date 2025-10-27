@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   import { Head } from '$lib/seo';
   const head = Head({ title:'Consulting', description:'Practical automation, data workflows, training.' });
   const services=['Automation & workflow design','Data integration and reporting','Team training and playbooks'];
   const process=['Kickoff & scope','Prototype in days','Iterate with feedback','Handover & training'];
   let pilotSpots=3;
-  const contactHref = `${base}/contact`;
+  const contactHref = `${appBase}/contact`;
 </script>
 <svelte:head>{@html head}</svelte:head>
 

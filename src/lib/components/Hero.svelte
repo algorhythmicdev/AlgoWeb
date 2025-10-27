@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   import Halo from './Halo.svelte';
   import { ripple } from '$lib/directives/ripple';
   export let title='Let’s create something awesome';
@@ -9,8 +9,8 @@
   $: resolved = isExternal(ctaHref)
     ? ctaHref
     : ctaHref === '/'
-      ? base || '/'
-      : `${base}${ctaHref}`;
+      ? appBase || '/'
+      : `${appBase}${ctaHref}`;
 </script>
 
 <section class="section beam-wrap">

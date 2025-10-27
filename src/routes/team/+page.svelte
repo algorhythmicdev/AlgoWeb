@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   import { Head } from '$lib/seo';
   const head=Head({title:'Team',description:'Latvia-based team focused on practical AI.'});
-  const contactHref = `${base}/contact`;
+  const contactHref = `${appBase}/contact`;
 </script>
 <svelte:head>{@html head}</svelte:head>
 <main id="main" class="prose section">

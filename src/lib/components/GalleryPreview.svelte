@@ -7,8 +7,8 @@
 <section class="section">
   <div class="grid">
     {#each items as i}
-      <figure class="card glass glossy">
-        <AssetImage base={i.base} alt={i.alt} width={i.w ?? 1200} height={i.h ?? 750} />
+      <figure class="card surface-2 control glass glossy">
+        <AssetImage assetBase={i.base} alt={i.alt} width={i.w ?? 1200} height={i.h ?? 750} />
       </figure>
     {/each}
   </div>

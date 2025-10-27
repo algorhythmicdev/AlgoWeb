@@ -1,10 +1,9 @@
 <script>
+  import '$lib/styles/theme.css';
   import Navigation from '$lib/components/Navigation.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import '$lib/styles/theme.css';
-  import '$lib/styles/reading.css';
 </script>
 
-<div class="header"><div class="container"><Navigation /></div></div>
-<div class="container"><slot /></div>
+<div class="header surface-1 control"><div class="container"><Navigation /></div></div>
+<div class="container surface-0"><slot /></div>
 <Footer />

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { base as appBase } from '$app/paths';
   import { Head } from '$lib/seo';
   import Hero from '$lib/components/Hero.svelte';
   import ProductCards from '$lib/components/ProductCards.svelte';
@@ -11,7 +11,7 @@
   import { ripple } from '$lib/directives/ripple';
   import { promoAlgorhythmics } from '$lib/assets';
   const head = Head({ title:'Home', description:'AI consulting + practical tools: NodeVoyage and Ideonautix.' });
-  const contactHref = `${base}/contact`;
+  const contactHref = `${appBase}/contact`;
   const algVid = promoAlgorhythmics() ?? null;
 </script>
 
@@ -25,7 +25,7 @@
     <div class="beam beam--dark" aria-hidden="true"></div>
     <div class="scrim">
       <h2>See what Algorhythmics is about</h2>
-      <VideoPlayer item={algVid} label="Algorhythmics — promo" />
+      <VideoPlayer videoBase={algVid} label="Algorhythmics — promo" />
     </div>
   </section>
   <SectionDivider />
