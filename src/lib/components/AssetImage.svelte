@@ -9,18 +9,37 @@
   export let height = 750;
   export let radius = 12;
 
-  const bases = new Set((manifest as { base: string }[]).map((item) => item.base));
+  type Item = { base: string; files: string[] };
+  type Manifest = { images: Item[]; videos: Item[] };
+  const data = manifest as Manifest;
+  const items = new Map(data.images.map((item) => [item.base, item]));
   let loaded = false;
   const onLoad = () => (loaded = true);
 
-  const hasBase = typeof base === 'string' && bases.has(base);
+  const toPublicPath = (path: string | null) => {
+    if (!path) return null;
+    let stripped = path.replace(/^\/?static\//, '/');
+    if (!stripped.startsWith('/')) stripped = `/${stripped}`;
+    return `${basePath}${stripped}`;
+  };
+
+  const getItem = () => (typeof base === 'string' ? items.get(base) ?? null : null);
+
+  $: item = getItem();
+  $: webpSrc = toPublicPath(item?.files.find((f) => /\.webp$/i.test(f)) ?? null);
+  $: pngSrc = toPublicPath(item?.files.find((f) => /\.png$/i.test(f)) ?? null);
+  $: svgSrc = toPublicPath(item?.files.find((f) => /\.svg$/i.test(f)) ?? null);
+  $: imgSrc = pngSrc ?? webpSrc ?? svgSrc;
+  const hasBase = Boolean(imgSrc);
 </script>
 
 {#if hasBase}
   <picture class="ai-wrap" data-loaded={loaded}>
-    <source srcset={`${basePath}${base}.webp`} type="image/webp" />
+    {#if webpSrc}
+      <source srcset={webpSrc} type="image/webp" />
+    {/if}
     <img
-      src={`${basePath}${base}.png`}
+      src={imgSrc}
       alt={alt}
       width={width}
       height={height}

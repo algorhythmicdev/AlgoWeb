@@ -2,8 +2,8 @@
   "nodevoyage": {
     "id": "nodevoyage",
     "slug": "nodevoyage",
-    "icon": "/images/products/nodevoyage-icon.svg",
-    "hero": "/images/products/nodevoyage-hero.svg",
+    "iconBase": "/static/images/products/nodevoyage-icon",
+    "heroBase": null,
     "color": "#1351FF",
     "demoUrl": "https://nodevoyage.algorhythmics.dev/",
     "demoHost": "nodevoyage.algorhythmics.dev",
@@ -25,8 +25,8 @@
   "ideonautix": {
     "id": "ideonautix",
     "slug": "ideonautix",
-    "icon": "/images/products/ideonautix-icon.svg",
-    "hero": "/images/products/ideonautix-hero.svg",
+    "iconBase": "/static/images/products/ideonautix-icon",
+    "heroBase": null,
     "color": "#6A38FF",
     "demoUrl": "https://ideonautix.algorhythmics.dev/",
     "demoHost": "ideonautix.algorhythmics.dev",

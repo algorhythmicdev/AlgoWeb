@@ -18,3 +18,12 @@ This file lists the images expected by the UI. Only **present** files (under `st
 - Keep PNG + WebP pairs, same basename. Transparent PNG is preferred for logos.
 - After adding files, run: `node scripts/scan-assets.mjs`
 - The UI will automatically switch from placeholder to the real image when files appear.
+
+## Videos (WebM)
+- [x] /static/videos/algorhythmics-promo.webm
+- [x] /static/videos/ideonautix-promo.webm
+- [x] /static/videos/nodevoyage-promo.webm
+
+### Notes
+- File names can vary. The app matches by substring: "algor", "ideonaut", "nodevoy".
+- After adding videos, run: `node scripts/scan-assets.mjs`

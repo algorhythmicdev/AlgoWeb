@@ -13,10 +13,10 @@
       : `${base}${ctaHref}`;
 </script>
 
-<section class="section">
+<section class="section beam-wrap">
+  <div class="beam beam--dark" aria-hidden="true"></div>
   <Halo intensity={1.2}>
-    <div class="glass" style="padding:clamp(1rem,3vw,2rem);position:relative">
-      <div style="position:absolute;inset:-10% -10% -30% -10%;background:var(--hero-gradient);opacity:.18;filter:blur(80px);z-index:-2"></div>
+    <div class="glass scrim">
       <h1>{title}</h1>
       <p class="lead">{lead}</p>
       <p><a class="btn btn-primary" href={resolved} use:ripple>{ctaLabel}</a></p>
