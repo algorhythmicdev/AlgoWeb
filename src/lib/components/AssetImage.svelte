@@ -12,7 +12,15 @@
 
 {#if assetBase}
   <picture>
+    <!-- Most efficient first -->
     <source srcset={`${appBase}${assetBase}.webp`} type="image/webp" />
+    <!-- PNG (both cases) -->
+    <source srcset={`${appBase}${assetBase}.png`}  type="image/png" />
+    <source srcset={`${appBase}${assetBase}.PNG`}  type="image/png" />
+    <!-- JPEG (both cases) -->
+    <source srcset={`${appBase}${assetBase}.jpg`}  type="image/jpeg" />
+    <source srcset={`${appBase}${assetBase}.JPG`}  type="image/jpeg" />
+    <!-- Fallback (may 404 if only JPG exists; that's OK if <source> hits) -->
     <img
       src={`${appBase}${assetBase}.png`}
       alt={alt}

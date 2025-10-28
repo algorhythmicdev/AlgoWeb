@@ -11,7 +11,21 @@ const config = {
   kit: {
     adapter: adapter(),
     paths: { base: basePath },
-    prerender: { entries: ['*'] },
+    prerender: {
+      entries: ['*'],
+      handleHttpError: ({ status, path, referrer, referenceType }) => {
+        // Ignore 404s for case-variant asset extensions (e.g., .PNG, .JPG, .WEBM)
+        if (status === 404 && referenceType === 'linked') {
+          const lowerPath = path.toLowerCase();
+          if (lowerPath.endsWith('.png') || lowerPath.endsWith('.jpg') || 
+              lowerPath.endsWith('.jpeg') || lowerPath.endsWith('.webp') ||
+              lowerPath.endsWith('.webm')) {
+            return;
+          }
+        }
+        throw new Error(`${status} ${path}${referrer ? ` (linked from ${referrer})` : ''}`);
+      }
+    },
 
     alias: {
       '$lib': 'src/lib',

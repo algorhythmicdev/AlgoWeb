@@ -7,6 +7,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
+    "scrub": "node scripts/scrub-repo.mjs",
+    "prebuild": "node scripts/generate-present-assets.mjs",
     "build": "svelte-kit sync && vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
@@ -15,7 +17,8 @@
     "test": "vitest run",
     "i18n:check": "node scripts/check-translations.mjs",
     "test:watch": "vitest",
-    "ci:local": "node ./scripts/run-ci.mjs"
+    "ci:local": "node ./scripts/run-ci.mjs",
+    "gensitemap": "node scripts/generate-sitemap.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
