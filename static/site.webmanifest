@@ -1,0 +1,10 @@
+{
+  "name": "Algorhythmics",
+  "short_name": "Algo",
+  "icons": [
+    { "src": "/AlgoWeb/icons/favicon.svg", "sizes": "64x64", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "theme_color": "#0B0E13",
+  "background_color": "#0B0E13",
+  "display": "standalone"
+}
