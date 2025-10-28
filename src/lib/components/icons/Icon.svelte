@@ -18,7 +18,8 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
      width={size} height={size} fill="none" stroke="currentColor" stroke-width="1.75"
-     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+     style="display:inline-block;vertical-align:middle;margin-right:0.25rem">
   {#if name==='check'}
     <path d={paths.check}></path>
   {:else if name==='spark'}
@@ -28,6 +29,7 @@
   {:else if name==='map'}
     <path d={paths.map}></path>
   {:else if name==='clock'}
+    <circle cx="12" cy="12" r="10"></circle>
     <path d={paths.clock}></path>
   {:else if name==='shield'}
     <path d={paths.shield}></path>
@@ -38,6 +40,7 @@
   {:else if name==='gear'}
     <path d={paths.gear}></path>
   {:else}
+    <circle cx="12" cy="12" r="10"></circle>
     <path d={paths.globe}></path>
   {/if}
 </svg>
