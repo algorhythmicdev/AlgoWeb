@@ -7,11 +7,13 @@
   const head = Head({ title: 'Ideonautix', description: 'Startup education & productivity toolkit.' });
   const features = ['Pitch Assistant', 'Competitive Intelligence', 'Pomodoro Coach', 'Smart Standups', 'Revenue Dashboard'];
 
-  const present = ideonautixPreviews().map((i) => ({ assetBase: i.base, alt: i.base.split('/').pop() ?? 'Preview' }));
-  const gallery = present.length ? present : [
-    { assetBase: null, alt: 'Preview 1' },
-    { assetBase: null, alt: 'Preview 2' }
-  ];
+  const present = ideonautixPreviews().map((i) => ({ base: i.base, alt: i.base.split('/').pop() ?? 'Preview' }));
+  const gallery = present.length
+    ? present
+    : [
+        { base: null, alt: 'Preview 1' },
+        { base: null, alt: 'Preview 2' }
+      ];
   const vid = promoIdeonautix() ?? null;
 </script>
 

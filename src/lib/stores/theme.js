@@ -23,6 +23,7 @@ const applyAndSet = (/** @type {Theme} */ value) => {
 };
 
 let initialized = false;
+/** @type {(() => void) | null} */
 let cleanup = null;
 
 if (browser && !initialized) {
