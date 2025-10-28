@@ -19,10 +19,13 @@
     "help_center": "Help center",
     "resources_panel_label": "Resources"
   },
-  "language": { "label": "Language" },
+  "language": {
+    "label": "Language"
+  },
   "education": {
     "title": "Education",
-    "description": "We’re preparing practical, easy-to-run AI programs for schools and universities. This page grows with real content."
+    "description": "We’re preparing practical, easy-to-run AI programs for schools and universities. This page grows with real content.",
+    "lede": "Programs for schools and universities in Latvia."
   },
   "hero": {
     "title": "Accessible AI for travel, startups, and schools.",
@@ -39,7 +42,7 @@
     "item_3_title": "Consulting",
     "item_3_body": "Pilot sprints that pair strategy, build, and training so teams stay confident.",
     "item_4_title": "Community",
-  "item_4_body": "Guides, newsletters, and meetups for families, founders, and educators."
+    "item_4_body": "Guides, newsletters, and meetups for families, founders, and educators."
   },
   "offer": {
     "title": "What we offer",
@@ -63,6 +66,14 @@
     "education_bullet_3": "Partnership model with LIAA for events, curriculum input, and long-term measurement."
   },
   "home": {
+    "hero_title": "Let's create something useful",
+    "hero_lead": "We build practical AI tools and help teams adopt them quickly.",
+    "products": "Products",
+    "promo": "Algorhythmics — promo",
+    "what_we_do": "What we do",
+    "testimonials": "What people say",
+    "timeline": "Timeline",
+    "cta": "Let's talk",
     "brand": {
       "section_title": "Our brand story",
       "section_copy": "Everything starts with honest execution, transparent updates, and measurable impact.",
@@ -111,11 +122,11 @@
           "item_1": "WebSockets and SSE for collaboration, plus testing from unit to accessibility checks.",
           "item_2": "CI pipelines mirror signage QA discipline with scenario scripts and visual diffing."
         },
-      "security": {
-        "title": "Security & privacy",
-        "item_1": "GDPR-first, encryption everywhere, role-based access, and monitoring for every release."
-      }
-    },
+        "security": {
+          "title": "Security & privacy",
+          "item_1": "GDPR-first, encryption everywhere, role-based access, and monitoring for every release."
+        }
+      },
       "vision": {
         "eyebrow": "Vision & goals",
         "title": "Where we are heading next",
@@ -365,7 +376,9 @@
     },
     "cta": {
       "secondary_status": "Coming soon"
-    }
+    },
+    "title": "Consulting",
+    "lede": "We make useful things that save time. We set up small, safe prototypes, then grow them with your team."
   },
   "language_switcher": {
     "group_label": "Language",
@@ -532,12 +545,27 @@
       "copy": "If you are exploring NodeVoyage for team retreats or student programmes, take a look at Ideonautix—our startup OS that keeps creative projects on track. Both platforms share the same inclusive design system.",
       "primary": "Explore Ideonautix",
       "secondary": "Talk to our team"
-    }
+    },
+    "title": "NodeVoyage",
+    "promo": "Promo video",
+    "preview": "Preview"
   },
   "ideonautix": {
     "hero": {
       "demo_cta": "Live demo (coming soon)",
       "demo_status": "Coming soon"
-    }
+    },
+    "title": "Ideonautix",
+    "promo": "Promo video",
+    "features": "What's inside",
+    "preview": "Preview"
+  },
+  "team": {
+    "title": "Team",
+    "lede": "Based in Daugavpils, Latvia. We build accessible AI tools and explain how to use them in plain language."
+  },
+  "contact": {
+    "title": "Contact",
+    "lede": "Tell us what you want to achieve. We'll reply with a simple plan."
   }
 }
