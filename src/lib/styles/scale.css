@@ -1,0 +1,26 @@
+/* Spacing scale (8px baseline) */
+:root {
+  --space-0: 0;
+  --space-1: .25rem;  /* 4  */
+  --space-2: .5rem;   /* 8  */
+  --space-3: .75rem;  /* 12 */
+  --space-4: 1rem;    /* 16 */
+  --space-5: 1.5rem;  /* 24 */
+  --space-6: 2rem;    /* 32 */
+  --space-7: 3rem;    /* 48 */
+  --space-8: 4rem;    /* 64 */
+}
+
+.rhythm > * + * { margin-top: var(--space-4); }
+.rhythm-tight > * + * { margin-top: var(--space-2); }
+.rhythm-wide  > * + * { margin-top: var(--space-5); }
+
+/* Headings rhythm */
+.h-stack > * { margin: 0; }
+.h-stack > * + * { margin-top: .35em; }
+
+/* Helpers */
+.mt-0{margin-top:0}.mt-2{margin-top:var(--space-2)}.mt-4{margin-top:var(--space-4)}.mt-6{margin-top:var(--space-6)}
+.mb-0{margin-bottom:0}.mb-2{margin-bottom:var(--space-2)}.mb-4{margin-bottom:var(--space-4)}.mb-6{margin-bottom:var(--space-6)}
+.py-4{padding-block:var(--space-4)}.py-6{padding-block:var(--space-6)}
+.gap-2{gap:var(--space-2)}.gap-4{gap:var(--space-4)}.gap-6{gap:var(--space-6)}
