@@ -20,7 +20,10 @@ const MINIMAL_KEYS = [
 
 const PARTIAL_LOCALE_KEYS = new Map([
   ['lv.json', MINIMAL_KEYS],
-  ['ru.json', MINIMAL_KEYS]
+  ['ru.json', MINIMAL_KEYS],
+  ['uk.json', []],  // New language - fallback to EN
+  ['fr.json', []],  // New language - fallback to EN
+  ['es.json', []]   // New language - fallback to EN
 ]);
 
 /**
@@ -129,7 +132,8 @@ async function extractUsedTranslationKeys() {
   const patterns = [
     /(?:\$_|\b_)\(\s*['"]([^'"$]+)['"]\s*/g,
     /\$json\?\.\(\s*['"]([^'"$]+)['"]\s*\)/g,
-    /\$json\?\.\(\s*`([^`$]+)`\s*\)/g
+    /\$json\?\.\(\s*`([^`$]+)`\s*\)/g,
+    /\bt\(\s*['"]([^'"$]+)['"]\s*/g  // Added for new i18n system
   ];
 
   const files = await fg(['src/**/*.{svelte,js,ts}'], {
