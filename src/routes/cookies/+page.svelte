@@ -1,6 +1,7 @@
 <script lang="ts">
   import { autoslug } from '$lib/directives/autoslug';
   import TableOfContents from '$lib/components/TableOfContents.svelte';
+  import StickyControls from '$lib/components/StickyControls.svelte';
   let contentEl: HTMLElement | null = null;
 </script>
 
@@ -20,6 +21,7 @@
 
     <div class="rhythm-tight">
       <TableOfContents container={contentEl} levels={['h2','h3']} />
+      <StickyControls />
     </div>
   </div>
 </main>

@@ -1,51 +1,63 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
-  import VideoPlayer from '$lib/components/VideoPlayer.svelte';
+  import { i18n } from '$lib/i18n';
+  $: t = $i18n;
+
+  import Icon from '$lib/components/icons/Icon.svelte';
+  import Card from '$lib/components/Card.svelte';
   import AssetImage from '$lib/components/AssetImage.svelte';
+  import VideoPlayer from '$lib/components/VideoPlayer.svelte';
   import { nodevoyagePreviews, videoNodeVoyage } from '$lib/presentAssets';
-  const previews = nodevoyagePreviews; // string[]
-  const vid = videoNodeVoyage;         // string | null
+  const previews = nodevoyagePreviews;
+  const vid = videoNodeVoyage;
   const contactHref = `${appBase}/contact`;
 </script>
 
 <svelte:head>
-  <title>NodeVoyage — Plan trips with Nodi</title>
-  <meta name="description" content="AI-assisted trip planning. Keep ideas, routes, and people in sync." />
+  <title>{t('nodevoyage.title')}</title>
 </svelte:head>
 
-<main id="main" class="prose">
-  <h1 class="text-strong">NodeVoyage</h1>
-  <p>Plan trips with Nodi. Collect places, set routes, and keep your crew in sync. The goal: less time fiddling, more time doing.</p>
+<main id="main" class="prose rhythm">
+  <h1 class="text-strong">{t('nodevoyage.title')}</h1>
+  <p>Plan trips with Nodi. Collect places, set routes, and keep your crew in sync.</p>
 
-  <section class="section beam-wrap">
-    <div class="beam beam--dark" aria-hidden="true"></div>
-    <h2 class="text-strong">Promo video</h2>
-    <VideoPlayer videoBase={vid} label="NodeVoyage — promo" />
+  <section class="section grid" style="grid-template-columns: minmax(0,1.5fr) minmax(260px,1fr); gap: var(--space-6)">
+    <Card as="section" heading={t('nodevoyage.features')}>
+      <ul class="rhythm-tight" style="list-style:none;padding:0;margin:0">
+        <li><Icon name="map" /> Smart suggestions and route planning.</li>
+        <li><Icon name="users" /> Collaboration and shared notes.</li>
+        <li><Icon name="clock" /> Timing and day-by-day view.</li>
+        <li><Icon name="shield" /> Offline-friendly and privacy-aware.</li>
+        <li><Icon name="globe" /> Sustainability hints and awareness.</li>
+      </ul>
+    </Card>
+
+    <Card as="aside" heading={t('nodevoyage.promo')}>
+      <VideoPlayer videoBase={vid} label="NodeVoyage — promo" decorative={true}/>
+    </Card>
   </section>
 
   <section class="section">
-    <h2 class="text-strong">Core features</h2>
-    <ul>
-      <li><strong>Suggestions:</strong> Nodi helps you pick places and routes.</li>
-      <li><strong>Route planning:</strong> map stops, timing, and notes in one place.</li>
-      <li><strong>Collaboration:</strong> invite friends, split tasks, keep it tidy.</li>
-      <li><strong>Offline-friendly:</strong> keep the plan handy when you’re moving.</li>
-    </ul>
-  </section>
-
-  <section class="section">
-    <h2 class="text-strong">Preview</h2>
+    <h2 class="text-strong">{t('nodevoyage.preview')}</h2>
     <div class="grid">
       {#if previews.length === 0}
-        <div class="card surface-2 control"><AssetImage assetBase={null} alt="Preview 1" /></div>
-        <div class="card surface-2 control"><AssetImage assetBase={null} alt="Preview 2" /></div>
+        <Card><AssetImage assetBase={null} alt="Preview 1" /></Card>
+        <Card><AssetImage assetBase={null} alt="Preview 2" /></Card>
       {:else}
         {#each previews as b}
-          <div class="card surface-2 control"><AssetImage assetBase={b} alt={b.split('/').pop()||'Preview'} /></div>
+          <Card><AssetImage assetBase={b} alt={b.split('/').pop()||'Preview'} /></Card>
         {/each}
       {/if}
     </div>
   </section>
 
-  <p><a class="btn btn-primary" href={contactHref}>Ask about NodeVoyage</a></p>
+  <section class="section grid">
+    <Card heading="Who it helps">
+      <ul><li>Solo travelers who like tidy plans.</li><li>Families and small groups.</li><li>School trips with clear schedules.</li></ul>
+    </Card>
+    <Card heading="How to start">
+      <ol><li>Add three places for your first day.</li><li>Let Nodi suggest the order.</li><li>Share the plan and iterate.</li></ol>
+      <p><a class="btn btn-primary" href={contactHref}>Ask about NodeVoyage</a></p>
+    </Card>
+  </section>
 </main>
