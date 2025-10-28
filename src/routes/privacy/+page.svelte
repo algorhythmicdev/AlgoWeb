@@ -1,17 +1,26 @@
-<script lang="ts">
-  import { Head } from '$lib/seo';
-  const head = Head({ title:'Privacy', description:'How we handle your data in plain language.' });
-  const points = [
-    'We collect analytics-only traffic insights with no personal data.',
-    'Emails you send are stored in a secure, access-controlled inbox.',
-    'You can request data removal at any time by emailing privacy@algoweb.studio.'
-  ];
-</script>
-<svelte:head>{@html head}</svelte:head>
+<svelte:head>
+  <title>Privacy Policy — Algorhythmics</title>
+  <meta name="description" content="Plain-language privacy policy for this static website." />
+</svelte:head>
 
 <main id="main" class="prose section">
-  <h1>Privacy</h1>
-  <p>We keep things simple. The site runs statically with no tracking pixels or third-party scripts.</p>
-  <h2>Key points</h2><ul>{#each points as point}<li>{point}</li>{/each}</ul>
-  <p>Questions? Email <a href="mailto:privacy@algoweb.studio">privacy@algoweb.studio</a>.</p>
+  <h1 class="text-strong">Privacy Policy</h1>
+  <p>This is a static website. We do not collect personal data through forms on this site. If you email us, we will see the information you send and use it only to reply.</p>
+
+  <h2 class="text-strong">What we collect</h2>
+  <ul>
+    <li>Basic technical logs from the hosting platform (GitHub Pages) for reliability and security.</li>
+    <li>Emails you voluntarily send to us.</li>
+  </ul>
+
+  <h2 class="text-strong">What we do not do</h2>
+  <ul>
+    <li>No user accounts or trackers here.</li>
+    <li>No sale of data.</li>
+  </ul>
+
+  <h2 class="text-strong">Your choices</h2>
+  <p>To remove or correct information you shared by email, message us and we’ll handle it.</p>
+
+  <p>Last updated: 2025</p>
 </main>
