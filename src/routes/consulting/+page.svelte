@@ -1,19 +1,42 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
-  import { Head } from '$lib/seo';
-  const head = Head({ title:'Consulting', description:'Practical automation, data workflows, training.' });
-  const services=['Automation & workflow design','Data integration and reporting','Team training and playbooks'];
-  const process=['Kickoff & scope','Prototype in days','Iterate with feedback','Handover & training'];
-  let pilotSpots=3;
   const contactHref = `${appBase}/contact`;
 </script>
-<svelte:head>{@html head}</svelte:head>
+
+<svelte:head>
+  <title>Consulting — Practical AI for teams</title>
+  <meta name="description" content="Automation, data flows, training, and quick prototypes. Clear outcomes in plain language." />
+</svelte:head>
 
 <main id="main" class="prose section">
-  <h1>Consulting</h1><p>We keep it practical and fast. Clear outcomes, shipped quickly.</p>
-  <h2>Services</h2><ul>{#each services as s}<li>{s}</li>{/each}</ul>
-  <h2>Process</h2><ol>{#each process as p}<li>{p}</li>{/each}</ol>
-  <aside class="glass" style="padding:1rem;border-radius:12px">
-    <strong>Pilot applications open.</strong><p>Spots left: {pilotSpots}</p><p><a class="btn btn-primary" href={contactHref}>Apply for a pilot</a></p>
+  <h1 class="text-strong">Consulting</h1>
+  <p>We make useful things that save time. We set up small, safe prototypes, then grow them with your team.</p>
+
+  <h2 class="text-strong">Services</h2>
+  <ul>
+    <li><strong>Automation:</strong> connect tools, cut manual steps, reduce errors.</li>
+    <li><strong>Data & reporting:</strong> simple dashboards and alerts that people actually use.</li>
+    <li><strong>Training:</strong> short sessions and playbooks; your team keeps the gains.</li>
+  </ul>
+
+  <h2 class="text-strong">Process</h2>
+  <ol>
+    <li><strong>Kickoff:</strong> what to improve and what you already have.</li>
+    <li><strong>Prototype:</strong> a first working version in days.</li>
+    <li><strong>Refine:</strong> adjust with feedback and basic metrics.</li>
+    <li><strong>Handover:</strong> docs, training, and a simple plan to maintain.</li>
+  </ol>
+
+  <h2 class="text-strong">Outcomes</h2>
+  <ul>
+    <li>Fewer manual steps and fewer errors.</li>
+    <li>Faster reporting and decisions.</li>
+    <li>Clear ownership and easy maintenance.</li>
+  </ul>
+
+  <aside class="card surface-2 control" style="padding:1rem;border-radius:12px">
+    <strong>Pilot applications open.</strong>
+    <p>We take a small number of pilots every month. If you want in, reach out.</p>
+    <p><a class="btn btn-primary" href={contactHref}>Apply for a pilot</a></p>
   </aside>
 </main>
