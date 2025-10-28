@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  
   export let container: HTMLElement | null = null;
   export let levels: ('h2'|'h3')[] = ['h2','h3'];
   let items: { id: string; text: string; level: 'h2'|'h3' }[] = [];
@@ -15,7 +17,15 @@
       });
     });
   }
-  $: refresh();
+  
+  $: if (container) {
+    refresh();
+  }
+  
+  onMount(() => {
+    // Give time for autoslug directive to run
+    setTimeout(refresh, 100);
+  });
 </script>
 
 {#if items.length > 1}
