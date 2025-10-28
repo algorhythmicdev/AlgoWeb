@@ -1,121 +1,41 @@
+import { writable, derived } from 'svelte/store';
 import { browser } from '$app/environment';
-import {
-  init as i18nInit,
-  register,
-  getLocaleFromNavigator,
-  locale,
-  waitLocale,
-  _ as translate,
-  t,
-  number,
-  date,
-  time
-} from 'svelte-i18n';
+import en from '$lib/translations/en.json';
+import lv from '$lib/translations/lv.json';
+import ru from '$lib/translations/ru.json';
+import uk from '$lib/translations/uk.json';
+import fr from '$lib/translations/fr.json';
+import es from '$lib/translations/es.json';
 
-const SUPPORTED_LOCALES = ['en', 'lv', 'ru'] as const;
-const COOKIE_NAME = 'locale';
+export const LANGS = ['en','lv','ru','uk','fr','es'] as const;
+export type Lang = typeof LANGS[number];
 
-type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+const dict: Record<Lang, any> = { en, lv, ru, uk, fr, es };
 
-let initialised = false;
+function getInitialLang(): Lang {
+  if (!browser) return 'en';
+  const stored = (localStorage.getItem('lang') as Lang) || 'en';
+  return (LANGS as readonly string[]).includes(stored) ? stored as Lang : 'en';
+}
 
-register('en', () => import('$lib/translations/en.json'));
-register('lv', () => import('$lib/translations/lv.json'));
-register('ru', () => import('$lib/translations/ru.json'));
-
-i18nInit({
-  fallbackLocale: 'en',
-  initialLocale: 'en'
+export const lang = writable<Lang>(getInitialLang());
+lang.subscribe((l) => {
+  if (!browser) return;
+  document.documentElement.lang = l;
+  localStorage.setItem('lang', l);
 });
 
-if (!browser) {
-  locale.set('en');
+function deepGet(obj: any, path: string) {
+  return path.split('.').reduce((acc, key) => (acc && key in acc ? acc[key] : undefined), obj);
 }
 
-function readLocaleCookie(): string | null {
-  if (!browser || typeof document === 'undefined') {
-    return null;
-  }
-
-  try {
-    return (
-      document.cookie
-        .split('; ')
-        .find((entry) => entry.startsWith(`${COOKIE_NAME}=`))
-        ?.split('=')[1] ?? null
-    );
-  } catch {
-    return null;
-  }
-}
-
-function writeLocaleCookie(value: string, days = 365) {
-  if (!browser || typeof document === 'undefined') {
-    return;
-  }
-
-  const date = new Date();
-  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${COOKIE_NAME}=${value};expires=${date.toUTCString()};path=/`;
-}
-
-function resolveStartLocale(defaultLocale?: SupportedLocale | string): SupportedLocale {
-  if (defaultLocale && SUPPORTED_LOCALES.includes(defaultLocale as SupportedLocale)) {
-    return defaultLocale as SupportedLocale;
-  }
-
-  const cookieLocale = readLocaleCookie();
-  if (cookieLocale && SUPPORTED_LOCALES.includes(cookieLocale as SupportedLocale)) {
-    return cookieLocale as SupportedLocale;
-  }
-
-  const navigatorLocale = getLocaleFromNavigator();
-  if (navigatorLocale) {
-    const normalised = navigatorLocale.split('-')[0]?.toLowerCase();
-    if (normalised && SUPPORTED_LOCALES.includes(normalised as SupportedLocale)) {
-      return normalised as SupportedLocale;
-    }
-  }
-
-  return 'en';
-}
-
-export async function initI18n(defaultLocale: SupportedLocale | string = 'en'): Promise<void> {
-  if (initialised && browser) {
-    return;
-  }
-
-  const start = resolveStartLocale(defaultLocale);
-
-  i18nInit({
-    fallbackLocale: 'en',
-    initialLocale: start
-  });
-
-  locale.set(start);
-  writeLocaleCookie(start);
-
-  await waitLocale();
-
-  if (browser) {
-    initialised = true;
-  }
-}
-
-export function setLocale(next: SupportedLocale): void {
-  if (!SUPPORTED_LOCALES.includes(next)) {
-    return;
-  }
-
-  if (browser) {
-    writeLocaleCookie(next);
-  }
-
-  locale.set(next);
-}
-
-export function getSupportedLocales(): SupportedLocale[] {
-  return [...SUPPORTED_LOCALES];
-}
-
-export { locale, translate as _, t, number, date, time, waitLocale };
+// reactive translator function
+export const i18n = derived(lang, ($lang) => {
+  return (key: string): string => {
+    const inActive = deepGet(dict[$lang], key);
+    if (typeof inActive === 'string') return inActive;
+    const inEn = deepGet(dict.en, key);
+    if (typeof inEn === 'string') return inEn;
+    return key; // last-resort: show key
+  };
+});

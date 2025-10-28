@@ -1,14 +1,17 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
   import { page } from '$app/stores';
+  import { i18n } from '$lib/i18n';
+  $: t = $i18n;
+
   const items = [
-    { href: '/',            label: 'Home' },
-    { href: '/team',        label: 'Team' },
-    { href: '/ideonautix',  label: 'Ideonautix' },
-    { href: '/nodevoyage',  label: 'NodeVoyage' },
-    { href: '/consulting',  label: 'Consulting' },
-    { href: '/contact',     label: 'Contact' },
-    { href: '/education',   label: 'Education' }
+    { href:'/', key:'nav.home' },
+    { href:'/team', key:'nav.team' },
+    { href:'/ideonautix', key:'nav.ideonautix' },
+    { href:'/nodevoyage', key:'nav.nodevoyage' },
+    { href:'/consulting', key:'nav.consulting' },
+    { href:'/contact', key:'nav.contact' },
+    { href:'/education', key:'nav.education' }
   ];
   const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
   const resolve = (href: string) => isExternal(href)
@@ -22,8 +25,8 @@
 
 <nav aria-label="Primary">
   <ul role="list" class="nav">
-    {#each items as item}
-      <li><a href={resolve(item.href)} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a></li>
+    {#each items as i}
+      <li><a href={resolve(i.href)} aria-current={current===i.href?'page':undefined}>{t(i.key)}</a></li>
     {/each}
   </ul>
 </nav>
