@@ -1,0 +1,57 @@
+:root {
+  --container: 1200px;
+  --radius-xl: 20px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --shadow-1: 0 8px 30px rgba(0,0,0,.08);
+  --gap-1: 8px;  --gap-2: 12px;  --gap-3: 16px;  --gap-4: 24px;  --gap-6: 32px;  --gap-8: 48px;
+}
+
+.page {
+  padding-inline: 20px;
+}
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+.grid {
+  display: grid;
+  gap: var(--gap-6);
+}
+.grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+@media (max-width: 1024px){ .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px){ .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-1);
+  padding: var(--gap-6);
+}
+
+/* Nav: remove bullets and fix alignment */
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 18px; align-items: center; }
+nav a { text-decoration: none; color: var(--text); padding: 8px 10px; border-radius: 10px; }
+nav a[aria-current="page"] { outline: 3px solid var(--border); }
+
+/* Media helpers */
+.media-cover { width: 100%; height: 100%; object-fit: cover; }
+.media-contain { width: 100%; height: 100%; object-fit: contain; }
+.ratio-16x9 { aspect-ratio: 16/9; }
+.ratio-1x1  { aspect-ratio: 1/1; }
+.ratio-4x3  { aspect-ratio: 4/3; }
+
+/* Frosted card (light blur, but keep HC readable) */
+@media (prefers-color-scheme: light) {
+  .frost { backdrop-filter: saturate(1.2) blur(8px); background: color-mix(in srgb, var(--bg-elev-1) 85%, transparent); }
+}
+@media (prefers-contrast: more) {
+  .frost { backdrop-filter: none; }
+}
+
+/* Video: hide controls everywhere (we don't render them) */
+video { display:block; width:100%; border-radius: var(--radius-xl); }
+video::-webkit-media-controls { display:none !important; }

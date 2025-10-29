@@ -61,7 +61,7 @@
         </Card>
 
         <Card as="aside" heading={t('ideonautix.promo')}>
-          <VideoPlayer src={vid} label="Ideonautix — promo" decorative={true} />
+          <VideoPlayer srcWebm={vid} />
         </Card>
       </div>
     </div>

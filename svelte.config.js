@@ -1,8 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-const dev = process.env.NODE_ENV === 'development';
-const basePath = dev ? '' : process.env.BASE_PATH || '/AlgoWeb';
+const dev = process.argv.includes('dev');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,7 +9,9 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    paths: { base: basePath },
+    paths: {
+      base: dev ? '' : '/AlgoWeb'
+    },
     prerender: {
       entries: ['*'],
       handleHttpError: ({ status, path, referrer, referenceType }) => {

@@ -59,7 +59,7 @@
   --shadow-1: 0 4px 20px rgba(10, 13, 20, 0.06);
   --shadow-2: 0 8px 30px rgba(10, 13, 20, 0.08);
 
-  --text-on-primary: #F5F7FB;
+  --text-on-primary: var(--bg);
   --divider: #E7EBF3;
   --control-border: #CBD4E3;
   --glass-bg: color-mix(in srgb, var(--bg-elev-1) 85%, transparent);
@@ -78,13 +78,13 @@
   --primary: #8A6BFF;
   --accent-1: #10E3D6;
   --accent-2: #FFD339;
-  --border: rgba(242, 245, 249, 0.18);
+  --border: #2A2F3A;
   --focus: #8A6BFF;
   --shadow-1: 0 6px 24px rgba(0, 0, 0, 0.35);
   --shadow-2: 0 10px 40px rgba(0, 0, 0, 0.45);
 
   --text-on-primary: #0B0E13;
-  --divider: rgba(242, 245, 249, 0.18);
+  --divider: #2A2F3A;
   --control-border: rgba(242, 245, 249, 0.28);
   --glass-bg: color-mix(in srgb, var(--bg-elev-1) 72%, transparent);
   --glass-stroke: color-mix(in srgb, rgba(242, 245, 249, 0.45) 60%, transparent);
