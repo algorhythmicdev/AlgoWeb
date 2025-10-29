@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-  import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
+  import ThemeToggle from '$lib/components/theme-toggle.svelte';
+  import LanguageSwitcher from '$lib/components/language-switcher.svelte';
 </script>
 
 <div class="sticky-dock" aria-label="Display controls">

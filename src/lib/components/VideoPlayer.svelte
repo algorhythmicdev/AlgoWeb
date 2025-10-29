@@ -1,12 +1,12 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
   import SvgPlaceholder from '$lib/components/SvgPlaceholder.svelte';
-
-  export let videoBase: string | null = null; // '/videos/xxx' (no extension), under static/
+  export let videoBase: string | null = null; // '/videos/foo' no extension
   export let label = 'Promotional video';
   export let width = 1200;
   export let height = 675;
-  export let decorative = false; // if true, hide from a11y tree
+  export let decorative = false;
+  export let posterBase: string | null = null; // '/images/foo-poster' optional
 </script>
 
 {#if videoBase}
@@ -20,10 +20,12 @@
       loop
       playsinline
       preload="metadata"
+      poster={posterBase ? `${appBase}${posterBase}.png` : undefined}
       aria-label={decorative ? undefined : label}
       aria-hidden={decorative ? 'true' : 'false'}
     >
       <source src={`${appBase}${videoBase}.webm`} type="video/webm" />
+      <source src={`${appBase}${videoBase}.WEBM`} type="video/webm" />
     </video>
   </figure>
 {:else}
@@ -31,8 +33,5 @@
 {/if}
 
 <style>
-  .video{
-    display:block;width:100%;height:auto;border:1px solid var(--glass-stroke);
-    border-radius:12px;background:#000
-  }
+  .video{display:block;width:100%;height:auto;border:1px solid var(--glass-stroke);border-radius:12px;background:#000}
 </style>
