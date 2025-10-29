@@ -21,6 +21,17 @@ type StrapiRelation<T> = {
   }>>;
 } | Nullable<Array<Nullable<{ id?: string | number | null; attributes?: Nullable<T> }>>>;
 
+type StrapiSingleRelation<T> =
+  | {
+      data?: Nullable<{
+        attributes?: Nullable<T>;
+      }>;
+    }
+  | Nullable<{
+      attributes?: Nullable<T>;
+    }>
+  | Nullable<T>;
+
 type StrapiAuthorAttributes = {
   name?: string | null;
   bio?: string | null;
@@ -45,6 +56,27 @@ type StrapiPostEntry = {
   attributes?: Nullable<StrapiPostAttributes>;
 };
 
+type StrapiModuleAttributes = {
+  slug?: string | null;
+  title?: string | null;
+  summary?: string | null;
+  description?: string | null;
+  content?: string | null;
+  publishDate?: string | null;
+  status?: string | null;
+  heroImage?: StrapiMedia;
+  mediaAttachments?:
+    | StrapiRelation<StrapiMediaAttributes>
+    | Nullable<Array<Nullable<StrapiMediaAttributes>>>;
+  category?: StrapiSingleRelation<{ name?: string | null }>;
+  tags?: StrapiRelation<{ name?: string | null }>;
+};
+
+type StrapiModuleEntry = {
+  id?: string | number | null;
+  attributes?: Nullable<StrapiModuleAttributes>;
+};
+
 export type NormalisedMedia = {
   url: string;
   alt: string;
@@ -66,6 +98,21 @@ export type NormalisedPost = {
   featuredImage?: NormalisedMedia;
   author?: NormalisedAuthor;
   categories: string[];
+  tags: string[];
+};
+
+export type NormalisedModule = {
+  id: string | number;
+  slug: string;
+  title: string;
+  summary?: string;
+  description?: string;
+  content?: string;
+  publishDate?: string;
+  status?: 'draft' | 'published';
+  heroImage?: NormalisedMedia;
+  mediaAttachments: NormalisedMedia[];
+  category?: string;
   tags: string[];
 };
 
@@ -108,6 +155,67 @@ const normaliseNameCollection = (relation: StrapiRelation<{ name?: string | null
     normalised.push(name.trim());
   }
   return normalised;
+};
+
+const normaliseStatus = (status: unknown): 'draft' | 'published' | undefined => {
+  if (status === 'draft' || status === 'published') {
+    return status;
+  }
+  return undefined;
+};
+
+const extractSingleRelationAttributes = <T>(relation: StrapiSingleRelation<T>): Nullable<T> => {
+  if (!relation) return null;
+
+  if (typeof relation !== 'object') {
+    return relation as Nullable<T>;
+  }
+
+  if ('data' in relation) {
+    const data = (relation as { data?: Nullable<{ attributes?: Nullable<T> }> }).data ?? null;
+    return data?.attributes ?? null;
+  }
+
+  if ('attributes' in relation) {
+    return (relation as { attributes?: Nullable<T> }).attributes ?? null;
+  }
+
+  return relation as Nullable<T>;
+};
+
+const collectRelationAttributes = <T>(
+  relation: StrapiRelation<T> | Nullable<Array<Nullable<T>>>
+): Array<Nullable<T>> => {
+  if (Array.isArray(relation)) {
+    return relation;
+  }
+
+  const entries = normaliseRelation<T>(
+    relation as {
+      data?: Array<{
+        id?: string | number;
+        attributes?: Nullable<T>;
+      } | null>;
+    }
+  );
+
+  return entries.map((entry) => entry.attributes ?? null);
+};
+
+const normaliseMediaCollection = (
+  relation: StrapiRelation<StrapiMediaAttributes> | Nullable<Array<Nullable<StrapiMediaAttributes>>>
+): NormalisedMedia[] => {
+  const attributesList = collectRelationAttributes<StrapiMediaAttributes>(relation);
+  const items: NormalisedMedia[] = [];
+
+  for (const attributes of attributesList) {
+    const media = normaliseMedia(attributes ?? null);
+    if (media) {
+      items.push(media);
+    }
+  }
+
+  return items;
 };
 
 const normaliseAuthor = (attributes: Nullable<StrapiAuthorAttributes>): NormalisedAuthor | undefined => {
@@ -155,3 +263,59 @@ export const normalisePost = (entry: unknown): NormalisedPost | null => {
 };
 
 export type { StrapiPostEntry };
+
+export const normaliseModule = (entry: unknown): NormalisedModule | null => {
+  if (!entry || typeof entry !== 'object') return null;
+  const record = entry as StrapiModuleEntry;
+  const attributes = record.attributes ?? null;
+  if (!attributes || typeof attributes !== 'object') return null;
+
+  const slug = attributes.slug;
+  const title = attributes.title;
+  if (!isNonEmptyString(slug) || !isNonEmptyString(title)) return null;
+
+  const summary = isNonEmptyString(attributes.summary) ? attributes.summary : undefined;
+  const description = isNonEmptyString(attributes.description) ? attributes.description : undefined;
+  const content = isNonEmptyString(attributes.content) ? attributes.content : undefined;
+  const publishDate = isNonEmptyString(attributes.publishDate) ? attributes.publishDate : undefined;
+  const status = normaliseStatus(attributes.status);
+
+  const categoryAttributes = extractSingleRelationAttributes<{ name?: string | null }>(attributes.category ?? null);
+  const category = isNonEmptyString(categoryAttributes?.name) ? categoryAttributes.name.trim() : undefined;
+
+  return {
+    id: record.id ?? slug,
+    slug,
+    title,
+    summary,
+    description,
+    content,
+    publishDate,
+    status,
+    heroImage: normaliseMedia(attributes.heroImage ?? null),
+    mediaAttachments: normaliseMediaCollection(attributes.mediaAttachments ?? null),
+    category,
+    tags: normaliseNameCollection(attributes.tags ?? null)
+  };
+};
+
+const mapCollection = <T>(collection: unknown, normaliser: (entry: unknown) => T | null): T[] => {
+  const source = Array.isArray(collection)
+    ? collection
+    : typeof collection === 'object' && collection !== null && 'data' in (collection as Record<string, unknown>)
+      ? ((collection as { data?: unknown[] }).data ?? [])
+      : [];
+
+  const items: T[] = [];
+  for (const entry of source ?? []) {
+    const normalised = normaliser(entry);
+    if (normalised) {
+      items.push(normalised);
+    }
+  }
+  return items;
+};
+
+export const normalisePostCollection = (collection: unknown): NormalisedPost[] => mapCollection(collection, normalisePost);
+
+export const normaliseModuleCollection = (collection: unknown): NormalisedModule[] => mapCollection(collection, normaliseModule);
