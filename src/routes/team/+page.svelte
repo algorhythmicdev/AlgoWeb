@@ -14,7 +14,7 @@
 
   <div class="grid cols-2" style="margin-top:24px">
     <article class="card grid cols-2">
-      <AssetImage src="/images/founders/founder-nikita.png" alt="Nikita Jurtaevs" ratio="1x1" className="ratio-1x1" />
+      <AssetImage src="/images/founders/founder-nikita.png" alt="Nikita Jurtaevs" ratio="1x1" />
       <div>
         <h2>Nikita Jurtaevs — CEO & Product</h2>
         <ul>
@@ -26,7 +26,7 @@
     </article>
 
     <article class="card grid cols-2">
-      <AssetImage src="/images/founders/founder-slaff.png" alt={'Vjaceslavs "Slaff" Trosins'} ratio="1x1" className="ratio-1x1" />
+      <AssetImage src="/images/founders/founder-slaff.png" alt={'Vjaceslavs "Slaff" Trosins'} ratio="1x1" />
       <div>
         <h2>Vjaceslavs "Slaff" Trosins — CTO</h2>
         <ul>
