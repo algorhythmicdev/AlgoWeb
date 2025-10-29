@@ -1,9 +1,11 @@
 <script lang="ts">
+  export let status: number | undefined = undefined;
   import { base as appBase } from '$app/paths';
-  export let status: number;
   const homeHref = appBase || '/';
 </script>
-<main id="main" class="prose section">
-  <h1>{status===404?'Page not found':'Something went wrong'}</h1>
-  <p><a class="btn" href={homeHref}>Go home</a></p>
+
+<main class="container section prose">
+  <h1 class="text-strong">{status || 404}</h1>
+  <p>That page doesn't live here anymore.</p>
+  <p><a class="btn btn-primary" href={homeHref}>Go to Home</a></p>
 </main>

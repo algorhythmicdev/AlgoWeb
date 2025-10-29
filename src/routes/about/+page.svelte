@@ -1,11 +1,14 @@
-<script>
-  import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
+<script lang="ts">
   import { base as appBase } from '$app/paths';
   const teamHref = `${appBase}/team`;
-  onMount(() => goto(teamHref, { replaceState: true }));
 </script>
-<noscript>
+
+<svelte:head>
   <meta http-equiv="refresh" content={`0;url=${teamHref}`} />
-  <p>Moved to <a href={teamHref}>team</a>.</p>
-</noscript>
+</svelte:head>
+
+<main id="main" class="container section prose">
+  <h1 class="text-strong">Moved</h1>
+  <p>This page has moved to <a href={teamHref}>Team</a>.</p>
+  <p><a class="btn btn-primary" href={teamHref}>Go to Team</a></p>
+</main>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
   import AssetImage from '$lib/components/AssetImage.svelte';
-  import { partners } from '$lib/assets';
+  import { partners } from '$lib/presentAssets';
 
   const nav = [
     { href: '/', label: 'Home' },
@@ -22,7 +22,6 @@
   const resolve = (href: string) =>
     isExternal(href) ? href : href === '/' ? appBase || '/' : `${appBase}${href}`;
 
-  const partnerItems = partners();
 </script>
 
 <footer class="section surface-1 control" aria-label="Site footer">
@@ -38,12 +37,12 @@
     <div class="divider" style="margin:.75rem 0"></div>
 
     <div style="display:flex;gap:1rem;align-items:center;margin:1rem 0;">
-      {#if partnerItems.length === 0}
+      {#if partners.length === 0}
         <div class="card surface-2 control" style="padding:.5rem 1rem;border-radius:8px">LIAA</div>
         <div class="card surface-2 control" style="padding:.5rem 1rem;border-radius:8px">Reclame Fabriek</div>
       {:else}
-        {#each partnerItems as p}
-          <AssetImage assetBase={p.base} alt={p.base.split('/').pop() || 'Partner'} width={160} height={40} radius={6} />
+        {#each partners as p}
+          <AssetImage assetBase={p} alt={p.split('/').pop() || 'Partner'} width={160} height={40} radius={6} />
         {/each}
       {/if}
     </div>
