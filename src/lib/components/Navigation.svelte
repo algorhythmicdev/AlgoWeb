@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { base as appBase } from '$app/paths';
+  import { base } from '$app/paths';
   import { page } from '$app/stores';
   import { i18n } from '$lib/i18n';
   import BrandMark from '$lib/components/BrandMark.svelte';
+  import LanguageSwitcher from '$lib/components/language-switcher.svelte';
+  import ThemeToggle from '$lib/components/theme-toggle.svelte';
   $: t = $i18n;
 
   const items = [
@@ -14,21 +16,23 @@
     { href:'/contact', key:'nav.contact' },
     { href:'/education', key:'nav.education' }
   ];
-  const resolve = (href: string) => href === '/' ? (appBase || '/') : `${appBase}${href}`;
-  const stripBase = (path: string) => appBase && path.startsWith(appBase) ? path.slice(appBase.length) || '/' : path || '/';
+  const resolve = (href: string) => href === '/' ? (base || '/') : `${base}${href}`;
+  const stripBase = (path: string) => base && path.startsWith(base) ? path.slice(base.length) || '/' : path || '/';
   $: current = stripBase($page.url.pathname).replace(/\/+$/,'') || '/';
 </script>
 
 <div class="site-nav-wrap">
   <BrandMark />
-  <nav class="site-nav" aria-label="Primary">
-    <ul class="nav-list" role="list">
+  <nav class="container page" aria-label="Primary">
+    <ul>
       {#each items as i}
-        <li>
-          <a href={resolve(i.href)} aria-current={current===i.href?'page':undefined}>{t(i.key)}</a>
-        </li>
+        <li><a href={resolve(i.href)} aria-current={current===i.href?'page':undefined}>{t(i.key)}</a></li>
       {/each}
     </ul>
+    <div class="controls">
+      <LanguageSwitcher />
+      <ThemeToggle />
+    </div>
   </nav>
 </div>
 
@@ -36,24 +40,13 @@
   .site-nav-wrap{
     display:flex;
     align-items:center;
+    justify-content: space-between;
+    width: 100%;
     gap:1rem;
   }
-  .site-nav{ background: transparent; }
-  .nav-list{
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .controls {
     display: flex;
-    flex-wrap: wrap;
-    gap: .875rem 1.25rem;
-  }
-  .nav-list a{
-    text-decoration: none;
-    color: var(--text-secondary, var(--text));
-    font-weight: 500;
-  }
-  .nav-list a[aria-current="page"]{
-    font-weight: 600;
-    color: var(--text-strong, var(--text));
+    gap: 0.5rem;
+    align-items: center;
   }
 </style>

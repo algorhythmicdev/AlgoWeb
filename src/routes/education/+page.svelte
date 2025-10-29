@@ -1,26 +1,25 @@
 <script lang="ts">
-  import { base as appBase } from '$app/paths';
-  const contactHref = `${appBase}/contact`;
+  import { base } from '$app/paths';
+  const contactHref = `${base}/contact`;
 </script>
 
 <svelte:head>
   <title>Education — Algorhythmics</title>
-  <meta name="description" content="Practical AI education programs for Latvia. Clear lessons, safe tools, simple projects." />
+  <meta name="description" content="Short, practical AI programs for Latvian schools and universities." />
 </svelte:head>
 
 <main id="main">
-  <section class="section">
-    <div class="container stack">
-      <h1 class="text-strong">Education</h1>
-      <p class="text-secondary">We design short, practical AI programs for schools and universities in Latvia. Clear lessons, safe tools, and simple projects you can actually run.</p>
-
-      <h2 class="text-strong">Program examples</h2>
-      <ul class="stack">
-        <li><strong>AI basics for students:</strong> how it works, where it’s useful, what to avoid.</li>
-        <li><strong>Product thinking:</strong> turn a real problem into a small prototype.</li>
-        <li><strong>Data skills:</strong> collecting, cleaning, and making sense of information.</li>
-      </ul>
-      <p class="text-secondary">This page will grow as programs roll out. For collaboration, go to <a href={contactHref}>Contact</a>.</p>
-    </div>
-  </section>
+  <section class="page container">
+  <div class="card">
+    <h1>Education</h1>
+    <p>Short, practical AI programs for Latvian schools and universities. Clear lessons, safe tools, projects you can run.</p>
+    <h2>Program examples</h2>
+    <ul>
+      <li>AI basics for students: how it works, where it's useful, and what to avoid.</li>
+      <li>Product thinking: turn a real problem into a small prototype.</li>
+      <li>Data skills: collecting, cleaning, and making sense of information.</li>
+    </ul>
+    <p>To collaborate, go to <a href={contactHref}>Contact</a>.</p>
+  </div>
+</section>
 </main>

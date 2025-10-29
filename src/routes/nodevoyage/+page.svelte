@@ -67,7 +67,7 @@
         </Card>
 
         <Card as="aside" heading={t('nodevoyage.promo')}>
-          <VideoPlayer src={vid} label="NodeVoyage — promo" decorative={true} />
+          <VideoPlayer srcWebm={vid} />
         </Card>
       </div>
     </div>
