@@ -175,3 +175,34 @@
   --gradient-mesh-3: var(--ai-cyber-1);
   --gradient-mesh-4: var(--ai-matrix-1);
 }
+
+/* === Utility Classes === */
+
+/* Theme-colored headings */
+.heading-neural { color: var(--ai-neural-1); }
+.heading-quantum { color: var(--ai-quantum-1); }
+.heading-cyber { color: var(--ai-cyber-1); }
+.heading-matrix { color: var(--ai-matrix-1); }
+.heading-coral { color: var(--ai-coral-1); }
+
+/* Form styles */
+.form-input {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--control-border);
+  background: var(--bg-elev-1);
+  color: var(--text);
+  transition: border-color var(--anim-fast, 200ms);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.form-error {
+  color: var(--ai-coral-1);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
