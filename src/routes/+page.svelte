@@ -1,99 +1,82 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
-  import { i18n } from '$lib/i18n';
-  $: t = $i18n;
-
-  import VideoPlayer from '$lib/components/VideoPlayer.svelte';
-  import AssetImage from '$lib/components/AssetImage.svelte';
   import Card from '$lib/components/Card.svelte';
-  import { videoAlgorhythmics, productIcons } from '$lib/presentAssets';
-  const algVid = videoAlgorhythmics; // string | null
-  const ixIcon  = productIcons.find(p => /ideonautix[-_]?icon$/i.test(p))   || '/images/products/ideonautix-icon';
-  const nvIcon  = productIcons.find(p => /nodevoyage[-_]?icon$/i.test(p))   || '/images/products/nodevoyage-icon';
+  import AssetImage from '$lib/components/AssetImage.svelte';
+  import VideoPlayer from '$lib/components/VideoPlayer.svelte';
+  import { productIcons, videoAlgorhythmics } from '$lib/presentAssets';
+
   const contactHref = `${appBase}/contact`;
   const ideonautixHref = `${appBase}/ideonautix`;
   const nodevoyageHref = `${appBase}/nodevoyage`;
   const consultingHref = `${appBase}/consulting`;
   const educationHref = `${appBase}/education`;
+
+  const findAsset = (needles: string[]) =>
+    productIcons.find((path) =>
+      needles.some((n) => path.toLowerCase().includes(n.toLowerCase()))
+    ) || null;
+
+  const iconIdeonautix = findAsset(['ideonautix', 'ix']);
+  const iconNodeVoyage = findAsset(['nodevoyage', 'nodi', 'nv']);
 </script>
 
 <svelte:head>
   <title>Algorhythmics</title>
-  <meta name="description" content="Practical AI tools, consulting, and education—built in Latvia." />
+  <meta name="description" content="Useful AI products, consulting, and education programs from Latvia." />
 </svelte:head>
 
 <main id="main" class="prose rhythm">
-
-  <section class="section hero-gradient hero-halo" style="position:relative">
-    <div class="container" style="padding: clamp(3rem, 6vw, 6rem) 0;">
-      <div class="frosted card" style="max-width: 820px; margin: 0 auto; text-align:center; padding: clamp(2.5rem, 6vw, 3.5rem);">
-        <h1 class="text-strong" style="margin:0 0 .5rem">{t('home.hero_title')}</h1>
-        <p class="text-secondary" style="margin:0 0 1.5rem">{t('home.hero_lead')}</p>
-        <a class="btn btn-primary" href={contactHref}>{t('home.cta')}</a>
+  <section class="section hero-gradient" style="position:relative">
+    <div class="container">
+      <div class="card frosted" style="max-width:880px;margin:0 auto;text-align:center;padding:2rem;">
+        <h1 class="text-strong" style="margin:0 0 .5rem">Let’s create something useful</h1>
+        <p class="text-secondary" style="margin:0 0 1rem">We build practical AI tools and help teams adopt them quickly.</p>
+        <a class="btn btn-primary" href={contactHref}>Let’s talk</a>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container" style="display:grid; gap: var(--space-5, 2rem);">
-      <div style="text-align:center;">
-        <h2 class="text-strong" style="margin-bottom:.5rem">{t('home.products')}</h2>
-        <p class="text-secondary" style="margin:0 auto; max-width: 52ch;">
-          Practical tools built in public with partners who need them today.
-        </p>
-      </div>
-      <div class="grid" style="gap: var(--space-5, 2rem);">
-        <Card as="a" elevation={1} className="rhythm-tight" href={ideonautixHref}>
-          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
-            <AssetImage assetBase={ixIcon} alt="Ideonautix icon" width={44} height={44} radius={12} />
-            <h3 class="text-strong" style="margin:0">Ideonautix</h3>
-          </div>
-          <p class="text-secondary" style="margin:0 0 .75rem;">
-            Startup education & productivity toolkit.
-          </p>
-          <ul class="text-secondary" style="margin:0; padding-left:1.1rem;">
-            <li>Pitch Assistant</li>
-            <li>Competitive Intelligence</li>
-            <li>Pomodoro Coach</li>
+    <div class="container grid-2">
+      <Card heading="Ideonautix">
+        <div class="grid-2" style="align-items:center;">
+          <AssetImage src={iconIdeonautix} alt="Ideonautix" ratio="1 / 1" fit="contain" />
+          <ul class="stack">
+            <li>Pitch Assistant, Standups, Focus Coach, Intel</li>
+            <li>Clean UI, six languages, AAA text contrast</li>
+            <li>Simple exports and short learning curve</li>
           </ul>
-        </Card>
-        <Card as="a" elevation={1} className="rhythm-tight" href={nodevoyageHref}>
-          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
-            <AssetImage assetBase={nvIcon} alt="NodeVoyage icon" width={44} height={44} radius={12} />
-            <h3 class="text-strong" style="margin:0">NodeVoyage</h3>
-          </div>
-          <p class="text-secondary" style="margin:0 0 .75rem;">
-            AI-assisted trip planning with Nodi.
-          </p>
-          <ul class="text-secondary" style="margin:0; padding-left:1.1rem;">
-            <li>Smart suggestions</li>
-            <li>Route planning</li>
-            <li>Collaboration</li>
+        </div>
+        <a class="btn" href={ideonautixHref} style="margin-top:var(--space-4);width:fit-content">Explore Ideonautix</a>
+      </Card>
+
+      <Card heading="NodeVoyage">
+        <div class="grid-2" style="align-items:center;">
+          <AssetImage src={iconNodeVoyage} alt="NodeVoyage" ratio="1 / 1" fit="contain" />
+          <ul class="stack">
+            <li>Map + timeline planning with Nodi helper</li>
+            <li>Real-time edits, budget & eco drawers</li>
+            <li>On-trip capture: camera, voice, translate</li>
           </ul>
-        </Card>
-      </div>
+        </div>
+        <a class="btn" href={nodevoyageHref} style="margin-top:var(--space-4);width:fit-content">See NodeVoyage</a>
+      </Card>
     </div>
   </section>
 
   <section class="section" style="background: var(--bg-elev-2);">
-    <div class="container" style="display:grid; gap: var(--space-5, 2rem);">
-      <div style="text-align:center;">
-        <h2 class="text-strong" style="margin-bottom:.5rem">{t('home.what_we_do')}</h2>
-        <p class="text-secondary" style="margin:0 auto; max-width: 56ch;">
-          We pair practical automation with education so teams learn while they ship.
-        </p>
+    <div class="container stack" style="text-align:center;">
+      <div class="stack" style="margin:0 auto;max-width:56ch;">
+        <h2 class="text-strong" style="margin:0">What we do</h2>
+        <p class="text-secondary" style="margin:0">Practical automation and adoption support so teams learn while they ship.</p>
       </div>
-      <div class="grid" style="gap: var(--space-5, 2rem);">
-        <Card elevation={2} className="rhythm-tight" heading="Consulting">
-          <p class="text-secondary">
-            Automation, data flows, and training. Clear outcomes, shipped fast.
-          </p>
+      <div class="grid-2">
+        <Card heading="Consulting">
+          <p class="text-secondary">Automation, data workflows, and training with clear outcomes.</p>
           <a class="btn" href={consultingHref}>Learn more</a>
         </Card>
-        <Card elevation={2} className="rhythm-tight" heading="Education">
-          <p class="text-secondary">
-            Plain-language AI programs for Latvian schools and universities.
-          </p>
+        <Card heading="Education">
+          <p class="text-secondary">Plain-language AI programs for Latvian schools and universities.</p>
           <a class="btn" href={educationHref}>Programs</a>
         </Card>
       </div>
@@ -101,24 +84,24 @@
   </section>
 
   <section class="section">
-    <div class="container" style="display:grid; gap: var(--space-5, 2rem);">
-      <h2 class="text-strong" style="margin-bottom:0; text-align:center;">{t('home.promo')}</h2>
+    <div class="container stack" style="text-align:center;">
+      <h2 class="text-strong" style="margin:0">Product preview</h2>
       <Card elevation={2} className="rhythm-tight" as="section">
-        <VideoPlayer videoBase={algVid} label={t('home.promo')} />
+        <VideoPlayer src={videoAlgorhythmics} ratio="16 / 9" />
       </Card>
     </div>
   </section>
 
   <section class="section">
-    <div class="container" style="display:grid; gap: var(--space-5, 2rem);">
-      <h2 class="text-strong" style="margin-bottom:0; text-align:center;">{t('home.testimonials')}</h2>
-      <div class="grid" style="gap: var(--space-4, 1.5rem);">
-        <Card as="blockquote" elevation={2} className="rhythm-tight">
-          <p class="text-secondary" style="margin:0 0 .75rem;">"Clear plan, shipped fast. We finally see results."</p>
+    <div class="container stack" style="text-align:center;">
+      <h2 class="text-strong" style="margin:0">Testimonials</h2>
+      <div class="grid-2">
+        <Card as="blockquote" className="rhythm-tight">
+          <p class="text-secondary" style="margin:0 0 .75rem;">“Clear plan, shipped fast. We finally see results.”</p>
           <footer class="text-strong">— Program lead</footer>
         </Card>
-        <Card as="blockquote" elevation={2} className="rhythm-tight">
-          <p class="text-secondary" style="margin:0 0 .75rem;">"They explain things simply and deliver the parts that matter."</p>
+        <Card as="blockquote" className="rhythm-tight">
+          <p class="text-secondary" style="margin:0 0 .75rem;">“They explain things simply and deliver the parts that matter.”</p>
           <footer class="text-strong">— Founder</footer>
         </Card>
       </div>
@@ -126,13 +109,13 @@
   </section>
 
   <section class="section">
-    <div class="container" style="display:grid; gap: var(--space-4, 1.5rem);">
-      <h2 class="text-strong" style="margin-bottom:0; text-align:center;">{t('home.timeline')}</h2>
-      <div class="grid" style="gap: var(--space-4, 1.5rem);">
-        <Card elevation={2} className="rhythm-tight" heading="2024–2025">
+    <div class="container stack" style="text-align:center;">
+      <h2 class="text-strong" style="margin:0">Timeline</h2>
+      <div class="grid-2">
+        <Card className="rhythm-tight" heading="2024–2025">
           <p class="text-secondary" style="margin:0;">Core vision and prototypes.</p>
         </Card>
-        <Card elevation={2} className="rhythm-tight" heading="2025">
+        <Card className="rhythm-tight" heading="2025">
           <p class="text-secondary" style="margin:0;">Public website and product previews.</p>
         </Card>
       </div>
@@ -140,6 +123,6 @@
   </section>
 
   <section class="section" style="text-align:center;">
-    <a class="btn btn-primary" href={contactHref}>{t('home.cta')}</a>
+    <a class="btn btn-primary" href={contactHref}>Let’s talk</a>
   </section>
 </main>

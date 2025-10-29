@@ -1,6 +1,7 @@
 <script>
   import '$lib/styles/theme.css';
   import '$lib/styles/scale.css';
+  import '$lib/styles/reading.css';
   import Navigation from '$lib/components/Navigation.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import ThemeToggle from '$lib/components/theme-toggle.svelte';
@@ -17,5 +18,7 @@
   </div>
 </div>
 
-<div class="container surface-0"><slot /></div>
+<main class="surface-0">
+  <slot />
+</main>
 <Footer />

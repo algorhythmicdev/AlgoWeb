@@ -32,34 +32,43 @@
   <meta name="description" content="Get in touch about consulting, Ideonautix, NodeVoyage, or education." />
 </svelte:head>
 
-<main id="main" class="prose section">
-  <h1 class="text-strong">Contact</h1>
-  <p>Tell us what you want to achieve. We’ll reply with a simple plan.</p>
+<main id="main">
+  <section class="section">
+    <div class="container stack prose">
+      <h1 class="text-strong">Contact</h1>
+      <p>Tell us what you want to achieve. We’ll reply with a simple plan.</p>
 
-  {#if resultMsg}<p aria-live="polite">{resultMsg}</p>{/if}
+      {#if resultMsg}<p aria-live="polite">{resultMsg}</p>{/if}
 
-  <form on:submit|preventDefault={submit} novalidate class="surface-2 control" style="padding:1rem;border-radius:12px">
-    <label for="intent">I’m contacting you about</label>
-    <select id="intent" bind:value={intent}>
-      <option value="consulting">Consulting</option>
-      <option value="ideonautix">Ideonautix</option>
-      <option value="nodevoyage">NodeVoyage</option>
-      <option value="education">Education</option>
-      <option value="other">Other</option>
-    </select>
+      <form
+        on:submit|preventDefault={submit}
+        novalidate
+        class="surface-2 control stack"
+        style="padding:var(--space-4);border-radius:12px"
+      >
+        <label for="intent">I’m contacting you about</label>
+        <select id="intent" bind:value={intent}>
+          <option value="consulting">Consulting</option>
+          <option value="ideonautix">Ideonautix</option>
+          <option value="nodevoyage">NodeVoyage</option>
+          <option value="education">Education</option>
+          <option value="other">Other</option>
+        </select>
 
-    <label for="name">Name</label>
-    <input id="name" bind:value={name} aria-invalid={!!errors.name} />
-    {#if errors.name}<div role="status">{errors.name}</div>{/if}
+        <label for="name">Name</label>
+        <input id="name" bind:value={name} aria-invalid={!!errors.name} />
+        {#if errors.name}<div role="status">{errors.name}</div>{/if}
 
-    <label for="email">Email</label>
-    <input id="email" type="email" bind:value={email} aria-invalid={!!errors.email} />
-    {#if errors.email}<div role="status">{errors.email}</div>{/if}
+        <label for="email">Email</label>
+        <input id="email" type="email" bind:value={email} aria-invalid={!!errors.email} />
+        {#if errors.email}<div role="status">{errors.email}</div>{/if}
 
-    <label for="message">Message</label>
-    <textarea id="message" rows="6" bind:value={message} aria-invalid={!!errors.message}></textarea>
-    {#if errors.message}<div role="status">{errors.message}</div>{/if}
+        <label for="message">Message</label>
+        <textarea id="message" rows="6" bind:value={message} aria-invalid={!!errors.message}></textarea>
+        {#if errors.message}<div role="status">{errors.message}</div>{/if}
 
-    <button class="btn btn-primary" type="submit">Send</button>
-  </form>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
 </main>
