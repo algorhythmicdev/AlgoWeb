@@ -21,6 +21,30 @@
   <h1 class="text-strong">{t('nodevoyage.title')}</h1>
   <p>Plan trips with Nodi. Collect places, set routes, and keep your crew in sync.</p>
 
+  <section class="section grid">
+    <Card heading="Web planning workspace">
+      <ul>
+        <li>Three-pane layout: Timeline • Map • Nodi assistant.</li>
+        <li>Node types: Stay / Activity / Food / Transport / Emergency.</li>
+        <li>Drawers: Budget, Eco (CO₂ estimate), Version history.</li>
+      </ul>
+    </Card>
+    <Card heading="Mobile on-trip">
+      <ul>
+        <li>Tabs: Home / Trip / Community / Profile.</li>
+        <li>Quick Capture: Camera / Translate / Voice — attach to nodes.</li>
+        <li>Nodi pill: hands-free assistant, six languages.</li>
+      </ul>
+    </Card>
+    <Card heading="MVP expectations">
+      <ul>
+        <li>Map↔Timeline sync and live route updates.</li>
+        <li>Export: ICS calendar & PDF itinerary.</li>
+        <li>Collaboration: presence, comments, share.</li>
+      </ul>
+    </Card>
+  </section>
+
   <section class="section grid" style="grid-template-columns: minmax(0,1.5fr) minmax(260px,1fr); gap: var(--space-6)">
     <Card as="section" heading={t('nodevoyage.features')}>
       <ul class="rhythm-tight" style="list-style:none;padding:0;margin:0">

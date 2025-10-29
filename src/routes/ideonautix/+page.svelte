@@ -21,6 +21,24 @@
   <h1 class="text-strong">{t('ideonautix.title')}</h1>
   <p>Startup education and productivity toolkit. Clear steps, short lessons, and practical templates.</p>
 
+  <section class="section grid">
+    <Card heading="MVP++ Snapshot">
+      <ul>
+        <li>Frontend: SvelteKit + TypeScript, a11y AAA, i18n (EN/LV/RU baseline).</li>
+        <li>Mobile: PWA + Capacitor; offline-first via IndexedDB (Dexie).</li>
+        <li>Backend (narrative only on website): Fastify, Postgres/Prisma, Redis/BullMQ, S3 store.</li>
+        <li>AI: Gemini on Vertex for text/multimodal; text-embedding-004 for memory.</li>
+      </ul>
+    </Card>
+    <Card heading="Near-term modules">
+      <ul>
+        <li>Pomodoro Coach — adaptive focus sessions.</li>
+        <li>Pitch Assistant — outline, slide aid, rehearsal notes.</li>
+        <li>Competitive Intelligence — watchlist + brief.</li>
+      </ul>
+    </Card>
+  </section>
+
   <section class="section grid" style="grid-template-columns: minmax(0,1.5fr) minmax(260px,1fr); gap: var(--space-6)">
     <Card as="section" heading={t('ideonautix.features')}>
       <ul class="rhythm-tight" style="list-style:none;padding:0;margin:0">

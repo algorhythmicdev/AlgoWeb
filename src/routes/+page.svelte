@@ -4,8 +4,11 @@
   $: t = $i18n;
 
   import VideoPlayer from '$lib/components/VideoPlayer.svelte';
-  import { videoAlgorhythmics } from '$lib/presentAssets';
+  import AssetImage from '$lib/components/AssetImage.svelte';
+  import { videoAlgorhythmics, productIcons } from '$lib/presentAssets';
   const algVid = videoAlgorhythmics; // string | null
+  const ixIcon  = productIcons.find(p => /ideonautix[-_]?icon$/i.test(p))   || '/images/products/ideonautix-icon';
+  const nvIcon  = productIcons.find(p => /nodevoyage[-_]?icon$/i.test(p))   || '/images/products/nodevoyage-icon';
 </script>
 
 <svelte:head>
@@ -32,14 +35,20 @@
     <h2 class="text-strong">{t('home.products')}</h2>
     <div class="grid">
       <a class="card surface-2 control rhythm-tight" href="{appBase}/ideonautix">
-        <h3>Ideonautix</h3>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <AssetImage assetBase={ixIcon} alt="Ideonautix icon" width={40} height={40} radius={8} />
+          <h3 style="margin:0">Ideonautix</h3>
+        </div>
         <p>Startup education & productivity toolkit.</p>
         <ul>
           <li>Pitch Assistant</li><li>Competitive Intelligence</li><li>Pomodoro Coach</li>
         </ul>
       </a>
       <a class="card surface-2 control rhythm-tight" href="{appBase}/nodevoyage">
-        <h3>NodeVoyage</h3>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <AssetImage assetBase={nvIcon} alt="NodeVoyage icon" width={40} height={40} radius={8} />
+          <h3 style="margin:0">NodeVoyage</h3>
+        </div>
         <p>AI-assisted trip planning with Nodi.</p>
         <ul>
           <li>Smart suggestions</li><li>Route planning</li><li>Collaboration</li>
