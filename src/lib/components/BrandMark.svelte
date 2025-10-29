@@ -1,20 +1,28 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
   import { brand } from '$lib/presentAssets';
-  // try to pick suitable variants by filename
-  const icon   = brand.find(b => /logo[-_]?icon$/i.test(b))   || brand.find(b => /icon/i.test(b)) || null;
-  const main   = brand.find(b => /logo[-_]?main$/i.test(b))   || null;
-  const white  = brand.find(b => /logo[-_]?white$/i.test(b))  || null;
 
-  // We'll render a single <img> that survives all themes:
-  // Prefer icon (usually squared), else main, else white.
+  const pick = (pattern: RegExp) => brand.find((b) => pattern.test(b)) || null;
+  const icon = pick(/logo[-_]?icon/i) || brand.find((b) => /icon/i.test(b)) || null;
+  const main = pick(/logo[-_]?main/i);
+  const white = pick(/logo[-_]?white/i);
   const chosen = icon || main || white;
+
+  const resolve = (path: string | null) => {
+    if (!path) return null;
+    if (/^(?:https?:|data:|\/\/)/i.test(path)) return path;
+    if (path.startsWith('/')) return appBase ? `${appBase}${path}` : path;
+    const prefix = appBase ? `${appBase}/` : '/';
+    return `${prefix}${path.replace(/^\/+/, '')}`;
+  };
+
   const homeHref = appBase || '/';
+  $: src = resolve(chosen);
 </script>
 
 <a href={homeHref} class="brand" aria-label="Algorhythmics Home">
-  {#if chosen}
-    <img src={`${appBase}${chosen}.png`} alt="Algorhythmics" width="28" height="28" />
+  {#if src}
+    <img src={src} alt="Algorhythmics" width="28" height="28" />
   {:else}
     <div style="width:28px;height:28px;border-radius:6px;background:var(--primary);" aria-hidden="true"></div>
   {/if}

@@ -2,38 +2,53 @@
   import { base as appBase } from '$app/paths';
   import SvgPlaceholder from './SvgPlaceholder.svelte';
 
-  // e.g. '/images/partners/liaa' (no extension)
-  export let assetBase: string | null = null;
-  export let alt = 'Image';
+  export let src: string | null = null;
+  export let alt = '';
+  /** e.g. '1 / 1', '4 / 3', '16 / 9'; null = natural */
+  export let ratio: string | null = null;
+  export let fit: 'cover' | 'contain' | 'scale-down' | 'none' = 'cover';
+  export let className = '';
   export let width = 1200;
   export let height = 750;
   export let radius = 12;
-  export let sizes = '(min-width: 1024px) 800px, 100vw'; // responsive hint
+
+  const externalPattern = /^(?:https?:|data:|\/\/)/i;
+
+  const resolvePath = (path: string) => {
+    if (!path) return null;
+    if (externalPattern.test(path)) return path;
+    if (path.startsWith('/')) return appBase ? `${appBase}${path}` : path;
+    const prefix = appBase ? `${appBase}/` : '/';
+    return `${prefix}${path.replace(/^\/+/, '')}`;
+  };
+
+  $: resolvedSrc = src ? resolvePath(src) : null;
+  $: hasRatio = Boolean(ratio);
+  $: objectFitStyle = `object-fit:${fit}`;
 </script>
 
-{#if assetBase}
-  <picture>
-    <!-- try modern first -->
-    <source srcset={`${appBase}${assetBase}.webp`} type="image/webp" />
-    <source srcset={`${appBase}${assetBase}.WEBP`} type="image/webp" />
-    <!-- png variants -->
-    <source srcset={`${appBase}${assetBase}.png`} type="image/png" />
-    <source srcset={`${appBase}${assetBase}.PNG`} type="image/png" />
-    <!-- jpg variants -->
-    <source srcset={`${appBase}${assetBase}.jpg`} type="image/jpeg" />
-    <source srcset={`${appBase}${assetBase}.JPG`} type="image/jpeg" />
-    <!-- fallback (may 404 if only jpg exists; ok if a <source> hit succeeds) -->
-    <img
-      src={`${appBase}${assetBase}.png`}
-      alt={alt}
-      width={width}
-      height={height}
-      loading="lazy"
-      decoding="async"
-      sizes={sizes}
-      style="display:block;border-radius:{radius}px;border:1px solid var(--glass-stroke)"
-    />
-  </picture>
-{:else}
-  <SvgPlaceholder label={alt} {width} {height} {radius} />
-{/if}
+<figure class={`asset ${className}`} data-has-ratio={hasRatio ? '1' : undefined} style={hasRatio ? `--ratio:${ratio}` : ''}>
+  {#if resolvedSrc}
+    <img src={resolvedSrc} alt={alt} loading="lazy" decoding="async" style={objectFitStyle} />
+  {:else}
+    <SvgPlaceholder label={alt || 'Image placeholder'} {width} {height} {radius} />
+  {/if}
+</figure>
+
+<style>
+  .asset{
+    width:100%;
+    display:block;
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--bg-elev-2);
+  }
+  .asset[data-has-ratio]{ aspect-ratio: var(--ratio); }
+  .asset img{
+    width:100%;
+    height:100%;
+    display:block;
+  }
+  .asset[data-has-ratio] img{ height:100%; }
+  .asset:not([data-has-ratio]) img{ height:auto; }
+</style>

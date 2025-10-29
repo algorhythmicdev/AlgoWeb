@@ -1,5 +1,6 @@
 <script lang="ts">
   import { base as appBase } from '$app/paths';
+  import { page } from '$app/stores';
   import AssetImage from '$lib/components/AssetImage.svelte';
   import { partners } from '$lib/presentAssets';
 
@@ -21,6 +22,16 @@
   const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
   const resolve = (href: string) =>
     isExternal(href) ? href : href === '/' ? appBase || '/' : `${appBase}${href}`;
+  const stripBase = (path: string) =>
+    appBase && path.startsWith(appBase) ? path.slice(appBase.length) || '/' : path || '/';
+  const normalize = (href: string) => (isExternal(href) ? null : href.replace(/\/+$/, '') || '/');
+  const partnerAlt = (path: string) => (path.split('/').pop() || 'Partner').replace(/\.[^.]+$/, '');
+
+  $: current = stripBase($page.url.pathname).replace(/\/+$/, '') || '/';
+  const isCurrent = (href: string) => {
+    const normalized = normalize(href);
+    return normalized ? normalized === current : false;
+  };
 
 </script>
 
@@ -29,7 +40,9 @@
     <nav aria-label="Footer">
       <ul role="list" class="nav">
         {#each nav as i}
-          <li><a href={resolve(i.href)}>{i.label}</a></li>
+          <li>
+            <a href={resolve(i.href)} aria-current={isCurrent(i.href) ? 'page' : undefined}>{i.label}</a>
+          </li>
         {/each}
       </ul>
     </nav>
@@ -42,7 +55,7 @@
         <div class="card surface-2 control" style="padding:.5rem 1rem;border-radius:8px">Reclame Fabriek</div>
       {:else}
         {#each partners as p}
-          <AssetImage assetBase={p} alt={p.split('/').pop() || 'Partner'} width={160} height={40} radius={6} />
+          <AssetImage src={p} alt={partnerAlt(p)} width={160} height={40} radius={6} />
         {/each}
       {/if}
     </div>
@@ -51,7 +64,9 @@
 
     <ul role="list" class="nav">
       {#each legal as i}
-        <li><a href={resolve(i.href)}>{i.label}</a></li>
+        <li>
+          <a href={resolve(i.href)} aria-current={isCurrent(i.href) ? 'page' : undefined}>{i.label}</a>
+        </li>
       {/each}
     </ul>
   </div>

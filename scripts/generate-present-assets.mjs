@@ -29,8 +29,8 @@ async function walk(dir, filterExts){
         const ext = parse(d.name).ext;
         if (filterExts.includes(ext)) {
           const drel = abs.split('static/')[1] || '';
-          const base = parse(d.name).name;
-          out.add('/' + posix.join(drel, base));
+          const fileRel = posix.join(drel, d.name);
+          out.add('/' + fileRel);
         }
       }
     }

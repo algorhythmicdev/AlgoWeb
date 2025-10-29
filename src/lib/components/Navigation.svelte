@@ -19,13 +19,41 @@
   $: current = stripBase($page.url.pathname).replace(/\/+$/,'') || '/';
 </script>
 
-<div style="display:flex;align-items:center;gap:1rem">
+<div class="site-nav-wrap">
   <BrandMark />
-  <nav aria-label="Primary">
-    <ul role="list" class="nav">
+  <nav class="site-nav" aria-label="Primary">
+    <ul class="nav-list" role="list">
       {#each items as i}
-        <li><a href={resolve(i.href)} aria-current={current===i.href?'page':undefined}>{t(i.key)}</a></li>
+        <li>
+          <a href={resolve(i.href)} aria-current={current===i.href?'page':undefined}>{t(i.key)}</a>
+        </li>
       {/each}
     </ul>
   </nav>
 </div>
+
+<style>
+  .site-nav-wrap{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+  }
+  .site-nav{ background: transparent; }
+  .nav-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .875rem 1.25rem;
+  }
+  .nav-list a{
+    text-decoration: none;
+    color: var(--text-secondary, var(--text));
+    font-weight: 500;
+  }
+  .nav-list a[aria-current="page"]{
+    font-weight: 600;
+    color: var(--text-strong, var(--text));
+  }
+</style>
