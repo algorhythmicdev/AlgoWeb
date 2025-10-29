@@ -5,8 +5,12 @@
 
   import Icon from '$lib/components/icons/Icon.svelte';
   import Card from '$lib/components/Card.svelte';
+  import CardHalo from '$lib/components/CardHalo.svelte';
   import AssetImage from '$lib/components/AssetImage.svelte';
   import VideoPlayer from '$lib/components/VideoPlayer.svelte';
+  import HeroEpic from '$lib/components/HeroEpic.svelte';
+  import AnimatedDivider from '$lib/components/AnimatedDivider.svelte';
+  import RevealOnScroll from '$lib/components/RevealOnScroll.svelte';
   import { nodevoyagePreviews, videoNodeVoyage } from '$lib/presentAssets';
   const previews = nodevoyagePreviews;
   const vid = videoNodeVoyage;
@@ -18,97 +22,132 @@
 </svelte:head>
 
 <main id="main" class="prose rhythm">
-  <section class="section">
-    <div class="container stack">
-      <h1 class="text-strong">{t('nodevoyage.title')}</h1>
-      <p>Plan trips with Nodi. Collect places, set routes, and keep your crew in sync.</p>
-    </div>
-  </section>
+  <HeroEpic
+    title={t('nodevoyage.title')}
+    subtitle="Smart Travel Planning"
+    description="Plan trips with Nodi. Collect places, set routes, and keep your crew in sync."
+    ctaLabel="Start Planning"
+    ctaHref="/contact"
+    variant="cyber"
+    particleType="waves"
+    size="large"
+  />
+
+  <AnimatedDivider variant="wave" theme="cyber" spacing="spacious" />
 
   <section class="section">
     <div class="container">
       <div class="grid-3">
-        <Card heading="Web planning workspace">
-          <ul>
-            <li>Three-pane layout: Timeline • Map • Nodi assistant.</li>
-            <li>Node types: Stay / Activity / Food / Transport / Emergency.</li>
-            <li>Drawers: Budget, Eco (CO₂ estimate), Version history.</li>
-          </ul>
-        </Card>
-        <Card heading="Mobile on-trip">
-          <ul>
-            <li>Tabs: Home / Trip / Community / Profile.</li>
-            <li>Quick Capture: Camera / Translate / Voice — attach to nodes.</li>
-            <li>Nodi pill: hands-free assistant, six languages.</li>
-          </ul>
-        </Card>
-        <Card heading="MVP expectations">
-          <ul>
-            <li>Map↔Timeline sync and live route updates.</li>
-            <li>Export: ICS calendar & PDF itinerary.</li>
-            <li>Collaboration: presence, comments, share.</li>
-          </ul>
-        </Card>
+        <RevealOnScroll animation="fade-up" delay={100}>
+          <CardHalo halo="cyber" glass heading="Web planning workspace">
+            <ul>
+              <li>Three-pane layout: Timeline • Map • Nodi assistant.</li>
+              <li>Node types: Stay / Activity / Food / Transport / Emergency.</li>
+              <li>Drawers: Budget, Eco (CO₂ estimate), Version history.</li>
+            </ul>
+          </CardHalo>
+        </RevealOnScroll>
+        
+        <RevealOnScroll animation="fade-up" delay={200}>
+          <CardHalo halo="neural" glass heading="Mobile on-trip">
+            <ul>
+              <li>Tabs: Home / Trip / Community / Profile.</li>
+              <li>Quick Capture: Camera / Translate / Voice — attach to nodes.</li>
+              <li>Nodi pill: hands-free assistant, six languages.</li>
+            </ul>
+          </CardHalo>
+        </RevealOnScroll>
+        
+        <RevealOnScroll animation="fade-up" delay={300}>
+          <CardHalo halo="matrix" glass heading="MVP expectations">
+            <ul>
+              <li>Map↔Timeline sync and live route updates.</li>
+              <li>Export: ICS calendar & PDF itinerary.</li>
+              <li>Collaboration: presence, comments, share.</li>
+            </ul>
+          </CardHalo>
+        </RevealOnScroll>
       </div>
     </div>
   </section>
+
+  <AnimatedDivider variant="gradient" theme="cyber" spacing="normal" />
 
   <section class="section">
     <div class="container">
       <div class="grid-2 feature-grid">
-        <Card as="section" heading={t('nodevoyage.features')}>
-          <ul class="rhythm-tight" style="list-style:none;padding:0;margin:0">
-            <li><Icon name="map" /> Smart suggestions and route planning.</li>
-            <li><Icon name="users" /> Collaboration and shared notes.</li>
-            <li><Icon name="clock" /> Timing and day-by-day view.</li>
-            <li><Icon name="shield" /> Offline-friendly and privacy-aware.</li>
-            <li><Icon name="globe" /> Sustainability hints and awareness.</li>
-          </ul>
-        </Card>
+        <RevealOnScroll animation="fade-right" delay={100}>
+          <CardHalo halo="cyber" interactive as="section" heading={t('nodevoyage.features')}>
+            <ul class="rhythm-tight" style="list-style:none;padding:0;margin:0">
+              <li><Icon name="map" /> Smart suggestions and route planning.</li>
+              <li><Icon name="users" /> Collaboration and shared notes.</li>
+              <li><Icon name="clock" /> Timing and day-by-day view.</li>
+              <li><Icon name="shield" /> Offline-friendly and privacy-aware.</li>
+              <li><Icon name="globe" /> Sustainability hints and awareness.</li>
+            </ul>
+          </CardHalo>
+        </RevealOnScroll>
 
-        <Card as="aside" heading={t('nodevoyage.promo')}>
-          <VideoPlayer srcWebm={vid} />
-        </Card>
+        <RevealOnScroll animation="fade-left" delay={200}>
+          <CardHalo halo="quantum" glass as="aside" heading={t('nodevoyage.promo')}>
+            <VideoPlayer srcWebm={vid} />
+          </CardHalo>
+        </RevealOnScroll>
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container stack">
-      <h2 class="text-strong">{t('nodevoyage.preview')}</h2>
+      <RevealOnScroll animation="fade-up" delay={0}>
+        <h2 class="text-strong" style="text-align:center">{t('nodevoyage.preview')}</h2>
+      </RevealOnScroll>
       <div class="grid-3">
         {#if previews.length === 0}
-          <Card><AssetImage src={null} alt="Preview 1" /></Card>
-          <Card><AssetImage src={null} alt="Preview 2" /></Card>
+          <RevealOnScroll animation="scale" delay={100}>
+            <CardHalo halo="cyber" glass><AssetImage src={null} alt="Preview 1" /></CardHalo>
+          </RevealOnScroll>
+          <RevealOnScroll animation="scale" delay={200}>
+            <CardHalo halo="cyber" glass><AssetImage src={null} alt="Preview 2" /></CardHalo>
+          </RevealOnScroll>
         {:else}
-          {#each previews as path}
-            <Card>
-              <AssetImage src={path} alt={(path.split('/').pop() || 'Preview').split('.')[0]} />
-            </Card>
+          {#each previews as path, i}
+            <RevealOnScroll animation="scale" delay={100 * (i + 1)}>
+              <CardHalo halo="cyber" glass>
+                <AssetImage src={path} alt={(path.split('/').pop() || 'Preview').split('.')[0]} />
+              </CardHalo>
+            </RevealOnScroll>
           {/each}
         {/if}
       </div>
     </div>
   </section>
 
+  <AnimatedDivider variant="particles" theme="cyber" spacing="spacious" />
+
   <section class="section">
     <div class="container">
-      <div class="grid-2">
-        <Card heading="Who it helps">
-          <ul>
-            <li>Solo travelers who like tidy plans.</li>
-            <li>Families and small groups.</li>
-            <li>School trips with clear schedules.</li>
-          </ul>
-        </Card>
-        <Card heading="How to start">
-          <ol>
-            <li>Add three places for your first day.</li>
-            <li>Let Nodi suggest the order.</li>
-            <li>Share the plan and iterate.</li>
-          </ol>
-          <p><a class="btn btn-primary" href={contactHref}>Ask about NodeVoyage</a></p>
-        </Card>
+      <div class="grid-2" style="gap:2rem">
+        <RevealOnScroll animation="fade-up" delay={100}>
+          <CardHalo halo="coral" interactive heading="Who it helps">
+            <ul>
+              <li>Solo travelers who like tidy plans.</li>
+              <li>Families and small groups.</li>
+              <li>School trips with clear schedules.</li>
+            </ul>
+          </CardHalo>
+        </RevealOnScroll>
+        
+        <RevealOnScroll animation="fade-up" delay={200}>
+          <CardHalo halo="neural" interactive heading="How to start">
+            <ol>
+              <li>Add three places for your first day.</li>
+              <li>Let Nodi suggest the order.</li>
+              <li>Share the plan and iterate.</li>
+            </ol>
+            <p><a class="btn btn-primary" href={contactHref}>Ask about NodeVoyage</a></p>
+          </CardHalo>
+        </RevealOnScroll>
       </div>
     </div>
   </section>

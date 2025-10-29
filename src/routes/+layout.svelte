@@ -1,5 +1,6 @@
 <script>
   import '$lib/styles/theme.css';
+  import '$lib/styles/tokens.css';
   import '$lib/styles/layout-new.css';
   import '$lib/styles/scale.css';
   import '$lib/styles/reading.css';

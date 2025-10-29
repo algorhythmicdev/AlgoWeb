@@ -1,4 +1,9 @@
 <script lang="ts">
+  import HeroEpic from '$lib/components/HeroEpic.svelte';
+  import CardHalo from '$lib/components/CardHalo.svelte';
+  import AnimatedDivider from '$lib/components/AnimatedDivider.svelte';
+  import RevealOnScroll from '$lib/components/RevealOnScroll.svelte';
+
   let intent = 'consulting';
   let name = '';
   let email = '';
@@ -33,42 +38,58 @@
 </svelte:head>
 
 <main id="main">
+  <HeroEpic
+    title="Let's Talk"
+    subtitle="Get in Touch"
+    description="Tell us what you want to achieve. We'll reply with a simple plan."
+    variant="neural"
+    particleType="waves"
+    size="default"
+  />
+
+  <AnimatedDivider variant="gradient" theme="neural" spacing="spacious" />
+
   <section class="section">
-    <div class="container stack prose">
-      <h1 class="text-strong">Contact</h1>
-      <p>Tell us what you want to achieve. We’ll reply with a simple plan.</p>
+    <div class="container stack prose" style="max-width:700px; margin:0 auto">
+      {#if resultMsg}
+        <RevealOnScroll animation="scale">
+          <p aria-live="polite" style="text-align:center; color:var(--ai-cyber-1); font-weight:600; font-size:1.125rem">{resultMsg}</p>
+        </RevealOnScroll>
+      {/if}
 
-      {#if resultMsg}<p aria-live="polite">{resultMsg}</p>{/if}
+      <RevealOnScroll animation="fade-up" delay={100}>
+        <CardHalo halo="neural" glass>
+          <form
+            on:submit|preventDefault={submit}
+            novalidate
+            class="stack"
+            style="padding:1.5rem"
+          >
+            <label for="intent">I'm contacting you about</label>
+            <select id="intent" bind:value={intent} style="padding:0.75rem; border-radius:8px">
+              <option value="consulting">Consulting</option>
+              <option value="ideonautix">Ideonautix</option>
+              <option value="nodevoyage">NodeVoyage</option>
+              <option value="education">Education</option>
+              <option value="other">Other</option>
+            </select>
 
-      <form
-        on:submit|preventDefault={submit}
-        novalidate
-        class="surface-2 control stack"
-        style="padding:var(--space-4);border-radius:12px"
-      >
-        <label for="intent">I’m contacting you about</label>
-        <select id="intent" bind:value={intent}>
-          <option value="consulting">Consulting</option>
-          <option value="ideonautix">Ideonautix</option>
-          <option value="nodevoyage">NodeVoyage</option>
-          <option value="education">Education</option>
-          <option value="other">Other</option>
-        </select>
+            <label for="name">Name</label>
+            <input id="name" bind:value={name} aria-invalid={!!errors.name} style="padding:0.75rem; border-radius:8px" />
+            {#if errors.name}<div role="status" style="color:var(--ai-coral-1); font-size:0.875rem">{errors.name}</div>{/if}
 
-        <label for="name">Name</label>
-        <input id="name" bind:value={name} aria-invalid={!!errors.name} />
-        {#if errors.name}<div role="status">{errors.name}</div>{/if}
+            <label for="email">Email</label>
+            <input id="email" type="email" bind:value={email} aria-invalid={!!errors.email} style="padding:0.75rem; border-radius:8px" />
+            {#if errors.email}<div role="status" style="color:var(--ai-coral-1); font-size:0.875rem">{errors.email}</div>{/if}
 
-        <label for="email">Email</label>
-        <input id="email" type="email" bind:value={email} aria-invalid={!!errors.email} />
-        {#if errors.email}<div role="status">{errors.email}</div>{/if}
+            <label for="message">Message</label>
+            <textarea id="message" rows="6" bind:value={message} aria-invalid={!!errors.message} style="padding:0.75rem; border-radius:8px"></textarea>
+            {#if errors.message}<div role="status" style="color:var(--ai-coral-1); font-size:0.875rem">{errors.message}</div>{/if}
 
-        <label for="message">Message</label>
-        <textarea id="message" rows="6" bind:value={message} aria-invalid={!!errors.message}></textarea>
-        {#if errors.message}<div role="status">{errors.message}</div>{/if}
-
-        <button class="btn btn-primary" type="submit">Send</button>
-      </form>
+            <button class="btn btn-primary" type="submit" style="margin-top:1rem; padding:1rem">Send Message</button>
+          </form>
+        </CardHalo>
+      </RevealOnScroll>
     </div>
   </section>
 </main>

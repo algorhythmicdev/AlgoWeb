@@ -1,0 +1,208 @@
+/*
+ * Design tokens for Apple-inspired AI theme
+ * Token system for modern, translucent effects
+ */
+
+:root {
+  /* === AI Theme Color Palettes === */
+  
+  /* Neural Blue - Default AI theme */
+  --ai-neural-1: #0066FF;
+  --ai-neural-2: #00A3FF;
+  --ai-neural-3: #4D9FFF;
+  
+  /* Quantum Purple - Innovation theme */
+  --ai-quantum-1: #8A6BFF;
+  --ai-quantum-2: #B794F6;
+  --ai-quantum-3: #C4B5FD;
+  
+  /* Cyber Green - Tech/Data theme */
+  --ai-cyber-1: #00E5A0;
+  --ai-cyber-2: #00FFC8;
+  --ai-cyber-3: #5FFFD7;
+  
+  /* Matrix Gold - Premium/Insight theme */
+  --ai-matrix-1: #FFB800;
+  --ai-matrix-2: #FFD700;
+  --ai-matrix-3: #FFED4E;
+  
+  /* Coral Pink - Creativity theme */
+  --ai-coral-1: #FF6B9D;
+  --ai-coral-2: #FF8FB4;
+  --ai-coral-3: #FFB3CC;
+  
+  /* === Halo Effect Tokens === */
+  
+  /* Default halo (neural blue) */
+  --halo-color-1: var(--ai-neural-1);
+  --halo-color-2: var(--ai-neural-2);
+  --halo-color-3: var(--ai-neural-3);
+  --halo-intensity: 0.35;
+  --halo-blur: 80px;
+  --halo-scale: 1.2;
+  
+  /* === Gradient Tokens === */
+  --gradient-mesh-1: var(--ai-neural-1);
+  --gradient-mesh-2: var(--ai-quantum-1);
+  --gradient-mesh-3: var(--ai-cyber-1);
+  --gradient-mesh-4: var(--ai-matrix-1);
+  
+  /* === Glassmorphism Tokens === */
+  --glass-bg-opacity: 0.08;
+  --glass-border-opacity: 0.18;
+  --glass-blur: 24px;
+  --glass-saturation: 1.1;
+  
+  /* === Animation Tokens === */
+  --anim-fast: 200ms;
+  --anim-normal: 400ms;
+  --anim-slow: 600ms;
+  --anim-hero: 800ms;
+  --anim-epic: 1200ms;
+  
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* === Particle System Tokens === */
+  --particle-color: var(--ai-neural-2);
+  --particle-size: 3px;
+  --particle-opacity: 0.6;
+  
+  /* === Reveal Animation Tokens === */
+  --reveal-distance: 40px;
+  --reveal-blur-start: 10px;
+  --reveal-scale-start: 0.95;
+  
+  /* === Shadow Tokens (Apple-style) === */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-large: 0 16px 48px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-epic: 0 24px 64px rgba(0, 0, 0, 0.16), 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* === Z-index Tokens === */
+  --z-particle: 1;
+  --z-content: 10;
+  --z-halo: -1;
+  --z-hero-bg: 0;
+  --z-sticky: 100;
+}
+
+/* === Dark Theme Adjustments === */
+:root[data-theme="dark"] {
+  --halo-intensity: 0.45;
+  --halo-blur: 100px;
+  --glass-bg-opacity: 0.12;
+  --glass-border-opacity: 0.24;
+  --particle-opacity: 0.8;
+  
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-large: 0 16px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-epic: 0 24px 64px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* === High Contrast Theme Adjustments === */
+:root[data-theme="high-contrast"] {
+  --halo-intensity: 0;
+  --halo-blur: 0;
+  --glass-bg-opacity: 1;
+  --glass-border-opacity: 1;
+  --glass-blur: 0;
+  --particle-opacity: 0;
+  
+  --shadow-subtle: none;
+  --shadow-medium: none;
+  --shadow-large: none;
+  --shadow-epic: none;
+}
+
+/* === Halo Theme Classes === */
+.halo-neural {
+  --halo-color-1: var(--ai-neural-1);
+  --halo-color-2: var(--ai-neural-2);
+  --halo-color-3: var(--ai-neural-3);
+}
+
+.halo-quantum {
+  --halo-color-1: var(--ai-quantum-1);
+  --halo-color-2: var(--ai-quantum-2);
+  --halo-color-3: var(--ai-quantum-3);
+}
+
+.halo-cyber {
+  --halo-color-1: var(--ai-cyber-1);
+  --halo-color-2: var(--ai-cyber-2);
+  --halo-color-3: var(--ai-cyber-3);
+}
+
+.halo-matrix {
+  --halo-color-1: var(--ai-matrix-1);
+  --halo-color-2: var(--ai-matrix-2);
+  --halo-color-3: var(--ai-matrix-3);
+}
+
+.halo-coral {
+  --halo-color-1: var(--ai-coral-1);
+  --halo-color-2: var(--ai-coral-2);
+  --halo-color-3: var(--ai-coral-3);
+}
+
+/* === Gradient Theme Classes === */
+.gradient-neural {
+  --gradient-mesh-1: var(--ai-neural-1);
+  --gradient-mesh-2: var(--ai-neural-2);
+}
+
+.gradient-quantum {
+  --gradient-mesh-1: var(--ai-quantum-1);
+  --gradient-mesh-2: var(--ai-quantum-2);
+}
+
+.gradient-cyber {
+  --gradient-mesh-1: var(--ai-cyber-1);
+  --gradient-mesh-2: var(--ai-cyber-2);
+}
+
+.gradient-matrix {
+  --gradient-mesh-1: var(--ai-matrix-1);
+  --gradient-mesh-2: var(--ai-matrix-2);
+}
+
+.gradient-mixed {
+  --gradient-mesh-1: var(--ai-neural-1);
+  --gradient-mesh-2: var(--ai-quantum-1);
+  --gradient-mesh-3: var(--ai-cyber-1);
+  --gradient-mesh-4: var(--ai-matrix-1);
+}
+
+/* === Utility Classes === */
+
+/* Theme-colored headings */
+.heading-neural { color: var(--ai-neural-1); }
+.heading-quantum { color: var(--ai-quantum-1); }
+.heading-cyber { color: var(--ai-cyber-1); }
+.heading-matrix { color: var(--ai-matrix-1); }
+.heading-coral { color: var(--ai-coral-1); }
+
+/* Form styles */
+.form-input {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--control-border);
+  background: var(--bg-elev-1);
+  color: var(--text);
+  transition: border-color var(--anim-fast, 200ms);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.form-error {
+  color: var(--ai-coral-1);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
