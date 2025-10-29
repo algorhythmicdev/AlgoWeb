@@ -10,7 +10,7 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    paths: { base: basePath },
+    paths: { base: basePath, assets: basePath },
     prerender: {
       entries: ['*'],
       handleHttpError: ({ status, path, referrer, referenceType }) => {

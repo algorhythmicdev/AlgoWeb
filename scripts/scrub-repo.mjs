@@ -1,28 +1,36 @@
-import { rm, stat } from 'node:fs/promises';
+import { rm, stat, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const ROOT = process.cwd();
-const maybeDelete = async (p) => {
+const maybeDel = async (p) => {
   try { await stat(p); await rm(p, { recursive: true, force: true }); console.log('Removed', p); }
   catch { /* ignore */ }
 };
 
-const toRemove = [
-  // Legacy CMS / content
-  'cms', 'content', 'admin', 'static/admin', 'static/cms',
-
-  // Old routes we no longer serve
-  'src/routes/blog', 'src/routes/posts', 'src/routes/article',
-  'src/routes/old', 'src/routes/legacy', 'src/routes/cms',
-  'src/routes/api',      // dynamic endpoints not allowed on static site
-  'src/routes/sanity',   // any CMS previews
-  'src/lib/cms',         // stale CMS helpers
-  'static/_redirects',   // old Netlify redirects (GH Pages ignores; just remove)
-
-  // Old CI / hosts
-  'netlify.toml', '.vercel', '.netlify', '.slicemachine'
+const dirs = [
+  // CMS/old content
+  'cms', 'content', 'admin', 'static/admin', 'static/cms', 'src/lib/cms',
+  // legacy routes/APIs (not allowed on static)
+  'src/routes/api', 'src/routes/blog', 'src/routes/posts', 'src/routes/article', 'src/routes/cms', 'src/routes/legacy', 'src/routes/old',
+  // old hosting/config
+  '.vercel', '.netlify', 'netlify.toml', '.slicemachine'
 ];
 
-await Promise.all(toRemove.map((p) => maybeDelete(join(ROOT, p))));
+// also nuke empty top-level dirs that only contain .md/.json cruft
+async function sweepEmpty(root = 'src/routes') {
+  try {
+    const kids = await readdir(root, { withFileTypes: true });
+    await Promise.all(kids.map(async (d) => {
+      if (!d.isDirectory()) return;
+      const p = join(root, d.name);
+      try {
+        const files = await readdir(p);
+        if (files.length === 0) await maybeDel(p);
+      } catch {}
+    }));
+  } catch {}
+}
 
-console.log('Scrub complete.');
+await Promise.all(dirs.map((d) => maybeDel(join(ROOT, d))));
+await sweepEmpty();
+console.log('Scrub complete');
