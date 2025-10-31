@@ -33,13 +33,6 @@
   --glass-stroke: color-mix(in srgb, var(--border) 70%, transparent);
   --glass-blur: 12px;
   --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 65%, transparent);
-
-  /* Shared motion + halo intensity */
-  --halo-blur: 42px;
-  --halo-opacity: .55;
-  --beam-opacity: .6;
-  --beam-thickness: 260px; /* hero beam height */
-  --flow-speed: 8s;        /* gradient flow */
 }
 
 :root[data-theme="light"] {
@@ -73,13 +66,6 @@
   --glass-stroke: color-mix(in srgb, var(--border) 70%, transparent);
   --glass-blur: 12px;
   --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 70%, transparent);
-
-  /* Halo tokens - light theme */
-  --halo-ai-1: rgba(106,56,255,0.12);   /* aurora purple */
-  --halo-ai-2: rgba(15,214,201,0.14);   /* cyan */
-  --halo-warm: rgba(255,211,57,0.12);   /* amber */
-  --beam-grad: linear-gradient(90deg, #6A38FF, #0FD6C9, #FFD339);
-  --sep-grad:  linear-gradient(135deg, #6A38FF 0%, #0FD6C9 60%, #FFD339 100%);
 }
 
 :root[data-theme="dark"] {
@@ -104,13 +90,6 @@
   --glass-stroke: color-mix(in srgb, rgba(242, 245, 249, 0.45) 60%, transparent);
   --glass-blur: 14px;
   --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 65%, transparent);
-
-  /* Halo tokens - dark theme */
-  --halo-ai-1: rgba(138,107,255,0.18);
-  --halo-ai-2: rgba(16,227,214,0.18);
-  --halo-warm: rgba(255,211,57,0.16);
-  --beam-grad: linear-gradient(90deg, #8A6BFF, #10E3D6, #FFD339);
-  --sep-grad:  linear-gradient(135deg, #8A6BFF 0%, #10E3D6 60%, #FFD339 100%);
 }
 
 :root[data-theme="high-contrast"] {
@@ -135,13 +114,6 @@
   --glass-stroke: #000000;
   --glass-blur: 0px;
   --focus-ring: 0 0 0 3px var(--focus);
-
-  /* Halo tokens - high contrast theme */
-  --halo-ai-1: rgba(68,0,255,0.30);
-  --halo-ai-2: rgba(0,122,115,0.26);
-  --halo-warm: rgba(183,131,0,0.26);
-  --beam-grad: linear-gradient(90deg, #000, #000);
-  --sep-grad:  linear-gradient(90deg, #000, #000);
 }
 
 /* Global element mappings */
