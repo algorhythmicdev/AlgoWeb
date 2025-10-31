@@ -142,15 +142,11 @@
     width: 100%;
     max-width: 1200px;
     opacity: 0;
-    transform: translateY(var(--reveal-distance, 40px));
-    transition: 
-      opacity var(--anim-epic, 1200ms) var(--ease-apple, cubic-bezier(0.25, 0.1, 0.25, 1)),
-      transform var(--anim-epic, 1200ms) var(--ease-apple, cubic-bezier(0.25, 0.1, 0.25, 1));
+    transition: opacity var(--anim-fast, 300ms) ease;
   }
   
   .mounted .hero-content {
     opacity: 1;
-    transform: translateY(0);
   }
   
   .hero-text {
@@ -166,16 +162,7 @@
     font-weight: 600;
     color: var(--halo-color-2, var(--primary));
     margin: 0 0 1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 
-      opacity var(--anim-hero, 800ms) var(--ease-apple) 100ms,
-      transform var(--anim-hero, 800ms) var(--ease-apple) 100ms;
-  }
-  
-  .mounted .hero-subtitle {
     opacity: 0.9;
-    transform: translateY(0);
   }
   
   .hero-title {
@@ -191,16 +178,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 
-      opacity var(--anim-hero, 800ms) var(--ease-apple) 200ms,
-      transform var(--anim-hero, 800ms) var(--ease-apple) 200ms;
-  }
-  
-  .mounted .hero-title {
-    opacity: 1;
-    transform: translateY(0);
   }
   
   .hero-description {
@@ -211,16 +188,6 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    opacity: 0;
-    transform: translateY(25px);
-    transition: 
-      opacity var(--anim-hero, 800ms) var(--ease-apple) 300ms,
-      transform var(--anim-hero, 800ms) var(--ease-apple) 300ms;
-  }
-  
-  .mounted .hero-description {
-    opacity: 1;
-    transform: translateY(0);
   }
   
   .hero-actions {
@@ -228,16 +195,6 @@
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 
-      opacity var(--anim-hero, 800ms) var(--ease-apple) 400ms,
-      transform var(--anim-hero, 800ms) var(--ease-apple) 400ms;
-  }
-  
-  .mounted .hero-actions {
-    opacity: 1;
-    transform: translateY(0);
   }
   
   .btn-hero {
@@ -290,13 +247,8 @@
   }
   
   @media (prefers-reduced-motion: reduce) {
-    .hero-content,
-    .hero-subtitle,
-    .hero-title,
-    .hero-description,
-    .hero-actions {
+    .hero-content {
       opacity: 1;
-      transform: none;
       transition: none;
     }
   }

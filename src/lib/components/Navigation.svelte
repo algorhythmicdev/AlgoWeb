@@ -57,7 +57,7 @@
     display: flex;
     gap: 0.25rem;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
   
   nav a {
@@ -102,10 +102,19 @@
     nav ul {
       gap: 0.125rem;
       font-size: 0.875rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    
+    nav ul::-webkit-scrollbar {
+      display: none;
     }
     
     nav a {
       padding: 0.375rem 0.625rem;
+      white-space: nowrap;
     }
   }
 </style>
