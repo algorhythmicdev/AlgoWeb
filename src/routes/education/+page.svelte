@@ -20,8 +20,8 @@
     ctaLabel="Get in touch"
     ctaHref="/contact"
     variant="coral"
-    particleType="dots"
-    size="default"
+    particleType="waves"
+    size="large"
   />
 
   <AnimatedDivider variant="wave" theme="coral" spacing="spacious" />

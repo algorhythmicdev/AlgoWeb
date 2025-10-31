@@ -18,7 +18,7 @@
     description="Based in Daugavpils, Latvia, building accessible AI tools with a global vision"
     variant="coral"
     particleType="dots"
-    size="default"
+    size="large"
   />
 
   <AnimatedDivider variant="wave" theme="coral" spacing="spacious" />

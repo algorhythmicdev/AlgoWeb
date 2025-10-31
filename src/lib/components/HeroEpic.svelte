@@ -41,7 +41,7 @@
   class="hero-epic hero-{size} halo-{variant} gradient-{variant}"
   class:mounted
 >
-  <MeshGradient {variant} opacity={0.12} />
+  <MeshGradient {variant} opacity={size === 'epic' ? 0.15 : size === 'large' ? 0.13 : 0.12} />
   
   {#if particleType !== 'none'}
     <ParticleSystem variant={particleType} density="medium" speed={0.8} />
@@ -98,6 +98,28 @@
     overflow: hidden;
     isolation: isolate;
     background: var(--bg-base);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* Variant-specific subtle gradients */
+  .hero-epic.halo-neural {
+    background: linear-gradient(180deg, var(--bg-base) 0%, color-mix(in srgb, var(--ai-neural-1) 3%, var(--bg-base)) 100%);
+  }
+  
+  .hero-epic.halo-quantum {
+    background: linear-gradient(180deg, var(--bg-base) 0%, color-mix(in srgb, var(--ai-quantum-1) 3%, var(--bg-base)) 100%);
+  }
+  
+  .hero-epic.halo-cyber {
+    background: linear-gradient(180deg, var(--bg-base) 0%, color-mix(in srgb, var(--ai-cyber-1) 3%, var(--bg-base)) 100%);
+  }
+  
+  .hero-epic.halo-matrix {
+    background: linear-gradient(180deg, var(--bg-base) 0%, color-mix(in srgb, var(--ai-matrix-1) 3%, var(--bg-base)) 100%);
+  }
+  
+  .hero-epic.halo-coral {
+    background: linear-gradient(180deg, var(--bg-base) 0%, color-mix(in srgb, var(--ai-coral-1) 3%, var(--bg-base)) 100%);
   }
   
   .hero-large {

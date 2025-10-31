@@ -20,7 +20,7 @@
     ctaLabel="Apply for a pilot"
     ctaHref="/contact"
     variant="matrix"
-    particleType="minimal"
+    particleType="matrix"
     size="default"
   />
 

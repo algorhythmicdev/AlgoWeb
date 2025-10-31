@@ -43,7 +43,7 @@
     subtitle="Get in Touch"
     description="Tell us what you want to achieve. We'll reply with a simple plan."
     variant="neural"
-    particleType="waves"
+    particleType="minimal"
     size="default"
   />
 
