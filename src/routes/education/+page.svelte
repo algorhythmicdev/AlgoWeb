@@ -20,18 +20,18 @@
     ctaLabel="Get in touch"
     ctaHref="/contact"
     variant="coral"
-    particleType="dots"
-    size="default"
+    particleType="waves"
+    size="large"
   />
 
   <AnimatedDivider variant="wave" theme="coral" spacing="spacious" />
 
-  <section class="page container">
+  <section class="page container section-spacing">
     <RevealOnScroll animation="fade-up" delay={100}>
-      <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem">Program Examples</h2>
+      <h2 class="section-title">Program Examples</h2>
     </RevealOnScroll>
 
-    <div class="grid cols-2" style="gap:2rem">
+    <div class="grid cols-2 programs-grid">
       <RevealOnScroll animation="fade-up" delay={100}>
         <CardHalo halo="coral" interactive glass>
           <h3 style="color:var(--ai-coral-1); margin-top:0">🎓 AI Basics for Students</h3>
@@ -61,12 +61,49 @@
       </RevealOnScroll>
     </div>
 
-    <RevealOnScroll animation="scale" delay={500}>
-      <CardHalo halo="matrix" glass style="margin-top:3rem; text-align:center; padding:2.5rem">
-        <h3 style="color:var(--ai-matrix-1); margin-top:0; font-size:1.75rem">Ready to Collaborate?</h3>
-        <p style="font-size:1.125rem; margin:1.5rem 0">We're building these programs with schools and universities across Latvia.</p>
-        <a class="btn btn-primary" href={contactHref} style="font-size:1.125rem; padding:1rem 2rem">Start a conversation</a>
-      </CardHalo>
-    </RevealOnScroll>
+    <div class="cta-card">
+      <RevealOnScroll animation="scale" delay={500}>
+        <CardHalo halo="matrix" glass>
+          <h3 style="color:var(--ai-matrix-1); margin-top:0; font-size:1.75rem">Ready to Collaborate?</h3>
+          <p style="font-size:1.125rem; margin:1.5rem 0">We're building these programs with schools and universities across Latvia.</p>
+          <a class="btn btn-primary" href={contactHref} style="font-size:1.125rem; padding:1rem 2rem">Start a conversation</a>
+        </CardHalo>
+      </RevealOnScroll>
+    </div>
   </section>
 </main>
+
+<style>
+  .section-spacing {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+  }
+  
+  .programs-grid {
+    gap: 2rem;
+  }
+  
+  .cta-card {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .section-spacing {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .cta-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

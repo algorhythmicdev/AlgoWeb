@@ -20,14 +20,14 @@
     ctaLabel="Apply for a pilot"
     ctaHref="/contact"
     variant="matrix"
-    particleType="minimal"
+    particleType="matrix"
     size="default"
   />
 
   <AnimatedDivider variant="pulse" theme="matrix" spacing="spacious" />
 
-  <section class="page container">
-    <div class="grid cols-2" style="gap:2rem">
+  <section class="page container section-spacing">
+    <div class="grid cols-2 content-grid">
       <RevealOnScroll animation="fade-up" delay={100}>
         <CardHalo halo="matrix" glass>
           <h2 style="margin-top:0; color:var(--ai-matrix-1)">Services</h2>
@@ -52,12 +52,42 @@
       </RevealOnScroll>
     </div>
 
-    <RevealOnScroll animation="scale" delay={300}>
-      <CardHalo halo="matrix" interactive glass style="margin-top:2rem; text-align:center; padding:2.5rem">
-        <h3 style="color:var(--ai-matrix-1); margin-top:0; font-size:1.75rem">Pilot Applications</h3>
-        <p style="font-size:1.125rem; margin:1.5rem 0">We open a small number of pilots each month.</p>
-        <a class="btn btn-primary" href={contactHref} style="font-size:1.125rem; padding:1rem 2rem">Apply for a pilot</a>
-      </CardHalo>
-    </RevealOnScroll>
+    <div class="cta-card">
+      <RevealOnScroll animation="scale" delay={300}>
+        <CardHalo halo="matrix" interactive glass>
+          <h3 style="color:var(--ai-matrix-1); margin-top:0; font-size:1.75rem">Pilot Applications</h3>
+          <p style="font-size:1.125rem; margin:1.5rem 0">We open a small number of pilots each month.</p>
+          <a class="btn btn-primary" href={contactHref} style="font-size:1.125rem; padding:1rem 2rem">Apply for a pilot</a>
+        </CardHalo>
+      </RevealOnScroll>
+    </div>
   </section>
 </main>
+
+<style>
+  .section-spacing {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .content-grid {
+    gap: 2rem;
+  }
+  
+  .cta-card {
+    margin-top: 2rem;
+    text-align: center;
+    padding: 2.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .section-spacing {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .cta-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

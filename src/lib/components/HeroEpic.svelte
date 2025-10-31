@@ -38,10 +38,10 @@
 </script>
 
 <section 
-  class="hero-epic hero-{size} halo-{variant} gradient-{variant}"
+  class="hero-section hero-{size} halo-{variant} gradient-{variant}"
   class:mounted
 >
-  <MeshGradient {variant} opacity={0.12} />
+  <MeshGradient {variant} opacity={size === 'epic' ? 0.15 : size === 'large' ? 0.13 : 0.12} />
   
   {#if particleType !== 'none'}
     <ParticleSystem variant={particleType} density="medium" speed={0.8} />
@@ -88,15 +88,38 @@
 </section>
 
 <style>
-  .hero-epic {
+  .hero-section {
     position: relative;
     min-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6rem 2rem 4rem;
+    padding: 8rem 2rem 5rem;
     overflow: hidden;
     isolation: isolate;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* Variant-specific subtle gradients */
+  .hero-section.halo-neural {
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--ai-neural-1) 3%, var(--bg)) 100%);
+  }
+  
+  .hero-section.halo-quantum {
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--ai-quantum-1) 3%, var(--bg)) 100%);
+  }
+  
+  .hero-section.halo-cyber {
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--ai-cyber-1) 3%, var(--bg)) 100%);
+  }
+  
+  .hero-section.halo-matrix {
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--ai-matrix-1) 3%, var(--bg)) 100%);
+  }
+  
+  .hero-section.halo-coral {
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--ai-coral-1) 3%, var(--bg)) 100%);
   }
   
   .hero-large {
@@ -104,9 +127,13 @@
     padding: 8rem 2rem 5rem;
   }
   
-  .hero-epic-size {
+  .hero-epic {
     min-height: 85vh;
     padding: 10rem 2rem 6rem;
+  }
+  
+  .hero-default {
+    /* Uses the base min-height from .hero-section */
   }
   
   .hero-content {
@@ -243,7 +270,7 @@
   }
   
   @media (max-width: 768px) {
-    .hero-epic {
+    .hero-section {
       min-height: 50vh;
       padding: 4rem 1.5rem 3rem;
     }

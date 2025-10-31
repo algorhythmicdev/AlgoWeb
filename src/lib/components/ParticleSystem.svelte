@@ -3,8 +3,10 @@
   
   export let variant: 'neural' | 'dots' | 'matrix' | 'waves' | 'minimal' = 'dots';
   export let density: 'low' | 'medium' | 'high' = 'medium';
-  export let color = 'var(--particle-color)';
   export let speed = 1;
+  
+  // Color is set via CSS variable, not as a prop
+  const color = 'var(--particle-color)';
   
   let canvas: HTMLCanvasElement;
   let ctx: CanvasRenderingContext2D | null;
