@@ -1,3 +1,6 @@
+const WORD_DELAY_MS = 35;
+const REVEAL_THRESHOLD = 0.35;
+
 export function splitReveal(node: HTMLElement, delay = 0) {
   const text = node.textContent ?? '';
   node.textContent = '';
@@ -10,7 +13,7 @@ export function splitReveal(node: HTMLElement, delay = 0) {
     span.style.opacity = '0';
     span.style.transform = 'translateY(14px)';
     span.style.transition = 'opacity .6s ease, transform .6s ease';
-    span.style.transitionDelay = `${delay + i * 35}ms`;
+    span.style.transitionDelay = `${delay + i * WORD_DELAY_MS}ms`;
     frag.appendChild(span);
   });
   node.appendChild(frag);
@@ -24,7 +27,7 @@ export function splitReveal(node: HTMLElement, delay = 0) {
         io.disconnect();
       }
     });
-  }, { threshold: 0.35 });
+  }, { threshold: REVEAL_THRESHOLD });
   io.observe(node);
   return { destroy() { io.disconnect(); } };
 }
