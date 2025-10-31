@@ -15,10 +15,6 @@
   max-width: var(--container);
   margin-inline: auto;
 }
-.readable {
-  max-width: 65ch;
-  margin-inline: auto;
-}
 .grid {
   display: grid;
   gap: var(--gap-6);
