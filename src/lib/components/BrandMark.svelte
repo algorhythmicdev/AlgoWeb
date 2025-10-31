@@ -22,13 +22,32 @@
 
 <a href={homeHref} class="brand" aria-label="Algorhythmics Home">
   {#if src}
-    <img src={src} alt="Algorhythmics" width="28" height="28" />
+    <img src={src} alt="Algorhythmics" class="brand-logo" />
   {:else}
-    <div style="width:28px;height:28px;border-radius:6px;background:var(--primary);" aria-hidden="true"></div>
+    <div class="brand-fallback" aria-hidden="true"></div>
   {/if}
 </a>
 
 <style>
-  .brand { display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; }
-  .brand img { display:block; border-radius:6px; }
+  .brand { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: .5rem; 
+    text-decoration: none;
+    height: 40px;
+  }
+  .brand-logo { 
+    display: block; 
+    height: 40px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .brand-fallback {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: var(--primary);
+  }
 </style>

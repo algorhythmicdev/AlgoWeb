@@ -33,12 +33,12 @@
 
   <AnimatedDivider variant="gradient" theme="neural" spacing="spacious" />
 
-  <section id="products" class="page container" style="margin-top:4rem; margin-bottom:4rem">
+  <section id="products" class="page container section-spacing">
     <RevealOnScroll animation="fade-up" delay={0}>
-      <h2 style="text-align:center; font-size:2.5rem; margin-bottom:3rem">Our AI-Powered Products</h2>
+      <h2 class="section-title">Our AI-Powered Products</h2>
     </RevealOnScroll>
     
-    <div class="grid cols-2" style="gap:2rem">
+    <div class="grid cols-2 product-grid">
       <RevealOnScroll animation="fade-up" delay={100}>
         <CardHalo halo="quantum" interactive glass>
           <h2 style="color:var(--ai-quantum-1)">Ideonautix</h2>
@@ -65,18 +65,18 @@
 
   <AnimatedDivider variant="particles" theme="mixed" spacing="spacious" />
 
-  <section class="page container" style="margin-top:4rem; margin-bottom:4rem">
+  <section class="page container section-spacing">
     <RevealOnScroll animation="scale" delay={0}>
-      <div style="text-align:center; max-width:800px; margin:0 auto">
-        <h2 style="font-size:2rem; margin-bottom:1rem">Why Choose Algorhythmics?</h2>
-        <p style="font-size:1.25rem; color:var(--text-secondary); line-height:1.8">
+      <div class="section-intro">
+        <h2 class="section-heading">Why Choose Algorhythmics?</h2>
+        <p class="section-description">
           We combine cutting-edge AI technology with practical, user-friendly design. 
           Based in Latvia, serving globally—our tools are built for real people solving real problems.
         </p>
       </div>
     </RevealOnScroll>
 
-    <div class="grid cols-2" style="margin-top:3rem; gap:1.5rem">
+    <div class="grid cols-2 features-grid">
       <RevealOnScroll animation="fade-right" delay={100}>
         <CardHalo halo="matrix" interactive>
           <h3 style="color:var(--ai-matrix-1)">🎯 Accessible by Design</h3>
@@ -107,3 +107,51 @@
     </div>
   </section>
 </main>
+
+<style>
+  .section-spacing {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 3rem;
+    font-weight: 700;
+  }
+  
+  .section-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+  
+  .section-heading {
+    font-size: clamp(1.75rem, 3.5vw, 2rem);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  
+  .section-description {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  
+  .product-grid {
+    gap: 2rem;
+  }
+  
+  .features-grid {
+    margin-top: 3rem;
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .section-spacing {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+</style>

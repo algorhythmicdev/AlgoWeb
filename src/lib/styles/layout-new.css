@@ -32,10 +32,9 @@
   padding: var(--gap-6);
 }
 
-/* Nav: remove bullets and fix alignment */
-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 18px; align-items: center; }
-nav a { text-decoration: none; color: var(--text); padding: 8px 10px; border-radius: 10px; }
-nav a[aria-current="page"] { outline: 3px solid var(--border); }
+/* Nav: basic reset - specific styles in components */
+nav ul { list-style: none; margin: 0; padding: 0; }
+nav a { text-decoration: none; color: var(--text); }
 
 /* Media helpers */
 .media-cover { width: 100%; height: 100%; object-fit: cover; }

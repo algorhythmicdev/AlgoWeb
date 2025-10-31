@@ -11,10 +11,34 @@
 </script>
 
 <div class="header surface-1 control">
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)">
+  <div class="container header-content">
     <Navigation />
   </div>
 </div>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky, 100);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .header {
+      transition: transform var(--anim-fast, 200ms) var(--ease-apple, ease);
+    }
+  }
+</style>
 
 <main class="surface-0">
   <slot />

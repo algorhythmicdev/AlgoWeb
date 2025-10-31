@@ -23,8 +23,8 @@
 
   <AnimatedDivider variant="wave" theme="coral" spacing="spacious" />
 
-  <section class="page container" style="margin-top:4rem">
-    <div class="grid cols-2" style="gap:2rem; margin-top:24px">
+  <section class="page container section-spacing">
+    <div class="grid cols-2 team-grid">
       <RevealOnScroll animation="fade-up" delay={100}>
         <CardHalo halo="quantum" glass>
           <article class="grid cols-2" style="gap:1.5rem; align-items:start">
@@ -60,11 +60,35 @@
       </RevealOnScroll>
     </div>
 
-    <RevealOnScroll animation="scale" delay={300}>
-      <CardHalo halo="matrix" glass style="margin-top:2rem">
-        <h3 style="color:var(--ai-matrix-1); margin-top:0">Partners & Background</h3>
-        <p style="line-height:1.8">LIAA (Latvia) and current workplace R&D at Reclame Fabriek in Daugavpils (next-gen LED neon, in-house controllers, advanced fabrication).</p>
-      </CardHalo>
-    </RevealOnScroll>
+    <div class="partners-card">
+      <RevealOnScroll animation="scale" delay={300}>
+        <CardHalo halo="matrix" glass>
+          <h3 style="color:var(--ai-matrix-1); margin-top:0">Partners & Background</h3>
+          <p style="line-height:1.8">LIAA (Latvia) and current workplace R&D at Reclame Fabriek in Daugavpils (next-gen LED neon, in-house controllers, advanced fabrication).</p>
+        </CardHalo>
+      </RevealOnScroll>
+    </div>
   </section>
 </main>
+
+<style>
+  .section-spacing {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .team-grid {
+    gap: 2rem;
+  }
+  
+  .partners-card {
+    margin-top: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .section-spacing {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+</style>

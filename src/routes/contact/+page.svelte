@@ -49,8 +49,8 @@
 
   <AnimatedDivider variant="gradient" theme="neural" spacing="spacious" />
 
-  <section class="section">
-    <div class="container stack prose" style="max-width:700px; margin:0 auto">
+  <section class="section contact-section">
+    <div class="container stack prose form-container">
       {#if resultMsg}
         <RevealOnScroll animation="scale">
           <p aria-live="polite" style="text-align:center; color:var(--ai-cyber-1); font-weight:600; font-size:1.125rem">{resultMsg}</p>
@@ -62,8 +62,7 @@
           <form
             on:submit|preventDefault={submit}
             novalidate
-            class="stack"
-            style="padding:1.5rem"
+            class="stack contact-form"
           >
             <label for="intent">I'm contacting you about</label>
             <select id="intent" bind:value={intent} style="padding:0.75rem; border-radius:8px">
@@ -93,3 +92,30 @@
     </div>
   </section>
 </main>
+
+<style>
+  .contact-section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .form-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .contact-form {
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-section {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .contact-form {
+      padding: 1.5rem;
+    }
+  }
+</style>

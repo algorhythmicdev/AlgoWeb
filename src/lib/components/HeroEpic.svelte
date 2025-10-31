@@ -94,9 +94,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6rem 2rem 4rem;
+    padding: 8rem 2rem 5rem;
     overflow: hidden;
     isolation: isolate;
+    background: var(--bg-base);
   }
   
   .hero-large {
@@ -104,7 +105,7 @@
     padding: 8rem 2rem 5rem;
   }
   
-  .hero-epic-size {
+  .hero-epic.hero-epic {
     min-height: 85vh;
     padding: 10rem 2rem 6rem;
   }
