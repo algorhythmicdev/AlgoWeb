@@ -117,3 +117,49 @@ html:is([data-theme='hc'], [data-theme-resolved='hc'], [data-theme-legacy='contr
     opacity: 0.25;
   }
 }
+
+/* Flowing gradient separators */
+.flow-divider {
+  width: 100%;
+  height: 4px;
+  background: var(--sep-grad);
+  background-size: 200% 100%;
+  animation: flow var(--flow-speed) linear infinite;
+  opacity: .35;
+  border-radius: 999px;
+}
+@keyframes flow {
+  to { background-position: 200% 0; }
+}
+
+/* Hero beam (behind hero content) */
+.hero-beam {
+  position: absolute; inset: 0 auto auto 0;
+  width: 100%;
+  height: var(--beam-thickness);
+  background: var(--beam-grad);
+  filter: blur(30px);
+  opacity: var(--beam-opacity);
+  transform: translateY(-25%);
+  pointer-events: none;
+}
+
+/* Reveal: gentler, airier */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Card halos via tokens */
+.halo { position: relative; z-index: 0; }
+.halo::before {
+  content: ""; position: absolute; inset: -4%;
+  border-radius: inherit; z-index: -1;
+  background: var(--halo-ai-1);
+  filter: blur(var(--halo-blur));
+  opacity: var(--halo-opacity);
+}
+.halo.ai-2::before { background: var(--halo-ai-2); }
+.halo.warm::before { background: var(--halo-warm); }
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-divider { animation: none; }
+}

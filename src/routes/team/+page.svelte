@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import AssetImage from '$lib/components/AssetImage.svelte';
-  import HeroEpic from '$lib/components/HeroEpic.svelte';
+  import HeroNew from '$lib/components/HeroNew.svelte';
   import CardHalo from '$lib/components/CardHalo.svelte';
-  import AnimatedDivider from '$lib/components/AnimatedDivider.svelte';
   import RevealOnScroll from '$lib/components/RevealOnScroll.svelte';
+  const contactHref = `${base}/contact`;
 </script>
 
 <svelte:head>
@@ -12,16 +13,12 @@
 </svelte:head>
 
 <main id="main">
-  <HeroEpic
-    title="Meet Our Team"
-    subtitle="Collaboration & Innovation"
-    description="Based in Daugavpils, Latvia, building accessible AI tools with a global vision"
-    variant="coral"
-    particleType="dots"
-    size="default"
-  />
-
-  <AnimatedDivider variant="wave" theme="coral" spacing="spacious" />
+  <HeroNew
+    variant="team"
+    title="Latvia-based, product-first"
+    lead="We build in Daugavpils. Honest early stage, strong accessibility, and real R&D background."
+    ctaHref={contactHref}
+    ctaLabel="Get in touch" />
 
   <section class="page container" style="margin-top:4rem">
     <div class="grid cols-2" style="gap:2rem; margin-top:24px">

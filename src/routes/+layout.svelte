@@ -1,13 +1,20 @@
 <script>
+  import { onMount } from 'svelte';
   import '$lib/styles/theme.css';
   import '$lib/styles/tokens.css';
   import '$lib/styles/layout-new.css';
   import '$lib/styles/scale.css';
   import '$lib/styles/reading.css';
+  import '$lib/styles/animations.css';
   import Navigation from '$lib/components/Navigation.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import ThemeToggle from '$lib/components/theme-toggle.svelte';
   import LanguageSwitcher from '$lib/components/language-switcher.svelte';
+  import { initReveal } from '$lib/utils/reveal';
+
+  onMount(() => {
+    initReveal();
+  });
 </script>
 
 <div class="header surface-1 control">
