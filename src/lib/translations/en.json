@@ -25,7 +25,25 @@
   "education": {
     "title": "Education",
     "description": "We’re preparing practical, easy-to-run AI programs for schools and universities. This page grows with real content.",
-    "lede": "Programs for schools and universities in Latvia."
+    "lede": "Programs for schools and universities in Latvia.",
+    "page_title": "Education — Algorhythmics",
+    "page_description": "Short, practical AI programs for Latvian schools and universities.",
+    "hero_title": "AI Education Programs",
+    "hero_subtitle": "Learning Pathways",
+    "hero_description": "Short, practical AI programs for Latvian schools and universities. Clear lessons, safe tools, projects you can run.",
+    "hero_cta": "Get in touch",
+    "programs_title": "Program Examples",
+    "program_1_title": "AI Basics for Students",
+    "program_1_description": "How it works, where it's useful, and what to avoid. Practical understanding without the hype.",
+    "program_2_title": "Product Thinking",
+    "program_2_description": "Turn a real problem into a small prototype. Learn to validate ideas and iterate.",
+    "program_3_title": "Data Skills",
+    "program_3_description": "Collecting, cleaning, and making sense of information. Hands-on with real datasets.",
+    "program_4_title": "Build & Ship",
+    "program_4_description": "Complete small projects from idea to working demo. Learn the full cycle.",
+    "cta_title": "Ready to Collaborate?",
+    "cta_description": "We're building these programs with schools and universities across Latvia.",
+    "cta_button": "Start a conversation"
   },
   "hero": {
     "title": "Accessible AI for travel, startups, and schools.",

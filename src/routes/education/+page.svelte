@@ -1,26 +1,29 @@
 <script lang="ts">
   import { base } from '$app/paths';
+  import { i18n } from '$lib/i18n';
+  $: t = $i18n;
   import HeroEpic from '$lib/components/HeroEpic.svelte';
   import CardHalo from '$lib/components/CardHalo.svelte';
   import AnimatedDivider from '$lib/components/AnimatedDivider.svelte';
   import RevealOnScroll from '$lib/components/RevealOnScroll.svelte';
+  import Icon from '$lib/components/icons/Icon.svelte';
   const contactHref = `${base}/contact`;
 </script>
 
 <svelte:head>
-  <title>Education — Algorhythmics</title>
-  <meta name="description" content="Short, practical AI programs for Latvian schools and universities." />
+  <title>{t('education.page_title')}</title>
+  <meta name="description" content={t('education.page_description')} />
 </svelte:head>
 
 <main id="main">
   <HeroEpic
-    title="AI Education Programs"
-    subtitle="Learning Pathways"
-    description="Short, practical AI programs for Latvian schools and universities. Clear lessons, safe tools, projects you can run."
-    ctaLabel="Get in touch"
+    title={t('education.hero_title')}
+    subtitle={t('education.hero_subtitle')}
+    description={t('education.hero_description')}
+    ctaLabel={t('education.hero_cta')}
     ctaHref="/contact"
     variant="coral"
-    particleType="waves"
+    particleType="dots"
     size="large"
   />
 
@@ -28,35 +31,47 @@
 
   <section class="page container section-spacing">
     <RevealOnScroll animation="fade-up" delay={100}>
-      <h2 class="section-title">Program Examples</h2>
+      <h2 class="section-title">{t('education.programs_title')}</h2>
     </RevealOnScroll>
 
     <div class="grid cols-2 programs-grid">
       <RevealOnScroll animation="fade-up" delay={100}>
         <CardHalo halo="coral" interactive glass>
-          <h3 style="color:var(--ai-coral-1); margin-top:0">🎓 AI Basics for Students</h3>
-          <p>How it works, where it's useful, and what to avoid. Practical understanding without the hype.</p>
+          <h3 style="color:var(--ai-coral-1); margin-top:0; display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="graduation-cap" size={24} />
+            {t('education.program_1_title')}
+          </h3>
+          <p>{t('education.program_1_description')}</p>
         </CardHalo>
       </RevealOnScroll>
 
       <RevealOnScroll animation="fade-up" delay={200}>
         <CardHalo halo="quantum" interactive glass>
-          <h3 style="color:var(--ai-quantum-1); margin-top:0">💡 Product Thinking</h3>
-          <p>Turn a real problem into a small prototype. Learn to validate ideas and iterate.</p>
+          <h3 style="color:var(--ai-quantum-1); margin-top:0; display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="lightbulb" size={24} />
+            {t('education.program_2_title')}
+          </h3>
+          <p>{t('education.program_2_description')}</p>
         </CardHalo>
       </RevealOnScroll>
 
       <RevealOnScroll animation="fade-up" delay={300}>
         <CardHalo halo="cyber" interactive glass>
-          <h3 style="color:var(--ai-cyber-1); margin-top:0">📊 Data Skills</h3>
-          <p>Collecting, cleaning, and making sense of information. Hands-on with real datasets.</p>
+          <h3 style="color:var(--ai-cyber-1); margin-top:0; display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="chart-bar" size={24} />
+            {t('education.program_3_title')}
+          </h3>
+          <p>{t('education.program_3_description')}</p>
         </CardHalo>
       </RevealOnScroll>
 
       <RevealOnScroll animation="fade-up" delay={400}>
         <CardHalo halo="neural" interactive glass>
-          <h3 style="color:var(--ai-neural-1); margin-top:0">🚀 Build & Ship</h3>
-          <p>Complete small projects from idea to working demo. Learn the full cycle.</p>
+          <h3 style="color:var(--ai-neural-1); margin-top:0; display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="rocket" size={24} />
+            {t('education.program_4_title')}
+          </h3>
+          <p>{t('education.program_4_description')}</p>
         </CardHalo>
       </RevealOnScroll>
     </div>
@@ -64,9 +79,9 @@
     <div class="cta-card">
       <RevealOnScroll animation="scale" delay={500}>
         <CardHalo halo="matrix" glass>
-          <h3 style="color:var(--ai-matrix-1); margin-top:0; font-size:1.75rem">Ready to Collaborate?</h3>
-          <p style="font-size:1.125rem; margin:1.5rem 0">We're building these programs with schools and universities across Latvia.</p>
-          <a class="btn btn-primary" href={contactHref} style="font-size:1.125rem; padding:1rem 2rem">Start a conversation</a>
+          <h3 style="color:var(--ai-matrix-1); margin-top:0; font-size:1.75rem">{t('education.cta_title')}</h3>
+          <p style="font-size:1.125rem; margin:1.5rem 0">{t('education.cta_description')}</p>
+          <a class="btn btn-primary" href={contactHref} style="font-size:1.125rem; padding:1rem 2rem">{t('education.cta_button')}</a>
         </CardHalo>
       </RevealOnScroll>
     </div>

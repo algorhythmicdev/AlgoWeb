@@ -6,6 +6,7 @@
   import CardHalo from '$lib/components/CardHalo.svelte';
   import AnimatedDivider from '$lib/components/AnimatedDivider.svelte';
   import RevealOnScroll from '$lib/components/RevealOnScroll.svelte';
+  import Icon from '$lib/components/icons/Icon.svelte';
 
   const contactHref = `${base}/contact`;
   const ideonautixHref = `${base}/ideonautix`;
@@ -79,28 +80,40 @@
     <div class="grid cols-2 features-grid">
       <RevealOnScroll animation="fade-right" delay={100}>
         <CardHalo halo="matrix" interactive>
-          <h3 style="color:var(--ai-matrix-1)">🎯 Accessible by Design</h3>
+          <h3 style="color:var(--ai-matrix-1); display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="shield" size={24} />
+            Accessible by Design
+          </h3>
           <p>AAA accessibility standards, multilingual support (EN/LV/RU), and intuitive interfaces for everyone.</p>
         </CardHalo>
       </RevealOnScroll>
       
       <RevealOnScroll animation="fade-left" delay={200}>
         <CardHalo halo="coral" interactive>
-          <h3 style="color:var(--ai-coral-1)">🚀 AI-Powered</h3>
+          <h3 style="color:var(--ai-coral-1); display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="rocket" size={24} />
+            AI-Powered
+          </h3>
           <p>Leveraging Google's Gemini AI for intelligent assistance, insights, and automation.</p>
         </CardHalo>
       </RevealOnScroll>
       
       <RevealOnScroll animation="fade-right" delay={300}>
         <CardHalo halo="neural" interactive>
-          <h3 style="color:var(--ai-neural-1)">💡 Practical Solutions</h3>
+          <h3 style="color:var(--ai-neural-1); display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="lightbulb" size={24} />
+            Practical Solutions
+          </h3>
           <p>No fluff, no hype—just tools that work, tested with real users and real feedback.</p>
         </CardHalo>
       </RevealOnScroll>
       
       <RevealOnScroll animation="fade-left" delay={400}>
         <CardHalo halo="quantum" interactive>
-          <h3 style="color:var(--ai-quantum-1)">🌍 Local & Global</h3>
+          <h3 style="color:var(--ai-quantum-1); display: flex; align-items: center; gap: 0.5rem;">
+            <Icon name="globe" size={24} />
+            Local & Global
+          </h3>
           <p>Proudly based in Daugavpils, Latvia, with a vision to serve teams worldwide.</p>
         </CardHalo>
       </RevealOnScroll>

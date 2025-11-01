@@ -1,5 +1,5 @@
 <script lang="ts">
-  export type Name = 'spark'|'check'|'bolt'|'map'|'clock'|'shield'|'book'|'users'|'gear'|'globe';
+  export type Name = 'spark'|'check'|'bolt'|'map'|'clock'|'shield'|'book'|'users'|'gear'|'globe'|'graduation-cap'|'lightbulb'|'chart-bar'|'rocket';
   export let name: Name = 'spark';
   export let size = 20;
   const paths: Record<Name,string> = {
@@ -12,7 +12,11 @@
     book:'M4 5a3 3 0 013-3h9v18h-9a3 3 0 01-3-3V5zm3-1a1 1 0 00-1 1v12a1 1 0 001 1h7V4H7z',
     users:'M7 14a4 4 0 118 0m-10 6a6 6 0 1112 0',
     gear:'M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z M3 12h3m12 0h3M12 3v3m0 12v3M5.1 5.1l2.1 2.1m9.6 9.6l2.1 2.1m0-13.8l-2.1 2.1M7.2 16.8l-2.1 2.1',
-    globe:'M2 12h20M12 2a10 10 0 000 20m0-20a10 10 0 010 20M2 12h20M12 2c3 3 3 17 0 20'
+    globe:'M2 12h20M12 2a10 10 0 000 20m0-20a10 10 0 010 20M2 12h20M12 2c3 3 3 17 0 20',
+    'graduation-cap':'M2 7l10-4 10 4-10 4L2 7zm0 0v8m10 4v-7',
+    'lightbulb':'M9 18h6m-6 0v3h6v-3m-8-6a5 5 0 1110 0c0 2.5-2 3-2 5H9c0-2-2-2.5-2-5z',
+    'chart-bar':'M3 3v18h18M7 10v8m4-12v12m4-8v8m4-4v4',
+    'rocket':'M4.5 16.5l-1.5 1.5M6 21l.5-2.5m7.5 0L15 21M10 5.5l.5-2.5m3 0L14 5.5M9 11l3-3m0 0l3 3m-3-3v12'
   };
 </script>
 
@@ -39,6 +43,14 @@
     <path d={paths.users}></path>
   {:else if name==='gear'}
     <path d={paths.gear}></path>
+  {:else if name==='graduation-cap'}
+    <path d={paths['graduation-cap']}></path>
+  {:else if name==='lightbulb'}
+    <path d={paths.lightbulb}></path>
+  {:else if name==='chart-bar'}
+    <path d={paths['chart-bar']}></path>
+  {:else if name==='rocket'}
+    <path d={paths.rocket}></path>
   {:else}
     <circle cx="12" cy="12" r="10"></circle>
     <path d={paths.globe}></path>
