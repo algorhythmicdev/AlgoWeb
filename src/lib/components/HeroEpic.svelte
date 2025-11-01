@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { base as appBase } from '$app/paths';
+  import { base as appBase, asset } from '$app/paths';
   import ParticleSystem from './ParticleSystem.svelte';
   import MeshGradient from './MeshGradient.svelte';
   import { ripple } from '$lib/directives/ripple';
@@ -15,6 +15,8 @@
   export let variant: 'neural' | 'quantum' | 'cyber' | 'matrix' | 'coral' | 'minimal' = 'neural';
   export let particleType: 'neural' | 'dots' | 'matrix' | 'waves' | 'minimal' | 'none' = 'dots';
   export let size: 'default' | 'large' | 'epic' = 'default';
+  export let videoSrc: string | null = null;
+  export let videoPoster: string | null = null;
   
   const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
   
@@ -30,6 +32,9 @@
       ? appBase || '/'
       : `${appBase}${secondaryCtaHref}`;
   
+  $: videoUrl = videoSrc ? asset(videoSrc) : null;
+  $: posterUrl = videoPoster ? asset(videoPoster) : null;
+  
   let mounted = false;
   
   onMount(() => {
@@ -40,11 +45,29 @@
 <section 
   class="hero-section hero-{size} halo-{variant} gradient-{variant}"
   class:mounted
+  class:has-video={videoUrl}
 >
-  <MeshGradient {variant} opacity={size === 'epic' ? 0.15 : size === 'large' ? 0.13 : 0.12} />
-  
-  {#if particleType !== 'none'}
-    <ParticleSystem variant={particleType} density="medium" speed={0.8} />
+  {#if videoUrl}
+    <div class="hero-video-container">
+      <video
+        class="hero-video"
+        poster={posterUrl}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source src={videoUrl} type="video/webm" />
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+  {:else}
+    <MeshGradient {variant} opacity={size === 'epic' ? 0.15 : size === 'large' ? 0.13 : 0.12} />
+    
+    {#if particleType !== 'none'}
+      <ParticleSystem variant={particleType} density="medium" speed={0.8} />
+    {/if}
   {/if}
   
   <div class="hero-content container">
@@ -244,6 +267,72 @@
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
     }
+  }
+  
+  /* Video background styles */
+  .hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }
+  
+  .hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 1;
+  }
+  
+  .has-video .hero-content {
+    z-index: 2;
+  }
+  
+  .has-video .hero-title,
+  .has-video .hero-description {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .has-video .hero-title {
+    -webkit-text-fill-color: white;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.9)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  .has-video .hero-description {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .has-video .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   }
   
   @media (prefers-reduced-motion: reduce) {
