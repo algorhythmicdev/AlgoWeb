@@ -24,10 +24,12 @@
   }
   
   function nextImage() {
+    if (items.length === 0) return;
     selectedIndex = (selectedIndex + 1) % items.length;
   }
   
   function prevImage() {
+    if (items.length === 0) return;
     selectedIndex = (selectedIndex - 1 + items.length) % items.length;
   }
   
@@ -58,8 +60,8 @@
   {/each}
 </div>
 
-{#if selectedIndex >= 0}
-  <div class="lightbox" on:click={closeLightbox} on:keydown={(e) => e.key === 'Escape' && closeLightbox()} role="dialog" tabindex="-1" aria-modal="true" aria-label="Image viewer">
+{#if selectedIndex >= 0 && selectedIndex < items.length}
+  <div class="lightbox" on:click={closeLightbox} on:keydown={(e) => e.key === 'Escape' && closeLightbox()} role="dialog" tabindex="0" aria-modal="true" aria-label="Image viewer">
     <button class="lightbox-close" on:click={closeLightbox} aria-label="Close">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12" />
