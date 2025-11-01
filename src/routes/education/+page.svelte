@@ -25,6 +25,7 @@
     variant="coral"
     particleType="dots"
     size="large"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="wave" theme="coral" spacing="spacious" />

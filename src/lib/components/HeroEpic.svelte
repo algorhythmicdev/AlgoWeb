@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { base as appBase } from '$app/paths';
+  import { base as appBase, asset } from '$app/paths';
   import ParticleSystem from './ParticleSystem.svelte';
   import MeshGradient from './MeshGradient.svelte';
   import { ripple } from '$lib/directives/ripple';
@@ -15,6 +15,9 @@
   export let variant: 'neural' | 'quantum' | 'cyber' | 'matrix' | 'coral' | 'minimal' = 'neural';
   export let particleType: 'neural' | 'dots' | 'matrix' | 'waves' | 'minimal' | 'none' = 'dots';
   export let size: 'default' | 'large' | 'epic' = 'default';
+  export let videoSrc: string | null = null;
+  export let videoPoster: string | null = null;
+  export let animatedTitle: boolean = false;
   
   const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
   
@@ -30,6 +33,9 @@
       ? appBase || '/'
       : `${appBase}${secondaryCtaHref}`;
   
+  $: videoUrl = videoSrc ? asset(videoSrc) : null;
+  $: posterUrl = videoPoster ? asset(videoPoster) : null;
+  
   let mounted = false;
   
   onMount(() => {
@@ -40,11 +46,30 @@
 <section 
   class="hero-section hero-{size} halo-{variant} gradient-{variant}"
   class:mounted
+  class:has-video={videoUrl}
 >
-  <MeshGradient {variant} opacity={size === 'epic' ? 0.15 : size === 'large' ? 0.13 : 0.12} />
-  
-  {#if particleType !== 'none'}
-    <ParticleSystem variant={particleType} density="medium" speed={0.8} />
+  {#if videoUrl}
+    <div class="hero-video-container">
+      <video
+        class="hero-video"
+        poster={posterUrl}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src={videoUrl} type="video/webm" />
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+  {:else}
+    <MeshGradient {variant} opacity={size === 'epic' ? 0.15 : size === 'large' ? 0.13 : 0.12} />
+    
+    {#if particleType !== 'none'}
+      <ParticleSystem variant={particleType} density="medium" speed={0.8} />
+    {/if}
   {/if}
   
   <div class="hero-content container">
@@ -53,7 +78,7 @@
         <p class="hero-subtitle">{subtitle}</p>
       {/if}
       
-      <h1 class="hero-title">{title}</h1>
+      <h1 class="hero-title" class:animated-gradient={animatedTitle}>{title}</h1>
       
       {#if description}
         <p class="hero-description">{description}</p>
@@ -166,7 +191,7 @@
   }
   
   .hero-title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 700;
     line-height: 1.1;
     margin: 0 0 1.5rem;
@@ -180,12 +205,36 @@
     background-clip: text;
   }
   
+  .hero-title.animated-gradient {
+    background: linear-gradient(
+      90deg,
+      var(--ai-neural-1),
+      var(--ai-quantum-1),
+      var(--ai-cyber-1),
+      var(--ai-neural-1)
+    );
+    background-size: 200% auto;
+    animation: gradient-shift 4s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
   .hero-description {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     line-height: 1.6;
     color: var(--text-secondary);
     margin: 0 0 2.5rem;
-    max-width: 600px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -246,10 +295,73 @@
     }
   }
   
+  /* Video background styles */
+  .hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }
+  
+  .hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+    z-index: 1;
+  }
+  
+  .has-video .hero-content {
+    z-index: 2;
+  }
+  
+  .has-video .hero-title,
+  .has-video .hero-description {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .has-video .hero-title {
+    color: white;
+  }
+  
+  .has-video .hero-description {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .has-video .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+  
   @media (prefers-reduced-motion: reduce) {
     .hero-content {
       opacity: 1;
       transition: none;
+    }
+    
+    .hero-video {
+      animation-play-state: paused;
     }
   }
 </style>

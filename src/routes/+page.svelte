@@ -20,7 +20,7 @@
 
 <main id="main">
   <HeroEpic
-    title="Let's create something awesome"
+    title="Algorhythmics"
     subtitle="AI Innovation"
     description="We build practical AI tools and help teams adopt them quickly. From travel planning to startup education."
     ctaLabel="Start a conversation"
@@ -28,8 +28,10 @@
     secondaryCtaLabel="Explore our products"
     secondaryCtaHref="#products"
     variant="neural"
-    particleType="neural"
+    particleType="none"
     size="epic"
+    videoSrc="/videos/algorhythmics-promo.webm"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="gradient" theme="neural" spacing="spacious" />

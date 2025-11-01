@@ -38,6 +38,7 @@
     variant="cyber"
     particleType="waves"
     size="large"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="wave" theme="cyber" spacing="spacious" />
