@@ -55,26 +55,36 @@
   
   nav ul {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.5rem;
     align-items: center;
     flex-wrap: nowrap;
+    padding: 0.375rem;
+    background: color-mix(in srgb, var(--bg-elev-1) 60%, transparent);
+    backdrop-filter: blur(var(--glass-blur, 24px));
+    border-radius: 20px;
+    border: 1px solid color-mix(in srgb, var(--control-border) 40%, transparent);
   }
   
   nav a {
-    padding: 0.5rem 0.875rem;
-    border-radius: 8px;
+    padding: 0.625rem 1.125rem;
+    border-radius: 16px;
     font-weight: 500;
     transition: all var(--anim-fast, 200ms) var(--ease-apple, ease);
+    backdrop-filter: blur(8px);
   }
   
   nav a:hover {
-    background: var(--bg-elev-1);
+    background: color-mix(in srgb, var(--bg-elev-2) 70%, transparent);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-subtle);
   }
   
   nav a[aria-current="page"] {
-    background: var(--bg-elev-2);
+    background: color-mix(in srgb, var(--primary) 15%, var(--bg-elev-2));
     outline: none;
     font-weight: 600;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 12%, transparent),
+                inset 0 1px 0 color-mix(in srgb, white 10%, transparent);
   }
   
   .controls {
@@ -100,12 +110,14 @@
   
   @media (max-width: 640px) {
     nav ul {
-      gap: 0.125rem;
+      gap: 0.375rem;
       font-size: 0.875rem;
       overflow-x: auto;
       overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      padding: 0.25rem;
+      border-radius: 18px;
     }
     
     nav ul::-webkit-scrollbar {
@@ -113,8 +125,9 @@
     }
     
     nav a {
-      padding: 0.375rem 0.625rem;
+      padding: 0.5rem 0.875rem;
       white-space: nowrap;
+      border-radius: 14px;
     }
   }
 </style>

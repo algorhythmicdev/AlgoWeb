@@ -1,6 +1,42 @@
 {
-  "nav": { "home": "Sākums", "team": "Komanda", "ideonautix": "Ideonautix", "nodevoyage": "NodeVoyage", "consulting": "Konsultācijas", "education": "Izglītība", "contact": "Kontakti" },
-  "language": { "label": "Valoda" },
-  "cta": { "primary": "Sazināties", "secondary": "Uzzināt vairāk" },
-  "common": { "loading": "Ielādējas...", "close": "Aizvērt" }
+  "nav": {
+    "home": "Sākums",
+    "team": "Komanda",
+    "ideonautix": "Ideonautix",
+    "nodevoyage": "NodeVoyage",
+    "consulting": "Konsultācijas",
+    "education": "Izglītība",
+    "contact": "Kontakti"
+  },
+  "language": {
+    "label": "Valoda"
+  },
+  "cta": {
+    "primary": "Sazināties",
+    "secondary": "Uzzināt vairāk"
+  },
+  "common": {
+    "loading": "Ielādējas...",
+    "close": "Aizvērt"
+  },
+  "education": {
+    "page_title": "Izglītība — Algorhythmics",
+    "page_description": "Īsas, praktiskas AI programmas Latvijas skolām un augstskolām.",
+    "hero_title": "AI Izglītības Programmas",
+    "hero_subtitle": "Mācību Ceļi",
+    "hero_description": "Īsas, praktiskas AI programmas Latvijas skolām un augstskolām. Skaidras mācības, droši rīki, projekti, kurus varat īstenot.",
+    "hero_cta": "Sazināties",
+    "programs_title": "Programmu Piemēri",
+    "program_1_title": "AI Pamati Studentiem",
+    "program_1_description": "Kā tas darbojas, kur tas ir noderīgs un ko izvairīties. Praktiska izpratne bez pārspīlējumiem.",
+    "program_2_title": "Produktu Domāšana",
+    "program_2_description": "Pārvēršiet reālu problēmu nelielā prototipā. Iemācieties validēt idejas un iterēt.",
+    "program_3_title": "Datu Prasmes",
+    "program_3_description": "Datu vākšana, tīrīšana un nozīmes atrašana. Praktiska pieredze ar reāliem datu kopumiem.",
+    "program_4_title": "Veidot un Nosūtīt",
+    "program_4_description": "Pabeidziet nelielos projektus no idejas līdz darbojošajai demonstrācijai. Iemācieties pilnu ciklu.",
+    "cta_title": "Gatavs Sadarboties?",
+    "cta_description": "Mēs veidojam šīs programmas ar skolām un augstskolām visā Latvijā.",
+    "cta_button": "Uzsākt sarunu"
+  }
 }

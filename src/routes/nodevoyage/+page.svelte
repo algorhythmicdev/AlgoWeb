@@ -11,10 +11,17 @@
   import HeroEpic from '$lib/components/HeroEpic.svelte';
   import AnimatedDivider from '$lib/components/AnimatedDivider.svelte';
   import RevealOnScroll from '$lib/components/RevealOnScroll.svelte';
+  import Gallery from '$lib/components/Gallery.svelte';
   import { nodevoyagePreviews, videoNodeVoyage } from '$lib/presentAssets';
   const previews = nodevoyagePreviews;
   const vid = videoNodeVoyage;
   const contactHref = `${appBase}/contact`;
+  
+  // Map previews to gallery format
+  const galleryItems = previews.map((src, i) => ({
+    src,
+    alt: `NodeVoyage Preview ${i + 1}`
+  }));
 </script>
 
 <svelte:head>
@@ -102,24 +109,18 @@
       <RevealOnScroll animation="fade-up" delay={0}>
         <h2 class="text-strong" style="text-align:center">{t('nodevoyage.preview')}</h2>
       </RevealOnScroll>
-      <div class="grid-3">
-        {#if previews.length === 0}
+      {#if galleryItems.length > 0}
+        <Gallery items={galleryItems} halo="cyber" columns={3} />
+      {:else}
+        <div class="grid-3">
           <RevealOnScroll animation="scale" delay={100}>
             <CardHalo halo="cyber" glass><AssetImage src={null} alt="Preview 1" /></CardHalo>
           </RevealOnScroll>
           <RevealOnScroll animation="scale" delay={200}>
             <CardHalo halo="cyber" glass><AssetImage src={null} alt="Preview 2" /></CardHalo>
           </RevealOnScroll>
-        {:else}
-          {#each previews as path, i}
-            <RevealOnScroll animation="scale" delay={100 * (i + 1)}>
-              <CardHalo halo="cyber" glass>
-                <AssetImage src={path} alt={(path.split('/').pop() || 'Preview').split('.')[0]} />
-              </CardHalo>
-            </RevealOnScroll>
-          {/each}
-        {/if}
-      </div>
+        </div>
+      {/if}
     </div>
   </section>
 
