@@ -11,15 +11,6 @@
   });
   
   function set(l: typeof LANGS[number]) { lang.set(l); }
-  
-  const langNames: Record<typeof LANGS[number], string> = {
-    en: 'English',
-    lv: 'Latvian',
-    ru: 'Russian',
-    uk: 'Ukrainian',
-    fr: 'French',
-    es: 'Spanish'
-  };
 </script>
 
 <div class="card surface-2 control" style="padding:.5rem;border-radius:10px;display:inline-flex;gap:.5rem;align-items:center">
