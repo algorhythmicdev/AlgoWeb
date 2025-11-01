@@ -30,6 +30,16 @@
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-1);
   padding: var(--gap-6);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.card p,
+.card h3,
+.card h4 {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* Nav: basic reset - specific styles in components */
