@@ -31,6 +31,7 @@
     particleType="none"
     size="epic"
     videoSrc="/videos/algorhythmics-promo.webm"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="gradient" theme="neural" spacing="spacious" />

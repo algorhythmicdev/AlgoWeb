@@ -19,14 +19,38 @@
   const resolve = (href: string) => href === '/' ? (base || '/') : `${base}${href}`;
   const stripBase = (path: string) => base && path.startsWith(base) ? path.slice(base.length) || '/' : path || '/';
   $: current = stripBase($page.url.pathname).replace(/\/+$/,'') || '/';
+  
+  let mobileMenuOpen = false;
+  
+  function toggleMobileMenu() {
+    mobileMenuOpen = !mobileMenuOpen;
+  }
+  
+  function closeMobileMenu() {
+    mobileMenuOpen = false;
+  }
 </script>
 
 <div class="site-nav-wrap">
   <BrandMark />
-  <nav class="container page" aria-label="Primary">
+  
+  <button 
+    class="mobile-menu-toggle" 
+    aria-label="Toggle menu"
+    aria-expanded={mobileMenuOpen}
+    on:click={toggleMobileMenu}
+  >
+    <span class="hamburger" class:open={mobileMenuOpen}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+  
+  <nav class="container page" aria-label="Primary" class:mobile-open={mobileMenuOpen}>
     <ul>
       {#each items as i}
-        <li><a href={resolve(i.href)} aria-current={current===i.href?'page':undefined}>{t(i.key)}</a></li>
+        <li><a href={resolve(i.href)} aria-current={current===i.href?'page':undefined} on:click={closeMobileMenu}>{t(i.key)}</a></li>
       {/each}
     </ul>
     <div class="controls">
@@ -36,6 +60,10 @@
   </nav>
 </div>
 
+{#if mobileMenuOpen}
+  <div class="mobile-overlay" on:click={closeMobileMenu} role="presentation"></div>
+{/if}
+
 <style>
   .site-nav-wrap {
     display: flex;
@@ -43,6 +71,46 @@
     justify-content: space-between;
     width: 100%;
     gap: 1.5rem;
+    position: relative;
+  }
+  
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 28px;
+    height: 24px;
+    position: relative;
+  }
+  
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: var(--text-strong);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+  
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
   }
   
   nav {
@@ -93,7 +161,90 @@
     align-items: center;
   }
   
-  @media (max-width: 1024px) {
+  .mobile-overlay {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: block;
+    }
+    
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 280px;
+      max-width: 80vw;
+      background: var(--bg);
+      backdrop-filter: blur(24px);
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 5rem 1.5rem 2rem;
+      gap: 2rem;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+    }
+    
+    nav.mobile-open {
+      right: 0;
+    }
+    
+    nav ul {
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      background: transparent;
+      border: none;
+      backdrop-filter: none;
+      gap: 0.5rem;
+    }
+    
+    nav li {
+      width: 100%;
+    }
+    
+    nav a {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.875rem 1.25rem;
+    }
+    
+    .controls {
+      width: 100%;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .mobile-overlay {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
     .site-nav-wrap {
       flex-wrap: wrap;
     }
@@ -105,29 +256,6 @@
     
     nav ul {
       justify-content: center;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    nav ul {
-      gap: 0.375rem;
-      font-size: 0.875rem;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: 0.25rem;
-      border-radius: 18px;
-    }
-    
-    nav ul::-webkit-scrollbar {
-      display: none;
-    }
-    
-    nav a {
-      padding: 0.5rem 0.875rem;
-      white-space: nowrap;
-      border-radius: 14px;
     }
   }
 </style>

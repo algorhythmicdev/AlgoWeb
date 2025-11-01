@@ -17,6 +17,7 @@
   export let size: 'default' | 'large' | 'epic' = 'default';
   export let videoSrc: string | null = null;
   export let videoPoster: string | null = null;
+  export let animatedTitle: boolean = false;
   
   const isExternal = (href: string) => /^(?:[a-z]+:|#)/i.test(href);
   
@@ -77,7 +78,7 @@
         <p class="hero-subtitle">{subtitle}</p>
       {/if}
       
-      <h1 class="hero-title">{title}</h1>
+      <h1 class="hero-title" class:animated-gradient={animatedTitle}>{title}</h1>
       
       {#if description}
         <p class="hero-description">{description}</p>
@@ -190,7 +191,7 @@
   }
   
   .hero-title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 700;
     line-height: 1.1;
     margin: 0 0 1.5rem;
@@ -204,12 +205,36 @@
     background-clip: text;
   }
   
+  .hero-title.animated-gradient {
+    background: linear-gradient(
+      90deg,
+      var(--ai-neural-1),
+      var(--ai-quantum-1),
+      var(--ai-cyber-1),
+      var(--ai-neural-1)
+    );
+    background-size: 200% auto;
+    animation: gradient-shift 4s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
   .hero-description {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     line-height: 1.6;
     color: var(--text-secondary);
     margin: 0 0 2.5rem;
-    max-width: 600px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -301,8 +326,8 @@
     height: 100%;
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.5) 100%
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.75) 100%
     );
     z-index: 1;
   }
