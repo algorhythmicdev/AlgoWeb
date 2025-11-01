@@ -52,7 +52,7 @@
 
     const subject = `Website: ${intent} — ${name}`;
     const body = `${message}\n\n---\nFrom: ${name}\nEmail: ${email}${company ? `\nCompany: ${company}` : ''}`;
-    location.href = `mailto:hello@yourdomain.tld?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    location.href = `mailto:algorhythmics.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     resultMsg = 'Thanks! Your email app should open momentarily.';
   }
 
@@ -94,7 +94,7 @@
                     </div>
                     <div>
                       <h3>Email Us</h3>
-                      <p>hello@algorhythmics.com</p>
+                      <p>algorhythmics.dev@gmail.com</p>
                     </div>
                   </div>
                   
