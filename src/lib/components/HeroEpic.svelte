@@ -57,6 +57,7 @@
         loop
         playsinline
         preload="metadata"
+        aria-hidden="true"
       >
         <source src={videoUrl} type="video/webm" />
       </video>
@@ -316,14 +317,7 @@
   }
   
   .has-video .hero-title {
-    -webkit-text-fill-color: white;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0.9)
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: white;
   }
   
   .has-video .hero-description {
@@ -339,6 +333,10 @@
     .hero-content {
       opacity: 1;
       transition: none;
+    }
+    
+    .hero-video {
+      animation-play-state: paused;
     }
   }
 </style>
