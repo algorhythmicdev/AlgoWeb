@@ -21,7 +21,8 @@
     ctaHref="/contact"
     variant="matrix"
     particleType="matrix"
-    size="default"
+    size="large"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="pulse" theme="matrix" spacing="spacious" />

@@ -38,6 +38,7 @@
     variant="quantum"
     particleType="minimal"
     size="large"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="pulse" theme="quantum" spacing="spacious" />

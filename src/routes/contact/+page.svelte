@@ -71,7 +71,8 @@
     description="Tell us what you want to achieve. We'll reply with a simple plan."
     variant="neural"
     particleType="minimal"
-    size="default"
+    size="large"
+    animatedTitle={true}
   />
 
   <AnimatedDivider variant="gradient" theme="neural" spacing="spacious" />
